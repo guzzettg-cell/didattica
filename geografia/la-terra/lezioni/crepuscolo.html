@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}
+.backlink{display:inline-block;margin:14px 16px 0;font:600 14px/1.2 system-ui,sans-serif;color:inherit;text-decoration:none;border:1px solid rgba(120,130,150,.4);border-radius:999px;padding:6px 12px}
+.backlink:hover{text-decoration:underline}
+.map.nomap{display:flex;flex-wrap:wrap;gap:8px;padding:14px;align-content:flex-start;background:var(--card,#fff)}
+.map.nomap .mapnote{flex-basis:100%;margin:0 0 4px;font-size:.9rem;color:var(--muted,#566476)}
+.map.nomap .dot,.map.nomap .hit,.map.nomap .istmo{position:static!important;transform:none!important;width:auto!important;height:auto!important;aspect-ratio:auto!important;opacity:1!important;border-radius:999px!important;padding:6px 12px!important;border:0!important;color:#fff!important;font:700 .88rem/1.2 system-ui,sans-serif!important;box-shadow:none!important;animation:none!important}
+.map.nomap .dot::after,.map.nomap .hit::after,.map.nomap .istmo::after{content:attr(aria-label)}
+.map.nomap .hit{background:#3b4a63!important}.map.nomap .istmo{background:#d62828!important}
+.map.nomap .dot.dim{opacity:.25!important}
+.map.nomap [aria-pressed="true"]{outline:3px solid #111!important;outline-offset:2px}
+</style>
+<title>Il crepuscolo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: intestazione breve, lo schema del libro animato, comandi sotto, poi spiegazione e domande */
+:root{
+  --paper:#edf1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
+  --sun:#d97f0f; --sun-soft:#fbe7c8; --scene:#f7f9fc; --scene-ink:#1b2a3c;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --sun:#f2a640; --sun-soft:#3a2a12; --scene:#0e1622; --scene-ink:#dfe8f2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --sun:#f2a640; --sun-soft:#3a2a12; --scene:#0e1622; --scene-ink:#dfe8f2; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:22px}
+header{display:grid;gap:6px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,4.2vw,2.8rem);line-height:1.05;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--sun)}
+.lead{margin:0;max-width:70ch;color:var(--muted)}
+figure{margin:0;background:var(--scene);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid;min-width:0}
+figure canvas{width:100%;aspect-ratio:16/11;display:block}
+figcaption{padding:12px 16px 14px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+.controls{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:14px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.clock{font-family:var(--display);font-weight:800;font-size:2rem;font-variant-numeric:tabular-nums;min-width:4.2ch}
+.slider{flex:1 1 260px;display:grid;gap:2px;min-width:0}
+input[type=range]{width:100%;accent-color:var(--sun)}
+.ticks{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
+button,select{font:inherit;font-size:.92rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:7px 14px;cursor:pointer}
+button:hover{border-color:var(--sun)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+#play{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700;min-width:7.5em}
+.check{display:flex;gap:8px;align-items:center;font-size:.92rem;cursor:pointer}
+.check input{width:18px;height:18px;accent-color:var(--sun)}
+.readout{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.readout{grid-template-columns:1fr}}
+.chip{border:1px solid var(--line);border-radius:10px;padding:8px 12px;display:grid;min-width:0}
+.chip span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.chip strong{font-family:var(--display);font-weight:600;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.chip.phase{background:var(--sun-soft);border-color:transparent}
+.explain{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px}
+@media (max-width:820px){.explain{grid-template-columns:1fr}}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:0}
+.box h2{font-family:var(--display);font-weight:800;font-size:1.25rem;margin:0 0 8px}
+.now{font-size:1.08rem;margin:0;min-height:4.8em}
+details{border-top:1px solid var(--line);padding:10px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700}
+details p{margin:8px 0 0;color:var(--muted)}
+.note{font-size:.85rem;color:var(--muted);margin:12px 0 0}
+</style>
+</head>
+<body>
+<a class="backlink" href="../index.html">← Tutte le lezioni</a>
+
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">I movimenti della Terra · il crepuscolo</div>
+    <h1>Il Sole è tramontato,<br>ma c'è ancora <em>luce</em></h1>
+    <p class="lead">I raggi del Sole arrivano dritti e si fermano al bordo dell'atmosfera. L'atmosfera gira insieme alla Terra: segui la parte d'aria sopra l'osservatore (il settore tratteggiato). Di giorno i raggi la attraversano e arrivano dritti. Dopo il tramonto, quando quella parte d'aria passa dove arrivano i raggi radenti, i raggi vengono deviati verso l'osservatore, che li vede arrivare da una direzione più alta: la direzione apparente.</p>
+  </header>
+
+  <figure>
+    <canvas id="scene" role="img" aria-label="Sezione della Terra con le fasce dell'atmosfera, il dì a destra, la notte a sinistra, la fascia del crepuscolo e il circolo di illuminazione; i raggi del Sole arrivano da destra e uno viene deviato verso l'osservatore"></canvas>
+    <figcaption>La Terra è vista dall'alto del Polo Nord e ruota in senso antiorario, da ovest a est, insieme alla sua atmosfera (i puntini). In alto l'osservatore vive il tramonto e il crepuscolo della sera, in basso l'alba e il crepuscolo del mattino. Lo spessore dell'atmosfera è molto ingrandito.</figcaption>
+  </figure>
+
+  <section class="controls" aria-label="Comandi">
+    <div class="row">
+      <button id="play" type="button">Pausa</button>
+      <div class="clock" id="clock">16:30</div>
+      <label class="slider" for="ora">
+        <input id="ora" type="range" min="0" max="1440" step="1" value="990" aria-label="Ora del giorno">
+        <div class="ticks"><span>0</span><span>6</span><span>12</span><span>18</span><span>24</span></div>
+      </label>
+    </div>
+    <div class="row">
+      <button type="button" data-t="5.3">Crepuscolo del mattino</button>
+      <button type="button" data-t="6">Alba</button>
+      <button type="button" data-t="12">Mezzogiorno</button>
+      <button type="button" data-t="18">Tramonto</button>
+      <button type="button" data-t="18.7">Crepuscolo della sera</button>
+      <button type="button" data-t="0">Notte</button>
+    </div>
+    <div class="row">
+      <select id="speed" aria-label="Velocità">
+        <option value="0.6">Lenta</option>
+        <option value="1.5" selected>Normale</option>
+        <option value="4">Veloce</option>
+      </select>
+      <label class="check"><input id="slow" type="checkbox" checked> Rallenta durante i crepuscoli</label>
+      <label class="check"><input id="noatm" type="checkbox"> E se la Terra non avesse l'atmosfera?</label>
+    </div>
+    <div class="readout">
+      <div class="chip phase"><span>Che cosa succede</span><strong id="phase">Dì</strong></div>
+      <div class="chip"><span>Altezza del Sole</span><strong id="alt">0°</strong></div>
+      <div class="chip"><span>Luce che arriva</span><strong id="light">diretta</strong></div>
+    </div>
+  </section>
+
+  <section class="explain">
+    <div class="box">
+      <h2>Che cosa sta succedendo</h2>
+      <p class="now" id="now"></p>
+      <p class="note">Schema semplificato: l'osservatore si trova sull'equatore in un giorno di equinozio, e il crepuscolo dura finché il Sole non scende 18° sotto l'orizzonte. Nella realtà i raggi vengono deviati solo di poco; gran parte della luce del crepuscolo è luce che l'aria ancora illuminata diffonde in tutte le direzioni.</p>
+    </div>
+    <div class="box">
+      <h2>Domande per ragionare</h2>
+      <details><summary>Perché dopo il tramonto il cielo non diventa subito buio?</summary><p>Perché l'atmosfera devia e diffonde i raggi del Sole: anche quando il Sole è sotto l'orizzonte, un po' della sua luce arriva ancora fino a noi.</p></details>
+      <details><summary>Da quale parte del cielo vedi il chiarore al mattino? E alla sera?</summary><p>Al mattino a est, da dove il Sole sta per sorgere; alla sera a ovest, dove il Sole è appena tramontato.</p></details>
+      <details><summary>Togli l'atmosfera. Che cosa cambia?</summary><p>Il crepuscolo sparisce: appena il Sole va sotto l'orizzonte è subito notte. È quello che succede sulla Luna, che non ha atmosfera.</p></details>
+      <details><summary>Perché il raggio deviato sembra arrivare da più in alto?</summary><p>I nostri occhi vedono la luce provenire dalla direzione dell'ultimo tratto del suo percorso. Il raggio è stato piegato, quindi il Sole sembra più alto di dove si trova davvero.</p></details>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+const D2R=Math.PI/180, R2D=180/Math.PI, H=0.22, TW=18, SEC=28;
+const dots=Array.from({length:150},(_,i)=>({a:(i*137.5)%360*Math.PI/180,r:0.12+0.8*((i*0.618)%1)}));
+const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+let t=16.5, playing=!reduce, speed=1.5, slow=true, atm=true, last=null;
+
+// modello semplificato della deviazione: i raggi radenti, entrando nell'atmosfera, si piegano verso la Terra
+const YD=0.85*H, BEND=3;
+function landFor(y){ // gradi oltre il circolo di illuminazione in cui il raggio arriva a terra (null = non arriva)
+  if(!atm) return y<1?Math.asin(y)*R2D-90:null;
+  if(y<=1) return Math.asin(y)*R2D-90+BEND*Math.pow(y,8);
+  if(y<=1+YD) return BEND+(TW-BEND)*(y-1)/YD;
+  return null;
+}
+function yFor(tg){
+  if(!atm) return tg<=0?Math.cos(tg*D2R):null;
+  if(tg>TW) return null; if(tg>=BEND) return 1+YD*(tg-BEND)/(TW-BEND);
+  let lo=0,hi=1; for(let i=0;i<40;i++){ const m=(lo+hi)/2; if(landFor(m)<tg) lo=m; else hi=m; } return (lo+hi)/2;
+}
+function trace(y){
+  const d=landFor(y); if(d==null) return {pts:[[6,y],[-6,y]],land:null};
+  const a=(90+d)*D2R, L=[Math.cos(a),Math.sin(a)];
+  const Ex=atm?Math.sqrt(Math.max(0,(1+H)*(1+H)-y*y)):L[0], K=[L[0]+0.5*(Ex-L[0]),y];
+  const pts=[[6,y],[Ex,y]];
+  for(let k=1;k<=30;k++){ const u=k/30, v=1-u; pts.push([v*v*Ex+2*u*v*K[0]+u*u*L[0], v*v*y+2*u*v*K[1]+u*u*L[1]]); }
+  let dx=L[0]-K[0], dy=L[1]-K[1], n=Math.hypot(dx,dy); if(n<1e-6){dx=-1;dy=0;n=1}
+  return {pts,land:L,d:[dx/n,dy/n]};
+}
+const $=id=>document.getElementById(id);
+const cv=$('scene'), c=cv.getContext('2d');
+const FD='"Bricolage Grotesque","Trebuchet MS",sans-serif', FB='"Atkinson Hyperlegible",Verdana,sans-serif';
+let pal={};
+function readPal(){ const dark=getComputedStyle(document.documentElement).colorScheme.includes('dark')||
+  (matchMedia('(prefers-color-scheme: dark)').matches&&document.documentElement.dataset.theme!=='light')||document.documentElement.dataset.theme==='dark';
+  pal=dark?{bg:'#0e1622',ink:'#dfe8f2',muted:'#93a3b6',ray:'#f2a640',atm:'120,170,235',west:'#8fc0ff'}:{bg:'#f7f9fc',ink:'#1b2a3c',muted:'#5b6878',ray:'#e08a1e',atm:'90,150,220',west:'#1f5fb8'}; }
+readPal(); matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',readPal);
+new MutationObserver(readPal).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+function fit(){ const r=cv.getBoundingClientRect(), d=window.devicePixelRatio||1;
+  const W=Math.round(r.width*d), Hh=Math.round(r.height*d); if(cv.width!==W||cv.height!==Hh){cv.width=W;cv.height=Hh}
+  c.setTransform(d,0,0,d,0,0); return {w:r.width,h:r.height}; }
+function arrow(x,y,dx,dy,s,col){ const L=Math.hypot(dx,dy)||1; dx/=L; dy/=L; c.fillStyle=col; c.beginPath();
+  c.moveTo(x+dx*s,y+dy*s); c.lineTo(x-dx*s*0.6-dy*s*0.65,y-dy*s*0.6+dx*s*0.65); c.lineTo(x-dx*s*0.6+dy*s*0.65,y-dy*s*0.6-dx*s*0.65); c.closePath(); c.fill(); }
+const SKY=[[-18,[8,12,30],[16,22,46]],[-12,[14,22,56],[40,40,80]],[-6,[28,44,96],[150,90,90]],[-1,[46,80,150],[240,140,80]],
+  [3,[60,110,180],[250,190,120]],[12,[66,132,206],[190,220,240]],[40,[40,118,206],[170,212,242]]];
+function skyCols(a){ const mx=(p,q,k)=>p.map((v,i)=>Math.round(v+(q[i]-v)*k));
+  if(a<=SKY[0][0]) return [SKY[0][1],SKY[0][2]];
+  for(let i=1;i<SKY.length;i++) if(a<=SKY[i][0]){const k=(a-SKY[i-1][0])/(SKY[i][0]-SKY[i-1][0]); return [mx(SKY[i-1][1],SKY[i][1],k),mx(SKY[i-1][2],SKY[i][2],k)];}
+  const l=SKY[SKY.length-1]; return [l[1],l[2]]; }
+
+function state(){
+  const th=(180+15*t)*D2R, O=[Math.cos(th),Math.sin(th)];
+  const alt=Math.asin(Math.max(-1,Math.min(1,O[0])))*R2D;
+  return {th,O,alt,dep:-alt,sg:O[1]>=0?1:-1};
+}
+
+function draw(){
+  const {w,h}=fit(), fs=Math.max(11,Math.min(16,w/58)), s=state();
+  const R=Math.min(h*0.31,w*0.27), cx=w*0.42, cy=h*0.5;
+  const X=p=>cx+R*p[0], Y=p=>cy-R*p[1];
+  c.fillStyle=pal.bg; c.fillRect(0,0,w,h);
+
+  // atmosfera: fasce concentriche
+  if(atm){ for(let i=6;i>=1;i--){ const r=R*(1+H*i/6);
+    c.fillStyle=`rgba(${pal.atm},${0.07+0.05*(6-i)})`; c.beginPath(); c.arc(cx,cy,r,0,Math.PI*2); c.fill();
+    c.strokeStyle=`rgba(${pal.atm},0.45)`; c.lineWidth=1; c.stroke(); }
+    // l'aria gira insieme alla Terra
+    dots.forEach(d=>{ const a=d.a+s.th, r=R*(1+H*d.r); c.fillStyle=`rgba(${pal.atm},0.75)`;
+      c.beginPath(); c.arc(cx+r*Math.cos(a),cy-r*Math.sin(a),1.4,0,Math.PI*2); c.fill(); });
+    // la parte di atmosfera sopra l'osservatore
+    const a0=s.th-SEC*D2R, a1=s.th+SEC*D2R;
+    c.beginPath(); c.arc(cx,cy,R*(1+H),-a0,-a1,true); c.arc(cx,cy,R,-a1,-a0,false); c.closePath();
+    c.fillStyle='rgba(255,236,190,.35)'; c.fill(); c.setLineDash([4,4]); c.strokeStyle=pal.ray; c.lineWidth=1.5; c.stroke(); c.setLineDash([]);
+  }
+
+  // Terra: dì, crepuscolo, notte
+  c.save(); c.beginPath(); c.arc(cx,cy,R,0,Math.PI*2); c.clip();
+  c.fillStyle='#16304f'; c.fillRect(cx-R,cy-R,2*R,2*R);
+  const g=c.createLinearGradient(cx,0,cx+R,0); g.addColorStop(0,'#5d9fdc'); g.addColorStop(1,'#a9d1f3');
+  c.fillStyle=g; c.fillRect(cx,cy-R,R,2*R);
+  if(atm){ const wt=R*Math.sin(TW*D2R), gt=c.createLinearGradient(cx-wt,0,cx,0);
+    gt.addColorStop(0,'rgba(22,48,79,0)'); gt.addColorStop(1,'rgba(120,160,210,.85)'); c.fillStyle=gt; c.fillRect(cx-wt,cy-R,wt,2*R); }
+  // meridiani che ruotano con la Terra
+  for(let k=0;k<12;k++){ const a=s.th+k*Math.PI/6;
+    c.strokeStyle=k===0?'rgba(255,90,70,.75)':'rgba(255,255,255,.18)'; c.lineWidth=k===0?2:1;
+    c.beginPath(); c.moveTo(cx,cy); c.lineTo(cx+R*Math.cos(a),cy-R*Math.sin(a)); c.stroke(); }
+  c.restore();
+  c.strokeStyle='rgba(255,255,255,.5)'; c.lineWidth=1.2; c.beginPath(); c.arc(cx,cy,R,0,Math.PI*2); c.stroke();
+  c.fillStyle='#fff'; c.beginPath(); c.arc(cx,cy,3,0,Math.PI*2); c.fill();
+
+  // circolo di illuminazione
+  c.strokeStyle='#d6283a'; c.lineWidth=2.5; c.beginPath(); c.moveTo(cx,cy-R); c.lineTo(cx,cy+R); c.stroke();
+
+  // etichette del disegno
+  c.font=`700 ${fs*1.15}px ${FB}`; c.textAlign='center'; c.textBaseline='middle';
+  c.fillStyle='#ffffff'; c.fillText('notte',cx-R*0.62,cy-R*0.08);
+  c.fillStyle='#163a63'; c.fillText('dì',cx+R*0.55,cy-R*0.08);
+  c.save(); c.translate(cx+fs*0.9,cy+R*0.42); c.rotate(-Math.PI/2); c.font=`${fs*0.85}px ${FB}`; c.fillStyle='#163a63';
+  c.fillText('circolo di illuminazione',0,0); c.restore();
+  if(atm){ c.save(); c.translate(cx-R*Math.sin(TW*D2R)/2,cy+R*0.42); c.rotate(-Math.PI/2); c.font=`700 ${fs*0.9}px ${FB}`; c.fillStyle='#e8f1fb';
+    c.fillText('crepuscolo',0,0); c.restore();
+    c.save(); const aa=-38*D2R, ra=R*(1+H*0.55); c.translate(cx+ra*Math.cos(aa),cy-ra*Math.sin(aa)); c.rotate(-aa+Math.PI/2);
+    c.font=`${fs*0.9}px ${FB}`; c.fillStyle=pal.ink; c.fillText('a t m o s f e r a',0,0); c.restore(); }
+  c.textBaseline='alphabetic';
+
+  // raggi solari reali (orizzontali, da destra)
+  const xr=(w-8-cx)/R;
+  c.lineWidth=2;
+  const top=atm?1+H:1;
+  for(let i=-6;i<=6;i++){ const y=i/6.6*top; const xs=Math.sqrt(Math.max(0,top*top-y*y));
+    c.strokeStyle=pal.ray; c.globalAlpha=0.55; c.beginPath(); c.moveTo(X([xr,y]),Y([0,y])); c.lineTo(X([xs,y])+8,Y([0,y])); c.stroke();
+    c.globalAlpha=0.85; arrow(X([xs,y])+2,Y([0,y]),-1,0,7,pal.ray); c.globalAlpha=1; }
+  c.font=`${fs*0.95}px ${FB}`; c.fillStyle=pal.ink; c.textAlign='right';
+  c.fillText('direzione reale',w-12,Y([0,0.53])-fs*1.6); c.fillText('dei raggi solari',w-12,Y([0,0.53])-fs*0.45);
+
+  // rotazione
+  const rr=R*(1+H)+16; c.strokeStyle=pal.muted; c.lineWidth=2;
+  c.beginPath(); c.arc(cx,cy,rr,-200*D2R,-245*D2R,true); c.stroke();
+  const ae=245*D2R; arrow(cx+rr*Math.cos(ae),cy-rr*Math.sin(ae),-Math.sin(ae)*1,-Math.cos(ae)*1,8,pal.muted);
+  c.font=`${fs*0.85}px ${FB}`; c.fillStyle=pal.muted; c.textAlign='left';
+  c.fillText('rotazione: da ovest a est',8,h-12);
+
+  // l'osservatore
+  const O=s.O, sg=s.sg, up=O;
+  const T=sg>0?[Math.sin(s.th),-Math.cos(s.th)]:[-Math.sin(s.th),Math.cos(s.th)]; // orizzonte verso il Sole
+  const E=[-Math.sin(s.th),Math.cos(s.th)];
+  const dep=s.dep;
+  let light='diretta', ph, txt;
+  const am=sg<0;
+  // raggi "attivati": quelli che arrivano a terra vicino all'osservatore
+  const drawRay=(yv,main)=>{
+    const r=trace(yv,atm), m=p=>[p[0],sg*p[1]];
+    c.strokeStyle=pal.ray; c.lineWidth=main?3.5:1.6; c.globalAlpha=main?1:0.8;
+    c.beginPath(); r.pts.forEach((p,i)=>{const q=m(p); i?c.lineTo(X(q),Y(q)):c.moveTo(X(q),Y(q));});
+    if(r.land){const q=m(r.land); c.lineTo(X(q),Y(q));} c.stroke();
+    let out=null;
+    if(r.land){ const q=m(r.land), d=[r.d[0],sg*r.d[1]], sz=main?10:6;
+      arrow(X(q)-d[0]*sz*0.9,Y(q)+d[1]*sz*0.9,d[0],-d[1],sz,pal.ray); out=d; }
+    c.globalAlpha=1; return out;
+  };
+  const maxD=atm?TW:0;
+  if(dep-SEC<=maxD){
+    const lo=Math.ceil(Math.max(-88,dep-SEC)/3)*3, hi=Math.min(maxD,dep+SEC);
+    for(let tg=lo;tg<=hi+1e-9;tg+=3){ const yv=yFor(tg); if(yv!=null) drawRay(yv,false); }
+  }
+  let myD=null;
+  if(dep<=maxD){ const yv=yFor(Math.max(-89.5,dep)); if(yv!=null) myD=drawRay(yv,true); }
+  if(dep<0){
+    ph=dep>-1.5?(am?'Alba':'Tramonto'):(Math.abs(t-12)<0.4?'Mezzogiorno':'Dì');
+    txt=dep>-1.5?(am?"L'osservatore arriva sul circolo di illuminazione: il Sole spunta all'orizzonte, a est. Arrivano i primi raggi diretti."
+                    :"L'osservatore arriva sul circolo di illuminazione: il Sole tocca l'orizzonte, a ovest. Sono gli ultimi raggi diretti.")
+       :"L'osservatore è nella metà illuminata. I raggi che attraversano la sua parte di atmosfera si piegano pochissimo e arrivano quasi dritti.";
+  } else if(atm&&myD){
+    light='deviata dall\'atmosfera';
+    const D=[-myD[0],-myD[1]];
+    const far=[O[0]+D[0]*3,O[1]+D[1]*3];
+    c.setLineDash([7,6]); c.strokeStyle=pal.ray; c.globalAlpha=0.9; c.lineWidth=2;
+    c.beginPath(); c.moveTo(X(O),Y(O)); c.lineTo(X(far),Y(far)); c.stroke(); c.setLineDash([]); c.globalAlpha=1;
+    let kl=1.4, lab; do{ lab=[O[0]+D[0]*kl,O[1]+D[1]*kl]; kl-=0.05; }
+    while(kl>0.3&&(Y(lab)<fs*3.2||Y(lab)>h-fs*3.2||X(lab)>w-fs*11));
+    c.font=`${fs*0.9}px ${FB}`; c.fillStyle=pal.ink; c.textAlign='left';
+    const ly=sg>0?Y(lab)-fs*1.6:Y(lab)+fs*1.2;
+    c.fillText('direzione apparente',X(lab)+10,ly); c.fillText('dei raggi solari',X(lab)+10,ly+fs*1.15);
+    const kind=dep<6?'civile':(dep<12?'nautico':'astronomico');
+    ph=(am?'Crepuscolo del mattino':'Crepuscolo della sera');
+    txt=am?`Il Sole è ancora ${Math.round(dep)}° sotto l'orizzonte. I raggi che passano radenti alla Terra attraversano l'atmosfera e si piegano verso il basso: i primi arrivano fino all'osservatore, che li vede venire da est, da una direzione più alta di quella vera. È il crepuscolo ${kind}.`
+           :`Il Sole è già ${Math.round(dep)}° sotto l'orizzonte. I raggi radenti, piegati dall'atmosfera, arrivano ancora oltre il circolo di illuminazione e raggiungono l'osservatore, che li vede venire da ovest, più in alto del vero. È il crepuscolo ${kind}: girando, presto nessun raggio lo raggiungerà più.`;
+  } else {
+    light='nessuna'; ph='Notte';
+    txt=atm?"L'osservatore è così lontano dal circolo di illuminazione che nessun raggio, nemmeno deviato, riesce a raggiungerlo: è notte."
+           :"Senza atmosfera nessun raggio viene deviato: appena il Sole scende sotto l'orizzonte è subito notte, come sulla Luna.";
+  }
+  // segno dell'osservatore
+  const L=R*0.2;
+  c.strokeStyle='#fff'; c.lineWidth=2; c.beginPath(); c.moveTo(X(O)-E[0]*L,Y(O)+E[1]*L); c.lineTo(X(O)+E[0]*L,Y(O)-E[1]*L); c.stroke();
+  c.font=`800 ${fs}px ${FD}`; c.textAlign='center'; c.textBaseline='middle';
+  c.fillStyle='#ffb347'; c.fillText('E',X(O)+E[0]*(L+fs*0.8),Y(O)-E[1]*(L+fs*0.8));
+  c.fillStyle=pal.west; c.fillText('O',X(O)-E[0]*(L+fs*0.8),Y(O)+E[1]*(L+fs*0.8)); c.textBaseline='alphabetic';
+  c.fillStyle='#ff4b3a'; c.strokeStyle='#fff'; c.lineWidth=2; c.beginPath(); c.arc(X(O),Y(O),6.5,0,Math.PI*2); c.fill(); c.stroke();
+
+  // il cielo dell'osservatore
+  const bw=Math.min(170,w*0.24), bh=bw*0.42, bx=12, by=12;
+  const skyA=atm?s.alt:(s.alt>0?s.alt:-30);
+  const [tc,hc]=skyCols(skyA), sg2=c.createLinearGradient(0,by,0,by+bh);
+  sg2.addColorStop(0,`rgb(${tc})`); sg2.addColorStop(1,`rgb(${hc})`);
+  c.fillStyle=sg2; c.fillRect(bx,by,bw,bh);
+  c.fillStyle='#2d3b2a'; c.fillRect(bx,by+bh*0.8,bw,bh*0.2);
+  c.strokeStyle=pal.muted; c.lineWidth=1; c.strokeRect(bx,by,bw,bh);
+  c.font=`${fs*0.8}px ${FB}`; c.fillStyle=pal.muted; c.textAlign='left'; c.fillText('il cielo dell\'osservatore',bx,by+bh+fs*1.2);
+
+  return {ph,txt,light,alt:s.alt};
+}
+
+function update(r){
+  $('phase').textContent=r.ph; $('alt').textContent=Math.round(r.alt)+'°'; $('light').textContent=r.light;
+  const now=$('now'); if(now.textContent!==r.txt) now.textContent=r.txt;
+  const m=Math.round(t*60)%1440; $('clock').textContent=String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
+  if(document.activeElement!==$('ora')) $('ora').value=Math.round(t*60);
+}
+function loop(ts){
+  if(last!==null&&playing){ const alt=Math.asin(Math.cos((180+15*t)*D2R))*R2D;
+    const k=(slow&&alt<1&&alt>-TW-1)?0.18:1; t=(t+(ts-last)/1000*speed*k)%24; }
+  last=ts; update(draw()); requestAnimationFrame(loop);
+}
+function setPlay(p){playing=p; $('play').textContent=p?'Pausa':'Avvia';}
+$('play').addEventListener('click',()=>setPlay(!playing));
+$('ora').addEventListener('input',e=>{t=e.target.value/60; setPlay(false);});
+document.querySelectorAll('[data-t]').forEach(b=>b.addEventListener('click',()=>{t=+b.dataset.t; setPlay(false);}));
+$('speed').addEventListener('change',e=>speed=+e.target.value);
+$('slow').addEventListener('change',e=>slow=e.target.checked);
+$('noatm').addEventListener('change',e=>atm=!e.target.checked);
+setPlay(playing); requestAnimationFrame(loop);
+})();
+</script>
+
+</body>
+</html>

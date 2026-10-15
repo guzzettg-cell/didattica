@@ -24,16 +24,41 @@ function el(tag, attrs, ...figli) {
 }
 const maiuscola = s => s.charAt(0).toUpperCase() + s.slice(1);
 
-function voce(m, conMateria) {
-  const dettagli = [maiuscola(m.classe)];
-  if (conMateria) dettagli.unshift(MATERIE[m.materia]?.nome || m.materia);
-  if (m.unita) dettagli.push(m.unita);
-  return el("li", { class: "voce", style: `--c: var(--${m.materia})` },
-    el("a", { href: BASE + m.link },
-      el("h3", null, m.titolo),
-      m.descrizione ? el("p", null, m.descrizione) : null,
-      el("p", { class: "dettagli" }, el("span", { class: "tipo" }, m.tipo || "Materiale"), dettagli.join(", "))
+const ELENCO_MODULI = typeof MODULI !== "undefined" ? MODULI : [];
+const nomeModulo = mod => (mod.numero ? "Modulo " + mod.numero + " – " : "") + mod.titolo;
+
+/* tutte le attività, con l'indicazione di dove si trovano */
+function tutteLeAttivita(moduli) {
+  const elenco = [];
+  for (const mod of moduli) {
+    (mod.lezioni || []).forEach(lez =>
+      (lez.attivita || []).forEach(a => elenco.push({ ...a, mod, lez })));
+    (mod.attivita || []).forEach(a => elenco.push({ ...a, mod, lez: null }));
+  }
+  return elenco;
+}
+
+/* scheda di un'attività per "Aggiunti di recente" */
+function voceRecente(a) {
+  const dove = [MATERIE[a.mod.materia]?.nome, maiuscola(a.mod.classe || ""), nomeModulo(a.mod)];
+  if (a.lez) dove.push(a.lez.titolo);
+  return el("li", { class: "voce", style: `--c: var(--${a.mod.materia})` },
+    el("a", { href: BASE + a.link },
+      el("h3", null, a.titolo),
+      a.descrizione ? el("p", null, a.descrizione) : null,
+      el("p", { class: "dettagli" }, el("span", { class: "tipo" }, a.tipo || "Attività"),
+        dove.filter(Boolean).join(", "))
     )
+  );
+}
+
+/* riga di un'attività dentro una lezione */
+function rigaAttivita(a) {
+  return el("li", { class: "attivita" },
+    el("a", { href: BASE + a.link },
+      el("span", { class: "tipo" }, a.tipo || "Attività"),
+      el("span", { class: "titolo-attivita" }, a.titolo)),
+    a.descrizione ? el("p", null, a.descrizione) : null
   );
 }
 
@@ -72,36 +97,121 @@ function elencoUda(contenitore, filtro, vuoto) {
 function home() {
   const griglia = document.getElementById("materie");
   for (const [id, info] of Object.entries(MATERIE)) {
-    const n = MATERIALI.filter(m => m.materia === id).length;
+    const moduli = ELENCO_MODULI.filter(m => m.materia === id);
+    const n = tutteLeAttivita(moduli).length;
+    let conta = "Materiali in arrivo";
+    if (moduli.length) {
+      conta = (moduli.length === 1 ? "1 modulo" : moduli.length + " moduli") + ", " +
+              (n === 1 ? "1 attività" : n + " attività");
+    }
     griglia.append(el("a", { class: "materia", href: id + "/", style: `--c: var(--${id})` },
       el("h3", null, info.nome),
       el("p", null, info.descr),
-      el("p", { class: "conta" }, n === 0 ? "Materiali in arrivo" : n === 1 ? "1 materiale" : n + " materiali")
+      el("p", { class: "conta" }, conta)
     ));
   }
   elencoUda(document.getElementById("uda"), () => true, "Le UDA interdisciplinari arriveranno presto.");
 
   const recenti = document.getElementById("recenti");
-  const ordinati = [...MATERIALI].sort((a, b) => (b.data || "").localeCompare(a.data || "")).slice(0, 6);
-  if (!ordinati.length) recenti.replaceWith(el("p", { class: "vuoto" }, "Non ci sono ancora materiali. Aggiungili nel file materiali.js."));
-  else ordinati.forEach(m => recenti.append(voce(m, true)));
+  const ordinati = tutteLeAttivita(ELENCO_MODULI)
+    .filter(a => a.data)
+    .sort((a, b) => b.data.localeCompare(a.data))
+    .slice(0, 6);
+  if (!ordinati.length) recenti.replaceWith(el("p", { class: "vuoto" }, "Non ci sono ancora materiali."));
+  else ordinati.forEach(a => recenti.append(voceRecente(a)));
 }
 
 /* ---------- pagina di una materia ---------- */
 function paginaMateria(id) {
-  const tutti = MATERIALI.filter(m => m.materia === id);
+  const tutti = ELENCO_MODULI.filter(m => m.materia === id);
   const area = document.getElementById("materiali");
   const campo = document.getElementById("cerca");
   const pulsanti = document.querySelectorAll(".classi button");
   let classe = new URLSearchParams(location.search).get("classe") || "tutte";
+  const aperti = new Set();          // moduli aperti dall'utente
+  const idModulo = m => ["modulo", m.classe, m.numero || m.titolo].join("-").toLowerCase().replace(/[^a-z0-9-]+/g, "-");
+  if (location.hash) aperti.add(location.hash.slice(1));
+
+  const contiene = (q, ...testi) => testi.join(" ").toLowerCase().includes(q);
+
+  /* restituisce il modulo ridotto alle sole parti che corrispondono alla ricerca */
+  function filtra(mod, q) {
+    if (!q || contiene(q, mod.titolo, mod.descrizione || "", mod.numero || "")) return mod;
+    const att = a => contiene(q, a.titolo, a.descrizione || "", a.tipo || "");
+    const lezioni = (mod.lezioni || []).map(l =>
+      contiene(q, l.titolo, l.descrizione || "") ? l : { ...l, attivita: (l.attivita || []).filter(att) }
+    ).filter(l => contiene(q, l.titolo, l.descrizione || "") || l.attivita.length);
+    const attivita = (mod.attivita || []).filter(att);
+    return lezioni.length || attivita.length ? { ...mod, lezioni, attivita } : null;
+  }
+
+  function disegnaModulo(mod, cercando) {
+    const lezioni = mod.lezioni || [];
+    const nAtt = tutteLeAttivita([mod]).length;
+    const chiave = idModulo(mod);
+    const riepilogo = lezioni.length || nAtt
+      ? [lezioni.length === 1 ? "1 lezione" : lezioni.length + " lezioni",
+         nAtt === 1 ? "1 attività" : nAtt + " attività"].join(", ")
+      : "In preparazione";
+
+    const box = el("details", { class: "modulo", id: chiave });
+    if (cercando || aperti.has(chiave)) box.open = true;
+    box.addEventListener("toggle", () => {
+      if (cercando) return;
+      box.open ? aperti.add(chiave) : aperti.delete(chiave);
+    });
+
+    box.append(el("summary", null,
+      el("span", { class: "numero-modulo" }, mod.numero ? "Modulo " + mod.numero : "Modulo"),
+      el("span", { class: "titolo-modulo" }, mod.titolo),
+      el("span", { class: "riepilogo" }, riepilogo)
+    ));
+
+    const dentro = el("div", { class: "contenuto-modulo" });
+    if (mod.descrizione) dentro.append(el("p", { class: "descr-modulo" }, mod.descrizione));
+
+    if (lezioni.length) {
+      const ol = el("ol", { class: "lezioni" });
+      lezioni.forEach((lez, i) => {
+        const titolo = lez.link
+          ? el("a", { href: BASE + lez.link }, lez.titolo)
+          : lez.titolo;
+        const li = el("li", { class: "lezione" },
+          el("p", { class: "numero-lezione" }, "Lezione " + (i + 1)),
+          el("h4", null, titolo),
+          lez.descrizione ? el("p", { class: "descr-lezione" }, lez.descrizione) : null);
+        const att = lez.attivita || [];
+        if (att.length) {
+          const ul = el("ul", { class: "attivita-elenco" });
+          att.forEach(a => ul.append(rigaAttivita(a)));
+          li.append(ul);
+        } else {
+          li.append(el("p", { class: "attesa" }, "Attività in preparazione"));
+        }
+        ol.append(li);
+      });
+      dentro.append(ol);
+    } else if (!(mod.attivita || []).length) {
+      dentro.append(el("p", { class: "attesa" }, "Le lezioni di questo modulo sono in preparazione."));
+    }
+
+    if ((mod.attivita || []).length) {
+      const ul = el("ul", { class: "attivita-elenco" });
+      mod.attivita.forEach(a => ul.append(rigaAttivita(a)));
+      dentro.append(el("div", { class: "fine-modulo" },
+        el("h4", null, "Per tutto il modulo"), ul));
+    }
+    box.append(dentro);
+    return box;
+  }
 
   function disegna() {
     pulsanti.forEach(b => b.setAttribute("aria-pressed", b.dataset.classe === classe));
     const q = campo.value.trim().toLowerCase();
-    const scelti = tutti.filter(m =>
-      (classe === "tutte" || m.classe === classe) &&
-      (!q || [m.titolo, m.descrizione, m.unita, m.tipo].join(" ").toLowerCase().includes(q))
-    );
+    const scelti = tutti
+      .filter(m => classe === "tutte" || m.classe === classe)
+      .map(m => filtra(m, q))
+      .filter(Boolean);
     area.replaceChildren();
     if (!scelti.length) {
       area.append(el("p", { class: "vuoto" },
@@ -112,12 +222,7 @@ function paginaMateria(id) {
       const diClasse = scelti.filter(m => m.classe === c);
       if (!diClasse.length) continue;
       const gruppo = el("section", { class: "gruppo" }, el("h2", null, "Classe " + c));
-      const unita = [...new Set(diClasse.map(m => m.unita || "Altri materiali"))];
-      for (const u of unita) {
-        const lista = el("ul", { class: "elenco" });
-        diClasse.filter(m => (m.unita || "Altri materiali") === u).forEach(m => lista.append(voce(m, false)));
-        gruppo.append(el("h3", { class: "unita" }, u), lista);
-      }
+      diClasse.forEach(m => gruppo.append(disegnaModulo(m, !!q)));
       area.append(gruppo);
     }
   }
