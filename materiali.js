@@ -25,3 +25,28 @@ const MATERIALI = [
     data: "2026-10-14"
   }
 ];
+
+
+/* =============================================================
+   UDA INTERDISCIPLINARI
+   Compaiono nella home e nella pagina di ogni materia coinvolta.
+   Carica il file nella cartella uda/ e aggiungi un blocco qui sotto.
+
+   materie:  elenco tra parentesi quadre, es. ["geografia", "storia"]
+   classe:   prima | seconda | terza
+   periodo:  facoltativo, es. "Novembre–dicembre"
+
+   Esempio (togli // all'inizio di ogni riga per usarlo):
+   {
+     titolo: "Titolo dell'UDA",
+     descrizione: "Breve descrizione del compito di realtà.",
+     classe: "terza",
+     periodo: "Novembre–dicembre",
+     materie: ["geografia", "storia", "educazione-civica"],
+     link: "uda/titolo-uda.html"
+   }
+   ============================================================= */
+
+const UDA = [
+
+];
