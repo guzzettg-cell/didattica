@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Scheda 1.2 – Il reticolato geografico e le coordinate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1EE; --paper:#FAFBF9; --ink:#1D2A30; --muted:#5B6B70; --line:#C9D2CE;
+  --terra:#8A5A3C; --clima:#2F6E57; --pop:#A8741C; --citta:#B5523B; --eco:#7A3E5A; --stati:#3E5A8E; --geo:#5A4E8C; --ocean:#2C5872;
+  --accent:var(--terra);
+  --cond:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+    --terra:#D09A72; --clima:#62B08E; --pop:#D9A64A; --citta:#E58A70; --eco:#C77E9F; --stati:#8FA8D8; --geo:#AA9DE0; --ocean:#80B1CC;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+  --terra:#D09A72; --ocean:#80B1CC;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.6}
+:focus-visible{outline:3px solid var(--ocean);outline-offset:2px}
+.bands{display:flex;height:5px}.bands span{flex:1}
+.bands span:nth-child(1){background:var(--terra)}.bands span:nth-child(2){background:var(--clima)}.bands span:nth-child(3){background:var(--pop)}.bands span:nth-child(4){background:var(--citta)}.bands span:nth-child(5){background:var(--eco)}.bands span:nth-child(6){background:var(--stati)}.bands span:nth-child(7){background:var(--geo)}
+main{max-width:46rem;margin:0 auto;padding:2rem 1rem 3rem}
+.mod{font-family:var(--cond);font-weight:600;font-size:1.05rem;color:var(--muted);margin:0 0 .6rem}
+.mod b{color:var(--accent)}
+h3,h4{font-family:var(--cond);line-height:1.1;margin:0}
+h3{font-size:clamp(1.7rem,4.5vw,2.2rem);font-weight:700}
+h4{font-weight:600}
+p{max-width:70ch}
+.scheda{background:var(--paper);border:1px solid var(--line);border-top:6px solid var(--accent);border-radius:10px;padding:1.3rem 1.5rem 1.1rem;margin:0}
+.scheda .k{font-family:var(--cond);font-weight:600;color:var(--accent);font-size:1.05rem}
+.scheda h3{margin:.1rem 0 .4rem}
+.scheda .inbreve{font-style:italic;color:var(--muted);margin:.2rem 0 .6rem}
+.scheda h4{margin:1rem 0 .2rem;font-size:1.12rem}
+.scheda p{margin:.3rem 0}
+.scheda .words{display:flex;flex-wrap:wrap;gap:.35rem;margin:.3rem 0 0;padding:0;list-style:none}
+.scheda .words li{font-family:var(--cond);border:1px solid var(--line);border-radius:20px;padding:.05rem .6rem;margin:0;background:var(--bg)}
+.scheda .ask{border-top:1px dashed var(--line);margin-top:1rem;padding-top:.6rem}
+.scheda .ask ol{margin:.2rem 0;padding-left:1.3rem}
+@media (max-width:600px){main{padding:1.2rem .75rem 2rem}.scheda{padding:1.1rem 1rem 1rem}}
+@media print{body{background:#fff}.bands{display:none}main{padding:0;max-width:none}.scheda{border-color:#999}}
+</style>
+</head>
+<body>
+<div class="bands" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+<main>
+<p class="mod"><b>Modulo I · La Terra</b> · argomento 1.2 · Forma, dimensioni, reticolato e coordinate</p>
+<article class="scheda" id="scheda-1.2">
+  <div class="k">Scheda 1.2</div><h3>Il reticolato geografico e le coordinate</h3>
+  <p class="inbreve">Per trovare un punto sulla Terra si usa una rete di linee immaginarie: paralleli e meridiani.</p><h4>Forma e dimensioni</h4><p>La Terra non è una sfera perfetta: è leggermente schiacciata ai poli. Il raggio all'Equatore misura circa 6378 km, quello polare circa 6357 km; la circonferenza all'Equatore è di circa 40 000 km.</p><h4>Paralleli e meridiani</h4><p>I <b>paralleli</b> sono cerchi paralleli all'Equatore. L'<b>Equatore</b> è il più lungo e divide la Terra in emisfero boreale (nord) ed emisfero australe (sud); verso i poli i paralleli diventano sempre più piccoli.</p><p>I <b>meridiani</b> sono semicirconferenze che vanno da un polo all'altro e sono tutti uguali. Il meridiano fondamentale (0°) passa per l'osservatorio di <b>Greenwich</b>, vicino a Londra, e divide la Terra in emisfero orientale ed emisfero occidentale. Paralleli e meridiani insieme formano il <b>reticolato geografico</b>.</p><h4>Latitudine e longitudine</h4><p>La <b>latitudine</b> è la distanza di un punto dall'Equatore, in gradi: da 0° a 90° Nord o Sud. La <b>longitudine</b> è la distanza dal meridiano di Greenwich: da 0° a 180° Est od Ovest. Insieme sono le <b>coordinate geografiche</b> di un luogo: Roma, per esempio, si trova a circa 42° N e 12° E.</p>
+  <h4>Parole da sapere</h4><ul class="words"><li>parallelo</li><li>meridiano</li><li>Equatore</li><li>Greenwich</li><li>emisfero</li><li>latitudine</li><li>longitudine</li><li>coordinate geografiche</li></ul>
+  <div class="ask"><b>Prova a rispondere</b><ol><li>In quale emisfero (nord o sud, est od ovest) si trova un punto a 30° S e 60° O?</li><li>Perché tutti i meridiani sono uguali mentre i paralleli no?</li></ol></div>
+</article>
+</main>
+</body>
+</html>

@@ -130,7 +130,7 @@ const MODULI = [
         tipo: "Ripasso",
         titolo: "Ripasso guidato prima dell'interrogazione",
         descrizione: "Sette attività in ordine: parole, concetti, carta e calcoli.",
-        link: "geografia/terza/la-terra/ripasso/ripasso-modulo-1.html",
+        link: "geografia/terza/la-terra/ripasso/Terra_Ripasso_guidato.html",
         data: "2026-10-14"
       }
     ]
