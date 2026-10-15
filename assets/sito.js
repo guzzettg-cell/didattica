@@ -155,8 +155,8 @@ function paginaMateria(id) {
     const nAtt = tutteLeAttivita([mod]).length;
     const chiave = idModulo(mod);
     const riepilogo = lezioni.length || nAtt
-      ? [lezioni.length === 1 ? "1 lezione" : lezioni.length + " lezioni",
-         nAtt === 1 ? "1 attività" : nAtt + " attività"].join(", ")
+      ? [lezioni.length ? (lezioni.length === 1 ? "1 lezione" : lezioni.length + " lezioni") : null,
+         nAtt ? (nAtt === 1 ? "1 attività" : nAtt + " attività") : null].filter(Boolean).join(", ")
       : "In preparazione";
 
     const box = el("details", { class: "modulo", id: chiave });
