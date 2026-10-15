@@ -31,14 +31,126 @@
 
 const MODULI = [
 
+  /* ---------------- GEOGRAFIA · PRIMA ---------------- */
+  {
+    materia: "geografia",
+    classe: "prima",
+    numero: "I",
+    titolo: "Cos'è la geografia: metodo e strumenti",
+    descrizione: "Primo quadrimestre, in collegamento con Scienze.",
+    lezioni: [
+      { titolo: "L'orientamento e i suoi strumenti", attivita: [] },
+      { titolo: "Il reticolato geografico", attivita: [] },
+      { titolo: "Le carte geografiche", attivita: [] },
+      { titolo: "I fusi orari", attivita: [] },
+      { titolo: "La riduzione in scala", attivita: [] },
+      { titolo: "I dati: raccoglierli, ordinarli, rappresentarli", attivita: [] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "prima",
+    numero: "II",
+    titolo: "Le basi della geografia fisica",
+    descrizione: "L'uomo e l'ambiente; il territorio europeo. Primo quadrimestre, in collegamento con Scienze.",
+    lezioni: [
+      { titolo: "Il clima", attivita: [] },
+      { titolo: "Le risorse idriche", attivita: [] },
+      { titolo: "Le risorse terrestri", attivita: [] },
+      { titolo: "L'inquinamento", attivita: [] },
+      { titolo: "Il territorio europeo: monti, mari, pianure, laghi", attivita: [] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "prima",
+    numero: "III",
+    titolo: "Le basi della geografia antropica",
+    descrizione: "Popolazione, città ed economia d'Europa. Tra primo e secondo quadrimestre, in collegamento con Storia.",
+    lezioni: [
+      { titolo: "La popolazione europea", attivita: [] },
+      { titolo: "L'urbanizzazione del continente europeo", attivita: [] },
+      { titolo: "L'economia europea: il settore primario", attivita: [] },
+      { titolo: "L'economia europea: il settore secondario", attivita: [] },
+      { titolo: "L'economia europea: il settore terziario", attivita: [] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "prima",
+    numero: "IV",
+    titolo: "Geografia regionale italiana",
+    descrizione: "Secondo quadrimestre, in collegamento con Storia.",
+    lezioni: [
+      { titolo: "Il quadro fisico dell'Italia", attivita: [] },
+      { titolo: "Il quadro politico dell'Italia", attivita: [] },
+      { titolo: "La popolazione italiana", attivita: [] },
+      { titolo: "L'economia italiana", attivita: [] },
+      { titolo: "L'Italia nel contesto europeo", attivita: [] },
+      { titolo: "Le regioni italiane", attivita: [] }
+    ]
+  },
+
+  /* ---------------- GEOGRAFIA · SECONDA ---------------- */
+  {
+    materia: "geografia",
+    classe: "seconda",
+    numero: "I",
+    titolo: "La formazione dell'Europa",
+    descrizione: "L'identità europea e le tappe dell'integrazione. Primo e secondo quadrimestre, in collegamento con Storia e Italiano.",
+    lezioni: [
+      { titolo: "L'Europa antica", descrizione: "L'identità europea", attivita: [] },
+      { titolo: "L'Europa medievale", descrizione: "L'identità europea", attivita: [] },
+      { titolo: "L'Europa moderna", descrizione: "L'identità europea", attivita: [] },
+      { titolo: "L'Europa contemporanea", descrizione: "L'identità europea", attivita: [] },
+      { titolo: "Le tappe dell'integrazione europea", attivita: [] },
+      { titolo: "Il funzionamento dell'UE", attivita: [] },
+      { titolo: "Le politiche comuni e l'euro", attivita: [] },
+      { titolo: "I diritti dei cittadini UE", attivita: [] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "seconda",
+    numero: "II",
+    titolo: "Economia e ambiente dell'Europa",
+    descrizione: "I settori dell'economia e la tutela dell'ambiente. Primo quadrimestre, in collegamento con Storia e Italiano.",
+    lezioni: [
+      { titolo: "Il ruolo dell'Europa nell'economia mondiale", descrizione: "I settori dell'economia", attivita: [] },
+      { titolo: "Gli squilibri nell'economia europea", descrizione: "I settori dell'economia", attivita: [] },
+      { titolo: "L'Italia nell'economia europea", descrizione: "I settori dell'economia", attivita: [] },
+      { titolo: "Gli squilibri nell'economia italiana", descrizione: "I settori dell'economia", attivita: [] },
+      { titolo: "Le regioni agrarie europee", attivita: [] },
+      { titolo: "L'industria e il terziario in Europa", attivita: [] },
+      { titolo: "Il riscaldamento globale in Europa", descrizione: "L'inquinamento e il degrado ambientale", attivita: [] },
+      { titolo: "La protezione dell'ambiente in Europa", descrizione: "L'inquinamento e il degrado ambientale", attivita: [] },
+      { titolo: "Le città sostenibili", descrizione: "L'inquinamento e il degrado ambientale", attivita: [] },
+      { titolo: "Lo smaltimento dei rifiuti", descrizione: "L'inquinamento e il degrado ambientale", attivita: [] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "seconda",
+    numero: "III",
+    titolo: "La geografia politica dell'Europa e i grandi Stati europei",
+    descrizione: "Gli Stati europei e gli altri Stati. Primo e secondo quadrimestre, in collegamento con Storia e Italiano.",
+    lezioni: [
+      { titolo: "Conflitti e tensioni in Europa", attivita: [] },
+      { titolo: "Monarchie e repubbliche, Stati federali e Stati unitari", attivita: [] },
+      { titolo: "Il sistema democratico e la Costituzione", attivita: [] },
+      { titolo: "Studio di alcuni Stati europei", attivita: [] },
+      { titolo: "Cenni su altri Stati europei", attivita: [] }
+    ]
+  },
+
   /* ---------------- GEOGRAFIA · TERZA ---------------- */
   {
     materia: "geografia",
     classe: "terza",
     numero: "I",
-    titolo: "La Terra",
+    titolo: "Il pianeta Terra: gli equilibri a rischio",
     link: "geografia/terza/la-terra/index.html",
-    descrizione: "Il pianeta Terra: lezioni interattive e simulazioni.",
+    descrizione: "Origini del pianeta, un pianeta irrequieto, idrografia, continenti, clima e biomi. Primo quadrimestre, in collegamento con Scienze.",
     lezioni: [
       {
         titolo: "Il Sistema solare",
@@ -123,7 +235,9 @@ const MODULI = [
         link: "geografia/terza/la-terra/lezioni/atmosfera.html",
         data: "2026-10-15",
         attivita: []
-      }
+      },
+      { titolo: "Il clima e i suoi cambiamenti", attivita: [] },
+      { titolo: "Fasce climatiche e biomi", attivita: [] }
     ],
     attivita: [
       {
@@ -139,29 +253,86 @@ const MODULI = [
     materia: "geografia",
     classe: "terza",
     numero: "II",
-    titolo: "Il clima",
-    lezioni: []
+    titolo: "Popolazione mondiale: crescita e inurbamento",
+    descrizione: "Popolazione, economia mondiale e risorse. Primo quadrimestre, in collegamento con Scienze e Tecnologia.",
+    lezioni: [
+      { titolo: "La crescita della popolazione mondiale", attivita: [] },
+      { titolo: "L'inurbamento", attivita: [] },
+      { titolo: "L'economia mondiale", attivita: [] },
+      { titolo: "La globalizzazione", attivita: [] },
+      { titolo: "Risorse e materie prime", attivita: [] },
+      { titolo: "Le energie", attivita: [] }
+    ]
   },
   {
     materia: "geografia",
     classe: "terza",
     numero: "III",
-    titolo: "La popolazione",
-    lezioni: []
+    titolo: "La geopolitica: verso un nuovo ordine mondiale",
+    descrizione: "Primo e secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
+    lezioni: [
+      { titolo: "La crisi degli Stati nazionali", attivita: [] },
+      { titolo: "Il sistema politico mondiale", attivita: [] },
+      { titolo: "L'Organizzazione delle Nazioni Unite", attivita: [] },
+      { titolo: "I diritti umani", attivita: [] }
+    ]
   },
   {
     materia: "geografia",
     classe: "terza",
     numero: "IV",
-    titolo: "L'economia",
-    lezioni: []
+    titolo: "Africa",
+    descrizione: "Profilo fisico, politico e antropico. Secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
+    lezioni: [
+      { titolo: "L'Africa: profilo fisico", attivita: [] },
+      { titolo: "L'Africa: profilo politico", attivita: [] },
+      { titolo: "L'Africa: profilo antropico", attivita: [] },
+      { titolo: "L'Africa mediterranea", attivita: [] },
+      { titolo: "L'Africa subsahariana", attivita: [] }
+    ]
   },
   {
     materia: "geografia",
     classe: "terza",
     numero: "V",
-    titolo: "Gli Stati del mondo",
-    lezioni: []
+    titolo: "Asia",
+    descrizione: "Profilo fisico, politico e antropico. Secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
+    lezioni: [
+      { titolo: "L'Asia: profilo fisico", attivita: [] },
+      { titolo: "L'Asia: profilo politico", attivita: [] },
+      { titolo: "L'Asia: profilo antropico", attivita: [] },
+      { titolo: "L'Asia occidentale", attivita: [] },
+      { titolo: "L'Asia centrale", attivita: [] },
+      { titolo: "L'Asia sud-orientale", attivita: [] },
+      { titolo: "L'Asia orientale", attivita: [] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "terza",
+    numero: "VI",
+    titolo: "America anglosassone e America Latina",
+    descrizione: "Profilo fisico, politico e antropico. Secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
+    lezioni: [
+      { titolo: "L'America: profilo fisico", attivita: [] },
+      { titolo: "L'America: profilo politico", attivita: [] },
+      { titolo: "L'America: profilo antropico", attivita: [] },
+      { titolo: "L'America settentrionale", attivita: [] },
+      { titolo: "L'America centrale", attivita: [] },
+      { titolo: "L'America meridionale", attivita: [] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "terza",
+    numero: "VII",
+    titolo: "Oceania",
+    descrizione: "Profilo fisico, politico e antropico. Secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
+    lezioni: [
+      { titolo: "L'Oceania: profilo fisico", attivita: [] },
+      { titolo: "L'Oceania: profilo politico", attivita: [] },
+      { titolo: "L'Oceania: profilo antropico", attivita: [] }
+    ]
   }
 
 ];
