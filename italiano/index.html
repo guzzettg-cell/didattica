@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Italiano · Didattica</title>
+<link rel="stylesheet" href="../assets/stile.css">
+<style>:root { --accento: var(--italiano); }</style>
+</head>
+<body data-materia="italiano" data-base="../">
+<div class="pagina">
+  <header class="testata">
+    <p class="briciole"><a href="../">Materiali didattici</a></p>
+    <h1>Italiano</h1>
+    <p class="intro">Lettura, scrittura, grammatica e laboratori di scrittura creativa.</p>
+  </header>
+
+  <main class="corpo">
+    <div class="filtri">
+      <div class="classi" role="group" aria-label="Filtra per classe">
+        <button type="button" data-classe="tutte">Tutte</button>
+        <button type="button" data-classe="prima">Prima</button>
+        <button type="button" data-classe="seconda">Seconda</button>
+        <button type="button" data-classe="terza">Terza</button>
+      </div>
+      <input class="cerca" id="cerca" type="search" placeholder="Cerca un argomento" aria-label="Cerca un argomento">
+    </div>
+    <div id="materiali"></div>
+  </main>
+
+  <footer class="piede"><a href="../">Torna a tutte le materie</a></footer>
+</div>
+
+<script src="../materiali.js"></script>
+<script src="../assets/sito.js"></script>
+</body>
+</html>
