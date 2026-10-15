@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}
+.backlink{display:inline-block;margin:14px 16px 0;font:600 14px/1.2 system-ui,sans-serif;color:inherit;text-decoration:none;border:1px solid rgba(120,130,150,.4);border-radius:999px;padding:6px 12px}
+.backlink:hover{text-decoration:underline}
+.map.nomap{display:flex;flex-wrap:wrap;gap:8px;padding:14px;align-content:flex-start;background:var(--card,#fff)}
+.map.nomap .mapnote{flex-basis:100%;margin:0 0 4px;font-size:.9rem;color:var(--muted,#566476)}
+.map.nomap .dot,.map.nomap .hit,.map.nomap .istmo{position:static!important;transform:none!important;width:auto!important;height:auto!important;aspect-ratio:auto!important;opacity:1!important;border-radius:999px!important;padding:6px 12px!important;border:0!important;color:#fff!important;font:700 .88rem/1.2 system-ui,sans-serif!important;box-shadow:none!important;animation:none!important}
+.map.nomap .dot::after,.map.nomap .hit::after,.map.nomap .istmo::after{content:attr(aria-label)}
+.map.nomap .hit{background:#3b4a63!important}.map.nomap .istmo{background:#d62828!important}
+.map.nomap .dot.dim{opacity:.25!important}
+.map.nomap [aria-pressed="true"]{outline:3px solid #111!important;outline-offset:2px}
+</style>
+<title>La Terra gira, il Sole sorge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: intestazione breve, una scena 3D (la Terra con la cupola del cielo di Roma), comandi sotto, poi spiegazione e domande */
+:root{
+  --paper:#edf1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
+  --sun:#d97f0f; --sun-soft:#fbe7c8; --scene:#08101d;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --sun:#f2a640; --sun-soft:#3a2a12; --scene:#060b14; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --sun:#f2a640; --sun-soft:#3a2a12; --scene:#060b14; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1000px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:22px}
+header{display:grid;gap:6px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,4.2vw,2.8rem);line-height:1.05;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--sun)}
+.lead{margin:0;max-width:68ch;color:var(--muted)}
+figure{margin:0;background:var(--scene);border-radius:14px;overflow:hidden;display:grid;min-width:0}
+figure canvas{width:100%;aspect-ratio:4/3;display:block;touch-action:pan-y;cursor:grab}
+figcaption{padding:12px 16px 14px;color:#c9d5e3;font-size:.9rem;display:grid;gap:2px;background:#0d1828}
+figcaption b{font-family:var(--display);font-weight:600;color:#fff;font-size:1.02rem;letter-spacing:.01em}
+.views{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.views button{background:transparent;color:#d6e2f0;border-color:#2e4360;font-size:.82rem;padding:5px 11px}
+.views button[aria-pressed="true"]{background:#ffd27a;color:#1d1505;border-color:#ffd27a;font-weight:700}
+.controls{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:14px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.clock{font-family:var(--display);font-weight:800;font-size:2rem;font-variant-numeric:tabular-nums;min-width:4.2ch}
+.slider{flex:1 1 260px;display:grid;gap:2px;min-width:0}
+input[type=range]{width:100%;accent-color:var(--sun)}
+.ticks{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
+button,select{font:inherit;font-size:.92rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:7px 14px;cursor:pointer}
+button:hover{border-color:var(--sun)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+#play{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700;min-width:7.5em}
+.check{display:flex;gap:8px;align-items:center;font-size:.92rem;cursor:pointer}
+.check input{width:18px;height:18px;accent-color:var(--sun)}
+.readout{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.readout{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.chip{border:1px solid var(--line);border-radius:10px;padding:8px 12px;display:grid;min-width:0}
+.chip span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.chip strong{font-family:var(--display);font-weight:600;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.chip.phase{background:var(--sun-soft);border-color:transparent}
+.explain{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px}
+@media (max-width:820px){.explain{grid-template-columns:1fr}}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:0}
+.box h2{font-family:var(--display);font-weight:800;font-size:1.25rem;margin:0 0 8px}
+.now{font-size:1.08rem;margin:0;min-height:3.3em}
+.now.rev{color:var(--sun)}
+ol.steps{margin:12px 0 0;padding-left:1.3em;display:grid;gap:6px}
+details{border-top:1px solid var(--line);padding:10px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700}
+details p{margin:8px 0 0;color:var(--muted)}
+.note{font-size:.85rem;color:var(--muted);margin:0}
+</style>
+</head>
+<body>
+<a class="backlink" href="../index.html">← Tutte le lezioni</a>
+
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">I movimenti della Terra · la rotazione</div>
+    <h1>La Terra gira verso <em>est</em>,<br>il Sole sorge a <em>est</em></h1>
+    <p class="lead">La Terra ruota attorno al suo asse e porta con sé Roma e il suo pezzo di cielo, la cupola trasparente. Dentro la cupola vedi il percorso del Sole: sorge a Est, a mezzogiorno è alto verso Sud, tramonta a Ovest. Trascina la scena per girarci intorno.</p>
+  </header>
+
+  <figure>
+    <canvas id="scene" role="img" aria-label="Modello tridimensionale della Terra che ruota da ovest a est, illuminata dal Sole; sopra Roma una cupola con l'orizzonte e il percorso del Sole da Est a Ovest"></canvas>
+    <figcaption><b>La Terra e il cielo di Roma</b><span id="cap"></span>
+      <div class="views" role="group" aria-label="Punto di vista">
+        <button type="button" data-view="spazio" aria-pressed="true">Dallo spazio</button>
+        <button type="button" data-view="roma" aria-pressed="false">Vicino a Roma</button>
+        <button type="button" data-view="polo" aria-pressed="false">Dal Polo Nord</button>
+      </div>
+    </figcaption>
+  </figure>
+
+  <section class="controls" aria-label="Comandi">
+    <div class="row">
+      <button id="play" type="button">Pausa</button>
+      <div class="clock" id="clock">05:00</div>
+      <label class="slider" for="ora">
+        <input id="ora" type="range" min="0" max="1440" step="1" value="300" aria-label="Ora del giorno">
+        <div class="ticks"><span>0</span><span>6</span><span>12</span><span>18</span><span>24</span></div>
+      </label>
+    </div>
+    <div class="row">
+      <button type="button" data-t="0">Mezzanotte</button>
+      <button type="button" data-t="6">Alba</button>
+      <button type="button" data-t="12">Mezzogiorno</button>
+      <button type="button" data-t="18">Tramonto</button>
+      <select id="speed" aria-label="Velocità">
+        <option value="0.6">Lenta</option>
+        <option value="1.5" selected>Normale</option>
+        <option value="4">Veloce</option>
+      </select>
+      <label class="check"><input id="rev" type="checkbox"> Ipotesi: e se la Terra girasse al contrario?</label>
+    </div>
+    <div class="readout">
+      <div class="chip phase"><span>Che cosa succede</span><strong id="phase">Notte</strong></div>
+      <div class="chip"><span>Altezza del Sole a Roma</span><strong id="alt">0°</strong></div>
+      <div class="chip"><span>Direzione del Sole</span><strong id="az">—</strong></div>
+      <div class="chip"><span>Roma è nella parte</span><strong id="side">in ombra</strong></div>
+    </div>
+  </section>
+
+  <section class="explain">
+    <div class="box">
+      <h2>Che cosa sta succedendo</h2>
+      <p class="now" id="now"></p>
+      <ol class="steps">
+        <li>La Terra ruota da ovest a est e Roma viene portata verso est, insieme alla sua cupola di cielo.</li>
+        <li>Il Sole compare dal lato verso cui andiamo, l'est, e sparisce dal lato opposto, l'ovest.</li>
+        <li>Il Sole in realtà resta fermo: è la cupola di Roma che, girando con la Terra, gli si rivolge in modi diversi. Il moto del Sole nel cielo è <b>apparente</b>.</li>
+      </ol>
+      <p class="note" style="margin-top:12px">Simulazione semplificata: Roma (42° N) in un giorno di equinozio, quando dì e notte durano 12 ore. La cupola è molto più grande del vero, per poterla vedere; l'altezza del Sole è invece quella reale (circa 48° a mezzogiorno).</p>
+    </div>
+    <div class="box">
+      <h2>Domande per ragionare</h2>
+      <details><summary>Se è la Terra a muoversi, perché vediamo muoversi il Sole?</summary><p>Perché noi ruotiamo insieme alla Terra e non ce ne accorgiamo. Girando da ovest a est, vediamo il Sole spostarsi nel verso opposto, da est a ovest.</p></details>
+      <details><summary>A mezzogiorno, in quale direzione si trova il Sole per chi vive a Roma? Perché non è proprio sopra la testa?</summary><p>È verso Sud, nel punto più alto del suo percorso: per questo il Sud si chiama anche "mezzogiorno". Non è sopra la testa perché Roma è lontana dall'equatore: i raggi del Sole arrivano inclinati.</p></details>
+      <details><summary>Attiva l'ipotesi della rotazione al contrario. Dove sorge il Sole? Che cosa resta uguale?</summary><p>Il Sole sorgerebbe a ovest e tramonterebbe a est. Il dì e la notte però continuerebbero ad alternarsi, perché la Terra continuerebbe a ruotare.</p></details>
+      <details><summary>Perché il passaggio dal dì alla notte non è improvviso?</summary><p>Il circolo di illuminazione non è una linea netta: l'atmosfera diffonde la luce del Sole e crea una zona di penombra, quella dell'alba e del tramonto.</p></details>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+const D2R=Math.PI/180, R2D=180/Math.PI, LAT=41.9*D2R, LON_R=12.5, cL=Math.cos(LAT), sL=Math.sin(LAT);
+const DOME=0.6; // raggio della cupola (Terra = 1), ingrandito
+const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+let t=5, dir=1, playing=!reduce, speed=1.5, last=null;
+let view='spazio', camA=-90, camE=55, offA=0, romaE=14;
+const $=id=>document.getElementById(id);
+const cv=$('scene'), c=cv.getContext('2d');
+const FD='"Bricolage Grotesque","Trebuchet MS",sans-serif', FB='"Atkinson Hyperlegible",Verdana,sans-serif';
+
+/* --- utilità --- */
+function rng(seed){return()=>{seed=(seed*16807)%2147483647;return seed/2147483647}}
+const r1=rng(7); const stars=Array.from({length:420},()=>{const z=2*r1()-1, p=2*Math.PI*r1(), q=Math.sqrt(1-z*z);
+  return {v:[q*Math.cos(p),q*Math.sin(p),z],a:0.15+r1()*0.55,s:r1()<0.12?2:1}});
+const SKY=[[-18,[6,10,26],[14,20,44]],[-9,[16,24,60],[70,52,92]],[-3,[34,52,110],[224,120,74]],
+  [1,[52,92,160],[246,168,96]],[8,[66,132,206],[190,220,240]],[30,[40,118,206],[170,212,242]]];
+function skyCols(alt){
+  const mx=(p,q,k)=>p.map((v,i)=>Math.round(v+(q[i]-v)*k));
+  if(alt<=SKY[0][0]) return [SKY[0][1],SKY[0][2]];
+  for(let i=1;i<SKY.length;i++) if(alt<=SKY[i][0]){ const k=(alt-SKY[i-1][0])/(SKY[i][0]-SKY[i-1][0]);
+    return [mx(SKY[i-1][1],SKY[i][1],k),mx(SKY[i-1][2],SKY[i][2],k)]; }
+  const l=SKY[SKY.length-1]; return [l[1],l[2]];
+}
+function hull(pts){ pts=pts.slice().sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+  const cr=(o,a,b)=>(a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]); const lo=[],up=[];
+  for(const p of pts){while(lo.length>=2&&cr(lo[lo.length-2],lo[lo.length-1],p)<=0)lo.pop();lo.push(p)}
+  for(let i=pts.length-1;i>=0;i--){const p=pts[i];while(up.length>=2&&cr(up[up.length-2],up[up.length-1],p)<=0)up.pop();up.push(p)}
+  return lo.slice(0,-1).concat(up.slice(0,-1)); }
+const lerp=(a,b,k)=>a+(b-a)*k;
+const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+const add=(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]];
+const mul=(a,k)=>[a[0]*k,a[1]*k,a[2]*k];
+function fit(){
+  const r=cv.getBoundingClientRect(), d=window.devicePixelRatio||1;
+  const W=Math.round(r.width*d), H=Math.round(r.height*d);
+  if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}
+  c.setTransform(d,0,0,d,0,0); return {w:r.width,h:r.height};
+}
+function altAz(Hd){
+  const H=Hd*D2R, alt=Math.asin(cL*Math.cos(H));
+  const A=Math.atan2(Math.sin(H),Math.cos(H)*sL);
+  return {alt:alt*R2D, az:((A*R2D+180)%360+360)%360};
+}
+function dirName(az){return ['Nord','Nord-Est','Est','Sud-Est','Sud','Sud-Ovest','Ovest','Nord-Ovest'][Math.round(az/45)%8]}
+function arrowHead(x,y,dx,dy,s){
+  const L=Math.hypot(dx,dy)||1; dx/=L; dy/=L;
+  c.beginPath(); c.moveTo(x+dx*s,y+dy*s);
+  c.lineTo(x-dx*s*0.6-dy*s*0.7,y-dy*s*0.6+dx*s*0.7);
+  c.lineTo(x-dx*s*0.6+dy*s*0.7,y-dy*s*0.6-dx*s*0.7); c.closePath(); c.fill();
+}
+
+/* --- camera ortografica: il Sole sta in direzione +x, il Polo Nord in +z --- */
+let B, cx, cy, R;
+function camBasis(a,e){
+  a*=D2R; e*=D2R;
+  const F=[Math.cos(e)*Math.cos(a),Math.cos(e)*Math.sin(a),Math.sin(e)];
+  const l=Math.hypot(F[0],F[1])||1, Rt=[-F[1]/l,F[0]/l,0];
+  const U=[F[1]*Rt[2]-F[2]*Rt[1],F[2]*Rt[0]-F[0]*Rt[2],F[0]*Rt[1]-F[1]*Rt[0]];
+  return {F,Rt,U};
+}
+const proj=P=>[cx+R*dot(P,B.Rt), cy-R*dot(P,B.U)];
+function hidden(P){ const x=dot(P,B.Rt), y=dot(P,B.U), z=dot(P,B.F), d2=x*x+y*y; return d2<1 && z<Math.sqrt(1-d2)-0.003; }
+function path(pts){ let open=false; c.beginPath();
+  for(const p of pts){ if(hidden(p)){open=false;continue} const s=proj(p); open?c.lineTo(s[0],s[1]):c.moveTo(s[0],s[1]); open=true; }
+  c.stroke(); }
+
+/* --- globo disegnato pixel per pixel --- */
+const off=document.createElement('canvas'), oc=off.getContext('2d');
+let cache=null;
+function buildCache(N){
+  const n=N*N, lonW=new Float32Array(n), lat=new Float32Array(n), col=new Uint8ClampedArray(n*3),
+        alpha=new Uint8ClampedArray(n), lit=new Uint8Array(n);
+  for(let j=0;j<N;j++){ const v=1-2*(j+0.5)/N;
+    for(let i=0;i<N;i++){ const u=2*(i+0.5)/N-1, r2=u*u+v*v, k=j*N+i;
+      if(r2>1){alpha[k]=0;continue}
+      const w=Math.sqrt(1-r2);
+      const Px=u*B.Rt[0]+v*B.U[0]+w*B.F[0], Py=u*B.Rt[1]+v*B.U[1]+w*B.F[1], Pz=u*B.Rt[2]+v*B.U[2]+w*B.F[2];
+      lonW[k]=Math.atan2(Py,Px)*R2D; lat[k]=Math.asin(Math.max(-1,Math.min(1,Pz)))*R2D; lit[k]=Px>0?1:0;
+      const s=Math.max(0,Math.min(1,(Px+0.10)/0.16)), day=s*s*(3-2*s);
+      const tw=Math.exp(-Math.pow((Px+0.02)/0.07,2))*0.65, sh=0.5+0.5*w;
+      let r=lerp(12,72,day), g=lerp(22,142,day), b=lerp(42,208,day);
+      r=lerp(r,236,tw); g=lerp(g,138,tw); b=lerp(b,72,tw);
+      col[k*3]=r*sh; col[k*3+1]=g*sh; col[k*3+2]=b*sh;
+      alpha[k]=Math.min(1,(1-Math.sqrt(r2))*N*0.5)*255;
+    }}
+  return {N,lonW,lat,col,alpha,lit,img:oc.createImageData(N,N),key:camA.toFixed(2)+'|'+camE.toFixed(2)};
+}
+function nearMult(x,m){const r=((x%m)+m)%m; return Math.min(r,m-r)}
+function drawGlobe(){
+  const N=Math.min(380,Math.round(2*R*(window.devicePixelRatio||1)));
+  const key=camA.toFixed(2)+'|'+camE.toFixed(2);
+  if(!cache||cache.N!==N||cache.key!==key){ off.width=off.height=N; cache=buildCache(N); }
+  const rot=180+dir*15*t-LON_R, d=cache.img.data, wd=170/N;
+  for(let k=0;k<N*N;k++){
+    const a=cache.alpha[k], o=k*4; if(!a){d[o+3]=0;continue}
+    let r=cache.col[k*3], g=cache.col[k*3+1], b=cache.col[k*3+2];
+    const la=cache.lat[k], lo=cache.lonW[k]-rot, cl=Math.cos(la*D2R), m=cache.lit[k]?1:0.45;
+    const dL=Math.abs(((lo-LON_R)%360+540)%360-180);
+    if(dL*cl<wd*1.4&&la>-60&&la<85){ r=lerp(r,255,0.8*m); g=lerp(g,214,0.8*m); b=lerp(b,120,0.8*m); }
+    else if(Math.abs(la)<wd*1.1){ r=lerp(r,255,0.5*m); g=lerp(g,255,0.5*m); b=lerp(b,255,0.5*m); }
+    else if(nearMult(lo,30)*cl<wd||nearMult(la,30)<wd){ r=lerp(r,255,0.2*m); g=lerp(g,255,0.2*m); b=lerp(b,255,0.2*m); }
+    d[o]=r; d[o+1]=g; d[o+2]=b; d[o+3]=a;
+  }
+  oc.putImageData(cache.img,0,0);
+  c.drawImage(off,cx-R,cy-R,2*R,2*R);
+}
+
+/* --- scena --- */
+function draw(sun){
+  const {w,h}=fit(), fs=Math.max(11,Math.min(16,w/46));
+  const th=(180+dir*15*t)*D2R;
+  if(view==='roma'){ // la camera sta a sud di Roma e guarda la cupola di lato
+    const up0=[cL*Math.cos(th),cL*Math.sin(th),sL], e0=[-Math.sin(th),Math.cos(th),0], n0=[-sL*Math.cos(th),-sL*Math.sin(th),cL];
+    const o=offA*D2R, e=romaE*D2R;
+    const F=add(mul(add(mul(n0,-Math.cos(o)),mul(e0,Math.sin(o))),Math.cos(e)),mul(up0,Math.sin(e)));
+    camA=Math.atan2(F[1],F[0])*R2D; camE=Math.asin(Math.max(-1,Math.min(1,F[2])))*R2D;
+  }
+  B=camBasis(camA,camE);
+  if(view==='roma'){ R=Math.min(w*0.62,h*0.44); cx=w/2; cy=h*0.1+R*1.62; }
+  else if(view==='spazio'){ R=Math.min(w*0.3,h*0.33); cx=w*0.44; cy=h*0.55; }
+  else { R=Math.min(w,h)*0.31; cx=w/2; cy=h*0.6; }
+  c.fillStyle='#070c16'; c.fillRect(0,0,w,h);
+  const K=Math.max(w,h)*0.75;
+  stars.forEach(s=>{ if(dot(s.v,B.F)>0)return; const x=cx+K*dot(s.v,B.Rt), y=cy-K*dot(s.v,B.U);
+    if(x<0||y<0||x>w||y>h)return; c.fillStyle=`rgba(255,255,255,${s.a})`; c.fillRect(x,y,s.s,s.s); });
+
+  // il Sole: sta fermo, la luce arriva sempre dalla direzione +x
+  const sx=B.Rt[0], sy=-B.U[0], sl=Math.hypot(sx,sy);
+  c.font=`700 ${fs}px ${FB}`;
+  if(sl>0.5){
+    const ux=sx/sl, uy=sy/sl, px=-uy, py=ux, D=Math.max(w,h)*0.5+R*0.1;
+    const sxc=cx+ux*D, syc=cy+uy*D, sr=R*0.5;
+    const g=c.createRadialGradient(sxc,syc,0,sxc,syc,sr*3);
+    g.addColorStop(0,'rgba(255,236,170,1)'); g.addColorStop(0.3,'rgba(255,190,80,.55)'); g.addColorStop(1,'rgba(255,150,40,0)');
+    c.fillStyle=g; c.fillRect(0,0,w,h);
+    c.fillStyle='#fff3c8'; c.beginPath(); c.arc(sxc,syc,sr,0,Math.PI*2); c.fill();
+    // raggi paralleli verso la Terra
+    c.strokeStyle='rgba(255,214,130,.6)'; c.fillStyle='rgba(255,214,130,.85)'; c.lineWidth=1.6;
+    [-0.8,-0.45,0.45,0.8].forEach(k=>{
+      const ex=cx+px*k*R+ux*(R*Math.sqrt(1-k*k)+14), ey=cy+py*k*R+uy*(R*Math.sqrt(1-k*k)+14);
+      const bx=sxc+px*k*R-ux*sr*1.05, by=syc+py*k*R-uy*sr*1.05;
+      if((bx-ex)*ux+(by-ey)*uy<20) return;
+      c.beginPath(); c.moveTo(bx,by); c.lineTo(ex+ux*6,ey+uy*6); c.stroke(); arrowHead(ex,ey,-ux,-uy,6); });
+    c.font=`800 ${fs*1.1}px ${FD}`; c.fillStyle='#ffe2a0'; c.textAlign=ux>0?'right':'left';
+    const lx=Math.max(12,Math.min(w-12,sxc)), ly=Math.max(fs*2,Math.min(h-12,syc+sr+fs*1.6));
+    c.fillText('SOLE (fermo)',lx,ly);
+  } else {
+    if(sl>0.15){ const gx=cx+sx/sl*Math.max(w,h)*0.6, gy=cy+sy/sl*Math.max(w,h)*0.6;
+      const g=c.createRadialGradient(gx,gy,0,gx,gy,R*1.6);
+      g.addColorStop(0,`rgba(255,224,140,${0.9*sl})`); g.addColorStop(1,'rgba(255,150,40,0)'); c.fillStyle=g; c.fillRect(0,0,w,h); }
+    c.fillStyle='rgba(255,226,170,.95)'; c.textAlign='left';
+    c.fillText(B.F[0]>0?'il Sole è alle tue spalle':'il Sole è dietro la Terra',12,22);
+  }
+
+  drawGlobe();
+
+  // circolo di illuminazione
+  const term=[]; for(let a=0;a<=360;a+=3) term.push([0,1.003*Math.cos(a*D2R),1.003*Math.sin(a*D2R)]);
+  c.strokeStyle='rgba(255,214,150,.75)'; c.lineWidth=1.4; c.setLineDash([5,5]); path(term); c.setLineDash([]);
+  // asse terrestre
+  const axis=[]; for(let z=-1.3;z<=1.301;z+=0.02) axis.push([0,0,z]);
+  c.strokeStyle='#fff'; c.lineWidth=2.5; path(axis);
+  if(view!=='roma') [[1.36,'Polo Nord'],[-1.36,'Polo Sud']].forEach(([z,lab])=>{ const P=[0,0,z]; if(hidden(P))return;
+    const s=proj(P); c.font=`700 ${fs*0.85}px ${FB}`; c.fillStyle='rgba(255,255,255,.9)'; c.textAlign='center'; c.fillText(lab,s[0],s[1]+(z>0?-4:fs)); });
+  // anello di rotazione lungo l'equatore
+  const ring=[], RR=1.13; for(let a=0;a<=360;a+=2) ring.push([RR*Math.cos(a*D2R),RR*Math.sin(a*D2R),0]);
+  c.strokeStyle='rgba(255,210,122,.9)'; c.lineWidth=2.5; path(ring);
+  c.fillStyle='#ffd27a';
+  for(let a=0;a<360;a+=60){ const p=[RR*Math.cos(a*D2R),RR*Math.sin(a*D2R),0], q=[RR*Math.cos((a+dir*4)*D2R),RR*Math.sin((a+dir*4)*D2R),0];
+    if(hidden(p))continue; const s=proj(p), s2=proj(q); arrowHead(s[0],s[1],s2[0]-s[0],s2[1]-s[1],8); }
+
+  // Roma e la sua cupola di cielo
+  const up=[cL*Math.cos(th),cL*Math.sin(th),sL], east=[-Math.sin(th),Math.cos(th),0], north=[-sL*Math.cos(th),-sL*Math.sin(th),cL];
+  const Pr=up.slice();
+  const local=(alt,az)=>{ alt*=D2R; az*=D2R; return add(mul(add(mul(east,Math.sin(az)),mul(north,Math.cos(az))),Math.cos(alt)),mul(up,Math.sin(alt))); };
+  const domeP=(alt,az,k=1)=>add(Pr,mul(local(alt,az),DOME*k));
+  const romaVis=!hidden(Pr);
+  // nella vista "dallo spazio" la cupola resta sempre dritta (vista da sud), mentre Roma gira con la Terra
+  const bill=false, rs=proj(Pr), eB=14*D2R, Dpx=R*DOME;
+  const DP=bill?(P=>{ const v=[(P[0]-Pr[0])/DOME,(P[1]-Pr[1])/DOME,(P[2]-Pr[2])/DOME];
+      return [rs[0]+Dpx*dot(v,east), rs[1]-Dpx*(dot(v,up)*Math.cos(eB)+dot(v,north)*Math.sin(eB))]; }):proj;
+  const DH=bill?(()=>false):hidden;
+  const dpath=pts=>{ let open=false; c.beginPath();
+    for(const p of pts){ if(DH(p)){open=false;continue} const s=DP(p); open?c.lineTo(s[0],s[1]):c.moveTo(s[0],s[1]); open=true; } c.stroke(); };
+  const showDome=bill?dot(Pr,B.F)>-0.3:true;
+  if(showDome){
+  c.save(); if(bill&&!romaVis) c.globalAlpha=Math.max(0.25,1+dot(Pr,B.F)*2.5);
+  // il cielo dentro la cupola
+  const samp=[]; for(let al=0;al<=90;al+=10) for(let a=0;a<360;a+=10) samp.push(domeP(al,a));
+  if(samp.every(p=>!DH(p))){
+    const hp=hull(samp.map(DP)); const ys=hp.map(p=>p[1]), y0=Math.min(...ys), y1=Math.max(...ys);
+    const [tc,hc]=skyCols(sun.alt), g=c.createLinearGradient(0,y0,0,y1);
+    g.addColorStop(0,`rgba(${tc},0.6)`); g.addColorStop(1,`rgba(${hc},0.6)`);
+    c.fillStyle=g; c.beginPath(); hp.forEach((p,i)=>i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1])); c.closePath(); c.fill();
+    c.strokeStyle='rgba(200,225,255,.35)'; c.lineWidth=1; c.stroke();
+  }
+  // piano dell'orizzonte
+  const hor=[]; for(let a=0;a<=360;a+=4) hor.push(domeP(0,a));
+  const day=Math.max(0,Math.min(1,(sun.alt+8)/16));
+  if(hor.every(p=>!DH(p))){ c.beginPath(); hor.forEach((p,i)=>{const s=DP(p); i?c.lineTo(s[0],s[1]):c.moveTo(s[0],s[1])});
+    c.fillStyle=`rgba(${Math.round(lerp(30,110,day))},${Math.round(lerp(44,170,day))},${Math.round(lerp(70,100,day))},0.55)`; c.fill(); }
+  c.strokeStyle='rgba(255,255,255,.75)'; c.lineWidth=1.5; dpath(hor);
+  // gusci della cupola
+  c.strokeStyle='rgba(200,225,255,.35)'; c.lineWidth=1; c.setLineDash([3,4]);
+  const m1=[],m2=[]; for(let a=0;a<=180;a+=4){ m1.push(domeP(a<=90?a:180-a, a<=90?0:180)); m2.push(domeP(a<=90?a:180-a, a<=90?90:270)); }
+  dpath(m1); dpath(m2);
+  for(const al of [30,60]){ const ring2=[]; for(let a=0;a<=360;a+=6) ring2.push(domeP(al,a)); dpath(ring2); }
+  c.setLineDash([]);
+  // percorso del Sole nel cielo di Roma
+  const sp=[]; for(let H=-90;H<=90;H+=2){ const q=altAz(H); sp.push(domeP(Math.max(0,q.alt),q.az)); }
+  c.strokeStyle='rgba(255,215,120,.95)'; c.lineWidth=2.6; dpath(sp);
+  c.fillStyle='#ffd27a';
+  [-45,45].forEach(H=>{ const a=altAz(H), b=altAz(H+dir*4), p=domeP(a.alt,a.az), q=domeP(b.alt,b.az);
+    if(DH(p))return; const s=DP(p), s2=DP(q); arrowHead(s[0],s[1],s2[0]-s[0],s2[1]-s[1],8); });
+  // punti cardinali
+  [[90,'E','#ffb347',1.1],[270,'O','#9ec8ff',1.1],[0,'N','#ffffff',0.85],[180,'S','#ffffff',0.85]].forEach(([az,l,col,k])=>{
+    const P=domeP(0,az,1.17); if(DH(P))return; const s=DP(P);
+    c.font=`800 ${fs*k*1.1}px ${FD}`; c.fillStyle=col; c.textAlign='center'; c.textBaseline='middle'; c.fillText(l,s[0],s[1]); c.textBaseline='alphabetic'; });
+  // osservatore
+  if(romaVis||bill){
+    const top=DP(add(Pr,mul(up,0.08))), s=DP(Pr);
+    c.strokeStyle='#fff'; c.lineWidth=2; c.beginPath(); c.moveTo(s[0],s[1]); c.lineTo(top[0],top[1]); c.stroke();
+    c.fillStyle='#ff5a46'; c.strokeStyle='#fff'; c.lineWidth=2; c.beginPath(); c.arc(s[0],s[1],5.5,0,Math.PI*2); c.fill(); c.stroke();
+    c.beginPath(); c.arc(top[0],top[1],3.5,0,Math.PI*2); c.fillStyle='#fff'; c.fill();
+    const lab=DP(add(Pr,mul(north,-0.12)));
+    c.font=`700 ${fs}px ${FB}`; c.fillStyle='#fff'; c.textAlign='center'; c.fillText('Roma',lab[0],lab[1]+fs*0.5);
+  }
+  // il Sole sulla cupola
+  if(sun.alt>0){
+    const S=add(Pr,[DOME,0,0]);  // direzione del Sole = +x
+    if(!DH(S)){
+      const s=DP(S), o=DP(Pr), sr=Math.max(9,R*0.06);
+      c.strokeStyle='rgba(255,230,150,.9)'; c.setLineDash([3,4]); c.lineWidth=1.6;
+      c.beginPath(); c.moveTo(o[0],o[1]); c.lineTo(s[0],s[1]); c.stroke(); c.setLineDash([]);
+      const gl=c.createRadialGradient(s[0],s[1],0,s[0],s[1],sr*3.2);
+      gl.addColorStop(0,'rgba(255,240,180,.95)'); gl.addColorStop(1,'rgba(255,200,90,0)');
+      c.fillStyle=gl; c.beginPath(); c.arc(s[0],s[1],sr*3.2,0,Math.PI*2); c.fill();
+      c.fillStyle=sun.alt<6?'#ffb04a':'#fff2c4'; c.beginPath(); c.arc(s[0],s[1],sr,0,Math.PI*2); c.fill();
+    }
+  }
+  c.restore();
+  }
+  if(!romaVis){
+    c.font=`700 ${fs}px ${FB}`; c.fillStyle='#ffd0c8'; c.textAlign='right';
+    c.fillText(bill&&showDome?'Roma sta passando dietro il bordo della Terra':'Roma è sul lato nascosto della Terra',w-12,h-14);
+  }
+  c.font=`700 ${fs*0.9}px ${FB}`; c.fillStyle='#ffd27a'; c.textAlign='right';
+  c.fillText(dir>0?'la Terra gira da ovest a est':'da est a ovest (ipotesi)',w-12,22);
+
+  // riquadro: vista dal Polo Nord
+  const ir=Math.max(32,Math.min(w,h)*0.09), ix=ir+18, iy=h-ir-34;
+  c.fillStyle='rgba(8,16,29,.85)'; c.strokeStyle='rgba(255,255,255,.18)'; c.lineWidth=1;
+  c.beginPath(); c.rect(ix-ir-10,iy-ir-fs*1.6-6,2*ir+20,2*ir+fs*3.4+8); c.fill(); c.stroke();
+  c.save(); c.beginPath(); c.arc(ix,iy,ir,0,Math.PI*2); c.clip();
+  c.fillStyle='#0d1a2e'; c.fillRect(ix-ir,iy-ir,2*ir,2*ir); c.fillStyle='#4a90d0'; c.fillRect(ix,iy-ir,ir,2*ir); c.restore();
+  c.strokeStyle='rgba(255,255,255,.5)'; c.beginPath(); c.arc(ix,iy,ir,0,Math.PI*2); c.stroke();
+  c.fillStyle='#fff'; c.beginPath(); c.arc(ix,iy,2.5,0,Math.PI*2); c.fill();
+  const ipx=ix+ir*cL*Math.cos(th), ipy=iy-ir*cL*Math.sin(th);
+  c.fillStyle='#ff5a46'; c.strokeStyle='#fff'; c.lineWidth=1.5; c.beginPath(); c.arc(ipx,ipy,4.5,0,Math.PI*2); c.fill(); c.stroke();
+  c.strokeStyle='#ffd27a'; c.fillStyle='#ffd27a'; c.lineWidth=2;
+  const ra=ir+5; c.beginPath(); c.arc(ix,iy,ra,Math.PI*1.35,Math.PI*1.65); c.stroke();
+  const ea=dir>0?Math.PI*1.35:Math.PI*1.65;
+  arrowHead(ix+ra*Math.cos(ea),iy+ra*Math.sin(ea),dir>0?Math.sin(ea):-Math.sin(ea),dir>0?-Math.cos(ea):Math.cos(ea),6);
+  c.font=`700 ${fs*0.78}px ${FB}`; c.fillStyle='rgba(255,255,255,.85)'; c.textAlign='center';
+  c.fillText('dal Polo Nord',ix,iy-ir-fs*0.7);
+  c.fillStyle='rgba(255,226,170,.95)'; c.fillText('luce del Sole ←',ix,iy+ir+fs*1.3);
+}
+
+/* --- testi --- */
+function update(sun){
+  const am=t<12, rot=dir>0?'da ovest a est':'da est a ovest', dn=dirName(sun.az);
+  let ph, txt;
+  if(sun.alt<-12){ph='Notte'; txt="Roma si trova nella metà della Terra che non riceve la luce del Sole. Il Sole è sotto il suo orizzonte.";}
+  else if(sun.alt<-0.8){ ph=am?'Alba':'Crepuscolo';
+    txt=am?`Roma si avvicina al circolo di illuminazione: il cielo si schiarisce verso ${dn}, nella zona di penombra, ma il Sole non è ancora sorto.`
+          :`Roma ha appena superato il circolo di illuminazione. Il Sole è tramontato, ma l'atmosfera diffonde ancora un po' di luce: è la penombra del crepuscolo.`;}
+  else if(sun.alt<4){ ph=am?'Il Sole sorge':'Il Sole tramonta';
+    txt=am?`Ruotando ${rot}, Roma entra nella metà illuminata. Il Sole compare sul bordo della cupola dal lato verso cui la Terra gira: a ${dn}.`
+          :`Roma sta uscendo dalla metà illuminata. Il Sole sparisce sul bordo della cupola dal lato opposto a quello verso cui la Terra gira: a ${dn}.`;}
+  else if(Math.abs(t-12)<0.35){ph='Mezzogiorno'; txt='Roma è rivolta verso il Sole: il Sole è nel punto più alto del suo percorso, verso Sud, a circa 48° sull\'orizzonte.';}
+  else if(am){ph='Il Sole sale'; txt=`Roma avanza verso ${dir>0?'est':'ovest'} e la sua cupola si rivolge sempre più verso il Sole: il Sole sale nel cielo.`;}
+  else {ph='Il Sole scende'; txt=`La cupola di Roma si allontana dalla direzione del Sole: il Sole scende verso ${dir>0?'Ovest':'Est'}.`;}
+  if(dir<0) txt='Ipotesi. '+txt;
+  $('phase').textContent=ph;
+  $('alt').textContent=Math.round(sun.alt)+'°';
+  $('az').textContent=sun.alt>-0.8?dn:'—';
+  $('side').textContent=sun.alt>0?'illuminata':(sun.alt>-12?'in penombra':'in ombra');
+  const now=$('now'); if(now.textContent!==txt) now.textContent=txt;
+  now.classList.toggle('rev',dir<0);
+  const m=Math.round(t*60)%1440;
+  $('clock').textContent=String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
+  if(document.activeElement!==$('ora')) $('ora').value=Math.round(t*60);
+}
+
+function render(){ const sun=altAz(dir*(t-12)*15); draw(sun); update(sun); }
+function loop(ts){ if(last!==null&&playing) t=(t+(ts-last)/1000*speed)%24; last=ts; render(); requestAnimationFrame(loop); }
+
+/* --- comandi --- */
+function setPlay(p){playing=p; $('play').textContent=p?'Pausa':'Avvia';}
+$('play').addEventListener('click',()=>setPlay(!playing));
+$('ora').addEventListener('input',e=>{t=e.target.value/60; setPlay(false);});
+document.querySelectorAll('[data-t]').forEach(b=>b.addEventListener('click',()=>{t=+b.dataset.t; setPlay(false);}));
+$('speed').addEventListener('change',e=>speed=+e.target.value);
+$('rev').addEventListener('change',e=>{dir=e.target.checked?-1:1;});
+const CAPS={roma:'Ti trovi nello spazio a sud di Roma e la segui mentre la Terra gira: vedi la cupola di lato, con l\'Est a destra e l\'Ovest a sinistra. Le stelle sullo sfondo scorrono perché è la Terra a ruotare.',
+  spazio:'Il Sole è fermo, a destra. La Terra gira e porta Roma e la sua cupola verso la luce e poi lontano da essa: la cupola si inclina e il Sole sembra muoversi dentro di essa. Trascina per girare intorno alla Terra.',
+  polo:'Vista dall\'alto del Polo Nord: la Terra gira in senso antiorario.'};
+function setView(v){
+  view=v; offA=0; romaE=14;
+  if(v==='spazio'){camA=-90;camE=55} else if(v==='polo'){camA=0;camE=85}
+  setPressed(v);
+}
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+let drag=null;
+cv.addEventListener('pointerdown',e=>{ drag={x:e.clientX,y:e.clientY,a:view==='roma'?offA:camA,e:view==='roma'?romaE:camE}; cv.setPointerCapture(e.pointerId); cv.style.cursor='grabbing'; });
+cv.addEventListener('pointermove',e=>{ if(!drag)return;
+  const dx=(e.clientX-drag.x), dy=(e.clientY-drag.y);
+  if(view==='roma'){ offA=Math.max(-80,Math.min(80,drag.a-dx*0.3)); if(e.pointerType==='mouse') romaE=Math.max(0,Math.min(70,drag.e+dy*0.3)); return; }
+  camA=drag.a-dx*0.45; if(view==='polo'){view='spazio'; setPressed('spazio');}
+  if(e.pointerType==='mouse') camE=Math.max(-80,Math.min(85,drag.e+dy*0.35));
+});
+function setPressed(v){document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===v))); $('cap').textContent=CAPS[v];}
+const endDrag=()=>{drag=null; cv.style.cursor='';};
+cv.addEventListener('pointerup',endDrag); cv.addEventListener('pointercancel',endDrag);
+setView('spazio'); setPlay(playing);
+requestAnimationFrame(loop);
+})();
+</script>
+
+</body>
+</html>

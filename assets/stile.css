@@ -170,7 +170,14 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   color: var(--accento);
   white-space: nowrap;
 }
-.titolo-modulo { font: 700 23px/1.25 var(--serif); }
+.titolo-modulo { font: 700 23px/1.25 var(--serif); justify-self: start; }
+a.titolo-modulo {
+  text-decoration: underline;
+  text-decoration-color: var(--accento);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+a.titolo-modulo:hover { color: var(--accento); }
 .riepilogo {
   grid-column: 2;
   font-size: 14px;

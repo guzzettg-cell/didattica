@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}
+.backlink{display:inline-block;margin:14px 16px 0;font:600 14px/1.2 system-ui,sans-serif;color:inherit;text-decoration:none;border:1px solid rgba(120,130,150,.4);border-radius:999px;padding:6px 12px}
+.backlink:hover{text-decoration:underline}
+.map.nomap{display:flex;flex-wrap:wrap;gap:8px;padding:14px;align-content:flex-start;background:var(--card,#fff)}
+.map.nomap .mapnote{flex-basis:100%;margin:0 0 4px;font-size:.9rem;color:var(--muted,#566476)}
+.map.nomap .dot,.map.nomap .hit,.map.nomap .istmo{position:static!important;transform:none!important;width:auto!important;height:auto!important;aspect-ratio:auto!important;opacity:1!important;border-radius:999px!important;padding:6px 12px!important;border:0!important;color:#fff!important;font:700 .88rem/1.2 system-ui,sans-serif!important;box-shadow:none!important;animation:none!important}
+.map.nomap .dot::after,.map.nomap .hit::after,.map.nomap .istmo::after{content:attr(aria-label)}
+.map.nomap .hit{background:#3b4a63!important}.map.nomap .istmo{background:#d62828!important}
+.map.nomap .dot.dim{opacity:.25!important}
+.map.nomap [aria-pressed="true"]{outline:3px solid #111!important;outline-offset:2px}
+</style>
+<title>I fusi orari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: vista dal Polo nord e orologi delle città affiancati; sotto la carta dei fusi con il dì che si sposta; poi ora locale/ora civile, esercizio e domande */
+:root{
+  --paper:#eef1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
+  --accent:#c2410c; --accent-soft:#fde4d3; --ok:#1f7a4d; --ok-soft:#dcf2e6; --no:#b42318; --no-soft:#fde3e1;
+  --z1:#e6edf7; --z2:#d6e2f1; --zline:rgba(40,70,110,.25); --night:rgba(12,22,48,.55); --mapink:#1d3557; --date:#c2185b;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717;
+  --z1:#1a2840; --z2:#22334f; --zline:rgba(190,210,240,.18); --night:rgba(2,6,16,.6); --mapink:#d6e4f5; --date:#f472b6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717;
+  --z1:#1a2840; --z2:#22334f; --zline:rgba(190,210,240,.18); --night:rgba(2,6,16,.6); --mapink:#d6e4f5; --date:#f472b6; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+[hidden]{display:none!important}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:18px}
+header.top{display:grid;gap:6px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.02;margin:0}
+.lead{margin:0;max-width:78ch;color:var(--muted)}
+.controls{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:10px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.clock{display:grid;line-height:1.1}
+.clock span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.clock strong{font-family:var(--display);font-weight:800;font-size:1.6rem;font-variant-numeric:tabular-nums}
+.slider{flex:1 1 280px;display:grid;gap:2px;min-width:0}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.ticks{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted)}
+.controls button{font:inherit;font-size:.9rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 13px;cursor:pointer}
+#play{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700;min-width:6.5em}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:920px){.stage{grid-template-columns:1fr}}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+.box h2{font-family:var(--display);font-weight:800;font-size:1.2rem;margin:0 0 6px}
+.box .sub{margin:0 0 8px;color:var(--muted);font-size:.9rem}
+canvas{width:100%;display:block}
+#polar{aspect-ratio:1/1}
+#strip{aspect-ratio:2.25/1}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-variant-numeric:tabular-nums}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:right;white-space:nowrap}
+th{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+th:first-child,td:first-child{text-align:left}
+tr.hl td{background:var(--accent-soft)}
+td small{color:var(--muted)}
+.day{font-weight:700}
+.q{display:grid;gap:10px}
+.q .ask{font-size:1.15rem;font-weight:700}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{font:inherit;font-variant-numeric:tabular-nums;font-size:1.05rem;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:8px 16px;cursor:pointer}
+.opts button.right{border-color:var(--ok);background:var(--ok-soft)}
+.opts button.wrong{border-color:var(--no);background:var(--no-soft)}
+.fb{border-radius:10px;padding:9px 12px;font-size:.95rem}
+.fb.right{background:var(--ok-soft);border:1px solid var(--ok)}
+.fb.wrong{background:var(--no-soft);border:1px solid var(--no)}
+.q .again{justify-self:start;font:inherit;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 14px;cursor:pointer}
+details{border-top:1px solid var(--line);padding:9px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700}
+details p{margin:6px 0 0;color:var(--muted)}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+.note{font-size:.86rem;color:var(--muted);margin:8px 0 0}
+</style>
+</head>
+<body>
+<a class="backlink" href="../index.html">← Tutte le lezioni</a>
+
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Geografia · I fusi orari</div>
+    <h1>Che ore sono nel mondo?</h1>
+    <p class="lead">Mentre la Terra ruota da ovest a est, il mezzogiorno arriva prima nei luoghi a est e dopo in quelli a ovest. Per non dover spostare le lancette ogni pochi chilometri, la Terra è stata divisa in 24 fusi orari: spicchi di 15° di longitudine dentro i quali tutti gli orologi segnano la stessa ora. Fai scorrere il tempo e guarda come cambia l'ora nel mondo.</p>
+  </header>
+
+  <section class="controls" aria-label="Comandi">
+    <div class="row">
+      <button id="play" type="button">Avvia</button>
+      <div class="clock"><span>Fuso di Greenwich</span><strong id="cG">12:00</strong></div>
+      <div class="clock"><span>Roma (ora civile)</span><strong id="cR">13:00</strong></div>
+      <label class="slider" for="utc">
+        <input id="utc" type="range" min="0" max="1439" step="5" value="720" aria-label="Ora nel fuso di Greenwich">
+        <div class="ticks"><span>0</span><span>3</span><span>6</span><span>9</span><span>12</span><span>15</span><span>18</span><span>21</span><span>24</span></div>
+      </label>
+    </div>
+    <div class="row">
+      <button type="button" data-u="720">Mezzogiorno a Greenwich</button>
+      <button type="button" data-u="660">Mezzogiorno a Roma</button>
+      <button type="button" data-u="0">Mezzanotte a Greenwich</button>
+    </div>
+  </section>
+
+  <div class="stage">
+    <section class="box">
+      <h2>La Terra vista dal Polo nord</h2>
+      <p class="sub">Il Sole illumina la Terra dal basso. Le ore sull'anello esterno restano ferme: è la Terra che ruota sotto di esse, in senso antiorario.</p>
+      <canvas id="polar" role="img" aria-label="La Terra vista dal Polo nord divisa in 24 spicchi; attorno l'anello delle 24 ore con il mezzodì in basso verso il Sole e la mezzanotte in alto"></canvas>
+    </section>
+    <section class="box">
+      <h2>Gli orologi delle città</h2>
+      <p class="sub">L'ora civile è quella dell'orologio, uguale in tutto il fuso. L'ora locale è quella del Sole: è mezzogiorno quando il Sole è nel punto più alto, sul meridiano della città.</p>
+      <div class="tw"><table>
+        <thead><tr><th>Città</th><th>Fuso</th><th>Ora civile</th><th>Ora locale</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table></div>
+      <p class="note">Orari senza l'ora legale. Le righe evidenziate mostrano tre città italiane: l'orologio segna la stessa ora, ma il Sole no. Il meridiano centrale del fuso italiano è il 15° E, che passa per l'Etna e per Termoli: solo lì l'ora locale coincide con l'ora civile. Roma, a 12° 30' E, è un po' più a ovest, quindi il suo mezzogiorno solare arriva circa 10 minuti dopo quello dell'orologio.</p>
+    </section>
+  </div>
+
+  <section class="box">
+    <h2>La carta dei fusi orari</h2>
+    <p class="sub">I 24 fusi disegnati come spicchi regolari di 15°. La zona scura è dove è notte: si sposta da est verso ovest mentre la Terra ruota. In alto l'ora civile di ogni fuso, in basso la differenza rispetto a Greenwich.</p>
+    <div class="tw"><canvas id="strip" role="img" aria-label="Carta del mondo divisa in 24 fusi con l'ora di ciascuno, le città, la zona di notte e la linea del cambiamento di data"></canvas></div>
+    <p class="note">Nella realtà i confini dei fusi seguono i confini tra gli Stati: la Cina usa un solo fuso, gli Stati Uniti ne usano diversi e l'India ha scelto un'ora «a metà», 5 ore e 30 minuti più avanti di Greenwich. Anche la linea del cambiamento di data non è dritta: fa delle deviazioni per non dividere gli arcipelaghi.</p>
+  </section>
+
+  <div class="two">
+    <section class="box q" aria-live="polite">
+      <h2>Prova tu</h2>
+      <div class="ask" id="ask"></div>
+      <div class="opts" id="opts"></div>
+      <div class="fb" id="fb" hidden></div>
+      <button type="button" class="again" id="again">Un'altra domanda</button>
+    </section>
+    <section class="box">
+      <h2>Domande per ragionare</h2>
+      <details><summary>Perché a Mosca il mezzogiorno arriva prima che a Roma?</summary><p>Perché Mosca è più a est. La Terra ruota da ovest a est, quindi Mosca «incontra» il Sole prima di Roma: lì il mezzodì è già passato quando a Roma deve ancora arrivare.</p></details>
+      <details><summary>Quando a Roma l'orologio segna mezzogiorno, è mezzogiorno solare anche a Bari e a Torino?</summary><p>No. Bari è più a est: lì il mezzogiorno solare è già passato da una ventina di minuti. Torino è più a ovest: lì arriverà fra una ventina di minuti. L'orologio però segna la stessa ora, perché le tre città sono nello stesso fuso.</p></details>
+      <details><summary>Quanti fusi orari ci sono e quanto è largo ciascuno?</summary><p>24, uno per ogni ora del giorno. Ognuno è largo 15° di longitudine, perché 360° diviso 24 ore fa 15° all'ora.</p></details>
+      <details><summary>Che cosa succede attraversando la linea del cambiamento di data?</summary><p>Andando verso ovest si salta avanti di un giorno, andando verso est si torna indietro di un giorno. Ai due lati della linea l'orologio segna la stessa ora, ma il calendario è diverso.</p></details>
+    </section>
+  </div>
+</div>
+
+<script>
+(function(){
+const D2R=Math.PI/180, PI=Math.PI;
+const $=id=>document.getElementById(id);
+const FB='"Atkinson Hyperlegible",Verdana,sans-serif', FD='"Bricolage Grotesque","Trebuchet MS",sans-serif';
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let utc=12, playing=false, last=null;
+
+const CITIES=[
+ ['Los Angeles',34.1,-118.2,-8],['Città del Messico',19.4,-99.1,-6],['New York',40.7,-74,-5],['Buenos Aires',-34.6,-58.4,-3],
+ ['Londra',51.5,-0.1,0],['Torino',45.1,7.7,1,1],['Roma',41.9,12.5,1,1],['Bari',41.1,16.9,1,1],['Il Cairo',30,31.2,2],['Johannesburg',-26.2,28,2],
+ ['Mosca',55.8,37.6,3],['Nuova Delhi',28.6,77.2,5.5],['Novosibirsk',55,82.9,7],['Pechino',39.9,116.4,8],['Tokyo',35.7,139.7,9],['Sydney',-33.9,151.2,10],['Auckland',-36.8,174.8,12],['Honolulu',21.3,-157.9,-10]];
+const SHOW_MAP=['Los Angeles','Città del Messico','New York','Buenos Aires','Londra','Roma','Il Cairo','Johannesburg','Mosca','Nuova Delhi','Novosibirsk','Pechino','Tokyo','Sydney','Auckland','Honolulu'];
+const DAYS=['lunedì','martedì','mercoledì','giovedì','venerdì','sabato','domenica'];
+
+function hm(h,withMin){ h=((h%24)+24)%24; let H=Math.floor(h+1e-9), M=Math.round((h-H)*60); if(M===60){H=(H+1)%24;M=0;} return String(H).padStart(2,'0')+':'+String(M).padStart(2,'0'); }
+function dayName(t){ const k=Math.floor(t/24); return DAYS[((k%7)+7)%7]; }
+function offTxt(o){ if(o===0) return '0'; const s=o>0?'+':'−', a=Math.abs(o); return s+(a%1?Math.floor(a)+':30':a); }
+
+/* ---------- vista dal Polo nord ---------- */
+const pc=$('polar'), p=pc.getContext('2d');
+function fit(cv,c){ const r=cv.getBoundingClientRect(), d=window.devicePixelRatio||1;
+  const W=Math.round(r.width*d), H=Math.round(r.height*d); if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}
+  c.setTransform(d,0,0,d,0,0); return {w:r.width,h:r.height}; }
+function drawPolar(){
+  const {w,h}=fit(pc,p), fs=Math.max(10,Math.min(13.5,w/40)), R=w*0.34, cx=w/2, cy=h/2;
+  const ink=css('--mapink');
+  p.clearRect(0,0,w,h);
+  // raggi del Sole dal basso
+  const g=p.createLinearGradient(0,h,0,cy); g.addColorStop(0,'rgba(255,200,80,.45)'); g.addColorStop(1,'rgba(255,200,80,0)'); p.fillStyle=g; p.fillRect(0,cy,w,h-cy);
+  p.font=`700 ${fs}px ${FB}`; p.textAlign='center'; p.fillStyle='#c27a00'; p.fillText('raggi solari',cx,h-6);
+  const rot=(utc-12)*15; // gradi
+  const ang=lon=>(-90+lon+rot)*D2R; // angolo sullo schermo (antiorario)
+  const P=(r,a)=>[cx+r*Math.cos(a), cy-r*Math.sin(a)];
+  // spicchi dei fusi
+  for(let k=-12;k<12;k++){ const a0=ang(15*k-7.5), a1=ang(15*k+7.5);
+    p.beginPath(); p.moveTo(cx,cy); p.arc(cx,cy,R,-a0,-a1,true); p.closePath();
+    p.fillStyle=k===0?'#cfe9d8':(k%2?css('--z2'):css('--z1')); if(k===1) p.fillStyle='#fde4d3'; p.fill(); p.strokeStyle=css('--zline'); p.lineWidth=1; p.stroke(); }
+  // notte (metà in alto, lontano dal Sole)
+  p.save(); p.beginPath(); p.arc(cx,cy,R,0,2*PI); p.clip(); p.fillStyle=css('--night'); p.fillRect(cx-R,cy-R,2*R,R); p.restore();
+  p.strokeStyle=ink; p.lineWidth=1.5; p.beginPath(); p.arc(cx,cy,R,0,2*PI); p.stroke();
+  // meridiano di Greenwich e antimeridiano
+  [[0,'#2fae6f'],[180,css('--date')]].forEach(([l,c])=>{ const q=P(R,ang(l)); p.strokeStyle=c; p.lineWidth=2.5; p.beginPath(); p.moveTo(cx,cy); p.lineTo(q[0],q[1]); p.stroke(); });
+  // longitudini sul bordo
+  p.font=`${fs*0.75}px ${FB}`; p.fillStyle=ink;
+  for(let l=-165;l<=180;l+=15){ const q=P(R*0.9,ang(l)); p.fillText(Math.abs(l)+(l===0||l===180?'':''),q[0],q[1]+4); }
+  // città
+  CITIES.filter(c=>['Roma','Londra','New York','Tokyo','Sydney','Mosca','Los Angeles','Buenos Aires','Nuova Delhi','Pechino'].includes(c[0])).forEach(([n,la,lo,off])=>{ const r=R*(90-la)/180, q=P(r,ang(lo));
+    p.fillStyle=n==='Roma'?'#d61f1f':ink; p.beginPath(); p.arc(q[0],q[1],n==='Roma'?5:3.2,0,2*PI); p.fill();
+    p.font=`${n==='Roma'?700:400} ${fs*0.82}px ${FB}`; p.textAlign='left'; p.lineWidth=3; p.strokeStyle=css('--card'); p.strokeText(n,q[0]+5,q[1]-4); p.fillStyle=n==='Roma'?'#d61f1f':ink; p.fillText(n,q[0]+5,q[1]-4); p.textAlign='center'; });
+  p.fillStyle=ink; p.beginPath(); p.arc(cx,cy,3,0,2*PI); p.fill(); p.font=`700 ${fs*0.8}px ${FB}`; p.fillText('Polo nord',cx,cy-7);
+  // anello delle ore (fisso rispetto al Sole)
+  const RH=R*1.14;
+  for(let hh=1;hh<=24;hh++){ const a=(-90+(hh-12)*15)*D2R, q=P(RH,a); p.font=`${hh%6===0?800:600} ${fs*(hh%6===0?1:0.85)}px ${FD}`; p.fillStyle=hh===12?'#c27a00':(hh===24?ink:css('--muted')); p.fillText('h'+hh,q[0],q[1]+5); }
+  p.font=`800 ${fs*1.05}px ${FB}`; p.fillStyle=ink; p.fillText('mezzanotte',cx,cy-RH-fs*1.3); p.fillStyle='#c27a00'; p.fillText('mezzodì',cx,cy+RH+fs*1.9);
+  // verso di rotazione
+  p.strokeStyle=css('--accent'); p.lineWidth=2.5; const ra=R*1.27; p.beginPath(); p.arc(cx,cy,ra,-(-60)*D2R,-(-30)*D2R,true); p.stroke();
+  const ea=-30*D2R, tip=P(ra,ea), tx=-Math.sin(ea), ty=-Math.cos(ea); // tangente in senso antiorario (schermo)
+  p.fillStyle=css('--accent'); p.beginPath(); p.moveTo(tip[0]+tx*9,tip[1]+ty*9); p.lineTo(tip[0]-ty*6,tip[1]+tx*6); p.lineTo(tip[0]+ty*6,tip[1]-tx*6); p.closePath(); p.fill();
+  p.font=`${fs*0.8}px ${FB}`; p.textAlign='left'; p.fillText('rotazione',tip[0]+6,tip[1]+14); p.textAlign='center';
+}
+
+/* ---------- carta dei fusi ---------- */
+const sc=$('strip'), s=sc.getContext('2d');
+function drawStrip(){
+  const {w,h}=fit(sc,s), fs=Math.max(9.5,Math.min(13,w/80)), top=fs*2.6, bot=fs*2.4, L=8, Rr=w-8, ink=css('--mapink');
+  const X=lo=>L+(lo+180)/360*(Rr-L), Y=la=>top+(75-la)/(75+60)*(h-top-bot);
+  s.clearRect(0,0,w,h);
+  for(let k=-12;k<=12;k++){ const x0=X(Math.max(-180,15*k-7.5)), x1=X(Math.min(180,15*k+7.5));
+    s.fillStyle=k===0?'#cfe9d8':(k===1?'#fde4d3':(Math.abs(k)%2?css('--z2'):css('--z1'))); s.fillRect(x0,top,x1-x0,h-top-bot);
+    s.strokeStyle=css('--zline'); s.lineWidth=1; s.strokeRect(x0,top,x1-x0,h-top-bot);
+    const civ=utc+k, xm=(x0+x1)/2;
+    s.font=`700 ${fs}px ${FD}`; s.textAlign='center'; s.fillStyle=ink; s.fillText(hm(civ).slice(0,2),xm,top-fs*0.9);
+    s.font=`${fs*0.9}px ${FB}`; s.fillStyle=css('--muted'); s.fillText(k===0?'0':(k>0?'+'+k:'−'+(-k)),xm,h-bot+fs*1.3); }
+  // notte: dove l'ora locale solare è prima delle 6 o dopo le 18
+  s.save(); s.beginPath(); s.rect(L,top,Rr-L,h-top-bot); s.clip();
+  for(let x=L;x<Rr;x+=2){ const lo=(x-L)/(Rr-L)*360-180, loc=((utc+lo/15)%24+24)%24, dist=Math.min(Math.abs(loc-12),24-Math.abs(loc-12));
+    const a=Math.max(0,Math.min(1,(dist-5.6)/0.8)); if(a>0){ s.globalAlpha=a; s.fillStyle=css('--night'); s.fillRect(x,top,2,h-top-bot); } }
+  s.globalAlpha=1;
+  // Sole a mezzogiorno
+  const sl=((12-utc)*15+540)%360-180, sx=X(sl); s.fillStyle='#ffbf2e'; s.beginPath(); s.arc(sx,Y(0),fs*0.9,0,2*PI); s.fill();
+  s.strokeStyle='rgba(255,191,46,.6)'; s.setLineDash([3,4]); s.beginPath(); s.moveTo(sx,top); s.lineTo(sx,h-bot); s.stroke(); s.setLineDash([]);
+  s.font=`700 ${fs*0.8}px ${FB}`; s.textAlign='center'; s.fillStyle='#b37400'; s.fillText('mezzogiorno solare',sx,Y(0)+fs*2);
+  // Equatore, Greenwich, linea del cambiamento di data
+  s.strokeStyle='rgba(214,31,31,.6)'; s.lineWidth=1.2; s.beginPath(); s.moveTo(L,Y(0)); s.lineTo(Rr,Y(0)); s.stroke();
+  s.strokeStyle='#2fae6f'; s.lineWidth=2; s.beginPath(); s.moveTo(X(0),top); s.lineTo(X(0),h-bot); s.stroke();
+  s.strokeStyle=css('--date'); s.lineWidth=2.5; [X(-180)+1.5,X(180)-1.5].forEach(x=>{ s.beginPath(); s.moveTo(x,top); s.lineTo(x,h-bot); s.stroke(); });
+  s.save(); s.translate(X(180)-fs*0.7,top+(h-top-bot)/2); s.rotate(-PI/2); s.font=`700 ${fs*0.8}px ${FB}`; s.fillStyle=css('--date'); s.fillText('linea del cambiamento di data',0,0); s.restore();
+  s.save(); s.translate(X(0)-fs*0.5,top+(h-top-bot)*0.78); s.rotate(-PI/2); s.font=`700 ${fs*0.8}px ${FB}`; s.fillStyle='#1f8a55'; s.fillText('meridiano di Greenwich',0,0); s.restore();
+  // città
+  CITIES.filter(c=>SHOW_MAP.includes(c[0])).forEach(([n,la,lo,off])=>{ const x=X(lo), y=Y(la);
+    s.fillStyle=n==='Roma'?'#d61f1f':ink; s.beginPath(); s.arc(x,y,3.5,0,2*PI); s.fill();
+    const t=hm(utc+off), right=lo<150; s.font=`700 ${fs*0.85}px ${FB}`; s.textAlign=right?'left':'right';
+    s.lineWidth=3; s.strokeStyle=css('--card'); const lab=n+' '+t; s.strokeText(lab,x+(right?5:-5),y-5); s.fillStyle=n==='Roma'?'#d61f1f':ink; s.fillText(lab,x+(right?5:-5),y-5); });
+  // giorni ai lati della linea di data
+  s.font=`700 ${fs*0.85}px ${FB}`; s.fillStyle=css('--date');
+  s.textAlign='left'; s.fillText(dayName(utc-12+(0)),X(-180)+fs*0.6,h-bot-fs*0.6);
+  s.textAlign='right'; s.fillText(dayName(utc+12),X(180)-fs*1.6,h-bot-fs*0.6);
+  s.restore();
+}
+
+/* ---------- tabella ---------- */
+const tb=$('tbody');
+CITIES.forEach(c=>{ const tr=document.createElement('tr'); if(c[4]) tr.className='hl'; tr.innerHTML=`<td>${c[0]}</td><td>${offTxt(c[3])}</td><td class="civ"></td><td class="loc"></td>`; tb.append(tr); });
+function updTable(){ [...tb.children].forEach((tr,i)=>{ const [n,la,lo,off]=CITIES[i]; const civ=utc+off, loc=utc+lo/15;
+  tr.querySelector('.civ').innerHTML=`<b>${hm(civ)}</b> <small class="day">${dayName(civ).slice(0,3)}</small>`;
+  tr.querySelector('.loc').textContent=hm(loc); }); }
+
+/* ---------- esercizio ---------- */
+const QC=CITIES.filter(c=>c[3]%1===0&&!c[4]||c[0]==='Roma');
+let cur=null;
+function newQ(){
+  const from=QC.find(c=>c[0]==='Roma'), pool=QC.filter(c=>c[0]!=='Roma'), to=pool[Math.floor(Math.random()*pool.length)];
+  const h0=6+Math.floor(Math.random()*13), diff=to[3]-from[3], ans=((h0+diff)%24+24)%24;
+  const wrong=new Set([((h0-diff)%24+24)%24,(ans+1)%24,(ans+23)%24,((h0+diff+2)%24+24)%24]); wrong.delete(ans);
+  const opts=[ans,...[...wrong].slice(0,3)].sort(()=>Math.random()-0.5);
+  cur={to,h0,diff,ans};
+  $('ask').textContent=`A Roma sono le ${h0}:00. Che ore sono a ${to[0]}?`;
+  const box=$('opts'); box.innerHTML=''; $('fb').hidden=true;
+  opts.forEach(o=>{ const b=document.createElement('button'); b.type='button'; b.textContent=String(o).padStart(2,'0')+':00';
+    b.addEventListener('click',()=>{ box.querySelectorAll('button').forEach(x=>x.classList.remove('right','wrong')); const ok=o===ans; b.classList.add(ok?'right':'wrong');
+      const f=$('fb'); f.hidden=false; f.className='fb '+(ok?'right':'wrong');
+      const d=Math.abs(diff), dir=diff>0?'più a est: lì l\'orologio è avanti':'più a ovest: lì l\'orologio è indietro';
+      f.textContent=(ok?'Giusto! ':'Non proprio. ')+`${to[0]} è ${dir} di ${d} ${d===1?'ora':'ore'} rispetto a Roma (fuso ${offTxt(to[3])} contro +1). Quindi ${h0}:00 ${diff>0?'+':'−'} ${d} = ${String(ans).padStart(2,'0')}:00${(h0+diff>=24)?' del giorno dopo':(h0+diff<0?' del giorno prima':'')}.`; });
+    box.append(b); }); }
+$('again').addEventListener('click',newQ);
+
+/* ---------- comandi ---------- */
+function update(){ $('cG').textContent=hm(utc); $('cR').textContent=hm(utc+1); if(document.activeElement!==$('utc')) $('utc').value=Math.round(((utc%24)+24)%24*60/5)*5%1440; updTable(); }
+function setPlay(v){ playing=v; $('play').textContent=v?'Pausa':'Avvia'; }
+$('play').addEventListener('click',()=>setPlay(!playing));
+$('utc').addEventListener('input',e=>{ utc=+e.target.value/60; setPlay(false); });
+document.querySelectorAll('[data-u]').forEach(b=>b.addEventListener('click',()=>{ utc=+b.dataset.u/60; setPlay(false); }));
+let lastTxt='';
+function loop(ts){ if(last!==null&&playing) utc=(utc+(ts-last)/1000*1.2); last=ts; drawPolar(); drawStrip(); const k=Math.round(utc*12); if(k!==lastTxt){ lastTxt=k; update(); } requestAnimationFrame(loop); }
+newQ(); update(); requestAnimationFrame(loop);
+})();
+</script>
+
+</body>
+</html>

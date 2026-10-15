@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}
+.backlink{display:inline-block;margin:14px 16px 0;font:600 14px/1.2 system-ui,sans-serif;color:inherit;text-decoration:none;border:1px solid rgba(120,130,150,.4);border-radius:999px;padding:6px 12px}
+.backlink:hover{text-decoration:underline}
+.map.nomap{display:flex;flex-wrap:wrap;gap:8px;padding:14px;align-content:flex-start;background:var(--card,#fff)}
+.map.nomap .mapnote{flex-basis:100%;margin:0 0 4px;font-size:.9rem;color:var(--muted,#566476)}
+.map.nomap .dot,.map.nomap .hit,.map.nomap .istmo{position:static!important;transform:none!important;width:auto!important;height:auto!important;aspect-ratio:auto!important;opacity:1!important;border-radius:999px!important;padding:6px 12px!important;border:0!important;color:#fff!important;font:700 .88rem/1.2 system-ui,sans-serif!important;box-shadow:none!important;animation:none!important}
+.map.nomap .dot::after,.map.nomap .hit::after,.map.nomap .istmo::after{content:attr(aria-label)}
+.map.nomap .hit{background:#3b4a63!important}.map.nomap .istmo{background:#d62828!important}
+.map.nomap .dot.dim{opacity:.25!important}
+.map.nomap [aria-pressed="true"]{outline:3px solid #111!important;outline-offset:2px}
+</style>
+<title>Il moto di rivoluzione</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: orbita (grande) e circolo di illuminazione (a destra), calendario sotto, poi ore di luce per latitudine e domande */
+:root{
+  --paper:#eef1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
+  --accent:#c2410c; --accent-soft:#fde4d3; --day:#f6c453; --night:#24324a; --space:#0a1222;
+  --spring:#3fae5f; --summer:#ef7d2d; --autumn:#e6b81e; --winter:#4a90d9;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --night:#0f1726; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --night:#0f1726; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+[hidden]{display:none!important}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:18px}
+header.top{display:grid;gap:6px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.02;margin:0}
+.lead{margin:0;max-width:78ch;color:var(--muted)}
+.stage{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;align-items:stretch}
+@media (max-width:920px){.stage{grid-template-columns:1fr}}
+figure{margin:0;background:var(--space);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:1fr auto;min-width:0}
+figure canvas{width:100%;display:block}
+#orbit{aspect-ratio:16/10}
+#side{aspect-ratio:1/1}
+figcaption{background:#0e1830;color:#c8d4e4;font-size:.86rem;padding:10px 14px}
+figcaption b{color:#fff;font-family:var(--display);font-weight:600}
+.controls{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:12px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.date{font-family:var(--display);font-weight:800;font-size:1.7rem;min-width:8.5ch;font-variant-numeric:tabular-nums}
+.slider{flex:1 1 300px;display:grid;gap:2px;min-width:0}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.months{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted)}
+.controls button{font:inherit;font-size:.9rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 13px;cursor:pointer}
+.controls button:hover{border-color:var(--accent)}
+#play{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700;min-width:6.5em}
+.check{display:flex;gap:8px;align-items:center;font-size:.92rem;cursor:pointer}
+.check input{width:18px;height:18px;accent-color:var(--accent)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.info{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:16px}
+@media (max-width:920px){.info{grid-template-columns:1fr}}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;min-width:0}
+.box h2{font-family:var(--display);font-weight:800;font-size:1.2rem;margin:0 0 8px}
+.seasons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.seasons div{border-radius:10px;padding:8px 12px;border:1px solid var(--line)}
+.seasons span{display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.seasons strong{font-family:var(--display);font-size:1.25rem}
+.now{margin:0}
+.bars{display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:minmax(0,9.5em) minmax(0,1fr) 5.4em;gap:10px;align-items:center;font-size:.9rem}
+.bar .lab{line-height:1.2}
+.bar .lab small{display:block;color:var(--muted);font-size:.78rem}
+.track{height:18px;border-radius:999px;background:var(--night);overflow:hidden;position:relative}
+.track i{position:absolute;top:0;bottom:0;background:var(--day);border-radius:999px;transition:left .15s,width .15s}
+.bar .h{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+.legend{font-size:.8rem;color:var(--muted);margin:8px 0 0}
+details{border-top:1px solid var(--line);padding:9px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700}
+details p{margin:6px 0 0;color:var(--muted)}
+</style>
+</head>
+<body>
+<a class="backlink" href="../index.html">← Tutte le lezioni</a>
+
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Geografia · I movimenti della Terra</div>
+    <h1>Il moto di rivoluzione</h1>
+    <p class="lead">In un anno la Terra compie un giro completo attorno al Sole. Il suo asse è inclinato di 23° 27' rispetto alla perpendicolare al piano dell'orbita e punta sempre nella stessa direzione. Per questo, durante l'anno, il circolo di illuminazione si sposta e la durata del dì cambia: nascono le stagioni.</p>
+  </header>
+
+  <div class="stage">
+    <figure>
+      <canvas id="orbit" role="img" aria-label="L'orbita della Terra attorno al Sole con equinozi, solstizi, perielio e afelio; la Terra si muove con l'asse sempre inclinato nella stessa direzione"></canvas>
+      <figcaption><b>L'orbita</b> · L'orbita è quasi un cerchio: disegnata in prospettiva sembra un'ellisse molto schiacciata. Le distanze non sono in scala.</figcaption>
+    </figure>
+    <figure>
+      <canvas id="side" role="img" aria-label="La Terra vista di lato con il Sole a destra: il circolo di illuminazione, l'asse, l'Equatore, i tropici, i circoli polari e il parallelo di Roma"></canvas>
+      <figcaption><b>Il circolo di illuminazione</b> · La Terra vista di lato, con il Sole a destra. Sui paralleli, la parte gialla è il dì e quella scura è la notte.</figcaption>
+    </figure>
+  </div>
+
+  <section class="controls" aria-label="Comandi">
+    <div class="row">
+      <button id="play" type="button">Avvia</button>
+      <div class="date" id="date">21 marzo</div>
+      <label class="slider" for="day">
+        <input id="day" type="range" min="0" max="364" step="1" value="79" aria-label="Giorno dell'anno">
+        <div class="months"><span>gen</span><span>feb</span><span>mar</span><span>apr</span><span>mag</span><span>giu</span><span>lug</span><span>ago</span><span>set</span><span>ott</span><span>nov</span><span>dic</span></div>
+      </label>
+    </div>
+    <div class="row">
+      <button type="button" data-d="79">Equinozio di primavera</button>
+      <button type="button" data-d="171">Solstizio d'estate</button>
+      <button type="button" data-d="265">Equinozio d'autunno</button>
+      <button type="button" data-d="355">Solstizio d'inverno</button>
+      <button type="button" data-d="2">Perielio</button>
+      <button type="button" data-d="182">Afelio</button>
+      <label class="check"><input id="noTilt" type="checkbox"> Ipotesi: asse perpendicolare al piano dell'orbita</label>
+    </div>
+  </section>
+
+  <div class="info">
+    <div class="box">
+      <h2>Che cosa succede in questo giorno</h2>
+      <div class="seasons">
+        <div><span>Emisfero boreale</span><strong id="sN">—</strong></div>
+        <div><span>Emisfero australe</span><strong id="sS">—</strong></div>
+      </div>
+      <p class="now" id="now"></p>
+    </div>
+    <div class="box">
+      <h2>Quante ore dura il dì?</h2>
+      <div class="bars" id="bars"></div>
+      <p class="legend">La barra rappresenta 24 ore: in giallo il dì, in blu scuro la notte (senza contare i crepuscoli).</p>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>Domande per ragionare</h2>
+    <details><summary>Perché all'Equatore il dì dura sempre 12 ore?</summary><p>Perché il circolo di illuminazione divide sempre l'Equatore esattamente a metà, in qualunque giorno dell'anno.</p></details>
+    <details><summary>A Roma il 21 giugno il dì è lungo: e a Sydney, nell'emisfero australe?</summary><p>È corto: quando nell'emisfero boreale è estate, nell'emisfero australe è inverno. Le stagioni sono invertite.</p></details>
+    <details><summary>Che cosa succede al Polo nord il 21 giugno? E il 22 dicembre?</summary><p>Il 21 giugno tutta la zona dentro il circolo polare artico resta illuminata anche quando la Terra ruota: il Sole non tramonta mai. Il 22 dicembre è il contrario: è notte per tutte le 24 ore.</p></details>
+    <details><summary>Attiva l'ipotesi dell'asse perpendicolare. Che cosa cambia?</summary><p>Il circolo di illuminazione passa sempre per i poli: tutto l'anno e in ogni punto della Terra il dì e la notte durerebbero 12 ore. Non ci sarebbero le stagioni.</p></details>
+    <details><summary>A luglio la Terra è più lontana dal Sole. Perché allora da noi fa caldo?</summary><p>Perché le stagioni non dipendono dalla distanza dal Sole, che cambia di poco, ma dall'inclinazione dell'asse: in estate il nostro emisfero è rivolto verso il Sole, che sta più a lungo sopra l'orizzonte e ci scalda con raggi meno inclinati.</p></details>
+  </div>
+</div>
+
+<script>
+(function(){
+const D2R=Math.PI/180, R2D=180/Math.PI, PI=Math.PI, EPS0=23.45*D2R;
+const $=id=>document.getElementById(id);
+const FB='"Atkinson Hyperlegible",Verdana,sans-serif', FD='"Bricolage Grotesque","Trebuchet MS",sans-serif';
+const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+let day=79, playing=false, last=null, tilt=EPS0;
+
+/* ---------- calendario ---------- */
+const MONTHS=['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+const MD=[31,28,31,30,31,30,31,31,30,31,30,31];
+function dateOf(n){ n=Math.round(n)%365; let m=0; while(n>=MD[m]){n-=MD[m];m++;} return (n+1)+' '+MONTHS[m]; }
+// giorni chiave (0 = 1 gennaio): 21 mar = 79, 21 giu = 171, 23 set = 265, 22 dic = 355
+const KEY=[79,171,265,355,444];
+function angleOf(n){ // posizione sull'orbita: 0 all'equinozio di primavera, 90° al solstizio d'estate...
+  let x=n; if(x<79) x+=365;
+  for(let i=0;i<4;i++) if(x<=KEY[i+1]) return (i+(x-KEY[i])/(KEY[i+1]-KEY[i]))*PI/2;
+  return 0; }
+function earthPos(n){ const L=PI+angleOf(n); // la Terra sta dalla parte opposta del Sole visto dalla Terra
+  const r=1-0.0167*Math.cos(L-(PI+angleOf(2))); return [Math.cos(L)*r,Math.sin(L)*r,0]; }
+const norm=v=>{const l=Math.hypot(...v); return v.map(x=>x/l);};
+const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+const axis=()=>[0,Math.sin(tilt),Math.cos(tilt)];
+function sunDir(n){ const e=earthPos(n); return norm([-e[0],-e[1],-e[2]]); }
+function decl(n){ return Math.asin(Math.max(-1,Math.min(1,dot(axis(),sunDir(n))))); }
+function dayLen(latDeg,d){ const x=-Math.tan(latDeg*D2R)*Math.tan(d); if(x<=-1) return 24; if(x>=1) return 0; return 2*Math.acos(x)*R2D/15; }
+function season(n,north){ let x=n; const s=['primavera','estate','autunno','inverno'];
+  let i; if(x>=79&&x<171) i=0; else if(x>=171&&x<265) i=1; else if(x>=265&&x<355) i=2; else i=3;
+  return north?s[i]:s[(i+2)%4]; }
+
+/* ---------- utilità di disegno ---------- */
+function fit(cv,c){ const r=cv.getBoundingClientRect(), d=window.devicePixelRatio||1;
+  const W=Math.round(r.width*d), H=Math.round(r.height*d); if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}
+  c.setTransform(d,0,0,d,0,0); return {w:r.width,h:r.height,d}; }
+function cam(F){ F=norm(F); const l=Math.hypot(F[0],F[1])||1, Rt=[-F[1]/l,F[0]/l,0];
+  return {F,Rt,U:[F[1]*Rt[2]-F[2]*Rt[1],F[2]*Rt[0]-F[0]*Rt[2],F[0]*Rt[1]-F[1]*Rt[0]]}; }
+function text(c,t,x,y,col,size,weight,align){ c.font=`${weight||700} ${size}px ${FB}`; c.textAlign=align||'center'; c.lineWidth=3; c.strokeStyle='rgba(8,14,28,.85)'; c.strokeText(t,x,y); c.fillStyle=col; c.fillText(t,x,y); }
+// globo disegnato pixel per pixel, illuminato dal Sole
+const tmp=document.createElement('canvas'), tc=tmp.getContext('2d');
+function globe(c,x,y,r,B,sd,dpr){
+  const N=Math.max(8,Math.round(2*r*dpr)); tmp.width=tmp.height=N; const img=tc.createImageData(N,N), d=img.data;
+  for(let j=0;j<N;j++){ const v=1-2*(j+0.5)/N; for(let i=0;i<N;i++){ const u=2*(i+0.5)/N-1, r2=u*u+v*v, o=(j*N+i)*4;
+    if(r2>1){d[o+3]=0;continue} const w=Math.sqrt(1-r2);
+    const n=[u*B.Rt[0]+v*B.U[0]+w*B.F[0],u*B.Rt[1]+v*B.U[1]+w*B.F[1],u*B.Rt[2]+v*B.U[2]+w*B.F[2]];
+    const L=dot(n,sd), s=Math.max(0,Math.min(1,(L+0.08)/0.16)), k=s*s*(3-2*s), tw=Math.exp(-Math.pow((L+0.02)/0.06,2))*0.5, sh=0.6+0.4*w;
+    let R=24+(86-24)*k, G=36+(150-36)*k, Bc=62+(214-62)*k; R+=(240-R)*tw; G+=(150-G)*tw; Bc+=(80-Bc)*tw;
+    d[o]=R*sh; d[o+1]=G*sh; d[o+2]=Bc*sh; d[o+3]=Math.min(1,(1-Math.sqrt(r2))*N*0.5)*255; }}
+  tc.putImageData(img,0,0); c.drawImage(tmp,x-r,y-r,2*r,2*r);
+}
+function circleOnGlobe(c,x,y,r,B,latDeg,styleLit,styleDark,sd,showBack){
+  const A=axis(), e1=[1,0,0], e2=[A[1]*e1[2]-A[2]*e1[1],A[2]*e1[0]-A[0]*e1[2],A[0]*e1[1]-A[1]*e1[0]], la=latDeg*D2R;
+  let prev=null;
+  for(let k=0;k<=180;k++){ const t=k/180*2*PI;
+    const p=[A[0]*Math.sin(la)+Math.cos(la)*(Math.cos(t)*e1[0]+Math.sin(t)*e2[0]), A[1]*Math.sin(la)+Math.cos(la)*(Math.cos(t)*e1[1]+Math.sin(t)*e2[1]), A[2]*Math.sin(la)+Math.cos(la)*(Math.cos(t)*e1[2]+Math.sin(t)*e2[2])];
+    const q=[x+r*dot(p,B.Rt), y-r*dot(p,B.U), dot(p,B.F)], lit=dot(p,sd)>0;
+    if(prev&&(prev[2]>=0&&q[2]>=0||showBack)){ const st=(prev[3]?styleLit:styleDark); c.globalAlpha=(q[2]<0)?0.25:1; c.strokeStyle=st[0]; c.lineWidth=st[1];
+      c.beginPath(); c.moveTo(prev[0],prev[1]); c.lineTo(q[0],q[1]); c.stroke(); c.globalAlpha=1; }
+    prev=[q[0],q[1],q[2],lit]; }
+}
+
+/* ---------- vista dell'orbita ---------- */
+const oc=$('orbit'), o=oc.getContext('2d');
+const OCAM=cam([Math.cos(24*D2R),0,Math.sin(24*D2R)]);
+const SEAS=[{a0:0,a1:90,col:'#3fae5f',n:'primavera nell\'emisfero boreale',s:'autunno nell\'emisfero australe'},
+  {a0:90,a1:180,col:'#ef7d2d',n:'estate nell\'emisfero boreale',s:'inverno nell\'emisfero australe'},
+  {a0:180,a1:270,col:'#e6b81e',n:'autunno nell\'emisfero boreale',s:'primavera nell\'emisfero australe'},
+  {a0:270,a1:360,col:'#4a90d9',n:'inverno nell\'emisfero boreale',s:'estate nell\'emisfero australe'}];
+function drawOrbit(){
+  const {w,h,d}=fit(oc,o), fs=Math.max(10,Math.min(13.5,w/62));
+  const R=Math.min(w*0.36,h*0.36/Math.sin(24*D2R)), cx=w/2, cy=h*0.5;
+  const P=v=>[cx+R*dot(v,OCAM.Rt), cy-R*dot(v,OCAM.U), dot(v,OCAM.F)];
+  o.fillStyle='#0a1222'; o.fillRect(0,0,w,h);
+  // stagioni sull'orbita
+  SEAS.forEach(s=>{ o.strokeStyle=s.col; o.lineWidth=4; o.beginPath();
+    for(let a=s.a0;a<=s.a1;a+=2){ const L=PI+a*D2R, r=1-0.0167*Math.cos(L-(PI+angleOf(2))), q=P([Math.cos(L)*r,Math.sin(L)*r,0]); a===s.a0?o.moveTo(q[0],q[1]):o.lineTo(q[0],q[1]); } o.stroke();
+    const am=(s.a0+s.a1)/2, L=PI+am*D2R, q=P([Math.cos(L)*1.0,Math.sin(L)*1.0,0]), out=P([Math.cos(L)*1.18,Math.sin(L)*1.18,0]);
+    const dy=out[1]-q[1]>0?1:-1;
+    o.font=`${fs*0.85}px ${FB}`; o.textAlign='center'; o.fillStyle=s.col; o.fillText(s.n,out[0],out[1]+(dy>0?fs*0.4:-fs*0.9));
+    o.fillStyle='rgba(220,230,245,.75)'; o.fillText(s.s,out[0],out[1]+(dy>0?fs*1.5:fs*0.2)); });
+  // linea solstizi ed equinozi
+  o.setLineDash([4,5]); o.strokeStyle='rgba(220,230,245,.35)'; o.lineWidth=1;
+  [[79,265],[171,355],[2,182]].forEach(([a,b])=>{ const p=P(earthPos(a)), q=P(earthPos(b)); o.beginPath(); o.moveTo(p[0],p[1]); o.lineTo(q[0],q[1]); o.stroke(); });
+  o.setLineDash([]);
+  // punti chiave
+  [[79,'equinozio di primavera','21 marzo'],[171,'solstizio d\'estate','21 giugno'],[265,'equinozio d\'autunno','23 settembre'],[355,'solstizio d\'inverno','22 dicembre']].forEach(([n,a,b])=>{
+    const L=PI+angleOf(n), q=P(earthPos(n)), out=P([Math.cos(L)*0.72,Math.sin(L)*0.72,0]);
+    o.fillStyle='#fff'; o.beginPath(); o.arc(q[0],q[1],3,0,2*PI); o.fill();
+    text(o,a,out[0],out[1]-2,'#ffffff',fs*0.95,700); text(o,b,out[0],out[1]+fs,'rgba(220,230,245,.85)',fs*0.85,400); });
+  // perielio e afelio
+  [[2,'perielio (3 gennaio)','147 000 000 km'],[182,'afelio (2 luglio)','152 000 000 km']].forEach(([n,a,b])=>{
+    const q=P(earthPos(n)); o.fillStyle='#ff6b6b'; o.beginPath(); o.arc(q[0],q[1],4,0,2*PI); o.fill();
+    const s=P([0,0,0]); const side=q[0]>s[0]?1:-1;
+    const lx=Math.max(70,Math.min(w-70,q[0]+side*R*0.12)), ly=q[1]+(n<100?-R*0.16:R*0.2);
+    text(o,a,lx,ly,'#ffb0b0',fs*0.85,700); text(o,b,(q[0]+s[0])/2,(q[1]+s[1])/2-4,'rgba(255,200,200,.8)',fs*0.8,400); });
+  // Sole e Terra in ordine di profondità
+  const E=earthPos(day), eq=P(E), sd=sunDir(day);
+  const sun=()=>{ const s=P([0,0,0]), sr=R*0.09; const g=o.createRadialGradient(s[0],s[1],sr*0.2,s[0],s[1],sr*3);
+    g.addColorStop(0,'rgba(255,220,130,.6)'); g.addColorStop(1,'rgba(255,160,40,0)'); o.fillStyle=g; o.beginPath(); o.arc(s[0],s[1],sr*3,0,2*PI); o.fill();
+    const g2=o.createRadialGradient(s[0]-sr*.3,s[1]-sr*.3,sr*.1,s[0],s[1],sr); g2.addColorStop(0,'#fff7d6'); g2.addColorStop(.6,'#ffcc4d'); g2.addColorStop(1,'#f08a1c');
+    o.fillStyle=g2; o.beginPath(); o.arc(s[0],s[1],sr,0,2*PI); o.fill(); text(o,'Sole',s[0],s[1]+4,'#3a2200',fs,800); o.fillStyle='#3a2200'; o.fillText('Sole',s[0],s[1]+4); };
+  const earth=()=>{ const er=R*0.075;
+    // raggio Terra-Sole
+    const s=P([0,0,0]); o.setLineDash([2,4]); o.strokeStyle='rgba(255,220,130,.5)'; o.beginPath(); o.moveTo(eq[0],eq[1]); o.lineTo(s[0],s[1]); o.stroke(); o.setLineDash([]);
+    globe(o,eq[0],eq[1],er,OCAM,sd,d);
+    circleOnGlobe(o,eq[0],eq[1],er,OCAM,0,['#ff6b6b',1.3],['#ff6b6b',1.3],sd,false);
+    // perpendicolare al piano e asse
+    const A=axis(); const top=[eq[0]+er*1.9*dot(A,OCAM.Rt), eq[1]-er*1.9*dot(A,OCAM.U)], bot=[eq[0]-er*1.6*dot(A,OCAM.Rt), eq[1]+er*1.6*dot(A,OCAM.U)];
+    const pz=[eq[0]+er*1.9*dot([0,0,1],OCAM.Rt), eq[1]-er*1.9*dot([0,0,1],OCAM.U)];
+    o.setLineDash([3,3]); o.strokeStyle='rgba(255,255,255,.6)'; o.lineWidth=1; o.beginPath(); o.moveTo(eq[0],eq[1]); o.lineTo(pz[0],pz[1]); o.stroke(); o.setLineDash([]);
+    o.strokeStyle='#ffffff'; o.lineWidth=2; o.beginPath(); o.moveTo(bot[0],bot[1]); o.lineTo(top[0],top[1]); o.stroke();
+    text(o,'N',top[0]+6,top[1]-2,'#ffffff',fs,800,'left');
+    if(tilt>0) text(o,'23° 27\'',pz[0]-6,pz[1]-4,'#ffe2a6',fs*0.85,700,'right'); };
+  if(E[0]>0){ sun(); earth(); } else { earth(); sun(); }
+}
+
+/* ---------- vista laterale: circolo di illuminazione ---------- */
+const sc=$('side'), s=sc.getContext('2d');
+const LATS=[[66.55,'circolo polare artico','#9fd3ff'],[23.45,'tropico del Cancro','#ffd27a'],[0,'Equatore','#ff6b6b'],[-23.45,'tropico del Capricorno','#ffd27a'],[-66.55,'circolo polare antartico','#9fd3ff']];
+function drawSide(){
+  const {w,h,d}=fit(sc,s), fs=Math.max(10,Math.min(13,w/36));
+  const sd=sunDir(day), B=cam([sd[1],-sd[0],0]); // il Sole è a destra
+  const r=Math.min(w,h)*0.3, cx=w*0.57, cy=h*0.5;
+  s.fillStyle='#0a1222'; s.fillRect(0,0,w,h);
+  const g=s.createRadialGradient(w*1.05,cy,0,w*1.05,cy,w*0.6); g.addColorStop(0,'rgba(255,220,130,.7)'); g.addColorStop(1,'rgba(255,160,40,0)'); s.fillStyle=g; s.fillRect(0,0,w,h);
+  s.strokeStyle='rgba(255,214,130,.5)'; s.fillStyle='rgba(255,214,130,.8)'; s.lineWidth=1.4;
+  [-0.6,0,0.6].forEach(k=>{ const yy=cy+k*r, x2=cx+r*Math.sqrt(1-k*k)+10; s.beginPath(); s.moveTo(w-8,yy); s.lineTo(x2+6,yy); s.stroke(); s.beginPath(); s.moveTo(x2,yy); s.lineTo(x2+8,yy-4); s.lineTo(x2+8,yy+4); s.fill(); });
+  text(s,'raggi del Sole',w-10,cy-r-10,'#ffe2a6',fs*0.9,700,'right');
+  globe(s,cx,cy,r,B,sd,d);
+  // circolo di illuminazione
+  s.strokeStyle='rgba(255,214,150,.85)'; s.setLineDash([5,4]); s.lineWidth=1.5; s.beginPath(); s.moveTo(cx,cy-r-10); s.lineTo(cx,cy+r+10); s.stroke(); s.setLineDash([]);
+  text(s,'circolo di illuminazione',cx,cy-r-16,'#ffe2a6',fs*0.85,700);
+  // paralleli: in giallo la parte illuminata, in blu quella al buio
+  LATS.forEach(([la,name,col])=>circleOnGlobe(s,cx,cy,r,B,la,[col,la===0?2.4:1.6],['rgba(120,150,200,.6)',1.4],sd,true));
+  circleOnGlobe(s,cx,cy,r,B,41.9,['#ffffff',2.6],['#5f7db3',2.6],sd,true);
+  // etichette dei paralleli sul lato sinistro
+  const A=axis();
+  LATS.concat([[41.9,'Roma','#ffffff']]).forEach(([la,name,col])=>{ const L=la*D2R;
+    const k=-dot(B.Rt,A), pv=norm([-B.Rt[0]-k*A[0],-B.Rt[1]-k*A[1],-B.Rt[2]-k*A[2]]); // verso sinistra, perpendicolare all'asse
+    const p=[A[0]*Math.sin(L)+Math.cos(L)*pv[0], A[1]*Math.sin(L)+Math.cos(L)*pv[1], A[2]*Math.sin(L)+Math.cos(L)*pv[2]];
+    const q=[cx+r*dot(p,B.Rt), cy-r*dot(p,B.U)]; text(s,name,q[0]-6,q[1]+4,col,fs*0.8,700,'right'); });
+  // asse e poli
+  const top=[cx+r*1.25*dot(A,B.Rt), cy-r*1.25*dot(A,B.U)], bot=[cx-r*1.25*dot(A,B.Rt), cy+r*1.25*dot(A,B.U)];
+  s.strokeStyle='#fff'; s.lineWidth=2; s.beginPath(); s.moveTo(bot[0],bot[1]); s.lineTo(top[0],top[1]); s.stroke();
+  text(s,'Polo nord',top[0],top[1]-6,'#ffffff',fs*0.9,700); text(s,'Polo sud',bot[0],bot[1]+fs+2,'#ffffff',fs*0.9,700);
+  if(tilt>0){ s.setLineDash([3,3]); s.strokeStyle='rgba(255,255,255,.5)'; s.beginPath(); s.moveTo(cx,cy-r*1.25); s.lineTo(cx,cy+r*1.25); s.stroke(); s.setLineDash([]); }
+}
+
+/* ---------- testi e barre ---------- */
+const PLACES=[['Polo nord','90° N',90],['Circolo polare artico','66° 33\' N',66.55],['Roma','42° N',41.9],['Equatore','0°',0],['Sydney','34° S',-33.9],['Polo sud','90° S',-90]];
+const bars=$('bars');
+PLACES.forEach(([n,l])=>{ const d=document.createElement('div'); d.className='bar'; d.innerHTML=`<div class="lab">${n}<small>${l}</small></div><div class="track"><i></i></div><div class="h"></div>`; bars.append(d); });
+function hm(x){ const hh=Math.floor(x+1e-6), mm=Math.round((x-hh)*60); return mm===60?`${hh+1} h`:(mm?`${hh} h ${mm}′`:`${hh} h`); }
+function update(){
+  $('date').textContent=dateOf(day);
+  if(document.activeElement!==$('day')) $('day').value=day;
+  const dl=decl(day);
+  [...bars.children].forEach((b,i)=>{ const L=dayLen(PLACES[i][2],dl); const i_=b.querySelector('i'); i_.style.width=(L/24*100)+'%'; i_.style.left=((24-L)/48*100)+'%'; b.querySelector('.h').textContent=hm(L); });
+  let txt;
+  if(tilt===0){ $('sN').textContent='nessuna'; $('sS').textContent='nessuna';
+    txt='Con l\'asse perpendicolare al piano dell\'orbita il circolo di illuminazione passa sempre per i poli: tutto l\'anno, in ogni punto della Terra, il dì e la notte durano 12 ore. Non ci sarebbero le stagioni.'; }
+  else { $('sN').textContent=season(day,true); $('sS').textContent=season(day,false);
+    const n=Math.round(day);
+    if(Math.abs(n-79)<=1||Math.abs(n-265)<=1) txt=`È l'${n<200?'equinozio di primavera':'equinozio d\'autunno'}: il circolo di illuminazione passa per i poli e in tutta la Terra il dì e la notte durano 12 ore.`;
+    else if(Math.abs(n-171)<=1) txt='È il solstizio d\'estate: il Polo nord è rivolto verso il Sole. Nell\'emisfero boreale c\'è il dì più lungo dell\'anno; dentro il circolo polare artico il Sole non tramonta mai. Nell\'emisfero australe è il giorno più corto.';
+    else if(Math.abs(n-355)<=1) txt='È il solstizio d\'inverno: il Polo nord è rivolto dalla parte opposta al Sole. Nell\'emisfero boreale c\'è il dì più corto dell\'anno; dentro il circolo polare artico è notte per 24 ore. Nell\'emisfero australe è il giorno più lungo.';
+    else if(Math.abs(n-2)<=1) txt='È il perielio: la Terra è nel punto più vicino al Sole, circa 147 milioni di km. Eppure da noi è inverno: le stagioni non dipendono dalla distanza.';
+    else if(Math.abs(n-182)<=1) txt='È l\'afelio: la Terra è nel punto più lontano dal Sole, circa 152 milioni di km. Eppure da noi è estate: le stagioni dipendono dall\'inclinazione dell\'asse.';
+    else { const north=dl>0; txt=`L'asse è sempre inclinato nello stesso modo, ma ora ${north?'il Polo nord è un po\' rivolto verso il Sole':'il Polo sud è un po\' rivolto verso il Sole'}. Nell'emisfero ${north?'boreale':'australe'} il dì dura più della notte, nell'altro emisfero è il contrario. All'Equatore dì e notte durano sempre 12 ore.`; } }
+  $('now').textContent=txt;
+}
+
+/* ---------- comandi ---------- */
+function setPlay(p){ playing=p; $('play').textContent=p?'Pausa':'Avvia'; }
+$('play').addEventListener('click',()=>setPlay(!playing));
+$('day').addEventListener('input',e=>{ day=+e.target.value; setPlay(false); });
+document.querySelectorAll('[data-d]').forEach(b=>b.addEventListener('click',()=>{ day=+b.dataset.d; setPlay(false); }));
+$('noTilt').addEventListener('change',e=>{ tilt=e.target.checked?0:EPS0; });
+function loop(ts){ if(last!==null&&playing) day=(day+(ts-last)/1000*24)%365; last=ts; drawOrbit(); drawSide(); update(); requestAnimationFrame(loop); }
+setPlay(false); requestAnimationFrame(loop);
+})();
+</script>
+
+</body>
+</html>

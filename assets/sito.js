@@ -99,10 +99,13 @@ function home() {
   for (const [id, info] of Object.entries(MATERIE)) {
     const moduli = ELENCO_MODULI.filter(m => m.materia === id);
     const n = tutteLeAttivita(moduli).length;
+    const nl = moduli.reduce((t, m) => t + (m.lezioni || []).length, 0);
+    const plurale = (x, uno, tanti) => x === 1 ? "1 " + uno : x + " " + tanti;
     let conta = "Materiali in arrivo";
     if (moduli.length) {
-      conta = (moduli.length === 1 ? "1 modulo" : moduli.length + " moduli") + ", " +
-              (n === 1 ? "1 attività" : n + " attività");
+      conta = [plurale(moduli.length, "modulo", "moduli"),
+               nl ? plurale(nl, "lezione", "lezioni") : null,
+               n ? plurale(n, "attività", "attività") : null].filter(Boolean).join(", ");
     }
     griglia.append(el("a", { class: "materia", href: id + "/", style: `--c: var(--${id})` },
       el("h3", null, info.nome),
@@ -113,7 +116,9 @@ function home() {
   elencoUda(document.getElementById("uda"), () => true, "Le UDA interdisciplinari arriveranno presto.");
 
   const recenti = document.getElementById("recenti");
-  const ordinati = tutteLeAttivita(ELENCO_MODULI)
+  const lezioniConPagina = ELENCO_MODULI.flatMap(mod =>
+    (mod.lezioni || []).filter(l => l.link).map(l => ({ ...l, tipo: "Lezione", mod, lez: null })));
+  const ordinati = [...lezioniConPagina, ...tutteLeAttivita(ELENCO_MODULI)]
     .filter(a => a.data)
     .sort((a, b) => b.data.localeCompare(a.data))
     .slice(0, 6);
@@ -163,7 +168,9 @@ function paginaMateria(id) {
 
     box.append(el("summary", null,
       el("span", { class: "numero-modulo" }, mod.numero ? "Modulo " + mod.numero : "Modulo"),
-      el("span", { class: "titolo-modulo" }, mod.titolo),
+      mod.link
+        ? el("a", { class: "titolo-modulo", href: BASE + mod.link, title: "Apri la pagina del modulo" }, mod.titolo)
+        : el("span", { class: "titolo-modulo" }, mod.titolo),
       el("span", { class: "riepilogo" }, riepilogo)
     ));
 
@@ -177,7 +184,8 @@ function paginaMateria(id) {
           ? el("a", { href: BASE + lez.link }, lez.titolo)
           : lez.titolo;
         const li = el("li", { class: "lezione" },
-          el("p", { class: "numero-lezione" }, "Lezione " + (i + 1)),
+          el("p", { class: "numero-lezione" },
+            "Lezione " + (i + 1) + (lez.pagine ? ", " + (/[–-]/.test(lez.pagine) ? "pp. " : "p. ") + lez.pagine : "")),
           el("h4", null, titolo),
           lez.descrizione ? el("p", { class: "descr-lezione" }, lez.descrizione) : null);
         const att = lez.attivita || [];
@@ -185,7 +193,7 @@ function paginaMateria(id) {
           const ul = el("ul", { class: "attivita-elenco" });
           att.forEach(a => ul.append(rigaAttivita(a)));
           li.append(ul);
-        } else {
+        } else if (!lez.link) {
           li.append(el("p", { class: "attesa" }, "Attività in preparazione"));
         }
         ol.append(li);
