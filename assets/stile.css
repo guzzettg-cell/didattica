@@ -121,6 +121,22 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 .gruppo h2 { margin-bottom: 6px; }
 
+/* UDA */
+.sottotitolo { margin: -10px 0 18px; color: var(--tenue); }
+.voce.uda {
+  position: relative;
+  overflow: hidden;
+  border-left-width: 1px;
+}
+.voce.uda .striscia {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 6px;
+}
+.voce.uda a { padding-left: 30px; }
+.voce.uda .tipo { margin-right: 6px; }
+.sezione-uda { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--filo); }
+
 /* filtri */
 .filtri {
   display: flex;

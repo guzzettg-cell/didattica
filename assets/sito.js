@@ -37,6 +37,37 @@ function voce(m, conMateria) {
   );
 }
 
+/* ---------- UDA interdisciplinari ---------- */
+const ELENCO_UDA = typeof UDA !== "undefined" ? UDA : [];
+
+function schedaUda(u) {
+  const materie = (u.materie || []).filter(id => MATERIE[id]);
+  const n = materie.length || 1;
+  const striscia = materie.length
+    ? materie.map((id, i) => `var(--${id}) ${i * 100 / n}% ${(i + 1) * 100 / n}%`).join(", ")
+    : "var(--inchiostro) 0 100%";
+  const etichette = el("p", { class: "dettagli" });
+  materie.forEach(id => etichette.append(
+    el("span", { class: "tipo", style: `--c: var(--${id})` }, MATERIE[id].nome)));
+  const extra = [u.classe ? "Classe " + u.classe : null, u.periodo].filter(Boolean).join(", ");
+  if (extra) etichette.append(extra);
+  return el("li", { class: "voce uda" },
+    el("span", { class: "striscia", style: `background: linear-gradient(to bottom, ${striscia})`, "aria-hidden": "true" }),
+    el("a", { href: BASE + u.link },
+      el("h3", null, u.titolo),
+      u.descrizione ? el("p", null, u.descrizione) : null,
+      etichette
+    )
+  );
+}
+
+function elencoUda(contenitore, filtro, vuoto) {
+  if (!contenitore) return;
+  const scelte = ELENCO_UDA.filter(filtro);
+  if (!scelte.length) { contenitore.replaceWith(el("p", { class: "vuoto" }, vuoto)); return; }
+  scelte.forEach(u => contenitore.append(schedaUda(u)));
+}
+
 /* ---------- home ---------- */
 function home() {
   const griglia = document.getElementById("materie");
@@ -48,6 +79,8 @@ function home() {
       el("p", { class: "conta" }, n === 0 ? "Materiali in arrivo" : n === 1 ? "1 materiale" : n + " materiali")
     ));
   }
+  elencoUda(document.getElementById("uda"), () => true, "Le UDA interdisciplinari arriveranno presto.");
+
   const recenti = document.getElementById("recenti");
   const ordinati = [...MATERIALI].sort((a, b) => (b.data || "").localeCompare(a.data || "")).slice(0, 6);
   if (!ordinati.length) recenti.replaceWith(el("p", { class: "vuoto" }, "Non ci sono ancora materiali. Aggiungili nel file materiali.js."));
@@ -98,6 +131,14 @@ function paginaMateria(id) {
   }));
   campo.addEventListener("input", disegna);
   disegna();
+
+  const conUda = ELENCO_UDA.filter(u => (u.materie || []).includes(id));
+  if (conUda.length) {
+    const lista = el("ul", { class: "elenco" });
+    area.after(el("section", { class: "gruppo sezione-uda" },
+      el("h2", null, "UDA interdisciplinari"), lista));
+    conUda.forEach(u => lista.append(schedaUda(u)));
+  }
 }
 
 if (corpo.dataset.materia) paginaMateria(corpo.dataset.materia);
