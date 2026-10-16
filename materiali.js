@@ -39,6 +39,25 @@ const MODULI = [
     titolo: "Cos'è la geografia: metodo e strumenti",
     descrizione: "Primo quadrimestre, in collegamento con Scienze.",
     lezioni: [
+      {
+        titolo: "Perché la geografia",
+        descrizione: "La Terra vista dalla Luna: astronauti, foto famose e una salita da Roma fino allo spazio.",
+        link: "geografia/prima/perche-la-geografia/index.html",
+        data: "2026-10-15",
+        attivita: [
+          { tipo: "Questionario", titolo: "Il tuo rapporto con la geografia", link: "geografia/prima/perche-la-geografia/attivita/il-tuo-rapporto-con-la-geografia.html", data: "2026-10-16" },
+          { tipo: "Scheda", titolo: "Che cosa studia la geografia", link: "geografia/prima/perche-la-geografia/attivita/che-cosa-studia-la-geografia.html", data: "2026-10-16" },
+          { tipo: "Metodo di studio", titolo: "Come si studia la geografia", link: "geografia/prima/perche-la-geografia/attivita/come-si-studia-la-geografia.html", data: "2026-10-16" },
+          { tipo: "Tappa 1", titolo: "Chi ha visto la Terra", link: "geografia/prima/perche-la-geografia/attivita/fase-1-chi-ha-visto-la-terra.html", data: "2026-10-15" },
+          { tipo: "Tappa 2", titolo: "Tre modi di disegnare il mondo", link: "geografia/prima/perche-la-geografia/attivita/fase-2-tre-modi-di-disegnare-il-mondo.html", data: "2026-10-15" },
+          { tipo: "Tappa 3", titolo: "Carte sovrapposte ed emisferi", link: "geografia/prima/perche-la-geografia/attivita/fase-3-carte-sovrapposte-ed-emisferi.html", data: "2026-10-15" },
+          { tipo: "Tappa 4", titolo: "Guardiamo il planisfero", link: "geografia/prima/perche-la-geografia/attivita/fase-4-guardiamo-il-planisfero.html", data: "2026-10-15" },
+          { tipo: "Cruciverba", titolo: "Le parole della Terra vista dalla Luna", link: "geografia/prima/perche-la-geografia/attivita/fase-5-cruciverba.html", data: "2026-10-15" },
+          { tipo: "Se c'è tempo", titolo: "Carte che cambiano forma", link: "geografia/prima/perche-la-geografia/attivita/fase-6-carte-che-cambiano-forma.html", data: "2026-10-15" },
+          { tipo: "Linea del tempo", titolo: "Una piccola storia dei viaggi nello spazio", link: "geografia/prima/perche-la-geografia/attivita/viaggi-nello-spazio.html", data: "2026-10-15" },
+          { tipo: "Approfondimento", titolo: "La storia della cartografia", link: "geografia/prima/perche-la-geografia/attivita/storia-della-cartografia.html", data: "2026-10-15" }
+        ]
+      },
       { titolo: "L'orientamento e i suoi strumenti", attivita: [] },
       { titolo: "Il reticolato geografico", attivita: [] },
       { titolo: "Le carte geografiche", attivita: [] },
