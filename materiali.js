@@ -430,7 +430,23 @@ const MODULI = [
     titolo: "Storia della letteratura",
     descrizione: "Dalle origini al Cinquecento: prosa e versi. Primo e secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
     lezioni: [
-      { titolo: "Dante", attivita: [] },
+      {
+        titolo: "Dante",
+        descrizione: "Ripasso: Dante, Cavalcanti e lo Stilnovo, con il sonetto «Tanto gentile e tanto onesta pare».",
+        link: "italiano/seconda/dante/stilnovo-ripasso/index.html",
+        data: "2026-10-16",
+        attivita: [
+          { tipo: "Guida alla lezione", titolo: "Dante, Cavalcanti e lo Stilnovo: come usare le fasi (circa 60 minuti)", link: "italiano/seconda/dante/stilnovo-ripasso/index.html", data: "2026-10-16" },
+          { tipo: "Fase 1", titolo: "Lo Stilnovo in dodici parole", link: "italiano/seconda/dante/stilnovo-ripasso/attivita/fase-1-lo-stilnovo-in-dodici-parole.html", data: "2026-10-16" },
+          { tipo: "Fase 2", titolo: "La vita di Dante in ordine", link: "italiano/seconda/dante/stilnovo-ripasso/attivita/fase-2-la-vita-di-dante-in-ordine.html", data: "2026-10-16" },
+          { tipo: "Fase 3", titolo: "Poeti, opere e idee", link: "italiano/seconda/dante/stilnovo-ripasso/attivita/fase-3-poeti-opere-e-idee.html", data: "2026-10-16" },
+          { tipo: "Fase 4", titolo: "Le parole di «Tanto gentile»", link: "italiano/seconda/dante/stilnovo-ripasso/attivita/fase-4-le-parole-del-sonetto.html", data: "2026-10-16" },
+          { tipo: "Fase 5", titolo: "Dentro il sonetto", link: "italiano/seconda/dante/stilnovo-ripasso/attivita/fase-5-dentro-il-sonetto.html", data: "2026-10-16" },
+          { tipo: "Fase 6", titolo: "Il cruciverba dello Stilnovo", link: "italiano/seconda/dante/stilnovo-ripasso/attivita/fase-6-cruciverba.html", data: "2026-10-16" },
+          { tipo: "Fase 7", titolo: "Vero o falso?", link: "italiano/seconda/dante/stilnovo-ripasso/attivita/fase-7-vero-o-falso.html", data: "2026-10-16" },
+          { tipo: "Fase 8", titolo: "Rischiatutto stilnovista", link: "italiano/seconda/dante/stilnovo-ripasso/attivita/fase-8-rischiatutto-stilnovista.html", data: "2026-10-16" }
+        ]
+      },
       { titolo: "Petrarca", attivita: [] },
       { titolo: "Boccaccio", attivita: [] },
       { titolo: "Ariosto", attivita: [] }

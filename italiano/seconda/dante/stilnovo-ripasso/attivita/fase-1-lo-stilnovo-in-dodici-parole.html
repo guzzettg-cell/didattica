@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lo Stilnovo in dodici parole</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Stili condivisi con la pagina per gli studenti */
+:root{
+  --bg:#f1f4ef; --surface:#ffffff; --ink:#1b2a21; --muted:#5a6b60; --line:#d4ddd6; --soft:#e3ebe4;
+  --accent:#2c7a4b; --accent-ink:#ffffff; --ok:#1d8a52; --ko:#cf2f28; --back:#fdf7e6;
+  --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111813; --surface:#1a241d; --ink:#e7f0ea; --muted:#9fb3a6; --line:#2c3b31; --soft:#223027;
+  --accent:#5fd08f; --accent-ink:#0d1a12; --ok:#45c983; --ko:#ff6b62; --back:#2a2716; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111813; --surface:#1a241d; --ink:#e7f0ea; --muted:#9fb3a6; --line:#2c3b31; --soft:#223027;
+  --accent:#5fd08f; --accent-ink:#0d1a12; --ok:#45c983; --ko:#ff6b62; --back:#2a2716; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 15px;font-weight:700;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.small{padding:5px 10px;font-size:.88rem;border-radius:8px}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.ko{background:var(--ko);border-color:var(--ko);color:#fff}
+
+.cs{max-width:860px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.cs-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:10px}
+.cs-kind{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.cs-title{font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,3.8vw,2.4rem);line-height:1.05;margin:0;text-wrap:balance}
+.cs-sub{margin:2px 0 0;color:var(--muted)}
+.cs-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.cs-pills{display:flex;gap:4px;background:var(--soft);padding:4px;border-radius:999px;flex-wrap:wrap}
+.cs-pills button{border:0;background:none;padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:700;color:var(--muted)}
+.cs-pills button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgb(0 0 0 / .14)}
+.cs-opts{display:flex;gap:6px;flex-wrap:wrap}
+.cs-info{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.cs-prog{height:8px;background:var(--soft);border-radius:99px;overflow:hidden}
+.cs-prog i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.cs-scene{perspective:1400px}
+.cs-card{position:relative;width:100%;aspect-ratio:16/10;max-height:58vh;margin:0 auto;cursor:pointer;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.3,.7,.3,1);border:0;background:none;padding:0;display:block}
+.cs-card.flip{transform:rotateY(180deg)}
+.cs-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;border:1px solid var(--line);background:var(--surface);box-shadow:0 8px 24px rgb(0 0 0 / .1);display:grid;place-items:center;padding:24px;overflow:auto;text-align:center}
+.cs-face.retro{transform:rotateY(180deg);background:var(--back)}
+.cs-face .lab{position:absolute;top:12px;left:16px;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cs-face .tag{position:absolute;top:12px;right:16px;font-size:.75rem;font-weight:700;color:var(--accent);background:var(--soft);padding:2px 9px;border-radius:999px}
+.cs-face .txt{font-size:clamp(1.2rem,3.2vw,2rem);font-weight:700;line-height:1.3;white-space:pre-line;overflow-wrap:anywhere}
+.cs-face.retro .txt{font-weight:400;font-size:clamp(1.05rem,2.6vw,1.6rem)}
+.cs-face img{max-width:100%;max-height:28vh;border-radius:10px;display:block;margin:0 auto 10px}
+.cs-hint{text-align:center;color:var(--muted);font-size:.9rem;margin:0}
+.cs-ctrl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.cs-ctrl .btn{min-width:120px}
+.cs-done{text-align:center;display:grid;gap:10px;justify-items:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px}
+.cs-big{font-family:var(--display);font-weight:800;font-size:3rem;line-height:1}
+.cs-write{display:grid;gap:8px}
+.cs-write input{border:2px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 14px;font-size:1.15rem}
+.cs-write input.ok{border-color:var(--ok)}.cs-write input.ko{border-color:var(--ko)}
+.cs-fb{border-radius:10px;padding:10px 14px;background:var(--soft);font-weight:700}
+.cs-fb.ok{color:var(--ok)}.cs-fb.ko{color:var(--ko)}
+.cs-fb span{display:block;color:var(--ink);font-weight:400;margin-top:4px;white-space:pre-line}
+.cs-list{display:grid;gap:6px;width:100%;text-align:left;margin:0;padding:0;list-style:none}
+.cs-list li{background:var(--bg);border-radius:8px;padding:6px 10px;border-left:4px solid var(--ko)}
+.cs-print-opts{display:grid;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.cs-print-opts label{display:flex;gap:8px;align-items:center;font-weight:700}
+.cs-print-opts input{width:18px;height:18px;accent-color:var(--accent)}
+.cs.lim .cs-face .txt{font-size:clamp(1.6rem,4vw,3rem)}
+.cs:fullscreen{max-width:none;padding:18px;background:var(--bg);overflow:auto}
+#cs-print-root{display:none}
+@media print{
+  @page{size:A4;margin:10mm}
+  body{background:#fff!important}
+  body.cs-stampa > *:not(#cs-print-root){display:none!important}
+  body.cs-stampa #cs-print-root{display:block!important}
+  .cs-pg{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:62mm;gap:0;break-after:page}
+  .cs-pg.piega{grid-template-columns:1fr 1fr;grid-auto-rows:44mm}
+  .cs-pc{border:.3mm dashed #888;padding:4mm 5mm;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:hidden;font-family:var(--body);color:#000}
+  .cs-pc .pt{font-size:12pt;font-weight:700;white-space:pre-line}
+  .cs-pc.r .pt{font-weight:400;font-size:10.5pt}
+  .cs-pc.r{background:#fbf6e8;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .cs-pc img{max-height:26mm;max-width:100%;margin-bottom:2mm}
+  .cs-pc small{font-size:7pt;color:#666;align-self:flex-start;text-transform:uppercase;letter-spacing:.08em}
+  .cs-ptitle{font-family:var(--body);font-size:9pt;color:#555;margin:0 0 2mm}
+}
+
+body{margin:0}.wrap{padding:24px 16px 48px}</style>
+</head>
+<body>
+<div class="wrap"><div id="cs"></div></div>
+<script>
+/* Carte di studio: la stessa funzione serve all'anteprima e alla pagina per gli studenti */
+function mountCS(root, D, opts){
+  opts = opts || {};
+  function h(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function mix(a){ a = a.slice(); for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function norm(s){ return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim(); }
+  var C = (D.carte || []).filter(function(c){ return String(c.f || '').trim() || c.fi; });
+  var LF = D.labF || 'Domanda', LR = D.labR || 'Risposta';
+  var modi = D.modes || {}, NOMI = {studia: 'Studia', ripassa: 'Ripassa', scrivi: 'Scrivi la risposta', stampa: 'Stampa'};
+  var M = ['studia', 'ripassa', 'scrivi', 'stampa'].filter(function(m){ return modi[m] !== false; }); if (!M.length) M = ['studia'];
+  if (!C.length){ root.innerHTML = '<div class="cs"><p class="cs-hint">Aggiungi almeno una carta.</p></div>'; return; }
+  var modo = M[0], inv = false, keyH = null;
+  root.innerHTML = '<div class="cs' + (opts.lim ? ' lim' : '') + '"><div class="cs-head"><div><span class="cs-kind">Carte di studio · ' + C.length + ' carte</span><h2 class="cs-title">' + h(D.title || 'Senza titolo') + '</h2>' + (D.subtitle ? '<p class="cs-sub">' + h(D.subtitle) + '</p>' : '') + '</div></div>' +
+    '<div class="cs-bar">' + (M.length > 1 ? '<div class="cs-pills">' + M.map(function(m){ return '<button type="button" data-m="' + m + '">' + NOMI[m] + '</button>'; }).join('') + '</div>' : '<span></span>') +
+    '<div class="cs-opts"><button class="btn small" type="button" data-inv title="Mostra prima il retro">⇄ ' + h(LR) + ' prima</button><button class="btn small" type="button" data-fs title="Schermo intero (LIM)">⛶</button></div></div><div class="cs-body"></div></div>';
+  var box = root.querySelector('.cs'), body = root.querySelector('.cs-body');
+  root.querySelector('[data-fs]').onclick = function(){ if (document.fullscreenElement) document.exitFullscreen(); else if (box.requestFullscreen) box.requestFullscreen().then(function(){ box.classList.add('lim'); }, function(){}); };
+  document.addEventListener('fullscreenchange', function(){ if (!document.fullscreenElement) box.classList.toggle('lim', !!opts.lim); });
+  root.querySelector('[data-inv]').onclick = function(){ inv = !inv; this.setAttribute('aria-pressed', inv); this.classList.toggle('primary', inv); apri(modo); };
+  root.querySelectorAll('[data-m]').forEach(function(b){ b.onclick = function(){ apri(b.dataset.m); }; });
+  if (root._csKey) document.removeEventListener('keydown', root._csKey);
+  root._csKey = function(e){ if (!root.isConnected || !keyH || /INPUT|TEXTAREA|SELECT/.test((e.target || {}).tagName || '')) return; keyH(e); };
+  document.addEventListener('keydown', root._csKey);
+  function lato(c, retro){ var t = retro !== inv ? c.r : c.f, im = retro !== inv ? c.ri : c.fi; return (im ? '<img src="' + h(im) + '" alt="">' : '') + (String(t || '').trim() ? '<div class="txt">' + h(t) + '</div>' : ''); }
+  function carta(c){ return '<div class="cs-scene"><button type="button" class="cs-card" aria-label="Gira la carta"><div class="cs-face"><span class="lab">' + h(inv ? LR : LF) + '</span>' + (c.tag ? '<span class="tag">' + h(c.tag) + '</span>' : '') + lato(c, false) + '</div><div class="cs-face retro"><span class="lab">' + h(inv ? LF : LR) + '</span>' + lato(c, true) + '</div></button></div>'; }
+  function apri(m){
+    modo = m; keyH = null; root.querySelectorAll('[data-m]').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.m === m); });
+    root.querySelector('[data-inv]').hidden = m === 'stampa';
+    if (m === 'studia') studia(); else if (m === 'ripassa') ripassa(); else if (m === 'scrivi') scrivi(); else stampa();
+  }
+  /* --- studia --- */
+  function studia(){
+    var ord = C.slice(), i = 0;
+    function draw(){
+      body.innerHTML = '<div class="cs-info"><span>Carta ' + (i + 1) + ' di ' + ord.length + '</span><span><button class="btn small" type="button" data-mix>🔀 Mescola</button></span></div><div class="cs-prog"><i style="width:' + ((i + 1) / ord.length * 100) + '%"></i></div>' + carta(ord[i]) +
+        '<p class="cs-hint">Tocca la carta (o premi la barra spaziatrice) per girarla · frecce ← → per scorrere</p><div class="cs-ctrl"><button class="btn" type="button" data-p ' + (i === 0 ? 'disabled' : '') + '>◀ Indietro</button><button class="btn primary" type="button" data-g>↻ Gira</button><button class="btn" type="button" data-n ' + (i === ord.length - 1 ? 'disabled' : '') + '>Avanti ▶</button></div>';
+      var k = body.querySelector('.cs-card');
+      k.onclick = function(){ k.classList.toggle('flip'); };
+      body.querySelector('[data-g]').onclick = function(){ k.classList.toggle('flip'); };
+      body.querySelector('[data-p]').onclick = function(){ if (i > 0){ i--; draw(); } };
+      body.querySelector('[data-n]').onclick = function(){ if (i < ord.length - 1){ i++; draw(); } };
+      body.querySelector('[data-mix]').onclick = function(){ ord = mix(C); i = 0; draw(); };
+    }
+    keyH = function(e){ if (e.key === ' '){ e.preventDefault(); var k = body.querySelector('.cs-card'); if (k) k.classList.toggle('flip'); } if (e.key === 'ArrowRight' && i < ord.length - 1){ i++; draw(); } if (e.key === 'ArrowLeft' && i > 0){ i--; draw(); } };
+    draw();
+  }
+  /* --- ripassa: le carte non sapute tornano in fondo al mazzo --- */
+  function ripassa(){
+    var coda = mix(C), sapute = 0, giri = 0, errori = {}, tot = C.length;
+    function draw(){
+      if (!coda.length){
+        var sbagl = C.filter(function(c){ return errori[c.f + '|' + c.r]; });
+        body.innerHTML = '<div class="cs-done"><span class="cs-kind">Ripasso finito</span><div class="cs-big">' + (tot - sbagl.length) + ' / ' + tot + '</div><p style="margin:0">carte sapute al primo colpo</p>' +
+          (sbagl.length ? '<p style="margin:6px 0 0;font-weight:700">Da ripassare ancora:</p><ul class="cs-list">' + sbagl.map(function(c){ return '<li><b>' + h(c.f) + '</b> — ' + h(c.r) + '</li>'; }).join('') + '</ul>' : '<p style="margin:0;font-weight:700;color:var(--ok)">Bravissimo: le sapevi tutte!</p>') +
+          '<div class="cs-ctrl"><button class="btn primary" type="button" data-again>Ricomincia</button>' + (sbagl.length ? '<button class="btn" type="button" data-wrong>Ripassa solo quelle sbagliate</button>' : '') + '</div></div>';
+        body.querySelector('[data-again]').onclick = function(){ ripassa(); };
+        var w = body.querySelector('[data-wrong]'); if (w) w.onclick = function(){ coda = mix(sbagl); tot = sbagl.length; errori = {}; sapute = 0; draw(); };
+        keyH = null; return;
+      }
+      var c = coda[0];
+      body.innerHTML = '<div class="cs-info"><span>Sapute: ' + sapute + ' di ' + tot + '</span><span>Ancora nel mazzo: ' + coda.length + '</span></div><div class="cs-prog"><i style="width:' + (sapute / tot * 100) + '%"></i></div>' + carta(c) +
+        '<p class="cs-hint">Pensa alla risposta, poi gira la carta e sii sincero!</p><div class="cs-ctrl"><button class="btn primary" type="button" data-g>↻ Gira</button></div>';
+      var k = body.querySelector('.cs-card'), ctrl = body.querySelector('.cs-ctrl');
+      function girata(){ k.classList.add('flip'); ctrl.innerHTML = '<button class="btn ko" type="button" data-no>✗ Da rivedere</button><button class="btn ok" type="button" data-si>✓ Lo sapevo</button>';
+        ctrl.querySelector('[data-no]').onclick = function(){ errori[c.f + '|' + c.r] = true; coda.push(coda.shift()); draw(); };
+        ctrl.querySelector('[data-si]').onclick = function(){ coda.shift(); sapute++; draw(); }; }
+      k.onclick = girata; body.querySelector('[data-g]').onclick = girata;
+      keyH = function(e){ if (e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); if (!k.classList.contains('flip')) girata(); } var b; if (k.classList.contains('flip') && (e.key === 'ArrowRight' || e.key === 's')) (b = ctrl.querySelector('[data-si]')) && b.click(); if (k.classList.contains('flip') && (e.key === 'ArrowLeft' || e.key === 'n')) (b = ctrl.querySelector('[data-no]')) && b.click(); };
+    }
+    draw();
+  }
+  /* --- scrivi la risposta --- */
+  function scrivi(){
+    var ord = mix(C), i = 0, ok = 0, log = [];
+    function draw(){
+      if (i >= ord.length){
+        body.innerHTML = '<div class="cs-done"><span class="cs-kind">Risultato</span><div class="cs-big">' + ok + ' / ' + ord.length + '</div>' +
+          (log.length ? '<ul class="cs-list">' + log.map(function(l){ return '<li><b>' + h(l.d) + '</b> — hai scritto «' + h(l.s || '…') + '», risposta: ' + h(l.r) + '</li>'; }).join('') + '</ul>' : '') +
+          '<div class="cs-ctrl"><button class="btn primary" type="button" data-again>Ricomincia</button></div></div>';
+        body.querySelector('[data-again]').onclick = scrivi; keyH = null; return;
+      }
+      var c = ord[i], dom = inv ? c.r : c.f, ris = inv ? c.f : c.r;
+      body.innerHTML = '<div class="cs-info"><span>Carta ' + (i + 1) + ' di ' + ord.length + '</span><span>Giuste: ' + ok + '</span></div><div class="cs-prog"><i style="width:' + (i / ord.length * 100) + '%"></i></div>' +
+        '<div class="cs-scene"><div class="cs-card" style="cursor:default;aspect-ratio:16/7"><div class="cs-face"><span class="lab">' + h(inv ? LR : LF) + '</span>' + lato(c, false) + '</div></div></div>' +
+        '<div class="cs-write"><input type="text" autocomplete="off" placeholder="Scrivi qui la risposta e premi Invio"><div class="cs-fb" hidden></div><div class="cs-ctrl"><button class="btn primary" type="button" data-chk>Controlla</button><button class="btn" type="button" data-skip>Non lo so</button></div></div>';
+      var inp = body.querySelector('input'), fb = body.querySelector('.cs-fb'), fatto = false;
+      if (!opts.noFocus) setTimeout(function(){ inp.focus({preventScroll: true}); }, 30);
+      function controlla(salta){
+        if (fatto){ i++; draw(); return; }
+        fatto = true; var s = inp.value, a = norm(s), b = norm(ris);
+        var giusto = !salta && a && (a === b || (b.length > 6 && (b.indexOf(a) >= 0 && a.length >= b.length * .6)) || ris.split(/[\/;]| oppure /).some(function(x){ return norm(x) === a; }));
+        if (giusto) ok++; else log.push({d: dom, s: s, r: ris});
+        inp.classList.add(giusto ? 'ok' : 'ko'); inp.readOnly = true;
+        fb.hidden = false; fb.className = 'cs-fb ' + (giusto ? 'ok' : 'ko'); fb.innerHTML = (giusto ? '✓ Giusto!' : (salta ? 'Ecco la risposta:' : '✗ Non proprio. La risposta è:')) + '<span>' + h(ris) + '</span>';
+        body.querySelector('[data-chk]').textContent = 'Avanti →'; body.querySelector('[data-skip]').hidden = true;
+      }
+      body.querySelector('[data-chk]').onclick = function(){ controlla(false); };
+      body.querySelector('[data-skip]').onclick = function(){ controlla(true); };
+      inp.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); controlla(false); } });
+    }
+    draw();
+  }
+  /* --- stampa --- */
+  function stampa(){
+    body.innerHTML = '<div class="cs-print-opts"><b>Stampa le carte per il quaderno</b>' +
+      '<label><input type="radio" name="csp" value="piega" checked> Fronte e retro affiancati: si ritaglia la striscia e si piega a metà (16 carte per foglio)</label>' +
+      '<label><input type="radio" name="csp" value="fr"> Per la stampa fronte-retro: 8 carte per foglio, i retri sono già nella posizione giusta</label>' +
+      '<label><input type="radio" name="csp" value="elenco"> Elenco a due colonne, da ripasso</label>' +
+      '<div class="cs-ctrl" style="justify-content:flex-start"><button class="btn primary" type="button" data-print>🖨 Stampa</button></div><p class="cs-hint" style="text-align:left">Nella finestra di stampa scegli il formato A4 e la scala al 100%.</p></div>';
+    body.querySelector('[data-print]').onclick = function(){
+      var tipo = body.querySelector('input[name=csp]:checked').value, html = '', sh = document.getElementById('cs-print-root');
+      if (!sh){ sh = document.createElement('div'); sh.id = 'cs-print-root'; document.body.appendChild(sh); }
+      function cel(c, r){ var t = r ? c.r : c.f, im = r ? c.ri : c.fi; if (!String(t || '').trim() && !im) return '<div class="cs-pc"></div>'; return '<div class="cs-pc' + (r ? ' r' : '') + '"><small>' + h(r ? LR : LF) + '</small>' + (im ? '<img src="' + h(im) + '" alt="">' : '') + '<div class="pt">' + h(t || '') + '</div></div>'; }
+      if (tipo === 'piega') for (var p = 0; p < C.length; p += 12){ html += '<p class="cs-ptitle">' + h(D.title || '') + '</p><div class="cs-pg piega">' + C.slice(p, p + 12).map(function(c){ return cel(c, false) + cel(c, true); }).join('') + '</div>'; }
+      else if (tipo === 'fr') for (var q = 0; q < C.length; q += 8){
+        var g = C.slice(q, q + 8); while (g.length < 8) g.push({f: '', r: ''});
+        html += '<div class="cs-pg">' + g.map(function(c){ return cel(c, false); }).join('') + '</div>';
+        var rv = []; for (var r = 0; r < 4; r++){ rv.push(g[r * 2 + 1], g[r * 2]); }
+        html += '<div class="cs-pg">' + rv.map(function(c){ return cel(c, true); }).join('') + '</div>';
+      }
+      else html = '<p class="cs-ptitle" style="font-size:14pt;font-weight:700">' + h(D.title || '') + '</p><table style="width:100%;border-collapse:collapse;font-family:var(--body);font-size:11pt">' + C.map(function(c){ return '<tr><td style="border:.3mm solid #999;padding:2mm 3mm;font-weight:700;width:45%">' + h(c.f) + '</td><td style="border:.3mm solid #999;padding:2mm 3mm">' + h(c.r) + '</td></tr>'; }).join('') + '</table>';
+      sh.innerHTML = html; document.body.classList.add('cs-stampa');
+      var fine = function(){ document.body.classList.remove('cs-stampa'); window.removeEventListener('afterprint', fine); };
+      window.addEventListener('afterprint', fine); window.print(); setTimeout(fine, 1500);
+    };
+  }
+  apri(modo);
+}
+</script>
+<script>mountCS(document.getElementById('cs'), {"kind": "carte", "title": "Lo Stilnovo in dodici parole", "subtitle": "Gira le carte e ripassa autori, idee e opere del Dolce stil novo.", "labF": "Parola chiave", "labR": "Che cosa significa", "modes": {"studia": true, "ripassa": true, "scrivi": true, "stampa": true}, "carte": [{"id": "s00", "f": "Dolce stil novo", "r": "Il modo nuovo di scrivere d'amore nato a fine Duecento: lingua dolce e limpida, la donna al centro. Il nome viene dal Purgatorio di Dante.", "fi": "", "ri": "", "tag": "Idee"}, {"id": "s01", "f": "Cor gentile", "r": "Il cuore nobile: per gli stilnovisti la nobiltà è dell'animo, non del sangue. Solo il cuore gentile può amare davvero.", "fi": "", "ri": "", "tag": "Idee"}, {"id": "s02", "f": "Donna angelo", "r": "La donna amata è come un angelo sceso dal cielo: rende migliore chi la guarda e lo avvicina a Dio.", "fi": "", "ri": "", "tag": "Idee"}, {"id": "s03", "f": "Saluto", "r": "Il saluto della donna dona salvezza e beatitudine. Per Dante il saluto di Beatrice è la felicità più grande.", "fi": "", "ri": "", "tag": "Idee"}, {"id": "s04", "f": "Volgare", "r": "La lingua parlata dal popolo, diversa dal latino. Gli stilnovisti scrivono nel volgare di Firenze, ripulito e raffinato.", "fi": "", "ri": "", "tag": "Idee"}, {"id": "s05", "f": "Guido Guinizzelli", "r": "Poeta di Bologna, considerato il padre dello Stilnovo. Scrive la canzone «Al cor gentil rimpaira sempre amore».", "fi": "", "ri": "", "tag": "Autori"}, {"id": "s06", "f": "Guido Cavalcanti", "r": "Poeta fiorentino, il «primo amico» di Dante. Nelle sue poesie l'amore è spesso tormento e paura.", "fi": "", "ri": "", "tag": "Autori"}, {"id": "s07", "f": "Dante Alighieri", "r": "Il poeta fiorentino (1265-1321) della Vita nuova e della Divina Commedia; da giovane è uno stilnovista.", "fi": "", "ri": "", "tag": "Autori"}, {"id": "s08", "f": "Beatrice", "r": "La donna amata da Dante. Il suo nome vuol dire «colei che rende beati».", "fi": "", "ri": "", "tag": "Autori"}, {"id": "s09", "f": "Vita nuova", "r": "Il libro giovanile di Dante sull'amore per Beatrice: poesie unite a parti in prosa che le raccontano.", "fi": "", "ri": "", "tag": "Opere"}, {"id": "s10", "f": "Prosimetro", "r": "Un'opera che alterna prosa e versi, come la Vita nuova.", "fi": "", "ri": "", "tag": "Opere"}, {"id": "s11", "f": "Sonetto", "r": "Poesia di 14 versi endecasillabi: due quartine e due terzine. Come «Tanto gentile e tanto onesta pare».", "fi": "", "ri": "", "tag": "Opere"}]});</script>
+</body>
+</html>

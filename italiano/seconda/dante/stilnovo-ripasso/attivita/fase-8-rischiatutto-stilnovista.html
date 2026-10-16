@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rischiatutto stilnovista</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Stili condivisi con la pagina per la LIM */
+:root{
+  --bg:#eef0f6; --surface:#ffffff; --ink:#151a2b; --muted:#5b6279; --line:#d6dae6; --soft:#e4e7f1;
+  --accent:#1d3fa8; --accent-ink:#ffffff; --ok:#1d8a52; --ko:#cf2f28; --gold:#f2b705; --board:#13246b; --cell:#1d3fa8; --cell-ink:#ffd84d;
+  --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0d1120; --surface:#171c2f; --ink:#e9ecf6; --muted:#a2a9c2; --line:#2c3350; --soft:#1f2640;
+  --accent:#7d9bff; --accent-ink:#0d1120; --ok:#45c983; --ko:#ff6b62; --board:#0a1440; --cell:#1a338c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d1120; --surface:#171c2f; --ink:#e9ecf6; --muted:#a2a9c2; --line:#2c3350; --soft:#1f2640;
+  --accent:#7d9bff; --accent-ink:#0d1120; --ok:#45c983; --ko:#ff6b62; --board:#0a1440; --cell:#1a338c; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 15px;font-weight:700;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.small{padding:5px 10px;font-size:.88rem;border-radius:8px}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.ko{background:var(--ko);border-color:var(--ko);color:#fff}
+
+.gs{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr);gap:14px;position:relative}
+.gs-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:10px}
+.gs-kind{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.gs-title{font-family:var(--display);font-weight:800;font-size:clamp(1.4rem,3.4vw,2.2rem);line-height:1.05;margin:0}
+.gs-tools{display:flex;gap:6px;flex-wrap:wrap}
+.gs-board{display:grid;gap:6px;background:var(--board);padding:8px;border-radius:16px}
+.gs-cat{background:var(--board);color:#fff;font-family:var(--display);font-weight:800;text-align:center;display:grid;place-items:center;padding:8px 6px;line-height:1.1;font-size:clamp(.8rem,1.8vw,1.25rem);text-transform:uppercase;letter-spacing:.02em;min-height:3.2em;overflow-wrap:anywhere}
+.gs-cell{background:var(--cell);color:var(--cell-ink);border:0;border-radius:8px;font-family:var(--display);font-weight:800;font-size:clamp(1.2rem,3.4vw,2.6rem);min-height:clamp(52px,9vh,96px);cursor:pointer;box-shadow:inset 0 -4px 0 rgb(0 0 0 / .25);transition:transform .1s}
+.gs-cell:hover{transform:scale(1.03)}
+.gs-cell.usata{background:rgb(255 255 255 / .06);color:transparent;cursor:default;box-shadow:none;transform:none}
+.gs-cell.vuota{background:rgb(255 255 255 / .03);cursor:default;color:transparent}
+.gs-teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.gs-team{--c:var(--accent);background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:14px;padding:10px 12px;display:grid;gap:4px;text-align:center}
+.gs-team input{border:0;background:none;text-align:center;font-weight:800;font-size:1rem;width:100%;padding:2px;border-radius:6px}
+.gs-team input:focus{background:var(--soft)}
+.gs-team .pt{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1;font-variant-numeric:tabular-nums}
+.gs-team .pt.neg{color:var(--ko)}
+.gs-team .adj{display:flex;gap:4px;justify-content:center}
+.gs-team .adj button{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:2px 9px;cursor:pointer;font-weight:700;font-size:.85rem}
+.gs-team.lead{box-shadow:0 0 0 3px var(--gold)}
+.gs-ov{position:fixed;inset:0;z-index:50;background:rgb(8 14 40 / .82);display:grid;place-items:center;padding:16px;overflow:auto}
+.gs-ovin{width:min(980px,100%);background:var(--board);color:#fff;border-radius:20px;padding:clamp(18px,3vw,36px);display:grid;gap:18px;text-align:center;box-shadow:0 20px 60px rgb(0 0 0 / .5);animation:gspop .3s ease-out}
+@keyframes gspop{from{transform:scale(.85);opacity:0}}
+.gs-ovin .meta{font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cell-ink);font-size:.95rem}
+.gs-ovin .q{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,4.4vw,3.2rem);line-height:1.15;white-space:pre-line}
+.gs-ovin img{max-width:100%;max-height:40vh;border-radius:12px;margin:0 auto}
+.gs-ovin .a{background:rgb(255 255 255 / .1);border:2px solid var(--cell-ink);border-radius:14px;padding:12px 16px;font-size:clamp(1.2rem,3vw,2rem);font-weight:700;white-space:pre-line}
+.gs-timer{font-family:var(--display);font-size:2.4rem;font-weight:800;font-variant-numeric:tabular-nums;color:var(--cell-ink)}
+.gs-timer.low{color:#ff6b62}
+.gs-who{display:grid;gap:8px}
+.gs-who .r{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:center;background:rgb(255 255 255 / .06);border-radius:10px;padding:6px 10px;text-align:left;font-weight:700}
+.gs-who .r i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px}
+.gs-who .r input{width:90px;border-radius:8px;border:0;padding:6px 8px;color:#111;font-weight:700}
+.gs-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.gs-ovin .btn{border-color:rgb(255 255 255 / .25)}
+.gs-ovin .btn:not(.primary):not(.ok):not(.ko){background:rgb(255 255 255 / .12);color:#fff}
+.gs-ovin .btn.primary{background:var(--cell-ink);border-color:var(--cell-ink);color:#13246b}
+.gs-podio{display:grid;gap:10px;max-width:560px;margin:0 auto;width:100%}
+.gs-podio .p{display:grid;grid-template-columns:3em minmax(0,1fr) auto;gap:10px;align-items:center;background:rgb(255 255 255 / .08);border-radius:12px;padding:10px 14px;font-size:1.3rem;font-weight:800}
+.gs-podio .p:first-child{background:var(--gold);color:#1a1300;font-size:1.6rem}
+.gs.lim .gs-team .pt{font-size:3.2rem}
+.gs:fullscreen{max-width:none;padding:18px;background:var(--bg);overflow:auto}
+.gs:fullscreen .gs-ov,.gs.inline .gs-ov{position:absolute;border-radius:16px}
+.gs.inline{min-height:520px}
+
+body{margin:0}.wrap{padding:20px 16px 40px}</style>
+</head>
+<body>
+<div class="wrap"><div id="gs"></div></div>
+<script>
+/* Gioco a squadre: la stessa funzione serve all'anteprima e alla pagina per la LIM */
+var GS_COL = ['#d0492a', '#2f6fd0', '#1d8a52', '#e0a21a', '#8a3fae', '#0e8fb5'];
+function mountGS(root, D, opts){
+  opts = opts || {};
+  function h(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  var C = (D.categorie || []).filter(function(c){ return String(c.nome || '').trim() || (c.domande || []).some(function(d){ return String(d.q || '').trim(); }); });
+  var V = (D.valori || [100, 200, 300, 400, 500]).map(Number);
+  var T = (D.squadre || ['Squadra 1', 'Squadra 2']).filter(function(x){ return String(x).trim(); }).map(function(n, i){ return {n: n, p: 0, c: GS_COL[i % GS_COL.length]}; });
+  if (!T.length) T = [{n: 'Squadra 1', p: 0, c: GS_COL[0]}, {n: 'Squadra 2', p: 0, c: GS_COL[1]}];
+  var usate = {}, timer = null, finita = false;
+  root.innerHTML = '<div class="gs' + (opts.lim ? ' lim' : '') + (opts.inline ? ' inline' : '') + '"><div class="gs-head"><div><span class="gs-kind">Gioco a squadre</span><h2 class="gs-title">' + h(D.title || '') + '</h2></div>' +
+    '<div class="gs-tools"><button class="btn small" type="button" data-fine>🏁 Fine partita</button><button class="btn small" type="button" data-nuova>↺ Nuova partita</button><button class="btn small" type="button" data-fs title="Schermo intero (LIM)">⛶</button></div></div>' +
+    '<div class="gs-board"></div><div class="gs-teams"></div><div class="gs-ov" hidden></div></div>';
+  var box = root.querySelector('.gs'), board = root.querySelector('.gs-board'), teamsEl = root.querySelector('.gs-teams'), ov = root.querySelector('.gs-ov');
+  function d(ci, ri){ var c = C[ci]; return c && c.domande && c.domande[ri]; }
+  function piena(x){ return x && String(x.q || '').trim(); }
+  function drawBoard(){
+    if (!C.length){ board.innerHTML = '<p style="color:#fff;text-align:center;padding:20px">Aggiungi almeno una categoria con le domande.</p>'; return; }
+    board.style.gridTemplateColumns = 'repeat(' + C.length + ',minmax(0,1fr))';
+    var s = C.map(function(c){ return '<div class="gs-cat">' + h(c.nome || '') + '</div>'; }).join('');
+    V.forEach(function(v, ri){ C.forEach(function(c, ci){ var x = d(ci, ri), k = ci + '-' + ri;
+      s += !piena(x) ? '<div class="gs-cell vuota"></div>' : '<button type="button" class="gs-cell' + (usate[k] ? ' usata' : '') + '" data-c="' + k + '"' + (usate[k] ? ' disabled' : '') + '>' + v + '</button>'; }); });
+    board.innerHTML = s;
+  }
+  function drawTeams(){
+    var mx = Math.max.apply(null, T.map(function(t){ return t.p; }));
+    teamsEl.innerHTML = T.map(function(t, i){ return '<div class="gs-team' + (mx > 0 && t.p === mx ? ' lead' : '') + '" style="--c:' + t.c + '"><input type="text" value="' + h(t.n) + '" data-tn="' + i + '" aria-label="Nome della squadra"><div class="pt' + (t.p < 0 ? ' neg' : '') + '">' + t.p + '</div>' +
+      '<div class="adj"><button type="button" data-adj="' + i + '" data-v="-' + (V[0] || 100) + '">−' + (V[0] || 100) + '</button><button type="button" data-adj="' + i + '" data-v="' + (V[0] || 100) + '">+' + (V[0] || 100) + '</button></div></div>'; }).join('');
+  }
+  function stopT(){ if (timer){ clearInterval(timer); timer = null; } }
+  function beep(f, du){ try { var a = window._gsA = window._gsA || new (window.AudioContext || window.webkitAudioContext)(), o = a.createOscillator(), g = a.createGain(); o.frequency.value = f; g.gain.setValueAtTime(.12, a.currentTime); g.gain.exponentialRampToValueAtTime(.001, a.currentTime + du); o.connect(g); g.connect(a.destination); o.start(); o.stop(a.currentTime + du); } catch (e) {} }
+  function domanda(k){
+    var p = k.split('-'), ci = +p[0], ri = +p[1], x = d(ci, ri), v = V[ri], tempo = +D.tempo || 0;
+    ov.hidden = false;
+    ov.innerHTML = '<div class="gs-ovin"><div class="meta">' + h(C[ci].nome || '') + ' · ' + v + ' punti</div>' + (x.img ? '<img src="' + h(x.img) + '" alt="">' : '') + '<div class="q">' + h(x.q) + '</div>' +
+      (tempo ? '<div class="gs-timer">' + tempo + '</div>' : '') + '<div class="a" hidden>' + h(x.a || '') + '</div>' +
+      '<div class="gs-row" data-step1><button class="btn primary" type="button" data-show>👁 Mostra la risposta</button><button class="btn" type="button" data-back>Torna al tabellone (senza usarla)</button></div>' +
+      '<div class="gs-who" data-step2 hidden>' + T.map(function(t, i){ return '<div class="r"><span><i style="background:' + t.c + '"></i>' + h(t.n) + '</span><button class="btn ok small" type="button" data-giusta="' + i + '">✓ +' + v + '</button>' + (D.negativi ? '<button class="btn ko small" type="button" data-sbagl="' + i + '">✗ −' + v + '</button>' : '<span></span>') + '</div>'; }).join('') +
+      '<div class="gs-row"><button class="btn primary" type="button" data-done>Fatto: torna al tabellone</button></div></div></div>';
+    if (tempo){ var left = tempo, el = ov.querySelector('.gs-timer'); timer = setInterval(function(){ left--; el.textContent = left; el.classList.toggle('low', left <= 5); if (left <= 5 && left > 0) beep(880, .08); if (left <= 0){ stopT(); beep(220, .6); el.textContent = 'Tempo!'; } }, 1000); }
+    ov.querySelector('[data-show]').onclick = function(){ stopT(); ov.querySelector('.a').hidden = false; ov.querySelector('[data-step1]').hidden = true; ov.querySelector('[data-step2]').hidden = false; };
+    ov.querySelector('[data-back]').onclick = function(){ stopT(); ov.hidden = true; };
+    ov.querySelectorAll('[data-giusta]').forEach(function(b){ b.onclick = function(){ T[+b.dataset.giusta].p += v; b.disabled = true; beep(990, .2); drawTeams(); }; });
+    ov.querySelectorAll('[data-sbagl]').forEach(function(b){ b.onclick = function(){ T[+b.dataset.sbagl].p -= v; b.disabled = true; beep(200, .3); drawTeams(); }; });
+    ov.querySelector('[data-done]').onclick = function(){ usate[k] = true; ov.hidden = true; drawBoard(); if (C.every(function(c, ci){ return V.every(function(_, ri){ return !piena(d(ci, ri)) || usate[ci + '-' + ri]; }); })) setTimeout(fine, 300); };
+  }
+  function fine(){
+    if (D.finale && String(D.finale.q || '').trim() && !finita) return finale();
+    var ord = T.slice().sort(function(a, b){ return b.p - a.p; });
+    ov.hidden = false;
+    ov.innerHTML = '<div class="gs-ovin"><div class="meta">Classifica finale</div><div class="q">🏆 ' + h(ord[0].n) + '</div><div class="gs-podio">' + ord.map(function(t, i){ return '<div class="p"><span>' + (['🥇', '🥈', '🥉'][i] || (i + 1)) + '</span><span style="text-align:left">' + h(t.n) + '</span><span>' + t.p + '</span></div>'; }).join('') + '</div>' +
+      '<div class="gs-row"><button class="btn" type="button" data-chiudi>Torna al tabellone</button><button class="btn primary" type="button" data-nuova>↺ Nuova partita</button></div></div>';
+    beep(660, .15); setTimeout(function(){ beep(880, .15); }, 150); setTimeout(function(){ beep(1100, .3); }, 300);
+    ov.querySelector('[data-chiudi]').onclick = function(){ ov.hidden = true; };
+  }
+  function finale(){
+    var F = D.finale; ov.hidden = false;
+    ov.innerHTML = '<div class="gs-ovin"><div class="meta">⭐ Domanda finale</div><p style="margin:0;font-size:1.2rem">Ogni squadra scommette una parte dei suoi punti (al massimo tutti quelli che ha).</p><div class="gs-who">' +
+      T.map(function(t, i){ return '<div class="r"><span><i style="background:' + t.c + '"></i>' + h(t.n) + ' · ' + t.p + ' punti</span><input type="number" min="0" max="' + Math.max(0, t.p) + '" value="0" data-bet="' + i + '" aria-label="Scommessa"><span></span></div>'; }).join('') +
+      '</div><div class="gs-row"><button class="btn primary" type="button" data-vai>Mostra la domanda</button></div></div>';
+    ov.querySelector('[data-vai]').onclick = function(){
+      var bet = T.map(function(t, i){ var b = Math.max(0, Math.min(Math.max(0, t.p), +ov.querySelector('[data-bet="' + i + '"]').value || 0)); return b; });
+      ov.innerHTML = '<div class="gs-ovin"><div class="meta">⭐ Domanda finale</div><div class="q">' + h(F.q) + '</div><div class="a" hidden>' + h(F.a || '') + '</div>' +
+        '<div class="gs-row" data-s1><button class="btn primary" type="button" data-show>👁 Mostra la risposta</button></div><div class="gs-who" data-s2 hidden>' +
+        T.map(function(t, i){ return '<div class="r"><span><i style="background:' + t.c + '"></i>' + h(t.n) + ' (scommessa ' + bet[i] + ')</span><button class="btn ok small" type="button" data-fg="' + i + '">✓ +' + bet[i] + '</button><button class="btn ko small" type="button" data-fs2="' + i + '">✗ −' + bet[i] + '</button></div>'; }).join('') +
+        '<div class="gs-row"><button class="btn primary" type="button" data-cl>Classifica finale 🏆</button></div></div></div>';
+      ov.querySelector('[data-show]').onclick = function(){ ov.querySelector('.a').hidden = false; ov.querySelector('[data-s1]').hidden = true; ov.querySelector('[data-s2]').hidden = false; };
+      ov.querySelectorAll('[data-fg]').forEach(function(b){ b.onclick = function(){ var i = +b.dataset.fg; T[i].p += bet[i]; b.parentNode.querySelectorAll('button').forEach(function(x){ x.disabled = true; }); drawTeams(); }; });
+      ov.querySelectorAll('[data-fs2]').forEach(function(b){ b.onclick = function(){ var i = +b.dataset.fs2; T[i].p -= bet[i]; b.parentNode.querySelectorAll('button').forEach(function(x){ x.disabled = true; }); drawTeams(); }; });
+      ov.querySelector('[data-cl]').onclick = function(){ finita = true; fine(); };
+    };
+  }
+  root.addEventListener('click', function(e){
+    var c = e.target.closest('.gs-cell[data-c]'); if (c && !c.disabled){ domanda(c.dataset.c); return; }
+    var a = e.target.closest('[data-adj]'); if (a){ T[+a.dataset.adj].p += +a.dataset.v; drawTeams(); return; }
+    if (e.target.closest('[data-fine]')){ if (confirm('Terminare la partita e vedere la classifica?')) fine(); }
+    if (e.target.closest('[data-nuova]')){ if (!ov.hidden || confirm('Ricominciare da zero? I punti verranno azzerati.')){ usate = {}; finita = false; T.forEach(function(t){ t.p = 0; }); ov.hidden = true; stopT(); drawBoard(); drawTeams(); } }
+    if (e.target.closest('[data-fs]')){ if (document.fullscreenElement) document.exitFullscreen(); else if (box.requestFullscreen) box.requestFullscreen().then(function(){ box.classList.add('lim'); }, function(){}); }
+  });
+  root.addEventListener('input', function(e){ if (e.target.dataset.tn != null) T[+e.target.dataset.tn].n = e.target.value; });
+  document.addEventListener('fullscreenchange', function(){ if (!document.fullscreenElement) box.classList.toggle('lim', !!opts.lim); });
+  drawBoard(); drawTeams();
+}
+</script>
+<script>mountGS(document.getElementById('gs'), {"kind": "squadre", "title": "Rischiatutto stilnovista", "tempo": 30, "negativi": false, "squadre": ["Squadra Rossa", "Squadra Blu", "Squadra Verde"], "valori": [100, 200, 300, 400], "categorie": [{"nome": "Dante e Beatrice", "id": "c1", "domande": [{"q": "In quale città nasce Dante?", "a": "A Firenze, nel 1265", "img": ""}, {"q": "Quanti anni ha Dante quando vede Beatrice per la prima volta?", "a": "Nove anni", "img": ""}, {"q": "Come si chiama il libro in cui Dante racconta il suo amore per Beatrice?", "a": "La Vita nuova", "img": ""}, {"q": "Che cosa vuol dire il nome Beatrice?", "a": "«Colei che rende beati», che dona la beatitudine", "img": ""}]}, {"nome": "Cavalcanti", "id": "c2", "domande": [{"q": "Che rapporto c'è tra Cavalcanti e Dante?", "a": "Sono grandi amici: Dante lo chiama il suo «primo amico»", "img": ""}, {"q": "Di quale città è Guido Cavalcanti?", "a": "Di Firenze", "img": ""}, {"q": "Com'è l'amore nelle poesie di Cavalcanti?", "a": "Doloroso e sconvolgente: fa soffrire, spaventa, toglie le forze", "img": ""}, {"q": "Che cosa succede a chi vede la donna in «Chi è questa che vèn»?", "a": "Nessuno riesce a parlare, ma tutti sospirano", "img": ""}]}, {"nome": "Stilnovo", "id": "c3", "domande": [{"q": "In quale lingua scrivono gli stilnovisti?", "a": "In volgare", "img": ""}, {"q": "Chi è considerato il padre dello Stilnovo?", "a": "Guido Guinizzelli, di Bologna", "img": ""}, {"q": "Che cos'è il «cor gentile»?", "a": "Il cuore nobile d'animo, l'unico capace di vero amore", "img": ""}, {"q": "Che cos'è la donna angelo?", "a": "Una donna quasi divina, che rende migliore chi la guarda e lo avvicina a Dio", "img": ""}]}, {"nome": "«Tanto gentile»", "id": "c4", "domande": [{"q": "Che tipo di poesia è «Tanto gentile e tanto onesta pare»?", "a": "Un sonetto: 14 versi, due quartine e due terzine", "img": ""}, {"q": "Che cosa succede alla gente quando Beatrice saluta?", "a": "Ammutolisce tremando e non osa guardarla", "img": ""}, {"q": "Che cosa significa «pare» nel primo verso?", "a": "Appare, si mostra: Beatrice è davvero così", "img": ""}, {"q": "Qual è l'ultima parola del sonetto e chi la «dice»?", "a": "«Sospira»: la dice all'anima lo spirito d'amore che esce dal volto di Beatrice", "img": ""}]}], "finale": {"q": "In che cosa è diverso l'amore di Dante in «Tanto gentile» da quello di Cavalcanti?", "a": "Per Dante la donna porta pace, dolcezza e salvezza, come un miracolo venuto dal cielo; per Cavalcanti l'amore è soprattutto turbamento e sofferenza."}, "conFinale": true});</script>
+</body>
+</html>
