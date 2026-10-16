@@ -530,6 +530,246 @@ const MODULI = [
       { titolo: "I pronomi personali", attivita: [] },
       { titolo: "I numeri romani", attivita: [] }
     ]
+  },
+
+  /* ---------------- STORIA · PRIMA ---------------- */
+  {
+    materia: "storia",
+    classe: "prima",
+    numero: "I",
+    titolo: "L'Italia dai Bizantini ai Longobardi",
+    descrizione: "Primo quadrimestre, in collegamento con Geografia.",
+    lezioni: [
+      { titolo: "Un nuovo scenario europeo", attivita: [] },
+      { titolo: "I Longobardi", attivita: [] },
+      { titolo: "L'inizio del potere temporale della Chiesa", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "prima",
+    numero: "II",
+    titolo: "Carlo Magno e la nascita dell'Europa",
+    descrizione: "Primo quadrimestre, in collegamento con Geografia e Religione.",
+    lezioni: [
+      { titolo: "L'espansione dei Franchi", attivita: [] },
+      { titolo: "Carlo Magno e il Sacro Romano Impero", attivita: [] },
+      { titolo: "L'organizzazione dell'Impero", attivita: [] },
+      { titolo: "La rinascita dell'economia e della cultura", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "prima",
+    numero: "III",
+    titolo: "Nuove invasioni e nuovi regni: l'Europa dopo l'impero carolingio",
+    descrizione: "Primo quadrimestre, in collegamento con Geografia e Italiano (epica cavalleresca).",
+    lezioni: [
+      { titolo: "La divisione dell'impero dopo Carlo Magno", attivita: [] },
+      { titolo: "Le nuove invasioni", attivita: [] },
+      { titolo: "L'epoca d'oro dell'impero romano d'Oriente", attivita: [] },
+      { titolo: "Signori e castelli: l'economia curtense", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "prima",
+    numero: "IV",
+    titolo: "La rinascita dell'anno Mille. Papi e imperatori",
+    descrizione: "Primo quadrimestre, in collegamento con Geografia, Scienze e Tecnologia.",
+    lezioni: [
+      { titolo: "Il rinnovamento dell'agricoltura e la crescita demografica", attivita: [] },
+      { titolo: "Lo sviluppo delle città e del commercio", attivita: [] },
+      { titolo: "Nascono le università", attivita: [] },
+      { titolo: "La crisi della Chiesa di Roma e i tentativi di riforma", attivita: [] },
+      { titolo: "La lotta per le investiture", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "prima",
+    numero: "V",
+    titolo: "Le crociate e la lotta alle eresie",
+    descrizione: "Primo quadrimestre, in collegamento con Geografia e Scienze.",
+    lezioni: [
+      { titolo: "La crisi dell'impero arabo e la minaccia dei Turchi", attivita: [] },
+      { titolo: "Lo scisma d'Oriente", attivita: [] },
+      { titolo: "Le crociate per la Terra Santa", attivita: [] },
+      { titolo: "Innocenzo III e la lotta alle eresie", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "prima",
+    numero: "VI",
+    titolo: "Dai Comuni a Federico II",
+    descrizione: "Secondo quadrimestre, in collegamento con Geografia, Tecnologia e Arte.",
+    lezioni: [
+      { titolo: "La nascita dei Comuni", attivita: [] },
+      { titolo: "Le lotte tra Comuni e imperatore", attivita: [] },
+      { titolo: "L'ascesa della borghesia", attivita: [] },
+      { titolo: "Il progetto imperiale di Federico II", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "prima",
+    numero: "VII",
+    titolo: "Le monarchie nazionali in Europa. La crisi del Trecento",
+    descrizione: "Secondo quadrimestre, in collegamento con Geografia, Scienze, Inglese e Francese.",
+    lezioni: [
+      { titolo: "La nascita delle monarchie nazionali: l'Inghilterra", attivita: [] },
+      { titolo: "La monarchia nazionale francese", attivita: [] },
+      { titolo: "La guerra dei Cent'anni", attivita: [] },
+      { titolo: "La peste e la crisi agricola", attivita: [] },
+      { titolo: "Enrico VII e il declino della Chiesa", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "prima",
+    numero: "VIII",
+    titolo: "L'Italia delle Signorie. Umanesimo e Rinascimento",
+    descrizione: "Secondo quadrimestre, in collegamento con Letteratura, Arte e Scienze.",
+    lezioni: [
+      { titolo: "Dai Comuni agli Stati regionali", attivita: [] },
+      { titolo: "L'Umanesimo: l'uomo al centro del mondo", attivita: [] },
+      { titolo: "Il Rinascimento: principi e artisti, letterati e scienziati", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "prima",
+    numero: "IX",
+    titolo: "Le esplorazioni e la scoperta dell'America. Riforma e Controriforma",
+    descrizione: "Secondo quadrimestre, in collegamento con Geografia, Religione, Arte, Tecnologia e Scienze.",
+    lezioni: [
+      { titolo: "Le rotte per le Indie", attivita: [] },
+      { titolo: "La scoperta del nuovo mondo", attivita: [] },
+      { titolo: "Le civiltà precolombiane e le esplorazioni", attivita: [] },
+      { titolo: "La corruzione della Chiesa e la Riforma di Lutero", attivita: [] },
+      { titolo: "La Controriforma e il Concilio di Trento", attivita: [] },
+      { titolo: "I nuovi ordini religiosi", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "prima",
+    numero: "X",
+    titolo: "Guerre in Italia e in Europa. La rivoluzione scientifica",
+    descrizione: "Secondo quadrimestre, in collegamento con Geografia, Scienze, Letteratura, Spagnolo, Francese e Inglese.",
+    lezioni: [
+      { titolo: "L'Italia contesa tra Francia e Spagna", attivita: [] },
+      { titolo: "Carlo V e Francesco I", attivita: [] },
+      { titolo: "Filippo II e l'età elisabettiana", attivita: [] },
+      { titolo: "Le guerre di religione in Francia", attivita: [] },
+      { titolo: "La guerra dei Trent'anni", attivita: [] },
+      { titolo: "La rivoluzione scientifica e i suoi protagonisti", attivita: [] }
+    ]
+  },
+
+  /* ---------------- STORIA · SECONDA ---------------- */
+  {
+    materia: "storia",
+    classe: "seconda",
+    numero: "I",
+    titolo: "Flussi migratori",
+    descrizione: "Primo quadrimestre, in collegamento con Geografia, Italiano ed Educazione civica.",
+    lezioni: [
+      { titolo: "La scoperta dei nuovi mondi", attivita: [] },
+      { titolo: "L'età dei conquistadores", attivita: [] },
+      { titolo: "Le civiltà precolombiane", attivita: [] },
+      { titolo: "La tratta degli schiavi", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "seconda",
+    numero: "II",
+    titolo: "Sistemi di produzione, organizzazione sociale e vita quotidiana",
+    descrizione: "Primo e secondo quadrimestre.",
+    lezioni: [
+      { titolo: "La rivoluzione agricola: nuove risorse, ripresa dei commerci, la società comunale", attivita: [] },
+      { titolo: "La civiltà rinascimentale", attivita: [] },
+      { titolo: "Gli imperi coloniali", attivita: [] },
+      { titolo: "Il sistema mondiale nei secoli XVII e XVIII", attivita: [] },
+      { titolo: "La rivoluzione industriale: nuove risorse e sistemi di produzione", attivita: [] },
+      { titolo: "Città, proletariato e capitalismo", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "seconda",
+    numero: "III",
+    titolo: "Lo Stato e le forme di governo",
+    descrizione: "Primo e secondo quadrimestre, in collegamento con Italiano ed Educazione civica.",
+    lezioni: [
+      { titolo: "I Comuni", attivita: [] },
+      { titolo: "Le monarchie nazionali", attivita: [] },
+      { titolo: "Le Signorie e gli altri Stati regionali", attivita: [] },
+      { titolo: "Riforma e Controriforma", attivita: [] },
+      { titolo: "L'Assolutismo", attivita: [] },
+      { titolo: "La monarchia parlamentare inglese", attivita: [] },
+      { titolo: "L'Illuminismo", attivita: [] },
+      { titolo: "La Rivoluzione americana", attivita: [] },
+      { titolo: "La Rivoluzione francese", attivita: [] },
+      { titolo: "L'impero napoleonico", attivita: [] },
+      { titolo: "Il Risorgimento", attivita: [] }
+    ]
+  },
+
+  /* ---------------- STORIA · TERZA ---------------- */
+  {
+    materia: "storia",
+    classe: "terza",
+    numero: "I",
+    titolo: "L'Europa e il mondo tra Ottocento e Novecento",
+    descrizione: "Primo quadrimestre, in collegamento con Geografia e Tecnologia.",
+    lezioni: [
+      { titolo: "La Belle Époque", attivita: [] },
+      { titolo: "I miracoli del progresso e delle scienze", attivita: [] },
+      { titolo: "La società di massa", attivita: [] },
+      { titolo: "Gli imperi coloniali", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "terza",
+    numero: "II",
+    titolo: "Guerra, rivoluzioni, totalitarismi",
+    descrizione: "Primo quadrimestre, in collegamento con Geografia e Religione.",
+    lezioni: [
+      { titolo: "La prima guerra mondiale", attivita: [] },
+      { titolo: "La Rivoluzione russa e lo stalinismo", attivita: [] },
+      { titolo: "Il primo dopoguerra", attivita: [] },
+      { titolo: "Il fascismo in Italia", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "terza",
+    numero: "III",
+    titolo: "Dal nazismo alla guerra fredda",
+    descrizione: "Secondo quadrimestre, in collegamento con Geografia, Italiano e Religione.",
+    lezioni: [
+      { titolo: "Il nazismo", attivita: [] },
+      { titolo: "La seconda guerra mondiale", attivita: [] },
+      { titolo: "L'Europa divisa", attivita: [] },
+      { titolo: "Il crollo degli imperi coloniali", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "terza",
+    numero: "IV",
+    titolo: "Capire il mondo attuale",
+    descrizione: "Secondo quadrimestre, in collegamento con Geografia, Scienze e Tecnologia.",
+    lezioni: [
+      { titolo: "La nascita della Repubblica italiana", attivita: [] },
+      { titolo: "I problemi del Medio Oriente", attivita: [] },
+      { titolo: "Cambia la carta geografica dell'Europa", attivita: [] },
+      { titolo: "Il mondo contemporaneo", attivita: [] }
+    ]
   }
 
 ];
