@@ -431,6 +431,15 @@ const MODULI = [
     descrizione: "Dalle origini al Cinquecento: prosa e versi. Primo e secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
     lezioni: [
       {
+        titolo: "Le origini delle lingue neolatine",
+        descrizione: "Dal latino ai volgari: le lingue romanze, i primi documenti e le prime opere, fino alla Scuola siciliana e al Dolce Stil Novo.",
+        attivita: [
+          { tipo: "Tappa 1", titolo: "Dall'Impero romano alle lingue neolatine", link: "italiano/seconda/origini-lingue-neolatine/attivita/tappa-1-dall-impero-romano-alle-lingue-neolatine.html", data: "2026-10-16" },
+          { tipo: "Tappa 2", titolo: "Domande guida", link: "italiano/seconda/origini-lingue-neolatine/attivita/tappa-2-domande-guida.html", data: "2026-10-16" },
+          { tipo: "Tappa 3", titolo: "Mettiti alla prova", link: "italiano/seconda/origini-lingue-neolatine/attivita/tappa-3-mettiti-alla-prova.html", data: "2026-10-16" }
+        ]
+      },
+      {
         titolo: "Dante",
         descrizione: "Ripasso: Dante, Cavalcanti e lo Stilnovo, con il sonetto «Tanto gentile e tanto onesta pare».",
         link: "italiano/seconda/dante/stilnovo-ripasso/index.html",
