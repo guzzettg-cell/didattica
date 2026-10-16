@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vero o falso? Ugo Foscolo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Layout: una domanda alla volta al centro; in LIM tutto più grande. Token condivisi con il file per gli studenti. */
+:root{
+  --bg:#f1f3f8; --surface:#ffffff; --ink:#172036; --muted:#5b6782; --line:#d6dce8; --soft:#e5eaf5;
+  --accent:#0e7c6b; --accent-ink:#ffffff; --ok:#1d8a52; --ko:#cf2f28;
+  --o1:#1f6fd1; --o2:#d1781a; --o3:#13897d; --o4:#8a3fae; --o5:#c23b6a; --o6:#4d6b1f;
+  --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1524; --surface:#18203a; --ink:#e8edf8; --muted:#9ba7c3; --line:#2b3656; --soft:#1f2a4a;
+  --accent:#4fd1b8; --accent-ink:#0f1524; --ok:#45c983; --ko:#ff6b62; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1524; --surface:#18203a; --ink:#e8edf8; --muted:#9ba7c3; --line:#2b3656; --soft:#1f2a4a;
+  --accent:#4fd1b8; --accent-ink:#0f1524; --ok:#45c983; --ko:#ff6b62; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.big{padding:14px 24px;font-size:1.1rem;border-radius:12px}
+
+.pl{max-width:900px;margin:0 auto;display:grid;gap:18px}
+.pl-intro{text-align:center;justify-items:center;padding-block:28px}
+.pl-kind{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.pl-title{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,5vw,3rem);line-height:1.05;margin:0;text-wrap:balance}
+.pl-meta{color:var(--muted);margin:0}
+.pl-name{display:grid;gap:6px;width:min(320px,100%);text-align:left}
+.pl-name label{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.pl-name input{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+.pl-modes{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.pl-top{display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.pl-score{background:var(--soft);padding:4px 12px;border-radius:999px;color:var(--ink)}
+.pl-bar{height:8px;background:var(--soft);border-radius:99px;overflow:hidden}
+.pl-bar i{display:block;height:100%;width:100%;background:var(--accent);transform-origin:left}
+.pl-bar.low i{background:var(--ko)}
+.pl-q{font-family:var(--display);font-weight:800;font-size:clamp(1.4rem,3.4vw,2rem);line-height:1.15;margin:6px 0;text-wrap:balance}
+.pl-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:560px){.pl-opts{grid-template-columns:minmax(0,1fr)}}
+.pl-opt{--c:var(--o1);display:flex;align-items:center;gap:12px;text-align:left;border:0;border-radius:14px;padding:14px 16px;min-height:68px;
+  background:var(--c);color:#fff;font-weight:700;font-size:1.08rem;cursor:pointer;box-shadow:0 4px 0 rgb(0 0 0 / .18);transition:transform .08s,opacity .2s}
+.pl-opt:hover{transform:translateY(-1px)}
+.pl-opt:active{transform:translateY(2px);box-shadow:0 2px 0 rgb(0 0 0 / .18)}
+.pl-opt .k{flex:none;width:34px;height:34px;border-radius:9px;background:rgb(255 255 255 / .22);display:grid;place-items:center;font-family:var(--display);font-size:1.1rem}
+.pl-opt span:last-child{min-width:0;overflow-wrap:anywhere}
+.pl-opt:nth-child(2){--c:var(--o2)}.pl-opt:nth-child(3){--c:var(--o3)}.pl-opt:nth-child(4){--c:var(--o4)}.pl-opt:nth-child(5){--c:var(--o5)}.pl-opt:nth-child(6){--c:var(--o6)}
+.pl-opts.vf .pl-opt{justify-content:center;font-family:var(--display);font-size:1.6rem;min-height:110px}
+.pl-opts.vf .pl-opt:nth-child(1){--c:var(--ok)}.pl-opts.vf .pl-opt:nth-child(2){--c:var(--ko)}
+.pl-opts.vf .pl-opt .k{display:none}
+.pl-opt[disabled]{cursor:default;transform:none}
+.pl-opt.dim{opacity:.28}
+.pl-opt.right{outline:4px solid var(--ok);outline-offset:3px}
+.pl-opt.wrong{outline:4px solid var(--ko);outline-offset:3px;opacity:.55}
+.pl-opt.right::after,.pl-opt.wrong::after{margin-left:auto;font-family:var(--display);font-size:1.5rem;line-height:1}
+.pl-opt.right::after{content:"✓"}.pl-opt.wrong::after{content:"✗"}
+.pl-opts.vf .pl-opt.right::after,.pl-opts.vf .pl-opt.wrong::after{margin-left:12px}
+.pl-fb{border-radius:12px;padding:14px 16px;background:var(--soft);display:grid;gap:4px}
+.pl-fb strong{font-family:var(--display);font-size:1.3rem;line-height:1.1}
+.pl-fb.ok strong{color:var(--ok)}.pl-fb.ko strong{color:var(--ko)}
+.pl-fb p{margin:0}
+.pl-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.pl-keys{color:var(--muted);font-size:.85rem}
+/* LIM: tutto più grande */
+.pl.lim{max-width:1200px}
+.pl.lim .pl-q{font-size:clamp(1.8rem,4.4vw,3.1rem)}
+.pl.lim .pl-opt{min-height:96px;font-size:clamp(1.15rem,2.2vw,1.6rem)}
+.pl.lim .pl-opts.vf .pl-opt{min-height:160px;font-size:2.4rem}
+/* Risultati */
+.pl-res{text-align:center;justify-items:center}
+.pl-big{font-family:var(--display);font-weight:800;font-size:clamp(3rem,10vw,5rem);line-height:1;font-variant-numeric:tabular-nums}
+.pl-big small{font-size:.4em;color:var(--muted)}
+.pl-grade{display:inline-flex;gap:8px;align-items:baseline;background:var(--soft);padding:6px 14px;border-radius:999px;font-weight:700}
+.pl-rev{list-style:none;margin:0;padding:0;display:grid;gap:8px;width:100%;text-align:left}
+.pl-rev li{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--ok);border-radius:10px;padding:10px 14px;display:grid;gap:2px}
+.pl-rev li.ko{border-left-color:var(--ko)}
+.pl-rev .rq{font-weight:700}
+.pl-rev .ra{font-size:.92rem;color:var(--muted)}
+.pl-rev .ra b{color:var(--ink)}
+.pl-empty{text-align:center;color:var(--muted);padding:40px 16px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+body{margin:0}.wrap{padding:24px 16px 48px}</style>
+</head>
+<body>
+<div class="wrap"><div id="play"></div></div>
+<script>
+function mountPlayer(root, act, opts){
+  opts = opts || {};
+  var isVF = act.kind === 'vf', LET = 'ABCDEF', st = null, audio = null;
+  function h(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function br(s){ return h(s).replace(/\n/g,'<br>'); }
+  function shuffle(a){ for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function beep(f, d){ if (opts.mute) return; try { audio = audio || new (window.AudioContext || window.webkitAudioContext)(); var o = audio.createOscillator(), g = audio.createGain(); o.frequency.value = f; g.gain.setValueAtTime(.15, audio.currentTime); g.gain.exponentialRampToValueAtTime(.001, audio.currentTime + d); o.connect(g); g.connect(audio.destination); o.start(); o.stop(audio.currentTime + d); } catch (e) {} }
+  function build(){
+    var items = (act.items || []).filter(function(it){ return (it.q || '').trim() && (isVF || (it.answers || []).some(function(a){ return (a.t || '').trim(); })); });
+    items = items.map(function(it){
+      var o = isVF ? [{t:'Vero', ok:!!it.ok}, {t:'Falso', ok:!it.ok}]
+                   : it.answers.filter(function(a){ return (a.t || '').trim(); }).map(function(a){ return {t:a.t, ok:!!a.ok}; });
+      if (!isVF && act.shuffleA) o = shuffle(o.slice());
+      return {q:it.q, why:it.why || '', opts:o};
+    });
+    if (act.shuffleQ) items = shuffle(items);
+    return items;
+  }
+  function stop(){ if (st && st.timer) { clearInterval(st.timer); st.timer = null; } }
+  function intro(){
+    stop(); st = null;
+    var n = build().length;
+    if (!n) { root.innerHTML = '<div class="pl pl-empty">Questa attività non ha ancora domande complete. Aggiungine almeno una nella scheda Modifica.</div>'; return; }
+    root.innerHTML = '<div class="pl pl-intro">' +
+      '<span class="pl-kind">' + (isVF ? 'Vero o falso' : 'Quiz') + '</span>' +
+      '<h2 class="pl-title">' + h(act.title || 'Senza titolo') + '</h2>' +
+      '<p class="pl-meta">' + n + (n === 1 ? ' domanda' : ' domande') + (act.time ? ' · ' + act.time + ' secondi per rispondere' : '') + '</p>' +
+      '<div class="pl-name"><label for="plName">Il tuo nome (facoltativo)</label><input id="plName" type="text" maxlength="40" autocomplete="off"></div>' +
+      '<div class="pl-modes"><button class="btn primary big" data-m="solo" type="button">Gioca da solo</button><button class="btn big" data-m="lim" type="button">Gioca con la classe (LIM)</button></div></div>';
+    root.querySelectorAll('[data-m]').forEach(function(b){ b.onclick = function(){ start(b.dataset.m, (root.querySelector('#plName') || {}).value || ''); }; });
+  }
+  function start(mode, name){ st = {mode:mode, name:name.trim(), items:build(), i:0, score:0, log:[], timer:null, done:false}; show(); }
+  function show(){
+    stop();
+    var it = st.items[st.i], lim = st.mode === 'lim';
+    st.done = false;
+    root.innerHTML = '<div class="pl ' + (lim ? 'lim' : 'solo') + '">' +
+      '<div class="pl-top"><span>Domanda ' + (st.i + 1) + ' di ' + st.items.length + '</span><span class="pl-score">' + (lim ? 'Giuste della classe: ' : 'Punti: ') + st.score + '</span></div>' +
+      (act.time ? '<div class="pl-bar"><i></i></div>' : '') +
+      '<h2 class="pl-q">' + br(it.q) + '</h2>' +
+      '<div class="pl-opts' + (isVF ? ' vf' : '') + '">' + it.opts.map(function(o, i){ return '<button class="pl-opt" type="button" data-i="' + i + '"><span class="k">' + LET[i] + '</span><span>' + h(o.t) + '</span></button>'; }).join('') + '</div>' +
+      '<div class="pl-fb" hidden></div>' +
+      '<div class="pl-foot"><span class="pl-keys">' + (isVF ? 'Tasti V e F' : 'Tasti A, B, C, D') + ' · Invio per andare avanti</span><span class="pl-actions"><button class="btn" data-a="quit" type="button">Esci</button> <button class="btn primary" data-a="next" type="button" hidden>' + (st.i + 1 < st.items.length ? 'Avanti' : 'Vedi il risultato') + '</button></span></div></div>';
+    root.querySelectorAll('.pl-opt').forEach(function(b){ b.onclick = function(){ answer(+b.dataset.i); }; });
+    root.querySelector('[data-a=next]').onclick = next;
+    root.querySelector('[data-a=quit]').onclick = intro;
+    if (act.time) {
+      var total = act.time * 10, left = total, bar = root.querySelector('.pl-bar'), fill = bar.firstChild;
+      st.timer = setInterval(function(){
+        left--; fill.style.transform = 'scaleX(' + Math.max(0, left / total) + ')';
+        bar.classList.toggle('low', left <= 50);
+        if (left <= 0) answer(-1);
+      }, 100);
+    }
+    var first = root.querySelector('.pl-opt'); if (first && !lim) first.focus({preventScroll:true});
+  }
+  function answer(i){
+    if (st.done) return; st.done = true; stop();
+    var it = st.items[st.i], chosen = it.opts[i], ok = !!(chosen && chosen.ok);
+    if (ok) st.score++;
+    st.log.push({q:it.q, ok:ok, given:chosen ? chosen.t : null, right:it.opts.filter(function(o){ return o.ok; }).map(function(o){ return o.t; }), why:it.why});
+    root.querySelectorAll('.pl-opt').forEach(function(b, j){
+      b.disabled = true; var o = it.opts[j];
+      if (o.ok) b.classList.add('right'); else if (j === i) b.classList.add('wrong'); else b.classList.add('dim');
+    });
+    beep(ok ? 880 : 200, ok ? .18 : .35);
+    var rights = it.opts.filter(function(o){ return o.ok; }).map(function(o){ return o.t; });
+    var fb = root.querySelector('.pl-fb'); fb.hidden = false; fb.className = 'pl-fb ' + (ok ? 'ok' : 'ko');
+    fb.innerHTML = '<strong>' + (ok ? 'Giusto!' : (i < 0 ? 'Tempo scaduto' : 'Sbagliato')) + '</strong>' +
+      (!ok && !isVF ? '<p>' + (rights.length > 1 ? 'Risposte giuste: ' : 'La risposta giusta è: ') + '<b>' + rights.map(h).join(', ') + '</b></p>' : '') +
+      (!ok && isVF ? '<p>L\'affermazione è <b>' + (rights[0] === 'Vero' ? 'vera' : 'falsa') + '</b>.</p>' : '') +
+      (it.why ? '<p>' + br(it.why) + '</p>' : '');
+    root.querySelector('.pl-score').textContent = (st.mode === 'lim' ? 'Giuste della classe: ' : 'Punti: ') + st.score;
+    var nb = root.querySelector('[data-a=next]'); nb.hidden = false; nb.focus({preventScroll:true});
+  }
+  function next(){ if (!st.done) return; st.i++; if (st.i < st.items.length) show(); else results(); }
+  function results(){
+    stop();
+    var n = st.items.length, pct = Math.round(st.score / n * 100), dec = Math.round(st.score / n * 20) / 2;
+    var rev = st.log.map(function(l){
+      return '<li class="' + (l.ok ? 'ok' : 'ko') + '"><span class="rq">' + (l.ok ? '✓ ' : '✗ ') + h(l.q) + '</span>' +
+        (l.ok ? '' : '<span class="ra">' + (l.given == null ? 'Nessuna risposta' : 'Risposta data: ' + h(l.given)) + ' · Giusta: <b>' + l.right.map(h).join(', ') + '</b></span>') +
+        (l.why && !l.ok ? '<span class="ra">' + h(l.why) + '</span>' : '') + '</li>';
+    }).join('');
+    root.innerHTML = '<div class="pl pl-res">' +
+      '<span class="pl-kind">' + h(act.title || '') + (st.name ? ' · ' + h(st.name) : '') + '</span>' +
+      '<div class="pl-big">' + st.score + '<small> / ' + n + '</small></div>' +
+      '<span class="pl-grade">' + pct + '% <span style="color:var(--muted);font-weight:400">· in decimi</span> ' + String(dec).replace('.', ',') + '</span>' +
+      '<div class="pl-modes"><button class="btn primary" data-a="again" type="button">Gioca ancora</button><button class="btn" data-a="home" type="button">Torna all\'inizio</button></div>' +
+      '<ul class="pl-rev">' + rev + '</ul></div>';
+    root.querySelector('[data-a=again]').onclick = function(){ start(st.mode, st.name); };
+    root.querySelector('[data-a=home]').onclick = intro;
+    beep(660, .2);
+  }
+  function onKey(e){
+    if (!root.isConnected || root.offsetParent === null || !st) return;
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test((e.target || {}).tagName || '')) return;
+    var k = e.key.toUpperCase();
+    if (!st.done) {
+      var idx = isVF ? (k === 'V' ? 0 : k === 'F' ? 1 : -2) : LET.indexOf(k);
+      if (idx >= 0 && idx < st.items[st.i].opts.length) { e.preventDefault(); answer(idx); }
+    } else if (k === 'ENTER' || k === ' ') { if (root.querySelector('[data-a=next]')) { e.preventDefault(); next(); } }
+  }
+  if (root._plKey) document.removeEventListener('keydown', root._plKey);
+  root._plKey = onKey; document.addEventListener('keydown', onKey);
+  intro();
+  return { stop: stop, intro: intro };
+}
+</script>
+<script>mountPlayer(document.getElementById('play'), {"kind":"vf","title":"Vero o falso? Ugo Foscolo","time":0,"shuffleQ":true,"shuffleA":false,"items":[{"q":"Foscolo nacque in Grecia, sull'isola di Zacinto.","ok":true,"why":"Zacinto (oggi Zante) era allora un dominio della Repubblica di Venezia."},{"q":"Con il trattato di Campoformio Venezia diventò libera e indipendente.","ok":false,"why":"Napoleone cedette Venezia all'Austria: per Foscolo fu un tradimento."},{"q":"Le «Ultime lettere di Jacopo Ortis» sono un romanzo in forma di lettere.","ok":true,"why":"È un romanzo epistolare."},{"q":"Alla fine del romanzo Jacopo sposa Teresa.","ok":false,"why":"Teresa è promessa a Odoardo; Jacopo, disperato per l'amore e per la patria, si toglie la vita."},{"q":"Un sonetto è formato da quattordici versi.","ok":true,"why":"Due quartine e due terzine di endecasillabi."},{"q":"Nel sonetto «Alla sera» la sera fa pensare alla morte, ma porta pace al poeta.","ok":true,"why":"È l'immagine della «fatal quïete» e calma lo «spirto guerrier»."},{"q":"In «A Zacinto» il poeta è sicuro che tornerà presto nella sua isola.","ok":false,"why":"Sa che non tornerà: lo attende una «illacrimata sepoltura» in terra straniera."},{"q":"Secondo i «Sepolcri» le tombe sono del tutto inutili.","ok":false,"why":"Ai morti non servono, ma servono ai vivi: conservano gli affetti e spingono a grandi azioni."},{"q":"Foscolo morì in esilio in Inghilterra.","ok":true,"why":"Morì nel 1827 vicino a Londra; dal 1871 riposa in Santa Croce a Firenze."},{"q":"Per Foscolo la poesia può rendere eterno il ricordo di persone e luoghi.","ok":true,"why":"È l'idea della poesia «eternatrice»."}]});</script>
+</body>
+</html>

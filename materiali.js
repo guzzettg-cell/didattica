@@ -520,6 +520,22 @@ const MODULI = [
     titolo: "Storia della letteratura",
     descrizione: "Dall'Ottocento ai giorni nostri. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica, Arte e Immagine, Musica, Geografia, Religione e Tecnologia.",
     lezioni: [
+      {
+        titolo: "Ugo Foscolo",
+        descrizione: "Ripasso: vita, opere e idee, con i sonetti «A Zacinto» e «Alla sera».",
+        link: "italiano/terza/foscolo/foscolo-ripasso/index.html",
+        data: "2026-10-16",
+        attivita: [
+          { tipo: "Guida alla lezione", titolo: "Ugo Foscolo: come usare le fasi (circa 60 minuti)", link: "italiano/terza/foscolo/foscolo-ripasso/index.html", data: "2026-10-16" },
+          { tipo: "Fase 1", titolo: "Foscolo in dodici parole", link: "italiano/terza/foscolo/foscolo-ripasso/attivita/fase-1-foscolo-in-dodici-parole.html", data: "2026-10-16" },
+          { tipo: "Fase 2", titolo: "La vita di Foscolo in ordine", link: "italiano/terza/foscolo/foscolo-ripasso/attivita/fase-2-la-vita-di-foscolo-in-ordine.html", data: "2026-10-16" },
+          { tipo: "Fase 3", titolo: "Opere, persone e luoghi", link: "italiano/terza/foscolo/foscolo-ripasso/attivita/fase-3-opere-persone-e-luoghi.html", data: "2026-10-16" },
+          { tipo: "Fase 4", titolo: "Dentro i sonetti: «A Zacinto» e «Alla sera»", link: "italiano/terza/foscolo/foscolo-ripasso/attivita/fase-4-dentro-i-sonetti.html", data: "2026-10-16" },
+          { tipo: "Fase 5", titolo: "Il cruciverba di Foscolo", link: "italiano/terza/foscolo/foscolo-ripasso/attivita/fase-5-cruciverba.html", data: "2026-10-16" },
+          { tipo: "Fase 6", titolo: "Vero o falso?", link: "italiano/terza/foscolo/foscolo-ripasso/attivita/fase-6-vero-o-falso.html", data: "2026-10-16" },
+          { tipo: "Fase 7", titolo: "Rischiatutto foscoliano", link: "italiano/terza/foscolo/foscolo-ripasso/attivita/fase-7-rischiatutto-foscoliano.html", data: "2026-10-16" }
+        ]
+      },
       { titolo: "La poesia lirica: Leopardi", attivita: [] },
       { titolo: "La poesia patriottica", attivita: [] },
       { titolo: "Il romanzo storico: Manzoni", attivita: [] },
