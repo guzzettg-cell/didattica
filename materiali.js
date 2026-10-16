@@ -352,6 +352,184 @@ const MODULI = [
       { titolo: "L'Oceania: profilo politico", attivita: [] },
       { titolo: "L'Oceania: profilo antropico", attivita: [] }
     ]
+  },
+
+  /* ---------------- ITALIANO · PRIMA ---------------- */
+  {
+    materia: "italiano",
+    classe: "prima",
+    numero: "I",
+    titolo: "Educazione linguistica",
+    descrizione: "Fonologia, ortografia e punteggiatura, le parti del discorso. Primo e secondo quadrimestre, in collegamento con Inglese, Francese, Spagnolo e Tedesco.",
+    lezioni: [
+      { titolo: "Suoni e lettere: fonologia e alfabeto", attivita: [] },
+      { titolo: "Ortografia e punteggiatura", attivita: [] },
+      { titolo: "Le parti variabili: articolo, nome e verbo", attivita: [] },
+      { titolo: "Le parti variabili: aggettivo, pronome e verbo", attivita: [] },
+      { titolo: "Le parti invariabili: preposizione, congiunzione, avverbio, interiezione", attivita: [] }
+    ]
+  },
+  {
+    materia: "italiano",
+    classe: "prima",
+    numero: "II",
+    titolo: "Generi letterari",
+    descrizione: "La narrazione in prosa e in versi: il genere epico. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica e Geografia.",
+    lezioni: [
+      { titolo: "La narrazione in prosa", attivita: [] },
+      { titolo: "L'epica: l'Iliade", attivita: [] },
+      { titolo: "L'epica: l'Odissea", attivita: [] },
+      { titolo: "L'epica: l'Eneide", attivita: [] },
+      { titolo: "L'epica medievale e cavalleresca", attivita: [] }
+    ]
+  },
+  {
+    materia: "italiano",
+    classe: "prima",
+    numero: "III",
+    titolo: "Laboratorio di scrittura",
+    descrizione: "Produzione di varie tipologie testuali. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica e Geografia.",
+    lezioni: [
+      { titolo: "Il riassunto", attivita: [] },
+      { titolo: "Il testo descrittivo", attivita: [] },
+      { titolo: "Il testo narrativo", attivita: [] },
+      { titolo: "Il testo argomentativo", attivita: [] },
+      { titolo: "L'analisi del testo narrativo", attivita: [] }
+    ]
+  }
+,
+
+  /* ---------------- ITALIANO · SECONDA ---------------- */
+  {
+    materia: "italiano",
+    classe: "seconda",
+    numero: "I",
+    titolo: "Educazione linguistica",
+    descrizione: "Analisi morfologica e analisi logica della frase semplice. Primo e secondo quadrimestre, in collegamento con Inglese, Francese, Spagnolo e Tedesco.",
+    lezioni: [
+      { titolo: "Le preposizioni", attivita: [] },
+      { titolo: "La frase semplice: soggetto e predicato verbale e nominale", attivita: [] },
+      { titolo: "L'attributo e l'apposizione", attivita: [] },
+      { titolo: "Il complemento oggetto e i complementi predicativi", attivita: [] },
+      { titolo: "Gli altri complementi", attivita: [] }
+    ]
+  },
+  {
+    materia: "italiano",
+    classe: "seconda",
+    numero: "II",
+    titolo: "Generi letterari",
+    descrizione: "La narrazione in prosa e in versi, da Boccaccio ad Ariosto. Primo e secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
+    lezioni: [
+      { titolo: "La narrazione in prosa: Boccaccio", attivita: [] },
+      { titolo: "La narrazione in versi: Dante", attivita: [] },
+      { titolo: "La narrazione in versi: Petrarca", attivita: [] },
+      { titolo: "La narrazione in versi: Ariosto", attivita: [] },
+      { titolo: "Altri generi letterari (a scelta del docente)", attivita: [] }
+    ]
+  },
+  {
+    materia: "italiano",
+    classe: "seconda",
+    numero: "III",
+    titolo: "Laboratorio di scrittura",
+    descrizione: "Produzione di varie tipologie testuali e analisi del testo. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica e Geografia.",
+    lezioni: [
+      { titolo: "Il riassunto", attivita: [] },
+      { titolo: "Il testo descrittivo", attivita: [] },
+      { titolo: "Il testo narrativo", attivita: [] },
+      { titolo: "Il testo espressivo", attivita: [] },
+      { titolo: "Il testo regolativo", attivita: [] },
+      { titolo: "Il testo poetico", attivita: [] },
+      { titolo: "L'analisi del testo narrativo", attivita: [] }
+    ]
+  },
+  {
+    materia: "italiano",
+    classe: "seconda",
+    numero: "IV",
+    titolo: "Latino per l'educazione linguistica (LEL)",
+    descrizione: "Opzionale ma curricolare (Nuove Indicazioni Nazionali): il docente decide se inserirlo nella propria programmazione. Primo e secondo quadrimestre.",
+    lezioni: [
+      { titolo: "Dalle parole alle radici: il lessico quotidiano e l'origine latina", attivita: [] },
+      { titolo: "Leggere il latino: alfabeto, pronuncia, accento, quantità", attivita: [] },
+      { titolo: "Scrivere in latino: flessione, tema e desinenza, numero e genere, coniugazione e paradigma", attivita: [] },
+      { titolo: "La prima declinazione e il verbo sum", attivita: [] },
+      { titolo: "La seconda declinazione e l'indicativo presente", attivita: [] },
+      { titolo: "Gli aggettivi possessivi", attivita: [] }
+    ]
+  }
+,
+
+  /* ---------------- ITALIANO · TERZA ---------------- */
+  {
+    materia: "italiano",
+    classe: "terza",
+    numero: "I",
+    titolo: "Educazione linguistica",
+    descrizione: "Lessico, linguaggio figurato e analisi del periodo. Primo e secondo quadrimestre, in collegamento con Inglese, Francese, Spagnolo e Tedesco.",
+    lezioni: [
+      { titolo: "Ripasso: analisi grammaticale e logica", attivita: [] },
+      { titolo: "L'uso corretto del lessico", attivita: [] },
+      { titolo: "Il linguaggio figurato", attivita: [] },
+      { titolo: "I connettivi testuali e le congiunzioni", attivita: [] },
+      { titolo: "La frase complessa e la proposizione principale", attivita: [] },
+      { titolo: "La coordinazione e le proposizioni coordinate", attivita: [] },
+      { titolo: "La subordinazione e le proposizioni subordinate", attivita: [] },
+      { titolo: "I gradi di subordinazione", attivita: [] },
+      { titolo: "La riflessione metalinguistica", attivita: [] }
+    ]
+  },
+  {
+    materia: "italiano",
+    classe: "terza",
+    numero: "II",
+    titolo: "Generi letterari",
+    descrizione: "Dall'Ottocento ai giorni nostri. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica, Arte e Immagine, Musica, Geografia, Religione e Tecnologia.",
+    lezioni: [
+      { titolo: "La poesia lirica: Leopardi", attivita: [] },
+      { titolo: "La poesia patriottica", attivita: [] },
+      { titolo: "Il racconto autobiografico", attivita: [] },
+      { titolo: "Il romanzo storico: Manzoni", attivita: [] },
+      { titolo: "Il romanzo di formazione", attivita: [] },
+      { titolo: "Il romanzo psicologico-sociale", attivita: [] },
+      { titolo: "Il romanzo di fantascienza", attivita: [] },
+      { titolo: "Il teatro", attivita: [] },
+      { titolo: "La letteratura contemporanea", attivita: [] }
+    ]
+  },
+  {
+    materia: "italiano",
+    classe: "terza",
+    numero: "III",
+    titolo: "Laboratorio di scrittura",
+    descrizione: "Produzione di varie tipologie testuali, parafrasi e analisi del testo. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica, Geografia, Arte e Immagine e Tecnologia.",
+    lezioni: [
+      { titolo: "La sintesi", attivita: [] },
+      { titolo: "Il testo narrativo", attivita: [] },
+      { titolo: "Il testo argomentativo", attivita: [] },
+      { titolo: "Il testo informativo-espositivo", attivita: [] },
+      { titolo: "Il testo poetico", attivita: [] },
+      { titolo: "La parafrasi", attivita: [] },
+      { titolo: "L'analisi del testo", attivita: [] }
+    ]
+  },
+  {
+    materia: "italiano",
+    classe: "terza",
+    numero: "IV",
+    titolo: "Latino per l'educazione linguistica (LEL)",
+    descrizione: "Opzionale ma curricolare (Nuove Indicazioni Nazionali): il docente decide se inserirlo nella propria programmazione. Primo e secondo quadrimestre.",
+    lezioni: [
+      { titolo: "La terza declinazione", attivita: [] },
+      { titolo: "Gli aggettivi della seconda classe", attivita: [] },
+      { titolo: "L'indicativo imperfetto e il futuro semplice", attivita: [] },
+      { titolo: "L'imperativo presente e futuro", attivita: [] },
+      { titolo: "Il perfetto", attivita: [] },
+      { titolo: "La quarta e la quinta declinazione", attivita: [] },
+      { titolo: "I pronomi personali", attivita: [] },
+      { titolo: "I numeri romani", attivita: [] }
+    ]
   }
 
 ];
