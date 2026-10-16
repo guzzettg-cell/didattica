@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Che cosa studia la geografia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1EE; --paper:#FAFBF9; --ink:#1D2A30; --muted:#5B6B70; --line:#C9D2CE;
+  --ocean:#2C5872; --warm:#B3412F; --ok:#2F7A5A; --ko:#B3412F; --soft:#E3EAE6;
+  --cond:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+  --ocean:#80B1CC; --warm:#EF8A73; --ok:#6CC79C; --ko:#EF8A73; --soft:#22303A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+  --ocean:#80B1CC; --warm:#EF8A73; --ok:#6CC79C; --ko:#EF8A73; --soft:#22303A; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.6}
+main{max-width:60rem;margin:0 auto;padding:1.4rem 16px 4rem;display:grid;gap:2.6rem}
+h1,h2,h3{font-family:var(--cond);line-height:1.08;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.4rem,6vw,3.6rem);font-weight:700}
+h2{font-size:clamp(1.6rem,3.6vw,2.2rem);font-weight:700}
+h3{font-size:1.4rem;font-weight:700}
+p{margin:0;max-width:66ch}
+a{color:var(--ocean)}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,label:focus-within{outline:3px solid var(--ocean);outline-offset:2px}
+.nav{font:600 1.05rem var(--cond)}
+.nav a{color:inherit}
+.testa{display:grid;gap:.8rem}
+.sopra{font:600 1.1rem var(--cond);color:var(--muted)}
+.lead{font-size:1.18rem;color:var(--muted)}
+section{display:grid;gap:1.1rem}
+.btn{font:600 1.08rem var(--cond);background:var(--ink);color:var(--paper);border:0;border-radius:6px;padding:.5rem 1.1rem;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.chiaro{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:1.1rem 1.3rem}
+.piede{font-size:.92rem;color:var(--muted);border-top:1px solid var(--line);padding-top:1rem}
+@media print{
+  body{background:#fff;color:#000}
+  .nav,.no-stampa{display:none!important}
+  main{padding:0;gap:1.4rem}
+  .box{break-inside:avoid}
+}
+
+.etimo{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;font-family:var(--cond)}
+.etimo span{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:.5rem 1rem;font-size:1.15rem}
+.etimo b{font-size:2rem;color:var(--ocean);margin-right:.3rem}
+.etimo i{font-style:normal;font-size:1.8rem;color:var(--muted)}
+.griglia{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,17.5rem),1fr));gap:1rem}
+.def{background:var(--paper);border:1px solid var(--line);border-top:5px solid var(--ocean);border-radius:8px;padding:1rem 1.2rem;display:grid;gap:.55rem;align-content:start}
+.def.sp{border-top-color:var(--warm)}
+.def .es{font-size:.98rem}
+.def .q{font-style:italic;color:var(--muted);font-size:.98rem;border-left:3px solid var(--line);padding-left:.7rem}
+.chiave{display:flex;flex-wrap:wrap;gap:.5rem}
+.chiave span{font:700 1.3rem var(--cond);background:var(--ink);color:var(--paper);border-radius:6px;padding:.25rem .8rem}
+.sint{font-size:1.25rem;line-height:1.5;border-left:5px solid var(--ocean);padding-left:1rem;max-width:none}
+.prova{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
+.prova li{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:1rem 1.2rem;display:grid;gap:.6rem}
+.prova .n{font:700 1rem var(--cond);color:var(--ocean)}
+.opz{display:flex;flex-wrap:wrap;gap:.4rem}
+.opz button{font:600 1rem var(--cond);background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:.3rem .8rem;cursor:pointer}
+.opz button:hover{border-color:var(--ocean)}
+.opz button.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.opz button.ko{border-color:var(--ko);color:var(--ko);text-decoration:line-through}
+.esito{font:600 1.05rem var(--cond);min-height:1.3em}
+.esito.ok{color:var(--ok)}.esito.ko{color:var(--ko)}
+.punti{font:700 1.4rem var(--cond)}
+</style>
+</head>
+<body>
+<main>
+<p class="nav"><a href="../index.html#attivita">← Torna a «La Terra vista dalla Luna»</a></p>
+
+<header class="testa">
+  <p class="sopra">Perché la geografia</p>
+  <h1>Che cosa studia la geografia</h1>
+  <p class="lead">La geografia non è solo un elenco di nomi di città e di fiumi. Leggi le schede, guarda gli esempi e prova a rispondere alle domande, a voce o sul quaderno.</p>
+</header>
+
+<section aria-labelledby="t-nome">
+  <h2 id="t-nome">Da dove viene la parola</h2>
+  <div class="etimo"><span><b>geo</b> = Terra</span><i>+</i><span><b>grafia</b> = scrittura, descrizione</span></div>
+  <p>Geografia è una parola greca: significa <b>descrizione della Terra</b>. Ma la geografia non si limita a descrivere: studia il pianeta insieme alle persone che lo abitano, e cerca di capire come gli uni e le altre si influenzano.</p>
+</section>
+
+<section aria-labelledby="t-studia">
+  <h2 id="t-studia">La geografia studia…</h2>
+  <div class="griglia">
+<article class="def st"><h3>Il pianeta e le sue forme</h3><p>Le terre emerse e le acque: continenti, oceani, mari, fiumi, laghi, montagne, pianure.</p><p class="es"><b>Per esempio.</b> Dallo spazio si riconoscono a colpo d&#x27;occhio il Mediterraneo e la forma a stivale dell&#x27;Italia.</p><p class="q">Quali forme della Terra vedi dalla finestra della tua scuola o di casa tua?</p></article>
+<article class="def st"><h3>I climi e gli ambienti naturali</h3><p>Che tempo fa di solito in un luogo, e perché: conta quanto è vicino all&#x27;Equatore, quanto è alto, quanto è lontano dal mare. Dal clima dipendono le piante e gli animali che ci vivono.</p><p class="es"><b>Per esempio.</b> In una stessa giornata di gennaio a Roma possono esserci 12 °C, mentre sul monte Terminillo, a un centinaio di chilometri, nevica.</p><p class="q">Perché in montagna fa più freddo che al mare?</p></article>
+<article class="def st"><h3>Come cambiano i paesaggi</h3><p>I paesaggi non sono fermi: fiumi, mare, vento, vulcani e anche gli esseri umani li trasformano, a volte in pochi anni, a volte in migliaia.</p><p class="es"><b>Per esempio.</b> Il Tevere porta al mare sabbia e detriti. Il porto dell&#x27;antica Ostia, che duemila anni fa era sulla costa, oggi è a qualche chilometro dal mare.</p><p class="q">Conosci un luogo che negli ultimi anni è cambiato? Che cosa l&#x27;ha cambiato?</p></article>
+<article class="def st"><h3>Le risorse naturali</h3><p>Acqua, suolo, foreste, minerali, energia: come le usiamo e come possiamo non sprecarle. Alcune si rinnovano, altre prima o poi finiscono.</p><p class="es"><b>Per esempio.</b> Il Sole e il vento non si esauriscono; il petrolio e il carbone, invece, sì.</p><p class="q">Quali risorse naturali hai usato da quando ti sei svegliato stamattina?</p></article>
+<article class="def st"><h3>La popolazione</h3><p>Quante persone vivono sulla Terra (oltre 8 miliardi), dove abitano, che lavoro fanno, come vivono, come si spostano. Più della metà vive in città.</p><p class="es"><b>Per esempio.</b> Roma ha quasi tre milioni di abitanti: è il comune più popoloso d&#x27;Italia.</p><p class="q">Perché tante persone scelgono di vivere in città?</p></article>
+<article class="def st"><h3>Le culture dei popoli</h3><p>Le lingue, le religioni, le tradizioni, l&#x27;arte, il cibo, il modo di costruire le case e le città.</p><p class="es"><b>Per esempio.</b> In molte classi di Roma si parlano, a casa, lingue diverse: è un piccolo mondo dentro una stanza.</p><p class="q">Quali lingue si parlano nelle case dei tuoi compagni?</p></article>
+<article class="def st"><h3>Il paesaggio</h3><p>Tutto quello che vediamo in un luogo, insieme: gli elementi naturali e quelli costruiti dalle persone. Ma anche la storia e le abitudini di chi ci vive.</p><p class="es"><b>Per esempio.</b> Ai Castelli Romani ci sono antichi vulcani spenti, laghi nati dentro i crateri, vigneti, boschi e paesi sulle colline.</p><p class="q">Descrivi il paesaggio che vedi andando a scuola: che cosa è naturale e che cosa è costruito?</p></article>
+  </div>
+</section>
+
+<section aria-labelledby="t-spiega">
+  <h2 id="t-spiega">La geografia spiega perché…</h2>
+  <div class="griglia">
+<article class="def sp"><h3>Perché le persone si spostano</h3><p>Da sempre le persone cambiano casa, città o Paese: per lavorare, per studiare, per raggiungere la famiglia, oppure per fuggire da guerre, povertà o disastri naturali.</p><p class="es"><b>Per esempio.</b> Nel Novecento milioni di italiani sono emigrati in America, in Australia e nel Nord Europa. Oggi l&#x27;Italia è anche un Paese in cui molte persone arrivano.</p><p class="q">Nella tua famiglia qualcuno si è trasferito in un&#x27;altra città o in un altro Paese? Perché?</p></article>
+<article class="def sp"><h3>Perché i popoli si organizzano in Stati e in unioni</h3><p>Le persone si danno regole, confini e governi: nascono gli Stati. Spesso gli Stati si uniscono per collaborare.</p><p class="es"><b>Per esempio.</b> L&#x27;Italia fa parte dell&#x27;Unione Europea, che oggi riunisce 27 Paesi: insieme decidono su commercio, ambiente, diritti dei cittadini.</p><p class="q">Quali vantaggi ha far parte di un gruppo più grande? E quali difficoltà?</p></article>
+<article class="def sp"><h3>Perché la ricchezza non è distribuita in modo uguale</h3><p>Ci sono Paesi ricchi e Paesi poveri, ma anche quartieri ricchi e quartieri poveri nella stessa città. La geografia cerca le cause: il clima, le risorse, la storia, le scelte delle persone.</p><p class="es"><b>Per esempio.</b> Il caffè si coltiva soprattutto in America Latina, in Africa e in Asia, ma si beve soprattutto nei Paesi ricchi.</p><p class="q">Chi guadagna di più da una tazzina di caffè: chi lo coltiva o chi lo vende?</p></article>
+<article class="def sp"><h3>Perché proteggiamo i beni dell&#x27;umanità</h3><p>Alcuni luoghi, naturali o costruiti, sono così importanti da appartenere a tutti. L&#x27;UNESCO, un&#x27;agenzia delle Nazioni Unite, li protegge come patrimonio dell&#x27;umanità.</p><p class="es"><b>Per esempio.</b> Il centro storico di Roma è patrimonio dell&#x27;umanità dal 1980.</p><p class="q">Quale luogo della tua città proteggeresti per primo? Perché?</p></article>
+  </div>
+</section>
+
+<section aria-labelledby="t-domande">
+  <h2 id="t-domande">Le domande della geografia</h2>
+  <div class="chiave"><span>Dove?</span><span>Com'è?</span><span>Perché?</span><span>Che cosa cambia?</span><span>Che cosa possiamo fare?</span></div>
+  <p class="sint">La geografia ci aiuta a capire dove si trovano le cose, come vivono le persone e perché il mondo è fatto così. Ci serve per orientarci, per capire le notizie, per conoscere chi è diverso da noi e per prenderci cura del pianeta, oggi e in futuro.</p>
+</section>
+
+<section aria-labelledby="t-prova" class="no-stampa">
+  <h2 id="t-prova">Mettiti alla prova</h2>
+  <p class="lead">Di che cosa si occupa la geografia in ognuna di queste situazioni? Scegli una risposta.</p>
+  <ol class="prova" id="prova"></ol>
+  <p class="punti" id="punti" aria-live="polite"></p>
+  <p><button class="btn chiaro" type="button" id="ricomincia">Ricomincia</button></p>
+</section>
+
+<p class="piede">Testi ed esempi scritti per questo sito. Dati: popolazione mondiale e urbana, Nazioni Unite; Unione Europea, 27 Paesi membri; centro storico di Roma nella lista UNESCO dal 1980.</p>
+
+</main>
+<script>
+(function(){
+  var DOM=[["Una ricercatrice misura quanta pioggia cade ogni anno a Roma e a Palermo.", "clima"], ["Un gruppo di studenti conta quanti abitanti ha ogni quartiere della città.", "popolazione"], ["Una classe scopre che il suo quartiere, cento anni fa, era campagna.", "paesaggio"], ["Un giornalista racconta le feste tradizionali di un villaggio del Marocco.", "culture"], ["Un'insegnante spiega perché in Italia si costruiscono pannelli solari sui tetti.", "risorse"], ["Un telegiornale parla di un incontro tra i Paesi dell'Unione Europea.", "stati"], ["Una famiglia lascia la Siria a causa della guerra e arriva in Germania.", "migrazioni"], ["Un esperto osserva come il mare ha cambiato la forma di una spiaggia in dieci anni.", "paesaggio"]], CAT={"clima": "Climi e ambienti", "popolazione": "Popolazione", "paesaggio": "Paesaggi che cambiano", "culture": "Culture dei popoli", "risorse": "Risorse naturali", "stati": "Stati e unioni", "migrazioni": "Persone che si spostano"}, ol=document.getElementById('prova'), punti=document.getElementById('punti'), fatte=0, giuste=0;
+  function costruisci(){
+    ol.innerHTML=''; fatte=0; giuste=0; punti.textContent='';
+    DOM.forEach(function(d,i){
+      var li=document.createElement('li');
+      li.innerHTML='<span class="n">Situazione '+(i+1)+'</span><p>'+d[0]+'</p><div class="opz" role="group" aria-label="Risposte"></div><p class="esito" aria-live="polite"></p>';
+      var box=li.querySelector('.opz'), es=li.querySelector('.esito'), finito=false;
+      Object.keys(CAT).forEach(function(k){
+        var b=document.createElement('button'); b.type='button'; b.textContent=CAT[k];
+        b.onclick=function(){
+          if(finito) return;
+          if(k===d[1]){ b.className='ok'; es.className='esito ok'; es.textContent='Giusto!'; finito=true; fatte++; if(!li.dataset.sbagliata) giuste++; aggiorna(); }
+          else { b.className='ko'; b.disabled=true; es.className='esito ko'; es.textContent='Non proprio: riprova.'; li.dataset.sbagliata='1'; }
+        };
+        box.appendChild(b);
+      });
+      ol.appendChild(li);
+    });
+  }
+  function aggiorna(){ if(fatte===DOM.length) punti.textContent='Hai indovinato al primo colpo '+giuste+' situazioni su '+DOM.length+'.'; }
+  document.getElementById('ricomincia').onclick=costruisci;
+  costruisci();
+})();
+</script>
+</body>
+</html>

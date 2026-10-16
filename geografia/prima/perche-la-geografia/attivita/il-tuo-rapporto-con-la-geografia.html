@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Il tuo rapporto con la geografia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1EE; --paper:#FAFBF9; --ink:#1D2A30; --muted:#5B6B70; --line:#C9D2CE;
+  --ocean:#2C5872; --warm:#B3412F; --ok:#2F7A5A; --ko:#B3412F; --soft:#E3EAE6;
+  --cond:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+  --ocean:#80B1CC; --warm:#EF8A73; --ok:#6CC79C; --ko:#EF8A73; --soft:#22303A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+  --ocean:#80B1CC; --warm:#EF8A73; --ok:#6CC79C; --ko:#EF8A73; --soft:#22303A; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.6}
+main{max-width:60rem;margin:0 auto;padding:1.4rem 16px 4rem;display:grid;gap:2.6rem}
+h1,h2,h3{font-family:var(--cond);line-height:1.08;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.4rem,6vw,3.6rem);font-weight:700}
+h2{font-size:clamp(1.6rem,3.6vw,2.2rem);font-weight:700}
+h3{font-size:1.4rem;font-weight:700}
+p{margin:0;max-width:66ch}
+a{color:var(--ocean)}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,label:focus-within{outline:3px solid var(--ocean);outline-offset:2px}
+.nav{font:600 1.05rem var(--cond)}
+.nav a{color:inherit}
+.testa{display:grid;gap:.8rem}
+.sopra{font:600 1.1rem var(--cond);color:var(--muted)}
+.lead{font-size:1.18rem;color:var(--muted)}
+section{display:grid;gap:1.1rem}
+.btn{font:600 1.08rem var(--cond);background:var(--ink);color:var(--paper);border:0;border-radius:6px;padding:.5rem 1.1rem;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.chiaro{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:1.1rem 1.3rem}
+.piede{font-size:.92rem;color:var(--muted);border-top:1px solid var(--line);padding-top:1rem}
+@media print{
+  body{background:#fff;color:#000}
+  .nav,.no-stampa{display:none!important}
+  main{padding:0;gap:1.4rem}
+  .box{break-inside:avoid}
+}
+
+.domande{list-style:none;margin:0;padding:0;display:grid;gap:1rem;counter-reset:d}
+.domande li{counter-increment:d;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:1rem 1.2rem;display:grid;gap:.6rem}
+.domande li > p{font-weight:600;font-size:1.1rem}
+.domande li > p::before{content:counter(d) ". ";font:700 1.25rem var(--cond);color:var(--ocean)}
+.domande label{display:flex;gap:.6rem;align-items:flex-start;padding:.35rem .6rem;border-radius:6px;cursor:pointer}
+.domande label:hover{background:var(--soft)}
+.domande input{margin-top:.35rem;accent-color:var(--ocean);width:1.05rem;height:1.05rem;flex:none}
+.domande .let{font:700 1.1rem var(--cond);color:var(--muted);width:1rem;flex:none}
+.risultato{background:var(--ink);color:var(--paper);border-radius:8px;padding:1.4rem 1.5rem;display:grid;gap:.6rem}
+.risultato h2{font-size:clamp(1.8rem,4vw,2.4rem)}
+.risultato .conta{font:600 1.1rem var(--cond);opacity:.8}
+.mancano{font:600 1.05rem var(--cond);color:var(--warm)}
+.profili{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:1rem}
+.profili article{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:1rem 1.2rem;display:grid;gap:.4rem;align-content:start}
+.profili b{font:700 1.3rem var(--cond)}
+.profili .chi{font:600 1rem var(--cond);color:var(--muted)}
+.scrivi{display:grid;gap:1rem}
+.scrivi label{display:grid;gap:.35rem;font-weight:600}
+.scrivi textarea{font:inherit;font-weight:400;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:.6rem .8rem;min-height:5.5rem;resize:vertical}
+.nome{display:grid;gap:.35rem;font-weight:600;max-width:24rem}
+.nome input{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:.5rem .8rem}
+.comandi{display:flex;flex-wrap:wrap;gap:.6rem}
+@media print{.domande li{break-inside:avoid}.scrivi textarea{border:1px solid #999;min-height:6rem}}
+</style>
+</head>
+<body>
+<main>
+<p class="nav"><a href="../index.html#attivita">← Torna a «La Terra vista dalla Luna»</a></p>
+
+<header class="testa">
+  <p class="sopra">Perché la geografia</p>
+  <h1>Il tuo rapporto con la geografia</h1>
+  <p class="lead">Non ci sono risposte giuste o sbagliate: scegli quella più vicina a quello che faresti davvero. Alla fine scopri che tipo di geografa o di geografo sei oggi.</p>
+  <label class="nome">Il tuo nome<input id="nome" type="text" autocomplete="off" maxlength="40"></label>
+</header>
+
+<section aria-labelledby="t-test">
+  <h2 id="t-test">Il test</h2>
+  <ol class="domande" id="domande">
+<li><p>In gita scolastica vedi un sentiero che non conosci, che si perde tra gli alberi.</p><div role="radiogroup"><label><input type="radio" name="d0" value="A"><span class="let">a</span><span>Ti viene voglia di seguirlo per vedere dove porta</span></label><label><input type="radio" name="d0" value="B"><span class="let">b</span><span>Lo seguiresti, ma solo insieme a qualcuno</span></label><label><input type="radio" name="d0" value="C"><span class="let">c</span><span>Preferisci restare sul percorso segnato</span></label></div></li>
+<li><p>In televisione inizia un documentario su un deserto dell'Africa.</p><div role="radiogroup"><label><input type="radio" name="d1" value="A"><span class="let">a</span><span>Lo guardi fino alla fine</span></label><label><input type="radio" name="d1" value="B"><span class="let">b</span><span>Lo guardi per un po', poi vedi se ti prende</span></label><label><input type="radio" name="d1" value="C"><span class="let">c</span><span>Cambi canale</span></label></div></li>
+<li><p>Nella tua classe arriva una nuova compagna che viene da un altro Paese.</p><div role="radiogroup"><label><input type="radio" name="d2" value="A"><span class="let">a</span><span>Le fai subito tante domande sul suo Paese</span></label><label><input type="radio" name="d2" value="B"><span class="let">b</span><span>Aspetti di conoscerla meglio prima di chiederle qualcosa</span></label><label><input type="radio" name="d2" value="C"><span class="let">c</span><span>Non ti chiedi da dove viene</span></label></div></li>
+<li><p>Devi raggiungere un posto nuovo con la mappa sul telefono.</p><div role="radiogroup"><label><input type="radio" name="d3" value="A"><span class="let">a</span><span>Guardi anche le strade intorno e capisci dove ti trovi</span></label><label><input type="radio" name="d3" value="B"><span class="let">b</span><span>Segui le indicazioni passo passo</span></label><label><input type="radio" name="d3" value="C"><span class="let">c</span><span>Chiedi a qualcuno di accompagnarti</span></label></div></li>
+<li><p>Fai un viaggio in auto con la tua famiglia.</p><div role="radiogroup"><label><input type="radio" name="d4" value="A"><span class="let">a</span><span>Aiuti a scegliere il percorso e le tappe</span></label><label><input type="radio" name="d4" value="B"><span class="let">b</span><span>Guardi fuori dal finestrino e fai domande sui posti</span></label><label><input type="radio" name="d4" value="C"><span class="let">c</span><span>Aspetti di arrivare e intanto pensi ad altro</span></label></div></li>
+<li><p>Al telegiornale parlano di un terremoto in un Paese lontano.</p><div role="radiogroup"><label><input type="radio" name="d5" value="A"><span class="let">a</span><span>Cerchi sulla carta dove si trova</span></label><label><input type="radio" name="d5" value="B"><span class="let">b</span><span>Ti chiedi se è vicino o lontano dall'Italia</span></label><label><input type="radio" name="d5" value="C"><span class="let">c</span><span>Non ci pensi più</span></label></div></li>
+<li><p>In classe c'è un mappamondo.</p><div role="radiogroup"><label><input type="radio" name="d6" value="A"><span class="let">a</span><span>Lo fai girare cercando posti che non conosci</span></label><label><input type="radio" name="d6" value="B"><span class="let">b</span><span>Cerchi l'Italia e Roma</span></label><label><input type="radio" name="d6" value="C"><span class="let">c</span><span>Non ci fai molto caso</span></label></div></li>
+<li><p>Se potessi andare in qualunque posto del mondo…</p><div role="radiogroup"><label><input type="radio" name="d7" value="A"><span class="let">a</span><span>Sai già dove andresti, e sai anche perché</span></label><label><input type="radio" name="d7" value="B"><span class="let">b</span><span>Hai qualche idea, ma non sei sicuro</span></label><label><input type="radio" name="d7" value="C"><span class="let">c</span><span>Non saprei proprio dove andare</span></label></div></li>
+  </ol>
+  <div class="comandi no-stampa"><button class="btn" type="button" id="calcola">Scopri il tuo profilo</button><button class="btn chiaro" type="button" id="azzera">Ricomincia</button></div>
+  <p class="mancano" id="mancano" aria-live="polite"></p>
+  <div class="risultato" id="risultato" hidden aria-live="polite"></div>
+</section>
+
+<section aria-labelledby="t-profili">
+  <h2 id="t-profili">I tre profili</h2>
+  <div class="profili">
+    <article><span class="chi">Più risposte a</span><b>Esploratrice, esploratore</b><p>La geografia fa per te: hai tanta curiosità, ti piace scoprire posti nuovi e capire come funzionano le cose. Quest'anno potrai fare tante domande e trovare tante risposte. Prova ad aiutare anche i compagni a scoprire quello che ti appassiona.</p></article>
+    <article><span class="chi">Più risposte b</span><b>Viaggiatrice, viaggiatore curioso</b><p>La geografia ti incuriosisce, anche se non è ancora la tua materia preferita. Hai bisogno di buoni compagni di viaggio e di argomenti che ti sorprendano: quest'anno cercheremo insieme quelli che fanno per te.</p></article>
+    <article><span class="chi">Più risposte c</span><b>Pronta, pronto a partire</b><p>Per ora la geografia ti sembra lontana, e forse non hai ancora capito a che cosa serve. Nessun problema: ogni viaggio comincia da un primo passo. Prova a scoprire come la geografia c'entra con le cose che ti piacciono già.</p></article>
+  </div>
+</section>
+
+<section aria-labelledby="t-scrivi">
+  <h2 id="t-scrivi">Ne parliamo in classe</h2>
+  <p class="lead">Rispondi qui o sul quaderno. Poi confronta le tue risposte con quelle dei compagni: insieme potete preparare una breve presentazione su che cosa vi aspettate dalla geografia.</p>
+  <div class="scrivi">
+    <label>Che cosa ti appassiona o ti incuriosisce? In che modo la geografia potrebbe c'entrare?<textarea data-k="interessi"></textarea></label>
+    <label>Che cosa ti aspetti di imparare quest'anno in geografia?<textarea data-k="aspetti"></textarea></label>
+    <label>Un luogo del mondo che vorresti conoscere meglio, e perché:<textarea data-k="luogo"></textarea></label>
+  </div>
+  <div class="comandi no-stampa"><button class="btn" type="button" onclick="window.print()">Stampa la scheda</button></div>
+</section>
+
+<p class="piede">Le risposte scritte restano solo su questo dispositivo, finché non le cancelli.</p>
+
+</main>
+<script>
+(function(){
+  var P={"A": ["Esploratrice, esploratore", "La geografia fa per te: hai tanta curiosità, ti piace scoprire posti nuovi e capire come funzionano le cose. Quest'anno potrai fare tante domande e trovare tante risposte. Prova ad aiutare anche i compagni a scoprire quello che ti appassiona."], "B": ["Viaggiatrice, viaggiatore curioso", "La geografia ti incuriosisce, anche se non è ancora la tua materia preferita. Hai bisogno di buoni compagni di viaggio e di argomenti che ti sorprendano: quest'anno cercheremo insieme quelli che fanno per te."], "C": ["Pronta, pronto a partire", "Per ora la geografia ti sembra lontana, e forse non hai ancora capito a che cosa serve. Nessun problema: ogni viaggio comincia da un primo passo. Prova a scoprire come la geografia c'entra con le cose che ti piacciono già."]}, N=8, K='geo-rapporto-v1', ris=document.getElementById('risultato'), manca=document.getElementById('mancano');
+  function leggi(){ try{ return JSON.parse(localStorage.getItem(K))||{}; }catch(e){ return {}; } }
+  function salva(){
+    var s={nome:document.getElementById('nome').value, r:{}, t:{}};
+    document.querySelectorAll('#domande input:checked').forEach(function(i){ s.r[i.name]=i.value; });
+    document.querySelectorAll('textarea[data-k]').forEach(function(t){ s.t[t.dataset.k]=t.value; });
+    try{ localStorage.setItem(K, JSON.stringify(s)); }catch(e){}
+  }
+  var s=leggi();
+  if(s.nome) document.getElementById('nome').value=s.nome;
+  Object.keys(s.r||{}).forEach(function(n){ var i=document.querySelector('input[name="'+n+'"][value="'+s.r[n]+'"]'); if(i) i.checked=true; });
+  Object.keys(s.t||{}).forEach(function(k){ var t=document.querySelector('textarea[data-k="'+k+'"]'); if(t) t.value=s.t[k]; });
+  document.addEventListener('input', salva); document.addEventListener('change', salva);
+  document.getElementById('calcola').onclick=function(){
+    var c={A:0,B:0,C:0}, fatte=0;
+    for(var i=0;i<N;i++){ var x=document.querySelector('input[name="d'+i+'"]:checked'); if(x){ c[x.value]++; fatte++; } }
+    if(fatte<N){ manca.textContent='Mancano ancora '+(N-fatte)+' risposte.'; ris.hidden=true; return; }
+    manca.textContent='';
+    function v(n){ return n+(n===1?' volta':' volte'); }
+    var max=Math.max(c.A,c.B,c.C), vinti=['A','B','C'].filter(function(k){ return c[k]===max; });
+    var nome=document.getElementById('nome').value.trim();
+    ris.innerHTML='<span class="conta">'+(nome? nome.replace(/[<>&]/g,'')+', hai':'Hai')+' risposto '+v(c.A)+' a, '+v(c.B)+' b, '+v(c.C)+' c.</span>'+
+      vinti.map(function(k){ return '<h2>'+P[k][0]+'</h2><p>'+P[k][1]+'</p>'; }).join('')+
+      (vinti.length>1?'<p>Sei a metà strada tra due profili: prendi il meglio di entrambi!</p>':'');
+    ris.hidden=false; ris.scrollIntoView({behavior:'smooth',block:'center'});
+  };
+  document.getElementById('azzera').onclick=function(){
+    document.querySelectorAll('#domande input').forEach(function(i){ i.checked=false; });
+    ris.hidden=true; manca.textContent=''; salva(); window.scrollTo({top:0,behavior:'smooth'});
+  };
+})();
+</script>
+</body>
+</html>

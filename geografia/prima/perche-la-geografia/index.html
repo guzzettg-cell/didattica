@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Terra vista dalla Luna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+/* Stessa famiglia grafica delle fasi: Barlow Condensed per titoli, Source Serif per il testo */
+:root{
+  --bg:#EEF1EE; --paper:#FAFBF9; --ink:#1D2A30; --muted:#5B6B70; --line:#C9D2CE;
+  --space:#0E1620; --space-ink:#E9EEF2; --space-muted:#9FB0BD;
+  --ocean:#2C5872; --warm:#B3412F;
+  --cond:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+    --space:#070B10; --ocean:#80B1CC; --warm:#EF8A73; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+  --space:#070B10; --ocean:#80B1CC; --warm:#EF8A73; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.65}
+h1,h2,h3{font-family:var(--cond);line-height:1.08;margin:0;text-wrap:balance}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700}
+h3{font-size:1.45rem;font-weight:700}
+p{margin:0;max-width:66ch}
+a{color:var(--ocean)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--ocean);outline-offset:2px}
+img{max-width:100%;display:block}
+.wrap{max-width:72rem;margin:0 auto;padding-inline:16px}
+section.blocco{padding-block:3.5rem}
+section.blocco > .wrap{display:grid;gap:1.4rem}
+.lead{font-size:1.2rem;color:var(--muted)}
+.nav-su{font:600 1.05rem var(--cond)}
+
+/* Copertina */
+.copertina{background:var(--space);color:var(--space-ink)}
+.copertina .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2.5rem;align-items:center;padding-block:1.4rem 3.5rem}
+.copertina .nav-su{grid-column:1/-1}
+.copertina .nav-su a{color:var(--space-muted)}
+.copertina h1{font-size:clamp(2.8rem,8vw,5.6rem);font-weight:700;letter-spacing:-.01em}
+.copertina .sopra{font:600 1.15rem var(--cond);color:var(--space-muted);margin-bottom:.6rem}
+.copertina p.lead{color:var(--space-muted);margin-top:1.2rem}
+.copertina figure{margin:0}
+.copertina img{border-radius:6px;width:100%;aspect-ratio:1/1;object-fit:cover}
+.copertina figcaption{font:500 .98rem var(--cond);color:var(--space-muted);margin-top:.5rem}
+
+/* Racconto: tappe con foto */
+.tappe{display:grid;gap:3rem;margin-top:1rem}
+.tappa{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:2rem;align-items:center}
+.tappa:nth-child(even) figure{order:2}
+.tappa figure{margin:0}
+.tappa figure button{border:0;padding:0;background:var(--space);border-radius:6px;cursor:zoom-in;display:block;width:100%;overflow:hidden}
+.tappa figure img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.tappa figure img.intera{object-fit:contain;background:#000}
+.tappa figcaption{font:500 .98rem var(--cond);color:var(--muted);margin-top:.45rem}
+.tappa .testo{display:grid;gap:.8rem}
+.anno{font:700 clamp(2.6rem,6vw,3.8rem)/1 var(--cond);color:var(--ocean);font-variant-numeric:tabular-nums}
+.chi{font:600 1.1rem var(--cond);color:var(--muted)}
+.domanda{font-style:italic;border-left:4px solid var(--ocean);padding-left:1rem}
+.senza-foto{background:var(--space);color:var(--space-ink);border-radius:6px;aspect-ratio:4/3;display:grid;place-items:center;padding:2rem;text-align:center}
+.senza-foto span{font:700 clamp(3rem,7vw,4.6rem)/1 var(--cond)}
+.senza-foto small{display:block;font:500 1.05rem var(--cond);color:var(--space-muted);margin-top:.6rem}
+
+/* Citazioni */
+blockquote{margin:0;padding:1.4rem 1.6rem;background:var(--paper);border:1px solid var(--line);border-radius:8px;display:grid;gap:.6rem}
+blockquote p{font-size:1.25rem;line-height:1.5;max-width:none}
+blockquote footer{font:600 1.05rem var(--cond);color:var(--muted)}
+blockquote.grande{background:var(--space);color:var(--space-ink);border-color:var(--space)}
+blockquote.grande p{font-size:clamp(1.25rem,2.6vw,1.6rem)}
+blockquote.grande footer{color:var(--space-muted)}
+
+/* Scala delle distanze */
+.scala{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+.scala li{display:grid;grid-template-columns:minmax(9rem,13rem) minmax(0,1fr);gap:1rem;align-items:center}
+.scala .nome{font:600 1.1rem/1.2 var(--cond)}
+.scala .nome small{display:block;font-weight:500;color:var(--muted)}
+.barra{height:1.6rem;background:var(--ocean);border-radius:3px;width:var(--w);display:flex;align-items:center;justify-content:flex-end;padding-right:.5rem;color:#fff;font:600 1rem var(--cond);white-space:nowrap;min-width:5.5rem}
+.nota{font:500 1rem var(--cond);color:var(--muted)}
+
+/* Salita da Roma */
+.salita{display:grid;grid-template-columns:minmax(0,1fr) minmax(16rem,22rem);gap:1.5rem;align-items:start}
+.mappa{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--space);aspect-ratio:4/3}
+.mappa iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.pannello{display:grid;gap:1rem}
+.quota{font:700 1.8rem/1.1 var(--cond)}
+.quota-testo{min-height:5.5em}
+.livelli{list-style:none;margin:0;padding:0;display:grid;gap:.25rem}
+.livelli button{width:100%;text-align:left;font:600 1.08rem var(--cond);background:transparent;color:var(--ink);border:1px solid transparent;border-radius:5px;padding:.3rem .6rem;cursor:pointer}
+.livelli button:hover{border-color:var(--line)}
+.livelli button[aria-current="true"]{background:var(--ink);color:var(--paper)}
+.comandi{display:flex;flex-wrap:wrap;gap:.5rem}
+.btn{font:600 1.08rem var(--cond);background:var(--ink);color:var(--paper);border:0;border-radius:6px;padding:.5rem 1rem;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.chiaro{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{font:600 1.05rem var(--cond);background:transparent;color:var(--ink);border:0;padding:.4rem .9rem;cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+details{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:.7rem 1.1rem}
+summary{font:600 1.15rem var(--cond);cursor:pointer;color:var(--ocean)}
+details > *:not(summary){margin-top:.6rem}
+details ol,details ul{padding-left:1.3rem;display:grid;gap:.3rem;margin-bottom:.2rem}
+
+
+/* Domande finali */
+.domande{margin:0;padding-left:1.6rem;display:grid;gap:.9rem}
+.domande li::marker{font:700 1.3rem var(--cond);color:var(--ocean)}
+.domande li{font-size:1.15rem}
+
+/* Attività */
+.attivita{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr));gap:1rem}
+.attivita a{display:grid;gap:.3rem;height:100%;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:1rem 1.2rem;text-decoration:none;color:inherit}
+.attivita a:hover{border-color:var(--ocean)}
+.attivita .n{font:700 1rem var(--cond);color:var(--ocean)}
+.attivita b{font:700 1.35rem/1.15 var(--cond)}
+.attivita span.d{color:var(--muted);font-size:.98rem}
+
+.crediti{border-top:1px solid var(--line);padding-block:1.6rem 3rem;font-size:.92rem;color:var(--muted)}
+.crediti .wrap{display:grid;gap:.4rem}
+
+/* Ingrandimento foto */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.9);display:grid;place-items:center;padding:24px;cursor:zoom-out}
+.lb img{max-height:calc(100vh - 80px);width:auto;border-radius:4px}
+.lb p{color:#dde5ea;font:500 1.05rem var(--cond);text-align:center;margin-top:.6rem;max-width:none}
+[hidden]{display:none!important}
+
+@media (max-width:800px){
+  .copertina .wrap,.tappa,.salita{grid-template-columns:1fr}
+  .tappa:nth-child(even) figure{order:0}
+  .scala li{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="copertina">
+  <div class="wrap">
+    <p class="nav-su"><a href="../../index.html#modulo-prima-i">← Geografia, classe prima</a></p>
+    <div>
+      <p class="sopra">Perché la geografia</p>
+      <h1>La Terra vista dalla Luna</h1>
+      <p class="lead">Per migliaia di anni nessuno ha potuto vedere la Terra da fuori. Poi, nel Novecento, satelliti e astronauti si sono allontanati abbastanza da guardarla tutta insieme. Che cosa hanno visto? E che cosa è cambiato nel nostro modo di pensare il pianeta?</p>
+    </div>
+    <figure>
+      <img src="img/terra-dalla-luna-2015.jpg" alt="La Terra, azzurra e bianca di nuvole, sopra l'orizzonte grigio della Luna">
+      <figcaption>La Terra sopra l'orizzonte della Luna, fotografata nel 2015 dalla sonda Lunar Reconnaissance Orbiter (NASA).</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main>
+
+<section class="blocco" aria-labelledby="t-prima">
+  <div class="wrap">
+    <h2 id="t-prima">Prima dei razzi</h2>
+    <p class="lead">Dalla finestra, da un monte o da un aereo vediamo sempre e solo un pezzo di Terra. Per immaginarla tutta intera, per secoli le persone hanno avuto un solo strumento: le carte geografiche. Le hanno disegnate mettendo insieme misure, racconti di viaggiatori e calcoli, senza mai poter controllare «dall'alto» se erano giuste.</p>
+    <p><a class="btn chiaro" href="attivita/storia-della-cartografia.html">Scopri la storia della cartografia</a></p>
+  </div>
+</section>
+
+<section class="blocco" aria-labelledby="t-chi" style="background:var(--paper)">
+  <div class="wrap">
+    <h2 id="t-chi">Chi ha guardato la Terra da fuori</h2>
+    <p class="lead">In poco più di dieci anni, dal 1960 al 1972, il punto di vista si allontana sempre di più: da poche centinaia di chilometri fino alla Luna. Clicca sulle foto per ingrandirle.</p>
+
+    <div class="tappe">
+      <article class="tappa">
+        <figure>
+          <button type="button" data-lb="img/tiros-1-1960.jpg" data-cap="1° aprile 1960 · la prima immagine televisiva della Terra, dal satellite TIROS I (NASA)"><img class="intera" src="img/tiros-1-1960.jpg" alt="Immagine televisiva sgranata in bianco e nero: nuvole e il bordo curvo della Terra" loading="lazy"></button>
+          <figcaption>Satellite TIROS I, circa 700 km di altezza.</figcaption>
+        </figure>
+        <div class="testo">
+          <span class="anno">1960</span>
+          <p class="chi">La prima a guardare è una macchina</p>
+          <p>Il satellite meteorologico TIROS I trasmette a terra la prima immagine televisiva della Terra vista dallo spazio. È sgranata, in bianco e nero: si vedono le nuvole e il bordo curvo del pianeta. A bordo non c'è nessuno.</p>
+          <p class="domanda">Che cosa riesci a riconoscere in questa immagine?</p>
+        </div>
+      </article>
+
+      <article class="tappa">
+        <figure>
+          <div class="senza-foto"><div><span>108 minuti</span><small>il primo giro intorno alla Terra</small></div></div>
+        </figure>
+        <div class="testo">
+          <span class="anno">1961</span>
+          <p class="chi">Il primo essere umano nello spazio</p>
+          <p>Il 12 aprile il sovietico Jurij Gagarin, a bordo della navicella Vostok 1, compie un giro completo intorno alla Terra in 108 minuti. Dal finestrino vede la curvatura del pianeta e la sottile fascia azzurra dell'atmosfera. Al momento della partenza disse una sola parola, diventata famosa.</p>
+          <blockquote><p>«Andiamo!»</p><footer>Jurij Gagarin, alla partenza (in russo: «Pojechali!»)</footer></blockquote>
+        </div>
+      </article>
+
+      <article class="tappa">
+        <figure>
+          <button type="button" data-lb="img/earthrise-1968.jpg" data-cap="24 dicembre 1968 · Earthrise, la Terra che sorge, missione Apollo 8 (NASA)"><img src="img/earthrise-1968.jpg" alt="Foto in bianco e nero: la Terra, illuminata a metà, sorge sopra l'orizzonte grigio della Luna" loading="lazy"></button>
+          <figcaption>Missione Apollo 8, dall'orbita della Luna, a circa 380.000 km dalla Terra.</figcaption>
+        </figure>
+        <div class="testo">
+          <span class="anno">1968</span>
+          <p class="chi">La Terra che sorge</p>
+          <p>La vigilia di Natale tre astronauti americani, Frank Borman, Jim Lovell e Bill Anders, sono i primi a girare intorno alla Luna. Dal finestrino vedono la Terra «sorgere» sopra l'orizzonte lunare: piccola, colorata, sola nel buio. La foto a colori scattata pochi istanti dopo diventerà una delle immagini più famose del Novecento.</p>
+          <blockquote><p>«Siamo venuti fin qui per esplorare la Luna, e la cosa più importante è che abbiamo scoperto la Terra.»</p><footer>Bill Anders, Apollo 8 (traduzione)</footer></blockquote>
+        </div>
+      </article>
+
+      <article class="tappa">
+        <figure>
+          <button type="button" data-lb="img/blue-marble-1972.jpg" data-cap="7 dicembre 1972 · Blue Marble, la biglia blu, missione Apollo 17 (NASA)"><img class="intera" src="img/blue-marble-1972.jpg" alt="La Terra intera e tutta illuminata: Africa, penisola arabica, Madagascar e i ghiacci dell'Antartide" loading="lazy"></button>
+          <figcaption>Missione Apollo 17, a circa 29.000 km dalla Terra.</figcaption>
+        </figure>
+        <div class="testo">
+          <span class="anno">1972</span>
+          <p class="chi">La Terra intera, per la prima volta</p>
+          <p>Gli astronauti dell'Apollo 17, diretti verso la Luna, hanno il Sole alle spalle: per questo vedono la Terra tutta illuminata, come un disco intero. È la «biglia blu». Dopo questa missione nessuno è più sceso sulla Luna.</p>
+          <p class="domanda">Quali continenti e quali mari riconosci? Dov'è l'Italia?</p>
+        </div>
+      </article>
+
+      <article class="tappa">
+        <figure>
+          <button type="button" data-lb="img/terra-dalla-luna-2015.jpg" data-cap="2015 · la Terra sopra l'orizzonte della Luna, sonda Lunar Reconnaissance Orbiter (NASA)"><img src="img/terra-dalla-luna-2015.jpg" alt="La Terra sopra l'orizzonte della Luna: si riconoscono l'Africa con il Sahara e l'Oceano Atlantico" loading="lazy"></button>
+          <figcaption>Sonda Lunar Reconnaissance Orbiter, in orbita intorno alla Luna.</figcaption>
+        </figure>
+        <div class="testo">
+          <span class="anno">Oggi</span>
+          <p class="chi">La Terra fotografata ogni giorno</p>
+          <p>Oggi intorno alla Terra girano la Stazione spaziale internazionale, a circa 400 km di altezza, e migliaia di satelliti. Grazie a loro possiamo guardare immagini dettagliate della superficie terrestre, realizzare carte geografiche e usare i navigatori. Un'astronauta italiana ha vissuto a lungo lassù: Samantha Cristoforetti.</p>
+        </div>
+      </article>
+    </div>
+
+    <blockquote class="grande">
+      <p>«A parte l'estremo Nord e l'estremo Sud del pianeta, abbiamo sorvolato ogni lembo di terra, ogni pezzo di mare, ogni montagna e ogni deserto, ogni città e ogni porto. Abbiamo assistito a uno spettacolo muto, in perpetuo rinnovamento, andato in scena per miliardi di anni prima che spettatori umani vi posassero gli occhi.»</p>
+      <footer>Samantha Cristoforetti, astronauta dell'Agenzia Spaziale Europea, <i>Diario di un'apprendista astronauta</i></footer>
+    </blockquote>
+
+    <blockquote>
+      <p>«La vastità della solitudine quassù è impressionante, e ti fa capire che cosa hai laggiù, sulla Terra.»</p>
+      <footer>Jim Lovell, Apollo 8, durante la diretta televisiva dall'orbita della Luna, 24 dicembre 1968 (traduzione)</footer>
+    </blockquote>
+  </div>
+</section>
+
+<section class="blocco" aria-labelledby="t-scala">
+  <div class="wrap">
+    <h2 id="t-scala">Quanto lontano?</h2>
+    <p class="lead">Più ci si allontana, più Terra si vede, ma più piccola diventa. Attenzione: le barre non sono in proporzione. Se la barra dell'aereo fosse lunga 1 cm, quella della Luna dovrebbe essere lunga 384 metri!</p>
+    <ul class="scala">
+      <li><span class="nome">Un aereo di linea<small>vede una regione</small></span><span class="barra" style="--w:18%">10 km</span></li>
+      <li><span class="nome">Gagarin, 1961<small>vede la curvatura</small></span><span class="barra" style="--w:44%">300 km</span></li>
+      <li><span class="nome">Stazione spaziale<small>vede un Paese alla volta</small></span><span class="barra" style="--w:47%">400 km</span></li>
+      <li><span class="nome">TIROS I, 1960<small>vede il bordo curvo</small></span><span class="barra" style="--w:51%">700 km</span></li>
+      <li><span class="nome">Blue Marble, 1972<small>vede la Terra intera</small></span><span class="barra" style="--w:80%">29.000 km</span></li>
+      <li><span class="nome">La Luna<small>vede una piccola Terra</small></span><span class="barra" style="--w:100%">384.000 km</span></li>
+    </ul>
+    <p class="nota">Anche da lontanissimo si vede al massimo metà della Terra: l'altra metà resta sempre nascosta dietro.</p>
+  </div>
+</section>
+
+<section class="blocco" aria-labelledby="t-roma" style="background:var(--paper)">
+  <div class="wrap">
+    <h2 id="t-roma">Saliamo da Roma</h2>
+    <p class="lead">Partiamo dal Colosseo e saliamo, un gradino alla volta, fino a vedere tutto il mondo. Premi «Avvia la salita» oppure scegli tu l'altezza.</p>
+    <div class="salita">
+      <div class="mappa"><iframe id="mappa" title="Mappa di Roma vista dall'alto" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+      <div class="pannello">
+        <div class="seg" role="group" aria-label="Tipo di mappa">
+          <button type="button" data-t="k" aria-pressed="true">Satellite</button>
+          <button type="button" data-t="p">Fisica</button>
+        </div>
+        <div>
+          <p class="quota" id="quota"></p>
+          <p class="quota-testo" id="quota-testo"></p>
+        </div>
+        <div class="comandi">
+          <button class="btn" type="button" id="avvia">Avvia la salita</button>
+          <button class="btn chiaro" type="button" id="giu" aria-label="Scendi">▼ Scendi</button>
+          <button class="btn chiaro" type="button" id="su" aria-label="Sali">▲ Sali</button>
+        </div>
+        <ol class="livelli" id="livelli"></ol>
+      </div>
+    </div>
+    <p><a class="btn chiaro" href="https://earth.google.com/web/@41.8902,12.4922,30a,22000000d,35y,0h,0t,0r" target="_blank" rel="noopener">Vedi la Terra come una sfera in Google Earth</a></p>
+    <details>
+      <summary>Per l'insegnante: come registrare un video della salita</summary>
+      <ol>
+        <li>Apri Google Earth (link qui sopra) oppure Google Maps in vista satellitare, sul Colosseo.</li>
+        <li>Avvia la registrazione dello schermo: su Mac premi <b>Cmd + Maiusc + 5</b>, su Windows <b>Win + Alt + R</b> (Xbox Game Bar).</li>
+        <li>Allontanati lentamente con la rotellina del mouse fino a vedere il globo intero, poi ferma la registrazione.</li>
+        <li>In Google Maps, attiva <b>Visualizzazione globo</b> nel menu Livelli: allontanandoti, la Terra diventa una sfera invece di un planisfero.</li>
+      </ol>
+    </details>
+  </div>
+</section>
+
+<section class="blocco" aria-labelledby="t-tempo">
+  <div class="wrap">
+    <h2 id="t-tempo">Una piccola storia dei viaggi nello spazio</h2>
+    <p class="lead">Dal primo satellite, nel 1957, al ritorno intorno alla Luna, nel 2026: tredici tappe da leggere scorrendo, mentre la foto cambia.</p>
+    <p><a class="btn" href="attivita/viaggi-nello-spazio.html">Apri la linea del tempo</a></p>
+  </div>
+</section>
+
+<section class="blocco" aria-labelledby="t-perche" style="background:var(--paper)">
+  <div class="wrap">
+    <h2 id="t-perche">E allora, perché la geografia?</h2>
+    <p class="lead">Quasi nessuno di noi andrà nello spazio. Ma la geografia ci dà gli strumenti per «vedere» la Terra anche da qui: carte, globi, foto dei satelliti, dati. Parliamone insieme.</p>
+    <ol class="domande">
+      <li>Che cosa hanno capito gli astronauti guardando la Terra da lontano, che da qui non si vede?</li>
+      <li>Prima delle foto dallo spazio, come facevano le persone a sapere com'era fatta la Terra?</li>
+      <li>Nella salita da Roma, a che punto non hai più riconosciuto la tua città? E l'Italia?</li>
+      <li>Quando usi un navigatore o guardi le previsioni del tempo, stai usando la geografia? In che modo?</li>
+    </ol>
+    <p><a class="btn" href="attivita/che-cosa-studia-la-geografia.html">Scopri che cosa studia la geografia</a></p>
+  </div>
+</section>
+
+<section class="blocco" id="attivita" aria-labelledby="t-att">
+  <div class="wrap">
+    <h2 id="t-att">Le attività</h2>
+    <p class="lead">Da fare in ordine, in classe o a casa.</p>
+    <ul class="attivita">
+      <li><a href="attivita/il-tuo-rapporto-con-la-geografia.html"><span class="n">Per cominciare</span><b>Il tuo rapporto con la geografia</b><span class="d">Un test di otto domande: che tipo di geografa o di geografo sei?</span></a></li>
+      <li><a href="attivita/che-cosa-studia-la-geografia.html"><span class="n">Per cominciare</span><b>Che cosa studia la geografia</b><span class="d">Le definizioni, con esempi vicini a Roma, e un esercizio per mettersi alla prova.</span></a></li>
+      <li><a href="attivita/come-si-studia-la-geografia.html"><span class="n">Per cominciare</span><b>Come si studia la geografia</b><span class="d">Sei consigli e il kit di geografia, da stampare e incollare sul quaderno.</span></a></li>
+      <li><a href="attivita/fase-1-chi-ha-visto-la-terra.html"><span class="n">Tappa 1</span><b>Chi ha visto la Terra</b><span class="d">Le foto più famose della Terra e la Terra che gira, vista dal satellite.</span></a></li>
+      <li><a href="attivita/fase-2-tre-modi-di-disegnare-il-mondo.html"><span class="n">Tappa 2</span><b>Tre modi di disegnare il mondo</b><span class="d">Tre carte del mondo a confronto: osserva e descrivi le differenze.</span></a></li>
+      <li><a href="attivita/fase-3-carte-sovrapposte-ed-emisferi.html"><span class="n">Tappa 3</span><b>Carte sovrapposte ed emisferi</b><span class="d">Mercatore, Peters ed Equal Earth una sull'altra; il globo e gli emisferi.</span></a></li>
+      <li><a href="attivita/fase-4-guardiamo-il-planisfero.html"><span class="n">Tappa 4</span><b>Guardiamo il planisfero</b><span class="d">Emisferi, Equatore, continenti e oceani: rispondi e controlla.</span></a></li>
+      <li><a href="attivita/fase-5-cruciverba.html"><span class="n">Tappa 5</span><b>Cruciverba</b><span class="d">Le parole della lezione, da soli o con la classe alla LIM.</span></a></li>
+      <li><a href="attivita/fase-6-carte-che-cambiano-forma.html"><span class="n">Se c'è tempo</span><b>Carte che cambiano forma</b><span class="d">Le anamorfosi: Paesi che si gonfiano o si sgonfiano in base a un dato.</span></a></li>
+      <li><a href="attivita/viaggi-nello-spazio.html"><span class="n">Linea del tempo</span><b>Una piccola storia dei viaggi nello spazio</b><span class="d">Dallo Sputnik ad Artemis II: scorri e la foto cambia.</span></a></li>
+      <li><a href="attivita/storia-della-cartografia.html"><span class="n">Approfondimento</span><b>La storia della cartografia</b><span class="d">Dalle tavolette di argilla alla carta Equal Earth.</span></a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer class="crediti">
+  <div class="wrap">
+    <p>Foto: NASA, in pubblico dominio (TIROS I, 1960; Earthrise, Apollo 8, 1968; Blue Marble, Apollo 17, 1972; Lunar Reconnaissance Orbiter, 2015). Mappe: Google Maps e Google Earth.</p>
+    <p>Citazione di Samantha Cristoforetti tratta da <i>Diario di un'apprendista astronauta</i>. Le citazioni degli astronauti americani sono tradotte dall'inglese.</p>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Foto ingrandita"><div><img id="lb-img" alt=""><p id="lb-cap"></p></div></div>
+
+<script>
+(function(){
+  /* Ingrandimento delle foto */
+  var lb = document.getElementById('lb'), lbImg = document.getElementById('lb-img'), lbCap = document.getElementById('lb-cap'), ultimo = null;
+  document.querySelectorAll('[data-lb]').forEach(function(b){
+    b.addEventListener('click', function(){
+      ultimo = b; lbImg.src = b.dataset.lb; lbImg.alt = b.querySelector('img').alt; lbCap.textContent = b.dataset.cap || '';
+      lb.hidden = false;
+    });
+  });
+  function chiudi(){ lb.hidden = true; lbImg.src = ''; if (ultimo) ultimo.focus(); }
+  lb.addEventListener('click', chiudi);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !lb.hidden) chiudi(); });
+
+  /* Salita da Roma: ogni gradino è uno zoom di Google Maps */
+  var LIV = [
+    {z:17, nome:'Il Colosseo', alt:'Poche centinaia di metri', t:'Come da un drone: si vedono le strade, gli alberi e le persone in fila per entrare.'},
+    {z:14, nome:'Il centro di Roma', alt:'Qualche chilometro', t:'Come dalla cima di un grattacielo altissimo: si riconosce il Tevere che attraversa la città.'},
+    {z:11, nome:'Roma e il mare', alt:'Circa 10 km', t:'Come dal finestrino di un aereo: la città è una macchia grigia, vicino c\'è il mar Tirreno.'},
+    {z:8, nome:'L\'Italia centrale', alt:'Un centinaio di chilometri', t:'Si vedono gli Appennini, i laghi vulcanici e la costa del Lazio.'},
+    {z:6, nome:'L\'Italia', alt:'Alcune centinaia di chilometri', t:'Più o meno quello che vede un astronauta dalla Stazione spaziale: la forma dello stivale, le Alpi, le isole.'},
+    {z:4, nome:'Europa e Mediterraneo', alt:'Qualche migliaio di chilometri', t:'L\'Italia è al centro del Mediterraneo, tra Europa e Africa.'},
+    {z:2, nome:'Tutto il mondo', alt:'Il mondo intero', t:'Attenzione: qui Google Maps stende la Terra su un planisfero (proiezione di Mercatore), e la Groenlandia sembra enorme. Per vederla come una sfera, apri Google Earth.'}
+  ];
+  var LAT = 41.8902, LON = 12.4922, i = 0, tipo = 'k', timer = null;
+  var frame = document.getElementById('mappa'), lista = document.getElementById('livelli');
+  LIV.forEach(function(l, n){
+    var li = document.createElement('li'), b = document.createElement('button');
+    b.type = 'button'; b.textContent = (n + 1) + '. ' + l.nome;
+    b.addEventListener('click', function(){ ferma(); vai(n); });
+    li.appendChild(b); lista.appendChild(li);
+  });
+  function vai(n){
+    i = Math.max(0, Math.min(LIV.length - 1, n));
+    var l = LIV[i];
+    frame.src = 'https://maps.google.com/maps?q=' + LAT + ',' + LON + '&z=' + l.z + '&t=' + tipo + '&output=embed';
+    document.getElementById('quota').textContent = l.nome;
+    document.getElementById('quota-testo').textContent = l.alt + '. ' + l.t;
+    lista.querySelectorAll('button').forEach(function(b, k){ b.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+    document.getElementById('giu').disabled = i === 0;
+    document.getElementById('su').disabled = i === LIV.length - 1;
+  }
+  function ferma(){ if (timer) { clearInterval(timer); timer = null; } document.getElementById('avvia').textContent = 'Avvia la salita'; }
+  document.getElementById('avvia').addEventListener('click', function(){
+    if (timer) { ferma(); return; }
+    vai(0); this.textContent = 'Ferma';
+    timer = setInterval(function(){ if (i >= LIV.length - 1) ferma(); else vai(i + 1); }, 4500);
+  });
+  document.getElementById('su').addEventListener('click', function(){ ferma(); vai(i + 1); });
+  document.getElementById('giu').addEventListener('click', function(){ ferma(); vai(i - 1); });
+  document.querySelectorAll('.seg button').forEach(function(b){
+    b.addEventListener('click', function(){
+      tipo = b.dataset.t;
+      document.querySelectorAll('.seg button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      vai(i);
+    });
+  });
+  vai(0);
+})();
+</script>
+</body>
+</html>
