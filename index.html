@@ -36,7 +36,8 @@
   <footer class="piede">didattica.amnesiacreativa.it</footer>
 </div>
 
-<script src="materiali.js"></script>
+<!-- Il catalogo viene sempre scaricato aggiornato (niente copie vecchie nel browser) -->
+<script>document.write('<script src="materiali.js?v=' + Date.now() + '"><\/script>');</script>
 <script src="assets/sito.js"></script>
 </body>
 </html>
