@@ -373,10 +373,10 @@ const MODULI = [
     materia: "italiano",
     classe: "prima",
     numero: "II",
-    titolo: "Generi letterari",
-    descrizione: "La narrazione in prosa e in versi: il genere epico. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica e Geografia.",
+    titolo: "Mito ed epica",
+    descrizione: "La narrazione in versi: il genere epico. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica e Geografia.",
     lezioni: [
-      { titolo: "La narrazione in prosa", attivita: [] },
+      { titolo: "Il mito", attivita: [] },
       { titolo: "L'epica: l'Iliade", attivita: [] },
       { titolo: "L'epica: l'Odissea", attivita: [] },
       { titolo: "L'epica: l'Eneide", attivita: [] },
@@ -387,6 +387,16 @@ const MODULI = [
     materia: "italiano",
     classe: "prima",
     numero: "III",
+    titolo: "Antologia",
+    descrizione: "Lettura e comprensione: la narrazione in prosa. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica e Geografia.",
+    lezioni: [
+      { titolo: "La narrazione in prosa", attivita: [] }
+    ]
+  },
+  {
+    materia: "italiano",
+    classe: "prima",
+    numero: "IV",
     titolo: "Laboratorio di scrittura",
     descrizione: "Produzione di varie tipologie testuali. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica e Geografia.",
     lezioni: [
@@ -396,8 +406,7 @@ const MODULI = [
       { titolo: "Il testo argomentativo", attivita: [] },
       { titolo: "L'analisi del testo narrativo", attivita: [] }
     ]
-  }
-,
+  },
 
   /* ---------------- ITALIANO · SECONDA ---------------- */
   {
@@ -418,20 +427,29 @@ const MODULI = [
     materia: "italiano",
     classe: "seconda",
     numero: "II",
-    titolo: "Generi letterari",
-    descrizione: "La narrazione in prosa e in versi, da Boccaccio ad Ariosto. Primo e secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
+    titolo: "Storia della letteratura",
+    descrizione: "Dalle origini al Cinquecento: prosa e versi. Primo e secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
     lezioni: [
-      { titolo: "La narrazione in prosa: Boccaccio", attivita: [] },
-      { titolo: "La narrazione in versi: Dante", attivita: [] },
-      { titolo: "La narrazione in versi: Petrarca", attivita: [] },
-      { titolo: "La narrazione in versi: Ariosto", attivita: [] },
-      { titolo: "Altri generi letterari (a scelta del docente)", attivita: [] }
+      { titolo: "Dante", attivita: [] },
+      { titolo: "Petrarca", attivita: [] },
+      { titolo: "Boccaccio", attivita: [] },
+      { titolo: "Ariosto", attivita: [] }
     ]
   },
   {
     materia: "italiano",
     classe: "seconda",
     numero: "III",
+    titolo: "Antologia",
+    descrizione: "Lettura e comprensione: le caratteristiche di alcuni generi letterari, a scelta del docente. Primo e secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
+    lezioni: [
+      { titolo: "I generi letterari (a scelta del docente)", attivita: [] }
+    ]
+  },
+  {
+    materia: "italiano",
+    classe: "seconda",
+    numero: "IV",
     titolo: "Laboratorio di scrittura",
     descrizione: "Produzione di varie tipologie testuali e analisi del testo. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica e Geografia.",
     lezioni: [
@@ -447,7 +465,7 @@ const MODULI = [
   {
     materia: "italiano",
     classe: "seconda",
-    numero: "IV",
+    numero: "V",
     titolo: "Latino per l'educazione linguistica (LEL)",
     descrizione: "Opzionale ma curricolare (Nuove Indicazioni Nazionali): il docente decide se inserirlo nella propria programmazione. Primo e secondo quadrimestre.",
     lezioni: [
@@ -458,8 +476,7 @@ const MODULI = [
       { titolo: "La seconda declinazione e l'indicativo presente", attivita: [] },
       { titolo: "Gli aggettivi possessivi", attivita: [] }
     ]
-  }
-,
+  },
 
   /* ---------------- ITALIANO · TERZA ---------------- */
   {
@@ -484,17 +501,12 @@ const MODULI = [
     materia: "italiano",
     classe: "terza",
     numero: "II",
-    titolo: "Generi letterari",
+    titolo: "Storia della letteratura",
     descrizione: "Dall'Ottocento ai giorni nostri. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica, Arte e Immagine, Musica, Geografia, Religione e Tecnologia.",
     lezioni: [
       { titolo: "La poesia lirica: Leopardi", attivita: [] },
       { titolo: "La poesia patriottica", attivita: [] },
-      { titolo: "Il racconto autobiografico", attivita: [] },
       { titolo: "Il romanzo storico: Manzoni", attivita: [] },
-      { titolo: "Il romanzo di formazione", attivita: [] },
-      { titolo: "Il romanzo psicologico-sociale", attivita: [] },
-      { titolo: "Il romanzo di fantascienza", attivita: [] },
-      { titolo: "Il teatro", attivita: [] },
       { titolo: "La letteratura contemporanea", attivita: [] }
     ]
   },
@@ -502,6 +514,20 @@ const MODULI = [
     materia: "italiano",
     classe: "terza",
     numero: "III",
+    titolo: "Antologia",
+    descrizione: "Lettura e comprensione: i generi della narrativa e il teatro. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica, Arte e Immagine, Musica, Geografia, Religione e Tecnologia.",
+    lezioni: [
+      { titolo: "Il racconto autobiografico", attivita: [] },
+      { titolo: "Il romanzo di formazione", attivita: [] },
+      { titolo: "Il romanzo psicologico-sociale", attivita: [] },
+      { titolo: "Il romanzo di fantascienza", attivita: [] },
+      { titolo: "Il teatro", attivita: [] }
+    ]
+  },
+  {
+    materia: "italiano",
+    classe: "terza",
+    numero: "IV",
     titolo: "Laboratorio di scrittura",
     descrizione: "Produzione di varie tipologie testuali, parafrasi e analisi del testo. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica, Geografia, Arte e Immagine e Tecnologia.",
     lezioni: [
@@ -517,7 +543,7 @@ const MODULI = [
   {
     materia: "italiano",
     classe: "terza",
-    numero: "IV",
+    numero: "V",
     titolo: "Latino per l'educazione linguistica (LEL)",
     descrizione: "Opzionale ma curricolare (Nuove Indicazioni Nazionali): il docente decide se inserirlo nella propria programmazione. Primo e secondo quadrimestre.",
     lezioni: [
