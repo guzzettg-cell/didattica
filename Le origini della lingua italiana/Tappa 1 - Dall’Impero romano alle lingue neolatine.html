@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tappa 1 · Dall'Impero romano alle lingue neolatine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,600;0,800;1,400&family=Alegreya+Sans:wght@400;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#FAF8F3; --ink:#2A2420; --soft:#6B625A; --lapis:#233D8C; --lapis-ink:#FFFFFF;
+  --gold:#B8892B; --verde:#3E7B6A; --rubric:#A3291F; --tint:#EEF1F8; --line:#DDD6CA;
+  --ok:#2F7A4F; --no:#A3291F; --land:#F1EDE4; --sea:#DCE6F0; --viola:#7A4E8C; --anglo:#5E8A2A; --arabo:#C98AA6; --arabo-ink:#94446B;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --page:#17181D; --ink:#ECE6DC; --soft:#ABA397; --lapis:#8FA6F0; --lapis-ink:#10131C;
+    --gold:#D9AE55; --verde:#7CC1AC; --rubric:#E07A6E; --tint:#21253A; --line:#34363F;
+    --ok:#7CC79A; --no:#E07A6E; --land:#2A2B31; --sea:#1B2333; --viola:#C49AD6; --anglo:#9BC25A; --arabo:#9C5F7C; --arabo-ink:#E3A9C5;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#17181D; --ink:#ECE6DC; --soft:#ABA397; --lapis:#8FA6F0; --lapis-ink:#10131C;
+  --gold:#D9AE55; --verde:#7CC1AC; --rubric:#E07A6E; --tint:#21253A; --line:#34363F;
+  --ok:#7CC79A; --no:#E07A6E; --land:#2A2B31; --sea:#1B2333; --viola:#C49AD6; --anglo:#9BC25A; --arabo:#9C5F7C; --arabo-ink:#E3A9C5;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--page);color:var(--ink);font-family:"Alegreya",Georgia,"Times New Roman",serif;font-size:1.15rem;line-height:1.6}
+img,svg{max-width:100%}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.25rem}
+h1,h2,h3{font-weight:800;line-height:1.15;margin:0}
+h2{font-size:clamp(1.6rem,4.5vw,2.1rem);margin:3.5rem 0 1rem;color:var(--lapis)}
+h3{font-size:1.25rem;margin:1.6rem 0 .4rem}
+p{margin:0 0 1rem}
+.ui{font-family:"Alegreya Sans",system-ui,-apple-system,sans-serif}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* hero */
+header{background:var(--lapis);color:var(--lapis-ink);padding:3rem 0 2.5rem}
+.hero{display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:center}
+.capo{font-family:"UnifrakturMaguntia",serif;font-size:clamp(6rem,22vw,9.5rem);line-height:.8;color:var(--gold);
+  border:3px solid var(--gold);padding:.5rem .9rem .9rem;border-radius:4px;animation:gild 1.4s ease-out both}
+@keyframes gild{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+header h1{font-size:clamp(1.9rem,6vw,3rem)}
+header p{margin:.6rem 0 0;font-style:italic;opacity:.9}
+nav{border-bottom:1px solid var(--line);overflow-x:auto}
+nav ol{display:flex;gap:1.2rem;list-style:none;margin:0 auto;padding:.8rem 1.25rem;max-width:46rem;white-space:nowrap;font-size:.95rem}
+nav a{color:var(--soft);text-decoration:none}
+nav a:hover{color:var(--lapis)}
+
+/* novità */
+.novita{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.75rem;margin:1.25rem 0}
+.flip{background:none;border:1.5px solid var(--line);border-radius:6px;padding:1rem;text-align:left;color:var(--ink);min-height:8.5rem}
+.flip b{display:block;font-size:1.15rem;color:var(--lapis)}
+.flip .prima{color:var(--soft);font-size:.95rem}
+.flip .dopo{display:none;font-size:.95rem}
+.flip[aria-pressed="true"]{border-color:var(--gold);background:var(--tint)}
+.flip[aria-pressed="true"] .prima{text-decoration:line-through}
+.flip[aria-pressed="true"] .dopo{display:block}
+.hint{font-size:.9rem;color:var(--soft)}
+
+/* lingue */
+.albero{margin:1.5rem 0;overflow-x:auto}
+.albero svg{display:block;min-width:30rem;width:100%;height:auto}
+.albero text{font-family:"Alegreya Sans",sans-serif;fill:var(--ink)}
+
+/* mappa */
+.mappa{margin:1.5rem 0;border:1.5px solid var(--line);border-radius:6px;overflow:hidden;background:var(--sea)}
+.mappa svg{display:block;width:100%;height:auto}
+.mappa .terra{fill:var(--land)}
+.mappa .costa{fill:none;stroke:var(--soft);stroke-width:.8;opacity:.6}
+.mappa text{font-family:"Alegreya Sans",sans-serif;font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--land);stroke-width:4px;stroke-linejoin:round}
+.mappa text.mare{fill:var(--soft);stroke:var(--sea);font-weight:400;font-style:italic}
+.controlli{display:flex;gap:.9rem;align-items:center;margin:1rem 0 .75rem}
+.play{border:none;background:var(--lapis);color:var(--lapis-ink);border-radius:999px;padding:.45rem 1.1rem;font-weight:700;min-width:6.5rem}
+.controlli input{flex:1;accent-color:var(--gold);height:2rem}
+.mappa text.anno{font-family:"Alegreya",serif;font-weight:800;fill:var(--lapis);stroke:var(--sea);stroke-width:5px}
+.spiega h3{margin-top:.6rem;color:var(--lapis)}
+.spiega{min-height:9rem}
+.domanda{font-size:1.25rem;font-weight:600;margin:.8rem 0 .5rem}
+.domanda::before{content:"?";display:inline-grid;place-items:center;width:1.6rem;height:1.6rem;border-radius:50%;background:var(--gold);color:var(--page);font-weight:800;margin-right:.5rem;font-size:1rem;vertical-align:.1rem}
+.rivela{border:1.5px solid var(--lapis);background:none;color:var(--lapis);border-radius:999px;padding:.3rem 1rem;font-size:.95rem}
+.mappa.celato text:not(.mare):not(.fisso){visibility:hidden}
+.legenda.celato{visibility:hidden}
+.risposta{border-left:3px solid var(--lapis);padding-left:1rem;margin-top:.6rem}
+.legenda{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.95rem;margin-top:.5rem}
+.legenda span::before{content:"";display:inline-block;width:.85rem;height:.85rem;border-radius:2px;margin-right:.35rem;vertical-align:-.1rem;background:var(--c)}
+
+.periodi{position:relative;margin:1rem 0 .5rem}
+.asse{display:grid;grid-template-columns:7.5rem 1fr;font-size:.8rem;color:var(--soft)}
+.asse .scala{position:relative;height:1.2rem}
+.asse .scala span{position:absolute;transform:translateX(-50%)}
+.riga{display:grid;grid-template-columns:7.5rem 1fr;align-items:start;padding:.55rem 0;border-top:1px solid var(--line)}
+.riga b{font-size:1rem;padding-top:.1rem}
+.traccia-l{position:relative;height:1.3rem}
+.barra{position:absolute;top:.3rem;height:.7rem;border-radius:4px;opacity:.45}
+.punto{position:absolute;top:.15rem;width:1rem;height:1rem;transform:translateX(-50%);border:2px solid var(--page)}
+.punto.doc{border-radius:50%}
+.punto.lett{transform:translateX(-50%) rotate(45deg);width:.85rem;height:.85rem;top:.22rem}
+.nota{grid-column:2;font-size:.9rem;color:var(--soft);margin:.2rem 0 0;line-height:1.4}
+@media (max-width:560px){.asse,.riga{grid-template-columns:6rem 1fr}.nota{grid-column:1/-1}}
+.cursore{position:absolute;top:0;bottom:0;width:2px;background:var(--rubric);pointer-events:none}
+.sim::before{background:var(--ink)!important}
+.sim.doc::before{border-radius:50%!important}
+.sim.lett::before{transform:rotate(45deg) scale(.8)}
+
+.annobox{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin:.25rem 0 .6rem}
+.anno-grande{font-weight:800;font-size:clamp(1.7rem,5vw,2.2rem);line-height:1;color:var(--lapis);font-variant-numeric:tabular-nums;min-width:5.5ch}
+.epoca{font-family:"Alegreya Sans",sans-serif;font-size:1.05rem;color:var(--soft)}
+
+.salto{border:1.5px solid var(--line);background:none;color:var(--ink);border-radius:50%;width:2.3rem;height:2.3rem;font-size:1.4rem;line-height:1;padding:0}
+.attesa{flex-basis:100%;height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.attesa div{height:100%;width:0;background:var(--gold)}
+
+.spinta{animation:spinge 1.1s ease-in-out infinite alternate}
+@keyframes spinge{from{transform:translate(0,0)}to{transform:translate(var(--dx),var(--dy))}}
+
+.parole{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.4rem 1.2rem;margin:.6rem 0}
+.parole h4{margin:.3rem 0 0;font-size:.95rem;color:var(--anglo)}
+.parole p{margin:0;font-size:1rem}
+.parole div:last-child{grid-column:1/-1}
+.gioco-tit{font-weight:600;margin:.8rem 0 .4rem}
+.gioco{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.8rem}
+.gioco button{border:1.5px solid var(--line);background:none;color:var(--ink);border-radius:999px;padding:.3rem .9rem;font-size:1rem}
+.gioco button.L{border-color:var(--anglo);color:var(--anglo);font-weight:700}
+.gioco button.L::after{content:" (longobarda)";font-size:.8em;font-weight:400}
+.gioco button.A{border-color:var(--arabo-ink);color:var(--arabo-ink);font-weight:700}
+.gioco button.A::after{content:" (araba)";font-size:.8em;font-weight:400}
+.parole h4.ar{color:var(--arabo-ink)}
+.gioco button.T{border-color:var(--lapis);color:var(--lapis)}
+.gioco button.T::after{content:" (latina)";font-size:.8em}
+.spiega a{color:var(--lapis)}
+
+.cartina-it{max-width:27rem;margin:.8rem auto 1rem}
+.affianco{display:grid;grid-template-columns:1fr;gap:0 1.4rem;align-items:start}
+@media (min-width:700px){.affianco{grid-template-columns:.85fr 1.15fr}.affianco .cartina-it{margin:.2rem 0 0}}
+.cartina-it svg{display:block;width:100%;height:auto;border:1.5px solid var(--line);border-radius:6px}
+.cartina-it text{font-family:"Alegreya Sans",sans-serif;font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--land);stroke-width:3.5px;stroke-linejoin:round}
+.cartina-it figcaption{justify-content:center}
+
+.topo-tit{font-size:1.15rem;margin:1.2rem 0 .3rem}
+.radici{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0 .8rem}
+.radici button{border:1.5px solid var(--c);background:none;color:var(--ink);border-radius:999px;padding:.25rem .8rem;font-size:.95rem}
+.radici button b{color:var(--c)}
+.radici button.on{background:var(--c);color:var(--page)}
+.radici button.on b{color:var(--page)}
+.cartina-sic{margin:0}
+.cartina-sic svg{display:block;width:100%;height:auto;border:1.5px solid var(--line);border-radius:6px}
+.cartina-sic text{font-family:"Alegreya Sans",sans-serif;font-weight:700;fill:var(--ink);paint-order:stroke;stroke:var(--land);stroke-width:3px;stroke-linejoin:round}
+.cartina-sic text.pal{font-weight:400;fill:var(--soft)}
+.topo{cursor:pointer;transition:opacity .3s}
+.topo.spento{opacity:.15}
+.topo.sel circle{r:9}
+.topo:focus{outline:none}.topo:focus-visible circle{stroke:var(--gold);stroke-width:3}
+.topo-scheda{border-left:3px solid var(--arabo-ink);padding-left:1rem;min-height:6rem}
+.topo-scheda h4{margin:.1rem 0 .3rem;font-size:1.2rem;color:var(--arabo-ink)}
+.topo-scheda p{margin:0 0 .4rem;font-size:1rem}
+@media (min-width:700px){.topo-box{grid-template-columns:1.25fr .75fr}}
+
+.video{display:inline-block;background:var(--rubric);color:var(--page)!important;text-decoration:none;border-radius:999px;padding:.4rem 1.1rem;font-family:"Alegreya Sans",sans-serif;font-weight:700}
+.video:hover{opacity:.9}
+
+.indizi{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.5rem;margin:.5rem 0 .8rem}
+.meta{border:1.5px dashed var(--gold);background:none;color:var(--ink);border-radius:6px;padding:.5rem .7rem;text-align:left;font:inherit;font-size:1rem}
+.meta::after{content:"?";display:block;color:var(--soft);font-size:.9rem}
+.meta.on{border-style:solid;background:var(--tint)}
+.meta.on::after{content:"= " attr(data-sol);color:var(--verde);font-weight:700}
+.sol{background:var(--tint);padding:.7rem 1rem;border-radius:6px}
+.fine1{margin-top:1.4rem;border:2px solid var(--lapis);border-radius:8px;padding:1rem 1.2rem}
+.fine1 p{margin-bottom:.7rem}
+.prosegui{border:none;background:var(--lapis);color:var(--lapis-ink);border-radius:999px;padding:.45rem 1.2rem;font-weight:700;font-size:1rem}
+
+.guida{margin:.4rem 0 .7rem;padding-left:1.4rem}
+.guida li{margin:.35rem 0;padding:.4rem .7rem;background:var(--tint);border-radius:6px}
+.guida li::marker{color:var(--gold);font-weight:800}
+.prossimo{border:1.5px solid var(--gold);background:none;color:var(--ink);border-radius:999px;padding:.3rem 1rem;font-size:.95rem;margin-bottom:.6rem}
+
+.tavolo{margin:.6rem 0 .2rem;max-width:26rem}
+.tavolo svg{display:block;width:100%;height:auto;border-radius:6px}
+
+.dimensione{position:fixed;top:calc(env(safe-area-inset-top,0px) + .6rem);right:.6rem;z-index:20;display:flex;background:var(--page);border:1.5px solid var(--line);border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.18);overflow:hidden}
+.dimensione button{border:none;background:none;color:var(--ink);font-weight:700;padding:.35rem .7rem;min-width:2.6rem;font-size:16px}
+.dimensione button+button{border-left:1px solid var(--line)}
+.dimensione button:disabled{opacity:.35;cursor:default}
+#tMeno{font-size:13px}#tPiu{font-size:19px}
+
+/* placito */
+.pergamena{border-left:4px solid var(--gold);background:var(--tint);padding:1.25rem 1.25rem 1rem;margin:1.25rem 0;border-radius:0 6px 6px 0}
+.verso{font-size:1.35rem;font-style:italic;line-height:2.1}
+.w{background:none;border:none;border-bottom:2px dotted var(--gold);padding:0 .1rem;color:var(--ink);font-style:italic}
+.w[aria-pressed="true"]{border-bottom-style:solid;color:var(--rubric)}
+.w[aria-pressed="true"]::after{content:" (" attr(data-oggi) ")";font-style:normal;font-size:.85em;color:var(--verde)}
+
+/* francia */
+.due{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1.25rem}
+.due > div{border-top:3px solid var(--lapis);padding-top:.75rem}
+.due > div:nth-child(2){border-color:var(--rubric)}
+
+blockquote{margin:1.25rem 0;padding:0 0 0 1.25rem;border-left:3px solid var(--rubric);font-style:italic}
+blockquote cite{display:block;font-size:.9rem;font-style:normal;color:var(--soft);margin-top:.3rem}
+
+/* linea del tempo */
+.tempo{list-style:none;margin:1.5rem 0;padding:0;position:relative}
+.tempo::before{content:"";position:absolute;left:5.2rem;top:.4rem;bottom:.4rem;width:2px;background:var(--gold)}
+.tempo li{display:grid;grid-template-columns:4.6rem 1fr;gap:1.4rem;margin-bottom:1.1rem;position:relative}
+.tempo li::after{content:"";position:absolute;left:4.95rem;top:.45rem;width:.6rem;height:.6rem;border-radius:50%;background:var(--page);border:2px solid var(--gold)}
+.anno{font-weight:800;color:var(--lapis);text-align:right;font-size:1rem}
+.tempo span{font-size:1rem}
+
+/* domande guida */
+.dg{margin:1.25rem 0;border-bottom:1px solid var(--line);padding-bottom:1rem}
+.dg label{display:block;font-weight:600;margin-bottom:.4rem}
+textarea{width:100%;min-height:5.5rem;border:1.5px solid var(--line);border-radius:6px;background:transparent;color:var(--ink);font:inherit;font-size:1rem;padding:.6rem}
+.traccia-btn{background:none;border:none;color:var(--verde);padding:.3rem 0;font-size:.95rem;text-decoration:underline}
+.traccia{display:none;font-size:.98rem;color:var(--soft);margin-top:.3rem}
+.traccia.on{display:block}
+
+/* quiz */
+.q{margin:1.4rem 0}
+.q p{font-weight:600;margin-bottom:.5rem}
+.opts{display:flex;flex-wrap:wrap;gap:.5rem}
+.opt{border:1.5px solid var(--line);background:none;color:var(--ink);border-radius:999px;padding:.4rem 1rem;font-size:1rem}
+.opt.giusta{border-color:var(--ok);color:var(--ok);font-weight:700}
+.opt.sbagliata{border-color:var(--no);color:var(--no);text-decoration:line-through}
+.esito{font-size:.95rem;margin-top:.4rem;min-height:1.4rem}
+.punteggio{position:sticky;bottom:env(safe-area-inset-bottom,0px);background:var(--lapis);color:var(--lapis-ink);padding:.7rem 1.25rem;text-align:center;font-weight:700;margin-top:2rem;border-radius:6px 6px 0 0}
+.reset{background:none;border:1.5px solid var(--lapis-ink);color:var(--lapis-ink);border-radius:999px;padding:.15rem .8rem;margin-left:.8rem;font-size:.9rem}
+footer{padding:3rem 0 4rem;color:var(--soft);font-size:.9rem}
+
+.tappa-n{display:block;margin:0 0 .45rem!important;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;font-style:normal!important;opacity:.85}
+main section>h2:first-child{margin-top:2.2rem}
+
+/* tappa 1: mappa grande a sinistra, data e domande di lato; risposte lunghe sotto la cartina */
+main.wrap{max-width:82rem}
+#mappa>h2,#mappa>p{max-width:46rem}
+.scena{display:grid;gap:1rem 1.6rem;align-items:start}
+.pannello .controlli{flex-wrap:wrap;margin-top:0}
+.pannello .controlli input{flex-basis:100%}
+.pannello .affianco{grid-template-columns:1fr!important}
+.spiega.in-sotto>.domanda,.spiega.in-sotto>.rivela{display:none}
+.spiega.in-sotto{min-height:0}
+.lato .giu a{color:var(--lapis);font-weight:700}
+.sotto{margin-top:1.6rem;border-top:3px solid var(--lapis);padding-top:.4rem;scroll-margin-top:1rem}
+.sotto .risposta{border-left:0;padding-left:0}
+.sotto .risposta>h3{font-size:clamp(1.4rem,3.5vw,1.8rem)}
+.sotto .risposta>p,.sotto .extra>p,.sotto .extra>h3{max-width:50rem}
+.extra{margin-top:1.4rem}
+.box-lingua{border-left:3px solid var(--lapis);padding:.1rem 0 .1rem .9rem;margin:.8rem 0}
+.box-lingua h3{font-size:1.1rem;margin:0}
+.extra .tempo{max-width:50rem}
+.lato-extra{margin-top:1rem;border-top:1.5px solid var(--line);padding-top:.6rem}
+.lato-extra .lx-tit{margin:0 0 .2rem;color:var(--anglo);font-size:1.1rem}
+.lato-extra .parole{grid-template-columns:1fr;gap:.25rem}
+.lato-extra .parole div:last-child{grid-column:auto}
+.lato-extra .video{margin-top:.4rem}
+.lato-extra .hint{font-size:.9rem}
+.att-tit{margin-top:1.8rem!important;padding-top:1rem;border-top:1.5px solid var(--line)}
+.att{margin:1rem 0 1.6rem}
+.cp h4{font-size:1.15rem;color:var(--anglo);margin:0 0 .3rem}
+.cp>p{max-width:50rem}
+.cp-gioco{display:grid;gap:1rem 1.6rem;align-items:start;margin-top:.6rem}
+@media (min-width:760px){.cp-gioco{grid-template-columns:minmax(0,34rem) minmax(14rem,1fr)}}
+.cp-griglia{display:grid;grid-template-columns:repeat(var(--n),1fr);width:100%;max-width:34rem;aspect-ratio:1;border:1.5px solid var(--line);border-radius:6px;background:var(--page);touch-action:none;user-select:none;-webkit-user-select:none}
+.cp-griglia span{display:grid;place-items:center;font-family:"Alegreya Sans",sans-serif;font-weight:700;font-size:clamp(.85rem,2.6vw,1.25rem);cursor:pointer;border-radius:4px}
+.cp-griglia span.sel{background:var(--gold);color:var(--page)}
+.cp-griglia span.L{background:color-mix(in srgb,var(--anglo) 30%,transparent)}
+.cp-griglia span.T{background:color-mix(in srgb,var(--lapis) 22%,transparent)}
+.cp-griglia span.sol{outline:2px dashed var(--gold);outline-offset:-3px}
+.cp-griglia span.inizio{outline:2px solid var(--gold);outline-offset:-2px}
+.cp-conta{font-weight:700;margin:0 0 .5rem}
+.cp-trovate{list-style:none;margin:0 0 .8rem;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+.cp-trovate li{border-radius:999px;padding:.15rem .75rem;font-size:.95rem;border:1.5px solid}
+.cp-trovate li.L{border-color:var(--anglo);color:var(--anglo)}
+.cp-trovate li.T{border-color:var(--lapis);color:var(--lapis)}
+.cp-trovate li small{font-size:.78em;opacity:.85}
+.cp-tasti .rivela{margin:.2rem .2rem .2rem 0}
+.extra .albero{max-width:40rem}
+@media (min-width:900px){
+  .scena{grid-template-columns:minmax(0,1.65fr) minmax(19rem,1fr)}
+  .col-mappa{position:sticky;top:.75rem}
+  .col-mappa .mappa{margin:0}
+  .col-mappa .mappa svg{max-height:calc(100vh - 5rem);width:auto;max-width:100%;margin:0 auto}
+  .pannello{border-left:1.5px solid var(--line);padding-left:1.4rem}
+  .pannello .domanda{font-size:1.15rem}
+}
+</style>
+</head>
+<body>
+
+<div class="dimensione ui" role="group" aria-label="Dimensione del testo">
+  <button id="tMeno" aria-label="Testo più piccolo">A−</button>
+  <button id="tReset" aria-label="Dimensione normale del testo">A</button>
+  <button id="tPiu" aria-label="Testo più grande">A+</button>
+</div>
+<header>
+  <div class="wrap hero">
+    <div class="capo" aria-hidden="true">L</div>
+    <div>
+      <p class="tappa-n">Tappa 1 di 3</p>
+      <h1>Le origini della lingua italiana</h1>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+<section id="mappa">
+  <h2>Dall'Impero romano alle lingue neolatine</h2>
+  <p>Premi Avvia e guarda il latino trasformarsi in nuove lingue. La <strong>prima parte</strong> arriva fino al 960, ai primi documenti in italiano; la <strong>seconda parte</strong> prosegue fino al Cinquecento con la nascita delle altre lingue neolatine. Puoi anche trascinare il cursore per fermarti su un anno.</p>
+  <div class="scena">
+    <div class="col-mappa">
+      <div class="mappa" id="carta" role="img" aria-label="Mappa dell'Europa e del Mediterraneo"></div>
+      <div class="legenda ui" id="legenda"></div>
+    </div>
+    <aside class="pannello" id="pannello">
+  <div class="controlli ui">
+    <button class="play" id="play" aria-label="Avvia la trasformazione">▶ Avvia</button>
+    <button class="salto" id="prec" aria-label="Tappa precedente">‹</button>
+    <button class="salto" id="succ" aria-label="Tappa successiva">›</button>
+    <input type="range" id="anno" min="100" max="1550" step="1" value="117" aria-label="Anno">
+  </div>
+  <div class="annobox" aria-live="off"><span class="anno-grande" id="annoGrande">117 d.C.</span><span class="epoca" id="epoca"></span><div class="attesa" aria-hidden="true"><div id="attesa"></div></div></div>
+      <div class="lato" id="lato" hidden><p class="domanda"></p><button class="rivela ui" type="button">Mostra la risposta ↓</button><p class="giu ui" hidden><a href="#sotto">La risposta è sotto la cartina ↓</a></p><div class="lato-extra" hidden></div></div>
+      <div class="spiega" id="spiega" aria-live="polite"></div>
+    </aside>
+  </div>
+  <div class="sotto" id="sotto" hidden></div>
+  <div id="riserva" hidden>
+    <div class="extra" data-extra="750">
+  <p>Si chiamano <strong>volgari</strong> perché erano le lingue parlate dal popolo, in latino <em>volgus</em>. Vengono tutte dal latino, che nei territori dell'antico Impero romano si è trasformato in modo diverso da zona a zona. Per questo si dicono <strong>neolatine</strong> (nate dal latino) o <strong>romanze</strong> (parlate dove c'era Roma): sono sorelle, si somigliano, ma ognuna ha preso la sua strada.</p>
+  <div class="albero" role="img" aria-label="Albero delle lingue romanze: dal latino nascono italiano, ladino, francese, spagnolo, portoghese e romeno">
+    <svg viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="var(--gold)" stroke-width="2" fill="none">
+        <path d="M300 48 C300 90, 55 95, 55 140"/><path d="M300 48 C300 90, 153 95, 153 140"/>
+        <path d="M300 48 C300 90, 251 95, 251 140"/><path d="M300 48 C300 90, 349 95, 349 140"/>
+        <path d="M300 48 C300 90, 447 95, 447 140"/><path d="M300 48 C300 90, 545 95, 545 140"/>
+      </g>
+      <rect x="235" y="10" width="130" height="40" rx="4" fill="var(--lapis)"/>
+      <text x="300" y="37" text-anchor="middle" font-size="20" font-weight="700" style="fill:var(--lapis-ink)">Latino</text>
+      <g font-size="16" text-anchor="middle">
+        <text x="55" y="162">italiano</text><text x="153" y="162">ladino</text>
+        <text x="251" y="162">francese</text><text x="349" y="162">spagnolo</text>
+        <text x="447" y="162">portoghese</text><text x="545" y="162">romeno</text>
+      </g>
+    </svg>
+  </div>
+  <p>Nel Duecento il latino lo sapevano ormai solo in pochi: uomini di Chiesa, notai e giuristi, professori delle università. Tutti gli altri parlavano in volgare, e il latino non lo capivano più.</p>
+
+  <h3>Quando nasce ciascuna lingua</h3>
+  <p>Per ogni lingua: il lungo periodo in cui il latino parlato si trasforma, il primo documento scritto che conosciamo e la prima grande opera letteraria. La linea rossa segue l'anno della mappa.</p>
+  <div class="periodi ui" id="periodi"></div>
+  <div class="legenda ui"><span style="--c:var(--line)">periodo di formazione</span><span class="sim doc">primo documento</span><span class="sim lett">prima opera letteraria</span></div>
+
+    </div>
+    <div class="extra" data-extra="960"><div class="pergamena">
+    <p class="verso" id="verso"></p>
+    <p class="hint ui">Tocca le parole sottolineate per vedere come le diciamo oggi.</p>
+  </div></div>
+    <div class="extra" data-extra="1070"><p>All'inizio si pensava che solo il latino fosse adatto a scrivere opere "belle". Tra la fine dell'XI e l'inizio del XII secolo, però, alcuni poeti delle corti francesi cominciano a comporre in volgare. Nascono così le <strong>letterature romanze</strong>. In Francia il volgare aveva due forme:</p><div class="box-lingua"><h3>Lingua d'oïl</h3>
+      <p class="hint">Francia del centro-nord</p>
+      <p>Genere: <strong>epica carolingia</strong>, poemi sulle imprese dei paladini di Carlo Magno. Il capolavoro è la <em>Chanson de Roland</em> (1070-1080 circa), che racconta la morte eroica di Rolando a Roncisvalle.</p>
+    </div></div>
+    <div class="extra" data-extra="1100"><div class="box-lingua"><h3>Lingua d'oc (provenzale)</h3>
+      <p class="hint">Francia del sud</p>
+      <p>Genere: <strong>lirica d'amore provenzale</strong>, cantata dai trovatori nelle corti della Provenza e ispirata all'amor cortese.</p>
+    </div><p>Una novità assoluta: queste opere non servono a insegnare la fede, ma a <strong>intrattenere</strong>, cioè a incuriosire e divertire chi ascolta.</p></div>
+    <div class="extra" data-extra="1224">
+  <h3>Il Cantico di frate Sole</h3>
+  <p>Il primo testo della nostra letteratura è una preghiera in volgare umbro scritta da <strong>Francesco d'Assisi</strong> nel 1224 o 1226. Francesco loda Dio attraverso le sue creature: il sole, la luna, l'acqua, il fuoco, la terra.</p>
+  <blockquote>Altissimu, onnipotente, bon Signore,<br>tue so' le laude, la gloria e l'honore et onne benedictione.<cite>Francesco d'Assisi, Cantico di frate Sole, vv. 1-2</cite></blockquote>
+  <h3>La Scuola siciliana</h3>
+  <p>Quasi negli stessi anni, alla corte di <strong>Federico II</strong> a Palermo, un gruppo di poeti-funzionari riprende l'amor cortese dei trovatori e lo canta in un volgare siciliano raffinato. È poesia d'amore <em>profano</em>: loda la donna, non Dio. Da qui la letteratura italiana comincia ufficialmente. A Giacomo da Lentini, uno di questi poeti, si attribuisce l'invenzione del sonetto.</p>
+  <h3>La Toscana e il Dolce Stil Novo</h3>
+  <p>La lirica d'amore piace ai lettori colti e si diffonde nella penisola, soprattutto in Toscana. A Firenze nasce il <strong>Dolce Stil Novo</strong>: la donna diventa una "donna angelo" che avvicina a Dio chi la ama. In questa corrente si forma il giovane <strong>Dante</strong>.</p>
+
+    </div>
+    <div class="extra" data-extra="1550">
+  <ol class="tempo">
+    <li><div class="anno">960</div><span>Placito di Capua: il volgare italiano compare in un documento scritto</span></li>
+    <li><div class="anno">1070-80</div><span><em>Chanson de Roland</em> in lingua d'oïl: nasce l'epica carolingia</span></li>
+    <li><div class="anno">XII sec.</div><span>I trovatori provenzali cantano l'amor cortese in lingua d'oc</span></li>
+    <li><div class="anno">1224-26</div><span><em>Cantico di frate Sole</em> di Francesco d'Assisi</span></li>
+    <li><div class="anno">1230-50</div><span>Scuola siciliana alla corte di Federico II</span></li>
+    <li><div class="anno">fine XIII</div><span>Dolce Stil Novo a Firenze: la giovinezza di Dante</span></li>
+  </ol>
+
+    </div>
+    <div class="extra attivita" data-extra="568">
+      <h3 class="att-tit">Attività con le parole</h3>
+      <div class="att" data-slot="gioco"></div>
+      <div class="att cp" id="cp">
+        <h4>Crucipuzzle: le parole dei Longobardi</h4>
+        <p>Nel crucipuzzle sono nascoste <b>14 parole</b>: <b>10 vengono dai Longobardi</b>, 4 sono «intruse» di origine latina. Trovale tutte: quando ne trovi una, scopri da dove viene. Le parole si leggono da sinistra a destra, dall'alto in basso e in diagonale.</p>
+        <p class="hint ui">Trascina dalla prima all'ultima lettera, oppure tocca la prima lettera e poi l'ultima.</p>
+        <div class="cp-gioco">
+          <div class="cp-griglia ui" id="cpGriglia" role="grid" aria-label="Crucipuzzle"></div>
+          <div class="cp-lato ui">
+            <p class="cp-conta" id="cpConta" aria-live="polite"></p>
+            <ul class="cp-trovate" id="cpTrovate"></ul>
+            <p class="cp-tasti"><button type="button" class="rivela" id="cpNuovo">Nuovo crucipuzzle</button> <button type="button" class="rivela" id="cpSol">Mostra le soluzioni</button></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="wrap ui">Lezione di italiano, classe terza. Unità 1: Le origini e Dante. · Tappa 1 di 3</footer>
+
+<script>
+// Dimensione del testo
+(function(){
+  const passi=[85,100,115,130,150,175]; let i=1;
+  try{const v=+localStorage.getItem('origini-testo');if(passi.includes(v))i=passi.indexOf(v);}catch(e){}
+  const meno=document.getElementById('tMeno'),piu=document.getElementById('tPiu');
+  function applica(){document.documentElement.style.fontSize=passi[i]+'%';meno.disabled=i===0;piu.disabled=i===passi.length-1;
+    try{localStorage.setItem('origini-testo',passi[i])}catch(e){}}
+  meno.addEventListener('click',()=>{if(i>0){i--;applica();}});
+  piu.addEventListener('click',()=>{if(i<passi.length-1){i++;applica();}});
+  document.getElementById('tReset').addEventListener('click',()=>{i=1;applica();});
+  applica();
+})();
+// carte delle novità
+document.querySelectorAll('.flip').forEach(b=>b.addEventListener('click',()=>{
+  b.setAttribute('aria-pressed', b.getAttribute('aria-pressed')==='true'?'false':'true');
+}));
+// Mappa animata: dall'Impero romano alle lingue neolatine
+(function(){
+  const X=l=>((l+11)*13).toFixed(1), Y=l=>((58-l)*18).toFixed(1);
+  const d=pts=>'M'+pts.map(p=>X(p[0])+','+Y(p[1])).join('L')+'Z';
+  const line=pts=>'M'+pts.map(p=>X(p[0])+','+Y(p[1])).join('L');
+  const terre=[
+    // Europa
+    [[-9.3,43],[-8.8,42],[-8.9,41],[-9.5,38.7],[-8.8,37],[-5.6,36],[-4.4,36.7],[-2,36.8],[-0.9,37.6],[-0.3,39.5],[0.9,40.7],[2.2,41.4],[3.2,42.3],[3,43.3],[5.4,43.3],[7.3,43.7],[8.9,44.4],[9.8,44.1],[10.3,43.5],[10.5,43],[12.3,41.8],[13.5,41.2],[14.2,40.8],[14.8,40.5],[15.6,40],[16,39],[15.6,38],[16.1,37.9],[17.1,39],[16.6,40.4],[17.2,40.5],[18.4,39.8],[18.5,40.1],[17.9,40.6],[16.9,41.1],[16.1,41.9],[14.2,42.5],[13.5,43.6],[12.6,44.1],[12.4,44.9],[12.3,45.4],[13.7,45.6],[13.6,45],[14.4,45.3],[15.2,44.1],[16.4,43.5],[18.1,42.6],[19.5,41.8],[19.4,41.3],[19.5,40.4],[20.2,39.5],[20.7,38.9],[21.3,37.6],[21.7,36.8],[22.5,36.4],[23.1,36.5],[22.8,37.5],[24,37.7],[23.6,38.3],[22.9,39.3],[22.6,40.4],[23.9,40],[24.4,40.9],[26,40.8],[26.6,40.4],[27.5,40.9],[29,41],[28,42],[27.5,42.5],[27.9,43.2],[28.6,44.2],[29.6,45.2],[30.7,46.5],[32.5,46],[33.6,44.5],[36.4,45.3],[38,47],[38.5,46],[37.5,45],[39,44.5],[41.5,42],[45,42],[45,58],[24.5,58],[24,57],[21,57],[21.1,55.7],[20,54.7],[18.6,54.4],[16,54.3],[12,54.2],[10.8,54],[10.2,54.4],[10.5,56.2],[10.6,57.7],[8.6,57.1],[8.1,55.5],[8.6,53.9],[7,53.5],[4.8,52.9],[4.1,51.9],[3.2,51.3],[1.8,50.9],[1.5,50.2],[0.1,49.5],[-1.3,49.7],[-1.6,48.6],[-4.7,48.5],[-4.3,47.8],[-2.2,47.2],[-1.2,46],[-1.1,45],[-1.5,43.5],[-3.8,43.5],[-8,43.7]],
+    // Asia Minore, Vicino Oriente e Africa
+    [[-9.8,29.5],[-9.8,30.5],[-9.6,31.5],[-8.5,33.3],[-6.8,34],[-5.9,35.8],[-5.3,35.9],[-2.9,35.3],[0,35.8],[3,36.8],[6.6,37.1],[9.8,37.3],[11,37.1],[10.4,36.4],[11.1,35.2],[10,34],[11,33.3],[13.2,32.9],[15.3,32.2],[19,30.3],[20.1,32.1],[21.7,32.9],[23,32.6],[25.2,31.6],[29.9,31.2],[32.3,31.3],[34.3,31.4],[34.9,32.5],[35.5,33.9],[35.9,35.5],[36.1,36.6],[34.6,36.8],[32.8,36.1],[30.6,36.8],[29.1,36.6],[27.4,37],[27.2,38.4],[26.3,39.3],[26.2,40],[27.5,40.4],[29,40.4],[29.1,41.2],[31.5,41.2],[34,42],[36,41.7],[38,41],[41.5,41.5],[45,41.8],[45,29],[-11,29],[-11,29.5]],
+    // Scandinavia
+    [[12.6,56.6],[12.5,56],[14.2,55.4],[16,56.2],[16.6,57.5],[16.8,58],[11.5,58],[11.9,57.5]],
+    // Gran Bretagna
+    [[-5.7,50.1],[-3.5,50.3],[0.2,50.8],[1.4,51.2],[0.9,51.8],[1.7,52.6],[0.3,53.4],[-0.1,54.4],[-1.6,55.6],[-2,56],[-1.8,57.6],[-3.5,57.7],[-4,58],[-5.2,58],[-5.7,56.5],[-5.1,55.5],[-4.9,54.8],[-3.1,54.6],[-3,53.4],[-4.5,53.3],[-4.2,52.3],[-5.3,51.8],[-3.1,51.5],[-4.3,51.2]],
+    // Irlanda
+    [[-6.2,53.3],[-6.4,52.2],[-8,51.6],[-10,51.7],[-9.9,53.4],[-10,54.2],[-8.2,55.2],[-6,55.2],[-5.6,54.3]],
+    // Sicilia, Sardegna, Corsica, Creta, Cipro
+    [[12.4,37.8],[13.3,38.2],[15.6,38.3],[15.1,37.2],[15.1,36.7],[14.4,36.8],[12.9,37.6]],
+    [[8.2,41],[9.2,41.2],[9.7,40.4],[9.6,39.1],[9,39],[8.4,39],[8.5,40.2]],
+    [[8.6,42.9],[9.4,43],[9.6,42.4],[9.3,41.4],[8.8,41.6],[8.6,42.3]],
+    [[23.5,35.6],[26.3,35.3],[26,35],[24,35.2]],
+    [[32.3,35],[34.6,35.6],[33.9,34.9],[32.6,34.7]]
+  ];
+  const impero=[[4.5,52.5],[6.5,51.5],[7.5,50.5],[8,49.5],[9.5,49],[10.5,48.9],[12,48.8],[16.5,48.2],[18.8,47.8],[19,46],[21,47.5],[23,48],[26,48],[27,47],[27.5,45.5],[29.7,45.3],[41,42],[45,40],[45,29],[30,29.5],[20,29.5],[12,31],[8,33],[0,34.5],[-6,33.5],[-10,33],[-12,35],[-12,44],[-6,48],[-6,50],[-6,55.5],[-2,55.2],[2,55]];
+  const greco=[[19.6,41.8],[21.5,42.5],[23.3,42.7],[28,43.2],[41,42],[45,40],[45,29],[19.5,29],[19.5,33],[24,36],[19.5,39],[19.4,41]];
+  const lingue={
+    portoghese:[[-10,42.2],[-8.1,42],[-6.2,41.9],[-6.9,41],[-7,39.6],[-7.3,38.4],[-7.4,37.2],[-10,37]],
+    spagnolo:[[-10,44],[-1.8,43.4],[0.7,42.8],[3.2,42.4],[4,40],[0,36.4],[-5.6,36],[-7.4,37.2],[-7.3,38.4],[-7,39.6],[-6.9,41],[-6.2,41.9],[-8.1,42],[-10,42.2]],
+    francese:[[-6,48.5],[-4,49.3],[1.5,50.3],[2.5,51.1],[4,50.7],[6,50.6],[6.1,49.5],[8.2,49],[7.6,47.6],[7.3,47.4],[7.4,46.8],[7.6,46.3],[7,45.9],[7,45],[7.6,44.2],[7.5,43.8],[7,43],[3.2,42.4],[0.7,42.8],[-1.8,43.4],[-5,44]],
+    italiano:[[7,45.9],[8.9,46.5],[9.5,46.3],[10.4,46.6],[11.2,46.5],[12.4,46.6],[13.7,46.5],[13.6,45.6],[14,44],[19,40],[16,37],[14.5,36.4],[12.2,37.5],[8,38.8],[7.6,42],[7.5,43.8],[7.6,44.2],[7,45]],
+    romeno:[[20.3,46.1],[22.9,47.9],[24.9,47.7],[26.6,48.3],[28,48.4],[30,46.5],[29.7,45.3],[28.6,44.3],[28.6,43.7],[27.3,44.1],[25.5,43.6],[22.7,43.8],[22.3,44.6],[21.4,44.8]]
+  };
+
+  const britannia=[[-6.5,49.8],[-6.5,55.5],[-2,55.2],[2.5,55],[2.5,51.5],[1.6,51.05],[0.2,50.6]];
+  const arabi=[[-12,29],[45,29],[45,37],[36.5,37],[36,35.5],[34,34.3],[30,33],[20,33.8],[13,37.4],[10,37.5],[5,37.2],[0,36.2],[-5.3,35.95],[-12,35.5]];
+  const col={portoghese:'var(--verde)',spagnolo:'var(--rubric)',francese:'var(--lapis)',italiano:'var(--gold)',romeno:'var(--viola)',ladino:'#2E9AA6'};
+  const T=(lon,lat,txt,size,cls)=>`<text x="${X(lon)}" y="${Y(lat)}" font-size="${size||16}" text-anchor="middle"${cls?` class="${cls}"`:''}>${txt}</text>`;
+  // ogni strato: [contenuto, chiavi [anno, opacità]]
+  const L=[]; const add=(html,k,clip)=>L.push({html,k,clip});
+  add(`<path d="${d(impero)}" fill="var(--gold)" opacity=".55"/>`,[[100,1],[476,1],[800,0]],1);
+  add(`<path d="${d(greco)}" fill="var(--soft)" opacity=".5"/>`,[[380,0],[395,1]],1);
+  add(`<path d="${d(britannia)}" fill="var(--anglo)" opacity=".75"/>`,[[410,0],[465,1]],1);
+  add(`<path d="${d(arabi)}" fill="var(--arabo)"/>`,[[600,0],[640,1]],1);
+  const fasi={francese:[650,850],italiano:[650,900],spagnolo:[680,920],portoghese:[700,950],romeno:[700,950]};
+  Object.keys(lingue).forEach(k=>add(`<path d="${d(lingue[k])}" fill="${col[k]}" opacity=".72"/>`,[[fasi[k][0],0],[fasi[k][1],1]],1));
+  add(`<circle cx="${X(11.9)}" cy="${Y(46.55)}" r="7" fill="${col.ladino}" stroke="var(--land)" stroke-width="2"/>`,[[850,0],[1000,1]],1);
+  add('COSTA',[[0,1]]);
+  add(`<path d="${d(impero)}" fill="none" stroke="var(--ink)" stroke-width="1.3" stroke-dasharray="5 4" opacity=".6"/>`,[[700,0],[900,1]]);
+  add(`<path d="${line([[-1.2,45.8],[0.5,46],[2.5,46.3],[4.5,45.9],[6.2,45.9]])}" fill="none" stroke="var(--land)" stroke-width="2" stroke-dasharray="3 3"/>${T(1.8,46.75,"d'oïl",11)}${T(1.8,45.2,"d'oc",11)}`,[[980,0],[1000,1]]);
+  // invasioni
+  const frecce=[
+    ['Visigoti',[[28,46],[22,44],[13.5,42],[3,43.5],[-4,40.5]],[22.5,45],[362,376,520]],
+    ['Vandali',[[9,51],[2,46],[-4,38.2],[9.5,36.3]],[4.5,48.3],[395,406,540]],
+    ['Franchi',[[7.5,51.6],[2.5,48.5]],[5.8,52.2],[420,486,600]],
+    ['Angli e Sassoni',[[9,54.6],[0.5,52.6]],[6,55.4],[430,480,600]],
+    ['Ostrogoti',[[22,46.8],[13,44]],[19,47.6],[470,493,560]],
+    ['Longobardi',[[17,48.8],[11,45.2]],[15.5,49.6],[560,568,660]]
+  ];
+  frecce.forEach(([n,p,lab,t])=>add(`<path d="${line(p)}" fill="none" stroke="var(--rubric)" stroke-width="2.5" marker-end="url(#punta)"/>${T(lab[0],lab[1],n,12)}`,[[t[0],0],[t[1],1],[t[2],1],[t[2]+40,0]]));
+  // pressione sui confini: frecce fuori dal limes, senza nomi (per far nascere la domanda)
+  const spinte=[[[12,54],[8.6,51]],[[15,52.5],[12.8,49.6]],[[20,51],[17.8,48.9]],[[26.5,51.5],[25.2,48.7]],[[34,49.5],[30.2,46.4]],[[42,50],[37,48.6]]];
+  add(spinte.map(([a,b])=>{const dx=X(b[0])-X(a[0]),dy=Y(b[1])-Y(a[1]),n=Math.hypot(dx,dy);
+    return `<g class="spinta" style="--dx:${(dx/n*7).toFixed(1)}px;--dy:${(dy/n*7).toFixed(1)}px"><path d="${line([a,b])}" fill="none" stroke="var(--rubric)" stroke-width="4" stroke-linecap="round" marker-end="url(#punta)"/></g>`;}).join(''),
+    [[250,0],[330,1],[400,1],[440,0]]);
+  // etichette
+  add(`<circle cx="${X(12.5)}" cy="${Y(41.9)}" r="4.5" fill="var(--rubric)" stroke="var(--land)" stroke-width="1.5"/>${T(13.2,41.2,'Roma',13,'fisso')}`,[[0,1]]);
+  add(T(22,37.4,'Impero romano',17),[[100,1],[376,1],[390,0]]);
+  add(T(2,46.2,'latino',22)+T(24.5,46.2,'latino',15),[[380,0],[395,1],[640,1],[720,0]]);
+  add(T(4,35.2,'latino',15),[[380,0],[395,1],[600,1],[630,0]]);
+  add(T(33,39,'greco',20),[[380,0],[395,1]]);
+  add(T(-2.5,53,'anglosassone',12),[[430,0],[465,1],[1000,1],[1100,0]]);
+  add(T(-2.5,53,'inglese',12),[[1050,0],[1150,1]]);
+  add(T(3,32.6,'arabo',15),[[600,0],[640,1]]);
+  add(T(2.4,47.8,'francese',16),[[800,0],[842,1]]);
+  add(T(14.6,42.2,'italiano',15),[[920,0],[960,1]]);
+  add(T(-3,40.4,'spagnolo',16),[[980,0],[1000,1]]);
+  add(T(-8.3,38.6,'portoghese',12),[[1200,0],[1214,1]]);
+  add(T(25.4,46,'romeno',16),[[1500,0],[1521,1]]);
+  add(T(11.9,47.5,'ladino',12),[[1530,0],[1550,1]]);
+
+  const terraD=terre.map(d).join('');
+  let svg=`<svg viewBox="0 0 728 522" xmlns="http://www.w3.org/2000/svg">
+  <defs><clipPath id="clipTerra"><path d="${terraD}"/></clipPath>
+  <marker id="punta" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0L10,5L0,10Z" fill="var(--rubric)"/></marker></defs>
+  <path class="terra" d="${terraD}"/>${T(18,34.2,'Mar Mediterraneo',15,'mare')}${T(-5.5,46.6,'Oceano Atlantico',14,'mare')}`;
+  L.forEach((l,i)=>{
+    if(l.html==='COSTA'){svg+=`<path class="costa" d="${terraD}"/>`;return;}
+    svg+=`<g data-i="${i}"${l.clip?' clip-path="url(#clipTerra)"':''}>${l.html}</g>`;
+  });
+  svg+=`</svg>`;
+  document.getElementById('carta').innerHTML=svg;
+  const gruppi=[...document.querySelectorAll('#carta g[data-i]')];
+
+  const op=(k,y)=>{ if(y<=k[0][0])return k[0][1]; for(let i=1;i<k.length;i++){ if(y<=k[i][0]){const [a,va]=k[i-1],[b,vb]=k[i];return va+(vb-va)*(y-a)/(b-a);} } return k[k.length-1][1]; };
+
+  const TOPO=[
+    ['Marsala',12.44,37.80,'marsa','porto','Il porto più importante della Sicilia araba, sulla punta occidentale dell\u2019isola.'],
+    ['Marzamemi',15.12,36.74,'marsa','porto','Un piccolo porto di pescatori: anche qui c\u2019è la parola araba per porto.'],
+    ['Calatafimi',12.86,37.91,'qal\u2019at','castello','Calta- e Cala- vengono da qal\u2019at, castello o rocca.'],
+    ['Caltabellotta',13.22,37.58,'qal\u2019at','castello','Un paese arroccato su una montagna, attorno a un antico castello.'],
+    ['Caltanissetta',14.06,37.49,'qal\u2019at','castello','Il capoluogo più interno della Sicilia porta nel nome il castello arabo.'],
+    ['Caltagirone',14.51,37.24,'qal\u2019at','castello','Famosa per le ceramiche: anche quest\u2019arte deve molto agli Arabi.'],
+    ['Gibellina',12.98,37.79,'jabal','monte','Gibil- e Gibel- vengono da jabal, monte.'],
+    ['Gibilmanna',14.02,37.98,'jabal','monte','Un santuario sulle Madonie, i monti sopra Cefalù.'],
+    ['Mongibello',14.99,37.75,'jabal','monte','È l\u2019antico nome dell\u2019Etna: mons in latino più jabal in arabo. Vuol dire \u201cmonte monte\u201d!'],
+    ['Racalmuto',13.73,37.41,'rahl','casale','Rac- e Regal- vengono da rahl, casale o villaggio di campagna.'],
+    ['Regalbuto',14.64,37.65,'rahl','casale','Un villaggio dell\u2019entroterra, vicino all\u2019Etna.'],
+    ['Misilmeri',13.45,38.03,'manzil','casale','Da manzil al-amir, il casale dell\u2019emiro, cioè del governatore arabo.']
+  ];
+  const RADICI={'qal\u2019at':'var(--rubric)','marsa':'var(--lapis)','jabal':'var(--verde)','rahl':'var(--gold)','manzil':'var(--viola)'};
+  function toponimiArabi(){
+    const k=110, PX=l=>((l-12.2)*k).toFixed(1), PY=l=>((38.4-l)*k*1.26).toFixed(1);
+    const sic=[[12.5,38.02],[12.73,38.18],[12.88,38.03],[13.08,38.15],[13.3,38.22],[13.37,38.12],[13.54,38.11],[13.7,37.98],[14.02,38.04],[14.3,38.02],[14.75,38.16],[15.24,38.27],[15.65,38.27],[15.55,38.19],[15.4,37.98],[15.29,37.85],[15.21,37.73],[15.09,37.5],[15.08,37.38],[15.22,37.23],[15.29,37.06],[15.14,36.91],[15.14,36.68],[14.85,36.72],[14.55,36.79],[14.25,37.06],[13.93,37.1],[13.52,37.29],[13.08,37.5],[12.82,37.58],[12.59,37.65],[12.43,37.8]];
+    const pal=[13.36,38.12];
+    const sx=['Marzamemi','Caltagirone','Regalbuto'];
+    let g='';
+    TOPO.forEach(([n,lo,la,rad],i)=>{
+      const x=PX(lo),y=PY(la),end=sx.includes(n);
+      const sotto=n==='Marsala';
+      g+=`<g class="topo" data-i="${i}" data-r="${rad}" tabindex="0" role="button" aria-label="${n}"><circle cx="${x}" cy="${y}" r="6" fill="${RADICI[rad]}" stroke="var(--land)" stroke-width="1.5"/><text x="${sotto?x:(+x+(end?-9:9)).toFixed(1)}" y="${(+y+(sotto?20:4)).toFixed(1)}" font-size="12.5" text-anchor="${sotto?'middle':end?'end':'start'}">${n}</text></g>`;
+    });
+    return `<h4 class="ar topo-tit">I nomi dei luoghi</h4>
+    <p>Il segno più duraturo degli Arabi è nei nomi dei luoghi, soprattutto in Sicilia. Molti nomi di paesi nascondono una parola araba: basta imparare a riconoscere qualche radice.</p>
+    <div class="radici ui">${Object.keys(RADICI).map(r=>`<button data-rad="${r}" style="--c:${RADICI[r]}"><b>${r}</b> ${ {"qal\u2019at":'castello',marsa:'porto',jabal:'monte',rahl:'casale',manzil:'casale, stazione'}[r]}</button>`).join('')}</div>
+    <div class="affianco topo-box"><figure class="cartina-sic"><svg viewBox="0 0 407 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sicilia con i nomi di luogo di origine araba">
+      <rect width="407" height="256" fill="var(--sea)"/><path d="M${sic.map(p=>PX(p[0])+','+PY(p[1])).join('L')}Z" fill="var(--land)" stroke="var(--soft)" stroke-width="1"/>
+      <circle cx="${PX(pal[0])}" cy="${PY(pal[1])}" r="3" fill="var(--ink)"/><text class="pal" x="${PX(pal[0])}" y="${(PY(pal[1])-7)}" font-size="11" text-anchor="middle">Palermo</text>
+      ${g}</svg><figcaption class="hint ui">Tocca un paese o una radice.</figcaption></figure>
+      <div class="topo-scheda" aria-live="polite"><p class="hint">Scegli un nome sulla cartina per scoprire da dove viene.</p></div></div>
+    <p><strong>Non solo in Sicilia.</strong> In Spagna: <em>Gibilterra</em> da <em>Jabal Tariq</em>, il monte di Tariq, il condottiero che vi sbarcò nel 711; il fiume <em>Guadalquivir</em> da <em>wadi al-kabir</em>, il grande fiume; <em>Guadalajara</em>, il fiume delle pietre; <em>Alcalá</em> da <em>al-qal\u2019a</em>, il castello, la stessa radice di Caltanissetta. In Portogallo, l\u2019<em>Algarve</em> da <em>al-gharb</em>, l\u2019occidente.</p>
+    <p class="gioco-tit">Sfida: sulla carta d\u2019Italia o su Google Maps, quanti altri paesi trovi che cominciano con Calta-, Gibil- o Marsa-?</p>`;
+  }
+  function cartinaLongobardi(){
+    const k=36, PX=l=>((l-6)*k).toFixed(1), PY=l=>((47.2-l)*k*1.38).toFixed(1);
+    const dd=pts=>'M'+pts.map(p=>PX(p[0])+','+PY(p[1])).join('L')+'Z';
+    const terra=terre.map(dd).join('');
+    const lon=[[6.6,45],[7,45.9],[8.4,46.4],[9.3,46.5],[10.4,46.6],[11.4,46.9],[12.4,46.7],[13.6,46.5],[13.8,45.6],[12.6,45.5],[12,45],[11.5,44.6],[11.2,44.2],[12.2,43.8],[12.3,43],[11.8,42.4],[11,42.3],[10,42.8],[9.5,44],[7,43.5],[6.5,44.5]];
+    const spoleto=[[12.4,43.25],[13.3,43.25],[14.1,42.6],[14.2,42],[13.4,41.9],[12.9,41.9],[12.6,42.5]];
+    const benevento=[[14,42.1],[15.9,42.05],[16.5,41.3],[17.3,40.6],[17.6,40.2],[16.8,39.5],[15.4,39.5],[14.9,40.4],[14,41.2],[13.8,41.5]];
+    const biz=[
+      [[7.5,43.6],[10.1,43.95],[10.1,44.3],[8.9,44.6],[7.6,44.05]],
+      [[12,44.95],[12.6,45.25],[13.2,45.8],[14.2,45.7],[14.2,44.6],[12.3,44.7]],
+      [[11.3,44.9],[12.6,44.9],[12.6,44],[13.7,43.4],[13.2,43.1],[12.6,43.1],[12.4,42.6],[12.9,41.9],[13.8,41.2],[12.5,41.3],[11.6,42.2],[12,42.6],[12.2,43.3],[11.7,44],[11.3,44.5]],
+      [[13.8,41.2],[14.6,40.95],[14.95,40.55],[14.3,40.45],[13.9,40.9]],
+      [[15.4,39.55],[16.8,39.55],[17.3,38.8],[16.2,37.7],[15.5,37.8]],
+      [[17.4,40.65],[18.7,40.65],[18.7,39.6],[17.6,40.15]],
+      [[12,36.4],[15.8,36.4],[15.8,38.4],[12,38.4]],
+      [[7.9,38.7],[9.95,38.7],[9.95,43.15],[7.9,43.15]]
+    ];
+    const città=[['Pavia',9.16,45.19,1],['Cividale',13.43,46.09],['Ravenna',12.2,44.42],['Spoleto',12.74,42.73],['Roma',12.5,41.9],['Benevento',14.78,41.13],['Napoli',14.25,40.85]];
+    const sx=['Roma','Napoli','Spoleto','Monte S. Angelo'];
+    const lab=(lo,la,t,sz,anc)=>`<text x="${PX(lo)}" y="${PY(la)}" font-size="${(sz*1.3).toFixed(1)}" text-anchor="${anc||'middle'}">${t}</text>`;
+    return `<figure class="cartina-it"><svg viewBox="0 0 468 532" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="L'Italia intorno al 600: territori longobardi e bizantini">
+      <defs><clipPath id="clipItalia"><path d="${terra}"/></clipPath></defs>
+      <rect width="468" height="532" fill="var(--sea)"/><path d="${terra}" fill="var(--land)"/>
+      <g clip-path="url(#clipItalia)">
+        <path d="${dd(lon)}" fill="var(--anglo)" opacity=".7"/>
+        <path d="${dd(spoleto)}" fill="var(--anglo)" opacity=".5"/>
+        <path d="${dd(benevento)}" fill="var(--anglo)" opacity=".5"/>
+        ${biz.map(p=>`<path d="${dd(p)}" fill="var(--soft)" opacity=".75"/>`).join('')}
+      </g>
+      <path d="${terra}" fill="none" stroke="var(--soft)" stroke-width=".8" opacity=".6"/>
+      ${città.map(([n,lo,la,cap])=>`<circle cx="${PX(lo)}" cy="${PY(la)}" r="${cap?5:3.2}" fill="${cap?'var(--rubric)':'var(--ink)'}" stroke="var(--land)" stroke-width="1.2"/>`+(sx.includes(n)?lab(lo-0.15,la+0.12,n,11.5,'end'):lab(lo+0.15,la+0.12,n+(cap?' (capitale)':''),cap?13:11.5,'start'))).join('')}
+      ${lab(10.2,44.85,'Langobardia Maior',13)}${lab(14.2,43.05,'Ducato di Spoleto',11.5,'start')}
+      ${lab(11.4,40.35,'Ducato di Benevento',12,'start')}${lab(11.4,40.05,'(Langobardia Minor)',11,'start')}
+      ${lab(10.5,39.2,'Sardegna',11)}${lab(13.9,37.45,'Sicilia',11)}
+    </svg><figcaption class="legenda ui"><span style="--c:var(--anglo)">Longobardi</span><span style="--c:var(--soft)">Bizantini</span><span style="--c:transparent">L'Italia intorno al 600</span></figcaption></figure>`;
+  }
+  const eventi=[
+    [117,"L'Impero romano nella sua massima estensione","Sotto l'imperatore Traiano, nel 117, l'Impero va dalla Britannia all'Egitto. Ovunque si parla <strong>latino</strong>: non quello elegante dei libri, ma il latino di tutti i giorni di soldati, mercanti e contadini."],
+    [395,"Due imperi, due lingue","Alla morte di Teodosio l'Impero si divide in due. In Oriente la lingua della cultura resta il <strong>greco</strong>; in Occidente il latino è ormai la lingua di tutti."],
+    [376,"Arrivano i popoli germanici","Le frecce sono i popoli germanici che vivono oltre il Reno e il Danubio, i confini dell'Impero, e premono per entrare. Più a est, gli Unni li spingono verso ovest. Nel 376 i Visigoti, in fuga dagli Unni, attraversano il Danubio: comincia l'età delle grandi migrazioni, che i Romani chiamarono invasioni barbariche. Nel 410 i Visigoti saccheggiano Roma."],
+    [476,"Cade l'Impero romano d'Occidente","L'ultimo imperatore, Romolo Augustolo, viene deposto. Al posto dell'Impero nascono i regni romano-barbarici. I nuovi popoli imparano il latino, ma lo pronunciano e lo mescolano a parole loro. In Britannia invece si impone la lingua degli Angli e dei Sassoni."],
+    [568,"I Longobardi in Italia","<div class='affianco'><div><p>Nel 568 i Longobardi, guidati dal re Alboino, arrivano dalla Pannonia (l'attuale Ungheria) e conquistano gran parte dell'Italia. La capitale è Pavia; al centro e al sud nascono i grandi ducati di Spoleto e Benevento. Il regno dura fino al 774, quando i Franchi di Carlo Magno lo conquistano. Col tempo i Longobardi si convertono al cattolicesimo, si mescolano con i Romani e finiscono per parlare il loro latino. Ma nel volgare che sta nascendo lasciano molte parole.</p></div>"+cartinaLongobardi()+"</div><div class='parole'><div><h4>Il corpo</h4><p>guancia, schiena, milza, nocca, stinco, zazzera</p></div><div><h4>La casa</h4><p>panca, scaffale, balcone, stamberga</p></div><div><h4>Le azioni</h4><p>graffiare, spaccare, scherzare, smaltire, arraffare</p></div><div><h4>I luoghi</h4><p><em>Fara</em> (Fara in Sabina, Fara Gera d'Adda) da <em>fara</em>, il clan familiare; <em>Gaggio</em> e <em>Cafaggio</em> da <em>gahagi</em>, bosco recintato; <em>Brera</em> a Milano da <em>braida</em>, campo aperto.</p></div></div><p class='gioco-tit'>Gioco: quali di queste parole vengono dai Longobardi? Tocca per scoprirlo.</p><div class='gioco'><button data-o='L'>schiena</button><button data-o='T'>finestra</button><button data-o='L'>guancia</button><button data-o='T'>mano</button><button data-o='L'>panca</button><button data-o='T'>tavola</button><button data-o='L'>graffiare</button><button data-o='T'>scrivere</button></div><p><a class='video' href='https://www.youtube.com/watch?v=jSmx0OsSMY0&t=127s' target='_blank' rel='noopener'>▶ Guarda il video sui Longobardi</a></p><p class='hint'>Per approfondire: <a href='https://longobardinitalia.it/' target='_blank' rel='noopener'>longobardinitalia.it</a>, il sito dei luoghi longobardi patrimonio UNESCO.</p>"],
+    [640,"Gli Arabi nel Mediterraneo","<p>Nel VII secolo gli Arabi, uniti dalla nuova religione islamica, conquistano in pochi decenni il Vicino Oriente, l'Egitto e il Nord Africa. Qui il latino e il greco scompaiono: si parlerà <strong>arabo</strong>. Nel 711 gli Arabi passano in Spagna, dove resteranno fino al 1492, e dall'827 conquistano la Sicilia, che terranno per più di due secoli.</p><p>Gli Arabi erano grandi mercanti, navigatori e scienziati. Attraverso i commerci nei porti e la presenza in Sicilia, molte loro parole sono entrate nell'italiano. Nello spagnolo sono ancora di più, circa quattromila: perfino <em>ojalá</em>, \"magari\", viene dall'arabo <em>law sha' Allah</em>, \"se Dio vuole\".</p><div class='parole'><div><h4 class='ar'>In cucina</h4><p>zucchero, arancia, limone, albicocca, carciofo, spinaci, zafferano, sciroppo</p></div><div><h4 class='ar'>Commercio e mare</h4><p>magazzino, dogana, tariffa, ammiraglio, arsenale, cotone, materasso, tazza</p></div><div><h4 class='ar'>Scienza e numeri</h4><p>zero, cifra, algebra, alchimia, algoritmo (dal nome del matematico al-Khwarizmi)</p></div></div>"+toponimiArabi()+"<p class='gioco-tit'>Gioco: quali di queste parole vengono dall'arabo? Tocca per scoprirlo.</p><div class='gioco'><button data-o='A'>zucchero</button><button data-o='T'>pane</button><button data-o='A'>arancia</button><button data-o='T'>latte</button><button data-o='A'>dogana</button><button data-o='T'>porta</button><button data-o='A'>zero</button><button data-o='T'>numero</button></div>"],
+    [750,"Il latino si frantuma","Le regioni sono isolate, le scuole poche. In ogni zona il latino parlato cambia a modo suo. La gente comune non capisce più il latino scritto della Chiesa."],
+    [813,"Prediche nella lingua del popolo","Il Concilio di Tours chiede ai preti di predicare non in latino ma nella <em>rustica romana lingua</em>, la lingua che la gente capisce davvero. I volgari esistono, anche se quasi nessuno li scrive ancora."],
+    [842,"Il primo testo in francese","Con i Giuramenti di Strasburgo, due nipoti di Carlo Magno giurano alleanza davanti ai loro eserciti, ciascuno nella lingua dei soldati. È il più antico testo in volgare francese."],
+    [800,"L'Indovinello veronese","<p>Agli inizi del IX secolo, forse un po' prima, un copista di Verona sta ricopiando un libro di preghiere. A un certo punto, sul margine della pagina, scrive per gioco un indovinello. Lo ha scoperto nel 1924 lo studioso Luigi Schiaparelli, nella Biblioteca Capitolare di Verona.</p><div class='pergamena'><p class='verso'><button class='w' aria-pressed='false' data-oggi='spingeva avanti'>Se pareba</button> <button class='w' aria-pressed='false' data-oggi='i buoi'>boves</button>, <button class='w' aria-pressed='false' data-oggi='bianchi'>alba</button> <button class='w' aria-pressed='false' data-oggi='prati'>pratalia</button> <button class='w' aria-pressed='false' data-oggi='arava'>araba</button>, et <button class='w' aria-pressed='false' data-oggi='bianco'>albo</button> <button class='w' aria-pressed='false' data-oggi='aratro'>versorio</button> <button class='w' aria-pressed='false' data-oggi='teneva'>teneba</button>, et <button class='w' aria-pressed='false' data-oggi='nero'>negro</button> <button class='w' aria-pressed='false' data-oggi='seme'>semen</button> <button class='w' aria-pressed='false' data-oggi='seminava'>seminaba</button>.</p><p class='hint ui'>Tocca le parole per tradurle.</p></div><p><em>«Spingeva avanti i buoi, arava bianchi prati, teneva un bianco aratro e seminava un nero seme.»</em></p><p class='gioco-tit'>Il gioco: chi è che ara un campo così strano? Procedete con un indizio alla volta.</p><ol class='guida'><li>Chi ha scritto questa frase, e dove? Che lavoro stava facendo in quel momento?</li><li hidden>L'indovinello descrive un lavoro dei campi. Quale? Elencate tutto quello che serve: chi tira, che cosa si usa, dove si lavora, che cosa si mette nella terra.</li><li hidden>Ma è un campo strano: i prati sono <em>bianchi</em>, l'aratro è <em>bianco</em>. Guardate il tavolo di un copista del Medioevo: che cosa c'è di bianco?<figure class='tavolo'><svg viewBox='0 0 440 270' xmlns='http://www.w3.org/2000/svg' role='img' aria-label='Il tavolo di un copista medievale: leggio di legno con pergamena, penna d’oca, calamaio, coltellino e candela'><rect width='440' height='270' rx='6' fill='#3b2f2a'/><rect x='0' y='205' width='440' height='65' fill='#6b4a2f'/><path d='M70 210 L100 30 L330 30 L370 210 Z' fill='#8a5e3a' stroke='#4a3121' stroke-width='3'/><path d='M105 50 L320 50 L345 195 L95 195 Z' fill='#f6f1e3' stroke='#cfc4a8' stroke-width='2'/><g transform='translate(0,0) skewX(-2)'><path d='M128 62 h150' stroke='#2a2420' stroke-width='3' stroke-linecap='round' stroke-dasharray='14 5 22 4'/><path d='M120 75 h143' stroke='#2a2420' stroke-width='3' stroke-linecap='round' stroke-dasharray='17 5 18 4'/><path d='M120 88 h136' stroke='#2a2420' stroke-width='3' stroke-linecap='round' stroke-dasharray='20 5 14 4'/><path d='M120 101 h129' stroke='#2a2420' stroke-width='3' stroke-linecap='round' stroke-dasharray='23 5 22 4'/><path d='M120 114 h145' stroke='#2a2420' stroke-width='3' stroke-linecap='round' stroke-dasharray='14 5 18 4'/><path d='M128 127 h138' stroke='#2a2420' stroke-width='3' stroke-linecap='round' stroke-dasharray='17 5 14 4'/><path d='M120 140 h131' stroke='#2a2420' stroke-width='3' stroke-linecap='round' stroke-dasharray='20 5 22 4'/><path d='M120 153 h147' stroke='#2a2420' stroke-width='3' stroke-linecap='round' stroke-dasharray='23 5 18 4'/><path d='M120 166 h140' stroke='#2a2420' stroke-width='3' stroke-linecap='round' stroke-dasharray='14 5 14 4'/><path d='M120 179 h93' stroke='#2a2420' stroke-width='3' stroke-linecap='round' stroke-dasharray='17 5 22 4'/></g><rect x='108' y='58' width='20' height='22' fill='#a3291f'/><path d='M250 185 C290 150 330 120 395 70 C385 92 360 110 330 135 C300 160 275 175 252 188 Z' fill='#ffffff' stroke='#9a9a9a' stroke-width='1.5'/><path d='M252 188 L395 70' stroke='#b0b0b0' stroke-width='1.2'/><path d='M246 192 L254 184' stroke='#2a2420' stroke-width='3' stroke-linecap='round'/><ellipse cx='70' cy='228' rx='26' ry='8' fill='#1a1412'/><path d='M46 228 L50 200 L90 200 L94 228 Z' fill='#262020'/><ellipse cx='70' cy='200' rx='20' ry='6' fill='#000'/><path d='M330 236 L400 226' stroke='#c9c9c9' stroke-width='4' stroke-linecap='round'/><path d='M310 239 L332 236' stroke='#5a3b24' stroke-width='6' stroke-linecap='round'/><rect x='402' y='120' width='16' height='90' fill='#efe6cf'/><path d='M410 98 C403 108 404 116 410 120 C416 116 417 108 410 98 Z' fill='#f2b134'/><rect x='396' y='206' width='28' height='8' rx='2' fill='#9a7b4f'/></svg><figcaption class='hint ui'>Il tavolo di un copista medievale (illustrazione).</figcaption></figure></li><li hidden>E il seme è <em>nero</em>. Che cosa di nero lascia il copista sulla pagina, riga dopo riga, come i semi in fila nei solchi?</li><li hidden>Ultimo indizio: i buoi spingono avanti l'aratro. Chi spinge avanti la penna sulla pagina?</li></ol><button class='prossimo ui'>Prossimo indizio ›</button><p class='gioco-tit'>Ora abbinate ogni elemento dell'indovinello alla sua soluzione, poi toccate per verificare.</p><div class='indizi'><button class='meta' data-sol='le dita della mano'>i buoi</button><button class='meta' data-sol='il foglio'>i bianchi prati</button><button class='meta' data-sol='la penna d’oca'>il bianco aratro</button><button class='meta' data-sol='l’inchiostro'>il nero seme</button></div><button class='rivela ui sol-btn'>Mostra la soluzione</button><p class='sol' hidden><strong>È la mano che scrive!</strong> Il copista descrive il suo lavoro come quello di un contadino: le dita spingono la penna sul foglio bianco e lasciano dietro di sé righe di inchiostro, come solchi seminati.</p><p><strong>Latino o italiano?</strong> Un po' tutti e due. Guarda le parole <em>araba, teneba, seminaba</em>: in latino si diceva <em>arabat, tenebat, seminabat</em>, ma qui la <em>t</em> finale è caduta, come nel nostro <em>arava, teneva, seminava</em>. E <em>negro</em> e <em>albo</em> sono già vicini al volgare. Per questo l'Indovinello veronese è considerato uno dei primi segni dell'italiano che sta nascendo, anche se gli studiosi discutono ancora se sia più latino o più volgare.</p>"],
+    [960,"Il Placito di Capua","<p>Nel 960, a Capua, si discute una causa: a chi appartengono alcune terre? Le rivendica l'abbazia di Montecassino, contro un certo Rodelgrimo. Il giudice scrive la sentenza in latino, ma quando i testimoni giurano, ne riporta le parole esattamente come le hanno pronunciate, nella lingua di tutti i giorni:</p><blockquote>Sao ko kelle terre, per kelle fini que ki contene, trenta anni le possette parte Sancti Benedicti.</blockquote><p><em>«So che quelle terre, entro quei confini di cui qui si parla, per trent'anni le ha possedute il monastero di San Benedetto.»</em></p><p>Perché proprio in volgare? Perché il giuramento doveva essere capito da tutti, anche da chi non sapeva il latino. È la prima volta che il volgare italiano compare in un documento ufficiale, scritto apposta per essere quello che è: la lingua parlata. Per questo il Placito di Capua è considerato <strong>l'atto di nascita dell'italiano</strong>.</p><div class='fine1'><p><strong>Fine della prima parte.</strong> Dal latino dell'Impero siamo arrivati ai primi documenti in italiano. Nella seconda parte vedremo nascere le altre lingue neolatine e le prime opere letterarie.</p><button class='prosegui ui'>Prosegui con la seconda parte ›</button></div>"],
+    [1000,"Spagnolo e provenzale","Intorno al Mille, nel monastero di San Millán de la Cogolla, un monaco annota un testo latino con parole in volgare: sono le <em>Glosas Emilianenses</em>, il primo segno scritto del castigliano. Negli stessi anni compaiono i primi testi in lingua d'oc."],
+    [1070,"La Chanson de Roland","In Francia nasce il grande poema epico in lingua d'oïl. Il volgare non è più solo lingua parlata: diventa lingua d'arte."],
+    [1100,"I trovatori","Guglielmo IX d'Aquitania è il primo trovatore di cui conosciamo i versi: la lingua d'oc diventa la lingua della poesia d'amore."],
+    [1200,"Il Cid e il portoghese","Verso il 1200 viene messo per iscritto il <em>Cantar de mio Cid</em>, il poema epico spagnolo. Nelle corti del Portogallo fiorisce la lirica galego-portoghese, e nel 1214 il testamento del re Alfonso II è uno dei primi documenti in portoghese."],
+    [1224,"La letteratura italiana","Il <em>Cantico di frate Sole</em> di Francesco d'Assisi, poi la Scuola siciliana e il Dolce Stil Novo. Nasce la nostra letteratura."],
+    [1521,"Ultimo il romeno","Per secoli in Romania si scrive in slavo ecclesiastico, la lingua della Chiesa ortodossa. Il più antico testo in romeno che conosciamo è una lettera del 1521 di Neacșu di Câmpulung. Il romeno si parlava da secoli: solo, nessuno lo scriveva."],
+    [1530,"Il ladino","Le parlate ladine delle valli alpine restano a lungo solo parlate: i primi testi scritti arrivano tra Cinquecento e Seicento. Il tratteggio mostra i confini dell'antico Impero: dove il latino è sopravvissuto sono nate le lingue neolatine."]
+,
+    [1550,"Conclusione: dal latino a Dante","<p>Il nostro viaggio finisce qui. Dal latino parlato in tutto l'Impero sono nate tante lingue sorelle; l'italiano compare per iscritto nel 960 e, tra Duecento e Trecento, diventa la lingua di una grande letteratura. Ecco le tappe principali.</p>"]
+  ].sort((a,b)=>a[0]-b[0]);
+  const domande={
+    117:"Cosa rappresenta questa mappa? Che lingua si parlava in tutti questi territori?",
+    376:"Cosa sono quelle frecce rosse? Da dove vengono e verso dove spingono? Una è già entrata nell'Impero: che cosa sta succedendo?",
+    395:"L'Impero ora ha due colori. Che cosa è successo? Che lingua si parla nella parte orientale?",
+    476:"Che cosa succede nel 476? E perché la Britannia cambia colore?",
+    568:"Un nuovo popolo arriva in Italia. Chi è, e da dove viene? Secondo te, ha lasciato qualcosa nella nostra lingua?",
+    640:"Il Nord Africa e il Vicino Oriente cambiano colore. Chi arriva, e quale lingua porta? Avrà lasciato parole anche in italiano?",
+    750:"L'oro dell'Impero sbiadisce e compaiono colori diversi. Che cosa sta succedendo al latino?",
+    813:"La gente non capisce più il latino della Chiesa. Che problema ha un prete quando deve fare la predica? Tu come lo risolveresti?",
+    842:"Sulla mappa compare la scritta \"francese\". Ma la gente lo parlava già da tempo! Come facciamo oggi a sapere che una lingua esisteva più di mille anni fa?",
+    800:"Un copista, sul margine di un libro, scrive per gioco questa frase. È latino o è già italiano? E soprattutto: di che cosa parla?",
+    960:"Ora compare l'italiano. Nel X secolo quasi tutto si scriveva in latino: secondo te, in quale occasione qualcuno avrebbe potuto scrivere proprio le parole della gente comune?",
+    1000:"Compare lo spagnolo. Immagina un monaco che legge un libro in latino e non capisce alcune parole: che cosa potrebbe scrivere a margine, per aiutarsi?",
+    1070:"Finora in volgare si scrivevano soprattutto documenti e appunti. Che cosa cambia quando qualcuno comincia a usare il volgare per raccontare storie di eroi e di battaglie?",
+    1100:"Nelle corti del sud della Francia vivono dame e cavalieri. Che tipo di poesie immagini che si cantassero in quelle corti?",
+    1200:"Compare il portoghese. Quali lingue neolatine mancano ancora sulla mappa?",
+    1224:"L'italiano si parla da secoli e c'è già qualche documento scritto. Secondo te, che differenza c'è tra un documento e un'opera di letteratura?",
+    1521:"Il romeno si parlava da secoli, ma compare solo ora. Perché, secondo te?",
+    1550:"Siamo arrivati alla fine del viaggio. Sapresti rimettere in ordine le tappe principali, dal Placito di Capua a Dante?",
+    1530:"Guarda il tratteggio: sono i confini dell'antico Impero. Dove il latino è sopravvissuto, e dove no?"
+  };
+  let rivelato=false;
+  const LUNGHI=[568, 640, 750, 800, 960, 1224, 1550], riserva=document.getElementById('riserva'), sotto=document.getElementById('sotto'), lato=document.getElementById('lato'), pannello=document.getElementById('pannello');
+  let lungo=false;
+  lato.querySelector('.rivela').addEventListener('click',()=>{rivela();sotto.scrollIntoView({behavior:'smooth',block:'start'});});
+  function mostra(e){
+    const [a,t,txt]=eventi[e]; rivelato=false;
+    riserva.querySelectorAll('.extra').length; document.querySelectorAll('#spiega .extra').forEach(n=>riserva.appendChild(n));
+    spiega.innerHTML=`<p class="domanda">${domande[a]||t}</p><button class="rivela ui">Mostra la risposta</button><div class="risposta" hidden><h3>${a}: ${t}</h3><p>${txt}</p></div>`;
+    spiega.querySelector('.rivela:not(.sol-btn)').addEventListener('click',rivela);
+    const ex=riserva.querySelector(`[data-extra="${a}"]`), ri=spiega.querySelector('.risposta');
+    if(ex&&ri){const bq=a===960&&ri.querySelector('blockquote'); if(bq)bq.replaceWith(ex); else ri.appendChild(ex);}
+    const lx=lato.querySelector('.lato-extra'); lx.innerHTML=''; lx.hidden=true;
+    if(a===568&&ri){
+      lx.innerHTML='<h4 class="lx-tit">Le parole dei Longobardi</h4>';
+      const pa=ri.querySelector('.parole'); if(pa)lx.appendChild(pa);
+      const vd=ri.querySelector('a.video'); if(vd){const pv=vd.closest('p'), ph=pv.nextElementSibling; lx.appendChild(pv); if(ph&&ph.classList.contains('hint'))lx.appendChild(ph);}
+      const slot=ri.querySelector('[data-slot="gioco"]'); if(slot){slot.innerHTML=''; ri.querySelectorAll(':scope>.gioco-tit,:scope>.gioco,:scope>p>.gioco').forEach(n=>slot.appendChild(n)); ri.querySelectorAll('.gioco-tit,.gioco').forEach(n=>{if(!slot.contains(n))slot.appendChild(n);});}
+    }
+    lungo=LUNGHI.includes(a);
+    if(lungo){sotto.appendChild(spiega);spiega.classList.add('in-sotto');sotto.hidden=true;lato.hidden=false;
+      lato.querySelector('.domanda').innerHTML=domande[a]||t;lato.querySelector('.rivela').hidden=false;lato.querySelector('.giu').hidden=true;}
+    else{pannello.appendChild(spiega);spiega.classList.remove('in-sotto');sotto.hidden=true;lato.hidden=true;}
+    document.getElementById('carta').classList.add('celato');document.getElementById('legenda').classList.add('celato');
+  }
+  function rivela(){ if(rivelato)return; rivelato=true; if(lungo){sotto.hidden=false;lato.querySelector('.rivela').hidden=true;lato.querySelector('.giu').hidden=false;const lx=lato.querySelector('.lato-extra');if(lx.childElementCount)lx.hidden=false;} const b=spiega.querySelector('.rivela:not(.sol-btn)'); if(b)b.remove(); const r=spiega.querySelector('.risposta'); if(r)r.hidden=false; document.getElementById('carta').classList.remove('celato');document.getElementById('legenda').classList.remove('celato'); }
+
+  const slider=document.getElementById('anno'), annoTxt=document.getElementById('annoGrande'), epocaTxt=document.getElementById('epoca'), spiega=document.getElementById('spiega'), play=document.getElementById('play');
+  function schedaTopo(i){
+    const [n,,,rad,sig,nota]=TOPO[i], box=spiega.querySelector('.topo-scheda'); if(!box)return;
+    spiega.querySelectorAll('.topo').forEach(t=>t.classList.toggle('sel',+t.dataset.i===i));
+    box.innerHTML=`<h4>${n}</h4><p>Radice araba: <b style="color:${RADICI[rad]}">${rad}</b>, ${sig}.</p><p>${nota}</p>`;
+  }
+  spiega.addEventListener('click',ev=>{
+    const t=ev.target.closest('.topo'); if(t){schedaTopo(+t.dataset.i);return;}
+    const w=ev.target.closest('.w'); if(w){w.setAttribute('aria-pressed',w.getAttribute('aria-pressed')==='true'?'false':'true');return;}
+    const me=ev.target.closest('.meta'); if(me){me.classList.add('on');return;}
+    if(ev.target.closest('.sol-btn')){spiega.querySelectorAll('.meta').forEach(m=>m.classList.add('on'));const so=spiega.querySelector('.sol');if(so)so.hidden=false;ev.target.closest('.sol-btn').remove();return;}
+    const pr=ev.target.closest('.prossimo'); if(pr){const h=spiega.querySelector('.guida li[hidden]'); if(h)h.hidden=false; if(!spiega.querySelector('.guida li[hidden]'))pr.remove(); return;}
+    if(ev.target.closest('.prosegui')){seconda=true;if(!raf)play.click();return;}
+    const rb=ev.target.closest('.radici button');
+    if(rb){const on=!rb.classList.contains('on');spiega.querySelectorAll('.radici button').forEach(b=>b.classList.remove('on'));
+      spiega.querySelectorAll('.topo').forEach(g=>g.classList.toggle('spento',on&&g.dataset.r!==rb.dataset.rad));
+      if(on)rb.classList.add('on');}
+  });
+  spiega.addEventListener('keydown',ev=>{const t=ev.target.closest('.topo');if(t&&(ev.key==='Enter'||ev.key===' ')){ev.preventDefault();schedaTopo(+t.dataset.i);}});
+  spiega.addEventListener('click',ev=>{const b=ev.target.closest('.gioco button');if(b)b.classList.add(b.dataset.o);});
+  const legende=[[0,[['Impero romano / latino','var(--gold)']]],[395,[['latino','var(--gold)'],['greco','var(--soft)']]],[476,[['latino','var(--gold)'],['greco','var(--soft)'],['anglosassone','var(--anglo)'],['invasioni','var(--rubric)']]],[640,[['latino','var(--gold)'],['greco','var(--soft)'],['anglosassone','var(--anglo)'],['arabo','var(--arabo)']]],[700,[['lingue neolatine in formazione','var(--gold)'],['greco','var(--soft)'],['anglosassone','var(--anglo)'],['arabo','var(--arabo)']]],[900,Object.keys(col).map(k=>[k,col[k]])]];
+  let ultimo=-1, ultimaLeg=-1;
+  function disegna(y){
+    gruppi.forEach(g=>g.style.opacity=op(L[+g.dataset.i].k,y).toFixed(3));
+    const ya=Math.round(y); annoTxt.textContent=ya+' d.C.';
+    const rom=['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI'][Math.floor((ya-1)/100)+1];
+    const ep=ya<476?'Età antica':ya<1000?'Alto Medioevo':ya<1492?'Basso Medioevo':'Età moderna';
+    epocaTxt.textContent=rom+' secolo, '+ep;
+    if(window.cursorePeriodi)window.cursorePeriodi(y);
+    let e=0; eventi.forEach((ev,i)=>{if(y>=ev[0])e=i;});
+    if(e!==ultimo){ultimo=e;mostra(e);}
+    let lg=0; legende.forEach((l,i)=>{if(y>=l[0])lg=i;});
+    if(lg!==ultimaLeg){ultimaLeg=lg;document.getElementById('legenda').innerHTML=legende[lg][1].map(([n,c])=>`<span style="--c:${c}">${n}</span>`).join('');}
+  }
+  let raf=null, t0=0, y0=0, yCur=117, fermoFino=0, seconda=false;
+  const FINE1=960;
+  const VEL=40;          // anni al secondo durante lo scorrimento
+  const PAUSA=20000;      // millisecondi di sosta su ogni tappa (domanda, poi risposta a metà)
+  const anni=eventi.map(e=>e[0]), barra=document.getElementById('attesa');
+  function stop(){cancelAnimationFrame(raf);raf=null;fermoFino=0;barra.style.width='0';play.textContent='▶ Avvia';play.setAttribute('aria-label','Avvia la trasformazione');}
+  function vaiA(y){yCur=y;slider.value=y;disegna(y);}
+  function passo(t){
+    if(t<fermoFino){if(!rivelato&&fermoFino-t<PAUSA/2)rivela();barra.style.width=(100*(1-(fermoFino-t)/PAUSA)).toFixed(1)+'%';raf=requestAnimationFrame(passo);return;}
+    barra.style.width='0';
+    if(fermoFino&&yCur===FINE1&&!seconda){stop();return;}
+    let y=Math.min(1550,Math.max(y0,y0+(t-t0)/1000*VEL));
+    const tappa=anni.find(a=>a>yCur&&a<=y);
+    if(tappa!==undefined&&LUNGHI.includes(tappa)){vaiA(tappa);stop();return;}
+    if(tappa!==undefined){y=tappa;y0=tappa;fermoFino=t+PAUSA;t0=fermoFino;}
+    vaiA(y);
+    if(y<1550)raf=requestAnimationFrame(passo);else stop();
+  }
+  play.addEventListener('click',()=>{
+    if(raf){stop();return;}
+    if(yCur>=1550)vaiA(117);
+    if(yCur>=FINE1)seconda=true;
+    y0=yCur;t0=performance.now();
+    if(anni.includes(yCur)&&!rivelato){fermoFino=t0+PAUSA;t0=fermoFino;}raf=requestAnimationFrame(passo);
+    play.textContent='❚❚ Pausa';play.setAttribute('aria-label','Metti in pausa');
+  });
+  slider.addEventListener('input',()=>{if(raf)stop();yCur=+slider.value;disegna(yCur);});
+  document.getElementById('succ').addEventListener('click',()=>{if(raf)stop();const a=anni.find(a=>a>yCur);vaiA(a!==undefined?a:1550);});
+  document.getElementById('prec').addEventListener('click',()=>{if(raf)stop();const a=[...anni].reverse().find(a=>a<yCur);vaiA(a!==undefined?a:117);});
+  disegna(117);
+})();
+// Periodi di nascita delle lingue
+(function(){
+  const A=300,B=1600, pct=t=>((Math.max(A,Math.min(B,t))-A)/(B-A)*100).toFixed(2)+'%';
+  const righe=[
+    ['francese','var(--lapis)',[450,842],'V–IX secolo',[842,'842','Giuramenti di Strasburgo'],[1075,'1070-1080','Chanson de Roland']],
+    ["provenzale (d'oc)",'#5C7FC2',[450,1000],'V–X secolo',[1000,'intorno al 1000',"primi testi in lingua d'oc"],[1100,'1100 circa','Guglielmo IX, il primo trovatore']],
+    ['italiano','var(--gold)',[450,960],'V–X secolo',[960,'960','Placito di Capua'],[1225,'1224-1226','Cantico di frate Sole']],
+    ['spagnolo','var(--rubric)',[450,1000],'V–X secolo',[1000,'X-XI secolo','Glosas Emilianenses'],[1200,'1200 circa','Cantar de mio Cid']],
+    ['portoghese','var(--verde)',[450,1150],'V–XII secolo',[1214,'1214','testamento del re Alfonso II'],[1190,'fine XII secolo','lirica galego-portoghese']],
+    ['ladino','#2E9AA6',[450,1100],'V–XI secolo',[1550,'XVI-XVII secolo','primi testi scritti'],null],
+    ['romeno','var(--viola)',[600,900],'VI–IX secolo',[1521,'1521','lettera di Neacșu di Câmpulung'],null]
+  ];
+  const tacche=[400,600,800,1000,1200,1400];
+  let h=`<div class="asse"><span></span><div class="scala">${tacche.map(t=>`<span style="left:${pct(t)}">${t}</span>`).join('')}</div></div>`;
+  righe.forEach(([n,c,f,ft,doc,lett])=>{
+    h+=`<div class="riga"><b>${n}</b><div class="traccia-l">
+      <div class="barra" style="left:${pct(f[0])};width:calc(${pct(f[1])} - ${pct(f[0])});background:${c}"></div>
+      ${lett?`<div class="punto lett" style="left:${pct(lett[0])};background:${c}" title="${lett[2]}"></div>`:''}
+      <div class="punto doc" style="left:${pct(doc[0])};background:${c}" title="${doc[2]}"></div></div>
+      <p class="nota">Formazione: ${ft}. Primo documento: <strong>${doc[1]}</strong>, ${doc[2]}.${lett?` Prima opera: <strong>${lett[1]}</strong>, <em>${lett[2]}</em>.`:''}</p></div>`;
+  });
+  const box=document.getElementById('periodi');
+  box.innerHTML=h+'<div class="cursore" id="cursore"></div>';
+  const cur=document.getElementById('cursore');
+  window.cursorePeriodi=y=>{const w=matchMedia('(max-width:560px)').matches?'6rem':'7.5rem';cur.style.left=`calc(${w} + (100% - ${w}) * ${(Math.max(A,Math.min(B,y))-A)/(B-A)})`;};
+  const an=document.getElementById('anno'); if(an) window.cursorePeriodi(+an.value); else cur.hidden=true;
+})();
+// Placito
+const parole=[["Sao","so"],["ko","che"],["kelle","quelle"],"terre","per",["kelle","quelle"],["fini","confini"],["que","che"],["ki","qui"],["contene","contiene / si parla"],"trenta","anni","le",["possette","possedette"],["parte","la parte di"],["Sancti Benedicti","San Benedetto"]];
+const verso=document.getElementById('verso');
+parole.forEach((p,i)=>{
+  if(typeof p==='string'){verso.append(p+' ');return;}
+  const b=document.createElement('button');
+  b.className='w';b.textContent=p[0];b.dataset.oggi=p[1];b.setAttribute('aria-pressed','false');
+  verso.append(b,' ');
+});
+
+
+// Crucipuzzle delle parole longobarde (nelle attività sotto la cartina, anno 568)
+(function(){
+  const LONG=['GUANCIA','SCHIENA','MILZA','STINCO','NOCCA','PANCA','SCAFFALE','BALCONE','SPACCARE','SCHERZARE'];
+  const LAT=['MANO','FINESTRA','TAVOLA','PORTA'];
+  const N=12, DIR=[[1,0],[0,1],[1,1]];
+  const LETT='AAAAEEEEIIIIOOOORRRNNNTTTLLSSCCDPMUVGBFZ';
+  const gr=document.getElementById('cpGriglia'); if(!gr)return;
+  const conta=document.getElementById('cpConta'), lista=document.getElementById('cpTrovate');
+  let G, P, trovate, inizio=null, trascina=null;
+  const rnd=n=>Math.floor(Math.random()*n);
+  function genera(){
+    for(let tent=0;tent<200;tent++){
+      const g=Array.from({length:N},()=>Array(N).fill('')), pos=[]; let ok=true;
+      for(const w of [...LONG,...LAT].sort((a,b)=>b.length-a.length)){
+        let messa=false;
+        for(let k=0;k<300&&!messa;k++){
+          const [dx,dy]=DIR[rnd(DIR.length)], x0=rnd(N), y0=rnd(N), x1=x0+dx*(w.length-1), y1=y0+dy*(w.length-1);
+          if(x1<0||x1>=N||y1<0||y1>=N)continue;
+          let lib=true; for(let i=0;i<w.length;i++){const c=g[y0+dy*i][x0+dx*i]; if(c&&c!==w[i]){lib=false;break;}}
+          if(!lib)continue;
+          for(let i=0;i<w.length;i++)g[y0+dy*i][x0+dx*i]=w[i];
+          pos.push({w,x0,y0,dx,dy,o:LONG.includes(w)?'L':'T'}); messa=true;
+        }
+        if(!messa){ok=false;break;}
+      }
+      if(ok){for(const r of g)for(let i=0;i<N;i++)if(!r[i])r[i]=LETT[rnd(LETT.length)]; return [g,pos];}
+    }
+  }
+  const cella=(x,y)=>gr.children[y*N+x];
+  function disegna(){
+    [G,P]=genera(); trovate=new Set(); inizio=null;
+    gr.style.setProperty('--n',N);
+    gr.innerHTML=G.map((r,y)=>r.map((c,x)=>`<span data-x="${x}" data-y="${y}" role="gridcell">${c}</span>`).join('')).join('');
+    aggiorna();
+  }
+  function aggiorna(){
+    const l=[...trovate].filter(w=>LONG.includes(w)).length, t=trovate.size-l;
+    conta.textContent=`Parole longobarde: ${l} su ${LONG.length} · intruse latine: ${t} su ${LAT.length}`+(trovate.size===LONG.length+LAT.length?' · Bravissimi, le avete trovate tutte!':'');
+    lista.innerHTML=[...trovate].map(w=>{const o=LONG.includes(w)?'L':'T';return `<li class="${o}">${w.toLowerCase()} <small>${o==='L'?'longobarda':'latina'}</small></li>`;}).join('');
+  }
+  function linea(a,b){
+    const dx=Math.sign(b.x-a.x), dy=Math.sign(b.y-a.y), lx=Math.abs(b.x-a.x), ly=Math.abs(b.y-a.y);
+    if(lx&&ly&&lx!==ly)return null; const n=Math.max(lx,ly)+1, c=[];
+    for(let i=0;i<n;i++)c.push({x:a.x+dx*i,y:a.y+dy*i}); return c;
+  }
+  function evidenzia(c){gr.querySelectorAll('.sel').forEach(s=>s.classList.remove('sel')); (c||[]).forEach(p=>cella(p.x,p.y).classList.add('sel'));}
+  function prova(c){
+    evidenzia(null); if(!c||c.length<2)return false;
+    const chiave=c.map(q=>q.x+','+q.y).join(' '), inv=[...c].reverse().map(q=>q.x+','+q.y).join(' ');
+    const p=P.find(p=>{if(trovate.has(p.w)||p.w.length!==c.length)return false; const k=[...p.w].map((_,i)=>(p.x0+p.dx*i)+','+(p.y0+p.dy*i)).join(' '); return k===chiave||k===inv;});
+    if(!p)return false;
+    trovate.add(p.w); c.forEach(q=>cella(q.x,q.y).classList.add(p.o)); aggiorna(); return true;
+  }
+  const pc=e=>{const el=document.elementFromPoint(e.clientX,e.clientY); return el&&el.parentElement===gr?{x:+el.dataset.x,y:+el.dataset.y}:null;};
+  gr.addEventListener('pointerdown',e=>{const p=pc(e); if(!p)return; e.preventDefault(); trascina=p; evidenzia([p]);});
+  gr.addEventListener('pointermove',e=>{if(!trascina)return; const p=pc(e); if(p)evidenzia(linea(trascina,p)||[trascina]);});
+  window.addEventListener('pointerup',e=>{
+    if(!trascina)return; const a=trascina; trascina=null; const b=pc(e)||a;
+    gr.querySelectorAll('.inizio').forEach(s=>s.classList.remove('inizio'));
+    if(b.x!==a.x||b.y!==a.y){inizio=null; prova(linea(a,b)); return;}
+    if(inizio&&(inizio.x!==a.x||inizio.y!==a.y)){const s=inizio; inizio=null; prova(linea(s,a)); return;}
+    inizio=a; evidenzia(null); cella(a.x,a.y).classList.add('inizio');
+  });
+  document.getElementById('cpNuovo').addEventListener('click',disegna);
+  document.getElementById('cpSol').addEventListener('click',()=>P.forEach(p=>{if(trovate.has(p.w))return; for(let i=0;i<p.w.length;i++)cella(p.x0+p.dx*i,p.y0+p.dy*i).classList.add('sol');}));
+  disegna();
+})();
+</script>
+</body>
+</html>
