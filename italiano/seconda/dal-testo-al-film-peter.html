@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dal testo al film – Peter e le decorazioni di Natale</title>
+<meta name="description" content="Da L'inventore di sogni di Ian McEwan a una sceneggiatura: testo, blocchi, voce del narratore, découpage in 26 inquadrature e metodo per la classe.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --paper:#f7f3ea; --card:#fffdf8; --ink:#1f2433; --muted:#5d6475; --line:#e3dccb;
+  --night:#26315c; --night-soft:#e6e9f5; --dream:#7a5cc4; --dream-soft:#efe9fb;
+  --sun:#c9772b; --sun-soft:#fbefe2; --leaf:#3d7a5a; --leaf-soft:#e5f2ea; --rose:#b5485f; --rose-soft:#f9e6ea;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:64px;scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:1.08rem/1.6 "Source Sans 3",system-ui,sans-serif}
+h1,h2,h3,h4{font-family:Fraunces,Georgia,serif;line-height:1.2;color:var(--night)}
+a{color:var(--dream)}
+
+header.cover{background:var(--night);color:#fff;padding:56px 20px 44px;position:relative;overflow:hidden}
+header.cover:after{content:"";position:absolute;right:8%;top:-40px;width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,#fff6 0,#fff2 40%,#fff0 70%)}
+header .wrap{max-width:960px;margin:0 auto;position:relative;z-index:1}
+header .k{font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;opacity:.8;margin:0}
+header h1{color:#fff;font-size:clamp(2rem,6vw,3.4rem);margin:.3em 0 .25em}
+header p.sub{font-size:1.15rem;opacity:.9;margin:0;max-width:60ch}
+
+nav.bar{position:sticky;top:0;z-index:10;background:var(--card);border-bottom:1px solid var(--line);
+  display:flex;gap:4px;overflow-x:auto;padding:8px 12px;scrollbar-width:thin}
+nav.bar a{flex:none;color:var(--night);text-decoration:none;font-weight:600;font-size:.92rem;padding:7px 12px;border-radius:99px}
+nav.bar a:hover,nav.bar a:focus-visible{background:var(--night-soft);outline:none}
+
+main{max-width:960px;margin:0 auto;padding:12px 16px 64px}
+main h2{font-size:clamp(1.5rem,3.6vw,2rem);margin:2.2em 0 .6em;padding-top:.6em;border-top:3px solid var(--night)}
+main h3{font-size:1.3rem;margin:1.8em 0 .5em}
+main h4{font-size:1.1rem;margin:1.6em 0 .4em;color:var(--dream)}
+main > p, main li{max-width:72ch}
+
+.racconto{background:var(--card);border:1px solid var(--line);border-left:8px solid var(--dream);border-radius:16px;
+  padding:20px 26px;font-family:Fraunces,Georgia,serif;font-size:1.12rem;line-height:1.7}
+.racconto p:first-child{font-family:"Source Sans 3",sans-serif;font-size:.95rem;color:var(--muted)}
+
+.copione{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px 28px;
+  font-family:"Courier New",Courier,monospace;font-size:1rem;line-height:1.6;box-shadow:0 1px 0 var(--line)}
+.copione p{max-width:62ch}
+.copione .slug{font-weight:700;text-transform:uppercase;margin-top:1.6em;padding:6px 10px;background:var(--night-soft);border-radius:6px}
+.copione .slug:first-child{margin-top:0}
+.copione .battuta{margin-left:2.5em}
+.copione .who{display:block;font-weight:700;letter-spacing:.04em}
+.copione .trans{text-align:right;font-weight:700}
+
+.scroll{overflow-x:auto;margin:1em 0;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:.95rem;min-width:640px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{background:var(--night);color:#fff;font-weight:600;position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+tbody tr:nth-child(even) td{background:#faf6ee}
+td:first-child{font-weight:700;color:var(--night);white-space:nowrap}
+td.blank{height:3.2em}
+
+.box{border-radius:14px;padding:14px 20px;border-left:8px solid;margin:1.2em 0}
+.box p:first-child{margin-top:0} .box p:last-child,.box ol:last-child{margin-bottom:0}
+.guarda{background:var(--sun-soft);border-color:var(--sun)}
+.compito{background:var(--leaf-soft);border-color:var(--leaf)}
+
+.glossario ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.glossario li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;max-width:none}
+.glossario strong{color:var(--dream)}
+
+.spiega ol{padding-left:2.2em}
+.spiega li{margin:.6em 0}
+.spiega .pass{display:inline-block;margin-left:.3em;padding:0 .55em;border-radius:99px;background:var(--dream-soft);color:var(--dream);font-weight:600;font-size:.92em}
+
+.domande p{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;max-width:none}
+.domande strong{display:block;font-family:Fraunces,Georgia,serif;color:var(--night);font-size:1.05rem;margin-bottom:.2em}
+
+footer{max-width:960px;margin:0 auto;padding:0 16px 40px;color:var(--muted);font-size:.9rem}
+
+@media (max-width:600px){
+  .copione{padding:16px} .copione .battuta{margin-left:1em}
+  .racconto{padding:16px}
+}
+@media print{
+  nav.bar{display:none} header.cover{background:#fff;color:var(--ink);padding:0 0 12px} header h1{color:var(--night)}
+  header.cover:after{display:none} body{background:#fff} .scroll{overflow:visible} table{min-width:0}
+  th{position:static;color:#000;background:#e6e9f5} h2{break-before:page} h2:first-of-type{break-before:auto}
+  tr,li,.domande p{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header class="cover"><div class="wrap">
+  <p class="k">Cinema e scuola · L'inventore di sogni</p>
+  <h1>Dal testo al film</h1>
+  <p class="sub">Peter e le decorazioni di Natale: dal racconto di Ian McEwan alla sceneggiatura, inquadratura per inquadratura.</p>
+</div></header>
+<nav class="bar" aria-label="Sezioni"><a href="#intro">Introduzione</a><a href="#testo">Il testo</a><a href="#blocchi">Blocchi</a><a href="#voce">La voce del narratore</a><a href="#sceneggiatura">Sceneggiatura</a><a href="#decoupage">Découpage</a><a href="#spiegate">Inquadrature spiegate</a><a href="#regia">Scelte di regia</a><a href="#metodo">Metodo</a></nav>
+<main>
+<h2 id="intro">Introduzione</h2>
+<p>Il brano di Peter che fa cadere il padre dalla poltrona diventa una scena di 26 inquadrature, circa due minuti di film. È il primo esempio, da usare come modello per trasformare altri episodi di <em>L'inventore di sogni</em> di Ian McEwan.</p>
+<p>Si parte dal testo del racconto, diviso in otto blocchi. Poi il lavoro procede in tre passaggi, uno per sezione:</p>
+<ol>
+<li><strong>Sceneggiatura letteraria</strong>: il racconto riscritto come lo si legge su un copione, con luoghi, azioni e battute. Il narratore sparisce: resta solo ciò che si vede e si sente.</li>
+<li><strong>Découpage tecnico</strong>: la scena divisa in inquadrature numerate, ciascuna con il piano, l'angolazione o il movimento, l'audio e la frase del testo da cui nasce.</li>
+<li><strong>Scelte di regia</strong>: perché quell'inquadratura e non un'altra, cioè come il cinema risolve ciò che il libro dice con le parole (i pensieri di Peter, ciò che succede alle sue spalle, la mamma che compare solo alla fine).</li>
+</ol>
+<p>L'ultima sezione riassume il metodo e offre una tabella vuota da far compilare ai ragazzi sui capitoli successivi.</p>
+<h2 id="testo">Il testo</h2>
+<div class="racconto">
+<p><em>Da Ian McEwan, L'inventore di sogni.</em></p>
+<p>Un Natale il padre di Peter, Thomas Fortune, stava sistemando le decorazioni in soggiorno. Detestava fare quel lavoro. Diventava sempre di cattivo umore. Quella volta, doveva attaccare dei nastri in alto in un angolo. Be', proprio in quell'angolo c'era una poltrona e seduto su quella poltrona a fare niente di speciale, c'era Peter.</p>
+<p>– Non ti muovere, – disse Mr Fortune. – Adesso salgo sulla poltrona per arrivare al muro.</p>
+<p>– Va bene, – disse Peter. – Fa' pure.</p>
+<p>Ed ecco Mr Thomas Fortune salire sopra la poltrona, e Peter salire in groppa ai suoi pensieri. A vederlo si sarebbe detto che non faceva nulla, ma in realtà era occupatissimo. Si stava inventando un modo emozionante di scendere dalle montagne con un attaccapanni e una corda ben tesa tra due pini. Continuò a pensarci mentre suo padre stava ritto sullo schienale della poltrona, ansimando e stirandosi per arrivare al soffitto. Come si poteva fare, pensava intanto Peter, per scivolare senza andare a sbattere negli alberi che tenevano la corda? Chissà, forse l'aria di montagna stuzzicò l'appetito di Peter. Fatto sta che in cucina c'era un pacchetto nuovo di biscotti al cioccolato. Non era bello continuare a ignorarli. Peter non fece in tempo ad alzarsi che sentì alle sue spalle un orrendo frastuono.</p>
+<p>E si voltò proprio mentre suo padre cadeva a testa prima nel buco tra la poltrona e il muro. Poi Mr Fortune riapparve, per prima la testa di nuovo. Sembrava deciso a fare Peter a pezzettini. Dall'altra parte della stanza, la mamma si teneva stretta la mano sulla bocca per non farsi sorprendere a ridere.</p>
+<p>– Oh, scusa papà, – disse Peter. – Mi ero dimenticato che eri lì.</p>
+</div>
+<h2 id="blocchi">Il testo diviso in blocchi</h2>
+<p>Il racconto si spezza in otto blocchi: ogni blocco cambia luogo, azione o punto di vista. Per ciascuno si chiede: che cosa si <strong>vede</strong>, che cosa si <strong>sente</strong>, che cosa è solo <strong>pensiero o commento del narratore</strong> (e quindi va tradotto in immagini)?</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Blocco</th>
+<th>Testo</th>
+<th>Che cosa contiene</th>
+<th>Diventa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A. L'ambiente</td>
+<td>«Un Natale il padre di Peter… stava sistemando le decorazioni in soggiorno.»</td>
+<td>Si vede: luogo, periodo, personaggio al lavoro</td>
+<td>Scena 1, inq. 1 (campo totale)</td>
+</tr>
+<tr>
+<td>B. Il malumore del padre</td>
+<td>«Detestava fare quel lavoro. Diventava sempre di cattivo umore.»</td>
+<td>Commento del narratore: un sentimento da trasformare in gesti</td>
+<td>Scena 1, inq. 2–3 (piano americano, dettaglio)</td>
+</tr>
+<tr>
+<td>C. Il problema e Peter</td>
+<td>«Quella volta, doveva attaccare dei nastri in alto… c'era Peter.»</td>
+<td>Si vede: l'angolo, la poltrona, Peter fermo</td>
+<td>Scena 1, inq. 4–5 (panoramica, mezza figura)</td>
+</tr>
+<tr>
+<td>D. Il dialogo</td>
+<td>«– Non ti muovere… – Va bene… Fa' pure.»</td>
+<td>Si sente: due battute</td>
+<td>Scena 1, inq. 6–7 (campo e controcampo)</td>
+</tr>
+<tr>
+<td>E. Due salite</td>
+<td>«Ed ecco Mr Thomas Fortune salire sopra la poltrona, e Peter salire in groppa ai suoi pensieri.»</td>
+<td>Si vede la prima salita; la seconda è un pensiero</td>
+<td>Scena 1, inq. 8–9 (dal basso; zoom nel riflesso degli occhiali)</td>
+</tr>
+<tr>
+<td>F. Il sogno a occhi aperti</td>
+<td>«Si stava inventando un modo emozionante… andare a sbattere negli alberi che tenevano la corda?»</td>
+<td>Pensiero di Peter, con dentro un'azione del padre</td>
+<td>Scena 2, inq. 10–14 (si entra nella montagna attraverso il riflesso negli occhiali; il soggiorno sparisce)</td>
+</tr>
+<tr>
+<td>G. I biscotti e il frastuono</td>
+<td>«Chissà, forse l'aria di montagna… un orrendo frastuono.»</td>
+<td>Pensiero, poi azione, poi un suono fuori campo</td>
+<td>Scena 2–3, inq. 15–18 (inserto dei biscotti, stacco, rumore fuori campo)</td>
+</tr>
+<tr>
+<td>H. La caduta e la scoperta</td>
+<td>«E si voltò… Mi ero dimenticato che eri lì.»</td>
+<td>Si vede la caduta; la mamma compare per la prima volta; ultima battuta</td>
+<td>Scena 3, inq. 19–26 (soggettiva, pausa, controcampo sulla mamma, finale)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Il blocco F è il più lungo nel libro e il più difficile da girare: tutto avviene nella testa di Peter. Per questo diventa una scena a sé.</p>
+<h2 id="voce">Primo problema: la voce del narratore</h2>
+<p>I primi tre blocchi (A, B, C) contengono la voce del narratore, che descrive il contesto in cui si svolge l'episodio: dove siamo, chi c'è, di che umore è il padre. Come renderla in un film? In passato si usava spesso una <strong>voce fuori campo</strong>: qualcuno che non vediamo racconta, mentre sullo schermo scorrono le immagini.</p>
+<div class="box guarda">
+<p><strong>Da guardare insieme:</strong> l'inizio di <a href="https://www.youtube.com/watch?v=F7U6-6zBYFc"><em>Viale del tramonto</em></a> di Billy Wilder (1950). Una voce racconta il luogo, l'ora e il fatto mentre vediamo le strade di Los Angeles, le auto della polizia, una piscina. Solo alla fine si scopre chi sta parlando.</p>
+<p>Domande dopo la visione:</p>
+<ol>
+<li>Che cosa ci dice la voce che le immagini da sole non potrebbero dire?</li>
+<li>Che cosa ci mostrano le immagini che la voce non dice?</li>
+<li>Chi parla? Lo vediamo? Quando lo capiamo?</li>
+</ol>
+</div>
+<h3>Tre soluzioni per Peter</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th></th>
+<th>Soluzione 1: voce fuori campo</th>
+<th>Soluzione 2: dialogo tra marito e moglie</th>
+<th>Soluzione 3: solo immagini</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Come funziona</td>
+<td>Una voce legge le frasi dei blocchi A–C sopra le inquadrature 1–5</td>
+<td>Ciò che dice il narratore passa in bocca ai personaggi: la mamma si lamenta del ritardo, il padre sbuffa, entrambi parlano di Peter</td>
+<td>Ogni frase diventa un'inquadratura: il malumore diventa sbuffi e mani aggrovigliate nel nastro (inq. 2–3)</td>
+</tr>
+<tr>
+<td>In sceneggiatura</td>
+<td>VOCE NARRANTE (f.c.): «Un Natale il padre di Peter… Detestava fare quel lavoro… Be', proprio in quell'angolo c'era una poltrona…»</td>
+<td>Una breve scena dialogata prima di «Non ti muovere» (vedi sotto)</td>
+<td>Solo azioni e suoni, nessuna parola fino a «Non ti muovere»</td>
+</tr>
+<tr>
+<td>Che cosa si guadagna</td>
+<td>Il tono ironico e affettuoso del libro («Be', proprio in quell'angolo…»)</td>
+<td>Scopriamo il carattere dei personaggi da come parlano; Peter è presentato dagli occhi dei genitori</td>
+<td>Lo spettatore capisce da solo, guardando</td>
+</tr>
+<tr>
+<td>Che cosa si perde</td>
+<td>Le immagini rischiano di ripetere ciò che la voce dice</td>
+<td>Si inventano battute che nel libro non ci sono; la mamma non è più una sorpresa finale</td>
+<td>L'ironia del narratore</td>
+</tr>
+<tr>
+<td>Chi parla</td>
+<td>Da decidere: il narratore del libro, oppure Peter stesso che ricorda</td>
+<td>La mamma e il padre</td>
+<td>Nessuno</td>
+</tr>
+</tbody>
+</table></div>
+<h3>La soluzione 2 in sceneggiatura</h3>
+<div class="copione">
+<p class="slug">SCENA 1 – INT. SOGGIORNO DI CASA FORTUNE – GIORNO. TRE GIORNI A NATALE</p>
+<p>Scatoloni aperti ovunque. THOMAS lotta con un groviglio di nastri. Sulla porta della cucina compare la MAMMA, un canovaccio in mano. Nell'angolo in fondo, PETER è seduto in poltrona, immobile.</p>
+<p class="battuta"><span class="who">MAMMA</span> Thomas, mancano tre giorni a Natale e questa casa sembra ancora agosto.</p>
+<p class="battuta"><span class="who">THOMAS (sbuffando)</span> Ci sto lavorando, no? Questi nastri si annodano da soli. Ogni anno la stessa storia.</p>
+<p class="battuta"><span class="who">MAMMA</span> Se ti pesa tanto, fatti aiutare da Peter. È lì in poltrona che non fa niente.</p>
+<p>Thomas si gira a guardare il figlio.</p>
+<p class="battuta"><span class="who">THOMAS</span> Lascia stare, non c'è bisogno. È immerso nei suoi pensieri, non vorrei disturbarlo.</p>
+<p>Una pausa. Thomas abbassa la voce.</p>
+<p class="battuta"><span class="who">THOMAS</span> Ma non ti sembra strano, tuo figlio? A cosa starà pensando?</p>
+<p class="battuta"><span class="who">MAMMA</span> Ma no, non è strano. È immerso nei suoi pensieri.</p>
+<p class="battuta"><span class="who">THOMAS (poco convinto)</span> Sarà.</p>
+<p>La mamma torna in cucina. Thomas si avvia verso l'angolo dove deve attaccare i festoni, proprio sopra la poltrona di Peter. <em>Segue il dialogo con Peter (inq. 6 del découpage) e la salita sullo schienale.</em></p>
+</div>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>N.</th>
+<th>Piano / campo</th>
+<th>Angolazione e movimento</th>
+<th>Cosa si vede</th>
+<th>Audio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Campo totale</td>
+<td>Frontale, fissa</td>
+<td>Il soggiorno: Thomas in primo piano tra i nastri, la mamma sulla porta, Peter piccolo sullo sfondo</td>
+<td>Canzone natalizia alla radio</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Piano americano</td>
+<td>Frontale</td>
+<td>La mamma sulla porta, braccia incrociate</td>
+<td>«Thomas, mancano tre giorni…»</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Piano americano</td>
+<td>Controcampo</td>
+<td>Thomas con il nastro aggrovigliato tra le mani</td>
+<td>«Ci sto lavorando, no?…»</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Primo piano</td>
+<td>Campo e controcampo</td>
+<td>La mamma propone l'aiuto di Peter</td>
+<td>«Fatti aiutare da Peter…»</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Campo medio</td>
+<td>Sopra la spalla di Thomas</td>
+<td>In fondo, Peter in poltrona con lo sguardo perso, ignaro di tutto</td>
+<td>«Lascia stare… non vorrei disturbarlo»</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Primo piano</td>
+<td>Frontale, Thomas si avvicina alla moglie</td>
+<td>Thomas sussurra, sospettoso</td>
+<td>«Ma non ti sembra strano, tuo figlio?…»</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Primo piano</td>
+<td>Controcampo</td>
+<td>La mamma sorride, tranquilla</td>
+<td>«Ma no, non è strano…»</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Figura intera</td>
+<td>Panoramica che segue Thomas</td>
+<td>Thomas si allontana verso l'angolo; la mamma esce</td>
+<td>«Sarà.»</td>
+</tr>
+</tbody>
+</table></div>
+<p>Una conseguenza da discutere: con questa soluzione la mamma è già in scena all'inizio. Perché il finale funzioni, deve uscire e poi ricomparire sulla porta, richiamata dal frastuono (inq. 23).</p>
+<div class="box compito">
+<p><strong>Compito per la classe:</strong> scegliere una delle tre soluzioni e motivarla. Chi sceglie la voce fuori campo decide anche chi parla e su quale inquadratura cade ogni frase. Il découpage qui sotto segue la soluzione 3.</p>
+</div>
+<h2 id="sceneggiatura">1. Sceneggiatura letteraria</h2>
+<p>Tre scene: il soggiorno, la montagna immaginata da Peter, di nuovo il soggiorno. Le parti in maiuscolo sono le intestazioni di scena e i nomi dei personaggi, come in un copione vero.</p>
+<div class="copione">
+<p class="slug">SCENA 1 – INT. SOGGIORNO DI CASA FORTUNE – GIORNO. PERIODO DI NATALE</p>
+<p>Un soggiorno pieno di scatoloni aperti: palline, festoni, luci aggrovigliate. In un angolo, una poltrona vicina al muro. Ci è seduto PETER (10 anni), immobile, lo sguardo perso.</p>
+<p>THOMAS FORTUNE, il padre, lotta con un rotolo di nastri. Sbuffa, borbotta, il nastro gli si attorciglia tra le dita. Guarda in alto: il punto dove deve attaccarlo è proprio sopra la poltrona di Peter.</p>
+<p class="battuta"><span class="who">THOMAS</span> Non ti muovere. Adesso salgo sulla poltrona per arrivare al muro.</p>
+<p class="battuta"><span class="who">PETER</span> Va bene. Fa' pure.</p>
+<p>Thomas sale sul sedile, poi sullo schienale. Traballa, si allunga verso il soffitto. Peter non lo guarda. Nelle lenti dei suoi occhiali, a poco a poco, si riflette una montagna innevata.</p>
+<p class="slug">SCENA 2 – EST. MONTAGNA INNEVATA – GIORNO (IMMAGINAZIONE DI PETER)</p>
+<p>Una valle bianca e silenziosa. Tra due pini lontani è tesa una corda. Peter, con giacca a vento e berretto, aggancia un attaccapanni alla corda, lo stringe con due mani e si lancia. Scivola sempre più veloce. Il secondo pino si avvicina, enorme. Peter strizza gli occhi: come si fa a non sbatterci contro?</p>
+<p>Il soggiorno, il padre, i nastri: tutto è scomparso. Esiste solo la montagna.</p>
+<p>Sulla montagna Peter annusa l'aria. Gli viene in mente una cosa: in cucina c'è un pacchetto nuovo di biscotti al cioccolato.</p>
+<p class="slug">SCENA 3 – INT. SOGGIORNO DI CASA FORTUNE – GIORNO</p>
+<p>Peter si alza di scatto. La poltrona, liberata dal suo peso, slitta. Alle sue spalle, un FRASTUONO.</p>
+<p>Peter si volta: suo padre sta precipitando a testa in giù nel buco tra la poltrona e il muro. Sparisce. Silenzio. Un nastro scende piano, piano, fino a terra.</p>
+<p>Dal buco riemerge la testa di Thomas: capelli dritti, un festone intorno al collo, la faccia di chi sta per fare a pezzettini qualcuno.</p>
+<p>Dall'altra parte della stanza, sulla porta, c'è la MAMMA. Si tiene la mano premuta sulla bocca. Le tremano le spalle: sta trattenendo una risata.</p>
+<p class="battuta"><span class="who">PETER</span> Oh, scusa papà. Mi ero dimenticato che eri lì.</p>
+<p class="trans">DISSOLVENZA A NERO.</p>
+</div>
+<h2 id="decoupage">2. Découpage tecnico</h2>
+<p>Ogni riga è un'inquadratura, cioè un pezzo di film girato senza interruzioni. L'ultima colonna dice da quale frase del libro nasce.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>N.</th>
+<th>Piano / campo</th>
+<th>Angolazione e movimento</th>
+<th>Cosa si vede</th>
+<th>Audio</th>
+<th>Dal testo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Campo totale</td>
+<td>Frontale, macchina fissa</td>
+<td>Il soggiorno: albero, scatoloni, Thomas con i nastri; nell'angolo la poltrona con Peter</td>
+<td>Canzone natalizia alla radio</td>
+<td>«stava sistemando le decorazioni in soggiorno»</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Piano americano</td>
+<td>Frontale</td>
+<td>Thomas srotola il nastro, sbuffa, scuote la testa</td>
+<td>Sbuffi, borbottìo</td>
+<td>«Detestava fare quel lavoro»</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Dettaglio</td>
+<td>Dall'alto</td>
+<td>Le mani di Thomas aggrovigliate nel nastro</td>
+<td>Fruscio del nastro</td>
+<td>«Diventava sempre di cattivo umore»</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Campo medio</td>
+<td>Dal basso; panoramica verticale verso l'alto</td>
+<td>Soggettiva di Thomas: dalla poltrona di Peter fino all'angolo sotto il soffitto</td>
+<td>Radio più lontana</td>
+<td>«doveva attaccare dei nastri in alto in un angolo»</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Mezza figura</td>
+<td>Frontale, fissa</td>
+<td>Peter seduto, immobile, sguardo nel vuoto</td>
+<td>Silenzio, ticchettìo di un orologio</td>
+<td>«…a fare niente di speciale, c'era Peter»</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Primo piano</td>
+<td>Leggermente dal basso (Peter lo vede da sotto)</td>
+<td>Thomas parla guardando in basso</td>
+<td>«Non ti muovere…»</td>
+<td>Dialogo</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Primo piano</td>
+<td>Leggermente dall'alto (controcampo)</td>
+<td>Peter risponde senza alzare gli occhi</td>
+<td>«Va bene. Fa' pure.»</td>
+<td>Dialogo</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Figura intera</td>
+<td>Dal basso (contre-plongée)</td>
+<td>Thomas sale sul sedile, poi sullo schienale; la poltrona scricchiola</td>
+<td>Scricchiolìo, ansimare</td>
+<td>«salire sopra la poltrona»</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Primissimo piano → dettaglio</td>
+<td>Frontale; zoom lento fin dentro le lenti degli occhiali</td>
+<td>Negli occhiali di Peter si riflette una montagna innevata; la macchina entra nel riflesso, che riempie lo schermo: il soggiorno scompare</td>
+<td>La radio e gli sbuffi del padre sfumano, cresce il vento</td>
+<td>«Peter salire in groppa ai suoi pensieri»</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Campo lunghissimo</td>
+<td>Dall'alto, ripresa aerea</td>
+<td>Valle innevata, due pini, una corda tesa tra loro</td>
+<td>Vento, musica d'avventura</td>
+<td>«scendere dalle montagne… tra due pini»</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Figura intera</td>
+<td>Frontale</td>
+<td>Peter aggancia l'attaccapanni alla corda e si lancia</td>
+<td>Corda che vibra</td>
+<td>«con un attaccapanni e una corda»</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Primo piano</td>
+<td>Carrellata laterale veloce (macchina che corre con lui)</td>
+<td>Peter scivola, il vento gli scompiglia i capelli</td>
+<td>Sibilo della corda, musica che accelera</td>
+<td>«modo emozionante»</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Campo medio</td>
+<td>Soggettiva di Peter, zoom in avanti</td>
+<td>Il secondo pino si avvicina, enorme</td>
+<td>Musica al culmine</td>
+<td>«senza andare a sbattere negli alberi»</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Campo lungo</td>
+<td>Dall'alto, ripresa aerea</td>
+<td>Peter si ferma a un soffio dal tronco, sospeso sulla corda sopra la valle. Nessun ritorno al soggiorno: il padre è dimenticato</td>
+<td>La musica si calma, solo vento</td>
+<td>«Continuò a pensarci mentre suo padre stava ritto sullo schienale» (il padre si sente nel libro, non si vede nel film)</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Primo piano</td>
+<td>Frontale (di nuovo la montagna)</td>
+<td>Peter, sospeso sulla corda, annusa l'aria</td>
+<td>Il vento cala</td>
+<td>«l'aria di montagna stuzzicò l'appetito»</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Dettaglio</td>
+<td>Dall'alto, luce calda</td>
+<td>Inserto: il pacchetto di biscotti al cioccolato sul tavolo di cucina</td>
+<td>Breve nota musicale «magica»</td>
+<td>«in cucina c'era un pacchetto nuovo di biscotti»</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Mezza figura</td>
+<td>Frontale (di nuovo il soggiorno, stacco netto)</td>
+<td>Peter torna in sé e si alza di scatto</td>
+<td>Fine della musica</td>
+<td>«Peter non fece in tempo ad alzarsi»</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Dettaglio</td>
+<td>Rasoterra</td>
+<td>La gamba della poltrona slitta sul pavimento</td>
+<td>Strisciata, poi FRASTUONO fuori campo</td>
+<td>«sentì alle sue spalle un orrendo frastuono»</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Primo piano</td>
+<td>Frontale</td>
+<td>Peter si gela e si volta</td>
+<td>Eco del frastuono</td>
+<td>«E si voltò»</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Figura intera</td>
+<td>Soggettiva di Peter, al rallentatore</td>
+<td>Thomas cade a testa in giù nel buco tra poltrona e muro e sparisce</td>
+<td>Grido di Thomas, tonfo</td>
+<td>«suo padre cadeva a testa prima nel buco»</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Campo medio</td>
+<td>Frontale, macchina fissa, pausa lunga</td>
+<td>Lo spazio vuoto; un nastro scende lento fino a terra</td>
+<td>Silenzio totale</td>
+<td>(pausa comica)</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Primo piano</td>
+<td>Dal basso</td>
+<td>La testa di Thomas riemerge: capelli dritti, festone al collo, sguardo furioso</td>
+<td>Un respiro rabbioso</td>
+<td>«Sembrava deciso a fare Peter a pezzettini»</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Campo medio</td>
+<td>Controcampo: dall'altra parte della stanza</td>
+<td>Sulla porta c'è la mamma, la mano sulla bocca (prima volta che la vediamo)</td>
+<td>Una risata soffocata</td>
+<td>«Dall'altra parte della stanza, la mamma…»</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Primo piano</td>
+<td>Frontale</td>
+<td>Gli occhi della mamma ridono, le spalle tremano</td>
+<td>Risata trattenuta</td>
+<td>«per non farsi sorprendere a ridere»</td>
+</tr>
+<tr>
+<td>25</td>
+<td>Primo piano</td>
+<td>Frontale</td>
+<td>Peter, innocente</td>
+<td>«Oh, scusa papà. Mi ero dimenticato che eri lì.»</td>
+<td>Dialogo</td>
+</tr>
+<tr>
+<td>26</td>
+<td>Campo totale</td>
+<td>Frontale, carrellata all'indietro lenta</td>
+<td>I tre nella stanza, le luci dell'albero lampeggiano; dissolvenza a nero</td>
+<td>Torna la canzone natalizia</td>
+<td>(chiusura)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="glossario">Le parole del montaggio</h3>
+<p>Tra un'inquadratura e l'altra c'è sempre un passaggio. Nella scena di Peter se ne usano questi:</p>
+<div class="glossario">
+<ul>
+<li><strong>Stacco</strong> (o taglio netto): si passa all'inquadratura successiva senza effetti. È il passaggio più comune, quasi invisibile.</li>
+<li><strong>Campo e controcampo</strong>: due inquadrature opposte, una per ciascuno dei due personaggi che si parlano o si guardano.</li>
+<li><strong>Raccordo di sguardo</strong>: un personaggio guarda qualcosa fuori campo e l'inquadratura successiva mostra ciò che guarda.</li>
+<li><strong>Soggettiva</strong>: vediamo con gli occhi del personaggio.</li>
+<li><strong>Inserto</strong>: un dettaglio breve dentro una scena, per esempio un oggetto o un pensiero.</li>
+<li><strong>Dissolvenza incrociata</strong>: un'immagine svanisce mentre l'altra compare. Segnala un salto di tempo o di mondo, per esempio dalla realtà al sogno.</li>
+<li><strong>Dissolvenza a nero</strong>: l'immagine si spegne nel nero. Chiude una scena o il film.</li>
+<li><strong>Zoom, carrellata, panoramica</strong>: nello zoom la macchina sta ferma e l'obiettivo ingrandisce; nella carrellata la macchina si sposta; nella panoramica ruota su se stessa.</li>
+</ul>
+</div>
+<h3 id="spiegate">Le inquadrature spiegate una per una</h3>
+<p>Per ogni inquadratura: perché quel piano e quell'angolazione; dopo la freccia, come si passa alla successiva.</p>
+<h4>Scena 1 – Il soggiorno (inq. 1–9)</h4>
+<div class="spiega">
+<ol>
+<li><strong>Campo totale.</strong> È l'inquadratura di ambientazione: dice dove siamo e chi c'è. Peter è piccolo nell'angolo, lo si nota appena, proprio come lo nota il padre. <span class="pass">→ Stacco.</span></li>
+<li><strong>Piano americano su Thomas.</strong> Ci avviciniamo e vediamo i gesti del malumore: sbuffa, scuote la testa. Prende il posto della frase del narratore «Detestava fare quel lavoro». <span class="pass">→ Stacco.</span></li>
+<li><strong>Dettaglio delle mani.</strong> Il fastidio diventa un oggetto: un nastro che non si lascia srotolare. <span class="pass">→ Raccordo di sguardo: Thomas alza gli occhi.</span></li>
+<li><strong>Campo medio dal basso, panoramica verso l'alto.</strong> È la soggettiva del padre: guardiamo con lui il punto da raggiungere e scopriamo che sotto c'è la poltrona con Peter. Il movimento misura la distanza: bisognerà salire. <span class="pass">→ Stacco.</span></li>
+<li><strong>Mezza figura di Peter.</strong> Peter è immobile e anche l'inquadratura: fissa e lunga. Il ticchettìo dell'orologio fa sentire il tempo che non passa. <span class="pass">→ Stacco.</span></li>
+<li><strong>Primo piano di Thomas, leggermente dal basso.</strong> Inizia il dialogo. Lo vediamo come lo vede Peter, da seduto: grande e un po' severo. <span class="pass">→ Controcampo.</span></li>
+<li><strong>Primo piano di Peter, leggermente dall'alto.</strong> Ora lo vediamo come lo vede il padre. Peter risponde senza alzare gli occhi: è già altrove. <span class="pass">→ Stacco.</span></li>
+<li><strong>Figura intera dal basso.</strong> Serve il corpo intero per seguire la salita. Dal basso la poltrona sembra alta e instabile: prepara la caduta. <span class="pass">→ Stacco su Peter.</span></li>
+<li><strong>Primissimo piano degli occhiali, zoom nel riflesso.</strong> È il passaggio più importante: dalla realtà al sogno senza tagli. Lo zoom entra nelle lenti e il riflesso della montagna diventa il mondo intero. <span class="pass">→ Al posto della dissolvenza incrociata, è il riflesso stesso a fare da porta.</span></li>
+</ol>
+</div>
+<h4>Scena 2 – La montagna (inq. 10–16)</h4>
+<div class="spiega">
+<ol start="10">
+<li><strong>Campo lunghissimo, ripresa aerea.</strong> Dopo tanti piani stretti il film si apre all'improvviso. Il contrasto tra il soggiorno chiuso e lo spazio infinito dice quanto è grande la fantasia di Peter. <span class="pass">→ Stacco.</span></li>
+<li><strong>Figura intera.</strong> Peter diventa un eroe d'avventura: lo vediamo intero, in azione, mentre si lancia. <span class="pass">→ Stacco.</span></li>
+<li><strong>Primo piano in carrellata laterale.</strong> La macchina corre accanto a lui: lo spettatore sente la velocità. <span class="pass">→ Stacco.</span></li>
+<li><strong>Campo medio in soggettiva, zoom in avanti.</strong> Vediamo con gli occhi di Peter il pino che ci viene addosso. La domanda del libro («come non sbattere?») diventa paura. <span class="pass">→ Stacco.</span></li>
+<li><strong>Campo lungo dall'alto.</strong> Peter si ferma, sospeso sopra la valle. Il padre non compare: il film tiene lo spettatore nel sogno finché dimentica il soggiorno. <span class="pass">→ Stacco.</span></li>
+<li><strong>Primo piano.</strong> Peter annusa l'aria. Il passaggio dalla montagna ai biscotti avviene con un gesto. <span class="pass">→ Stacco.</span></li>
+<li><strong>Inserto: i biscotti.</strong> È un pensiero dentro il pensiero, e ci riporta verso casa. <span class="pass">→ Stacco brusco verso il soggiorno: il risveglio.</span></li>
+</ol>
+</div>
+<h4>Scena 3 – Di nuovo il soggiorno (inq. 17–26)</h4>
+<div class="spiega">
+<ol start="17">
+<li><strong>Mezza figura.</strong> Peter si alza di scatto. La brusca fine della musica rende anche per noi il ritorno alla realtà. <span class="pass">→ Stacco.</span></li>
+<li><strong>Dettaglio rasoterra.</strong> La gamba della poltrona che slitta: la causa della caduta in un'immagine piccola. Il frastuono arriva fuori campo: sentiamo prima di vedere, come Peter. <span class="pass">→ Stacco.</span></li>
+<li><strong>Primo piano di Peter.</strong> La reazione. Si volta, e il suo sguardo prepara l'inquadratura successiva. <span class="pass">→ Raccordo di sguardo.</span></li>
+<li><strong>Figura intera in soggettiva, al rallentatore.</strong> Vediamo ciò che vede Peter. Il rallentatore allunga la caduta e la rende comica. <span class="pass">→ Stacco.</span></li>
+<li><strong>Campo medio fisso sul vuoto.</strong> Un'inquadratura senza nessuno è una pausa: lo spettatore aspetta, e l'attesa fa ridere. <span class="pass">→ Stacco.</span></li>
+<li><strong>Primo piano dal basso.</strong> La testa riemerge. Dal basso il padre sembra minaccioso, ma il festone al collo lo rende buffo. <span class="pass">→ Controcampo.</span></li>
+<li><strong>Campo medio, dall'altra parte della stanza.</strong> Il controcampo rivela la mamma, che finora non avevamo visto (con la soluzione 2, rientra qui richiamata dal rumore). <span class="pass">→ Stacco.</span></li>
+<li><strong>Primo piano della mamma.</strong> Il primo piano serve per l'emozione: gli occhi ridono, la mano trattiene la risata. <span class="pass">→ Stacco.</span></li>
+<li><strong>Primo piano di Peter.</strong> L'ultima battuta. Il primo piano ci fa leggere sul suo viso che non c'è cattiveria, solo distrazione. <span class="pass">→ Stacco.</span></li>
+<li><strong>Campo totale, carrellata all'indietro.</strong> Torna l'inquadratura della prima scena, ma ora tutto è cambiato. Allontanarsi chiude la storia. <span class="pass">→ Dissolvenza a nero.</span></li>
+</ol>
+</div>
+<h2 id="regia">3. Le scelte di regia</h2>
+<p>Il libro può dire «Peter pensava»; il film no, deve farlo vedere. Ogni problema qui sotto è una domanda da porre alla classe prima di mostrare la soluzione.</p>
+<div class="domande">
+<p><strong>Come si mostra un pensiero?</strong> Con un primissimo piano sugli occhiali di Peter, nelle cui lenti si riflette una montagna innevata (inq. 9). Uno zoom lento entra nel riflesso finché la montagna riempie lo schermo: lo spettatore viene risucchiato nel sogno insieme a Peter. La montagna è girata come un film d'avventura (campo lunghissimo, musica, movimento veloce) perché per Peter quel pensiero è più vero del soggiorno.</p>
+<p><strong>Perché non torniamo mai dal padre durante il sogno?</strong> Il libro ce lo ricorda («mentre suo padre stava ritto sullo schienale»), il film no. Una volta dentro la montagna non si torna in soggiorno: lo spettatore, come Peter, si dimentica del padre in bilico. Così, quando arriva il frastuono, la sorpresa è anche sua. È una scelta diversa dal montaggio alternato, che invece avrebbe creato attesa: domanda per la classe, quale delle due funziona meglio qui?</p>
+<p><strong>Come si capisce il carattere del padre?</strong> Con i piani ravvicinati sul suo malumore (2–3) e con le inquadrature dal basso (6, 8): visto da Peter sembra grande e minaccioso, ma è anche in bilico, e quindi già un po' comico.</p>
+<p><strong>Come si racconta ciò che succede alle spalle?</strong> Il testo dice che Peter <em>sente</em> il frastuono prima di vedere. Per questo il rumore arriva fuori campo (inq. 18) e solo dopo, girandosi con lui, vediamo la caduta in soggettiva (19–20).</p>
+<p><strong>Come si fa ridere?</strong> Con il tempo: un'inquadratura fissa e vuota dopo la caduta (21), il nastro che scende piano, la testa che riemerge dal basso (22). Il rallentatore (20) allunga il momento.</p>
+<p><strong>Come si rivela la mamma?</strong> Nel testo compare solo alla fine, «dall'altra parte della stanza». Il film fa lo stesso: nessuna inquadratura la mostra prima, poi un controcampo la scopre all'improvviso (23). La sorpresa è anche dello spettatore.</p>
+<p><strong>Che cosa si perde?</strong> La voce del narratore, ironica e affettuosa («Be', proprio in quell'angolo…»). Si può recuperare con una voce fuori campo: buona domanda di discussione, con o senza?</p>
+</div>
+<h2 id="metodo">4. Il metodo per gli altri capitoli</h2>
+<p>Gli stessi sei passi valgono per qualunque episodio del libro. I primi tre si fanno sul testo, gli ultimi tre sulla tabella.</p>
+<ol>
+<li><strong>Trova i luoghi.</strong> Ogni cambio di luogo o di tempo apre una scena nuova (INT./EST., GIORNO/NOTTE). Le fantasie di Peter sono scene a parte.</li>
+<li><strong>Sottolinea ciò che si vede e si sente.</strong> Azioni, oggetti, rumori, battute. Cerchia invece ciò che il cinema non può mostrare direttamente: pensieri, ricordi, commenti del narratore.</li>
+<li><strong>Scrivi la sceneggiatura letteraria.</strong> Solo presente indicativo, niente «pensava» o «si sentiva»: se un sentimento conta, deve diventare un gesto, uno sguardo, un suono.</li>
+<li><strong>Dividi in inquadrature.</strong> Una nuova inquadratura ogni volta che cambia ciò che lo spettatore deve guardare. Apri con un campo che fa capire dove siamo.</li>
+<li><strong>Scegli il piano.</strong> Campi per l'ambiente, figura intera e piano americano per le azioni, primo piano per le emozioni, dettaglio per gli oggetti che contano.</li>
+<li><strong>Decidi l'angolazione e il suono.</strong> Dal basso per chi sembra grande o minaccioso, dall'alto per chi è piccolo o in difficoltà; un rumore fuori campo per ciò che succede dove il personaggio non guarda.</li>
+</ol>
+<h3>Tabella da compilare</h3>
+<div class="vuota">
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>N.</th>
+<th>Piano / campo</th>
+<th>Angolazione e movimento</th>
+<th>Cosa si vede</th>
+<th>Audio</th>
+<th>Dal testo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+</tr>
+<tr>
+<td>2</td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+</tr>
+<tr>
+<td>3</td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+</tr>
+<tr>
+<td>4</td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+</tr>
+<tr>
+<td>5</td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+</tr>
+<tr>
+<td>6</td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+<td class="blank"></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>Per verificare: si può leggere solo la colonna «Cosa si vede» e capire la storia? Se no, manca un'inquadratura.</p>
+</main>
+<footer>Testo da Ian McEwan, <em>L'inventore di sogni</em>, citato a scopo didattico.</footer>
+</body>
+</html>
