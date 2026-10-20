@@ -468,7 +468,15 @@ const MODULI = [
     titolo: "Antologia",
     descrizione: "Lettura e comprensione: le caratteristiche di alcuni generi letterari, a scelta del docente. Primo e secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
     lezioni: [
-      { titolo: "I generi letterari (a scelta del docente)", attivita: [] }
+      { titolo: "I generi letterari (a scelta del docente)", attivita: [] },
+      {
+        titolo: "Dal testo al film: L'inventore di sogni",
+        descrizione: "Episodi del libro di Ian McEwan trasformati in sceneggiatura: piani, angolazioni, movimenti di macchina e montaggio.",
+        data: "2026-10-20",
+        attivita: [
+          { tipo: "Sceneggiatura", titolo: "Peter e le decorazioni di Natale: dal racconto al découpage", link: "italiano/seconda/dal-testo-al-film/peter-decorazioni-di-natale.html", data: "2026-10-20" }
+        ]
+      }
     ]
   },
   {
