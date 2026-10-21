@@ -48,8 +48,7 @@ const MODULI = [
           { tipo: "Questionario", titolo: "Il tuo rapporto con la geografia", link: "geografia/prima/perche-la-geografia/attivita/il-tuo-rapporto-con-la-geografia.html", data: "2026-10-16" },
           { tipo: "Scheda", titolo: "Che cosa studia la geografia", link: "geografia/prima/perche-la-geografia/attivita/che-cosa-studia-la-geografia.html", data: "2026-10-16" },
           { tipo: "Metodo di studio", titolo: "Come si studia la geografia", link: "geografia/prima/perche-la-geografia/attivita/come-si-studia-la-geografia.html", data: "2026-10-16" },
-          { tipo: "Tappa 1", titolo: "Chi ha visto la Terra", link: "geografia/prima/perche-la-geografia/attivita/fase-1-chi-ha-visto-la-terra.html", data: "2026-10-15" },
-          { tipo: "Tappa 2", titolo: "Il cielo sopra di noi: astronauti, cosmonauti, taikonauti", descrizione: "Fasi 1 e 2 in geografia; il resto in italiano, verso i miti cosmogonici.", link: "italiano/prima/mito-ed-epica/il-cielo-sopra-di-noi.html", data: "2026-10-21" }
+          { tipo: "Lezione", titolo: "Il cielo sopra di noi", descrizione: "Le foto della Terra dal 1960 a oggi, le voci degli astronauti, la salita da Roma. Fasi 1–5 in geografia; giornali, parole e mito in italiano.", link: "italiano/prima/mito-ed-epica/il-cielo-sopra-di-noi.html", data: "2026-10-21" }
         ]
       },
       { titolo: "L'orientamento e i suoi strumenti", attivita: [] },
@@ -406,7 +405,7 @@ const MODULI = [
       {
         titolo: "Il mito",
         attivita: [
-          { tipo: "Lezione", titolo: "Il cielo sopra di noi", descrizione: "Dalla Terra vista dallo spazio ai racconti più antichi sull'origine del mondo.", link: "italiano/prima/mito-ed-epica/il-cielo-sopra-di-noi.html", data: "2026-10-21" }
+          { tipo: "Lezione", titolo: "Il cielo sopra di noi", descrizione: "La Terra vista dalla Luna, astronauti, cosmonauti e taikonauti, fino ai racconti più antichi sull'origine del mondo. Fasi 6–9 in italiano.", link: "italiano/prima/mito-ed-epica/il-cielo-sopra-di-noi.html", data: "2026-10-21" }
         ]
       },
       { titolo: "L'epica: l'Iliade", attivita: [] },
