@@ -70,6 +70,12 @@ section{display:grid;gap:1.1rem}
 .nome{display:grid;gap:.35rem;font-weight:600;max-width:24rem}
 .nome input{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:.5rem .8rem}
 .comandi{display:flex;flex-wrap:wrap;gap:.6rem}
+.dimensione{position:fixed;top:calc(env(safe-area-inset-top,0px) + .6rem);right:.6rem;z-index:20;display:flex;background:var(--paper);border:1px solid var(--line);border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.18);overflow:hidden}
+.dimensione button{border:none;background:none;color:var(--ink);font:700 16px var(--cond);padding:.35rem .7rem;min-width:2.6rem;cursor:pointer}
+.dimensione button+button{border-left:1px solid var(--line)}
+.dimensione button:disabled{opacity:.35;cursor:default}
+#tMeno{font-size:14px}#tPiu{font-size:20px}
+@media print{.dimensione{display:none!important}}
 .anagrafica{display:flex;flex-wrap:wrap;gap:1rem}
 .anagrafica .classe{max-width:8rem}
 .consegna{display:grid;gap:.6rem}
@@ -78,6 +84,11 @@ section{display:grid;gap:1.1rem}
 </style>
 </head>
 <body>
+<div class="dimensione" role="group" aria-label="Dimensione del testo">
+  <button type="button" id="tMeno" aria-label="Testo più piccolo">A−</button>
+  <button type="button" id="tReset" aria-label="Dimensione normale del testo">A</button>
+  <button type="button" id="tPiu" aria-label="Testo più grande">A+</button>
+</div>
 <main>
 <p class="nav"><a href="../index.html#attivita">← Torna a «La Terra vista dalla Luna»</a></p>
 
@@ -133,6 +144,17 @@ section{display:grid;gap:1.1rem}
 
 </main>
 <script>
+// Dimensione del testo
+(function(){
+  var passi=[85,100,115,130,150,175], i=1, K='dimensione-testo';
+  try{ var v=+localStorage.getItem(K); if(passi.indexOf(v)>=0) i=passi.indexOf(v); }catch(e){}
+  var meno=document.getElementById('tMeno'), piu=document.getElementById('tPiu');
+  function applica(){ document.documentElement.style.fontSize=passi[i]+'%'; meno.disabled=i===0; piu.disabled=i===passi.length-1; try{ localStorage.setItem(K,passi[i]); }catch(e){} }
+  meno.onclick=function(){ if(i>0){ i--; applica(); } };
+  piu.onclick=function(){ if(i<passi.length-1){ i++; applica(); } };
+  document.getElementById('tReset').onclick=function(){ i=1; applica(); };
+  applica();
+})();
 (function(){
   var P={"A": ["Esploratrice, esploratore", "La geografia fa per te: hai tanta curiosità, ti piace scoprire posti nuovi e capire come funzionano le cose. Quest'anno potrai fare tante domande e trovare tante risposte. Prova ad aiutare anche i compagni a scoprire quello che ti appassiona."], "B": ["Viaggiatrice, viaggiatore curioso", "La geografia ti incuriosisce, anche se non è ancora la tua materia preferita. Hai bisogno di buoni compagni di viaggio e di argomenti che ti sorprendano: quest'anno cercheremo insieme quelli che fanno per te."], "C": ["Pronta, pronto a partire", "Per ora la geografia ti sembra lontana, e forse non hai ancora capito a che cosa serve. Nessun problema: ogni viaggio comincia da un primo passo. Prova a scoprire come la geografia c'entra con le cose che ti piacciono già."]}, N=8, K='geo-rapporto-v1', ris=document.getElementById('risultato'), manca=document.getElementById('mancano');
   function leggi(){ try{ return JSON.parse(localStorage.getItem(K))||{}; }catch(e){ return {}; } }
