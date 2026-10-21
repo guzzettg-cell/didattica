@@ -1,0 +1,5116 @@
+{
+ "campi": [
+  [
+   "emozioni",
+   "Emozioni e stati d'animo"
+  ],
+  [
+   "relazioni",
+   "Amicizia, amore e relazioni"
+  ],
+  [
+   "famiglia",
+   "Famiglia e persone"
+  ],
+  [
+   "scuola",
+   "Scuola e studio"
+  ],
+  [
+   "carattere",
+   "Carattere e valori"
+  ],
+  [
+   "mente",
+   "Pensiero, sogni e immaginazione"
+  ],
+  [
+   "natura",
+   "Natura, cielo e universo"
+  ],
+  [
+   "tempo",
+   "Tempo, cambiamento e crescita"
+  ],
+  [
+   "luoghi",
+   "Luoghi, viaggi e confini"
+  ],
+  [
+   "gioco",
+   "Gioco, sport, cibo e oggetti"
+  ],
+  [
+   "parole",
+   "Parole, musica e comunicazione"
+  ],
+  [
+   "societa",
+   "Società, diritti e conflitti"
+  ]
+ ],
+ "words": [
+  {
+   "f": "abbraccio",
+   "k": "abbraccio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 5
+    },
+    {
+     "ed": "2026",
+     "pag": 7
+    }
+   ]
+  },
+  {
+   "f": "accettàrsi",
+   "k": "accettarsi",
+   "c": "v. rifl.",
+   "cl": "verbo",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 7
+    }
+   ]
+  },
+  {
+   "f": "accoglienza",
+   "k": "accoglienza",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 7
+    }
+   ]
+  },
+  {
+   "f": "acqua",
+   "k": "acqua",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 5
+    }
+   ]
+  },
+  {
+   "f": "adrenalina",
+   "k": "adrenalina",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 7
+    }
+   ]
+  },
+  {
+   "f": "aeroplano",
+   "k": "aeroplano",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 7
+    }
+   ]
+  },
+  {
+   "f": "affètto",
+   "k": "affetto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 6
+    }
+   ]
+  },
+  {
+   "f": "affidamento",
+   "k": "affidamento",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 7
+    }
+   ]
+  },
+  {
+   "f": "agenda",
+   "k": "agenda",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 8
+    }
+   ]
+  },
+  {
+   "f": "alba",
+   "k": "alba",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 8
+    }
+   ]
+  },
+  {
+   "f": "albero",
+   "k": "albero",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 8
+    }
+   ]
+  },
+  {
+   "f": "allegraménte",
+   "k": "allegramente",
+   "c": "avv.",
+   "cl": "avverbio",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 10
+    }
+   ]
+  },
+  {
+   "f": "allenarsi",
+   "k": "allenarsi",
+   "c": "v. intr.",
+   "cl": "verbo",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 9
+    }
+   ]
+  },
+  {
+   "f": "altaléna",
+   "k": "altalena",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 4
+    }
+   ]
+  },
+  {
+   "f": "altrove",
+   "k": "altrove",
+   "c": "avv.",
+   "cl": "avverbio",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 10
+    }
+   ]
+  },
+  {
+   "f": "altruismo",
+   "k": "altruismo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 9
+    }
+   ]
+  },
+  {
+   "f": "amicìzia",
+   "k": "amicizia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 4
+    },
+    {
+     "ed": "2025",
+     "pag": 6
+    },
+    {
+     "ed": "2025",
+     "pag": 7
+    },
+    {
+     "ed": "2025",
+     "pag": 7
+    },
+    {
+     "ed": "2026",
+     "pag": 11
+    }
+   ]
+  },
+  {
+   "f": "amico",
+   "k": "amico",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 8
+    }
+   ]
+  },
+  {
+   "f": "amóre",
+   "k": "amore",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 5
+    },
+    {
+     "ed": "2025",
+     "pag": 8
+    },
+    {
+     "ed": "2026",
+     "pag": 12
+    }
+   ]
+  },
+  {
+   "f": "ànime",
+   "k": "anime",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 10
+    }
+   ]
+  },
+  {
+   "f": "ànsia",
+   "k": "ansia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 6
+    },
+    {
+     "ed": "2025",
+     "pag": 9
+    },
+    {
+     "ed": "2025",
+     "pag": 9
+    },
+    {
+     "ed": "2026",
+     "pag": 13
+    }
+   ]
+  },
+  {
+   "f": "arcobaleno",
+   "k": "arcobaleno",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 11
+    },
+    {
+     "ed": "2026",
+     "pag": 13
+    }
+   ]
+  },
+  {
+   "f": "armonìa",
+   "k": "armonia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 11
+    }
+   ]
+  },
+  {
+   "f": "ascólto",
+   "k": "ascolto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 13
+    }
+   ]
+  },
+  {
+   "f": "assist",
+   "k": "assist",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 14
+    }
+   ]
+  },
+  {
+   "f": "astrale",
+   "k": "astrale",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 10
+    }
+   ]
+  },
+  {
+   "f": "astuccio",
+   "k": "astuccio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 10
+    }
+   ]
+  },
+  {
+   "f": "aùra",
+   "k": "aura",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 14
+    }
+   ]
+  },
+  {
+   "f": "autenticità",
+   "k": "autenticita",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 12
+    },
+    {
+     "ed": "2026",
+     "pag": 16
+    }
+   ]
+  },
+  {
+   "f": "autostìma",
+   "k": "autostima",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 12
+    },
+    {
+     "ed": "2026",
+     "pag": 17
+    }
+   ]
+  },
+  {
+   "f": "avventùra",
+   "k": "avventura",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 13
+    },
+    {
+     "ed": "2026",
+     "pag": 17
+    }
+   ]
+  },
+  {
+   "f": "bagno",
+   "k": "bagno",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 14
+    }
+   ]
+  },
+  {
+   "f": "banco",
+   "k": "banco",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 11
+    }
+   ]
+  },
+  {
+   "f": "bangladìno",
+   "k": "bangladino",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 18
+    }
+   ]
+  },
+  {
+   "f": "barbie",
+   "k": "barbie",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 14
+    }
+   ]
+  },
+  {
+   "f": "bellézza",
+   "k": "bellezza",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 14
+    }
+   ]
+  },
+  {
+   "f": "bianchètto",
+   "k": "bianchetto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 15
+    }
+   ]
+  },
+  {
+   "f": "bianco",
+   "k": "bianco",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 7
+    }
+   ]
+  },
+  {
+   "f": "bicicletta",
+   "k": "bicicletta",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 16
+    }
+   ]
+  },
+  {
+   "f": "bigliétto",
+   "k": "biglietto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 16
+    }
+   ]
+  },
+  {
+   "f": "bocciatura",
+   "k": "bocciatura",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 18
+    }
+   ]
+  },
+  {
+   "f": "bòomer",
+   "k": "boomer",
+   "c": "s. m. e f.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 17
+    }
+   ]
+  },
+  {
+   "f": "borràccia",
+   "k": "borraccia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 7
+    }
+   ]
+  },
+  {
+   "f": "bràdipo",
+   "k": "bradipo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 19
+    }
+   ]
+  },
+  {
+   "f": "bro",
+   "k": "bro",
+   "c": "s. m. inv.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 11
+    }
+   ]
+  },
+  {
+   "f": "bugìa",
+   "k": "bugia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 7
+    }
+   ]
+  },
+  {
+   "f": "bùio",
+   "k": "buio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 8
+    }
+   ]
+  },
+  {
+   "f": "burrone",
+   "k": "burrone",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 19
+    }
+   ]
+  },
+  {
+   "f": "càlcio",
+   "k": "calcio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 12
+    },
+    {
+     "ed": "2025",
+     "pag": 12
+    }
+   ]
+  },
+  {
+   "f": "calcolatrice",
+   "k": "calcolatrice",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 19
+    }
+   ]
+  },
+  {
+   "f": "cambiamento",
+   "k": "cambiamento",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 13
+    },
+    {
+     "ed": "2026",
+     "pag": 20
+    }
+   ]
+  },
+  {
+   "f": "càmera",
+   "k": "camera",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 20
+    }
+   ]
+  },
+  {
+   "f": "camperàre",
+   "k": "camperare",
+   "c": "v. intr.",
+   "cl": "verbo",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 13
+    }
+   ]
+  },
+  {
+   "f": "canzóne",
+   "k": "canzone",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 19
+    }
+   ]
+  },
+  {
+   "f": "càsa",
+   "k": "casa",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 19
+    },
+    {
+     "ed": "2026",
+     "pag": 20
+    }
+   ]
+  },
+  {
+   "f": "castello",
+   "k": "castello",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 21
+    }
+   ]
+  },
+  {
+   "f": "chiave",
+   "k": "chiave",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 9
+    }
+   ]
+  },
+  {
+   "f": "chill",
+   "k": "chill",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 14
+    },
+    {
+     "ed": "2026",
+     "pag": 21
+    }
+   ]
+  },
+  {
+   "f": "chillàre",
+   "k": "chillare",
+   "c": "v. intr.",
+   "cl": "verbo",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 14
+    },
+    {
+     "ed": "2025",
+     "pag": 15
+    }
+   ]
+  },
+  {
+   "f": "cicatrìce",
+   "k": "cicatrice",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 15
+    }
+   ]
+  },
+  {
+   "f": "cilìndro",
+   "k": "cilindro",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 22
+    }
+   ]
+  },
+  {
+   "f": "ciuffo",
+   "k": "ciuffo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 16
+    }
+   ]
+  },
+  {
+   "f": "ciurma",
+   "k": "ciurma",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 22
+    }
+   ]
+  },
+  {
+   "f": "classe",
+   "k": "classe",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 9
+    }
+   ]
+  },
+  {
+   "f": "clessidra",
+   "k": "clessidra",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 9
+    }
+   ]
+  },
+  {
+   "f": "collaboratore",
+   "k": "collaboratore",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 22
+    }
+   ]
+  },
+  {
+   "f": "collaborazióne",
+   "k": "collaborazione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 22
+    }
+   ]
+  },
+  {
+   "f": "colóre",
+   "k": "colore",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 16
+    },
+    {
+     "ed": "2026",
+     "pag": 23
+    }
+   ]
+  },
+  {
+   "f": "compagnia",
+   "k": "compagnia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 22
+    }
+   ]
+  },
+  {
+   "f": "compàgno",
+   "k": "compagno",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 23
+    }
+   ]
+  },
+  {
+   "f": "compare",
+   "k": "compare",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 23
+    }
+   ]
+  },
+  {
+   "f": "competitività",
+   "k": "competitivita",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 23
+    }
+   ]
+  },
+  {
+   "f": "comunicazione",
+   "k": "comunicazione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 24
+    }
+   ]
+  },
+  {
+   "f": "confìne",
+   "k": "confine",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 10
+    },
+    {
+     "ed": "2025",
+     "pag": 17
+    }
+   ]
+  },
+  {
+   "f": "confòrto",
+   "k": "conforto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 25
+    }
+   ]
+  },
+  {
+   "f": "confronto",
+   "k": "confronto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 10
+    }
+   ]
+  },
+  {
+   "f": "confusione",
+   "k": "confusione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 26
+    }
+   ]
+  },
+  {
+   "f": "consapevolezza",
+   "k": "consapevolezza",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 26
+    }
+   ]
+  },
+  {
+   "f": "contraccólpo",
+   "k": "contraccolpo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 17
+    }
+   ]
+  },
+  {
+   "f": "coordinazione",
+   "k": "coordinazione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 11
+    }
+   ]
+  },
+  {
+   "f": "copiare",
+   "k": "copiare",
+   "c": "v. tr.",
+   "cl": "verbo",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 18
+    }
+   ]
+  },
+  {
+   "f": "coràggio",
+   "k": "coraggio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 27
+    },
+    {
+     "ed": "2026",
+     "pag": 24
+    }
+   ]
+  },
+  {
+   "f": "corridóio",
+   "k": "corridoio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 25
+    }
+   ]
+  },
+  {
+   "f": "cosmopolitismo",
+   "k": "cosmopolitismo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 18
+    }
+   ]
+  },
+  {
+   "f": "costellazione",
+   "k": "costellazione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 11
+    }
+   ]
+  },
+  {
+   "f": "costituzione",
+   "k": "costituzione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 25
+    }
+   ]
+  },
+  {
+   "f": "creatività",
+   "k": "creativita",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 26
+    }
+   ]
+  },
+  {
+   "f": "crimine",
+   "k": "crimine",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 27
+    }
+   ]
+  },
+  {
+   "f": "crìnge",
+   "k": "cringe",
+   "c": "s. m. inv.",
+   "cl": "nome",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 28
+    }
+   ]
+  },
+  {
+   "f": "cristallino",
+   "k": "cristallino",
+   "c": "agg. e s. m.",
+   "cl": "aggettivo",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 19
+    }
+   ]
+  },
+  {
+   "f": "cristallo",
+   "k": "cristallo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 26
+    }
+   ]
+  },
+  {
+   "f": "crush",
+   "k": "crush",
+   "c": "s. f. o m. inv.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 26
+    }
+   ]
+  },
+  {
+   "f": "cuòre",
+   "k": "cuore",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 28
+    }
+   ]
+  },
+  {
+   "f": "cura",
+   "k": "cura",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 27
+    }
+   ]
+  },
+  {
+   "f": "curiosità",
+   "k": "curiosita",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 28
+    }
+   ]
+  },
+  {
+   "f": "débole",
+   "k": "debole",
+   "c": "agg. e s. m.",
+   "cl": "aggettivo",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 31
+    }
+   ]
+  },
+  {
+   "f": "deserto",
+   "k": "deserto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 13
+    }
+   ]
+  },
+  {
+   "f": "desiderio",
+   "k": "desiderio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 31
+    },
+    {
+     "ed": "2025",
+     "pag": 20
+    },
+    {
+     "ed": "2026",
+     "pag": 29
+    }
+   ]
+  },
+  {
+   "f": "destìno",
+   "k": "destino",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 29
+    }
+   ]
+  },
+  {
+   "f": "determinazione",
+   "k": "determinazione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 20
+    }
+   ]
+  },
+  {
+   "f": "diario",
+   "k": "diario",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 32
+    }
+   ]
+  },
+  {
+   "f": "diritto",
+   "k": "diritto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 29
+    }
+   ]
+  },
+  {
+   "f": "disòrdine",
+   "k": "disordine",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 30
+    }
+   ]
+  },
+  {
+   "f": "dìva",
+   "k": "diva",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 30
+    }
+   ]
+  },
+  {
+   "f": "divertimento",
+   "k": "divertimento",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 21
+    }
+   ]
+  },
+  {
+   "f": "divinità",
+   "k": "divinita",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 21
+    }
+   ]
+  },
+  {
+   "f": "divisione",
+   "k": "divisione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 33
+    }
+   ]
+  },
+  {
+   "f": "dizionàrio",
+   "k": "dizionario",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 22
+    }
+   ]
+  },
+  {
+   "f": "dormire",
+   "k": "dormire",
+   "c": "v. intr.",
+   "cl": "verbo",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 13
+    }
+   ]
+  },
+  {
+   "f": "duro",
+   "k": "duro",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 31
+    }
+   ]
+  },
+  {
+   "f": "eclissi",
+   "k": "eclissi",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 35
+    },
+    {
+     "ed": "2026",
+     "pag": 32
+    }
+   ]
+  },
+  {
+   "f": "ègo",
+   "k": "ego",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 32
+    }
+   ]
+  },
+  {
+   "f": "emozióne",
+   "k": "emozione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 35
+    }
+   ]
+  },
+  {
+   "f": "empatìa",
+   "k": "empatia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 36
+    },
+    {
+     "ed": "2026",
+     "pag": 32
+    }
+   ]
+  },
+  {
+   "f": "entusiasmo",
+   "k": "entusiasmo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 33
+    }
+   ]
+  },
+  {
+   "f": "equilìbrio",
+   "k": "equilibrio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 34
+    }
+   ]
+  },
+  {
+   "f": "equo",
+   "k": "equo",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 14
+    }
+   ]
+  },
+  {
+   "f": "eròe",
+   "k": "eroe",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 37
+    }
+   ]
+  },
+  {
+   "f": "errore",
+   "k": "errore",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 23
+    }
+   ]
+  },
+  {
+   "f": "esame",
+   "k": "esame",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 37
+    }
+   ]
+  },
+  {
+   "f": "esclusiòne",
+   "k": "esclusione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 14
+    }
+   ]
+  },
+  {
+   "f": "esplodi",
+   "k": "esplodi",
+   "c": "v.d.v.",
+   "cl": "verbo",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 34
+    }
+   ]
+  },
+  {
+   "f": "estate",
+   "k": "estate",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 14
+    },
+    {
+     "ed": "2025",
+     "pag": 24
+    },
+    {
+     "ed": "2025",
+     "pag": 24
+    }
+   ]
+  },
+  {
+   "f": "eterno",
+   "k": "eterno",
+   "c": "agg. e s. m.",
+   "cl": "aggettivo",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 23
+    }
+   ]
+  },
+  {
+   "f": "etichétta",
+   "k": "etichetta",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 38
+    }
+   ]
+  },
+  {
+   "f": "falliménto",
+   "k": "fallimento",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 35
+    }
+   ]
+  },
+  {
+   "f": "famìglia",
+   "k": "famiglia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 39
+    },
+    {
+     "ed": "2026",
+     "pag": 35
+    }
+   ]
+  },
+  {
+   "f": "fantasia",
+   "k": "fantasia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 42
+    }
+   ]
+  },
+  {
+   "f": "farfalla",
+   "k": "farfalla",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 16
+    }
+   ]
+  },
+  {
+   "f": "faro",
+   "k": "faro",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 42
+    }
+   ]
+  },
+  {
+   "f": "fedeltà",
+   "k": "fedelta",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 16
+    },
+    {
+     "ed": "2025",
+     "pag": 25
+    }
+   ]
+  },
+  {
+   "f": "felicità",
+   "k": "felicita",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 43
+    }
+   ]
+  },
+  {
+   "f": "fidarsi",
+   "k": "fidarsi",
+   "c": "v. intr.",
+   "cl": "verbo",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 35
+    }
+   ]
+  },
+  {
+   "f": "fiducia",
+   "k": "fiducia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 16
+    }
+   ]
+  },
+  {
+   "f": "fiera",
+   "k": "fiera",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 36
+    }
+   ]
+  },
+  {
+   "f": "filo",
+   "k": "filo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 16
+    },
+    {
+     "ed": "2026",
+     "pag": 36
+    }
+   ]
+  },
+  {
+   "f": "fìltro",
+   "k": "filtro",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 37
+    }
+   ]
+  },
+  {
+   "f": "fiore",
+   "k": "fiore",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 37
+    }
+   ]
+  },
+  {
+   "f": "flexare",
+   "k": "flexare",
+   "c": "v. tr. e intr.",
+   "cl": "verbo",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 39
+    }
+   ]
+  },
+  {
+   "f": "fòglio",
+   "k": "foglio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 40
+    }
+   ]
+  },
+  {
+   "f": "fortuna",
+   "k": "fortuna",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 44
+    }
+   ]
+  },
+  {
+   "f": "forza",
+   "k": "forza",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 25
+    }
+   ]
+  },
+  {
+   "f": "fotografìa",
+   "k": "fotografia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 44
+    }
+   ]
+  },
+  {
+   "f": "fragile",
+   "k": "fragile",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 44
+    }
+   ]
+  },
+  {
+   "f": "fratellanza",
+   "k": "fratellanza",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 45
+    }
+   ]
+  },
+  {
+   "f": "fratèllo",
+   "k": "fratello",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 46
+    },
+    {
+     "ed": "2026",
+     "pag": 40
+    }
+   ]
+  },
+  {
+   "f": "freestyle",
+   "k": "freestyle",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 26
+    }
+   ]
+  },
+  {
+   "f": "frésco",
+   "k": "fresco",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 47
+    }
+   ]
+  },
+  {
+   "f": "frontiera",
+   "k": "frontiera",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 17
+    },
+    {
+     "ed": "2025",
+     "pag": 26
+    }
+   ]
+  },
+  {
+   "f": "futuro",
+   "k": "futuro",
+   "c": "agg. e s. m.",
+   "cl": "aggettivo",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 17
+    },
+    {
+     "ed": "2025",
+     "pag": 27
+    }
+   ]
+  },
+  {
+   "f": "galàssia",
+   "k": "galassia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 48
+    }
+   ]
+  },
+  {
+   "f": "gelàto",
+   "k": "gelato",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 18
+    }
+   ]
+  },
+  {
+   "f": "gelosìa",
+   "k": "gelosia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 49
+    },
+    {
+     "ed": "2026",
+     "pag": 41
+    }
+   ]
+  },
+  {
+   "f": "gelovello",
+   "k": "gelovello",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 41
+    }
+   ]
+  },
+  {
+   "f": "gemma",
+   "k": "gemma",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 18
+    }
+   ]
+  },
+  {
+   "f": "genitore",
+   "k": "genitore",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 50
+    }
+   ]
+  },
+  {
+   "f": "gentilezza",
+   "k": "gentilezza",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 41
+    }
+   ]
+  },
+  {
+   "f": "ghostare",
+   "k": "ghostare",
+   "c": "v. tr.",
+   "cl": "verbo",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 42
+    }
+   ]
+  },
+  {
+   "f": "giocàre",
+   "k": "giocare",
+   "c": "v. intr. e tr.",
+   "cl": "verbo",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 48
+    }
+   ]
+  },
+  {
+   "f": "gióia",
+   "k": "gioia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 49
+    }
+   ]
+  },
+  {
+   "f": "giudizio",
+   "k": "giudizio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 18
+    }
+   ]
+  },
+  {
+   "f": "giuràre",
+   "k": "giurare",
+   "c": "v. tr. e intr.",
+   "cl": "verbo",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 19
+    }
+   ]
+  },
+  {
+   "f": "glassàre",
+   "k": "glassare",
+   "c": "v. tr. e intr.",
+   "cl": "verbo",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 42
+    }
+   ]
+  },
+  {
+   "f": "glaucopide",
+   "k": "glaucopide",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 50
+    }
+   ]
+  },
+  {
+   "f": "gossippàre",
+   "k": "gossippare",
+   "c": "v. intr.",
+   "cl": "verbo",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 28
+    }
+   ]
+  },
+  {
+   "f": "gratitudine",
+   "k": "gratitudine",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 51
+    }
+   ]
+  },
+  {
+   "f": "grave",
+   "k": "grave",
+   "c": "agg. e s. f.",
+   "cl": "aggettivo",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 43
+    }
+   ]
+  },
+  {
+   "f": "grezzata",
+   "k": "grezzata",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 51
+    }
+   ]
+  },
+  {
+   "f": "grinta",
+   "k": "grinta",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 20
+    }
+   ]
+  },
+  {
+   "f": "gruppo",
+   "k": "gruppo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 43
+    }
+   ]
+  },
+  {
+   "f": "guerra",
+   "k": "guerra",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 20
+    },
+    {
+     "ed": "2025",
+     "pag": 28
+    },
+    {
+     "ed": "2026",
+     "pag": 44
+    }
+   ]
+  },
+  {
+   "f": "guerrièro",
+   "k": "guerriero",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 29
+    }
+   ]
+  },
+  {
+   "f": "idèa",
+   "k": "idea",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 45
+    }
+   ]
+  },
+  {
+   "f": "identità",
+   "k": "identita",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 45
+    }
+   ]
+  },
+  {
+   "f": "ignavo",
+   "k": "ignavo",
+   "c": "agg. e s. m.",
+   "cl": "aggettivo",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 30
+    }
+   ]
+  },
+  {
+   "f": "ignoto",
+   "k": "ignoto",
+   "c": "agg. e s. m.",
+   "cl": "aggettivo",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 53
+    }
+   ]
+  },
+  {
+   "f": "illusione",
+   "k": "illusione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 46
+    }
+   ]
+  },
+  {
+   "f": "immaginazione",
+   "k": "immaginazione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 21
+    }
+   ]
+  },
+  {
+   "f": "impegno",
+   "k": "impegno",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 53
+    }
+   ]
+  },
+  {
+   "f": "impossibilità",
+   "k": "impossibilita",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 54
+    }
+   ]
+  },
+  {
+   "f": "impronta",
+   "k": "impronta",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 54
+    }
+   ]
+  },
+  {
+   "f": "incànto",
+   "k": "incanto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 54
+    }
+   ]
+  },
+  {
+   "f": "inchiostro",
+   "k": "inchiostro",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 21
+    }
+   ]
+  },
+  {
+   "f": "inclusione",
+   "k": "inclusione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 30
+    }
+   ]
+  },
+  {
+   "f": "incompreso",
+   "k": "incompreso",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 55
+    }
+   ]
+  },
+  {
+   "f": "indelebile",
+   "k": "indelebile",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 21
+    }
+   ]
+  },
+  {
+   "f": "infànzia",
+   "k": "infanzia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 55
+    }
+   ]
+  },
+  {
+   "f": "infinìto",
+   "k": "infinito",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 56
+    },
+    {
+     "ed": "2026",
+     "pag": 46
+    }
+   ]
+  },
+  {
+   "f": "ingranaggio",
+   "k": "ingranaggio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 57
+    }
+   ]
+  },
+  {
+   "f": "inizio",
+   "k": "inizio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 56
+    }
+   ]
+  },
+  {
+   "f": "intelligenza",
+   "k": "intelligenza",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 57
+    }
+   ]
+  },
+  {
+   "f": "interdipendènza",
+   "k": "interdipendenza",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 47
+    }
+   ]
+  },
+  {
+   "f": "interiezióne",
+   "k": "interiezione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 48
+    }
+   ]
+  },
+  {
+   "f": "intervallo",
+   "k": "intervallo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 48
+    }
+   ]
+  },
+  {
+   "f": "inventàre",
+   "k": "inventare",
+   "c": "v. tr.",
+   "cl": "verbo",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 58
+    }
+   ]
+  },
+  {
+   "f": "jumpscare",
+   "k": "jumpscare",
+   "c": "s. m. inv.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 49
+    }
+   ]
+  },
+  {
+   "f": "lacrima",
+   "k": "lacrima",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 31
+    }
+   ]
+  },
+  {
+   "f": "lealtà",
+   "k": "lealta",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 31
+    },
+    {
+     "ed": "2025",
+     "pag": 32
+    },
+    {
+     "ed": "2025",
+     "pag": 32
+    },
+    {
+     "ed": "2026",
+     "pag": 50
+    }
+   ]
+  },
+  {
+   "f": "legàme",
+   "k": "legame",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 23
+    }
+   ]
+  },
+  {
+   "f": "leggere",
+   "k": "leggere",
+   "c": "v. tr.",
+   "cl": "verbo",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 50
+    }
+   ]
+  },
+  {
+   "f": "letsgoski",
+   "k": "letsgoski",
+   "c": "interiez.",
+   "cl": "interiezione",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 51
+    }
+   ]
+  },
+  {
+   "f": "letto",
+   "k": "letto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 59
+    },
+    {
+     "ed": "2026",
+     "pag": 51
+    }
+   ]
+  },
+  {
+   "f": "lettura",
+   "k": "lettura",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 50
+    }
+   ]
+  },
+  {
+   "f": "libertà",
+   "k": "liberta",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 23
+    },
+    {
+     "ed": "2025",
+     "pag": 33
+    }
+   ]
+  },
+  {
+   "f": "libràrsi",
+   "k": "librarsi",
+   "c": "v. intr. pron.",
+   "cl": "verbo",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 51
+    }
+   ]
+  },
+  {
+   "f": "libro",
+   "k": "libro",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 59
+    },
+    {
+     "ed": "2026",
+     "pag": 52
+    }
+   ]
+  },
+  {
+   "f": "limite",
+   "k": "limite",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 60
+    }
+   ]
+  },
+  {
+   "f": "link",
+   "k": "link",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 33
+    }
+   ]
+  },
+  {
+   "f": "litigio",
+   "k": "litigio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 53
+    }
+   ]
+  },
+  {
+   "f": "luce",
+   "k": "luce",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 61
+    }
+   ]
+  },
+  {
+   "f": "lupo",
+   "k": "lupo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 61
+    }
+   ]
+  },
+  {
+   "f": "maestoso",
+   "k": "maestoso",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 34
+    }
+   ]
+  },
+  {
+   "f": "magìa",
+   "k": "magia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 25
+    }
+   ]
+  },
+  {
+   "f": "malèssere",
+   "k": "malessere",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 63
+    }
+   ]
+  },
+  {
+   "f": "mamma",
+   "k": "mamma",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 63
+    }
+   ]
+  },
+  {
+   "f": "mappa",
+   "k": "mappa",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 25
+    }
+   ]
+  },
+  {
+   "f": "maranza",
+   "k": "maranza",
+   "c": "s. m. e f.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 25
+    }
+   ]
+  },
+  {
+   "f": "màre",
+   "k": "mare",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 26
+    },
+    {
+     "ed": "2025",
+     "pag": 34
+    }
+   ]
+  },
+  {
+   "f": "maschera",
+   "k": "maschera",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 65
+    }
+   ]
+  },
+  {
+   "f": "matìta",
+   "k": "matita",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 65
+    }
+   ]
+  },
+  {
+   "f": "meravìglia",
+   "k": "meraviglia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 66
+    },
+    {
+     "ed": "2026",
+     "pag": 54
+    }
+   ]
+  },
+  {
+   "f": "merènda",
+   "k": "merenda",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 54
+    }
+   ]
+  },
+  {
+   "f": "messaggio",
+   "k": "messaggio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 26
+    }
+   ]
+  },
+  {
+   "f": "metaverso",
+   "k": "metaverso",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 27
+    }
+   ]
+  },
+  {
+   "f": "mitico",
+   "k": "mitico",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 54
+    }
+   ]
+  },
+  {
+   "f": "musica",
+   "k": "musica",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 27
+    },
+    {
+     "ed": "2024",
+     "pag": 64
+    },
+    {
+     "ed": "2024",
+     "pag": 66
+    },
+    {
+     "ed": "2024",
+     "pag": 67
+    },
+    {
+     "ed": "2026",
+     "pag": 55
+    }
+   ]
+  },
+  {
+   "f": "natura",
+   "k": "natura",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 28
+    }
+   ]
+  },
+  {
+   "f": "nave",
+   "k": "nave",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 68
+    }
+   ]
+  },
+  {
+   "f": "nèutro",
+   "k": "neutro",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 28
+    }
+   ]
+  },
+  {
+   "f": "niènte",
+   "k": "niente",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 28
+    }
+   ]
+  },
+  {
+   "f": "no",
+   "k": "no",
+   "c": "avv.",
+   "cl": "avverbio",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 68
+    }
+   ]
+  },
+  {
+   "f": "nodo",
+   "k": "nodo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 29
+    }
+   ]
+  },
+  {
+   "f": "nòia",
+   "k": "noia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 29
+    }
+   ]
+  },
+  {
+   "f": "nònna",
+   "k": "nonna",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 56
+    }
+   ]
+  },
+  {
+   "f": "nonno",
+   "k": "nonno",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 30
+    }
+   ]
+  },
+  {
+   "f": "nostalgìa",
+   "k": "nostalgia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 35
+    },
+    {
+     "ed": "2026",
+     "pag": 56
+    }
+   ]
+  },
+  {
+   "f": "nótte",
+   "k": "notte",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 30
+    }
+   ]
+  },
+  {
+   "f": "nùvola",
+   "k": "nuvola",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 68
+    },
+    {
+     "ed": "2026",
+     "pag": 56
+    }
+   ]
+  },
+  {
+   "f": "obiéttivo",
+   "k": "obiettivo",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 31
+    }
+   ]
+  },
+  {
+   "f": "occhio",
+   "k": "occhio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 70
+    },
+    {
+     "ed": "2024",
+     "pag": 70
+    },
+    {
+     "ed": "2025",
+     "pag": 36
+    }
+   ]
+  },
+  {
+   "f": "olimpiade",
+   "k": "olimpiade",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 36
+    },
+    {
+     "ed": "2026",
+     "pag": 58
+    }
+   ]
+  },
+  {
+   "f": "omertà",
+   "k": "omerta",
+   "c": "s. f. inv.",
+   "cl": "nome",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 58
+    }
+   ]
+  },
+  {
+   "f": "orologio",
+   "k": "orologio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 70
+    }
+   ]
+  },
+  {
+   "f": "orsacchiòtto",
+   "k": "orsacchiotto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 71
+    }
+   ]
+  },
+  {
+   "f": "ottenebràto",
+   "k": "ottenebrato",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 59
+    }
+   ]
+  },
+  {
+   "f": "ottimismo",
+   "k": "ottimismo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 59
+    }
+   ]
+  },
+  {
+   "f": "pàce",
+   "k": "pace",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 37
+    },
+    {
+     "ed": "2026",
+     "pag": 61
+    }
+   ]
+  },
+  {
+   "f": "pallamàno",
+   "k": "pallamano",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 72
+    }
+   ]
+  },
+  {
+   "f": "panchina",
+   "k": "panchina",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 37
+    }
+   ]
+  },
+  {
+   "f": "paranòia",
+   "k": "paranoia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 72
+    }
+   ]
+  },
+  {
+   "f": "parolàccia",
+   "k": "parolaccia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 73
+    }
+   ]
+  },
+  {
+   "f": "particolarità",
+   "k": "particolarita",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 61
+    }
+   ]
+  },
+  {
+   "f": "passàggio",
+   "k": "passaggio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 73
+    }
+   ]
+  },
+  {
+   "f": "passione",
+   "k": "passione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 32
+    },
+    {
+     "ed": "2025",
+     "pag": 38
+    }
+   ]
+  },
+  {
+   "f": "pàsta",
+   "k": "pasta",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 38
+    }
+   ]
+  },
+  {
+   "f": "patria",
+   "k": "patria",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 32
+    }
+   ]
+  },
+  {
+   "f": "paùra",
+   "k": "paura",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 62
+    }
+   ]
+  },
+  {
+   "f": "peluche",
+   "k": "peluche",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 74
+    }
+   ]
+  },
+  {
+   "f": "pensare",
+   "k": "pensare",
+   "c": "v. tr. e intr.",
+   "cl": "verbo",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 39
+    }
+   ]
+  },
+  {
+   "f": "pensièro",
+   "k": "pensiero",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 32
+    }
+   ]
+  },
+  {
+   "f": "perdonare",
+   "k": "perdonare",
+   "c": "v. tr. e intr.",
+   "cl": "verbo",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 63
+    }
+   ]
+  },
+  {
+   "f": "perdóno",
+   "k": "perdono",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 63
+    }
+   ]
+  },
+  {
+   "f": "perfetto",
+   "k": "perfetto",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 33
+    },
+    {
+     "ed": "2025",
+     "pag": 39
+    }
+   ]
+  },
+  {
+   "f": "piànta",
+   "k": "pianta",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 74
+    }
+   ]
+  },
+  {
+   "f": "piastra",
+   "k": "piastra",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 63
+    }
+   ]
+  },
+  {
+   "f": "pìzza",
+   "k": "pizza",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 74
+    }
+   ]
+  },
+  {
+   "f": "polpetta",
+   "k": "polpetta",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 64
+    }
+   ]
+  },
+  {
+   "f": "ponte",
+   "k": "ponte",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 33
+    }
+   ]
+  },
+  {
+   "f": "pòst-it",
+   "k": "post-it",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 64
+    }
+   ]
+  },
+  {
+   "f": "potere",
+   "k": "potere",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 34
+    },
+    {
+     "ed": "2025",
+     "pag": 40
+    }
+   ]
+  },
+  {
+   "f": "praticamente",
+   "k": "praticamente",
+   "c": "avv.",
+   "cl": "avverbio",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 76
+    }
+   ]
+  },
+  {
+   "f": "professóre",
+   "k": "professore",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 65
+    }
+   ]
+  },
+  {
+   "f": "profumo",
+   "k": "profumo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 76
+    }
+   ]
+  },
+  {
+   "f": "promessa",
+   "k": "promessa",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 77
+    }
+   ]
+  },
+  {
+   "f": "puzzle",
+   "k": "puzzle",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 78
+    }
+   ]
+  },
+  {
+   "f": "quadèrno",
+   "k": "quaderno",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 66
+    }
+   ]
+  },
+  {
+   "f": "rabbia",
+   "k": "rabbia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 79
+    }
+   ]
+  },
+  {
+   "f": "reputazióne",
+   "k": "reputazione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 67
+    }
+   ]
+  },
+  {
+   "f": "réte",
+   "k": "rete",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 67
+    }
+   ]
+  },
+  {
+   "f": "rìccio",
+   "k": "riccio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 79
+    }
+   ]
+  },
+  {
+   "f": "riconoscenza",
+   "k": "riconoscenza",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 67
+    }
+   ]
+  },
+  {
+   "f": "ricordo",
+   "k": "ricordo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 35
+    }
+   ]
+  },
+  {
+   "f": "ricreazióne",
+   "k": "ricreazione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 41
+    }
+   ]
+  },
+  {
+   "f": "ridarola",
+   "k": "ridarola",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 68
+    }
+   ]
+  },
+  {
+   "f": "riserva",
+   "k": "riserva",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 68
+    }
+   ]
+  },
+  {
+   "f": "rispètto",
+   "k": "rispetto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 79
+    },
+    {
+     "ed": "2026",
+     "pag": 68
+    }
+   ]
+  },
+  {
+   "f": "rito",
+   "k": "rito",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 69
+    }
+   ]
+  },
+  {
+   "f": "ritorno",
+   "k": "ritorno",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 35
+    }
+   ]
+  },
+  {
+   "f": "róndine",
+   "k": "rondine",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 81
+    }
+   ]
+  },
+  {
+   "f": "sacrifìcio",
+   "k": "sacrificio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 42
+    }
+   ]
+  },
+  {
+   "f": "saluto",
+   "k": "saluto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 42
+    }
+   ]
+  },
+  {
+   "f": "sbisigone",
+   "k": "sbisigone",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 70
+    }
+   ]
+  },
+  {
+   "f": "sbocciàre",
+   "k": "sbocciare",
+   "c": "v. intr.",
+   "cl": "verbo",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 82
+    }
+   ]
+  },
+  {
+   "f": "scàla",
+   "k": "scala",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 82
+    }
+   ]
+  },
+  {
+   "f": "scappare",
+   "k": "scappare",
+   "c": "v. intr.",
+   "cl": "verbo",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 70
+    }
+   ]
+  },
+  {
+   "f": "scàtola",
+   "k": "scatola",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 70
+    }
+   ]
+  },
+  {
+   "f": "scélta",
+   "k": "scelta",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 71
+    }
+   ]
+  },
+  {
+   "f": "sciogliere",
+   "k": "sciogliere",
+   "c": "v. tr.",
+   "cl": "verbo",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 37
+    }
+   ]
+  },
+  {
+   "f": "scivolo",
+   "k": "scivolo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 82
+    }
+   ]
+  },
+  {
+   "f": "scrivere",
+   "k": "scrivere",
+   "c": "v. tr.",
+   "cl": "verbo",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 83
+    }
+   ]
+  },
+  {
+   "f": "scudo",
+   "k": "scudo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 71
+    }
+   ]
+  },
+  {
+   "f": "scuola",
+   "k": "scuola",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 42
+    }
+   ]
+  },
+  {
+   "f": "segréto",
+   "k": "segreto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 71
+    }
+   ]
+  },
+  {
+   "f": "sensibilità",
+   "k": "sensibilita",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 72
+    }
+   ]
+  },
+  {
+   "f": "sentiero",
+   "k": "sentiero",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 83
+    }
+   ]
+  },
+  {
+   "f": "sguàrdo",
+   "k": "sguardo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 37
+    }
+   ]
+  },
+  {
+   "f": "silenzio",
+   "k": "silenzio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 83
+    },
+    {
+     "ed": "2025",
+     "pag": 43
+    }
+   ]
+  },
+  {
+   "f": "skillàto",
+   "k": "skillato",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 72
+    }
+   ]
+  },
+  {
+   "f": "snitchare",
+   "k": "snitchare",
+   "c": "v. tr.",
+   "cl": "verbo",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 73
+    }
+   ]
+  },
+  {
+   "f": "socializzare",
+   "k": "socializzare",
+   "c": "v. tr. e intr.",
+   "cl": "verbo",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 43
+    }
+   ]
+  },
+  {
+   "f": "sognare",
+   "k": "sognare",
+   "c": "v. tr. e intr.",
+   "cl": "verbo",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 84
+    },
+    {
+     "ed": "2026",
+     "pag": 73
+    }
+   ]
+  },
+  {
+   "f": "sógno",
+   "k": "sogno",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 38
+    },
+    {
+     "ed": "2023",
+     "pag": 38
+    },
+    {
+     "ed": "2023",
+     "pag": 39
+    },
+    {
+     "ed": "2025",
+     "pag": 44
+    }
+   ]
+  },
+  {
+   "f": "sopracciglio",
+   "k": "sopracciglio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 85
+    }
+   ]
+  },
+  {
+   "f": "sorèlla",
+   "k": "sorella",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 74
+    }
+   ]
+  },
+  {
+   "f": "sorriso",
+   "k": "sorriso",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 85
+    },
+    {
+     "ed": "2025",
+     "pag": 44
+    },
+    {
+     "ed": "2025",
+     "pag": 45
+    }
+   ]
+  },
+  {
+   "f": "specchio",
+   "k": "specchio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 87
+    }
+   ]
+  },
+  {
+   "f": "sperànza",
+   "k": "speranza",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 87
+    },
+    {
+     "ed": "2026",
+     "pag": 74
+    }
+   ]
+  },
+  {
+   "f": "sport",
+   "k": "sport",
+   "c": "s. m. inv.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 39
+    },
+    {
+     "ed": "2023",
+     "pag": 39
+    },
+    {
+     "ed": "2023",
+     "pag": 40
+    },
+    {
+     "ed": "2025",
+     "pag": 45
+    }
+   ]
+  },
+  {
+   "f": "squàdra",
+   "k": "squadra",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 88
+    }
+   ]
+  },
+  {
+   "f": "staffétta",
+   "k": "staffetta",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 46
+    }
+   ]
+  },
+  {
+   "f": "stella",
+   "k": "stella",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 88
+    },
+    {
+     "ed": "2026",
+     "pag": 75
+    }
+   ]
+  },
+  {
+   "f": "stile",
+   "k": "stile",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 40
+    }
+   ]
+  },
+  {
+   "f": "stòria",
+   "k": "storia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 40
+    }
+   ]
+  },
+  {
+   "f": "strambotik",
+   "k": "strambotik",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 75
+    }
+   ]
+  },
+  {
+   "f": "stréga",
+   "k": "strega",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 89
+    }
+   ]
+  },
+  {
+   "f": "sturdy",
+   "k": "sturdy",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 90
+    }
+   ]
+  },
+  {
+   "f": "suggeriménto",
+   "k": "suggerimento",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 76
+    }
+   ]
+  },
+  {
+   "f": "suonare",
+   "k": "suonare",
+   "c": "v. tr. e intr.",
+   "cl": "verbo",
+   "cp": "parole",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 90
+    }
+   ]
+  },
+  {
+   "f": "supereròe",
+   "k": "supereroe",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 46
+    }
+   ]
+  },
+  {
+   "f": "swag",
+   "k": "swag",
+   "c": "s. m. inv.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 76
+    }
+   ]
+  },
+  {
+   "f": "talènto",
+   "k": "talento",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 78
+    }
+   ]
+  },
+  {
+   "f": "telefono",
+   "k": "telefono",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 42
+    }
+   ]
+  },
+  {
+   "f": "tempo",
+   "k": "tempo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 42
+    }
+   ]
+  },
+  {
+   "f": "tenàcia",
+   "k": "tenacia",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 78
+    }
+   ]
+  },
+  {
+   "f": "tradizione",
+   "k": "tradizione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 47
+    }
+   ]
+  },
+  {
+   "f": "traguàrdo",
+   "k": "traguardo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 91
+    },
+    {
+     "ed": "2026",
+     "pag": 79
+    }
+   ]
+  },
+  {
+   "f": "tramónto",
+   "k": "tramonto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 91
+    },
+    {
+     "ed": "2024",
+     "pag": 92
+    }
+   ]
+  },
+  {
+   "f": "trasformazione",
+   "k": "trasformazione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 48
+    }
+   ]
+  },
+  {
+   "f": "trasgola",
+   "k": "trasgola",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 79
+    }
+   ]
+  },
+  {
+   "f": "troll",
+   "k": "troll",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 80
+    }
+   ]
+  },
+  {
+   "f": "tuff",
+   "k": "tuff",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 80
+    }
+   ]
+  },
+  {
+   "f": "uguaglianza",
+   "k": "uguaglianza",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "societa",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 93
+    }
+   ]
+  },
+  {
+   "f": "umiliazione",
+   "k": "umiliazione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 93
+    }
+   ]
+  },
+  {
+   "f": "unione",
+   "k": "unione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "relazioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 94
+    }
+   ]
+  },
+  {
+   "f": "universo",
+   "k": "universo",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 94
+    }
+   ]
+  },
+  {
+   "f": "urgènte",
+   "k": "urgente",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 81
+    }
+   ]
+  },
+  {
+   "f": "vagabóndo",
+   "k": "vagabondo",
+   "c": "agg. e s. m.",
+   "cl": "aggettivo",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 95
+    }
+   ]
+  },
+  {
+   "f": "variopinto",
+   "k": "variopinto",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 95
+    }
+   ]
+  },
+  {
+   "f": "vècchio",
+   "k": "vecchio",
+   "c": "agg. e s. m.",
+   "cl": "aggettivo",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 95
+    }
+   ]
+  },
+  {
+   "f": "verifica",
+   "k": "verifica",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 96
+    }
+   ]
+  },
+  {
+   "f": "verità",
+   "k": "verita",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 96
+    }
+   ]
+  },
+  {
+   "f": "vetro",
+   "k": "vetro",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "gioco",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 96
+    }
+   ]
+  },
+  {
+   "f": "viaggiare",
+   "k": "viaggiare",
+   "c": "v. intr.",
+   "cl": "verbo",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 49
+    }
+   ]
+  },
+  {
+   "f": "viàggio",
+   "k": "viaggio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "luoghi",
+   "d": [
+    {
+     "ed": "2023",
+     "pag": 44
+    },
+    {
+     "ed": "2025",
+     "pag": 49
+    },
+    {
+     "ed": "2026",
+     "pag": 82
+    }
+   ]
+  },
+  {
+   "f": "videogioco",
+   "k": "videogioco",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 97
+    }
+   ]
+  },
+  {
+   "f": "vìrgola",
+   "k": "virgola",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 97
+    }
+   ]
+  },
+  {
+   "f": "visione",
+   "k": "visione",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "mente",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 98
+    }
+   ]
+  },
+  {
+   "f": "vita",
+   "k": "vita",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2026",
+     "pag": 83
+    }
+   ]
+  },
+  {
+   "f": "vivacità",
+   "k": "vivacita",
+   "c": "s. f.",
+   "cl": "nome",
+   "cp": "carattere",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 98
+    }
+   ]
+  },
+  {
+   "f": "volare",
+   "k": "volare",
+   "c": "v. intr.",
+   "cl": "verbo",
+   "cp": "tempo",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 99
+    }
+   ]
+  },
+  {
+   "f": "vòrtice",
+   "k": "vortice",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "natura",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 99
+    }
+   ]
+  },
+  {
+   "f": "voto",
+   "k": "voto",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 100
+    }
+   ]
+  },
+  {
+   "f": "vulnerabile",
+   "k": "vulnerabile",
+   "c": "agg.",
+   "cl": "aggettivo",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 100
+    }
+   ]
+  },
+  {
+   "f": "vuoto",
+   "k": "vuoto",
+   "c": "agg. e s. m.",
+   "cl": "aggettivo",
+   "cp": "emozioni",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 101
+    }
+   ]
+  },
+  {
+   "f": "zaino",
+   "k": "zaino",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "scuola",
+   "d": [
+    {
+     "ed": "2024",
+     "pag": 102
+    }
+   ]
+  },
+  {
+   "f": "zio",
+   "k": "zio",
+   "c": "s. m.",
+   "cl": "nome",
+   "cp": "famiglia",
+   "d": [
+    {
+     "ed": "2025",
+     "pag": 50
+    }
+   ]
+  }
+ ]
+}

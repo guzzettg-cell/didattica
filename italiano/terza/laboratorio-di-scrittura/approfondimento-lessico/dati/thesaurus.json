@@ -1,0 +1,11075 @@
+[
+ {
+  "p": "abbraccio",
+  "sig": [
+   [
+    "Persone",
+    [
+     "mamma",
+     "nonna",
+     "amico",
+     "fratello",
+     "sorella",
+     "compagno",
+     "innamorato"
+    ]
+   ],
+   [
+    "Occasioni",
+    [
+     "saluto",
+     "partenza",
+     "ritorno",
+     "festa",
+     "consolazione",
+     "pace",
+     "vittoria"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "abbracciare",
+     "stringere",
+     "cingere",
+     "accogliere",
+     "consolare",
+     "proteggere",
+     "coccolare"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "caloroso",
+     "affettuoso",
+     "forte",
+     "lungo",
+     "tenero",
+     "fraterno",
+     "di gruppo"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "stretta",
+     "amplesso"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "respingimento",
+     "distacco"
+    ]
+   ],
+   [
+    "Alterati",
+    [
+     "abbraccione",
+     "abbraccino"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "abbracciare",
+     "braccio",
+     "bracciale",
+     "bracciata",
+     "imbracciare"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "acqua",
+  "sig": [
+   [
+    "Luoghi",
+    [
+     "mare",
+     "lago",
+     "fiume",
+     "sorgente",
+     "cascata",
+     "pozzo",
+     "palude"
+    ]
+   ],
+   [
+    "Oggetti",
+    [
+     "borraccia",
+     "rubinetto",
+     "fontana",
+     "annaffiatoio",
+     "diga",
+     "piscina"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "bere",
+     "nuotare",
+     "annaffiare",
+     "lavare",
+     "tuffarsi",
+     "scorrere",
+     "gocciolare"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "idraulico",
+     "bagnino",
+     "pescatore",
+     "sommozzatore",
+     "nuotatore"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "limpida",
+     "potabile",
+     "gelida",
+     "frizzante",
+     "salata",
+     "torbida",
+     "cristallina"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Significato più ampio",
+    [
+     "liquido",
+     "elemento"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "fuoco",
+     "terra asciutta"
+    ]
+   ],
+   [
+    "Alterati",
+    [
+     "acquetta",
+     "acquaccia"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "acquario",
+     "acquatico",
+     "acquazzone",
+     "acquerello",
+     "annacquare",
+     "acquedotto"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "aeroplano",
+  "sig": [
+   [
+    "Parti",
+    [
+     "ali",
+     "coda",
+     "motore",
+     "carrello",
+     "cabina",
+     "oblò",
+     "cockpit"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "pilota",
+     "hostess",
+     "steward",
+     "passeggero",
+     "controllore di volo"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "aeroporto",
+     "pista",
+     "hangar",
+     "cielo",
+     "gate",
+     "terminal"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "volare",
+     "decollare",
+     "atterrare",
+     "imbarcarsi",
+     "rullare",
+     "planare"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "supersonico",
+     "di linea",
+     "da turismo",
+     "a reazione",
+     "militare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "aereo",
+     "velivolo"
+    ]
+   ],
+   [
+    "Significato più ampio",
+    [
+     "mezzo di trasporto",
+     "aeromobile"
+    ]
+   ],
+   [
+    "Significato meno ampio",
+    [
+     "jet",
+     "idrovolante",
+     "aliante",
+     "caccia"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "aeroporto",
+     "aerodinamico",
+     "aeronautica",
+     "aviazione"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "affetto",
+  "sig": [
+   [
+    "Per chi",
+    [
+     "genitori",
+     "nonni",
+     "amici",
+     "fratelli",
+     "animali",
+     "compagni di classe"
+    ]
+   ],
+   [
+    "Gesti",
+    [
+     "abbraccio",
+     "carezza",
+     "bacio",
+     "sorriso",
+     "regalo",
+     "parola gentile"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "voler bene",
+     "affezionarsi",
+     "coccolare",
+     "prendersi cura",
+     "proteggere"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "sincero",
+     "profondo",
+     "reciproco",
+     "fraterno",
+     "materno",
+     "tenero"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "bene",
+     "tenerezza",
+     "attaccamento",
+     "simpatia"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "indifferenza",
+     "freddezza",
+     "antipatia",
+     "odio"
+    ]
+   ],
+   [
+    "Significato più ampio",
+    [
+     "sentimento",
+     "emozione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "affettuoso",
+     "affettività",
+     "affezionato",
+     "affezione"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "albero",
+  "sig": [
+   [
+    "Parti",
+    [
+     "radici",
+     "tronco",
+     "rami",
+     "foglie",
+     "corteccia",
+     "chioma",
+     "gemma"
+    ]
+   ],
+   [
+    "Tipi",
+    [
+     "quercia",
+     "pino",
+     "olivo",
+     "faggio",
+     "abete",
+     "salice",
+     "melo"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "bosco",
+     "foresta",
+     "parco",
+     "viale",
+     "giardino",
+     "frutteto"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "piantare",
+     "potare",
+     "crescere",
+     "fiorire",
+     "arrampicarsi",
+     "abbattere"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "secolare",
+     "sempreverde",
+     "frondoso",
+     "spoglio",
+     "da frutto"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Significato più ampio",
+    [
+     "pianta",
+     "vegetale"
+    ]
+   ],
+   [
+    "Alterati",
+    [
+     "alberello",
+     "alberone"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "alberato",
+     "alberatura",
+     "alberata"
+    ]
+   ],
+   [
+    "Usi figurati",
+    [
+     "albero genealogico",
+     "albero di Natale",
+     "albero maestro"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "amico",
+  "sig": [
+   [
+    "Chi è",
+    [
+     "compagno di banco",
+     "vicino di casa",
+     "compagno di squadra",
+     "amico di penna",
+     "migliore amico"
+    ]
+   ],
+   [
+    "Cosa si condivide",
+    [
+     "segreti",
+     "risate",
+     "giochi",
+     "avventure",
+     "merenda",
+     "confidenze"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "fidarsi",
+     "aiutare",
+     "ascoltare",
+     "confidarsi",
+     "difendere",
+     "consolare"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "leale",
+     "sincero",
+     "fedele",
+     "inseparabile",
+     "del cuore",
+     "di vecchia data"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "compagno",
+     "bro",
+     "socio"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "nemico",
+     "rivale",
+     "estraneo"
+    ]
+   ],
+   [
+    "Alterati",
+    [
+     "amichetto",
+     "amicone"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "amicizia",
+     "amichevole",
+     "amicarsi",
+     "inimicizia",
+     "nemico"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "amore",
+  "sig": [
+   [
+    "Persone",
+    [
+     "innamorato",
+     "fidanzato",
+     "partner",
+     "crush",
+     "anima gemella"
+    ]
+   ],
+   [
+    "Simboli",
+    [
+     "cuore",
+     "rosa rossa",
+     "anello",
+     "lettera",
+     "bacio"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "amare",
+     "innamorarsi",
+     "corteggiare",
+     "dichiararsi",
+     "prendersi cura"
+    ]
+   ],
+   [
+    "Tipi",
+    [
+     "amore materno",
+     "amore fraterno",
+     "primo amore",
+     "amore per la natura",
+     "amore di patria"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "corrisposto",
+     "platonico",
+     "eterno",
+     "a prima vista",
+     "non ricambiato"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "affetto",
+     "passione",
+     "tenerezza",
+     "adorazione"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "odio",
+     "indifferenza",
+     "avversione"
+    ]
+   ],
+   [
+    "Significato più ampio",
+    [
+     "sentimento",
+     "emozione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "amare",
+     "amoroso",
+     "amorevole",
+     "innamorarsi",
+     "amante",
+     "amabile"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "buio",
+  "sig": [
+   [
+    "Quando",
+    [
+     "notte",
+     "sera",
+     "tramonto",
+     "eclissi",
+     "blackout",
+     "inverno"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "cantina",
+     "grotta",
+     "galleria",
+     "bosco di notte",
+     "stanza chiusa"
+    ]
+   ],
+   [
+    "Oggetti contro il buio",
+    [
+     "lampada",
+     "torcia",
+     "candela",
+     "lampione",
+     "lucciola"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "oscurarsi",
+     "imbrunire",
+     "annottare",
+     "accendere",
+     "tastare"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "pesto",
+     "fitto",
+     "totale",
+     "pauroso",
+     "rassicurante"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "oscurità",
+     "tenebre",
+     "ombra"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "luce",
+     "chiaro",
+     "luminosità"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "abbuiare",
+     "rabbuiarsi"
+    ]
+   ],
+   [
+    "Modi di dire",
+    [
+     "al buio",
+     "buio pesto",
+     "salto nel buio"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "confusione",
+  "sig": [
+   [
+    "Luoghi",
+    [
+     "classe",
+     "mercato",
+     "stazione",
+     "stadio",
+     "cameretta",
+     "festa"
+    ]
+   ],
+   [
+    "Cause",
+    [
+     "rumore",
+     "folla",
+     "fretta",
+     "disordine",
+     "dubbio",
+     "troppe informazioni"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "confondere",
+     "mescolare",
+     "sbagliare",
+     "perdersi",
+     "fare caos"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "totale",
+     "mentale",
+     "rumorosa",
+     "allegra",
+     "generale"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "caos",
+     "disordine",
+     "baraonda",
+     "trambusto",
+     "casino (inf.)"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "ordine",
+     "calma",
+     "chiarezza",
+     "silenzio"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "confondere",
+     "confuso",
+     "confusionario",
+     "confusamente"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "diario",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "diario segreto",
+     "diario scolastico",
+     "diario di bordo",
+     "diario di viaggio",
+     "blog"
+    ]
+   ],
+   [
+    "Oggetti",
+    [
+     "lucchetto",
+     "penna",
+     "pagina",
+     "copertina",
+     "agenda",
+     "quaderno"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "scrivere",
+     "annotare",
+     "raccontare",
+     "confidare",
+     "rileggere",
+     "nascondere"
+    ]
+   ],
+   [
+    "Contenuti",
+    [
+     "ricordi",
+     "segreti",
+     "emozioni",
+     "compiti",
+     "pensieri",
+     "sogni"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "memoriale",
+     "giornale (di bordo)"
+    ]
+   ],
+   [
+    "Significato più ampio",
+    [
+     "libro",
+     "quaderno"
+    ]
+   ],
+   [
+    "Alterati",
+    [
+     "diarietto"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "diarista",
+     "diaristico",
+     "dì (giorno)",
+     "quotidiano"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "emozione",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "gioia",
+     "paura",
+     "rabbia",
+     "tristezza",
+     "disgusto",
+     "sorpresa",
+     "ansia",
+     "nostalgia"
+    ]
+   ],
+   [
+    "Segnali del corpo",
+    [
+     "batticuore",
+     "lacrima",
+     "sorriso",
+     "rossore",
+     "brivido",
+     "farfalle nello stomaco"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "emozionarsi",
+     "commuoversi",
+     "provare",
+     "esprimere",
+     "trattenere",
+     "condividere"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "forte",
+     "intensa",
+     "positiva",
+     "negativa",
+     "contrastante",
+     "travolgente"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "sentimento",
+     "sensazione",
+     "turbamento"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "indifferenza",
+     "apatia",
+     "freddezza"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "emozionare",
+     "emozionante",
+     "emotivo",
+     "emotività"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "eroe",
+  "sig": [
+   [
+    "Chi",
+    [
+     "supereroe",
+     "guerriero",
+     "cavaliere",
+     "pompiere",
+     "medico",
+     "campione"
+    ]
+   ],
+   [
+    "Dove",
+    [
+     "mito",
+     "fumetto",
+     "film",
+     "videogioco",
+     "storia",
+     "vita di tutti i giorni"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "salvare",
+     "proteggere",
+     "combattere",
+     "sacrificarsi",
+     "sconfiggere",
+     "aiutare"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "coraggioso",
+     "generoso",
+     "leggendario",
+     "invincibile",
+     "umile"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "campione",
+     "paladino",
+     "protagonista"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "vigliacco",
+     "antieroe",
+     "cattivo"
+    ]
+   ],
+   [
+    "Femminile",
+    [
+     "eroina"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "eroico",
+     "eroismo",
+     "eroicamente",
+     "supereroe"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "fragile",
+  "sig": [
+   [
+    "Cose",
+    [
+     "vetro",
+     "cristallo",
+     "uovo",
+     "porcellana",
+     "bicchiere",
+     "ghiaccio sottile"
+    ]
+   ],
+   [
+    "Persone e stati",
+    [
+     "bambino",
+     "anziano",
+     "malato",
+     "cuore",
+     "autostima",
+     "equilibrio"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "rompersi",
+     "incrinarsi",
+     "spezzarsi",
+     "proteggere",
+     "maneggiare con cura"
+    ]
+   ],
+   [
+    "Cosa la protegge",
+    [
+     "imballaggio",
+     "scudo",
+     "abbraccio",
+     "cura",
+     "gentilezza"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "delicato",
+     "debole",
+     "vulnerabile",
+     "friabile"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "robusto",
+     "resistente",
+     "solido",
+     "forte"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "fragilità",
+     "fragilmente",
+     "frangere",
+     "frammento"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "gioia",
+  "sig": [
+   [
+    "Occasioni",
+    [
+     "festa",
+     "compleanno",
+     "vittoria",
+     "vacanze",
+     "incontro",
+     "nascita"
+    ]
+   ],
+   [
+    "Segnali",
+    [
+     "sorriso",
+     "risata",
+     "salto",
+     "applauso",
+     "lacrime di gioia",
+     "abbraccio"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "gioire",
+     "esultare",
+     "festeggiare",
+     "ridere",
+     "rallegrarsi",
+     "brillare"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "immensa",
+     "pura",
+     "contagiosa",
+     "improvvisa",
+     "condivisa"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "felicità",
+     "allegria",
+     "contentezza",
+     "esultanza"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "tristezza",
+     "dolore",
+     "dispiacere",
+     "malinconia"
+    ]
+   ],
+   [
+    "Altro significato",
+    [
+     "gioiello",
+     "pietra preziosa"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "gioioso",
+     "gioire",
+     "gioiosamente",
+     "gioiello"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "guerra",
+  "sig": [
+   [
+    "Persone",
+    [
+     "soldato",
+     "generale",
+     "profugo",
+     "civile",
+     "vittima",
+     "reduce"
+    ]
+   ],
+   [
+    "Cose",
+    [
+     "arma",
+     "carro armato",
+     "trincea",
+     "bomba",
+     "bandiera",
+     "confine"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "combattere",
+     "attaccare",
+     "difendersi",
+     "invadere",
+     "fuggire",
+     "resistere"
+    ]
+   ],
+   [
+    "Conseguenze",
+    [
+     "distruzione",
+     "fame",
+     "paura",
+     "esilio",
+     "ricostruzione"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "mondiale",
+     "civile",
+     "fredda",
+     "lampo",
+     "santa"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "conflitto",
+     "battaglia",
+     "scontro",
+     "ostilità"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "pace",
+     "tregua",
+     "armistizio",
+     "concordia"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "guerriero",
+     "guerreggiare",
+     "dopoguerra",
+     "guerrafondaio",
+     "guerriglia"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "impegno",
+  "sig": [
+   [
+    "Dove",
+    [
+     "scuola",
+     "sport",
+     "lavoro",
+     "volontariato",
+     "famiglia",
+     "amicizia"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "agenda",
+     "orario",
+     "promessa",
+     "obiettivo",
+     "allenamento"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "impegnarsi",
+     "sforzarsi",
+     "dedicarsi",
+     "mantenere",
+     "rispettare",
+     "promettere"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "costante",
+     "serio",
+     "preso",
+     "mantenuto",
+     "civile"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "sforzo",
+     "dedizione",
+     "costanza",
+     "responsabilità"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "svogliatezza",
+     "pigrizia",
+     "disinteresse"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "impegnare",
+     "impegnativo",
+     "impegnato",
+     "disimpegno",
+     "pegno"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "libertà",
+  "sig": [
+   [
+    "Di che cosa",
+    [
+     "di pensiero",
+     "di parola",
+     "di stampa",
+     "di movimento",
+     "di scelta"
+    ]
+   ],
+   [
+    "Simboli",
+    [
+     "ali",
+     "volo",
+     "gabbiano",
+     "catene spezzate",
+     "bandiera"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "liberare",
+     "scegliere",
+     "esprimersi",
+     "volare",
+     "difendere",
+     "conquistare"
+    ]
+   ],
+   [
+    "Dove si trova",
+    [
+     "Costituzione",
+     "diritti",
+     "regole condivise",
+     "democrazia"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "indipendenza",
+     "autonomia",
+     "emancipazione"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "schiavitù",
+     "prigionia",
+     "oppressione",
+     "costrizione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "libero",
+     "liberare",
+     "liberazione",
+     "liberamente",
+     "liberatorio"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "musica",
+  "sig": [
+   [
+    "Persone",
+    [
+     "cantante",
+     "musicista",
+     "compositore",
+     "direttore d'orchestra",
+     "rapper",
+     "DJ"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "chitarra",
+     "pianoforte",
+     "violino",
+     "batteria",
+     "flauto",
+     "cuffie"
+    ]
+   ],
+   [
+    "Generi",
+    [
+     "pop",
+     "rock",
+     "rap",
+     "classica",
+     "jazz",
+     "trap"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "suonare",
+     "cantare",
+     "ascoltare",
+     "comporre",
+     "ballare",
+     "improvvisare"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "orecchiabile",
+     "ritmata",
+     "dolce",
+     "assordante",
+     "dal vivo"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Significato più ampio",
+    [
+     "arte",
+     "suono"
+    ]
+   ],
+   [
+    "Significato meno ampio",
+    [
+     "canzone",
+     "sinfonia",
+     "melodia"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "silenzio"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "musicale",
+     "musicista",
+     "musicare",
+     "musical"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "pace",
+  "sig": [
+   [
+    "Simboli",
+    [
+     "colomba",
+     "ramoscello d'ulivo",
+     "arcobaleno",
+     "stretta di mano",
+     "bandiera bianca"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "mediatore",
+     "diplomatico",
+     "pacifista",
+     "volontario",
+     "arbitro"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "fare pace",
+     "riconciliarsi",
+     "perdonare",
+     "dialogare",
+     "disarmare",
+     "accordarsi"
+    ]
+   ],
+   [
+    "Dove",
+    [
+     "tra popoli",
+     "tra amici",
+     "in famiglia",
+     "dentro di sé"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "armonia",
+     "concordia",
+     "tregua",
+     "serenità",
+     "quiete"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "guerra",
+     "conflitto",
+     "litigio",
+     "agitazione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "pacifico",
+     "pacifista",
+     "pacificare",
+     "pacato",
+     "rappacificarsi"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "rabbia",
+  "sig": [
+   [
+    "Cause",
+    [
+     "ingiustizia",
+     "offesa",
+     "sconfitta",
+     "litigio",
+     "presa in giro",
+     "frustrazione"
+    ]
+   ],
+   [
+    "Segnali",
+    [
+     "pugni chiusi",
+     "viso rosso",
+     "urla",
+     "porta sbattuta",
+     "silenzio ostinato"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "arrabbiarsi",
+     "urlare",
+     "sfogarsi",
+     "calmarsi",
+     "respirare",
+     "contare fino a dieci"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "cieca",
+     "improvvisa",
+     "trattenuta",
+     "giusta",
+     "esplosiva"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "ira",
+     "collera",
+     "furia",
+     "stizza"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "calma",
+     "pazienza",
+     "serenità",
+     "mitezza"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "arrabbiarsi",
+     "arrabbiato",
+     "rabbioso",
+     "rabbiosamente"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "scuola",
+  "sig": [
+   [
+    "Persone",
+    [
+     "studente",
+     "professore",
+     "dirigente",
+     "bidello",
+     "compagno di classe"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "classe",
+     "palestra",
+     "laboratorio",
+     "corridoio",
+     "cortile",
+     "mensa"
+    ]
+   ],
+   [
+    "Oggetti",
+    [
+     "banco",
+     "lavagna",
+     "zaino",
+     "quaderno",
+     "astuccio",
+     "diario"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "studiare",
+     "imparare",
+     "spiegare",
+     "interrogare",
+     "copiare",
+     "ripassare"
+    ]
+   ],
+   [
+    "Momenti",
+    [
+     "ricreazione",
+     "intervallo",
+     "verifica",
+     "esame",
+     "gita",
+     "pagella"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "istituto",
+     "liceo",
+     "ginnasio (stor.)"
+    ]
+   ],
+   [
+    "Significato meno ampio",
+    [
+     "scuola primaria",
+     "scuola media",
+     "università"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "scolaro",
+     "scolastico",
+     "doposcuola",
+     "scolaresca"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "stile",
+  "sig": [
+   [
+    "Ambiti",
+    [
+     "abbigliamento",
+     "scrittura",
+     "musica",
+     "sport",
+     "arte",
+     "architettura"
+    ]
+   ],
+   [
+    "Elementi",
+    [
+     "look",
+     "taglio di capelli",
+     "accessori",
+     "firma",
+     "modo di parlare"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "vestirsi",
+     "distinguersi",
+     "personalizzare",
+     "imitare",
+     "inventare"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "elegante",
+     "sportivo",
+     "casual",
+     "originale",
+     "inconfondibile",
+     "vintage"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "modo",
+     "maniera",
+     "gusto",
+     "swag"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "banalità",
+     "goffaggine"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "stilista",
+     "stiloso",
+     "stilizzare",
+     "stilografica",
+     "stilo"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "telefono",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "smartphone",
+     "cellulare",
+     "telefono fisso",
+     "cordless",
+     "videotelefono"
+    ]
+   ],
+   [
+    "Parti",
+    [
+     "schermo",
+     "tastiera",
+     "batteria",
+     "fotocamera",
+     "cover",
+     "caricatore"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "chiamare",
+     "rispondere",
+     "messaggiare",
+     "squillare",
+     "scorrere",
+     "spegnere"
+    ]
+   ],
+   [
+    "Cose che si fanno",
+    [
+     "chat",
+     "videochiamata",
+     "foto",
+     "social",
+     "messaggio vocale"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "apparecchio",
+     "cell (inf.)"
+    ]
+   ],
+   [
+    "Significato più ampio",
+    [
+     "dispositivo",
+     "mezzo di comunicazione"
+    ]
+   ],
+   [
+    "Alterati",
+    [
+     "telefonino"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "telefonare",
+     "telefonata",
+     "telefonista",
+     "telefonico"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "vita",
+  "sig": [
+   [
+    "Fasi",
+    [
+     "nascita",
+     "infanzia",
+     "adolescenza",
+     "età adulta",
+     "vecchiaia"
+    ]
+   ],
+   [
+    "Ciò che la riempie",
+    [
+     "famiglia",
+     "amicizia",
+     "amore",
+     "scuola",
+     "sogni",
+     "viaggio"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "vivere",
+     "nascere",
+     "crescere",
+     "cambiare",
+     "scegliere",
+     "godersi"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "lunga",
+     "serena",
+     "avventurosa",
+     "sana",
+     "quotidiana",
+     "nuova"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "esistenza",
+     "vissuto"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "morte"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "vivere",
+     "vitale",
+     "vitalità",
+     "vivace",
+     "vivo",
+     "rivivere"
+    ]
+   ],
+   [
+    "Modi di dire",
+    [
+     "fare la bella vita",
+     "per la vita",
+     "dare vita"
+    ]
+   ]
+  ],
+  "d": 1
+ },
+ {
+  "p": "abbandonare",
+  "sig": [
+   [
+    "Chi",
+    [
+     "genitore",
+     "amico",
+     "animale",
+     "squadra",
+     "soldato"
+    ]
+   ],
+   [
+    "Cosa",
+    [
+     "casa",
+     "paese",
+     "studio",
+     "progetto",
+     "gioco",
+     "nave"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "lasciare",
+     "partire",
+     "fuggire",
+     "rinunciare",
+     "trascurare"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "improvviso",
+     "definitivo",
+     "doloroso",
+     "volontario"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "lasciare",
+     "mollare",
+     "piantare",
+     "desistere"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "accogliere",
+     "custodire",
+     "proseguire",
+     "tenere"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "abbandono",
+     "abbandonato",
+     "bando"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "abbattere",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "albero",
+     "muro",
+     "edificio",
+     "ostacolo",
+     "record",
+     "aereo"
+    ]
+   ],
+   [
+    "Chi",
+    [
+     "boscaiolo",
+     "demolitore",
+     "ruspa",
+     "tempesta"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "demolire",
+     "buttare giù",
+     "atterrare",
+     "sconfiggere"
+    ]
+   ],
+   [
+    "In senso figurato",
+    [
+     "avvilire",
+     "scoraggiare",
+     "deprimere"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "demolire",
+     "abbassare",
+     "rovesciare"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "costruire",
+     "innalzare",
+     "rialzare",
+     "incoraggiare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "abbattimento",
+     "abbattuto",
+     "battere"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "abbigliamento",
+  "sig": [
+   [
+    "Capi",
+    [
+     "maglia",
+     "felpa",
+     "pantaloni",
+     "gonna",
+     "giacca",
+     "cappotto"
+    ]
+   ],
+   [
+    "Accessori",
+    [
+     "cappello",
+     "sciarpa",
+     "cintura",
+     "borsa",
+     "guanti"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "negozio",
+     "armadio",
+     "sartoria",
+     "mercato",
+     "sfilata"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "vestirsi",
+     "indossare",
+     "provare",
+     "abbinare",
+     "cucire"
+    ]
+   ],
+   [
+    "Stili",
+    [
+     "sportivo",
+     "elegante",
+     "casual",
+     "da lavoro",
+     "stile"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "vestiario",
+     "abiti",
+     "indumenti",
+     "guardaroba"
+    ]
+   ],
+   [
+    "Significato meno ampio",
+    [
+     "abito",
+     "vestito",
+     "divisa"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "abbigliare",
+     "abbigliato"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "abbondante",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "cibo",
+     "pioggia",
+     "raccolto",
+     "porzione",
+     "nevicata",
+     "merenda"
+    ]
+   ],
+   [
+    "Qualità vicine",
+    [
+     "ricco",
+     "generoso",
+     "copioso",
+     "pieno"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "abbondare",
+     "traboccare",
+     "moltiplicarsi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "copioso",
+     "ampio",
+     "ricco",
+     "sovrabbondante"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "scarso",
+     "insufficiente",
+     "misero",
+     "ridotto"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "abbondanza",
+     "abbondare",
+     "abbondantemente"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "abilità",
+  "sig": [
+   [
+    "Dove",
+    [
+     "sport",
+     "musica",
+     "disegno",
+     "cucina",
+     "videogioco",
+     "scuola"
+    ]
+   ],
+   [
+    "Chi",
+    [
+     "campione",
+     "artigiano",
+     "artista",
+     "esperto"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "allenarsi",
+     "imparare",
+     "migliorare",
+     "dimostrare"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "manuale",
+     "mentale",
+     "sociale",
+     "tecnica",
+     "innata"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "bravura",
+     "capacità",
+     "talento",
+     "destrezza",
+     "skill"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "incapacità",
+     "goffaggine",
+     "inettitudine"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "abile",
+     "abilmente",
+     "inabile",
+     "abilitare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "abitare",
+  "sig": [
+   [
+    "Dove",
+    [
+     "casa",
+     "appartamento",
+     "villa",
+     "città",
+     "campagna",
+     "quartiere"
+    ]
+   ],
+   [
+    "Chi",
+    [
+     "inquilino",
+     "abitante",
+     "cittadino",
+     "vicino",
+     "famiglia"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "vivere",
+     "risiedere",
+     "alloggiare",
+     "traslocare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "vivere",
+     "risiedere",
+     "dimorare",
+     "stare"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "traslocare",
+     "emigrare",
+     "sloggiare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "abitazione",
+     "abitante",
+     "abitato",
+     "abitativo"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "abitazione",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "casa",
+     "appartamento",
+     "villa",
+     "baita",
+     "condominio",
+     "castello"
+    ]
+   ],
+   [
+    "Parti",
+    [
+     "camera",
+     "cucina",
+     "bagno",
+     "scala",
+     "balcone",
+     "soffitta"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "famiglia",
+     "inquilino",
+     "proprietario",
+     "vicino",
+     "portinaio"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "abitare",
+     "arredare",
+     "affittare",
+     "costruire",
+     "traslocare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "casa",
+     "dimora",
+     "alloggio",
+     "residenza"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "abitare",
+     "abitante",
+     "abitativo"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "abito",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "vestito da sera",
+     "tailleur",
+     "tuta",
+     "divisa",
+     "costume"
+    ]
+   ],
+   [
+    "Parti",
+    [
+     "manica",
+     "colletto",
+     "bottone",
+     "tasca",
+     "orlo"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "sarto",
+     "stilista",
+     "modella",
+     "commessa"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "indossare",
+     "cucire",
+     "stirare",
+     "provare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "vestito",
+     "indumento",
+     "completo"
+    ]
+   ],
+   [
+    "Proverbio",
+    [
+     "l'abito non fa il monaco"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "abitino",
+     "abituccio"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "abitudine",
+  "sig": [
+   [
+    "Esempi",
+    [
+     "colazione",
+     "merenda",
+     "compiti",
+     "allenamento",
+     "saluto"
+    ]
+   ],
+   [
+    "Momenti",
+    [
+     "mattina",
+     "sera",
+     "weekend",
+     "vacanze"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "abituarsi",
+     "ripetere",
+     "cambiare",
+     "perdere",
+     "prendere"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "buona",
+     "cattiva",
+     "quotidiana",
+     "sana",
+     "strana"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "consuetudine",
+     "usanza",
+     "routine",
+     "rito",
+     "tradizione"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "novità",
+     "eccezione",
+     "cambiamento"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "abituale",
+     "abituarsi",
+     "abitudinario"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "abuso",
+  "sig": [
+   [
+    "Di che cosa",
+    [
+     "potere",
+     "alcol",
+     "farmaci",
+     "telefono",
+     "videogioco"
+    ]
+   ],
+   [
+    "Chi lo combatte",
+    [
+     "giudice",
+     "polizia",
+     "legge",
+     "Costituzione"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "abusare",
+     "approfittare",
+     "eccedere",
+     "denunciare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "eccesso",
+     "sopruso",
+     "prepotenza"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "moderazione",
+     "misura",
+     "rispetto"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "abusare",
+     "abusivo",
+     "uso"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "accadere",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "incidente",
+     "sorpresa",
+     "miracolo",
+     "eclissi",
+     "novità"
+    ]
+   ],
+   [
+    "Quando",
+    [
+     "all'improvviso",
+     "per caso",
+     "di solito",
+     "raramente"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "avvenire",
+     "capitare",
+     "succedere",
+     "verificarsi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "succedere",
+     "capitare",
+     "avvenire"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "accaduto",
+     "caso",
+     "cadere"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "accendere",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "luce",
+     "fuoco",
+     "candela",
+     "motore",
+     "telefono",
+     "computer"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "fiammifero",
+     "accendino",
+     "interruttore",
+     "telecomando"
+    ]
+   ],
+   [
+    "In senso figurato",
+    [
+     "entusiasmo",
+     "passione",
+     "curiosità",
+     "discussione"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "attivare",
+     "avviare",
+     "incendiare"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "spegnere",
+     "disattivare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "acceso",
+     "accensione",
+     "accendino"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "accogliere",
+  "sig": [
+   [
+    "Chi",
+    [
+     "ospite",
+     "profugo",
+     "compagno nuovo",
+     "amico",
+     "turista"
+    ]
+   ],
+   [
+    "Dove",
+    [
+     "casa",
+     "scuola",
+     "porto",
+     "aeroporto",
+     "comunità"
+    ]
+   ],
+   [
+    "Gesti",
+    [
+     "abbraccio",
+     "saluto",
+     "sorriso",
+     "stretta di mano"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "ospitare",
+     "ricevere",
+     "includere",
+     "ascoltare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "ricevere",
+     "ospitare",
+     "accettare"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "respingere",
+     "escludere",
+     "rifiutare",
+     "abbandonare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "accoglienza",
+     "accogliente",
+     "cogliere"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "accordo",
+  "sig": [
+   [
+    "Tra chi",
+    [
+     "amici",
+     "Stati",
+     "squadre",
+     "compagni",
+     "famiglia"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "patto",
+     "contratto",
+     "firma",
+     "stretta di mano",
+     "promessa"
+    ]
+   ],
+   [
+    "In musica",
+    [
+     "chitarra",
+     "pianoforte",
+     "nota",
+     "armonia"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "accordarsi",
+     "trattare",
+     "firmare",
+     "rispettare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "intesa",
+     "patto",
+     "armonia",
+     "alleanza"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "disaccordo",
+     "litigio",
+     "rottura",
+     "conflitto"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "accordare",
+     "concordia",
+     "cuore"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "accusa",
+  "sig": [
+   [
+    "Persone",
+    [
+     "accusatore",
+     "imputato",
+     "giudice",
+     "avvocato",
+     "testimone"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "tribunale",
+     "aula",
+     "processo"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "accusare",
+     "incolpare",
+     "difendersi",
+     "discolparsi"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "falsa",
+     "grave",
+     "ingiusta",
+     "fondata"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "imputazione",
+     "rimprovero",
+     "denuncia"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "difesa",
+     "discolpa",
+     "assoluzione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "accusare",
+     "accusato",
+     "accusatore"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "acido",
+  "sig": [
+   [
+    "Cose",
+    [
+     "limone",
+     "aceto",
+     "yogurt",
+     "frutta acerba",
+     "pioggia acida"
+    ]
+   ],
+   [
+    "Sensazioni",
+    [
+     "sapore",
+     "smorfia",
+     "bruciore"
+    ]
+   ],
+   [
+    "In senso figurato",
+    [
+     "commento",
+     "battuta",
+     "carattere"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "aspro",
+     "agro",
+     "pungente"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "dolce",
+     "basico",
+     "gentile"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "acidità",
+     "acidulo",
+     "acetato"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "acuto",
+  "sig": [
+   [
+    "Cose",
+    [
+     "punta",
+     "angolo acuto",
+     "suono",
+     "voce",
+     "dolore"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "osservatore",
+     "studente",
+     "critico"
+    ]
+   ],
+   [
+    "Qualità vicine",
+    [
+     "appuntito",
+     "sottile",
+     "penetrante",
+     "intelligente"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "aguzzo",
+     "perspicace",
+     "intenso"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "ottuso",
+     "grave",
+     "smussato"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "acutezza",
+     "acume",
+     "acuire"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "adattarsi",
+  "sig": [
+   [
+    "A che cosa",
+    [
+     "clima",
+     "scuola nuova",
+     "regole",
+     "cambiamento",
+     "gruppo"
+    ]
+   ],
+   [
+    "Chi",
+    [
+     "animale",
+     "pianta",
+     "studente",
+     "viaggiatore"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "abituarsi",
+     "cambiare",
+     "accettarsi",
+     "trasformarsi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "adeguarsi",
+     "abituarsi",
+     "conformarsi"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "ribellarsi",
+     "resistere",
+     "opporsi"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "adattamento",
+     "adatto",
+     "adattabile"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "addetto",
+  "sig": [
+   [
+    "Esempi",
+    [
+     "addetto alle pulizie",
+     "alla cassa",
+     "alla sicurezza",
+     "stampa"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "ufficio",
+     "negozio",
+     "stazione",
+     "museo",
+     "scuola"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "incaricato",
+     "responsabile",
+     "impiegato"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "addire",
+     "detto"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "adulto",
+  "sig": [
+   [
+    "Fasi della vita",
+    [
+     "infanzia",
+     "adolescenza",
+     "età adulta",
+     "vecchiaia"
+    ]
+   ],
+   [
+    "Chi",
+    [
+     "genitore",
+     "professore",
+     "nonno",
+     "lavoratore"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "crescere",
+     "maturare",
+     "decidere",
+     "lavorare"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "responsabile",
+     "maturo",
+     "autonomo"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "grande",
+     "maggiorenne",
+     "maturo"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "bambino",
+     "ragazzo",
+     "minorenne"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "adolescente",
+     "adultità"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "aereo",
+  "sig": [
+   [
+    "Parti",
+    [
+     "ali",
+     "motore",
+     "coda",
+     "carrello",
+     "cabina"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "pilota",
+     "hostess",
+     "passeggero"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "aeroporto",
+     "pista",
+     "cielo",
+     "hangar"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "volare",
+     "decollare",
+     "atterrare",
+     "imbarcarsi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "aeroplano",
+     "velivolo"
+    ]
+   ],
+   [
+    "Come aggettivo",
+    [
+     "aria",
+     "leggero",
+     "aereo (che sta in aria)"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "aeroporto",
+     "aerostato",
+     "aria"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "aggressivo",
+  "sig": [
+   [
+    "Chi",
+    [
+     "cane",
+     "avversario",
+     "giocatore",
+     "bullo"
+    ]
+   ],
+   [
+    "Comportamenti",
+    [
+     "urla",
+     "spintone",
+     "minaccia",
+     "insulto",
+     "rabbia"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "aggredire",
+     "attaccare",
+     "provocare",
+     "calmarsi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "violento",
+     "prepotente",
+     "combattivo"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "mite",
+     "pacifico",
+     "gentile",
+     "calmo"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "aggressione",
+     "aggressività",
+     "aggredire"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "agire",
+  "sig": [
+   [
+    "Come",
+    [
+     "in fretta",
+     "con calma",
+     "da solo",
+     "in gruppo",
+     "con coraggio"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "fare",
+     "operare",
+     "intervenire",
+     "comportarsi",
+     "decidere"
+    ]
+   ],
+   [
+    "Chi",
+    [
+     "eroe",
+     "volontario",
+     "medico",
+     "cittadino"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "fare",
+     "operare",
+     "muoversi"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "aspettare",
+     "esitare",
+     "stare fermi"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "azione",
+     "attivo",
+     "agente",
+     "attore"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "agricoltura",
+  "sig": [
+   [
+    "Persone",
+    [
+     "contadino",
+     "agricoltore",
+     "allevatore",
+     "bracciante"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "campo",
+     "serra",
+     "vigna",
+     "frutteto",
+     "fattoria"
+    ]
+   ],
+   [
+    "Attrezzi",
+    [
+     "trattore",
+     "aratro",
+     "zappa",
+     "falce",
+     "irrigatore"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "coltivare",
+     "seminare",
+     "raccogliere",
+     "arare",
+     "potare"
+    ]
+   ],
+   [
+    "Prodotti",
+    [
+     "grano",
+     "frutta",
+     "verdura",
+     "olio",
+     "vino"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Significato più ampio",
+    [
+     "economia",
+     "settore primario"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "agricolo",
+     "agricoltore",
+     "agrario"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "aiuto",
+  "sig": [
+   [
+    "Chi",
+    [
+     "amico",
+     "insegnante",
+     "medico",
+     "volontario",
+     "soccorritore"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "ambulanza",
+     "salvagente",
+     "dizionario",
+     "suggerimento"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "aiutare",
+     "sostenere",
+     "soccorrere",
+     "collaborare",
+     "chiedere"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "prezioso",
+     "reciproco",
+     "urgente",
+     "concreto"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "soccorso",
+     "sostegno",
+     "appoggio",
+     "supporto"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "ostacolo",
+     "abbandono",
+     "danno"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "aiutare",
+     "aiutante",
+     "aiutino"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "albergo",
+  "sig": [
+   [
+    "Parti",
+    [
+     "hall",
+     "camera",
+     "reception",
+     "ascensore",
+     "sala colazione"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "portiere",
+     "cameriere",
+     "ospite",
+     "turista",
+     "direttore"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "prenotare",
+     "alloggiare",
+     "soggiornare",
+     "partire"
+    ]
+   ],
+   [
+    "Tipi",
+    [
+     "hotel di lusso",
+     "pensione",
+     "ostello",
+     "bed and breakfast"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "hotel",
+     "locanda",
+     "pensione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "albergatore",
+     "alberghiero",
+     "albergare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "alfabeto",
+  "sig": [
+   [
+    "Elementi",
+    [
+     "lettera",
+     "vocale",
+     "consonante",
+     "maiuscola",
+     "minuscola"
+    ]
+   ],
+   [
+    "Tipi",
+    [
+     "alfabeto latino",
+     "greco",
+     "Braille",
+     "morse",
+     "cirillico"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "leggere",
+     "scrivere",
+     "imparare",
+     "ordinare"
+    ]
+   ],
+   [
+    "Dove",
+    [
+     "dizionario",
+     "abbecedario",
+     "tastiera",
+     "scuola"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "abbecedario",
+     "ABC"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "alfabetico",
+     "analfabeta",
+     "alfabetizzare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "alimento",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "pane",
+     "pasta",
+     "frutta",
+     "verdura",
+     "carne",
+     "legumi"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "cucina",
+     "mercato",
+     "supermercato",
+     "mensa",
+     "merenda"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "mangiare",
+     "nutrire",
+     "cucinare",
+     "conservare"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "sano",
+     "nutriente",
+     "fresco",
+     "biologico"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "cibo",
+     "nutrimento",
+     "vivanda"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "alimentare",
+     "alimentazione"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "alleanza",
+  "sig": [
+   [
+    "Tra chi",
+    [
+     "Stati",
+     "popoli",
+     "squadre",
+     "amici",
+     "partiti"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "patto",
+     "accordo",
+     "trattato",
+     "giuramento"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "allearsi",
+     "unirsi",
+     "collaborare",
+     "tradire"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "patto",
+     "unione",
+     "coalizione",
+     "accordo"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "rivalità",
+     "inimicizia",
+     "guerra"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "alleato",
+     "allearsi"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "allegria",
+  "sig": [
+   [
+    "Occasioni",
+    [
+     "festa",
+     "gioco",
+     "vacanze",
+     "compleanno",
+     "ricreazione"
+    ]
+   ],
+   [
+    "Segnali",
+    [
+     "sorriso",
+     "risata",
+     "canzone",
+     "ballo"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "ridere",
+     "scherzare",
+     "festeggiare",
+     "divertirsi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "gioia",
+     "felicità",
+     "buonumore",
+     "divertimento"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "tristezza",
+     "malinconia",
+     "noia"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "allegro",
+     "allegramente",
+     "rallegrare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "allevare",
+  "sig": [
+   [
+    "Chi",
+    [
+     "genitore",
+     "allevatore",
+     "contadino",
+     "nonna"
+    ]
+   ],
+   [
+    "Animali",
+    [
+     "mucca",
+     "pecora",
+     "gallina",
+     "cavallo",
+     "ape"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "stalla",
+     "fattoria",
+     "pollaio",
+     "recinto"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "crescere",
+     "educare",
+     "nutrire",
+     "accudire"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "crescere",
+     "educare",
+     "tirare su"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "allevamento",
+     "allevatore",
+     "levare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "allievo",
+  "sig": [
+   [
+    "Dove",
+    [
+     "scuola",
+     "classe",
+     "palestra",
+     "conservatorio",
+     "laboratorio"
+    ]
+   ],
+   [
+    "Persone vicine",
+    [
+     "professore",
+     "maestro",
+     "compagno",
+     "classe"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "studiare",
+     "imparare",
+     "ascoltare",
+     "esercitarsi"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "attento",
+     "diligente",
+     "distratto",
+     "promettente"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "alunno",
+     "studente",
+     "scolaro",
+     "discepolo"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "maestro",
+     "insegnante"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "allevare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "altezza",
+  "sig": [
+   [
+    "Cose",
+    [
+     "montagna",
+     "grattacielo",
+     "albero",
+     "persona",
+     "onda"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "metro",
+     "altimetro",
+     "scala"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "misurare",
+     "salire",
+     "crescere",
+     "superare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "statura",
+     "elevazione",
+     "quota"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "bassezza",
+     "profondità"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "alto",
+     "altitudine",
+     "innalzare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "alto",
+  "sig": [
+   [
+    "Cose",
+    [
+     "montagna",
+     "torre",
+     "voce",
+     "volume",
+     "prezzo"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "cestista",
+     "gigante",
+     "ragazzo"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "salire",
+     "crescere",
+     "innalzare",
+     "superare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "elevato",
+     "slanciato",
+     "eccelso"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "basso",
+     "piccolo",
+     "profondo"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "altezza",
+     "altura",
+     "altopiano"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "amare",
+  "sig": [
+   [
+    "Chi",
+    [
+     "famiglia",
+     "amico",
+     "innamorato",
+     "animale",
+     "natura"
+    ]
+   ],
+   [
+    "Gesti",
+    [
+     "abbraccio",
+     "bacio",
+     "carezza",
+     "regalo"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "voler bene",
+     "adorare",
+     "desiderare",
+     "prendersi cura"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "voler bene",
+     "adorare"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "odiare",
+     "detestare",
+     "ignorare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "amore",
+     "amante",
+     "amabile",
+     "amoroso"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "amaro",
+  "sig": [
+   [
+    "Cose",
+    [
+     "caffè",
+     "cioccolato fondente",
+     "medicina",
+     "cicoria"
+    ]
+   ],
+   [
+    "Sensazioni",
+    [
+     "sapore",
+     "delusione",
+     "sconfitta",
+     "lacrima"
+    ]
+   ],
+   [
+    "In senso figurato",
+    [
+     "ricordo",
+     "verità",
+     "sorriso"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "aspro",
+     "triste",
+     "doloroso"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "dolce",
+     "piacevole",
+     "lieto"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "amarezza",
+     "amareggiato",
+     "amaretto"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "ambiente",
+  "sig": [
+   [
+    "Elementi",
+    [
+     "aria",
+     "acqua",
+     "suolo",
+     "piante",
+     "animali",
+     "clima"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "bosco",
+     "mare",
+     "città",
+     "montagna",
+     "deserto"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "ecologista",
+     "scienziato",
+     "guardia forestale",
+     "cittadino"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "proteggere",
+     "inquinare",
+     "riciclare",
+     "rispettare"
+    ]
+   ],
+   [
+    "Problemi",
+    [
+     "inquinamento",
+     "rifiuti",
+     "siccità",
+     "deforestazione"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "natura",
+     "habitat",
+     "contesto"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "ambientale",
+     "ambientalista",
+     "ambientare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "amministrare",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "città",
+     "scuola",
+     "azienda",
+     "condominio",
+     "denaro"
+    ]
+   ],
+   [
+    "Chi",
+    [
+     "sindaco",
+     "preside",
+     "direttore",
+     "amministratore"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "gestire",
+     "governare",
+     "organizzare",
+     "decidere"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "gestire",
+     "dirigere",
+     "governare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "amministrazione",
+     "amministratore",
+     "ministro"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "analisi",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "grammaticale",
+     "logica",
+     "del periodo",
+     "del sangue",
+     "del testo"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "microscopio",
+     "grafico",
+     "dizionario",
+     "test"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "analizzare",
+     "esaminare",
+     "scomporre",
+     "osservare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "esame",
+     "studio",
+     "indagine"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "sintesi"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "analizzare",
+     "analitico",
+     "analista"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "andare",
+  "sig": [
+   [
+    "Dove",
+    [
+     "scuola",
+     "casa",
+     "mare",
+     "montagna",
+     "estero"
+    ]
+   ],
+   [
+    "Come",
+    [
+     "a piedi",
+     "in bicicletta",
+     "in treno",
+     "in aereo",
+     "di corsa"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "camminare",
+     "partire",
+     "viaggiare",
+     "correre"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "recarsi",
+     "dirigersi",
+     "muoversi"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "venire",
+     "tornare",
+     "restare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "andata",
+     "andamento",
+     "andatura"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "anello",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "fede",
+     "solitario",
+     "anello di fidanzamento",
+     "sigillo"
+    ]
+   ],
+   [
+    "Materiali",
+    [
+     "oro",
+     "argento",
+     "diamante",
+     "gemma"
+    ]
+   ],
+   [
+    "Parti",
+    [
+     "castone",
+     "cerchio",
+     "pietra"
+    ]
+   ],
+   [
+    "Altri anelli",
+    [
+     "catena",
+     "pista",
+     "Saturno",
+     "Olimpiadi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "cerchio",
+     "fede",
+     "vera"
+    ]
+   ],
+   [
+    "Alterati",
+    [
+     "anellino"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "inanellare",
+     "anellide"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "angelo",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "angelo custode",
+     "arcangelo",
+     "cherubino"
+    ]
+   ],
+   [
+    "Simboli",
+    [
+     "ali",
+     "aureola",
+     "luce",
+     "nuvola"
+    ]
+   ],
+   [
+    "In senso figurato",
+    [
+     "persona buona",
+     "aiuto",
+     "protezione"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "spirito celeste",
+     "protettore"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "demonio",
+     "diavolo"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "angelico",
+     "angioletto"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "angolo",
+  "sig": [
+   [
+    "Dove",
+    [
+     "stanza",
+     "strada",
+     "piazza",
+     "campo da calcio",
+     "foglio"
+    ]
+   ],
+   [
+    "Tipi",
+    [
+     "retto",
+     "acuto",
+     "ottuso",
+     "piatto"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "goniometro",
+     "squadra",
+     "compasso"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "girare l'angolo",
+     "misurare",
+     "nascondersi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "canto",
+     "cantone",
+     "spigolo"
+    ]
+   ],
+   [
+    "Alterati",
+    [
+     "angolino"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "angolare",
+     "rettangolo",
+     "triangolo"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "angoscia",
+  "sig": [
+   [
+    "Cause",
+    [
+     "pericolo",
+     "attesa",
+     "malattia",
+     "guerra",
+     "buio"
+    ]
+   ],
+   [
+    "Segnali",
+    [
+     "nodo alla gola",
+     "batticuore",
+     "pianto",
+     "insonnia"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "angosciarsi",
+     "preoccuparsi",
+     "temere"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "ansia",
+     "affanno",
+     "tormento",
+     "paura"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "serenità",
+     "sollievo",
+     "calma"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "angosciare",
+     "angoscioso",
+     "angusto"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "anima",
+  "sig": [
+   [
+    "Parti della persona",
+    [
+     "corpo",
+     "mente",
+     "cuore",
+     "spirito"
+    ]
+   ],
+   [
+    "Dove si parla",
+    [
+     "religione",
+     "filosofia",
+     "poesia"
+    ]
+   ],
+   [
+    "In senso figurato",
+    [
+     "anima della festa",
+     "anima gemella"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "spirito",
+     "psiche",
+     "interiorità"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "corpo",
+     "materia"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "animo",
+     "animare",
+     "animato",
+     "animale"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "animale",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "mammifero",
+     "uccello",
+     "pesce",
+     "rettile",
+     "insetto"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "bosco",
+     "savana",
+     "mare",
+     "fattoria",
+     "zoo"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "veterinario",
+     "allevatore",
+     "zoologo",
+     "guardiano"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "allevare",
+     "nutrire",
+     "accarezzare",
+     "proteggere"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Significato meno ampio",
+    [
+     "cane",
+     "gatto",
+     "lupo",
+     "rondine",
+     "bradipo"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "animalista",
+     "animalesco",
+     "anima"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "anno",
+  "sig": [
+   [
+    "Parti",
+    [
+     "mese",
+     "settimana",
+     "stagione",
+     "giorno"
+    ]
+   ],
+   [
+    "Tipi",
+    [
+     "anno scolastico",
+     "bisestile",
+     "solare",
+     "nuovo"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "calendario",
+     "agenda",
+     "diario",
+     "orologio"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "compiere",
+     "festeggiare",
+     "iniziare",
+     "finire"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "annata"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "annuale",
+     "anniversario",
+     "annuario",
+     "capodanno"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "annuncio",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "pubblicitario",
+     "di lavoro",
+     "ufficiale",
+     "sui social"
+    ]
+   ],
+   [
+    "Dove",
+    [
+     "giornale",
+     "radio",
+     "stazione",
+     "bacheca",
+     "sito"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "annunciare",
+     "comunicare",
+     "pubblicare",
+     "leggere"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "avviso",
+     "comunicazione",
+     "notizia"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "annunciare",
+     "annunciatore",
+     "nunzio"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "antico",
+  "sig": [
+   [
+    "Cose",
+    [
+     "tempio",
+     "statua",
+     "castello",
+     "moneta",
+     "manoscritto"
+    ]
+   ],
+   [
+    "Epoche",
+    [
+     "preistoria",
+     "età antica",
+     "Medioevo"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "Greci",
+     "Romani",
+     "Egizi",
+     "archeologo"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "vecchio",
+     "remoto",
+     "arcaico"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "moderno",
+     "nuovo",
+     "recente"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "antichità",
+     "anticaglia",
+     "antiquario"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "anziano",
+  "sig": [
+   [
+    "Chi",
+    [
+     "nonno",
+     "nonna",
+     "pensionato",
+     "saggio"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "casa",
+     "parco",
+     "panchina",
+     "centro anziani"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "saggio",
+     "esperto",
+     "fragile",
+     "sereno"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "vecchio",
+     "attempato",
+     "maturo"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "giovane",
+     "ragazzo",
+     "bambino"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "anzianità",
+     "avanti"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "apparire",
+  "sig": [
+   [
+    "Chi",
+    [
+     "fantasma",
+     "attore",
+     "stella",
+     "arcobaleno",
+     "sole"
+    ]
+   ],
+   [
+    "Dove",
+    [
+     "palco",
+     "schermo",
+     "cielo",
+     "sogno"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "comparire",
+     "mostrarsi",
+     "spuntare",
+     "sembrare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "comparire",
+     "manifestarsi"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "sparire",
+     "scomparire",
+     "nascondersi"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "apparizione",
+     "apparenza",
+     "apparente"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "architettura",
+  "sig": [
+   [
+    "Opere",
+    [
+     "casa",
+     "ponte",
+     "chiesa",
+     "grattacielo",
+     "castello"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "architetto",
+     "ingegnere",
+     "muratore",
+     "geometra"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "progetto",
+     "disegno",
+     "plastico",
+     "squadra"
+    ]
+   ],
+   [
+    "Stili",
+    [
+     "romanico",
+     "gotico",
+     "barocco",
+     "moderno"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Significato più ampio",
+    [
+     "arte"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "architetto",
+     "architettonico"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "arte",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "pittura",
+     "scultura",
+     "musica",
+     "danza",
+     "teatro",
+     "cinema"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "artista",
+     "pittore",
+     "scultore",
+     "musicista"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "museo",
+     "galleria",
+     "atelier",
+     "teatro"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "creare",
+     "dipingere",
+     "scolpire",
+     "ammirare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "creatività",
+     "abilità",
+     "tecnica"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "artista",
+     "artistico",
+     "artigiano",
+     "artefatto"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "artigianato",
+  "sig": [
+   [
+    "Persone",
+    [
+     "falegname",
+     "ceramista",
+     "sarto",
+     "orafo",
+     "fabbro"
+    ]
+   ],
+   [
+    "Materiali",
+    [
+     "legno",
+     "ferro",
+     "ceramica",
+     "stoffa",
+     "vetro"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "bottega",
+     "laboratorio",
+     "mercatino"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "creare",
+     "intagliare",
+     "cucire",
+     "modellare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Contrari",
+    [
+     "industria",
+     "produzione di massa"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "artigiano",
+     "artigianale",
+     "arte"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "atletico",
+  "sig": [
+   [
+    "Sport",
+    [
+     "corsa",
+     "salto",
+     "lancio",
+     "calcio",
+     "nuoto"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "atleta",
+     "allenatore",
+     "campione"
+    ]
+   ],
+   [
+    "Qualità vicine",
+    [
+     "forte",
+     "agile",
+     "veloce",
+     "muscoloso"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "sportivo",
+     "prestante"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "goffo",
+     "debole",
+     "gracile"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "atleta",
+     "atletica"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "atteggiamento",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "positivo",
+     "aggressivo",
+     "gentile",
+     "timido",
+     "sicuro"
+    ]
+   ],
+   [
+    "Segnali",
+    [
+     "sguardo",
+     "postura",
+     "sorriso",
+     "tono di voce"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "comportarsi",
+     "assumere",
+     "cambiare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "comportamento",
+     "modo di fare",
+     "posa"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "atteggiarsi",
+     "gesto"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "attrezzo",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "martello",
+     "cacciavite",
+     "pinza",
+     "sega",
+     "zappa"
+    ]
+   ],
+   [
+    "Sport",
+    [
+     "palla",
+     "racchetta",
+     "pesi",
+     "corda",
+     "sbarra"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "officina",
+     "palestra",
+     "cantina",
+     "orto"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "strumento",
+     "utensile",
+     "arnese"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "attrezzare",
+     "attrezzatura",
+     "attrezzato"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "bagnare",
+  "sig": [
+   [
+    "Con che cosa",
+    [
+     "acqua",
+     "pioggia",
+     "mare",
+     "lacrime",
+     "sudore"
+    ]
+   ],
+   [
+    "Cosa",
+    [
+     "piante",
+     "capelli",
+     "vestiti",
+     "pavimento"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "innaffiare",
+     "inzuppare",
+     "spruzzare",
+     "lavare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "inumidire",
+     "irrigare",
+     "inzuppare"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "asciugare",
+     "seccare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "bagno",
+     "bagnato",
+     "bagnino"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "benessere",
+  "sig": [
+   [
+    "Fonti",
+    [
+     "sport",
+     "riposo",
+     "amicizia",
+     "natura",
+     "alimentazione"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "casa",
+     "parco",
+     "spiaggia",
+     "piscina"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "stare bene",
+     "rilassarsi",
+     "curarsi",
+     "chillare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "salute",
+     "agio",
+     "serenità"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "malessere",
+     "disagio",
+     "sofferenza"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "bene",
+     "benestante"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "borsa",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "zaino",
+     "borsetta",
+     "valigia",
+     "sacchetto",
+     "cartella"
+    ]
+   ],
+   [
+    "Cosa contiene",
+    [
+     "astuccio",
+     "portafoglio",
+     "chiavi",
+     "telefono"
+    ]
+   ],
+   [
+    "Altri significati",
+    [
+     "borsa di studio",
+     "borsa valori"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "sacca",
+     "cartella",
+     "zaino"
+    ]
+   ],
+   [
+    "Alterati",
+    [
+     "borsetta",
+     "borsone",
+     "borsellino"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "borseggiatore",
+     "rimborsare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "buono",
+  "sig": [
+   [
+    "Cose",
+    [
+     "cibo",
+     "profumo",
+     "consiglio",
+     "voto",
+     "libro"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "amico",
+     "maestro",
+     "nonno",
+     "eroe"
+    ]
+   ],
+   [
+    "Qualità vicine",
+    [
+     "gentile",
+     "generoso",
+     "onesto",
+     "bravo"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "gustoso",
+     "gentile",
+     "bravo"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "cattivo",
+     "malvagio",
+     "disgustoso"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "bontà",
+     "buonissimo",
+     "buonumore"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "burocrazia",
+  "sig": [
+   [
+    "Luoghi",
+    [
+     "ufficio",
+     "comune",
+     "sportello",
+     "ministero"
+    ]
+   ],
+   [
+    "Cose",
+    [
+     "modulo",
+     "timbro",
+     "certificato",
+     "pratica",
+     "fila"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "impiegato",
+     "funzionario",
+     "cittadino"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "amministrazione",
+     "scartoffie"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "burocrate",
+     "burocratico"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "calcolare",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "somma",
+     "area",
+     "distanza",
+     "prezzo",
+     "tempo"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "calcolatrice",
+     "computer",
+     "abaco",
+     "righello"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "contare",
+     "misurare",
+     "stimare",
+     "prevedere"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "computare",
+     "contare",
+     "valutare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "calcolo",
+     "calcolatrice",
+     "calcolatore"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "calzatura",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "scarpa",
+     "stivale",
+     "sandalo",
+     "ciabatta",
+     "scarpa da ginnastica"
+    ]
+   ],
+   [
+    "Parti",
+    [
+     "suola",
+     "tacco",
+     "lacci",
+     "punta"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "calzolaio",
+     "commesso"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "scarpa"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "calzare",
+     "calzino",
+     "calzolaio"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "cane",
+  "sig": [
+   [
+    "Razze",
+    [
+     "labrador",
+     "pastore tedesco",
+     "barboncino",
+     "bassotto"
+    ]
+   ],
+   [
+    "Oggetti",
+    [
+     "guinzaglio",
+     "cuccia",
+     "ciotola",
+     "collare",
+     "osso"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "abbaiare",
+     "scodinzolare",
+     "ringhiare",
+     "annusare"
+    ]
+   ],
+   [
+    "Qualità",
+    [
+     "fedele",
+     "giocherellone",
+     "affettuoso",
+     "coraggioso"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Significato più ampio",
+    [
+     "animale",
+     "mammifero"
+    ]
+   ],
+   [
+    "Alterati",
+    [
+     "cagnolino",
+     "cagnone"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "canile",
+     "canino",
+     "cagnara"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "cardinale",
+  "sig": [
+   [
+    "Numeri",
+    [
+     "uno",
+     "due",
+     "cento",
+     "mille"
+    ]
+   ],
+   [
+    "Punti cardinali",
+    [
+     "nord",
+     "sud",
+     "est",
+     "ovest"
+    ]
+   ],
+   [
+    "Nella Chiesa",
+    [
+     "papa",
+     "vescovo",
+     "conclave"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Contrari (numeri)",
+    [
+     "ordinale"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "cardine"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "ciclo",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "dell'acqua",
+     "della vita",
+     "delle stagioni",
+     "lunare"
+    ]
+   ],
+   [
+    "Esempi",
+    [
+     "primavera",
+     "estate",
+     "autunno",
+     "inverno"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "ripetersi",
+     "ricominciare",
+     "concludersi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "giro",
+     "periodo",
+     "serie"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "ciclico",
+     "bicicletta",
+     "riciclare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "cimitero",
+  "sig": [
+   [
+    "Cose",
+    [
+     "tomba",
+     "lapide",
+     "fiore",
+     "cipresso",
+     "croce"
+    ]
+   ],
+   [
+    "Momenti",
+    [
+     "ricordo",
+     "preghiera",
+     "commemorazione"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "ricordare",
+     "visitare",
+     "pregare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "camposanto",
+     "necropoli"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "cimiteriale"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "clima",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "mediterraneo",
+     "alpino",
+     "tropicale",
+     "desertico",
+     "polare"
+    ]
+   ],
+   [
+    "Elementi",
+    [
+     "temperatura",
+     "pioggia",
+     "vento",
+     "umidità"
+    ]
+   ],
+   [
+    "Problemi",
+    [
+     "riscaldamento globale",
+     "siccità",
+     "alluvione"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "tempo atmosferico",
+     "atmosfera"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "climatico",
+     "climatizzatore"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "coltivare",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "grano",
+     "fiori",
+     "ortaggi",
+     "vite",
+     "olivo"
+    ]
+   ],
+   [
+    "Chi",
+    [
+     "contadino",
+     "giardiniere",
+     "agricoltore"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "zappa",
+     "vanga",
+     "annaffiatoio",
+     "trattore"
+    ]
+   ],
+   [
+    "In senso figurato",
+    [
+     "amicizia",
+     "passione",
+     "talento"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "curare",
+     "lavorare la terra"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "coltivazione",
+     "coltivatore",
+     "cultura"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "commedia",
+  "sig": [
+   [
+    "Persone",
+    [
+     "attore",
+     "regista",
+     "pubblico",
+     "autore"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "teatro",
+     "palcoscenico",
+     "sipario"
+    ]
+   ],
+   [
+    "Elementi",
+    [
+     "battuta",
+     "equivoco",
+     "finale lieto",
+     "risata"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Contrari",
+    [
+     "tragedia",
+     "dramma"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "commediante",
+     "commediografo"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "commercio",
+  "sig": [
+   [
+    "Luoghi",
+    [
+     "negozio",
+     "mercato",
+     "porto",
+     "centro commerciale"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "commerciante",
+     "cliente",
+     "venditore",
+     "compratore"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "comprare",
+     "vendere",
+     "scambiare",
+     "esportare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "compravendita",
+     "scambio",
+     "traffico"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "commerciante",
+     "commerciale",
+     "commerciare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "consultare",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "dizionario",
+     "atlante",
+     "enciclopedia",
+     "mappa",
+     "sito"
+    ]
+   ],
+   [
+    "Chi",
+    [
+     "medico",
+     "avvocato",
+     "esperto",
+     "professore"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "chiedere",
+     "cercare",
+     "informarsi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "interpellare",
+     "esaminare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "consulto",
+     "consulente",
+     "consultazione"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "contadino",
+  "sig": [
+   [
+    "Luoghi",
+    [
+     "campo",
+     "fattoria",
+     "stalla",
+     "orto"
+    ]
+   ],
+   [
+    "Attrezzi",
+    [
+     "zappa",
+     "falce",
+     "trattore",
+     "aratro"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "coltivare",
+     "seminare",
+     "raccogliere",
+     "allevare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "agricoltore",
+     "coltivatore"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "contado",
+     "contadinesco"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "contare",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "numeri",
+     "soldi",
+     "giorni",
+     "voti",
+     "pecore"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "dita",
+     "abaco",
+     "calcolatrice"
+    ]
+   ],
+   [
+    "Altro significato",
+    [
+     "avere importanza",
+     "fidarsi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "numerare",
+     "calcolare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "conto",
+     "contabile",
+     "racconto"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "conto",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "conto in banca",
+     "conto del ristorante",
+     "calcolo"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "cameriere",
+     "cassiere",
+     "banchiere"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "pagare",
+     "chiedere",
+     "saldare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "calcolo",
+     "fattura",
+     "scontrino"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "contare",
+     "contabilità",
+     "sconto"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "contratto",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "di lavoro",
+     "di affitto",
+     "di vendita"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "firmatario",
+     "notaio",
+     "avvocato"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "firmare",
+     "rispettare",
+     "rompere"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "accordo",
+     "patto",
+     "convenzione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "contrarre",
+     "contrattare",
+     "contrattuale"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "cosmetico",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "crema",
+     "rossetto",
+     "profumo",
+     "smalto",
+     "mascara"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "profumeria",
+     "bagno",
+     "farmacia"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "truccarsi",
+     "idratare",
+     "curarsi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "prodotto di bellezza"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "cosmesi",
+     "cosmetologia"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "cultura",
+  "sig": [
+   [
+    "Ambiti",
+    [
+     "letteratura",
+     "arte",
+     "scienza",
+     "musica",
+     "tradizioni"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "biblioteca",
+     "museo",
+     "teatro",
+     "scuola"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "leggere",
+     "imparare",
+     "conoscere",
+     "condividere"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "sapere",
+     "istruzione",
+     "civiltà"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "ignoranza"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "culturale",
+     "colto",
+     "coltivare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "dare",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "regalo",
+     "consiglio",
+     "voto",
+     "aiuto",
+     "mano"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "donare",
+     "offrire",
+     "prestare",
+     "consegnare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "donare",
+     "regalare",
+     "porgere"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "prendere",
+     "ricevere",
+     "togliere"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "dono",
+     "data",
+     "dote"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "decisione",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "difficile",
+     "importante",
+     "improvvisa",
+     "condivisa"
+    ]
+   ],
+   [
+    "Momenti",
+    [
+     "scelta",
+     "votazione",
+     "riunione",
+     "bivio"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "decidere",
+     "scegliere",
+     "rinviare",
+     "cambiare idea"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "scelta",
+     "risoluzione",
+     "deliberazione"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "indecisione",
+     "dubbio",
+     "esitazione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "decidere",
+     "deciso",
+     "indeciso"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "discorso",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "pubblico",
+     "diretto",
+     "indiretto",
+     "di benvenuto"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "oratore",
+     "pubblico",
+     "ascoltatore"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "parlare",
+     "spiegare",
+     "ascoltare",
+     "interrompere"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "intervento",
+     "conversazione",
+     "orazione"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "silenzio"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "discorrere",
+     "discorsivo"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "dispiacere",
+  "sig": [
+   [
+    "Cause",
+    [
+     "sconfitta",
+     "litigio",
+     "addio",
+     "delusione"
+    ]
+   ],
+   [
+    "Segnali",
+    [
+     "lacrima",
+     "silenzio",
+     "viso triste"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "consolare",
+     "scusarsi",
+     "rimediare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "tristezza",
+     "rammarico",
+     "dolore"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "piacere",
+     "gioia",
+     "contentezza"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "piacere",
+     "dispiaciuto"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "disprezzo",
+  "sig": [
+   [
+    "Segnali",
+    [
+     "sguardo dall'alto",
+     "insulto",
+     "risata cattiva"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "disprezzare",
+     "umiliare",
+     "ignorare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "sdegno",
+     "disdegno",
+     "sufficienza"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "stima",
+     "rispetto",
+     "ammirazione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "disprezzare",
+     "prezzo",
+     "sprezzante"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "distruggere",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "casa",
+     "città",
+     "foresta",
+     "oggetto",
+     "amicizia"
+    ]
+   ],
+   [
+    "Cause",
+    [
+     "guerra",
+     "terremoto",
+     "incendio",
+     "rabbia"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "abbattere",
+     "rompere",
+     "demolire",
+     "devastare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "demolire",
+     "annientare",
+     "rovinare"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "costruire",
+     "creare",
+     "ricostruire"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "distruzione",
+     "distruttivo"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "dittatura",
+  "sig": [
+   [
+    "Persone",
+    [
+     "dittatore",
+     "oppositore",
+     "esule",
+     "cittadino"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "censura",
+     "polizia segreta",
+     "propaganda"
+    ]
+   ],
+   [
+    "Contrario di",
+    [
+     "democrazia",
+     "libertà",
+     "Costituzione"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "tirannia",
+     "regime",
+     "autoritarismo"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "democrazia",
+     "libertà"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "dittatore",
+     "dittatoriale",
+     "dettare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "donna",
+  "sig": [
+   [
+    "Ruoli",
+    [
+     "madre",
+     "sorella",
+     "nonna",
+     "amica",
+     "professoressa",
+     "scienziata"
+    ]
+   ],
+   [
+    "Diritti",
+    [
+     "voto",
+     "lavoro",
+     "parità",
+     "uguaglianza"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "signora",
+     "femmina"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "uomo"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "donnina",
+     "madonna"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "dramma",
+  "sig": [
+   [
+    "Persone",
+    [
+     "attore",
+     "autore",
+     "regista",
+     "protagonista"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "teatro",
+     "palcoscenico",
+     "cinema"
+    ]
+   ],
+   [
+    "In senso figurato",
+    [
+     "dramma familiare",
+     "fare un dramma"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "tragedia",
+     "opera teatrale"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "commedia"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "drammatico",
+     "drammaturgo",
+     "sdrammatizzare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "drammatico",
+  "sig": [
+   [
+    "Cose",
+    [
+     "film",
+     "momento",
+     "situazione",
+     "finale"
+    ]
+   ],
+   [
+    "Qualità vicine",
+    [
+     "tragico",
+     "grave",
+     "commovente",
+     "teatrale"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "tragico",
+     "grave",
+     "emozionante"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "comico",
+     "sereno",
+     "leggero"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "dramma",
+     "drammaticità"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "dubbio",
+  "sig": [
+   [
+    "Momenti",
+    [
+     "scelta",
+     "verifica",
+     "bivio",
+     "decisione"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "dubitare",
+     "esitare",
+     "chiedere",
+     "verificare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "incertezza",
+     "perplessità",
+     "esitazione"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "certezza",
+     "sicurezza",
+     "convinzione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "dubitare",
+     "dubbioso",
+     "indubbio"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "ecologia",
+  "sig": [
+   [
+    "Temi",
+    [
+     "ambiente",
+     "riciclo",
+     "energia pulita",
+     "biodiversità"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "ecologista",
+     "scienziato",
+     "volontario"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "riciclare",
+     "risparmiare",
+     "proteggere",
+     "piantare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "ambientalismo"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "ecologico",
+     "ecologista",
+     "ecosistema"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "economia",
+  "sig": [
+   [
+    "Elementi",
+    [
+     "denaro",
+     "lavoro",
+     "commercio",
+     "banca",
+     "tasse"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "economista",
+     "imprenditore",
+     "lavoratore",
+     "consumatore"
+    ]
+   ],
+   [
+    "Settori",
+    [
+     "agricoltura",
+     "industria",
+     "servizi",
+     "artigianato"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "risparmio",
+     "gestione"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "spreco"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "economico",
+     "economista",
+     "economizzare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "epoca",
+  "sig": [
+   [
+    "Esempi",
+    [
+     "preistoria",
+     "età antica",
+     "Medioevo",
+     "Rinascimento",
+     "età moderna"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "linea del tempo",
+     "calendario",
+     "storia"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "età",
+     "periodo",
+     "era",
+     "tempo"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "epocale"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "esperto",
+  "sig": [
+   [
+    "Chi",
+    [
+     "scienziato",
+     "medico",
+     "artigiano",
+     "campione",
+     "maestro"
+    ]
+   ],
+   [
+    "Qualità vicine",
+    [
+     "abile",
+     "competente",
+     "preparato"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "competente",
+     "pratico",
+     "specialista",
+     "skillato"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "inesperto",
+     "principiante",
+     "dilettante"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "esperienza",
+     "sperimentare",
+     "esperimento"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "fantascienza",
+  "sig": [
+   [
+    "Elementi",
+    [
+     "astronave",
+     "robot",
+     "alieno",
+     "galassia",
+     "viaggio nel tempo"
+    ]
+   ],
+   [
+    "Dove",
+    [
+     "romanzo",
+     "film",
+     "fumetto",
+     "videogioco"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "scrittore",
+     "astronauta",
+     "scienziato"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Significato più ampio",
+    [
+     "fantasia",
+     "narrativa"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "fantascientifico"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "fare",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "compiti",
+     "sport",
+     "merenda",
+     "regalo",
+     "amicizia"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "agire",
+     "creare",
+     "costruire",
+     "produrre"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "compiere",
+     "eseguire",
+     "realizzare"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "disfare",
+     "distruggere"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "fatto",
+     "fattore",
+     "disfare",
+     "rifare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "favola",
+  "sig": [
+   [
+    "Personaggi",
+    [
+     "lupo",
+     "volpe",
+     "principessa",
+     "drago",
+     "strega"
+    ]
+   ],
+   [
+    "Elementi",
+    [
+     "morale",
+     "magia",
+     "inizio",
+     "finale"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "narratore",
+     "nonna",
+     "autore"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "fiaba",
+     "racconto",
+     "leggenda"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "favoloso",
+     "favolista"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "fretta",
+  "sig": [
+   [
+    "Momenti",
+    [
+     "mattina",
+     "ritardo",
+     "verifica",
+     "partenza"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "correre",
+     "sbrigarsi",
+     "affrettarsi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "premura",
+     "urgenza",
+     "rapidità"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "calma",
+     "lentezza",
+     "pazienza"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "frettoloso",
+     "affrettarsi"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "gente",
+  "sig": [
+   [
+    "Dove",
+    [
+     "piazza",
+     "stadio",
+     "festa",
+     "strada",
+     "stazione"
+    ]
+   ],
+   [
+    "Tipi",
+    [
+     "folla",
+     "popolo",
+     "comunità",
+     "pubblico"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "persone",
+     "popolo",
+     "folla"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "gentile",
+     "genitore",
+     "generazione"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "giardino",
+  "sig": [
+   [
+    "Elementi",
+    [
+     "prato",
+     "fiore",
+     "albero",
+     "siepe",
+     "panchina"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "giardiniere",
+     "bambino",
+     "nonno"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "annaffiare",
+     "potare",
+     "seminare",
+     "giocare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "parco",
+     "orto",
+     "aiuola"
+    ]
+   ],
+   [
+    "Alterati",
+    [
+     "giardinetto"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "giardiniere",
+     "giardinaggio"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "gioiello",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "anello",
+     "collana",
+     "bracciale",
+     "orecchino",
+     "spilla"
+    ]
+   ],
+   [
+    "Materiali",
+    [
+     "oro",
+     "argento",
+     "diamante",
+     "gemma",
+     "perla"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "orefice",
+     "gioielliere"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "gemma",
+     "monile",
+     "tesoro"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "gioia",
+     "gioielleria"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "giusto",
+  "sig": [
+   [
+    "Cose",
+    [
+     "risposta",
+     "prezzo",
+     "decisione",
+     "legge"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "giudice",
+     "arbitro",
+     "eroe"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "equo",
+     "corretto",
+     "esatto"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "ingiusto",
+     "sbagliato"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "giustizia",
+     "giustificare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "gloria",
+  "sig": [
+   [
+    "Chi",
+    [
+     "campione",
+     "eroe",
+     "artista",
+     "condottiero"
+    ]
+   ],
+   [
+    "Cose",
+    [
+     "medaglia",
+     "trofeo",
+     "applauso",
+     "monumento"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "fama",
+     "onore",
+     "celebrità"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "anonimato",
+     "vergogna",
+     "disonore"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "glorioso",
+     "gloriarsi"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "governare",
+  "sig": [
+   [
+    "Chi",
+    [
+     "governo",
+     "sindaco",
+     "re",
+     "presidente"
+    ]
+   ],
+   [
+    "Cosa",
+    [
+     "Stato",
+     "città",
+     "nave",
+     "squadra"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "guidare",
+     "dirigere",
+     "amministrare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "reggere",
+     "dirigere",
+     "guidare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "governo",
+     "governatore"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "guasto",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "auto",
+     "computer",
+     "telefono",
+     "ascensore"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "meccanico",
+     "tecnico",
+     "elettricista"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "riparare",
+     "aggiustare",
+     "rompersi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "rotto",
+     "danneggiato",
+     "avaria"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "funzionante",
+     "intatto"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "guastare",
+     "guastatore"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "imitare",
+  "sig": [
+   [
+    "Chi",
+    [
+     "attore",
+     "scimmia",
+     "pappagallo",
+     "comico"
+    ]
+   ],
+   [
+    "Cosa",
+    [
+     "voce",
+     "gesto",
+     "stile",
+     "accento"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "copiare",
+     "riprodurre",
+     "emulare"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "inventare",
+     "creare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "imitazione",
+     "imitatore",
+     "inimitabile"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "importante",
+  "sig": [
+   [
+    "Cose",
+    [
+     "decisione",
+     "notizia",
+     "esame",
+     "incontro",
+     "amicizia"
+    ]
+   ],
+   [
+    "Qualità vicine",
+    [
+     "essenziale",
+     "fondamentale",
+     "grave"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "rilevante",
+     "fondamentale",
+     "essenziale"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "insignificante",
+     "banale",
+     "secondario"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "importanza",
+     "importare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "incontro",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "casuale",
+     "ufficiale",
+     "sportivo",
+     "tra amici"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "piazza",
+     "scuola",
+     "stazione",
+     "panchina"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "incontrarsi",
+     "salutarsi",
+     "conoscersi",
+     "ritrovarsi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "appuntamento",
+     "riunione",
+     "ritrovo"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "separazione",
+     "addio"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "incontrare",
+     "contro"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "individuo",
+  "sig": [
+   [
+    "Contesti",
+    [
+     "gruppo",
+     "società",
+     "comunità",
+     "squadra"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "persona",
+     "singolo",
+     "soggetto"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "collettività",
+     "gruppo"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "individuale",
+     "individualità"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "lirica",
+  "sig": [
+   [
+    "Elementi",
+    [
+     "poesia",
+     "verso",
+     "strofa",
+     "rima"
+    ]
+   ],
+   [
+    "Musica",
+    [
+     "opera",
+     "aria",
+     "tenore",
+     "soprano"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "poeta",
+     "cantante lirico"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "poesia",
+     "opera"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "lirico",
+     "lira"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "malattia",
+  "sig": [
+   [
+    "Persone",
+    [
+     "medico",
+     "infermiere",
+     "paziente"
+    ]
+   ],
+   [
+    "Luoghi",
+    [
+     "ospedale",
+     "ambulatorio",
+     "farmacia"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "curare",
+     "guarire",
+     "ammalarsi"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "malanno",
+     "infermità"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "salute",
+     "guarigione",
+     "benessere"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "malato",
+     "ammalarsi"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "mangiare",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "pasta",
+     "pizza",
+     "merenda",
+     "frutta",
+     "gelato"
+    ]
+   ],
+   [
+    "Momenti",
+    [
+     "colazione",
+     "pranzo",
+     "cena",
+     "merenda"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "assaggiare",
+     "divorare",
+     "gustare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "cibarsi",
+     "nutrirsi"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "digiunare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "mangiata",
+     "mangione"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "memoria",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "a breve termine",
+     "a lungo termine",
+     "del computer"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "ricordare",
+     "dimenticare",
+     "imparare a memoria"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "ricordo",
+     "mente"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "oblio",
+     "dimenticanza"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "memorizzare",
+     "memorabile",
+     "memoriale"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "mobile",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "armadio",
+     "tavolo",
+     "sedia",
+     "letto",
+     "scaffale"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "falegname",
+     "arredatore"
+    ]
+   ],
+   [
+    "Come aggettivo",
+    [
+     "che si muove",
+     "telefono mobile"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "arredo",
+     "mobilio"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "fisso",
+     "immobile"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "mobilia",
+     "mobilità"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "morte",
+  "sig": [
+   [
+    "Momenti",
+    [
+     "lutto",
+     "funerale",
+     "ricordo",
+     "addio"
+    ]
+   ],
+   [
+    "Simboli",
+    [
+     "cimitero",
+     "fiori",
+     "candela"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "morire",
+     "ricordare",
+     "piangere"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "decesso",
+     "scomparsa"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "vita",
+     "nascita"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "morire",
+     "mortale",
+     "immortale"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "mostro",
+  "sig": [
+   [
+    "Esempi",
+    [
+     "drago",
+     "orco",
+     "mostro marino",
+     "alieno",
+     "fantasma"
+    ]
+   ],
+   [
+    "Dove",
+    [
+     "favola",
+     "film",
+     "incubo",
+     "videogioco"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "creatura",
+     "belva",
+     "orco"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "mostruoso",
+     "mostrare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "museo",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "d'arte",
+     "di storia",
+     "di scienza",
+     "archeologico"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "visitatore",
+     "guida",
+     "custode",
+     "curatore"
+    ]
+   ],
+   [
+    "Cose",
+    [
+     "quadro",
+     "statua",
+     "reperto",
+     "vetrina"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "galleria",
+     "esposizione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "museale"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "nobile",
+  "sig": [
+   [
+    "Persone",
+    [
+     "re",
+     "conte",
+     "marchese",
+     "cavaliere"
+    ]
+   ],
+   [
+    "In senso morale",
+    [
+     "gesto",
+     "animo",
+     "cuore"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "aristocratico",
+     "generoso"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "plebeo",
+     "meschino"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "nobiltà",
+     "nobilitare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "onestà",
+  "sig": [
+   [
+    "Esempi",
+    [
+     "dire la verità",
+     "restituire",
+     "ammettere un errore"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "sincerità",
+     "lealtà",
+     "correttezza"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "disonestà",
+     "falsità",
+     "inganno"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "onesto",
+     "onestamente"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "onore",
+  "sig": [
+   [
+    "Cose",
+    [
+     "medaglia",
+     "parola d'onore",
+     "cerimonia"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "dignità",
+     "rispetto",
+     "gloria"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "disonore",
+     "vergogna"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "onorare",
+     "onorevole"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "operaio",
+  "sig": [
+   [
+    "Luoghi",
+    [
+     "fabbrica",
+     "cantiere",
+     "officina"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "macchina",
+     "attrezzo",
+     "casco",
+     "tuta"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "lavorare",
+     "costruire",
+     "montare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "lavoratore",
+     "manovale"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "opera",
+     "operare",
+     "operosità"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "organismo",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "animale",
+     "pianta",
+     "batterio",
+     "fungo"
+    ]
+   ],
+   [
+    "Parti",
+    [
+     "cellula",
+     "organo",
+     "tessuto"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "essere vivente"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "organo",
+     "organico",
+     "organizzare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "organizzare",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "festa",
+     "gita",
+     "torneo",
+     "agenda",
+     "viaggio"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "agenda",
+     "elenco",
+     "calendario"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "preparare",
+     "pianificare",
+     "coordinare"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "improvvisare",
+     "disorganizzare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "organizzazione",
+     "organizzatore"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "origine",
+  "sig": [
+   [
+    "Esempi",
+    [
+     "origine di un fiume",
+     "di una parola",
+     "della vita"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "etimologia",
+     "albero genealogico",
+     "dizionario"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "inizio",
+     "provenienza",
+     "radice"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "fine",
+     "conclusione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "originale",
+     "originario",
+     "originare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "paesaggio",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "montano",
+     "marino",
+     "collinare",
+     "urbano"
+    ]
+   ],
+   [
+    "Elementi",
+    [
+     "montagna",
+     "fiume",
+     "bosco",
+     "casa",
+     "cielo"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "panorama",
+     "veduta",
+     "scenario"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "paese",
+     "paesaggista"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "paese",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "villaggio",
+     "borgo",
+     "città",
+     "Stato",
+     "nazione"
+    ]
+   ],
+   [
+    "Elementi",
+    [
+     "piazza",
+     "chiesa",
+     "scuola",
+     "municipio"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "borgo",
+     "località",
+     "nazione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "paesano",
+     "compaesano",
+     "paesaggio"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "polizia",
+  "sig": [
+   [
+    "Persone",
+    [
+     "agente",
+     "commissario",
+     "ispettore"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "auto",
+     "sirena",
+     "distintivo",
+     "divisa"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "proteggere",
+     "indagare",
+     "arrestare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "forze dell'ordine"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "poliziotto",
+     "poliziesco"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "porto",
+  "sig": [
+   [
+    "Elementi",
+    [
+     "molo",
+     "banchina",
+     "faro",
+     "gru"
+    ]
+   ],
+   [
+    "Mezzi",
+    [
+     "nave",
+     "traghetto",
+     "barca",
+     "peschereccio"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "marinaio",
+     "pescatore",
+     "capitano"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "approdo",
+     "scalo",
+     "darsena"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "portuale",
+     "porta"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "posta",
+  "sig": [
+   [
+    "Oggetti",
+    [
+     "lettera",
+     "cartolina",
+     "pacco",
+     "francobollo"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "postino",
+     "mittente",
+     "destinatario"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "spedire",
+     "ricevere",
+     "imbucare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "corrispondenza"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "postino",
+     "postale",
+     "spedire"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "primavera",
+  "sig": [
+   [
+    "Elementi",
+    [
+     "fiore",
+     "gemma",
+     "rondine",
+     "pioggia",
+     "sole"
+    ]
+   ],
+   [
+    "Mesi",
+    [
+     "marzo",
+     "aprile",
+     "maggio"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "sbocciare",
+     "rinascere",
+     "fiorire"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "stagione dei fiori"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "primaverile",
+     "primo"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "prospettiva",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "frontale",
+     "centrale",
+     "a volo d'uccello"
+    ]
+   ],
+   [
+    "Ambiti",
+    [
+     "disegno",
+     "arte",
+     "futuro",
+     "punto di vista"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "punto di vista",
+     "visione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "prospetto",
+     "spettatore"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "razza",
+  "sig": [
+   [
+    "Ambiti",
+    [
+     "cani",
+     "cavalli",
+     "gatti",
+     "bovini (in zoologia)"
+    ]
+   ],
+   [
+    "Contro le discriminazioni",
+    [
+     "uguaglianza",
+     "diritti",
+     "Costituzione"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi (per gli animali)",
+    [
+     "varietà",
+     "ceppo"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "razzismo",
+     "razzista",
+     "antirazzismo"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "realtà",
+  "sig": [
+   [
+    "Opposti",
+    [
+     "sogno",
+     "fantasia",
+     "finzione"
+    ]
+   ],
+   [
+    "Tipi",
+    [
+     "virtuale",
+     "aumentata",
+     "quotidiana"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "verità",
+     "concretezza"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "immaginazione",
+     "illusione",
+     "finzione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "reale",
+     "realismo",
+     "realizzare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "religioso",
+  "sig": [
+   [
+    "Luoghi",
+    [
+     "chiesa",
+     "moschea",
+     "sinagoga",
+     "tempio"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "sacerdote",
+     "monaco",
+     "suora",
+     "imam",
+     "rabbino"
+    ]
+   ],
+   [
+    "Momenti",
+    [
+     "preghiera",
+     "festa",
+     "rito",
+     "pellegrinaggio"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "devoto",
+     "sacro",
+     "spirituale"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "laico"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "religione",
+     "religiosità"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "romanzo",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "d'avventura",
+     "giallo",
+     "storico",
+     "fantasy",
+     "di formazione"
+    ]
+   ],
+   [
+    "Elementi",
+    [
+     "personaggio",
+     "trama",
+     "capitolo",
+     "finale"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "scrittore",
+     "lettore",
+     "editore"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "racconto lungo",
+     "narrativa"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "romanziere",
+     "romanzesco"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "sacro",
+  "sig": [
+   [
+    "Luoghi",
+    [
+     "tempio",
+     "chiesa",
+     "santuario"
+    ]
+   ],
+   [
+    "Cose",
+    [
+     "libro sacro",
+     "reliquia",
+     "altare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "santo",
+     "divino",
+     "religioso"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "profano"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "sacralità",
+     "consacrare",
+     "sacrificio"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "salutare",
+  "sig": [
+   [
+    "Gesti",
+    [
+     "stretta di mano",
+     "abbraccio",
+     "cenno",
+     "inchino"
+    ]
+   ],
+   [
+    "Formule",
+    [
+     "ciao",
+     "buongiorno",
+     "arrivederci",
+     "buonanotte"
+    ]
+   ],
+   [
+    "Come aggettivo",
+    [
+     "aria salutare",
+     "cibo salutare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "ossequiare",
+     "accogliere"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "saluto",
+     "salute",
+     "salvare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "scacchi",
+  "sig": [
+   [
+    "Pezzi",
+    [
+     "re",
+     "regina",
+     "torre",
+     "alfiere",
+     "cavallo",
+     "pedone"
+    ]
+   ],
+   [
+    "Elementi",
+    [
+     "scacchiera",
+     "mossa",
+     "scacco matto"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "scacchista",
+     "campione",
+     "avversario"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Stessa famiglia",
+    [
+     "scacchiera",
+     "scacchista",
+     "scacco"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "scambio",
+  "sig": [
+   [
+    "Cose",
+    [
+     "figurine",
+     "regali",
+     "idee",
+     "opinioni",
+     "merci"
+    ]
+   ],
+   [
+    "Contesti",
+    [
+     "gemellaggio",
+     "scambio culturale",
+     "commercio"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "baratto",
+     "permuta",
+     "confronto"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "scambiare",
+     "cambio",
+     "cambiamento"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "scheletro",
+  "sig": [
+   [
+    "Parti",
+    [
+     "cranio",
+     "colonna vertebrale",
+     "costole",
+     "femore"
+    ]
+   ],
+   [
+    "Dove",
+    [
+     "corpo",
+     "museo",
+     "aula di scienze"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "ossatura",
+     "struttura"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "scheletrico"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "scopo",
+  "sig": [
+   [
+    "Esempi",
+    [
+     "vincere",
+     "imparare",
+     "aiutare",
+     "viaggiare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "obiettivo",
+     "traguardo",
+     "fine",
+     "meta"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "scopi"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "scuro",
+  "sig": [
+   [
+    "Cose",
+    [
+     "notte",
+     "cielo",
+     "colore",
+     "stanza",
+     "nuvola"
+    ]
+   ],
+   [
+    "Qualità vicine",
+    [
+     "buio",
+     "cupo",
+     "tenebroso"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "oscuro",
+     "tetro"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "chiaro",
+     "luminoso"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "oscurità",
+     "scurire"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "scusa",
+  "sig": [
+   [
+    "Momenti",
+    [
+     "errore",
+     "litigio",
+     "ritardo",
+     "offesa"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "scusarsi",
+     "perdonare",
+     "rimediare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "perdono",
+     "giustificazione",
+     "pretesto"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "scusare",
+     "scusabile"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "sete",
+  "sig": [
+   [
+    "Cause",
+    [
+     "caldo",
+     "corsa",
+     "sport",
+     "sale"
+    ]
+   ],
+   [
+    "Rimedi",
+    [
+     "acqua",
+     "borraccia",
+     "fontana"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "arsura",
+     "desiderio"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "assetato",
+     "dissetarsi"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "significato",
+  "sig": [
+   [
+    "Dove si cerca",
+    [
+     "dizionario",
+     "contesto",
+     "etimologia"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "senso",
+     "valore",
+     "concetto"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "significare",
+     "significativo",
+     "segno"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "simpatico",
+  "sig": [
+   [
+    "Persone",
+    [
+     "amico",
+     "compagno",
+     "professore",
+     "vicino"
+    ]
+   ],
+   [
+    "Qualità vicine",
+    [
+     "allegro",
+     "divertente",
+     "gentile"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "piacevole",
+     "gradevole"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "antipatico",
+     "scontroso"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "simpatia",
+     "antipatia"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "specie",
+  "sig": [
+   [
+    "Esempi",
+    [
+     "specie animali",
+     "vegetali",
+     "protette",
+     "in estinzione"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "tipo",
+     "genere",
+     "categoria"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "speciale",
+     "specifico"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "stato",
+  "sig": [
+   [
+    "Elementi",
+    [
+     "governo",
+     "territorio",
+     "popolo",
+     "confine"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "presidente",
+     "cittadino",
+     "ministro"
+    ]
+   ],
+   [
+    "Altri significati",
+    [
+     "stato d'animo",
+     "stato solido",
+     "liquido",
+     "gassoso"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "nazione",
+     "paese",
+     "condizione"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "statale",
+     "statista"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "stretto",
+  "sig": [
+   [
+    "Cose",
+    [
+     "strada",
+     "vicolo",
+     "porta",
+     "scarpa",
+     "maglia"
+    ]
+   ],
+   [
+    "In geografia",
+    [
+     "stretto di Messina",
+     "di Gibilterra"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "angusto",
+     "stringato"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "largo",
+     "ampio",
+     "vasto"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "stringere",
+     "strettoia"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "stupire",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "magia",
+     "sorpresa",
+     "regalo",
+     "arcobaleno",
+     "notizia"
+    ]
+   ],
+   [
+    "Segnali",
+    [
+     "bocca aperta",
+     "occhi spalancati",
+     "silenzio"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "meravigliare",
+     "sorprendere"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "stupore",
+     "stupefacente"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "successo",
+  "sig": [
+   [
+    "Esempi",
+    [
+     "vittoria",
+     "promozione",
+     "libro più letto",
+     "canzone"
+    ]
+   ],
+   [
+    "Segnali",
+    [
+     "applauso",
+     "medaglia",
+     "premio"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "vittoria",
+     "trionfo",
+     "riuscita"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "fallimento",
+     "sconfitta",
+     "insuccesso"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "succedere",
+     "accadere"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "superbo",
+  "sig": [
+   [
+    "Persone",
+    [
+     "re",
+     "campione",
+     "ego"
+    ]
+   ],
+   [
+    "Qualità vicine",
+    [
+     "altezzoso",
+     "arrogante",
+     "orgoglioso"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "arrogante",
+     "presuntuoso"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "umile",
+     "modesto"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "superbia"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "tacere",
+  "sig": [
+   [
+    "Momenti",
+    [
+     "verifica",
+     "segreto",
+     "sguardo",
+     "silenzio"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "zittirsi",
+     "ammutolire",
+     "ascoltare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "stare zitti",
+     "ammutolire"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "parlare",
+     "urlare"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "tacito",
+     "taciturno"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "tassa",
+  "sig": [
+   [
+    "Esempi",
+    [
+     "tassa scolastica",
+     "tassa di soggiorno",
+     "imposta"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "contribuente",
+     "Stato",
+     "ufficio"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "imposta",
+     "tributo"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "tassare",
+     "tassazione"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "tatto",
+  "sig": [
+   [
+    "Parti",
+    [
+     "mano",
+     "pelle",
+     "polpastrello"
+    ]
+   ],
+   [
+    "Sensazioni",
+    [
+     "morbido",
+     "ruvido",
+     "liscio",
+     "caldo",
+     "freddo"
+    ]
+   ],
+   [
+    "In senso figurato",
+    [
+     "delicatezza",
+     "gentilezza"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "sensibilità",
+     "delicatezza"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "tattile",
+     "contatto"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "tecnologia",
+  "sig": [
+   [
+    "Esempi",
+    [
+     "computer",
+     "telefono",
+     "robot",
+     "internet"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "ingegnere",
+     "informatico",
+     "scienziato"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "tecnica"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "tecnologico",
+     "tecnico"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "terreno",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "agricolo",
+     "roccioso",
+     "argilloso",
+     "da gioco"
+    ]
+   ],
+   [
+    "Elementi",
+    [
+     "suolo",
+     "terra",
+     "sasso",
+     "erba"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "suolo",
+     "campo",
+     "terra"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "terra",
+     "terrestre",
+     "territorio"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "territorio",
+  "sig": [
+   [
+    "Elementi",
+    [
+     "confine",
+     "montagna",
+     "pianura",
+     "città"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "abitante",
+     "cittadino",
+     "amministratore"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "regione",
+     "zona",
+     "area"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "territoriale",
+     "terra"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "trattare",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "argomento",
+     "prezzo",
+     "accordo",
+     "persone"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "discutere",
+     "negoziare",
+     "affrontare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "negoziare",
+     "discutere"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "trattato",
+     "trattativa",
+     "trattamento"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "uccello",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "rondine",
+     "aquila",
+     "passero",
+     "gabbiano",
+     "pappagallo"
+    ]
+   ],
+   [
+    "Parti",
+    [
+     "ali",
+     "becco",
+     "piume",
+     "zampe"
+    ]
+   ],
+   [
+    "Azioni (verbi)",
+    [
+     "volare",
+     "cinguettare",
+     "nidificare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Significato più ampio",
+    [
+     "animale"
+    ]
+   ],
+   [
+    "Alterati",
+    [
+     "uccellino"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "uccelliera",
+     "uccellaccio"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "uccidere",
+  "sig": [
+   [
+    "Contro chi",
+    [
+     "persona",
+     "animale",
+     "nemico",
+     "innocente"
+    ]
+   ],
+   [
+    "Contesti",
+    [
+     "guerra",
+     "crimine",
+     "caccia"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "ammazzare",
+     "eliminare"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "salvare",
+     "proteggere"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "uccisione",
+     "uccisore"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "udito",
+  "sig": [
+   [
+    "Parti",
+    [
+     "orecchio",
+     "timpano",
+     "cervello"
+    ]
+   ],
+   [
+    "Suoni",
+    [
+     "musica",
+     "rumore",
+     "voce",
+     "silenzio"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "senso dell'udito"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "udire",
+     "audio",
+     "auditorium"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "umanità",
+  "sig": [
+   [
+    "Elementi",
+    [
+     "popoli",
+     "persone",
+     "culture",
+     "storia"
+    ]
+   ],
+   [
+    "Qualità vicine",
+    [
+     "bontà",
+     "compassione",
+     "gentilezza"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "genere umano",
+     "bontà"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "disumanità",
+     "crudeltà"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "umano",
+     "umanitario"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "umorismo",
+  "sig": [
+   [
+    "Dove",
+    [
+     "battuta",
+     "barzelletta",
+     "vignetta",
+     "commedia"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "comico",
+     "umorista"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "spirito",
+     "ironia",
+     "comicità"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "umorista",
+     "umoristico",
+     "umore"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "urlare",
+  "sig": [
+   [
+    "Cause",
+    [
+     "rabbia",
+     "paura",
+     "gioia",
+     "emergenza"
+    ]
+   ],
+   [
+    "Azioni vicine",
+    [
+     "gridare",
+     "strillare",
+     "chiamare"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "gridare",
+     "strillare"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "sussurrare",
+     "tacere"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "urlo",
+     "urlatore"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "vasto",
+  "sig": [
+   [
+    "Cose",
+    [
+     "territorio",
+     "mare",
+     "pianura",
+     "universo"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "ampio",
+     "esteso",
+     "immenso"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "stretto",
+     "piccolo",
+     "limitato"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "vastità"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "vedere",
+  "sig": [
+   [
+    "Parti",
+    [
+     "occhio",
+     "sguardo",
+     "vista"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "occhiali",
+     "binocolo",
+     "microscopio"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "guardare",
+     "osservare",
+     "scorgere"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "visione",
+     "vista",
+     "visibile"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "veloce",
+  "sig": [
+   [
+    "Cose",
+    [
+     "auto",
+     "treno",
+     "aereo",
+     "ghepardo",
+     "corridore"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "rapido",
+     "svelto",
+     "celere"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "lento",
+     "tardo"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "velocità",
+     "velocemente"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "vestito",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "da sera",
+     "da sposa",
+     "a fiori",
+     "di Carnevale"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "sarto",
+     "stilista"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "abito",
+     "indumento"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "vestire",
+     "vestiario",
+     "svestire"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "via",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "strada",
+     "sentiero",
+     "vicolo",
+     "autostrada"
+    ]
+   ],
+   [
+    "Elementi",
+    [
+     "marciapiede",
+     "semaforo",
+     "incrocio",
+     "ponte"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "strada",
+     "percorso",
+     "cammino"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "viaggio",
+     "viale",
+     "viaggiare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "video",
+  "sig": [
+   [
+    "Tipi",
+    [
+     "videoclip",
+     "tutorial",
+     "videochiamata",
+     "film"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "telecamera",
+     "telefono",
+     "schermo"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "filmato",
+     "clip"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "videogioco",
+     "videoteca"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "vietare",
+  "sig": [
+   [
+    "Cosa",
+    [
+     "fumo",
+     "sosta",
+     "ingresso",
+     "uso del telefono"
+    ]
+   ],
+   [
+    "Segnali",
+    [
+     "cartello",
+     "divieto",
+     "regola"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "proibire",
+     "impedire"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "permettere",
+     "consentire"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "divieto",
+     "vietato"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "violenza",
+  "sig": [
+   [
+    "Forme",
+    [
+     "guerra",
+     "aggressione",
+     "bullismo",
+     "insulto"
+    ]
+   ],
+   [
+    "Contro la violenza",
+    [
+     "pace",
+     "rispetto",
+     "diritto",
+     "empatia"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "brutalità",
+     "aggressività"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "pace",
+     "mitezza",
+     "rispetto"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "violento",
+     "violare"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "viso",
+  "sig": [
+   [
+    "Parti",
+    [
+     "occhi",
+     "naso",
+     "bocca",
+     "sopracciglio",
+     "guance"
+    ]
+   ],
+   [
+    "Espressioni",
+    [
+     "sorriso",
+     "smorfia",
+     "lacrima",
+     "sguardo"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "volto",
+     "faccia"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "visibile",
+     "visione"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "vivere",
+  "sig": [
+   [
+    "Dove",
+    [
+     "casa",
+     "città",
+     "paese",
+     "campagna"
+    ]
+   ],
+   [
+    "Come",
+    [
+     "felicemente",
+     "intensamente",
+     "in pace"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "esistere",
+     "abitare"
+    ]
+   ],
+   [
+    "Contrari",
+    [
+     "morire"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "vita",
+     "vivo",
+     "vivace",
+     "vitale"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "votare",
+  "sig": [
+   [
+    "Dove",
+    [
+     "seggio",
+     "assemblea",
+     "classe",
+     "consiglio"
+    ]
+   ],
+   [
+    "Strumenti",
+    [
+     "scheda",
+     "urna",
+     "alzata di mano"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "eleggere",
+     "scegliere"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "voto",
+     "votazione",
+     "elettore"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "web",
+  "sig": [
+   [
+    "Elementi",
+    [
+     "sito",
+     "link",
+     "pagina",
+     "browser"
+    ]
+   ],
+   [
+    "Usi",
+    [
+     "social",
+     "chat",
+     "video",
+     "ricerca"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "internet",
+     "rete"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "webcam",
+     "website"
+    ]
+   ]
+  ]
+ },
+ {
+  "p": "zoo",
+  "sig": [
+   [
+    "Animali",
+    [
+     "leone",
+     "giraffa",
+     "elefante",
+     "scimmia",
+     "pinguino"
+    ]
+   ],
+   [
+    "Persone",
+    [
+     "guardiano",
+     "veterinario",
+     "visitatore"
+    ]
+   ]
+  ],
+  "lex": [
+   [
+    "Sinonimi",
+    [
+     "giardino zoologico",
+     "bioparco"
+    ]
+   ],
+   [
+    "Stessa famiglia",
+    [
+     "zoologia",
+     "zoologo"
+    ]
+   ]
+  ]
+ }
+]

@@ -586,7 +586,16 @@ const MODULI = [
       { titolo: "Il testo informativo-espositivo", attivita: [] },
       { titolo: "Il testo poetico", attivita: [] },
       { titolo: "La parafrasi", attivita: [] },
-      { titolo: "L'analisi del testo", attivita: [] }
+      { titolo: "L'analisi del testo", attivita: [] },
+      {
+        titolo: "Approfondimento lessico",
+        descrizione: "Il mazzo delle parole: le 366 parole del Piccolo Dizionario (immaginario) delle ragazze e dei ragazzi e le ruote del Thesaurus.",
+        link: "italiano/terza/laboratorio-di-scrittura/approfondimento-lessico/index.html",
+        data: "2026-10-21",
+        attivita: [
+          { tipo: "Approfondimento", titolo: "Il mazzo delle parole: card, nuvola, campi semantici e Thesaurus", link: "italiano/terza/laboratorio-di-scrittura/approfondimento-lessico/index.html", data: "2026-10-21" }
+        ]
+      }
     ]
   },
   {
