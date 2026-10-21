@@ -129,7 +129,7 @@ section{display:grid;gap:1.1rem}
   </div>
 </section>
 
-<p class="piede">Le risposte scritte restano solo su questo dispositivo, finché non le cancelli.</p>
+<p class="piede">Le risposte restano solo su questo dispositivo, finché non le cancelli. Se usi un dispositivo condiviso, quando hai inviato il file premi «Ricomincia» per cancellare i tuoi dati.</p>
 
 </main>
 <script>
@@ -241,7 +241,11 @@ section{display:grid;gap:1.1rem}
     navigator.share({files:[ultimo],title:'Il tuo rapporto con la geografia',text:'Il mio test di geografia'}).catch(function(){});
   };
   document.getElementById('azzera').onclick=function(){
+    if(!confirm('Vuoi cancellare tutto (nome, classe, risposte e testi scritti) e ricominciare da capo?')) return;
     document.querySelectorAll('#domande input').forEach(function(i){ i.checked=false; });
+    document.getElementById('nome').value=''; document.getElementById('classe').value='';
+    document.querySelectorAll('textarea[data-k]').forEach(function(t){ t.value=''; });
+    document.getElementById('stato-doc').textContent=''; document.getElementById('invia-doc').hidden=true; ultimo=null;
     document.querySelector('main').classList.remove('svelato');
     ris.hidden=true; manca.textContent=''; salva(); window.scrollTo({top:0,behavior:'smooth'});
   };
