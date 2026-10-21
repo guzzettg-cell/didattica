@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mazzo del Piccolo Dizionario</title>
+<title>Parole giovani</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -161,6 +161,15 @@ input[type=search]{flex:1 1 12rem;min-width:0}
 .ctrl .pos{font-family:var(--f-mono);font-size:.78rem;color:#e7eaf0}
 .ctrl .flipbtn{font-weight:700}
 
+
+/* parole della rete */
+.rete-intro{color:var(--muted);max-width:46rem;margin:.6rem 0 0}
+.rete-q{background:var(--surface);border:1px solid var(--rule);border-left:6px solid var(--c-parole);border-radius:10px;padding:.8rem 1rem;margin:1rem 0 .4rem;max-width:46rem}
+.rete-q h3{margin:0 0 .3rem;font-family:var(--f-lemma);font-size:1.05rem}
+.rete-q ul{margin:.2rem 0 0;padding-left:1.2rem;font-size:.95rem}
+.rete-sub{color:var(--muted);font-size:.9rem;margin:-.3rem 0 .7rem}
+.miss{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0 0}
+.miss span{font-family:var(--f-lemma);font-size:.95rem;border:1.5px dashed var(--rule);border-radius:8px;padding:.25rem .6rem;color:var(--muted)}
 /* thesaurus */
 .thes-intro{color:var(--muted);max-width:46rem;margin:0 0 .8rem}
 .thes-pick{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1rem}
@@ -213,7 +222,7 @@ input[type=search]{flex:1 1 12rem;min-width:0}
 <div class="wrap">
   <header>
     <div class="eyebrow">Piccolo Dizionario (immaginario) delle ragazze e dei ragazzi · edizioni 2023–2026</div>
-    <h1>Il mazzo delle parole</h1>
+    <h1>Parole giovani</h1>
     <p class="lede" id="lede"></p>
     <nav class="edlinks" aria-label="Le quattro edizioni sul sito di pordenonelegge">
       <a href="https://www.pordenonelegge.it/tuttolanno/scuola-e-formazione/piccolo-dizionario-immaginario-delle-ragazze-e-dei-ragazzi/piccolo-dizionario-immaginario-delle-ragazze-e-dei-ragazzi-2023" target="_blank" rel="noopener" style="--c:var(--e23)"><b>2023</b><span>Prima edizione ↗</span></a>
@@ -230,6 +239,7 @@ input[type=search]{flex:1 1 12rem;min-width:0}
         <button class="tab" role="tab" data-v="nuvola">Nuvola</button>
         <button class="tab" role="tab" data-v="campi">Campi semantici</button>
         <button class="tab" role="tab" data-v="edizioni">Edizioni</button>
+        <button class="tab" role="tab" data-v="rete">Parole della rete</button>
         <button class="tab" role="tab" data-v="thes">Thesaurus</button>
       </div>
       <input type="search" id="q" placeholder="Cerca una parola…" autocomplete="off" aria-label="Cerca una parola">
@@ -333,6 +343,15 @@ function render(){
       ORDER.push(...g)});
     $("letters").innerHTML=EDS.filter(y=>state.eds.has(y)).map(y=>`<a href="#E${y}" style="color:${ECOL[y]}">${y}</a>`).join("");
   }
+  if(state.view==="rete"){
+    const ks=new Set(list.map(w=>w.k)); let used=new Set();
+    h+=`<p class="rete-intro">Le parole del Piccolo Dizionario nate nei social e nelle chat, o che le classi hanno definito pensando alla vita online. Un punto di partenza per lavorare sulla <b>cittadinanza digitale</b> e sulla comunicazione non ostile.</p>
+      <div class="rete-q"><h3>Per ogni parola, chiediti</h3><ul><li>Dove la usi: chat, social, videogiochi, a voce?</li><li>Che effetto fa su chi la riceve: include o esclude, ferisce o fa ridere?</li><li>Esiste un modo più rispettoso per dire la stessa cosa?</li><li>Da dove viene? Molte arrivano dall'inglese: qual è la parola originale?</li></ul></div>`;
+    RETE.forEach(([t,sub,keys])=>{const g=keys.filter(k=>ks.has(k)&&BYK[k]).map(k=>BYK[k]); if(!g.length)return; g.forEach(w=>used.add(w.k));
+      h+=`<div class="section-h"><i class="sw" style="--cf:var(--c-parole)"></i><h2>${t}</h2><span>${g.length} card</span></div><p class="rete-sub">${sub}</p><div class="deck">${g.map(mini).join("")}</div>`;
+      ORDER.push(...g)});
+    h+=`<div class="section-h"><i class="sw" style="--cf:var(--rule)"></i><h2>Parole che mancano</h2><span>da definire in classe</span></div><p class="rete-sub">Non sono ancora nel Piccolo Dizionario. Sceglietene una e scrivetene la definizione seguendo lo schema delle card.</p><div class="miss">${RETE_MANCANTI.map(x=>`<span>${x}</span>`).join("")}</div>`;
+  }
   if(state.view==="nuvola"){
     const sh=[...list].sort((a,b)=>{const ha=hash(a.k),hb=hash(b.k);return ha-hb});
     const max=Math.max(...list.map(weight));
@@ -349,6 +368,15 @@ function render(){
   }
 }
 const openFolds=new Set();
+
+const RETE=[
+ ["Azioni nate in rete","Verbi del gergo dei social e delle chat.",["ghostare","snitchare","flexare","gossippare","glassare","chillare","camperare"]],
+ ["Persone e ruoli","Come chiamiamo chi incontriamo online.",["troll","boomer","diva","crush","bro"]],
+ ["Giudizi ed emozioni","Parole per dire che cosa pensiamo e proviamo.",["cringe","aura","chill","tuff","swag","skillato","sturdy","letsgoski","jumpscare"]],
+ ["Strumenti e luoghi","Dove e con che cosa comunichiamo.",["link","filtro","rete","telefono","messaggio","metaverso","videogioco"]],
+ ["Parole di sempre, vissute online","Parole comuni che le classi hanno definito pensando anche ai social.",["amicizia","socializzare","reputazione","comunicazione","segreto","famiglia","cambiamento"]]
+];
+const RETE_MANCANTI=["like","follower","storia","hater","influencer","spoiler","meme","hashtag","screenshot","blastare","streak","fake news","privacy","cyberbullismo"];
 /* thesaurus */
 const THES=DATA.thes||[];
 const BYK=Object.fromEntries(W.map(w=>[w.k,w]));

@@ -1,4 +1,4 @@
-# Il mazzo delle parole
+# Parole giovani
 
 Un indice interattivo del **Piccolo Dizionario (immaginario) delle ragazze e dei ragazzi**, il progetto della Fondazione Pordenonelegge con Fondazione Treccani Cultura, Istituto Toniolo e Parole O_Stili (edizioni 2023, 2024, 2025 e 2026).
 
@@ -8,7 +8,7 @@ Pagina pensata per l'uso in classe nella scuola secondaria di primo grado.
 
 - **366 card**, una per ogni parola delle quattro edizioni: parola, categoria grammaticale, campo semantico, edizioni in cui compare.
   Sul retro: i link ai PDF ufficiali, alla pagina esatta in cui si trova ogni definizione, e uno schema per scrivere la propria definizione.
-- **Quattro modi di sfogliare le card**: indice alfabetico, nuvola di parole, campi semantici (sezioni a scomparsa), edizioni.
+- **Cinque modi di sfogliare le card**: indice alfabetico, nuvola di parole, campi semantici (sezioni a scomparsa), edizioni, **Parole della rete** (le parole dei social e delle chat, con domande guida per la cittadinanza digitale e un elenco di parole da definire in classe).
 - **Thesaurus**: 202 ruote di parole (relazioni di significato e relazioni tra parole). Le parole presenti nel dizionario aprono la loro card; quelle che hanno una ruota portano alla ruota corrispondente.
 - Tasti per ingrandire e rimpicciolire il testo; tema chiaro e scuro automatico.
 
