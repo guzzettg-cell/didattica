@@ -489,7 +489,16 @@ const MODULI = [
       },
       { titolo: "Petrarca", attivita: [] },
       { titolo: "Boccaccio", attivita: [] },
-      { titolo: "Ariosto", attivita: [] }
+      { titolo: "Ariosto", attivita: [] },
+      {
+        titolo: "Approfondimento: Copernico e Colombo nelle Operette morali",
+        descrizione: "Leopardi racconta il Cinquecento: il viaggio di Colombo verso l'ignoto e la Terra di Copernico che lascia il centro dell'universo, con la Storia del genere umano come cornice.",
+        link: "italiano/seconda/leopardi-operette-morali/leggere-le-operette-morali.html",
+        data: "2026-10-21",
+        attivita: [
+          { tipo: "Lettura", titolo: "Leggere le Operette morali: Storia del genere umano, Colombo, Copernico", descrizione: "Testo con parole spiegate, parafrasi in parole semplici, glossario e domande.", link: "italiano/seconda/leopardi-operette-morali/leggere-le-operette-morali.html", data: "2026-10-21" }
+        ]
+      }
     ]
   },
   {
