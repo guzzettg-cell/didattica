@@ -41,7 +41,7 @@ const MODULI = [
     lezioni: [
       {
         titolo: "Perché la geografia",
-        descrizione: "La Terra vista dalla Luna: astronauti, foto famose e una salita da Roma fino allo spazio.",
+        descrizione: "La Terra vista da fuori: le foto più famose, astronauti, cosmonauti e taikonauti, e che cosa studieremo in geografia.",
         link: "geografia/prima/perche-la-geografia/index.html",
         data: "2026-10-15",
         attivita: [
@@ -49,18 +49,39 @@ const MODULI = [
           { tipo: "Scheda", titolo: "Che cosa studia la geografia", link: "geografia/prima/perche-la-geografia/attivita/che-cosa-studia-la-geografia.html", data: "2026-10-16" },
           { tipo: "Metodo di studio", titolo: "Come si studia la geografia", link: "geografia/prima/perche-la-geografia/attivita/come-si-studia-la-geografia.html", data: "2026-10-16" },
           { tipo: "Tappa 1", titolo: "Chi ha visto la Terra", link: "geografia/prima/perche-la-geografia/attivita/fase-1-chi-ha-visto-la-terra.html", data: "2026-10-15" },
-          { tipo: "Tappa 2", titolo: "Tre modi di disegnare il mondo", link: "geografia/prima/perche-la-geografia/attivita/fase-2-tre-modi-di-disegnare-il-mondo.html", data: "2026-10-15" },
-          { tipo: "Tappa 3", titolo: "Carte sovrapposte ed emisferi", link: "geografia/prima/perche-la-geografia/attivita/fase-3-carte-sovrapposte-ed-emisferi.html", data: "2026-10-15" },
-          { tipo: "Tappa 4", titolo: "Guardiamo il planisfero", link: "geografia/prima/perche-la-geografia/attivita/fase-4-guardiamo-il-planisfero.html", data: "2026-10-15" },
-          { tipo: "Cruciverba", titolo: "Le parole della Terra vista dalla Luna", link: "geografia/prima/perche-la-geografia/attivita/fase-5-cruciverba.html", data: "2026-10-15" },
-          { tipo: "Se c'è tempo", titolo: "Carte che cambiano forma", link: "geografia/prima/perche-la-geografia/attivita/fase-6-carte-che-cambiano-forma.html", data: "2026-10-15" },
-          { tipo: "Approfondimento", titolo: "La storia della cartografia", link: "geografia/prima/perche-la-geografia/attivita/storia-della-cartografia.html", data: "2026-10-15" }
+          { tipo: "Tappa 2", titolo: "Il cielo sopra di noi: astronauti, cosmonauti, taikonauti", descrizione: "Fasi 1 e 2 in geografia; il resto in italiano, verso i miti cosmogonici.", link: "italiano/prima/mito-ed-epica/il-cielo-sopra-di-noi.html", data: "2026-10-21" }
         ]
       },
       { titolo: "L'orientamento e i suoi strumenti", attivita: [] },
-      { titolo: "Il reticolato geografico", attivita: [] },
-      { titolo: "Le carte geografiche", attivita: [] },
-      { titolo: "I fusi orari", attivita: [] },
+      {
+        titolo: "Il reticolato geografico",
+        descrizione: "A tappe: poli, Equatore, paralleli, meridiani, Greenwich, coordinate.",
+        link: "geografia/prima/metodo-e-strumenti/lezioni/reticolato.html",
+        data: "2026-10-21",
+        attivita: [
+          { tipo: "Scheda", titolo: "Scheda 1.2 – Meridiani e paralleli", link: "geografia/prima/metodo-e-strumenti/attivita/scheda-1-2-reticolato.html", data: "2026-10-21" }
+        ]
+      },
+      {
+        titolo: "Le carte geografiche",
+        descrizione: "Dal globo alla carta: proiezioni a confronto e storia della cartografia.",
+        link: "geografia/prima/metodo-e-strumenti/lezioni/proiezioni.html",
+        data: "2026-10-21",
+        attivita: [
+          { tipo: "Attività 1", titolo: "Tre modi di disegnare il mondo", link: "geografia/prima/carte-geografiche/attivita/tre-modi-di-disegnare-il-mondo.html", data: "2026-10-21" },
+          { tipo: "Attività 2", titolo: "Carte sovrapposte ed emisferi", link: "geografia/prima/carte-geografiche/attivita/carte-sovrapposte-ed-emisferi.html", data: "2026-10-21" },
+          { tipo: "Attività 3", titolo: "Guardiamo il planisfero", link: "geografia/prima/carte-geografiche/attivita/guardiamo-il-planisfero.html", data: "2026-10-21" },
+          { tipo: "Approfondimento", titolo: "La storia della cartografia", link: "geografia/prima/carte-geografiche/attivita/storia-della-cartografia.html", data: "2026-10-21" },
+          { tipo: "Se c'è tempo", titolo: "Carte che cambiano forma", link: "geografia/prima/carte-geografiche/attivita/carte-che-cambiano-forma.html", data: "2026-10-21" }
+        ]
+      },
+      {
+        titolo: "I fusi orari",
+        descrizione: "Vista dal Polo nord, carta dei fusi, ora civile e ora locale delle città.",
+        link: "geografia/prima/metodo-e-strumenti/lezioni/fusi-orari.html",
+        data: "2026-10-21",
+        attivita: []
+      },
       { titolo: "La riduzione in scala", attivita: [] },
       { titolo: "I dati: raccoglierli, ordinarli, rappresentarli", attivita: [] }
     ]
@@ -178,27 +199,6 @@ const MODULI = [
         attivita: []
       },
       {
-        titolo: "Il reticolato geografico",
-        descrizione: "A tappe: poli, Equatore, paralleli, meridiani, Greenwich, coordinate.",
-        link: "geografia/terza/la-terra/lezioni/reticolato.html",
-        data: "2026-10-15",
-        attivita: [
-          {
-            tipo: "Scheda",
-            titolo: "Scheda 1.2 – Meridiani e paralleli",
-            link: "geografia/terza/la-terra/ripasso/scheda-1-2-reticolato.html",
-            data: "2026-10-14"
-          }
-        ]
-      },
-      {
-        titolo: "Le proiezioni",
-        descrizione: "Mercatore, Mollweide e carta equidistante a confronto con il globo.",
-        link: "geografia/terza/la-terra/lezioni/proiezioni.html",
-        data: "2026-10-15",
-        attivita: []
-      },
-      {
         titolo: "Il moto di rotazione",
         descrizione: "La Terra gira da ovest a est: modello 3D con la cupola del cielo di Roma.",
         link: "geografia/terza/la-terra/lezioni/rotazione-terra.html",
@@ -216,13 +216,6 @@ const MODULI = [
         titolo: "Il moto di rivoluzione",
         descrizione: "Orbita, equinozi e solstizi, circolo di illuminazione e durata del dì.",
         link: "geografia/terza/la-terra/lezioni/rivoluzione.html",
-        data: "2026-10-15",
-        attivita: []
-      },
-      {
-        titolo: "I fusi orari",
-        descrizione: "Vista dal Polo nord, carta dei fusi, ora civile e ora locale delle città.",
-        link: "geografia/terza/la-terra/lezioni/fusi-orari.html",
         data: "2026-10-15",
         attivita: []
       },
@@ -254,8 +247,28 @@ const MODULI = [
         data: "2026-10-15",
         attivita: []
       },
-      { titolo: "Il clima e i suoi cambiamenti", attivita: [] },
-      { titolo: "Fasce climatiche e biomi", attivita: [] }
+      {
+        titolo: "Fasce climatiche e biomi",
+        descrizione: "Clima e ambienti, lezioni 1–4: i fattori del clima, dal clima ai biomi, gli ambienti caldi, dalle zone temperate ai poli.",
+        link: "geografia/terza/clima-e-ambienti/index.html",
+        data: "2026-10-21",
+        attivita: [
+          { tipo: "Lezione 1", titolo: "Perché sulla Terra esistono climi diversi?", link: "geografia/terza/clima-e-ambienti/index.html#lezione-1", data: "2026-10-21" },
+          { tipo: "Lezione 2", titolo: "Dal clima ai biomi", link: "geografia/terza/clima-e-ambienti/index.html#lezione-2", data: "2026-10-21" },
+          { tipo: "Lezione 3", titolo: "Gli ambienti caldi: troppa acqua o troppo poca?", link: "geografia/terza/clima-e-ambienti/index.html#lezione-3", data: "2026-10-21" },
+          { tipo: "Lezione 4", titolo: "Dalle zone temperate ai poli", link: "geografia/terza/clima-e-ambienti/index.html#lezione-4", data: "2026-10-21" }
+        ]
+      },
+      {
+        titolo: "Il clima e i suoi cambiamenti",
+        descrizione: "Clima e ambienti, lezioni 5–6: come trasformiamo gli ambienti, il clima di ieri e di oggi.",
+        link: "geografia/terza/clima-e-ambienti/index.html#lezione-5",
+        data: "2026-10-21",
+        attivita: [
+          { tipo: "Lezione 5", titolo: "Come trasformiamo gli ambienti?", link: "geografia/terza/clima-e-ambienti/index.html#lezione-5", data: "2026-10-21" },
+          { tipo: "Lezione 6", titolo: "Il clima è sempre cambiato. Che cosa cambia oggi?", link: "geografia/terza/clima-e-ambienti/index.html#lezione-6", data: "2026-10-21" }
+        ]
+      }
     ],
     attivita: [
       {
@@ -264,6 +277,12 @@ const MODULI = [
         descrizione: "Sette attività in ordine: parole, concetti, carta e calcoli.",
         link: "geografia/terza/la-terra/ripasso/Terra_Ripasso_guidato.html",
         data: "2026-10-14"
+      },
+      {
+        tipo: "Cruciverba",
+        titolo: "Le parole del pianeta Terra",
+        link: "geografia/terza/la-terra/ripasso/cruciverba-la-terra.html",
+        data: "2026-10-21"
       }
     ]
   },
@@ -272,10 +291,19 @@ const MODULI = [
     classe: "terza",
     numero: "II",
     titolo: "Popolazione mondiale: crescita e inurbamento",
-    descrizione: "Popolazione, economia mondiale e risorse. Primo quadrimestre, in collegamento con Scienze e Tecnologia.",
+    descrizione: "Dove siamo, quanti siamo, come ci muoviamo. Dicembre–gennaio, in collegamento con Scienze e Storia.",
     lezioni: [
       { titolo: "La crescita della popolazione mondiale", attivita: [] },
-      { titolo: "L'inurbamento", attivita: [] },
+      { titolo: "L'inurbamento", attivita: [] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "terza",
+    numero: "III",
+    titolo: "L'economia mondiale",
+    descrizione: "Le attività e le reti con cui trasformiamo il pianeta. Gennaio–febbraio, in collegamento con Scienze e Tecnologia.",
+    lezioni: [
       { titolo: "L'economia mondiale", attivita: [] },
       { titolo: "La globalizzazione", attivita: [] },
       { titolo: "Risorse e materie prime", attivita: [] },
@@ -285,9 +313,9 @@ const MODULI = [
   {
     materia: "geografia",
     classe: "terza",
-    numero: "III",
-    titolo: "La geopolitica: verso un nuovo ordine mondiale",
-    descrizione: "Primo e secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
+    numero: "IV",
+    titolo: "Gli Stati del mondo: la geopolitica",
+    descrizione: "Introduzione agli Stati: febbraio–marzo, in collegamento con Storia ed Educazione civica.",
     lezioni: [
       { titolo: "La crisi degli Stati nazionali", attivita: [] },
       { titolo: "Il sistema politico mondiale", attivita: [] },
@@ -298,9 +326,9 @@ const MODULI = [
   {
     materia: "geografia",
     classe: "terza",
-    numero: "IV",
-    titolo: "Africa",
-    descrizione: "Profilo fisico, politico e antropico. Secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
+    numero: "V",
+    titolo: "Gli Stati del mondo: Africa",
+    descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
       { titolo: "L'Africa: profilo fisico", attivita: [] },
       { titolo: "L'Africa: profilo politico", attivita: [] },
@@ -312,9 +340,9 @@ const MODULI = [
   {
     materia: "geografia",
     classe: "terza",
-    numero: "V",
-    titolo: "Asia",
-    descrizione: "Profilo fisico, politico e antropico. Secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
+    numero: "VI",
+    titolo: "Gli Stati del mondo: Asia",
+    descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
       { titolo: "L'Asia: profilo fisico", attivita: [] },
       { titolo: "L'Asia: profilo politico", attivita: [] },
@@ -328,9 +356,9 @@ const MODULI = [
   {
     materia: "geografia",
     classe: "terza",
-    numero: "VI",
-    titolo: "America anglosassone e America Latina",
-    descrizione: "Profilo fisico, politico e antropico. Secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
+    numero: "VII",
+    titolo: "Gli Stati del mondo: America anglosassone e America Latina",
+    descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
       { titolo: "L'America: profilo fisico", attivita: [] },
       { titolo: "L'America: profilo politico", attivita: [] },
@@ -343,9 +371,9 @@ const MODULI = [
   {
     materia: "geografia",
     classe: "terza",
-    numero: "VII",
-    titolo: "Oceania",
-    descrizione: "Profilo fisico, politico e antropico. Secondo quadrimestre, in collegamento con Storia ed Educazione civica.",
+    numero: "VIII",
+    titolo: "Gli Stati del mondo: Oceania",
+    descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
       { titolo: "L'Oceania: profilo fisico", attivita: [] },
       { titolo: "L'Oceania: profilo politico", attivita: [] },
@@ -375,7 +403,12 @@ const MODULI = [
     titolo: "Mito ed epica",
     descrizione: "La narrazione in versi: il genere epico. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica e Geografia.",
     lezioni: [
-      { titolo: "Il mito", attivita: [] },
+      {
+        titolo: "Il mito",
+        attivita: [
+          { tipo: "Lezione", titolo: "Il cielo sopra di noi", descrizione: "Dalla Terra vista dallo spazio ai racconti più antichi sull'origine del mondo.", link: "italiano/prima/mito-ed-epica/il-cielo-sopra-di-noi.html", data: "2026-10-21" }
+        ]
+      },
       { titolo: "L'epica: l'Iliade", attivita: [] },
       { titolo: "L'epica: l'Odissea", attivita: [] },
       { titolo: "L'epica: l'Eneide", attivita: [] },
