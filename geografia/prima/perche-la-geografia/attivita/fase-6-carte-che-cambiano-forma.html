@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carte che cambiano forma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+/* Layout: tre tappe in verticale (globo, tre carte affiancate, carte sovrapposte), stessa famiglia tipografica della Guida di Geografia 3 */
+:root{
+  --bg:#EEF1EE; --paper:#FAFBF9; --ink:#1D2A30; --muted:#5B6B70; --line:#C9D2CE;
+  --space:#0E1620; --ocean:#2C5872; --sea:#CFE0EA; --land:#B9C9A8; --land-ink:#6E8460; --sea2:#5B9BD0; --land2:#B07A45; --land2-ink:#7A4E26; --hn:#9B7BD1; --hs:#3FA79E;
+  --merc:#B3412F; --gp:#2C5872; --ee:#2F7A5A;
+  --cond:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+    --space:#070B10; --ocean:#80B1CC; --sea:#1F3442; --land:#4E6247; --land-ink:#8FA582; --sea2:#2D6A9A; --land2:#9A6A3C; --land2-ink:#D2A577; --hn:#B79BE6; --hs:#6CCFC4;
+    --merc:#EF8A73; --gp:#7FB4D6; --ee:#6CC79C; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+  --space:#070B10; --ocean:#80B1CC; --sea:#1F3442; --land:#4E6247; --land-ink:#8FA582; --sea2:#2D6A9A; --land2:#9A6A3C; --land2-ink:#D2A577; --hn:#B79BE6; --hs:#6CCFC4;
+  --merc:#EF8A73; --gp:#7FB4D6; --ee:#6CC79C; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.6;padding-inline:16px;padding-block:1.5rem 4rem}
+main{max-width:72rem;margin:0 auto;display:grid;gap:3.5rem}
+h1,h2,h3{font-family:var(--cond);line-height:1.08;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.2rem,5.5vw,3.5rem);font-weight:700}
+h2{font-size:clamp(1.6rem,3.4vw,2.2rem);font-weight:700}
+h3{font-size:1.3rem;font-weight:600}
+p{margin:0;max-width:66ch}
+a{color:var(--ocean)}
+.eyebrow{font:600 .95rem var(--cond);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.step{display:grid;gap:1.1rem}
+.step-n{font:700 1rem var(--cond);letter-spacing:.07em;text-transform:uppercase;color:var(--ocean)}
+.lead{font-size:1.15rem;color:var(--muted)}
+.btn{font:600 1.05rem var(--cond);background:var(--ink);color:var(--paper);border:0;border-radius:6px;padding:.45rem 1rem;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button:focus-visible,input:focus-visible+span,a:focus-visible{outline:3px solid var(--ocean);outline-offset:2px}
+
+/* tappa 1 */
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:2rem;align-items:center}
+.globe{background:var(--space);border-radius:14px;aspect-ratio:1/1;max-width:100%;display:grid;place-items:center;overflow:hidden;touch-action:none;cursor:grab}
+.globe:active{cursor:grabbing}
+.globe svg{width:92%;height:auto;display:block}
+.facts{display:grid;gap:.9rem}
+.fact{display:grid;grid-template-columns:6.2rem 1fr;gap:1rem;align-items:baseline;border-top:1px solid var(--line);padding-top:.8rem}
+.fact b{font:700 1.9rem/1 var(--cond);color:var(--ocean);font-variant-numeric:tabular-nums}
+.ask{font-style:italic;font-size:1.2rem;border-left:4px solid var(--ocean);padding-left:1rem}
+.real{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;display:grid;gap:.4rem}
+.real ul{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.real li{display:grid;gap:.05rem;font-size:.95rem}
+.real a{font:600 1.08rem var(--cond)}
+.real span{color:var(--muted)}
+.cap{font-family:var(--cond);font-size:.98rem;color:var(--muted)}
+
+/* tappa 2 */
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:1.2rem;align-items:start}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.9rem;display:grid;gap:.6rem;min-width:0}
+.card .tag{font:700 1.5rem/1 var(--cond)}
+.card svg{width:100%;height:auto;display:block}
+.who{display:grid;gap:.25rem;font-size:.97rem}
+.who h3{color:var(--c)}
+.questions{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.3rem;display:grid;gap:.5rem}
+.questions ol{margin:0;padding-left:1.3rem;display:grid;gap:.3rem}
+
+.palette{display:flex;flex-wrap:wrap;gap:.5rem .8rem;align-items:center;font:600 1.05rem var(--cond);color:var(--muted)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{font:600 1.02rem var(--cond);background:transparent;color:var(--ink);border:0;padding:.35rem .8rem;cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+#overlay[data-pal="soft"] .o-fill,#overlay[data-only] .o-fill{display:none}
+.controls input:disabled{opacity:.4}
+/* tappa 3 */
+.controls{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;align-items:center;font-family:var(--cond);font-size:1.08rem}
+.controls label{display:inline-flex;align-items:center;gap:.4rem;cursor:pointer}
+.controls input{width:1.1rem;height:1.1rem;accent-color:var(--ink)}
+.dot{width:.95rem;height:.95rem;border-radius:50%;background:var(--c);display:inline-block}
+.sep{width:1px;align-self:stretch;background:var(--line)}
+.overlay{background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow-x:auto}
+.overlay svg{display:block;width:100%;min-width:40rem;height:auto}
+.layer{transition:opacity .45s ease}
+@media (prefers-reduced-motion:reduce){.layer{transition:none}}
+details{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.7rem 1.1rem}
+summary{font:600 1.15rem var(--cond);cursor:pointer;color:var(--ocean)}
+details ul{margin:.6rem 0 .2rem;padding-left:1.2rem;display:grid;gap:.35rem}
+.err{background:var(--paper);border:2px dashed var(--line);border-radius:10px;padding:1rem 1.2rem}
+.qa{margin:0;padding-left:1.6rem;display:grid;gap:.9rem}
+.qa li::marker{font:700 1.3rem var(--cond);color:var(--ocean)}
+.qa .q{font-size:1.2rem;font-weight:600;margin-bottom:.35rem}
+.qa .hint{color:var(--muted);margin:0}
+.cur{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:1rem}
+.cur article{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.9rem 1.1rem;display:grid;gap:.35rem;align-content:start;min-width:0}
+.cur a{font:600 1.08rem var(--cond)}
+a.ref{text-decoration:none;display:inline-block}
+.qa details p{margin:.5rem 0 .2rem}
+footer{font-size:.92rem;color:var(--muted);display:grid;gap:.3rem}
+@media (max-width:760px){.hero{grid-template-columns:1fr}}
+[hidden]{display:none!important}
+</style>
+<main>
+  <!-- SE C'È TEMPO -->
+  <section class="step" aria-labelledby="t5">
+    <p class="step-n">Se c'è tempo · La Terra vista dalla Luna</p>
+    <h2 id="t5">Carte che cambiano forma</h2>
+    <p class="lead">Nelle <b>anamorfosi</b> ogni Paese non è disegnato in base alla sua superficie, ma in base a un dato: più grande è il dato, più il Paese si gonfia. Guarda prima la carta di riferimento, poi scegli una carta e prova a capire che cosa racconta. Ne riparleremo nelle prossime lezioni.</p>
+    <p><a class="btn ghost ref" href="https://worldmapper.org/maps/worldmapper-basemap/" target="_blank" rel="noopener">Apri la carta di riferimento</a></p>
+    <div class="cur">
+      <article><h3>Dove vivono i ragazzi della tua età?</h3>
+        <p><a href="https://worldmapper.org/maps/5to14-year-olds-2015/" target="_blank" rel="noopener">Ragazzi tra 5 e 14 anni</a></p>
+        <p class="hint">Dove ce ne sono tanti? E l'Italia, com'è?</p></article>
+      <article><h3>Chi ha vinto i Mondiali di calcio?</h3>
+        <p><a href="https://worldmapper.org/maps/football-world-cup-wins-1930t2018/" target="_blank" rel="noopener">Mondiali vinti, 1930–2018</a></p>
+        <p class="hint">Quali continenti sono spariti del tutto? Perché secondo te?</p></article>
+      <article><h3>Chi coltiva il caffè e chi lo beve?</h3>
+        <p><a href="https://worldmapper.org/maps/coffee-production-2014/" target="_blank" rel="noopener">Produzione di caffè</a> · <a href="https://worldmapper.org/maps/coffee-consumption-2014/" target="_blank" rel="noopener">Consumo di caffè</a></p>
+        <p class="hint">Apri le due carte una dopo l'altra: sono uguali?</p></article>
+      <article><h3>Quanti telefoni cellulari?</h3>
+        <p><a href="https://worldmapper.org/maps/mobile-subscription-1990/" target="_blank" rel="noopener">Nel 1990</a> · <a href="https://worldmapper.org/maps/mobile-subscription-2015/" target="_blank" rel="noopener">Nel 2015</a></p>
+        <p class="hint">Che cosa è cambiato in 25 anni?</p></article>
+      <article><h3>Come sarà il mondo nel 2100?</h3>
+        <p><a href="https://worldmapper.org/maps/population-year-2018/" target="_blank" rel="noopener">Popolazione nel 2018</a> · <a href="https://worldmapper.org/maps/population-year-2100/" target="_blank" rel="noopener">Popolazione nel 2100</a></p>
+        <p class="hint">Quali Paesi cresceranno di più? Quanti anni avrai tu nel 2100?</p></article>
+    </div>
+    <details>
+      <summary>Per la lezione successiva (per l'insegnante)</summary>
+      <ul>
+        <li><a href="https://worldmapper.org/maps/gdp-2018/" target="_blank" rel="noopener">PIL 2018</a> e <a href="https://worldmapper.org/maps/co2-emissions-2020/" target="_blank" rel="noopener">emissioni di CO₂ 2020</a>: confrontate con la carta della popolazione, fanno emergere le disuguaglianze tra le aree del mondo (moduli Popolazione ed Economia).</li>
+        <li>Il caffè (prodotto in America latina, Africa e Asia tropicale, consumato soprattutto nei Paesi ricchi) è un buon aggancio per parlare di scambi mondiali e globalizzazione.</li>
+      </ul>
+    </details>
+    <p class="cap">Carte di <a href="https://worldmapper.org/" target="_blank" rel="noopener">Worldmapper</a> (in inglese), con licenza Creative Commons BY-NC-SA 4.0. Si aprono in una nuova scheda.</p>
+  </section>
+
+</main>
+<!-- zoom-ctrl -->
+<style>
+.zm{position:fixed;top:10px;right:10px;z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,#fff);border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgb(0 0 0 / .15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,#eef);color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv>100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+(function(){
+  var Z = [.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], i = 4, K = 'ripasso-zoom';
+  var box = document.querySelector('.zm'), lab = box.querySelector('[data-zv]');
+  try { var s = parseFloat(localStorage.getItem(K)); if (Z.indexOf(s) >= 0) i = Z.indexOf(s); } catch (e) {}
+  function set(n){
+    i = Math.max(0, Math.min(Z.length - 1, n)); var z = Z[i];
+    document.documentElement.style.zoom = z; box.style.zoom = 1 / z;
+    lab.textContent = Math.round(z * 100) + '%';
+    try { localStorage.setItem(K, z); } catch (e) {}
+  }
+  box.addEventListener('click', function(e){ var b = e.target.closest('[data-z]'); if (!b) return; var d = +b.dataset.z; set(d ? i + d : 4); });
+  document.addEventListener('keydown', function(e){
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test((e.target || {}).tagName || '') || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === '+' || e.key === '=') { e.preventDefault(); set(i + 1); }
+    else if (e.key === '-') { e.preventDefault(); set(i - 1); }
+    else if (e.key === '0') { e.preventDefault(); set(4); }
+  });
+  set(i);
+})();
+</script>
+</html>

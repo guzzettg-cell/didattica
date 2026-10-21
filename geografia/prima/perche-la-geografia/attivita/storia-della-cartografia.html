@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La storia della cartografia</title>
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:#fff;
+    background:#2c5f8a;
+  }
+  #bg{
+    position:fixed; inset:0; z-index:-1;
+    background:#2c5f8a;
+    transition:background-color .7s ease;
+  }
+  .progress{
+    position:fixed; top:0; left:0; right:0; height:4px;
+    background:rgba(255,255,255,.15); z-index:20;
+  }
+  .progress-bar{ height:100%; width:0%; background:#fff; transition:width .1s linear; }
+
+  .intro{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px 20px;
+    color:#ffffff;
+  }
+  .intro h1{
+    font-size:clamp(1.8rem, 5vw, 3.2rem);
+    margin:0 0 16px;
+    font-weight:800;
+    max-width:900px;
+  }
+  .intro p{
+    font-size:clamp(1rem, 1.6vw, 1.25rem);
+    max-width:640px;
+    opacity:.9;
+    line-height:1.5;
+    margin:0;
+  }
+  .scroll-cue{
+    margin-top:48px;
+    font-size:13px;
+    opacity:.75;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+  }
+  .scroll-cue span{
+    width:10px;height:10px;
+    border-right:2px solid currentColor;
+    border-bottom:2px solid currentColor;
+    transform:rotate(45deg);
+    animation:bounce 1.6s infinite;
+  }
+  @keyframes bounce{
+    0%,100%{ transform:rotate(45deg) translate(0,0); opacity:.4; }
+    50%{ transform:rotate(45deg) translate(4px,4px); opacity:1; }
+  }
+
+  main{ position:relative; }
+  .era-block{ padding:60px 0; }
+  .era-label{
+    max-width:1000px;
+    margin:0 auto 20px;
+    padding:0 24px;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    opacity:.65;
+  }
+  .events{
+    --year-col:72px;
+    max-width:1000px;
+    margin:0 auto;
+    padding:0 24px;
+    position:relative;
+  }
+  .events::before{
+    content:"";
+    position:absolute;
+    left:calc(var(--year-col) + 20px);
+    top:6px; bottom:6px;
+    width:2px;
+    background:rgba(255,255,255,.28);
+  }
+
+  .event{
+    position:relative;
+    display:grid;
+    grid-template-columns:var(--year-col) 32px 1fr;
+    gap:6px 0;
+    padding:22px 0;
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .event.visible{ opacity:1; transform:translateY(0); }
+  .event-dot{
+    position:absolute;
+    left:calc(var(--year-col) + 15px); top:14px;
+    width:12px; height:12px;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 0 0 4px rgba(255,255,255,.18);
+  }
+  .event-year{
+    grid-column:1/2;
+    text-align:right;
+    padding-right:16px;
+    padding-top:2px;
+    font-size:clamp(1.15rem, 2.4vw, 2rem);
+    font-weight:800;
+    line-height:1.15;
+  }
+  .event-body{
+    grid-column:3/4;
+    padding-left:20px;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .event-body.no-media{ grid-template-columns:1fr; }
+  .event-content h3{ margin:0 0 8px; font-size:1.15rem; font-weight:700; }
+  .event-content p{ margin:0; line-height:1.6; opacity:.92; font-size:.98rem; }
+  .event-media{ min-width:0; }
+  .event-media img{
+    width:100%;
+    max-height:280px;
+    object-fit:cover;
+    border-radius:10px;
+    display:block;
+    box-shadow:0 8px 24px rgba(0,0,0,.25);
+    cursor:zoom-in;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .event-media img:hover{
+    transform:scale(1.02);
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  @media (min-width:640px){
+    .event-body{ grid-template-columns:minmax(160px,240px) 1fr; align-items:start; }
+    .event-body.no-media{ grid-template-columns:1fr; }
+    .event-media img{ max-height:220px; }
+  }
+
+  /* Lightbox: ingrandisce l'immagine cliccata */
+  .lightbox{
+    position:fixed; inset:0; z-index:100;
+    background:rgba(0,0,0,.88);
+    display:flex; align-items:center; justify-content:center;
+    padding:32px;
+    opacity:0; visibility:hidden;
+    transition:opacity .2s ease;
+    cursor:zoom-out;
+  }
+  .lightbox.open{ opacity:1; visibility:visible; }
+  .lightbox img{
+    max-width:100%;
+    max-height:100%;
+    border-radius:8px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+  }
+  .lightbox-close{
+    position:absolute;
+    top:16px; right:20px;
+    width:40px; height:40px;
+    border-radius:50%;
+    border:none;
+    background:rgba(255,255,255,.15);
+    color:#fff;
+    font-size:22px;
+    line-height:1;
+    cursor:pointer;
+  }
+  .lightbox-close:hover{ background:rgba(255,255,255,.28); }
+
+  @media (min-width:520px){
+    .events{ --year-col:110px; }
+    .event-year{ font-size:clamp(1.5rem, 2.8vw, 2.6rem); }
+  }
+  @media (min-width:720px){
+    .events{ --year-col:150px; }
+  }
+
+  /* Layout a doppia colonna (locale / globale) */
+  .dual-wrap{
+    max-width:1200px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    align-items:start;
+    position:relative;
+  }
+  .track-col{ min-width:0; padding-top:16px; }
+  .track-col .era-block{ padding:28px 0; }
+  .track-col .era-label,
+  .track-col .events{ max-width:none; margin:0; padding-left:16px; padding-right:16px; }
+  .track-col .events{ --year-col:64px; }
+  .track-col .event-year{ font-size:clamp(1rem, 2vw, 1.5rem); }
+  .track-col .event-content h3{ font-size:1rem; }
+  .track-col .event-content p{ font-size:.92rem; }
+  .track-b{ border-left:2px solid rgba(255,255,255,.15); }
+  /* La colonna globale mostra solo le foto: niente testo, immagine a piena larghezza */
+  .track-b .event-body{ grid-template-columns:1fr !important; }
+  .track-b .event-content{ display:none; }
+  .track-b .event-media img{ max-height:340px; }
+  .track-heading{
+    position:sticky;
+    top:12px;
+    z-index:5;
+    display:inline-block;
+    margin:0 16px 16px;
+    padding:5px 14px;
+    background:rgba(0,0,0,.4);
+    -webkit-backdrop-filter:blur(6px);
+    backdrop-filter:blur(6px);
+    border-radius:999px;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.07em;
+    color:#fff;
+  }
+  .track-empty{
+    margin:0 16px;
+    opacity:.6;
+    font-size:.85rem;
+    font-style:italic;
+  }
+  @media (max-width:760px){
+    .dual-wrap{ grid-template-columns:1fr; }
+    .track-b{ border-left:none; border-top:2px solid rgba(255,255,255,.15); margin-top:12px; padding-top:24px; }
+  }
+
+  footer.end-space{ height:20vh; }
+</style>
+</head>
+<body>
+  <div id="bg"></div>
+  <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
+
+  <section class="intro">
+    <h1>La storia della cartografia</h1>
+    <p>Dalle prime tavolette mesopotamiche alla risoluzione ONU del 2026: come sono cambiate nel tempo le mappe del mondo. Immagini da Wikimedia Commons, dominio pubblico o CC. Se qualche immagine non si carica, sostituiscila con «Carica file» o incollando un nuovo URL.</p>
+    <div class="scroll-cue"><span></span></div>
+  </section>
+
+  <main>
+    <section class="era-block" data-color="#2c5f8a" data-fg="#ffffff" aria-label="Mondo antico">
+          <div class="era-label">Mondo antico</div>
+          <div class="events">
+          <article class="event" data-color="#2c5f8a">
+            <span class="event-dot"></span>
+            <div class="event-year">~1500 a.C.</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Stadtplan_Nippur_Jena.jpg/640px-Stadtplan_Nippur_Jena.jpg" alt="La mappa di Nippur" loading="lazy"></div>
+              <div class="event-content">
+                <h3>La mappa di Nippur</h3>
+                <p>Considerata la più antica pianta urbana conosciuta: una tavoletta d&#39;argilla che rappresenta la città sumera di Nippur con sorprendente precisione, indicando le mura, i canali derivati dall&#39;Eufrate, le porte cittadine e il grande tempio di Enlil. È conservata oggi in Germania, nella collezione Hilprecht dell&#39;Università di Jena.</p>
+              </div>
+            </div>
+          </article>
+        
+          <article class="event" data-color="#2c5f8a">
+            <span class="event-dot"></span>
+            <div class="event-year">VI sec. a.C.</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/The_Babylonian_map_of_the_world,_from_Sippar,_Mesopotamia..JPG/640px-The_Babylonian_map_of_the_world,_from_Sippar,_Mesopotamia..JPG" alt="La mappa mundi babilonese" loading="lazy"></div>
+              <div class="event-content">
+                <h3>La mappa mundi babilonese</h3>
+                <p>Incisa su una tavoletta d&#39;argilla, mostra Babilonia al centro del mondo, circondata da un oceano circolare chiamato «fiume amaro» con sette isole misteriose oltre i suoi confini. È una delle prime rappresentazioni simboliche, più che geografiche, dell&#39;intero mondo conosciuto.</p>
+              </div>
+            </div>
+          </article>
+        
+          <article class="event" data-color="#2c5f8a">
+            <span class="event-dot"></span>
+            <div class="event-year">~200 a.C.</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Mappa_di_Eratostene.jpg/640px-Mappa_di_Eratostene.jpg" alt="Eratostene di Cirene" loading="lazy"></div>
+              <div class="event-content">
+                <h3>Eratostene di Cirene</h3>
+                <p>Il matematico e geografo greco calcolò con sorprendente precisione la circonferenza della Terra misurando l&#39;angolo dei raggi solari in due città egiziane. Sulla base di questi calcoli disegnò una mappa del mondo allora conosciuto, dalle isole britanniche fino a Taprobana (l&#39;odierno Sri Lanka), tracciando i primi paralleli e meridiani.</p>
+              </div>
+            </div>
+          </article>
+        
+          <article class="event" data-color="#2c5f8a">
+            <span class="event-dot"></span>
+            <div class="event-year">II sec. d.C.</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/PtolemyWorldMap.jpg/640px-PtolemyWorldMap.jpg" alt="Tolomeo, Geografia" loading="lazy"></div>
+              <div class="event-content">
+                <h3>Tolomeo, Geografia</h3>
+                <p>L&#39;opera più influente della cartografia antica: un elenco di ottomila luoghi con relative coordinate di latitudine e longitudine, accompagnato da due proposte di proiezione conica per rappresentare la Terra su un piano. Riscoperta in Europa nel Quattrocento, ha condizionato la cartografia fino al Rinascimento.</p>
+              </div>
+            </div>
+          </article>
+        
+          <article class="event" data-color="#2c5f8a">
+            <span class="event-dot"></span>
+            <div class="event-year">II–XIII sec.</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/TabulaPeutingeriana.jpg/800px-TabulaPeutingeriana.jpg" alt="La Tabula Peutingeriana" loading="lazy"></div>
+              <div class="event-content">
+                <h3>La Tabula Peutingeriana</h3>
+                <p>Una lunghissima striscia pergamenacea (quasi 7 metri) che rappresenta l&#39;intera rete stradale dell&#39;Impero Romano: oltre 200.000 km di strade, circa 555 città e migliaia di altre indicazioni geografiche. Non è pensata per essere precisa geometricamente, ma per essere uno schema pratico degli itinerari.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+        </section><section class="era-block" data-color="#4b3b8a" data-fg="#ffffff" aria-label="Medioevo">
+          <div class="era-label">Medioevo</div>
+          <div class="events">
+          <article class="event" data-color="#4b3b8a">
+            <span class="event-dot"></span>
+            <div class="event-year">1154</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/TabulaRogeriana.jpg/640px-TabulaRogeriana.jpg" alt="al-Idrisi, Tabula Rogeriana" loading="lazy"></div>
+              <div class="event-content">
+                <h3>al-Idrisi, Tabula Rogeriana</h3>
+                <p>Realizzata dal geografo arabo al-Idrisi per re Ruggero II di Sicilia, fu per tre secoli la mappa del mondo più accurata mai prodotta. Orientata con il sud in alto, univa le conoscenze di Tolomeo alle informazioni più aggiornate dei navigatori arabi sull&#39;Oceano Indiano.</p>
+              </div>
+            </div>
+          </article>
+        
+          <article class="event" data-color="#4b3b8a">
+            <span class="event-dot"></span>
+            <div class="event-year">1283</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Hereford_Mappa_Mundi_1300.jpg/640px-Hereford_Mappa_Mundi_1300.jpg" alt="Il mappamondo di Hereford" loading="lazy"></div>
+              <div class="event-content">
+                <h3>Il mappamondo di Hereford</h3>
+                <p>Uno dei più celebri e dettagliati «mappamondi» medievali europei: non uno strumento di orientamento, ma una rappresentazione simbolica del mondo con Gerusalemme al centro e l&#39;Oriente in alto, secondo la visione cristiana dell&#39;epoca.</p>
+              </div>
+            </div>
+          </article>
+        
+          <article class="event" data-color="#4b3b8a">
+            <span class="event-dot"></span>
+            <div class="event-year">Fine XIII sec.</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Carte_Pisane_Portolan.jpg/640px-Carte_Pisane_Portolan.jpg" alt="La Carta Pisana" loading="lazy"></div>
+              <div class="event-content">
+                <h3>La Carta Pisana</h3>
+                <p>Il più antico portolano marittimo europeo giunto fino a noi. Rappresenta le coste del Mediterraneo con una precisione sorprendente per l&#39;epoca, grazie a una fitta rete di linee di rotta (le «lossodromie») tracciate a partire da rose dei venti: uno strumento pratico per i naviganti, non un mappamondo simbolico.</p>
+              </div>
+            </div>
+          </article>
+        
+          <article class="event" data-color="#4b3b8a">
+            <span class="event-dot"></span>
+            <div class="event-year">1402</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/KangnidoMap.jpg/640px-KangnidoMap.jpg" alt="Il Kangnido coreano" loading="lazy"></div>
+              <div class="event-content">
+                <h3>Il Kangnido coreano</h3>
+                <p>Un planisfero compilato in Corea, tra i più antichi a mostrare insieme Europa, Africa e Asia orientale, basato su carte cinesi oggi perdute. Dedica ampio spazio dettagliato alla Corea e al Giappone, riflettendo il punto di vista di chi lo ha realizzato.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+        </section><section class="era-block" data-color="#8a4b1f" data-fg="#ffffff" aria-label="Rinascimento">
+          <div class="era-label">Rinascimento</div>
+          <div class="events">
+          <article class="event" data-color="#8a4b1f">
+            <span class="event-dot"></span>
+            <div class="event-year">1492</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Behaims_Erdapfel.jpg/640px-Behaims_Erdapfel.jpg" alt="L&#39;Erdapfel di Martin Behaim" loading="lazy"></div>
+              <div class="event-content">
+                <h3>L&#39;Erdapfel di Martin Behaim</h3>
+                <p>Il globo terrestre più antico giunto fino a noi, costruito a Norimberga proprio nell&#39;anno del viaggio di Colombo: per questo non rappresenta ancora le Americhe. Mostra bene come, alla fine del Quattrocento, l&#39;Europa immaginasse ancora un mondo fatto solo di Europa, Africa e Asia.</p>
+              </div>
+            </div>
+          </article>
+        
+          <article class="event" data-color="#8a4b1f">
+            <span class="event-dot"></span>
+            <div class="event-year">1507</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Waldseemuller_map,_complete.jpg/800px-Waldseemuller_map,_complete.jpg" alt="Il planisfero di Waldseemüller" loading="lazy"></div>
+              <div class="event-content">
+                <h3>Il planisfero di Waldseemüller</h3>
+                <p>La prima mappa della storia a usare il nome «America» per indicare il Nuovo Mondo, in onore del navigatore Amerigo Vespucci. Il suo autore, Martin Waldseemüller, inventò anche il sistema degli spicchi (i «fusi») ancora oggi usato per costruire i globi terrestri di carta.</p>
+              </div>
+            </div>
+          </article>
+        
+          <article class="event" data-color="#8a4b1f">
+            <span class="event-dot"></span>
+            <div class="event-year">1569</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Mercator_1569_world_map_composite.jpg/800px-Mercator_1569_world_map_composite.jpg" alt="Mercatore" loading="lazy"></div>
+              <div class="event-content">
+                <h3>Mercatore</h3>
+                <p>Il cartografo fiammingo Gerardo Mercatore pubblica il planisfero che ancora oggi porta il suo nome, pensato appositamente per i naviganti: la sua proiezione mantiene inalterati gli angoli, così che una rotta a bussola diventa una linea retta sulla carta. Il prezzo da pagare è una forte deformazione delle dimensioni dei territori lontani dall&#39;equatore.</p>
+              </div>
+            </div>
+          </article>
+        
+          <article class="event" data-color="#8a4b1f">
+            <span class="event-dot"></span>
+            <div class="event-year">1570</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Theatrum_Orbis_Terrarum,_by_Abraham_Ortelius,_World,_1572.jpg/640px-Theatrum_Orbis_Terrarum,_by_Abraham_Ortelius,_World,_1572.jpg" alt="Ortelius, Theatrum Orbis Terrarum" loading="lazy"></div>
+              <div class="event-content">
+                <h3>Ortelius, Theatrum Orbis Terrarum</h3>
+                <p>Considerato il primo vero atlante moderno: settanta carte geografiche rilegate insieme e accompagnate da testi esplicativi, pubblicato ad Anversa e più volte aggiornato nei decenni successivi in diverse lingue europee.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+        </section><section class="era-block" data-color="#1f6f6f" data-fg="#ffffff" aria-label="Cartografia scientifica (Settecento)">
+          <div class="era-label">Cartografia scientifica (Settecento)</div>
+          <div class="events">
+          <article class="event" data-color="#1f6f6f">
+            <span class="event-dot"></span>
+            <div class="event-year">1740–1793</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Carte_de_Cassini_Paris_BNF07711505.jpg/640px-Carte_de_Cassini_Paris_BNF07711505.jpg" alt="La Carte de Cassini" loading="lazy"></div>
+              <div class="event-content">
+                <h3>La Carte de Cassini</h3>
+                <p>In Francia, tre generazioni della famiglia Cassini realizzano la prima rilevazione sistematica «a tappeto» di un intero paese, basata sulla triangolazione geodetica: una rivoluzione nel modo di produrre carte, che passano dall&#39;essere disegni più o meno accurati a misurazioni scientifiche del territorio.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+        </section><section class="era-block" data-color="#7a1f3d" data-fg="#ffffff" aria-label="Età contemporanea">
+          <div class="era-label">Età contemporanea</div>
+          <div class="events">
+          <article class="event" data-color="#7a1f3d">
+            <span class="event-dot"></span>
+            <div class="event-year">1974</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Gall%E2%80%93Peters_projection_SW.jpg/640px-Gall%E2%80%93Peters_projection_SW.jpg" alt="La proiezione di Peters" loading="lazy"></div>
+              <div class="event-content">
+                <h3>La proiezione di Peters</h3>
+                <p>Il tedesco Arno Peters propone una proiezione che restituisce le vere proporzioni tra le superfici dei continenti, capovolgendo la logica di Mercatore: l&#39;Africa e il Sud America appaiono molto più grandi, ma le forme dei territori risultano visibilmente allungate, soprattutto vicino all&#39;equatore.</p>
+              </div>
+            </div>
+          </article>
+        
+          <article class="event" data-color="#7a1f3d">
+            <span class="event-dot"></span>
+            <div class="event-year">2018–2026</div>
+            <div class="event-body">
+              <div class="event-media"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Equal_Earth_projection_SW.jpg/640px-Equal_Earth_projection_SW.jpg" alt="Equal Earth e la risoluzione ONU" loading="lazy"></div>
+              <div class="event-content">
+                <h3>Equal Earth e la risoluzione ONU</h3>
+                <p>Nel 2018 i cartografi Bojan Šavrič, Bernhard Jenny e Tom Patterson elaborano la proiezione Equal Earth, che mantiene le vere proporzioni dei continenti riducendo però le distorsioni delle forme rispetto a quella di Peters. Il 4 settembre 2026 l&#39;Assemblea Generale delle Nazioni Unite ne raccomanda ufficialmente l&#39;uso al posto della proiezione di Mercatore in ambito scolastico e istituzionale, accogliendo anni di richieste dell&#39;Unione Africana e del Togo con la campagna «Correct the Map».</p>
+              </div>
+            </div>
+          </article>
+        </div>
+        </section>
+  </main>
+  <footer class="end-space"></footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Chiudi">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+<script>
+(function(){
+  var isDual = false;
+  var bar = document.getElementById('progress-bar');
+
+  if(!isDual){
+    var bg = document.getElementById('bg');
+    var blocks = Array.prototype.slice.call(document.querySelectorAll('.era-block'));
+    var blockObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          bg.style.backgroundColor = entry.target.getAttribute('data-color');
+        }
+      });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    blocks.forEach(function(b){ blockObserver.observe(b); });
+  }
+
+  var events = Array.prototype.slice.call(document.querySelectorAll('.event'));
+  var eventObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.18 });
+  events.forEach(function(ev){ eventObserver.observe(ev); });
+
+  function onScroll(){
+    var h = document.documentElement;
+    var scrollable = h.scrollHeight - h.clientHeight;
+    var pct = scrollable > 0 ? (h.scrollTop / scrollable) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  // Lightbox: clic su una foto per ingrandirla
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightbox-img');
+  var lightboxClose = document.getElementById('lightbox-close');
+
+  function openLightbox(src, alt){
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || '';
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.src = '';
+  }
+
+  document.querySelectorAll('.event-media img').forEach(function(img){
+    img.addEventListener('click', function(){
+      openLightbox(img.getAttribute('src'), img.getAttribute('alt'));
+    });
+  });
+  lightbox.addEventListener('click', closeLightbox);
+  lightboxClose.addEventListener('click', function(e){ e.stopPropagation(); closeLightbox(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeLightbox();
+  });
+})();
+</script>
+<!-- zoom-ctrl -->
+<style>
+.zm{position:fixed;top:10px;right:10px;z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,#fff);border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgb(0 0 0 / .15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,#eef);color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv>100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+(function(){
+  var Z = [.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], i = 4, K = 'ripasso-zoom';
+  var box = document.querySelector('.zm'), lab = box.querySelector('[data-zv]');
+  try { var s = parseFloat(localStorage.getItem(K)); if (Z.indexOf(s) >= 0) i = Z.indexOf(s); } catch (e) {}
+  function set(n){
+    i = Math.max(0, Math.min(Z.length - 1, n)); var z = Z[i];
+    document.documentElement.style.zoom = z; box.style.zoom = 1 / z;
+    lab.textContent = Math.round(z * 100) + '%';
+    try { localStorage.setItem(K, z); } catch (e) {}
+  }
+  box.addEventListener('click', function(e){ var b = e.target.closest('[data-z]'); if (!b) return; var d = +b.dataset.z; set(d ? i + d : 4); });
+  document.addEventListener('keydown', function(e){
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test((e.target || {}).tagName || '') || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === '+' || e.key === '=') { e.preventDefault(); set(i + 1); }
+    else if (e.key === '-') { e.preventDefault(); set(i - 1); }
+    else if (e.key === '0') { e.preventDefault(); set(4); }
+  });
+  set(i);
+})();
+</script>
+</body>
+</html>

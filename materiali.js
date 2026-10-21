@@ -54,7 +54,6 @@ const MODULI = [
           { tipo: "Tappa 4", titolo: "Guardiamo il planisfero", link: "geografia/prima/perche-la-geografia/attivita/fase-4-guardiamo-il-planisfero.html", data: "2026-10-15" },
           { tipo: "Cruciverba", titolo: "Le parole della Terra vista dalla Luna", link: "geografia/prima/perche-la-geografia/attivita/fase-5-cruciverba.html", data: "2026-10-15" },
           { tipo: "Se c'è tempo", titolo: "Carte che cambiano forma", link: "geografia/prima/perche-la-geografia/attivita/fase-6-carte-che-cambiano-forma.html", data: "2026-10-15" },
-          { tipo: "Linea del tempo", titolo: "Una piccola storia dei viaggi nello spazio", link: "geografia/prima/perche-la-geografia/attivita/viaggi-nello-spazio.html", data: "2026-10-15" },
           { tipo: "Approfondimento", titolo: "La storia della cartografia", link: "geografia/prima/perche-la-geografia/attivita/storia-della-cartografia.html", data: "2026-10-15" }
         ]
       },
