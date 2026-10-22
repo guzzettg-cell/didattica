@@ -408,7 +408,7 @@ function showCard(key, kid, form){
   } else {
     h+=`<div class="card t-K"><button type="button" class="btn closex" data-close>Chiudi</button><span class="kind">${TIPI1.K}</span><span class="word">${esc(form)}</span>`;
   }
-  const n=COUNTS[key]; if(n>1) h+=`<span class="cnt">Compare ${n} volte in questo testo.</span>`;
+  const n=COUNTS[key]; if(n>1 && key!=="g681") h+=`<span class="cnt">Compare ${n} volte in questo testo.</span>`;
   if(kid && DATA.kids[kid]){
     const k=DATA.kids[kid];
     const eds=Object.keys(k.ed).sort();
