@@ -245,7 +245,7 @@ const TABINFO = {storia:"La cornice", colombo:"Dialogo · 1492", copernico:"Dial
 const TIPI = {A:"Forma antica", D:"Parola difficile", E:"Espressione", N:"Nomi e riferimenti"};
 const TIPI1 = {A:"Forma antica", D:"Parola difficile", E:"Espressione", N:"Nome o riferimento", K:"Parola del Piccolo Dizionario"};
 const EDURL = {
- "2023":"https://www.pordenonelegge.it/tuttolanno/scuola-e-formazione/piccolo-dizionario-immaginario-delle-ragazze-e-dei-ragazzi/piccolo-dizionario-immaginario-delle-ragazze-e-dei-ragazzi-2023",
+ "2023":"https://static.pordenonelegge.it/assets/pdf/2023/piccolo-dizionario.pdf",
  "2024":"https://www.pordenonelegge.it/tuttolanno/scuola-e-formazione/piccolo-dizionario-immaginario-delle-ragazze-e-dei-ragazzi/piccolo-dizionario-immaginario-delle-ragazze-e-dei-ragazzi-2024/ESITI%20piccolo-dizionario-immaginario-delle-ragazze-e-dei-ragazzi-2024",
  "2025":"https://www.pordenonelegge.it/tuttolanno/scuola-e-formazione/piccolo-dizionario-immaginario-delle-ragazze-e-dei-ragazzi/piccolo-dizionario-immaginario-delle-ragazze-e-dei-ragazzi-2025/ESITI%20piccolo-dizionario-immaginario-delle-ragazze-e-dei-ragazzi-2025",
  "2026":"https://www.pordenonelegge.it/tuttolanno/scuola-e-formazione/piccolo-dizionario-immaginario-delle-ragazze-e-dei-ragazzi/piccolo-dizionario-immaginario-delle-ragazze-e-dei-ragazzi-2026/ESITI%20piccolo-dizionario-immaginario-delle-ragazze-e-dei-ragazzi-2026"};
@@ -413,7 +413,7 @@ function showCard(key, kid, form){
     const k=DATA.kids[kid];
     const eds=Object.keys(k.ed).sort();
     h+=`<div class="kidbox"><span class="kh">● Nel Piccolo Dizionario dei ragazzi</span><span>La parola <b>${esc(k.forma)}</b> (${esc(k.cat)}) è stata definita da ragazze e ragazzi come voi. Leggi le loro definizioni:</span>
-      <div class="eds">${eds.map(y=>`<a href="${EDURL[y]}" target="_blank" rel="noopener">${y} · p. ${k.ed[y][1].join(", ")}</a>`).join("")}</div>${k.nota?`<span>${esc(k.nota)}</span>`:""}</div>`;
+      <div class="eds">${eds.map(y=>`<a href="${EDURL[y]}${/\.pdf$/.test(EDURL[y])?"#page="+k.ed[y][1][0]:""}" target="_blank" rel="noopener">${y} · p. ${k.ed[y][1].join(", ")}</a>`).join("")}</div>${k.nota?`<span>${esc(k.nota)}</span>`:""}</div>`;
   }
   h+=`<div class="actions"><button type="button" class="btn" data-addmine="${esc(form)}">Non mi è ancora chiara</button></div></div>`;
   side.innerHTML=h+mineHTML(); side.classList.add("open");
