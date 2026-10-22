@@ -51,7 +51,17 @@ const MODULI = [
           { tipo: "Lezione", titolo: "Il cielo sopra di noi", descrizione: "Le foto della Terra dal 1960 a oggi, le voci degli astronauti, la salita da Roma. Fasi 1–5 in geografia; giornali, parole e mito in italiano.", link: "italiano/prima/mito-ed-epica/il-cielo-sopra-di-noi.html", data: "2026-10-21" }
         ]
       },
-      { titolo: "L'orientamento e i suoi strumenti", attivita: [] },
+      {
+        titolo: "L'orientamento e i suoi strumenti",
+        descrizione: "Punti di riferimento personali e universali, il Sole e i punti cardinali, la Stella polare e la Croce del Sud, la rotazione della Terra.",
+        data: "2026-10-23",
+        attivita: [
+          { tipo: "Attività 1", titolo: "Il paese delle indicazioni", descrizione: "Missioni su una piantina: punti di riferimento personali, punti cardinali e percorsi inventati dai gruppi.", link: "geografia/prima/orientamento/attivita/il-paese-delle-indicazioni.html", data: "2026-10-23" },
+          { tipo: "Attività 2", titolo: "Il cammino del Sole", descrizione: "Dove si trova il Sole durante il giorno, l'ombra del bastone e il confronto tra città.", link: "geografia/prima/orientamento/attivita/il-cammino-del-sole.html", data: "2026-10-23" },
+          { tipo: "Attività 3", titolo: "Orientarsi con le stelle", descrizione: "Trovare la Stella polare con il Grande Carro e il Sud con la Croce del Sud.", link: "geografia/prima/orientamento/attivita/orientarsi-con-le-stelle.html", data: "2026-10-23" },
+          { tipo: "Attività 4", titolo: "La Terra che gira", descrizione: "La rotazione terrestre vista dallo spazio e il moto apparente del Sole visto da Roma.", link: "geografia/prima/orientamento/attivita/la-terra-che-gira.html", data: "2026-10-23" }
+        ]
+      },
       {
         titolo: "Il reticolato geografico",
         descrizione: "A tappe: poli, Equatore, paralleli, meridiani, Greenwich, coordinate.",

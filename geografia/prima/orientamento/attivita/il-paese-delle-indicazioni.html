@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Il paese delle indicazioni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+/* Layout: schede delle missioni in alto; sotto, piantina del paese grande e quaderno della missione */
+:root{
+  --bg:#edf1f5; --surface:#ffffff; --ink:#15233a; --muted:#56657a; --line:#d2dae4;
+  --accent:#2c5c9c; --walker:#d1531f; --ok:#2e7d4f; --no:#b3261e;
+  --street:#dfe4ea; --house:#c9d1db; --house-in:#b4bfcc; --lm:#f3d9a4; --lm-edge:#c9a35a;
+  --park:#a9d39b; --tree:#5f9e52; --water:#8cc3ec; --water-edge:#5d9fd3; --plaza:#e9e3d6; --field:#8fc77e; --rail:#8a7a62;
+  --f-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1622; --surface:#172131; --ink:#e6ecf3; --muted:#9aa8ba; --line:#2b384c;
+  --accent:#86aee6; --walker:#ff8a52; --ok:#6fcf97; --no:#ff8a80;
+  --street:#24303f; --house:#334257; --house-in:#3f5068; --lm:#6b5631; --lm-edge:#a4844a;
+  --park:#2f5a3a; --tree:#5c9a5f; --water:#24557d; --water-edge:#3f7fb3; --plaza:#3a3d44; --field:#355f3c; --rail:#a8977c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1622; --surface:#172131; --ink:#e6ecf3; --muted:#9aa8ba; --line:#2b384c;
+  --accent:#86aee6; --walker:#ff8a52; --ok:#6fcf97; --no:#ff8a80;
+  --street:#24303f; --house:#334257; --house-in:#3f5068; --lm:#6b5631; --lm-edge:#a4844a;
+  --park:#2f5a3a; --tree:#5c9a5f; --water:#24557d; --water-edge:#3f7fb3; --plaza:#3a3d44; --field:#355f3c; --rail:#a8977c; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1280px;margin:0 auto;padding-block:20px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(1.9rem,4.5vw,2.8rem);line-height:1.05;margin:0;text-wrap:balance}
+h1 span{color:var(--walker)}
+.lede{margin:4px 0 0;max-width:70ch;color:var(--muted)}
+h2{font-family:var(--f-display);font-weight:600;font-size:1.25rem;margin:0;text-wrap:balance}
+
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tab{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 12px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.tab .n{font-family:var(--f-display);font-weight:800;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tab[aria-selected="true"] .n{color:var(--bg)}
+.tab .tick{color:var(--ok);font-weight:700}
+.tab[aria-selected="true"] .tick{color:var(--bg)}
+
+.grid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:980px){.grid{grid-template-columns:1fr}}
+.mapBox{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.scroll{overflow-x:auto}
+svg{display:block;width:100%;min-width:640px;height:auto}
+.mapBar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center;font-size:.9rem;color:var(--muted);padding:0 4px}
+.facing b{color:var(--walker)}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.brief{margin:0;color:var(--muted)}
+blockquote{margin:0;padding:10px 14px;border-left:4px solid var(--walker);background:var(--bg);border-radius:0 8px 8px 0;font-size:1.05rem}
+.task{margin:0;font-weight:700}
+.pad{display:grid;gap:8px}
+.pad.rel{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pad.card{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:". n ." "w s e";max-width:330px}
+.pad.card [data-d="0"]{grid-area:n}.pad.card [data-d="1"]{grid-area:e}.pad.card [data-d="2"]{grid-area:s}.pad.card [data-d="3"]{grid-area:w}
+button{font:inherit;font-size:.95rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:9px 10px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.big{font-weight:700}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.arrive{background:var(--walker);border-color:var(--walker);color:#fff;font-weight:700}
+label.chk{display:inline-flex;gap:6px;align-items:center;font-size:.92rem;cursor:pointer}
+.fb{margin:0;padding:10px 12px;border-radius:8px;border:1px solid var(--line)}
+.fb.ok{border-color:var(--ok)}.fb.ok b{color:var(--ok)}
+.fb.no{border-color:var(--no)}.fb.no b{color:var(--no)}
+.learn{margin:0;padding:12px 14px;background:var(--bg);border-radius:8px}
+.learn strong{display:block;font-family:var(--f-display);font-weight:600;margin-bottom:2px}
+.kbd{font-size:.82rem;color:var(--muted);margin:0}
+.opts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:420px){.opts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.opts button.right{border-color:var(--ok);color:var(--ok);font-weight:700}
+.opts button.wrong{border-color:var(--no);color:var(--no)}
+textarea{font:inherit;font-size:1rem;width:100%;min-height:9em;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);resize:vertical}
+textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+blockquote.mine{white-space:pre-line}
+.log{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;font-size:.92rem;font-variant-numeric:tabular-nums}
+.log li{display:flex;flex-wrap:wrap;gap:6px 12px;padding:6px 10px;border-radius:6px;background:var(--bg)}
+.log .y{color:var(--ok);font-weight:700}.log .n2{color:var(--no);font-weight:700}
+.goalbox{fill:none;stroke:var(--ok);stroke-width:4;stroke-dasharray:8 6}
+input[type=text]{font:inherit;font-size:1rem;width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.routes{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.rcard{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;text-align:left;align-items:center;padding:10px 12px}
+.rcard .rid{grid-row:span 2;font-family:var(--f-display);font-weight:800;font-size:1.5rem;color:var(--walker)}
+.chip{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.chip.facile{color:var(--ok)}.chip.difficile{color:var(--no)}
+
+/* piantina */
+.street{stroke:var(--street);stroke-width:20;stroke-linecap:round}
+.bridge{stroke:var(--street);stroke-width:20}
+.rail{stroke:var(--rail);stroke-width:3}
+.house{fill:var(--house)}
+.house-in{fill:var(--house-in)}
+.lm{fill:var(--lm);stroke:var(--lm-edge);stroke-width:2}
+.park{fill:var(--park)}
+.tree{fill:var(--tree)}
+.plaza{fill:var(--plaza)}
+.water{fill:var(--water)}
+.river{fill:var(--water);stroke:var(--water-edge);stroke-width:2}
+.field{fill:var(--field)}
+.fieldline{fill:none;stroke:#ffffff;stroke-opacity:.8;stroke-width:2}
+.lbl{fill:var(--ink);font-family:var(--f-body);font-size:13px;font-weight:700;text-anchor:middle;paint-order:stroke;stroke:var(--surface);stroke-width:3px}
+.riverlbl{fill:var(--water-edge);font-family:var(--f-display);font-weight:600;font-size:15px;font-style:italic;letter-spacing:.2em}
+.rose text{fill:var(--ink);font-family:var(--f-display);font-weight:800;font-size:16px;text-anchor:middle}
+.rose .needle{fill:var(--walker)}
+.rose .needle2{fill:var(--muted)}
+.trail{fill:none;stroke:var(--walker);stroke-width:4;stroke-dasharray:2 9;stroke-linecap:round;opacity:.8}
+.walker{transition:transform .35s ease}
+.walker circle{fill:var(--walker);stroke:var(--surface);stroke-width:3}
+.walker path{fill:#fff}
+.goal{fill:none;stroke:var(--ok);stroke-width:4}
+@media (prefers-reduced-motion: reduce){.walker{transition:none}}
+
+.lnav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;font-size:.9rem;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.lnav a{color:var(--accent);text-decoration:none;font-weight:700}
+.lnav a:hover{text-decoration:underline}
+.lnav .passi{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;color:var(--muted)}
+</style>
+
+<div class="wrap">
+  <nav class="lnav" aria-label="Lezione"><a href="../../../index.html?classe=prima#modulo-prima-i">← Geografia · L'orientamento e i suoi strumenti</a><span class="passi"><span>Attività 1 di 4</span><a href="il-cammino-del-sole.html">Il cammino del Sole →</a></span></nav>
+  <header>
+    <div class="eyebrow">Geografia · I punti di riferimento</div>
+    <h1>Il paese delle <span>indicazioni</span></h1>
+    <p class="lede">Segui le indicazioni per muoverti nel paese, tra strade, piazze, un parco e un fiume. Scoprirai quando bastano i punti di riferimento personali e quando servono i punti cardinali.</p>
+  </header>
+
+  <div class="tabs" role="tablist" id="tabs"></div>
+
+  <div class="grid">
+    <div class="mapBox">
+      <div class="scroll">
+        <svg id="map" viewBox="0 0 950 620" role="img" aria-label="Piantina del paese con le strade, gli edifici, il fiume e il pallino che si muove"></svg>
+      </div>
+      <div class="mapBar">
+        <span class="facing" id="facing"></span>
+        <label class="chk"><input type="checkbox" id="names"> Mostra i nomi dei luoghi</label>
+      </div>
+    </div>
+    <section class="panel" id="panel" aria-live="polite"></section>
+  </div>
+</div>
+
+<script>
+(function(){
+  const S = 90, M = 40, COLS = 10, ROWS = 7, RIVER = 4, BRIDGES = [2,7];
+  const DIR = ['Nord','Est','Sud','Ovest'];
+  const DX = [0,1,0,-1], DY = [-1,0,1,0];
+  const $ = id => document.getElementById(id);
+  const NS = 'http://www.w3.org/2000/svg';
+  const nx = x => M + x*S, ny = y => M + y*S;
+
+  // luoghi: bx, by = isolato in alto a sinistra; w, h = quanti isolati occupa
+  const PLACES = [
+    { bx:0, by:0, name:['Stazione'] },
+    { bx:3, by:0, name:['Ufficio','postale'] },
+    { bx:6, by:0, name:['Ospedale'] },
+    { bx:8, by:0, name:['Biblioteca'] },
+    { bx:1, by:1, w:2, h:2, name:['Parco'], kind:'park' },
+    { bx:4, by:1, name:['Municipio'] },
+    { bx:5, by:1, name:['Piazza','fontana'], kind:'plaza' },
+    { bx:7, by:1, name:['Cinema'] },
+    { bx:0, by:2, name:['Scuola'] },
+    { bx:4, by:2, name:['Mercato','comunale'] },
+    { bx:6, by:2, name:['Farmacia'] },
+    { bx:8, by:2, name:['Palestra'] },
+    { bx:2, by:3, name:['Edicola'] },
+    { bx:5, by:3, name:['Panetteria'] },
+    { bx:7, by:3, name:['Bar','Sport'] },
+    { bx:1, by:5, name:['Super-','mercato'] },
+    { bx:3, by:5, name:['Pizzeria'] },
+    { bx:5, by:5, w:2, h:1, name:['Campo sportivo'], kind:'field' },
+    { bx:8, by:5, name:['Gelateria'] }
+  ];
+  // tratti di strada che non esistono: dentro il parco, dentro il campo, sul fiume (tranne i ponti)
+  const BLOCKED = new Set(['h,1,2','h,2,2','v,2,1','v,2,2','v,6,5']);
+  for (let x = 0; x < COLS; x++) if (!BRIDGES.includes(x)) BLOCKED.add('v,'+x+','+RIVER);
+  function edgeKey(x,y,d){
+    if (d === 1) return 'h,'+x+','+y; if (d === 3) return 'h,'+(x-1)+','+y;
+    if (d === 2) return 'v,'+x+','+y; return 'v,'+x+','+(y-1);
+  }
+  function canGo(x,y,d){
+    const x2 = x+DX[d], y2 = y+DY[d];
+    if (x2 < 0 || y2 < 0 || x2 >= COLS || y2 >= ROWS) return 'end';
+    if (BLOCKED.has(edgeKey(x,y,d))){
+      const k = edgeKey(x,y,d), p = k.split(',');
+      return (p[0] === 'v' && +p[2] === RIVER) ? 'river' : 'blocked';
+    }
+    return 'ok';
+  }
+
+  const MISSIONS = [
+    { title:'Le indicazioni di Luca', mode:'rel', start:[1,3], f:1, names:true, goals:[[4,1]],
+      brief:'Luca ti ha invitato a casa sua e ti ha scritto un messaggio:',
+      quote:'«Quando esci da scuola, vai dritto. Supera l\'edicola e prendi la seconda strada a sinistra. Passa davanti al mercato e fermati all\'incrocio subito dopo il municipio: abito lì.»',
+      task:'Segui le sue indicazioni con i pulsanti. Quando pensi di essere arrivato, premi «Sono arrivato!».',
+      ok:'Sei a casa di Luca!',
+      wrong:'Qui non c\'è la casa di Luca. Rileggi: devi contare le strade a sinistra solo dopo aver superato l\'edicola.',
+      learn:'Hai usato <b>punti di riferimento personali</b>: l\'edicola, il mercato, il municipio, «la seconda a sinistra». Funzionano bene se conosci il paese.' },
+    { title:'Il negozio della signora Rosa', mode:'rel', start:[1,1], f:1, names:true, goals:[[6,3],[5,3]], hint:true,
+      brief:'Sei appena sceso dal treno e vuoi comprare la focaccia. Un passante ti risponde:',
+      quote:'«Facile! Vai sempre dritto, lungo il parco, fino alla piazza della fontana. Subito dopo la piazza gira a destra e supera la farmacia: il negozio della signora Rosa è all\'angolo con la prima strada a destra.»',
+      task:'Segui le indicazioni. Sulla carta, però, non c\'è nessun «negozio della signora Rosa»…',
+      ok:'Il negozio della signora Rosa è la panetteria!',
+      wrong:'Non sei davanti al negozio della signora Rosa. Se non sai qual è, chiedi a un abitante.',
+      learn:'Il passante ha usato un punto di riferimento che conosce solo chi abita qui. I punti di riferimento personali <b>dipendono dall\'esperienza di chi parla</b>: per un turista possono non servire a niente.' },
+    { title:'Al cinema con i punti cardinali', mode:'card', start:[1,0], f:1, names:false, goals:[[7,2]],
+      brief:'Ora i nomi dei luoghi sono nascosti: è come trovarsi in un paese che non conosci. Alla stazione c\'è un cartello:',
+      quote:'«Cinema: dalla stazione vai verso Est per 6 incroci, poi verso Sud per 2 incroci.»',
+      task:'Muoviti con i punti cardinali. La rosa dei venti in alto a destra ti dice dov\'è il Nord.',
+      ok:'Sei all\'ingresso del cinema! Accendi «Mostra i nomi dei luoghi» per controllare.',
+      wrong:'Non è qui. Conta di nuovo gli incroci: 6 verso Est, poi 2 verso Sud.',
+      learn:'Nord, Sud, Est e Ovest valgono per tutti e ovunque, anche se non conosci nessun edificio: sono <b>punti di riferimento universali</b>.' },
+    { title:'Oltre il fiume', mode:'card', start:[0,3], f:1, names:false, goals:[[3,5]],
+      brief:'Sei ancora in un paese sconosciuto. Sul sito della pizzeria trovi queste indicazioni:',
+      quote:'«Dall\'angolo della scuola vai verso Est per 2 incroci. Poi vai verso Sud e attraversa il fiume sul ponte. Dall\'altra parte, vai verso Est per 1 incrocio: siamo lì.»',
+      task:'Attenzione: il fiume si attraversa solo sui ponti.',
+      ok:'Sei alla pizzeria! Accendi «Mostra i nomi dei luoghi» per controllare.',
+      wrong:'Non è qui. Rileggi le indicazioni: prima Est, poi Sud attraverso il ponte, poi ancora Est.',
+      learn:'Le indicazioni migliori <b>uniscono</b> i punti cardinali a un elemento che vedono tutti, come il fiume e il ponte. Il negozio della signora Rosa, invece, lo conosce solo chi abita lì.' },
+    { title:'Destra o Est?', mode:'quiz', start:[4,3], f:0, names:true,
+      brief:'«Destra» e «sinistra» cambiano a seconda di dove guardi. I punti cardinali, invece, restano sempre gli stessi.',
+      qs:[ { f:0, turn:1, text:'Il pallino guarda verso <b>Nord</b>. Se gira a destra, verso dove guarda?' },
+           { f:2, turn:1, text:'Ora guarda verso <b>Sud</b>. Se gira a destra, verso dove guarda?' },
+           { f:3, turn:1, text:'Ora guarda verso <b>Ovest</b>. Se gira a destra, verso dove guarda?' },
+           { f:1, turn:-1, text:'Ora guarda verso <b>Est</b>. Se gira a sinistra, verso dove guarda?' } ],
+      learn:'Girare «a destra» porta verso Est se guardi a Nord, ma verso Ovest se guardi a Sud. Per questo, per dare indicazioni a chiunque, i punti cardinali sono più sicuri.',
+      after:'Sul quaderno: scrivi due modi per andare dalla <b>scuola</b> alla <b>gelateria</b>, uno con punti di riferimento personali e uno con i punti cardinali. Attenzione al fiume! Poi mettetele alla prova nella missione 6.' },
+    { title:'Percorsi da inventare', mode:'test', start:[1,3], f:1, names:true }
+  ];
+
+  // luoghi di partenza e di arrivo per i percorsi dei gruppi: b = isolato, s = incrocio di partenza e direzione
+  const DEST = {
+    scuola:       { b:[0,2], from:'dalla scuola', to:'alla scuola', s:[1,3,1], out:'dall\'uscita della scuola' },
+    stazione:     { b:[0,0], from:'dalla stazione', to:'alla stazione', s:[1,1,1], out:'dall\'uscita della stazione' },
+    ospedale:     { b:[6,0], from:'dall\'ospedale', to:'all\'ospedale', s:[6,1,2], out:'dall\'uscita dell\'ospedale' },
+    biblioteca:   { b:[8,0], from:'dalla biblioteca', to:'alla biblioteca', s:[8,1,3], out:'dall\'uscita della biblioteca' },
+    supermercato: { b:[1,5], from:'dal supermercato', to:'al supermercato', s:[2,5,0], out:'dall\'uscita del supermercato' },
+    palestra:     { b:[8,2], from:'dalla palestra', to:'alla palestra', s:[8,3,3], out:'dall\'uscita della palestra' },
+    campo:        { b:[5,5], w:2, from:'dal campo sportivo', to:'al campo sportivo', s:[5,5,3], out:'dall\'ingresso del campo sportivo' },
+    cinema:       { b:[7,1], from:'dal cinema', to:'al cinema', s:[7,2,2], out:'dall\'uscita del cinema' },
+    gelateria:    { b:[8,5], from:'dalla gelateria', to:'alla gelateria' },
+    pizzeria:     { b:[3,5], from:'dalla pizzeria', to:'alla pizzeria' },
+    edicola:      { b:[2,3], from:'dall\'edicola', to:'all\'edicola' },
+    postale:      { b:[3,0], from:'dall\'ufficio postale', to:'all\'ufficio postale' },
+    farmacia:     { b:[6,2], from:'dalla farmacia', to:'alla farmacia' },
+    municipio:    { b:[4,1], from:'dal municipio', to:'al municipio' }
+  };
+  const ROUTES = [
+    ['A','scuola','gelateria'], ['B','stazione','biblioteca'], ['C','ospedale','pizzeria'], ['D','supermercato','cinema'],
+    ['E','biblioteca','edicola'], ['F','palestra','postale'], ['G','campo','farmacia'], ['H','cinema','scuola']
+  ].map(([id,a,b]) => makeRoute(id,a,b));
+  function makeRoute(id, a, b){
+    const A = DEST[a], B = DEST[b], goals = [];
+    for (let x = B.b[0]; x <= B.b[0]+(B.w||1); x++) for (let y = B.b[1]; y <= B.b[1]+(B.h||1); y++) goals.push([x,y]);
+    const r = { id, a, b, goals, title: cap(A.from) + ' ' + B.to };
+    r.best = shortest(A.s[0], A.s[1], goals);
+    r.river = (A.s[1] > RIVER) !== (B.b[1] > RIVER);
+    r.level = r.river ? 'difficile' : (r.best <= 6 ? 'facile' : 'medio');
+    return r;
+  }
+  function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+  function shortest(x0, y0, goals){
+    const seen = new Set([x0+','+y0]); let q = [[x0,y0]], d = 0;
+    while (q.length){
+      const nq = [];
+      for (const [x,y] of q){
+        if (goals.some(([gx,gy]) => gx === x && gy === y)) return d;
+        for (let k = 0; k < 4; k++){
+          if (canGo(x,y,k) !== 'ok') continue;
+          const id = (x+DX[k])+','+(y+DY[k]);
+          if (!seen.has(id)){ seen.add(id); nq.push([x+DX[k], y+DY[k]]); }
+        }
+      }
+      q = nq; d++;
+    }
+    return null;
+  }
+
+  const st = { m:0, x:0, y:0, f:0, rot:0, trail:[], names:true, hint:false, result:null, done:MISSIONS.map(() => false), q:0, qAns:null,
+    test:{ phase:'choose', route:null, kind:'pers', text:'', group:'', log:[] }, showGoal:false };
+  try { const saved = localStorage.getItem('paese-indicazioni-testo'); if (saved) st.test.text = saved; } catch(e){}
+  const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const KIND = { pers:'Personali', card:'Punti cardinali' };
+
+  // ---------- piantina ----------
+  const svg = $('map');
+  let walkerEl = null;
+  function el(tag, attrs, parent){ const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); (parent||svg).appendChild(e); return e; }
+  const covered = new Map();
+  PLACES.forEach(p => { for (let i = 0; i < (p.w||1); i++) for (let j = 0; j < (p.h||1); j++) covered.set((p.bx+i)+','+(p.by+j), p); });
+  const trailPts = () => st.trail.map(([x,y]) => nx(x)+','+ny(y)).join(' ');
+
+  function drawMap(){
+    svg.textContent = '';
+    // fiume
+    el('rect', { class:'river', x:nx(0)-30, y:ny(RIVER)+14, width:nx(COLS-1)-nx(0)+60, height:S-28, rx:10 });
+    const rl = el('text', { class:'riverlbl', x:nx(4)+S/2, y:ny(RIVER)+S/2+5 }); rl.textContent = 'FIUME';
+    // strade
+    for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS-1; x++)
+      if (!BLOCKED.has('h,'+x+','+y)) el('line', { class:'street', x1:nx(x), y1:ny(y), x2:nx(x+1), y2:ny(y) });
+    for (let x = 0; x < COLS; x++) for (let y = 0; y < ROWS-1; y++){
+      if (BLOCKED.has('v,'+x+','+y)) continue;
+      if (y === RIVER){
+        el('line', { class:'bridge', x1:nx(x), y1:ny(y), x2:nx(x), y2:ny(y+1) });
+        el('line', { class:'rail', x1:nx(x)-12, y1:ny(y)+16, x2:nx(x)-12, y2:ny(y+1)-16 });
+        el('line', { class:'rail', x1:nx(x)+12, y1:ny(y)+16, x2:nx(x)+12, y2:ny(y+1)-16 });
+      } else el('line', { class:'street', x1:nx(x), y1:ny(y), x2:nx(x), y2:ny(y+1) });
+    }
+    // isolati
+    const done = new Set();
+    for (let by = 0; by < ROWS-1; by++) for (let bx = 0; bx < COLS-1; bx++){
+      if (by === RIVER) continue;
+      const p = covered.get(bx+','+by);
+      if (p){
+        if (done.has(p)) continue; done.add(p);
+        const x0 = nx(p.bx)+14, y0 = ny(p.by)+14, w = (p.w||1)*S-28, h = (p.h||1)*S-28;
+        if (p.kind === 'park'){
+          el('rect', { class:'park', x:x0, y:y0, width:w, height:h, rx:8 });
+          for (let i = 0; i < 14; i++){ const a = (i*0.618)%1, b = (i*0.381+0.13)%1; el('circle', { class:'tree', cx:x0+12+a*(w-24), cy:y0+12+b*(h-24), r:8 }); }
+        } else if (p.kind === 'field'){
+          el('rect', { class:'field', x:x0, y:y0, width:w, height:h, rx:6 });
+          el('rect', { class:'fieldline', x:x0+8, y:y0+8, width:w-16, height:h-16 });
+          el('line', { class:'fieldline', x1:x0+w/2, y1:y0+8, x2:x0+w/2, y2:y0+h-8 });
+          el('circle', { class:'fieldline', cx:x0+w/2, cy:y0+h/2, r:10 });
+        } else if (p.kind === 'plaza' && st.names){
+          el('rect', { class:'plaza', x:x0, y:y0, width:w, height:h, rx:6 });
+          el('circle', { class:'water', cx:x0+w/2, cy:y0+h/2, r:13 });
+        } else if (st.names){
+          el('rect', { class:'lm', x:x0, y:y0, width:w, height:h, rx:6 });
+        } else { house(x0,y0,w); }
+        if (st.names){
+          const lines = p.name, cy = (p.kind === 'park' || p.kind === 'plaza') ? y0+h/2+(p.kind === 'plaza' ? -18 : 5) : y0+h/2+5;
+          const t = el('text', { class:'lbl', x:x0+w/2, y: cy - (lines.length-1)*7 });
+          lines.forEach((ln,i) => { const ts = el('tspan', { x:x0+w/2, dy: i ? 15 : 0 }, t); ts.textContent = ln; });
+        }
+      } else house(nx(bx)+14, ny(by)+14, S-28);
+    }
+    // rosa dei venti
+    const g = el('g', { class:'rose', transform:'translate(912,82)' });
+    el('path', { class:'needle', d:'M0,-26 L7,0 L-7,0 Z' }, g);
+    el('path', { class:'needle2', d:'M0,26 L7,0 L-7,0 Z' }, g);
+    const tn = el('text', { x:0, y:-32 }, g); tn.textContent = 'N';
+    if (st.trail.length > 1) el('polyline', { class:'trail', points: trailPts() });
+    if (st.result === 'ok') el('circle', { class:'goal', cx:nx(st.x), cy:ny(st.y), r:22 });
+    const R = MISSIONS[st.m].mode === 'test' ? st.test.route : null;
+    if (R && (st.test.phase === 'write' || st.showGoal)){
+      const B = DEST[R.b];
+      el('rect', { class:'goalbox', x:nx(B.b[0])+6, y:ny(B.b[1])+6, width:(B.w||1)*S-12, height:(B.h||1)*S-12, rx:8 });
+    }
+    const w = el('g', { class:'walker', transform:'translate('+nx(st.x)+','+ny(st.y)+') rotate('+st.rot+')' });
+    el('circle', { r:13 }, w);
+    el('path', { d:'M0,-9 L6,4 L0,1 L-6,4 Z' }, w);
+    walkerEl = w;
+  }
+  function house(x0,y0,w){
+    el('rect', { class:'house', x:x0, y:y0, width:w, height:w, rx:6 });
+    const s = (w-24)/2;
+    [[8,8],[16+s,8],[8,16+s],[16+s,16+s]].forEach(([a,b]) => el('rect', { class:'house-in', x:x0+a, y:y0+b, width:s, height:s, rx:3 }));
+  }
+  function moveWalker(){
+    if (!walkerEl) return drawMap();
+    walkerEl.setAttribute('transform', 'translate('+nx(st.x)+','+ny(st.y)+') rotate('+st.rot+')');
+    const tr = svg.querySelector('.trail');
+    if (st.trail.length > 1){ if (tr) tr.setAttribute('points', trailPts()); else drawMap(); }
+  }
+
+  // ---------- missioni ----------
+  function loadMission(i){
+    const ms = MISSIONS[i];
+    st.m = i; st.x = ms.start[0]; st.y = ms.start[1]; st.f = ms.f; st.rot = ms.f*90;
+    st.trail = [[st.x,st.y]]; st.names = ms.names; st.hint = false; st.result = null; st.q = 0; st.qAns = null; st.showGoal = false;
+    if (ms.mode === 'quiz'){ st.f = ms.qs[0].f; st.rot = st.f*90; }
+    if (ms.mode === 'test'){
+      const R = st.test.route;
+      if (R){ const s = DEST[R.a].s; st.x = s[0]; st.y = s[1]; st.f = s[2]; st.rot = s[2]*90; st.trail = [[st.x,st.y]]; }
+      st.names = st.test.phase !== 'play' || st.test.kind === 'pers';
+    }
+    $('names').checked = st.names;
+    drawMap(); renderTabs(); renderPanel(); renderFacing();
+  }
+  function setFacing(f){
+    let d = ((f - st.f) % 4 + 4) % 4; if (d === 3) d = -1;
+    st.f = f; st.rot += d*90;
+  }
+  function turn(dir){ st.f = (st.f + dir + 4) % 4; st.rot += dir*90; st.result = null; moveWalker(); renderFacing(); renderPanel(); }
+  function step(d){
+    const r = canGo(st.x, st.y, d);
+    if (r !== 'ok'){ st.result = r; renderPanel(); return; }
+    st.x += DX[d]; st.y += DY[d]; st.trail.push([st.x,st.y]); st.result = null;
+    moveWalker(); renderFacing(); renderPanel();
+  }
+  function goCard(d){ if (st.f !== d){ setFacing(d); moveWalker(); renderFacing(); } step(d); }
+  function arrive(){
+    const ms = MISSIONS[st.m];
+    const goals = ms.mode === 'test' ? st.test.route.goals : ms.goals;
+    const ok = goals.some(([x,y]) => x === st.x && y === st.y);
+    st.result = ok ? 'ok' : 'no';
+    if (ms.mode === 'test'){
+      const T = st.test;
+      T.log.push({ group: T.group.trim() || 'Senza nome', route: T.route, kind: T.kind, ok, moves: st.trail.length-1 });
+      if (!ok) st.showGoal = false;
+    }
+    if (ok){ st.done[st.m] = true; renderTabs(); }
+    drawMap(); renderPanel();
+  }
+
+  function renderFacing(){ $('facing').innerHTML = 'Davanti al pallino: <b>' + DIR[st.f] + '</b>'; }
+  function renderTabs(){
+    const t = $('tabs'); t.textContent = '';
+    MISSIONS.forEach((ms,i) => {
+      const b = document.createElement('button');
+      b.className = 'tab'; b.type = 'button'; b.setAttribute('role','tab'); b.id = 'tab'+i;
+      b.setAttribute('aria-selected', String(i === st.m));
+      b.innerHTML = '<span class="n">' + (i+1) + '</span>' + ms.title + (st.done[i] ? ' <span class="tick" aria-label="completata">✓</span>' : '');
+      b.addEventListener('click', () => loadMission(i));
+      t.appendChild(b);
+    });
+  }
+
+  const STOP = {
+    end:'<b>Qui la strada finisce.</b> Girati e prova un\'altra direzione.',
+    blocked:'<b>Di qui non si passa:</b> c\'è il parco o il campo sportivo. Cerca un\'altra strada.',
+    river:'<b>Di qui non si passa: c\'è il fiume!</b> Si attraversa solo sui ponti.'
+  };
+  function padHtml(mode){
+    return mode === 'rel'
+      ? '<div class="pad rel"><button type="button" class="big" data-t="-1">↰ Gira a sinistra</button>' +
+        '<button type="button" class="big" data-fw="1">↑ Avanti</button>' +
+        '<button type="button" class="big" data-t="1">↱ Gira a destra</button></div>'
+      : '<div class="pad card">' + [0,1,2,3].map(d => '<button type="button" class="big" data-d="'+d+'">' + DIR[d] + '</button>').join('') + '</div>';
+  }
+  function bindPad(p){
+    p.querySelectorAll('[data-t]').forEach(b => b.addEventListener('click', () => turn(+b.dataset.t)));
+    p.querySelectorAll('[data-fw]').forEach(b => b.addEventListener('click', () => step(st.f)));
+    p.querySelectorAll('[data-d]').forEach(b => b.addEventListener('click', () => goCard(+b.dataset.d)));
+  }
+  function renderTest(){
+    const ms = MISSIONS[st.m], p = $('panel'), T = st.test, R = T.route;
+    let h = '<h2>' + (st.m+1) + '. ' + ms.title + '</h2>';
+    if (T.phase === 'choose' || !R){
+      h += '<p class="brief">Ogni gruppo riceve un percorso e prepara sul quaderno due tipi di indicazioni: <b>personali</b> e <b>con i punti cardinali</b>. Poi, alla LIM, un altro gruppo le mette alla prova senza sapere dove arriverà.</p>' +
+        '<label for="group" class="task">Chi ha scritto le indicazioni?</label>' +
+        '<input type="text" id="group" placeholder="Nome del gruppo o dello studente" value="' + esc(T.group) + '">' +
+        '<p class="task">Scegli il percorso</p><div class="routes">' +
+        ROUTES.map((r,i) => '<button type="button" class="rcard" data-r="' + i + '"><span class="rid">' + r.id + '</span><span class="rt">' + r.title + '</span>' +
+          '<span class="chip ' + r.level + '">' + r.level + (r.river ? ' · fiume' : '') + '</span></button>').join('') +
+        '</div><div class="row"><button type="button" id="surprise">Percorso a sorpresa</button></div>';
+    } else if (T.phase === 'write'){
+      const A = DEST[R.a];
+      h += '<p class="brief">Percorso <b>' + R.id + '</b>: ' + R.title + '. Sulla piantina il pallino è alla partenza e la destinazione è segnata con il tratteggio verde.</p>' +
+        '<p class="task">Che tipo di indicazioni provate?</p><div class="seg">' +
+        Object.keys(KIND).map(k => '<button type="button" data-k="'+k+'" aria-pressed="'+(T.kind === k)+'">' + KIND[k] + '</button>').join('') + '</div>' +
+        '<label for="testText" class="task">Le indicazioni ' + (T.group.trim() ? 'di ' + esc(T.group.trim()) : '') + '</label>' +
+        '<textarea id="testText" placeholder="' + (T.kind === 'pers'
+          ? 'Esempio: Esci e vai dritto fino al bar, poi…'
+          : 'Esempio: Vai verso Est per … incroci, poi verso Sud…') + '">' + esc(T.text) + '</textarea>' +
+        '<p class="kbd">Si parte ' + A.out + ', guardando verso ' + DIR[A.s[2]] + '. Quando inizia la prova la destinazione sparisce' +
+        (T.kind === 'card' ? ' e si nascondono anche i nomi dei luoghi: così si vede se le indicazioni funzionano per chi non conosce il paese.' : '.') + '</p>' +
+        '<div class="row"><button type="button" class="arrive" id="startTest">Inizia la prova</button>' +
+        '<button type="button" id="change">Cambia percorso</button></div>';
+    } else {
+      const A = DEST[R.a];
+      h += '<p class="brief">Percorso <b>' + R.id + '</b>. Segui <b>solo</b> quello che c\'è scritto. Si parte ' + A.out + ', guardando verso ' + DIR[A.s[2]] + '.</p>' +
+        '<blockquote class="mine">' + (T.text.trim() ? esc(T.text.trim()) : '(nessuna indicazione scritta)') + '</blockquote>' +
+        padHtml(T.kind === 'pers' ? 'rel' : 'card') +
+        '<div class="row"><button type="button" class="arrive" id="arrive">Sono arrivato!</button>' +
+        '<button type="button" id="retry">Ricomincia la prova</button>' +
+        '<button type="button" id="edit">Modifica le indicazioni</button>' +
+        '<button type="button" id="change">Nuovo percorso</button></div>';
+      if (STOP[st.result]) h += '<p class="fb no">' + STOP[st.result] + '</p>';
+      if (st.result === 'ok') h += '<p class="fb ok"><b>Le indicazioni funzionano!</b> Siete arrivati ' + DEST[R.b].to + ' in ' + (st.trail.length-1) +
+        ' incroci. Il percorso più breve è di ' + R.best + '.</p>';
+      if (st.result === 'no') h += '<p class="fb no"><b>Qui non c\'è la destinazione.</b> Dovevate arrivare ' + DEST[R.b].to + '. Discutete: cosa mancava o cosa era poco chiaro nelle indicazioni?</p>' +
+        '<div class="row"><button type="button" id="showGoal">Mostra la destinazione</button></div>';
+    }
+    if (T.log.length){
+      h += '<p class="task">Le prove di oggi</p><ol class="log">' + T.log.map((r,i) =>
+        '<li><span>' + (i+1) + '.</span><span><b>' + esc(r.group) + '</b></span><span>Percorso ' + r.route.id + '</span><span>' + KIND[r.kind] + '</span>' +
+        (r.ok ? '<span class="y">arrivato ✓</span><span>' + r.moves + ' incroci (minimo ' + r.route.best + ')</span>' : '<span class="n2">non arrivato</span>') + '</li>').join('') + '</ol>';
+    }
+    p.innerHTML = h;
+    bindPad(p);
+    const on = (id, fn) => { const e = $(id); if (e) e.addEventListener('click', fn); };
+    const ta = $('testText');
+    if (ta) ta.addEventListener('input', () => { T.text = ta.value; try { localStorage.setItem('paese-indicazioni-testo', T.text); } catch(e){} });
+    const gi = $('group');
+    if (gi) gi.addEventListener('input', () => { T.group = gi.value; });
+    const pick = r => { T.route = r; T.phase = 'write'; T.text = ''; try { localStorage.removeItem('paese-indicazioni-testo'); } catch(e){} loadMission(st.m); };
+    p.querySelectorAll('[data-r]').forEach(b => b.addEventListener('click', () => pick(ROUTES[+b.dataset.r])));
+    on('surprise', () => {
+      const starts = Object.keys(DEST).filter(k => DEST[k].s), all = Object.keys(DEST);
+      let a, b; do { a = starts[Math.floor(Math.random()*starts.length)]; b = all[Math.floor(Math.random()*all.length)]; } while (a === b);
+      const r = makeRoute('?', a, b); r.id = 'sorpresa';
+      pick(r);
+    });
+    p.querySelectorAll('[data-k]').forEach(b => b.addEventListener('click', () => { T.kind = b.dataset.k; renderTest(); }));
+    on('startTest', () => { T.phase = 'play'; loadMission(st.m); });
+    on('arrive', arrive);
+    on('retry', () => loadMission(st.m));
+    on('edit', () => { T.phase = 'write'; loadMission(st.m); });
+    on('change', () => { T.phase = 'choose'; T.route = null; loadMission(st.m); });
+    on('showGoal', () => { st.showGoal = true; st.names = true; $('names').checked = true; drawMap(); });
+  }
+
+  function renderPanel(){
+    const ms = MISSIONS[st.m], p = $('panel');
+    if (ms.mode === 'test') return renderTest();
+    let h = '<h2>' + (st.m+1) + '. ' + ms.title + '</h2><p class="brief">' + ms.brief + '</p>';
+    if (ms.mode !== 'quiz'){
+      h += '<blockquote>' + ms.quote + '</blockquote><p class="task">' + ms.task + '</p>';
+      if (ms.mode === 'rel'){
+        h += '<div class="pad rel"><button type="button" class="big" data-t="-1">↰ Gira a sinistra</button>' +
+             '<button type="button" class="big" data-fw="1">↑ Avanti</button>' +
+             '<button type="button" class="big" data-t="1">↱ Gira a destra</button></div>' +
+             '<p class="kbd">Con la tastiera: freccia su per andare avanti, frecce destra e sinistra per girarti.</p>';
+      } else {
+        h += '<div class="pad card">' + [0,1,2,3].map(d => '<button type="button" class="big" data-d="'+d+'">' + DIR[d] + '</button>').join('') + '</div>' +
+             '<p class="kbd">Con la tastiera: le frecce muovono verso Nord, Sud, Est e Ovest.</p>';
+      }
+      h += '<div class="row"><button type="button" class="arrive" id="arrive">Sono arrivato!</button>' +
+           '<button type="button" id="reset">Ricomincia</button>' +
+           (ms.hint ? '<button type="button" id="hint">Chiedi a un abitante</button>' : '') + '</div>';
+      if (st.hint) h += '<p class="fb">Un abitante ti dice: «Il negozio della signora Rosa? È la <b>panetteria</b>, la conoscono tutti!»</p>';
+      if (STOP[st.result]) h += '<p class="fb no">' + STOP[st.result] + '</p>';
+      if (st.result === 'no') h += '<p class="fb no"><b>Non ancora.</b> ' + ms.wrong + '</p>';
+      if (st.result === 'ok') h += '<p class="fb ok"><b>Ce l\'hai fatta!</b> ' + ms.ok + '</p><p class="learn"><strong>Cosa abbiamo scoperto</strong>' + ms.learn + '</p>' +
+        (st.m < MISSIONS.length-1 ? '<div class="row"><button type="button" class="arrive" id="next">Vai alla missione ' + (st.m+2) + '</button></div>' : '');
+    } else if (st.q < ms.qs.length){
+      const q = ms.qs[st.q], right = (q.f + q.turn + 4) % 4;
+      h += '<p class="task">Domanda ' + (st.q+1) + ' di ' + ms.qs.length + '</p><p style="margin:0">' + q.text + '</p><div class="opts">' +
+        [0,1,2,3].map(d => {
+          let cls = '';
+          if (st.qAns !== null){ if (d === right) cls = 'right'; else if (d === st.qAns) cls = 'wrong'; }
+          return '<button type="button" class="' + cls + '" data-a="' + d + '"' + (st.qAns !== null ? ' disabled' : '') + '>' + DIR[d] + '</button>';
+        }).join('') + '</div>';
+      if (st.qAns !== null){
+        h += (st.qAns === right ? '<p class="fb ok"><b>Giusto!</b> Guarda come si è girato il pallino sulla piantina.</p>'
+                                 : '<p class="fb no"><b>Non proprio:</b> la risposta giusta è ' + DIR[right] + '. Guarda come si è girato il pallino sulla piantina.</p>') +
+             '<div class="row"><button type="button" class="arrive" id="qnext">' + (st.q < ms.qs.length-1 ? 'Domanda successiva' : 'Fine') + '</button></div>';
+      }
+    } else {
+      h += '<p class="learn"><strong>Cosa abbiamo scoperto</strong>' + ms.learn + '</p><p class="fb">' + ms.after + '</p>' +
+           '<div class="row"><button type="button" id="qagain">Rifai le domande</button></div>';
+    }
+    p.innerHTML = h;
+    p.querySelectorAll('[data-t]').forEach(b => b.addEventListener('click', () => turn(+b.dataset.t)));
+    p.querySelectorAll('[data-fw]').forEach(b => b.addEventListener('click', () => step(st.f)));
+    p.querySelectorAll('[data-d]').forEach(b => b.addEventListener('click', () => goCard(+b.dataset.d)));
+    p.querySelectorAll('[data-a]').forEach(b => b.addEventListener('click', () => answer(+b.dataset.a)));
+    const on = (id, fn) => { const e = $(id); if (e) e.addEventListener('click', fn); };
+    on('arrive', arrive);
+    on('reset', () => loadMission(st.m));
+    on('hint', () => { st.hint = true; renderPanel(); });
+    on('next', () => { loadMission(st.m+1); $('tab'+st.m).focus(); });
+    on('qnext', () => {
+      st.q++; st.qAns = null; const qs = MISSIONS[st.m].qs;
+      if (st.q < qs.length){ setFacing(qs[st.q].f); moveWalker(); renderFacing(); } else { st.done[st.m] = true; renderTabs(); }
+      renderPanel();
+    });
+    on('qagain', () => loadMission(st.m));
+  }
+  function answer(a){
+    const q = MISSIONS[st.m].qs[st.q];
+    st.qAns = a; st.f = (q.f + q.turn + 4) % 4; st.rot += q.turn*90;
+    moveWalker(); renderFacing(); renderPanel();
+  }
+
+  $('names').addEventListener('change', e => { st.names = e.target.checked; drawMap(); });
+  document.addEventListener('keydown', e => {
+    if (e.target.closest && e.target.closest('input, textarea')) return;
+    const ms = MISSIONS[st.m], k = e.key;
+    if (!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(k)) return;
+    let mode = ms.mode;
+    if (mode === 'test') mode = st.test.phase !== 'play' ? 'none' : (st.test.kind === 'pers' ? 'rel' : 'card');
+    if (mode === 'rel'){
+      if (k === 'ArrowUp') step(st.f); else if (k === 'ArrowLeft') turn(-1); else if (k === 'ArrowRight') turn(1); else return;
+    } else if (mode === 'card'){
+      goCard({ArrowUp:0, ArrowRight:1, ArrowDown:2, ArrowLeft:3}[k]);
+    } else return;
+    e.preventDefault();
+  });
+
+  loadMission(0);
+})();
+</script>
+
+</html>

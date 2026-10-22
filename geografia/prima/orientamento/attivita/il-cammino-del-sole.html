@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Il cammino del Sole</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+/* Layout: il panorama è una "finestra sul cielo" a tutta larghezza; sotto, comandi e vista dall'alto con l'ombra del bastone */
+:root{
+  --bg:#edf1f5; --surface:#ffffff; --ink:#15233a; --muted:#56657a; --line:#d2dae4;
+  --sun:#e8961c; --sun-ink:#8a4f00; --shade:#38475f; --accent:#2c5c9c; --chalk:#c0392b;
+  --f-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1622; --surface:#172131; --ink:#e6ecf3; --muted:#9aa8ba; --line:#2b384c;
+  --sun:#f2a93b; --sun-ink:#f6c46e; --shade:#b4c0d2; --accent:#86aee6; --chalk:#ff7d6c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1622; --surface:#172131; --ink:#e6ecf3; --muted:#9aa8ba; --line:#2b384c;
+  --sun:#f2a93b; --sun-ink:#f6c46e; --shade:#b4c0d2; --accent:#86aee6; --chalk:#ff7d6c; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding-block:20px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(1.9rem,4.5vw,2.8rem);line-height:1.05;margin:0;text-wrap:balance}
+h1 span{color:var(--sun-ink)}
+.lede{margin:4px 0 0;max-width:65ch;color:var(--muted)}
+h2{font-family:var(--f-display);font-weight:600;font-size:1.2rem;margin:0}
+
+figure{margin:0;display:flex;flex-direction:column;gap:8px}
+figcaption{font-size:.9rem;color:var(--muted);max-width:75ch}
+#pano{width:100%;aspect-ratio:2.4/1;max-width:100%;display:block;border-radius:10px;background:#1c2c55}
+@media (max-width:640px){#pano{aspect-ratio:1.5/1}}
+
+.controls{display:flex;flex-direction:column;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.timeRow{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center}
+.clock{font-family:var(--f-display);font-weight:800;font-size:1.6rem;font-variant-numeric:tabular-nums;min-width:4.2ch;text-align:right}
+input[type=range]{width:100%;accent-color:var(--sun);min-width:0}
+button{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+#play{background:var(--sun);border-color:var(--sun);color:#1d1200;font-weight:700;min-width:7.5em}
+.lbl{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;margin-right:2px}
+label.chk{display:inline-flex;gap:6px;align-items:center;font-size:.92rem;cursor:pointer}
+
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:18px;align-items:start}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+#top{width:100%;max-width:420px;aspect-ratio:1/1;align-self:center;display:block}
+
+dl{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:0}
+dt{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;padding-top:3px}
+dd{margin:0;font-size:1.05rem}
+dd b{color:var(--sun-ink)}
+.night dd b{color:var(--accent)}
+.note{font-size:.88rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;margin:0}
+ol{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:8px}
+details{border-top:1px solid var(--line);padding-top:10px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}
+details ol{margin-top:10px}
+
+.lnav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;font-size:.9rem;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.lnav a{color:var(--accent);text-decoration:none;font-weight:700}
+.lnav a:hover{text-decoration:underline}
+.lnav .passi{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;color:var(--muted)}
+</style>
+
+<div class="wrap">
+  <nav class="lnav" aria-label="Lezione"><a href="../../../index.html?classe=prima#modulo-prima-i">← Geografia · L'orientamento e i suoi strumenti</a><span class="passi"><a href="il-paese-delle-indicazioni.html">← Il paese delle indicazioni</a><span>Attività 2 di 4</span><a href="orientarsi-con-le-stelle.html">Orientarsi con le stelle →</a></span></nav>
+  <header>
+    <div class="eyebrow">Geografia · L'orientamento e i punti cardinali</div>
+    <h1>Il cammino del <span>Sole</span></h1>
+    <p class="lede">Scegli una città, muovi l'ora e guarda dove si trova il Sole nel cielo. Più sotto, vista dall'alto, c'è l'ombra di un bastone piantato in cortile.</p>
+  </header>
+
+  <figure>
+    <canvas id="pano" role="img" aria-label="Panorama del cielo con la posizione del Sole"></canvas>
+    <figcaption id="panoCap"></figcaption>
+  </figure>
+
+  <section class="controls" aria-label="Comandi">
+    <div class="row" role="group" aria-label="Città">
+      <span class="lbl">Città</span>
+      <button type="button" class="city" data-c="oslo" aria-pressed="false">Oslo (Norvegia)</button>
+      <button type="button" class="city" data-c="roma" aria-pressed="true">Roma</button>
+      <button type="button" class="city" data-c="nairobi" aria-pressed="false">Nairobi (Kenya)</button>
+      <button type="button" class="city" data-c="sydney" aria-pressed="false">Sydney (Australia)</button>
+    </div>
+    <div class="timeRow">
+      <button id="play" type="button">▶ Avvia</button>
+      <input id="hour" type="range" min="0" max="24" step="0.25" value="9" aria-label="Ora del giorno">
+      <div class="clock" id="clock">9:00</div>
+    </div>
+    <div class="row">
+      <span class="lbl">Vai a</span>
+      <button type="button" id="goRise">Alba</button>
+      <button type="button" id="goNoon">Mezzogiorno</button>
+      <button type="button" id="goSet">Tramonto</button>
+    </div>
+    <div class="row" role="group" aria-label="Giorno dell'anno">
+      <span class="lbl">Giorno</span>
+      <button type="button" class="day" data-k="equi" aria-pressed="true">21 marzo / 23 settembre</button>
+      <button type="button" class="day" data-k="giu" aria-pressed="false">21 giugno</button>
+      <button type="button" class="day" data-k="dic" aria-pressed="false">21 dicembre</button>
+      <button type="button" class="day" data-k="oggi" aria-pressed="false">Oggi</button>
+    </div>
+    <div class="row">
+      <label class="chk"><input type="checkbox" id="compare"> Confronta le stagioni (mostra i tre percorsi)</label>
+    </div>
+  </section>
+
+  <div class="grid">
+    <div class="card">
+      <h2>L'ombra del bastone, vista dall'alto</h2>
+      <canvas id="top" role="img" aria-label="Vista dall'alto: bastone, ombra e punti cardinali"></canvas>
+      <p class="note">Come su una carta: Nord in alto, Est a destra. I puntini rossi sono i segni di gesso lasciati dalla punta dell'ombra ogni ora.</p>
+    </div>
+    <div class="card">
+      <h2>Cosa vedi</h2>
+      <dl id="out" aria-live="polite"></dl>
+      <p class="note">L'ora è quella del Sole: a mezzogiorno il Sole è nel punto più alto del cielo. Gli orologi segnano un po' di più (con l'ora legale, circa un'ora in più).</p>
+      <h2>Prova a rispondere</h2>
+      <ol>
+        <li>A che ora il Sole è più alto? In quale direzione si trova?</li>
+        <li>Porta l'ora alle 9: da che parte è il Sole? E verso dove punta l'ombra?</li>
+        <li>Confronta il 21 giugno e il 21 dicembre: dove sorge il Sole? Quante ore di luce ci sono?</li>
+        <li>Guarda la vista dall'alto: quando l'ombra è più corta, verso quale punto cardinale punta?</li>
+        <li>Scegli Sydney e vai a mezzogiorno: dove si trova il Sole? Verso dove punta l'ombra? Potresti trovare il Sud come a Roma?</li>
+        <li>Scegli Nairobi e vai a mezzogiorno del 21 marzo: cosa succede all'ombra? Perché?</li>
+      </ol>
+      <details>
+        <summary>Risposte per l'insegnante</summary>
+        <ol>
+          <li>A Roma alle 12 (ora del Sole). Il Sole è a Sud.</li>
+          <li>Il Sole è a Sud-Est; l'ombra punta a Nord-Ovest, sempre dalla parte opposta al Sole.</li>
+          <li>A Roma: a giugno sorge a Nord-Est e ci sono circa 15 ore di luce; a dicembre sorge a Sud-Est e le ore di luce sono circa 9. Solo a marzo e settembre sorge esattamente a Est.</li>
+          <li>Verso Nord: l'ombra più corta è quella di mezzogiorno, quando il Sole è a Sud.</li>
+          <li>A Sydney (emisfero Sud) il Sole a mezzogiorno è a Nord e l'ombra punta a Sud. Il metodo del libro va rovesciato: lì il Sole di mezzogiorno indica il Nord.</li>
+          <li>Il Sole è quasi sopra la testa e l'ombra quasi scompare. Vicino all'equatore il Sole di mezzogiorno può stare a Nord o a Sud a seconda del periodo dell'anno.</li>
+        </ol>
+      </details>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const D2R = Math.PI/180;
+  const CITIES = {
+    oslo:    { name: 'Oslo',    lat: 59.9 },
+    roma:    { name: 'Roma',    lat: 41.9 },
+    nairobi: { name: 'Nairobi', lat: -1.3 },
+    sydney:  { name: 'Sydney',  lat: -33.9 }
+  };
+  let LAT = CITIES.roma.lat*D2R;
+  const state = { t: 9, k: 'equi', city: 'roma', playing: false, compare: false };
+  const $ = id => document.getElementById(id);
+  const pano = $('pano'), top = $('top');
+
+  function declFor(k){
+    if (k === 'equi') return 0;
+    if (k === 'giu') return 23.44;
+    if (k === 'dic') return -23.44;
+    const now = new Date(), start = new Date(now.getFullYear(), 0, 0);
+    const n = Math.floor((now - start) / 864e5);
+    return -23.44 * Math.cos(2*Math.PI/365*(n+10));
+  }
+  function sunPos(t, dec){
+    const H = (t-12)*15*D2R, d = dec*D2R;
+    const alt = Math.asin(Math.sin(LAT)*Math.sin(d) + Math.cos(LAT)*Math.cos(d)*Math.cos(H));
+    const A = Math.atan2(Math.sin(H), Math.cos(H)*Math.sin(LAT) - Math.tan(d)*Math.cos(LAT));
+    let az = (A/D2R + 180) % 360; if (az < 0) az += 360;
+    return { alt: alt/D2R, az };
+  }
+  function dayInfo(dec){
+    const c = Math.max(-1, Math.min(1, -Math.tan(LAT)*Math.tan(dec*D2R)));
+    const H0 = Math.acos(c)/D2R;
+    return { rise: 12-H0/15, set: 12+H0/15, len: 2*H0/15 };
+  }
+  // il panorama guarda verso il punto in cui sta il Sole a mezzogiorno (Sud o Nord)
+  const facing = dec => sunPos(12, dec).az > 90 && sunPos(12, dec).az < 270 ? 180 : 0;
+  const DIRS = ['Nord','Nord-Est','Est','Sud-Est','Sud','Sud-Ovest','Ovest','Nord-Ovest'];
+  const SHORT = ['N','NE','E','SE','S','SW','W','NW'];
+  const dirName = az => DIRS[Math.round(az/45) % 8];
+  const fmtT = t => { let m = Math.round(t*60) % 1440; return Math.floor(m/60) + ':' + String(m%60).padStart(2,'0'); };
+  const num = (v,d=1) => v.toLocaleString('it-IT',{maximumFractionDigits:d});
+  const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+
+  function hex(h){ const n = parseInt(h.slice(1),16); return [n>>16, (n>>8)&255, n&255]; }
+  function mix(a,b,t){ const A = hex(a), B = hex(b); return 'rgb(' + A.map((v,i) => Math.round(v+(B[i]-v)*t)).join(',') + ')'; }
+  function sky(alt){
+    const N=['#0a1430','#1c2c55'], T=['#2b3f78','#e98a4f'], D=['#2f74c0','#b9dcf3'];
+    if (alt <= -12) return [N[0], N[1]];
+    if (alt < 0){ const t=(alt+12)/12; return [mix(N[0],T[0],t), mix(N[1],T[1],t)]; }
+    if (alt < 12){ const t=alt/12; return [mix(T[0],D[0],t), mix(T[1],D[1],t)]; }
+    return D;
+  }
+  function tok(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  function setup(c){
+    const dpr = window.devicePixelRatio || 1, w = c.clientWidth, h = c.clientHeight;
+    if (c.width !== Math.round(w*dpr) || c.height !== Math.round(h*dpr)){ c.width = Math.round(w*dpr); c.height = Math.round(h*dpr); }
+    const ctx = c.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0);
+    return { ctx, W: w, H: h };
+  }
+
+  // stelle fisse per la notte
+  const stars = Array.from({length: 90}, (_, i) => ({ x: (Math.sin(i*12.9898)*43758.5453) % 1, y: (Math.sin(i*78.233)*12345.678) % 1, r: (i % 3) ? 1 : 1.6 }))
+    .map(s => ({ x: Math.abs(s.x), y: Math.abs(s.y), r: s.r }));
+
+  function drawPano(){
+    const { ctx, W, H } = setup(pano);
+    const body = tok('--f-body');
+    const dec = declFor(state.k), s = sunPos(state.t, dec), info = dayInfo(dec);
+    const hy = H*0.78, topPad = 22, sy = (hy-topPad)/90;
+    const face = facing(dec);
+    const X = az => ((az - face + 180) % 360 + 360) % 360 / 360 * W, Y = alt => hy - alt*sy;
+
+    const [c1, c2] = sky(s.alt);
+    let g = ctx.createLinearGradient(0,0,0,hy); g.addColorStop(0,c1); g.addColorStop(1,c2);
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,hy+2);
+
+    const night = clamp((-s.alt-3)/9, 0, 1);
+    if (night > 0){
+      ctx.fillStyle = 'rgba(255,255,255,' + (0.85*night) + ')';
+      stars.forEach(st => { ctx.beginPath(); ctx.arc(st.x*W, st.y*(hy-30)+4, st.r, 0, 7); ctx.fill(); });
+    }
+
+    // percorsi del Sole
+    function path(d, color, width, dash){
+      ctx.save(); ctx.strokeStyle = color; ctx.lineWidth = width; ctx.setLineDash(dash || []);
+      ctx.beginPath(); let on = false, lx = 0;
+      for (let m = 0; m <= 1440; m += 4){
+        const p = sunPos(m/60, d);
+        if (p.alt < 0){ on = false; continue; }
+        const px = X(p.az), py = Y(p.alt);
+        if (on && Math.abs(px - lx) > W/2) on = false;
+        on ? ctx.lineTo(px,py) : ctx.moveTo(px,py); on = true; lx = px;
+      }
+      ctx.stroke(); ctx.restore();
+    }
+    const lineCol = night > 0.5 ? 'rgba(255,255,255,.35)' : 'rgba(255,255,255,.75)';
+    if (state.compare){
+      [[23.44,'21 giugno'],[0,'21 mar / 23 set'],[-23.44,'21 dicembre']].forEach(([d,lab]) => {
+        const cur = Math.abs(d-dec) < 0.01;
+        path(d, cur ? lineCol : 'rgba(255,255,255,.4)', cur ? 2.5 : 1.5, cur ? [7,6] : [3,5]);
+        const p = sunPos(12, d);
+        ctx.font = '600 12px ' + body; ctx.fillStyle = 'rgba(255,255,255,.9)'; ctx.textAlign = 'left';
+        ctx.fillText(lab, X(p.az)+10, Y(p.alt)-6);
+      });
+    }
+    path(dec, lineCol, 2.5, [7,6]);
+
+    // etichette alba / mezzogiorno / tramonto
+    ctx.font = '600 12px ' + body; ctx.fillStyle = 'rgba(255,255,255,.95)'; ctx.textAlign = 'center';
+    const pr = sunPos(info.rise, dec), ps = sunPos(info.set, dec), pn = sunPos(12, dec);
+    ctx.fillText('alba', X(pr.az), hy-26); ctx.fillText('tramonto', X(ps.az), hy-26);
+    if (!state.compare) ctx.fillText('mezzogiorno', X(pn.az), Y(pn.alt)-20);
+
+    // Sole
+    if (s.alt > -1.5){
+      const px = X(s.az), py = Y(s.alt);
+      const glow = ctx.createRadialGradient(px,py,4,px,py,46);
+      glow.addColorStop(0,'rgba(255,214,110,.9)'); glow.addColorStop(1,'rgba(255,214,110,0)');
+      ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(px,py,46,0,7); ctx.fill();
+      ctx.fillStyle = '#ffd65a'; ctx.strokeStyle = '#f2a01e'; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(px,py,13,0,7); ctx.fill(); ctx.stroke();
+    }
+
+    // colline e terreno
+    const day = clamp((s.alt+6)/14, 0, 1);
+    ctx.fillStyle = mix('#1d2a3a','#86b0a2', day);
+    ctx.beginPath(); ctx.moveTo(0,hy+2);
+    for (let x = 0; x <= W; x += 4){
+      const h = (7 + 6*Math.sin(x*0.011) + 4*Math.sin(x*0.029+1) + 3*Math.sin(x*0.006+2)) * (H/320);
+      ctx.lineTo(x, hy - Math.max(0,h));
+    }
+    ctx.lineTo(W,hy+2); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = mix('#16231c','#5f8f4e', day); ctx.fillRect(0,hy,W,H-hy);
+
+    // punti cardinali sull'orizzonte
+    for (let i = 0; i <= 8; i++){
+      const x = i/8*W, main = i % 2 === 0, d = Math.round(((face + 180 + i*45) % 360) / 45) % 8;
+      ctx.strokeStyle = 'rgba(255,255,255,.7)'; ctx.lineWidth = main ? 2 : 1;
+      ctx.beginPath(); ctx.moveTo(x,hy); ctx.lineTo(x, hy + (main ? 10 : 6)); ctx.stroke();
+      ctx.fillStyle = '#ffffff'; ctx.textAlign = i === 0 ? 'left' : (i === 8 ? 'right' : 'center');
+      ctx.font = (main ? '700 14px ' : '600 11px ') + body;
+      ctx.fillText(main ? DIRS[d].toUpperCase() : SHORT[d], i === 0 ? x+4 : (i === 8 ? x-4 : x), hy + (main ? 27 : 23));
+    }
+    // osservatore visto di spalle
+    const ox = W/2, oy = H - 8, sc = Math.min(1, (H-hy-34)/32);
+    if (sc > 0.4){
+      ctx.fillStyle = mix('#0b1220','#20304a', day);
+      ctx.beginPath(); ctx.arc(ox, oy-26*sc, 5*sc, 0, 7); ctx.fill();
+      ctx.fillRect(ox-5*sc, oy-20*sc, 10*sc, 20*sc);
+    }
+  }
+
+  function drawTop(){
+    const { ctx, W } = setup(top);
+    const body = tok('--f-body'), surf = tok('--surface'), line = tok('--line'), ink = tok('--ink'),
+          chalk = tok('--chalk'), shade = tok('--shade'), sunC = tok('--sun'), muted = tok('--muted');
+    const cx = W/2, cy = W/2, R = W/2 - 30, L = R*0.28;
+    const P = (az, r) => [cx + r*Math.sin(az*D2R), cy - r*Math.cos(az*D2R)];
+    const dec = declFor(state.k), s = sunPos(state.t, dec);
+
+    ctx.fillStyle = surf; ctx.fillRect(0,0,W,W);
+    ctx.strokeStyle = line; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(cx,cy,R,0,7); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx,cy,R*0.5,0,7); ctx.stroke();
+    for (let i = 0; i < 8; i++){
+      const [x1,y1] = P(i*45, 0), [x2,y2] = P(i*45, R);
+      ctx.setLineDash(i % 2 ? [3,5] : []); ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+      const [lx,ly] = P(i*45, R+16);
+      ctx.fillStyle = i === 0 ? chalk : (i % 2 ? muted : ink);
+      ctx.font = (i % 2 ? '600 11px ' : '700 15px ') + body; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(SHORT[i], lx, ly);
+    }
+    ctx.setLineDash([]);
+
+    // traccia della punta dell'ombra durante il giorno
+    ctx.strokeStyle = chalk; ctx.globalAlpha = .45; ctx.lineWidth = 1.5; ctx.beginPath(); let on = false;
+    for (let m = 0; m <= 1440; m += 5){
+      const p = sunPos(m/60, dec), len = p.alt > 2 ? L/Math.tan(p.alt*D2R) : Infinity;
+      if (len > R*0.95){ on = false; continue; }
+      const [x,y] = P(p.az+180, len); on ? ctx.lineTo(x,y) : ctx.moveTo(x,y); on = true;
+    }
+    ctx.stroke(); ctx.globalAlpha = 1;
+    ctx.font = '600 10px ' + body;
+    for (let h = 4; h <= 20; h++){
+      const p = sunPos(h, dec); if (p.alt <= 2) continue;
+      const len = L/Math.tan(p.alt*D2R); if (len > R*0.95) continue;
+      const [x,y] = P(p.az+180, len), [tx,ty] = P(p.az+180, len+12);
+      ctx.fillStyle = chalk; ctx.beginPath(); ctx.arc(x,y,3.2,0,7); ctx.fill();
+      ctx.fillText(String(h), tx, ty);
+    }
+
+    // ombra attuale e Sole
+    if (s.alt > 0.5){
+      const len = Math.min(L/Math.tan(s.alt*D2R), R*0.95);
+      const [x,y] = P(s.az+180, len);
+      ctx.strokeStyle = shade; ctx.lineWidth = 6; ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x,y); ctx.stroke();
+      const [sx,sy] = P(s.az, R*0.9), [rx,ry] = P(s.az, 12);
+      ctx.strokeStyle = sunC; ctx.lineWidth = 1.5; ctx.setLineDash([4,5]);
+      ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(rx,ry); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = sunC; ctx.beginPath(); ctx.arc(sx,sy,10,0,7); ctx.fill();
+    }
+    ctx.fillStyle = ink; ctx.beginPath(); ctx.arc(cx,cy,5,0,7); ctx.fill();
+  }
+
+  function render(){
+    const dec = declFor(state.k), s = sunPos(state.t, dec), info = dayInfo(dec);
+    $('clock').textContent = fmtT(state.t);
+    $('hour').value = state.t;
+    const out = $('out');
+    out.classList.toggle('night', s.alt < 0);
+    const face = facing(dec), city = CITIES[state.city].name, noon = sunPos(12, dec);
+    $('panoCap').textContent = 'Panorama a 360° visto da ' + city + '. Guardi verso ' + (face === 180
+      ? 'Sud: l\'Est è alla tua sinistra, l\'Ovest alla tua destra, il Nord alle spalle (ai due bordi del disegno).'
+      : 'Nord, perché qui il Sole di mezzogiorno sta a Nord: l\'Est è alla tua destra, l\'Ovest alla tua sinistra, il Sud alle spalle (ai due bordi del disegno).');
+    const mezzo = noon.alt > 87 ? 'quasi sopra la testa (' + Math.round(noon.alt) + '°)'
+      : 'verso <b>' + dirName(noon.az) + '</b>, alto ' + Math.round(noon.alt) + '°';
+    const giorno = 'alba ' + fmtT(info.rise) + ' a <b>' + dirName(sunPos(info.rise,dec).az) + '</b>, tramonto ' + fmtT(info.set) +
+      ' a <b>' + dirName(sunPos(info.set,dec).az) + '</b>, ' + num(info.len) + ' ore di luce';
+    if (s.alt >= 0){
+      out.innerHTML =
+        '<dt>Sole</dt><dd>verso <b>' + dirName(s.az) + '</b>, alto ' + Math.round(s.alt) + '° sull\'orizzonte</dd>' +
+        '<dt>Ombra</dt><dd>' + (s.alt > 87 ? 'quasi <b>scomparsa</b>: il Sole è sopra il bastone'
+          : 'punta verso <b>' + dirName(s.az+180) + '</b>, lunga ' + num(1/Math.tan(Math.max(s.alt,0.5)*D2R)) + ' volte il bastone') + '</dd>' +
+        '<dt>A mezzogiorno</dt><dd>il Sole è ' + mezzo + '</dd>' +
+        '<dt>Giornata</dt><dd>' + giorno + '</dd>';
+    } else {
+      out.innerHTML =
+        '<dt>Sole</dt><dd><b>sotto l\'orizzonte</b>: è notte' + (s.alt > -8 ? ' (crepuscolo)' : '') + '</dd>' +
+        (CITIES[state.city].lat > 5
+          ? '<dt>Di notte</dt><dd>ci si orienta con la <b>Stella polare</b>, che indica il Nord</dd>'
+          : '<dt>Di notte</dt><dd>' + (CITIES[state.city].lat < -5 ? 'la Stella polare <b>non si vede</b>: è sotto l\'orizzonte' : 'la Stella polare è <b>bassissima</b>, sull\'orizzonte a Nord') + '</dd>') +
+        '<dt>A mezzogiorno</dt><dd>il Sole è ' + mezzo + '</dd>' +
+        '<dt>Giornata</dt><dd>' + giorno + '</dd>';
+    }
+    drawPano(); drawTop();
+  }
+
+  // comandi
+  let last = 0;
+  function tick(ts){
+    if (!state.playing) return;
+    if (last) state.t = (state.t + (ts-last)/1000*1.2) % 24;
+    last = ts; render(); requestAnimationFrame(tick);
+  }
+  function setPlay(on){
+    state.playing = on; last = 0;
+    $('play').textContent = on ? '⏸ Ferma' : '▶ Avvia';
+    if (on) requestAnimationFrame(tick);
+  }
+  $('play').addEventListener('click', () => setPlay(!state.playing));
+  $('hour').addEventListener('input', e => { setPlay(false); state.t = parseFloat(e.target.value); render(); });
+  const jump = t => { setPlay(false); state.t = Math.round(t*4)/4; render(); };
+  $('goRise').addEventListener('click', () => jump(dayInfo(declFor(state.k)).rise));
+  $('goNoon').addEventListener('click', () => jump(12));
+  $('goSet').addEventListener('click', () => jump(dayInfo(declFor(state.k)).set));
+  document.querySelectorAll('.day').forEach(b => b.addEventListener('click', () => {
+    state.k = b.dataset.k;
+    document.querySelectorAll('.day').forEach(o => o.setAttribute('aria-pressed', String(o === b)));
+    render();
+  }));
+  document.querySelectorAll('.city').forEach(b => b.addEventListener('click', () => {
+    state.city = b.dataset.c; LAT = CITIES[state.city].lat*D2R;
+    document.querySelectorAll('.city').forEach(o => o.setAttribute('aria-pressed', String(o === b)));
+    render();
+  }));
+  $('compare').addEventListener('change', e => { state.compare = e.target.checked; render(); });
+
+  new ResizeObserver(() => render()).observe(pano);
+  new MutationObserver(() => render()).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render); } catch(e){}
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
+  render();
+})();
+</script>
+
+</html>
