@@ -398,13 +398,13 @@ function openPop(btn){
 }
 function showCard(key, kid, form){
   const side=$("side");
-  let h="", kind, c;
+  let h="", kind, c, xl="";
   if(key[0]==="g"){
     const g=G[key.slice(1)]; kind=g.t;
     h+=`<div class="card t-${g.t}"><button type="button" class="btn closex" data-close>Chiudi</button><span class="kind">${TIPI1[g.t]}</span><span class="word">${esc(form)}</span>`;
     if(g.b) h+=`<div class="mean"><em>${g.t==="A"?"Oggi diremmo":g.t==="N"?"Chi o che cosa è":"Che cosa vuol dire"}</em>${esc(g.b)}</div>`;
     if(g.l) h+=`<p class="long">${esc(g.l)}</p>`;
-    if(g.x) h+=`<button type="button" class="xlink" data-x="${g.id}" aria-expanded="false">Approfondimento: ${esc(g.x.h)} →</button>`;
+    if(g.x) xl=`<button type="button" class="xlink" data-x="${g.id}" aria-expanded="false">Approfondimento: ${esc(g.x.h)} →</button>`;
   } else {
     h+=`<div class="card t-K"><button type="button" class="btn closex" data-close>Chiudi</button><span class="kind">${TIPI1.K}</span><span class="word">${esc(form)}</span>`;
   }
@@ -415,7 +415,8 @@ function showCard(key, kid, form){
     h+=`<div class="kidbox"><span class="kh">● Nel Piccolo Dizionario dei ragazzi</span><span>La parola <b>${esc(k.forma)}</b> (${esc(k.cat)}) è stata definita da ragazze e ragazzi come voi. Leggi le loro definizioni:</span>
       <div class="eds">${eds.map(y=>`<a href="${EDURL[y]}${/\.pdf$/.test(EDURL[y])?"#page="+k.ed[y][1][0]:""}" target="_blank" rel="noopener">${y} · p. ${k.ed[y][1].join(", ")}</a>`).join("")}</div>${k.nota?`<span>${esc(k.nota)}</span>`:""}</div>`;
   }
-  h+=`<div class="actions"><button type="button" class="btn" data-addmine="${esc(form)}">Non mi è ancora chiara</button></div></div>`;
+  h+=xl;
+  h+= xl ? `</div>` : `<div class="actions"><button type="button" class="btn" data-addmine="${esc(form)}">Non mi è ancora chiara</button></div></div>`;
   side.innerHTML=h+mineHTML(); side.classList.add("open");
 }
 function showPlain(w){
