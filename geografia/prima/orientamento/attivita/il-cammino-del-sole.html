@@ -56,6 +56,11 @@ label.chk{display:inline-flex;gap:6px;align-items:center;font-size:.92rem;cursor
 @media (max-width:760px){.grid{grid-template-columns:1fr}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
 #top{width:100%;max-width:420px;aspect-ratio:1/1;align-self:center;display:block}
+#side{width:100%;max-width:100%;aspect-ratio:2.4/1;display:block;border-radius:8px}
+.how{margin:0}
+.how b{color:var(--sun-ink)}
+.sub{margin:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+.note b{color:var(--ink)}
 
 dl{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;margin:0}
 dt{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;padding-top:3px}
@@ -120,9 +125,14 @@ details ol{margin-top:10px}
 
   <div class="grid">
     <div class="card">
-      <h2>L'ombra del bastone, vista dall'alto</h2>
+      <h2>L'ombra di un bastone</h2>
+      <p class="how">Pianta un bastone dritto nel cortile, in una giornata di sole. L'ombra si forma sempre <b>dalla parte opposta al Sole</b>: mentre il Sole si sposta nel cielo, l'ombra gira e cambia lunghezza.</p>
+      <p class="sub">Visto di lato</p>
+      <canvas id="side" role="img" aria-label="Visto di lato: il Sole, il bastone e la sua ombra"></canvas>
+      <p class="how">Più il Sole è basso, più l'ombra è lunga. A mezzogiorno il Sole è nel punto più alto e l'ombra è la più corta della giornata.</p>
+      <p class="sub">Visto dall'alto</p>
       <canvas id="top" role="img" aria-label="Vista dall'alto: bastone, ombra e punti cardinali"></canvas>
-      <p class="note">Come su una carta: Nord in alto, Est a destra. I puntini rossi sono i segni di gesso lasciati dalla punta dell'ombra ogni ora.</p>
+      <p class="note" id="topNote"></p>
     </div>
     <div class="card">
       <h2>Cosa vedi</h2>
@@ -354,7 +364,11 @@ details ol{margin-top:10px}
       ctx.strokeStyle = sunC; ctx.lineWidth = 1.5; ctx.setLineDash([4,5]);
       ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(rx,ry); ctx.stroke(); ctx.setLineDash([]);
       ctx.fillStyle = sunC; ctx.beginPath(); ctx.arc(sx,sy,10,0,7); ctx.fill();
+      ctx.font = '700 12px ' + body; ctx.fillStyle = tok('--sun-ink');
+      const [slx,sly] = P(s.az, R*0.9 - 20); ctx.fillText('Sole', slx, sly);
+      if (len > 34){ const [mx,my] = P(s.az+180, len/2), [ox,oy] = P(s.az+90, 14); ctx.fillStyle = shade; ctx.fillText('ombra', mx + (ox-cx), my + (oy-cy)); }
     }
+    ctx.font = '600 11px ' + body; ctx.fillStyle = muted; ctx.fillText('bastone', cx, cy + 16);
     ctx.fillStyle = ink; ctx.beginPath(); ctx.arc(cx,cy,5,0,7); ctx.fill();
   }
 
@@ -388,7 +402,40 @@ details ol{margin-top:10px}
         '<dt>A mezzogiorno</dt><dd>il Sole è ' + mezzo + '</dd>' +
         '<dt>Giornata</dt><dd>' + giorno + '</dd>';
     }
-    drawPano(); drawTop();
+    const nn = sunPos(12, dec);
+    $('topNote').innerHTML = 'Come su una carta: Nord in alto, Est a destra. Ogni ora segniamo con il gesso dove arriva la punta dell\'ombra (i puntini rossi con l\'ora). ' +
+      (nn.alt > 87 ? 'Qui a mezzogiorno il Sole è quasi sopra il bastone e l\'ombra quasi sparisce.'
+                   : '<b>L\'ombra più corta è quella di mezzogiorno e punta verso ' + dirName(nn.az+180) + '</b>: così si trovano i punti cardinali anche senza bussola.');
+    drawPano(); drawTop(); drawSide();
+  }
+
+  function drawSide(){
+    const side = $('side'); const { ctx, W, H } = setup(side);
+    const body = tok('--f-body'), ink = tok('--ink'), shade = tok('--shade'), sunC = tok('--sun'), muted = tok('--muted'), bg = tok('--bg'), sunInk = tok('--sun-ink');
+    const s = sunPos(state.t, declFor(state.k));
+    ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+    const gy = H*0.8, bx = W*0.36, hs = H*0.36, top = gy - hs;
+    ctx.strokeStyle = muted; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(8,gy); ctx.lineTo(W-8,gy); ctx.stroke();
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    if (s.alt > 0.5){
+      const a = s.alt*D2R, len = hs/Math.tan(a), tip = Math.min(bx + len, W - 14);
+      const D = Math.min((bx - 22)/Math.max(Math.cos(a), 1e-3), (top - 20)/Math.max(Math.sin(a), 1e-3));
+      const sx = bx - D*Math.cos(a), sy = top - D*Math.sin(a);
+      ctx.strokeStyle = sunC; ctx.lineWidth = 1.5; ctx.setLineDash([5,5]);
+      ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(bx + len <= W - 14 ? bx + len : W - 14, bx + len <= W - 14 ? gy : top + (W - 14 - bx)*Math.tan(a)); ctx.stroke(); ctx.setLineDash([]);
+      ctx.strokeStyle = shade; ctx.lineWidth = 7; ctx.lineCap = 'round';
+      if (tip - bx > 2){ ctx.beginPath(); ctx.moveTo(bx, gy); ctx.lineTo(tip, gy); ctx.stroke(); }
+      ctx.fillStyle = sunC; ctx.beginPath(); ctx.arc(sx, sy, 13, 0, 7); ctx.fill();
+      ctx.font = '700 12px ' + body; ctx.fillStyle = sunInk;
+      ctx.fillText('Sole · alto ' + Math.round(s.alt) + '°', Math.max(46, sx), sy + (sy < 40 ? 24 : -22));
+      ctx.fillStyle = shade; ctx.fillText(bx + len > W - 14 ? 'ombra lunghissima →' : 'ombra', (bx + tip)/2, gy + 16);
+    } else {
+      ctx.font = '600 13px ' + body; ctx.fillStyle = muted;
+      ctx.fillText('Il Sole è sotto l\'orizzonte: il bastone non fa ombra.', W*0.62, H*0.4);
+    }
+    ctx.strokeStyle = ink; ctx.lineWidth = 5; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(bx, gy); ctx.lineTo(bx, top); ctx.stroke();
+    ctx.font = '600 11px ' + body; ctx.fillStyle = ink; ctx.textAlign = 'right'; ctx.fillText('bastone', bx - 8, top + 6);
   }
 
   // comandi
