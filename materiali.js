@@ -68,20 +68,8 @@ const MODULI = [
         link: "geografia/prima/metodo-e-strumenti/lezioni/reticolato.html",
         data: "2026-10-21",
         attivita: [
-          { tipo: "Scheda", titolo: "Scheda 1.2 – Meridiani e paralleli", link: "geografia/prima/metodo-e-strumenti/attivita/scheda-1-2-reticolato.html", data: "2026-10-21" }
-        ]
-      },
-      {
-        titolo: "Le carte geografiche",
-        descrizione: "Dal globo alla carta: proiezioni a confronto e storia della cartografia.",
-        link: "geografia/prima/metodo-e-strumenti/lezioni/proiezioni.html",
-        data: "2026-10-21",
-        attivita: [
-          { tipo: "Attività 1", titolo: "Tre modi di disegnare il mondo", link: "geografia/prima/carte-geografiche/attivita/tre-modi-di-disegnare-il-mondo.html", data: "2026-10-21" },
-          { tipo: "Attività 2", titolo: "Carte sovrapposte ed emisferi", link: "geografia/prima/carte-geografiche/attivita/carte-sovrapposte-ed-emisferi.html", data: "2026-10-21" },
-          { tipo: "Attività 3", titolo: "Guardiamo il planisfero", link: "geografia/prima/carte-geografiche/attivita/guardiamo-il-planisfero.html", data: "2026-10-21" },
-          { tipo: "Approfondimento", titolo: "La storia della cartografia", link: "geografia/prima/carte-geografiche/attivita/storia-della-cartografia.html", data: "2026-10-21" },
-          { tipo: "Se c'è tempo", titolo: "Carte che cambiano forma", link: "geografia/prima/carte-geografiche/attivita/carte-che-cambiano-forma.html", data: "2026-10-21" }
+          { tipo: "Scheda", titolo: "Scheda 1.2 – Meridiani e paralleli", link: "geografia/prima/metodo-e-strumenti/attivita/scheda-1-2-reticolato.html", data: "2026-10-21" },
+          { tipo: "Attività", titolo: "Guardiamo il planisfero", descrizione: "Emisferi, terre e acque, coordinate sul mappamondo.", link: "geografia/prima/carte-geografiche/attivita/guardiamo-il-planisfero.html", data: "2026-10-21" }
         ]
       },
       {
@@ -91,7 +79,32 @@ const MODULI = [
         data: "2026-10-21",
         attivita: []
       },
-      { titolo: "La riduzione in scala", attivita: [] },
+      {
+        titolo: "Le carte geografiche",
+        descrizione: "Ridotte, approssimate e simboliche: leggere una carta con la legenda (libro, pag. A8–A9).",
+        data: "2026-10-23",
+        attivita: [
+          { tipo: "Attività 1", titolo: "Tre modi di disegnare il mondo", link: "geografia/prima/carte-geografiche/attivita/tre-modi-di-disegnare-il-mondo.html", data: "2026-10-21" },
+          { tipo: "Attività 2", titolo: "Leggere una carta", descrizione: "La legenda, i simboli e le tre proprietà di una carta, su una regione inventata.", link: "geografia/prima/carte-geografiche/attivita/leggere-una-carta.html", data: "2026-10-23" },
+          { tipo: "Approfondimento", titolo: "La storia della cartografia", link: "geografia/prima/carte-geografiche/attivita/storia-della-cartografia.html", data: "2026-10-21" }
+        ]
+      },
+      {
+        titolo: "La riduzione in scala",
+        descrizione: "Scala numerica e grafica, calcolo delle distanze, grande e piccola scala (libro, pag. A10–A11).",
+        link: "geografia/prima/metodo-e-strumenti/lezioni/la-riduzione-in-scala.html",
+        data: "2026-10-23",
+        attivita: []
+      },
+      {
+        titolo: "Tanti tipi di carte",
+        descrizione: "Carte fisiche, politiche e tematiche; curve di livello e tinte altimetriche (libro, pag. A12–A13).",
+        data: "2026-10-23",
+        attivita: [
+          { tipo: "Attività 1", titolo: "Fisica, politica o tematica?", descrizione: "La stessa regione disegnata in cinque modi, la carta misteriosa e lo smistamento.", link: "geografia/prima/carte-geografiche/attivita/fisica-politica-o-tematica.html", data: "2026-10-23" },
+          { tipo: "Attività 2", titolo: "Le curve di livello", descrizione: "Una montagna tagliata a fette, il profilo e la carta da colorare con le tinte altimetriche.", link: "geografia/prima/carte-geografiche/attivita/le-curve-di-livello.html", data: "2026-10-23" }
+        ]
+      },
       { titolo: "I dati: raccoglierli, ordinarli, rappresentarli", attivita: [] }
     ]
   },
@@ -243,6 +256,15 @@ const MODULI = [
         attivita: []
       },
       {
+        titolo: "Le proiezioni: disegnare il mondo su un foglio",
+        descrizione: "Carte conformi ed equivalenti, Mercatore, Peters ed Equal Earth a confronto con il globo. Spostata dalla prima, da verificare.",
+        link: "geografia/prima/metodo-e-strumenti/lezioni/proiezioni.html",
+        data: "2026-10-23",
+        attivita: [
+          { tipo: "Attività", titolo: "Carte sovrapposte ed emisferi", link: "geografia/prima/carte-geografiche/attivita/carte-sovrapposte-ed-emisferi.html", data: "2026-10-21" }
+        ]
+      },
+      {
         titolo: "Rilievi, oceani, fiumi e laghi",
         descrizione: "Catene montuose e scudi, fondali oceanici, correnti, acqua dolce.",
         link: "geografia/terza/la-terra/lezioni/acque.html",
@@ -302,7 +324,12 @@ const MODULI = [
     titolo: "Popolazione mondiale: crescita e inurbamento",
     descrizione: "Dove siamo, quanti siamo, come ci muoviamo. Dicembre–gennaio, in collegamento con Scienze e Storia.",
     lezioni: [
-      { titolo: "La crescita della popolazione mondiale", attivita: [] },
+      {
+        titolo: "La crescita della popolazione mondiale",
+        attivita: [
+          { tipo: "Se c'è tempo", titolo: "Carte che cambiano forma", descrizione: "Anamorfosi: il mondo disegnato in base alla popolazione, ai giovani, ai cellulari.", link: "geografia/prima/carte-geografiche/attivita/carte-che-cambiano-forma.html", data: "2026-10-23" }
+        ]
+      },
       { titolo: "L'inurbamento", attivita: [] }
     ]
   },

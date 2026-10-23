@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le curve di livello</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+:root{
+  --bg:#edf1f5; --surface:#ffffff; --ink:#15233a; --muted:#56657a; --line:#d2dae4;
+  --accent:#2c5c9c; --hot:#c4511f; --ok:#2e7d4f; --no:#b3261e; --soft:#f4f6f9;
+  --f-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1622; --surface:#172131; --ink:#e6ecf3; --muted:#9aa8ba; --line:#2b384c;
+  --accent:#86aee6; --hot:#ff8a52; --ok:#6fcf97; --no:#ff8a80; --soft:#1d2a3d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1622; --surface:#172131; --ink:#e6ecf3; --muted:#9aa8ba; --line:#2b384c;
+  --accent:#86aee6; --hot:#ff8a52; --ok:#6fcf97; --no:#ff8a80; --soft:#1d2a3d; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1500px;margin:0 auto;padding-block:20px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(1.9rem,4.5vw,2.8rem);line-height:1.05;margin:0;text-wrap:balance}
+h1 span{color:var(--hot)}
+.lede{margin:4px 0 0;max-width:72ch;color:var(--muted)}
+h2{font-family:var(--f-display);font-weight:600;font-size:1.3rem;margin:0;text-wrap:balance}
+h3{font-family:var(--f-display);font-weight:600;font-size:1.08rem;margin:0}
+p{margin:0}
+.lnav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;font-size:.9rem;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.lnav a{color:var(--accent);text-decoration:none;font-weight:700}
+.lnav a:hover{text-decoration:underline}
+.lnav .passi{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;color:var(--muted)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button{font:inherit;font-size:.95rem;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:8px;padding:8px 12px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button.go{background:var(--hot);border-color:var(--hot);color:#fff;font-weight:700}
+button:disabled{opacity:.55;cursor:default}
+label.chk{display:inline-flex;gap:6px;align-items:center;font-size:.95rem;cursor:pointer}
+.fb{padding:10px 12px;border-radius:8px;border:1px solid var(--line)}
+.fb.ok{border-color:var(--ok)}.fb.ok b{color:var(--ok)}
+.fb.no{border-color:var(--no)}.fb.no b{color:var(--no)}
+.learn{padding:12px 14px;background:var(--soft);border-radius:8px}
+.learn strong{display:block;font-family:var(--f-display);font-weight:600;margin-bottom:2px}
+.book{border:2px dashed var(--line);border-radius:8px;padding:10px 14px;font-size:.95rem}
+.book b:first-child{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--hot);margin-right:6px}
+.small{font-size:.86rem;color:var(--muted)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.opts button{text-align:left}
+.opts button.right{border-color:var(--ok);color:var(--ok);font-weight:700}
+.opts button.wrong{border-color:var(--no);color:var(--no)}
+input[type=text],input[type=number]{font:inherit;font-size:1rem;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);min-width:0}
+input.ok{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)}
+input.no{border-color:var(--no);box-shadow:0 0 0 1px var(--no)}
+textarea{font:inherit;width:100%;min-height:5em;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);resize:vertical}
+details{border-top:1px solid var(--line);padding-top:10px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}
+details > :not(summary){margin-top:8px}
+.score{font-family:var(--f-display);font-weight:800;font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---- carta (stile da atlante, uguale nei due temi) ---- */
+.mapframe{background:#fbfaf6;border:1px solid var(--line);border-radius:10px;padding:8px;min-width:0}
+.mapframe svg{display:block;width:100%;height:auto;max-height:calc(100vh - 90px)}
+.coast{vector-effect:non-scaling-stroke}
+.river{fill:none;stroke:#3f86c8;stroke-width:2.6;stroke-linecap:round}
+.river-true{fill:none;stroke:#0e3f73;stroke-width:1.1;opacity:.95}
+.lake{fill:#8cc0e9;stroke:#3f86c8;stroke-width:1.4}
+.park{fill:#3f9a52;fill-opacity:.16;stroke:#2f7d40;stroke-width:1.6;stroke-dasharray:5 3}
+.urban{fill:#e9b9a3;fill-opacity:.85;stroke:#b7735a;stroke-width:1}
+.streets line{stroke:#fff;stroke-width:1.1}
+.zoomed path,.zoomed line,.zoomed ellipse,.zoomed circle,.zoomed rect{vector-effect:non-scaling-stroke}
+.zoomed .streets line{stroke-width:3}
+.zoomed .urban{stroke-width:1.5}
+.b-state{fill:none;stroke:#7a2f8f;stroke-width:4;stroke-dasharray:10 4 2 4;opacity:.85}
+.b-region{fill:none;stroke:#7a2f8f;stroke-width:2;stroke-dasharray:7 4;opacity:.75}
+.road-auto-c{fill:none;stroke:#7d2316;stroke-width:6.2;stroke-linecap:round}
+.road-auto{fill:none;stroke:#e5533c;stroke-width:3.8;stroke-linecap:round}
+.road-main{fill:none;stroke:#e08a2c;stroke-width:3;stroke-linecap:round}
+.road-other{fill:none;stroke:#8a6d4b;stroke-width:1.6;stroke-linecap:round}
+.rail-b{fill:none;stroke:#222;stroke-width:3.4}
+.rail-w{fill:none;stroke:#fff;stroke-width:1.8;stroke-dasharray:6 6}
+.poi-bg{fill:#fff;stroke:#333;stroke-width:1}
+.poi-ink{fill:#333}
+.pass{fill:none;stroke:#3b2a1a;stroke-width:2}
+.peak{fill:#3b2a1a}
+.sym{stroke:#1d1d1d;stroke-width:1.4}
+.sym.fill{fill:#1d1d1d}
+.sym.ring{fill:#fff}
+.sym.open{fill:#fff;stroke-width:1.6}
+.sym-cap{fill:#c0282d;stroke:#1d1d1d}
+.tour{fill:#e5533c;fill-opacity:.45;stroke:#a33621;stroke-width:1.2}
+.lab-city{fill:#151515;font-family:var(--f-body);font-weight:700;paint-order:stroke;stroke:#fbfaf6;stroke-width:3.2px;stroke-linejoin:round}
+.lab-peak{fill:#3b2a1a;font:700 11.5px var(--f-body);text-anchor:middle;paint-order:stroke;stroke:#fff8;stroke-width:3px}
+.lab-q{fill:#3b2a1a;font:400 11px var(--f-body);text-anchor:middle;paint-order:stroke;stroke:#fff8;stroke-width:3px}
+.lab-river{fill:#1f5f9c;font:italic 600 12.5px var(--f-body);text-anchor:middle;paint-order:stroke;stroke:#ffffffaa;stroke-width:3px}
+.lab-sea{fill:#3a76ad;font:italic 600 21px var(--f-display);letter-spacing:.45em}
+.lab-gulf{fill:#3a76ad;font:italic 600 13px var(--f-body);text-anchor:middle}
+.lab-state{fill:#6d2a80;font:700 17px var(--f-display);letter-spacing:.2em;text-anchor:middle}
+.lab-region{fill:#6d2a80;font:700 12px var(--f-body);letter-spacing:.18em;text-anchor:middle;opacity:.8;paint-order:stroke;stroke:#ffffffaa;stroke-width:3px}
+.lab-park{fill:#2f7d40;font:italic 600 11.5px var(--f-body);text-anchor:middle}
+.lab-small{fill:#333;font:600 11px var(--f-body);text-anchor:middle;paint-order:stroke;stroke:#ffffffcc;stroke-width:3px}
+.dim{opacity:.18}
+.off{display:none}
+.city.station .sym{stroke:#e5533c;stroke-width:3}
+@media (prefers-reduced-motion:no-preference){.pulse{animation:pulse 1.2s ease-in-out 2}}
+@keyframes pulse{50%{opacity:.25}}
+.sb-bg{fill:#fbfaf6;fill-opacity:.92;stroke:#9aa3ad;stroke-width:.8}
+.sb-t{fill:#222;font:700 11px var(--f-body)}
+.sb-b{fill:#222}.sb-w{fill:#fff;stroke:#222;stroke-width:.8}
+.sb-n{fill:#222;font:600 10px var(--f-body);text-anchor:middle}
+.north{fill:#222}.north-t{fill:#222;font:700 13px var(--f-display);text-anchor:middle}
+
+/* Layout: la montagna grande (dalle fette alla pianta) con i comandi accanto; sotto il profilo, le domande e l'esercizio delle tinte */
+.top{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
+@media (max-width:980px){.top{grid-template-columns:minmax(0,1fr)}}
+.stage{background:#fbfaf6;border:1px solid var(--line);border-radius:10px;padding:8px;min-width:0;position:relative}
+#island{display:block;width:100%;aspect-ratio:16/9;max-height:calc(100vh - 90px)}
+.readout{position:absolute;left:18px;top:16px;background:#fffffff0;color:#15233a;border:1px solid #c9d1db;border-radius:6px;padding:4px 10px;font-weight:700;font-variant-numeric:tabular-nums;pointer-events:none}
+.ctrl{display:flex;flex-direction:column;gap:14px}
+.slider label{font-weight:700;display:block;margin-bottom:4px}
+.slider input{width:100%;accent-color:var(--hot)}
+.slider .ends{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted)}
+.checks{display:flex;flex-direction:column;gap:6px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.legend-t{display:grid;grid-template-columns:22px 1fr;gap:2px 8px;font-size:.84rem;align-items:center}
+.legend-t i{display:block;height:13px;border-radius:2px;border:1px solid #0002}
+.grid2{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:980px){.grid2{grid-template-columns:minmax(0,1fr)}}
+#profile{display:block;width:100%;aspect-ratio:3.6/1}
+.ask{font-size:1.1rem;font-weight:700}
+.paint{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:12px;align-items:start}
+@media (max-width:620px){.paint{grid-template-columns:minmax(0,1fr)}}
+#hill{display:block;width:100%;aspect-ratio:4/3;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
+.pal{display:flex;flex-direction:column;gap:6px}
+.pal button{display:grid;grid-template-columns:26px 1fr;gap:8px;align-items:center;text-align:left;padding:6px 8px;font-size:.9rem}
+.pal button i{display:block;height:18px;border-radius:3px;border:1px solid #0003}
+.pal button[aria-pressed="true"]{outline:3px solid var(--hot);outline-offset:1px;background:var(--surface);color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="lnav" aria-label="Lezione"><a href="../../../index.html?classe=prima#modulo-prima-i">← Geografia · Tanti tipi di carte</a><span class="passi"><a href="fisica-politica-o-tematica.html">← Fisica, politica o tematica?</a><span>Attività 2 di 2</span></span></nav>
+  <header>
+    <div class="eyebrow">Geografia · Tanti tipi di carte</div>
+    <h1>Le curve di <span>livello</span></h1>
+    <p class="lede">Come si disegna una montagna su un foglio piatto? Si immagina di tagliarla a fette orizzontali, tutte alla stessa distanza. Il contorno di ogni fetta è una <b>curva di livello</b> (o <b>isoipsa</b>): tutti i suoi punti sono alla stessa altitudine. Muovi il cursore e schiaccia le fette fino a ottenere la carta.</p>
+  </header>
+
+  <div class="top">
+    <div class="stage">
+      <canvas id="island" role="img" aria-label="Un'isola con due cime: si passa dalle fette sollevate alla carta con le curve di livello"></canvas>
+      <div class="readout" id="readout" hidden></div>
+    </div>
+    <aside class="card ctrl">
+      <div class="slider">
+        <label for="lift">Dalle fette alla carta</label>
+        <input type="range" id="lift" min="0" max="100" value="100">
+        <div class="ends"><span>carta vista dall'alto</span><span>fette sollevate</span></div>
+      </div>
+      <div class="row"><button type="button" id="play" class="go">▶ Schiaccia le fette</button></div>
+      <div>
+        <p style="font-weight:700;margin-bottom:4px">Una fetta ogni</p>
+        <div class="seg" role="group" aria-label="Distanza tra le curve"><button type="button" data-s="100" aria-pressed="true">100 m</button><button type="button" data-s="50" aria-pressed="false">50 m</button></div>
+      </div>
+      <div class="checks">
+        <label class="chk"><input type="checkbox" id="oLines" checked> Curve di livello</label>
+        <label class="chk"><input type="checkbox" id="oTinte" checked> Tinte altimetriche</label>
+        <label class="chk"><input type="checkbox" id="oShade"> Sfumo (ombre in grigio)</label>
+        <label class="chk"><input type="checkbox" id="oSea"> Isobate (profondità del mare)</label>
+      </div>
+      <div class="legend-t" id="legT"></div>
+      <p class="small">Sulla carta vista dall'alto, passa sopra l'isola per leggere la quota. L'isola è inventata.</p>
+    </aside>
+  </div>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>Il profilo da ovest a est</h2>
+      <p>Il profilo mostra la montagna «tagliata» lungo la linea tratteggiata A–B, come se la guardassi di lato.</p>
+      <canvas id="profile" role="img" aria-label="Profilo della montagna da ovest a est"></canvas>
+      <p class="learn"><strong>Curve vicine, curve lontane</strong>Dove le curve di livello sono <b>vicine</b> il pendio è <b>ripido</b>: si sale molto in poco spazio. Dove sono <b>lontane</b>, il pendio è <b>dolce</b>.</p>
+    </section>
+    <section class="card" aria-live="polite">
+      <div class="row" style="justify-content:space-between"><h2>Rispondi guardando la carta</h2><span class="score" id="score"></span></div>
+      <div id="quiz"></div>
+    </section>
+  </div>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>Colora la carta con le tinte altimetriche</h2>
+      <p>Scegli un colore, poi tocca la zona da colorare. I numeri sulle curve sono le altitudini in metri.</p>
+      <div class="paint">
+        <canvas id="hill" role="img" aria-label="Collina con curve di livello da colorare"></canvas>
+        <div class="pal" id="pal"></div>
+      </div>
+      <div class="row"><button type="button" class="go" id="pCheck">Controlla</button><button type="button" id="pReset">Cancella</button></div>
+      <p class="fb" id="pFb" hidden></p>
+    </section>
+    <section class="card">
+      <h2>Le parole da ricordare</h2>
+      <ul style="margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px">
+        <li><b>Curve di livello</b> o <b>isoipse</b>: linee che uniscono i punti alla stessa altitudine.</li>
+        <li><b>Tinte altimetriche</b>: i colori delle zone tra due curve. Di solito verde per la pianura, giallo per la collina, marrone per la montagna; più è scuro, più è alto.</li>
+        <li><b>Isobate</b>: linee che uniscono i punti del fondale marino alla stessa profondità. Il blu è più scuro dove il mare è più profondo.</li>
+        <li><b>Sfumo</b>: ombre in grigio che fanno sembrare i rilievi in rilievo, come se il sole li illuminasse di lato.</li>
+      </ul>
+      <p class="book"><b>Sul libro</b>Pag. A13, figura E: la Sardegna del sud con curve di livello e tinte altimetriche. Qual è il rilievo più alto? Quanto è alto?</p>
+      <details><summary>Risposta per l'insegnante</summary><p>Sulla carta sono segnati il Monte Linas (1236 m) e il Monte Is Caravius (1116 m): il più alto è il Monte Linas.</p></details>
+    </section>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  /* ---------- l'isola: altitudine in metri su un dominio 1 x 0.6 ---------- */
+  function G(x,y,cx,cy,sx,sy){ return Math.exp(-((x-cx)**2/(2*sx*sx) + (y-cy)**2/(2*sy*sy))); }
+  function H(x,y){
+    const sxw = x < 0.33 ? 0.045 : 0.10;
+    let f = 560*G(x,y,0.33,0.29,sxw,0.085) + 330*G(x,y,0.62,0.31,0.095,0.075) + 150*G(x,y,0.80,0.36,0.05,0.05) + 160*G(x,y,0.52,0.31,0.26,0.13);
+    const e = Math.sqrt(((x-0.55)/0.36)**2 + ((y-0.31)/0.21)**2);
+    return f - 55 - 320*Math.max(0, e-0.85);
+  }
+  const DW = 1, DH = 0.6, GW = 300, GH = 180;
+  const grid = new Float32Array(GW*GH);
+  for (let j=0;j<GH;j++) for (let i=0;i<GW;i++) grid[j*GW+i] = H((i+.5)/GW*DW, (j+.5)/GH*DH);
+  let peak = { x:0, y:0, h:-1 };
+  for (let j=0;j<GH;j++) for (let i=0;i<GW;i++){ const h = grid[j*GW+i]; if (h > peak.h) peak = { x:(i+.5)/GW, y:(j+.5)/GH*DH, h }; }
+  let peak2 = { h:-1 };
+  for (let j=0;j<GH;j++) for (let i=0;i<GW;i++){ const x=(i+.5)/GW; if (x < 0.5) continue; const h = grid[j*GW+i]; if (h > peak2.h) peak2 = { x, y:(j+.5)/GH*DH, h }; }
+  peak.q = Math.round(peak.h); peak2.q = Math.round(peak2.h);
+
+  const TINT = [[0,100,'#a9cf8c'],[100,200,'#cfe09a'],[200,300,'#efdd9c'],[300,400,'#dfba7c'],[400,500,'#c69565'],[500,9999,'#a5764f']];
+  const SEA = [[-50,0,'#cbe3f6'],[-100,-50,'#a5cbec'],[-9999,-100,'#7fb5df']];
+  const hex = s => [parseInt(s.slice(1,3),16),parseInt(s.slice(3,5),16),parseInt(s.slice(5,7),16)];
+  const colorOf = h => h < 0 ? hex((SEA.find(b => h >= b[0] && h < b[1]) || SEA[2])[2]) : hex((TINT.find(b => h >= b[0] && h < b[1]) || TINT[5])[2]);
+  $('legT').innerHTML = TINT.slice().reverse().map(b => '<i style="background:' + b[2] + '"></i>' + (b[1] > 5000 ? 'oltre ' + b[0] + ' m' : 'da ' + b[0] + ' a ' + b[1] + ' m')).join('') +
+    SEA.map(b => '<i style="background:' + b[2] + '"></i>' + (b[0] < -5000 ? 'oltre 100 m di profondità' : 'da ' + (-b[1]) + ' a ' + (-b[0]) + ' m di profondità')).join('');
+
+  const st = { t:1, step:100, lines:true, tinte:true, shade:false, sea:false, hover:null, markA:null, markClick:null };
+
+  /* ---------- curve con il metodo dei quadratini ---------- */
+  function contours(level, arr, gw, gh, yScale){
+    arr = arr || grid; const GW_ = gw || GW, GH_ = gh || GH, YS = yScale === undefined ? DH : yScale;
+    const segs = [];
+    const P = (i,j) => arr[j*GW_+i];
+    for (let j=0;j<GH_-1;j++) for (let i=0;i<GW_-1;i++){
+      const a=P(i,j), b=P(i+1,j), c=P(i+1,j+1), d=P(i,j+1);
+      const idx = (a>=level?8:0)|(b>=level?4:0)|(c>=level?2:0)|(d>=level?1:0);
+      if (idx===0 || idx===15) continue;
+      const lerp = (p,q) => (level-p)/(q-p);
+      const T=[i+lerp(a,b), j], R=[i+1, j+lerp(b,c)], B=[i+lerp(d,c), j+1], L=[i, j+lerp(a,d)];
+      const add = (p,q) => segs.push([(p[0]+.5)/GW_, (p[1]+.5)/GH_*YS, (q[0]+.5)/GW_, (q[1]+.5)/GH_*YS]);
+      switch(idx){
+        case 1: case 14: add(L,B); break; case 2: case 13: add(B,R); break; case 3: case 12: add(L,R); break;
+        case 4: case 11: add(T,R); break; case 5: add(L,T); add(B,R); break; case 6: case 9: add(T,B); break;
+        case 7: case 8: add(L,T); break; case 10: add(T,R); add(L,B); break;
+      }
+    }
+    return segs;
+  }
+  const CCACHE = {};
+  const cont = l => CCACHE[l] || (CCACHE[l] = contours(l));
+
+  /* ---------- maschere colorate per ogni fetta ---------- */
+  const MCACHE = {};
+  function mask(level, top, darker){
+    const key = level + '|' + top + '|' + (darker?1:0) + '|' + (st.tinte?1:0);
+    if (MCACHE[key]) return MCACHE[key];
+    const cv = document.createElement('canvas'); cv.width = GW; cv.height = GH;
+    const c = cv.getContext('2d'), im = c.createImageData(GW,GH), d = im.data;
+    for (let k=0;k<GW*GH;k++){
+      const h = grid[k]; if (h < level) continue;
+      let col = st.tinte ? colorOf(Math.min(h, top-0.01)) : [236,233,224];
+      if (top !== null && h >= top) col = st.tinte ? colorOf(level) : [236,233,224];
+      if (top !== null) col = st.tinte ? colorOf(level + 0.01) : [236,233,224];
+      const f = darker ? 0.72 : 1;
+      d[k*4]=col[0]*f; d[k*4+1]=col[1]*f; d[k*4+2]=col[2]*f; d[k*4+3]=255;
+    }
+    c.putImageData(im,0,0);
+    return MCACHE[key] = cv;
+  }
+  let flatCache = {};
+  function flatMap(){
+    const key = (st.tinte?1:0) + '|' + (st.shade?1:0) + '|' + (st.sea?1:0);
+    if (flatCache[key]) return flatCache[key];
+    const cv = document.createElement('canvas'); cv.width = GW; cv.height = GH;
+    const c = cv.getContext('2d'), im = c.createImageData(GW,GH), d = im.data;
+    for (let j=0;j<GH;j++) for (let i=0;i<GW;i++){
+      const k=j*GW+i, h=grid[k];
+      let col = h < 0 ? (st.sea ? colorOf(h) : [188,218,240]) : (st.tinte ? colorOf(h) : [246,244,238]);
+      if (st.shade && h > 0){
+        const hl=grid[k-(i>0?1:0)], hr=grid[k+(i<GW-1?1:0)], hu=grid[k-(j>0?GW:0)], hd=grid[k+(j<GH-1?GW:0)];
+        const gx=(hr-hl)/2/12, gy=(hd-hu)/2/12, nz=1/Math.sqrt(gx*gx+gy*gy+1), lit=(gx*0.6+gy*0.6+0.53)*nz;
+        const f = Math.max(0.45, Math.min(1.1, 0.35+lit*0.8));
+        col = st.tinte ? col.map(v => v*f) : [255*f*0.86, 255*f*0.86, 255*f*0.86];
+      }
+      d[k*4]=col[0]; d[k*4+1]=col[1]; d[k*4+2]=col[2]; d[k*4+3]=255;
+    }
+    c.putImageData(im,0,0);
+    return flatCache[key] = cv;
+  }
+
+  /* ---------- disegno principale ---------- */
+  const cv = $('island'), ctx = cv.getContext('2d');
+  let VIEW = null;
+  function fit(c){ const r=c.getBoundingClientRect(), dpr=window.devicePixelRatio||1; const w=Math.round(r.width*dpr), h=Math.round(r.height*dpr); if (c.width!==w||c.height!==h){ c.width=w; c.height=h; } return { w:r.width, h:r.height, dpr }; }
+  function draw(){
+    const { w, h, dpr } = fit(cv);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.fillStyle = '#fbfaf6'; ctx.fillRect(0,0,w,h);
+    const t = st.t, S = Math.min(w*0.96, h/(DH+0.03)*0.96);
+    const sq = 1 - 0.5*t, k = 0.00028*S*t;            // schiacciamento e altezza delle fette
+    const ox = (w - S)/2, oy = (h - S*DH*sq)/2 + 0.16*S*t*0.5;
+    VIEW = { S, sq, k, ox, oy, t };
+    const X = x => ox + x*S, Y = (y,l) => oy + y*S*sq - l*k;
+    ctx.imageSmoothingEnabled = true;
+    // base: mare e isola schiacciati
+    ctx.drawImage(flatMap(), ox, oy, S, S*DH*sq);
+    if (t > 0.02){
+      // fette: dal basso verso l'alto
+      const levels = []; for (let l=st.step; l<peak.h; l+=st.step) levels.push(l);
+      const base = [0, ...levels];
+      for (let n=0; n<base.length; n++){
+        const l = base[n], prev = n ? base[n-1] : 0, m = mask(l, true, false), md = mask(l, true, true);
+        const steps = Math.max(1, Math.ceil((l - (n?prev:0))*k/0.7));
+        for (let s=0; s<=steps; s++){ const ll = (n?prev:0) + (l-(n?prev:0))*s/steps; ctx.drawImage(md, ox, Y(0,ll), S, S*DH*sq); }
+        ctx.drawImage(m, ox, Y(0,l), S, S*DH*sq);
+        if (st.lines){ ctx.lineWidth = 1.2; ctx.strokeStyle = '#5a3a1e'; ctx.beginPath(); for (const s of cont(l)){ ctx.moveTo(X(s[0]),Y(s[1],l)); ctx.lineTo(X(s[2]),Y(s[3],l)); } ctx.stroke(); }
+      }
+    }
+    // curve di livello (vista dall'alto)
+    if (st.lines && t <= 0.02){
+      const levels = []; for (let l=st.step; l<peak.h; l+=st.step) levels.push(l);
+      ctx.lineWidth = 1.4; ctx.strokeStyle = '#5a3a1e';
+      ctx.beginPath();
+      for (const s of cont(0)){ ctx.moveTo(X(s[0]),Y(s[1],0)); ctx.lineTo(X(s[2]),Y(s[3],0)); }
+      ctx.stroke();
+      for (const l of levels){
+        ctx.lineWidth = (l % 500 === 0 || (st.step===50 && l%100===0)) ? 1.6 : 1.1;
+        ctx.beginPath();
+        for (const s of cont(l)){ ctx.moveTo(X(s[0]),Y(s[1],l)); ctx.lineTo(X(s[2]),Y(s[3],l)); }
+        ctx.stroke();
+      }
+      if (t < 0.05){
+        // etichette sulle curve, lungo la linea che va verso sud-est dalla cima
+        ctx.font = '700 ' + Math.max(10, S/75) + 'px ' + getComputedStyle(document.documentElement).getPropertyValue('--f-body');
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        for (const l of levels.filter(l => st.step===100 || l%100===0)){
+          const segs = cont(l).filter(s => s[1] > peak.y && s[0] > peak.x - 0.02 && s[0] < peak.x + 0.25);
+          if (!segs.length) continue;
+          const s = segs.reduce((a,b) => Math.abs(b[0]-peak.x-(b[1]-peak.y)) < Math.abs(a[0]-peak.x-(a[1]-peak.y)) ? b : a);
+          const px = X((s[0]+s[2])/2), py = Y((s[1]+s[3])/2, l);
+          ctx.fillStyle = '#fbfaf6'; ctx.fillRect(px-13, py-7, 26, 14);
+          ctx.fillStyle = '#5a3a1e'; ctx.fillText(String(l), px, py);
+        }
+      }
+    }
+    if (st.sea && t < 0.5){
+      ctx.strokeStyle = '#2c6fae'; ctx.setLineDash([4,3]); ctx.lineWidth = 1.1;
+      for (const l of [-50,-100]){ ctx.beginPath(); for (const s of cont(l)){ ctx.moveTo(X(s[0]),Y(s[1],0)); ctx.lineTo(X(s[2]),Y(s[3],0)); } ctx.stroke(); }
+      ctx.setLineDash([]);
+    }
+    // cime
+    for (const p of [peak, peak2]){
+      const px = X(p.x), py = Y(p.y, p.h) - (t>0.02 ? 0 : 0);
+      ctx.fillStyle = '#3b2a1a'; ctx.beginPath(); ctx.moveTo(px, py-7); ctx.lineTo(px+6, py+4); ctx.lineTo(px-6, py+4); ctx.fill();
+      if (t < 0.05){ ctx.font = '700 12px ' + getComputedStyle(document.documentElement).getPropertyValue('--f-body'); ctx.textAlign='center'; ctx.fillStyle='#3b2a1a'; ctx.fillText(String(p.q), px, py-13); }
+    }
+    // linea del profilo
+    if (t < 0.05){
+      ctx.strokeStyle = '#c4511f'; ctx.lineWidth = 1.6; ctx.setLineDash([6,4]);
+      ctx.beginPath(); ctx.moveTo(X(0.04), Y(peak.y,0)); ctx.lineTo(X(0.96), Y(peak.y,0)); ctx.stroke(); ctx.setLineDash([]);
+      ctx.font = '700 14px ' + getComputedStyle(document.documentElement).getPropertyValue('--f-body'); ctx.fillStyle = '#c4511f';
+      ctx.textAlign = 'center'; ctx.fillText('A', X(0.025), Y(peak.y,0)+5); ctx.fillText('B', X(0.975), Y(peak.y,0)+5);
+      ctx.fillStyle = '#3a76ad'; ctx.font = 'italic 600 15px ' + getComputedStyle(document.documentElement).getPropertyValue('--f-display');
+      ctx.fillText('ISOLA SERENA', X(0.55), Y(0.56,0));
+      if (st.markA){ dot(X(st.markA.x), Y(st.markA.y,0), 'P', '#1d4ed8'); }
+      if (st.markClick){ ctx.strokeStyle = st.markClick.ok ? '#1f8a4c' : '#d43c2c'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(X(st.markClick.x), Y(st.markClick.y,0), 16, 0, 7); ctx.stroke(); }
+    }
+    // nord
+    ctx.fillStyle = '#222'; const nx = w - 26, ny = 30;
+    ctx.beginPath(); ctx.moveTo(nx, ny-16); ctx.lineTo(nx+6, ny+6); ctx.lineTo(nx, ny+2); ctx.lineTo(nx-6, ny+6); ctx.fill();
+    ctx.font = '700 12px sans-serif'; ctx.textAlign = 'center'; ctx.fillText('N', nx, ny+20);
+  }
+  function dot(x,y,label,color){
+    ctx.fillStyle = color; ctx.strokeStyle = '#fff'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.arc(x,y,7,0,7); ctx.fill(); ctx.stroke();
+    ctx.font = '800 15px sans-serif'; ctx.textAlign='left'; ctx.fillStyle = color;
+    ctx.strokeStyle = '#ffffffdd'; ctx.lineWidth = 4; ctx.strokeText(label, x+10, y+5); ctx.fillText(label, x+10, y+5);
+  }
+
+  /* ---------- profilo ---------- */
+  const pc = $('profile'), px = pc.getContext('2d');
+  function drawProfile(){
+    const { w, h, dpr } = fit(pc); px.setTransform(dpr,0,0,dpr,0,0);
+    const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+    px.fillStyle = css('--surface'); px.fillRect(0,0,w,h);
+    const L = 34, R = w-10, B = h-22, Tp = 10, maxH = 600, minH = -120;
+    const XX = x => L + (x-0.04)/(0.92)*(R-L), YY = v => B - (v-minH)/(maxH-minH)*(B-Tp);
+    px.font = '11px sans-serif'; px.fillStyle = css('--muted'); px.textAlign = 'right';
+    for (let l=0; l<=maxH; l+=st.step){ px.strokeStyle = l===0 ? '#3f86c8' : css('--line'); px.lineWidth = 1; px.beginPath(); px.moveTo(L,YY(l)); px.lineTo(R,YY(l)); px.stroke(); if (st.step===100 || l%100===0) px.fillText(l+' m', L-4, YY(l)+4); }
+    px.beginPath(); px.moveTo(XX(0.04), YY(minH));
+    for (let x=0.04; x<=0.96; x+=0.002) px.lineTo(XX(x), YY(Math.max(minH, H(x, peak.y))));
+    px.lineTo(XX(0.96), YY(minH)); px.closePath();
+    px.save(); px.fillStyle = '#7fb5df'; px.fillRect(L, YY(0), R-L, YY(minH)-YY(0)); px.restore();
+    px.fillStyle = '#c69565'; px.fill();
+    px.strokeStyle = '#5a3a1e'; px.lineWidth = 1.6; px.beginPath();
+    for (let x=0.04; x<=0.96; x+=0.002) (x===0.04?px.moveTo:px.lineTo).call(px, XX(x), YY(Math.max(minH, H(x, peak.y))));
+    px.stroke();
+    px.font = '700 13px sans-serif'; px.fillStyle = '#c4511f'; px.textAlign = 'left'; px.fillText('A (ovest)', L+2, h-6); px.textAlign = 'right'; px.fillText('B (est)', R, h-6);
+  }
+
+  /* ---------- comandi ---------- */
+  $('lift').addEventListener('input', e => { st.t = e.target.value/100; draw(); });
+  let anim = null;
+  $('play').addEventListener('click', () => {
+    if (anim) return; const from = st.t, to = st.t > 0.5 ? 0 : 1, t0 = performance.now();
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const stepf = now => { const p = reduce ? 1 : Math.min(1, (now-t0)/2200); st.t = from + (to-from)*(0.5-0.5*Math.cos(Math.PI*p)); $('lift').value = Math.round(st.t*100); draw(); if (p < 1) anim = requestAnimationFrame(stepf); else { anim = null; $('play').textContent = st.t > 0.5 ? '▶ Schiaccia le fette' : '▶ Solleva le fette'; } };
+    anim = requestAnimationFrame(stepf);
+  });
+  document.querySelectorAll('[data-s]').forEach(b => b.addEventListener('click', () => { st.step = +b.dataset.s; document.querySelectorAll('[data-s]').forEach(o => o.setAttribute('aria-pressed', String(o===b))); draw(); drawProfile(); }));
+  const chk = (id, key) => $(id).addEventListener('change', e => { st[key] = e.target.checked; for (const k in MCACHE) delete MCACHE[k]; flatCache = {}; draw(); });
+  chk('oLines','lines'); chk('oTinte','tinte'); chk('oShade','shade'); chk('oSea','sea');
+  function toDomain(e){ const r = cv.getBoundingClientRect(), V = VIEW; if (!V || V.t > 0.05) return null; const x = (e.clientX - r.left - V.ox)/V.S, y = (e.clientY - r.top - V.oy)/(V.S*V.sq); return (x<0||x>1||y<0||y>DH) ? null : { x, y }; }
+  cv.addEventListener('mousemove', e => {
+    const d = toDomain(e), ro = $('readout');
+    if (!d){ ro.hidden = true; return; }
+    const h = H(d.x, d.y); ro.hidden = false;
+    ro.textContent = h >= 0 ? 'Quota: ' + Math.round(h) + ' m' : 'Mare: profondità ' + Math.round(-h) + ' m';
+  });
+  cv.addEventListener('mouseleave', () => $('readout').hidden = true);
+
+  /* ---------- domande ---------- */
+  // punto P: sul versante est della cima più alta, tra due curve
+  let A = { x: peak.x + 0.09, y: peak.y + 0.03 };
+  for (let dx=0.05; dx<0.2; dx+=0.004){ const hh = H(peak.x+dx, peak.y+0.03); const r = hh % 100; if (hh > 120 && hh < 420 && r > 35 && r < 65){ A = { x:peak.x+dx, y:peak.y+0.03 }; break; } }
+  const hA = H(A.x, A.y), lo = Math.floor(hA/100)*100;
+  const bandTxt = l => 'tra ' + l + ' e ' + (l+100) + ' m';
+  const Q = [
+    { t:'click', ask:'Clicca sulla cima più alta dell\'isola.', ok:'È la cima a ovest: è alta ' + peak.q + ' m. Dentro la curva più piccola c\'è il punto più alto.' },
+    { t:'choice', ask:'Il punto P (in blu) a quale altitudine si trova?', opts:[0,100,200,300,400].map(bandTxt), right:bandTxt(lo), mark:true,
+      ok:'P si trova tra la curva dei ' + lo + ' m e quella dei ' + (lo+100) + ' m. Passa sopra il punto con il mouse per leggere la quota esatta.' },
+    { t:'choice', ask:'La cima più alta ha un versante ripido e uno dolce. Quale è il versante più ripido?', opts:['il versante ovest','il versante est'], right:'il versante ovest',
+      ok:'A ovest le curve di livello sono vicinissime: si sale molto in poco spazio. Guarda anche il profilo: da quella parte la linea è quasi verticale.' },
+    { t:'choice', ask:'Se due curve di livello sono molto lontane tra loro, il terreno è…', opts:['ripido','quasi pianeggiante o in leggera salita','sotto il livello del mare'], right:'quasi pianeggiante o in leggera salita',
+      ok:'Curve lontane vogliono dire che bisogna percorrere molta strada per salire di poco: il pendio è dolce.' },
+    { t:'choice', ask:'Come si chiamano le linee che uniscono i punti del fondale marino alla stessa profondità?', opts:['isoipse','isobate','meridiani'], right:'isobate',
+      ok:'Sono le isobate. Accendi «Isobate» per vederle tratteggiate in blu intorno all\'isola.' },
+    { t:'choice', ask:'Quante fette (e quindi quante curve) servono per arrivare dalla costa a ' + Math.floor(peak.q/100)*100 + ' m, con una fetta ogni 100 m?', opts:[String(Math.floor(peak.q/100)-1), String(Math.floor(peak.q/100)), String(Math.floor(peak.q/100)*100)], right:String(Math.floor(peak.q/100)),
+      ok:'Una curva ogni 100 m: 100, 200, 300… fino a ' + Math.floor(peak.q/100)*100 + ' m. In tutto ' + Math.floor(peak.q/100) + ' curve, più la linea di costa che è a 0 m.' }
+  ];
+  const qs = { i:0, score:0, ans:null, tries:0 };
+  function goFlat(){ if (st.t > 0.05){ st.t = 0; $('lift').value = 0; $('play').textContent = '▶ Solleva le fette'; } }
+  function renderQuiz(){
+    const box = $('quiz'); $('score').textContent = 'Punti: ' + qs.score + ' su ' + Q.length;
+    if (qs.i >= Q.length){ box.innerHTML = '<p class="learn"><strong>Finito!</strong>Hai risposto giusto al primo colpo a ' + qs.score + ' domande su ' + Q.length + '.</p><div class="row"><button type="button" class="go" id="qAgain">Ricomincia</button></div>'; $('qAgain').onclick = () => { Object.assign(qs,{i:0,score:0,ans:null,tries:0}); st.markClick=null; renderQuiz(); }; st.markA = null; draw(); return; }
+    const q = Q[qs.i];
+    st.markA = q.mark ? A : null;
+    let h = '<p class="small">Domanda ' + (qs.i+1) + ' di ' + Q.length + (q.t==='click' ? ' · rispondi cliccando sulla carta vista dall\'alto' : '') + '</p><p class="ask">' + q.ask + '</p>';
+    if (q.t === 'choice') h += '<div class="opts">' + q.opts.map(o => { let c=''; if (qs.ans!==null){ if (o===q.right) c='right'; else if (o===qs.ans) c='wrong'; } return '<button type="button" class="' + c + '" data-o="' + o + '"' + (qs.ans!==null?' disabled':'') + '>' + o + '</button>'; }).join('') + '</div>';
+    if (qs.msg) h += '<p class="fb ' + (qs.ok?'ok':'no') + '">' + qs.msg + '</p>';
+    if (qs.ans !== null) h += '<div class="row"><button type="button" class="go" id="qNext">' + (qs.i < Q.length-1 ? 'Domanda successiva' : 'Vedi il risultato') + '</button></div>';
+    box.innerHTML = h;
+    box.querySelectorAll('[data-o]').forEach(b => b.addEventListener('click', () => { qs.ans = b.dataset.o; qs.ok = qs.ans === q.right; if (qs.ok) qs.score++; qs.msg = (qs.ok?'<b>Giusto!</b> ':'<b>Non proprio.</b> La risposta giusta è «' + q.right + '». ') + q.ok; renderQuiz(); }));
+    const n = $('qNext'); if (n) n.onclick = () => { qs.i++; qs.ans = null; qs.msg = null; qs.tries = 0; st.markClick = null; renderQuiz(); };
+    if (qs.i > 0 && (q.t === 'click' || q.mark)) goFlat();
+    draw();
+  }
+  cv.addEventListener('click', e => {
+    const q = Q[qs.i]; if (!q || q.t !== 'click' || qs.ans !== null) return;
+    if (st.t > 0.05){ goFlat(); draw(); return; }
+    const d = toDomain(e); if (!d) return;
+    const dist = Math.hypot((d.x-peak.x), (d.y-peak.y)), dist2 = Math.hypot(d.x-peak2.x, d.y-peak2.y);
+    const ok = dist < 0.045;
+    st.markClick = { x:d.x, y:d.y, ok };
+    if (ok){ qs.ans = 'ok'; qs.ok = true; if (!qs.tries) qs.score++; qs.msg = '<b>Giusto!</b> ' + q.ok; }
+    else { qs.tries++; qs.ok = false; qs.msg = dist2 < 0.045 ? '<b>Non proprio.</b> Questa cima è alta ' + peak2.q + ' m: c\'è una cima ancora più alta. Conta le curve!' : '<b>Non proprio.</b> Cerca il punto dove le curve diventano sempre più piccole, una dentro l\'altra.'; }
+    renderQuiz();
+  });
+
+  /* ---------- esercizio: colora con le tinte ---------- */
+  const PAL = [[0,100,'#a9cf8c'],[100,200,'#cfe09a'],[200,500,'#efdd9c'],[500,1000,'#c69565']];
+  function Hh(x,y){ return 1080*G(x,y,0.42,0.42,0.13,0.16) + 420*G(x,y,0.72,0.62,0.12,0.10) + 120*G(x,y,0.5,0.5,0.45,0.4) - 20; }
+  const HW = 200, HH = 150, hg = new Float32Array(HW*HH);
+  for (let j=0;j<HH;j++) for (let i=0;i<HW;i++) hg[j*HW+i] = Hh((i+.5)/HW, (j+.5)/HH);
+  const bandIdx = h => h < 0 ? -1 : PAL.findIndex(b => h >= b[0] && h < b[1]) >= 0 ? PAL.findIndex(b => h >= b[0] && h < b[1]) : 3;
+  const paint = { sel:0, fill:{} };
+  const pal = $('pal');
+  PAL.forEach((b,i) => { const btn = document.createElement('button'); btn.type='button'; btn.setAttribute('aria-pressed', String(i===0)); btn.innerHTML = '<i style="background:' + b[2] + '"></i>' + 'da ' + b[0] + ' a ' + b[1] + ' m'; btn.onclick = () => { paint.sel = i; pal.querySelectorAll('button').forEach((o,j) => o.setAttribute('aria-pressed', String(j===i))); }; pal.appendChild(btn); });
+  const hc = $('hill'), hx = hc.getContext('2d');
+  // zone: componenti connesse di ciascuna fascia
+  const zone = new Int32Array(HW*HH).fill(-1); const zones = [];
+  for (let k=0;k<HW*HH;k++){ if (zone[k] >= 0 || hg[k] < 0) continue; const b = bandIdx(hg[k]), id = zones.length; zones.push({ band:b, n:0 }); const stack=[k]; zone[k]=id;
+    while (stack.length){ const p = stack.pop(); zones[id].n++; const i=p%HW, j=(p-i)/HW; for (const [di,dj] of [[1,0],[-1,0],[0,1],[0,-1]]){ const ii=i+di, jj=j+dj; if (ii<0||jj<0||ii>=HW||jj>=HH) continue; const q=jj*HW+ii; if (zone[q]<0 && hg[q]>=0 && bandIdx(hg[q])===b){ zone[q]=id; stack.push(q); } } } }
+  const bigZones = zones.map((z,i) => i).filter(i => zones[i].n > 25);
+  function drawHill(){
+    const { w, h, dpr } = fit(hc); hx.setTransform(dpr,0,0,dpr,0,0);
+    const off = document.createElement('canvas'); off.width = HW; off.height = HH;
+    const o = off.getContext('2d'), im = o.createImageData(HW,HH), d = im.data;
+    for (let k=0;k<HW*HH;k++){ let c = [255,255,255]; if (hg[k] < 0) c = [203,227,246]; else { const f = paint.fill[zone[k]]; if (f !== undefined) c = hex(PAL[f][2]); } d[k*4]=c[0]; d[k*4+1]=c[1]; d[k*4+2]=c[2]; d[k*4+3]=255; }
+    o.putImageData(im,0,0);
+    hx.imageSmoothingEnabled = false; hx.drawImage(off, 0, 0, w, h);
+    hx.strokeStyle = '#5a3a1e'; hx.lineWidth = 1.3;
+    for (const l of [0,100,200,500]){
+      hx.beginPath();
+      for (const s of contours(l, hg, HW, HH, 1)){ hx.moveTo(s[0]*w, s[1]*h); hx.lineTo(s[2]*w, s[3]*h); }
+      hx.stroke();
+    }
+    hx.font = '700 12px sans-serif'; hx.textAlign = 'center'; hx.textBaseline = 'middle';
+    for (const l of [100,200,500]){
+      for (let x=0.42; x<0.99; x+=0.002){ if (Hh(x,0.42) < l){ const px=x*w, py=0.42*h; hx.fillStyle='#fff'; hx.fillRect(px-12,py-7,24,14); hx.fillStyle='#5a3a1e'; hx.fillText(String(l),px,py); break; } }
+    }
+  }
+  hc.addEventListener('click', e => {
+    const r = hc.getBoundingClientRect(), i = Math.floor((e.clientX-r.left)/r.width*HW), j = Math.floor((e.clientY-r.top)/r.height*HH);
+    const z = zone[j*HW+i]; if (z < 0) return; paint.fill[z] = paint.sel; $('pFb').hidden = true; drawHill();
+  });
+  $('pReset').onclick = () => { paint.fill = {}; $('pFb').hidden = true; drawHill(); };
+  $('pCheck').onclick = () => {
+    const fb = $('pFb'); fb.hidden = false;
+    const missing = bigZones.filter(z => paint.fill[z] === undefined).length, wrong = bigZones.filter(z => paint.fill[z] !== undefined && paint.fill[z] !== zones[z].band).length;
+    if (!missing && !wrong){ fb.className = 'fb ok'; fb.innerHTML = '<b>Perfetto!</b> Ogni zona ha la tinta giusta: più si sale, più il colore è scuro.'; }
+    else { fb.className = 'fb no'; fb.innerHTML = '<b>Non ancora.</b> ' + (wrong ? 'Ci sono ' + wrong + ' zone con il colore sbagliato. ' : '') + (missing ? 'Mancano ' + missing + ' zone da colorare. ' : '') + 'Guarda i numeri sulle curve: la zona tra 100 e 200 m sta tra la curva «100» e la curva «200».'; }
+  };
+
+  new ResizeObserver(() => { draw(); drawProfile(); drawHill(); }).observe(document.body);
+  draw(); drawProfile(); drawHill(); renderQuiz();
+})();
+</script>
+</body>
+</html>

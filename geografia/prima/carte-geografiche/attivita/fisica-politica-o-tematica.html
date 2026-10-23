@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fisica, politica o tematica?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+:root{
+  --bg:#edf1f5; --surface:#ffffff; --ink:#15233a; --muted:#56657a; --line:#d2dae4;
+  --accent:#2c5c9c; --hot:#c4511f; --ok:#2e7d4f; --no:#b3261e; --soft:#f4f6f9;
+  --f-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1622; --surface:#172131; --ink:#e6ecf3; --muted:#9aa8ba; --line:#2b384c;
+  --accent:#86aee6; --hot:#ff8a52; --ok:#6fcf97; --no:#ff8a80; --soft:#1d2a3d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1622; --surface:#172131; --ink:#e6ecf3; --muted:#9aa8ba; --line:#2b384c;
+  --accent:#86aee6; --hot:#ff8a52; --ok:#6fcf97; --no:#ff8a80; --soft:#1d2a3d; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1500px;margin:0 auto;padding-block:20px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(1.9rem,4.5vw,2.8rem);line-height:1.05;margin:0;text-wrap:balance}
+h1 span{color:var(--hot)}
+.lede{margin:4px 0 0;max-width:72ch;color:var(--muted)}
+h2{font-family:var(--f-display);font-weight:600;font-size:1.3rem;margin:0;text-wrap:balance}
+h3{font-family:var(--f-display);font-weight:600;font-size:1.08rem;margin:0}
+p{margin:0}
+.lnav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;font-size:.9rem;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.lnav a{color:var(--accent);text-decoration:none;font-weight:700}
+.lnav a:hover{text-decoration:underline}
+.lnav .passi{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;color:var(--muted)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button{font:inherit;font-size:.95rem;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:8px;padding:8px 12px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button.go{background:var(--hot);border-color:var(--hot);color:#fff;font-weight:700}
+button:disabled{opacity:.55;cursor:default}
+label.chk{display:inline-flex;gap:6px;align-items:center;font-size:.95rem;cursor:pointer}
+.fb{padding:10px 12px;border-radius:8px;border:1px solid var(--line)}
+.fb.ok{border-color:var(--ok)}.fb.ok b{color:var(--ok)}
+.fb.no{border-color:var(--no)}.fb.no b{color:var(--no)}
+.learn{padding:12px 14px;background:var(--soft);border-radius:8px}
+.learn strong{display:block;font-family:var(--f-display);font-weight:600;margin-bottom:2px}
+.book{border:2px dashed var(--line);border-radius:8px;padding:10px 14px;font-size:.95rem}
+.book b:first-child{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--hot);margin-right:6px}
+.small{font-size:.86rem;color:var(--muted)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.opts button{text-align:left}
+.opts button.right{border-color:var(--ok);color:var(--ok);font-weight:700}
+.opts button.wrong{border-color:var(--no);color:var(--no)}
+input[type=text],input[type=number]{font:inherit;font-size:1rem;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);min-width:0}
+input.ok{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)}
+input.no{border-color:var(--no);box-shadow:0 0 0 1px var(--no)}
+textarea{font:inherit;width:100%;min-height:5em;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);resize:vertical}
+details{border-top:1px solid var(--line);padding-top:10px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}
+details > :not(summary){margin-top:8px}
+.score{font-family:var(--f-display);font-weight:800;font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---- carta (stile da atlante, uguale nei due temi) ---- */
+.mapframe{background:#fbfaf6;border:1px solid var(--line);border-radius:10px;padding:8px;min-width:0}
+.mapframe svg{display:block;width:100%;height:auto;max-height:calc(100vh - 90px)}
+.coast{vector-effect:non-scaling-stroke}
+.river{fill:none;stroke:#3f86c8;stroke-width:2.6;stroke-linecap:round}
+.river-true{fill:none;stroke:#0e3f73;stroke-width:1.1;opacity:.95}
+.lake{fill:#8cc0e9;stroke:#3f86c8;stroke-width:1.4}
+.park{fill:#3f9a52;fill-opacity:.16;stroke:#2f7d40;stroke-width:1.6;stroke-dasharray:5 3}
+.urban{fill:#e9b9a3;fill-opacity:.85;stroke:#b7735a;stroke-width:1}
+.streets line{stroke:#fff;stroke-width:1.1}
+.zoomed path,.zoomed line,.zoomed ellipse,.zoomed circle,.zoomed rect{vector-effect:non-scaling-stroke}
+.zoomed .streets line{stroke-width:3}
+.zoomed .urban{stroke-width:1.5}
+.b-state{fill:none;stroke:#7a2f8f;stroke-width:4;stroke-dasharray:10 4 2 4;opacity:.85}
+.b-region{fill:none;stroke:#7a2f8f;stroke-width:2;stroke-dasharray:7 4;opacity:.75}
+.road-auto-c{fill:none;stroke:#7d2316;stroke-width:6.2;stroke-linecap:round}
+.road-auto{fill:none;stroke:#e5533c;stroke-width:3.8;stroke-linecap:round}
+.road-main{fill:none;stroke:#e08a2c;stroke-width:3;stroke-linecap:round}
+.road-other{fill:none;stroke:#8a6d4b;stroke-width:1.6;stroke-linecap:round}
+.rail-b{fill:none;stroke:#222;stroke-width:3.4}
+.rail-w{fill:none;stroke:#fff;stroke-width:1.8;stroke-dasharray:6 6}
+.poi-bg{fill:#fff;stroke:#333;stroke-width:1}
+.poi-ink{fill:#333}
+.pass{fill:none;stroke:#3b2a1a;stroke-width:2}
+.peak{fill:#3b2a1a}
+.sym{stroke:#1d1d1d;stroke-width:1.4}
+.sym.fill{fill:#1d1d1d}
+.sym.ring{fill:#fff}
+.sym.open{fill:#fff;stroke-width:1.6}
+.sym-cap{fill:#c0282d;stroke:#1d1d1d}
+.tour{fill:#e5533c;fill-opacity:.45;stroke:#a33621;stroke-width:1.2}
+.lab-city{fill:#151515;font-family:var(--f-body);font-weight:700;paint-order:stroke;stroke:#fbfaf6;stroke-width:3.2px;stroke-linejoin:round}
+.lab-peak{fill:#3b2a1a;font:700 11.5px var(--f-body);text-anchor:middle;paint-order:stroke;stroke:#fff8;stroke-width:3px}
+.lab-q{fill:#3b2a1a;font:400 11px var(--f-body);text-anchor:middle;paint-order:stroke;stroke:#fff8;stroke-width:3px}
+.lab-river{fill:#1f5f9c;font:italic 600 12.5px var(--f-body);text-anchor:middle;paint-order:stroke;stroke:#ffffffaa;stroke-width:3px}
+.lab-sea{fill:#3a76ad;font:italic 600 21px var(--f-display);letter-spacing:.45em}
+.lab-gulf{fill:#3a76ad;font:italic 600 13px var(--f-body);text-anchor:middle}
+.lab-state{fill:#6d2a80;font:700 17px var(--f-display);letter-spacing:.2em;text-anchor:middle}
+.lab-region{fill:#6d2a80;font:700 12px var(--f-body);letter-spacing:.18em;text-anchor:middle;opacity:.8;paint-order:stroke;stroke:#ffffffaa;stroke-width:3px}
+.lab-park{fill:#2f7d40;font:italic 600 11.5px var(--f-body);text-anchor:middle}
+.lab-small{fill:#333;font:600 11px var(--f-body);text-anchor:middle;paint-order:stroke;stroke:#ffffffcc;stroke-width:3px}
+.dim{opacity:.18}
+.off{display:none}
+.city.station .sym{stroke:#e5533c;stroke-width:3}
+@media (prefers-reduced-motion:no-preference){.pulse{animation:pulse 1.2s ease-in-out 2}}
+@keyframes pulse{50%{opacity:.25}}
+.sb-bg{fill:#fbfaf6;fill-opacity:.92;stroke:#9aa3ad;stroke-width:.8}
+.sb-t{fill:#222;font:700 11px var(--f-body)}
+.sb-b{fill:#222}.sb-w{fill:#fff;stroke:#222;stroke-width:.8}
+.sb-n{fill:#222;font:600 10px var(--f-body);text-anchor:middle}
+.north{fill:#222}.north-t{fill:#222;font:700 13px var(--f-display);text-anchor:middle}
+
+/* Layout: in alto i pulsanti dei tipi di carta; la carta grande con accanto la spiegazione; sotto la carta misteriosa e lo smistamento */
+.types{display:flex;flex-wrap:wrap;gap:8px}
+.types button{font-weight:700;font-size:1rem;padding:10px 14px}
+.types button.t-fis{border-left:6px solid #a5764f}
+.types button.t-pol{border-left:6px solid #c0282d}
+.types button.t-fp{border-left:6px solid #7a2f8f}
+.types button.t-tem{border-left:6px solid #2c78b8}
+.layers{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.92rem;color:var(--muted)}
+.top{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
+@media (max-width:980px){.top{grid-template-columns:minmax(0,1fr)}}
+.explain h2{font-size:1.5rem}
+.explain .kind{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;font-weight:700;color:var(--hot)}
+.tl{display:grid;grid-template-columns:26px 1fr;gap:4px 8px;font-size:.88rem;align-items:center}
+.tl i{display:block;height:14px;border-radius:2px;border:1px solid #0002}
+.tl .c{display:flex;justify-content:center}
+.yesno{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:.9rem}
+.yesno div{padding:6px 8px;border-radius:6px;background:var(--soft)}
+.yesno b{display:block;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.mystery-veil{font-family:var(--f-display);font-weight:800;font-size:1.4rem}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:16px;align-items:start}
+@media (max-width:980px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
+.mc{border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;background:var(--soft)}
+.mc p{font-weight:700}
+.mc .row button{flex:1;padding:6px 8px;font-size:.88rem;background:var(--surface)}
+.mc.ok{border-color:var(--ok)}.mc.no{border-color:var(--no)}
+.mc .why{font-size:.86rem}
+.mc.ok .why b{color:var(--ok)}.mc.no .why b{color:var(--no)}
+.mc button.sel{font-weight:700;border-color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="lnav" aria-label="Lezione"><a href="../../../index.html?classe=prima#modulo-prima-i">← Geografia · Tanti tipi di carte</a><span class="passi"><span>Attività 1 di 2</span><a href="le-curve-di-livello.html">Le curve di livello →</a></span></nav>
+  <header>
+    <div class="eyebrow">Geografia · Tanti tipi di carte</div>
+    <h1>Fisica, politica o <span>tematica?</span></h1>
+    <p class="lede">Ogni carta rappresenta alcuni elementi e ne trascura altri. Guarda la stessa regione disegnata in modi diversi: che cosa compare e che cosa sparisce?</p>
+  </header>
+
+  <div class="types" role="group" aria-label="Tipo di carta">
+    <button type="button" class="t-fis" data-t="fisica" aria-pressed="false">Carta fisica</button>
+    <button type="button" class="t-pol" data-t="politica" aria-pressed="false">Carta politica</button>
+    <button type="button" class="t-fp" data-t="fisicopolitica" aria-pressed="true">Carta fisico-politica</button>
+    <button type="button" class="t-tem" data-t="neve" aria-pressed="false">Carta tematica: la neve</button>
+    <button type="button" class="t-tem" data-t="turisti" aria-pressed="false">Carta tematica: i turisti</button>
+  </div>
+
+  <div class="top">
+    <div class="mapframe"><svg id="map" viewBox="0 0 1000 680" role="img" aria-label="La regione inventata disegnata come carta fisica, politica o tematica"></svg></div>
+    <aside class="card explain" id="explain" aria-live="polite"></aside>
+  </div>
+
+  <div class="grid2">
+    <section class="card" aria-live="polite">
+      <h2>La carta misteriosa</h2>
+      <p>La carta cambia, ma il suo nome resta nascosto. Guardala bene: che tipo di carta è?</p>
+      <div id="myst"></div>
+    </section>
+    <section class="card">
+      <div class="row" style="justify-content:space-between"><h2>Che tipo di carta è?</h2><span class="score" id="sScore"></span></div>
+      <p>Per ogni carta descritta, scegli il tipo giusto.</p>
+      <div class="cards" id="cards"></div>
+    </section>
+  </div>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>Spiega con parole tue</h2>
+      <label for="why" class="ask" style="font-weight:700">Qual è la differenza fra carte fisiche e carte politiche?</label>
+      <textarea id="why" placeholder="Scrivi qui la tua risposta…"></textarea>
+      <details><summary>Confronta con una risposta possibile</summary><p>Una carta fisica rappresenta gli elementi naturali, come i rilievi, i mari, i fiumi e i laghi. Una carta politica rappresenta gli elementi creati dagli esseri umani, come i confini, le città, le strade e le ferrovie.</p></details>
+    </section>
+    <section class="card">
+      <h2>Ora sul libro</h2>
+      <p class="book"><b>Studio attivo</b>Pag. A12: sottolinea nel testo le definizioni di carta fisica, politica e tematica e gli elementi che le contraddistinguono, usando tre colori diversi.</p>
+      <p>Apri l'<b>Atlante</b> in fondo al libro e rispondi.</p>
+      <ol style="margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:6px">
+        <li>Che tipo di carte sono quelle dell'Atlante?</li>
+        <li>Con quale simbolo sono indicate le capitali? E le cime delle montagne?</li>
+        <li>Trova nell'Atlante una carta tematica: quale fenomeno rappresenta?</li>
+      </ol>
+      <details><summary>Risposte per l'insegnante</summary><p>1. Fisico-politiche. 2. Le capitali con un quadrato, le cime con un triangolo (pag. A13, esercizio 1). 3. Risposta libera.</p></details>
+    </section>
+  </div>
+</div>
+
+<script>
+/* ===== Territorio inventato comune alle attività sulle carte =====
+   Coordinate della carta: 1000 x 680 unità. 50 unità = 1 cm sulla carta stampata (20 cm di larghezza).
+   Scala di base 1 : 1 000 000, quindi 1 cm = 10 km e 1 unità = 200 m. */
+const T = (function(){
+  const W = 1000, H = 680, U_CM = 50, BASE = 1000000;
+  const NS = 'http://www.w3.org/2000/svg';
+
+  function coastY(x){ return 560 + 32*Math.sin(x/110) + 16*Math.sin(x/37+1.3) - 70*Math.exp(-(((x-430)/75)**2)); }
+  function borderX(y){ return 95 + 14*Math.sin(y/55); }
+  function regBorderY(x){ return 300 + 25*Math.sin(x/90) + 10*Math.sin(x/31); }
+
+  // fiumi (il primo punto è la sorgente, l'ultimo la foce)
+  const RIVERS = [
+    { id:'doria', name:'F. Doria', pts:[[470,20],[478,100],[493,165],[486,225],[478,248],[470,282],[458,335],[446,395],[436,445],[432,coastY(432)+2]], lab:[452,372,-72] },
+    { id:'serra', name:'T. Serra', pts:[[760,170],[782,240],[796,310],[806,380],[816,450],[824,coastY(824)+2]], lab:[818,420,-80] },
+    { id:'lino',  name:'T. Lino',  pts:[[230,330],[214,400],[196,470],[184,coastY(184)+2]], lab:[214,430,-74] }
+  ];
+  const LAKE = { cx:474, cy:264, rx:26, ry:17, name:'Lago Chiaro' };
+
+  function segDist(px,py,ax,ay,bx,by){
+    const dx=bx-ax, dy=by-ay, l=dx*dx+dy*dy; let t=l?((px-ax)*dx+(py-ay)*dy)/l:0; t=Math.max(0,Math.min(1,t));
+    const qx=ax+t*dx-px, qy=ay+t*dy-py; return Math.sqrt(qx*qx+qy*qy);
+  }
+  function riverDist(x,y,r){ let m=1e9, mi=0; const p=r.pts; for(let i=0;i<p.length-1;i++){ const d=segDist(x,y,p[i][0],p[i][1],p[i+1][0],p[i+1][1]); if(d<m){m=d;mi=i;} } return [m, mi/(p.length-2)]; }
+
+  const PEAKS_RAW = [
+    { id:'corvo', name:'M. Corvo', x:210, y:118, a:1650, s:80 },
+    { id:'nero',  name:'Pizzo Nero', x:805, y:96, a:1350, s:80 },
+    { id:'alto',  name:'M. Alto', x:648, y:128, a:1000, s:60 },
+    { id:'verde', name:'Colle Verde', x:905, y:390, a:430, s:50 },
+    { id:'fosco', name:'M. Fosco', x:300, y:345, a:420, s:60 }
+  ];
+  function rawHeight(x,y){
+    const c = coastY(x), d = c - y;
+    if (d < 0) return -Math.min(2400, 30 + (-d)*9);
+    let h = 950*(1-Math.exp(-d/230));
+    for (const p of PEAKS_RAW){ const r2=(x-p.x)**2+(y-p.y)**2; h += p.a*Math.exp(-r2/(2*p.s*p.s)); }
+    h += 80*Math.sin(x/47+y/61)*Math.cos(x/29-y/23) + 45*Math.sin(x/19)*Math.sin(y/23);
+    for (const r of RIVERS){ const [rd,t]=riverDist(x,y,r); h -= (r.id==='doria'?720:450)*(0.25+0.75*t)*Math.exp(-rd*rd/(2*34*34))*Math.min(1,d/180); }
+    h *= Math.min(1, d/60);
+    return Math.max(3, h);
+  }
+  const ring = []; for (let a=0;a<6.28;a+=0.2) ring.push(rawHeight(LAKE.cx+(LAKE.rx+6)*Math.cos(a), LAKE.cy+(LAKE.ry+6)*Math.sin(a)));
+  ring.sort((p,q)=>p-q); const LAKE_H = Math.round(ring[Math.floor(ring.length*0.35)]);
+  function inLake(x,y){ return ((x-LAKE.cx)/LAKE.rx)**2 + ((y-LAKE.cy)/LAKE.ry)**2 <= 1; }
+  function height(x,y){ if (inLake(x,y)) return LAKE_H; return rawHeight(x,y); }
+
+  // cime: la quota è letta dal rilievo, così carta, tinte e quote coincidono
+  const PEAKS = PEAKS_RAW.map(p => {
+    let bx=p.x, by=p.y, bh=-1;
+    for (let dx=-30; dx<=30; dx+=2) for (let dy=-30; dy<=30; dy+=2){ const hh=height(p.x+dx,p.y+dy); if (hh>bh){ bh=hh; bx=p.x+dx; by=p.y+dy; } }
+    return { id:p.id, name:p.name, x:bx, y:by, q:Math.round(bh) };
+  });
+
+  function region(x,y){ if (x < borderX(y)) return 'lorenia'; return y < regBorderY(x) ? 'alta' : 'riviera'; }
+  const REGIONS = { alta:'Alta Valle', riviera:'Riviera', lorenia:'Lorenia' };
+
+  // classi di popolazione come nella legenda
+  const CLASSES = [
+    { min:200000, label:'oltre 200 000 abitanti', r:8.5, font:19 },
+    { min:50000,  label:'da 50 000 a 200 000 abitanti', r:6.5, font:16 },
+    { min:10000,  label:'da 10 000 a 50 000 abitanti', r:5, font:14 },
+    { min:0,      label:'meno di 10 000 abitanti', r:4, font:12.5 }
+  ];
+  const cls = p => CLASSES.findIndex(c => p >= c.min);
+  const CITIES = [
+    { id:'portovela', name:'Porto Vela', x:430, y:458, pop:312000, cap:true, lab:'l' },
+    { id:'valdora',   name:'Valdora', x:518, y:164, pop:128000, cap:true, lab:'r' },
+    { id:'sanfiore',  name:'Sanfiore', x:822, y:556, pop:86000, lab:'t' },
+    { id:'ponterosso',name:'Ponte Rosso', x:640, y:420, pop:41000, lab:'r' },
+    { id:'lagomare',  name:'Lagomare', x:518, y:268, pop:23000, lab:'r' },
+    { id:'capolino',  name:'Capo Lino', x:170, y:570, pop:14000, lab:'t' },
+    { id:'montefosco',name:'Montefosco', x:352, y:420, pop:9400, lab:'r' },
+    { id:'roccabianca',name:'Rocca Bianca', x:900, y:300, pop:6100, lab:'t' },
+    { id:'borgoalto', name:'Borgoalto', x:262, y:246, pop:3800, lab:'r' }
+  ].map(c => ({ ...c, k:cls(c.pop), reg:region(c.x,c.y), h:Math.round(height(c.x,c.y)) }));
+  const C = Object.fromEntries(CITIES.map(c => [c.id, c]));
+  const pt = id => [C[id].x, C[id].y];
+
+  function coastPts(x0,x1,off,step){ const a=[]; for(let x=x0;x<=x1;x+=step) a.push([x, coastY(x)-off]); return a; }
+  const ROADS = [
+    { k:'auto', pts:[[borderX(coastY(95)-22)-20, coastY(95)-24], pt('capolino'), [260,coastY(260)-26], [340,coastY(340)-28], pt('portovela'), [500,coastY(500)-30], [600,coastY(600)-26], [700,coastY(700)-26], pt('sanfiore'), [900,coastY(900)-28], [1010,coastY(1000)-28]] },
+    { k:'auto', pts:[pt('portovela'), [452,402], [462,340], [494,300], pt('lagomare'), [508,215], pt('valdora'), [522,90], [528,-10]] },
+    { k:'main', pts:[pt('portovela'), [395,440], pt('montefosco'), [300,320], pt('borgoalto')] },
+    { k:'main', pts:[pt('sanfiore'), [760,500], [700,455], pt('ponterosso'), [585,360], [548,300], pt('lagomare')] },
+    { k:'main', pts:[pt('ponterosso'), [740,400], [830,330], pt('roccabianca'), [1010,280]] },
+    { k:'other', pts:[pt('borgoalto'), [320,200], [372,176], [440,170], pt('valdora')] },
+    { k:'other', pts:[pt('capolino'), [215,520], [270,470], pt('montefosco')] },
+    { k:'other', pts:[pt('valdora'), [600,200], [700,215], [760,250], pt('roccabianca')] }
+  ];
+  const RAIL = [
+    { pts:[[borderX(coastY(95))-20, coastY(95)-8], pt('capolino'), [300,coastY(300)-10], [380,coastY(380)-12], pt('portovela'), [520,coastY(520)-6], [640,coastY(640)-10], [740,coastY(740)-10], pt('sanfiore'), [1010,coastY(1000)-12]] },
+    { pts:[pt('portovela'), [440,400], [452,330], [470,296], pt('lagomare'), [500,220], pt('valdora')] }
+  ];
+  const STATIONS = ['capolino','portovela','sanfiore','lagomare','valdora'];
+  const PASS = { name:'Passo del Vento', x:372, y:176 };
+  PASS.q = Math.round(height(PASS.x, PASS.y));
+  const POI = [
+    { id:'airport', k:'airport', name:'Aeroporto', x:530, y:coastY(530)-16 },
+    { id:'abbey', k:'church', name:'Abbazia di San Mauro', x:690, y:292 },
+    { id:'caves', k:'cave', name:'Grotte del Corvo', x:150, y:210 }
+  ];
+  const PARK = { name:'Parco del Monte Corvo', cx:225, cy:130, rx:115, ry:78 };
+
+  /* ---------- strumenti ---------- */
+  function smoothPath(p){
+    if (p.length < 3) return 'M' + p.map(q => q.join(',')).join('L');
+    let d = 'M' + p[0][0].toFixed(1) + ',' + p[0][1].toFixed(1);
+    for (let i=0;i<p.length-1;i++){
+      const p0=p[Math.max(0,i-1)], p1=p[i], p2=p[i+1], p3=p[Math.min(p.length-1,i+2)];
+      const c1=[p1[0]+(p2[0]-p0[0])/6, p1[1]+(p2[1]-p0[1])/6], c2=[p2[0]-(p3[0]-p1[0])/6, p2[1]-(p3[1]-p1[1])/6];
+      d += 'C'+c1.map(v=>v.toFixed(1))+' '+c2.map(v=>v.toFixed(1))+' '+p2.map(v=>v.toFixed(1));
+    }
+    return d;
+  }
+  function polyLen(p){ let s=0; for(let i=0;i<p.length-1;i++) s+=Math.hypot(p[i+1][0]-p[i][0],p[i+1][1]-p[i][1]); return s; }
+  // il corso «vero» del fiume, pieno di curve, per mostrare che la carta è approssimata
+  function meander(p){
+    const out=[]; const L=polyLen(p); let acc=0;
+    for (let i=0;i<p.length-1;i++){
+      const [ax,ay]=p[i],[bx,by]=p[i+1], l=Math.hypot(bx-ax,by-ay), nx=-(by-ay)/l, ny=(bx-ax)/l;
+      const n=Math.ceil(l/2);
+      for (let j=0;j<n;j++){ const t=j/n, s=acc+t*l; const w=Math.min(1,s/20,(L-s)/20);
+        const off=w*(5*Math.sin(s/7)+2.5*Math.sin(s/2.9+1)); out.push([ax+t*(bx-ax)+nx*off, ay+t*(by-ay)+ny*off]); }
+      acc+=l;
+    }
+    out.push(p[p.length-1]); return out;
+  }
+  function el(tag, attrs, parent){ const e=document.createElementNS(NS,tag); for (const k in attrs) e.setAttribute(k,attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function txt(parent, x, y, s, attrs){ const t=el('text',{x,y,...attrs},parent); t.textContent=s; return t; }
+
+  const TINTE = [
+    [-99999,-1000,'#7fb5df','oltre 1000 m di profondità'],[-1000,-200,'#a5cbec','da 200 a 1000 m di profondità'],[-200,0,'#cbe3f6','fino a 200 m di profondità'],
+    [0,200,'#a9cf8c','da 0 a 200 m'],[200,500,'#d4e3a0','da 200 a 500 m'],[500,1000,'#efdd9c','da 500 a 1000 m'],
+    [1000,1500,'#dfba7c','da 1000 a 1500 m'],[1500,2000,'#c69565','da 1500 a 2000 m'],[2000,99999,'#a5764f','oltre 2000 m']
+  ];
+  const band = h => TINTE.findIndex(b => h >= b[0] && h < b[1]);
+  const hex = s => [parseInt(s.slice(1,3),16),parseInt(s.slice(3,5),16),parseInt(s.slice(5,7),16)];
+  const TINTE_RGB = TINTE.map(b => hex(b[2]));
+
+  const cache = {};
+  function grid(){
+    if (cache.g) return cache.g;
+    const gw=1000, gh=680, hs=new Float32Array(gw*gh);
+    for (let j=0;j<gh;j++) for (let i=0;i<gw;i++) hs[j*gw+i]=height((i+.5)*W/gw,(j+.5)*H/gh);
+    return cache.g = { gw, gh, hs };
+  }
+  // mode: 'tinte' | 'flat' | 'neve'
+  function raster(mode, shade){
+    const key = mode + (shade?'s':'');
+    if (cache[key]) return cache[key];
+    const { gw, gh, hs } = grid();
+    const cv=document.createElement('canvas'); cv.width=gw; cv.height=gh;
+    const cx=cv.getContext('2d'), im=cx.createImageData(gw,gh), d=im.data;
+    const REG = { alta:[246,214,214], riviera:[250,236,186], lorenia:[226,226,226] };
+    const SNOW = [[0,2,[246,243,251]],[2,10,[214,200,240]],[10,40,[168,139,217]],[40,999,[111,79,184]]];
+    for (let j=0;j<gh;j++) for (let i=0;i<gw;i++){
+      const k=j*gw+i, h=hs[k], x=(i+.5)*W/gw, y=(j+.5)*H/gh;
+      let c;
+      if (h < 0) c = mode==='tinte' ? TINTE_RGB[band(h)] : [214,233,246];
+      else if (inLake(x,y)) c = [140,190,230];
+      else if (mode==='flat') c = REG[region(x,y)];
+      else if (mode==='neve'){ const days = snowDays(h); c = SNOW.find(s => days>=s[0] && days<s[1])[2]; }
+      else c = TINTE_RGB[band(h)];
+      let f = 1;
+      if (shade && h > 0){
+        const hl=hs[k-(i>0?1:0)], hr=hs[k+(i<gw-1?1:0)], hu=hs[k-(j>0?gw:0)], hd=hs[k+(j<gh-1?gw:0)];
+        const gx=(hr-hl)/2/200*1.2, gy=(hd-hu)/2/200*1.2;  // 1 cella = 1 unità = 200 m
+        const nz=1/Math.sqrt(gx*gx+gy*gy+1), lit=((-gx)*-0.6+(-gy)*-0.6+1*0.53)*nz;
+        f = Math.max(0.62, Math.min(1.12, 0.45 + lit*0.75));
+      }
+      d[k*4]=Math.min(255,c[0]*f); d[k*4+1]=Math.min(255,c[1]*f); d[k*4+2]=Math.min(255,c[2]*f); d[k*4+3]=255;
+    }
+    cx.putImageData(im,0,0);
+    return cache[key] = cv.toDataURL();
+  }
+  function snowDays(h){ return h < 200 ? 0 : h < 600 ? 1 + (h-200)/60 : h < 1200 ? 8 + (h-600)/20 : 38 + (h-1200)/25; }
+
+  const TOURISTS = { portovela:410000, sanfiore:265000, capolino:120000, lagomare:68000, valdora:52000, borgoalto:31000, montefosco:9000, ponterosso:7000, roccabianca:4000 };
+
+  /* ---------- disegno della carta ----------
+     opts: relief 'tinte'|'flat'|'neve'|'none', shade, natural, human, theme null|'neve'|'turisti',
+           approx, highlight (stringa), detail (0,1,2 per lo zoom), labels */
+  function render(svg, o){
+    o = Object.assign({ minimal:false, scalebar:null, north:null, relief:'tinte', shade:true, natural:true, human:true, theme:null, approx:false, highlight:null, detail:0, labels:true, legendTargets:true }, o||{});
+    svg.textContent = '';
+    const hl = o.highlight;
+    const dim = k => hl && hl !== k ? ' dim' : '';
+    const defs = el('defs',{},svg), ID = (svg.id || 'm') + '-';
+    const clip = el('clipPath',{id:ID+'land'},defs);
+    let landD = 'M-20,-20 L1020,-20 L1020,' + coastY(1020).toFixed(1);
+    for (let x=1020;x>=-20;x-=5) landD += ' L'+x+','+coastY(x).toFixed(1);
+    landD += ' Z';
+    el('path',{d:landD},clip);
+
+    // fondo
+    el('rect',{x:0,y:0,width:W,height:H},el('clipPath',{id:ID+'frame'},defs));
+    const root = svg; svg = el('g',{'clip-path':'url(#'+ID+'frame)'},root);
+    el('rect',{x:0,y:0,width:W,height:H,fill:o.relief==='tinte'?'#a5cbec':'#d6e9f6'},svg);
+    if (o.relief !== 'none'){
+      const im = el('image',{x:0,y:0,width:W,height:H,preserveAspectRatio:'none',class:'relief'},svg);
+      im.setAttribute('href', raster(o.relief, o.shade));
+      // fuori dalla carta (quando si sposta lo zoom): bordo neutro
+    } else {
+      el('path',{d:landD,fill:'#f4f1e8'},svg);
+    }
+    el('path',{d:landD,fill:'none',stroke:'#5b8fbf','stroke-width':1.2,class:'coast'},svg);
+
+    const gN = el('g',{class:'nat'+(o.natural?'':' off')},svg);
+    // parco
+    if (o.human && !o.minimal){
+      el('ellipse',{cx:PARK.cx,cy:PARK.cy,rx:PARK.rx,ry:PARK.ry,class:'park'+dim('park')},svg);
+    }
+    // fiumi e lago (sempre nella carta fisica; nella politica solo se richiesti)
+    if (o.natural){
+      for (const r of RIVERS){
+        el('path',{d:smoothPath(r.pts),class:'river'+dim('river')},gN);
+        if (o.approx) el('path',{d:'M'+meander(r.pts).map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join('L'),class:'river-true'},gN);
+      }
+      el('ellipse',{cx:LAKE.cx,cy:LAKE.cy,rx:LAKE.rx,ry:LAKE.ry,class:'lake'+dim('river')},gN);
+    }
+    // area urbana (zoom)
+    const gH = el('g',{class:'hum'},svg);
+    if (o.human && o.detail >= 1){
+      const gU = el('g',{'clip-path':'url(#'+ID+'land)'},gH);
+      for (const c of CITIES){
+        const rad = [46,30,20,12][c.k];
+        let ud = ''; for (let a=0; a<6.29; a+=0.12){ const r = rad*(1 + 0.16*Math.sin(3*a + c.x) + 0.09*Math.sin(5*a + c.y)); ud += (a?'L':'M') + (c.x + r*Math.cos(a)).toFixed(1) + ',' + (c.y + r*Math.sin(a)).toFixed(1); }
+        ud += 'Z';
+        el('path',{d:ud,class:'urban'},gU);
+        el('path',{d:ud},el('clipPath',{id:ID+'u-'+c.id},defs));
+        if (o.detail >= 2){
+          const g = el('g',{class:'streets','clip-path':'url(#'+ID+'u-'+c.id+')'},el('g',{'clip-path':'url(#'+ID+'land)'},gU));
+          const g2 = el('g',{transform:'rotate('+((c.x*7)%24-12)+' '+c.x+' '+c.y+')'},g);
+          for (let s=-rad+0.9; s<=rad; s+=1.8){
+            const w = Math.sqrt(Math.max(0,rad*rad-s*s));
+            el('line',{x1:c.x-w-10,y1:c.y+s,x2:c.x+w+10,y2:c.y+s},g2);
+            el('line',{x1:c.x+s,y1:c.y-w-10,x2:c.x+s,y2:c.y+w+10},g2);
+          }
+        }
+      }
+    }
+    if (o.human){
+      // confini
+      let sb='M'; for (let y=-10;y<=coastY(borderX(500))+2;y+=5) sb += (y>-10?'L':'') + borderX(y).toFixed(1)+','+y;
+      el('path',{d:sb,class:'b-state'+dim('state')},gH);
+      let rb='M'; let first=true;
+      for (let x=borderX(300); x<=1015; x+=5){ rb += (first?'':'L') + x.toFixed(1)+','+regBorderY(x).toFixed(1); first=false; }
+      el('path',{d:rb,class:'b-region'+dim('region')},gH);
+      // strade
+      if (!o.minimal) for (const k of ['other','main','auto']) for (const r of ROADS.filter(r=>r.k===k)){
+        if (k==='auto') el('path',{d:smoothPath(r.pts),class:'road-auto-c'+dim('auto')},gH);
+        el('path',{d:smoothPath(r.pts),class:'road-'+k+dim(k)},gH);
+      }
+      if (!o.minimal) for (const r of RAIL){ el('path',{d:smoothPath(r.pts),class:'rail-b'+dim('rail')},gH); el('path',{d:smoothPath(r.pts),class:'rail-w'+dim('rail')},gH); }
+      // punti di interesse
+      if (!o.minimal) for (const p of POI){
+        const g = el('g',{class:'poi'+dim(p.k),transform:'translate('+p.x.toFixed(1)+','+p.y.toFixed(1)+')'},gH);
+        if (p.k==='airport'){ el('circle',{r:9,class:'poi-bg'},g); el('path',{d:'M0,-6 L1.3,-1.5 L6,1 L6,2.4 L1.3,1.2 L1,4.2 L2.6,5.6 L2.6,6.4 L0,5.6 L-2.6,6.4 L-2.6,5.6 L-1,4.2 L-1.3,1.2 L-6,2.4 L-6,1 L-1.3,-1.5 Z',class:'poi-ink'},g); }
+        if (p.k==='church'){ el('circle',{r:8,class:'poi-bg'},g); el('path',{d:'M-1.2,-6 h2.4 v3 h3 v2.4 h-3 v6.6 h-2.4 v-6.6 h-3 v-2.4 h3 Z',class:'poi-ink'},g); }
+        if (p.k==='cave'){ el('circle',{r:8,class:'poi-bg'},g); el('path',{d:'M-6,5 Q-6,-5 0,-5 Q6,-5 6,5 Z M-2.6,5 Q-2.6,-0.6 0,-0.6 Q2.6,-0.6 2.6,5 Z',class:'poi-ink','fill-rule':'evenodd'},g); }
+      }
+      if (!o.minimal) el('path',{d:'M'+(PASS.x-6)+','+(PASS.y-6)+' q6,6 0,12 M'+(PASS.x+6)+','+(PASS.y-6)+' q-6,6 0,12',class:'pass'+dim('pass')},gH);
+    }
+    // tema
+    const gT = el('g',{class:'theme'},svg);
+    if (o.theme === 'turisti'){
+      for (const c of CITIES){ const v=TOURISTS[c.id]; el('circle',{cx:c.x,cy:c.y,r:(Math.sqrt(v)/18).toFixed(1),class:'tour'},gT); }
+    }
+    // cime
+    const gP = el('g',{class:'peaks'+(o.natural?'':' off')},svg);
+    if (o.natural){
+      for (const p of PEAKS){
+        el('path',{d:'M'+p.x+','+(p.y-6)+' l5.5,9.5 h-11 Z',class:'peak'+dim('peak')},gP);
+        if (o.labels){ txt(gP,p.x,p.y+16,p.name,{class:'lab-peak'+dim('peak')}); txt(gP,p.x,p.y+28,String(p.q),{class:'lab-q'+dim('peak')}); }
+      }
+    }
+    // città
+    const gC = el('g',{class:'cities'},svg);
+    if (o.human){
+      for (const c of CITIES){
+        const r = CLASSES[c.k].r, k = 'c'+c.k + (c.cap?'cap':'');
+        const g = el('g',{class:'city'+dim(c.cap?'cap':'c'+c.k)+(hl==='rail'&&STATIONS.includes(c.id)?' station':''),transform:'translate('+c.x+','+c.y+')'},gC);
+        if (c.cap) el('rect',{x:-r,y:-r,width:2*r,height:2*r,class:'sym sym-cap'},g);
+        else if (c.k===0) { el('circle',{r:r+2.5,class:'sym ring'},g); el('circle',{r,class:'sym fill'},g); }
+        else if (c.k===1) el('circle',{r,class:'sym fill'},g);
+        else if (c.k===2) { el('circle',{r,class:'sym ring'},g); el('circle',{r:1.8,class:'sym fill'},g); }
+        else el('circle',{r,class:'sym open'},g);
+        if (o.labels){
+          const f = CLASSES[c.k].font, nm = c.cap ? c.name.toUpperCase() : c.name;
+          const pos = { r:[r+5,5,'start'], l:[-r-5,5,'end'], t:[0,-r-6,'middle'] }[c.lab];
+          txt(g,pos[0],pos[1],nm,{class:'lab-city','font-size':f,'text-anchor':pos[2]});
+        }
+      }
+    }
+    // nomi naturali
+    if (o.natural && o.labels){
+      for (const r of RIVERS){ const [x,y,a]=r.lab; txt(svg,x,y,r.name,{class:'lab-river'+dim('river'),transform:'rotate('+a+' '+x+' '+y+')'}); }
+      txt(svg,LAKE.cx-40,LAKE.cy+4,LAKE.name,{class:'lab-river'+dim('river'),'text-anchor':'end'});
+      txt(svg,300,650,'MAR DI PONENTE',{class:'lab-sea'});
+      txt(svg,438,512,'Golfo di Porto Vela',{class:'lab-gulf'});
+    }
+    if (o.scalebar){
+      const g = el('g',{class:'scalebar',transform:'translate('+o.scalebar[0]+','+o.scalebar[1]+')'},svg);
+      el('rect',{x:-10,y:-30,width:o.scalebar[2]+56,height:52,rx:4,class:'sb-bg'},g);
+      txt(g,0,-14,'SCALA 1 : '+o.scalebar[3],{class:'sb-t'});
+      const n = o.scalebar[4], step = o.scalebar[2]/n;
+      for (let i=0;i<n;i++) el('rect',{x:i*step,y:-4,width:step,height:6,class:i%2?'sb-w':'sb-b'},g);
+      for (let i=0;i<=n;i++) txt(g,i*step,16,String(o.scalebar[5]*i)+(i===n?' '+o.scalebar[6]:''),{class:'sb-n'});
+    }
+    if (o.north){
+      const g = el('g',{transform:'translate('+o.north[0]+','+o.north[1]+')'},svg);
+      el('path',{d:'M0,-22 L7,6 L0,1 L-7,6 Z',class:'north'},g); txt(g,0,22,'N',{class:'north-t'});
+    }
+    if (o.human && o.labels){
+      txt(svg,40,300,'L O R E N I A',{class:'lab-state',transform:'rotate(-90 40 300)'});
+      txt(svg,700,262,'REGIONE ALTA VALLE',{class:'lab-region'});
+      txt(svg,640,350,'REGIONE RIVIERA',{class:'lab-region'});
+      if (!o.minimal){ txt(svg,PARK.cx,PARK.cy+PARK.ry-10,PARK.name,{class:'lab-park'});
+      txt(svg,PASS.x+10,PASS.y-8,'Passo del Vento '+PASS.q,{class:'lab-small','text-anchor':'start'}); }
+      if (!o.minimal) for (const p of POI) txt(svg,p.x,p.y+(p.k==='airport'?22:20),p.name,{class:'lab-small'});
+    }
+    return root;
+  }
+
+  return { W, H, U_CM, BASE, CITIES, C, PEAKS, PASS, POI, ROADS, RAIL, RIVERS, LAKE, LAKE_H, STATIONS, REGIONS, CLASSES, TINTE, TOURISTS,
+           height, region, coastY, render, el, txt, polyLen, smoothPath, snowDays };
+})();
+
+(function(){
+  const $ = id => document.getElementById(id);
+  const svg = $('map');
+  const TYPES = {
+    fisica: { o:{ relief:'tinte', natural:true, human:false }, kind:'Carta fisica', title:'Gli elementi naturali',
+      text:'Mostra i rilievi, il mare, i fiumi e i laghi. Le città, le strade e i confini non ci sono.',
+      yes:'montagne, colline, pianure, fiumi, laghi, mare', no:'città, strade, ferrovie, confini' },
+    politica: { o:{ relief:'flat', shade:false, natural:false, human:true }, kind:'Carta politica', title:'Gli elementi umani',
+      text:'Mostra le città, le strade, le ferrovie e i confini. Ogni regione ha un colore diverso. Le montagne e i fiumi non ci sono.',
+      yes:'città, confini, strade, ferrovie, regioni', no:'montagne, fiumi, laghi, altitudini' },
+    fisicopolitica: { o:{ relief:'tinte', natural:true, human:true }, kind:'Carta fisico-politica', title:'Elementi naturali e umani insieme',
+      text:'Unisce la carta fisica e quella politica: è il tipo di carta che trovi di solito negli atlanti.',
+      yes:'sia gli elementi naturali sia quelli umani', no:'—' },
+    neve: { o:{ relief:'neve', shade:false, natural:false, human:true, minimal:true }, kind:'Carta tematica', title:'Un solo fenomeno: la neve',
+      text:'Mostra un solo fenomeno: quanti giorni di neve ci sono in un anno. I colori viola qui non indicano l\'altitudine, ma i giorni di neve: per capirli serve la legenda.',
+      yes:'il fenomeno scelto, più città e confini per orientarsi', no:'altitudini, fiumi e quasi tutto il resto', legend:'neve' },
+    turisti: { o:{ relief:'none', natural:false, human:true, theme:'turisti', minimal:true }, kind:'Carta tematica', title:'Un solo fenomeno: i turisti',
+      text:'Ogni cerchio rosso è grande quanto il numero di turisti che arrivano in quella città ad agosto. Le città sul mare sono le più visitate.',
+      yes:'il fenomeno scelto, più città e confini per orientarsi', no:'altitudini, fiumi e quasi tutto il resto', legend:'turisti' }
+  };
+  const st = { type:'fisicopolitica', myst:null, mystAns:null, mystN:0, mystOk:0 };
+
+  function legendHtml(t){
+    if (t.legend === 'neve') return '<div class="tl"><i style="background:#6f4fb8"></i>più di 40 giorni<i style="background:#a88bd9"></i>da 10 a 40 giorni<i style="background:#d6c8f0"></i>da 2 a 10 giorni<i style="background:#f6f3fb"></i>meno di 2 giorni</div><p class="small">Dati inventati, come il territorio.</p>';
+    if (t.legend === 'turisti') return '<div class="tl">' + [400000,100000,20000].map(v => { const r=Math.sqrt(v)/18*0.42; return '<span class="c"><svg width="26" height="' + Math.max(14,2*r+2) + '"><circle cx="13" cy="' + (Math.max(14,2*r+2)/2) + '" r="' + r + '" fill="#e5533c73" stroke="#a33621"/></svg></span>' + v.toLocaleString('it-IT') + ' turisti'; }).join('') + '</div><p class="small">I cerchi della legenda sono più piccoli di quelli della carta. Dati inventati, come il territorio.</p>';
+    return '';
+  }
+  function draw(){
+    const key = st.myst || st.type, t = TYPES[key];
+    T.render(svg, Object.assign({ shade:true, scalebar:[740,620,100,'1 000 000',2,10,'km'], north:[960,70] }, t.o));
+    if (st.myst && st.mystAns === null){
+      $('explain').innerHTML = '<span class="kind">Carta misteriosa</span><h2 class="mystery-veil">?</h2><p>Che cosa vedi sulla carta? Che cosa manca? Rispondi qui sotto.</p>' + (t.legend ? '<h3>Legenda</h3>' + legendHtml(t) : '');
+    } else {
+      $('explain').innerHTML = '<span class="kind">' + t.kind + '</span><h2>' + t.title + '</h2><p>' + t.text + '</p>' +
+        '<div class="yesno"><div><b>Ci sono</b>' + t.yes + '</div><div><b>Non ci sono</b>' + t.no + '</div></div>' + (t.legend ? '<h3>Legenda</h3>' + legendHtml(t) : '');
+    }
+    document.querySelectorAll('.types button').forEach(b => b.setAttribute('aria-pressed', String(!st.myst && b.dataset.t === st.type)));
+  }
+  document.querySelectorAll('.types button').forEach(b => b.addEventListener('click', () => { st.type = b.dataset.t; st.myst = null; st.mystAns = null; draw(); renderMyst(); }));
+
+  /* ---------- carta misteriosa ---------- */
+  const MCH = [['fisica','Fisica'],['politica','Politica'],['fisicopolitica','Fisico-politica'],['tematica','Tematica']];
+  const kindOf = k => (k === 'neve' || k === 'turisti') ? 'tematica' : k;
+  let last = null;
+  function newMyst(){
+    const keys = Object.keys(TYPES).filter(k => k !== last); st.myst = keys[Math.floor(Math.random()*keys.length)]; last = st.myst;
+    st.mystAns = null; draw(); renderMyst(); window.scrollTo({ top: svg.getBoundingClientRect().top + window.scrollY - 20, behavior: 'smooth' });
+  }
+  function renderMyst(){
+    const b = $('myst');
+    if (!st.myst){ b.innerHTML = '<div class="row"><button type="button" class="go" id="mGo">Mostra una carta misteriosa</button></div>' + (st.mystN ? '<p class="score">Indovinate: ' + st.mystOk + ' su ' + st.mystN + '</p>' : ''); $('mGo').onclick = newMyst; return; }
+    const right = kindOf(st.myst);
+    let h = '<div class="opts">' + MCH.map(([k,l]) => { let c=''; if (st.mystAns !== null){ if (k===right) c='right'; else if (k===st.mystAns) c='wrong'; } return '<button type="button" class="' + c + '" data-m="' + k + '"' + (st.mystAns!==null?' disabled':'') + '>' + l + '</button>'; }).join('') + '</div>';
+    if (st.mystAns !== null){
+      const ok = st.mystAns === right, t = TYPES[st.myst];
+      h += '<p class="fb ' + (ok?'ok':'no') + '"><b>' + (ok?'Giusto!':'Non proprio.') + '</b> È una ' + t.kind.toLowerCase() + ': ' + t.text.charAt(0).toLowerCase() + t.text.slice(1) + '</p>';
+      h += '<div class="row"><button type="button" class="go" id="mNext">Un\'altra carta</button><button type="button" id="mStop">Basta così</button></div>';
+    }
+    h += '<p class="score">Indovinate: ' + st.mystOk + ' su ' + st.mystN + '</p>';
+    b.innerHTML = h;
+    b.querySelectorAll('[data-m]').forEach(x => x.addEventListener('click', () => { st.mystAns = x.dataset.m; st.mystN++; if (st.mystAns === right) st.mystOk++; draw(); renderMyst(); }));
+    const n = $('mNext'); if (n) n.onclick = newMyst;
+    const s = $('mStop'); if (s) s.onclick = () => { st.type = st.myst; st.myst = null; st.mystAns = null; draw(); renderMyst(); };
+  }
+
+  /* ---------- smistamento ---------- */
+  const CARDS = [
+    ['Le catene montuose e i fiumi d\'Europa', 'fisica', 'montagne e fiumi sono elementi naturali.'],
+    ['I confini degli Stati europei e le loro capitali', 'politica', 'confini e capitali sono elementi umani.'],
+    ['Quanta pioggia cade in un anno nelle regioni italiane', 'tematica', 'mostra un solo fenomeno, la pioggia.'],
+    ['Le autostrade e le ferrovie d\'Italia', 'politica', 'strade e ferrovie sono costruite dagli esseri umani.'],
+    ['I mari, i laghi e le isole del Mediterraneo', 'fisica', 'mari, laghi e isole sono elementi naturali.'],
+    ['Quanti rifiuti vengono riciclati nei Paesi europei', 'tematica', 'mostra un solo fenomeno, come la figura C di pag. A12.'],
+    ['Le pianure, le colline e le montagne della Lombardia', 'fisica', 'i rilievi sono elementi naturali.'],
+    ['Le regioni italiane e i loro capoluoghi', 'politica', 'regioni e capoluoghi sono elementi umani.'],
+    ['Le lingue parlate nei Paesi d\'Europa', 'tematica', 'mostra un solo fenomeno, le lingue.'],
+    ['Le province del Veneto', 'politica', 'le province hanno confini decisi dagli esseri umani.'],
+    ['Le zone d\'Italia dove si coltivano gli ulivi', 'tematica', 'mostra un solo fenomeno, la coltivazione degli ulivi.'],
+    ['I ghiacciai e le vette delle Alpi', 'fisica', 'ghiacciai e vette sono elementi naturali.']
+  ];
+  const LAB = { fisica:'Fisica', politica:'Politica', tematica:'Tematica' };
+  const ans = {};
+  function renderCards(){
+    const box = $('cards'); box.innerHTML = '';
+    let ok = 0, done = 0;
+    CARDS.forEach(([t, r, why], i) => {
+      const a = ans[i], c = document.createElement('div');
+      c.className = 'mc' + (a ? (a === r ? ' ok' : ' no') : '');
+      if (a){ done++; if (a === r) ok++; }
+      c.innerHTML = '<p>' + t + '</p><div class="row">' + Object.keys(LAB).map(k => '<button type="button" data-k="' + k + '" class="' + (a===k?'sel':'') + '">' + LAB[k] + '</button>').join('') + '</div>' +
+        (a ? '<p class="why">' + (a === r ? '<b>Giusto:</b> ' : '<b>No, è ' + LAB[r].toLowerCase() + ':</b> ') + why + '</p>' : '');
+      c.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { ans[i] = b.dataset.k; renderCards(); }));
+      box.appendChild(c);
+    });
+    $('sScore').textContent = done ? 'Giuste: ' + ok + ' su ' + CARDS.length : '';
+  }
+
+  new ResizeObserver(() => {}).observe(svg);
+  draw(); renderMyst(); renderCards();
+})();
+</script>
+</body>
+</html>
