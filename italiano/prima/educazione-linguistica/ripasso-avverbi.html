@@ -1,0 +1,433 @@
+<title>Ripasso degli avverbi</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: quaderno a colonna singola; l'avverbio è sempre "evidenziato" come con l'evidenziatore */
+:root{
+  --bg:#f6f7f4; --paper:#ffffff; --ink:#1d2b33; --muted:#5b6a70; --line:#d9dfdc;
+  --accent:#1f6f78; --hl:#ffe46b; --hl-ink:#3a2f00;
+  --ok:#2e7d4f; --ok-bg:#e3f3e8; --ko:#b23a3a; --ko-bg:#f9e3e1;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }
+
+html{font-size:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:1.5rem 4rem}
+.wrap{max-width:46rem;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800}
+h2{font-size:1.6rem;font-weight:700}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+.mark{background:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 88%,transparent 88%);color:var(--hl-ink);padding:0 .15em;border-radius:2px}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+header{display:flex;flex-direction:column;gap:.75rem;padding-top:1rem}
+header p{color:var(--muted);max-width:38rem}
+section{display:flex;flex-direction:column;gap:1rem}
+.note{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1rem 1.15rem;display:flex;flex-direction:column;gap:.6rem}
+.tipi{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.75rem}
+.tipo{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.tipo b{font-family:var(--display);font-size:1.05rem}
+.tipo .q{font-size:.85rem;color:var(--muted)}
+.tipo .es{font-size:.95rem}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:.55rem .8rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-size:.9rem;color:var(--accent)}
+tr:last-child td{border-bottom:none}
+hr{border:none;border-top:2px dashed var(--line);margin:0}
+
+/* esercizi */
+.ex{display:flex;flex-direction:column;gap:.9rem}
+.ex .consegna{color:var(--muted)}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .8rem}
+.item .frase{flex:1 1 16rem;min-width:0}
+.item.ok{border-color:var(--ok);background:var(--ok-bg)}
+.item.ko{border-color:var(--ko);background:var(--ko-bg)}
+.fb{flex-basis:100%;font-size:.9rem;color:var(--muted)}
+.fb:empty{display:none}
+.tok{cursor:pointer;border-radius:4px;padding:0 .1em;border:none;background:none;font:inherit;color:inherit}
+.tok:hover{outline:1px dashed var(--accent)}
+.tok.sel{background:var(--hl);color:var(--hl-ink)}
+.tok.miss{outline:2px solid var(--ko)}
+.tok.wrong{text-decoration:line-through;text-decoration-color:var(--ko);text-decoration-thickness:2px}
+select,input[type=text]{font:inherit;font-size:1rem;padding:.35rem .5rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);max-width:100%}
+input[type=text]{width:11rem}
+.seg{display:flex;gap:.4rem;flex-wrap:wrap}
+.seg button,.btn{font:inherit;font-size:.95rem;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:.3rem .9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--paper)}
+.btn.main{background:var(--accent);color:var(--paper);font-weight:700}
+.azioni{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.punti{font-weight:700;font-variant-numeric:tabular-nums}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* zoom */
+.zoom{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;gap:.3rem;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:.3rem;box-shadow:0 4px 14px rgba(0,0,0,.15);z-index:20}
+.zoom button{width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:var(--display);font-weight:700;font-size:1rem;cursor:pointer}
+.zoom span{align-self:center;font-size:.8rem;min-width:2.8rem;text-align:center;font-variant-numeric:tabular-nums;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.item{transition:background .2s,border-color .2s}}
+</style>
+
+<div class="zoom" role="group" aria-label="Dimensione del testo">
+  <button id="zm" type="button" aria-label="Rimpicciolisci">A−</button>
+  <span id="zv">100%</span>
+  <button id="zp" type="button" aria-label="Ingrandisci">A+</button>
+</div>
+
+<main class="wrap">
+<header>
+  <span class="eyebrow">Grammatica · ripasso</span>
+  <h1>Gli <span class="mark">avverbi</span></h1>
+  <p>L'avverbio è la parola che precisa il significato di un verbo, di un aggettivo, di un altro avverbio o di un'intera frase. È una parte del discorso <b>invariabile</b>: non cambia mai forma.</p>
+</header>
+
+<section>
+  <h2>A che cosa serve</h2>
+  <div class="note">
+    <p>Corre <span class="mark">velocemente</span>. → modifica un <b>verbo</b></p>
+    <p>È <span class="mark">molto</span> simpatico. → modifica un <b>aggettivo</b></p>
+    <p>Sta <span class="mark">abbastanza</span> bene. → modifica un altro <b>avverbio</b></p>
+    <p><span class="mark">Purtroppo</span> ha piovuto. → modifica <b>tutta la frase</b></p>
+  </div>
+</section>
+
+<section>
+  <h2>I tipi di avverbio</h2>
+  <div class="tipi">
+    <div class="tipo"><b>di modo</b><span class="q">come?</span><span class="es">bene, male, piano, lentamente, volentieri</span></div>
+    <div class="tipo"><b>di tempo</b><span class="q">quando?</span><span class="es">ieri, oggi, domani, ora, presto, tardi, sempre, mai</span></div>
+    <div class="tipo"><b>di luogo</b><span class="q">dove?</span><span class="es">qui, qua, lì, là, sopra, sotto, vicino, lontano</span></div>
+    <div class="tipo"><b>di quantità</b><span class="q">quanto?</span><span class="es">molto, poco, troppo, tanto, abbastanza, parecchio</span></div>
+    <div class="tipo"><b>di affermazione</b><span class="q">conferma</span><span class="es">sì, certo, certamente, sicuramente, davvero</span></div>
+    <div class="tipo"><b>di negazione</b><span class="q">nega</span><span class="es">no, non, neanche, nemmeno, neppure</span></div>
+    <div class="tipo"><b>di dubbio</b><span class="q">incertezza</span><span class="es">forse, probabilmente, magari, quasi</span></div>
+    <div class="tipo"><b>interrogativi ed esclamativi</b><span class="q">domanda o esclamazione</span><span class="es">come? dove? quando? quanto? perché?</span></div>
+  </div>
+  <div class="note">
+    <h3>Le locuzioni avverbiali</h3>
+    <p>Sono gruppi di parole che funzionano come un unico avverbio: <span class="mark">all'improvviso</span>, <span class="mark">di corsa</span>, <span class="mark">a poco a poco</span>, <span class="mark">per caso</span>, <span class="mark">d'ora in poi</span>.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Come si formano gli avverbi in <i>-mente</i></h2>
+  <div class="note">
+    <p>Si parte dall'aggettivo <b>femminile singolare</b> e si aggiunge <b>-mente</b>: rapid<b>a</b> → rapida<span class="mark">mente</span>, dolce → dolce<span class="mark">mente</span>.</p>
+    <p>Se l'aggettivo finisce in <b>-le</b> o <b>-re</b>, la <i>e</i> cade: faci<b>le</b> → facil<span class="mark">mente</span>, regola<b>re</b> → regolar<span class="mark">mente</span>.</p>
+    <p>Attenzione: legger<b>o</b> → leggermente, violent<b>o</b> → violentemente.</p>
+  </div>
+</section>
+
+<section>
+  <h2>I gradi dell'avverbio</h2>
+  <p>Molti avverbi di modo, come gli aggettivi, hanno il comparativo e il superlativo. Alcuni sono irregolari.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>positivo</th><th>comparativo</th><th>superlativo</th></tr></thead>
+      <tbody>
+        <tr><td>presto</td><td>più presto</td><td>prestissimo</td></tr>
+        <tr><td>lentamente</td><td>più lentamente</td><td>lentissimamente / molto lentamente</td></tr>
+        <tr><td>bene</td><td><span class="mark">meglio</span></td><td>benissimo, ottimamente</td></tr>
+        <tr><td>male</td><td><span class="mark">peggio</span></td><td>malissimo, pessimamente</td></tr>
+        <tr><td>molto</td><td><span class="mark">più</span></td><td>moltissimo</td></tr>
+        <tr><td>poco</td><td><span class="mark">meno</span></td><td>pochissimo</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Ci sono anche gli avverbi <b>alterati</b>: bene → benino, male → maluccio, piano → pianino.</p>
+</section>
+
+<section>
+  <h2>Avverbio o aggettivo?</h2>
+  <div class="note">
+    <p>Parole come <i>molto, poco, tanto, troppo, forte, piano, chiaro</i> possono essere tutte e due le cose.</p>
+    <p>Se si accordano con un nome sono <b>aggettivi</b>: Ho <b>molti</b> libri. Il terreno è <b>piano</b>.</p>
+    <p>Se accompagnano un verbo e restano invariabili sono <b>avverbi</b>: Leggo <span class="mark">molto</span>. Parla <span class="mark">piano</span>.</p>
+  </div>
+</section>
+
+<hr>
+
+<section class="ex" id="ex1">
+  <span class="eyebrow">Esercizio 1</span>
+  <h2>Evidenzia gli avverbi</h2>
+  <p class="consegna">Tocca le parole che sono avverbi: si coloreranno come con l'evidenziatore. Poi premi «Correggi».</p>
+  <div id="e1"></div>
+</section>
+
+<section class="ex" id="ex2">
+  <span class="eyebrow">Esercizio 2</span>
+  <h2>Di che tipo è?</h2>
+  <p class="consegna">Scegli il tipo dell'avverbio evidenziato.</p>
+  <div id="e2"></div>
+</section>
+
+<section class="ex" id="ex3">
+  <span class="eyebrow">Esercizio 3</span>
+  <h2>Avverbio o aggettivo?</h2>
+  <p class="consegna">Guarda la parola evidenziata e scegli.</p>
+  <div id="e3"></div>
+</section>
+
+<section class="ex" id="ex4">
+  <span class="eyebrow">Esercizio 4</span>
+  <h2>Forma l'avverbio in -mente</h2>
+  <p class="consegna">Scrivi l'avverbio che deriva dall'aggettivo.</p>
+  <div id="e4"></div>
+</section>
+
+<section class="ex" id="ex5">
+  <span class="eyebrow">Esercizio 5</span>
+  <h2>Comparativi e superlativi</h2>
+  <p class="consegna">Completa con la forma giusta dell'avverbio tra parentesi.</p>
+  <div id="e5"></div>
+</section>
+
+<section class="ex" id="ex6">
+  <span class="eyebrow">Esercizio 6</span>
+  <h2>Dalla locuzione all'avverbio</h2>
+  <p class="consegna">Sostituisci la locuzione avverbiale con un avverbio in <i>-mente</i> che abbia lo stesso significato.</p>
+  <div id="e6"></div>
+</section>
+
+<section class="ex" id="ex7">
+  <span class="eyebrow">Esercizio 7</span>
+  <h2>Che cosa modifica?</h2>
+  <p class="consegna">Indica se l'avverbio evidenziato modifica un verbo, un aggettivo, un altro avverbio o tutta la frase.</p>
+  <div id="e7"></div>
+</section>
+
+<section class="ex" id="ex8">
+  <span class="eyebrow">Esercizio 8</span>
+  <h2>Scegli la forma giusta</h2>
+  <p class="consegna">Avverbio o aggettivo? Scegli la parola corretta per completare la frase.</p>
+  <div id="e8"></div>
+</section>
+
+<section class="ex" id="ex9">
+  <span class="eyebrow">Esercizio 9</span>
+  <h2>Caccia agli avverbi nel testo</h2>
+  <p class="consegna">Nel racconto ci sono 14 avverbi e locuzioni avverbiali. Toccali tutti: per le locuzioni basta toccare il gruppo di parole.</p>
+  <div id="e9"></div>
+</section>
+
+<section class="ex">
+  <div class="note">
+    <div class="azioni">
+      <button class="btn main" id="check" type="button">Correggi tutto</button>
+      <button class="btn" id="reset" type="button">Ricomincia</button>
+      <span class="punti" id="score" aria-live="polite"></span>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+(function(){
+  // ZOOM
+  var z=100, zv=document.getElementById('zv');
+  try{ z=parseInt(localStorage.getItem('avv-zoom'))||100 }catch(e){}
+  function setZ(v){ z=Math.max(70,Math.min(200,v)); document.documentElement.style.fontSize=z+'%'; zv.textContent=z+'%'; try{localStorage.setItem('avv-zoom',z)}catch(e){} }
+  document.getElementById('zp').onclick=function(){setZ(z+10)};
+  document.getElementById('zm').onclick=function(){setZ(z-10)};
+  setZ(z);
+
+  function el(t,c,h){var e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e}
+
+  // ES 1: parole tra *asterischi* sono avverbi
+  var E1=[
+    "*Domani* partiremo *presto* per il mare.",
+    "Marco ha parlato *troppo* e ha ascoltato *poco*.",
+    "Il gatto dorme *tranquillamente* *lì*.",
+    "*Forse* *non* verrò alla festa.",
+    "Hai studiato *davvero* *bene*!",
+    "*Ieri* pioveva *molto* *forte*."
+  ];
+  var e1=document.getElementById('e1'), e1items=[];
+  E1.forEach(function(s,i){
+    var it=el('div','item'), fr=el('div','frase'), fb=el('div','fb');
+    s.split(' ').forEach(function(w,j){
+      var m=w.match(/^\*(.+?)\*([.,!?]*)$/), word=m?m[1]:w.replace(/[.,!?]+$/,''), punct=m?m[2]:(w.match(/[.,!?]+$/)||[''])[0];
+      var b=el('button','tok'); b.type='button'; b.textContent=word; b.dataset.ok=m?'1':'0'; b.id='e1-'+i+'-'+j;
+      b.onclick=function(){b.classList.toggle('sel')};
+      fr.appendChild(b); if(punct) fr.appendChild(document.createTextNode(punct)); fr.appendChild(document.createTextNode(' '));
+    });
+    it.appendChild(fr); it.appendChild(fb); e1.appendChild(it); e1items.push(it);
+  });
+  function check1(){ var tot=0,ok=0;
+    e1items.forEach(function(it){ var good=true, fb=it.querySelector('.fb');
+      it.querySelectorAll('.tok').forEach(function(b){ b.classList.remove('miss','wrong');
+        var s=b.classList.contains('sel'), a=b.dataset.ok==='1';
+        if(a&&!s){good=false;b.classList.add('miss')} if(!a&&s){good=false;b.classList.add('wrong')} });
+      it.className='item '+(good?'ok':'ko'); fb.textContent=good?'Giusto!':'Il bordo rosso indica un avverbio mancante; la parola barrata non è un avverbio.';
+      tot++; if(good)ok++; });
+    return [ok,tot]; }
+
+  // ES 2
+  var TIPI=['modo','tempo','luogo','quantità','affermazione','negazione','dubbio','interrogativo'];
+  var E2=[
+    ["Il nonno cammina <span class='mark'>lentamente</span>.","modo"],
+    ["Ci vediamo <span class='mark'>stasera</span> al campo.","tempo"],
+    ["Abito <span class='mark'>qui</span> vicino.","luogo"],
+    ["A pranzo ho mangiato <span class='mark'>troppo</span>.","quantità"],
+    ["<span class='mark'>Sì</span>, vengo anch'io.","affermazione"],
+    ["<span class='mark'>Non</span> ho capito la domanda.","negazione"],
+    ["<span class='mark'>Probabilmente</span> arriverà in ritardo.","dubbio"],
+    ["<span class='mark'>Dove</span> hai messo il quaderno?","interrogativo"],
+    ["Il cane è uscito <span class='mark'>di corsa</span>.","modo"],
+    ["Ti spiegherò tutto <span class='mark'>dopo</span>.","tempo"]
+  ];
+  var e2=document.getElementById('e2'), e2items=[];
+  E2.forEach(function(d,i){
+    var it=el('div','item'), fr=el('div','frase',d[0]), sel=el('select'), fb=el('div','fb');
+    sel.id='e2-'+i; sel.setAttribute('aria-label','Tipo di avverbio');
+    sel.appendChild(new Option('scegli…',''));
+    TIPI.forEach(function(t){sel.appendChild(new Option(t,t))});
+    it.append(fr,sel,fb); e2.appendChild(it); e2items.push([it,sel,d[1]]);
+  });
+  function check2(){var ok=0; e2items.forEach(function(x){var g=x[1].value===x[2]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').textContent=g?'Giusto!':'Risposta corretta: di '+x[2]+'.'; if(g)ok++}); return [ok,e2items.length]}
+
+  // ES 3
+  var E3=[
+    ["Ho <span class='mark'>molti</span> amici al mare.","agg","si accorda con «amici»."],
+    ["Ieri ho studiato <span class='mark'>molto</span>.","avv","accompagna il verbo «ho studiato»."],
+    ["Parla <span class='mark'>piano</span>, il bimbo dorme.","avv","dice come si parla."],
+    ["Il terreno qui è <span class='mark'>piano</span>.","agg","descrive il nome «terreno»."],
+    ["Luca è un ragazzo <span class='mark'>forte</span>.","agg","descrive il nome «ragazzo»."],
+    ["La musica suona <span class='mark'>forte</span>.","avv","dice come suona."],
+    ["Nella bottiglia c'è <span class='mark'>poca</span> acqua.","agg","si accorda con «acqua»."],
+    ["Stanotte ho dormito <span class='mark'>poco</span>.","avv","accompagna il verbo «ho dormito»."]
+  ];
+  var e3=document.getElementById('e3'), e3items=[];
+  E3.forEach(function(d,i){
+    var it=el('div','item'), fr=el('div','frase',d[0]), seg=el('div','seg'), fb=el('div','fb'), st={v:''};
+    [['avv','avverbio'],['agg','aggettivo']].forEach(function(o){
+      var b=el('button'); b.type='button'; b.id='e3-'+i+'-'+o[0]; b.textContent=o[1]; b.setAttribute('aria-pressed','false');
+      b.onclick=function(){ st.v=o[0]; seg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')}) };
+      seg.appendChild(b);
+    });
+    it.append(fr,seg,fb); e3.appendChild(it); e3items.push([it,st,d]);
+  });
+  function check3(){var ok=0; e3items.forEach(function(x){var g=x[1].v===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').textContent=(g?'Giusto: ':'È un '+(x[2][1]==='avv'?'avverbio':'aggettivo')+': ')+x[2][2]; if(g)ok++}); return [ok,e3items.length]}
+
+  // ES 4 e 5: input
+  function inputs(id,data,label){
+    var box=document.getElementById(id), arr=[];
+    data.forEach(function(d,i){
+      var it=el('div','item'), fr=el('div','frase',d[0]), inp=el('input'), fb=el('div','fb');
+      inp.type='text'; inp.id=id+'-'+i; inp.autocomplete='off'; inp.spellcheck=false; inp.setAttribute('aria-label',label);
+      it.append(fr,inp,fb); box.appendChild(it); arr.push([it,inp,d[1]]);
+    });
+    return function(){var ok=0; arr.forEach(function(x){var v=x[1].value.trim().toLowerCase(), g=x[2].indexOf(v)>-1; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').textContent=g?'Giusto!':'Soluzione: '+x[2][0]+'.'; if(g)ok++}); return [ok,arr.length]};
+  }
+  var check4=inputs('e4',[
+    ["dolce →",["dolcemente"]],["veloce →",["velocemente"]],["facile →",["facilmente"]],["regolare →",["regolarmente"]],
+    ["allegro →",["allegramente"]],["vero →",["veramente"]],["sicuro →",["sicuramente"]],["gentile →",["gentilmente"]]
+  ],'Avverbio in -mente');
+  var check5=inputs('e5',[
+    ["Oggi sto ______ di ieri. (bene)",["meglio"]],
+    ["Questo esercizio mi è riuscito ______ del precedente. (male)",["peggio"]],
+    ["Al concerto ci siamo divertiti ______! (molto, superlativo)",["moltissimo"]],
+    ["Sabato ho studiato ______ di venerdì. (poco)",["meno"]],
+    ["Hai disegnato ______! (bene, superlativo)",["benissimo","ottimamente"]],
+    ["Domani mi alzerò ______ (presto, superlativo)",["prestissimo"]]
+  ],'Forma dell’avverbio');
+
+  // ES 6
+  var check6=inputs('e6',[
+    ["all'improvviso →",["improvvisamente"]],
+    ["di solito →",["solitamente","abitualmente"]],
+    ["in fretta →",["velocemente","rapidamente","frettolosamente"]],
+    ["con attenzione →",["attentamente"]],
+    ["per caso →",["casualmente"]],
+    ["senza dubbio →",["indubbiamente","certamente","sicuramente"]],
+    ["in silenzio →",["silenziosamente"]],
+    ["con gentilezza →",["gentilmente"]]
+  ],'Avverbio in -mente');
+
+  // pulsanti a scelta (generico)
+  function scelta(id,data,opts,fbFn){
+    var box=document.getElementById(id), arr=[];
+    data.forEach(function(d,i){
+      var it=el('div','item'), fr=el('div','frase',d[0]), seg=el('div','seg'), fb=el('div','fb');
+      (d.opts||opts).forEach(function(o,k){
+        var b=el('button'); b.type='button'; b.id=id+'-'+i+'-'+k; b.textContent=o; b.setAttribute('aria-pressed','false');
+        b.onclick=function(){ seg.dataset.v=o; seg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')}) };
+        seg.appendChild(b);
+      });
+      it.append(fr,seg,fb); box.appendChild(it); arr.push([it,seg,d]);
+    });
+    return function(){var ok=0; arr.forEach(function(x){var g=x[1].dataset.v===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').textContent=fbFn(g,x[2]); if(g)ok++}); return [ok,arr.length]};
+  }
+
+  // ES 7
+  var check7=scelta('e7',[
+    ["Mia sorella canta <span class='mark'>benissimo</span>.","verbo","modifica «canta»."],
+    ["Il film era <span class='mark'>davvero</span> noioso.","aggettivo","modifica «noioso»."],
+    ["Sei arrivato <span class='mark'>troppo</span> tardi.","avverbio","modifica l'avverbio «tardi»."],
+    ["<span class='mark'>Fortunatamente</span> nessuno si è fatto male.","frase","commenta tutto quello che è successo."],
+    ["Questa torta è <span class='mark'>poco</span> dolce.","aggettivo","modifica «dolce»."],
+    ["Ci vediamo <span class='mark'>molto</span> presto.","avverbio","modifica l'avverbio «presto»."],
+    ["Il treno parte <span class='mark'>adesso</span>.","verbo","modifica «parte»."],
+    ["<span class='mark'>Purtroppo</span> la gita è stata annullata.","frase","esprime un giudizio su tutta la frase."]
+  ],['verbo','aggettivo','avverbio','frase'],function(g,d){return (g?'Giusto: ':'Modifica: '+d[1]+'. L’avverbio ')+d[2]});
+
+  // ES 8
+  var check8=scelta('e8',[
+    {0:"Dopo la medicina mi sento ______.",1:"meglio",opts:["meglio","migliore"],2:"«meglio» è un avverbio e accompagna il verbo «mi sento»."},
+    {0:"Giulia è la mia ______ amica.",1:"migliore",opts:["meglio","migliore"],2:"«migliore» è un aggettivo e si riferisce al nome «amica»."},
+    {0:"Alla gara ha corso ______ di tutti.",1:"peggio",opts:["peggio","peggiore"],2:"«peggio» è un avverbio: dice come ha corso."},
+    {0:"Questa è la ______ giornata della settimana.",1:"peggiore",opts:["peggio","peggiore"],2:"«peggiore» è un aggettivo riferito a «giornata»."},
+    {0:"I ragazzi sono ______ stanchi.",1:"molto",opts:["molto","molti"],2:"davanti a un aggettivo «molto» è avverbio e non cambia."},
+    {0:"Al museo c'erano ______ persone.",1:"molte",opts:["molto","molte"],2:"«molte» è aggettivo e si accorda con «persone»."},
+    {0:"Le mie amiche parlano ______.",1:"piano",opts:["piano","piane"],2:"«piano» è avverbio: accompagna «parlano» e resta invariato."},
+    {0:"Queste scarpe sono ______ care.",1:"troppo",opts:["troppo","troppe"],2:"«troppo» modifica l'aggettivo «care» e resta invariato."}
+  ],null,function(g,d){return (g?'Giusto: ':'Forma corretta: '+d[1]+'. ')+d[2]});
+
+  // ES 9: testo, le parti tra *asterischi* sono avverbi
+  var T9="*Stamattina* mi sono svegliato *tardi*. Ho fatto colazione *velocemente* e sono uscito *di corsa*. Abito *abbastanza* *lontano*, ma *per fortuna* l'autobus è arrivato *subito*. In classe la prof mi ha guardato *severamente*: *non* era *affatto* contenta. *Domani* metterò la sveglia *prima*! *Forse* sarà la volta buona.";
+  var e9=document.getElementById('e9'), it9=el('div','item'), fr9=el('div','frase'), fb9=el('div','fb');
+  fr9.style.lineHeight='2';
+  T9.match(/\*[^*]+\*|[A-Za-zÀ-ÿ']+|[^\sA-Za-zÀ-ÿ'*]+|\s+/g).forEach(function(t,j){
+    if(/^[A-Za-zÀ-ÿ']+$/.test(t)||t[0]==='*'){
+      var m=t[0]==='*', b=el('button','tok'); b.type='button'; b.id='e9-'+j; b.textContent=m?t.slice(1,-1):t; b.dataset.ok=m?'1':'0';
+      b.onclick=function(){b.classList.toggle('sel')}; fr9.appendChild(b);
+    } else fr9.appendChild(document.createTextNode(t));
+  });
+  it9.append(fr9,fb9); e9.appendChild(it9);
+  function check9(){var tot=0,ok=0,err=0;
+    fr9.querySelectorAll('.tok').forEach(function(b){b.classList.remove('miss','wrong');
+      var s=b.classList.contains('sel'),a=b.dataset.ok==='1';
+      if(a){tot++; if(s)ok++; else b.classList.add('miss')} else if(s){err++;b.classList.add('wrong')} });
+    var pts=Math.max(0,ok-err);
+    it9.className='item '+(ok===tot&&!err?'ok':'ko');
+    fb9.textContent='Avverbi trovati: '+ok+' su '+tot+(err?'. Parole segnate per errore: '+err+' (barrate).':'.')+(ok<tot?' Il bordo rosso indica quelli mancanti.':'');
+    return [pts,tot]}
+
+  var score=document.getElementById('score');
+  document.getElementById('check').onclick=function(){
+    var r=[check1(),check2(),check3(),check4(),check5(),check6(),check7(),check8(),check9()], ok=0, tot=0;
+    r.forEach(function(x){ok+=x[0];tot+=x[1]});
+    score.textContent='Risposte giuste: '+ok+' su '+tot;
+  };
+  document.getElementById('reset').onclick=function(){
+    document.querySelectorAll('.item').forEach(function(i){i.className='item'; var f=i.querySelector('.fb'); if(f)f.textContent=''});
+    document.querySelectorAll('.tok').forEach(function(b){b.classList.remove('sel','miss','wrong')});
+    document.querySelectorAll('select').forEach(function(s){s.value=''});
+    document.querySelectorAll('input[type=text]').forEach(function(s){s.value=''});
+    e3items.forEach(function(x){x[1].v=''; x[0].querySelectorAll('.seg button').forEach(function(b){b.setAttribute('aria-pressed','false')})});
+    document.querySelectorAll('.seg').forEach(function(s){delete s.dataset.v; s.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed','false')})});
+    score.textContent=''; window.scrollTo(0,0);
+  };
+})();
+</script>

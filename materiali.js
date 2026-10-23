@@ -429,7 +429,9 @@ const MODULI = [
       { titolo: "Ortografia e punteggiatura", attivita: [] },
       { titolo: "Le parti variabili: articolo, nome e verbo", attivita: [] },
       { titolo: "Le parti variabili: aggettivo, pronome e verbo", attivita: [] },
-      { titolo: "Le parti invariabili: preposizione, congiunzione, avverbio, interiezione", attivita: [] }
+      { titolo: "Le parti invariabili: preposizione, congiunzione, avverbio, interiezione", attivita: [
+          { tipo: "Esercizi", titolo: "Ripasso degli avverbi", descrizione: "Scheda riassuntiva e nove esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/ripasso-avverbi.html", data: "2026-10-23" }
+        ] }
     ]
   },
   {
