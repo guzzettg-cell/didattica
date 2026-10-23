@@ -74,7 +74,7 @@ const MODULI = [
       },
       {
         titolo: "I fusi orari",
-        descrizione: "Vista dal Polo nord, carta dei fusi, ora civile e ora locale delle città.",
+        descrizione: "24 fusi da 15°, ora UTC e ora legale, i fusi dell'Europa e le lancette da spostare (libro, pag. A7).",
         link: "geografia/prima/metodo-e-strumenti/lezioni/fusi-orari.html",
         data: "2026-10-21",
         attivita: []
