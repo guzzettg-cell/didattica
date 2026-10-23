@@ -93,22 +93,6 @@ details ol{margin-top:10px}
     <p class="lede">A sinistra guardi la Terra dallo spazio, dall'alto del Polo Nord. A destra vedi il cielo con gli occhi dell'omino che sta a Roma. Fai girare la Terra e confronta le due viste.</p>
   </header>
 
-  <div class="views">
-    <div class="view">
-      <h2>Dallo spazio</h2>
-      <canvas id="space" role="img" aria-label="La Terra vista dall'alto del Polo Nord, con la metà illuminata dal Sole e la metà al buio"></canvas>
-      <p id="spaceNote">Il Sole è a destra e illumina metà della Terra. L'omino rosso è a Roma.</p>
-    </div>
-    <div class="view">
-      <h2>Da Roma</h2>
-      <canvas id="skyv" role="img" aria-label="Il cielo visto da Roma guardando verso Sud, con la posizione del Sole"></canvas>
-      <p>L'omino guarda verso Sud: l'Est è alla sua sinistra, l'Ovest alla sua destra.</p>
-      <div class="cover" id="cover" hidden><div><span>?</span>Guarda la Terra dallo spazio e indovina cosa vede l'omino.</div></div>
-    </div>
-  </div>
-
-  <p class="say" id="say" aria-live="polite"></p>
-
   <section class="controls" aria-label="Comandi">
     <div class="timeRow">
       <button id="play" type="button">▶ Avvia</button>
@@ -127,6 +111,23 @@ details ol{margin-top:10px}
     </div>
     <p class="note" id="geoNote"></p>
   </section>
+
+  <div class="views">
+    <div class="view">
+      <h2>Dallo spazio</h2>
+      <canvas id="space" role="img" aria-label="La Terra vista dall'alto del Polo Nord, con la metà illuminata dal Sole e la metà al buio"></canvas>
+      <p id="spaceNote">Il Sole è a destra e illumina metà della Terra. L'omino rosso è a Roma.</p>
+    </div>
+    <div class="view">
+      <h2>Da Roma</h2>
+      <canvas id="skyv" role="img" aria-label="Il cielo visto da Roma guardando verso Sud, con la posizione del Sole"></canvas>
+      <p>L'omino guarda verso Sud: l'Est è alla sua sinistra, l'Ovest alla sua destra.</p>
+      <div class="cover" id="cover" hidden><div><span>?</span>Guarda la Terra dallo spazio e indovina cosa vede l'omino.</div></div>
+    </div>
+  </div>
+
+  <p class="say" id="say" aria-live="polite"></p>
+
 
   <div class="grid">
     <div class="card" id="quiz" aria-live="polite"></div>
@@ -335,7 +336,7 @@ details ol{margin-top:10px}
   }
 
   // ---------- sfida ----------
-  const CHOICES = [ ['notte','Notte'], ['alba','Alba: il Sole sorge a Est'], ['mattina','Mattina: il Sole sale'], ['mezzogiorno','Mezzogiorno: il Sole è a Sud'], ['pomeriggio','Pomeriggio: il Sole scende'], ['tramonto','Tramonto: il Sole tramonta a Ovest'] ];
+  const CHOICES = [ ['alba','Il Sole compare all\'orizzonte, a Est'], ['mattina','Il Sole sale nel cielo, verso Sud'], ['mezzogiorno','Il Sole è nel punto più alto, a Sud'], ['pomeriggio','Il Sole scende, verso Ovest'], ['tramonto','Il Sole scompare all\'orizzonte, a Ovest'], ['notte','Il Sole non si vede: è buio'] ];
   const ROUND_T = [6, 12, 21, 18, 9, 0, 15];
   const ROUNDS = 6;
   function renderQuiz(){
