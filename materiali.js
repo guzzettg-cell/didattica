@@ -53,6 +53,7 @@ const MODULI = [
       },
       {
         titolo: "L'orientamento e i suoi strumenti",
+        link: "geografia/prima/orientamento/index.html",
         descrizione: "Punti di riferimento personali e universali, il Sole e i punti cardinali, la Stella polare e la Croce del Sud, la rotazione della Terra.",
         data: "2026-10-23",
         attivita: [
