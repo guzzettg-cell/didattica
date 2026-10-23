@@ -1,0 +1,263 @@
+<title>Ripasso delle preposizioni</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: quaderno a colonna singola; l'avverbio è sempre "evidenziato" come con l'evidenziatore */
+:root{
+  --bg:#f6f7f4; --paper:#ffffff; --ink:#1d2b33; --muted:#5b6a70; --line:#d9dfdc;
+  --accent:#1f6f78; --hl:#ffe46b; --hl-ink:#3a2f00;
+  --ok:#2e7d4f; --ok-bg:#e3f3e8; --ko:#b23a3a; --ko-bg:#f9e3e1;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }
+
+html{font-size:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:1.5rem 4rem}
+.wrap{max-width:46rem;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800}
+h2{font-size:1.6rem;font-weight:700}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+.mark{background:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 88%,transparent 88%);color:var(--hl-ink);padding:0 .15em;border-radius:2px}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+header{display:flex;flex-direction:column;gap:.75rem;padding-top:1rem}
+header p{color:var(--muted);max-width:38rem}
+section{display:flex;flex-direction:column;gap:1rem}
+.note{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1rem 1.15rem;display:flex;flex-direction:column;gap:.6rem}
+.tipi{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.75rem}
+.tipo{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.tipo b{font-family:var(--display);font-size:1.05rem}
+.tipo .q{font-size:.85rem;color:var(--muted)}
+.tipo .es{font-size:.95rem}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:.55rem .8rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-size:.9rem;color:var(--accent)}
+tr:last-child td{border-bottom:none}
+hr{border:none;border-top:2px dashed var(--line);margin:0}
+
+/* esercizi */
+.ex{display:flex;flex-direction:column;gap:.9rem}
+.ex .consegna{color:var(--muted)}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .8rem}
+.item .frase{flex:1 1 16rem;min-width:0}
+.item.ok{border-color:var(--ok);background:var(--ok-bg)}
+.item.ko{border-color:var(--ko);background:var(--ko-bg)}
+.fb{flex-basis:100%;font-size:.9rem;color:var(--muted)}
+.fb:empty{display:none}
+.tok{cursor:pointer;border-radius:4px;padding:0 .1em;border:none;background:none;font:inherit;color:inherit}
+.tok:hover{outline:1px dashed var(--accent)}
+.tok.sel{background:var(--hl);color:var(--hl-ink)}
+.tok.miss{outline:2px solid var(--ko)}
+.tok.wrong{text-decoration:line-through;text-decoration-color:var(--ko);text-decoration-thickness:2px}
+select,input[type=text]{font:inherit;font-size:1rem;padding:.35rem .5rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);max-width:100%}
+input[type=text]{width:11rem}
+.seg{display:flex;gap:.4rem;flex-wrap:wrap}
+.seg button,.btn{font:inherit;font-size:.95rem;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:.3rem .9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--paper)}
+.btn.main{background:var(--accent);color:var(--paper);font-weight:700}
+.azioni{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.punti{font-weight:700;font-variant-numeric:tabular-nums}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* zoom */
+.zoom{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;gap:.3rem;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:.3rem;box-shadow:0 4px 14px rgba(0,0,0,.15);z-index:20}
+.zoom button{width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:var(--display);font-weight:700;font-size:1rem;cursor:pointer}
+.zoom span{align-self:center;font-size:.8rem;min-width:2.8rem;text-align:center;font-variant-numeric:tabular-nums;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.item{transition:background .2s,border-color .2s}}
+</style>
+
+<div class="zoom" role="group" aria-label="Dimensione del testo">
+  <button id="zm" type="button" aria-label="Rimpicciolisci">A−</button>
+  <span id="zv">100%</span>
+  <button id="zp" type="button" aria-label="Ingrandisci">A+</button>
+</div>
+
+<main class="wrap">
+<header>
+  <span class="eyebrow">Grammatica · ripasso</span>
+  <h1>Le <span class="mark">preposizioni</span></h1>
+  <p>La preposizione è una parte del discorso <b>invariabile</b> che serve a collegare le parole tra loro. Senza preposizioni non potremmo dire di chi è una cosa, dove andiamo o con chi.</p>
+</header>
+
+<section>
+  <h2>A che cosa serve</h2>
+  <div class="note">
+    <p>La preposizione <b>collega</b> due parole o due parti della frase e ne chiarisce il rapporto. Introduce i complementi.</p>
+    <p>Il quaderno <span class="mark">di</span> Sara. → di chi è?</p>
+    <p>Vado <span class="mark">a</span> scuola <span class="mark">con</span> il pullman. → dove? con che cosa?</p>
+    <p>Da sola non ha un significato completo: lo prende dalle parole che unisce.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Preposizioni proprie semplici</h2>
+  <div class="note">
+    <p>Sono nove: <span class="mark">di</span>, <span class="mark">a</span>, <span class="mark">da</span>, <span class="mark">in</span>, <span class="mark">con</span>, <span class="mark">su</span>, <span class="mark">per</span>, <span class="mark">tra</span>, <span class="mark">fra</span>.</p>
+    <p>Una filastrocca per ricordarle: <i>di, a, da, in, con, su, per, tra, fra</i>.</p>
+    <p><b>Di</b> davanti a vocale può perdere la <i>i</i>: d'oro, d'inverno. <b>Tra</b> e <b>fra</b> hanno lo stesso significato: si sceglie quella che suona meglio (fra tre giorni, tra fratelli).</p>
+  </div>
+</section>
+
+<section>
+  <h2>Preposizioni articolate</h2>
+  <p>Si formano unendo una preposizione semplice e un articolo determinativo: di + il = <b>del</b>, in + la = <b>nella</b>.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th></th><th>il</th><th>lo</th><th>la</th><th>l'</th><th>i</th><th>gli</th><th>le</th></tr></thead>
+      <tbody>
+        <tr><th>di</th><td>del</td><td>dello</td><td>della</td><td>dell'</td><td>dei</td><td>degli</td><td>delle</td></tr>
+        <tr><th>a</th><td>al</td><td>allo</td><td>alla</td><td>all'</td><td>ai</td><td>agli</td><td>alle</td></tr>
+        <tr><th>da</th><td>dal</td><td>dallo</td><td>dalla</td><td>dall'</td><td>dai</td><td>dagli</td><td>dalle</td></tr>
+        <tr><th>in</th><td>nel</td><td>nello</td><td>nella</td><td>nell'</td><td>nei</td><td>negli</td><td>nelle</td></tr>
+        <tr><th>su</th><td>sul</td><td>sullo</td><td>sulla</td><td>sull'</td><td>sui</td><td>sugli</td><td>sulle</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><b>Con</b> si unisce all'articolo solo in <i>col</i> e <i>coi</i>, ma oggi si preferisce scrivere separato: con il, con i. <b>Per</b>, <b>tra</b> e <b>fra</b> restano sempre separate.</p>
+</section>
+
+<section>
+  <h2>Preposizioni improprie e locuzioni</h2>
+  <div class="tipi">
+    <div class="tipo"><b>improprie</b><span class="q">parole che a volte fanno da preposizione</span><span class="es">sopra, sotto, dentro, fuori, prima, dopo, dietro, davanti, contro, senza, durante, lungo, verso, secondo, tranne</span></div>
+    <div class="tipo"><b>locuzioni prepositive</b><span class="q">gruppi di parole con valore di preposizione</span><span class="es">davanti a, accanto a, insieme con, invece di, prima di, fino a, a causa di, per mezzo di, in mezzo a</span></div>
+  </div>
+  <div class="note">
+    <h3>Preposizione o avverbio?</h3>
+    <p>Le preposizioni improprie possono essere anche avverbi. Se sono seguite da un nome o da un pronome sono <b>preposizioni</b>: Il gatto è <span class="mark">sotto</span> il letto.</p>
+    <p>Se sono da sole, accanto al verbo, sono <b>avverbi</b>: Il gatto è <b>sotto</b>. Ci vediamo <b>dopo</b>.</p>
+  </div>
+</section>
+
+<hr>
+
+<section class="ex" id="ex1">
+  <span class="eyebrow">Esercizio 1</span>
+  <h2>Evidenzia le preposizioni</h2>
+  <p class="consegna">Tocca tutte le preposizioni: semplici, articolate e improprie. Poi premi «Correggi tutto».</p>
+  <div id="e1"></div>
+</section>
+
+<section class="ex" id="ex2">
+  <span class="eyebrow">Esercizio 2</span>
+  <h2>Semplice, articolata o impropria?</h2>
+  <p class="consegna">Scegli il tipo della preposizione evidenziata.</p>
+  <div id="e2"></div>
+</section>
+
+<section class="ex" id="ex3">
+  <span class="eyebrow">Esercizio 3</span>
+  <h2>Forma la preposizione articolata</h2>
+  <p class="consegna">Unisci la preposizione e l'articolo e scrivi la preposizione articolata.</p>
+  <div id="e3"></div>
+</section>
+
+<section class="ex" id="ex4">
+  <span class="eyebrow">Esercizio 4</span>
+  <h2>Preposizione o avverbio?</h2>
+  <p class="consegna">Guarda la parola evidenziata e scegli.</p>
+  <div id="e4"></div>
+</section>
+
+<section class="ex" id="ex5">
+  <span class="eyebrow">Esercizio 5</span>
+  <h2>Completa con la preposizione giusta</h2>
+  <p class="consegna">Scrivi la preposizione semplice o articolata che manca.</p>
+  <div id="e5"></div>
+</section>
+
+<section class="ex" id="ex6">
+  <span class="eyebrow">Esercizio 6</span>
+  <h2>Caccia alle preposizioni nel testo</h2>
+  <p class="consegna">Nel racconto ci sono 12 preposizioni. Trovale tutte.</p>
+  <div id="e6"></div>
+</section>
+
+<section class="ex">
+  <div class="note">
+    <div class="azioni">
+      <button class="btn main" id="check" type="button">Correggi tutto</button>
+      <button class="btn" id="reset" type="button">Ricomincia</button>
+      <span class="punti" id="score" aria-live="polite"></span>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+var EX=[{"type": "hl", "title": "Evidenzia le preposizioni", "cons": "Tocca tutte le preposizioni: semplici, articolate e improprie. Poi premi «Correggi tutto».", "items": ["Il libro *di* Marco è *sul* tavolo.", "Vado *a* scuola *con* mia sorella.", "*Dalla* finestra vedo il campanile *della* chiesa.", "Partiamo *per* Roma *tra* due giorni.", "Ho messo le chiavi *nello* zaino.", "Il gatto dorme *sotto* il letto *senza* fare rumore."]}, {"type": "select", "title": "Semplice, articolata o impropria?", "cons": "Scegli il tipo della preposizione evidenziata.", "label": "Tipo di preposizione", "options": ["semplice", "articolata", "impropria"], "items": [["Ho trovato una moneta <span class='mark'>nel</span> cassetto.", "articolata", "in + il."], ["Esco <span class='mark'>con</span> gli amici.", "semplice", ""], ["Non uscire <span class='mark'>senza</span> ombrello.", "impropria", ""], ["Ho letto il diario <span class='mark'>degli</span> esploratori.", "articolata", "di + gli."], ["Ci vediamo <span class='mark'>tra</span> un'ora.", "semplice", ""], ["<span class='mark'>Durante</span> la lezione ho preso appunti.", "impropria", ""], ["La penna è <span class='mark'>sulla</span> scrivania.", "articolata", "su + la."], ["Questo regalo è <span class='mark'>per</span> te.", "semplice", ""]]}, {"type": "input", "title": "Forma la preposizione articolata", "cons": "Unisci la preposizione e l'articolo e scrivi la preposizione articolata.", "label": "Preposizione articolata", "items": [["di + il =", ["del"]], ["a + lo =", ["allo"]], ["da + la =", ["dalla"]], ["in + i =", ["nei"]], ["su + gli =", ["sugli"]], ["di + le =", ["delle"]], ["in + l' (l'aula) =", ["nell'"]], ["a + gli =", ["agli"]], ["da + i =", ["dai"]], ["su + lo =", ["sullo"]]]}, {"type": "seg", "title": "Preposizione o avverbio?", "cons": "Guarda la parola evidenziata e scegli.", "options": ["preposizione", "avverbio"], "items": [["Il cane è <span class='mark'>dietro</span> la porta.", "preposizione", "è seguita dal nome «la porta»."], ["Resta <span class='mark'>dietro</span>, non superarmi.", "avverbio", "è da sola, accanto al verbo."], ["Ci vediamo <span class='mark'>dopo</span>.", "avverbio", "è da sola, accanto al verbo."], ["Ci vediamo <span class='mark'>dopo</span> pranzo.", "preposizione", "è seguita dal nome «pranzo»."], ["Il vaso è <span class='mark'>sopra</span> il tavolo.", "preposizione", "è seguita da «il tavolo»."], ["Sali <span class='mark'>sopra</span>, ti aspetto.", "avverbio", "è da sola, accanto al verbo."], ["Guarda <span class='mark'>sotto</span>!", "avverbio", "è da sola, accanto al verbo."], ["Il gatto è <span class='mark'>sotto</span> il divano.", "preposizione", "è seguita da «il divano»."]]}, {"type": "input", "title": "Completa con la preposizione giusta", "cons": "Scrivi la preposizione semplice o articolata che manca.", "label": "Preposizione", "items": [["Sono nato ______ Milano.", ["a"], "con i nomi di città si usa «a»."], ["Vivo ______ Italia.", ["in"], "con i nomi di nazione si usa «in»."], ["Questo bicchiere è ______ plastica.", ["di"], "indica la materia."], ["Torno ______ scuola alle due.", ["da"], "indica il luogo da cui si viene."], ["Oggi pomeriggio vado ______ dentista.", ["dal"], "da + il, per andare da una persona."], ["Ho scritto una lettera ______ nonna.", ["alla"], "a + la."], ["Metti il latte ______ frigorifero.", ["nel"], "in + il."], ["Mangio la pasta ______ la forchetta.", ["con"], "indica il mezzo."]]}, {"type": "text", "n": 12, "title": "Caccia alle preposizioni nel testo", "cons": "Nel racconto ci sono 12 preposizioni. Trovale tutte.", "text": "Sabato *con* i miei amici sono andato *al* lago. Siamo partiti *dalla* stazione *alle* otto e abbiamo viaggiato *per* un'ora. *Sulla* riva c'erano molte barche *a* vela. Abbiamo mangiato i panini *sotto* un albero e *dopo* il pranzo abbiamo fatto un giro *in* bicicletta. Siamo tornati *a* casa *verso* sera, stanchi ma felici."}];
+
+(function(){
+  var z=100, zv=document.getElementById('zv'), KEY='zoom-'+document.title;
+  try{ z=parseInt(localStorage.getItem(KEY))||100 }catch(e){}
+  function setZ(v){ z=Math.max(70,Math.min(200,v)); document.documentElement.style.fontSize=z+'%'; zv.textContent=z+'%'; try{localStorage.setItem(KEY,z)}catch(e){} }
+  document.getElementById('zp').onclick=function(){setZ(z+10)};
+  document.getElementById('zm').onclick=function(){setZ(z-10)};
+  setZ(z);
+  function el(t,c,h){var e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e}
+  var RX=/\*[^*]+\*|[A-Za-zÀ-ÿ']+|[^\sA-Za-zÀ-ÿ'*]+|\s+/g;
+  function tokens(fr,s,pre){
+    s.match(RX).forEach(function(t,j){
+      if(/^[A-Za-zÀ-ÿ']+$/.test(t)||t[0]==='*'){
+        var m=t[0]==='*', b=el('button','tok'); b.type='button'; b.id=pre+'-'+j; b.textContent=m?t.slice(1,-1):t; b.dataset.ok=m?'1':'0';
+        b.onclick=function(){b.classList.toggle('sel')}; fr.appendChild(b);
+      } else fr.appendChild(document.createTextNode(t));
+    });
+  }
+  function mark(fr){var ok=0,tot=0,err=0;
+    fr.querySelectorAll('.tok').forEach(function(b){b.classList.remove('miss','wrong');
+      var s=b.classList.contains('sel'),a=b.dataset.ok==='1';
+      if(a){tot++; if(s)ok++; else b.classList.add('miss')} else if(s){err++;b.classList.add('wrong')}});
+    return [ok,tot,err]}
+  function fbText(g,ans,ex){ return g ? (ex?'Giusto: '+ex:'Giusto!') : 'Risposta corretta: '+ans+'.'+(ex?' '+ex:'') }
+  var checks=[];
+  EX.forEach(function(x,n){
+    var box=document.getElementById('e'+(n+1)), id='e'+(n+1);
+    if(x.type==='hl'){
+      var its=x.items.map(function(s,i){var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); tokens(fr,s,id+'-'+i); it.append(fr,fb); box.appendChild(it); return it});
+      checks.push(function(){var ok=0; its.forEach(function(it){var r=mark(it), g=r[0]===r[1]&&!r[2]; it.className='item '+(g?'ok':'ko'); it.querySelector('.fb').textContent=g?'Giusto!':'Il bordo rosso indica una parola da segnare; la parola barrata non va segnata.'; if(g)ok++}); return [ok,its.length]});
+    } else if(x.type==='text'){
+      var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); fr.style.lineHeight='2'; tokens(fr,x.text,id); it.append(fr,fb); box.appendChild(it);
+      checks.push(function(){var r=mark(fr); it.className='item '+(r[0]===r[1]&&!r[2]?'ok':'ko');
+        fb.textContent='Trovate: '+r[0]+' su '+r[1]+(r[2]?'. Parole segnate per errore: '+r[2]+' (barrate).':'.')+(r[0]<r[1]?' Il bordo rosso indica quelle mancanti.':'');
+        return [Math.max(0,r[0]-r[2]),r[1]]});
+    } else if(x.type==='select'){
+      var arr=x.items.map(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),s=el('select'),fb=el('div','fb');
+        s.id=id+'-'+i; s.setAttribute('aria-label',x.label||'Risposta'); s.appendChild(new Option('scegli…',''));
+        x.options.forEach(function(o){s.appendChild(new Option(o,o))}); it.append(fr,s,fb); box.appendChild(it); return [it,s,d]});
+      checks.push(function(){var ok=0; arr.forEach(function(a){var g=a[1].value===a[2][1]; a[0].className='item '+(g?'ok':'ko'); a[0].querySelector('.fb').textContent=fbText(g,a[2][1],a[2][2]); if(g)ok++}); return [ok,arr.length]});
+    } else if(x.type==='seg'){
+      var arr2=x.items.map(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),seg=el('div','seg'),fb=el('div','fb');
+        (d[3]||x.options).forEach(function(o,k){var b=el('button'); b.type='button'; b.id=id+'-'+i+'-'+k; b.textContent=o; b.setAttribute('aria-pressed','false');
+          b.onclick=function(){seg.dataset.v=o; seg.querySelectorAll('button').forEach(function(y){y.setAttribute('aria-pressed',y===b?'true':'false')})}; seg.appendChild(b)});
+        it.append(fr,seg,fb); box.appendChild(it); return [it,seg,d]});
+      checks.push(function(){var ok=0; arr2.forEach(function(a){var g=a[1].dataset.v===a[2][1]; a[0].className='item '+(g?'ok':'ko'); a[0].querySelector('.fb').textContent=fbText(g,a[2][1],a[2][2]); if(g)ok++}); return [ok,arr2.length]});
+    } else if(x.type==='input'){
+      var arr3=x.items.map(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),inp=el('input'),fb=el('div','fb');
+        inp.type='text'; inp.id=id+'-'+i; inp.autocomplete='off'; inp.spellcheck=false; inp.setAttribute('aria-label',x.label||'Risposta'); it.append(fr,inp,fb); box.appendChild(it); return [it,inp,d]});
+      checks.push(function(){var ok=0; arr3.forEach(function(a){var v=a[1].value.trim().toLowerCase().replace(/’/g,"'"), g=a[2][1].indexOf(v)>-1; a[0].className='item '+(g?'ok':'ko'); a[0].querySelector('.fb').textContent=fbText(g,a[2][1].join(' / '),a[2][2]); if(g)ok++}); return [ok,arr3.length]});
+    }
+  });
+  var score=document.getElementById('score');
+  document.getElementById('check').onclick=function(){var ok=0,tot=0; checks.forEach(function(c){var r=c(); ok+=r[0]; tot+=r[1]}); score.textContent='Risposte giuste: '+ok+' su '+tot};
+  document.getElementById('reset').onclick=function(){
+    document.querySelectorAll('.item').forEach(function(i){i.className='item'; var f=i.querySelector('.fb'); if(f)f.textContent=''});
+    document.querySelectorAll('.tok').forEach(function(b){b.classList.remove('sel','miss','wrong')});
+    document.querySelectorAll('select').forEach(function(s){s.value=''});
+    document.querySelectorAll('input[type=text]').forEach(function(s){s.value=''});
+    document.querySelectorAll('.seg').forEach(function(s){delete s.dataset.v; s.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed','false')})});
+    score.textContent=''; window.scrollTo(0,0)};
+})();
+</script>

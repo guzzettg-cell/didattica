@@ -430,7 +430,10 @@ const MODULI = [
       { titolo: "Le parti variabili: articolo, nome e verbo", attivita: [] },
       { titolo: "Le parti variabili: aggettivo, pronome e verbo", attivita: [] },
       { titolo: "Le parti invariabili: preposizione, congiunzione, avverbio, interiezione", attivita: [
-          { tipo: "Esercizi", titolo: "Ripasso degli avverbi", descrizione: "Scheda riassuntiva e nove esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/ripasso-avverbi.html", data: "2026-10-23" }
+          { tipo: "Esercizi", titolo: "Ripasso degli avverbi", descrizione: "Scheda riassuntiva e nove esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/ripasso-avverbi.html", data: "2026-10-23" },
+          { tipo: "Esercizi", titolo: "Ripasso delle preposizioni", descrizione: "Semplici, articolate e improprie: scheda riassuntiva e sei esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/ripasso-preposizioni.html", data: "2026-10-23" },
+          { tipo: "Esercizi", titolo: "Ripasso delle congiunzioni", descrizione: "Coordinanti e subordinanti: scheda riassuntiva e sei esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/ripasso-congiunzioni.html", data: "2026-10-23" },
+          { tipo: "Esercizi", titolo: "Ripasso delle interiezioni", descrizione: "Proprie, improprie, locuzioni e onomatopee: scheda riassuntiva e sei esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/ripasso-interiezioni.html", data: "2026-10-23" }
         ] }
     ]
   },
