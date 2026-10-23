@@ -48,7 +48,8 @@ h2{font-family:var(--f-display);font-weight:600;font-size:1.25rem;margin:0;text-
 .tab .tick{color:var(--ok);font-weight:700}
 .tab[aria-selected="true"] .tick{color:var(--bg)}
 
-.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;align-items:start}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:16px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
 .mapBox{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .scroll{overflow-x:auto}
 svg{display:block;width:100%;min-width:640px;height:auto;max-height:calc(100vh - 120px)}
@@ -56,7 +57,14 @@ svg{display:block;width:100%;min-width:640px;height:auto;max-height:calc(100vh -
 .facing b{color:var(--walker)}
 
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
-@media (min-width:1000px){.panel{display:block;columns:2 340px;column-gap:32px;padding:18px 22px}.panel>*{break-inside:avoid;margin:0 0 12px}.panel>h2{column-span:all}.panel>.routes,.panel>.log{column-span:all}}
+[hidden]{display:none!important}
+#brief{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+#brief blockquote{font-size:1.15rem}
+.side .pad.rel{grid-template-columns:1fr}
+.side .pad.rel button,.side .row button{padding:11px 12px;font-size:1rem}
+.side .row{flex-direction:column;align-items:stretch}
+.side .opts{grid-template-columns:1fr}
+.side .kbd{order:0}
 .brief{margin:0;color:var(--muted)}
 blockquote{margin:0;padding:10px 14px;border-left:4px solid var(--walker);background:var(--bg);border-radius:0 8px 8px 0;font-size:1.05rem}
 .task{margin:0;font-weight:700}
@@ -139,6 +147,8 @@ input[type=text]{font:inherit;font-size:1rem;width:100%;padding:9px 12px;border:
 
   <div class="tabs" role="tablist" id="tabs"></div>
 
+  <section class="panel" id="brief" aria-live="polite"></section>
+
   <div class="grid">
     <div class="mapBox">
       <div class="scroll">
@@ -149,8 +159,9 @@ input[type=text]{font:inherit;font-size:1rem;width:100%;padding:9px 12px;border:
         <label class="chk"><input type="checkbox" id="names"> Mostra i nomi dei luoghi</label>
       </div>
     </div>
-    <section class="panel" id="panel" aria-live="polite"></section>
+    <aside class="panel side" id="side" aria-live="polite"></aside>
   </div>
+  <section class="panel" id="logbox" hidden></section>
 </div>
 
 <script>
@@ -447,8 +458,14 @@ input[type=text]{font:inherit;font-size:1rem;width:100%;padding:9px 12px;border:
     p.querySelectorAll('[data-fw]').forEach(b => b.addEventListener('click', () => step(st.f)));
     p.querySelectorAll('[data-d]').forEach(b => b.addEventListener('click', () => goCard(+b.dataset.d)));
   }
+  function place(h){
+    const [main, log = ''] = h.split('<!--LOG-->'), [top, side = ''] = main.split('<!--SIDE-->');
+    $('brief').innerHTML = top;
+    $('side').innerHTML = side || '<p class="small">Scegli un percorso qui sopra: la partenza e l\'arrivo compaiono sulla piantina.</p>';
+    $('logbox').innerHTML = log; $('logbox').hidden = !log;
+  }
   function renderTest(){
-    const ms = MISSIONS[st.m], p = $('panel'), T = st.test, R = T.route;
+    const ms = MISSIONS[st.m], p = document, T = st.test, R = T.route;
     let h = '<h2>' + (st.m+1) + '. ' + ms.title + '</h2>';
     if (T.phase === 'choose' || !R){
       h += '<p class="brief">Ogni gruppo riceve un percorso e prepara sul quaderno due tipi di indicazioni: <b>personali</b> e <b>con i punti cardinali</b>. Poi, alla LIM, un altro gruppo le mette alla prova senza sapere dove arriverà.</p>' +
@@ -469,12 +486,12 @@ input[type=text]{font:inherit;font-size:1rem;width:100%;padding:9px 12px;border:
           : 'Esempio: Vai verso Est per … incroci, poi verso Sud…') + '">' + esc(T.text) + '</textarea>' +
         '<p class="kbd">Si parte ' + A.out + ', guardando verso ' + DIR[A.s[2]] + '. Quando inizia la prova la destinazione sparisce' +
         (T.kind === 'card' ? ' e si nascondono anche i nomi dei luoghi: così si vede se le indicazioni funzionano per chi non conosce il paese.' : '.') + '</p>' +
-        '<div class="row"><button type="button" class="arrive" id="startTest">Inizia la prova</button>' +
+        '<!--SIDE--><div class="row"><button type="button" class="arrive" id="startTest">Inizia la prova</button>' +
         '<button type="button" id="change">Cambia percorso</button></div>';
     } else {
       const A = DEST[R.a];
       h += '<p class="brief">Percorso <b>' + R.id + '</b>. Segui <b>solo</b> quello che c\'è scritto. Si parte ' + A.out + ', guardando verso ' + DIR[A.s[2]] + '.</p>' +
-        '<blockquote class="mine">' + (T.text.trim() ? esc(T.text.trim()) : '(nessuna indicazione scritta)') + '</blockquote>' +
+        '<blockquote class="mine">' + (T.text.trim() ? esc(T.text.trim()) : '(nessuna indicazione scritta)') + '</blockquote><!--SIDE-->' +
         padHtml(T.kind === 'pers' ? 'rel' : 'card') +
         '<div class="row"><button type="button" class="arrive" id="arrive">Sono arrivato!</button>' +
         '<button type="button" id="retry">Ricomincia la prova</button>' +
@@ -487,11 +504,11 @@ input[type=text]{font:inherit;font-size:1rem;width:100%;padding:9px 12px;border:
         '<div class="row"><button type="button" id="showGoal">Mostra la destinazione</button></div>';
     }
     if (T.log.length){
-      h += '<p class="task">Le prove di oggi</p><ol class="log">' + T.log.map((r,i) =>
+      h += '<!--LOG--><p class="task">Le prove di oggi</p><ol class="log">' + T.log.map((r,i) =>
         '<li><span>' + (i+1) + '.</span><span><b>' + esc(r.group) + '</b></span><span>Percorso ' + r.route.id + '</span><span>' + KIND[r.kind] + '</span>' +
         (r.ok ? '<span class="y">arrivato ✓</span><span>' + r.moves + ' incroci (minimo ' + r.route.best + ')</span>' : '<span class="n2">non arrivato</span>') + '</li>').join('') + '</ol>';
     }
-    p.innerHTML = h;
+    place(h);
     bindPad(p);
     const on = (id, fn) => { const e = $(id); if (e) e.addEventListener('click', fn); };
     const ta = $('testText');
@@ -516,11 +533,11 @@ input[type=text]{font:inherit;font-size:1rem;width:100%;padding:9px 12px;border:
   }
 
   function renderPanel(){
-    const ms = MISSIONS[st.m], p = $('panel');
+    const ms = MISSIONS[st.m], p = document;
     if (ms.mode === 'test') return renderTest();
     let h = '<h2>' + (st.m+1) + '. ' + ms.title + '</h2><p class="brief">' + ms.brief + '</p>';
     if (ms.mode !== 'quiz'){
-      h += '<blockquote>' + ms.quote + '</blockquote><p class="task">' + ms.task + '</p>';
+      h += '<blockquote>' + ms.quote + '</blockquote><p class="task">' + ms.task + '</p><!--SIDE-->';
       if (ms.mode === 'rel'){
         h += '<div class="pad rel"><button type="button" class="big" data-t="-1">↰ Gira a sinistra</button>' +
              '<button type="button" class="big" data-fw="1">↑ Avanti</button>' +
@@ -540,7 +557,7 @@ input[type=text]{font:inherit;font-size:1rem;width:100%;padding:9px 12px;border:
         (st.m < MISSIONS.length-1 ? '<div class="row"><button type="button" class="arrive" id="next">Vai alla missione ' + (st.m+2) + '</button></div>' : '');
     } else if (st.q < ms.qs.length){
       const q = ms.qs[st.q], right = (q.f + q.turn + 4) % 4;
-      h += '<p class="task">Domanda ' + (st.q+1) + ' di ' + ms.qs.length + '</p><p style="margin:0">' + q.text + '</p><div class="opts">' +
+      h += '<p class="task">Domanda ' + (st.q+1) + ' di ' + ms.qs.length + '</p><p style="margin:0;font-size:1.15rem">' + q.text + '</p><!--SIDE--><div class="opts">' +
         [0,1,2,3].map(d => {
           let cls = '';
           if (st.qAns !== null){ if (d === right) cls = 'right'; else if (d === st.qAns) cls = 'wrong'; }
@@ -552,10 +569,10 @@ input[type=text]{font:inherit;font-size:1rem;width:100%;padding:9px 12px;border:
              '<div class="row"><button type="button" class="arrive" id="qnext">' + (st.q < ms.qs.length-1 ? 'Domanda successiva' : 'Fine') + '</button></div>';
       }
     } else {
-      h += '<p class="learn"><strong>Cosa abbiamo scoperto</strong>' + ms.learn + '</p><p class="fb">' + ms.after + '</p>' +
+      h += '<p class="learn"><strong>Cosa abbiamo scoperto</strong>' + ms.learn + '</p><p class="fb">' + ms.after + '</p><!--SIDE-->' +
            '<div class="row"><button type="button" id="qagain">Rifai le domande</button></div>';
     }
-    p.innerHTML = h;
+    place(h);
     p.querySelectorAll('[data-t]').forEach(b => b.addEventListener('click', () => turn(+b.dataset.t)));
     p.querySelectorAll('[data-fw]').forEach(b => b.addEventListener('click', () => step(st.f)));
     p.querySelectorAll('[data-d]').forEach(b => b.addEventListener('click', () => goCard(+b.dataset.d)));
