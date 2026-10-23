@@ -49,7 +49,11 @@ h2{font-family:var(--f-display);font-weight:600;font-size:1.2rem;margin:0}
 
 .controls{display:flex;flex-direction:column;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
 .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
-.timeRow{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center}
+.timeRow{display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center}
+@media (max-width:560px){.timeRow{grid-template-columns:auto 1fr}}
+.stepper{display:flex;gap:6px}
+.stepper button{font-weight:700;font-variant-numeric:tabular-nums;min-width:3.6em}
+
 .clock{font-family:var(--f-display);font-weight:800;font-size:1.6rem;font-variant-numeric:tabular-nums;min-width:4.2ch;text-align:right}
 input[type=range]{width:100%;accent-color:var(--sun);min-width:0}
 button{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:7px 14px;cursor:pointer}
@@ -97,6 +101,7 @@ details ol{margin-top:10px}
     <div class="timeRow">
       <button id="play" type="button">▶ Avvia</button>
       <input id="hour" type="range" min="0" max="24" step="0.1" value="6" aria-label="Ora del giorno a Roma">
+      <div class="stepper" role="group" aria-label="Sposta l'ora"><button type="button" data-step="-1" aria-label="Indietro di un'ora">− 1 h</button><button type="button" data-step="1" aria-label="Avanti di un'ora">+ 1 h</button></div>
       <div class="clock" id="clock">6:00</div>
     </div>
     <div class="row">
@@ -361,7 +366,7 @@ details ol{margin-top:10px}
     }
     el.innerHTML = h;
     const on = (id, fn) => { const e = $(id); if (e) e.addEventListener('click', fn); };
-    on('qStart', () => { setPlay(false); Object.assign(q, { on:true, round:0, score:0, ans:null, order: ROUND_T.slice().sort(() => Math.random()-0.5) }); q.t = q.order[0]; st.t = q.t; render(); });
+    on('qStart', () => { setPlay(false); document.querySelectorAll('[data-go]').forEach(x => x.setAttribute('aria-pressed','false')); Object.assign(q, { on:true, round:0, score:0, ans:null, order: ROUND_T.slice().sort(() => Math.random()-0.5) }); q.t = q.order[0]; st.t = q.t; render(); });
     el.querySelectorAll('[data-c]').forEach(b => b.addEventListener('click', () => {
       q.ans = b.dataset.c; if (q.ans === phrase(q.t).k) q.score++; render();
     }));
@@ -384,9 +389,11 @@ details ol{margin-top:10px}
     st.playing = on; last = 0; $('play').textContent = on ? '⏸ Ferma' : '▶ Avvia';
     if (on) requestAnimationFrame(tick);
   }
-  $('play').addEventListener('click', () => setPlay(!st.playing));
-  $('hour').addEventListener('input', e => { setPlay(false); st.t = parseFloat(e.target.value) % 24; render(); });
-  document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => { if (st.quiz.on) return; setPlay(false); st.t = +b.dataset.go; render(); }));
+  const setJump = b => document.querySelectorAll('[data-go]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  $('play').addEventListener('click', () => { setJump(null); setPlay(!st.playing); });
+  document.querySelectorAll('[data-step]').forEach(b => b.addEventListener('click', () => { if (st.quiz.on) return; setPlay(false); setJump(null); st.t = ((st.t + +b.dataset.step) % 24 + 24) % 24; render(); }));
+  $('hour').addEventListener('input', e => { setPlay(false); setJump(null); st.t = parseFloat(e.target.value) % 24; render(); });
+  document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => { if (st.quiz.on) return; setPlay(false); setJump(b); st.t = +b.dataset.go; render(); }));
   $('geo').addEventListener('change', e => { st.geo = e.target.checked; render(); });
 
   const ro = new ResizeObserver(() => { drawSpace(); drawSky(); });

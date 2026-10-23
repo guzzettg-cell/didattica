@@ -41,7 +41,11 @@ figcaption{font-size:.9rem;color:var(--muted);max-width:75ch}
 
 .controls{display:flex;flex-direction:column;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
 .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
-.timeRow{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center}
+.timeRow{display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center}
+@media (max-width:560px){.timeRow{grid-template-columns:auto 1fr}}
+.stepper{display:flex;gap:6px}
+.stepper button{font-weight:700;font-variant-numeric:tabular-nums;min-width:3.6em}
+
 .clock{font-family:var(--f-display);font-weight:800;font-size:1.6rem;font-variant-numeric:tabular-nums;min-width:4.2ch;text-align:right}
 input[type=range]{width:100%;accent-color:var(--sun);min-width:0}
 button{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
@@ -103,6 +107,7 @@ details ol{margin-top:10px}
     <div class="timeRow">
       <button id="play" type="button">▶ Avvia</button>
       <input id="hour" type="range" min="0" max="24" step="0.25" value="9" aria-label="Ora del giorno">
+      <div class="stepper" role="group" aria-label="Sposta l'ora"><button type="button" data-step="-1" aria-label="Indietro di un'ora">− 1 h</button><button type="button" data-step="1" aria-label="Avanti di un'ora">+ 1 h</button></div>
       <div class="clock" id="clock">9:00</div>
     </div>
     <div class="row">
@@ -450,21 +455,23 @@ details ol{margin-top:10px}
     $('play').textContent = on ? '⏸ Ferma' : '▶ Avvia';
     if (on) requestAnimationFrame(tick);
   }
-  $('play').addEventListener('click', () => setPlay(!state.playing));
-  $('hour').addEventListener('input', e => { setPlay(false); state.t = parseFloat(e.target.value); render(); });
-  const jump = t => { setPlay(false); state.t = Math.round(t*4)/4; render(); };
-  $('goRise').addEventListener('click', () => jump(dayInfo(declFor(state.k)).rise));
-  $('goNoon').addEventListener('click', () => jump(12));
-  $('goSet').addEventListener('click', () => jump(dayInfo(declFor(state.k)).set));
+  const JUMPS = { goRise: () => dayInfo(declFor(state.k)).rise, goNoon: () => 12, goSet: () => dayInfo(declFor(state.k)).set };
+  function setJump(id){ state.jump = id; for (const k in JUMPS) $(k).setAttribute('aria-pressed', String(k === id)); }
+  const jump = id => { setPlay(false); setJump(id); state.t = Math.round(JUMPS[id]()*4)/4; render(); };
+  const rejump = () => { if (state.jump) { state.t = Math.round(JUMPS[state.jump]()*4)/4; } };
+  $('play').addEventListener('click', () => { setJump(null); setPlay(!state.playing); });
+  document.querySelectorAll('[data-step]').forEach(b => b.addEventListener('click', () => { setPlay(false); setJump(null); state.t = ((state.t + +b.dataset.step) % 24 + 24) % 24; render(); }));
+  $('hour').addEventListener('input', e => { setPlay(false); setJump(null); state.t = parseFloat(e.target.value); render(); });
+  for (const k in JUMPS) $(k).addEventListener('click', () => jump(k));
   document.querySelectorAll('.day').forEach(b => b.addEventListener('click', () => {
     state.k = b.dataset.k;
     document.querySelectorAll('.day').forEach(o => o.setAttribute('aria-pressed', String(o === b)));
-    render();
+    rejump(); render();
   }));
   document.querySelectorAll('.city').forEach(b => b.addEventListener('click', () => {
     state.city = b.dataset.c; LAT = CITIES[state.city].lat*D2R;
     document.querySelectorAll('.city').forEach(o => o.setAttribute('aria-pressed', String(o === b)));
-    render();
+    rejump(); render();
   }));
   $('compare').addEventListener('change', e => { state.compare = e.target.checked; render(); });
 
