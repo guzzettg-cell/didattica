@@ -237,7 +237,7 @@ const MODULI = [
       },
       {
         titolo: "I fusi orari",
-        descrizione: "24 fusi da 15°, ora UTC e ora legale, i fusi dell'Europa e le lancette da spostare.",
+        descrizione: "24 fusi da 15°, ora UTC e ora legale, ora civile e ora locale, linea del cambiamento di data, i fusi dell'Europa e le lancette da spostare.",
         link: "geografia/terza/la-terra/lezioni/fusi-orari.html",
         data: "2026-10-24",
         attivita: []
