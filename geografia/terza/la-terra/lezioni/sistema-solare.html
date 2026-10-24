@@ -45,6 +45,10 @@ figure{margin:0;background:var(--space);border-radius:16px;overflow:hidden;displ
 .zoom button{font:inherit;font-size:.85rem;min-width:36px;height:36px;border-radius:999px;border:1px solid #33445f;background:rgba(12,18,32,.85);color:#e6edf6;padding:0 12px;cursor:pointer}
 .zoom button:hover{border-color:#ffd27a}
 #zin,#zout{font-size:1.2rem;padding:0}
+#play2{font-weight:700;margin-right:6px;min-width:6.2em}
+.zoom .sm{display:none}
+@media (max-width:640px){.zoom .lg{display:none}.zoom .sm{display:inline}#play2{min-width:36px;padding:0 10px;margin-right:2px}#zreset{padding:0}#zlab{display:none}}
+#play2[aria-pressed="true"]{background:#ffd27a;color:#1d1505;border-color:#ffd27a}
 #zlab{color:#ffe2a6;font-weight:700;font-size:.85rem;margin-right:4px}
 .stage canvas{touch-action:pan-y}
 .stage canvas.zoomed{touch-action:none;cursor:grab}
@@ -52,6 +56,7 @@ figure:fullscreen{border-radius:0;grid-template-rows:1fr auto;height:100vh}
 figure:fullscreen .stage{min-height:0}
 figure:fullscreen .stage canvas{aspect-ratio:auto;height:100%}
 .tag-scale{position:absolute;left:12px;top:10px;font-size:.78rem;color:#9fb0c6;letter-spacing:.04em}
+@media (max-width:480px){.tag-scale{max-width:45%;line-height:1.25}}
 .time{position:absolute;right:12px;top:8px;font-family:var(--display);font-weight:600;color:#ffe2a6;font-size:.95rem;font-variant-numeric:tabular-nums;text-align:right}
 .time small{display:block;font-family:var(--body);font-weight:400;color:#9fb0c6;font-size:.75rem}
 .event{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:rgba(255,214,120,.95);color:#2a1a00;
@@ -94,37 +99,42 @@ details:last-child{border-bottom:1px solid var(--line)}
 summary{cursor:pointer;font-weight:700}
 details p{margin:6px 0 0;color:var(--muted)}
 .note{font-size:.85rem;color:var(--muted);margin:0}
+.box h3.sub{font-family:var(--display);font-weight:800;font-size:1.05rem;margin:16px 0 4px;padding-top:12px;border-top:1px solid var(--line)}
+.box a{color:var(--sun);font-weight:700}
+.tabpl .note{font-size:.95rem;margin-bottom:12px}
+.tscroll{overflow-x:auto}
+.tabpl table{width:100%;min-width:560px;border-collapse:collapse;font-size:.92rem}
+.tabpl th,.tabpl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.tabpl thead th{background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:600}
+.tabpl tbody th,.tabpl tfoot th{background:var(--paper);font-weight:700;width:22%}
+.tabpl tbody tr:nth-child(even) td{background:color-mix(in srgb,var(--paper) 50%,transparent)}
+.tabpl tfoot th,.tabpl tfoot td{background:var(--sun-soft)}
+.tabpl .names{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.tabpl input{font:inherit;font-size:.9rem;width:100%;box-sizing:border-box;border:1px dashed var(--muted);border-radius:8px;padding:6px 8px;background:var(--card);color:var(--ink)}
+/* navigazione tra gli argomenti */
+.pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pager a{display:grid;gap:2px;align-content:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;color:var(--ink);text-decoration:none}
+.pager a:hover{border-color:var(--sun,var(--accent,#d9800f))}
+.pager a:hover span{text-decoration:underline}
+.pager small{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pager span{font-family:var(--display);font-weight:800;font-size:1.05rem;line-height:1.25}
+.pager .next{text-align:right}
+.pager.pager-top a{padding:8px 14px}
+.pager.pager-top span{font-size:.95rem}
+@media (max-width:560px){.pager{grid-template-columns:1fr}.pager .next{text-align:left}}
 </style>
 </head>
 <body>
-<a class="backlink" href="../index.html">← Tutte le lezioni</a>
-
-
 <div class="wrap">
+  <nav class="pager pager-top" aria-label="Argomenti (in alto)">
+    <a class="prev" href="../index.html"><small>Indietro</small><span>← Il pianeta Terra: tutte le lezioni</span></a>
+    <a class="next" href="rotazione-terra.html"><small>Argomento successivo</small><span>Il moto di rotazione →</span></a>
+  </nav>
   <header>
     <div class="eyebrow">Geografia · La Terra nel Sistema solare</div>
     <h1>Il Sistema solare</h1>
     <p class="lead">Il Sole, gli otto pianeti e i corpi minori: asteroidi, meteoroidi e comete. Guarda come tutti girano attorno al Sole, ognuno con la sua velocità. Clicca sul Sole, su un pianeta o su un corpo minore per leggere le sue caratteristiche.</p>
   </header>
-
-  <figure>
-    <div class="stage" id="stage">
-      <canvas id="sky" role="img" aria-label="Modello animato del Sistema solare: il Sole al centro, gli otto pianeti sulle loro orbite, la fascia degli asteroidi tra Marte e Giove, i corpi oltre Nettuno, una cometa con la coda e i meteoroidi lungo la sua orbita"></canvas>
-      <div class="tag-scale">Distanze e dimensioni non in scala</div>
-      <div class="time" id="time">0,0 anni<small>tempo trascorso sulla Terra</small></div>
-      <div class="zoom" role="group" aria-label="Ingrandimento"><span id="zlab"></span><button id="zin" type="button" aria-label="Ingrandisci">+</button><button id="zout" type="button" aria-label="Rimpicciolisci">−</button><button id="zreset" type="button">Vista intera</button></div>
-      <div class="event" id="event" hidden>La Terra attraversa i meteoroidi lasciati dalla cometa: stelle cadenti!</div>
-      <section class="info" id="info" hidden aria-live="polite">
-        <header><div><div class="kind" id="iKind"></div><h2 id="iName"></h2></div><button class="x" id="iClose" type="button" aria-label="Chiudi la scheda">✕</button></header>
-        <dl id="iFacts"></dl>
-        <p id="iNote"></p>
-      </section>
-    </div>
-    <figcaption>
-      <div class="chips" id="chips" role="group" aria-label="Corpi del Sistema solare"></div>
-      <p class="hint">Clicca su un corpo celeste nel disegno oppure su un nome qui sopra. Per ingrandire usa la rotellina del mouse, due dita sullo schermo o il pulsante +; quando è ingrandito, trascina per spostarti. Seleziona i meteoroidi e guarda che cosa succede quando la Terra attraversa la scia della cometa.</p>
-    </figcaption>
-  </figure>
 
   <section class="controls" aria-label="Comandi">
     <button id="play" type="button">Pausa</button>
@@ -142,6 +152,25 @@ details p{margin:6px 0 0;color:var(--muted)}
     <button id="fs" type="button">Schermo intero</button>
   </section>
 
+  <figure>
+    <div class="stage" id="stage">
+      <canvas id="sky" role="img" aria-label="Modello animato del Sistema solare: il Sole al centro, gli otto pianeti sulle loro orbite, la fascia degli asteroidi tra Marte e Giove, i corpi oltre Nettuno, una cometa con la coda e i meteoroidi lungo la sua orbita"></canvas>
+      <div class="tag-scale">Distanze e dimensioni non in scala</div>
+      <div class="time" id="time">0,0 anni<small>tempo trascorso sulla Terra</small></div>
+      <div class="zoom" role="group" aria-label="Ingrandimento e animazione"><button id="play2" type="button">Pausa</button><span id="zlab"></span><button id="zin" type="button" aria-label="Ingrandisci">+</button><button id="zout" type="button" aria-label="Rimpicciolisci">−</button><button id="zreset" type="button" aria-label="Vista intera"><span class="lg">Vista intera</span><span class="sm" aria-hidden="true">↺</span></button></div>
+      <div class="event" id="event" hidden>La Terra attraversa i meteoroidi lasciati dalla cometa: stelle cadenti!</div>
+      <section class="info" id="info" hidden aria-live="polite">
+        <header><div><div class="kind" id="iKind"></div><h2 id="iName"></h2></div><button class="x" id="iClose" type="button" aria-label="Chiudi la scheda">✕</button></header>
+        <dl id="iFacts"></dl>
+        <p id="iNote"></p>
+      </section>
+    </div>
+    <figcaption>
+      <div class="chips" id="chips" role="group" aria-label="Corpi del Sistema solare"></div>
+      <p class="hint">Clicca su un corpo celeste nel disegno oppure su un nome qui sopra. Per ingrandire usa la rotellina del mouse, due dita sullo schermo o il pulsante +; quando è ingrandito, trascina per spostarti. Seleziona i meteoroidi e guarda che cosa succede quando la Terra attraversa la scia della cometa.</p>
+    </figcaption>
+  </figure>
+
   <section class="qs">
     <div class="box">
       <h2>Domande per ragionare</h2>
@@ -154,8 +183,45 @@ details p{margin:6px 0 0;color:var(--muted)}
       <h2>Da sapere</h2>
       <p class="note">Le distanze e le dimensioni non sono in scala: in scala reale il Sole sarebbe più grande di tutti i pianeti messi insieme, e Nettuno così lontano da uscire dallo schermo. I tempi di rivoluzione invece sono quelli veri, uno rispetto all'altro.</p>
       <p class="note" style="margin-top:10px">Il numero dei satelliti è aggiornato al 2025-2026. Il libro riporta numeri più bassi perché gli astronomi continuano a scoprire nuove piccole lune, soprattutto attorno a Giove e Saturno.</p>
+      <h3 class="sub">Approfondimento</h3>
+      <p class="note">Cerca informazioni sui pianeti interni ed esterni nell'<a href="https://www.treccani.it/enciclopedia/sistema-solare_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Enciclopedia Treccani ragazzi</a> e approfondisci <a href="#tabella-pianeti">sotto</a>.</p>
     </div>
   </section>
+
+  <section class="box tabpl" id="tabella-pianeti">
+    <h2>Pianeti interni e pianeti esterni a confronto</h2>
+    <p class="note">Leggi le caratteristiche dei due gruppi di pianeti. Poi cerca sull'<a href="https://www.treccani.it/enciclopedia/sistema-solare_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Enciclopedia Treccani ragazzi</a> quali sono i pianeti di ciascun gruppo e scrivi i loro nomi nell'ultima riga, in ordine di distanza dal Sole.</p>
+    <div class="tscroll">
+      <table>
+        <thead>
+          <tr><th scope="col">Caratteristica</th><th scope="col">Pianeti interni</th><th scope="col">Pianeti esterni</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Posizione</th><td>tra il Sole e la fascia degli asteroidi</td><td>oltre la fascia degli asteroidi</td></tr>
+          <tr><th scope="row">Quanti sono</th><td>4</td><td>4</td></tr>
+          <tr><th scope="row">Distanza dal Sole</th><td>da circa 58 a circa 228 milioni di km</td><td>da circa 780 milioni a circa 4,5 miliardi di km</td></tr>
+          <tr><th scope="row">Di che cosa sono fatti</th><td>rocce e metalli: sono pianeti <strong>rocciosi</strong>, con una superficie solida</td><td>soprattutto gas (idrogeno ed elio) e ghiacci: sono pianeti <strong>giganti</strong> gassosi, senza una superficie solida su cui posarsi</td></tr>
+          <tr><th scope="row">Dimensioni</th><td>piccole: il più grande ha un diametro di circa 12 700 km</td><td>enormi: il più piccolo è circa 4 volte più largo del più grande pianeta interno</td></tr>
+          <tr><th scope="row">Densità</th><td>alta: sono pesanti per le loro dimensioni</td><td>bassa: uno di loro galleggerebbe nell'acqua</td></tr>
+          <tr><th scope="row">Atmosfera</th><td>più leggera, o quasi assente; solo uno ne ha una molto densa</td><td>molto spessa, di idrogeno ed elio</td></tr>
+          <tr><th scope="row">Satelliti</th><td>pochi o nessuno: in tutto sono 3</td><td>molti: da più di una decina a diverse centinaia</td></tr>
+          <tr><th scope="row">Anelli</th><td>nessuno</td><td>tutti hanno anelli, ma solo uno li ha grandi e ben visibili</td></tr>
+          <tr><th scope="row">Rotazione (giorno)</th><td>lenta: da circa 24 ore a diversi mesi</td><td>veloce: da circa 10 a circa 17 ore</td></tr>
+          <tr><th scope="row">Rivoluzione (anno)</th><td>breve: da meno di 3 mesi a meno di 2 anni</td><td>lunga: da circa 12 a circa 165 anni</td></tr>
+          <tr><th scope="row">Temperatura</th><td>più alta, perché sono più vicini al Sole</td><td>molto bassa, perché sono lontani dal Sole</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><th scope="row">Quali sono?</th><td><div class="names"><input type="text" aria-label="Pianeta interno 1" placeholder="1."><input type="text" aria-label="Pianeta interno 2" placeholder="2."><input type="text" aria-label="Pianeta interno 3" placeholder="3."><input type="text" aria-label="Pianeta interno 4" placeholder="4."></div></td><td><div class="names"><input type="text" aria-label="Pianeta esterno 1" placeholder="1."><input type="text" aria-label="Pianeta esterno 2" placeholder="2."><input type="text" aria-label="Pianeta esterno 3" placeholder="3."><input type="text" aria-label="Pianeta esterno 4" placeholder="4."></div></td></tr>
+        </tfoot>
+      </table>
+    </div>
+  </section>
+
+
+  <nav class="pager" aria-label="Argomenti (in basso)">
+    <a class="prev" href="../index.html"><small>Indietro</small><span>← Il pianeta Terra: tutte le lezioni</span></a>
+    <a class="next" href="rotazione-terra.html"><small>Argomento successivo</small><span>Il moto di rotazione →</span></a>
+  </nav>
 </div>
 
 <script>
@@ -394,8 +460,9 @@ document.addEventListener('fullscreenchange',()=>{ $('fs').textContent=document.
 if(!fig.requestFullscreen) $('fs').hidden=true;
 
 /* ---------- tempo ---------- */
-function setPlay(p){playing=p; $('play').textContent=p?'Pausa':'Avvia';}
+function setPlay(p){playing=p; $('play').textContent=p?'Pausa':'Avvia'; $('play2').innerHTML=p?'<span aria-hidden="true">❚❚</span><span class="lg"> Pausa</span>':'<span aria-hidden="true">▶</span><span class="lg"> Avvia</span>'; $('play2').setAttribute('aria-label',p?'Pausa':'Avvia'); $('play2').setAttribute('aria-pressed',String(!p));}
 $('play').addEventListener('click',()=>setPlay(!playing));
+$('play2').addEventListener('click',()=>setPlay(!playing));
 $('speed').addEventListener('change',e=>speed=+e.target.value);
 $('names').addEventListener('change',e=>showNames=e.target.checked);
 $('orbits').addEventListener('change',e=>showOrbits=e.target.checked);
@@ -406,5 +473,127 @@ setPlay(playing); requestAnimationFrame(loop);
 })();
 </script>
 
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
 </body>
 </html>
