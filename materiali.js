@@ -74,13 +74,6 @@ const MODULI = [
         ]
       },
       {
-        titolo: "I fusi orari",
-        descrizione: "24 fusi da 15°, ora UTC e ora legale, i fusi dell'Europa e le lancette da spostare (libro, pag. A7).",
-        link: "geografia/prima/metodo-e-strumenti/lezioni/fusi-orari.html",
-        data: "2026-10-21",
-        attivita: []
-      },
-      {
         titolo: "Le carte geografiche",
         descrizione: "Ridotte, approssimate e simboliche: leggere una carta con la legenda (libro, pag. A8–A9).",
         data: "2026-10-23",
@@ -240,6 +233,13 @@ const MODULI = [
         descrizione: "Orbita, equinozi e solstizi, circolo di illuminazione e durata del dì.",
         link: "geografia/terza/la-terra/lezioni/rivoluzione.html",
         data: "2026-10-15",
+        attivita: []
+      },
+      {
+        titolo: "I fusi orari",
+        descrizione: "24 fusi da 15°, ora UTC e ora legale, i fusi dell'Europa e le lancette da spostare.",
+        link: "geografia/terza/la-terra/lezioni/fusi-orari.html",
+        data: "2026-10-24",
         attivita: []
       },
       {

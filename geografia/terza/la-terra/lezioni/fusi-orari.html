@@ -13,6 +13,17 @@
 .map.nomap .hit{background:#3b4a63!important}.map.nomap .istmo{background:#d62828!important}
 .map.nomap .dot.dim{opacity:.25!important}
 .map.nomap [aria-pressed="true"]{outline:3px solid #111!important;outline-offset:2px}
+
+.pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.pager a{display:grid;gap:2px;align-content:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;color:var(--ink);text-decoration:none}
+.pager a:hover{border-color:var(--accent,#d9800f)}
+.pager a:hover span{text-decoration:underline}
+.pager small{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pager span{font-family:var(--display);font-weight:800;font-size:1.05rem;line-height:1.25}
+.pager .next{text-align:right}
+.pager.pager-top a{padding:8px 14px}
+.pager.pager-top span{font-size:.95rem}
+@media (max-width:560px){.pager{grid-template-columns:1fr}.pager .next{text-align:left}}
 </style>
 <title>I fusi orari</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -117,12 +128,15 @@ details p{margin:6px 0 0;color:var(--muted)}
 </style>
 </head>
 <body>
-<a class="backlink" href="../../../index.html#modulo-prima-i">← Geografia, classe prima</a>
 
 
 <div class="wrap">
+  <nav class="pager pager-top" aria-label="Argomenti (in alto)">
+    <a class="prev" href="rivoluzione.html"><small>Argomento precedente</small><span>← Il moto di rivoluzione</span></a>
+    <a class="next" href="struttura-terra.html"><small>Argomento successivo</small><span>La struttura della Terra →</span></a>
+  </nav>
   <header class="top">
-    <div class="eyebrow">Geografia · I fusi orari</div>
+    <div class="eyebrow">Geografia · I movimenti della Terra</div>
     <h1>Che ore sono nel mondo?</h1>
     <p class="lead">Mentre la Terra ruota da ovest a est, il mezzogiorno arriva prima nei luoghi a est e dopo in quelli a ovest. Per non avere un orario diverso in ogni città, la Terra è stata divisa in <b>24 fusi orari</b>: spicchi di 15° di longitudine dentro i quali tutti gli orologi segnano la stessa ora. Il primo fuso è quello del meridiano di Greenwich: la sua ora si chiama <b>UTC</b> (Tempo Coordinato Universale). L'Italia è nel fuso <b>UTC+1</b>.</p>
   </header>
@@ -171,7 +185,7 @@ details p{margin:6px 0 0;color:var(--muted)}
 
   <section class="box">
     <h2>I fusi orari dell'Europa</h2>
-    <p class="sub">Nella realtà i confini dei fusi non sono linee dritte: seguono i confini degli Stati, come nella figura C di pag. A7. Tocca uno Stato per leggere il suo fuso e l'ora. Poi accendi l'ora legale e guarda come cambiano i colori.</p>
+    <p class="sub">Nella realtà i confini dei fusi non sono linee dritte: seguono i confini degli Stati. Tocca uno Stato per leggere il suo fuso e l'ora. Poi accendi l'ora legale e guarda come cambiano i colori.</p>
     <div class="zones" id="zones"></div>
     <div class="eumap"><svg id="eumap" role="img" aria-label="Carta dell'Europa colorata secondo i fusi orari"></svg></div>
     <p class="euinfo" id="euinfo" aria-live="polite">Tocca uno Stato sulla carta.</p>
@@ -195,6 +209,11 @@ details p{margin:6px 0 0;color:var(--muted)}
       <details><summary>Che cos'è l'ora legale?</summary><p>È lo spostamento dell'orologio di un'ora in avanti nei mesi più caldi, deciso da molti Stati (fra cui l'Italia) per sfruttare meglio la luce del Sole. In estate l'Italia passa da UTC+1 a UTC+2.</p></details>
     </section>
   </div>
+
+  <nav class="pager" aria-label="Argomenti (in basso)">
+    <a class="prev" href="rivoluzione.html"><small>Argomento precedente</small><span>← Il moto di rivoluzione</span></a>
+    <a class="next" href="struttura-terra.html"><small>Argomento successivo</small><span>La struttura della Terra →</span></a>
+  </nav>
 </div>
 
 <script>
