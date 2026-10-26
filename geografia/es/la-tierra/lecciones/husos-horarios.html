@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}
+.backlink{display:inline-block;margin:14px 16px 0;font:600 14px/1.2 system-ui,sans-serif;color:inherit;text-decoration:none;border:1px solid rgba(120,130,150,.4);border-radius:999px;padding:6px 12px}
+.backlink:hover{text-decoration:underline}
+.map.nomap{display:flex;flex-wrap:wrap;gap:8px;padding:14px;align-content:flex-start;background:var(--card,#fff)}
+.map.nomap .mapnote{flex-basis:100%;margin:0 0 4px;font-size:.9rem;color:var(--muted,#566476)}
+.map.nomap .dot,.map.nomap .hit,.map.nomap .istmo{position:static!important;transform:none!important;width:auto!important;height:auto!important;aspect-ratio:auto!important;opacity:1!important;border-radius:999px!important;padding:6px 12px!important;border:0!important;color:#fff!important;font:700 .88rem/1.2 system-ui,sans-serif!important;box-shadow:none!important;animation:none!important}
+.map.nomap .dot::after,.map.nomap .hit::after,.map.nomap .istmo::after{content:attr(aria-label)}
+.map.nomap .hit{background:#3b4a63!important}.map.nomap .istmo{background:#d62828!important}
+.map.nomap .dot.dim{opacity:.25!important}
+.map.nomap [aria-pressed="true"]{outline:3px solid #111!important;outline-offset:2px}
+
+.pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.pager a{display:grid;gap:2px;align-content:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;color:var(--ink);text-decoration:none}
+.pager a:hover{border-color:var(--accent,#d9800f)}
+.pager a:hover span{text-decoration:underline}
+.pager small{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pager span{font-family:var(--display);font-weight:800;font-size:1.05rem;line-height:1.25}
+.pager .next{text-align:right}
+.pager.pager-top a{padding:8px 14px}
+.pager.pager-top span{font-size:.95rem}
+@media (max-width:560px){.pager{grid-template-columns:1fr}.pager .next{text-align:left}}
+</style>
+<title>Los husos horarios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: vista dal Polo nord e orologi delle città affiancati; sotto la carta dei fusi con il dì che si sposta; poi ora locale/ora civile, esercizio e domande */
+:root{
+  --paper:#eef1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
+  --accent:#c2410c; --accent-soft:#fde4d3; --ok:#1f7a4d; --ok-soft:#dcf2e6; --no:#b42318; --no-soft:#fde3e1;
+  --z1:#e6edf7; --z2:#d6e2f1; --zline:rgba(40,70,110,.25); --night:rgba(12,22,48,.55); --mapink:#1d3557; --date:#c2185b;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717;
+  --z1:#1a2840; --z2:#22334f; --zline:rgba(190,210,240,.18); --night:rgba(2,6,16,.6); --mapink:#d6e4f5; --date:#f472b6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717;
+  --z1:#1a2840; --z2:#22334f; --zline:rgba(190,210,240,.18); --night:rgba(2,6,16,.6); --mapink:#d6e4f5; --date:#f472b6; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+[hidden]{display:none!important}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:18px}
+header.top{display:grid;gap:6px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.02;margin:0}
+.lead{margin:0;max-width:78ch;color:var(--muted)}
+.controls{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:10px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.clock{display:grid;line-height:1.1}
+.clock span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.clock strong{font-family:var(--display);font-weight:800;font-size:1.6rem;font-variant-numeric:tabular-nums}
+.slider{flex:1 1 280px;display:grid;gap:2px;min-width:0}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.ticks{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted)}
+.controls button{font:inherit;font-size:.9rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 13px;cursor:pointer}
+#play{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700;min-width:6.5em}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:920px){.stage{grid-template-columns:1fr}}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+.box h2{font-family:var(--display);font-weight:800;font-size:1.2rem;margin:0 0 6px}
+.box .sub{margin:0 0 8px;color:var(--muted);font-size:.9rem}
+canvas{width:100%;display:block}
+#polar{aspect-ratio:1/1}
+#strip{aspect-ratio:2.25/1}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-variant-numeric:tabular-nums}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:right;white-space:nowrap}
+th{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+th:first-child,td:first-child{text-align:left}
+tr.hl td{background:var(--accent-soft)}
+td small{color:var(--muted)}
+.day{font-weight:700}
+.q{display:grid;gap:10px}
+.q .ask{font-size:1.15rem;font-weight:700}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{font:inherit;font-variant-numeric:tabular-nums;font-size:1.05rem;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:8px 16px;cursor:pointer}
+.opts button.right{border-color:var(--ok);background:var(--ok-soft)}
+.opts button.wrong{border-color:var(--no);background:var(--no-soft)}
+.fb{border-radius:10px;padding:9px 12px;font-size:.95rem}
+.fb.right{background:var(--ok-soft);border:1px solid var(--ok)}
+.fb.wrong{background:var(--no-soft);border:1px solid var(--no)}
+.q .again{justify-self:start;font:inherit;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 14px;cursor:pointer}
+details{border-top:1px solid var(--line);padding:9px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700}
+details p{margin:6px 0 0;color:var(--muted)}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+.note{font-size:.86rem;color:var(--muted);margin:8px 0 0}
+.controls button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.rule{margin:10px 0 0;padding:10px 14px;border-radius:10px;background:var(--accent-soft);font-weight:700}
+.zones{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 10px}
+.zone{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-variant-numeric:tabular-nums}
+.zone i{width:18px;height:18px;border-radius:4px;border:1px solid #0003;display:block}
+.zone b{font-family:var(--display);font-size:1.15rem}
+.eumap{background:#d6e9f6;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.eumap svg{display:block;width:100%;height:auto;max-height:calc(100vh - 160px)}
+.eumap path.c{stroke:#fff;stroke-width:1;cursor:pointer}
+.eumap path.c:hover{stroke:#152131;stroke-width:1.6}
+.eumap path.c.sel{stroke:#152131;stroke-width:2.6}
+.eumap text{font:700 15px var(--body);fill:#152131;paint-order:stroke;stroke:#ffffffd0;stroke-width:3.5px}
+.eumap .ct{font-weight:400;font-size:13px}
+.euinfo{margin:10px 0 0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);min-height:2.8em}
+.seasons{display:flex;flex-wrap:wrap;gap:8px}
+.seasons button,.q .go{font:inherit;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 14px;cursor:pointer}
+.seasons button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.q .go{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.clocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.ck{border:1px solid var(--line);border-radius:12px;padding:10px;display:grid;gap:6px;justify-items:center;text-align:center}
+.ck.ref{background:var(--accent-soft)}
+.ck.right{border-color:var(--ok);background:var(--ok-soft)}
+.ck.wrong{border-color:var(--no);background:var(--no-soft)}
+.ck svg{width:118px;height:118px}
+.ck .nm{font-weight:700}
+.ck .off{font-size:.82rem;color:var(--muted)}
+.ck .bt{display:flex;gap:6px}
+.ck .bt button{font:inherit;font-size:.9rem;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:4px 10px;cursor:pointer}
+.ck .dig{font-family:var(--display);font-weight:800;font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <nav class="pager pager-top" aria-label="Temas (arriba)">
+    <a class="prev" href="traslacion.html"><small>Tema anterior</small><span>← El movimiento de traslación</span></a>
+    <a class="next" href="estructura-tierra.html"><small>Tema siguiente</small><span>La estructura de la Tierra →</span></a>
+  </nav>
+  <header class="top">
+    <div class="eyebrow">Geografía · Los movimientos de la Tierra</div>
+    <h1>¿Qué hora es en el mundo?</h1>
+    <p class="lead">Mientras la Tierra gira de oeste a este, el mediodía llega antes a los lugares del este y después a los del oeste. Para no tener una hora distinta en cada ciudad, la Tierra se ha dividido en <b>24 husos horarios</b>: gajos de 15° de longitud dentro de los cuales todos los relojes marcan la misma hora. El primer huso es el del meridiano de Greenwich: su hora se llama <b>UTC</b> (Tiempo Universal Coordinado). Italia está en el huso <b>UTC+1</b>.</p>
+  </header>
+
+  <section class="controls" aria-label="Controles">
+    <div class="row">
+      <button id="play" type="button">Iniciar</button>
+      <div class="clock"><span>UTC · Greenwich</span><strong id="cG">12:00</strong></div>
+      <div class="clock"><span id="cRl">Italia · UTC+1</span><strong id="cR">13:00</strong></div>
+      <label class="slider" for="utc">
+        <input id="utc" type="range" min="0" max="1439" step="5" value="720" aria-label="Hora UTC, es decir, de Greenwich">
+        <div class="ticks"><span>0</span><span>3</span><span>6</span><span>9</span><span>12</span><span>15</span><span>18</span><span>21</span><span>24</span></div>
+      </label>
+    </div>
+    <div class="row">
+      <button type="button" data-u="720">Mediodía en Greenwich</button>
+      <button type="button" data-it="12">Mediodía en Italia</button>
+      <button type="button" data-u="0">Medianoche en Greenwich</button>
+      <button type="button" id="dst" aria-pressed="false">Horario de verano: no</button>
+    </div>
+  </section>
+
+  <div class="stage">
+    <section class="box">
+      <h2>La Tierra vista desde el Polo Norte</h2>
+      <p class="sub">El Sol ilumina la Tierra desde abajo. Las horas del anillo exterior no se mueven: es la Tierra la que gira debajo de ellas, en sentido antihorario.</p>
+      <canvas id="polar" role="img" aria-label="La Tierra vista desde el Polo Norte dividida en 24 gajos; alrededor, el anillo de las 24 horas con el mediodía abajo, hacia el Sol, y la medianoche arriba"></canvas>
+    </section>
+    <section class="box">
+      <h2>Los relojes de las ciudades</h2>
+      <p class="sub">El huso se indica con la diferencia respecto a la hora UTC de Greenwich: UTC+1 quiere decir una hora más, UTC−5 cinco horas menos.</p>
+      <div class="tw"><table>
+        <thead><tr><th>Ciudad</th><th>Huso</th><th>Hora</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table></div>
+      <p class="note"><b>Horario de verano</b>: desde finales de marzo hasta finales de octubre Italia adelanta el reloj una hora, para aprovechar mejor la luz del Sol, y pasa de UTC+1 a UTC+2. Lo hacen también los demás países de la Unión Europea y el Reino Unido; Islandia, Turquía, Bielorrusia y Rusia no. Para simplificar, las ciudades fuera de Europa mantienen siempre la hora solar.</p>
+    </section>
+  </div>
+
+  <section class="box">
+    <h2>El mapa de los husos horarios</h2>
+    <p class="sub">Los 24 husos dibujados como gajos regulares de 15°. La zona oscura es donde es de noche: se desplaza de este a oeste mientras la Tierra gira. Arriba, la hora civil de cada huso; abajo, la diferencia respecto a Greenwich.</p>
+    <div class="tw"><canvas id="strip" role="img" aria-label="Mapa del mundo dividido en 24 husos con la hora de cada uno, las ciudades y la zona de noche"></canvas></div>
+    <p class="rule">Si vas hacia el este, el reloj se adelanta una hora por cada huso; si vas hacia el oeste, se atrasa.</p>
+  </section>
+
+  <section class="box">
+    <h2>Los husos horarios de Europa</h2>
+    <p class="sub">En la realidad los límites de los husos no son líneas rectas: siguen las fronteras de los Estados. Toca un Estado para leer su huso y la hora. Después enciende el horario de verano y mira cómo cambian los colores.</p>
+    <div class="zones" id="zones"></div>
+    <div class="eumap"><svg id="eumap" role="img" aria-label="Mapa de Europa coloreado según los husos horarios"></svg></div>
+    <p class="euinfo" id="euinfo" aria-live="polite">Toca un Estado en el mapa.</p>
+  </section>
+
+  <div class="two">
+    <section class="box q" aria-live="polite">
+      <h2>Ahora tú: mueve las agujas</h2>
+      <div class="seasons" role="group" aria-label="Estación"><button type="button" data-season="w" aria-pressed="true">Invierno · hora solar</button><button type="button" data-season="s" aria-pressed="false">Verano · horario de verano</button></div>
+      <div class="ask" id="ask"></div>
+      <div class="clocks" id="clocks"></div>
+      <div class="row"><button type="button" class="go" id="check">Comprobar</button><button type="button" class="again" id="again">Otra pregunta</button></div>
+      <div class="fb" id="fb" hidden></div>
+    </section>
+    <section class="box">
+      <h2>Preguntas para razonar</h2>
+      <details><summary>¿Por qué en Moscú el mediodía llega antes que en Roma?</summary><p>Porque Moscú está más al este. La Tierra gira de oeste a este, así que Moscú «encuentra» el Sol antes que Roma: allí el mediodía ya ha pasado cuando a Roma todavía tiene que llegar.</p></details>
+      <details><summary>¿Cuántos husos horarios hay y qué ancho tiene cada uno?</summary><p>24, uno por cada hora del día. Cada uno tiene 15° de longitud de ancho, porque 360° dividido entre 24 horas da 15° por hora.</p></details>
+      <details><summary>Vas en avión de Roma a Londres: ¿adelantas o atrasas el reloj?</summary><p>Lo atrasas una hora: Londres está más al oeste, en el huso UTC, mientras que Italia está en el huso UTC+1.</p></details>
+      <details><summary>Cuando en Roma el reloj marca las doce, ¿el Sol está en el punto más alto también en Bari y en Turín?</summary><p>No exactamente: Bari está más al este y su mediodía solar llega un poco antes; Turín está más al oeste y llega un poco después. Pero los relojes marcan la misma hora, porque las tres ciudades están en el mismo huso: precisamente para eso se inventaron los husos horarios.</p></details>
+      <details><summary>¿Qué es el horario de verano?</summary><p>Es adelantar el reloj una hora en los meses más cálidos, como deciden muchos Estados (entre ellos Italia y España) para aprovechar mejor la luz del Sol. En verano Italia pasa de UTC+1 a UTC+2.</p></details>
+    </section>
+  </div>
+
+  <nav class="pager" aria-label="Temas (abajo)">
+    <a class="prev" href="traslacion.html"><small>Tema anterior</small><span>← El movimiento de traslación</span></a>
+    <a class="next" href="estructura-tierra.html"><small>Tema siguiente</small><span>La estructura de la Tierra →</span></a>
+  </nav>
+</div>
+
+<script>
+(function(){
+const D2R=Math.PI/180, PI=Math.PI;
+const $=id=>document.getElementById(id);
+const FB='"Atkinson Hyperlegible",Verdana,sans-serif', FD='"Bricolage Grotesque","Trebuchet MS",sans-serif';
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let utc=12, playing=false, last=null, legale=false;
+const itOff=()=>1+(legale?1:0);
+
+const CITIES=[
+ ['Los Angeles',34.1,-118.2,-8],['Ciudad de México',19.4,-99.1,-6],['New York',40.7,-74,-5],['Buenos Aires',-34.6,-58.4,-3],
+ ['Londres',51.5,-0.1,0],['Turín',45.1,7.7,1,1],['Roma',41.9,12.5,1,1],['Bari',41.1,16.9,1,1],['El Cairo',30,31.2,2],['Johannesburg',-26.2,28,2],
+ ['Moscú',55.8,37.6,3],['Nueva Delhi',28.6,77.2,5.5],['Novosibirsk',55,82.9,7],['Pekín',39.9,116.4,8],['Tokyo',35.7,139.7,9],['Sídney',-33.9,151.2,10],['Auckland',-36.8,174.8,12],['Honolulu',21.3,-157.9,-10]];
+const SHOW_MAP=['Los Angeles','Ciudad de México','New York','Buenos Aires','Londres','Roma','El Cairo','Johannesburg','Moscú','Nueva Delhi','Novosibirsk','Pekín','Tokyo','Sídney','Auckland','Honolulu'];
+const DAYS=['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
+
+function hm(h,withMin){ h=((h%24)+24)%24; let H=Math.floor(h+1e-9), M=Math.round((h-H)*60); if(M===60){H=(H+1)%24;M=0;} return String(H).padStart(2,'0')+':'+String(M).padStart(2,'0'); }
+function dayName(t){ const k=Math.floor(t/24); return DAYS[((k%7)+7)%7]; }
+function offTxt(o){ if(o===0) return '0'; const s=o>0?'+':'−', a=Math.abs(o); return s+(a%1?Math.floor(a)+':30':a); }
+
+/* ---------- vista dal Polo nord ---------- */
+const pc=$('polar'), p=pc.getContext('2d');
+function fit(cv,c){ const r=cv.getBoundingClientRect(), d=window.devicePixelRatio||1;
+  const W=Math.round(r.width*d), H=Math.round(r.height*d); if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}
+  c.setTransform(d,0,0,d,0,0); return {w:r.width,h:r.height}; }
+function drawPolar(){
+  const {w,h}=fit(pc,p), fs=Math.max(10,Math.min(13.5,w/40)), R=w*0.34, cx=w/2, cy=h/2;
+  const ink=css('--mapink');
+  p.clearRect(0,0,w,h);
+  // raggi del Sole dal basso
+  const g=p.createLinearGradient(0,h,0,cy); g.addColorStop(0,'rgba(255,200,80,.45)'); g.addColorStop(1,'rgba(255,200,80,0)'); p.fillStyle=g; p.fillRect(0,cy,w,h-cy);
+  p.font=`700 ${fs}px ${FB}`; p.textAlign='center'; p.fillStyle='#c27a00'; p.fillText('rayos solares',cx,h-6);
+  const rot=(utc-12)*15; // gradi
+  const ang=lon=>(-90+lon+rot)*D2R; // angolo sullo schermo (antiorario)
+  const P=(r,a)=>[cx+r*Math.cos(a), cy-r*Math.sin(a)];
+  // spicchi dei fusi
+  for(let k=-12;k<12;k++){ const a0=ang(15*k-7.5), a1=ang(15*k+7.5);
+    p.beginPath(); p.moveTo(cx,cy); p.arc(cx,cy,R,-a0,-a1,true); p.closePath();
+    p.fillStyle=k===0?'#cfe9d8':(k%2?css('--z2'):css('--z1')); if(k===1) p.fillStyle='#fde4d3'; p.fill(); p.strokeStyle=css('--zline'); p.lineWidth=1; p.stroke(); }
+  // notte (metà in alto, lontano dal Sole)
+  p.save(); p.beginPath(); p.arc(cx,cy,R,0,2*PI); p.clip(); p.fillStyle=css('--night'); p.fillRect(cx-R,cy-R,2*R,R); p.restore();
+  p.strokeStyle=ink; p.lineWidth=1.5; p.beginPath(); p.arc(cx,cy,R,0,2*PI); p.stroke();
+  // meridiano di Greenwich e antimeridiano
+  [[0,'#2fae6f']].forEach(([l,c])=>{ const q=P(R,ang(l)); p.strokeStyle=c; p.lineWidth=2.5; p.beginPath(); p.moveTo(cx,cy); p.lineTo(q[0],q[1]); p.stroke(); });
+  // longitudini sul bordo
+  p.font=`${fs*0.75}px ${FB}`; p.fillStyle=ink;
+  for(let l=-165;l<=180;l+=15){ const q=P(R*0.9,ang(l)); p.fillText(Math.abs(l)+(l===0||l===180?'':''),q[0],q[1]+4); }
+  // città
+  CITIES.filter(c=>['Roma','Londres','New York','Tokyo','Sídney','Moscú','Los Angeles','Buenos Aires','Nueva Delhi','Pekín'].includes(c[0])).forEach(([n,la,lo,off])=>{ const r=R*(90-la)/180, q=P(r,ang(lo));
+    p.fillStyle=n==='Roma'?'#d61f1f':ink; p.beginPath(); p.arc(q[0],q[1],n==='Roma'?5:3.2,0,2*PI); p.fill();
+    p.font=`${n==='Roma'?700:400} ${fs*0.82}px ${FB}`; p.textAlign='left'; p.lineWidth=3; p.strokeStyle=css('--card'); p.strokeText(n,q[0]+5,q[1]-4); p.fillStyle=n==='Roma'?'#d61f1f':ink; p.fillText(n,q[0]+5,q[1]-4); p.textAlign='center'; });
+  p.fillStyle=ink; p.beginPath(); p.arc(cx,cy,3,0,2*PI); p.fill(); p.font=`700 ${fs*0.8}px ${FB}`; p.fillText('Polo Norte',cx,cy-7);
+  // anello delle ore (fisso rispetto al Sole)
+  const RH=R*1.14;
+  for(let hh=1;hh<=24;hh++){ const a=(-90+(hh-12)*15)*D2R, q=P(RH,a); p.font=`${hh%6===0?800:600} ${fs*(hh%6===0?1:0.85)}px ${FD}`; p.fillStyle=hh===12?'#c27a00':(hh===24?ink:css('--muted')); p.fillText('h'+hh,q[0],q[1]+5); }
+  p.font=`800 ${fs*1.05}px ${FB}`; p.fillStyle=ink; p.fillText('medianoche',cx,cy-RH-fs*1.3); p.fillStyle='#c27a00'; p.fillText('mediodía',cx,cy+RH+fs*1.9);
+  // verso di rotazione
+  p.strokeStyle=css('--accent'); p.lineWidth=2.5; const ra=R*1.27; p.beginPath(); p.arc(cx,cy,ra,-(-60)*D2R,-(-30)*D2R,true); p.stroke();
+  const ea=-30*D2R, tip=P(ra,ea), tx=-Math.sin(ea), ty=-Math.cos(ea); // tangente in senso antiorario (schermo)
+  p.fillStyle=css('--accent'); p.beginPath(); p.moveTo(tip[0]+tx*9,tip[1]+ty*9); p.lineTo(tip[0]-ty*6,tip[1]+tx*6); p.lineTo(tip[0]+ty*6,tip[1]-tx*6); p.closePath(); p.fill();
+  p.font=`${fs*0.8}px ${FB}`; p.textAlign='left'; p.fillText('rotación',tip[0]+6,tip[1]+14); p.textAlign='center';
+}
+
+/* ---------- carta dei fusi ---------- */
+const sc=$('strip'), s=sc.getContext('2d');
+function drawStrip(){
+  const {w,h}=fit(sc,s), fs=Math.max(9.5,Math.min(13,w/80)), top=fs*2.6, bot=fs*2.4, L=8, Rr=w-8, ink=css('--mapink');
+  const X=lo=>L+(lo+180)/360*(Rr-L), Y=la=>top+(75-la)/(75+60)*(h-top-bot);
+  s.clearRect(0,0,w,h);
+  for(let k=-12;k<=12;k++){ const x0=X(Math.max(-180,15*k-7.5)), x1=X(Math.min(180,15*k+7.5));
+    s.fillStyle=k===0?'#cfe9d8':(k===1?'#fde4d3':(Math.abs(k)%2?css('--z2'):css('--z1'))); s.fillRect(x0,top,x1-x0,h-top-bot);
+    s.strokeStyle=css('--zline'); s.lineWidth=1; s.strokeRect(x0,top,x1-x0,h-top-bot);
+    const civ=utc+k, xm=(x0+x1)/2;
+    s.font=`700 ${fs}px ${FD}`; s.textAlign='center'; s.fillStyle=ink; s.fillText(hm(civ).slice(0,2),xm,top-fs*0.9);
+    s.font=`${fs*0.9}px ${FB}`; s.fillStyle=css('--muted'); s.fillText(k===0?'0':(k>0?'+'+k:'−'+(-k)),xm,h-bot+fs*1.3); }
+  // notte: dove l'ora locale solare è prima delle 6 o dopo le 18
+  s.save(); s.beginPath(); s.rect(L,top,Rr-L,h-top-bot); s.clip();
+  for(let x=L;x<Rr;x+=2){ const lo=(x-L)/(Rr-L)*360-180, loc=((utc+lo/15)%24+24)%24, dist=Math.min(Math.abs(loc-12),24-Math.abs(loc-12));
+    const a=Math.max(0,Math.min(1,(dist-5.6)/0.8)); if(a>0){ s.globalAlpha=a; s.fillStyle=css('--night'); s.fillRect(x,top,2,h-top-bot); } }
+  s.globalAlpha=1;
+  // Sole a mezzogiorno
+  const sl=((12-utc)*15+540)%360-180, sx=X(sl); s.fillStyle='#ffbf2e'; s.beginPath(); s.arc(sx,Y(0),fs*0.9,0,2*PI); s.fill();
+  s.strokeStyle='rgba(255,191,46,.6)'; s.setLineDash([3,4]); s.beginPath(); s.moveTo(sx,top); s.lineTo(sx,h-bot); s.stroke(); s.setLineDash([]);
+  s.font=`700 ${fs*0.8}px ${FB}`; s.textAlign='center'; s.fillStyle='#b37400'; s.fillText('mediodía solar',sx,Y(0)+fs*2);
+  // Equatore, Greenwich, linea del cambiamento di data
+  s.strokeStyle='rgba(214,31,31,.6)'; s.lineWidth=1.2; s.beginPath(); s.moveTo(L,Y(0)); s.lineTo(Rr,Y(0)); s.stroke();
+  s.strokeStyle='#2fae6f'; s.lineWidth=2; s.beginPath(); s.moveTo(X(0),top); s.lineTo(X(0),h-bot); s.stroke();
+  s.save(); s.translate(X(0)-fs*0.5,top+(h-top-bot)*0.78); s.rotate(-PI/2); s.font=`700 ${fs*0.8}px ${FB}`; s.fillStyle='#1f8a55'; s.fillText('meridiano de Greenwich',0,0); s.restore();
+  // città
+  CITIES.filter(c=>SHOW_MAP.includes(c[0])).forEach(([n,la,lo,off])=>{ const x=X(lo), y=Y(la);
+    s.fillStyle=n==='Roma'?'#d61f1f':ink; s.beginPath(); s.arc(x,y,3.5,0,2*PI); s.fill();
+    const t=hm(utc+off+(legale&&(n==='Londres'||n==='Roma')?1:0)), right=lo<150; s.font=`700 ${fs*0.85}px ${FB}`; s.textAlign=right?'left':'right';
+    s.lineWidth=3; s.strokeStyle=css('--card'); const lab=n+' '+t; s.strokeText(lab,x+(right?5:-5),y-5); s.fillStyle=n==='Roma'?'#d61f1f':ink; s.fillText(lab,x+(right?5:-5),y-5); });
+  s.restore();
+}
+
+/* ---------- tabella ---------- */
+const TABLE=[['Reykjavík',0,0],['Lisboa',0,1],['Londres',0,1],['Dublín',0,1],['París',1,1],['Roma',1,1,1],['Berlín',1,1],['Atenas',2,1],['Helsinki',2,1],['Estambul',3,0],['Moscú',3,0],['New York',-5,0],['Pekín',8,0],['Tokyo',9,0],['Sídney',10,0]];
+const tb=$('tbody');
+const utcTxt=o=>o===0?'UTC':'UTC'+(o>0?'+':'−')+Math.abs(o);
+TABLE.forEach(c=>{ const tr=document.createElement('tr'); if(c[3]) tr.className='hl'; tr.innerHTML=`<td>${c[0]}</td><td class="fz"></td><td class="civ"></td>`; tb.append(tr); });
+function updTable(){ [...tb.children].forEach((tr,i)=>{ const [n,off,dst]=TABLE[i], o=off+(legale&&dst?1:0);
+  tr.querySelector('.fz').textContent=utcTxt(o); tr.querySelector('.civ').innerHTML=`<b>${hm(utc+o)}</b>`; }); }
+
+/* ---------- carta dell'Europa ---------- */
+const EU={"W":1000,"H":860,"c":[{"n":"Kazajistán","z":null,"dst":false,"d":"M1240.9,401.4L1216.4,394.5L1200.6,395.4L1170.8,396.5L1167.3,396.5L1140.3,430.5L1186.2,501.2L1179.3,506.9L1159.6,498.0L1146.4,498.4L1132.3,512.3L1129.6,522.7L1126.0,518.3L1124.9,508.0L1118.1,502.7L1097.3,505.4L1081.0,491.0L1070.2,490.2L1066.3,483.9L1081.2,478.2L1073.7,463.4L1083.8,453.5L1097.6,449.5L1088.9,428.9L1079.4,418.2L1066.5,426.9L1052.3,428.4L1041.2,445.7L1030.5,456.7L1021.7,457.0L1017.9,445.8L1002.4,436.6L992.4,442.2L974.3,433.8L974.8,414.6L968.9,412.3L968.7,384.8L987.8,390.0L982.0,374.5L996.5,339.1L1015.4,328.0L1050.1,325.7L1069.3,324.6L1076.9,308.4L1095.3,295.5L1117.0,294.6L1116.4,286.8L1133.2,275.7L1129.6,265.0L1102.1,265.9L1106.4,249.2L1100.7,245.8L1107.6,233.3L1090.6,226.7L1090.9,216.9L1096.1,211.4Z"},{"n":"Kaliningrado (Rusia)","z":2,"dst":false,"d":"M617.8,395.7L593.7,398.4L577.4,397.0L579.7,386.9L596.9,378.2L610.8,380.9L616.9,383.8L616.1,390.1L617.8,395.7Z"},{"n":"Rusia (parte europea)","z":3,"dst":false,"d":"M769.8,-120.1L772.2,-147.1L766.0,-154.2L793.0,-172.6L790.9,-150.0L795.8,-124.2L799.1,-98.3L811.1,-82.0L834.3,-73.6L831.6,-69.2L808.0,-58.2L800.7,-66.3L785.4,-64.9L778.1,-75.9L782.2,-84.1L775.3,-95.6L776.8,-120.8L769.8,-120.1ZM1096.1,211.4L1090.9,216.9L1090.6,226.7L1107.6,233.3L1100.7,245.8L1106.4,249.2L1102.1,265.9L1129.6,265.0L1133.2,275.7L1116.4,286.8L1117.0,294.6L1095.3,295.5L1076.9,308.4L1069.3,324.6L1050.1,325.7L1015.4,328.0L996.5,339.1L982.0,374.5L987.8,390.0L968.7,384.8L968.9,412.3L974.8,414.6L974.3,433.8L992.4,442.2L1002.4,436.6L1017.9,445.8L1021.7,457.0L1030.5,456.7L1030.1,471.9L1018.0,482.1L1013.8,510.2L1036.5,523.3L1041.8,537.9L1070.2,553.9L1065.2,566.8L1065.1,573.3L1057.5,575.2L1040.9,567.7L1036.2,569.1L1024.2,568.7L1015.6,562.3L999.3,564.2L991.3,571.6L986.9,568.8L961.7,567.3L937.5,572.7L923.0,573.9L922.0,577.1L895.9,565.8L875.5,563.5L858.2,555.0L868.2,548.0L874.8,525.8L863.7,520.0L882.4,504.0L880.4,499.4L868.5,507.3L865.8,497.6L871.2,489.1L884.5,482.7L884.3,474.8L876.9,464.2L878.6,451.0L876.2,444.8L853.4,445.0L845.4,447.9L833.6,440.6L824.1,447.4L804.4,445.0L803.4,440.6L795.9,432.6L784.7,434.6L781.7,428.1L783.9,422.8L772.0,412.8L758.7,418.5L754.3,418.4L752.1,424.2L746.9,424.5L740.3,411.2L735.5,404.6L737.5,402.0L748.3,400.2L752.3,394.2L747.1,389.3L737.4,387.5L737.2,383.3L731.0,380.6L719.7,367.9L721.1,361.4L717.6,351.3L704.2,348.7L698.2,352.7L695.4,347.5L681.2,344.5L674.9,332.1L671.9,321.4L665.2,317.3L669.1,309.3L661.9,289.1L667.8,274.7L665.4,271.1L675.8,256.3L662.2,247.9L679.6,214.7L686.5,199.6L687.8,187.3L669.4,175.2L670.3,159.7L658.0,144.7L660.3,123.8L644.3,100.0L648.9,81.0L632.6,68.2L630.7,51.7L637.0,48.2L649.0,35.9L655.4,25.9L672.1,36.5L695.9,35.6L735.5,50.4L745.8,58.5L751.8,72.9L746.4,88.0L733.9,99.0L688.8,94.1L683.0,98.7L702.2,111.2L705.8,121.4L712.8,144.0L727.2,147.1L736.6,150.5L734.4,139.5L725.7,131.8L729.1,121.5L756.3,127.6L762.2,119.5L750.2,105.7L762.9,76.6L771.4,74.6L782.6,78.8L781.3,61.9L768.8,52.0L767.3,37.4L755.7,26.4L781.1,23.5L791.2,33.4L782.1,40.7L787.5,52.6L797.5,56.9L808.2,46.2L803.5,31.8L815.0,13.3L831.5,-19.2L837.6,-21.6L837.7,-4.9L848.2,-8.4L849.3,-18.5L862.6,-27.9L867.7,-43.2L884.0,-37.2L882.6,-55.7L867.4,-61.6L866.2,-70.5L877.9,-74.8ZM804.1,553.2L806.7,546.7L818.8,548.5L823.9,548.0L827.1,551.8L829.6,551.8L830.3,553.6L839.3,556.7L854.5,550.8L853.9,559.4L838.1,568.2L820.4,586.8L810.5,584.6L811.3,573.4L792.6,571.3L794.3,566.3L807.1,555.2L804.1,553.2Z"},{"n":"Noruega","z":1,"dst":true,"d":"M649.0,35.9L637.0,48.2L630.7,51.7L631.0,34.6L619.0,27.2L607.8,37.3L606.4,55.2L599.8,66.7L589.9,62.2L579.0,64.6L568.4,53.0L563.9,59.7L558.7,61.0L558.5,76.7L542.0,73.8L540.2,87.0L531.7,87.2L526.2,104.0L517.2,130.1L501.9,162.6L505.4,170.6L501.7,179.7L491.7,179.0L484.3,200.4L483.6,230.8L490.1,242.7L485.5,269.4L475.3,284.5L469.5,297.4L462.5,283.0L437.4,307.4L420.9,311.1L406.0,297.6L405.1,272.8L408.7,220.2L420.4,206.8L449.9,190.6L471.6,168.3L491.0,136.9L514.0,92.1L528.6,74.3L550.6,43.6L567.7,31.9L581.0,31.8L590.7,10.6L605.0,9.6L618.0,2.5L645.7,14.7L637.0,23.2L649.0,35.9Z"},{"n":"Francia","z":1,"dst":true,"d":"M387.0,503.2L393.2,509.9L413.9,516.3L404.9,530.9L401.3,546.8L396.7,550.2L390.0,547.4L389.9,553.1L377.1,564.4L375.6,574.6L383.4,572.0L387.6,582.5L386.3,588.8L390.0,597.8L383.7,604.1L385.9,622.1L394.4,625.9L391.5,635.5L375.1,646.7L343.3,636.3L318.3,639.9L314.1,653.1L294.2,652.7L277.5,638.9L270.6,642.5L242.6,625.7L238.2,615.6L249.6,604.2L262.8,560.7L252.5,533.8L244.3,519.9L224.1,505.5L227.0,489.2L247.0,489.5L269.9,501.1L271.2,475.1L282.5,487.7L319.4,477.4L327.1,460.0L340.1,457.7L340.8,465.9L347.3,467.4L352.4,477.4L360.8,489.5L368.4,488.8L379.7,500.7L382.7,503.1L387.0,503.2ZM410.9,661.9L422.4,654.1L423.8,673.9L416.7,691.1L409.3,685.8L406.8,670.1L410.9,661.9Z"},{"n":"Israel","z":null,"dst":false,"d":"M926.0,838.5L924.7,846.7L916.8,845.5L917.2,862.0L922.8,863.2L918.6,867.8L919.5,874.1L927.9,868.3L931.0,877.1L931.6,917.1L928.0,911.6L907.4,880.8L911.0,871.6L909.2,870.7L911.5,858.5L910.5,840.0L911.6,833.5L912.1,833.1L918.5,831.3L919.0,826.7L924.1,824.9L927.1,834.2L925.5,838.4L926.0,838.5Z"},{"n":"Líbano","z":null,"dst":false,"d":"M924.1,824.9L919.0,826.7L918.5,831.3L912.1,833.1L913.5,812.5L918.1,793.8L918.2,792.9L926.9,791.5L932.6,799.4L925.0,811.1L924.1,824.9Z"},{"n":"Palestina","z":null,"dst":false,"d":"M927.9,868.3L919.5,874.1L918.6,867.8L922.8,863.2L917.2,862.0L916.8,845.5L924.7,846.7L928.8,860.7L927.9,868.3Z"},{"n":"Túnez","z":null,"dst":false,"d":"M401.2,950.9L395.9,907.2L384.3,896.6L384.7,890.8L369.8,875.1L369.9,857.2L383.2,845.2L389.5,826.3L388.6,803.8L393.5,792.2L414.5,784.5L427.3,788.2L425.9,800.0L442.2,792.4L443.3,796.9L433.3,807.8L432.5,818.6L438.7,824.8L435.1,845.0L421.6,856.0L424.4,869.2L434.5,870.2L438.9,881.7L446.3,885.8L444.2,904.0L434.1,910.4L427.3,917.7L412.7,926.0L414.2,936.0L411.7,946.1L401.2,950.9Z"},{"n":"Argelia","z":null,"dst":false,"d":"M13.3,928.2L19.8,908.7L58.0,902.4L79.2,905.0L97.5,903.6L108.5,894.2L134.4,891.4L139.8,874.4L151.7,875.4L162.9,869.0L189.5,871.3L195.2,863.1L191.2,857.0L190.2,831.0L192.3,816.7L188.8,800.3L209.7,792.0L230.6,792.5L244.3,785.5L263.5,782.0L295.5,783.4L326.4,786.3L335.2,791.0L353.9,784.1L373.7,786.2L380.7,792.3L393.5,792.2L388.6,803.8L389.5,826.3L383.2,845.2L369.9,857.2L369.8,875.1L384.7,890.8L384.3,896.6L395.9,907.2L401.2,950.9L406.4,972.8L406.7,984.1L401.5,1003.7L401.8,1007.3Z"},{"n":"Jordania","z":null,"dst":false,"d":"M924.7,846.7L926.0,838.5L950.2,841.0L979.5,804.7L996.6,829.5L994.2,834.2L959.2,858.3L986.2,874.9L980.9,881.0L980.1,889.7L965.8,897.8L963.6,907.6L957.0,917.4L933.3,920.3L931.6,917.1L931.0,877.1L927.9,868.3L928.8,860.7L924.7,846.7Z"},{"n":"Kuwait","z":null,"dst":false,"d":"M1183.6,808.1L1192.3,815.8L1193.1,821.6L1207.3,835.0L1194.1,842.3L1184.2,834.1L1166.0,840.2L1170.1,812.5L1183.6,808.1Z"},{"n":"Irak","z":null,"dst":false,"d":"M996.6,829.5L979.5,804.7L1012.2,766.8L1008.8,737.5L1001.1,722.2L1008.6,713.1L1012.1,696.0L1018.2,689.7L1039.3,684.2L1047.6,687.1L1054.2,679.9L1076.7,700.5L1090.9,701.8L1098.0,713.6L1092.6,725.1L1096.0,743.8L1117.8,758.6L1145.6,760.0L1162.9,771.8L1167.5,788.9L1173.4,786.0L1179.3,797.4L1195.2,803.7L1183.6,808.1L1170.1,812.5L1166.0,840.2L1129.3,854.7L1056.2,832.3L1021.8,827.3L996.6,829.5Z"},{"n":"Irán","z":null,"dst":false,"d":"M1195.2,803.7L1179.3,797.4L1173.4,786.0L1167.5,788.9L1162.9,771.8L1145.6,760.0L1117.8,758.6L1096.0,743.8L1092.6,725.1L1098.0,713.6L1090.9,701.8L1076.7,700.5L1054.2,679.9L1037.5,666.8L1038.0,658.8L1022.3,636.6L1030.9,625.7L1037.0,632.6L1049.7,638.6L1062.2,636.3L1067.9,632.9L1079.6,608.4L1084.9,603.9L1092.6,607.7L1092.2,620.7L1107.7,626.5L1111.2,623.4L1124.2,636.1L1142.0,632.3L1158.9,636.5L1184.2,627.1L1206.3,607.1L1205.0,601.4L1216.6,589.1L1220.7,570.9L1231.4,564.9L1235.8,556.9L1247.9,551.6L1271.4,549.9L1284.9,543.6L1314.3,548.0L1326.1,540.4L1339.2,555.2L1350.4,583.5L1356.2,600.6L1365.3,598.3L1366.1,613.8L1382.7,625.2L1393.0,636.5L1407.8,630.5L1418.5,641.8L1416.5,670.7L1432.4,674.7L1448.1,681.3L1453.6,680.4L1462.4,691.9L1271.0,816.8L1250.6,805.2L1221.6,784.1L1213.5,792.8L1198.0,791.7L1195.2,803.7Z"},{"n":"Siria","z":null,"dst":false,"d":"M926.0,838.5L925.5,838.4L927.1,834.2L924.1,824.9L925.0,811.1L932.6,799.4L926.9,791.5L918.2,792.9L911.3,776.1L913.0,765.5L916.3,759.2L919.7,752.7L916.8,740.0L924.0,742.5L941.6,729.9L952.4,731.0L967.0,725.8L984.2,710.2L993.7,707.1L1012.1,696.0L1008.6,713.1L1001.1,722.2L1008.8,737.5L1012.2,766.8L979.5,804.7L950.2,841.0L926.0,838.5Z"},{"n":"Armenia","z":null,"dst":false,"d":"M1067.9,632.9L1062.2,636.3L1050.0,627.1L1048.6,623.9L1041.4,627.2L1034.0,623.6L1030.9,625.7L1021.8,622.3L1007.5,622.2L1004.7,611.2L998.9,604.8L1019.6,592.0L1025.2,596.1L1032.9,597.1L1032.1,603.8L1043.9,607.1L1042.4,615.9L1051.9,618.4L1060.7,618.5L1067.9,632.9Z"},{"n":"Suecia","z":1,"dst":true,"d":"M469.5,297.4L475.3,284.5L485.5,269.4L490.1,242.7L483.6,230.8L484.3,200.4L491.7,179.0L501.7,179.7L505.4,170.6L501.9,162.6L517.2,130.1L526.2,104.0L531.7,87.2L540.2,87.0L542.0,73.8L558.5,76.7L558.7,61.0L563.9,59.7L576.3,70.2L591.5,84.7L596.1,120.6L600.3,129.2L584.7,137.6L576.9,154.6L579.7,168.6L565.1,188.3L546.1,209.2L539.4,241.7L547.8,257.5L559.2,269.7L549.8,295.8L537.7,301.5L534.0,339.6L527.3,361.0L512.0,358.9L504.6,376.7L489.7,377.4L486.3,356.0L477.0,329.9L469.5,297.4Z"},{"n":"Bielorrusia","z":3,"dst":false,"d":"M681.2,344.5L695.4,347.5L698.2,352.7L704.2,348.7L717.6,351.3L721.1,361.4L719.7,367.9L731.0,380.6L737.2,383.3L737.4,387.5L747.1,389.3L752.3,394.2L748.3,400.2L737.5,402.0L735.5,404.6L740.3,411.2L746.9,424.5L735.6,428.5L732.5,434.3L734.0,445.6L728.1,444.6L715.8,448.2L711.2,443.8L706.8,448.7L700.9,446.4L690.0,447.9L673.7,445.2L659.5,445.5L648.9,447.5L642.1,454.5L635.6,456.2L634.1,446.3L628.7,436.4L636.3,430.8L635.3,421.9L630.5,413.8L628.8,404.0L641.5,402.5L654.6,392.1L655.7,379.1L665.1,370.2L662.3,360.5L669.3,355.4L681.2,344.5Z"},{"n":"Ucrania","z":2,"dst":true,"d":"M746.9,424.5L752.1,424.2L754.3,418.4L758.7,418.5L772.0,412.8L783.9,422.8L781.7,428.1L784.7,434.6L795.9,432.6L803.4,440.6L804.4,445.0L824.1,447.4L833.6,440.6L845.4,447.9L853.4,445.0L876.2,444.8L878.6,451.0L876.9,464.2L884.3,474.8L884.5,482.7L871.2,489.1L865.8,497.6L868.5,507.3L857.3,512.9L849.7,523.0L836.1,528.4L825.5,540.3L829.6,551.8L827.1,551.8L823.9,548.0L818.8,548.5L806.7,546.7L804.1,553.2L801.4,551.4L776.3,551.7L773.3,543.7L759.9,549.6L756.9,563.1L748.3,582.0L740.5,579.7L733.8,584.7L726.0,581.9L729.5,578.7L730.8,570.5L733.6,562.6L731.7,558.8L734.6,556.4L736.7,559.2L745.9,558.0L749.6,555.5L746.3,553.9L746.6,550.3L740.2,545.8L736.1,537.0L729.9,534.4L729.5,526.7L721.6,522.0L715.3,522.3L703.2,517.3L693.7,521.2L690.7,525.1L684.4,526.1L681.5,531.9L670.7,535.7L666.0,539.9L658.3,535.3L648.7,536.4L639.0,535.1L633.1,540.6L631.4,534.7L622.4,529.4L624.4,520.0L627.9,513.7L631.3,514.7L626.4,505.0L637.5,484.9L644.3,481.4L645.0,474.9L635.6,456.2L642.1,454.5L648.9,447.5L659.5,445.5L673.7,445.2L690.0,447.9L700.9,446.4L706.8,448.7L711.2,443.8L715.8,448.2L728.1,444.6L734.0,445.6L732.5,434.3L735.6,428.5L746.9,424.5Z"},{"n":"Polonia","z":1,"dst":true,"d":"M628.8,404.0L630.5,413.8L635.3,421.9L636.3,430.8L628.7,436.4L634.1,446.3L635.6,456.2L645.0,474.9L644.3,481.4L637.5,484.9L626.4,505.0L631.3,514.7L627.9,513.7L613.1,506.5L602.9,510.6L595.7,508.8L587.4,514.3L579.4,506.7L573.6,510.2L572.7,508.8L565.5,498.0L554.6,497.1L553.0,490.1L543.0,487.9L541.0,493.8L533.1,489.3L533.9,483.0L523.2,481.2L516.4,473.9L510.7,459.5L511.8,451.7L508.5,439.6L503.6,431.5L507.4,425.5L504.4,414.0L513.5,407.5L534.0,396.9L550.3,388.8L563.4,392.0L564.7,397.5L577.4,397.0L593.7,398.4L617.8,395.7L624.8,397.4L628.8,404.0Z"},{"n":"Austria","z":1,"dst":true,"d":"M546.1,541.0L545.2,550.2L536.6,550.5L539.6,555.4L534.8,570.0L531.9,573.9L518.3,574.6L510.4,579.7L497.5,577.8L475.4,571.4L472.2,563.4L456.8,566.6L454.8,570.8L445.5,567.1L437.7,565.9L431.0,561.3L433.8,555.9L433.5,551.9L438.2,550.9L445.5,557.7L448.0,551.9L461.5,553.6L472.6,550.0L479.8,551.0L484.5,555.8L486.0,552.0L484.3,537.2L489.8,534.4L495.3,524.1L506.2,531.6L514.7,522.4L519.9,520.7L531.5,527.5L538.5,526.2L545.5,530.3L544.3,533.2L546.1,541.0Z"},{"n":"Hungría","z":1,"dst":true,"d":"M622.4,529.4L631.4,534.7L633.1,540.6L624.3,546.3L618.5,562.3L610.5,578.4L598.3,583.7L588.4,583.3L576.7,590.0L570.9,593.7L557.7,589.9L545.6,580.5L540.6,577.9L537.4,570.2L534.8,570.0L539.6,555.4L536.6,550.5L545.2,550.2L546.1,541.0L553.9,546.5L559.7,548.8L572.3,545.4L573.3,540.9L579.3,539.8L586.4,535.9L588.1,537.2L594.9,533.9L598.1,528.3L602.9,526.6L619.5,532.0L622.4,529.4Z"},{"n":"Moldavia","z":2,"dst":true,"d":"M690.7,525.1L693.7,521.2L703.2,517.3L715.3,522.3L721.6,522.0L729.5,526.7L729.9,534.4L736.1,537.0L740.2,545.8L746.6,550.3L746.3,553.9L749.6,555.5L745.9,558.0L736.7,559.2L734.6,556.4L731.7,558.8L733.6,562.6L730.8,570.5L729.5,578.7L726.0,581.9L721.3,572.2L721.2,562.4L718.9,552.7L707.8,540.9L701.3,532.4L695.6,526.5L690.7,525.1Z"},{"n":"Rumanía","z":2,"dst":true,"d":"M726.0,581.9L733.8,584.7L740.5,579.7L748.3,582.0L749.8,587.7L743.1,594.1L737.9,592.9L738.6,620.8L728.7,620.2L715.5,614.1L697.3,622.5L690.1,629.4L665.9,631.5L652.9,629.5L646.7,631.9L641.0,623.1L637.6,619.4L641.0,615.2L636.7,612.8L632.2,618.4L622.1,612.7L620.0,603.5L609.9,599.0L607.5,591.9L598.3,583.7L610.5,578.4L618.5,562.3L624.3,546.3L633.1,540.6L639.0,535.1L648.7,536.4L658.3,535.3L666.0,539.9L670.7,535.7L681.5,531.9L684.4,526.1L690.7,525.1L695.6,526.5L701.3,532.4L707.8,540.9L718.9,552.7L721.2,562.4L721.3,572.2L726.0,581.9Z"},{"n":"Lituania","z":2,"dst":true,"d":"M662.3,360.5L665.1,370.2L655.7,379.1L654.6,392.1L641.5,402.5L628.8,404.0L624.8,397.4L617.8,395.7L616.1,390.1L616.9,383.8L610.8,380.9L596.9,378.2L592.6,359.5L606.3,351.3L627.4,350.4L639.3,346.5L641.7,351.0L648.6,351.4L662.3,360.5Z"},{"n":"Letonia","z":2,"dst":true,"d":"M665.2,317.3L671.9,321.4L674.9,332.1L681.2,344.5L669.3,355.4L662.3,360.5L648.6,351.4L641.7,351.0L639.3,346.5L627.4,350.4L606.3,351.3L592.6,359.5L591.6,342.5L596.4,327.8L607.0,318.9L618.5,334.7L628.3,333.1L628.4,315.5L638.1,310.2L643.7,312.2L655.2,318.9L665.2,317.3Z"},{"n":"Estonia","z":2,"dst":true,"d":"M665.4,271.1L667.8,274.7L661.9,289.1L669.1,309.3L665.2,317.3L655.2,318.9L643.7,312.2L638.1,310.2L628.4,315.5L628.0,302.1L624.1,305.5L615.6,298.4L613.1,285.5L626.9,277.4L640.8,272.1L653.7,273.8L665.4,271.1Z"},{"n":"Alemania","z":1,"dst":true,"d":"M504.4,414.0L507.4,425.5L503.6,431.5L508.5,439.6L511.8,451.7L510.7,459.5L516.4,473.9L510.1,476.3L506.3,473.6L502.7,477.9L492.4,482.1L486.9,487.6L476.3,492.2L478.6,499.0L479.8,508.6L487.1,514.2L495.3,524.1L489.8,534.4L484.3,537.2L486.0,552.0L484.5,555.8L479.8,551.0L472.6,550.0L461.5,553.6L448.0,551.9L445.5,557.7L438.2,550.9L433.5,551.9L417.8,543.6L414.2,548.2L401.3,546.8L404.9,530.9L413.9,516.3L393.2,509.9L387.0,503.2L389.0,493.4L386.7,488.0L390.2,473.0L390.8,449.3L399.1,450.3L403.6,442.3L409.2,422.1L407.6,414.2L410.7,409.7L422.0,409.7L424.0,414.9L434.0,404.6L431.7,395.9L432.3,383.1L441.8,386.9L450.4,384.1L450.0,392.8L462.9,398.9L462.3,406.9L476.0,403.3L483.6,397.4L498.2,406.7L504.4,414.0Z"},{"n":"Bulgaria","z":2,"dst":true,"d":"M641.0,623.1L646.7,631.9L652.9,629.5L665.9,631.5L690.1,629.4L697.3,622.5L715.5,614.1L728.7,620.2L738.6,620.8L731.9,631.7L728.8,648.9L736.5,660.8L721.5,660.3L705.5,670.2L707.1,681.5L691.9,686.0L678.8,679.7L665.9,687.7L653.1,688.5L650.2,673.5L641.0,667.1L643.4,663.6L641.4,661.1L643.4,653.5L648.9,645.7L639.9,636.8L637.6,628.6L641.0,623.1Z"},{"n":"Grecia","z":2,"dst":true,"d":"M732.1,819.4L730.7,826.7L703.5,832.7L703.2,828.8L679.3,827.2L681.7,816.9L693.1,823.4L707.7,820.1L722.0,819.7L722.2,823.8L732.1,819.4ZM653.1,688.5L665.9,687.7L678.8,679.7L691.9,686.0L707.1,681.5L705.5,670.2L714.7,674.9L711.7,689.9L708.0,693.2L697.4,694.1L688.1,693.2L668.0,701.9L681.7,713.2L673.3,718.1L663.5,719.3L652.9,708.5L650.2,713.9L655.6,727.2L665.7,736.9L659.5,742.7L670.8,752.2L680.5,757.8L682.4,770.8L664.8,766.7L671.5,777.9L660.1,781.6L669.4,801.3L657.1,803.0L640.7,794.4L632.1,776.4L627.6,761.3L619.7,751.2L609.4,738.7L607.8,732.3L615.2,720.5L615.6,712.9L621.1,709.1L620.9,703.1L632.0,700.0L638.2,694.4L647.5,693.9L649.9,689.6L653.1,688.5Z"},{"n":"Turquía","z":3,"dst":false,"d":"M1054.2,679.9L1047.6,687.1L1039.3,684.2L1018.2,689.7L1012.1,696.0L993.7,707.1L984.2,710.2L967.0,725.8L952.4,731.0L941.6,729.9L924.0,742.5L916.8,740.0L919.7,752.7L916.3,759.2L913.0,765.5L903.3,757.3L907.6,746.9L897.2,752.1L880.6,751.2L871.7,767.6L844.6,777.4L826.8,768.7L806.8,772.5L804.7,782.9L792.5,788.3L772.2,779.6L752.2,783.8L737.3,762.8L722.0,752.2L727.8,733.0L714.8,723.8L730.6,698.9L757.1,693.1L760.9,674.5L793.8,670.6L810.5,651.4L828.2,640.2L855.3,632.2L888.6,639.1L915.0,639.9L932.9,630.0L947.7,626.9L962.5,608.4L979.2,600.7L998.9,604.8L1004.7,611.2L1007.5,622.2L1021.8,622.3L1030.9,625.7L1022.3,636.6L1038.0,658.8L1037.5,666.8L1054.2,679.9ZM705.5,670.2L721.5,660.3L736.5,660.8L740.1,669.1L756.3,673.6L754.2,679.7L734.2,684.7L728.1,693.0L715.7,707.6L708.6,697.8L708.0,693.2L711.7,689.9L714.7,674.9L705.5,670.2Z"},{"n":"Albania","z":1,"dst":true,"d":"M620.9,703.1L621.1,709.1L615.6,712.9L615.2,720.5L607.8,732.3L604.6,730.9L604.0,725.8L593.7,718.7L591.5,707.9L592.0,692.1L593.9,684.8L590.8,681.4L589.2,674.2L595.8,662.4L597.2,666.7L601.6,664.3L605.6,670.2L609.8,672.3L611.6,680.5L610.1,688.4L613.2,698.1L620.9,703.1Z"},{"n":"Croacia","z":1,"dst":true,"d":"M540.6,577.9L545.6,580.5L557.7,589.9L570.9,593.7L576.7,590.0L581.0,598.6L586.5,604.8L580.8,613.7L573.2,609.0L562.1,609.8L548.2,606.5L540.7,607.2L537.4,612.0L531.5,606.9L528.2,616.3L536.3,626.9L540.1,633.9L547.8,642.3L554.2,647.1L560.9,656.4L576.1,664.5L574.4,668.4L558.2,660.7L548.3,652.7L533.0,646.2L519.0,629.6L522.3,627.8L514.9,618.3L514.6,610.5L504.3,606.9L499.2,616.7L494.6,609.0L495.1,601.1L495.7,600.7L506.8,601.7L509.7,597.8L515.1,601.6L521.4,602.0L521.3,595.6L526.8,593.3L528.2,584.1L540.6,577.9Z"},{"n":"Suiza","z":1,"dst":true,"d":"M433.5,551.9L433.8,555.9L431.0,561.3L437.7,565.9L445.5,567.1L443.7,576.2L436.6,579.6L425.2,575.9L421.1,584.7L413.6,584.8L411.2,581.0L401.6,587.8L393.9,588.1L387.6,582.5L383.4,572.0L375.6,574.6L377.1,564.4L389.9,553.1L390.0,547.4L396.7,550.2L401.3,546.8L414.2,548.2L417.8,543.6L433.5,551.9Z"},{"n":"Luxemburgo","z":1,"dst":true,"d":"M386.7,488.0L389.0,493.4L387.0,503.2L382.7,503.1L379.7,500.7L382.9,488.4L386.7,488.0Z"},{"n":"Bélgica","z":1,"dst":true,"d":"M390.2,473.0L386.7,488.0L382.9,488.4L379.7,500.7L368.4,488.8L360.8,489.5L352.4,477.4L347.3,467.4L340.8,465.9L340.1,457.7L352.0,455.2L362.0,458.6L375.6,455.8L383.1,466.8L390.2,473.0Z"},{"n":"Países Bajos","z":1,"dst":true,"d":"M407.6,414.2L409.2,422.1L403.6,442.3L399.1,450.3L390.8,449.3L390.2,473.0L383.1,466.8L375.6,455.8L362.0,458.6L352.0,455.2L360.2,450.2L377.1,419.2L396.6,412.3L407.6,414.2Z"},{"n":"Portugal","z":0,"dst":true,"d":"M113.0,615.8L120.8,612.3L128.4,611.4L129.0,623.4L138.6,626.5L142.2,624.6L151.5,628.4L152.7,640.8L143.2,644.4L137.6,661.5L133.9,663.8L130.0,674.0L122.1,673.5L124.6,688.9L115.2,701.9L119.2,710.4L114.9,715.7L105.7,721.9L104.8,729.7L95.8,733.1L87.5,726.9L77.5,726.3L86.1,709.9L89.1,695.8L82.1,691.1L80.9,681.4L87.3,667.6L96.8,662.0L101.1,653.6L109.0,641.7L111.8,632.3L111.2,623.4L113.0,615.8Z"},{"n":"España","z":1,"dst":true,"d":"M104.8,729.7L105.7,721.9L114.9,715.7L119.2,710.4L115.2,701.9L124.6,688.9L122.1,673.5L130.0,674.0L133.9,663.8L137.6,661.5L143.2,644.4L152.7,640.8L151.5,628.4L142.2,624.6L138.6,626.5L129.0,623.4L128.4,611.4L120.8,612.3L113.0,615.8L119.2,600.7L115.9,589.0L143.5,581.0L161.5,591.1L182.8,597.4L198.8,605.9L212.3,608.3L238.2,615.6L242.6,625.7L270.6,642.5L277.5,638.9L294.2,652.7L314.1,653.1L312.8,666.4L294.1,678.7L271.4,679.3L268.3,686.6L255.2,697.0L244.6,714.0L248.7,728.4L236.3,736.3L229.2,750.2L214.5,751.7L197.5,766.1L174.4,760.6L157.2,755.6L143.7,760.4L134.3,766.9L125.9,762.4L121.5,752.8L120.3,738.4L104.8,729.7Z"},{"n":"Irlanda","z":0,"dst":true,"d":"M237.9,370.4L235.4,386.5L219.6,402.8L192.0,407.8L174.4,398.1L192.8,379.6L193.8,355.6L216.6,344.7L229.2,337.8L228.0,350.1L221.8,360.8L229.7,363.0L237.9,370.4Z"},{"n":"Italia","z":1,"dst":true,"d":"M445.5,567.1L454.8,570.8L456.8,566.6L472.2,563.4L475.4,571.4L497.5,577.8L495.6,589.0L499.2,598.7L486.7,595.2L473.5,602.8L473.9,614.1L471.7,620.5L476.6,632.3L491.8,644.3L499.9,663.3L518.6,681.9L531.9,681.6L536.2,686.6L531.4,691.3L547.1,699.3L560.0,705.9L575.5,717.3L577.5,721.5L574.6,729.9L564.3,719.5L548.9,716.2L541.9,731.3L554.9,739.6L553.2,751.7L545.7,753.3L536.3,773.4L528.7,775.3L528.7,768.1L532.3,755.7L536.1,750.7L529.0,737.3L523.5,725.7L516.1,722.9L511.0,712.9L499.8,708.6L492.4,699.2L479.6,697.5L466.5,686.6L451.7,671.0L441.0,657.2L437.3,634.3L429.4,631.1L416.7,622.5L408.9,624.9L398.5,634.6L391.5,635.5L394.4,625.9L385.9,622.1L383.7,604.1L390.0,597.8L386.3,588.8L387.6,582.5L393.9,588.1L401.6,587.8L411.2,581.0L413.6,584.8L421.1,584.7L425.2,575.9L436.6,579.6L443.7,576.2L445.5,567.1ZM511.8,769.9L525.7,767.8L519.1,786.2L521.9,793.4L518.0,805.4L503.7,796.5L494.3,793.9L468.8,781.4L471.7,769.5L493.1,772.2L511.8,769.9ZM406.9,701.4L416.1,695.0L425.2,712.1L420.5,742.4L412.5,740.3L404.6,747.4L398.4,740.7L400.2,712.8L397.4,699.3L406.9,701.4Z"},{"n":"Dinamarca","z":1,"dst":true,"d":"M450.4,384.1L441.8,386.9L432.3,383.1L428.2,370.1L430.1,347.0L432.7,341.2L436.9,334.7L447.7,334.2L452.5,328.3L462.7,322.6L461.6,334.2L457.5,341.3L458.5,347.8L465.1,351.6L461.5,359.9L457.9,357.2L447.7,372.8L450.4,384.1ZM483.0,360.3L486.6,371.8L478.3,389.8L465.3,376.4L464.1,366.9L483.0,360.3Z"},{"n":"Reino Unido","z":0,"dst":true,"d":"M237.9,370.4L229.7,363.0L221.8,360.8L228.0,350.1L229.2,337.8L239.8,340.2L249.1,357.6L237.9,370.4ZM275.1,391.7L275.2,391.7L280.3,379.5L275.2,363.8L275.1,363.4L260.9,355.4L259.6,348.7L266.8,340.3L264.5,333.1L254.9,341.4L260.3,320.3L257.6,307.5L268.5,286.3L282.6,271.2L291.2,275.5L305.5,277.3L286.9,297.8L299.6,297.9L312.5,301.2L305.1,318.4L289.2,335.4L301.6,339.9L302.0,342.5L307.1,371.1L315.1,376.6L317.7,403.4L319.7,412.9L335.1,420.3L330.8,434.2L322.6,439.4L325.9,451.9L311.1,461.0L292.4,456.8L267.3,457.3L261.8,451.4L250.0,459.2L237.8,453.3L225.7,458.8L219.5,452.3L246.2,435.3L259.7,433.8L259.6,433.8L239.4,424.4L238.0,414.7L253.9,411.8L249.9,398.1L256.3,384.5L275.1,391.7Z"},{"n":"Islandia","z":0,"dst":false,"d":"M248.4,68.4L240.4,81.4L244.2,100.2L225.4,111.4L192.3,113.5L182.5,113.3L172.1,104.1L150.7,84.0L164.4,80.0L151.4,59.4L168.6,64.3L171.6,58.1L156.9,43.2L170.2,33.5L184.2,37.7L189.5,58.6L208.1,54.1L215.8,65.3L235.0,60.6L248.4,68.4Z"},{"n":"Azerbaiyán","z":null,"dst":false,"d":"M1036.2,569.1L1040.9,567.7L1057.5,575.2L1065.1,573.3L1065.2,566.8L1070.2,553.9L1083.8,560.6L1099.1,571.1L1106.9,568.2L1114.5,571.2L1102.6,579.6L1108.1,596.9L1109.0,605.6L1105.6,613.4L1111.2,623.4L1107.7,626.5L1092.2,620.7L1092.6,607.7L1084.9,603.9L1079.6,608.4L1067.9,632.9L1060.7,618.5L1051.9,618.4L1042.4,615.9L1043.9,607.1L1032.1,603.8L1032.9,597.1L1025.2,596.1L1019.6,592.0L1021.9,586.9L1036.3,587.6L1045.4,585.0L1046.4,581.5L1033.5,573.8L1036.2,569.1ZM1062.2,636.3L1049.7,638.6L1037.0,632.6L1030.9,625.7L1034.0,623.6L1041.4,627.2L1048.6,623.9L1050.0,627.1L1062.2,636.3Z"},{"n":"Georgia","z":null,"dst":false,"d":"M922.0,577.1L923.0,573.9L937.5,572.7L961.7,567.3L986.9,568.8L991.3,571.6L999.3,564.2L1015.6,562.3L1024.2,568.7L1036.2,569.1L1033.5,573.8L1046.4,581.5L1045.4,585.0L1036.3,587.6L1021.9,586.9L1019.6,592.0L998.9,604.8L979.2,600.7L962.5,608.4L961.4,598.4L951.8,585.3L939.8,580.8L930.2,581.6L922.0,577.1Z"},{"n":"Eslovenia","z":1,"dst":true,"d":"M497.5,577.8L510.4,579.7L518.3,574.6L531.9,573.9L534.8,570.0L537.4,570.2L540.6,577.9L528.2,584.1L526.8,593.3L521.3,595.6L521.4,602.0L515.1,601.6L509.7,597.8L506.8,601.7L495.7,600.7L499.2,598.7L495.6,589.0L497.5,577.8Z"},{"n":"Finlandia","z":2,"dst":true,"d":"M630.7,51.7L632.6,68.2L648.9,81.0L644.3,100.0L660.3,123.8L658.0,144.7L670.3,159.7L669.4,175.2L687.8,187.3L686.5,199.6L679.6,214.7L662.2,247.9L642.4,253.1L623.8,264.2L606.0,271.2L598.2,259.5L586.6,253.1L587.1,230.5L580.1,210.3L583.9,196.5L591.8,181.2L611.5,153.6L617.3,147.9L614.9,138.3L600.3,129.2L596.1,120.6L591.5,84.7L576.3,70.2L563.9,59.7L568.4,53.0L579.0,64.6L589.9,62.2L599.8,66.7L606.4,55.2L607.8,37.3L619.0,27.2L631.0,34.6L630.7,51.7Z"},{"n":"Eslovaquia","z":1,"dst":true,"d":"M627.9,513.7L624.4,520.0L622.4,529.4L619.5,532.0L602.9,526.6L598.1,528.3L594.9,533.9L588.1,537.2L586.4,535.9L579.3,539.8L573.3,540.9L572.3,545.4L559.7,548.8L553.9,546.5L546.1,541.0L544.3,533.2L545.5,530.3L547.5,525.2L554.1,525.4L559.1,522.9L559.4,520.8L562.2,519.6L562.9,514.4L566.3,513.2L568.4,509.1L572.7,508.8L573.6,510.2L579.4,506.7L587.4,514.3L595.7,508.8L602.9,510.6L613.1,506.5L627.9,513.7Z"},{"n":"Rep. Checa","z":1,"dst":true,"d":"M516.4,473.9L523.2,481.2L533.9,483.0L533.1,489.3L541.0,493.8L543.0,487.9L553.0,490.1L554.6,497.1L565.5,498.0L572.7,508.8L568.4,509.1L566.3,513.2L562.9,514.4L562.2,519.6L559.4,520.8L559.1,522.9L554.1,525.4L547.5,525.2L545.5,530.3L538.5,526.2L531.5,527.5L519.9,520.7L514.7,522.4L506.2,531.6L495.3,524.1L487.1,514.2L479.8,508.6L478.6,499.0L476.3,492.2L486.9,487.6L492.4,482.1L502.7,477.9L506.3,473.6L510.1,476.3L516.4,473.9Z"},{"n":"Arabia Saudí","z":null,"dst":false,"d":"M933.3,920.3L957.0,917.4L963.6,907.6L965.8,897.8L980.1,889.7L980.9,881.0L986.2,874.9L959.2,858.3L994.2,834.2L996.6,829.5L1021.8,827.3L1056.2,832.3L1129.3,854.7L1166.0,840.2L1184.2,834.1L1194.1,842.3L1207.3,835.0L1218.2,844.6L946.9,950.8L945.5,949.6L935.2,952.7L934.8,938.8L933.4,930.4L933.3,920.3Z"},{"n":"Chipre","z":2,"dst":true,"d":"M854.2,798.4L855.4,798.0L856.7,791.8L870.2,788.6L885.2,777.3L875.3,790.3L877.8,794.2L875.6,794.0L872.5,796.6L869.6,796.9L868.9,798.0L867.9,795.8L866.2,794.7L862.5,795.5L858.0,798.7L854.2,798.4Z"},{"n":"Chipre","z":2,"dst":true,"d":"M854.2,798.4L858.0,798.7L862.5,795.5L866.2,794.7L867.9,795.8L868.9,798.0L869.6,796.9L872.5,796.6L875.6,794.0L877.8,794.2L878.9,795.9L862.1,810.2L852.1,809.6L845.5,801.4L854.2,798.4Z"},{"n":"Marruecos","z":null,"dst":false,"d":"M188.8,800.3L192.3,816.7L190.2,831.0L191.2,857.0L195.2,863.1L189.5,871.3L162.9,869.0L151.7,875.4L139.8,874.4L134.4,891.4L108.5,894.2L97.5,903.6L79.2,905.0L58.0,902.4L19.8,908.7L13.3,928.2L-67.8,898.1L-66.4,897.7L-46.7,902.5L-25.0,892.9L-12.7,890.6L10.8,877.5L15.9,847.5L30.1,830.7L36.9,819.7L54.3,808.7L76.5,804.6L93.4,799.7L113.0,780.2L122.9,768.1L136.4,772.2L144.7,784.9L162.7,788.1L180.7,798.1L188.8,800.3Z"},{"n":"Egipto","z":null,"dst":false,"d":"M731.8,996.5L727.6,966.6L718.7,948.1L722.0,932.6L717.4,922.8L723.2,910.4L749.9,905.9L770.5,908.9L791.8,912.3L801.9,914.1L816.0,903.5L822.8,895.1L840.0,889.3L854.9,889.0L863.0,899.3L865.9,890.5L883.2,892.1L899.1,889.3L907.4,880.8L928.0,911.6L931.6,917.1L928.6,928.1L929.0,947.1L927.5,956.3L913.2,960.1L901.8,952.5L878.6,922.4L877.0,925.0L891.7,947.9L904.9,962.3Z"},{"n":"Libia","z":null,"dst":false,"d":"M401.8,1007.3L401.5,1003.7L406.7,984.1L406.4,972.8L401.2,950.9L411.7,946.1L414.2,936.0L412.7,926.0L427.3,917.7L434.1,910.4L444.2,904.0L446.3,885.8L469.4,895.0L477.8,893.2L494.5,897.5L521.1,908.3L530.8,929.5L549.3,933.9L578.6,943.0L601.4,953.9L611.2,947.0L620.3,935.3L614.3,917.3L619.8,905.2L633.4,893.0L646.9,888.6L674.3,890.7L682.4,900.6L689.9,899.8L696.8,903.1L717.1,903.2L723.2,910.4L717.4,922.8L722.0,932.6L718.7,948.1L727.6,966.6L731.8,996.5Z"},{"n":"Bosnia y Herzegovina","z":1,"dst":true,"d":"M576.1,664.5L560.9,656.4L554.2,647.1L547.8,642.3L540.1,633.9L536.3,626.9L528.2,616.3L531.5,606.9L537.4,612.0L540.7,607.2L548.2,606.5L562.1,609.8L573.2,609.0L580.8,613.7L586.6,613.3L583.2,623.5L591.6,631.8L589.8,642.7L586.0,643.9L583.0,646.2L577.9,651.8L576.1,664.5Z"},{"n":"Macedonia del Norte","z":1,"dst":true,"d":"M641.0,667.1L650.2,673.5L653.1,688.5L649.9,689.6L647.5,693.9L638.2,694.4L632.0,700.0L620.9,703.1L613.2,698.1L610.1,688.4L611.6,680.5L613.8,680.5L614.2,675.7L623.9,671.4L627.6,670.1L633.3,668.2L641.0,667.1Z"},{"n":"Serbia","z":1,"dst":true,"d":"M576.7,590.0L588.4,583.3L598.3,583.7L607.5,591.9L609.9,599.0L620.0,603.5L622.1,612.7L632.2,618.4L636.7,612.8L641.0,615.2L637.6,619.4L641.0,623.1L637.6,628.6L639.9,636.8L648.9,645.7L643.4,653.5L641.4,661.1L643.4,663.6L641.0,667.1L633.3,668.2L627.6,670.1L626.9,668.5L628.7,665.6L630.0,659.8L627.7,660.2L624.0,656.3L621.2,655.4L618.7,652.0L615.5,650.9L612.8,647.8L609.9,649.3L608.2,657.1L604.4,659.0L605.6,657.0L598.9,652.7L593.2,650.6L590.6,647.6L586.0,643.9L589.8,642.7L591.6,631.8L583.2,623.5L586.6,613.3L580.8,613.7L586.5,604.8L581.0,598.6L576.7,590.0Z"},{"n":"Montenegro","z":1,"dst":true,"d":"M601.6,664.3L597.2,666.7L595.8,662.4L589.2,674.2L590.8,681.4L587.1,679.8L581.9,672.6L574.4,668.4L576.1,664.5L577.9,651.8L583.0,646.2L586.0,643.9L590.6,647.6L593.2,650.6L598.9,652.7L605.6,657.0L604.4,659.0L601.6,664.3Z"},{"n":"Kosovo","z":1,"dst":true,"d":"M611.6,680.5L609.8,672.3L605.6,670.2L601.6,664.3L604.4,659.0L608.2,657.1L609.9,649.3L612.8,647.8L615.5,650.9L618.7,652.0L621.2,655.4L624.0,656.3L627.7,660.2L630.0,659.8L628.7,665.6L626.9,668.5L627.6,670.1L623.9,671.4L614.2,675.7L613.8,680.5L611.6,680.5Z"}],"cities":{"Londres":[305.0,442.8],"Dublín":[233.7,381.4],"Lisboa":[87.4,684.1],"Reykjavík":[159.9,85.5],"Madrid":[191.5,675.3],"París":[328.8,508.3],"Berlín":[494.2,441.8],"Roma":[473.5,682.4],"Atenas":[675.8,764.0],"Helsinki":[628.5,261.0],"Bucarest":[696.1,611.4],"Estambul":[757.4,680.4],"Moscú":[799.1,324.4],"Minsk":[682.4,396.4],"Estocolmo":[551.8,287.1],"Varsovia":[599.0,445.1],"Kiev":[737.7,464.9]},"gw":[[223.8,836.6],[233.6,790.4],[243.2,744.7],[252.8,699.4],[262.3,654.4],[271.7,609.6],[281.1,565.0],[290.5,520.6],[299.8,476.4],[309.1,432.2],[318.4,388.0],[327.8,343.8],[337.1,299.4],[346.5,254.9],[355.9,210.2],[365.4,165.2],[375.0,119.8],[384.7,74.0],[394.5,27.6],[404.4,-19.6]]};
+const ZCOL=['#9cc3e6','#f6c9a8','#c7e3b5','#d9c4ea','#f2df8a'];
+const euSvg=$('eumap'); euSvg.setAttribute('viewBox','0 0 '+EU.W+' '+EU.H);
+const NS='http://www.w3.org/2000/svg';
+let euSel=null;
+function euOff(c){ return c.z===null?null:c.z+(legale&&c.dst?1:0); }
+function drawEU(){
+  euSvg.textContent='';
+  const mk=(t,a,p)=>{ const e=document.createElementNS(NS,t); for(const k in a) e.setAttribute(k,a[k]); (p||euSvg).appendChild(e); return e; };
+  EU.c.forEach((c,i)=>{ const o=euOff(c);
+    const p=mk('path',{d:c.d,class:'c'+(euSel===i?' sel':''),fill:o===null?'#e6e6e6':ZCOL[o]});
+    if(o!==null){ p.addEventListener('click',()=>{ euSel=i; drawEU(); euInfo(); }); const t=mk('title',{},p); t.textContent=c.n; } });
+  mk('polyline',{points:EU.gw.map(p=>p.join(',')).join(' '),fill:'none',stroke:'#1f8a55','stroke-width':2.5,'stroke-dasharray':'8 5'});
+  const g0=EU.gw[EU.gw.length-1]; const tg=mk('text',{x:g0[0]+6,y:g0[1]+14,fill:'#1f8a55'}); tg.textContent='meridiano de Greenwich'; tg.style.fill='#1f8a55';
+  for(const [n,[x,y]] of Object.entries(EU.cities)){ if(['Kiev','Varsovia','Estocolmo','Bucarest','Madrid'].includes(n)) continue;
+    mk('circle',{cx:x,cy:y,r:n==='Roma'?6:4.5,fill:n==='Roma'?'#d61f1f':'#152131'}); const t=mk('text',{x:x+7,y:y-6,class:'ct'}); t.textContent=n+' '+hm(utc+cityOff(n)); }
+  euZones();
+}
+const CITY_OFF={Londra:[0,1],Dublino:[0,1],Lisbona:[0,1],'Reykjavík':[0,0],Madrid:[1,1],Parigi:[1,1],Berlino:[1,1],Roma:[1,1],Stoccolma:[1,1],Varsavia:[1,1],Atene:[2,1],Helsinki:[2,1],Bucarest:[2,1],Kiev:[2,1],Istanbul:[3,0],Mosca:[3,0],Minsk:[3,0]};
+function cityOff(n){ const c=CITY_OFF[n]; return c[0]+(legale&&c[1]?1:0); }
+function euZones(){ const used=new Set(EU.c.map(euOff).filter(o=>o!==null));
+  $('zones').innerHTML=[...used].sort().map(o=>`<span class="zone"><i style="background:${ZCOL[o]}"></i>${utcTxt(o)} <b>${hm(utc+o)}</b></span>`).join(''); }
+function euInfo(){ if(euSel===null) return; const c=EU.c[euSel], o=euOff(c);
+  const extra = legale ? (c.dst ? ' Ahora está en vigor el horario de verano: respecto al invierno, el reloj va una hora adelantado.' : ' Aquí no hay horario de verano: el reloj es igual todo el año.') : '';
+  const diff=o-itOff(), rel = diff===0 ? 'la misma hora que Italia' : (Math.abs(diff)+(Math.abs(diff)===1?' hora':' horas')+(diff>0?' más':' menos')+' respecto a Italia');
+  $('euinfo').innerHTML=`<b>${c.n}</b>: huso ${utcTxt(o)}, son las <b>${hm(utc+o)}</b>, ${rel}.`+extra; }
+
+/* ---------- esercizio: le lancette ---------- */
+const POOL=[['Londres',0,1],['Dublín',0,1],['Lisboa',0,1],['Reykjavík',0,0],['Madrid',1,1],['París',1,1],['Berlín',1,1],['Roma',1,1],['Atenas',2,1],['Helsinki',2,1],['Bucarest',2,1],['Estambul',3,0],['Moscú',3,0],['Minsk',3,0]];
+let season='w', Q=null, first=true;
+const offOf=(c)=>c[1]+(season==='s'&&c[2]?1:0);
+function face(h){ const a=((h%12)/12)*2*PI;
+  let s=`<svg viewBox="-60 -60 120 120" aria-hidden="true"><circle r="56" fill="#fff" stroke="#152131" stroke-width="3"/>`;
+  for(let k=0;k<12;k++){ const t=k/12*2*PI, r1=k%3?48:44; s+=`<line x1="${(r1*Math.sin(t)).toFixed(1)}" y1="${(-r1*Math.cos(t)).toFixed(1)}" x2="${(52*Math.sin(t)).toFixed(1)}" y2="${(-52*Math.cos(t)).toFixed(1)}" stroke="#152131" stroke-width="${k%3?1.5:3}"/>`; }
+  [[12,0,-33],[3,35,5],[6,0,42],[9,-35,5]].forEach(([n,x,y])=>s+=`<text x="${x}" y="${y}" text-anchor="middle" font-size="14" font-weight="700" fill="#152131">${n}</text>`);
+  s+=`<line x1="0" y1="0" x2="0" y2="-42" stroke="#566476" stroke-width="3" stroke-linecap="round"/>`;
+  s+=`<line x1="0" y1="0" x2="${(28*Math.sin(a)).toFixed(1)}" y2="${(-28*Math.cos(a)).toFixed(1)}" stroke="#c2410c" stroke-width="6" stroke-linecap="round"/><circle r="4" fill="#152131"/></svg>`;
+  return s; }
+function newQ(){
+  let ref, h0, targets;
+  if(first && season==='w'){ ref=POOL[0]; h0=9; targets=[POOL[7],POOL[1],POOL[11]]; first=false; }
+  else { const refs=[POOL[0],POOL[7],POOL[8]]; ref=refs[Math.floor(Math.random()*3)]; h0=7+Math.floor(Math.random()*11);
+    const others=POOL.filter(c=>c!==ref).sort(()=>Math.random()-0.5); targets=others.slice(0,3);
+    if(targets.every(c=>offOf(c)===offOf(ref))) targets[0]=others.find(c=>offOf(c)!==offOf(ref)); }
+  Q={ref,h0,targets,set:targets.map(()=>h0),checked:false};
+  $('ask').textContent=`En ${ref[0]} son las ${h0}:00${season==='s'?' de un día de verano':' de un día de invierno'}. Mueve la aguja de las horas para las otras ciudades.`;
+  $('fb').hidden=true; drawClocks(); }
+function drawClocks(){
+  const box=$('clocks'); box.innerHTML='';
+  const add=(c,h,i)=>{ const d=document.createElement('div'); const ref=i<0;
+    let cls='ck'+(ref?' ref':''); if(!ref&&Q.checked){ cls+=(((h-(Q.h0+offOf(c)-offOf(Q.ref)))%12+12)%12===0)?' right':' wrong'; }
+    d.className=cls;
+    d.innerHTML=`<span class="nm">${c[0]}</span><span class="off">${utcTxt(offOf(c))}</span>`+face(h)+(ref||Q.checked?`<span class="dig">${hm(ref?h:Q.h0+offOf(c)-offOf(Q.ref))}</span>`:'')+(ref?'':`<div class="bt"><button type="button" data-d="-1" aria-label="Atrasar una hora la aguja en ${c[0]}">− 1 hora</button><button type="button" data-d="1" aria-label="Adelantar una hora la aguja en ${c[0]}">+ 1 hora</button></div>`);
+    d.querySelectorAll('[data-d]').forEach(b=>b.addEventListener('click',()=>{ Q.set[i]+=+b.dataset.d; Q.checked=false; $('fb').hidden=true; drawClocks(); }));
+    box.append(d); };
+  add(Q.ref,Q.h0,-1); Q.targets.forEach((c,i)=>add(c,Q.set[i],i)); }
+$('check').addEventListener('click',()=>{ Q.checked=true; drawClocks();
+  const ok=Q.targets.filter((c,i)=>(((Q.set[i]-(Q.h0+offOf(c)-offOf(Q.ref)))%12+12)%12)===0).length;
+  const lines=Q.targets.map(c=>{ const d=offOf(c)-offOf(Q.ref); return d===0?`${c[0]} está en el mismo huso que ${Q.ref[0]}: la misma hora.`:`${c[0]} va ${Math.abs(d)} ${Math.abs(d)===1?'hora':'horas'} ${d>0?'adelantada (más al este)':'atrasada (más al oeste)'}.`; });
+  const f=$('fb'); f.hidden=false; f.className='fb '+(ok===Q.targets.length?'right':'wrong');
+  f.innerHTML=(ok===Q.targets.length?'<b>¡Todo correcto!</b> ':`<b>Correctas: ${ok} de ${Q.targets.length}.</b> `)+lines.join(' ')+(season==='s'?' Recuerda: en verano Islandia, Turquía, Bielorrusia y Rusia no cambian el reloj.':''); });
+$('again').addEventListener('click',newQ);
+document.querySelectorAll('[data-season]').forEach(b=>b.addEventListener('click',()=>{ season=b.dataset.season; document.querySelectorAll('[data-season]').forEach(o=>o.setAttribute('aria-pressed',String(o===b))); newQ(); }));
+
+/* ---------- comandi ---------- */
+function update(){ $('cG').textContent=hm(utc); $('cR').textContent=hm(utc+itOff()); $('cRl').textContent='Italia · '+utcTxt(itOff())+(legale?' (horario de verano)':''); if(document.activeElement!==$('utc')) $('utc').value=Math.round(((utc%24)+24)%24*60/5)*5%1440; updTable(); drawEU(); euInfo(); }
+function setPlay(v){ playing=v; $('play').textContent=v?'Pausa':'Iniciar'; }
+let jumpBtn=null;
+function setJump(b){ jumpBtn=b; document.querySelectorAll('[data-u],[data-it]').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); }
+$('play').addEventListener('click',()=>{ setJump(null); setPlay(!playing); });
+$('utc').addEventListener('input',e=>{ utc=+e.target.value/60; setPlay(false); setJump(null); });
+document.querySelectorAll('[data-u]').forEach(b=>b.addEventListener('click',()=>{ utc=+b.dataset.u/60; setPlay(false); setJump(b); }));
+document.querySelectorAll('[data-it]').forEach(b=>b.addEventListener('click',()=>{ utc=+b.dataset.it-itOff(); setPlay(false); setJump(b); }));
+$('dst').addEventListener('click',()=>{ legale=!legale; if(jumpBtn&&jumpBtn.dataset.it) utc=+jumpBtn.dataset.it-itOff(); $('dst').setAttribute('aria-pressed',String(legale)); $('dst').textContent='Horario de verano: '+(legale?'sí':'no'); lastTxt=''; update(); });
+let lastTxt='';
+function loop(ts){ if(last!==null&&playing) utc=(utc+(ts-last)/1000*1.2); last=ts; drawPolar(); drawStrip(); const k=Math.round(utc*12); if(k!==lastTxt){ lastTxt=k; update(); } requestAnimationFrame(loop); }
+newQ(); update(); requestAnimationFrame(loop);
+})();
+</script>
+
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Tamaño de la página">
+<button type="button" data-z="-1" title="Reducir (tecla −)" aria-label="Reducir">A−</button><span data-zv title="Volver al 100 %">100%</span><button type="button" data-z="1" title="Ampliar (tecla +)" aria-label="Ampliar">A+</button><button type="button" data-z="0" title="Tamaño normal (tecla 0)" aria-label="Tamaño normal">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+</body>
+</html>

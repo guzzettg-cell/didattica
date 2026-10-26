@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}
+.backlink{display:inline-block;margin:14px 16px 0;font:600 14px/1.2 system-ui,sans-serif;color:inherit;text-decoration:none;border:1px solid rgba(120,130,150,.4);border-radius:999px;padding:6px 12px}
+.backlink:hover{text-decoration:underline}
+.map.nomap{display:flex;flex-wrap:wrap;gap:8px;padding:14px;align-content:flex-start;background:var(--card,#fff)}
+.map.nomap .mapnote{flex-basis:100%;margin:0 0 4px;font-size:.9rem;color:var(--muted,#566476)}
+.map.nomap .dot,.map.nomap .hit,.map.nomap .istmo{position:static!important;transform:none!important;width:auto!important;height:auto!important;aspect-ratio:auto!important;opacity:1!important;border-radius:999px!important;padding:6px 12px!important;border:0!important;color:#fff!important;font:700 .88rem/1.2 system-ui,sans-serif!important;box-shadow:none!important;animation:none!important}
+.map.nomap .dot::after,.map.nomap .hit::after,.map.nomap .istmo::after{content:attr(aria-label)}
+.map.nomap .hit{background:#3b4a63!important}.map.nomap .istmo{background:#d62828!important}
+.map.nomap .dot.dim{opacity:.25!important}
+.map.nomap [aria-pressed="true"]{outline:3px solid #111!important;outline-offset:2px}
+</style>
+<title>La atmósfera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: 1 di che cosa è fatta (quadretti); 2 l'ascensore negli strati (colonna + temperatura + scheda); 3 i venti costanti (globo animato); 4 le brezze (scena giorno/notte); 5 esercizi */
+:root{
+  --paper:#eef1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
+  --accent:#c2410c; --accent-soft:#fde4d3; --ok:#1f7a4d; --ok-soft:#dcf2e6; --no:#b42318; --no-soft:#fde3e1;
+  --n2:#3b6fd8; --o2:#2bb07f; --oth:#e6a23c; --warm:#d62828; --cold:#2457c5;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717; --warm:#f87171; --cold:#7aa2f7; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717; --warm:#f87171; --cold:#7aa2f7; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+[hidden]{display:none!important}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:24px}
+header.top{display:grid;gap:6px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.02;margin:0}
+h2.sec{font-family:var(--display);font-weight:800;font-size:1.45rem;margin:0}
+.lead{margin:0;max-width:80ch;color:var(--muted)}
+section.part{display:grid;gap:12px}
+.grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:920px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.card h3{font-family:var(--display);font-weight:800;font-size:1.35rem;margin:0}
+.card p{margin:0}
+.kind{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.note{font-size:.86rem;color:var(--muted);margin:0}
+.scene{background:#08142a;border-radius:16px;overflow:hidden;min-width:0}
+canvas{width:100%;display:block}
+#gas{aspect-ratio:1/1;max-width:340px}
+#col{aspect-ratio:1.05/1}
+#winds{aspect-ratio:1.25/1}
+#breeze{aspect-ratio:2/1}
+.gasgrid{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:20px;align-items:center}
+@media (max-width:720px){.gasgrid{grid-template-columns:1fr}}
+.legend{display:grid;gap:10px}
+.legend div{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start}
+.legend i{width:22px;height:22px;border-radius:5px}
+.legend b{font-family:var(--display);font-size:1.25rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button,.btn{font:inherit;font-size:.88rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 12px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.alt{font-family:var(--display);font-weight:800;font-size:1.9rem;font-variant-numeric:tabular-nums}
+.temp{font-weight:700;font-variant-numeric:tabular-nums}
+.things{display:flex;flex-wrap:wrap;gap:6px}
+.things span{font-size:.85rem;border-radius:999px;padding:3px 10px;background:var(--accent-soft)}
+.fb{border-radius:10px;padding:9px 12px;font-size:.95rem}
+.fb.right{background:var(--ok-soft);border:1px solid var(--ok)}
+.fb.wrong{background:var(--no-soft);border:1px solid var(--no)}
+.lay{display:grid;gap:8px}
+.lay .row{display:grid;grid-template-columns:minmax(0,9em) auto auto;gap:8px;align-items:center}
+.lay .row button{font:inherit;font-size:.88rem;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 10px;cursor:pointer}
+.lay .row button.right{border-color:var(--ok);background:var(--ok-soft)}
+.lay .row button.wrong{border-color:var(--no);background:var(--no-soft)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:8px 12px;cursor:pointer}
+.opts button.on{background:var(--accent-soft);border-color:var(--accent)}
+.opts button.right{border-color:var(--ok);background:var(--ok-soft)}
+.opts button.wrong{border-color:var(--no);background:var(--no-soft)}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+details{border-top:1px solid var(--line);padding:9px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700}
+details p{margin:6px 0 0;color:var(--muted)}
+/* navigazione tra gli argomenti */
+.pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pager a{display:grid;gap:2px;align-content:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;color:var(--ink);text-decoration:none}
+.pager a:hover{border-color:var(--sun,var(--accent,#d9800f))}
+.pager a:hover span{text-decoration:underline}
+.pager small{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pager span{font-family:var(--display);font-weight:800;font-size:1.05rem;line-height:1.25}
+.pager .next{text-align:right}
+.pager.pager-top a{padding:8px 14px}
+.pager.pager-top span{font-size:.95rem}
+@media (max-width:560px){.pager{grid-template-columns:1fr}.pager .next{text-align:left}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="pager pager-top" aria-label="Temas (arriba)">
+    <a class="prev" href="relieve-aguas.html"><small>Tema anterior</small><span>← Relieve, océanos, ríos y lagos</span></a>
+    <a class="next" href="../index.html"><small>Fin del módulo</small><span>El planeta Tierra: todas las lecciones →</span></a>
+  </nav>
+  <header class="top">
+    <div class="eyebrow">Geografía · La atmósfera</div>
+    <h1>La atmósfera</h1>
+    <p class="lead">La atmósfera es una capa de gases, vapor de agua y polvo que rodea la Tierra, sujeta por la fuerza de la gravedad. Gracias a la atmósfera es posible la respiración de los seres vivos, la regulación de la temperatura, la combustión de los recursos energéticos y la protección contra las radiaciones cósmicas peligrosas.</p>
+  </header>
+
+  <section class="part">
+    <h2 class="sec">1. ¿De qué está hecho el aire?</h2>
+    <div class="card gasgrid">
+      <canvas id="gas" role="img" aria-label="Cien cuadritos: 78 de nitrógeno, 21 de oxígeno, 1 de otros gases"></canvas>
+      <div class="legend">
+        <p>Imagina que divides el aire en 100 partes iguales:</p>
+        <div><i style="background:var(--n2)"></i><span><b>78%</b> nitrógeno<br><small class="note">el gas más abundante</small></span></div>
+        <div><i style="background:var(--o2)"></i><span><b>21%</b> oxígeno<br><small class="note">el que respiramos</small></span></div>
+        <div><i style="background:var(--oth)"></i><span><b>1%</b> otros gases<br><small class="note">sobre todo argón, después dióxido de carbono (menos de medio cuadrito, más o menos el 0,04 %) y otros</small></span></div>
+        <p class="note">En el aire también hay vapor de agua y polvo, en cantidades que cambian de un lugar a otro.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">2. Un viaje hacia arriba, capa por capa</h2>
+    <div class="grid">
+      <div class="scene"><canvas id="col" role="img" aria-label="Columna de la atmósfera desde el suelo hasta 1000 km con las cinco capas y el gráfico de la temperatura"></canvas></div>
+      <div class="card" aria-live="polite">
+        <label for="h" class="kind">Altitud</label>
+        <div class="alt" id="hv">0 km</div>
+        <input id="h" type="range" min="0" max="1000" step="1" value="0">
+        <div class="chips" id="layers"></div>
+        <h3 id="lname"></h3>
+        <div class="temp" id="tv"></div>
+        <p id="ltext"></p>
+        <div class="things" id="things"></div>
+      </div>
+    </div>
+    <p class="note">La escala de las alturas no es regular: las capas más bajas están ampliadas, como en la figura del libro.</p>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">3. Cómo circula el aire: los vientos constantes</h2>
+    <div class="grid">
+      <div class="scene"><canvas id="winds" role="img" aria-label="La Tierra con las franjas de alta y baja presión y los vientos constantes animados: alisios, vientos del oeste y vientos polares"></canvas></div>
+      <div class="card" aria-live="polite">
+        <div class="chips" id="wch"></div>
+        <h3 id="wname"></h3>
+        <p id="wtext"></p>
+        <p class="note">Los vientos soplan desde las zonas de alta presión (A) hacia las de baja presión (B). No van rectos hacia el norte o hacia el sur: la rotación de la Tierra hace que se desvíen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">4. Los vientos periódicos: las brisas</h2>
+    <div class="grid">
+      <div class="scene"><canvas id="breeze" role="img" aria-label="Animación de las brisas de día y de noche"></canvas></div>
+      <div class="card" aria-live="polite">
+        <div class="chips" id="bplace"></div>
+        <div class="chips" id="btime"></div>
+        <h3 id="bname"></h3>
+        <p id="btext"></p>
+        <p class="note">Las brisas soplan desde las zonas más frescas hacia las más cálidas. El aire caliente es más ligero y sube; en su lugar llega el aire más fresco.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">Ahora tú</h2>
+    <div class="two">
+      <div class="card" aria-live="polite">
+        <div class="kind">Ejercicio 2</div>
+        <p>¿En qué capas la temperatura <b style="color:var(--warm)">aumenta</b> al subir y en cuáles <b style="color:var(--cold)">disminuye</b>? Usa el ascensor de arriba para comprobarlo.</p>
+        <div class="lay" id="lay"></div>
+        <div class="fb" id="layfb" hidden></div>
+      </div>
+      <div class="card" aria-live="polite">
+        <div class="kind">Ejercicio 3</div>
+        <p>¿Cuáles son los tres tipos de vientos constantes? Selecciona tres y después comprueba.</p>
+        <div class="opts" id="wq"></div>
+        <div><button class="btn" id="wqc" type="button">Comprobar</button></div>
+        <div class="fb" id="wqfb" hidden></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="kind">Preguntas para razonar</div>
+      <div>
+        <details><summary>¿Por qué en la montaña hace más frío que en la llanura?</summary><p>Porque estamos en la troposfera, que se calienta con el calor que sube de la superficie de la Tierra: cuanto más se sube, más nos alejamos de la fuente de calor y la temperatura baja, de media unos 6 °C cada 1000 metros.</p></details>
+        <details><summary>¿Para qué sirve la ozonosfera?</summary><p>Es una franja de la estratosfera rica en ozono, que retiene parte de las radiaciones solares peligrosas para los seres vivos, como los rayos ultravioleta. Es como una crema solar para todo el planeta.</p></details>
+        <details><summary>En la termosfera hay 1000 °C: ¿por qué los astronautas no se queman?</summary><p>Porque allí los gases están tan enrarecidos que hay poquísimas partículas: aunque cada una es rapidísima, es decir, «calentísima», hay demasiado pocas para calentar un objeto.</p></details>
+        <details><summary>¿Por qué las estrellas fugaces se ven normalmente entre 80 y 120 km de altura?</summary><p>Allí el aire empieza a ser bastante denso para que los meteoroides que entran en la atmósfera a altísima velocidad se quemen por el roce.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Temas (abajo)">
+    <a class="prev" href="relieve-aguas.html"><small>Tema anterior</small><span>← Relieve, océanos, ríos y lagos</span></a>
+    <a class="next" href="../index.html"><small>Fin del módulo</small><span>El planeta Tierra: todas las lecciones →</span></a>
+  </nav>
+</div>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const FB='"Atkinson Hyperlegible",Verdana,sans-serif', FD='"Bricolage Grotesque","Trebuchet MS",sans-serif';
+const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+function fit(cv,c){ const r=cv.getBoundingClientRect(), d=window.devicePixelRatio||1;
+  const W=Math.round(r.width*d), H=Math.round(r.height*d); if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}
+  c.setTransform(d,0,0,d,0,0); return {w:r.width,h:r.height}; }
+function label(c,t,x,y,col,size,weight,align){ c.font=`${weight||700} ${size}px ${FB}`; c.textAlign=align||'left'; c.lineWidth=3; c.strokeStyle='rgba(6,12,26,.8)'; c.strokeText(t,x,y); c.fillStyle=col; c.fillText(t,x,y); }
+function arrow(c,x,y,dx,dy,s,col){ const L=Math.hypot(dx,dy)||1; dx/=L; dy/=L; c.fillStyle=col; c.beginPath(); c.moveTo(x+dx*s,y+dy*s); c.lineTo(x-dx*s*0.6-dy*s*0.6,y-dy*s*0.6+dx*s*0.6); c.lineTo(x-dx*s*0.6+dy*s*0.6,y-dy*s*0.6-dx*s*0.6); c.closePath(); c.fill(); }
+
+/* ---------- 1. gas ---------- */
+const gc=$('gas'), g=gc.getContext('2d');
+function drawGas(){ const {w}=fit(gc,g), cell=w/10;
+  for(let i=0;i<100;i++){ const r=Math.floor(i/10), c=i%10; g.fillStyle=i<78?css('--n2'):(i<99?css('--o2'):css('--oth')); g.fillRect(c*cell+1.5,r*cell+1.5,cell-3,cell-3); }
+  g.font=`800 ${cell*0.55}px ${FD}`; g.textAlign='center'; g.fillStyle='#fff'; g.fillText('N₂',5*cell,4*cell); g.fillText('O₂',4*cell,8.75*cell); }
+
+/* ---------- 2. strati ---------- */
+const SEG=[[0,0],[12,0.26],[50,0.47],[100,0.66],[600,0.92],[1000,1]];
+const fy=z=>{ for(let i=1;i<SEG.length;i++) if(z<=SEG[i][0]){ const [a,pa]=SEG[i-1],[b,pb]=SEG[i]; return pa+(pb-pa)*(z-a)/(b-a); } return 1; };
+const TP=[[0,15],[12,-56],[20,-56],[50,-2],[85,-90],[100,-80],[150,500],[250,850],[500,1000],[1000,1000]];
+const tempAt=z=>{ for(let i=1;i<TP.length;i++) if(z<=TP[i][0]){ const [a,ta]=TP[i-1],[b,tb]=TP[i]; return ta+(tb-ta)*(z-a)/(b-a); } return 1000; };
+const LAY=[
+ {id:'tro',n:'Troposfera',a:0,b:12,col:'#4a9ee8',dir:-1,t:'Llega hasta unos 12 km de altura de media. Contiene el 75 % del aire de toda la atmósfera y casi todo el vapor de agua. Se calienta con el calor que sube de la superficie de la Tierra, por eso al subir la temperatura baja. Aquí se producen los fenómenos meteorológicos: aquí se forman las nubes.'},
+ {id:'str',n:'Estratosfera',a:12,b:50,col:'#2f6fc6',dir:1,t:'Llega hasta 50 km. El vapor de agua y los gases están enrarecidos y la temperatura aumenta con la altura. Contiene una franja de ozono, la ozonosfera, que retiene parte de las radiaciones solares.'},
+ {id:'mes',n:'Mesosfera',a:50,b:100,col:'#2a4f9e',dir:-1,t:'Llega hasta casi 100 km. La temperatura vuelve a bajar al subir, hasta llegar a −90 °C: es la capa más fría de la atmósfera. Aquí se queman muchos meteoroides, que vemos como estrellas fugaces.'},
+ {id:'ter',n:'Termosfera',a:100,b:600,col:'#1e3577',dir:1,t:'La temperatura vuelve a subir con la altura, por efecto de la radiación solar, hasta llegar a 1000 °C. Aquí se forman las auroras polares y aquí orbita la Estación Espacial Internacional.'},
+ {id:'eso',n:'Exosfera',a:600,b:1000,col:'#121f4a',dir:0,t:'Es la capa más externa: aquí hay poquísimas partículas de gas y la Tierra ya no las retiene. La atmósfera se difumina poco a poco en el espacio.'}
+];
+const THINGS=[[0.5,'nubes bajas','cloud'],[3,'nubes','cloud'],[8.8,'Everest (8,8 km)','peak'],[10.5,'avión de línea','plane'],[25,'ozonosfera','ozone'],[35,'globo sonda','balloon'],[85,'estrellas fugaces','meteor'],[250,'auroras polares','aurora'],[400,'Estación Espacial','iss']];
+let h=0;
+const lc=$('layers');
+LAY.forEach(l=>{ const b=document.createElement('button'); b.type='button'; b.textContent=l.n; b.dataset.id=l.id; b.setAttribute('aria-pressed','false');
+  b.addEventListener('click',()=>{ target=(l.a+Math.min(l.b,l.a===600?800:l.b))/2; }); lc.append(b); });
+let target=null;
+$('h').addEventListener('input',e=>{ h=+e.target.value; target=null; });
+const cc=$('col'), c=cc.getContext('2d'); let tt=0;
+function drawCol(){ const {w,h:H}=fit(cc,c), fs=Math.max(10,Math.min(13,w/48)), top=fs*1.2, bot=H-fs*2.2, colW=w*0.5, x0=w*0.07;
+  const Y=z=>bot-fy(z)*(bot-top);
+  c.fillStyle='#06101f'; c.fillRect(0,0,w,H);
+  LAY.forEach(l=>{ const y1=Y(l.b), y0=Y(l.a); const gr=c.createLinearGradient(0,y1,0,y0); gr.addColorStop(0,l.col); gr.addColorStop(1,l.col); c.fillStyle=l.col; c.fillRect(x0,y1,colW,y0-y1);
+    const sel=h>=l.a&&h<=l.b; if(sel){ c.strokeStyle='#ffd27a'; c.lineWidth=2.5; c.strokeRect(x0+1,y1+1,colW-2,y0-y1-2); }
+    label(c,l.n,x0+8,y1+(y0-y1)/2+5,'#ffffff',fs*1.05,800); });
+  // stelle in alto
+  for(let i=0;i<40;i++){ const x=x0+((i*97)%100)/100*colW, y=Y(600)+((i*53)%100)/100*(Y(1000)-Y(600)); c.fillStyle='rgba(255,255,255,.6)'; c.fillRect(x,y,1.5,1.5); }
+  // ozonosfera
+  c.fillStyle='rgba(120,220,255,.25)'; c.fillRect(x0,Y(35),colW,Y(15)-Y(35));
+  // aurore
+  c.save(); c.globalAlpha=0.6+0.2*Math.sin(tt*2); const ag=c.createLinearGradient(0,Y(400),0,Y(100)); ag.addColorStop(0,'rgba(120,255,160,0)'); ag.addColorStop(1,'rgba(120,255,160,.55)');
+  c.fillStyle=ag; c.beginPath(); c.moveTo(x0+colW*0.55,Y(100)); for(let k=0;k<=20;k++){ const xx=x0+colW*(0.55+0.4*k/20); c.lineTo(xx,Y(400)+Math.sin(k*0.9+tt*1.5)*8); } c.lineTo(x0+colW*0.95,Y(100)); c.closePath(); c.fill(); c.restore();
+  // terra
+  c.fillStyle='#3f7d3a'; c.fillRect(x0,bot,colW,4); c.fillStyle='#2b5a28'; c.beginPath(); c.moveTo(x0+colW*0.6,bot); c.lineTo(x0+colW*0.72,Y(8.8)); c.lineTo(x0+colW*0.84,bot); c.closePath(); c.fill();
+  // oggetti
+  THINGS.forEach(([z,n,k])=>{ const y=Y(z), x=x0+colW*({cloud:0.3,peak:0.72,plane:0.45,ozone:0.62,balloon:0.8,meteor:0.75,aurora:0.75,iss:0.4}[k]);
+    if(k==='cloud'){ c.fillStyle='rgba(255,255,255,.9)'; c.beginPath(); c.arc(x,y,6,0,2*Math.PI); c.arc(x+7,y+1,5,0,2*Math.PI); c.arc(x-7,y+1,5,0,2*Math.PI); c.fill(); }
+    if(k==='plane'){ c.fillStyle='#fff'; c.beginPath(); c.moveTo(x-10,y); c.lineTo(x+10,y); c.lineTo(x+4,y-2); c.lineTo(x-2,y-8); c.lineTo(x-2,y); c.fill(); }
+    if(k==='balloon'){ c.fillStyle='#fff'; c.beginPath(); c.arc(x,y-6,6,0,2*Math.PI); c.fill(); c.strokeStyle='#fff'; c.beginPath(); c.moveTo(x,y); c.lineTo(x,y+8); c.stroke(); }
+    if(k==='meteor'){ for(let j=0;j<3;j++){ const ph=(tt*0.6+j/3)%1; const mx=x+20-ph*40-j*14, my=y-12+ph*18+j*6; const gr=c.createLinearGradient(mx,my,mx+18,my-10); gr.addColorStop(0,'#fff'); gr.addColorStop(1,'rgba(255,255,255,0)'); c.strokeStyle=gr; c.lineWidth=2; c.beginPath(); c.moveTo(mx,my); c.lineTo(mx+18,my-10); c.stroke(); } }
+    if(k==='iss'){ c.fillStyle='#ddd'; c.fillRect(x-3,y-3,6,6); c.fillStyle='#6aa0ff'; c.fillRect(x-14,y-2,9,4); c.fillRect(x+5,y-2,9,4); }
+    if(k!=='ozone'&&k!=='aurora'&&k!=='peak') label(c,n,x+14,y+4,'#ffe2a6',fs*0.8,700);
+    if(k==='ozone') label(c,'ozonosfera',x0+colW-8,y+4,'#bff0ff',fs*0.85,700,'right');
+    if(k==='aurora') label(c,'auroras polares',x0+colW-8,Y(300),'#c8ffd8',fs*0.85,700,'right');
+    if(k==='peak') label(c,'Everest',x+14,y+12,'#d8f0d0',fs*0.8,700); });
+  // scala
+  c.font=`${fs*0.8}px ${FB}`; c.fillStyle='rgba(220,230,245,.8)'; c.textAlign='right';
+  [0,12,50,100,600,1000].forEach(z=>{ c.fillText(z+' km',x0-4,Y(z)+4); });
+  // ascensore
+  const ya=Y(h); c.strokeStyle='#ffd27a'; c.lineWidth=2; c.beginPath(); c.moveTo(x0,ya); c.lineTo(x0+colW,ya); c.stroke();
+  c.fillStyle='#ffd27a'; c.beginPath(); c.moveTo(x0-1,ya); c.lineTo(x0+9,ya-6); c.lineTo(x0+9,ya+6); c.fill();
+  // grafico temperatura
+  const gx0=x0+colW+fs*1.2, gx1=w-fs*0.8, TX=t=>t<=50?gx0+(t+100)/150*(gx1-gx0)*0.62:gx0+(gx1-gx0)*0.62+(t-50)/950*(gx1-gx0)*0.38;
+  c.strokeStyle='rgba(255,255,255,.18)'; c.lineWidth=1;
+  [-100,-50,0,50,1000].forEach(t=>{ c.beginPath(); c.moveTo(TX(t),top); c.lineTo(TX(t),bot); c.stroke(); c.font=`${fs*0.75}px ${FB}`; c.textAlign='center'; c.fillStyle='rgba(220,230,245,.8)'; c.fillText(t+'°',TX(t),bot+fs*1.1); });
+  c.fillText('temperatura (°C)',(gx0+gx1)/2,bot+fs*2.1);
+  c.lineWidth=3; for(let z=0;z<1000;z+=1){ const t0=tempAt(z), t1=tempAt(z+1); c.strokeStyle=t1>t0+1e-6?'#ff6b6b':(t1<t0-1e-6?'#7aa7ff':'#dddddd'); c.beginPath(); c.moveTo(TX(t0),Y(z)); c.lineTo(TX(t1),Y(z+1)); c.stroke(); }
+  const tp=tempAt(h); c.fillStyle='#ffd27a'; c.beginPath(); c.arc(TX(tp),ya,5,0,2*Math.PI); c.fill();
+  label(c,Math.round(tp)+' °C',TX(tp)+(tp>500?-8:8),ya-8,'#ffd27a',fs,800,tp>500?'right':'left');
+  label(c,'sube ↑ / baja ↓',gx0,top+fs*0.4,'rgba(220,230,245,.85)',fs*0.8,400);
+}
+function updCol(){ $('hv').textContent=(h<20?h.toFixed(1).replace('.',','):Math.round(h))+' km'; if(document.activeElement!==$('h')) $('h').value=Math.round(h);
+  const l=LAY.find(x=>h>=x.a&&h<=x.b)||LAY[4]; $('lname').textContent=l.n; $('ltext').textContent=l.t;
+  const t=Math.round(tempAt(h)); $('tv').innerHTML=`Temperatura: ${t} °C · ${l.dir>0?'<span style="color:var(--warm)">salendo aumenta</span>':l.dir<0?'<span style="color:var(--cold)">salendo diminuisce</span>':'quasi costante'}`;
+  lc.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.id===l.id)));
+  const th=$('things'); const ins=THINGS.filter(([z])=>z>=l.a&&z<=l.b).map(x=>x[1]); th.innerHTML=ins.map(n=>`<span>${n}</span>`).join(''); }
+
+/* ---------- 3. venti costanti ---------- */
+const W={
+ ali:{n:'Alisios',bands:[[0,30,-1,1],[-30,0,-1,-1]],col:'#ffd166',t:'Soplan desde las altas presiones tropicales hacia la baja presión ecuatorial. En nuestro hemisferio vienen del noreste y van hacia el suroeste; en el hemisferio sur vienen del sureste. Antes los barcos de vela los usaban para cruzar el Atlántico.'},
+ occ:{n:'Vientos del oeste',bands:[[30,60,1,-1],[-60,-30,1,1]],col:'#ff8fab',t:'Soplan desde los trópicos hacia los círculos polares. En nuestro hemisferio van del suroeste al noreste: por eso a Italia y a España muchas borrascas llegan del oeste, del Atlántico.'},
+ pol:{n:'Vientos polares',bands:[[60,90,-1,1],[-90,-60,-1,-1]],col:'#9be7ff',t:'Soplan desde las altas presiones polares hacia las bajas presiones de los círculos polares. En nuestro hemisferio van del noreste al suroeste. Son vientos muy fríos.'}
+};
+let wsel='all';
+const wch=$('wch');
+[['all','Todos'],['ali','Alisios'],['occ','Vientos del oeste'],['pol','Vientos polares']].forEach(([k,l])=>{ const b=document.createElement('button'); b.type='button'; b.textContent=l; b.dataset.k=k; b.setAttribute('aria-pressed',String(k===wsel));
+  b.addEventListener('click',()=>{ wsel=k; wch.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.k===k))); updW(); }); wch.append(b); });
+function updW(){ if(wsel==='all'){ $('wname').textContent='La circulación general de la atmósfera'; $('wtext').textContent='En la troposfera la circulación del aire se divide en tres grandes sistemas de vientos constantes en cada hemisferio: los alisios, los vientos del oeste y los vientos polares. En el hemisferio sur las direcciones son exactamente simétricas.'; }
+  else { $('wname').textContent=W[wsel].n; $('wtext').textContent=W[wsel].t; } }
+const parts=[]; for(let i=0;i<260;i++) parts.push({lat:Math.random()*180-90,u:Math.random()*2-1,age:Math.random()});
+const wc=$('winds'), wx=wc.getContext('2d');
+function bandOf(lat){ for(const k in W) for(const b of W[k].bands) if(lat>=b[0]&&lat<b[1]) return [k,b]; return null; }
+function drawWinds(dt){ const {w,h:H}=fit(wc,wx), fs=Math.max(10,Math.min(13,w/52)), R=Math.min(w*0.33,H*0.44), cx=w*0.36, cy=H/2;
+  wx.fillStyle='#06101f'; wx.fillRect(0,0,w,H);
+  const sg=wx.createRadialGradient(cx-R*0.3,cy-R*0.3,R*0.1,cx,cy,R); sg.addColorStop(0,'#4f9ad8'); sg.addColorStop(1,'#163e72'); wx.fillStyle=sg; wx.beginPath(); wx.arc(cx,cy,R,0,2*Math.PI); wx.fill();
+  const Ylat=lat=>cy-R*Math.sin(lat*Math.PI/180), half=lat=>R*Math.cos(lat*Math.PI/180);
+  // fasce
+  for(const k in W){ if(wsel!=='all'&&wsel!==k) continue; W[k].bands.forEach(([a,b])=>{ wx.save(); wx.beginPath(); wx.arc(cx,cy,R,0,2*Math.PI); wx.clip(); wx.fillStyle=W[k].col+'22'; wx.fillRect(cx-R,Ylat(b),2*R,Ylat(a)-Ylat(b)); wx.restore(); }); }
+  // paralleli
+  [[0,'Ecuador'],[30,'30° N (trópicos)'],[-30,'30° S'],[60,'60° N (círculos polares)'],[-60,'60° S']].forEach(([l,t])=>{ const y=Ylat(l), hw=half(l); wx.strokeStyle=l===0?'rgba(255,120,120,.8)':'rgba(255,255,255,.35)'; wx.lineWidth=l===0?2:1; wx.beginPath(); wx.moveTo(cx-hw,y); wx.lineTo(cx+hw,y); wx.stroke(); });
+  // particelle
+  parts.forEach(p=>{ const bb=bandOf(p.lat); if(!bb) return; const [k,b]=bb; const vis=wsel==='all'||wsel===k;
+    if(!reduce) { p.u+=b[2]*dt*0.18; p.lat+=b[3]*dt*4; p.age+=dt*0.4; }
+    if(p.lat<b[0]||p.lat>=b[1]||p.u<-1||p.u>1||p.age>1){ p.lat=b[0]+Math.random()*(b[1]-b[0]); p.u=Math.random()*2-1; p.age=0; }
+    if(!vis) return; const x=cx+p.u*half(p.lat)*0.95, y=Ylat(p.lat), dx=b[2]*half(p.lat)*0.06, dy=-b[3]*R*0.03;
+    wx.strokeStyle=W[k].col; wx.globalAlpha=Math.sin(p.age*Math.PI); wx.lineWidth=2; wx.beginPath(); wx.moveTo(x-dx,y-dy); wx.lineTo(x,y); wx.stroke(); arrow(wx,x,y,dx,dy,4,W[k].col); wx.globalAlpha=1; });
+  // pressioni
+  [[90,'A','alta presión polar'],[60,'B','baja presión'],[30,'A','alta presión tropical'],[0,'B','baja presión (ecuador)'],[-30,'A','alta presión tropical'],[-60,'B','baja presión'],[-90,'A','alta presión polar']].forEach(([l,s,t])=>{
+    const y=Ylat(l)+(l===90?-6:l===-90?10:0), x=cx+half(l)+18; wx.fillStyle=s==='A'?'#ff6b6b':'#7aa7ff'; wx.beginPath(); wx.arc(x,y,fs*0.85,0,2*Math.PI); wx.fill();
+    wx.fillStyle='#fff'; wx.font=`800 ${fs}px ${FD}`; wx.textAlign='center'; wx.fillText(s,x,y+fs*0.38); label(wx,t,x+fs*1.3,y+4,'rgba(230,236,245,.9)',fs*0.82,400); });
+  // nomi dei venti
+  [['ali',15],['ali',-15],['occ',45],['occ',-45],['pol',75],['pol',-75]].forEach(([k,l])=>{ if(wsel!=='all'&&wsel!==k) return; label(wx,W[k].n,cx,Ylat(l)+5,W[k].col,fs*0.95,800,'center'); });
+}
+
+/* ---------- 4. brezze ---------- */
+let place='mar', night=false;
+const bp=$('bplace'), bt=$('btime');
+[['mar','En el mar'],['montaña','En la montaña']].forEach(([k,l])=>{ const b=document.createElement('button'); b.type='button'; b.textContent=l; b.dataset.k=k; b.setAttribute('aria-pressed',String(k===place)); b.addEventListener('click',()=>{ place=k; bp.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.k===k))); updB(); }); bp.append(b); });
+[['d','De día'],['n','De noche']].forEach(([k,l])=>{ const b=document.createElement('button'); b.type='button'; b.textContent=l; b.dataset.k=k; b.setAttribute('aria-pressed',String((k==='n')===night)); b.addEventListener('click',()=>{ night=k==='n'; bt.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.k===k))); updB(); }); bt.append(b); });
+function updB(){ const T={
+  'mare0':['Brisa marina','De día la tierra se calienta más deprisa que el mar. El aire sobre la tierra se vuelve caliente, más ligero, y sube; en su lugar llega el aire más fresco que está sobre el mar. La brisa sopla del mar hacia la tierra.'],
+  'mare1':['Brisa terrestre','De noche la tierra se enfría más deprisa que el mar, que sigue más templado. Ahora es el aire sobre el mar el que sube, y la brisa sopla de la tierra hacia el mar.'],
+  'monte0':['Brisa de valle','De día el Sol calienta las laderas de los montes más que el fondo del valle. El aire caliente sube por las laderas: la brisa sopla del valle hacia la montaña.'],
+  'monte1':['Brisa de montaña','De noche las laderas se enfrían deprisa y el aire frío, más pesado, se desliza hacia abajo: la brisa sopla de la montaña hacia el valle.']}[place+(night?1:0)];
+  $('bname').textContent=T[0]; $('btext').textContent=T[1]; }
+const bc=$('breeze'), b=bc.getContext('2d'); let bt0=0;
+function loopPath(pts,t){ // punto lungo un anello di punti
+  const n=pts.length; let L=0, seg=[]; for(let i=0;i<n;i++){ const a=pts[i], c2=pts[(i+1)%n], l=Math.hypot(c2[0]-a[0],c2[1]-a[1]); seg.push(l); L+=l; }
+  let d=((t%1)+1)%1*L; for(let i=0;i<n;i++){ if(d<=seg[i]){ const a=pts[i], c2=pts[(i+1)%n], k=d/seg[i]; return [a[0]+(c2[0]-a[0])*k,a[1]+(c2[1]-a[1])*k,c2[0]-a[0],c2[1]-a[1]]; } d-=seg[i]; } return [pts[0][0],pts[0][1],1,0]; }
+function drawBreeze(dt){ const {w,h:H}=fit(bc,b), fs=Math.max(10,Math.min(13,w/60)); bt0+=reduce?0:dt;
+  const sky=b.createLinearGradient(0,0,0,H); if(night){ sky.addColorStop(0,'#071430'); sky.addColorStop(1,'#1d2c55'); } else { sky.addColorStop(0,'#7ec3ff'); sky.addColorStop(1,'#d9f0ff'); } b.fillStyle=sky; b.fillRect(0,0,w,H);
+  const gy=H*0.72; let loop, warmX, coolX;
+  if(place==='mar'){
+    b.fillStyle=night?'#1c3f66':'#2f86c9'; b.fillRect(0,gy,w*0.5,H-gy);
+    b.fillStyle=night?'#4a4a2e':'#d8c27a'; b.beginPath(); b.moveTo(w*0.5,gy); b.lineTo(w*0.56,gy-6); b.lineTo(w,gy-10); b.lineTo(w,H); b.lineTo(w*0.5,H); b.closePath(); b.fill();
+    b.fillStyle=night?'#2e3d26':'#6aa85f'; b.fillRect(w*0.62,gy-14,w*0.38,8);
+    warmX=night?w*0.25:w*0.78; coolX=night?w*0.78:w*0.25;
+    label(b,'mar',w*0.25,H-12,'#ffffff',fs,800,'center'); label(b,'tierra',w*0.78,H-12,'#ffffff',fs,800,'center');
+    const yTop=H*0.22, yLow=gy-26;
+    loop=[[coolX,yLow],[warmX,yLow],[warmX,yTop],[coolX,yTop]];
+  } else {
+    b.fillStyle=night?'#2e3d26':'#5f9a4f'; b.beginPath(); b.moveTo(0,H); b.lineTo(0,gy); b.lineTo(w*0.35,gy); b.lineTo(w*0.82,H*0.18); b.lineTo(w*0.92,H*0.22); b.lineTo(w,H*0.3); b.lineTo(w,H); b.closePath(); b.fill();
+    b.fillStyle='rgba(255,255,255,.9)'; b.beginPath(); b.moveTo(w*0.82,H*0.18); b.lineTo(w*0.78,H*0.25); b.lineTo(w*0.86,H*0.23); b.closePath(); b.fill();
+    label(b,'valle',w*0.16,gy+fs*1.6,'#ffffff',fs,800,'center'); label(b,'montaña',w*0.86,H*0.12,'#ffffff',fs,800,'center');
+    const up=!night; // giorno: valle -> monte lungo il pendio
+    const A=[w*0.3,gy-14], B=[w*0.76,H*0.22-4], C=[w*0.62,H*0.08], D=[w*0.18,H*0.35];
+    loop=up?[A,B,C,D]:[B,A,D,C];
+  }
+  // Sole o Luna
+  if(night){ b.fillStyle='#f4f1d6'; b.beginPath(); b.arc(w*0.08,H*0.14,fs*1.4,0,2*Math.PI); b.fill(); b.fillStyle='#071430'; b.beginPath(); b.arc(w*0.08+fs*0.6,H*0.14-fs*0.3,fs*1.2,0,2*Math.PI); b.fill(); }
+  else { b.fillStyle='#ffd34d'; b.beginPath(); b.arc(w*0.08,H*0.14,fs*1.6,0,2*Math.PI); b.fill(); }
+  // flusso d'aria
+  b.setLineDash([6,6]); b.strokeStyle=night?'rgba(200,220,255,.35)':'rgba(30,60,110,.35)'; b.lineWidth=1.5; b.beginPath(); loop.forEach((p,i)=>i?b.lineTo(p[0],p[1]):b.moveTo(p[0],p[1])); b.closePath(); b.stroke(); b.setLineDash([]);
+  for(let k=0;k<14;k++){ const q=loopPath(loop,bt0*0.12+k/14); arrow(b,q[0],q[1],q[2],q[3],7,night?'#dfe8ff':'#1d3e74'); }
+  if(place==='mar'){ label(b,'más caliente: el aire sube',warmX,H*0.15,'#ffb3a0',fs*0.9,800,'center'); label(b,'más fresco',coolX,H*0.15,'#bcd6ff',fs*0.9,800,'center');
+    label(b,night?'← brisa terrestre':'brisa marina →',w*0.5,gy-34,'#ffffff',fs*1.05,800,'center'); }
+  else { label(b,night?'brisa de montaña: el aire frío baja':'brisa de valle: el aire caliente sube',w*0.4,H*0.55,'#ffffff',fs*1.05,800,'center'); }
+}
+
+/* ---------- esercizi ---------- */
+const lay=$('lay'); let layOk=0, layDone=0;
+LAY.filter(l=>l.dir!==0).forEach(l=>{ const r=document.createElement('div'); r.className='row'; r.innerHTML=`<b>${l.n}</b>`;
+  [[1,'aumenta'],[-1,'disminuye']].forEach(([d,t])=>{ const bt=document.createElement('button'); bt.type='button'; bt.textContent=t; bt.style.color=d>0?'var(--warm)':'var(--cold)';
+    bt.addEventListener('click',()=>{ if(r.dataset.done) return; r.dataset.done=1; const ok=d===l.dir; bt.classList.add(ok?'right':'wrong'); layDone++; if(ok) layOk++;
+      if(layDone===4){ const f=$('layfb'); f.hidden=false; f.className='fb '+(layOk===4?'right':'wrong'); f.textContent=layOk===4?'¡Perfecto! Aumenta en la estratosfera y en la termosfera, disminuye en la troposfera y en la mesosfera.':`${layOk} de 4. Recuerda: aumenta en la estratosfera y en la termosfera, disminuye en la troposfera y en la mesosfera.`; } }); r.append(bt); });
+  lay.append(r); });
+const WQ=[['alisios',1],['vientos del oeste',1],['vientos polares',1],['brisas',0],['monzones',0],['vientos del este de mar',0]].sort(()=>Math.random()-0.5);
+const wq=$('wq'), on=new Set();
+WQ.forEach(([t,ok])=>{ const bt=document.createElement('button'); bt.type='button'; bt.textContent=t; bt.dataset.ok=ok; bt.setAttribute('aria-pressed','false');
+  bt.addEventListener('click',()=>{ if(on.has(bt)){ on.delete(bt); bt.classList.remove('on'); } else { on.add(bt); bt.classList.add('on'); } bt.setAttribute('aria-pressed',String(on.has(bt))); }); wq.append(bt); });
+$('wqc').addEventListener('click',()=>{ let ok=0, bad=0; wq.querySelectorAll('button').forEach(bt=>{ bt.classList.remove('right','wrong'); if(on.has(bt)){ if(bt.dataset.ok==='1'){ ok++; bt.classList.add('right'); } else { bad++; bt.classList.add('wrong'); } } });
+  const f=$('wqfb'); f.hidden=false; const good=ok===3&&bad===0; f.className='fb '+(good?'right':'wrong');
+  f.textContent=good?'Correcto: alisios, vientos del oeste y vientos polares.':'Todavía no. Las brisas son vientos periódicos, no constantes. Mira el globo de los vientos de arriba.'; });
+
+/* ---------- animazione ---------- */
+let last=null;
+function loop(ts){ const dt=last===null?0:Math.min(0.05,(ts-last)/1000); last=ts; tt+=reduce?0:dt;
+  if(target!==null){ h+=(target-h)*0.1; if(Math.abs(target-h)<0.3){ h=target; target=null; } }
+  drawCol(); updCol(); drawWinds(dt); drawBreeze(dt); requestAnimationFrame(loop); }
+drawGas(); window.addEventListener('resize',drawGas); updW(); updB(); requestAnimationFrame(loop);
+})();
+</script>
+
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Tamaño de la página">
+<button type="button" data-z="-1" title="Reducir (tecla −)" aria-label="Reducir">A−</button><span data-zv title="Volver al 100 %">100%</span><button type="button" data-z="1" title="Ampliar (tecla +)" aria-label="Ampliar">A+</button><button type="button" data-z="0" title="Tamaño normal (tecla 0)" aria-label="Tamaño normal">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+</body>
+</html>

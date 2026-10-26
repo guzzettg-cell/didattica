@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}
+.backlink{display:inline-block;margin:14px 16px 0;font:600 14px/1.2 system-ui,sans-serif;color:inherit;text-decoration:none;border:1px solid rgba(120,130,150,.4);border-radius:999px;padding:6px 12px}
+.backlink:hover{text-decoration:underline}
+.map.nomap{display:flex;flex-wrap:wrap;gap:8px;padding:14px;align-content:flex-start;background:var(--card,#fff)}
+.map.nomap .mapnote{flex-basis:100%;margin:0 0 4px;font-size:.9rem;color:var(--muted,#566476)}
+.map.nomap .dot,.map.nomap .hit,.map.nomap .istmo{position:static!important;transform:none!important;width:auto!important;height:auto!important;aspect-ratio:auto!important;opacity:1!important;border-radius:999px!important;padding:6px 12px!important;border:0!important;color:#fff!important;font:700 .88rem/1.2 system-ui,sans-serif!important;box-shadow:none!important;animation:none!important}
+.map.nomap .dot::after,.map.nomap .hit::after,.map.nomap .istmo::after{content:attr(aria-label)}
+.map.nomap .hit{background:#3b4a63!important}.map.nomap .istmo{background:#d62828!important}
+.map.nomap .dot.dim{opacity:.25!important}
+.map.nomap [aria-pressed="true"]{outline:3px solid #111!important;outline-offset:2px}
+</style>
+<title>Del globo al mapa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: globo a sinistra e carta a destra, collegati; sopra le schede delle tre proiezioni; sotto il confronto delle superfici e le domande */
+:root{
+  --paper:#eef1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
+  --accent:#c2410c; --accent-soft:#fde4d3; --ok:#1f7a4d; --ok-soft:#dcf2e6; --no:#b42318; --no-soft:#fde3e1;
+  --sea:#cfe3f5; --sea-ink:#2b4a6b; --grid:rgba(43,74,107,.28); --map-bg:#f7f9fc;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717;
+  --sea:#17304d; --sea-ink:#bcd3ec; --grid:rgba(188,211,236,.25); --map-bg:#0e1622; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717;
+  --sea:#17304d; --sea-ink:#bcd3ec; --grid:rgba(188,211,236,.25); --map-bg:#0e1622; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+[hidden]{display:none!important}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:18px}
+header.top{display:grid;gap:6px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.02;margin:0}
+.lead{margin:0;max-width:76ch;color:var(--muted)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tabs button{font:inherit;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:8px 14px;cursor:pointer;display:grid;line-height:1.25}
+.tabs button small{color:var(--muted);font-size:.8rem}
+.tabs button[aria-selected="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--accent-soft)}
+.tabs button b{font-family:var(--display);font-size:1.05rem}
+.stage{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:16px;align-items:start}
+@media (max-width:900px){.stage{grid-template-columns:1fr}}
+.pane{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;gap:8px;min-width:0}
+.pane h2{font-family:var(--display);font-weight:800;font-size:1.1rem;margin:0}
+.pane .sub{font-size:.85rem;color:var(--muted);margin:0}
+.pane canvas{width:100%;display:block;border-radius:10px;background:var(--map-bg)}
+#globe{aspect-ratio:1/1;touch-action:none;cursor:grab}
+#map{aspect-ratio:1.29/1;cursor:crosshair}
+.read{font-size:.88rem;color:var(--muted);min-height:1.4em;font-variant-numeric:tabular-nums}
+.keeps{display:flex;flex-wrap:wrap;gap:8px}
+.keeps span{font-size:.85rem;border-radius:999px;padding:4px 11px;font-weight:700;border:1px solid}
+.keeps .y{background:var(--ok-soft);border-color:var(--ok)}
+.keeps .n{background:var(--no-soft);border-color:var(--no)}
+.desc{margin:0;font-size:.95rem}
+.opts{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:.92rem}
+.opts label{display:flex;gap:7px;align-items:center;cursor:pointer}
+.opts input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent)}
+.opts input[type=range]{accent-color:var(--accent);width:160px}
+.opts button{font:inherit;font-size:.88rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:5px 12px;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.cmp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:720px){.cmp{grid-template-columns:1fr}}
+.cmp div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.cmp dt{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.cmp dd{margin:2px 0 0;font-family:var(--display);font-weight:600;font-size:1.05rem}
+.boxes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:820px){.boxes{grid-template-columns:1fr}}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;min-width:0}
+.box h2{font-family:var(--display);font-weight:800;font-size:1.2rem;margin:0 0 6px}
+details{border-top:1px solid var(--line);padding:9px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700}
+details p{margin:6px 0 0;color:var(--muted)}
+.note{font-size:.88rem;color:var(--muted);margin:0 0 8px}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+th:first-child,td:first-child{text-align:left}
+.tw{overflow-x:auto}
+</style>
+</head>
+<body>
+<a class="backlink" href="../index.html">← El planeta Tierra: todas las lecciones</a>
+
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Geografía · La representación de la Tierra</div>
+    <h1>Del globo al mapa</h1>
+    <p class="lead">El globo terráqueo es la representación más correcta de la Tierra, pero una superficie curva no se puede extender sobre una hoja sin deformarla. Cada proyección elige qué conservar y qué sacrificar. Elige una proyección y compara el mapa con el globo: si pasas el ratón por uno de los dos, ves el mismo punto también en el otro.</p>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Proyecciones">
+    <button role="tab" data-p="merc" aria-selected="true"><b>Conforme</b><small>proyección de Mercator</small></button>
+    <button role="tab" data-p="moll" aria-selected="false"><b>Equivalente</b><small>proyección de Mollweide</small></button>
+    <button role="tab" data-p="eqd" aria-selected="false"><b>Equidistante</b><small>proyección cilíndrica equidistante</small></button>
+  </div>
+
+  <div class="stage">
+    <section class="pane">
+      <h2>El globo</h2>
+      <p class="sub">Arrástralo para girarlo.</p>
+      <canvas id="globe" role="img" aria-label="Globo con la cuadrícula y los círculos de comparación"></canvas>
+      <div class="read" id="gread"></div>
+    </section>
+    <section class="pane">
+      <h2 id="mtitle">El mapa</h2>
+      <div class="keeps" id="keeps"></div>
+      <p class="desc" id="desc"></p>
+      <canvas id="map" role="img" aria-label="Planisferio en la proyección elegida"></canvas>
+      <div class="read" id="mread"></div>
+      <div class="opts">
+        <label><input type="checkbox" id="cont" checked> Groenlandia, América del Sur, África, Antártida</label>
+        <label><input type="checkbox" id="tis"> Círculos todos iguales en el globo</label>
+        <label>Meridiano central <input type="range" id="lon0" min="-180" max="180" step="5" value="0"> <span id="lon0v">0°</span></label>
+        <label><input type="checkbox" id="flip"> Sur arriba</label>
+        <button type="button" id="am">América en el centro</button>
+        <button type="button" id="eu">Europa en el centro</button>
+      </div>
+    </section>
+  </div>
+
+  <section>
+    <p class="note">Comparación de las superficies en el mapa elegido. Los círculos de colores tienen la misma superficie real que Groenlandia, América del Sur y África: las formas no son las de los continentes, pero los tamaños sí.</p>
+    <dl class="cmp" id="cmp"></dl>
+  </section>
+
+  <div class="boxes">
+    <div class="box">
+      <h2>Qué conserva cada mapa</h2>
+      <div class="tw"><table>
+        <thead><tr><th>Proyección</th><th>Ángulos y formas</th><th>Áreas</th><th>Distancias</th></tr></thead>
+        <tbody>
+          <tr><td>Conforme (Mercator)</td><td>sí</td><td>no</td><td>solo a lo largo del ecuador</td></tr>
+          <tr><td>Equivalente (Mollweide)</td><td>no</td><td>sí</td><td>no</td></tr>
+          <tr><td>Equidistante</td><td>no</td><td>no</td><td>solo a lo largo de los meridianos</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note" style="margin-top:10px">Ninguna proyección tiene a la vez las tres características: la superficie de la Tierra no se puede representar perfectamente en una hoja.</p>
+    </div>
+    <div class="box">
+      <h2>Preguntas para razonar</h2>
+      <details><summary>¿Por qué en el mapa de Mercator Groenlandia parece tan grande como América del Sur?</summary><p>Porque en esta proyección la distancia entre los paralelos aumenta hacia los polos: las zonas polares aparecen muy ampliadas. En realidad Groenlandia es unas 8 veces más pequeña que América del Sur.</p></details>
+      <details><summary>Enciende los círculos todos iguales. ¿Qué pasa en cada mapa?</summary><p>Con Mercator siguen siendo círculos, pero son cada vez más grandes hacia los polos. Con Mollweide todos tienen la misma área, pero en los lados se aplastan y se doblan. Con el mapa equidistante tienen todos la misma altura, pero se ensanchan hacia los polos.</p></details>
+      <details><summary>¿Qué mapa usarías para comparar la superficie de dos Estados?</summary><p>Un mapa equivalente, como el de Mollweide, porque mantiene las proporciones entre las áreas.</p></details>
+      <details><summary>Pon América en el centro y el sur arriba. ¿Ha cambiado la Tierra?</summary><p>No: solo ha cambiado el punto de vista de quien dibuja el mapa. En la Tierra no hay una zona central, ni un «arriba» o un «abajo».</p></details>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+const D2R=Math.PI/180, R2D=180/Math.PI, PI=Math.PI;
+const $=id=>document.getElementById(id);
+const FB='"Atkinson Hyperlegible",Verdana,sans-serif', FD='"Bricolage Grotesque","Trebuchet MS",sans-serif';
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* ---------- dati ---------- */
+const R_E=6371;
+function capRadius(area){ return Math.acos(1-area/(2*PI*R_E*R_E)); } // raggio angolare di un cerchio con quella superficie
+const AREAS=[
+  {id:'gr',name:'Groenlandia',area:2.166e6,lat:72,lon:-41,col:'#e8a33d'},
+  {id:'sa',name:'América del Sur',area:17.84e6,lat:-16,lon:-60,col:'#3fa66b'},
+  {id:'af',name:'África',area:30.37e6,lat:3,lon:20,col:'#c76b4a'}
+];
+AREAS.forEach(a=>a.rho=capRadius(a.area));
+const ANT={lat:-71}; // calotta con la superficie dell'Antartide (circa 14 milioni di km²)
+const PROJ={
+  merc:{title:'Mapa conforme · proyección de Mercator',keeps:[['Ángulos y formas',1],['Áreas',0],['Distancias',0]],
+    desc:'Mantiene los ángulos, pero no las distancias. Los meridianos y los paralelos se cruzan en ángulo recto y solo a lo largo del ecuador las distancias son proporcionales a las reales. La distancia entre los paralelos aumenta hacia los polos: las zonas polares aparecen exageradamente ampliadas.'},
+  moll:{title:'Mapa equivalente · proyección de Mollweide',keeps:[['Áreas',1],['Ángulos y formas',0],['Distancias',0]],
+    desc:'Mantiene las proporciones entre las áreas, pero cambia las formas: son bastante fieles en el centro (Europa y África) y muy curvadas en los lados. Es uno de los mapas más usados hoy.'},
+  eqd:{title:'Mapa equidistante · proyección cilíndrica equidistante',keeps:[['Distancias a lo largo de los meridianos',1],['Ángulos y formas',0],['Áreas',0]],
+    desc:'Conserva las proporciones entre las longitudes, pero no en todo el mapa: aquí las distancias son correctas a lo largo de los meridianos y del ecuador. Los paralelos están todos a la misma distancia, pero hacia los polos las tierras se ensanchan en horizontal.'}
+};
+let proj='merc', lon0=0, flip=false, showCont=true, showTis=false;
+let gLat=20, gLon=0, hover=null;
+
+/* ---------- geometria ---------- */
+const wrap=a=>{ while(a>PI) a-=2*PI; while(a<-PI) a+=2*PI; return a; };
+function dest(lat,lon,rho,brg){ // punto a distanza angolare rho dal centro, nella direzione brg (radianti)
+  const la=lat*D2R, lo=lon*D2R, s=Math.asin(Math.sin(la)*Math.cos(rho)+Math.cos(la)*Math.sin(rho)*Math.cos(brg));
+  const l=lo+Math.atan2(Math.sin(brg)*Math.sin(rho)*Math.cos(la),Math.cos(rho)-Math.sin(la)*Math.sin(s)); return [s,l]; }
+function circle(lat,lon,rho,n=72){ const a=[]; for(let i=0;i<=n;i++) a.push(dest(lat,lon,rho,i/n*2*PI)); return a; }
+const MLAT=80*D2R, YM=Math.log(Math.tan(PI/4+MLAT/2));
+function mollTheta(phi){ if(Math.abs(phi)>PI/2-1e-9) return Math.sign(phi)*PI/2; let t=phi; for(let i=0;i<30;i++){ const f=2*t+Math.sin(2*t)-PI*Math.sin(phi); t-=f/(2+2*Math.cos(2*t)); if(Math.abs(f)<1e-10) break; } return t; }
+const MK=2*PI/(4*Math.SQRT2); // Mollweide in scala: Equatore lungo come nelle altre carte
+function fwd(phi,lam){ // lam già relativo al meridiano centrale
+  if(proj==='merc'){ const p=Math.max(-MLAT,Math.min(MLAT,phi)); return [lam, Math.log(Math.tan(PI/4+p/2))]; }
+  if(proj==='moll'){ const t=mollTheta(phi); return [MK*(2*Math.SQRT2/PI)*lam*Math.cos(t), MK*Math.SQRT2*Math.sin(t)]; }
+  return [lam,phi];
+}
+function inv(x,y){
+  if(proj==='merc'){ if(Math.abs(y)>YM||Math.abs(x)>PI) return null; return [2*Math.atan(Math.exp(y))-PI/2, x]; }
+  if(proj==='moll'){ x/=MK; y/=MK; const t=Math.asin(y/Math.SQRT2); if(!isFinite(t)) return null; const c=Math.cos(t); if(c<1e-9) return null;
+    const lam=PI*x/(2*Math.SQRT2*c); if(Math.abs(lam)>PI) return null; return [Math.asin((2*t+Math.sin(2*t))/PI), lam]; }
+  if(Math.abs(y)>PI/2||Math.abs(x)>PI) return null; return [y,x];
+}
+const yTop=()=>proj==='merc'?YM:(proj==='moll'?MK*Math.SQRT2:PI/2);
+
+/* ---------- carta ---------- */
+const mc=$('map'), m=mc.getContext('2d');
+let MS={};
+function fit(cv,ctx){ const r=cv.getBoundingClientRect(), d=window.devicePixelRatio||1;
+  const W=Math.round(r.width*d), H=Math.round(r.height*d); if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}
+  ctx.setTransform(d,0,0,d,0,0); return {w:r.width,h:r.height}; }
+function toScreen(x,y){ if(flip){x=-x;y=-y;} return [MS.cx+x*MS.s, MS.cy-y*MS.s]; }
+function fromScreen(X,Y){ let x=(X-MS.cx)/MS.s, y=-(Y-MS.cy)/MS.s; if(flip){x=-x;y=-y;} return [x,y]; }
+function mapPath(ctx,pts,center){ // pts [phi,lam] assoluti; li ridisegna vicino al loro centro per non spezzarli al bordo
+  const out=[]; const lc=center!=null?center:wrap(pts[0][1]-lon0*D2R);
+  pts.forEach(([p,l])=>{ const lr=lc+wrap(wrap(l-lon0*D2R)-lc); out.push(fwd(p,lr)); }); return out; }
+function clipMap(ctx){ ctx.beginPath();
+  if(proj==='moll'){ ctx.ellipse(MS.cx,MS.cy,PI*MS.s,MK*Math.SQRT2*MS.s,0,0,2*PI); }
+  else { const t=yTop(); ctx.rect(MS.cx-PI*MS.s,MS.cy-t*MS.s,2*PI*MS.s,2*t*MS.s); } }
+function polyArea(pts){ let a=0; for(let i=0;i<pts.length-1;i++) a+=pts[i][0]*pts[i+1][1]-pts[i+1][0]*pts[i][1]; return Math.abs(a/2); }
+
+function drawMap(){
+  const {w,h}=fit(mc,m), fs=Math.max(10.5,Math.min(13,w/60));
+  MS.s=(w-24)/(2*PI); MS.cx=w/2; MS.cy=h/2;
+  m.clearRect(0,0,w,h);
+  m.save(); clipMap(m); m.fillStyle=css('--sea'); m.fill(); m.clip();
+  const grid=css('--grid'), ink=css('--sea-ink');
+  // reticolato
+  m.lineWidth=1; m.strokeStyle=grid;
+  for(let la=-75;la<=75;la+=15){ m.beginPath(); for(let lo=-180;lo<=180;lo+=3){ const q=toScreen(...fwd(la*D2R,lo*D2R)); lo===-180?m.moveTo(q[0],q[1]):m.lineTo(q[0],q[1]); } m.stroke(); }
+  for(let lo=-180;lo<=180;lo+=15){ m.beginPath(); for(let la=-90;la<=90;la+=2){ const q=toScreen(...fwd(la*D2R,lo*D2R)); la===-90?m.moveTo(q[0],q[1]):m.lineTo(q[0],q[1]); } m.stroke(); }
+  // Equatore e Greenwich
+  m.lineWidth=2; m.strokeStyle='#e04646'; m.beginPath(); [-PI,PI].forEach((l,i)=>{const q=toScreen(...fwd(0,l)); i?m.lineTo(q[0],q[1]):m.moveTo(q[0],q[1]);}); m.stroke();
+  const gl=wrap(-lon0*D2R); m.strokeStyle='#2fae6f'; m.beginPath(); for(let la=-90;la<=90;la+=2){ const q=toScreen(...fwd(la*D2R,gl)); la===-90?m.moveTo(q[0],q[1]):m.lineTo(q[0],q[1]); } m.stroke();
+  // cerchi tutti uguali
+  if(showTis){ m.lineWidth=1.2;
+    for(let la=-75;la<=75;la+=25) for(let lo=-165;lo<=180;lo+=30){ const pts=circle(la,lo,6.5*D2R,48), c0=wrap(lo*D2R-lon0*D2R);
+      [0,-2*PI,2*PI].forEach(sh=>{ const pp=mapPath(m,pts,c0+sh); m.beginPath(); pp.forEach((p,i)=>{const q=toScreen(...p); i?m.lineTo(q[0],q[1]):m.moveTo(q[0],q[1]);}); m.closePath();
+        m.fillStyle='rgba(194,65,12,.22)'; m.fill(); m.strokeStyle='rgba(194,65,12,.85)'; m.stroke(); }); } }
+  // superfici di confronto
+  const areas={};
+  if(showCont){
+    // Antartide
+    m.beginPath(); for(let lo=-180;lo<=180;lo+=3){ const q=toScreen(...fwd(ANT.lat*D2R,lo*D2R)); lo===-180?m.moveTo(q[0],q[1]):m.lineTo(q[0],q[1]); }
+    for(let lo=180;lo>=-180;lo-=3){ const q=toScreen(...fwd(-90*D2R,lo*D2R)); m.lineTo(q[0],q[1]); } m.closePath();
+    m.fillStyle='rgba(255,255,255,.85)'; m.fill(); m.strokeStyle='rgba(120,140,160,.8)'; m.lineWidth=1; m.stroke();
+    AREAS.forEach(a=>{ const pts=circle(a.lat,a.lon,a.rho,120), c0=wrap(a.lon*D2R-lon0*D2R);
+      [0,-2*PI,2*PI].forEach(sh=>{ const pp=mapPath(m,pts,c0+sh); if(sh===0) areas[a.id]=polyArea(pp);
+        m.beginPath(); pp.forEach((p,i)=>{const q=toScreen(...p); i?m.lineTo(q[0],q[1]):m.moveTo(q[0],q[1]);}); m.closePath();
+        m.globalAlpha=0.8; m.fillStyle=a.col; m.fill(); m.globalAlpha=1; m.strokeStyle='rgba(0,0,0,.35)'; m.lineWidth=1; m.stroke(); }); });
+    m.font=`700 ${fs}px ${FB}`; m.textAlign='center'; m.lineWidth=3; m.strokeStyle='rgba(255,255,255,.85)';
+    AREAS.forEach(a=>{ const q=toScreen(...fwd(a.lat*D2R,wrap(a.lon*D2R-lon0*D2R))); m.strokeText(a.name,q[0],q[1]+4); m.fillStyle='#1b1b1b'; m.fillText(a.name,q[0],q[1]+4); });
+    const aq=toScreen(...fwd((proj==='merc'?-76:-80)*D2R,0)); m.strokeText('Antártida',aq[0],aq[1]+4); m.fillStyle='#1b1b1b'; m.fillText('Antártida',aq[0],aq[1]+4);
+  }
+  // punto collegato
+  if(hover){ const q=toScreen(...fwd(hover[0],wrap(hover[1]-lon0*D2R)));
+    m.strokeStyle='#d61f1f'; m.lineWidth=2; m.beginPath(); m.arc(q[0],q[1],7,0,2*PI); m.moveTo(q[0]-12,q[1]); m.lineTo(q[0]+12,q[1]); m.moveTo(q[0],q[1]-12); m.lineTo(q[0],q[1]+12); m.stroke(); }
+  m.restore();
+  // bordo ed etichette dei paralleli
+  m.save(); clipMap(m); m.strokeStyle=ink; m.lineWidth=1.5; m.stroke(); m.restore();
+  m.font=`${fs*0.85}px ${FB}`; m.fillStyle=ink; m.textAlign='left';
+  [-60,-30,0,30,60].forEach(la=>{ const q=toScreen(...fwd(la*D2R,flip?PI:-PI)); const t=la===0?'0°':Math.abs(la)+'° '+(la>0?'N':'S');
+    m.fillText(t,q[0]+5,q[1]-3); });
+  return areas;
+}
+
+/* ---------- globo ---------- */
+const gc=$('globe'), g=gc.getContext('2d');
+let GB, gR, gcx, gcy;
+function gbasis(){ const la=gLat*D2R, lo=gLon*D2R;
+  GB={F:[Math.cos(la)*Math.cos(lo),Math.cos(la)*Math.sin(lo),Math.sin(la)],Rt:[-Math.sin(lo),Math.cos(lo),0],U:[-Math.sin(la)*Math.cos(lo),-Math.sin(la)*Math.sin(lo),Math.cos(la)]}; }
+const vec=(p,l)=>[Math.cos(p)*Math.cos(l),Math.cos(p)*Math.sin(l),Math.sin(p)];
+const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+const gp=v=>[gcx+gR*dot(v,GB.Rt), gcy-gR*dot(v,GB.U), dot(v,GB.F)];
+function gline(pts,style){ g.save(); Object.assign(g,style); g.beginPath(); let open=false;
+  for(const [p,l] of pts){ const q=gp(vec(p,l)); if(q[2]<0){open=false;continue} open?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]); open=true; } g.stroke(); g.restore(); }
+function gpoly(pts,fill,stroke){ // disegna solo se tutto visibile o ritaglia ai punti visibili proiettando quelli nascosti sul bordo
+  g.beginPath(); pts.forEach(([p,l],i)=>{ let v=vec(p,l), q=gp(v); if(q[2]<0){ const d=Math.hypot(q[0]-gcx,q[1]-gcy)||1; q=[gcx+(q[0]-gcx)/d*gR,gcy+(q[1]-gcy)/d*gR]; } i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]); });
+  g.closePath(); g.fillStyle=fill; g.fill(); if(stroke){g.strokeStyle=stroke; g.lineWidth=1; g.stroke();} }
+function drawGlobe(){
+  const {w,h}=fit(gc,g), fs=Math.max(10.5,Math.min(13,w/34)); gR=Math.min(w,h)*0.44; gcx=w/2; gcy=h/2; gbasis();
+  g.clearRect(0,0,w,h);
+  const sg=g.createRadialGradient(gcx-gR*0.35,gcy-gR*0.35,gR*0.1,gcx,gcy,gR); sg.addColorStop(0,css('--sea')); sg.addColorStop(1,'rgba(60,110,160,.9)');
+  g.fillStyle=sg; g.beginPath(); g.arc(gcx,gcy,gR,0,2*PI); g.fill();
+  g.save(); g.beginPath(); g.arc(gcx,gcy,gR,0,2*PI); g.clip();
+  const grid={strokeStyle:css('--grid'),lineWidth:1};
+  for(let la=-75;la<=75;la+=15){ const a=[]; for(let lo=-180;lo<=180;lo+=3) a.push([la*D2R,lo*D2R]); gline(a,grid); }
+  for(let lo=-180;lo<180;lo+=15){ const a=[]; for(let la=-90;la<=90;la+=3) a.push([la*D2R,lo*D2R]); gline(a,grid); }
+  { const a=[]; for(let lo=-180;lo<=180;lo+=3) a.push([0,lo*D2R]); gline(a,{strokeStyle:'#e04646',lineWidth:2}); }
+  { const a=[]; for(let la=-90;la<=90;la+=3) a.push([la*D2R,0]); gline(a,{strokeStyle:'#2fae6f',lineWidth:2}); }
+  if(showTis) for(let la=-75;la<=75;la+=25) for(let lo=-165;lo<=180;lo+=30){ const pts=circle(la,lo,6.5*D2R,36); const c=gp(vec(la*D2R,lo*D2R)); if(c[2]>0.05) gpoly(pts,'rgba(194,65,12,.22)','rgba(194,65,12,.85)'); }
+  if(showCont){ const ap=[]; for(let lo=-180;lo<=180;lo+=4) ap.push([ANT.lat*D2R,lo*D2R]); const sp=gp([0,0,-1]);
+      if(sp[2]>-0.6){ g.beginPath(); let first=true; ap.forEach(([p,l])=>{ let q=gp(vec(p,l)); if(q[2]<0){ const d=Math.hypot(q[0]-gcx,q[1]-gcy)||1; q=[gcx+(q[0]-gcx)/d*gR,gcy+(q[1]-gcy)/d*gR]; } first?g.moveTo(q[0],q[1]):g.lineTo(q[0],q[1]); first=false; }); g.closePath(); g.fillStyle='rgba(255,255,255,.85)'; g.fill(); }
+    AREAS.forEach(a=>{ const c=gp(vec(a.lat*D2R,a.lon*D2R)); if(c[2]<-0.3) return; g.globalAlpha=0.8; gpoly(circle(a.lat,a.lon,a.rho,90),a.col,'rgba(0,0,0,.35)'); g.globalAlpha=1;
+      if(c[2]>0){ g.font=`700 ${fs}px ${FB}`; g.textAlign='center'; g.lineWidth=3; g.strokeStyle='rgba(255,255,255,.85)'; g.strokeText(a.name,c[0],c[1]+4); g.fillStyle='#1b1b1b'; g.fillText(a.name,c[0],c[1]+4); } }); }
+  if(hover){ const q=gp(vec(hover[0],hover[1])); if(q[2]>0){ g.strokeStyle='#d61f1f'; g.lineWidth=2; g.beginPath(); g.arc(q[0],q[1],7,0,2*PI); g.moveTo(q[0]-12,q[1]); g.lineTo(q[0]+12,q[1]); g.moveTo(q[0],q[1]-12); g.lineTo(q[0],q[1]+12); g.stroke(); } }
+  g.restore();
+  g.strokeStyle=css('--sea-ink'); g.lineWidth=1.5; g.beginPath(); g.arc(gcx,gcy,gR,0,2*PI); g.stroke();
+}
+
+/* ---------- testi e confronto ---------- */
+function fmtC(p,l){ const la=Math.round(p*R2D), lo=Math.round(l*R2D); return `${Math.abs(la)}° ${la>=0?'N':'S'}, ${Math.abs(lo)}° ${lo>=0?'E':'W'}`.replace('0° N','0°').replace(', 0° E',', 0°'); }
+function updatePanel(){
+  const P=PROJ[proj]; $('mtitle').textContent=P.title; $('desc').textContent=P.desc;
+  $('keeps').innerHTML=''; P.keeps.forEach(([t,y])=>{ const s=document.createElement('span'); s.className=y?'y':'n'; s.textContent=(y?'conserva: ':'deforma: ')+t; $('keeps').append(s); });
+  document.querySelectorAll('[role=tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.p===proj)));
+}
+function updateCmp(areas){
+  const cmp=$('cmp'); cmp.innerHTML='';
+  if(!showCont||!areas.gr){ const d=document.createElement('div'); d.innerHTML='<dt>Comparación</dt><dd>Enciende los círculos de los continentes</dd>'; cmp.append(d); return; }
+  const fmt=x=>x.toLocaleString('es-ES',{maximumFractionDigits:1});
+  const real=AREAS[1].area/AREAS[0].area, map=areas.sa/areas.gr;
+  const rows=[['En la realidad',`Groenlandia es ${fmt(real)} veces más pequeña que América del Sur`],
+    ['En el mapa',map>=1?`Groenlandia parece ${fmt(map)} veces más pequeña que América del Sur`:`Groenlandia parece ${fmt(1/map)} veces más grande que América del Sur`],
+    ['África y Groenlandia',`en la realidad África es ${fmt(AREAS[2].area/AREAS[0].area)} veces más grande; en el mapa ${fmt(areas.af/areas.gr)} veces`]];
+  rows.forEach(([t,v])=>{ const d=document.createElement('div'); const dt=document.createElement('dt'), dd=document.createElement('dd'); dt.textContent=t; dd.textContent=v; d.append(dt,dd); cmp.append(d); });
+}
+let lastAreasKey='';
+function frame(){
+  const areas=drawMap(); drawGlobe();
+  const k=proj+showCont+lon0+(areas.gr||0).toFixed(3); if(k!==lastAreasKey){ lastAreasKey=k; updateCmp(areas); }
+  requestAnimationFrame(frame);
+}
+
+/* ---------- interazione ---------- */
+document.querySelectorAll('[role=tab]').forEach(b=>b.addEventListener('click',()=>{ proj=b.dataset.p; updatePanel(); }));
+$('cont').addEventListener('change',e=>showCont=e.target.checked);
+$('tis').addEventListener('change',e=>showTis=e.target.checked);
+function setLon0(v){ lon0=v; $('lon0').value=v; $('lon0v').textContent=(v===0?'0°':Math.abs(v)+'° '+(v>0?'E':'W')); gLon=v; }
+$('lon0').addEventListener('input',e=>setLon0(+e.target.value));
+$('flip').addEventListener('change',e=>flip=e.target.checked);
+$('am').addEventListener('click',()=>setLon0(-90));
+$('eu').addEventListener('click',()=>setLon0(0));
+mc.addEventListener('pointermove',e=>{ const r=mc.getBoundingClientRect(); const [x,y]=fromScreen(e.clientX-r.left,e.clientY-r.top); const q=inv(x,y);
+  if(q){ hover=[q[0],wrap(q[1]+lon0*D2R)]; $('mread').textContent='En el mapa: '+fmtC(hover[0],hover[1]); $('gread').textContent='El mismo punto en el globo: '+fmtC(hover[0],hover[1]); }
+  else { hover=null; $('mread').textContent=''; } });
+mc.addEventListener('pointerleave',()=>{ hover=null; $('mread').textContent=''; $('gread').textContent=''; });
+let drag=null;
+gc.addEventListener('pointerdown',e=>{ drag={x:e.clientX,y:e.clientY,la:gLat,lo:gLon}; gc.setPointerCapture(e.pointerId); gc.style.cursor='grabbing'; });
+gc.addEventListener('pointermove',e=>{ const r=gc.getBoundingClientRect();
+  if(drag){ gLon=drag.lo-(e.clientX-drag.x)*0.4; gLat=Math.max(-85,Math.min(85,drag.la+(e.clientY-drag.y)*0.4)); }
+  const u=(e.clientX-r.left-gcx)/gR, v=-(e.clientY-r.top-gcy)/gR, r2=u*u+v*v;
+  if(r2<1&&GB){ const w=Math.sqrt(1-r2), X=u*GB.Rt[0]+v*GB.U[0]+w*GB.F[0], Y=u*GB.Rt[1]+v*GB.U[1]+w*GB.F[1], Z=u*GB.Rt[2]+v*GB.U[2]+w*GB.F[2];
+    hover=[Math.asin(Z),Math.atan2(Y,X)]; $('gread').textContent='En el globo: '+fmtC(hover[0],hover[1]); $('mread').textContent='El mismo punto en el mapa: '+fmtC(hover[0],hover[1]); } });
+const end=()=>{drag=null; gc.style.cursor='';}; gc.addEventListener('pointerup',end); gc.addEventListener('pointercancel',end);
+gc.addEventListener('pointerleave',()=>{ if(!drag){ hover=null; $('gread').textContent=''; $('mread').textContent=''; } });
+
+updatePanel(); requestAnimationFrame(frame);
+})();
+</script>
+
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Tamaño de la página">
+<button type="button" data-z="-1" title="Reducir (tecla −)" aria-label="Reducir">A−</button><span data-zv title="Volver al 100 %">100%</span><button type="button" data-z="1" title="Ampliar (tecla +)" aria-label="Ampliar">A+</button><button type="button" data-z="0" title="Tamaño normal (tecla 0)" aria-label="Tamaño normal">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+</body>
+</html>

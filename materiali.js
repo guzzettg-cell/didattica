@@ -315,6 +315,13 @@ const MODULI = [
         titolo: "Le parole del pianeta Terra",
         link: "geografia/terza/la-terra/ripasso/cruciverba-la-terra.html",
         data: "2026-10-21"
+      },
+      {
+        tipo: "Español",
+        titolo: "El planeta Tierra · versión en español",
+        descrizione: "Resumen fácil (nivel B1) con glosario y las 11 herramientas interactivas traducidas.",
+        link: "geografia/es/la-tierra/index.html",
+        data: "2026-10-26"
       }
     ]
   },

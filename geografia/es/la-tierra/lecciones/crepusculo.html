@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}
+.backlink{display:inline-block;margin:14px 16px 0;font:600 14px/1.2 system-ui,sans-serif;color:inherit;text-decoration:none;border:1px solid rgba(120,130,150,.4);border-radius:999px;padding:6px 12px}
+.backlink:hover{text-decoration:underline}
+.map.nomap{display:flex;flex-wrap:wrap;gap:8px;padding:14px;align-content:flex-start;background:var(--card,#fff)}
+.map.nomap .mapnote{flex-basis:100%;margin:0 0 4px;font-size:.9rem;color:var(--muted,#566476)}
+.map.nomap .dot,.map.nomap .hit,.map.nomap .istmo{position:static!important;transform:none!important;width:auto!important;height:auto!important;aspect-ratio:auto!important;opacity:1!important;border-radius:999px!important;padding:6px 12px!important;border:0!important;color:#fff!important;font:700 .88rem/1.2 system-ui,sans-serif!important;box-shadow:none!important;animation:none!important}
+.map.nomap .dot::after,.map.nomap .hit::after,.map.nomap .istmo::after{content:attr(aria-label)}
+.map.nomap .hit{background:#3b4a63!important}.map.nomap .istmo{background:#d62828!important}
+.map.nomap .dot.dim{opacity:.25!important}
+.map.nomap [aria-pressed="true"]{outline:3px solid #111!important;outline-offset:2px}
+</style>
+<title>El crepúsculo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: intestazione breve, lo schema del libro animato, comandi sotto, poi spiegazione e domande */
+:root{
+  --paper:#edf1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
+  --sun:#d97f0f; --sun-soft:#fbe7c8; --scene:#f7f9fc; --scene-ink:#1b2a3c;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --sun:#f2a640; --sun-soft:#3a2a12; --scene:#0e1622; --scene-ink:#dfe8f2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --sun:#f2a640; --sun-soft:#3a2a12; --scene:#0e1622; --scene-ink:#dfe8f2; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:22px}
+header{display:grid;gap:6px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,4.2vw,2.8rem);line-height:1.05;margin:0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--sun)}
+.lead{margin:0;max-width:70ch;color:var(--muted)}
+figure{margin:0;background:var(--scene);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid;min-width:0}
+figure canvas{width:100%;aspect-ratio:16/11;display:block}
+figcaption{padding:12px 16px 14px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+.controls{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:14px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.clock{font-family:var(--display);font-weight:800;font-size:2rem;font-variant-numeric:tabular-nums;min-width:4.2ch}
+.slider{flex:1 1 260px;display:grid;gap:2px;min-width:0}
+input[type=range]{width:100%;accent-color:var(--sun)}
+.ticks{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);font-variant-numeric:tabular-nums}
+button,select{font:inherit;font-size:.92rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:7px 14px;cursor:pointer}
+button:hover{border-color:var(--sun)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+#play{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700;min-width:7.5em}
+.check{display:flex;gap:8px;align-items:center;font-size:.92rem;cursor:pointer}
+.check input{width:18px;height:18px;accent-color:var(--sun)}
+.readout{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.readout{grid-template-columns:1fr}}
+.chip{border:1px solid var(--line);border-radius:10px;padding:8px 12px;display:grid;min-width:0}
+.chip span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.chip strong{font-family:var(--display);font-weight:600;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.chip.phase{background:var(--sun-soft);border-color:transparent}
+.explain{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px}
+@media (max-width:820px){.explain{grid-template-columns:1fr}}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:0}
+.box h2{font-family:var(--display);font-weight:800;font-size:1.25rem;margin:0 0 8px}
+.now{font-size:1.08rem;margin:0;min-height:4.8em}
+details{border-top:1px solid var(--line);padding:10px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700}
+details p{margin:8px 0 0;color:var(--muted)}
+.note{font-size:.85rem;color:var(--muted);margin:12px 0 0}
+/* navigazione tra gli argomenti */
+.pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pager a{display:grid;gap:2px;align-content:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;color:var(--ink);text-decoration:none}
+.pager a:hover{border-color:var(--sun,var(--accent,#d9800f))}
+.pager a:hover span{text-decoration:underline}
+.pager small{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pager span{font-family:var(--display);font-weight:800;font-size:1.05rem;line-height:1.25}
+.pager .next{text-align:right}
+.pager.pager-top a{padding:8px 14px}
+.pager.pager-top span{font-size:.95rem}
+@media (max-width:560px){.pager{grid-template-columns:1fr}.pager .next{text-align:left}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="pager pager-top" aria-label="Temas (arriba)">
+    <a class="prev" href="rotacion.html"><small>Tema anterior</small><span>← El movimiento de rotación</span></a>
+    <a class="next" href="traslacion.html"><small>Tema siguiente</small><span>El movimiento de traslación →</span></a>
+  </nav>
+  <header>
+    <div class="eyebrow">Los movimientos de la Tierra · el crepúsculo</div>
+    <h1>El Sol se ha puesto,<br>pero todavía hay <em>luz</em></h1>
+    <p class="lead">Los rayos del Sol llegan rectos y se detienen en el borde de la atmósfera. La atmósfera gira junto con la Tierra: sigue la parte de aire que está sobre el observador (el sector de rayas). De día los rayos la atraviesan y llegan rectos. Después de la puesta de sol, cuando esa parte de aire pasa por donde llegan los rayos rasantes, los rayos se desvían hacia el observador, que los ve llegar desde una dirección más alta: la dirección aparente.</p>
+  </header>
+
+  <figure>
+    <canvas id="scene" role="img" aria-label="Sección de la Tierra con las capas de la atmósfera, el día a la derecha, la noche a la izquierda, la franja del crepúsculo y el círculo de iluminación; los rayos del Sol llegan desde la derecha y uno se desvía hacia el observador"></canvas>
+    <figcaption>La Tierra se ve desde arriba del Polo Norte y gira en sentido antihorario, de oeste a este, junto con su atmósfera (los puntitos). Arriba, el observador vive la puesta de sol y el crepúsculo de la tarde; abajo, el amanecer y el crepúsculo de la mañana. El grosor de la atmósfera está muy ampliado.</figcaption>
+  </figure>
+
+  <section class="controls" aria-label="Controles">
+    <div class="row">
+      <button id="play" type="button">Pausa</button>
+      <div class="clock" id="clock">16:30</div>
+      <label class="slider" for="ora">
+        <input id="ora" type="range" min="0" max="1440" step="1" value="990" aria-label="Hora del día">
+        <div class="ticks"><span>0</span><span>6</span><span>12</span><span>18</span><span>24</span></div>
+      </label>
+    </div>
+    <div class="row">
+      <button type="button" data-t="5.3">Crepúsculo de la mañana</button>
+      <button type="button" data-t="6">Amanecer</button>
+      <button type="button" data-t="12">Mediodía</button>
+      <button type="button" data-t="18">Puesta de sol</button>
+      <button type="button" data-t="18.7">Crepúsculo de la tarde</button>
+      <button type="button" data-t="0">Noche</button>
+    </div>
+    <div class="row">
+      <select id="speed" aria-label="Velocidad">
+        <option value="0.6">Lenta</option>
+        <option value="1.5" selected>Normal</option>
+        <option value="4">Rápida</option>
+      </select>
+      <label class="check"><input id="slow" type="checkbox" checked> Más despacio durante los crepúsculos</label>
+      <label class="check"><input id="noatm" type="checkbox"> ¿Y si la Tierra no tuviera atmósfera?</label>
+    </div>
+    <div class="readout">
+      <div class="chip phase"><span>Qué pasa</span><strong id="phase">Día</strong></div>
+      <div class="chip"><span>Altura del Sol</span><strong id="alt">0°</strong></div>
+      <div class="chip"><span>Luz que llega</span><strong id="light">directa</strong></div>
+    </div>
+  </section>
+
+  <section class="explain">
+    <div class="box">
+      <h2>Qué está pasando</h2>
+      <p class="now" id="now"></p>
+      <p class="note">Esquema simplificado: el observador está en el ecuador en un día de equinoccio, y el crepúsculo dura hasta que el Sol baja 18° bajo el horizonte. En la realidad los rayos se desvían solo un poco; gran parte de la luz del crepúsculo es luz que el aire todavía iluminado difunde en todas las direcciones.</p>
+    </div>
+    <div class="box">
+      <h2>Preguntas para razonar</h2>
+      <details><summary>¿Por qué después de la puesta de sol el cielo no se oscurece enseguida?</summary><p>Porque la atmósfera desvía y difunde los rayos del Sol: aunque el Sol esté bajo el horizonte, un poco de su luz todavía llega hasta nosotros.</p></details>
+      <details><summary>¿En qué parte del cielo ves la claridad por la mañana? ¿Y por la tarde?</summary><p>Por la mañana al este, por donde el Sol está a punto de salir; por la tarde al oeste, por donde el Sol se acaba de poner.</p></details>
+      <details><summary>Quita la atmósfera. ¿Qué cambia?</summary><p>El crepúsculo desaparece: en cuanto el Sol baja del horizonte, es de noche enseguida. Es lo que pasa en la Luna, que no tiene atmósfera.</p></details>
+      <details><summary>¿Por qué el rayo desviado parece llegar desde más arriba?</summary><p>Nuestros ojos ven la luz como si viniera de la dirección del último tramo de su recorrido. El rayo se ha doblado, así que el Sol parece más alto de donde está de verdad.</p></details>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Temas (abajo)">
+    <a class="prev" href="rotacion.html"><small>Tema anterior</small><span>← El movimiento de rotación</span></a>
+    <a class="next" href="traslacion.html"><small>Tema siguiente</small><span>El movimiento de traslación →</span></a>
+  </nav>
+</div>
+
+<script>
+(function(){
+const D2R=Math.PI/180, R2D=180/Math.PI, H=0.22, TW=18, SEC=28;
+const dots=Array.from({length:150},(_,i)=>({a:(i*137.5)%360*Math.PI/180,r:0.12+0.8*((i*0.618)%1)}));
+const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+let t=16.5, playing=!reduce, speed=1.5, slow=true, atm=true, last=null;
+
+// modello semplificato della deviazione: i raggi radenti, entrando nell'atmosfera, si piegano verso la Terra
+const YD=0.85*H, BEND=3;
+function landFor(y){ // gradi oltre il circolo di illuminazione in cui il raggio arriva a terra (null = non arriva)
+  if(!atm) return y<1?Math.asin(y)*R2D-90:null;
+  if(y<=1) return Math.asin(y)*R2D-90+BEND*Math.pow(y,8);
+  if(y<=1+YD) return BEND+(TW-BEND)*(y-1)/YD;
+  return null;
+}
+function yFor(tg){
+  if(!atm) return tg<=0?Math.cos(tg*D2R):null;
+  if(tg>TW) return null; if(tg>=BEND) return 1+YD*(tg-BEND)/(TW-BEND);
+  let lo=0,hi=1; for(let i=0;i<40;i++){ const m=(lo+hi)/2; if(landFor(m)<tg) lo=m; else hi=m; } return (lo+hi)/2;
+}
+function trace(y){
+  const d=landFor(y); if(d==null) return {pts:[[6,y],[-6,y]],land:null};
+  const a=(90+d)*D2R, L=[Math.cos(a),Math.sin(a)];
+  const Ex=atm?Math.sqrt(Math.max(0,(1+H)*(1+H)-y*y)):L[0], K=[L[0]+0.5*(Ex-L[0]),y];
+  const pts=[[6,y],[Ex,y]];
+  for(let k=1;k<=30;k++){ const u=k/30, v=1-u; pts.push([v*v*Ex+2*u*v*K[0]+u*u*L[0], v*v*y+2*u*v*K[1]+u*u*L[1]]); }
+  let dx=L[0]-K[0], dy=L[1]-K[1], n=Math.hypot(dx,dy); if(n<1e-6){dx=-1;dy=0;n=1}
+  return {pts,land:L,d:[dx/n,dy/n]};
+}
+const $=id=>document.getElementById(id);
+const cv=$('scene'), c=cv.getContext('2d');
+const FD='"Bricolage Grotesque","Trebuchet MS",sans-serif', FB='"Atkinson Hyperlegible",Verdana,sans-serif';
+let pal={};
+function readPal(){ const dark=String(getComputedStyle(document.documentElement).colorScheme||'').indexOf('dark')>=0||
+  (matchMedia('(prefers-color-scheme: dark)').matches&&document.documentElement.dataset.theme!=='light')||document.documentElement.dataset.theme==='dark';
+  pal=dark?{bg:'#0e1622',ink:'#dfe8f2',muted:'#93a3b6',ray:'#f2a640',atm:'120,170,235',west:'#8fc0ff'}:{bg:'#f7f9fc',ink:'#1b2a3c',muted:'#5b6878',ray:'#e08a1e',atm:'90,150,220',west:'#1f5fb8'}; }
+readPal(); (function(mq){ if(mq.addEventListener) mq.addEventListener('change',readPal); else if(mq.addListener) mq.addListener(readPal); })(matchMedia('(prefers-color-scheme: dark)'));
+new MutationObserver(readPal).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+function fit(){ const r=cv.getBoundingClientRect(), d=window.devicePixelRatio||1;
+  const W=Math.round(r.width*d), Hh=Math.round(r.height*d); if(cv.width!==W||cv.height!==Hh){cv.width=W;cv.height=Hh}
+  c.setTransform(d,0,0,d,0,0); return {w:r.width,h:r.height}; }
+function arrow(x,y,dx,dy,s,col){ const L=Math.hypot(dx,dy)||1; dx/=L; dy/=L; c.fillStyle=col; c.beginPath();
+  c.moveTo(x+dx*s,y+dy*s); c.lineTo(x-dx*s*0.6-dy*s*0.65,y-dy*s*0.6+dx*s*0.65); c.lineTo(x-dx*s*0.6+dy*s*0.65,y-dy*s*0.6-dx*s*0.65); c.closePath(); c.fill(); }
+const SKY=[[-18,[8,12,30],[16,22,46]],[-12,[14,22,56],[40,40,80]],[-6,[28,44,96],[150,90,90]],[-1,[46,80,150],[240,140,80]],
+  [3,[60,110,180],[250,190,120]],[12,[66,132,206],[190,220,240]],[40,[40,118,206],[170,212,242]]];
+function skyCols(a){ const mx=(p,q,k)=>p.map((v,i)=>Math.round(v+(q[i]-v)*k));
+  if(a<=SKY[0][0]) return [SKY[0][1],SKY[0][2]];
+  for(let i=1;i<SKY.length;i++) if(a<=SKY[i][0]){const k=(a-SKY[i-1][0])/(SKY[i][0]-SKY[i-1][0]); return [mx(SKY[i-1][1],SKY[i][1],k),mx(SKY[i-1][2],SKY[i][2],k)];}
+  const l=SKY[SKY.length-1]; return [l[1],l[2]]; }
+
+function state(){
+  const th=(180+15*t)*D2R, O=[Math.cos(th),Math.sin(th)];
+  const alt=Math.asin(Math.max(-1,Math.min(1,O[0])))*R2D;
+  return {th,O,alt,dep:-alt,sg:O[1]>=0?1:-1};
+}
+
+function draw(){
+  const {w,h}=fit(), fs=Math.max(11,Math.min(16,w/58)), s=state();
+  const R=Math.min(h*0.31,w*0.27), cx=w*0.42, cy=h*0.5;
+  const X=p=>cx+R*p[0], Y=p=>cy-R*p[1];
+  c.fillStyle=pal.bg; c.fillRect(0,0,w,h);
+
+  // atmosfera: fasce concentriche
+  if(atm){ for(let i=6;i>=1;i--){ const r=R*(1+H*i/6);
+    c.fillStyle=`rgba(${pal.atm},${0.07+0.05*(6-i)})`; c.beginPath(); c.arc(cx,cy,r,0,Math.PI*2); c.fill();
+    c.strokeStyle=`rgba(${pal.atm},0.45)`; c.lineWidth=1; c.stroke(); }
+    // l'aria gira insieme alla Terra
+    dots.forEach(d=>{ const a=d.a+s.th, r=R*(1+H*d.r); c.fillStyle=`rgba(${pal.atm},0.75)`;
+      c.beginPath(); c.arc(cx+r*Math.cos(a),cy-r*Math.sin(a),1.4,0,Math.PI*2); c.fill(); });
+    // la parte di atmosfera sopra l'osservatore
+    const a0=s.th-SEC*D2R, a1=s.th+SEC*D2R;
+    c.beginPath(); c.arc(cx,cy,R*(1+H),-a0,-a1,true); c.arc(cx,cy,R,-a1,-a0,false); c.closePath();
+    c.fillStyle='rgba(255,236,190,.35)'; c.fill(); c.setLineDash([4,4]); c.strokeStyle=pal.ray; c.lineWidth=1.5; c.stroke(); c.setLineDash([]);
+  }
+
+  // Terra: dì, crepuscolo, notte
+  c.save(); c.beginPath(); c.arc(cx,cy,R,0,Math.PI*2); c.clip();
+  c.fillStyle='#16304f'; c.fillRect(cx-R,cy-R,2*R,2*R);
+  const g=c.createLinearGradient(cx,0,cx+R,0); g.addColorStop(0,'#5d9fdc'); g.addColorStop(1,'#a9d1f3');
+  c.fillStyle=g; c.fillRect(cx,cy-R,R,2*R);
+  if(atm){ const wt=R*Math.sin(TW*D2R), gt=c.createLinearGradient(cx-wt,0,cx,0);
+    gt.addColorStop(0,'rgba(22,48,79,0)'); gt.addColorStop(1,'rgba(120,160,210,.85)'); c.fillStyle=gt; c.fillRect(cx-wt,cy-R,wt,2*R); }
+  // meridiani che ruotano con la Terra
+  for(let k=0;k<12;k++){ const a=s.th+k*Math.PI/6;
+    c.strokeStyle=k===0?'rgba(255,90,70,.75)':'rgba(255,255,255,.18)'; c.lineWidth=k===0?2:1;
+    c.beginPath(); c.moveTo(cx,cy); c.lineTo(cx+R*Math.cos(a),cy-R*Math.sin(a)); c.stroke(); }
+  c.restore();
+  c.strokeStyle='rgba(255,255,255,.5)'; c.lineWidth=1.2; c.beginPath(); c.arc(cx,cy,R,0,Math.PI*2); c.stroke();
+  c.fillStyle='#fff'; c.beginPath(); c.arc(cx,cy,3,0,Math.PI*2); c.fill();
+
+  // circolo di illuminazione
+  c.strokeStyle='#d6283a'; c.lineWidth=2.5; c.beginPath(); c.moveTo(cx,cy-R); c.lineTo(cx,cy+R); c.stroke();
+
+  // etichette del disegno
+  c.font=`700 ${fs*1.15}px ${FB}`; c.textAlign='center'; c.textBaseline='middle';
+  c.fillStyle='#ffffff'; c.fillText('noche',cx-R*0.62,cy-R*0.08);
+  c.fillStyle='#163a63'; c.fillText('día',cx+R*0.55,cy-R*0.08);
+  c.save(); c.translate(cx+fs*0.9,cy+R*0.42); c.rotate(-Math.PI/2); c.font=`${fs*0.85}px ${FB}`; c.fillStyle='#163a63';
+  c.fillText('círculo de iluminación',0,0); c.restore();
+  if(atm){ c.save(); c.translate(cx-R*Math.sin(TW*D2R)/2,cy+R*0.42); c.rotate(-Math.PI/2); c.font=`700 ${fs*0.9}px ${FB}`; c.fillStyle='#e8f1fb';
+    c.fillText('crepúsculo',0,0); c.restore();
+    c.save(); const aa=-38*D2R, ra=R*(1+H*0.55); c.translate(cx+ra*Math.cos(aa),cy-ra*Math.sin(aa)); c.rotate(-aa+Math.PI/2);
+    c.font=`${fs*0.9}px ${FB}`; c.fillStyle=pal.ink; c.fillText('a t m ó s f e r a',0,0); c.restore(); }
+  c.textBaseline='alphabetic';
+
+  // raggi solari reali (orizzontali, da destra)
+  const xr=(w-8-cx)/R;
+  c.lineWidth=2;
+  const top=atm?1+H:1;
+  for(let i=-6;i<=6;i++){ const y=i/6.6*top; const xs=Math.sqrt(Math.max(0,top*top-y*y));
+    c.strokeStyle=pal.ray; c.globalAlpha=0.55; c.beginPath(); c.moveTo(X([xr,y]),Y([0,y])); c.lineTo(X([xs,y])+8,Y([0,y])); c.stroke();
+    c.globalAlpha=0.85; arrow(X([xs,y])+2,Y([0,y]),-1,0,7,pal.ray); c.globalAlpha=1; }
+  c.font=`${fs*0.95}px ${FB}`; c.fillStyle=pal.ink; c.textAlign='right';
+  c.fillText('dirección real',w-12,Y([0,0.53])-fs*1.6); c.fillText('de los rayos solares',w-12,Y([0,0.53])-fs*0.45);
+
+  // rotazione
+  const rr=R*(1+H)+16; c.strokeStyle=pal.muted; c.lineWidth=2;
+  c.beginPath(); c.arc(cx,cy,rr,-200*D2R,-245*D2R,true); c.stroke();
+  const ae=245*D2R; arrow(cx+rr*Math.cos(ae),cy-rr*Math.sin(ae),-Math.sin(ae)*1,-Math.cos(ae)*1,8,pal.muted);
+  c.font=`${fs*0.85}px ${FB}`; c.fillStyle=pal.muted; c.textAlign='left';
+  c.fillText('rotación: de oeste a este',8,h-12);
+
+  // l'osservatore
+  const O=s.O, sg=s.sg, up=O;
+  const T=sg>0?[Math.sin(s.th),-Math.cos(s.th)]:[-Math.sin(s.th),Math.cos(s.th)]; // orizzonte verso il Sole
+  const E=[-Math.sin(s.th),Math.cos(s.th)];
+  const dep=s.dep;
+  let light='directa', ph, txt;
+  const am=sg<0;
+  // raggi "attivati": quelli che arrivano a terra vicino all'osservatore
+  const drawRay=(yv,main)=>{
+    const r=trace(yv,atm), m=p=>[p[0],sg*p[1]];
+    c.strokeStyle=pal.ray; c.lineWidth=main?3.5:1.6; c.globalAlpha=main?1:0.8;
+    c.beginPath(); r.pts.forEach((p,i)=>{const q=m(p); i?c.lineTo(X(q),Y(q)):c.moveTo(X(q),Y(q));});
+    if(r.land){const q=m(r.land); c.lineTo(X(q),Y(q));} c.stroke();
+    let out=null;
+    if(r.land){ const q=m(r.land), d=[r.d[0],sg*r.d[1]], sz=main?10:6;
+      arrow(X(q)-d[0]*sz*0.9,Y(q)+d[1]*sz*0.9,d[0],-d[1],sz,pal.ray); out=d; }
+    c.globalAlpha=1; return out;
+  };
+  const maxD=atm?TW:0;
+  if(dep-SEC<=maxD){
+    const lo=Math.ceil(Math.max(-88,dep-SEC)/3)*3, hi=Math.min(maxD,dep+SEC);
+    for(let tg=lo;tg<=hi+1e-9;tg+=3){ const yv=yFor(tg); if(yv!=null) drawRay(yv,false); }
+  }
+  let myD=null;
+  if(dep<=maxD){ const yv=yFor(Math.max(-89.5,dep)); if(yv!=null) myD=drawRay(yv,true); }
+  if(dep<0){
+    ph=dep>-1.5?(am?'Amanecer':'Puesta de sol'):(Math.abs(t-12)<0.4?'Mediodía':'Día');
+    txt=dep>-1.5?(am?"El observador llega al círculo de iluminación: el Sol asoma en el horizonte, al este. Llegan los primeros rayos directos."
+                    :"El observador llega al círculo de iluminación: el Sol toca el horizonte, al oeste. Son los últimos rayos directos.")
+       :"El observador está en la mitad iluminada. Los rayos que atraviesan su parte de atmósfera se doblan muy poco y llegan casi rectos.";
+  } else if(atm&&myD){
+    light='desviada por la atmósfera';
+    const D=[-myD[0],-myD[1]];
+    const far=[O[0]+D[0]*3,O[1]+D[1]*3];
+    c.setLineDash([7,6]); c.strokeStyle=pal.ray; c.globalAlpha=0.9; c.lineWidth=2;
+    c.beginPath(); c.moveTo(X(O),Y(O)); c.lineTo(X(far),Y(far)); c.stroke(); c.setLineDash([]); c.globalAlpha=1;
+    let kl=1.4, lab; do{ lab=[O[0]+D[0]*kl,O[1]+D[1]*kl]; kl-=0.05; }
+    while(kl>0.3&&(Y(lab)<fs*3.2||Y(lab)>h-fs*3.2||X(lab)>w-fs*11));
+    c.font=`${fs*0.9}px ${FB}`; c.fillStyle=pal.ink; c.textAlign='left';
+    const ly=sg>0?Y(lab)-fs*1.6:Y(lab)+fs*1.2;
+    c.fillText('dirección aparente',X(lab)+10,ly); c.fillText('de los rayos solares',X(lab)+10,ly+fs*1.15);
+    const kind=dep<6?'civil':(dep<12?'náutico':'astronómico');
+    ph=(am?'Crepúsculo de la mañana':'Crepúsculo de la tarde');
+    txt=am?`El Sol está todavía ${Math.round(dep)}° bajo el horizonte. Los rayos que pasan rasantes a la Tierra atraviesan la atmósfera y se doblan hacia abajo: los primeros llegan hasta el observador, que los ve venir del este, desde una dirección más alta que la real. Es el crepúsculo ${kind}.`
+           :`El Sol ya está ${Math.round(dep)}° bajo el horizonte. Los rayos rasantes, doblados por la atmósfera, todavía llegan más allá del círculo de iluminación y alcanzan al observador, que los ve venir del oeste, más arriba de lo real. Es el crepúsculo ${kind}: al girar, pronto ningún rayo lo alcanzará.`;
+  } else {
+    light='ninguna'; ph='Noche';
+    txt=atm?"El observador está tan lejos del círculo de iluminación que ningún rayo, ni siquiera desviado, consigue alcanzarlo: es de noche."
+           :"Sin atmósfera ningún rayo se desvía: en cuanto el Sol baja del horizonte es de noche enseguida, como en la Luna.";
+  }
+  // segno dell'osservatore
+  const L=R*0.2;
+  c.strokeStyle='#fff'; c.lineWidth=2; c.beginPath(); c.moveTo(X(O)-E[0]*L,Y(O)+E[1]*L); c.lineTo(X(O)+E[0]*L,Y(O)-E[1]*L); c.stroke();
+  c.font=`800 ${fs}px ${FD}`; c.textAlign='center'; c.textBaseline='middle';
+  c.fillStyle='#ffb347'; c.fillText('E',X(O)+E[0]*(L+fs*0.8),Y(O)-E[1]*(L+fs*0.8));
+  c.fillStyle=pal.west; c.fillText('O',X(O)-E[0]*(L+fs*0.8),Y(O)+E[1]*(L+fs*0.8)); c.textBaseline='alphabetic';
+  c.fillStyle='#ff4b3a'; c.strokeStyle='#fff'; c.lineWidth=2; c.beginPath(); c.arc(X(O),Y(O),6.5,0,Math.PI*2); c.fill(); c.stroke();
+
+  // il cielo dell'osservatore
+  const bw=Math.min(170,w*0.24), bh=bw*0.42, bx=12, by=12;
+  const skyA=atm?s.alt:(s.alt>0?s.alt:-30);
+  const [tc,hc]=skyCols(skyA), sg2=c.createLinearGradient(0,by,0,by+bh);
+  sg2.addColorStop(0,`rgb(${tc})`); sg2.addColorStop(1,`rgb(${hc})`);
+  c.fillStyle=sg2; c.fillRect(bx,by,bw,bh);
+  c.fillStyle='#2d3b2a'; c.fillRect(bx,by+bh*0.8,bw,bh*0.2);
+  c.strokeStyle=pal.muted; c.lineWidth=1; c.strokeRect(bx,by,bw,bh);
+  c.font=`${fs*0.8}px ${FB}`; c.fillStyle=pal.muted; c.textAlign='left'; c.fillText('el cielo del observador',bx,by+bh+fs*1.2);
+
+  return {ph,txt,light,alt:s.alt};
+}
+
+function update(r){
+  $('phase').textContent=r.ph; $('alt').textContent=Math.round(r.alt)+'°'; $('light').textContent=r.light;
+  const now=$('now'); if(now.textContent!==r.txt) now.textContent=r.txt;
+  const m=Math.round(t*60)%1440; $('clock').textContent=String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
+  if(document.activeElement!==$('ora')) $('ora').value=Math.round(t*60);
+}
+function loop(ts){
+  if(last!==null&&playing){ const alt=Math.asin(Math.cos((180+15*t)*D2R))*R2D;
+    const k=(slow&&alt<1&&alt>-TW-1)?0.18:1; t=(t+(ts-last)/1000*speed*k)%24; }
+  last=ts; update(draw()); requestAnimationFrame(loop);
+}
+function setPlay(p){playing=p; $('play').textContent=p?'Pausa':'Iniciar';}
+$('play').addEventListener('click',()=>setPlay(!playing));
+$('ora').addEventListener('input',e=>{t=e.target.value/60; setPlay(false);});
+document.querySelectorAll('[data-t]').forEach(b=>b.addEventListener('click',()=>{t=+b.dataset.t; setPlay(false);}));
+$('speed').addEventListener('change',e=>speed=+e.target.value);
+$('slow').addEventListener('change',e=>slow=e.target.checked);
+$('noatm').addEventListener('change',e=>atm=!e.target.checked);
+setPlay(playing); requestAnimationFrame(loop);
+})();
+</script>
+
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Tamaño de la página">
+<button type="button" data-z="-1" title="Reducir (tecla −)" aria-label="Reducir">A−</button><span data-zv title="Volver al 100 %">100%</span><button type="button" data-z="1" title="Ampliar (tecla +)" aria-label="Ampliar">A+</button><button type="button" data-z="0" title="Tamaño normal (tecla 0)" aria-label="Tamaño normal">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+</body>
+</html>

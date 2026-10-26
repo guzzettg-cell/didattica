@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}
+.backlink{display:inline-block;margin:14px 16px 0;font:600 14px/1.2 system-ui,sans-serif;color:inherit;text-decoration:none;border:1px solid rgba(120,130,150,.4);border-radius:999px;padding:6px 12px}
+.backlink:hover{text-decoration:underline}
+.map.nomap{display:flex;flex-wrap:wrap;gap:8px;padding:14px;align-content:flex-start;background:var(--card,#fff)}
+.map.nomap .mapnote{flex-basis:100%;margin:0 0 4px;font-size:.9rem;color:var(--muted,#566476)}
+.map.nomap .dot,.map.nomap .hit,.map.nomap .istmo{position:static!important;transform:none!important;width:auto!important;height:auto!important;aspect-ratio:auto!important;opacity:1!important;border-radius:999px!important;padding:6px 12px!important;border:0!important;color:#fff!important;font:700 .88rem/1.2 system-ui,sans-serif!important;box-shadow:none!important;animation:none!important}
+.map.nomap .dot::after,.map.nomap .hit::after,.map.nomap .istmo::after{content:attr(aria-label)}
+.map.nomap .hit{background:#3b4a63!important}.map.nomap .istmo{background:#d62828!important}
+.map.nomap .dot.dim{opacity:.25!important}
+.map.nomap [aria-pressed="true"]{outline:3px solid #111!important;outline-offset:2px}
+</style>
+<title>¿Dónde está el punto P?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: a sinistra il globo da girare, a destra la tappa con la domanda "che cosa manca?"; sotto, le misure della Terra */
+:root{
+  --paper:#eef1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
+  --accent:#c2410c; --accent-soft:#fde4d3; --ok:#1f7a4d; --ok-soft:#dcf2e6; --no:#b42318; --no-soft:#fde3e1;
+  --globe-bg:#0b1424;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717; --globe-bg:#070d18; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717; --globe-bg:#070d18; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+[hidden]{display:none!important}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:20px}
+header.top{display:grid;gap:6px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.02;margin:0}
+h1 em{font-style:normal;color:var(--accent)}
+.lead{margin:0;max-width:72ch;color:var(--muted)}
+.steps{display:flex;gap:6px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+.steps button{font:inherit;font-size:.8rem;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:5px 11px;cursor:pointer}
+.steps button[aria-current="step"]{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}
+.steps button.done{border-color:var(--ok);color:var(--ok)}
+.main{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:900px){.main{grid-template-columns:1fr}}
+.globe{background:var(--globe-bg);border-radius:16px;overflow:hidden;position:relative;min-width:0}
+.globe canvas{width:100%;aspect-ratio:1/1;display:block;touch-action:none;cursor:grab}
+.globe .hint{position:absolute;left:12px;top:10px;color:#a9b8cc;font-size:.8rem}
+.globe .read{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:rgba(10,18,32,.85);color:#ffe2a6;border:1px solid #33445f;
+  border-radius:999px;padding:5px 14px;font-weight:700;font-size:.9rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;gap:14px;min-width:0}
+.panel .num{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.panel h2{font-family:var(--display);font-weight:800;font-size:1.6rem;margin:0;line-height:1.1;text-wrap:balance}
+.panel p{margin:0}
+.see{font-size:.92rem;color:var(--muted);border-left:3px solid var(--accent);padding-left:10px}
+.q{background:var(--accent-soft);border-radius:12px;padding:14px;display:grid;gap:10px}
+.q h3{margin:0;font-size:1.02rem}
+.opts{display:grid;gap:8px}
+.opts button{font:inherit;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:9px 12px;cursor:pointer}
+.opts button:hover{border-color:var(--accent)}
+.opts button.right{border-color:var(--ok);background:var(--ok-soft)}
+.opts button.wrong{border-color:var(--no);background:var(--no-soft)}
+.fb{font-size:.92rem;border-radius:10px;padding:9px 12px}
+.fb.right{background:var(--ok-soft);color:var(--ink);border:1px solid var(--ok)}
+.fb.wrong{background:var(--no-soft);color:var(--ink);border:1px solid var(--no)}
+.nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.nav button,.game button{font:inherit;font-size:.95rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:8px 16px;cursor:pointer}
+.nav .next{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}
+.nav .next.ready{background:var(--ok);border-color:var(--ok);color:#fff}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.coord{font-family:var(--display);font-weight:800;font-size:1.5rem;background:var(--paper);border-radius:10px;padding:8px 12px;text-align:center;font-variant-numeric:tabular-nums}
+.game{display:grid;gap:10px;border-top:1px solid var(--line);padding-top:14px}
+.game h3{margin:0;font-family:var(--display);font-size:1.15rem}
+.target{font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums}
+.facts{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 20px}
+.facts h2{font-family:var(--display);font-weight:800;font-size:1.15rem;margin:0 0 10px}
+.facts dl{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.facts div{border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.facts dt{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.facts dd{margin:0;font-family:var(--display);font-weight:600;font-size:1.1rem;font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<a class="backlink" href="../index.html">← El planeta Tierra: todas las lecciones</a>
+
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Geografía · La forma de la Tierra y la cuadrícula geográfica</div>
+    <h1>¿Dónde está el <em>punto P</em>?</h1>
+    <p class="lead">En una esfera no hay un principio ni un final, no hay arriba ni abajo. Entonces, ¿cómo podemos indicar un punto exacto de la Tierra, sin equivocarnos? Vamos a construir las referencias paso a paso. En cada paso pregúntate: ¿qué falta todavía?</p>
+  </header>
+
+  <ol class="steps" id="steps" aria-label="Pasos"></ol>
+
+  <div class="main">
+    <div class="globe">
+      <canvas id="globe" role="img" aria-label="Globo que se puede girar arrastrándolo, con el punto P y las referencias del paso"></canvas>
+      <div class="hint">Arrastra para girar el globo</div>
+      <div class="read" id="read" hidden></div>
+    </div>
+    <section class="panel" aria-live="polite">
+      <div class="num" id="num"></div>
+      <h2 id="title"></h2>
+      <div id="text" style="display:grid;gap:8px"></div>
+      <p class="see" id="see"></p>
+      <div class="q" id="qbox">
+        <h3 id="q"></h3>
+        <div class="opts" id="opts"></div>
+        <div class="fb" id="fb" hidden></div>
+      </div>
+      <div class="game" id="game" hidden>
+        <h3>Ahora tú: encuentra el punto</h3>
+        <p style="margin:0">Haz clic en el globo en el punto con estas coordenadas. Mientras mueves el ratón, abajo lees la latitud y la longitud.</p>
+        <div class="target" id="tgt"></div>
+        <div class="fb" id="gfb" hidden></div>
+        <div><button type="button" id="gnext">Otro punto</button></div>
+      </div>
+      <div class="nav">
+        <button type="button" id="prev">← Atrás</button>
+        <button type="button" class="next" id="next">Adelante →</button>
+      </div>
+    </section>
+  </div>
+
+</div>
+
+<script>
+(function(){
+const D2R=Math.PI/180, R2D=180/Math.PI;
+const $=id=>document.getElementById(id);
+const cv=$('globe'), c=cv.getContext('2d');
+const FD='"Bricolage Grotesque","Trebuchet MS",sans-serif', FB='"Atkinson Hyperlegible",Verdana,sans-serif';
+const P={lat:41.9,lon:12.5};
+
+/* ---------- le tappe ---------- */
+const STEPS=[
+ {short:'El punto P',title:'Un punto en una esfera',cam:[20,-5],
+  text:['La Tierra tiene la forma de una esfera casi perfecta: solo está un poco «achatada» en los polos y más ancha en el ecuador.','En el globo hay un punto P. Intenta explicar a un compañero dónde está.'],
+  see:'Gira el globo: P se mueve arriba, abajo, a la derecha, a la izquierda. Expresiones como «arriba a la derecha» no sirven.',
+  q:'¿Qué necesitamos para decir dónde está P?',
+  opts:[['Basta con decir «arriba a la derecha».',0,'Depende de cómo sostienes el globo: si lo giras, «arriba a la derecha» es otro punto.'],
+        ['Necesitamos referencias fijas en la Tierra, iguales para todos.',1,'Exacto. Buscamos puntos y líneas que no cambian, aunque giremos el globo.'],
+        ['Es imposible: una esfera es toda igual.',0,'No es imposible: solo tenemos que inventar unas referencias. Pero ¿desde dónde empezamos?']]},
+ {short:'Eje y polos',title:'El eje y los polos',cam:[20,-5],
+  text:['La Tierra gira alrededor de un eje imaginario. Los dos puntos donde el eje «sale» de la superficie son el Polo Norte y el Polo Sur.','Son las dos primeras referencias fijas: no cambian nunca.'],
+  see:'Ahora el globo tiene un «arriba» (el Polo Norte) y un «abajo» (el Polo Sur).',
+  q:'Con los dos polos, ¿ya podemos decir exactamente dónde está P?',
+  opts:[['Sí: P está cerca del Polo Norte.',0,'¿Cómo de cerca? ¿Y en qué dirección? Hay infinitos puntos «cerca del Polo Norte».'],
+        ['No: necesitamos una línea que divida la Tierra por la mitad entre los dos polos.',1,'Correcto. Una línea a mitad de camino entre los dos polos nos dirá si P está en la mitad norte o en la mitad sur.'],
+        ['Sí: basta con medir la distancia de P al Polo Sur.',0,'Esa distancia solo nos dice que P está en un círculo alrededor del polo: los puntos posibles siguen siendo infinitos.']]},
+ {short:'Ecuador',title:'El ecuador y los dos hemisferios',cam:[18,-5],tint:'ns',
+  text:['El ecuador es la circunferencia que está a la misma distancia de los dos polos. Divide la superficie de la Tierra en dos mitades iguales.','Al norte está el hemisferio norte (boreal), al sur el hemisferio sur (austral).'],
+  see:'P está en el hemisferio norte. ¡Pero el hemisferio norte es la mitad de toda la Tierra!',
+  q:'Saber que P está en el hemisferio norte, ¿es suficiente para encontrarlo?',
+  opts:[['Sí, porque el hemisferio norte es una zona precisa.',0,'Es precisa, pero es enorme: es la mitad del planeta.'],
+        ['No: tenemos que saber a qué distancia está P del ecuador.',1,'Exacto. Necesitamos medir la distancia desde el ecuador, hacia el norte o hacia el sur.'],
+        ['No: tenemos que saber a qué distancia está P del Polo Sur.',0,'Podría funcionar, pero se usa el ecuador como referencia, porque divide la Tierra por la mitad.']]},
+ {short:'Paralelos',title:'Los paralelos y la latitud',cam:[12,-50],
+  text:['Los paralelos son circunferencias paralelas al ecuador: se obtienen cortando la Tierra con planos perpendiculares al eje. El ecuador es el paralelo más largo.','La latitud es el ángulo que mide la distancia de un punto al ecuador, a lo largo de su meridiano. Va de 0° (ecuador) a 90° (polos) y puede ser norte (N) o sur (S).'],
+  see:'P tiene una latitud de unos 42° N: está en el paralelo naranja. Los puntos grises tienen todos la misma latitud que P.',
+  q:'Saber que P está en el paralelo 42° N, ¿es suficiente?',
+  opts:[['Sí: ahora sabemos exactamente dónde está P.',0,'Mira los puntos grises: todos tienen latitud 42° N, pero están en lugares distintos.'],
+        ['No: el paralelo es una circunferencia entera. Necesitamos una segunda medida, de este a oeste.',1,'Exacto. Ahora necesitamos unas líneas que vayan de un polo al otro.'],
+        ['No: necesitamos un paralelo más largo.',0,'La longitud del paralelo no cambia el problema: P podría estar en cualquier punto del paralelo.']]},
+ {short:'Meridianos',title:'Los meridianos',cam:[22,-5],
+  text:['Los meridianos son semicircunferencias que van de un polo al otro. Cruzan los paralelos en ángulo recto.','Todos los meridianos tienen la misma longitud: unos 20 000 km.'],
+  see:'La cuadrícula está formada por meridianos y paralelos. Pero los meridianos son todos iguales: ninguno es más importante que los otros.',
+  q:'¿Desde qué meridiano conviene empezar a medir?',
+  opts:[['Desde el más largo.',0,'Los meridianos miden todos lo mismo.'],
+        ['Desde cualquiera, con tal de que todo el mundo use el mismo.',1,'Exacto: hace falta un acuerdo, una convención. Y ese acuerdo existe.'],
+        ['Desde el que pasa por el punto que buscamos.',0,'Así cada punto tendría su propia referencia y no podríamos compararlos.']]},
+ {short:'Greenwich',title:'El meridiano de Greenwich',cam:[20,-20],tint:'ew',
+  text:['En 1884 los países del mundo se pusieron de acuerdo: el meridiano de partida es el que pasa por el observatorio astronómico de Greenwich, en Londres. Es el meridiano 0°.','El meridiano opuesto es su antimeridiano, a 180°. Juntos dividen la Tierra en hemisferio oriental (este) y hemisferio occidental (oeste).'],
+  see:'P está en el hemisferio oriental, al este de Greenwich.',
+  q:'Conocemos el paralelo de P y tenemos un meridiano de partida. ¿Qué falta?',
+  opts:[['Nada, hemos terminado.',0,'Sabemos que P está al este de Greenwich, pero no a qué distancia.'],
+        ['A qué distancia está P del meridiano de Greenwich, hacia el este o hacia el oeste.',1,'Correcto: esta medida se llama longitud.'],
+        ['A qué distancia está P del antimeridiano.',0,'Se podría hacer, pero por convención se mide desde el meridiano de Greenwich.']]},
+ {short:'Longitud',title:'La longitud',cam:[48,6],
+  text:['La longitud es el ángulo que mide la distancia de un punto al meridiano de Greenwich, a lo largo del paralelo del punto. Va de 0° a 180° y puede ser este (E) u oeste (W, del inglés West).','Todos los puntos de un mismo meridiano tienen la misma longitud.'],
+  see:'P tiene una longitud de unos 12° E: está en el meridiano naranja.',
+  q:'¿Ahora P está identificado sin posibilidad de error?',
+  opts:[['Sí: hay un solo punto donde el paralelo 42° N cruza el meridiano 12° E.',1,'¡Exacto! Un meridiano y un paralelo se cruzan en un solo punto.'],
+        ['No: también hace falta un tercer número.',0,'Para un punto de la superficie de la Tierra bastan dos números: latitud y longitud.'],
+        ['No: el meridiano cruza el paralelo en dos puntos.',0,'El meridiano es una semicircunferencia: va de un polo al otro solo por un lado, así que cruza el paralelo una sola vez.']]},
+ {short:'Coordenadas',title:'Las coordenadas geográficas',cam:[30,12.5],final:true,
+  text:['La latitud y la longitud son las coordenadas geográficas: un par de valores que indica el punto donde se cruzan un paralelo y un meridiano.','Las coordenadas de P son:'],
+  see:'¡El punto P es Roma!'}
+];
+
+/* ---------- stato ---------- */
+let step=0, answered=new Set(), camLat=20, camLon=-5, tgtLat=20, tgtLon=-5, anim=true, hover=null, click=null;
+let game=null;
+const CITIES=[['Londres',51.5,-0.1],['New York',40.7,-74],['Rio de Janeiro',-22.9,-43.2],['Sydney',-33.9,151.2],['Tokyo',35.7,139.7],['El Cairo',30,31.2],['Ciudad del Cabo',-33.9,18.4],['Ciudad de México',19.4,-99.1],['Moscú',55.8,37.6],['Nairobi',-1.3,36.8]];
+
+function fmtLat(v){ const a=Math.round(Math.abs(v)); return a===0?'0°':a+'° '+(v>0?'N':'S'); }
+function fmtLon(v){ const a=Math.round(Math.abs(v)); return a===0||a===180?a+'°':a+'° '+(v>0?'E':'W'); }
+
+/* ---------- proiezione ---------- */
+let B, cx, cy, R;
+function basis(){ const la=camLat*D2R, lo=camLon*D2R;
+  B={F:[Math.cos(la)*Math.cos(lo),Math.cos(la)*Math.sin(lo),Math.sin(la)],Rt:[-Math.sin(lo),Math.cos(lo),0],U:[-Math.sin(la)*Math.cos(lo),-Math.sin(la)*Math.sin(lo),Math.cos(la)]}; }
+const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+const ll=(lat,lon)=>{ lat*=D2R; lon*=D2R; return [Math.cos(lat)*Math.cos(lon),Math.cos(lat)*Math.sin(lon),Math.sin(lat)]; };
+const pr=v=>[cx+R*dot(v,B.Rt), cy-R*dot(v,B.U), dot(v,B.F)];
+function line(pts,front,back){ // pts: vettori; disegna davanti e (tenue) dietro
+  for(const pass of [0,1]){ const st=pass?front:back; if(!st) continue; c.save(); Object.assign(c,st.o); if(st.dash) c.setLineDash(st.dash);
+    c.beginPath(); let open=false;
+    for(const v of pts){ const p=pr(v), vis=p[2]>=-0.002; if(vis!==!!pass){open=false;continue} open?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]); open=true; }
+    c.stroke(); c.restore(); } }
+const parallel=(lat,l0=-180,l1=180)=>{const a=[]; for(let l=l0;l<=l1+1e-9;l+=2) a.push(ll(lat,l)); return a;};
+const meridian=(lon,a0=-90,a1=90)=>{const a=[]; for(let l=a0;l<=a1+1e-9;l+=2) a.push(ll(l,lon)); return a;};
+
+/* ---------- globo ---------- */
+const off=document.createElement('canvas'), oc=off.getContext('2d'); let img=null, imgKey='';
+function shade(N,tint){
+  const key=N+'|'+camLat.toFixed(2)+'|'+camLon.toFixed(2)+'|'+tint; if(key===imgKey) return; imgKey=key;
+  off.width=off.height=N; img=oc.createImageData(N,N); const d=img.data;
+  for(let j=0;j<N;j++){ const v=1-2*(j+0.5)/N; for(let i=0;i<N;i++){ const u=2*(i+0.5)/N-1, r2=u*u+v*v, o=(j*N+i)*4;
+    if(r2>1){d[o+3]=0;continue} const w=Math.sqrt(1-r2);
+    const X=u*B.Rt[0]+v*B.U[0]+w*B.F[0], Y=u*B.Rt[1]+v*B.U[1]+w*B.F[1], Z=u*B.Rt[2]+v*B.U[2]+w*B.F[2];
+    let r=62,g=127,b=194;
+    if(tint==='ns'){ if(Z>=0){r=r*0.62+240*0.38; g=g*0.62+178*0.38; b=b*0.62+92*0.38;} else {r=r*0.62+80*0.38; g=g*0.62+196*0.38; b=b*0.62+170*0.38;} }
+    if(tint==='ew'){ const lon=Math.atan2(Y,X); if(lon>=0){r=r*0.62+240*0.38; g=g*0.62+178*0.38; b=b*0.62+92*0.38;} else {r=r*0.62+150*0.38; g=g*0.62+132*0.38; b=b*0.62+235*0.38;} }
+    const sh=0.5+0.5*(0.75*w+0.25*(-u*0.5+v*0.6)); d[o]=r*sh; d[o+1]=g*sh; d[o+2]=b*sh;
+    d[o+3]=Math.min(1,(1-Math.sqrt(r2))*N*0.5)*255; }}
+  oc.putImageData(img,0,0);
+}
+function fit(){ const r=cv.getBoundingClientRect(), dpr=window.devicePixelRatio||1;
+  const W=Math.round(r.width*dpr), H=Math.round(r.height*dpr); if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}
+  c.setTransform(dpr,0,0,dpr,0,0); return {w:r.width,h:r.height,dpr}; }
+function text(t,x,y,col,size,weight,align){ c.font=`${weight||700} ${size}px ${FB}`; c.textAlign=align||'center'; c.lineWidth=3.5; c.strokeStyle='rgba(8,14,26,.85)'; c.strokeText(t,x,y); c.fillStyle=col; c.fillText(t,x,y); }
+
+function draw(){
+  const {w,h,dpr}=fit(), fs=Math.max(11,Math.min(15,w/40)), S=STEPS[step];
+  if(anim){ camLat+=(tgtLat-camLat)*0.12; let dl=((tgtLon-camLon+540)%360)-180; camLon+=dl*0.12; if(Math.abs(tgtLat-camLat)<0.05&&Math.abs(dl)<0.05) anim=false; }
+  basis(); cx=w/2; cy=h/2+fs*0.4; R=Math.min(w,h)*0.36;
+  c.clearRect(0,0,w,h);
+  // asse (dietro)
+  if(step>=1){ c.strokeStyle='rgba(255,255,255,.5)'; c.lineWidth=2; const a=pr([0,0,1.28]), b=pr([0,0,-1.28]); c.beginPath(); c.moveTo(a[0],a[1]); c.lineTo(b[0],b[1]); c.stroke(); }
+  shade(Math.min(520,Math.round(2*R*dpr)),S.tint||(step===2?'ns':step===5?'ew':''));
+  c.drawImage(off,cx-R,cy-R,2*R,2*R);
+  // asse (davanti) e poli
+  if(step>=1){ [[1,'Polo Norte'],[-1,'Polo Sur']].forEach(([z,lab])=>{ const p0=pr([0,0,z]), p1=pr([0,0,1.28*z]);
+      if(p0[2]>0){ c.strokeStyle='#fff'; c.lineWidth=2.5; c.beginPath(); c.moveTo(p0[0],p0[1]); c.lineTo(p1[0],p1[1]); c.stroke(); c.fillStyle='#fff'; c.beginPath(); c.arc(p0[0],p0[1],4,0,Math.PI*2); c.fill(); }
+      const out=Math.hypot(p1[0]-cx,p1[1]-cy)>R+4; if(p0[2]>0||out) text(lab,p1[0],p1[1]+(z>0?-8:fs+4),'#ffffff',fs,700); }); }
+  const back={o:{strokeStyle:'rgba(255,255,255,.14)',lineWidth:1}};
+  // meridiani e paralleli
+  if(step>=4){ for(let lo=-165;lo<=180;lo+=15) line(meridian(lo),{o:{strokeStyle:'rgba(255,255,255,.45)',lineWidth:1}},back); }
+  if(step>=3){ for(let la=-75;la<=75;la+=15) if(la!==0) line(parallel(la),{o:{strokeStyle:'rgba(255,255,255,.45)',lineWidth:1}},back); }
+  // Equatore
+  if(step>=2){ line(parallel(0),{o:{strokeStyle:'#ff4d4d',lineWidth:3}},{o:{strokeStyle:'rgba(255,90,90,.3)',lineWidth:1.5}});
+    const e=[0,90,180,270].map(l=>ll(0,l+camLon-30)).map(pr).filter(p=>p[2]>0.2)[0]; if(e) text('Ecuador',e[0],e[1]-8,'#ffb0b0',fs,700); }
+  if(step===2){ const n=pr(ll(45,camLon)), s=pr(ll(-45,camLon)); text('hemisferio norte',n[0],n[1],'#fff2d6',fs*1.05,700); text('hemisferio sur',s[0],s[1],'#d6fff6',fs*1.05,700); }
+  // Greenwich e antimeridiano
+  if(step>=5){ line(meridian(0),{o:{strokeStyle:'#3ee08f',lineWidth:3}},{o:{strokeStyle:'rgba(62,224,143,.3)',lineWidth:1.5}});
+    line(meridian(180),{o:{strokeStyle:'#3ee08f',lineWidth:2},dash:[6,5]},{o:{strokeStyle:'rgba(62,224,143,.25)',lineWidth:1.2},dash:[6,5]});
+    const g=pr(ll(51.5,0)); if(g[2]>0){ c.fillStyle='#3ee08f'; c.beginPath(); c.arc(g[0],g[1],4,0,Math.PI*2); c.fill(); text('Greenwich (Londres)',g[0],g[1]-9,'#b9ffd9',fs*0.9,700); }
+    const m=pr(ll(-20,0)); if(m[2]>0) text('meridiano de Greenwich 0°',m[0]+6,m[1],'#b9ffd9',fs*0.9,700,'left');
+    const am=pr(ll(-20,180)); if(am[2]>0) text('antimeridiano 180°',am[0]+6,am[1],'#b9ffd9',fs*0.9,700,'left');
+    if(step===5){ const e=pr(ll(15,Math.max(25,camLon+50))), o=pr(ll(15,Math.min(-25,camLon-50))); if(e[2]>0) text('hemisferio oriental',e[0],e[1],'#fff2d6',fs,700); if(o[2]>0) text('hemisferio occidental',o[0],o[1],'#e6e0ff',fs,700); } }
+  // latitudine di P
+  if(step>=3){ line(parallel(P.lat),{o:{strokeStyle:'#ffa733',lineWidth:3}},{o:{strokeStyle:'rgba(255,167,51,.3)',lineWidth:1.5}});
+    if(step===3){ for(let k=1;k<12;k++){ const g=pr(ll(P.lat,P.lon+k*30)); if(g[2]>0){ c.fillStyle='rgba(215,222,232,.9)'; c.beginPath(); c.arc(g[0],g[1],4.5,0,Math.PI*2); c.fill(); } }
+      angle([0,0,0],ll(0,P.lon),ll(P.lat,P.lon),meridian(P.lon,0,P.lat),'42°'); } }
+  // longitudine di P
+  if(step>=6){ line(meridian(P.lon),{o:{strokeStyle:'#ffa733',lineWidth:3}},{o:{strokeStyle:'rgba(255,167,51,.3)',lineWidth:1.5}});
+    if(step===6) angle([0,0,Math.sin(P.lat*D2R)],ll(P.lat,0),ll(P.lat,P.lon),parallel(P.lat,0,P.lon),'12°'); }
+  // altri punti del gioco
+  if(S.final&&game){ if(game.show){ const t=pr(ll(game.c[1],game.c[2])); if(t[2]>0){ c.fillStyle='#3ee08f'; c.beginPath(); c.arc(t[0],t[1],6,0,Math.PI*2); c.fill(); text(game.c[0],t[0],t[1]-10,'#b9ffd9',fs,700);} }
+    if(click){ const k=pr(ll(click[0],click[1])); if(k[2]>0){ c.strokeStyle='#ffe2a6'; c.lineWidth=2.5; c.beginPath(); c.moveTo(k[0]-7,k[1]-7); c.lineTo(k[0]+7,k[1]+7); c.moveTo(k[0]+7,k[1]-7); c.lineTo(k[0]-7,k[1]+7); c.stroke(); } } }
+  // il punto P
+  const p=pr(ll(P.lat,P.lon));
+  if(p[2]>0){ c.fillStyle='rgba(255,60,60,.35)'; c.beginPath(); c.arc(p[0],p[1],12,0,Math.PI*2); c.fill();
+    c.fillStyle='#ff3b3b'; c.strokeStyle='#fff'; c.lineWidth=2; c.beginPath(); c.arc(p[0],p[1],6.5,0,Math.PI*2); c.fill(); c.stroke();
+    text(S.final?'P = Roma':'P',p[0]+12,p[1]-10,'#ffffff',fs*1.15,800,'left'); }
+}
+function angle(O,A,Bv,arc,lab){
+  const o=pr(O), a=pr(A), b=pr(Bv);
+  c.save(); c.setLineDash([5,4]); c.strokeStyle='#ffe2a6'; c.lineWidth=1.8; c.beginPath(); c.moveTo(o[0],o[1]); c.lineTo(a[0],a[1]); c.moveTo(o[0],o[1]); c.lineTo(b[0],b[1]); c.stroke(); c.restore();
+  c.strokeStyle='#ffe2a6'; c.lineWidth=4; c.beginPath(); arc.forEach((v,i)=>{const q=pr(v); i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1]);}); c.stroke();
+  const mid=arc[Math.floor(arc.length/2)], m=[O[0]+(mid[0]-O[0])*0.55,O[1]+(mid[1]-O[1])*0.55,O[2]+(mid[2]-O[2])*0.55], q=pr(m);
+  text(lab,q[0],q[1]+5,'#ffe2a6',Math.max(14,R*0.08),800);
+}
+
+/* ---------- pannello ---------- */
+function render(){
+  const S=STEPS[step];
+  $('num').textContent=`Paso ${step+1} de ${STEPS.length}`; $('title').textContent=S.title;
+  const tx=$('text'); tx.innerHTML=''; S.text.forEach(t=>{const p=document.createElement('p'); p.textContent=t; tx.append(p);});
+  if(S.final){ const cd=document.createElement('div'); cd.className='coord'; cd.textContent='P (42° N, 12° E)'; tx.append(cd); }
+  $('see').textContent=S.see;
+  $('qbox').hidden=!S.q; $('game').hidden=!S.final; $('read').hidden=step<6;
+  if(S.q){ $('q').textContent=S.q; const box=$('opts'); box.innerHTML=''; $('fb').hidden=true;
+    S.opts.forEach(([t,ok,fb])=>{ const b=document.createElement('button'); b.type='button'; b.textContent=t;
+      b.addEventListener('click',()=>{ box.querySelectorAll('button').forEach(x=>x.classList.remove('right','wrong')); b.classList.add(ok?'right':'wrong');
+        const f=$('fb'); f.hidden=false; f.className='fb '+(ok?'right':'wrong'); f.textContent=fb; if(ok){answered.add(step); $('next').classList.add('ready'); steps();} });
+      box.append(b); }); }
+  $('prev').disabled=step===0; $('next').hidden=step===STEPS.length-1; $('next').classList.toggle('ready',answered.has(step));
+  tgtLat=S.cam[0]; tgtLon=S.cam[1]; anim=true;
+  if(S.final&&!game) newGame();
+  steps();
+}
+function steps(){ const ol=$('steps'); ol.innerHTML='';
+  STEPS.forEach((s,i)=>{ const li=document.createElement('li'), b=document.createElement('button'); b.type='button'; b.textContent=(i+1)+'. '+s.short;
+    if(i===step) b.setAttribute('aria-current','step'); if(answered.has(i)) b.classList.add('done');
+    b.addEventListener('click',()=>{step=i; render();}); li.append(b); ol.append(li); }); }
+$('prev').addEventListener('click',()=>{ if(step>0){step--; render();} });
+$('next').addEventListener('click',()=>{ if(step<STEPS.length-1){step++; render();} });
+
+/* ---------- gioco ---------- */
+let order=[...CITIES].sort(()=>Math.random()-0.5), gi=0;
+function newGame(){ const ct=order[gi++%order.length]; game={c:ct,show:false}; click=null;
+  $('tgt').textContent=`${fmtLat(ct[1])}, ${fmtLon(ct[2])}`; $('gfb').hidden=true; }
+$('gnext').addEventListener('click',newGame);
+function check(lat,lon){ if(!game) return; click=[lat,lon]; game.show=true;
+  const a=ll(lat,lon), b=ll(game.c[1],game.c[2]), ang=Math.acos(Math.max(-1,Math.min(1,dot(a,b))))*R2D, km=Math.round(ang*111.2/10)*10;
+  const f=$('gfb'); f.hidden=false; const good=ang<10; f.className='fb '+(good?'right':'wrong');
+  f.textContent=good?`¡Muy bien! Era ${game.c[0]}: estás a unos ${km} km del punto correcto.`:`Era ${game.c[0]} (el punto verde): estás a unos ${km.toLocaleString('es-ES')} km. Comprueba primero la latitud (¿norte o sur?) y después la longitud (¿este u oeste?).`;
+}
+
+/* ---------- trascinare e leggere le coordinate ---------- */
+function inv(x,y){ const u=(x-cx)/R, v=-(y-cy)/R, r2=u*u+v*v; if(r2>1) return null; const w=Math.sqrt(1-r2);
+  const X=u*B.Rt[0]+v*B.U[0]+w*B.F[0], Y=u*B.Rt[1]+v*B.U[1]+w*B.F[1], Z=u*B.Rt[2]+v*B.U[2]+w*B.F[2];
+  return [Math.asin(Z)*R2D, Math.atan2(Y,X)*R2D]; }
+let drag=null;
+cv.addEventListener('pointerdown',e=>{ drag={x:e.clientX,y:e.clientY,la:camLat,lo:camLon,moved:false}; cv.setPointerCapture(e.pointerId); cv.style.cursor='grabbing'; });
+cv.addEventListener('pointermove',e=>{ const r=cv.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+  if(drag){ const dx=e.clientX-drag.x, dy=e.clientY-drag.y; if(Math.hypot(dx,dy)>4) drag.moved=true;
+    if(drag.moved){ anim=false; camLon=drag.lo-dx*0.35; camLat=Math.max(-85,Math.min(85,drag.la+dy*0.35)); } }
+  hover=inv(x,y); if(step>=6) $('read').textContent=hover?`${fmtLat(hover[0])}, ${fmtLon(hover[1])}`:'Mueve el ratón sobre el globo'; });
+cv.addEventListener('pointerup',e=>{ const r=cv.getBoundingClientRect();
+  if(drag&&!drag.moved&&STEPS[step].final){ const q=inv(e.clientX-r.left,e.clientY-r.top); if(q) check(q[0],q[1]); }
+  drag=null; cv.style.cursor=''; });
+cv.addEventListener('pointercancel',()=>{drag=null; cv.style.cursor='';});
+cv.addEventListener('pointerleave',()=>{ if(step>=6) $('read').textContent='Mueve el ratón sobre el globo'; });
+
+function loop(){ draw(); requestAnimationFrame(loop); }
+render(); $('read').textContent='Mueve el ratón sobre el globo'; requestAnimationFrame(loop);
+})();
+</script>
+
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Tamaño de la página">
+<button type="button" data-z="-1" title="Reducir (tecla −)" aria-label="Reducir">A−</button><span data-zv title="Volver al 100 %">100%</span><button type="button" data-z="1" title="Ampliar (tecla +)" aria-label="Ampliar">A+</button><button type="button" data-z="0" title="Tamaño normal (tecla 0)" aria-label="Tamaño normal">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+</body>
+</html>
