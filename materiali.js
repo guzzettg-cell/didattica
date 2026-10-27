@@ -564,6 +564,7 @@ const MODULI = [
         descrizione: "Episodi del libro di Ian McEwan trasformati in sceneggiatura: piani, angolazioni, movimenti di macchina e montaggio.",
         data: "2026-10-20",
         attivita: [
+          { tipo: "Lezione", titolo: "Inquadrature: campi e piani", descrizione: "Video su campi e piani, la scala delle inquadrature con esempi, quiz su spezzoni del cinema in bianco e nero e collegamento con il fumetto.", link: "italiano/seconda/dal-testo-al-film/inquadrature/index.html", data: "2026-10-27" },
           { tipo: "Sceneggiatura", titolo: "Peter e le decorazioni di Natale: dal racconto al découpage", link: "italiano/seconda/dal-testo-al-film/peter-decorazioni-di-natale.html", data: "2026-10-20" }
         ]
       }
