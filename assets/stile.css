@@ -261,6 +261,37 @@ a.titolo-modulo:hover { color: var(--accento); }
   border-radius: 6px;
 }
 
+/* etichette dei libri */
+.libri { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 6px !important; }
+.libro {
+  display: inline-block;
+  padding: 1px 10px;
+  border-radius: 99px;
+  border: 1px solid var(--lc, var(--tenue));
+  background: var(--carta);
+  color: var(--lc, var(--tenue));
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.voce .libri { margin-top: 8px !important; }
+.libri-filtro { align-items: center; }
+.etichetta-filtro { font-size: 15px; font-weight: 600; color: var(--tenue); margin-right: 2px; }
+.libri-filtro button[aria-pressed="true"] { background: var(--lc, var(--accento)); border-color: var(--lc, var(--accento)); }
+
+/* segno della programmazione di dipartimento */
+.dip {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 0 8px;
+  border-radius: 99px;
+  background: #fff4d6;
+  color: #7a5200;
+  font-weight: 700;
+  font-size: 12px;
+}
+.pulsante-dip[aria-pressed="true"] { background: #7a5200 !important; border-color: #7a5200 !important; }
+
 .vuoto {
   padding: 28px;
   border: 1px dashed var(--filo);

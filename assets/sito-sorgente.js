@@ -28,6 +28,31 @@ const maiuscola = s => s.charAt(0).toUpperCase() + s.slice(1);
 const ELENCO_MODULI = typeof MODULI !== "undefined" ? MODULI : [];
 const nomeModulo = mod => (mod.numero ? "Modulo " + mod.numero + " – " : "") + mod.titolo;
 
+/* ---------- segno delle lezioni nella programmazione di dipartimento ---------- */
+function segnoDipartimento(lez) {
+  if (!lez.dipartimento) return null;
+  const altra = typeof lez.dipartimento === "string";
+  return el("span", {
+    class: "dip",
+    title: altra ? "Argomento della programmazione di dipartimento di " + lez.dipartimento
+                 : "Argomento della programmazione di dipartimento"
+  }, "◆ Programma di dipartimento" + (altra ? " (" + lez.dipartimento + ")" : ""));
+}
+
+/* ---------- etichette dei libri (definite in materiali.js, in LIBRI) ---------- */
+const ELENCO_LIBRI = typeof LIBRI !== "undefined" ? LIBRI : {};
+const libriDi = x => ((x && x.libri) || []).filter(id => ELENCO_LIBRI[id]);
+function etichetteLibri(ids) {
+  if (!ids.length) return null;
+  const p = el("p", { class: "libri" });
+  ids.forEach(id => p.append(el("span", {
+    class: "libro",
+    style: `--lc: ${ELENCO_LIBRI[id].colore || "#555"}`,
+    title: "Lezione che parte dal libro " + ELENCO_LIBRI[id].nome
+  }, ELENCO_LIBRI[id].nome)));
+  return p;
+}
+
 /* tutte le attività, con l'indicazione di dove si trovano */
 function tutteLeAttivita(moduli) {
   const elenco = [];
@@ -48,7 +73,8 @@ function voceRecente(a) {
       el("h3", null, a.titolo),
       a.descrizione ? el("p", null, a.descrizione) : null,
       el("p", { class: "dettagli" }, el("span", { class: "tipo" }, a.tipo || "Attività"),
-        dove.filter(Boolean).join(", "))
+        dove.filter(Boolean).join(", ")),
+      etichetteLibri(libriDi(a.lez || a))
     )
   );
 }
@@ -135,6 +161,53 @@ function paginaMateria(id) {
   const campo = document.getElementById("cerca");
   const pulsanti = document.querySelectorAll(".classi button");
   let classe = new URLSearchParams(location.search).get("classe") || "tutte";
+  let libro = new URLSearchParams(location.search).get("libro") || "tutti";
+  /* numero originale di ogni lezione, che resta uguale anche quando si filtra */
+  tutti.forEach(m => (m.lezioni || []).forEach((l, i) => { l._posizione = i + 1; }));
+
+  /* pulsanti dei libri: solo quelli usati in questa materia */
+  const libriUsati = Object.keys(ELENCO_LIBRI).filter(idL =>
+    tutti.some(m => (m.lezioni || []).some(l => libriDi(l).includes(idL))));
+  if (!libriUsati.includes(libro)) libro = "tutti";
+  let pulsantiLibro = [];
+  if (libriUsati.length) {
+    const gruppoLibri = el("div", { class: "classi libri-filtro", role: "group", "aria-label": "Filtra per libro" },
+      el("span", { class: "etichetta-filtro" }, "Libro:"),
+      el("button", { type: "button", "data-libro": "tutti" }, "Tutti"));
+    libriUsati.forEach(idL => gruppoLibri.append(
+      el("button", { type: "button", "data-libro": idL, style: `--lc: ${ELENCO_LIBRI[idL].colore || "#555"}` }, ELENCO_LIBRI[idL].nome)));
+    campo.before(gruppoLibri);
+    pulsantiLibro = gruppoLibri.querySelectorAll("button");
+    pulsantiLibro.forEach(b => b.addEventListener("click", () => {
+      libro = b.dataset.libro;
+      const url = new URL(location);
+      libro === "tutti" ? url.searchParams.delete("libro") : url.searchParams.set("libro", libro);
+      history.replaceState(null, "", url);
+      disegna();
+    }));
+  }
+  /* pulsante per vedere solo gli argomenti della programmazione di dipartimento */
+  let soloDip = new URLSearchParams(location.search).get("dipartimento") === "1";
+  let pulsanteDip = null;
+  if (tutti.some(m => (m.lezioni || []).some(l => l.dipartimento))) {
+    pulsanteDip = el("button", { type: "button", class: "pulsante-dip" }, "◆ Solo programma di dipartimento");
+    campo.before(el("div", { class: "classi", role: "group", "aria-label": "Programma di dipartimento" }, pulsanteDip));
+    pulsanteDip.addEventListener("click", () => {
+      soloDip = !soloDip;
+      const url = new URL(location);
+      soloDip ? url.searchParams.set("dipartimento", "1") : url.searchParams.delete("dipartimento");
+      history.replaceState(null, "", url);
+      disegna();
+    });
+  }
+  /* tiene solo le lezioni del libro scelto e, se richiesto, quelle del programma di dipartimento
+     (il modulo resta solo se ne rimane qualcuna) */
+  function perLibro(mod) {
+    if (libro === "tutti" && !soloDip) return mod;
+    const lezioni = (mod.lezioni || []).filter(l =>
+      (libro === "tutti" || libriDi(l).includes(libro)) && (!soloDip || l.dipartimento));
+    return lezioni.length ? { ...mod, lezioni } : null;
+  }
   const aperti = new Set();          // moduli aperti dall'utente
   const idModulo = m => ["modulo", m.classe, m.numero || m.titolo].join("-").toLowerCase().replace(/[^a-z0-9-]+/g, "-");
   if (location.hash) aperti.add(location.hash.slice(1));
@@ -187,8 +260,10 @@ function paginaMateria(id) {
           : lez.titolo;
         const li = el("li", { class: "lezione" },
           el("p", { class: "numero-lezione" },
-            "Lezione " + (i + 1) + (lez.pagine ? ", " + (/[–-]/.test(lez.pagine) ? "pp. " : "p. ") + lez.pagine : "")),
+            "Lezione " + (lez._posizione || i + 1) + (lez.pagine ? ", " + (/[–-]/.test(lez.pagine) ? "pp. " : "p. ") + lez.pagine : ""),
+            segnoDipartimento(lez)),
           el("h4", null, titolo),
+          etichetteLibri(libriDi(lez)),
           lez.descrizione ? el("p", { class: "descr-lezione" }, lez.descrizione) : null);
         const att = lez.attivita || [];
         if (att.length) {
@@ -217,9 +292,13 @@ function paginaMateria(id) {
 
   function disegna() {
     pulsanti.forEach(b => b.setAttribute("aria-pressed", b.dataset.classe === classe));
+    pulsantiLibro.forEach(b => b.setAttribute("aria-pressed", b.dataset.libro === libro));
+    if (pulsanteDip) pulsanteDip.setAttribute("aria-pressed", soloDip);
     const q = campo.value.trim().toLowerCase();
     const scelti = tutti
       .filter(m => classe === "tutte" || m.classe === classe)
+      .map(perLibro)
+      .filter(Boolean)
       .map(m => filtra(m, q))
       .filter(Boolean);
     area.replaceChildren();
@@ -232,7 +311,7 @@ function paginaMateria(id) {
       const diClasse = scelti.filter(m => m.classe === c);
       if (!diClasse.length) continue;
       const gruppo = el("section", { class: "gruppo" }, el("h2", null, "Classe " + c));
-      diClasse.forEach(m => gruppo.append(disegnaModulo(m, !!q)));
+      diClasse.forEach(m => gruppo.append(disegnaModulo(m, !!q || libro !== "tutti" || soloDip)));
       area.append(gruppo);
     }
   }

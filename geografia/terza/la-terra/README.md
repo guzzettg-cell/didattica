@@ -12,6 +12,7 @@ Simulazioni e attività interattive sul pianeta Terra per la classe terza della 
 | Il moto di rivoluzione | `lezioni/rivoluzione.html` |
 | I fusi orari | `lezioni/fusi-orari.html` |
 | La struttura della Terra | `lezioni/struttura-terra.html` |
+| Il rischio vulcanico e il rischio sismico | `lezioni/rischio-vulcanico-sismico.html` |
 | I continenti | `lezioni/continenti.html` |
 | Rilievi, oceani, fiumi e laghi | `lezioni/acque.html` |
 | L'atmosfera | `lezioni/atmosfera.html` |

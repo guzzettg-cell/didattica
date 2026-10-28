@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Il rischio vulcanico e il rischio sismico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: 1 che cos'è il rischio; 2 i pericoli dei vulcani (5 scene); 3 i pericoli dei terremoti (crolli, tsunami);
+   4 difendersi dalle eruzioni (Vesuvio: sorveglianza ed evacuazione; Etna: argini); 5 difendersi dai terremoti (previsione e prevenzione, tre edifici); 6 prova tu */
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --paper:#eef1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
+  --accent:#c2410c; --accent-soft:#fde4d3; --scene:#0d1626; --ok:#15803d; --ko:#b91c1c; --ok-soft:#dcfce7; --ko-soft:#fee2e2;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244; --accent:#fb923c; --accent-soft:#3b2414; --scene:#070d18;
+  --ok:#4ade80; --ko:#f87171; --ok-soft:#12301d; --ko-soft:#3a1616; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244; --accent:#fb923c; --accent-soft:#3b2414; --scene:#070d18;
+  --ok:#4ade80; --ko:#f87171; --ok-soft:#12301d; --ko-soft:#3a1616; color-scheme:dark}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+[hidden]{display:none!important}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:22px}
+header.top{display:grid;gap:6px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.02;margin:0}
+h2.sec{font-family:var(--display);font-weight:800;font-size:1.55rem;margin:0}
+.lead{margin:0;max-width:78ch;color:var(--muted)}
+.lead a,.card a{color:var(--accent);font-weight:700}
+section.part{display:grid;gap:12px}
+.grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:920px){.grid{grid-template-columns:1fr}}
+.scene{background:var(--scene);border-radius:16px;overflow:hidden;min-width:0}
+.scene canvas{width:100%;display:block;touch-action:pan-y}
+.scene canvas.zoomed{touch-action:none;cursor:grab}
+#risk{aspect-ratio:2/1}
+#volc{aspect-ratio:2/1}
+#quake{aspect-ratio:2/1}
+#vesu{aspect-ratio:2/1}
+#etna{aspect-ratio:1.6/1;cursor:crosshair}
+#build{aspect-ratio:2/1}
+.cap{color:#c9d5e3;font-size:.85rem;padding:9px 14px;background:#101c31}
+/* comandi sopra il disegno */
+.bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 10px;background:#101c31;border-bottom:1px solid #22324d}
+.bar button{font:inherit;font-size:.85rem;min-width:36px;height:34px;border-radius:999px;border:1px solid #33445f;background:#16233a;color:#e6edf6;padding:0 12px;cursor:pointer}
+.bar button:hover:not(:disabled){border-color:#ffd27a}
+.bar button.go{background:#ffd27a;color:#1a1200;border-color:#ffd27a;font-weight:700}
+.bar button.warn{background:#d62828;border-color:#d62828;color:#fff;font-weight:700}
+.bar button[aria-pressed="true"]{background:#e6edf6;color:#101c31;font-weight:700}
+.bar button:disabled{opacity:.4;cursor:default}
+.bar .info{color:#ffe2a6;font-weight:700;font-size:.85rem}
+.bar .sp{flex:1}
+.bar .zl{color:#ffe2a6;font-weight:700;font-size:.82rem;min-width:2.6em;text-align:right}
+.bar .zb{font-size:1.15rem;padding:0}
+.bar .grp{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+.bar .lbl{color:#9fb0c6;font-size:.8rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.card h3{font-family:var(--display);font-weight:800;font-size:1.35rem;margin:0}
+.card p{margin:0}
+.kind{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.book{font-size:.86rem;color:var(--muted);border-left:3px solid var(--accent);padding-left:10px}
+.note{font-size:.86rem;color:var(--muted);margin:0}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tabs button,.chips button,.btn{font:inherit;font-size:.88rem;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;cursor:pointer}
+.tabs button[aria-selected="true"],.chips button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.ticks{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}
+.meter{display:grid;gap:4px}
+.meter .row{display:flex;justify-content:space-between;font-size:.9rem}
+.meter .row b{font-variant-numeric:tabular-nums}
+.bar-out{height:12px;border-radius:999px;background:var(--line);overflow:hidden}
+.bar-out i{display:block;height:100%;width:0;border-radius:999px;background:var(--accent);transition:width .25s}
+.formula{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-weight:700}
+.formula span{background:var(--accent-soft);border-radius:10px;padding:6px 10px}
+.msg{border-radius:12px;padding:10px 14px;font-weight:700}
+.msg.ok{background:var(--ok-soft);color:var(--ok)}
+.msg.ko{background:var(--ko-soft);color:var(--ko)}
+.msg.info{background:var(--accent-soft)}
+ul.dots{margin:0;padding-left:1.2em;display:grid;gap:4px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:720px){.two{grid-template-columns:1fr}}
+.box{background:var(--accent-soft);border-radius:12px;padding:12px 14px;display:grid;gap:6px}
+.box b.t{font-family:var(--display);font-size:1.15rem}
+/* esercizi di classificazione */
+.sort{display:grid;gap:8px}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--card)}
+.item .opts{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.item .opts button{font:inherit;font-size:.85rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:5px 11px;cursor:pointer}
+.item .opts button.right{background:var(--ok);border-color:var(--ok);color:#fff;font-weight:700}
+.item .opts button.wrong{background:var(--ko);border-color:var(--ko);color:#fff}
+.item .fb{grid-column:1/-1;font-size:.88rem;margin:0}
+.item .fb.ok{color:var(--ok)} .item .fb.ko{color:var(--ko)}
+@media (max-width:620px){.item{grid-template-columns:1fr}.item .opts{justify-content:flex-start}}
+.score{font-weight:700}
+.words{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:820px){.words{grid-template-columns:1fr}}
+.words div{background:var(--accent-soft);border-radius:12px;padding:10px 14px;font-size:.92rem}
+.words b{font-family:var(--display);font-size:1.05rem}
+details{border-top:1px solid var(--line);padding:9px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700}
+details p{margin:6px 0 0;color:var(--muted)}
+/* navigazione tra gli argomenti */
+.pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pager a{display:grid;gap:2px;align-content:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;color:var(--ink);text-decoration:none}
+.pager a:hover{border-color:var(--accent)}
+.pager a:hover span{text-decoration:underline}
+.pager small{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pager span{font-family:var(--display);font-weight:800;font-size:1.05rem;line-height:1.25}
+.pager .next{text-align:right}
+.pager.pager-top a{padding:8px 14px}
+.pager.pager-top span{font-size:.95rem}
+@media (max-width:560px){.pager{grid-template-columns:1fr}.pager .next{text-align:left}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="pager pager-top" aria-label="Argomenti (in alto)">
+    <a class="prev" href="struttura-terra.html"><small>Argomento precedente</small><span>← La struttura della Terra</span></a>
+    <a class="next" href="continenti.html"><small>Argomento successivo</small><span>I continenti →</span></a>
+  </nav>
+  <header class="top">
+    <div class="eyebrow">Geografia · Educazione civica</div>
+    <h1>Il rischio vulcanico e il rischio sismico</h1>
+    <p class="lead">Vulcani e terremoti sono fenomeni naturali: in milioni di anni hanno dato forma al nostro pianeta. Nella lezione <a href="struttura-terra.html">La struttura della Terra</a> hai visto che nascono dal movimento delle placche. Ma oggi la Terra è molto popolata, e questi fenomeni sono diventati anche un pericolo per le persone. Scopri quali danni possono fare e come ci si difende.</p>
+  </header>
+
+  <!-- 1 -->
+  <section class="part" id="s1">
+    <h2 class="sec">1. Quando un vulcano diventa un rischio?</h2>
+    <div class="grid">
+      <div class="scene">
+        <div class="bar" data-for="risk">
+          <span class="info">Cambia il vulcano e le case qui accanto</span><span class="sp"></span>
+          <span class="grp"><span class="zl"></span><button type="button" class="zb" data-zo aria-label="Rimpicciolisci il disegno">−</button><button type="button" class="zb" data-zi aria-label="Ingrandisci il disegno">+</button><button type="button" data-zr aria-label="Vista intera">↺</button></span>
+        </div>
+        <canvas id="risk" role="img" aria-label="Un vulcano e, ai suoi piedi, un numero variabile di case"></canvas>
+      </div>
+      <div class="card">
+        <div class="kind">Pericolo e rischio</div>
+        <div class="chips" id="rkind" role="group" aria-label="Il vulcano">
+          <button type="button" data-a="1" aria-pressed="true">Vulcano attivo</button>
+          <button type="button" data-a="0" aria-pressed="false">Vulcano spento</button>
+        </div>
+        <div>
+          <label for="rpop" class="kind" style="color:var(--muted)">Case e abitanti vicino al vulcano</label>
+          <input id="rpop" type="range" min="0" max="10" step="1" value="2">
+          <div class="ticks"><span>nessuno</span><span>un paese</span><span>una grande città</span></div>
+        </div>
+        <div class="meter"><div class="row"><span>Pericolo dal vulcano</span><b id="rp1"></b></div><div class="bar-out"><i id="rb1"></i></div></div>
+        <div class="meter"><div class="row"><span>Persone che vivono vicino</span><b id="rp2"></b></div><div class="bar-out"><i id="rb2"></i></div></div>
+        <div class="meter"><div class="row"><span>Rischio</span><b id="rp3"></b></div><div class="bar-out"><i id="rb3" style="background:#d62828"></i></div></div>
+        <p id="rtext"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="part" id="s2">
+    <h2 class="sec">2. Che cosa può succedere vicino a un vulcano</h2>
+    <p class="lead">Non c'è solo l'eruzione con la lava. Alcuni pericoli arrivano dopo l'eruzione, altri anche quando il vulcano è a riposo. Scegli un fenomeno.</p>
+    <div class="tabs" role="tablist" aria-label="Fenomeni vulcanici" id="vtabs">
+      <button role="tab" data-v="lava" aria-selected="true">Colate di lava</button>
+      <button role="tab" data-v="cenere" aria-selected="false">Nubi di ceneri</button>
+      <button role="tab" data-v="fango" aria-selected="false">Colate di fango</button>
+      <button role="tab" data-v="gas" aria-selected="false">Emissioni di gas</button>
+      <button role="tab" data-v="isola" aria-selected="false">Collasso di un'isola</button>
+    </div>
+    <div class="grid">
+      <div class="scene">
+        <div class="bar" data-for="volc">
+          <button type="button" data-play></button><span class="info" id="vinfo"></span><span class="sp"></span>
+          <span class="grp"><span class="zl"></span><button type="button" class="zb" data-zo aria-label="Rimpicciolisci il disegno">−</button><button type="button" class="zb" data-zi aria-label="Ingrandisci il disegno">+</button><button type="button" data-zr aria-label="Vista intera">↺</button></span>
+        </div>
+        <canvas id="volc" role="img" aria-label="Animazione del fenomeno vulcanico scelto"></canvas>
+      </div>
+      <div class="card" aria-live="polite">
+        <div class="kind" id="vkind"></div><h3 id="vtitle"></h3>
+        <p id="vtext"></p>
+        <p class="book" id="vbook"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="part" id="s3">
+    <h2 class="sec">3. Che cosa può fare un terremoto</h2>
+    <p class="lead">Il rischio sismico dipende soprattutto dalle vibrazioni del suolo. Ma un terremoto sotto il mare può anche sollevare onde gigantesche.</p>
+    <div class="tabs" role="tablist" aria-label="Effetti dei terremoti" id="qtabs">
+      <button role="tab" data-q="crolli" aria-selected="true">Crolli e voragini</button>
+      <button role="tab" data-q="tsunami" aria-selected="false">Lo tsunami</button>
+    </div>
+    <div class="grid">
+      <div class="scene">
+        <div class="bar" data-for="quake">
+          <button type="button" data-play></button><span class="info" id="qinfo"></span><span class="sp"></span>
+          <span class="grp"><span class="zl"></span><button type="button" class="zb" data-zo aria-label="Rimpicciolisci il disegno">−</button><button type="button" class="zb" data-zi aria-label="Ingrandisci il disegno">+</button><button type="button" data-zr aria-label="Vista intera">↺</button></span>
+        </div>
+        <canvas id="quake" role="img" aria-label="Animazione degli effetti di un terremoto"></canvas>
+      </div>
+      <div class="card" aria-live="polite">
+        <div class="kind" id="qkind"></div><h3 id="qtitle"></h3>
+        <div id="qtext" style="display:grid;gap:8px"></div>
+        <p class="book" id="qbook"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="part" id="s4">
+    <h2 class="sec">4. Come ci si difende dalle eruzioni?</h2>
+    <p class="lead">Il rischio vulcanico dipende da quante persone vivono vicino a vulcani attivi. In Italia due vulcani molto diversi mostrano due modi di difendersi.</p>
+    <div class="tabs" role="tablist" aria-label="Due vulcani" id="dtabs">
+      <button role="tab" data-d="vesuvio" aria-selected="true">Vesuvio: eruzioni esplosive</button>
+      <button role="tab" data-d="etna" aria-selected="false">Etna: eruzioni effusive</button>
+    </div>
+    <div class="grid" id="dvesuvio">
+      <div class="scene">
+        <div class="bar" data-for="vesu">
+          <button type="button" data-play></button><button type="button" class="warn" id="evac" disabled>Ordina l'evacuazione</button><span class="info" id="vday"></span><span class="sp"></span>
+          <span class="grp"><span class="zl"></span><button type="button" class="zb" data-zo aria-label="Rimpicciolisci il disegno">−</button><button type="button" class="zb" data-zi aria-label="Ingrandisci il disegno">+</button><button type="button" data-zr aria-label="Vista intera">↺</button></span>
+        </div>
+        <canvas id="vesu" role="img" aria-label="Il Vesuvio con i paesi sulle sue pendici e le stazioni che lo sorvegliano"></canvas>
+      </div>
+      <div class="card">
+        <div class="kind">Gioco · Sei tu a sorvegliare il vulcano</div>
+        <h3>Vesuvio: si può solo evacuare</h3>
+        <p>Il Vesuvio è a riposo dal 1944, ma vicino a lui vivono centinaia di migliaia di persone. Le sue eruzioni sono quasi sempre <b>esplosive</b>: non si possono fermare né deviare. L'unica difesa è capire in anticipo che un'eruzione si avvicina e <b>far allontanare le persone prima</b>.</p>
+        <p>Premi <b>Avvia</b>: i giorni passano e gli strumenti misurano alcuni dati. Quando ti sembra il momento giusto, ordina l'evacuazione. Attento: spostare tante persone richiede giorni.</p>
+        <div class="meter"><div class="row"><span>Piccole scosse sotto il vulcano</span></div><div class="bar-out"><i id="g1"></i></div></div>
+        <div class="meter"><div class="row"><span>Il suolo si solleva</span></div><div class="bar-out"><i id="g2"></i></div></div>
+        <div class="meter"><div class="row"><span>Gas dal cratere</span></div><div class="bar-out"><i id="g3"></i></div></div>
+        <div class="msg info" id="vmsg">Gli strumenti sono pronti. Premi Avvia.</div>
+        <p class="note">Le scosse, il sollevamento del suolo e i gas sono esempi dei «dati fisici e chimici» di cui parla il libro.</p>
+      </div>
+    </div>
+    <div class="grid" id="detna" hidden>
+      <div class="scene">
+        <div class="bar" data-for="etna">
+          <button type="button" data-play></button>
+          <span class="grp" role="group" aria-label="Direzione dell'argine"><span class="lbl">Argine:</span><button type="button" data-dir="-1" aria-pressed="true">↙ devia a sinistra</button><button type="button" data-dir="1" aria-pressed="false">↘ devia a destra</button></span>
+          <button type="button" id="eclear">Togli gli argini</button><span class="sp"></span>
+          <span class="grp"><span class="zl"></span><button type="button" class="zb" data-zo aria-label="Rimpicciolisci il disegno">−</button><button type="button" class="zb" data-zi aria-label="Ingrandisci il disegno">+</button><button type="button" data-zr aria-label="Vista intera">↺</button></span>
+        </div>
+        <canvas id="etna" role="img" aria-label="Il fianco dell'Etna visto dall'alto: una colata di lava scende verso un paese; si possono costruire argini per deviarla"></canvas>
+      </div>
+      <div class="card">
+        <div class="kind">Gioco · Devia la colata</div>
+        <h3>Etna: si può difendere il paese</h3>
+        <p>Le eruzioni dell'Etna sono di solito <b>effusive</b>: la lava fluida esce senza esplosioni e scende lungo i fianchi. Il vulcano è sorvegliato di continuo e, durante l'eruzione, si può tentare una <b>difesa attiva</b>: deviare le colate perché non raggiungano i paesi.</p>
+        <p><b>Clicca sul disegno</b> per costruire un argine di terra (al massimo 3), poi premi <b>Avvia</b>. Scegli prima da che parte l'argine manda la lava.</p>
+        <div class="msg info" id="emsg">La bocca eruttiva si sta aprendo sopra il paese.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="part" id="s5">
+    <h2 class="sec">5. Come ci si difende dai terremoti?</h2>
+    <div class="two">
+      <div class="box"><b class="t">Previsione</b><p style="margin:0">Cercare di capire <b>quando e dove</b> avverrà un terremoto. È difficile e non permette di dare l'allarme all'ultimo momento. Si studiano i segnali che possono annunciare una scossa e i terremoti del passato, per sapere dove è più probabile che ne avvengano altri (<i>previsione statistica</i>).</p></div>
+      <div class="box"><b class="t">Prevenzione</b><p style="margin:0">Prepararsi perché un terremoto faccia <b>meno danni</b>. È la difesa più efficace: si studia quanto è sismico il territorio, si costruisce con le <b>norme antisismiche</b>, si rinforzano gli edifici vecchi, si preparano i soccorsi e si insegna alle persone come comportarsi.</p></div>
+    </div>
+    <div class="grid">
+      <div class="scene">
+        <div class="bar" data-for="build">
+          <button type="button" data-play></button>
+          <span class="grp" role="group" aria-label="Forza del terremoto"><span class="lbl">Scossa:</span><button type="button" data-int="1" aria-pressed="false">debole</button><button type="button" data-int="2" aria-pressed="false">forte</button><button type="button" data-int="3" aria-pressed="true">fortissima</button></span>
+          <span class="sp"></span>
+          <span class="grp"><span class="zl"></span><button type="button" class="zb" data-zo aria-label="Rimpicciolisci il disegno">−</button><button type="button" class="zb" data-zi aria-label="Ingrandisci il disegno">+</button><button type="button" data-zr aria-label="Vista intera">↺</button></span>
+        </div>
+        <canvas id="build" role="img" aria-label="Tre edifici sullo stesso terreno durante un terremoto: non antisismico, rinforzato, isolato dal basso"></canvas>
+      </div>
+      <div class="card" aria-live="polite">
+        <div class="kind">Prova · Tre edifici, la stessa scossa</div>
+        <h3>Le norme antisismiche</h3>
+        <ul class="dots">
+          <li><b>Non antisismico</b>: le pareti non sono legate bene tra loro. Con le scosse forti oscilla molto e si crepa.</li>
+          <li><b>Edificio rinforzato</b>: travi e strutture di rinforzo lo rendono più rigido. Oscilla poco e resta in piedi.</li>
+          <li><b>Isolato dal basso</b>: tra le fondamenta e l'edificio ci sono degli appoggi che assorbono il movimento. Il terreno si muove, l'edificio quasi no.</li>
+        </ul>
+        <div class="msg info" id="bmsg">Scegli la forza della scossa e premi Avvia.</div>
+        <p class="book">Nel libro: figura E a pag. E17.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="kind">Esercizio · Previsione o prevenzione?</div>
+      <p>Per ogni azione scegli se serve a <b>prevedere</b> il terremoto o a <b>prevenire</b> i danni. Rileggi pag. E17 se hai dubbi.</p>
+      <div class="sort" id="sortPP"></div>
+      <p class="score" id="scorePP"></p>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="part" id="s6">
+    <h2 class="sec">Prova tu</h2>
+    <div class="card">
+      <div class="kind">Esercizio · Vulcani o terremoti?</div>
+      <p>Da che cosa può essere causato ogni fenomeno? Ripensa alla mappa «Impara a imparare» di pag. E17: un fenomeno ha due risposte giuste.</p>
+      <div class="sort" id="sortVT"></div>
+      <p class="score" id="scoreVT"></p>
+    </div>
+    <div class="words">
+      <div><b>Lahar</b>: colata di fango che si forma quando la cenere accumulata sui pendii si mescola all'acqua piovana.</div>
+      <div><b>Tsunami</b>: parola giapponese che indica il maremoto, un'onda gigantesca provocata da un movimento del fondale o dal crollo di un'isola.</div>
+      <div><b>Quiescenza</b>: fase in cui un vulcano attivo è a riposo e non erutta.</div>
+      <div><b>Eruzione esplosiva</b>: il magma esce con violenza, con nubi di ceneri e frammenti di roccia.</div>
+      <div><b>Eruzione effusiva</b>: la lava fluida esce in modo non violento e scende lungo i fianchi.</div>
+      <div><b>Norme antisismiche</b>: regole per costruire edifici che resistono ai terremoti.</div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:1.15rem">Domande per ragionare</h3>
+      <div>
+        <details><summary>Perché lo stesso vulcano può essere un rischio piccolo o grande?</summary><p>Perché il rischio dipende anche dalle persone che vivono vicino. Un vulcano attivo in una zona deserta fa poco danno; lo stesso vulcano vicino a una grande città, come il Vesuvio vicino a Napoli, è un rischio molto alto.</p></details>
+        <details><summary>Perché sull'Etna si possono deviare le colate e sul Vesuvio no?</summary><p>L'Etna ha di solito eruzioni effusive: la lava scende lentamente lungo i fianchi e si può guidare con argini. Il Vesuvio ha eruzioni esplosive, con nubi di ceneri e frammenti: non si possono deviare, si può solo evacuare la zona in tempo.</p></details>
+        <details><summary>Un tsunami è più pericoloso al largo o vicino alla costa?</summary><p>Vicino alla costa. In mare aperto, dove il fondale è profondo, l'onda è bassa (una nave quasi non se ne accorge). Quando il fondale risale l'onda rallenta e diventa altissima, fino a 30 metri.</p></details>
+        <details><summary>Spiega con parole tue la differenza tra previsione e prevenzione dei terremoti.</summary><p>Prevedere significa cercare di sapere quando e dove avverrà un terremoto: oggi è possibile solo in modo statistico, senza un allarme preciso. Prevenire significa preparare edifici, soccorsi e persone perché il terremoto, quando arriva, faccia meno danni. Per questo la prevenzione è più efficace.</p></details>
+        <details><summary>Le colate di fango possono arrivare anche quando il vulcano non erutta. Perché?</summary><p>Perché si formano con la pioggia sulla cenere caduta durante eruzioni precedenti, anche molto tempo dopo. A Sarno, in Campania, nel 1998 i lahar si sono formati con materiali vulcanici depositati sui rilievi nel passato.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Argomenti (in basso)">
+    <a class="prev" href="struttura-terra.html"><small>Argomento precedente</small><span>← La struttura della Terra</span></a>
+    <a class="next" href="continenti.html"><small>Argomento successivo</small><span>I continenti →</span></a>
+  </nav>
+</div>
+
+<script>
+(function(){
+const PI=Math.PI, TAU=2*PI;
+const $=id=>document.getElementById(id);
+const FB='"Atkinson Hyperlegible",Verdana,sans-serif';
+const reduce=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const sstep=(a,b,x)=>{ const t=clamp((x-a)/(b-a),0,1); return t*t*(3-2*t); };
+const hash=n=>{ const s=Math.sin(n*127.1+311.7)*43758.5453; return s-Math.floor(s); };
+function fit(cv,c){ const r=cv.getBoundingClientRect(), d=window.devicePixelRatio||1;
+  const W=Math.round(r.width*d), H=Math.round(r.height*d); if(W&&H&&(cv.width!==W||cv.height!==H)){cv.width=W;cv.height=H}
+  c.setTransform(d,0,0,d,0,0); return {w:r.width,h:r.height}; }
+function label(c,t,x,y,col,size,weight,align){ c.font=(weight||700)+' '+size+'px '+FB; c.textAlign=align||'left'; c.textBaseline='alphabetic';
+  c.lineWidth=3.5; c.lineJoin='round'; c.strokeStyle='rgba(8,14,26,.85)'; c.strokeText(t,x,y); c.fillStyle=col||'#fff'; c.fillText(t,x,y); }
+function sky(c,w,h,top,bot){ const g=c.createLinearGradient(0,0,0,h); g.addColorStop(0,top); g.addColorStop(1,bot); c.fillStyle=g; c.fillRect(0,0,w,h); }
+function house(c,x,y,s,wall){ c.fillStyle=wall||'#efe3cf'; c.fillRect(x-s/2,y-s*0.8,s,s*0.8);
+  c.fillStyle='#b5523b'; c.beginPath(); c.moveTo(x-s*0.62,y-s*0.78); c.lineTo(x,y-s*1.22); c.lineTo(x+s*0.62,y-s*0.78); c.closePath(); c.fill();
+  c.fillStyle='#4a5a70'; c.fillRect(x-s*0.14,y-s*0.48,s*0.28,s*0.28); }
+function puff(c,x,y,r,col){ c.fillStyle=col; c.beginPath(); c.arc(x,y,r,0,TAU); c.arc(x+r*0.8,y+r*0.2,r*0.75,0,TAU); c.arc(x-r*0.8,y+r*0.25,r*0.7,0,TAU); c.fill(); }
+
+/* ---------- motore delle scene: animazione, comandi sopra il disegno, zoom e spostamento ---------- */
+const scenes=[];
+function scene(id,draw,opt){
+  opt=opt||{};
+  const cv=$(id), c=cv.getContext('2d'), bar=document.querySelector('.bar[data-for="'+id+'"]');
+  const s={id,cv,c,draw,opt,z:1,ox:0,oy:0,t:0,run:!!opt.auto&&!reduce,w:0,h:0};
+  s.play=bar.querySelector('[data-play]'); s.zl=bar.querySelector('.zl');
+  s.zo=bar.querySelector('[data-zo]'); s.zi=bar.querySelector('[data-zi]'); s.zr=bar.querySelector('[data-zr]');
+  if(s.play) s.play.addEventListener('click',()=>{ if(opt.onPlay) opt.onPlay(s); else s.run=!s.run; s.upd(); });
+  s.upd=function(){ if(!s.play) return; const lab=opt.label?opt.label(s):(s.run?'❚❚ Pausa':'▶ Avvia'); s.play.textContent=lab; s.play.classList.toggle('go',!s.run); };
+  function setZ(z){ s.z=clamp(z,1,4); clampPan(); s.zl.textContent=s.z>1.01?'×'+s.z.toFixed(1).replace('.',','):''; s.zo.disabled=s.z<=1.001; s.zi.disabled=s.z>=3.99; cv.classList.toggle('zoomed',s.z>1.01); }
+  function clampPan(){ const mx=(s.z-1)*s.w/2, my=(s.z-1)*s.h/2; s.ox=clamp(s.ox,-mx,mx); s.oy=clamp(s.oy,-my,my); }
+  s.zo.addEventListener('click',()=>setZ(s.z/1.4)); s.zi.addEventListener('click',()=>setZ(s.z*1.4)); s.zr.addEventListener('click',()=>{ s.ox=0; s.oy=0; setZ(1); });
+  let drag=null;
+  cv.addEventListener('pointerdown',e=>{ drag={x:e.clientX,y:e.clientY,ox:s.ox,oy:s.oy,moved:false}; });
+  cv.addEventListener('pointermove',e=>{ if(!drag||s.z<=1.01) return; const dx=e.clientX-drag.x, dy=e.clientY-drag.y;
+    if(Math.abs(dx)+Math.abs(dy)>5){ drag.moved=true; try{cv.setPointerCapture(e.pointerId);}catch(_){} }
+    if(drag.moved){ s.ox=drag.ox+dx; s.oy=drag.oy+dy; clampPan(); } });
+  cv.addEventListener('pointerup',e=>{ const d=drag; drag=null; if(!d||d.moved||!opt.onClick) return;
+    const r=cv.getBoundingClientRect(), px=e.clientX-r.left, py=e.clientY-r.top;
+    opt.onClick(s,(px-s.w/2-s.ox)/s.z+s.w/2,(py-s.h/2-s.oy)/s.z+s.h/2); });
+  cv.addEventListener('pointercancel',()=>{ drag=null; });
+  setZ(1); s.upd(); scenes.push(s); return s;
+}
+function frame(dt){
+  const vh=window.innerHeight||800;
+  scenes.forEach(s=>{
+    const r=s.cv.getBoundingClientRect(); if(r.width<2||r.bottom<-50||r.top>vh+50) return;
+    const {w,h}=fit(s.cv,s.c); s.w=w; s.h=h; const d=s.run?dt:0; s.t+=d;
+    const c=s.c; c.save(); c.translate(w/2+s.ox,h/2+s.oy); c.scale(s.z,s.z); c.translate(-w/2,-h/2);
+    s.draw(c,w,h,s,d); c.restore();
+  });
+}
+
+/* ---------- forma del vulcano (vista di lato) ---------- */
+function cone(w,h,cx,top,G,half){ const xl=cx-w*0.03, xr=cx+w*0.03, bl=cx-half, br=cx+half;
+  const f=t=>1-Math.pow(1-t,1.7);
+  return {cx,top,G,xl,xr,bl,br,
+    yR:x=>x>=br?G:top+(G-top)*f(clamp((x-xr)/(br-xr),0,1)),
+    yL:x=>x<=bl?G:top+(G-top)*f(clamp((xl-x)/(xl-bl),0,1))}; }
+function drawCone(c,K,col,col2){ const g=c.createLinearGradient(0,K.top,0,K.G); g.addColorStop(0,col2||'#4a3a33'); g.addColorStop(1,col);
+  c.fillStyle=g; c.beginPath(); c.moveTo(K.bl,K.G);
+  for(let x=K.bl;x<=K.xl;x+=3) c.lineTo(x,K.yL(x));
+  c.lineTo(K.xl,K.top); c.lineTo(K.cx,K.top+7); c.lineTo(K.xr,K.top);
+  for(let x=K.xr;x<=K.br;x+=3) c.lineTo(x,K.yR(x));
+  c.lineTo(K.br,K.G); c.closePath(); c.fill(); }
+
+/* ================= 1. pericolo e rischio ================= */
+let rAct=1, rPop=2;
+function rUpd(){ const p1=rAct?100:0, p2=rPop*10, p3=Math.round(p1*p2/100);
+  const lv=v=>v===0?'nullo':v<30?'basso':v<70?'medio':'alto';
+  $('rp1').textContent=rAct?'alto':'nullo'; $('rb1').style.width=p1+'%';
+  $('rp2').textContent=rPop===0?'nessuno':rPop<4?'poche':rPop<8?'molte':'moltissime'; $('rb2').style.width=p2+'%';
+  $('rp3').textContent=lv(p3); $('rb3').style.width=p3+'%';
+  $('rtext').textContent=!rAct?'Un vulcano spento non erutta più: anche con tante case vicino il rischio è nullo.'
+    :rPop===0?'Il vulcano è pericoloso, ma nessuno vive vicino: il rischio per le persone è nullo.'
+    :rPop<8?'Il pericolo è lo stesso, ma più persone vivono vicino al vulcano, più il rischio cresce.'
+    :'Un vulcano attivo vicino a una grande città: il rischio è altissimo. È il caso del Vesuvio, vicino a Napoli (foto D a pag. E17).';
+  document.querySelectorAll('#rkind button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.a===rAct)));
+}
+document.querySelectorAll('#rkind button').forEach(b=>b.addEventListener('click',()=>{ rAct=+b.dataset.a; rUpd(); }));
+$('rpop').addEventListener('input',e=>{ rPop=+e.target.value; rUpd(); });
+const RH=Array.from({length:120},(_,i)=>({x:hash(i+1),y:hash(i+50),k:hash(i+99)}));
+scene('risk',function(c,w,h,s){
+  sky(c,w,h,rAct?'#7d8fa8':'#8fb6e0','#e9dcc4');
+  const G=h*0.72, K=cone(w,h,w*0.27,h*0.26,G,w*0.24);
+  c.fillStyle='#8a9a5b'; c.fillRect(0,G,w,h-G);
+  drawCone(c,K,rAct?'#6b5446':'#6f7d55',rAct?'#3d2c25':'#5b6b45');
+  if(rAct){ for(let k=0;k<10;k++){ const ph=(s.t*0.12+k/10)%1; puff(c,K.cx+ph*w*0.12,K.top-10-ph*h*0.22,5+ph*16,'rgba(120,120,125,'+(0.55*(1-ph))+')'); }
+    c.fillStyle='rgba(255,120,40,.85)'; c.beginPath(); c.ellipse(K.cx,K.top+4,w*0.022,4,0,0,TAU); c.fill(); }
+  else { c.fillStyle='#6a8fb0'; c.beginPath(); c.ellipse(K.cx,K.top+5,w*0.025,4,0,0,TAU); c.fill(); }
+  const n=rPop*12, sz=Math.max(7,w*0.02);
+  const pts=RH.slice(0,n).map(p=>{ const x=K.br-w*0.12+p.x*(w*0.98-(K.br-w*0.12)); let y=G+2+p.y*(h-G-sz*0.4);
+    if(x<K.br&&p.k<0.5){ y=K.yR(x)+sz*0.9; } return {x,y}; }).sort((a,b)=>a.y-b.y);
+  pts.forEach(p=>house(c,p.x,p.y,sz));
+  label(c,rAct?'vulcano attivo':'vulcano spento',K.cx,K.G-h*0.05,'#fff',Math.max(11,w/48),700,'center');
+},{auto:true});
+rUpd();
+
+/* ================= 2. fenomeni vulcanici ================= */
+const VT={
+ lava:{k:'Durante l\'eruzione',t:'Colate di lava',x:'La lava esce dal cratere o da fessure sui fianchi e scende verso valle. Brucia e copre tutto quello che incontra: strade, campi, case.',b:'Nel libro: pag. E16, primo paragrafo dopo l\'introduzione.',d:12},
+ cenere:{k:'Durante l\'eruzione',t:'Nubi di ceneri',x:'Nelle eruzioni esplosive il vulcano lancia in alto una colonna di gas, cenere e frammenti di roccia. Il vento porta la nube lontano e la cenere ricade su paesi e campi: il cielo si oscura e i tetti possono crollare per il peso.',b:'Nel libro: pag. E16, primo paragrafo dopo l\'introduzione.',d:12},
+ fango:{k:'Anche molto tempo dopo l\'eruzione',t:'Colate di fango (lahar)',x:'La cenere accumulata sui pendii si mescola all\'acqua piovana. Si forma un fango che scende a valle all\'improvviso e molto velocemente, travolgendo ciò che trova.',b:'Nel libro: foto A a pag. E16 (Sarno, in Campania, 1998).',d:14},
+ gas:{k:'Anche quando il vulcano è a riposo',t:'Emissioni di gas',x:'Un vulcano può emettere gas anche nelle fasi di quiescenza, cioè quando non erutta. Alcuni gas sono pericolosi da respirare.',b:'Nel libro: pag. E16, inizio della seconda colonna.',d:10},
+ isola:{k:'Quando crolla un vulcano nel mare',t:'Collasso di un\'isola vulcanica',x:'Se una parte di un\'isola vulcanica crolla in mare, sposta di colpo una grande massa d\'acqua. Nascono onde gigantesche, gli tsunami, che possono colpire coste anche lontane.',b:'Nel libro: pag. E16, seconda colonna.',d:14}
+};
+let vSel='lava';
+function vUpd(){ const v=VT[vSel]; $('vkind').textContent=v.k; $('vtitle').textContent=v.t; $('vtext').textContent=v.x; $('vbook').textContent=v.b;
+  document.querySelectorAll('#vtabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.v===vSel))); }
+document.querySelectorAll('#vtabs button').forEach(b=>b.addEventListener('click',()=>{ vSel=b.dataset.v; SV.t=0; vUpd(); }));
+const TOWN=[0.68,0.715,0.75,0.785,0.82,0.855];
+function vBase(c,w,h,K,dark){
+  sky(c,w,h,dark?'#3a3f4a':'#8fb6e0',dark?'#7b7468':'#f1e3c8');
+  c.fillStyle='#8a9a5b'; c.fillRect(0,K.G,w,h-K.G);
+  c.fillStyle='#3d86c6'; c.fillRect(w*0.9,K.G+3,w*0.1,h-K.G);
+  drawCone(c,K,'#6b5446','#3d2c25');
+}
+function vTown(c,w,h,K,cover,coverCol){ const sz=Math.max(8,w*0.024);
+  TOWN.forEach(u=>house(c,u*w,K.G+2,sz));
+  if(cover>0){ c.fillStyle=coverCol; c.beginPath(); c.moveTo(w*0.6,K.G+3); c.quadraticCurveTo(w*0.62,K.G-cover,w*0.66,K.G-cover); c.lineTo(w*0.88,K.G-cover*0.8); c.quadraticCurveTo(w*0.9,K.G-cover*0.4,w*0.9,K.G+3); c.closePath(); c.fill(); } }
+const SV=scene('volc',function(c,w,h,s){
+  const v=VT[vSel], tt=s.t%v.d, fs=Math.max(11,Math.min(15,w/52));
+  if(vSel==='isola') return drawIsland(c,w,h,tt,fs);
+  const K=cone(w,h,w*0.33,h*0.28,h*0.74,w*0.29);
+  if(vSel==='lava'){
+    vBase(c,w,h,K,false); const p=clamp(tt/8,0,1), xe=K.xr+(w*0.64-K.xr)*p;
+    const path=(x0,x1,fy)=>{ c.beginPath(); c.moveTo(x0,fy(x0)); for(let x=x0;x<=x1;x+=3) c.lineTo(x,fy(x)-2); };
+    c.lineCap='round'; c.lineJoin='round';
+    path(K.xr-2,xe,K.yR); c.strokeStyle='#7a1d0a'; c.lineWidth=9; c.stroke();
+    path(Math.max(K.xr,xe-w*0.12),xe,K.yR); c.strokeStyle='#ff6a1f'; c.lineWidth=7; c.stroke();
+    c.fillStyle='#ffd27a'; c.beginPath(); c.arc(xe,K.yR(xe)-2,4,0,TAU); c.fill();
+    const xl=K.xl-(K.xl-w*0.12)*clamp(tt/10,0,1)*0.6; c.beginPath(); c.moveTo(K.xl+2,K.yL(K.xl)); for(let x=K.xl;x>=xl;x-=3) c.lineTo(x,K.yL(x)-2); c.strokeStyle='#a8320f'; c.lineWidth=6; c.stroke();
+    for(let k=0;k<24;k++){ const ph=(tt*1.3+k/24)%1, side=(k%2?1:-1)*(0.3+hash(k)*0.7);
+      c.fillStyle='rgba(255,'+(140+Math.round(100*(1-ph)))+',60,'+(1-ph)+')'; c.beginPath(); c.arc(K.cx+side*ph*w*0.035,K.top-Math.sin(ph*PI)*h*0.11,2.6,0,TAU); c.fill(); }
+    vTown(c,w,h,K,0);
+    $('vinfo').textContent=p<1?'La lava scende lungo il fianco':'La colata si ferma quando si raffredda';
+  } else if(vSel==='cenere'){
+    const dk=sstep(1,5,tt);
+    vBase(c,w,h,K,dk>0.5);
+    c.fillStyle='rgba(30,30,40,'+(0.35*dk)+')'; c.fillRect(0,0,w,h);
+    for(let k=0;k<46;k++){ const ph=(tt*0.16+k/46)%1, rise=Math.min(ph/0.35,1);
+      const x=K.cx+(ph>0.35?(ph-0.35)/0.65*w*0.6:0)+Math.sin(k)*w*0.015*rise, y=K.top-8-rise*h*0.2+(ph>0.35?Math.sin(k*1.7)*h*0.04:0);
+      puff(c,x,y,5+rise*14+(ph>0.35?(ph-0.35)*30:0),'rgba('+(70+k%3*15)+','+(68+k%3*15)+',72,'+(0.75*(1-ph*0.6))+')'); }
+    for(let k=0;k<160;k++){ const x=K.cx+w*0.12+hash(k)*w*0.5, ph=(tt*0.35+hash(k+7))%1; if(x-K.cx>w*0.6*Math.min(1,tt/5)) continue;
+      c.fillStyle='rgba(60,60,60,.7)'; c.fillRect(x+ph*8,h*0.12+ph*(K.G-h*0.12),1.6,1.6); }
+    vTown(c,w,h,K,clamp((tt-4)/6,0,1)*5,'rgba(120,120,120,.95)');
+    $('vinfo').textContent=tt<4?'Si alza una colonna di cenere e gas':'Il vento porta la nube: la cenere ricade sui paesi';
+  } else if(vSel==='fango'){
+    const rain=tt>3, a=clamp(tt/3,0,1), m=clamp((tt-6)/4,0,1);
+    vBase(c,w,h,K,rain);
+    c.lineCap='round'; c.strokeStyle='rgba(150,150,150,.95)'; c.lineWidth=2+5*a*(1-m*0.7);
+    c.beginPath(); for(let x=K.xr;x<=K.br;x+=3) c.lineTo(x,K.yR(x)-1); c.stroke();
+    c.beginPath(); for(let x=K.xl;x>=K.bl;x-=3) c.lineTo(x,K.yL(x)-1); c.stroke();
+    if(m>0){ const xe=K.xr+w*0.04+(w*0.88-K.xr-w*0.04)*m; c.fillStyle='#6b4a2b'; c.beginPath(); c.moveTo(K.xr+w*0.04,K.yR(K.xr+w*0.04));
+      for(let x=K.xr+w*0.04;x<=xe;x+=3) c.lineTo(x,K.yR(x)-3-h*0.03*Math.min(1,(x-K.xr)/(w*0.15))*Math.min(1,(xe-x)/(w*0.03)+0.3));
+      for(let x=xe;x>=K.xr+w*0.04;x-=3) c.lineTo(x,K.yR(x)+1); c.closePath(); c.fill(); }
+    vTown(c,w,h,K,m>0.7?(m-0.7)/0.3*h*0.04:0,'#6b4a2b');
+    if(rain){ c.strokeStyle='rgba(200,220,255,.55)'; c.lineWidth=1; for(let k=0;k<90;k++){ const x=hash(k)*w, y=((tt*1.4+hash(k+3))%1)*h; c.beginPath(); c.moveTo(x,y); c.lineTo(x-3,y+10); c.stroke(); } }
+    const st=tt<3?'1. La cenere si accumula sui pendii':tt<6?'2. Piove: l\'acqua si mescola alla cenere':'3. Il fango scende a valle all\'improvviso';
+    $('vinfo').textContent=st; label(c,st,w*0.03,h*0.1,'#fff',fs,800);
+  } else if(vSel==='gas'){
+    vBase(c,w,h,K,false);
+    const src=[[K.cx,K.top+4],[K.xr+w*0.05,K.yR(K.xr+w*0.05)],[K.xl-w*0.07,K.yL(K.xl-w*0.07)],[w*0.6,K.G]];
+    src.forEach((p,j)=>{ for(let k=0;k<9;k++){ const ph=(tt*0.22+k/9+j*0.13)%1;
+      puff(c,p[0]+Math.sin(ph*6+k+j)*6*ph+ph*w*0.03,p[1]-ph*h*(j?0.13:0.2),3+ph*(j?9:14),'rgba(236,230,190,'+(0.55*(1-ph))+')'); } });
+    vTown(c,w,h,K,0);
+    label(c,'Il vulcano è a riposo (quiescenza), ma emette gas',w*0.03,h*0.1,'#fff',fs,800);
+    $('vinfo').textContent='Nessuna eruzione, eppure c\'è pericolo';
+  }
+},{auto:true});
+function drawIsland(c,w,h,tt,fs){
+  sky(c,w,h,'#8fb6e0','#e8eef5'); const SL=h*0.56;
+  const K=cone(w,h,w*0.2,h*0.22,h*0.82,w*0.18);
+  c.fillStyle='#2a5f93'; c.fillRect(0,SL,w,h-SL);
+  drawCone(c,K,'#6b5446','#3d2c25');
+  const k=sstep(1.5,4,tt);
+  const x0=K.xr+w*0.01; let x1=x0; while(x1<K.br&&K.yR(x1)<SL+h*0.01) x1+=2;
+  const piece=()=>{ c.beginPath(); c.moveTo(x0,K.yR(x0)); for(let x=x0;x<=x1;x+=3) c.lineTo(x,K.yR(x)); c.lineTo(K.cx+w*0.035,SL+h*0.01); c.lineTo(K.cx+w*0.012,K.top+h*0.06); c.closePath(); };
+  // onda
+  const s=K.br-w*0.02+Math.max(0,tt-3.6)*w*0.062, coast=w*0.82, A=tt<3.6?0:Math.min(h*0.11,h*0.012+h*0.12*Math.pow(clamp((s-w*0.4)/(coast-w*0.4),0,1),1.6)), L=w*0.05;
+  const eta=x=>A*Math.exp(-Math.pow((x-s)/L,2));
+  c.fillStyle='#3d86c6'; c.beginPath(); c.moveTo(0,h); for(let x=0;x<=w;x+=3) c.lineTo(x,SL-eta(x)); c.lineTo(w,h); c.closePath(); c.fill();
+  c.strokeStyle='rgba(255,255,255,.7)'; c.lineWidth=1.5; c.beginPath(); for(let x=0;x<=w;x+=3) c.lineTo(x,SL-eta(x)); c.stroke();
+  // isola sopra l'acqua (parte emersa)
+  c.save(); c.beginPath(); c.rect(0,0,w,SL); c.clip(); drawCone(c,K,'#6b5446','#3d2c25');
+  if(k>0){ c.globalAlpha=k; const sg=c.createLinearGradient(0,0,0,h); sg.addColorStop(0,'#8fb6e0'); sg.addColorStop(1,'#e8eef5'); c.fillStyle=sg; piece(); c.fill(); c.strokeStyle=sg; c.lineWidth=2.5; c.stroke(); c.globalAlpha=1; }
+  c.restore();
+  if(k>0){ c.save(); c.translate(w*0.05*k,h*0.2*k); c.rotate(0.06*k); c.globalAlpha=1-0.6*k; c.fillStyle='#5a463b'; piece(); c.fill(); c.restore(); }
+  if(k>0&&k<1){ for(let j=0;j<10;j++) puff(c,K.br-w*0.06+j*4,SL-6-hash(j)*14*k,5,'rgba(255,255,255,'+(0.7*(1-k))+')'); }
+  // costa e paese
+  const ly=x=>SL+h*0.02-(x-coast)*0.28;
+  c.fillStyle='#b9a77a'; c.beginPath(); c.moveTo(coast-w*0.02,h); c.lineTo(coast-w*0.02,SL+h*0.06); for(let x=coast;x<=w;x+=3) c.lineTo(x,ly(x)); c.lineTo(w,h); c.closePath(); c.fill();
+  const sz=Math.max(8,w*0.022); [0.88,0.92,0.96].forEach(u=>house(c,u*w,ly(u*w),sz));
+  if(s>coast-w*0.02){ const run=clamp((s-coast)/(w*0.13),0,1); c.fillStyle='rgba(61,134,198,.85)';
+    c.beginPath(); c.moveTo(coast-w*0.02,SL+h*0.02); for(let x=coast;x<=coast+run*w*0.16;x+=3) c.lineTo(x,ly(x)-h*0.05*(1-(x-coast)/(w*0.2))); c.lineTo(coast+run*w*0.16,ly(coast+run*w*0.16)); for(let x=coast+run*w*0.16;x>=coast;x-=3) c.lineTo(x,ly(x)); c.closePath(); c.fill(); }
+  const st=tt<1.5?'Un\'isola vulcanica nel mare':tt<4?'Una parte dell\'isola crolla in mare':s<coast?'Si forma un\'onda che corre verso la costa':'L\'onda si abbatte sulla costa: è uno tsunami';
+  label(c,st,w*0.03,h*0.1,'#fff',fs,800); $('vinfo').textContent=st;
+}
+vUpd();
+
+/* ================= 3. terremoti ================= */
+let qSel='crolli';
+const QT={
+ crolli:{k:'Le vibrazioni del suolo',t:'Crolli e voragini',x:['Durante un terremoto il suolo vibra e si scuote. Gli edifici e i ponti che non sono costruiti per resistere possono crollare.','Il terreno si può anche aprire, formando voragini.','Premi <b>Avvia il terremoto</b> e osserva quali edifici resistono.'],b:'Nel libro: foto B a pag. E16 (Italia centrale, estate 2016).'},
+ tsunami:{k:'Un terremoto sotto il mare',t:'Lo tsunami',x:['Lungo una faglia sul fondale marino una parte del fondale si solleva e l\'altra si abbassa. Si muove tutta l\'acqua sopra: nasce un\'onda.','<b>Al largo</b>, dove il fondale è profondo, l\'onda è bassa, molto lunga e molto veloce.','<b>Man mano che il fondale risale</b> l\'onda rallenta e diventa più alta.','<b>Sulla costa</b> può essere alta anche 30 metri e viaggia a circa 50 km/h. Prima dell\'arrivo il mare può ritirarsi di decine di metri: è un segnale di pericolo!'],b:'Nel libro: figura C a pag. E16.'}
+};
+function qUpd(){ const q=QT[qSel]; $('qkind').textContent=q.k; $('qtitle').textContent=q.t; $('qtext').innerHTML=q.x.map(p=>'<p>'+p+'</p>').join(''); $('qbook').textContent=q.b;
+  document.querySelectorAll('#qtabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.q===qSel))); SQ.t=0; SQ.run=false; SQ.ws=null; SQ.upd(); }
+document.querySelectorAll('#qtabs button').forEach(b=>b.addEventListener('click',()=>{ qSel=b.dataset.q; qUpd(); }));
+const BLD=[[0.07,0.09,3,1],[0.18,0.08,5,0],[0.28,0.07,2,1],[0.38,0.09,4,0],[0.48,0.06,3,1],[0.78,0.08,4,0],[0.90,0.09,3,1]];
+const QDUR={crolli:9,tsunami:30};
+const SQ=scene('quake',function(c,w,h,s,dt){
+  const fs=Math.max(11,Math.min(15,w/52));
+  if(qSel==='tsunami') return drawTsunami(c,w,h,s,dt,fs);
+  const t=s.t; if(s.run&&t>=QDUR.crolli){ s.run=false; s.done=true; s.upd(); }
+  const env=sstep(0.3,1.2,t)*(1-sstep(5.5,7.5,t)), dx=Math.sin(t*26)*w*0.006*env+Math.sin(t*41)*w*0.003*env;
+  sky(c,w,h,'#9cc3ea','#eef2f6');
+  const G=h*0.7, rv0=w*0.575, rv1=w*0.685, hole=w*0.66+0.0;
+  // onde sismiche nel terreno
+  c.fillStyle='#9a8a6a'; c.fillRect(0,G,w,h-G);
+  c.fillStyle='#7d6e52'; c.fillRect(0,G+h*0.12,w,h);
+  if(env>0){ c.save(); c.beginPath(); c.rect(0,G,w,h-G); c.clip(); c.strokeStyle='rgba(255,230,150,.5)'; c.lineWidth=2; for(let k=0;k<4;k++){ const r=((t*0.5+k/4)%1)*w*0.6; c.beginPath(); c.arc(w*0.42,h*1.15,r,PI*1.05,PI*1.95); c.stroke(); } c.restore(); }
+  c.save(); c.translate(dx,0);
+  c.fillStyle='#8a9a5b'; c.fillRect(-20,G-4,rv0+20,6); c.fillRect(rv1,G-4,w-rv1+20,6);
+  // fiume
+  c.fillStyle='#9a8a6a'; c.fillRect(rv0,G,rv1-rv0,h); c.fillStyle='#3d86c6'; c.fillRect(rv0,G+h*0.07,rv1-rv0,h*0.06);
+  // strada
+  c.fillStyle='#555'; c.fillRect(-20,G-2,rv0+20,3); c.fillRect(rv1,G-2,w,3);
+  // voragine
+  const vg=sstep(3,5,t); if(vg>0){ const cx=w*0.735, ww=w*0.05*vg; c.fillStyle='#1b130b'; c.beginPath(); c.moveTo(cx-ww,G-2); c.lineTo(cx-ww*0.4,G+h*0.1*vg); c.lineTo(cx+ww*0.5,G+h*0.08*vg); c.lineTo(cx+ww,G-2); c.closePath(); c.fill(); }
+  // ponte
+  const br=sstep(4,5.2,t);
+  c.fillStyle='#8d8f94'; c.fillRect((rv0+rv1)/2-4,G,8,h*0.08);
+  c.save(); c.translate(rv0,G-3); c.rotate(br*0.5); c.fillRect(0,-4,(rv1-rv0)/2,6); c.restore();
+  c.save(); c.translate(rv1,G-3); c.rotate(-br*0.42); c.fillRect(-(rv1-rv0)/2,-4,(rv1-rv0)/2,6); c.restore();
+  // edifici
+  const fh=h*0.065;
+  BLD.forEach((b,i)=>{ const x=b[0]*w, bw=b[1]*w, n=b[2], weak=b[3], sway=Math.sin(t*26-1-i)*env*w*(weak?0.01:0.004);
+    if(weak&&t>3.6){ const k=sstep(3.6,4.6,t); const hh=n*fh*(1-k*0.75);
+      c.fillStyle='#c9b79a'; c.beginPath(); c.moveTo(x-bw/2-k*bw*0.25,G-2); c.lineTo(x-bw*0.3,G-hh); c.lineTo(x+bw*0.2,G-hh*0.85); c.lineTo(x+bw/2+k*bw*0.25,G-2); c.closePath(); c.fill();
+      c.fillStyle='#8f7f66'; for(let j=0;j<10;j++) c.fillRect(x-bw/2+hash(i*20+j)*bw,G-2-hash(i*20+j+5)*hh*0.8,bw*0.12,bw*0.08);
+      if(k<1||t<6){ for(let j=0;j<6;j++){ const ph=clamp((t-3.6)/3,0,1); puff(c,x-bw/2+hash(j+i)*bw,G-hh-ph*h*0.08*(j%3+1),6+ph*14,'rgba(200,190,170,'+(0.5*(1-ph))+')'); } }
+      return; }
+    for(let f=0;f<n;f++){ const o0=sway*f/n, o1=sway*(f+1)/n;
+      c.fillStyle=weak?'#e6d3b3':'#d7dde5'; c.beginPath(); c.moveTo(x-bw/2+o0,G-2-f*fh); c.lineTo(x+bw/2+o0,G-2-f*fh); c.lineTo(x+bw/2+o1,G-2-(f+1)*fh); c.lineTo(x-bw/2+o1,G-2-(f+1)*fh); c.closePath(); c.fill();
+      c.fillStyle='#4a5a70'; for(let j=0;j<3;j++) c.fillRect(x-bw/2+bw*(0.14+j*0.28)+(o0+o1)/2,G-2-f*fh-fh*0.7,bw*0.16,fh*0.38); }
+    c.fillStyle=weak?'#b5523b':'#6b7686'; c.fillRect(x-bw/2-2+sway,G-2-n*fh-4,bw+4,4);
+    if(weak&&t>2.2){ c.strokeStyle='#5a1a0a'; c.lineWidth=1.5; c.beginPath(); c.moveTo(x-bw*0.2+sway*0.5,G-2-fh*0.5); c.lineTo(x+sway*0.6,G-2-fh*1.4); c.lineTo(x-bw*0.1+sway*0.8,G-2-fh*2.2); c.stroke(); }
+  });
+  c.restore();
+  const st=t<0.3?'Il paese prima del terremoto':t<3.6?'Il suolo vibra: gli edifici oscillano':t<6?'Crolli di edifici e di un ponte, si apre una voragine':'Dopo la scossa';
+  label(c,st,w*0.03,h*0.1,'#fff',fs,800); $('qinfo').textContent=s.run||t>0?st:'';
+  if(t>5) { label(c,'voragine',w*0.735,G+h*0.16,'#ffe2a6',fs*0.9,700,'center'); }
+},{label:s=>s.run?'❚❚ Pausa':(s.done?'↺ Ricomincia':(s.t>0?'▶ Continua':(qSel==='tsunami'?'▶ Avvia il terremoto sotto il mare':'▶ Avvia il terremoto'))),
+   onPlay:s=>{ if(s.done){ s.t=0; s.ws=null; s.done=false; } s.run=!s.run; }});
+function drawTsunami(c,w,h,s,dt,fs){
+  const t=s.t; if(s.run&&t>=QDUR.tsunami){ s.run=false; s.done=true; s.upd(); }
+  const SL=h*0.4, BOT=h*0.9, coastU=0.82;
+  const depth=u=>u<0.45?1:u<coastU?1-(u-0.45)/(coastU-0.45):0;
+  const gY=u=>u<coastU?SL+depth(u)*(BOT-SL)+2:SL+2-(u-coastU)*h*0.55;
+  const lift=sstep(0.5,1.5,t)*h*0.03, fU=0.25;
+  const fd=u=>u>=coastU?0:(u>fU?-lift:lift*0.6)*(1-sstep(0.08,0.17,Math.abs(u-fU)));
+  // posizione dell'onda: la velocità dipende dalla profondità
+  if(s.ws==null||t<1.2) s.ws=fU;
+  if(t>=1.2&&dt>0){ const d=depth(s.ws); s.ws+=dt*(0.085*Math.sqrt(Math.max(d,0.015))+0.006); }
+  const u0=s.ws, d0=Math.max(depth(u0),0.04), on=t>=1.2;
+  const A=on?Math.min(h*0.14,h*0.012*Math.pow(1/d0,0.85))*(u0>coastU?Math.exp(-(u0-coastU)/0.03):1):0;
+  if(s.ws>1.02&&s.run){ s.run=false; s.done=true; s.upd(); }
+  const L=0.085*Math.sqrt(Math.max(depth(u0),0.05))+0.012;
+  const eta=u=>A*(Math.exp(-Math.pow((u-u0+0.45*L)/(0.5*L),2))-0.75*Math.exp(-Math.pow((u-u0-0.55*L)/(0.5*L),2)));
+  sky(c,w,h,'#9cc3ea','#eef2f6');
+  // fondale e terra
+  c.fillStyle='#8d7656'; c.beginPath(); c.moveTo(0,h);
+  for(let x=0;x<=w;x+=2){ const u=x/w; c.lineTo(x,gY(u)+fd(u)); }
+  c.lineTo(w,h); c.closePath(); c.fill();
+  // acqua a colonne
+  for(let x=0;x<w;x+=2){ const u=x/w, gy=gY(u)+fd(u), sy=SL-eta(u);
+    if(sy<gy){ c.fillStyle=u<coastU?'#2f74b5':'rgba(61,134,198,.85)'; c.fillRect(x,sy,2.2,gy-sy); } }
+  c.strokeStyle='rgba(255,255,255,.75)'; c.lineWidth=1.5; c.beginPath(); let st=false;
+  for(let x=0;x<=w;x+=2){ const u=x/w, sy=SL-eta(u); if(sy<gY(u)){ if(!st){c.moveTo(x,sy);st=true;} else c.lineTo(x,sy); } else st=false; } c.stroke();
+  // l'onda risale sulla terraferma
+  const run=clamp((u0-coastU+0.015)/0.1,0,1), back=clamp((u0-0.97)/0.05,0,1);
+  if(on&&run>0){ const xe=(coastU+run*0.17)*w, th=h*0.045*(1-back*0.8); c.fillStyle='rgba(47,116,181,.92)'; c.beginPath(); c.moveTo((coastU-0.01)*w,SL);
+    for(let x=(coastU-0.01)*w;x<=xe;x+=3){ const f=(xe-x)/(xe-(coastU-0.01)*w+1); c.lineTo(x,gY(x/w)-th*Math.sqrt(f)-2); }
+    c.lineTo(xe,gY(xe/w)); for(let x=xe;x>=(coastU-0.01)*w;x-=3) c.lineTo(x,gY(x/w)+1); c.closePath(); c.fill(); }
+  const sz=Math.max(8,w*0.02); [0.9,0.94,0.98].forEach(u=>house(c,u*w,gY(u),sz));
+  if(on&&run>0.45&&back<1){ c.fillStyle='rgba(47,116,181,.8)'; c.beginPath(); for(let x=(coastU+0.05)*w;x<=(coastU+run*0.17)*w;x+=3) c.lineTo(x,gY(x/w)-h*0.02*(1-back)); c.lineTo((coastU+run*0.17)*w,gY(coastU+run*0.17)+1); c.lineTo((coastU+0.05)*w,gY(coastU+0.05)+1); c.closePath(); c.fill(); }
+  // faglia e frecce
+  c.strokeStyle='#d62828'; c.lineWidth=2.5; c.setLineDash([5,4]); c.beginPath(); c.moveTo(fU*w,BOT-h*0.06); c.lineTo(fU*w,h); c.stroke(); c.setLineDash([]);
+  const arr=(x,y,up)=>{ c.fillStyle='#ffd27a'; c.beginPath(); if(up){ c.moveTo(x,y-14); c.lineTo(x+8,y); c.lineTo(x-8,y); } else { c.moveTo(x,y+14); c.lineTo(x+8,y); c.lineTo(x-8,y); } c.closePath(); c.fill(); };
+  if(t>0.3&&t<3){ arr(w*(fU+0.06),BOT+h*0.05,true); arr(w*(fU-0.06),BOT+h*0.03,false); }
+  label(c,'faglia',fU*w+8,h*0.97,'#ffe2a6',fs*0.9,700);
+  label(c,'livello del mare',w*0.02,SL-8,'#ffffff',fs*0.85,700);
+  // tre zone della figura C
+  const zones=[[0.03,'Fondale profondo:','onda bassa, lunga, velocissima'],[0.42,'Il fondale risale:','l\'onda rallenta e si alza'],[0.70,'Sulla costa:','fino a 30 m, circa 50 km/h']];
+  const zi=!on?-1:u0<0.45?0:u0<0.74?1:2;
+  zones.forEach((z,i)=>{ const col=i===zi?'#ffd27a':'#e6edf6'; label(c,z[1],z[0]*w,h*0.1,col,fs*(i===zi?1:0.88),800); label(c,z[2],z[0]*w,h*0.1+fs*1.25,col,fs*(i===zi?1:0.88),700); });
+  const retreat=on&&u0>0.66&&u0<coastU+0.01;
+  if(retreat) label(c,'Il mare si ritira: pericolo!',w*0.66,SL+h*0.17,'#ffd27a',fs,800);
+  $('qinfo').textContent=!on?(t>0?'Il fondale si muove lungo la faglia':''):zi===0?'Velocità: altissima · onda bassa':zi===1?'L\'onda rallenta e cresce':retreat?'Prima dell\'onda il mare arretra':'L\'onda si abbatte sulla costa';
+}
+qUpd();
+
+/* ================= 4a. Vesuvio: sorveglianza ed evacuazione ================= */
+const VS={eDay:0,ev:null,out:null};
+function vsReset(){ VS.eDay=44+Math.floor(Math.random()*8); VS.ev=null; VS.out=null; SVS.t=0; SVS.run=false; SVS.done=false;
+  $('evac').disabled=true; $('vmsg').className='msg info'; $('vmsg').textContent='Gli strumenti sono pronti. Premi Avvia.'; SVS.upd(); }
+const sig=(d,o)=>clamp(Math.pow(clamp((d-16-o)/24,0,1),1.3)+(d>10?0.06*Math.sin(d*1.7+o):0),0,1);
+const VH=Array.from({length:70},(_,i)=>({u:hash(i+200),k:hash(i+300),r:hash(i+400)}));
+const SVS=scene('vesu',function(c,w,h,s){
+  const day=s.t*4, er=day>=VS.eDay&&VS.out!=='presto', fs=Math.max(11,Math.min(15,w/52));
+  if(s.run&&!VS.out&&day>=VS.eDay){ const p=VS.ev==null?0:clamp((day-VS.ev)/7,0,1);
+    if(VS.ev==null){ VS.out='nessuna'; $('vmsg').className='msg ko'; $('vmsg').textContent='L\'eruzione è cominciata e nessuno è stato evacuato. I segnali c\'erano: le misure erano salite per molti giorni.'; }
+    else if(p<1){ VS.out='tardi'; $('vmsg').className='msg ko'; $('vmsg').textContent='Troppo tardi: l\'evacuazione era al '+Math.round(p*100)+'% quando è cominciata l\'eruzione. Per far allontanare centinaia di migliaia di persone servono giorni.'; }
+    else { VS.out='ok'; $('vmsg').className='msg ok'; $('vmsg').textContent='Evacuazione riuscita! Quando è cominciata l\'eruzione, la zona intorno al vulcano era già vuota. È proprio questa la difesa dal Vesuvio.'; }
+    $('evac').disabled=true; }
+  if(s.run&&day>=VS.eDay+8){ s.run=false; s.done=true; s.upd(); }
+  sky(c,w,h,er?'#4a4a52':'#8fb6e0',er?'#8a8070':'#f1e3c8');
+  const K=cone(w,h,w*0.36,h*0.26,h*0.74,w*0.3);
+  c.fillStyle='#8a9a5b'; c.fillRect(0,K.G,w,h-K.G);
+  c.fillStyle='#3d86c6'; c.fillRect(0,K.G+h*0.12,w*0.25,h);
+  drawCone(c,K,'#6b6050','#3d332b');
+  // stazioni di sorveglianza
+  [[K.xr+w*0.08],[K.xl-w*0.1],[K.cx+w*0.16]].forEach((p,i)=>{ const x=p[0], y=(x>K.cx?K.yR(x):K.yL(x)); c.fillStyle='#ffd27a'; c.fillRect(x-3,y-14,6,12); c.beginPath(); c.moveTo(x,y-20); c.lineTo(x+7,y-14); c.lineTo(x-7,y-14); c.closePath(); c.fill(); });
+  // case e abitanti
+  const p=VS.ev==null?0:clamp((day-VS.ev)/7,0,1), sz=Math.max(6,w*0.015);
+  VH.forEach((q,i)=>{ const x=K.bl+w*0.03+q.u*(K.br-K.bl+w*0.18); let y=x<K.xl?K.yL(x):x<K.xr?K.top:K.yR(x); if(x>K.br) y=K.G; y+=sz*0.8+q.k*h*0.08;
+    if(Math.abs(x-K.cx)<w*0.06) return; house(c,x,y,sz,q.r<p?'#a0a6ad':undefined); });
+  // persone che se ne vanno
+  if(VS.ev!=null&&p<1&&!er){ c.fillStyle='#fff'; for(let k=0;k<40;k++){ const ph=((day-VS.ev)*0.4+k/40)%1; c.beginPath(); c.arc(w*0.5+ph*w*0.5,K.G+h*0.05+(k%4)*4,2,0,TAU); c.fill(); } label(c,'evacuazione in corso →',w*0.72,K.G+h*0.2,'#fff',fs,800,'center'); }
+  // segnali
+  const g1=sig(day,0), g2=sig(day,3), g3=sig(day,6);
+  if(!er){ for(let k=0;k<6;k++){ const ph=(s.t*0.25+k/6)%1; puff(c,K.cx+ph*w*0.03,K.top-6-ph*h*0.12,3+ph*(6+g3*14),'rgba(235,230,200,'+(0.5*(1-ph)*(0.3+g3))+')'); }
+    if(g1>0.15){ c.strokeStyle='rgba(255,210,122,'+(0.6*g1)+')'; c.lineWidth=1.5; for(let k=0;k<3;k++){ const r=((s.t*1.5+k/3)%1)*w*0.08; c.beginPath(); c.arc(K.cx,K.G+h*0.12,r,PI,TAU); c.stroke(); } } }
+  else { const k=clamp((day-VS.eDay)/4,0,1); for(let j=0;j<40;j++){ const ph=(s.t*0.2+j/40)%1; puff(c,K.cx+(ph>0.5?(ph-0.5)*w*0.5:0)+Math.sin(j)*8,K.top-ph*Math.min(1,ph*2)*h*0.25*(0.4+k),6+ph*26,'rgba('+(60+j%3*15)+','+(60+j%3*15)+',66,'+(0.85*(1-ph*0.5))+')'); }
+    c.fillStyle='rgba(255,110,30,.9)'; c.beginPath(); c.ellipse(K.cx,K.top+3,w*0.03,6,0,0,TAU); c.fill(); }
+  [['scosse',g1],['suolo',g2],['gas',g3]].forEach((q,i)=>{ const x=w*0.66, y=h*0.06+i*fs*1.5, bw=w*0.16; label(c,q[0],x-6,y+fs*0.75,'#e6edf6',fs*0.85,700,'right');
+    c.fillStyle='rgba(255,255,255,.25)'; c.fillRect(x,y,bw,fs*0.8); c.fillStyle=q[1]>0.66?'#d62828':q[1]>0.33?'#f08c2e':'#22a55a'; c.fillRect(x,y,bw*q[1],fs*0.8); });
+  label(c,'▲ stazioni di misura',w*0.02,h*0.08,'#ffd27a',fs*0.85,700);
+  $('g1').style.width=Math.round(g1*100)+'%'; $('g2').style.width=Math.round(g2*100)+'%'; $('g3').style.width=Math.round(g3*100)+'%';
+  ['g1','g2','g3'].forEach((id,i)=>{ const v=[g1,g2,g3][i]; $(id).style.background=v>0.66?'#d62828':v>0.33?'#f08c2e':'var(--ok)'; });
+  $('vday').textContent=s.t>0?'Giorno '+Math.floor(day):'';
+  label(c,'Vesuvio',K.cx,K.top-h*0.03-(er?h*0.2:0),'#fff',fs,800,'center'); label(c,'Golfo di Napoli',w*0.02,h*0.96,'#cfe3ff',fs*0.85,700);
+},{label:s=>s.run?'❚❚ Pausa':(s.done?'↺ Ricomincia':(s.t>0?'▶ Continua':'▶ Avvia la sorveglianza')),
+   onPlay:s=>{ if(s.done){ vsReset(); s.run=true; } else s.run=!s.run; if(s.run&&!VS.out&&VS.ev==null) $('evac').disabled=false; }});
+$('evac').addEventListener('click',()=>{ const day=SVS.t*4; VS.ev=day; $('evac').disabled=true;
+  if(day<VS.eDay-24&&sig(day,0)<0.12){ VS.out='presto'; SVS.run=false; SVS.done=true; SVS.upd(); $('vmsg').className='msg ko';
+    $('vmsg').textContent='Hai fatto evacuare la zona, ma gli strumenti non segnalavano nulla di strano. Senza dati che cambiano non si può spostare tanta gente: si evacua quando le misure indicano che un\'eruzione si avvicina.'; }
+  else { $('vmsg').className='msg info'; $('vmsg').textContent='Evacuazione ordinata al giorno '+Math.floor(day)+'. Le persone stanno lasciando la zona…'; } });
+vsReset();
+
+/* ================= 4b. Etna: argini per deviare la colata ================= */
+const AR=1.6, VIL={x:0.8,y:0.84,r:0.085}, SRC={x:0.8,y:0.16};
+const ET={walls:[],dir:-1,parts:[],crust:[],hits:0,spawn:0,out:null,acc:0};
+function etReset(keepWalls){ ET.parts=[]; ET.crust=[]; ET.hits=0; ET.spawn=0; ET.out=null; SE.t=0; SE.run=false; SE.done=false; if(!keepWalls) ET.walls=[]; etMsg(); SE.upd(); }
+function etMsg(){ const m=$('emsg');
+  if(ET.out==='ko'){ m.className='msg ko'; m.textContent='La lava ha raggiunto il paese. Prova a costruire gli argini più in alto, inclinati verso un lato.'; }
+  else if(ET.out==='ok'){ m.className='msg ok'; m.textContent='Il paese è salvo: gli argini hanno deviato la colata. Così sull\'Etna si difendono gli insediamenti sui fianchi del vulcano.'; }
+  else { m.className='msg info'; m.textContent=ET.walls.length?'Argini costruiti: '+ET.walls.length+' su 3. Premi Avvia per far uscire la lava.':'La bocca eruttiva si sta aprendo sopra il paese. Clicca sul disegno per costruire un argine.'; } }
+document.querySelectorAll('[data-dir]').forEach(b=>b.addEventListener('click',()=>{ ET.dir=+b.dataset.dir; document.querySelectorAll('[data-dir]').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); }));
+$('eclear').addEventListener('click',()=>etReset(false));
+function wallHit(p,W){ const ax=W[0],ay=W[1],bx=W[2],by=W[3], dx=bx-ax, dy=by-ay, L2=dx*dx+dy*dy;
+  const t=clamp(((p.x-ax)*dx+(p.y-ay)*dy)/L2,0,1), qx=ax+t*dx, qy=ay+t*dy, ex=p.x-qx, ey=p.y-qy, d=Math.hypot(ex,ey); return {d,nx:d?ex/d:0,ny:d?ey/d:-1,qx,qy}; }
+const SE=scene('etna',function(c,w,h,s,dt){
+  const k=h, fs=Math.max(11,Math.min(15,w/46));
+  // sfondo: il fianco del vulcano visto dall'alto
+  const g=c.createLinearGradient(0,0,0,h); g.addColorStop(0,'#4b3d36'); g.addColorStop(0.35,'#6d6150'); g.addColorStop(0.7,'#7f9157'); g.addColorStop(1,'#6f8a4a'); c.fillStyle=g; c.fillRect(0,0,w,h);
+  c.strokeStyle='rgba(255,255,255,.18)'; c.lineWidth=1; for(let i=1;i<9;i++){ c.beginPath(); c.ellipse(SRC.x*k,-0.25*k,i*0.16*k,i*0.13*k,0,0,PI); c.stroke(); }
+  label(c,'verso la cima ↑',SRC.x*k,fs*1.3,'#e6edf6',fs*0.85,700,'center'); label(c,'la lava scende verso valle ↓',w-8,h-8,'#e6edf6',fs*0.85,700,'right');
+  // strada e paese
+  c.strokeStyle='#d9d2c0'; c.lineWidth=3; c.beginPath(); c.moveTo(0,VIL.y*k+12); c.lineTo(w,VIL.y*k-6); c.stroke();
+  c.fillStyle='rgba(255,255,255,.12)'; c.beginPath(); c.arc(VIL.x*k,VIL.y*k,VIL.r*k,0,TAU); c.fill();
+  for(let i=0;i<14;i++){ const a=hash(i+9)*TAU, r=Math.sqrt(hash(i+19))*VIL.r*0.85; const x=(VIL.x+Math.cos(a)*r)*k, y=(VIL.y+Math.sin(a)*r)*k, z=k*0.022;
+    c.fillStyle='#efe3cf'; c.fillRect(x-z/2,y-z/2,z,z); c.fillStyle='#b5523b'; c.fillRect(x-z/2,y-z/2,z,z*0.45); }
+  label(c,'paese',VIL.x*k,(VIL.y+VIL.r)*k+fs,'#fff',fs,800,'center');
+  // simulazione
+  if(dt>0){ ET.acc+=dt; const st=1/60; while(ET.acc>=st){ ET.acc-=st; step(st,s); } }
+  // crosta di lava raffreddata
+  ET.crust.forEach(p=>{ c.fillStyle=p.c; c.beginPath(); c.arc(p.x*k,p.y*k,0.011*k,0,TAU); c.fill(); });
+  ET.parts.forEach(p=>{ const a=clamp(1-p.age/14,0.3,1); c.fillStyle='rgba(255,'+Math.round(90+90*a)+',30,'+(0.75+0.25*a)+')'; c.beginPath(); c.arc(p.x*k,p.y*k,0.012*k,0,TAU); c.fill(); });
+  // bocca eruttiva
+  c.fillStyle=s.t>0?'#ff6a1f':'#2a1a14'; c.beginPath(); c.ellipse(SRC.x*k,SRC.y*k,0.03*k,0.015*k,0,0,TAU); c.fill();
+  label(c,'bocca eruttiva',SRC.x*k+0.045*k,SRC.y*k+5,'#ffe2a6',fs*0.9,700);
+  // argini
+  ET.walls.forEach(W=>{ c.strokeStyle='#3b2f25'; c.lineWidth=0.024*k; c.lineCap='round'; c.beginPath(); c.moveTo(W[0]*k,W[1]*k); c.lineTo(W[2]*k,W[3]*k); c.stroke();
+    c.strokeStyle='#c7a77a'; c.lineWidth=0.012*k; c.stroke(); });
+},{label:s=>s.run?'❚❚ Pausa':(s.done?'↺ Ricomincia (con gli stessi argini)':(s.t>0?'▶ Continua':'▶ Avvia la colata')),
+   onPlay:s=>{ if(s.done){ etReset(true); s.run=true; } else s.run=!s.run; if(s.run&&!ET.out){ $('emsg').className='msg info'; $('emsg').textContent='La lava esce dalla bocca eruttiva e scende verso valle…'; } },
+   onClick:(s,x,y)=>{ if(ET.walls.length>=3||s.done) return; const X=x/s.h, Y=y/s.h, d=ET.dir;
+     ET.walls.push([X-d*0.13,Y-0.05,X+d*0.13,Y+0.05]); etMsg(); }});
+function step(dt,s){
+  const T=s.t;
+  if(T<18&&!ET.out){ ET.spawn+=dt*26; while(ET.spawn>=1){ ET.spawn--; ET.parts.push({x:SRC.x+(Math.random()-0.5)*0.03,y:SRC.y+0.01,vx:(Math.random()-0.5)*0.02,vy:0.02,age:0}); } }
+  for(let i=ET.parts.length-1;i>=0;i--){ const p=ET.parts[i]; p.age+=dt;
+    p.vy+=0.06*dt; p.vx+=(Math.random()-0.5)*0.06*dt; p.vx*=0.985;
+    const sp=Math.hypot(p.vx,p.vy), mx=0.075*Math.max(0.15,1-p.age/16); if(sp>mx){ p.vx*=mx/sp; p.vy*=mx/sp; }
+    p.x+=p.vx*dt; p.y+=p.vy*dt;
+    ET.walls.forEach(W=>{ const r=wallHit(p,W); if(r.d<0.02){ p.x=r.qx+r.nx*0.02; p.y=r.qy+r.ny*0.02; const vn=p.vx*r.nx+p.vy*r.ny; if(vn<0){ p.vx-=vn*r.nx; p.vy-=vn*r.ny; } } });
+    if(Math.hypot((p.x-VIL.x),(p.y-VIL.y))<VIL.r){ ET.hits++; ET.crust.push({x:p.x,y:p.y,c:'#3a1a10'}); ET.parts.splice(i,1); continue; }
+    if(p.age>14||p.y>1.05||p.x<-0.05||p.x>AR+0.05){ if(p.y<=1.02) ET.crust.push({x:p.x,y:p.y,c:'#3a2620'}); ET.parts.splice(i,1); continue; }
+    if(Math.random()<dt*1.2) ET.crust.push({x:p.x,y:p.y,c:'#5a2a18'});
+  }
+  if(ET.crust.length>5000) ET.crust.splice(0,ET.crust.length-5000);
+  if(!ET.out&&ET.hits>20){ ET.out='ko'; etMsg(); }
+  if(T>26){ if(!ET.out){ ET.out='ok'; etMsg(); } s.run=false; s.done=true; s.upd(); }
+  if(ET.out==='ko'&&T>20){ s.run=false; s.done=true; s.upd(); }
+}
+etMsg();
+document.querySelectorAll('#dtabs button').forEach(b=>b.addEventListener('click',()=>{ const v=b.dataset.d;
+  document.querySelectorAll('#dtabs button').forEach(x=>x.setAttribute('aria-selected',String(x===b)));
+  $('dvesuvio').hidden=v!=='vesuvio'; $('detna').hidden=v!=='etna'; }));
+
+/* ================= 5. tre edifici ================= */
+let bInt=3;
+document.querySelectorAll('[data-int]').forEach(b=>b.addEventListener('click',()=>{ bInt=+b.dataset.int;
+  document.querySelectorAll('[data-int]').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); SB.t=0; SB.run=false; SB.done=false; SB.upd(); bMsg(); }));
+function bMsg(){ const m=$('bmsg');
+  if(!SB.done){ m.className='msg info'; m.textContent='Scossa '+['','debole','forte','fortissima'][bInt]+'. Premi Avvia e guarda bene la base e la cima dei tre edifici.'; return; }
+  m.className='msg '+(bInt===3?'ko':'info');
+  m.textContent=bInt===1?'Con una scossa debole resistono tutti e tre, ma quello non antisismico oscilla già molto di più.'
+    :bInt===2?'Con una scossa forte l\'edificio non antisismico si è crepato. Gli altri due non hanno danni.'
+    :'Con una scossa fortissima l\'edificio non antisismico è crollato. Quello rinforzato ha oscillato poco, quello isolato dal basso quasi per niente.'; }
+const SB=scene('build',function(c,w,h,s){
+  const t=s.t; if(s.run&&t>=8.5){ s.run=false; s.done=true; s.upd(); bMsg(); }
+  const fs=Math.max(10.5,Math.min(14,w/56)), env=sstep(0.2,1,t)*(1-sstep(5.5,7.5,t)), om=TAU*1.7;
+  const gx=Math.sin(om*t)*env*w*0.006*bInt;
+  sky(c,w,h,'#9cc3ea','#eef2f6');
+  const G=h*0.74;
+  c.fillStyle='#a07a4a'; c.fillRect(0,G,w,h-G);
+  c.strokeStyle='#e8c07a'; c.lineWidth=2;
+  for(let i=0;i<3;i++){ const y=h*0.9; const x=w*(0.18+i*0.32); c.beginPath(); for(let k=-30;k<=30;k+=3){ c.lineTo(x+k*w/600+gx,y+Math.sin(k*0.8+t*20)*3*env); } c.stroke(); }
+  label(c,'⟵ il terreno si muove ⟶',w*0.5+gx,h*0.97,'#fff3d6',fs,700,'center');
+  const n=5, fh=h*0.085, bw=w*0.13;
+  [['non',0.18,'Non antisismico'],['rinf',0.5,'Edificio rinforzato'],['iso',0.82,'Isolato dal basso']].forEach(([ty,u,name],bi)=>{
+    const cx=u*w, lag=Math.sin(om*t-0.9)*env;
+    let base=gx, top;
+    // fondazione
+    c.fillStyle='#7a5a3a'; c.fillRect(cx-bw*0.62+gx,G,bw*1.24,h*0.07); c.fillStyle='#5f6b78';
+    let y0=G;
+    if(ty==='iso'){ // appoggi isolanti
+      for(let j=0;j<4;j++){ const x=cx-bw*0.42+j*bw*0.28; c.strokeStyle='#ffd27a'; c.lineWidth=2; c.beginPath(); c.moveTo(x+gx,G); for(let z=1;z<=4;z++) c.lineTo(x+gx*(1-z/4)+gx*0.12*(z/4)+(z%2?4:-4),G-z*3); c.stroke(); }
+      y0=G-h*0.035; base=gx*0.12; }
+    const amp=ty==='non'?w*0.012*bInt:ty==='rinf'?w*0.0016*bInt:w*0.0015*bInt;
+    const off=f=>base+(ty==='iso'?lag*amp*(f/n):lag*amp*(f/n)*1.6+(ty==='non'?0:0));
+    const broken=ty==='non'&&bInt===3&&t>3.2;
+    if(broken){ const k=sstep(3.2,4.4,t); const hh=n*fh*(1-k*0.8);
+      c.fillStyle='#d9c9ad'; c.beginPath(); c.moveTo(cx-bw*0.6-k*bw*0.3+gx,y0); c.lineTo(cx-bw*0.4+gx,y0-hh); c.lineTo(cx+bw*0.3+gx,y0-hh*0.8); c.lineTo(cx+bw*0.6+k*bw*0.3+gx,y0); c.closePath(); c.fill();
+      c.fillStyle='#a8977b'; for(let j=0;j<12;j++) c.fillRect(cx-bw*0.6+hash(j+3)*bw*1.2+gx,y0-hash(j+8)*hh*0.85,bw*0.13,bw*0.08);
+      for(let j=0;j<6;j++){ const ph=clamp((t-3.2)/3,0,1); puff(c,cx-bw*0.5+hash(j)*bw+gx,y0-hh-ph*h*0.1*(j%3+1),6+ph*14,'rgba(200,190,170,'+(0.5*(1-ph))+')'); }
+    } else {
+      for(let f=0;f<n;f++){ const o0=off(f), o1=off(f+1), yb=y0-f*fh, yt=y0-(f+1)*fh;
+        c.fillStyle='#d7dde5'; c.beginPath(); c.moveTo(cx-bw/2+o0,yb); c.lineTo(cx+bw/2+o0,yb); c.lineTo(cx+bw/2+o1,yt); c.lineTo(cx-bw/2+o1,yt); c.closePath(); c.fill();
+        c.fillStyle='#6b7686'; c.fillRect(cx-bw/2-2+o1,yt-3,bw+4,5);
+        c.fillStyle='#4a5a70'; for(let j=0;j<3;j++) c.fillRect(cx-bw/2+bw*(0.12+j*0.29)+(o0+o1)/2,yb-fh*0.72,bw*0.18,fh*0.42);
+        if(ty==='rinf'){ c.strokeStyle='#c2410c'; c.lineWidth=2.2; c.beginPath(); c.moveTo(cx-bw/2+o0+3,yb); c.lineTo(cx+o1,yt+2); c.lineTo(cx+bw/2+o0-3,yb); c.stroke(); }
+        if(ty==='non'&&bInt>=2&&t>2.2){ c.strokeStyle='#5a1a0a'; c.lineWidth=1.5; c.beginPath(); c.moveTo(cx-bw*0.3+o0,yb-2); c.lineTo(cx-bw*0.1+(o0+o1)/2,yb-fh*0.5); c.lineTo(cx-bw*0.25+o1,yt+2); c.stroke(); }
+      }
+    }
+    label(c,name,cx,G+h*0.12,'#fff',fs,800,'center');
+  });
+},{label:s=>s.run?'❚❚ Pausa':(s.done?'↺ Ricomincia':(s.t>0?'▶ Continua':'▶ Avvia il terremoto')),
+   onPlay:s=>{ if(s.done){ s.t=0; s.done=false; bMsg(); } s.run=!s.run; }});
+bMsg();
+
+/* ================= esercizi di classificazione ================= */
+function sorter(boxId,scoreId,opts,items){
+  const box=$(boxId); let ok=0;
+  items.forEach((it,i)=>{ const row=document.createElement('div'); row.className='item';
+    const txt=document.createElement('span'); txt.textContent=it.t; const o=document.createElement('div'); o.className='opts'; const fb=document.createElement('p'); fb.className='fb'; fb.hidden=true;
+    let done=false;
+    opts.forEach(op=>{ const b=document.createElement('button'); b.type='button'; b.textContent=op.l;
+      b.addEventListener('click',()=>{ if(done) return; const right=it.a.indexOf(op.v)>=0;
+        if(right){ done=true; ok++; b.classList.add('right'); o.querySelectorAll('button').forEach(x=>{ if(x!==b) x.disabled=true; }); fb.className='fb ok'; fb.textContent='Giusto. '+it.f; }
+        else { b.classList.add('wrong'); b.disabled=true; fb.className='fb ko'; fb.textContent='Non proprio. '+(it.h||'Rileggi pag. E16-E17 e riprova.'); }
+        fb.hidden=false; $(scoreId).textContent='Risposte giuste: '+ok+' su '+items.length+(ok===items.length?' — complimenti!':''); });
+      o.append(b); });
+    row.append(txt,o,fb); box.append(row); });
+}
+sorter('sortPP','scorePP',[{l:'Previsione',v:'prev'},{l:'Prevenzione',v:'prevz'}],[
+ {t:'Studiare i segnali che possono indicare che un terremoto si avvicina.',a:['prev'],f:'Si cerca di capire quando arriverà la scossa.',h:'Questa azione cerca di capire quando arriverà la scossa.'},
+ {t:'Studiare i terremoti del passato per capire dove è più probabile che ne avvengano altri.',a:['prev'],f:'È la previsione statistica: dice dove è probabile un terremoto, non il giorno preciso.',h:'Il libro la chiama «previsione statistica».'},
+ {t:'Costruire i nuovi edifici seguendo le norme antisismiche.',a:['prevz'],f:'Gli edifici resisteranno meglio alle scosse.',h:'Non dice quando arriva il terremoto: serve a ridurre i danni.'},
+ {t:'Rinforzare le scuole e le case già esistenti.',a:['prevz'],f:'Anche gli edifici vecchi diventano più sicuri.',h:'Serve a ridurre i danni, non a sapere quando arriva il terremoto.'},
+ {t:'Studiare il territorio per sapere quanto è sismico (forza e frequenza dei terremoti passati).',a:['prevz'],f:'Serve a decidere dove costruire con regole più severe. Attenzione: assomiglia alla previsione statistica, ma lo scopo è diverso.',h:'Il libro la mette tra i modi di attuare la prevenzione: serve a decidere come costruire.'},
+ {t:'Preparare i piani dei soccorsi in caso di terremoto.',a:['prevz'],f:'Quando arriva la scossa, i soccorsi sanno già che cosa fare.',h:'Serve a ridurre i danni dopo la scossa.'},
+ {t:'Fare le prove di evacuazione a scuola.',a:['prevz'],f:'Le persone imparano come comportarsi in caso di emergenza.',h:'Serve a ridurre i danni: le persone sanno come comportarsi.'}
+]);
+sorter('sortVT','scoreVT',[{l:'Vulcani',v:'v'},{l:'Terremoti',v:'t'}],[
+ {t:'Colate di lava',a:['v'],f:'La lava esce dal vulcano durante l\'eruzione.'},
+ {t:'Nubi di ceneri',a:['v'],f:'Si formano nelle eruzioni esplosive.'},
+ {t:'Colate di fango (lahar)',a:['v'],f:'Nascono dalla cenere vulcanica mescolata alla pioggia.'},
+ {t:'Emissioni di gas',a:['v'],f:'Avvengono anche quando il vulcano è a riposo.'},
+ {t:'Crolli di edifici e ponti',a:['t'],f:'Sono causati dalle vibrazioni del suolo.'},
+ {t:'Voragini nel terreno',a:['t'],f:'Il suolo che vibra si può aprire.'},
+ {t:'Tsunami',a:['v','t'],f:'Vale per tutti e due: lo causa sia il collasso di un\'isola vulcanica sia il movimento del fondale durante un terremoto. Prova a cliccare anche l\'altra risposta!',h:''}
+]);
+// lo tsunami ha due risposte giuste: dopo la prima si può cliccare anche la seconda
+(function(){ const rows=$('sortVT').querySelectorAll('.item'), row=rows[rows.length-1], bs=row.querySelectorAll('.opts button'), fb=row.querySelector('.fb'); let n=0;
+  bs.forEach(b=>b.addEventListener('click',()=>{ n++; if(n===1) bs.forEach(x=>{ if(x!==b){ x.disabled=false; } });
+    else { b.classList.add('right'); fb.textContent='Giusto: lo tsunami può essere causato sia dai vulcani (collasso di un\'isola) sia dai terremoti (movimento del fondale marino).'; bs.forEach(x=>x.disabled=true); } })); })();
+
+/* ---------- animazione ---------- */
+let last=null;
+function loop(ts){ const dt=last===null?0:Math.min(0.05,(ts-last)/1000); last=ts; frame(dt); requestAnimationFrame(loop); }
+requestAnimationFrame(loop);
+})();
+</script>
+
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+</body>
+</html>

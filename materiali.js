@@ -18,6 +18,11 @@
      titolo, descrizione (facoltativa)
      link:         facoltativo: la pagina della lezione, se esiste
      data:         facoltativo: anno-mese-giorno, per "Aggiunti di recente"
+     dipartimento: facoltativo: true se l'argomento è nella programmazione di dipartimento
+                   della stessa classe; "prima" (o "seconda"...) se è nella programmazione
+                   di un'altra classe; compare il segno «◆ Programma di dipartimento»
+     libri:        facoltativo: da quale libro parte la lezione, una o più
+                   etichette tra quelle di LIBRI qui sotto, es. libri: ["vivi", "geoagenda"],
      attivita:     elenco delle attività, tra [ ]
 
    ATTIVITÀ
@@ -29,18 +34,34 @@
    Ricorda le virgole: dopo ogni riga, tra un blocco { } e l'altro.
    ============================================================= */
 
+/* LIBRI: le etichette che indicano da quale libro parte una lezione.
+   Per aggiungere un libro, copia una riga e cambia sigla, nome e colore.
+   Nella pagina della materia compaiono i pulsanti per vedere solo le lezioni di un libro.
+   Libro di riferimento: Paesaggi vicini e lontani (prima e seconda solo Paesaggi;
+   in terza si parte da Paesaggi e si indicano anche GeoAgenda e Vivi la Geografia,
+   adottati nelle classi terze attuali). */
+const LIBRI = {
+  "paesaggi":  { nome: "Paesaggi vicini e lontani", colore: "#2e7d4f" },
+  "geoagenda": { nome: "GeoAgenda",                 colore: "#7a3fa0" },
+  "vivi":      { nome: "Vivi la Geografia",         colore: "#1d6fa5" }
+};
+
 const MODULI = [
 
   /* ---------------- GEOGRAFIA · PRIMA ---------------- */
+  /* Organizzata secondo Paesaggi vicini e lontani 1 (pagine A e B).
+     Le lezioni senza etichetta e con «Lezione extra» non sono nel libro. */
   {
     materia: "geografia",
     classe: "prima",
     numero: "I",
-    titolo: "Cos'è la geografia: metodo e strumenti",
-    descrizione: "Primo quadrimestre, in collegamento con Scienze.",
+    titolo: "Gli strumenti della geografia",
+    descrizione: "Orientarsi, leggere le carte, usare dati e grafici. Primo quadrimestre, in collegamento con Scienze.",
     lezioni: [
       {
         titolo: "Perché la geografia",
+        libri: ["paesaggi"],
+        pagine: "XI, A2–A3",
         descrizione: "La Terra vista da fuori: le foto più famose, astronauti, cosmonauti e taikonauti, e che cosa studieremo in geografia.",
         link: "geografia/prima/perche-la-geografia/index.html",
         data: "2026-10-15",
@@ -53,6 +74,9 @@ const MODULI = [
       },
       {
         titolo: "L'orientamento e i suoi strumenti",
+        dipartimento: true,
+        libri: ["paesaggi"],
+        pagine: "A4–A5",
         link: "geografia/prima/orientamento/index.html",
         descrizione: "Punti di riferimento personali e universali, il Sole e i punti cardinali, la Stella polare e la Croce del Sud, la rotazione della Terra.",
         data: "2026-10-23",
@@ -65,6 +89,9 @@ const MODULI = [
       },
       {
         titolo: "Il reticolato geografico",
+        dipartimento: true,
+        libri: ["paesaggi"],
+        pagine: "A6–A7",
         descrizione: "A tappe: poli, Equatore, paralleli, meridiani, Greenwich, coordinate.",
         link: "geografia/prima/metodo-e-strumenti/lezioni/reticolato.html",
         data: "2026-10-21",
@@ -75,7 +102,10 @@ const MODULI = [
       },
       {
         titolo: "Le carte geografiche",
-        descrizione: "Ridotte, approssimate e simboliche: leggere una carta con la legenda (libro, pag. A8–A9).",
+        dipartimento: true,
+        libri: ["paesaggi"],
+        pagine: "A8–A9",
+        descrizione: "Ridotte, approssimate e simboliche: leggere una carta con la legenda.",
         data: "2026-10-23",
         attivita: [
           { tipo: "Attività 1", titolo: "Tre modi di disegnare il mondo", link: "geografia/prima/carte-geografiche/attivita/tre-modi-di-disegnare-il-mondo.html", data: "2026-10-21" },
@@ -85,116 +115,186 @@ const MODULI = [
       },
       {
         titolo: "La riduzione in scala",
-        descrizione: "Scala numerica e grafica, calcolo delle distanze, grande e piccola scala (libro, pag. A10–A11).",
+        dipartimento: true,
+        libri: ["paesaggi"],
+        pagine: "A10–A11",
+        descrizione: "Scala numerica e grafica, calcolo delle distanze, grande e piccola scala.",
         link: "geografia/prima/metodo-e-strumenti/lezioni/la-riduzione-in-scala.html",
         data: "2026-10-23",
         attivita: []
       },
       {
         titolo: "Tanti tipi di carte",
-        descrizione: "Carte fisiche, politiche e tematiche; curve di livello e tinte altimetriche (libro, pag. A12–A13).",
+        dipartimento: true,
+        libri: ["paesaggi"],
+        pagine: "A12–A13",
+        descrizione: "Carte fisiche, politiche e tematiche; curve di livello e tinte altimetriche.",
         data: "2026-10-23",
         attivita: [
           { tipo: "Attività 1", titolo: "Fisica, politica o tematica?", descrizione: "La stessa regione disegnata in cinque modi, la carta misteriosa e lo smistamento.", link: "geografia/prima/carte-geografiche/attivita/fisica-politica-o-tematica.html", data: "2026-10-23" },
           { tipo: "Attività 2", titolo: "Le curve di livello", descrizione: "Una montagna tagliata a fette, il profilo e la carta da colorare con le tinte altimetriche.", link: "geografia/prima/carte-geografiche/attivita/le-curve-di-livello.html", data: "2026-10-23" }
         ]
       },
-      { titolo: "I dati: raccoglierli, ordinarli, rappresentarli", attivita: [] }
+      { titolo: "Tanti tipi di fotografie", libri: ["paesaggi"], pagine: "A16–A17", attivita: [] },
+      { titolo: "I dati: raccoglierli, ordinarli, rappresentarli", dipartimento: true, libri: ["paesaggi"], pagine: "A18–A21", descrizione: "I dati e i grafici.", attivita: [] },
+      { titolo: "Il GIS: che cos'è un Sistema Informativo Geografico?", libri: ["paesaggi"], pagine: "A141", descrizione: "Esplorare, mappare, condividere.", attivita: [] }
     ]
   },
   {
     materia: "geografia",
     classe: "prima",
     numero: "II",
-    titolo: "Le basi della geografia fisica",
-    descrizione: "L'uomo e l'ambiente; il territorio europeo. Primo quadrimestre, in collegamento con Scienze.",
+    titolo: "Il paesaggio: clima, rilievi e acque",
+    descrizione: "Che cos'è il paesaggio, i fenomeni che lo modificano, il clima, i rilievi e le acque. Primo quadrimestre, in collegamento con Scienze.",
     lezioni: [
-      { titolo: "Il clima", attivita: [] },
-      { titolo: "Le risorse idriche", attivita: [] },
-      { titolo: "Le risorse terrestri", attivita: [] },
-      { titolo: "L'inquinamento", attivita: [] },
-      { titolo: "Il territorio europeo: monti, mari, pianure, laghi", attivita: [] }
+      { titolo: "Il paesaggio e la sua evoluzione", libri: ["paesaggi"], pagine: "A34–A37", attivita: [] },
+      { titolo: "Le forze che modificano il paesaggio", libri: ["paesaggi"], pagine: "A38–A41", descrizione: "Fenomeni che hanno origine all'interno e all'esterno della Terra.", attivita: [] },
+      { titolo: "Il clima", dipartimento: true, libri: ["paesaggi"], pagine: "A44–A47", descrizione: "Il clima e gli ambienti naturali.", attivita: [] },
+      { titolo: "L'inquinamento", dipartimento: true, libri: ["paesaggi"], pagine: "A48–A49", descrizione: "I problemi dell'ambiente.", attivita: [] },
+      { titolo: "I rilievi", libri: ["paesaggi"], pagine: "A61–A71", descrizione: "Montagne, colline, pianure; gli esseri umani modificano i rilievi.", attivita: [] },
+      { titolo: "Le acque", libri: ["paesaggi"], pagine: "A81–A95", descrizione: "Ghiacciai, fiumi, laghi, mari e coste; gli esseri umani modificano i corsi d'acqua e le coste.", attivita: [] },
+      { titolo: "Le risorse idriche", dipartimento: true, libri: ["paesaggi"], pagine: "A105–A110", descrizione: "Dossier: l'acqua.", attivita: [] }
     ]
   },
   {
     materia: "geografia",
     classe: "prima",
     numero: "III",
-    titolo: "Le basi della geografia antropica",
-    descrizione: "Popolazione, città ed economia d'Europa. Tra primo e secondo quadrimestre, in collegamento con Storia.",
+    titolo: "Il paesaggio italiano",
+    descrizione: "Il quadro fisico dell'Italia. Secondo quadrimestre, in collegamento con Scienze e Storia.",
     lezioni: [
-      { titolo: "La popolazione europea", attivita: [] },
-      { titolo: "L'urbanizzazione del continente europeo", attivita: [] },
-      { titolo: "L'economia europea: il settore primario", attivita: [] },
-      { titolo: "L'economia europea: il settore secondario", attivita: [] },
-      { titolo: "L'economia europea: il settore terziario", attivita: [] }
+      { titolo: "Il quadro fisico dell'Italia", dipartimento: true, libri: ["paesaggi"], pagine: "A112–A113", descrizione: "Com'è fatta l'Italia.", attivita: [] },
+      { titolo: "I climi italiani", dipartimento: true, libri: ["paesaggi"], pagine: "A114–A115", attivita: [] },
+      { titolo: "Montagne, colline e pianure italiane", dipartimento: true, libri: ["paesaggi"], pagine: "A116–A119", attivita: [] },
+      { titolo: "Fiumi, laghi e fenomeni carsici", dipartimento: true, libri: ["paesaggi"], pagine: "A122–A125", attivita: [] },
+      { titolo: "I mari e le coste italiane", dipartimento: true, libri: ["paesaggi"], pagine: "A126–A127", attivita: [] },
+      { titolo: "I rischi ambientali in Italia", libri: ["paesaggi"], pagine: "A128–A129", descrizione: "In terza si riprende con la lezione sul rischio vulcanico e sismico.", attivita: [] }
     ]
   },
   {
     materia: "geografia",
     classe: "prima",
     numero: "IV",
-    titolo: "Geografia regionale italiana",
+    titolo: "Le attività umane in Italia",
+    descrizione: "Popolazione, organizzazione politica ed economia dell'Italia. Secondo quadrimestre, in collegamento con Storia.",
+    lezioni: [
+      { titolo: "La popolazione, le città e la società", libri: ["paesaggi"], pagine: "B2–B7", attivita: [] },
+      { titolo: "Le risorse terrestri", dipartimento: true, libri: ["paesaggi"], pagine: "B10–B13", descrizione: "L'economia e le risorse.", attivita: [] },
+      { titolo: "Il quadro politico dell'Italia", dipartimento: true, libri: ["paesaggi"], pagine: "B26–B31", descrizione: "Che cos'è uno Stato, la Repubblica Italiana, un paese di venti regioni.", attivita: [] },
+      { titolo: "L'Italia nel contesto europeo", dipartimento: true, libri: ["paesaggi"], pagine: "B32–B35", descrizione: "L'Italia in Europa e nel Mediterraneo.", attivita: [] },
+      { titolo: "La popolazione italiana", dipartimento: true, libri: ["paesaggi"], pagine: "B45–B61", descrizione: "Quanti sono gli italiani, dove vivono, come cambia la popolazione; più culture, lingue e religioni.", attivita: [] },
+      { titolo: "Cultura e paesaggio", libri: ["paesaggi"], pagine: "B71–B76", descrizione: "Dossier.", attivita: [] },
+      { titolo: "L'economia italiana", dipartimento: true, libri: ["paesaggi"], pagine: "B77–B87", descrizione: "Regioni a confronto: economia e lavoro, sviluppo, ambiente e salute; il Terzo settore e il volontariato.", attivita: [] },
+      { titolo: "I settori dell'economia italiana", dipartimento: true, libri: ["paesaggi"], pagine: "B90–B97", descrizione: "Primario, secondario, terziario e infrastrutture.", attivita: [] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "prima",
+    numero: "V",
+    titolo: "Le regioni italiane",
     descrizione: "Secondo quadrimestre, in collegamento con Storia.",
     lezioni: [
-      { titolo: "Il quadro fisico dell'Italia", attivita: [] },
-      { titolo: "Il quadro politico dell'Italia", attivita: [] },
-      { titolo: "La popolazione italiana", attivita: [] },
-      { titolo: "L'economia italiana", attivita: [] },
-      { titolo: "L'Italia nel contesto europeo", attivita: [] },
-      { titolo: "Le regioni italiane", attivita: [] }
+      { titolo: "Come si studia una regione italiana", dipartimento: true, libri: ["paesaggi"], pagine: "B114–B115", attivita: [] },
+      { titolo: "L'Italia settentrionale", dipartimento: true, libri: ["paesaggi"], pagine: "B116–B145", attivita: [] },
+      { titolo: "L'Italia centrale", dipartimento: true, libri: ["paesaggi"], pagine: "B146–B161", attivita: [] },
+      { titolo: "L'Italia meridionale e insulare", dipartimento: true, libri: ["paesaggi"], pagine: "B162–B189", attivita: [] }
     ]
   },
 
   /* ---------------- GEOGRAFIA · SECONDA ---------------- */
+  /* Organizzata secondo Paesaggi vicini e lontani 2 (pagine C e D).
+     Le lezioni senza etichetta e con «Lezione extra» non sono nel libro. */
   {
     materia: "geografia",
     classe: "seconda",
     numero: "I",
-    titolo: "La formazione dell'Europa",
-    descrizione: "L'identità europea e le tappe dell'integrazione. Primo e secondo quadrimestre, in collegamento con Storia e Italiano.",
+    titolo: "Il continente europeo",
+    descrizione: "Territorio, clima e paesaggi dell'Europa. Primo quadrimestre, in collegamento con Scienze.",
     lezioni: [
-      { titolo: "L'Europa antica", descrizione: "L'identità europea", attivita: [] },
-      { titolo: "L'Europa medievale", descrizione: "L'identità europea", attivita: [] },
-      { titolo: "L'Europa moderna", descrizione: "L'identità europea", attivita: [] },
-      { titolo: "L'Europa contemporanea", descrizione: "L'identità europea", attivita: [] },
-      { titolo: "Le tappe dell'integrazione europea", attivita: [] },
-      { titolo: "Il funzionamento dell'UE", attivita: [] },
-      { titolo: "Le politiche comuni e l'euro", attivita: [] },
-      { titolo: "I diritti dei cittadini UE", attivita: [] }
+      { titolo: "Il territorio europeo: monti, mari, pianure, laghi", dipartimento: "prima", libri: ["paesaggi"], pagine: "C2–C11", descrizione: "Com'è fatta l'Europa, i rilievi, la formazione del continente, fiumi, laghi, mari e coste.", attivita: [] },
+      { titolo: "Il clima e le regioni climatiche", libri: ["paesaggi"], pagine: "C14–C17", descrizione: "Il clima in Europa, le regioni climatiche e i biomi.", attivita: [] },
+      { titolo: "Gli esseri umani modificano il paesaggio europeo", libri: ["paesaggi"], pagine: "C18–C19", attivita: [] },
+      { titolo: "Il riscaldamento globale in Europa", dipartimento: true, libri: ["paesaggi"], pagine: "C31–C36", descrizione: "Dossier: l'aria.", attivita: [] }
     ]
   },
   {
     materia: "geografia",
     classe: "seconda",
     numero: "II",
-    titolo: "Economia e ambiente dell'Europa",
-    descrizione: "I settori dell'economia e la tutela dell'ambiente. Primo quadrimestre, in collegamento con Storia e Italiano.",
+    titolo: "L'organizzazione politica in Europa",
+    descrizione: "Gli Stati europei e l'Unione Europea. Primo e secondo quadrimestre, in collegamento con Storia e Italiano.",
     lezioni: [
-      { titolo: "Il ruolo dell'Europa nell'economia mondiale", descrizione: "I settori dell'economia", attivita: [] },
-      { titolo: "Gli squilibri nell'economia europea", descrizione: "I settori dell'economia", attivita: [] },
-      { titolo: "L'Italia nell'economia europea", descrizione: "I settori dell'economia", attivita: [] },
-      { titolo: "Gli squilibri nell'economia italiana", descrizione: "I settori dell'economia", attivita: [] },
-      { titolo: "Le regioni agrarie europee", attivita: [] },
-      { titolo: "L'industria e il terziario in Europa", attivita: [] },
-      { titolo: "Il riscaldamento globale in Europa", descrizione: "L'inquinamento e il degrado ambientale", attivita: [] },
-      { titolo: "La protezione dell'ambiente in Europa", descrizione: "L'inquinamento e il degrado ambientale", attivita: [] },
-      { titolo: "Le città sostenibili", descrizione: "L'inquinamento e il degrado ambientale", attivita: [] },
-      { titolo: "Lo smaltimento dei rifiuti", descrizione: "L'inquinamento e il degrado ambientale", attivita: [] }
+      { titolo: "Monarchie e repubbliche, Stati federali e Stati unitari", dipartimento: true, libri: ["paesaggi"], pagine: "C38–C39", descrizione: "Quali sono gli Stati europei.", attivita: [] },
+      { titolo: "Le tappe dell'integrazione europea", dipartimento: true, libri: ["paesaggi"], pagine: "C40–C41", descrizione: "L'Unione Europea.", attivita: [] },
+      { titolo: "Il funzionamento dell'UE", dipartimento: true, libri: ["paesaggi"], pagine: "C42–C43", descrizione: "Come funziona l'Unione Europea.", attivita: [] },
+      { titolo: "Le politiche comuni e l'euro", dipartimento: true, libri: ["paesaggi"], pagine: "C40–C43", attivita: [] },
+      { titolo: "I diritti dei cittadini UE", dipartimento: true, libri: ["paesaggi"], pagine: "C40–C43", attivita: [] },
+      { titolo: "Conflitti e tensioni in Europa", dipartimento: true, libri: ["paesaggi"], pagine: "C44–C45", descrizione: "Pace, sicurezza, conflitti.", attivita: [] },
+      { titolo: "Il sistema democratico e la Costituzione", dipartimento: true, descrizione: "Lezione extra: non è nel libro di seconda (la Repubblica Italiana è in Paesaggi 1, B28).", attivita: [] }
     ]
   },
   {
     materia: "geografia",
     classe: "seconda",
     numero: "III",
-    titolo: "La geografia politica dell'Europa e i grandi Stati europei",
-    descrizione: "Gli Stati europei e gli altri Stati. Primo e secondo quadrimestre, in collegamento con Storia e Italiano.",
+    titolo: "La popolazione europea",
+    descrizione: "Chi sono e come vivono gli europei. Tra primo e secondo quadrimestre, in collegamento con Storia.",
     lezioni: [
-      { titolo: "Conflitti e tensioni in Europa", attivita: [] },
-      { titolo: "Monarchie e repubbliche, Stati federali e Stati unitari", attivita: [] },
-      { titolo: "Il sistema democratico e la Costituzione", attivita: [] },
-      { titolo: "Studio di alcuni Stati europei", attivita: [] },
-      { titolo: "Cenni su altri Stati europei", attivita: [] }
+      { titolo: "La popolazione europea", dipartimento: "prima", libri: ["paesaggi"], pagine: "C56–C59", descrizione: "Chi sono gli europei; Stati a confronto: superficie e popolazione.", attivita: [] },
+      { titolo: "I movimenti migratori in Europa", libri: ["paesaggi"], pagine: "C60–C61", attivita: [] },
+      { titolo: "L'urbanizzazione del continente europeo", dipartimento: "prima", libri: ["paesaggi"], pagine: "C64–C67", descrizione: "Dove vivono gli europei; Stati a confronto: densità e urbanesimo.", attivita: [] },
+      { titolo: "Come vivono gli europei", libri: ["paesaggi"], pagine: "C68–C71", descrizione: "Stati a confronto: istruzione, salute e parità.", attivita: [] },
+      { titolo: "Le culture degli europei", libri: ["paesaggi"], pagine: "C83–C88", descrizione: "Dossier.", attivita: [] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "seconda",
+    numero: "IV",
+    titolo: "L'economia europea",
+    descrizione: "Risorse, lavoro, settori dell'economia e sviluppo sostenibile. In collegamento con Storia e Italiano.",
+    lezioni: [
+      { titolo: "Il ruolo dell'Europa nell'economia mondiale", dipartimento: true, libri: ["paesaggi"], pagine: "C90–C93", descrizione: "Su quali risorse si basa l'economia europea; economia e lavoro.", attivita: [] },
+      { titolo: "Gli squilibri nell'economia europea", dipartimento: true, libri: ["paesaggi"], pagine: "C94–C95", descrizione: "Stati a confronto: PIL e occupazione.", attivita: [] },
+      { titolo: "La protezione dell'ambiente in Europa", dipartimento: true, libri: ["paesaggi"], pagine: "C96–C97", descrizione: "Lo sviluppo sostenibile.", attivita: [] },
+      { titolo: "L'economia europea: il settore primario", dipartimento: true, libri: ["paesaggi"], pagine: "C100–C101", descrizione: "Anche le regioni agrarie europee.", attivita: [] },
+      { titolo: "L'economia europea: il settore secondario", dipartimento: true, libri: ["paesaggi"], pagine: "C102–C103", attivita: [] },
+      { titolo: "L'economia europea: il settore terziario", dipartimento: true, libri: ["paesaggi"], pagine: "C104–C107", descrizione: "Terziario tradizionale (commercio, trasporti, turismo) e avanzato (telecomunicazioni e finanza).", attivita: [] },
+      { titolo: "Ricerca e innovazione", libri: ["paesaggi"], pagine: "C108–C109", attivita: [] },
+      { titolo: "Che cos'è OpenStreetMap", libri: ["paesaggi"], pagine: "C121", descrizione: "Esplorare, mappare, condividere.", attivita: [] },
+      { titolo: "L'Italia nell'economia europea", dipartimento: true, descrizione: "Lezione extra: non è nel libro di seconda (l'economia italiana è in Paesaggi 1, B77).", attivita: [] },
+      { titolo: "Gli squilibri nell'economia italiana", dipartimento: true, descrizione: "Lezione extra: non è nel libro di seconda (Regioni a confronto in Paesaggi 1, B80).", attivita: [] },
+      { titolo: "Le città sostenibili", dipartimento: true, descrizione: "Lezione extra: non è nel libro.", attivita: [] },
+      { titolo: "Lo smaltimento dei rifiuti", dipartimento: true, descrizione: "Lezione extra: non è nel libro.", attivita: [] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "seconda",
+    numero: "V",
+    titolo: "Gli Stati europei",
+    descrizione: "Gli Stati per grandi regioni, con i cinque grandi Stati: Regno Unito, Francia, Spagna, Germania, Russia. Primo e secondo quadrimestre, in collegamento con Storia e Italiano.",
+    lezioni: [
+      { titolo: "Come si studia uno Stato europeo", dipartimento: true, libri: ["paesaggi"], pagine: "D1–D2", descrizione: "Quando sono nati gli Stati europei.", attivita: [] },
+      { titolo: "L'Europa settentrionale", dipartimento: true, libri: ["paesaggi"], pagine: "D3–D28", descrizione: "Islanda, Norvegia, Svezia, Danimarca, Finlandia, Repubbliche baltiche.", attivita: [] },
+      { titolo: "L'Europa occidentale", dipartimento: true, libri: ["paesaggi"], pagine: "D29–D77", descrizione: "Irlanda, Regno Unito, Francia, Benelux, Spagna, Portogallo.", attivita: [] },
+      { titolo: "L'Europa centrale", dipartimento: true, libri: ["paesaggi"], pagine: "D79–D113", descrizione: "Germania, Svizzera, Austria, Polonia, Repubblica Ceca, Slovacchia, Ungheria.", attivita: [] },
+      { titolo: "L'Europa orientale", dipartimento: true, libri: ["paesaggi"], pagine: "D115–D147", descrizione: "Russia, Bielorussia, Ucraina, Moldavia, Romania, Bulgaria, Georgia, Armenia, Azerbaigian.", attivita: [] },
+      { titolo: "L'Europa sud-orientale", dipartimento: true, libri: ["paesaggi"], pagine: "D149–D181", descrizione: "I paesi della ex Iugoslavia, Albania, Grecia, Malta, Cipro, Turchia.", attivita: [] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "seconda",
+    numero: "VI",
+    titolo: "Geostoria dell'Europa",
+    descrizione: "Lezioni extra, non presenti nel libro: l'identità europea attraverso la storia. Durante l'anno, in collegamento con Storia e Italiano.",
+    lezioni: [
+      { titolo: "L'Europa antica", dipartimento: true, descrizione: "Lezione extra. L'identità europea.", attivita: [] },
+      { titolo: "L'Europa medievale", dipartimento: true, descrizione: "Lezione extra. L'identità europea.", attivita: [] },
+      { titolo: "L'Europa moderna", dipartimento: true, descrizione: "Lezione extra. L'identità europea.", attivita: [] },
+      { titolo: "L'Europa contemporanea", dipartimento: true, descrizione: "Lezione extra. L'identità europea (nel libro solo «Quando sono nati gli Stati europei?», D1).", attivita: [] }
     ]
   },
 
@@ -209,6 +309,7 @@ const MODULI = [
     lezioni: [
       {
         titolo: "Il Sistema solare",
+        libri: ["paesaggi", "geoagenda", "vivi"],
         descrizione: "Sole, pianeti, asteroidi, meteoroidi e comete: schede cliccabili e zoom.",
         link: "geografia/terza/la-terra/lezioni/sistema-solare.html",
         data: "2026-10-15",
@@ -216,6 +317,7 @@ const MODULI = [
       },
       {
         titolo: "Il moto di rotazione",
+        libri: ["paesaggi", "geoagenda", "vivi"],
         descrizione: "La Terra gira da ovest a est: modello 3D con la cupola del cielo di Roma.",
         link: "geografia/terza/la-terra/lezioni/rotazione-terra.html",
         data: "2026-10-15",
@@ -223,6 +325,7 @@ const MODULI = [
       },
       {
         titolo: "Il crepuscolo",
+        libri: ["paesaggi", "geoagenda", "vivi"],
         descrizione: "I raggi del Sole deviati dall'atmosfera all'alba e al tramonto.",
         link: "geografia/terza/la-terra/lezioni/crepuscolo.html",
         data: "2026-10-15",
@@ -230,6 +333,7 @@ const MODULI = [
       },
       {
         titolo: "Il moto di rivoluzione",
+        libri: ["paesaggi", "geoagenda", "vivi"],
         descrizione: "Orbita, equinozi e solstizi, circolo di illuminazione e durata del dì.",
         link: "geografia/terza/la-terra/lezioni/rivoluzione.html",
         data: "2026-10-15",
@@ -237,6 +341,8 @@ const MODULI = [
       },
       {
         titolo: "I fusi orari",
+        dipartimento: "prima",
+        libri: ["paesaggi", "geoagenda", "vivi"],
         descrizione: "24 fusi da 15°, ora UTC e ora legale, ora civile e ora locale, linea del cambiamento di data, i fusi dell'Europa e le lancette da spostare.",
         link: "geografia/terza/la-terra/lezioni/fusi-orari.html",
         data: "2026-10-24",
@@ -244,13 +350,26 @@ const MODULI = [
       },
       {
         titolo: "La struttura della Terra",
+        dipartimento: true,
+        libri: ["paesaggi", "geoagenda", "vivi"],
         descrizione: "Viaggio verso il centro, placche, vulcani e terremoti, formazione della Terra.",
         link: "geografia/terza/la-terra/lezioni/struttura-terra.html",
         data: "2026-10-15",
         attivita: []
       },
       {
+        titolo: "Il rischio vulcanico e il rischio sismico",
+        dipartimento: true,
+        libri: ["geoagenda", "vivi"],
+        descrizione: "Educazione civica: pericoli di vulcani e terremoti, tsunami, difese di Vesuvio ed Etna, previsione e prevenzione, edifici antisismici.",
+        link: "geografia/terza/la-terra/lezioni/rischio-vulcanico-sismico.html",
+        data: "2026-10-27",
+        attivita: []
+      },
+      {
         titolo: "I continenti",
+        dipartimento: true,
+        libri: ["paesaggi", "geoagenda", "vivi"],
         descrizione: "Dati dei sei continenti, confronti e deriva dalla Pangea a oggi.",
         link: "geografia/terza/la-terra/lezioni/continenti.html",
         data: "2026-10-15",
@@ -258,6 +377,8 @@ const MODULI = [
       },
       {
         titolo: "Le proiezioni: disegnare il mondo su un foglio",
+        dipartimento: "prima",
+        libri: ["paesaggi", "geoagenda", "vivi"],
         descrizione: "Carte conformi ed equivalenti, Mercatore, Peters ed Equal Earth a confronto con il globo. Spostata dalla prima, da verificare.",
         link: "geografia/prima/metodo-e-strumenti/lezioni/proiezioni.html",
         data: "2026-10-23",
@@ -267,6 +388,8 @@ const MODULI = [
       },
       {
         titolo: "Rilievi, oceani, fiumi e laghi",
+        dipartimento: true,
+        libri: ["paesaggi", "geoagenda", "vivi"],
         descrizione: "Catene montuose e scudi, fondali oceanici, correnti, acqua dolce.",
         link: "geografia/terza/la-terra/lezioni/acque.html",
         data: "2026-10-15",
@@ -274,6 +397,7 @@ const MODULI = [
       },
       {
         titolo: "L'atmosfera",
+        libri: ["paesaggi", "geoagenda", "vivi"],
         descrizione: "Composizione, strati e temperatura, venti costanti e brezze.",
         link: "geografia/terza/la-terra/lezioni/atmosfera.html",
         data: "2026-10-15",
@@ -281,6 +405,8 @@ const MODULI = [
       },
       {
         titolo: "Fasce climatiche e biomi",
+        dipartimento: true,
+        libri: ["paesaggi", "geoagenda", "vivi"],
         descrizione: "Clima e ambienti, lezioni 1–4: i fattori del clima, dal clima ai biomi, gli ambienti caldi, dalle zone temperate ai poli.",
         link: "geografia/terza/clima-e-ambienti/index.html",
         data: "2026-10-21",
@@ -293,6 +419,8 @@ const MODULI = [
       },
       {
         titolo: "Il clima e i suoi cambiamenti",
+        dipartimento: true,
+        libri: ["paesaggi", "geoagenda", "vivi"],
         descrizione: "Clima e ambienti, lezioni 5–6: come trasformiamo gli ambienti, il clima di ieri e di oggi.",
         link: "geografia/terza/clima-e-ambienti/index.html#lezione-5",
         data: "2026-10-21",
@@ -334,11 +462,15 @@ const MODULI = [
     lezioni: [
       {
         titolo: "La crescita della popolazione mondiale",
+        dipartimento: true,
         attivita: [
           { tipo: "Se c'è tempo", titolo: "Carte che cambiano forma", descrizione: "Anamorfosi: il mondo disegnato in base alla popolazione, ai giovani, ai cellulari.", link: "geografia/prima/carte-geografiche/attivita/carte-che-cambiano-forma.html", data: "2026-10-23" }
         ]
       },
-      { titolo: "L'inurbamento", attivita: [] }
+      { titolo: "L'inurbamento", dipartimento: true, attivita: [] },
+      { titolo: "I movimenti migratori", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E94–E95", descrizione: "Perché si emigra; migrazioni internazionali e forzate, profughi. GeoAgenda 3: E78–E79 · Vivi la Geografia 3: pp. 62–65.", attivita: [] },
+      { titolo: "Salute e istruzione", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E98–E101", descrizione: "Problematiche legate allo sviluppo. GeoAgenda 3: E80–E83 · Vivi la Geografia 3: pp. 118–123.", attivita: [] },
+      { titolo: "Culture, lingue e religioni", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E102–E103, E115–E120", descrizione: "La geografia delle culture; dossier «La diversità delle culture». GeoAgenda 3: E84–E87 · Vivi la Geografia 3: pp. 164–175.", attivita: [] }
     ]
   },
   {
@@ -348,10 +480,12 @@ const MODULI = [
     titolo: "L'economia mondiale",
     descrizione: "Le attività e le reti con cui trasformiamo il pianeta. Gennaio–febbraio, in collegamento con Scienze e Tecnologia.",
     lezioni: [
-      { titolo: "L'economia mondiale", attivita: [] },
-      { titolo: "La globalizzazione", attivita: [] },
-      { titolo: "Risorse e materie prime", attivita: [] },
-      { titolo: "Le energie", attivita: [] }
+      { titolo: "L'economia mondiale", dipartimento: true, attivita: [] },
+      { titolo: "La globalizzazione", dipartimento: true, attivita: [] },
+      { titolo: "Risorse e materie prime", dipartimento: true, attivita: [] },
+      { titolo: "Le energie", dipartimento: true, attivita: [] },
+      { titolo: "Nord e Sud del mondo", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E90–E93", descrizione: "Disuguaglianze, sottosviluppo, rapporti di dipendenza economica. GeoAgenda 3: E74–E77 · Vivi la Geografia 3: pp. 10–11, 116–117, 126–127.", attivita: [] },
+      { titolo: "I conflitti per le risorse: acqua, suolo e cibo", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E124–E125", descrizione: "Le risorse e lo sviluppo sostenibile. GeoAgenda 3: E104–E105 · Vivi la Geografia 3: pp. 46–47, 118–119.", attivita: [] }
     ]
   },
   {
@@ -361,10 +495,10 @@ const MODULI = [
     titolo: "Gli Stati del mondo: la geopolitica",
     descrizione: "Introduzione agli Stati: febbraio–marzo, in collegamento con Storia ed Educazione civica.",
     lezioni: [
-      { titolo: "La crisi degli Stati nazionali", attivita: [] },
-      { titolo: "Il sistema politico mondiale", attivita: [] },
-      { titolo: "L'Organizzazione delle Nazioni Unite", attivita: [] },
-      { titolo: "I diritti umani", attivita: [] }
+      { titolo: "La crisi degli Stati nazionali", dipartimento: true, attivita: [] },
+      { titolo: "Il sistema politico mondiale", dipartimento: true, attivita: [] },
+      { titolo: "L'Organizzazione delle Nazioni Unite", dipartimento: true, attivita: [] },
+      { titolo: "I diritti umani", dipartimento: true, attivita: [] }
     ]
   },
   {
@@ -374,11 +508,11 @@ const MODULI = [
     titolo: "Gli Stati del mondo: Africa",
     descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
-      { titolo: "L'Africa: profilo fisico", attivita: [] },
-      { titolo: "L'Africa: profilo politico", attivita: [] },
-      { titolo: "L'Africa: profilo antropico", attivita: [] },
-      { titolo: "L'Africa mediterranea", attivita: [] },
-      { titolo: "L'Africa subsahariana", attivita: [] }
+      { titolo: "L'Africa: profilo fisico", dipartimento: true, attivita: [] },
+      { titolo: "L'Africa: profilo politico", dipartimento: true, attivita: [] },
+      { titolo: "L'Africa: profilo antropico", dipartimento: true, attivita: [] },
+      { titolo: "L'Africa mediterranea", dipartimento: true, attivita: [] },
+      { titolo: "L'Africa subsahariana", dipartimento: true, attivita: [] }
     ]
   },
   {
@@ -388,13 +522,14 @@ const MODULI = [
     titolo: "Gli Stati del mondo: Asia",
     descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
-      { titolo: "L'Asia: profilo fisico", attivita: [] },
-      { titolo: "L'Asia: profilo politico", attivita: [] },
-      { titolo: "L'Asia: profilo antropico", attivita: [] },
-      { titolo: "L'Asia occidentale", attivita: [] },
-      { titolo: "L'Asia centrale", attivita: [] },
-      { titolo: "L'Asia sud-orientale", attivita: [] },
-      { titolo: "L'Asia orientale", attivita: [] }
+      { titolo: "L'Asia: profilo fisico", dipartimento: true, attivita: [] },
+      { titolo: "L'Asia: profilo politico", dipartimento: true, attivita: [] },
+      { titolo: "L'Asia: profilo antropico", dipartimento: true, attivita: [] },
+      { titolo: "L'Asia occidentale", dipartimento: true, attivita: [] },
+      { titolo: "L'Asia centrale", dipartimento: true, attivita: [] },
+      { titolo: "L'Asia meridionale", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "F94–F101", descrizione: "La regione indiana: India, Pakistan, Bangladesh. GeoAgenda 3: F46–F51 · Vivi la Geografia 3: p. 202 e l'unità sull'India, pp. 206–219.", attivita: [] },
+      { titolo: "L'Asia sud-orientale", dipartimento: true, attivita: [] },
+      { titolo: "L'Asia orientale", dipartimento: true, attivita: [] }
     ]
   },
   {
@@ -404,12 +539,12 @@ const MODULI = [
     titolo: "Gli Stati del mondo: America anglosassone e America Latina",
     descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
-      { titolo: "L'America: profilo fisico", attivita: [] },
-      { titolo: "L'America: profilo politico", attivita: [] },
-      { titolo: "L'America: profilo antropico", attivita: [] },
-      { titolo: "L'America settentrionale", attivita: [] },
-      { titolo: "L'America centrale", attivita: [] },
-      { titolo: "L'America meridionale", attivita: [] }
+      { titolo: "L'America: profilo fisico", dipartimento: true, attivita: [] },
+      { titolo: "L'America: profilo politico", dipartimento: true, attivita: [] },
+      { titolo: "L'America: profilo antropico", dipartimento: true, attivita: [] },
+      { titolo: "L'America settentrionale", dipartimento: true, attivita: [] },
+      { titolo: "L'America centrale", dipartimento: true, attivita: [] },
+      { titolo: "L'America meridionale", dipartimento: true, attivita: [] }
     ]
   },
   {
@@ -419,9 +554,10 @@ const MODULI = [
     titolo: "Gli Stati del mondo: Oceania",
     descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
-      { titolo: "L'Oceania: profilo fisico", attivita: [] },
-      { titolo: "L'Oceania: profilo politico", attivita: [] },
-      { titolo: "L'Oceania: profilo antropico", attivita: [] }
+      { titolo: "L'Oceania: profilo fisico", dipartimento: true, attivita: [] },
+      { titolo: "L'Oceania: profilo politico", dipartimento: true, attivita: [] },
+      { titolo: "L'Oceania: profilo antropico", dipartimento: true, attivita: [] },
+      { titolo: "L'Antartide", libri: ["paesaggi", "geoagenda", "vivi"], pagine: "F196–F197", descrizione: "GeoAgenda 3: F218–F219 · Vivi la Geografia 3: pp. 316–317.", attivita: [] }
     ]
   },
 
@@ -707,6 +843,12 @@ const MODULI = [
     ]
   },
 
+  /* STORIA: la scansione per anni e per moduli è quella della programmazione di dipartimento.
+     Il campo «indice» (solo per l'insegnante, non compare nel sito) dice dove si trova lo stesso
+     argomento nell'organizzazione di Storia facile 1-3 (Erickson: modulo e capitolo) e del
+     Tablet degli argomenti di Storia (pagina): serve a costruire la lezione su quel modello.
+     Le corrispondenze sono per titolo di capitolo. Le lezioni senza «dipartimento» sono extra. */
+
   /* ---------------- STORIA · PRIMA ---------------- */
   {
     materia: "storia",
@@ -715,9 +857,18 @@ const MODULI = [
     titolo: "L'Italia dai Bizantini ai Longobardi",
     descrizione: "Primo quadrimestre, in collegamento con Geografia.",
     lezioni: [
-      { titolo: "Un nuovo scenario europeo", attivita: [] },
-      { titolo: "I Longobardi", attivita: [] },
-      { titolo: "L'inizio del potere temporale della Chiesa", attivita: [] }
+      {
+        titolo: "Come si studia la storia",
+        descrizione: "Lezione di metodo, prima di cominciare: le cinque attività del mestiere dello storico e le parti di ogni lezione (Prima/Dopo, Idea principale, Perché?, Concetti, Parole chiave, Testo, Lente, Compiti).",
+        link: "storia/prima/metodo/come-si-studia-la-storia.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      { titolo: "La fine dell'Impero romano d'Occidente", descrizione: "Lezione extra: il punto di partenza del Medioevo, ripreso da Storia facile e dal Tablet; non è nella programmazione di dipartimento.", indice: "Storia facile 1, M1 capp. 1–2 · Tablet pp. 11, 14, 20", attivita: [] },
+      { titolo: "Un nuovo scenario europeo", dipartimento: true, indice: "Storia facile 1, M1 cap. 3 (I regni romano-barbarici) · Tablet p. 25", attivita: [] },
+      { titolo: "Il monachesimo", descrizione: "Lezione extra: capitolo di Storia facile e del Tablet che non è nella programmazione di dipartimento.", indice: "Storia facile 1, M1 cap. 4 · Tablet p. 36", attivita: [] },
+      { titolo: "I Longobardi", dipartimento: true, indice: "Storia facile 1, M1 cap. 5 · Tablet p. 25", attivita: [] },
+      { titolo: "L'inizio del potere temporale della Chiesa", dipartimento: true, indice: "Storia facile 1, M1 cap. 5 · Tablet p. 25", attivita: [] }
     ]
   },
   {
@@ -727,10 +878,11 @@ const MODULI = [
     titolo: "Carlo Magno e la nascita dell'Europa",
     descrizione: "Primo quadrimestre, in collegamento con Geografia e Religione.",
     lezioni: [
-      { titolo: "L'espansione dei Franchi", attivita: [] },
-      { titolo: "Carlo Magno e il Sacro Romano Impero", attivita: [] },
-      { titolo: "L'organizzazione dell'Impero", attivita: [] },
-      { titolo: "La rinascita dell'economia e della cultura", attivita: [] }
+      { titolo: "La civiltà araba e l'Islam", descrizione: "Lezione extra: capitolo di Storia facile e del Tablet che non è nella programmazione di dipartimento.", indice: "Storia facile 1, M2 cap. 6 · Tablet p. 31", attivita: [] },
+      { titolo: "L'espansione dei Franchi", dipartimento: true, indice: "Storia facile 1, M2 cap. 7 · Tablet p. 41", attivita: [] },
+      { titolo: "Carlo Magno e il Sacro Romano Impero", dipartimento: true, indice: "Storia facile 1, M2 cap. 7 · Tablet p. 41", attivita: [] },
+      { titolo: "L'organizzazione dell'Impero", dipartimento: true, indice: "Storia facile 1, M2 cap. 7 · Tablet p. 41", attivita: [] },
+      { titolo: "La rinascita dell'economia e della cultura", dipartimento: true, indice: "Storia facile 1, M2 cap. 7 · Tablet p. 41", attivita: [] }
     ]
   },
   {
@@ -740,10 +892,10 @@ const MODULI = [
     titolo: "Nuove invasioni e nuovi regni: l'Europa dopo l'impero carolingio",
     descrizione: "Primo quadrimestre, in collegamento con Geografia e Italiano (epica cavalleresca).",
     lezioni: [
-      { titolo: "La divisione dell'impero dopo Carlo Magno", attivita: [] },
-      { titolo: "Le nuove invasioni", attivita: [] },
-      { titolo: "L'epoca d'oro dell'impero romano d'Oriente", attivita: [] },
-      { titolo: "Signori e castelli: l'economia curtense", attivita: [] }
+      { titolo: "La divisione dell'impero dopo Carlo Magno", dipartimento: true, indice: "Storia facile 1, M2 cap. 8 · Tablet p. 47", attivita: [] },
+      { titolo: "Le nuove invasioni", dipartimento: true, indice: "Storia facile 1, M2 cap. 8 · Tablet p. 47", attivita: [] },
+      { titolo: "L'epoca d'oro dell'impero romano d'Oriente", dipartimento: true, indice: "Storia facile 1, M1 cap. 5 · Tablet p. 25", attivita: [] },
+      { titolo: "Signori e castelli: l'economia curtense", dipartimento: true, indice: "Storia facile 1, M3 cap. 9 (La società feudale) · Tablet p. 47", attivita: [] }
     ]
   },
   {
@@ -753,11 +905,11 @@ const MODULI = [
     titolo: "La rinascita dell'anno Mille. Papi e imperatori",
     descrizione: "Primo quadrimestre, in collegamento con Geografia, Scienze e Tecnologia.",
     lezioni: [
-      { titolo: "Il rinnovamento dell'agricoltura e la crescita demografica", attivita: [] },
-      { titolo: "Lo sviluppo delle città e del commercio", attivita: [] },
-      { titolo: "Nascono le università", attivita: [] },
-      { titolo: "La crisi della Chiesa di Roma e i tentativi di riforma", attivita: [] },
-      { titolo: "La lotta per le investiture", attivita: [] }
+      { titolo: "Il rinnovamento dell'agricoltura e la crescita demografica", dipartimento: true, indice: "Storia facile 1, M3 cap. 10 · Tablet p. 53", attivita: [] },
+      { titolo: "Lo sviluppo delle città e del commercio", dipartimento: true, indice: "Storia facile 1, M3 cap. 10 · Tablet p. 53", attivita: [] },
+      { titolo: "Nascono le università", dipartimento: true, indice: "Storia facile 1, M3 cap. 10 · Tablet p. 53", attivita: [] },
+      { titolo: "La crisi della Chiesa di Roma e i tentativi di riforma", dipartimento: true, indice: "Storia facile 1, M3 cap. 11 · Tablet p. 60", attivita: [] },
+      { titolo: "La lotta per le investiture", dipartimento: true, indice: "Storia facile 1, M3 cap. 11 · Tablet p. 60", attivita: [] }
     ]
   },
   {
@@ -767,10 +919,10 @@ const MODULI = [
     titolo: "Le crociate e la lotta alle eresie",
     descrizione: "Primo quadrimestre, in collegamento con Geografia e Scienze.",
     lezioni: [
-      { titolo: "La crisi dell'impero arabo e la minaccia dei Turchi", attivita: [] },
-      { titolo: "Lo scisma d'Oriente", attivita: [] },
-      { titolo: "Le crociate per la Terra Santa", attivita: [] },
-      { titolo: "Innocenzo III e la lotta alle eresie", attivita: [] }
+      { titolo: "La crisi dell'impero arabo e la minaccia dei Turchi", dipartimento: true, indice: "Storia facile 1, M3 cap. 13 · Tablet p. 70", attivita: [] },
+      { titolo: "Lo scisma d'Oriente", dipartimento: true, indice: "Storia facile 1, M3 cap. 11 · Tablet p. 60", attivita: [] },
+      { titolo: "Le crociate per la Terra Santa", dipartimento: true, indice: "Storia facile 1, M3 cap. 13 · Tablet p. 70", attivita: [] },
+      { titolo: "Innocenzo III e la lotta alle eresie", dipartimento: true, indice: "Tablet p. 76 (Storia facile non ha un capitolo proprio)", attivita: [] }
     ]
   },
   {
@@ -780,10 +932,10 @@ const MODULI = [
     titolo: "Dai Comuni a Federico II",
     descrizione: "Secondo quadrimestre, in collegamento con Geografia, Tecnologia e Arte.",
     lezioni: [
-      { titolo: "La nascita dei Comuni", attivita: [] },
-      { titolo: "Le lotte tra Comuni e imperatore", attivita: [] },
-      { titolo: "L'ascesa della borghesia", attivita: [] },
-      { titolo: "Il progetto imperiale di Federico II", attivita: [] }
+      { titolo: "La nascita dei Comuni", dipartimento: true, indice: "Storia facile 1, M3 cap. 12 · Tablet p. 65", attivita: [] },
+      { titolo: "Le lotte tra Comuni e imperatore", dipartimento: true, indice: "Storia facile 1, M3 cap. 12 · Tablet p. 65", attivita: [] },
+      { titolo: "L'ascesa della borghesia", dipartimento: true, indice: "Storia facile 1, M3 cap. 12 · Tablet p. 65", attivita: [] },
+      { titolo: "Il progetto imperiale di Federico II", dipartimento: true, indice: "Storia facile 1, M3 cap. 14 · Tablet p. 81", attivita: [] }
     ]
   },
   {
@@ -793,11 +945,11 @@ const MODULI = [
     titolo: "Le monarchie nazionali in Europa. La crisi del Trecento",
     descrizione: "Secondo quadrimestre, in collegamento con Geografia, Scienze, Inglese e Francese.",
     lezioni: [
-      { titolo: "La nascita delle monarchie nazionali: l'Inghilterra", attivita: [] },
-      { titolo: "La monarchia nazionale francese", attivita: [] },
-      { titolo: "La guerra dei Cent'anni", attivita: [] },
-      { titolo: "La peste e la crisi agricola", attivita: [] },
-      { titolo: "Enrico VII e il declino della Chiesa", attivita: [] }
+      { titolo: "La nascita delle monarchie nazionali: l'Inghilterra", dipartimento: true, indice: "Storia facile 1, M4 cap. 15 · Tablet p. 96", attivita: [] },
+      { titolo: "La monarchia nazionale francese", dipartimento: true, indice: "Storia facile 1, M4 cap. 15 · Tablet p. 96", attivita: [] },
+      { titolo: "La guerra dei Cent'anni", dipartimento: true, indice: "Storia facile 1, M4 cap. 15 · Tablet p. 96", attivita: [] },
+      { titolo: "La peste e la crisi agricola", dipartimento: true, indice: "Storia facile 1, M4 cap. 16 · Tablet p. 86", attivita: [] },
+      { titolo: "Enrico VII e il declino della Chiesa", dipartimento: true, indice: "Storia facile 1, M4 cap. 16 · Tablet p. 86", attivita: [] }
     ]
   },
   {
@@ -807,9 +959,9 @@ const MODULI = [
     titolo: "L'Italia delle Signorie. Umanesimo e Rinascimento",
     descrizione: "Secondo quadrimestre, in collegamento con Letteratura, Arte e Scienze.",
     lezioni: [
-      { titolo: "Dai Comuni agli Stati regionali", attivita: [] },
-      { titolo: "L'Umanesimo: l'uomo al centro del mondo", attivita: [] },
-      { titolo: "Il Rinascimento: principi e artisti, letterati e scienziati", attivita: [] }
+      { titolo: "Dai Comuni agli Stati regionali", dipartimento: true, indice: "Storia facile 1, M4 cap. 17 · Tablet p. 91", attivita: [] },
+      { titolo: "L'Umanesimo: l'uomo al centro del mondo", dipartimento: true, indice: "Storia facile 1, M4 cap. 18 · Tablet p. 102", attivita: [] },
+      { titolo: "Il Rinascimento: principi e artisti, letterati e scienziati", dipartimento: true, indice: "Storia facile 2, M1 cap. 1 · Tablet p. 102", attivita: [] }
     ]
   },
   {
@@ -819,12 +971,12 @@ const MODULI = [
     titolo: "Le esplorazioni e la scoperta dell'America. Riforma e Controriforma",
     descrizione: "Secondo quadrimestre, in collegamento con Geografia, Religione, Arte, Tecnologia e Scienze.",
     lezioni: [
-      { titolo: "Le rotte per le Indie", attivita: [] },
-      { titolo: "La scoperta del nuovo mondo", attivita: [] },
-      { titolo: "Le civiltà precolombiane e le esplorazioni", attivita: [] },
-      { titolo: "La corruzione della Chiesa e la Riforma di Lutero", attivita: [] },
-      { titolo: "La Controriforma e il Concilio di Trento", attivita: [] },
-      { titolo: "I nuovi ordini religiosi", attivita: [] }
+      { titolo: "Le rotte per le Indie", dipartimento: true, indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112", attivita: [] },
+      { titolo: "La scoperta del nuovo mondo", dipartimento: true, indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112", attivita: [] },
+      { titolo: "Le civiltà precolombiane e le esplorazioni", dipartimento: true, indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112", attivita: [] },
+      { titolo: "La corruzione della Chiesa e la Riforma di Lutero", dipartimento: true, indice: "Storia facile 2, M1 cap. 4 · Tablet p. 123", attivita: [] },
+      { titolo: "La Controriforma e il Concilio di Trento", dipartimento: true, indice: "Storia facile 2, M1 cap. 4 · Tablet p. 123", attivita: [] },
+      { titolo: "I nuovi ordini religiosi", dipartimento: true, indice: "Storia facile 2, M1 cap. 4 · Tablet p. 123", attivita: [] }
     ]
   },
   {
@@ -834,12 +986,12 @@ const MODULI = [
     titolo: "Guerre in Italia e in Europa. La rivoluzione scientifica",
     descrizione: "Secondo quadrimestre, in collegamento con Geografia, Scienze, Letteratura, Spagnolo, Francese e Inglese.",
     lezioni: [
-      { titolo: "L'Italia contesa tra Francia e Spagna", attivita: [] },
-      { titolo: "Carlo V e Francesco I", attivita: [] },
-      { titolo: "Filippo II e l'età elisabettiana", attivita: [] },
-      { titolo: "Le guerre di religione in Francia", attivita: [] },
-      { titolo: "La guerra dei Trent'anni", attivita: [] },
-      { titolo: "La rivoluzione scientifica e i suoi protagonisti", attivita: [] }
+      { titolo: "L'Italia contesa tra Francia e Spagna", dipartimento: true, indice: "Storia facile 2, M1 cap. 3 · Tablet p. 118", attivita: [] },
+      { titolo: "Carlo V e Francesco I", dipartimento: true, indice: "Storia facile 2, M1 capp. 3 e 5 · Tablet p. 118", attivita: [] },
+      { titolo: "Filippo II e l'età elisabettiana", dipartimento: true, indice: "Storia facile 2, M1 cap. 5 · Tablet p. 129", attivita: [] },
+      { titolo: "Le guerre di religione in Francia", dipartimento: true, indice: "Storia facile 2, M1 cap. 5 · Tablet p. 134", attivita: [] },
+      { titolo: "La guerra dei Trent'anni", dipartimento: true, indice: "Storia facile 2, M2 cap. 7 · Tablet p. 139", attivita: [] },
+      { titolo: "La rivoluzione scientifica e i suoi protagonisti", dipartimento: true, indice: "Storia facile 2, M2 cap. 6 · Tablet p. 154", attivita: [] }
     ]
   },
 
@@ -851,10 +1003,10 @@ const MODULI = [
     titolo: "Flussi migratori",
     descrizione: "Primo quadrimestre, in collegamento con Geografia, Italiano ed Educazione civica.",
     lezioni: [
-      { titolo: "La scoperta dei nuovi mondi", attivita: [] },
-      { titolo: "L'età dei conquistadores", attivita: [] },
-      { titolo: "Le civiltà precolombiane", attivita: [] },
-      { titolo: "La tratta degli schiavi", attivita: [] }
+      { titolo: "La scoperta dei nuovi mondi", dipartimento: true, indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112", attivita: [] },
+      { titolo: "L'età dei conquistadores", dipartimento: true, indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112", attivita: [] },
+      { titolo: "Le civiltà precolombiane", dipartimento: true, indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112", attivita: [] },
+      { titolo: "La tratta degli schiavi", dipartimento: true, indice: "Storia facile 2, M3 cap. 9 · Tablet p. 112", attivita: [] }
     ]
   },
   {
@@ -864,12 +1016,12 @@ const MODULI = [
     titolo: "Sistemi di produzione, organizzazione sociale e vita quotidiana",
     descrizione: "Primo e secondo quadrimestre.",
     lezioni: [
-      { titolo: "La rivoluzione agricola: nuove risorse, ripresa dei commerci, la società comunale", attivita: [] },
-      { titolo: "La civiltà rinascimentale", attivita: [] },
-      { titolo: "Gli imperi coloniali", attivita: [] },
-      { titolo: "Il sistema mondiale nei secoli XVII e XVIII", attivita: [] },
-      { titolo: "La rivoluzione industriale: nuove risorse e sistemi di produzione", attivita: [] },
-      { titolo: "Città, proletariato e capitalismo", attivita: [] }
+      { titolo: "La rivoluzione agricola: nuove risorse, ripresa dei commerci, la società comunale", dipartimento: true, indice: "Storia facile 1, M3 capp. 10 e 12 · Tablet pp. 53, 65", attivita: [] },
+      { titolo: "La civiltà rinascimentale", dipartimento: true, indice: "Storia facile 2, M1 cap. 1 · Tablet p. 102", attivita: [] },
+      { titolo: "Gli imperi coloniali", dipartimento: true, indice: "Storia facile 2, M3 cap. 9 · Tablet p. 112", attivita: [] },
+      { titolo: "Il sistema mondiale nei secoli XVII e XVIII", dipartimento: true, indice: "Storia facile 2, M2 cap. 7 · Tablet p. 154", attivita: [] },
+      { titolo: "La rivoluzione industriale: nuove risorse e sistemi di produzione", dipartimento: true, indice: "Storia facile 2, M3 cap. 11 · Tablet p. 165", attivita: [] },
+      { titolo: "Città, proletariato e capitalismo", dipartimento: true, indice: "Storia facile 2, M3 cap. 11 · Tablet p. 165", attivita: [] }
     ]
   },
   {
@@ -879,17 +1031,19 @@ const MODULI = [
     titolo: "Lo Stato e le forme di governo",
     descrizione: "Primo e secondo quadrimestre, in collegamento con Italiano ed Educazione civica.",
     lezioni: [
-      { titolo: "I Comuni", attivita: [] },
-      { titolo: "Le monarchie nazionali", attivita: [] },
-      { titolo: "Le Signorie e gli altri Stati regionali", attivita: [] },
-      { titolo: "Riforma e Controriforma", attivita: [] },
-      { titolo: "L'Assolutismo", attivita: [] },
-      { titolo: "La monarchia parlamentare inglese", attivita: [] },
-      { titolo: "L'Illuminismo", attivita: [] },
-      { titolo: "La Rivoluzione americana", attivita: [] },
-      { titolo: "La Rivoluzione francese", attivita: [] },
-      { titolo: "L'impero napoleonico", attivita: [] },
-      { titolo: "Il Risorgimento", attivita: [] }
+      { titolo: "I Comuni", dipartimento: true, indice: "Storia facile 1, M3 cap. 12 · Tablet p. 65", attivita: [] },
+      { titolo: "Le monarchie nazionali", dipartimento: true, indice: "Storia facile 1, M4 cap. 15 · Tablet p. 96", attivita: [] },
+      { titolo: "Le Signorie e gli altri Stati regionali", dipartimento: true, indice: "Storia facile 1, M4 cap. 17 · Tablet p. 91", attivita: [] },
+      { titolo: "Riforma e Controriforma", dipartimento: true, indice: "Storia facile 2, M1 cap. 4 · Tablet p. 123", attivita: [] },
+      { titolo: "L'Assolutismo", dipartimento: true, indice: "Storia facile 2, M2 cap. 7 · Tablet p. 144", attivita: [] },
+      { titolo: "La monarchia parlamentare inglese", dipartimento: true, indice: "Storia facile 2, M2 cap. 7 · Tablet p. 149", attivita: [] },
+      { titolo: "L'Illuminismo", dipartimento: true, indice: "Storia facile 2, M3 cap. 8 · Tablet p. 159", attivita: [] },
+      { titolo: "La Rivoluzione americana", dipartimento: true, indice: "Storia facile 2, M3 cap. 10 · Tablet p. 170", attivita: [] },
+      { titolo: "La Rivoluzione francese", dipartimento: true, indice: "Storia facile 2, M3 cap. 12 · Tablet p. 175", attivita: [] },
+      { titolo: "L'impero napoleonico", dipartimento: true, indice: "Storia facile 2, M3 cap. 13 · Tablet p. 180", attivita: [] },
+      { titolo: "Il Congresso di Vienna e la Restaurazione", descrizione: "Lezione extra: capitolo di Storia facile e del Tablet che non è nella programmazione di dipartimento.", indice: "Storia facile 2, M4 cap. 14 · Tablet p. 186", attivita: [] },
+      { titolo: "Il Risorgimento", dipartimento: true, indice: "Storia facile 2, M4 cap. 15 · Tablet p. 192", attivita: [] },
+      { titolo: "L'unità d'Italia", descrizione: "Lezione extra: capitolo di Storia facile e del Tablet che non è nella programmazione di dipartimento.", indice: "Storia facile 2, M4 cap. 16 · Tablet p. 192", attivita: [] }
     ]
   },
 
@@ -901,10 +1055,22 @@ const MODULI = [
     titolo: "L'Europa e il mondo tra Ottocento e Novecento",
     descrizione: "Primo quadrimestre, in collegamento con Geografia e Tecnologia.",
     lezioni: [
-      { titolo: "La Belle Époque", attivita: [] },
-      { titolo: "I miracoli del progresso e delle scienze", attivita: [] },
-      { titolo: "La società di massa", attivita: [] },
-      { titolo: "Gli imperi coloniali", attivita: [] }
+      { titolo: "L'Italia dopo l'Unità", descrizione: "Lezione extra: non è nella programmazione di dipartimento. Destra e Sinistra storica, questione meridionale: il ponte tra il Risorgimento (seconda) e il Novecento.", indice: "Storia facile 3, M1 cap. 1 · Tablet p. 210", attivita: [] },
+      { titolo: "Gli imperi coloniali", dipartimento: true, descrizione: "Colonialismo, imperialismo e nazionalismo: le rivalità tra le potenze europee.", indice: "Storia facile 3, M1 cap. 2 · Tablet p. 216", attivita: [] },
+      { titolo: "La seconda rivoluzione industriale", descrizione: "Lezione extra: non è nominata nella programmazione di dipartimento (Storia facile e Tablet la mettono alla fine della seconda). Acciaio, elettricità, chimica, petrolio: le basi dei «miracoli del progresso».", indice: "Storia facile 2, M4 cap. 17 · Tablet p. 200", attivita: [] },
+      {
+        titolo: "La Belle Époque",
+        dipartimento: true,
+        descrizione: "1871–1914: gli anni in cui l'Europa credeva nel futuro. Prima/Dopo, Idea principale, Perché?, concetti, parole chiave, testo su due livelli, la Lente su La Stampa e i compiti.",
+        indice: "Storia facile 3, M1 cap. 3 · Tablet p. 221",
+        link: "storia/terza/ottocento-novecento/belle-epoque.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      { titolo: "I miracoli del progresso e delle scienze", dipartimento: true, indice: "Storia facile 3, M1 cap. 3 · Tablet pp. 222–224", attivita: [] },
+      { titolo: "La società di massa", dipartimento: true, indice: "Storia facile 3, M1 cap. 3 · Tablet pp. 224–225", attivita: [] },
+      { titolo: "La grande emigrazione", descrizione: "Lezione extra: non è nella programmazione di dipartimento. Milioni di italiani verso le Americhe tra Ottocento e Novecento.", indice: "Storia facile 3, M1 cap. 3 · Tablet p. 227", attivita: [] },
+      { titolo: "L'età giolittiana", descrizione: "Lezione extra: non è nella programmazione di dipartimento. L'Italia dal 1901 al 1914: industria, riforme, suffragio universale maschile, guerra di Libia.", indice: "Storia facile 3, M1 cap. 3 · Tablet p. 227", attivita: [] }
     ]
   },
   {
@@ -914,10 +1080,10 @@ const MODULI = [
     titolo: "Guerra, rivoluzioni, totalitarismi",
     descrizione: "Primo quadrimestre, in collegamento con Geografia e Religione.",
     lezioni: [
-      { titolo: "La prima guerra mondiale", attivita: [] },
-      { titolo: "La Rivoluzione russa e lo stalinismo", attivita: [] },
-      { titolo: "Il primo dopoguerra", attivita: [] },
-      { titolo: "Il fascismo in Italia", attivita: [] }
+      { titolo: "La prima guerra mondiale", dipartimento: true, indice: "Storia facile 3, M2 capp. 4–5 · Tablet p. 232", attivita: [] },
+      { titolo: "La Rivoluzione russa e lo stalinismo", dipartimento: true, indice: "Storia facile 3, M3 cap. 6 · Tablet p. 240", attivita: [] },
+      { titolo: "Il primo dopoguerra", dipartimento: true, indice: "Storia facile 3, M2 cap. 5 · Tablet p. 246", attivita: [] },
+      { titolo: "Il fascismo in Italia", dipartimento: true, indice: "Storia facile 3, M3 cap. 7 · Tablet p. 251", attivita: [] }
     ]
   },
   {
@@ -927,10 +1093,11 @@ const MODULI = [
     titolo: "Dal nazismo alla guerra fredda",
     descrizione: "Secondo quadrimestre, in collegamento con Geografia, Italiano e Religione.",
     lezioni: [
-      { titolo: "Il nazismo", attivita: [] },
-      { titolo: "La seconda guerra mondiale", attivita: [] },
-      { titolo: "L'Europa divisa", attivita: [] },
-      { titolo: "Il crollo degli imperi coloniali", attivita: [] }
+      { titolo: "Il nazismo", dipartimento: true, indice: "Storia facile 3, M3 cap. 8 · Tablet p. 257", attivita: [] },
+      { titolo: "La seconda guerra mondiale", dipartimento: true, indice: "Storia facile 3, M4 capp. 9 e 11 · Tablet p. 262", attivita: [] },
+      { titolo: "La Resistenza in Italia e in Europa", dipartimento: true, descrizione: "Nella programmazione di dipartimento è tra le conoscenze («Resistenza e formazione della Repubblica italiana»), non tra i moduli.", indice: "Storia facile 3, M4 cap. 10 · Tablet p. 262", attivita: [] },
+      { titolo: "L'Europa divisa", dipartimento: true, indice: "Storia facile 3, M5 cap. 12 (La guerra fredda) · Tablet p. 271", attivita: [] },
+      { titolo: "Il crollo degli imperi coloniali", dipartimento: true, indice: "Storia facile 3, M5 cap. 14 · Tablet p. 283", attivita: [] }
     ]
   },
   {
@@ -940,13 +1107,13 @@ const MODULI = [
     titolo: "Capire il mondo attuale",
     descrizione: "Secondo quadrimestre, in collegamento con Geografia, Scienze e Tecnologia.",
     lezioni: [
-      { titolo: "La nascita della Repubblica italiana", attivita: [] },
-      { titolo: "I problemi del Medio Oriente", attivita: [] },
-      { titolo: "Cambia la carta geografica dell'Europa", attivita: [] },
-      { titolo: "Il mondo contemporaneo", attivita: [] }
+      { titolo: "La nascita della Repubblica italiana", dipartimento: true, indice: "Storia facile 3, M5 cap. 13 · Tablet p. 278", attivita: [] },
+      { titolo: "La Ricostruzione e il miracolo economico", descrizione: "Lezione extra: capitolo di Storia facile e del Tablet che non è nella programmazione di dipartimento.", indice: "Storia facile 3, M5 cap. 13 · Tablet p. 278", attivita: [] },
+      { titolo: "I problemi del Medio Oriente", dipartimento: true, indice: "Storia facile 3, M5 cap. 16 · Tablet p. 289", attivita: [] },
+      { titolo: "Cambia la carta geografica dell'Europa", dipartimento: true, indice: "Storia facile 3, M5 capp. 15 e 17 · Tablet p. 271", attivita: [] },
+      { titolo: "Il mondo contemporaneo", dipartimento: true, indice: "Storia facile 3, M5 cap. 18 · Tablet p. 289", attivita: [] }
     ]
   }
-
 ];
 
 

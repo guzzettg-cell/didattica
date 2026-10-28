@@ -18,6 +18,8 @@
   if (window.NodeList && !NodeList.prototype.forEach) NodeList.prototype.forEach = AP.forEach;
   function nodo(x) { return (x && x.nodeType) ? x : document.createTextNode(String(x)); }
   if (EP && !EP.append) EP.append = function () { for (var i = 0; i < arguments.length; i++) this.appendChild(nodo(arguments[i])); };
+  if (EP && !EP.before) EP.before = function () { for (var i = 0; i < arguments.length; i++) if (this.parentNode) this.parentNode.insertBefore(nodo(arguments[i]), this); };
+  if (EP && !EP.after) EP.after = function () { for (var i = arguments.length - 1; i >= 0; i--) if (this.parentNode) this.parentNode.insertBefore(nodo(arguments[i]), this.nextSibling); };
   if (EP && !EP.prepend) EP.prepend = function () { for (var i = arguments.length - 1; i >= 0; i--) this.insertBefore(nodo(arguments[i]), this.firstChild); };
   if (EP && !EP.remove) EP.remove = function () { if (this.parentNode) this.parentNode.removeChild(this); };
   if (EP && !EP.replaceWith) EP.replaceWith = function (n) { if (this.parentNode) this.parentNode.replaceChild(nodo(n), this); };
@@ -40,8 +42,6 @@
 })();
 
 "use strict";
-/* Costruisce le pagine a partire dal catalogo in materiali.js.
-   Di solito non c'è bisogno di modificare questo file. */
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -89,6 +89,8 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+/* Costruisce le pagine a partire dal catalogo in materiali.js.
+   Di solito non c'è bisogno di modificare questo file. */
 var MATERIE = {
     "geografia": { nome: "Geografia", descr: "La Terra, i climi, la popolazione, l'economia e gli Stati del mondo." },
     "storia": { nome: "Storia", descr: "Fonti, periodi, linee del tempo e grandi trasformazioni." },
@@ -132,6 +134,31 @@ function el(tag, attrs) {
 var maiuscola = function (s) { return s.charAt(0).toUpperCase() + s.slice(1); };
 var ELENCO_MODULI = typeof MODULI !== "undefined" ? MODULI : [];
 var nomeModulo = function (mod) { return (mod.numero ? "Modulo " + mod.numero + " – " : "") + mod.titolo; };
+/* ---------- segno delle lezioni nella programmazione di dipartimento ---------- */
+function segnoDipartimento(lez) {
+    if (!lez.dipartimento)
+        return null;
+    var altra = typeof lez.dipartimento === "string";
+    return el("span", {
+        class: "dip",
+        title: altra ? "Argomento della programmazione di dipartimento di " + lez.dipartimento
+            : "Argomento della programmazione di dipartimento"
+    }, "◆ Programma di dipartimento" + (altra ? " (" + lez.dipartimento + ")" : ""));
+}
+/* ---------- etichette dei libri (definite in materiali.js, in LIBRI) ---------- */
+var ELENCO_LIBRI = typeof LIBRI !== "undefined" ? LIBRI : {};
+var libriDi = function (x) { return ((x && x.libri) || []).filter(function (id) { return ELENCO_LIBRI[id]; }); };
+function etichetteLibri(ids) {
+    if (!ids.length)
+        return null;
+    var p = el("p", { class: "libri" });
+    ids.forEach(function (id) { return p.append(el("span", {
+        class: "libro",
+        style: "--lc: ".concat(ELENCO_LIBRI[id].colore || "#555"),
+        title: "Lezione che parte dal libro " + ELENCO_LIBRI[id].nome
+    }, ELENCO_LIBRI[id].nome)); });
+    return p;
+}
 /* tutte le attività, con l'indicazione di dove si trovano */
 function tutteLeAttivita(moduli) {
     var e_2, _a;
@@ -163,7 +190,7 @@ function voceRecente(a) {
     var dove = [(_a = MATERIE[a.mod.materia]) === null || _a === void 0 ? void 0 : _a.nome, maiuscola(a.mod.classe || ""), nomeModulo(a.mod)];
     if (a.lez)
         dove.push(a.lez.titolo);
-    return el("li", { class: "voce", style: "--c: var(--".concat(a.mod.materia, ")") }, el("a", { href: BASE + a.link }, el("h3", null, a.titolo), a.descrizione ? el("p", null, a.descrizione) : null, el("p", { class: "dettagli" }, el("span", { class: "tipo" }, a.tipo || "Attività"), dove.filter(Boolean).join(", "))));
+    return el("li", { class: "voce", style: "--c: var(--".concat(a.mod.materia, ")") }, el("a", { href: BASE + a.link }, el("h3", null, a.titolo), a.descrizione ? el("p", null, a.descrizione) : null, el("p", { class: "dettagli" }, el("span", { class: "tipo" }, a.tipo || "Attività"), dove.filter(Boolean).join(", ")), etichetteLibri(libriDi(a.lez || a))));
 }
 /* riga di un'attività dentro una lezione */
 function rigaAttivita(a) {
@@ -245,6 +272,53 @@ function paginaMateria(id) {
     var campo = document.getElementById("cerca");
     var pulsanti = document.querySelectorAll(".classi button");
     var classe = new URLSearchParams(location.search).get("classe") || "tutte";
+    var libro = new URLSearchParams(location.search).get("libro") || "tutti";
+    /* numero originale di ogni lezione, che resta uguale anche quando si filtra */
+    tutti.forEach(function (m) { return (m.lezioni || []).forEach(function (l, i) { l._posizione = i + 1; }); });
+    /* pulsanti dei libri: solo quelli usati in questa materia */
+    var libriUsati = Object.keys(ELENCO_LIBRI).filter(function (idL) {
+        return tutti.some(function (m) { return (m.lezioni || []).some(function (l) { return libriDi(l).includes(idL); }); });
+    });
+    if (!libriUsati.includes(libro))
+        libro = "tutti";
+    var pulsantiLibro = [];
+    if (libriUsati.length) {
+        var gruppoLibri_1 = el("div", { class: "classi libri-filtro", role: "group", "aria-label": "Filtra per libro" }, el("span", { class: "etichetta-filtro" }, "Libro:"), el("button", { type: "button", "data-libro": "tutti" }, "Tutti"));
+        libriUsati.forEach(function (idL) { return gruppoLibri_1.append(el("button", { type: "button", "data-libro": idL, style: "--lc: ".concat(ELENCO_LIBRI[idL].colore || "#555") }, ELENCO_LIBRI[idL].nome)); });
+        campo.before(gruppoLibri_1);
+        pulsantiLibro = gruppoLibri_1.querySelectorAll("button");
+        pulsantiLibro.forEach(function (b) { return b.addEventListener("click", function () {
+            libro = b.dataset.libro;
+            var url = new URL(location);
+            libro === "tutti" ? url.searchParams.delete("libro") : url.searchParams.set("libro", libro);
+            history.replaceState(null, "", url);
+            disegna();
+        }); });
+    }
+    /* pulsante per vedere solo gli argomenti della programmazione di dipartimento */
+    var soloDip = new URLSearchParams(location.search).get("dipartimento") === "1";
+    var pulsanteDip = null;
+    if (tutti.some(function (m) { return (m.lezioni || []).some(function (l) { return l.dipartimento; }); })) {
+        pulsanteDip = el("button", { type: "button", class: "pulsante-dip" }, "◆ Solo programma di dipartimento");
+        campo.before(el("div", { class: "classi", role: "group", "aria-label": "Programma di dipartimento" }, pulsanteDip));
+        pulsanteDip.addEventListener("click", function () {
+            soloDip = !soloDip;
+            var url = new URL(location);
+            soloDip ? url.searchParams.set("dipartimento", "1") : url.searchParams.delete("dipartimento");
+            history.replaceState(null, "", url);
+            disegna();
+        });
+    }
+    /* tiene solo le lezioni del libro scelto e, se richiesto, quelle del programma di dipartimento
+       (il modulo resta solo se ne rimane qualcuna) */
+    function perLibro(mod) {
+        if (libro === "tutti" && !soloDip)
+            return mod;
+        var lezioni = (mod.lezioni || []).filter(function (l) {
+            return (libro === "tutti" || libriDi(l).includes(libro)) && (!soloDip || l.dipartimento);
+        });
+        return lezioni.length ? __assign(__assign({}, mod), { lezioni: lezioni }) : null;
+    }
     var aperti = new Set(); // moduli aperti dall'utente
     var idModulo = function (m) { return ["modulo", m.classe, m.numero || m.titolo].join("-").toLowerCase().replace(/[^a-z0-9-]+/g, "-"); };
     if (location.hash)
@@ -295,7 +369,7 @@ function paginaMateria(id) {
                 var titolo = lez.link
                     ? el("a", { href: BASE + lez.link }, lez.titolo)
                     : lez.titolo;
-                var li = el("li", { class: "lezione" }, el("p", { class: "numero-lezione" }, "Lezione " + (i + 1) + (lez.pagine ? ", " + (/[–-]/.test(lez.pagine) ? "pp. " : "p. ") + lez.pagine : "")), el("h4", null, titolo), lez.descrizione ? el("p", { class: "descr-lezione" }, lez.descrizione) : null);
+                var li = el("li", { class: "lezione" }, el("p", { class: "numero-lezione" }, "Lezione " + (lez._posizione || i + 1) + (lez.pagine ? ", " + (/[–-]/.test(lez.pagine) ? "pp. " : "p. ") + lez.pagine : ""), segnoDipartimento(lez)), el("h4", null, titolo), etichetteLibri(libriDi(lez)), lez.descrizione ? el("p", { class: "descr-lezione" }, lez.descrizione) : null);
                 var att = lez.attivita || [];
                 if (att.length) {
                     var ul_1 = el("ul", { class: "attivita-elenco" });
@@ -323,9 +397,14 @@ function paginaMateria(id) {
     function disegna() {
         var e_4, _a;
         pulsanti.forEach(function (b) { return b.setAttribute("aria-pressed", b.dataset.classe === classe); });
+        pulsantiLibro.forEach(function (b) { return b.setAttribute("aria-pressed", b.dataset.libro === libro); });
+        if (pulsanteDip)
+            pulsanteDip.setAttribute("aria-pressed", soloDip);
         var q = campo.value.trim().toLowerCase();
         var scelti = tutti
             .filter(function (m) { return classe === "tutte" || m.classe === classe; })
+            .map(perLibro)
+            .filter(Boolean)
             .map(function (m) { return filtra(m, q); })
             .filter(Boolean);
         area.replaceChildren();
@@ -338,7 +417,7 @@ function paginaMateria(id) {
             if (!diClasse.length)
                 return "continue";
             var gruppo = el("section", { class: "gruppo" }, el("h2", null, "Classe " + c));
-            diClasse.forEach(function (m) { return gruppo.append(disegnaModulo(m, !!q)); });
+            diClasse.forEach(function (m) { return gruppo.append(disegnaModulo(m, !!q || libro !== "tutti" || soloDip)); });
             area.append(gruppo);
         };
         try {
