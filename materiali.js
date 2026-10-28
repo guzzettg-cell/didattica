@@ -859,7 +859,7 @@ const MODULI = [
     lezioni: [
       {
         titolo: "Come si studia la storia",
-        descrizione: "Lezione di metodo, prima di cominciare: le cinque attività del mestiere dello storico e le parti di ogni lezione (Prima/Dopo, Idea principale, Perché?, Concetti, Parole chiave, Testo, Lente, Compiti).",
+        descrizione: "Lezione di metodo, prima di cominciare: le cinque attività del mestiere dello storico e le parti di ogni lezione (Prima/Dopo, Idea principale, Testo, Perché?, Concetti fondamentali, Come?, Parole chiave, Studiamo le fonti, Ripassiamo).",
         link: "storia/prima/metodo/come-si-studia-la-storia.html",
         data: "2026-10-28",
         attivita: []
@@ -1061,7 +1061,7 @@ const MODULI = [
       {
         titolo: "La Belle Époque",
         dipartimento: true,
-        descrizione: "1871–1914: gli anni in cui l'Europa credeva nel futuro. Prima/Dopo, Idea principale, Perché?, concetti, parole chiave, testo su due livelli, la Lente su La Stampa e i compiti.",
+        descrizione: "1871–1914: gli anni in cui l'Europa credeva nel futuro. Prima/Dopo, Idea principale, testo su due livelli, Perché?, Concetti fondamentali, Come?, Parole chiave, Studiamo le fonti (La Stampa) e Ripassiamo.",
         indice: "Storia facile 3, M1 cap. 3 · Tablet p. 221",
         link: "storia/terza/ottocento-novecento/belle-epoque.html",
         data: "2026-10-28",

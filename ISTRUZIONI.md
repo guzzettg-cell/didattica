@@ -71,7 +71,7 @@ Nella pagina della materia il pulsante «◆ Solo programma di dipartimento» mo
 Le lezioni di storia hanno la riga `indice`, che **non compare nel sito**: dice in quale capitolo
 di *Storia facile* 1-3 e in quale pagina del *Tablet degli argomenti di Storia* (Erickson) si trova
 lo stesso argomento, per costruire la lezione con la loro organizzazione
-(Prima/Dopo, Idea principale, Perché?, Concetti, Parole chiave, testi, verifiche). I contenuti
+(Prima/Dopo, Idea principale, Testo sintetico/essenziale, Perché?, Concetti fondamentali, Come?, Parole chiave, Studiamo le fonti, Ripassiamo). I contenuti
 delle lezioni sono nostri; dei due libri si usa solo il modo di organizzare il materiale.
 
 ```js
