@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le civiltà precolombiane</title>
+<style>
+:root{
+  --sfondo:#f3f3ef; --carta:#ffffff; --tenue-bg:#eaf1f2; --ink:#23262a; --tenue:#5a6066; --filo:#dfe2dd;
+  --accento:#2b5f6b; --accento-2:#1f4a54; --accento-soft:#e1edef;
+  --causa:#8a5a12; --causa-bg:#f8eedb; --evento:#2b5f6b; --evento-bg:#e1edef; --effetto:#6b3f74; --effetto-bg:#f1e6f3;
+  --ombra:#7a3b2e; --ombra-bg:#f7e7e2;
+  --mare:#d7e8ee; --terra:#f4efe2; --ok:#1f7a4d; --ok-bg:#dcf2e6; --no:#b42318; --no-bg:#fde3e1;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --surface:var(--carta); --line:var(--filo); --soft:var(--tenue-bg); --paper:var(--tenue-bg); --accent:var(--accento); --accent-ink:#fff; --muted:var(--tenue); --card:var(--carta);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#f3f3ef;background:var(--sfondo);color:#23262a;color:var(--ink);font:1.08rem/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:1.08rem/1.65 var(--sans)}
+a{color:#2b5f6b;color:var(--accento)}
+a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.salta{position:absolute;left:1rem;top:-6rem;background:#ffffff;background:var(--carta);padding:.8rem 1rem;z-index:20}.salta:focus{top:1rem}
+.foglio{max-width:1280px;margin:32px auto;background:#ffffff;background:var(--carta);border:1px solid #dfe2dd;border:1px solid var(--filo)}
+header.testata{padding:22px 52px 26px;border-top:9px solid #2b5f6b;border-top:9px solid var(--accento);background:#eaf1f2;background:var(--tenue-bg)}
+.indietro{display:inline-block;font-size:.92rem;margin-bottom:18px;text-decoration:none;border-bottom:1px solid currentColor}
+.eyebrow{margin:0 0 6px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:#5a6066;color:var(--tenue);font-weight:700}
+.capitolo{margin:0;font-weight:700;color:#2b5f6b;color:var(--accento)}
+h1{font:700 2.6rem/1.08 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2.6rem/1.08 var(--serif);font-size:clamp(2.1rem,6vw,3.5rem);margin:6px 0 10px}
+.sottotitolo{margin:0;font:italic 1.25rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.25rem/1.4 var(--serif);color:#5a6066;color:var(--tenue)}
+.corpo-lezione{display:grid;grid-template-columns:268px minmax(0,1fr);align-items:start}
+nav.indice{position:-webkit-sticky;position:sticky;top:12px;align-self:start;display:grid;grid-template-columns:minmax(0,1fr);grid-gap:10px;gap:10px;padding:30px 0 24px 28px;max-height:calc(100vh - 24px);overflow-y:auto}
+.indice-titolo{margin:0 0 2px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue)}
+a.voce{display:flex;align-items:center;min-height:54px;padding:4px 12px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;text-decoration:none;font:800 .86rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .86rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em;transition:transform .15s,box-shadow .15s}
+a.voce .tondo{margin-right:10px;flex:none;width:46px;height:46px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+a.voce svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+a.voce:hover{transform:translateX(4px)}
+a.voce[aria-current="true"]{transform:translateX(8px);box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+a.voce:focus-visible{outline:3px solid #23262a;outline:3px solid var(--ink);outline-offset:3px}
+main{padding:10px 52px 40px 40px;min-width:0}
+.fascia{display:flex;align-items:center;margin:28px 0 12px;min-height:50px;padding:4px 16px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;font:800 .95rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .95rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.fascia .tondo{margin-right:10px;flex:none;width:42px;height:42px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+.fascia svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+section.parte{padding:34px 0 8px;border-bottom:1px solid #dfe2dd;border-bottom:1px solid var(--filo);scroll-margin-top:56px}
+section.parte:last-of-type{border-bottom:0}
+h2{font:700 2rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2rem/1.2 var(--serif);margin:0 0 6px}
+.etichetta{display:inline-block;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#2b5f6b;color:var(--accento);margin:0 0 4px}
+.guida{margin:0 0 22px;color:#5a6066;color:var(--tenue);font-size:.98rem;max-width:72ch}
+h3{font:700 1.08rem/1.3 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 1.08rem/1.3 var(--sans);text-transform:uppercase;letter-spacing:.05em;color:#2b5f6b;color:var(--accento);margin:26px 0 12px}
+h3 span{border-bottom:3px dotted #2b5f6b;border-bottom:3px dotted var(--accento);padding-bottom:4px}
+p{margin:0 0 14px}
+.lettura{max-width:74ch}
+.mestiere{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:-4px 0 16px}
+
+/* prima / dopo */
+.primadopo{display:grid;grid-template-columns:1fr auto 1fr;grid-gap:16px;gap:16px;align-items:stretch;margin:6px 0 10px}
+.pd{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:18px 20px;background:#ffffff;background:var(--carta)}
+.pd h3{margin-top:0}
+.pd.ora{background:#e1edef;background:var(--accento-soft);border-color:transparent}
+.freccia{align-self:center;font:700 1.8rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.8rem var(--serif);color:#2b5f6b;color:var(--accento)}
+.pd .link-lez{font-size:.92rem;margin:0}
+.pd-centro{grid-column:1/-1;text-align:center;font:700 1.15rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem/1.4 var(--serif);background:#2b5f6b;background:var(--accento);color:#fff;border-radius:12px;padding:12px 18px;margin:0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pd-centro{color:#0f1416}}
+:root[data-theme="dark"] .pd-centro{color:#0f1416}
+
+/* idea principale */
+.mappa-box{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;margin:16px 0 8px}
+#mappa{display:block;width:100%;height:auto;background:#d7e8ee;background:var(--mare)}
+#mappa .mare{fill:#d7e8ee;fill:var(--mare)}
+#mappa .terra{fill:#f4efe2;fill:var(--terra);stroke:#f4efe2;stroke:var(--terra);stroke-width:1.2;stroke-linejoin:round}
+#mappa .segno{cursor:pointer}
+#mappa .segno circle{fill:#2b5f6b;fill:var(--accento);stroke:#ffffff;stroke:var(--carta);stroke-width:3}
+#mappa .segno text{font:700 17px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 17px var(--sans);fill:#23262a;fill:var(--ink);paint-order:stroke;stroke:#f4efe2;stroke:var(--terra);stroke-width:5px;stroke-linejoin:round}
+#mappa .segno.scelto circle{fill:#d9822b}
+#mappa .segno:focus{outline:none}#mappa .segno:focus-visible circle{stroke:#23262a;stroke:var(--ink);stroke-width:4}
+.mappa-info{margin:0;padding:12px 14px;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);font-size:.98rem;min-height:3.2em}
+.mappa-info strong{color:#2b5f6b;color:var(--accento)}
+.mappa-nota{font-size:.88rem;color:#5a6066;color:var(--tenue);padding:10px 14px;margin:0;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo)}
+.luoghi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));grid-gap:10px;gap:10px;margin:12px 0 0;padding:0;list-style:none}
+.luoghi li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 12px;font-size:.95rem}
+.luoghi button{all:unset;cursor:pointer;font-weight:700;color:#2b5f6b;color:var(--accento)}
+.luoghi button:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.linea{position:relative;margin:8px 0 0;padding:0 0 0 30px;list-style:none}
+.linea::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:3px;background:#2b5f6b;background:var(--accento);border-radius:2px}
+.linea li{position:relative;margin:0 0 12px}
+.linea li::before{content:"";position:absolute;left:-26px;top:.45em;width:13px;height:13px;border-radius:50%;background:#ffffff;background:var(--carta);border:3px solid #2b5f6b;border:3px solid var(--accento)}
+.linea li.estremo::before{background:#2b5f6b;background:var(--accento)}
+.linea .anno{font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);color:#2b5f6b;color:var(--accento);margin-right:8px}
+.linea .pista{display:inline-block;max-width:100%;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;padding:1px 8px;margin-left:6px;color:#5a6066;color:var(--tenue);white-space:nowrap}
+.persone{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-gap:14px;gap:14px}
+.persona{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:54px 1fr;grid-gap:14px;gap:14px;align-items:start}
+.sigla{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#e1edef;background:var(--accento-soft);color:#2b5f6b;color:var(--accento);font:700 1.2rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem var(--serif)}
+.persona h4{margin:0;font:700 1.12rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.12rem/1.3 var(--serif)}
+.persona .date{font-size:.88rem;color:#5a6066;color:var(--tenue);display:block;margin-bottom:6px}
+.persona p{margin:0 0 6px;font-size:.97rem}
+.persona a{font-size:.9rem}
+
+/* perché */
+.catena{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;grid-gap:10px;gap:10px;align-items:stretch}
+.anello{border-radius:12px;padding:16px 18px}
+.anello h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.anello p{margin:0;font-size:.98rem}
+.anello.causa{background:#f8eedb;background:var(--causa-bg)}.anello.causa h4{color:#8a5a12;color:var(--causa)}
+.anello.evento{background:#e1edef;background:var(--evento-bg)}.anello.evento h4{color:#2b5f6b;color:var(--evento)}
+.anello.effetto{background:#f1e6f3;background:var(--effetto-bg)}.anello.effetto h4{color:#6b3f74;color:var(--effetto)}
+.catena .freccia{font-size:1.5rem}
+.ombra{margin:16px 0 0;background:#f7e7e2;background:var(--ombra-bg);border-left:5px solid #7a3b2e;border-left:5px solid var(--ombra);border-radius:0 12px 12px 0;padding:14px 18px}
+.ombra h4{margin:0 0 6px;color:#7a3b2e;color:var(--ombra);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.ombra p{margin:0}
+.ricorda{margin:18px 0 0;border:2px dashed #dfe2dd;border:2px dashed var(--filo);border-radius:12px;padding:14px 18px}
+.ricorda h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+.ricorda dl{margin:0;display:grid;grid-template-columns:max-content 1fr;grid-gap:6px 14px;gap:6px 14px}
+.ricorda dt{font-weight:700}.ricorda dd{margin:0}
+
+/* concetti e come */
+.concetto{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);padding:18px 22px;margin:0 0 16px;scroll-margin-top:60px}
+.concetto h4{font:700 1.3rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.3rem/1.3 var(--serif);margin:0 0 10px}
+.concetto p:last-child{margin-bottom:0}
+.come{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-gap:12px;gap:12px;margin-top:10px}
+.colonna{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:0;overflow:hidden}
+.colonna h4{margin:0;padding:10px 14px;background:#2b5f6b;background:var(--accento);color:#fff;font-size:1rem}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .colonna h4{color:#0f1416}}
+:root[data-theme="dark"] .colonna h4{color:#0f1416}
+.colonna ul{margin:0;padding:12px 14px 12px 30px;font-size:.95rem}
+.colonna li{margin:0 0 6px}
+.radice{text-align:center;font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:999px;padding:8px 16px;max-width:520px;margin:4px auto 10px}
+
+/* parole chiave */
+.parole{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));grid-gap:12px;gap:12px;margin:0;padding:0}
+.parola{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px;scroll-margin-top:60px}
+.parola dt{font:700 1.1rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.1rem var(--serif);color:#2b5f6b;color:var(--accento);margin-bottom:4px}
+.parola dd{margin:0;font-size:.97rem}
+a.pk{color:inherit;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted #2b5f6b;text-decoration:underline dotted var(--accento);text-underline-offset:4px;text-decoration-thickness:2px}
+a.pk:hover{background:#e1edef;background:var(--accento-soft)}
+:target{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:4px}
+
+/* testi */
+.livelli{display:inline-flex;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;overflow:hidden;margin:0 0 18px}
+.livelli button{font:inherit;font-size:.95rem;border:0;background:transparent;color:#23262a;color:var(--ink);padding:7px 16px;cursor:pointer}
+.livelli button[aria-pressed="true"]{background:#2b5f6b;background:var(--accento);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .livelli button[aria-pressed="true"]{color:#0f1416}}
+:root[data-theme="dark"] .livelli button[aria-pressed="true"]{color:#0f1416}
+.paragrafo{margin:0 0 22px;max-width:74ch}
+.paragrafo h4{font:700 1.2rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem/1.3 var(--serif);margin:0 0 6px}
+.paragrafo h4 .n{color:#2b5f6b;color:var(--accento);margin-right:6px}
+.essenziale .paragrafo p{font-size:1.12rem;line-height:1.75}
+
+/* lente */
+.lente{border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:14px;overflow:hidden}
+.lente-testa{background:#2b5f6b;background:var(--accento);color:#fff;padding:16px 22px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lente-testa{color:#0f1416}}
+:root[data-theme="dark"] .lente-testa{color:#0f1416}
+.lente-testa .testata-giornale{margin:0;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.lente-testa h3{margin:4px 0 0;color:inherit;font:700 1.6rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.6rem/1.2 var(--serif);text-transform:none;letter-spacing:0}
+.lente-corpo{padding:18px 22px}
+.domanda-guida{font:italic 1.2rem/1.5 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.2rem/1.5 var(--serif);border-left:4px solid #2b5f6b;border-left:4px solid var(--accento);padding:4px 0 4px 14px;margin:0 0 18px}
+.fasi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-gap:14px;gap:14px}
+.fase{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px}
+.fase h4{margin:0 0 8px;font-size:1rem}
+.fase ol,.fase ul{margin:0;padding-left:20px;font-size:.96rem}
+.fase li{margin:0 0 6px}
+.bottone{display:inline-block;font:inherit;font-weight:700;border-radius:999px;padding:9px 18px;border:2px solid #2b5f6b;border:2px solid var(--accento);background:#2b5f6b;background:var(--accento);color:#fff;text-decoration:none;cursor:pointer}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bottone{color:#0f1416}}
+:root[data-theme="dark"] .bottone{color:#0f1416}
+.bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+:root .bottone.secondario,:root:not([data-theme="light"]) .bottone.secondario,:root[data-theme="dark"] .bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+.bottone[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.altre-fonti{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-gap:8px;gap:8px}
+.altre-fonti li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 14px;font-size:.96rem}
+.altre-fonti .tipo{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue);display:block}
+
+/* compiti */
+.attivita{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:14px;padding:18px 22px;margin:0 0 18px}
+.attivita h4{margin:0 0 4px;font:700 1.25rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.25rem/1.3 var(--serif)}
+.attivita .meta{font-size:.86rem;color:#5a6066;color:var(--tenue);margin:0 0 12px}
+.consegna{margin:0 0 12px}
+table.esercizio{width:100%;border-collapse:collapse;font-size:.97rem}
+table.esercizio td{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:8px 6px;vertical-align:middle}
+table.esercizio td:first-child{width:52%}
+table.esercizio select{font:inherit;font-size:.95rem;width:100%;max-width:100%;padding:5px 6px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:6px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+td.esito{width:34px;text-align:center;font-weight:700}
+tr.ok td.esito{color:#1f7a4d;color:var(--ok)} tr.no td.esito{color:#b42318;color:var(--no)}
+tr.ok{background:#dcf2e6;background:var(--ok-bg)} tr.no{background:#fde3e1;background:var(--no-bg)}
+.spiega{display:block;font-size:.88rem;color:#5a6066;color:var(--tenue);margin-top:4px}
+.comandi{display:flex;flex-wrap:wrap;align-items:center;margin:14px 0 0}
+.comandi>*{margin:0 10px 8px 0}
+.punteggio{font-weight:700}
+textarea{font:inherit;width:100%;min-height:84px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:8px;padding:8px 10px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+.dibattito{margin:14px 0 0;background:#eaf1f2;background:var(--tenue-bg);border-radius:10px;padding:10px 14px;font-size:.95rem}
+.dibattito b{color:#2b5f6b;color:var(--accento)}
+
+footer{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:18px 52px;font-size:.86rem;color:#5a6066;color:var(--tenue)}
+footer p{margin:0 0 6px}
+
+@media (max-width:960px){
+  html{scroll-padding-bottom:84px}
+  .corpo-lezione{display:block}
+  nav.indice{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:90;grid-auto-flow:column;grid-auto-columns:max-content;grid-template-columns:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;max-height:none;grid-gap:8px;gap:8px;padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));background:#ffffff;background:var(--carta);border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);box-shadow:0 -4px 14px rgba(0,0,0,.12)}
+  .foglio{margin-bottom:70px}
+  .indice-titolo{display:none}
+  a.voce{flex:none;min-height:40px;padding:3px 12px 3px 3px;font-size:.74rem;white-space:nowrap}
+  a.voce .tondo{width:34px;height:34px;border-width:2px}
+  a.voce svg{width:18px;height:18px}
+  a.voce:hover,a.voce[aria-current="true"]{transform:none}
+  a.voce[aria-current="true"]{box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+  main{padding:10px 40px 40px}
+}
+@media (max-width:860px){
+  .come{grid-template-columns:1fr 1fr}
+  .fasi{grid-template-columns:1fr}
+  .catena{grid-template-columns:1fr}
+  .catena .freccia{transform:rotate(90deg);justify-self:center;line-height:1}
+}
+@media (max-width:700px){
+  .foglio{margin:0;border:0}
+  header.testata{padding:16px 16px 20px}
+  main{padding:4px 16px 28px}
+  footer{padding:16px}
+  .primadopo{grid-template-columns:1fr}
+  .primadopo .freccia{transform:rotate(90deg);justify-self:center}
+  .come{grid-template-columns:1fr}
+  #mappa .segno text{font-size:30px}
+  .ricorda dl{grid-template-columns:1fr}
+  .ricorda dd{margin-bottom:6px}
+  table.esercizio td{display:block;width:100%!important;border-top:0;padding:4px 6px}
+  table.esercizio tr{display:block;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:6px 0}
+  td.esito{text-align:left}
+}
+@media print{
+  body{background:#fff}.foglio{border:0;margin:0}nav.indice,.indietro,.comandi,.livelli,.mappa-box{display:none}
+  .essenziale-solo{display:none}section.parte{break-inside:avoid-page}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#mappa.mondo .segno text{font-size:14px;stroke-width:4px}
+@media (max-width:700px){#mappa.mondo .segno text{font-size:26px;stroke-width:5px}}
+
+.animata{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);border-radius:12px;padding:14px 16px;margin:16px 0 0;background:#ffffff;background:var(--carta)}
+.animata h4{margin:0 0 6px;font-size:1.02rem}
+.animata p{margin:0 0 8px}
+.animata ul{margin:8px 0 0;padding:0;list-style:none}
+.animata li{margin:0 0 8px;padding-left:24px;position:relative}
+.animata li:before{content:"\25B6";position:absolute;left:2px;top:0;color:#2b5f6b;color:var(--accento);font-size:.85em}
+.animata h5{margin:10px 0 2px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+.animata .nota-video{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:6px 0 0}
+@media print{.animata{display:none}}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<div class="foglio">
+<header class="testata">
+  <a class="indietro" href="../../index.html">← Torna a Storia: tutti i moduli</a>
+  <p class="eyebrow">Storia · Flussi migratori</p>
+  <p class="capitolo">Lezione 3</p>
+  <h1>Le civiltà precolombiane</h1>
+  <p class="sottotitolo">Prima del 1492: Maya, Aztechi e Inca</p>
+</header>
+<div class="corpo-lezione">
+<nav class="indice" aria-label="Parti della lezione">
+  <p class="indice-titolo">In questa lezione</p>
+  <a class="voce" href="#prima-dopo" style="--c:#3a6ea5"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l3 3-3 3"/><path d="M4 7h13"/><path d="M10 14l-3 3 3 3"/><path d="M20 17H7"/></svg></span><span class="nome">Prima / Dopo</span></a>
+  <a class="voce" href="#idea" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">Idea principale</span></a>
+  <a class="voce" href="#testi" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">Testo sintetico / essenziale</span></a>
+  <a class="voce" href="#perche" style="--c:#b25510"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .9-1 1.6v.6"/><circle cx="12" cy="17" r=".7" fill="currentColor"/></svg></span><span class="nome">Perché?</span></a>
+  <a class="voce" href="#concetti" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4"/><path d="M10.5 12.5L19 4M15.5 7.5l3 3M13 10l2 2"/></svg></span><span class="nome">Concetti fondamentali</span></a>
+  <a class="voce" href="#come" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="4.5" rx="1"/><rect x="3" y="15" width="6" height="5" rx="1"/><rect x="15" y="15" width="6" height="5" rx="1"/><path d="M12 7v4M6 15v-4h12v4"/></svg></span><span class="nome">Come?</span></a>
+  <a class="voce" href="#parole" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">Parole chiave</span></a>
+  <a class="voce" href="#lente" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M20 20l-5.2-5.2"/></svg></span><span class="nome">Studiamo le fonti</span></a>
+  <a class="voce" href="#compiti" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="nome">Ripassiamo</span></a>
+</nav>
+
+<main id="contenuto">
+
+<!-- ======================= PRIMA / DOPO ======================= -->
+<section class="parte" id="prima-dopo" aria-labelledby="t-pd">
+  <p class="etichetta">Per orientarsi</p>
+  <h2 id="t-pd">Prima e dopo</h2>
+  <p class="guida">Quando arrivano gli europei, l'America è abitata da migliaia di anni. Alcuni popoli hanno costruito città, imperi e conoscenze straordinarie.</p>
+  <div class="primadopo">
+    <div class="pd">
+      <h3><span>Prima</span></h3>
+      <p>Gli esseri umani arrivano in America dall'Asia almeno quindicimila anni fa, durante l'ultima glaciazione, quando il mare era più basso e un ponte di terra univa Siberia e Alaska. Poi si diffondono in tutto il continente, fino alla Terra del Fuoco.</p>
+      <p class="link-lez">Ripassa: <a href="scoperta-nuovi-mondi.html">La scoperta dei nuovi mondi</a></p>
+    </div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="pd">
+      <h3><span>Dopo</span></h3>
+      <p>Nel Cinquecento i conquistadores spagnoli abbattono gli imperi azteco e inca. Ma le lingue, le tradizioni e i discendenti di questi popoli sono ancora vivi oggi.</p>
+      <p class="link-lez">Più avanti: <a href="conquistadores.html">L'età dei conquistadores</a> · <a href="tratta-schiavi.html">La tratta degli schiavi</a></p>
+    </div>
+    <p class="pd-centro">1200 a.C. → le civiltà precolombiane → 1532</p>
+  </div>
+</section>
+
+<!-- ======================= IDEA PRINCIPALE ======================= -->
+<section class="parte" id="idea" aria-labelledby="t-idea">
+  <p class="etichetta">Idea principale</p>
+  <h2 id="t-idea">Che cosa, dove, quando, chi</h2>
+  <p class="guida">Prima di studiare i dettagli, guarda l'argomento dall'alto: che cosa succede e dove, in che anni, chi sono i protagonisti.</p>
+
+  <h3 id="dove"><span>1. Dove? Che cosa?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 🗺️ Collocare nello spazio</p>
+  <div class="lettura">
+    <p>Si chiamano <a class="pk" href="#p-precolombiane">precolombiane</a> le civiltà americane sviluppate prima dell'arrivo di Colombo. Le più conosciute si trovano in due grandi aree: la <strong>Mesoamerica</strong> (Messico e America centrale) e le <strong>Ande</strong> (Perù, Ecuador, Bolivia).</p>
+    <p>In Mesoamerica la prima grande civiltà è quella degli Olmechi, a <strong>La Venta</strong>. Poi fioriscono i <strong>Maya</strong>, con città come <strong>Tikal</strong> e <strong>Chichén Itzá</strong>: costruiscono piramidi, scrivono con i geroglifici, studiano gli astri. Nel Trecento gli <strong>Aztechi</strong> fondano <strong>Tenochtitlan</strong> e creano un grande impero.</p>
+    <p>Nelle Ande, nel Quattrocento, gli <strong>Inca</strong> partono da <strong>Cuzco</strong> e costruiscono il più grande impero d'America, lungo più di quattromila chilometri, fino all'attuale <strong>Quito</strong> e oltre. Lo tengono unito con una rete di strade e un'organizzazione molto efficiente.</p>
+  </div>
+  <div class="mappa-box">
+    <svg id="mappa" class="mondo" viewBox="0 0 900 900" role="img" aria-labelledby="mappa-titolo"><title id="mappa-titolo">Carta dell'America centrale e meridionale con i luoghi delle civiltà precolombiane</title><rect x="0" y="0" width="900" height="900" class="mare"/><path class="terra" d="M-398.4,-382.0L-374.4,-378.9L-354.1,-372.7L-340.8,-371.5L-329.5,-376.9L-313.9,-380.9L-294.8,-379.4L-275.6,-385.0L-254.5,-388.2L-245.7,-382.9L-236.1,-385.9L-233.2,-391.9L-224.3,-390.6L-202.6,-379.0L-185.5,-387.8L-183.7,-378.0L-167.9,-380.1L-163.1,-383.9L-147.5,-383.1L-127.9,-377.7L-97.8,-373.0L-80.0,-370.8L-67.5,-371.7L-50.1,-365.1L-68.2,-358.7L-45.0,-356.0L-10.2,-357.5L0.7,-359.7L14.4,-352.0L28.4,-358.6L15.3,-364.0L23.5,-368.4L39.2,-369.0L49.5,-370.3L59.9,-367.2L72.8,-360.2L87.1,-361.3L109.9,-355.5L129.8,-357.5L148.6,-357.2L147.1,-365.2L158.5,-367.4L178.5,-363.1L178.4,-350.9L186.6,-361.2L196.9,-360.8L202.7,-373.7L188.9,-381.7L173.9,-386.9L175.0,-401.1L190.2,-410.4L207.1,-408.3L220.1,-402.7L237.6,-388.2L226.2,-381.9L250.1,-379.2L250.1,-366.1L267.2,-376.2L282.6,-367.9L278.8,-358.4L291.2,-349.7L304.6,-359.0L314.0,-370.1L314.7,-384.2L333.0,-383.2L352.0,-381.3L369.3,-374.9L370.0,-368.6L360.5,-361.7L369.5,-354.8L367.9,-348.6L342.7,-339.6L324.8,-337.6L311.5,-341.5L307.7,-335.0L295.3,-324.2L291.5,-318.5L276.6,-309.9L258.3,-309.0L248.1,-303.6L247.2,-295.2L232.3,-293.6L216.6,-283.2L202.6,-268.7L197.6,-258.6L196.9,-243.6L215.8,-241.5L221.6,-229.4L227.6,-219.7L245.6,-222.2L269.5,-216.7L282.3,-211.8L291.5,-205.7L307.7,-202.2L321.3,-196.8L342.5,-196.0L356.5,-194.8L354.4,-183.6L358.4,-170.7L367.7,-156.3L386.8,-144.1L396.8,-148.3L403.7,-161.5L397.0,-181.8L387.9,-188.6L408.5,-194.6L423.0,-203.6L430.2,-212.6L429.1,-221.2L420.4,-232.1L404.8,-241.8L419.9,-255.3L414.3,-266.9L410.0,-287.0L419.0,-289.9L441.0,-286.4L454.3,-285.2L464.9,-288.6L476.9,-284.2L492.7,-276.8L496.6,-271.8L519.6,-270.8L519.2,-260.0L523.4,-243.7L535.2,-241.7L544.5,-234.2L563.1,-241.3L575.4,-255.5L583.9,-261.5L593.9,-250.0L610.7,-233.6L624.9,-218.1L619.7,-210.1L636.8,-202.8L648.4,-195.5L668.9,-192.2L677.2,-188.1L682.2,-177.2L692.2,-175.5L697.4,-170.6L698.4,-156.2L689.0,-151.3L679.8,-146.8L658.6,-142.3L642.4,-131.7L620.7,-129.6L593.2,-132.3L573.9,-132.4L560.6,-131.5L549.8,-122.3L533.4,-116.6L514.9,-99.6L500.1,-87.7L511.0,-89.8L531.6,-106.7L558.6,-117.4L577.8,-118.7L589.2,-112.4L577.1,-103.8L581.2,-89.9L585.4,-80.2L602.1,-73.8L623.3,-75.7L636.2,-90.1L637.1,-80.8L645.4,-76.1L629.5,-67.7L601.0,-60.1L588.2,-54.8L573.9,-45.6L564.1,-46.5L563.6,-57.4L586.0,-68.0L565.4,-67.6L551.1,-66.1L553.3,-61.8L539.6,-55.6L526.4,-51.2L512.8,-47.4L506.0,-39.7L503.8,-36.8L503.7,-30.0L507.9,-23.2L513.3,-22.9L511.9,-27.6L515.8,-24.7L514.7,-21.1L506.0,-19.0L499.9,-19.2L490.4,-17.0L484.8,-16.3L477.3,-15.7L466.6,-12.0L485.5,-14.4L489.3,-12.0L471.3,-8.1L463.1,-8.1L463.5,-9.7L459.6,-6.1L463.4,-5.5L460.6,3.7L451.2,13.6L450.3,10.3L447.4,9.7L443.2,6.5L445.9,13.4L449.1,15.7L449.3,20.5L445.2,25.5L437.9,35.8L436.7,35.3L440.7,26.5L434.2,21.6L432.6,10.9L430.2,16.5L432.9,24.6L424.4,22.6L433.3,26.8L433.8,39.0L437.5,39.9L438.8,44.3L440.6,57.2L432.5,66.8L419.2,70.6L410.7,78.1L404.3,78.9L397.8,83.6L396.0,88.0L381.8,96.3L374.6,102.4L368.5,110.1L366.5,119.2L368.8,128.1L373.1,139.1L378.8,148.2L378.9,153.8L385.0,168.7L384.6,177.3L384.0,182.4L380.8,190.2L377.0,191.8L370.6,190.3L368.6,184.6L363.8,181.7L356.9,170.6L350.9,160.8L349.0,155.8L351.6,147.2L348.1,140.1L338.0,129.4L333.0,127.4L320.0,133.3L317.7,132.6L311.5,126.6L303.4,123.4L288.9,125.1L277.5,123.6L267.7,124.5L262.4,126.5L264.7,129.9L264.5,135.2L267.2,137.7L264.7,139.4L260.0,137.5L255.2,139.9L245.8,139.5L236.2,132.7L225.0,134.3L215.7,131.3L207.7,132.3L196.8,135.3L185.1,144.8L172.4,150.3L165.3,156.5L162.4,162.3L162.3,171.1L162.9,177.3L165.3,181.7L160.4,192.9L158.1,202.2L157.2,219.4L155.9,225.7L158.1,232.7L162.1,239.0L164.7,249.0L173.2,258.5L176.2,265.9L181.3,272.2L194.9,275.6L200.2,281.0L211.5,277.4L221.3,276.1L231.0,273.8L239.1,271.6L247.2,266.3L250.3,258.8L251.3,248.0L253.5,244.3L262.2,240.9L275.9,237.9L287.2,238.4L295.1,237.3L298.1,240.0L297.7,246.2L290.8,253.9L287.7,261.7L290.1,263.9L288.2,269.5L285.0,279.5L281.7,276.2L279.0,276.4L279.0,278.3L281.5,278.4L281.3,281.9L279.2,287.4L280.3,289.4L279.0,294.0L279.8,295.2L278.3,301.8L275.8,305.2L273.4,305.6L270.9,310.0L275.1,312.4L276.2,310.4L280.0,312.1L281.3,312.6L284.1,310.3L287.8,310.1L289.0,311.2L291.0,310.5L297.0,311.7L302.9,311.4L307.1,309.9L308.5,308.5L312.7,309.2L315.7,310.0L319.1,309.7L321.6,308.6L327.5,310.4L329.5,310.7L333.5,313.1L337.2,316.0L341.9,317.9L345.2,321.5L344.1,322.7L343.5,325.6L344.8,330.3L341.9,334.7L340.5,339.8L340.1,345.5L340.7,348.8L341.1,354.6L339.1,355.9L337.9,361.4L338.8,364.8L336.2,368.1L336.7,371.5L338.7,373.6L342.0,380.6L346.9,385.8L353.0,391.3L357.6,395.9L357.3,398.6L362.5,399.2L363.7,398.2L367.2,401.3L373.5,400.4L379.0,397.1L386.8,394.5L391.2,390.7L398.3,391.5L397.8,392.7L405.0,393.2L410.7,395.4L414.9,399.2L419.8,402.8L426.4,403.2L436.1,394.2L441.3,392.9L441.5,388.6L443.8,377.7L451.2,371.8L459.3,371.5L460.3,368.9L470.4,369.9L480.5,363.4L485.5,360.6L491.7,354.4L496.3,355.2L499.6,358.6L497.1,362.9L496.8,365.9L489.2,367.4L493.4,373.2L493.3,380.0L487.6,387.5L492.5,397.6L498.0,396.8L500.9,387.5L496.9,383.0L496.3,373.3L512.3,368.0L510.5,362.0L515.0,357.9L519.6,367.0L528.7,367.1L537.0,374.3L537.5,378.6L549.0,378.7L562.8,377.4L570.1,383.1L580.0,384.7L587.2,380.7L587.4,377.5L603.3,376.7L618.7,376.5L607.8,380.3L612.2,386.4L622.4,387.3L632.2,393.7L634.2,404.0L640.9,403.7L646.0,406.7L654.4,411.4L662.3,419.8L662.7,426.4L667.6,426.7L674.5,433.0L679.5,437.5L694.9,440.1L696.3,437.7L706.7,436.8L720.5,440.3L724.9,441.7L734.4,444.7L748.0,455.6L750.1,460.9L754.5,460.2L757.7,467.4L764.9,489.8L771.8,492.0L772.1,500.8L762.5,511.4L766.4,515.3L789.2,517.3L789.6,530.2L799.4,521.8L815.6,526.4L836.9,534.2L843.2,541.8L841.1,548.9L856.1,544.9L881.0,551.7L900.3,551.2L919.3,561.9L935.7,576.3L945.6,580.0L956.6,580.5L961.3,584.5L965.6,600.9L967.7,608.7L962.6,630.0L956.1,638.3L938.0,656.2L929.8,670.8L920.3,681.9L917.1,682.2L913.4,691.6L914.4,715.7L910.8,735.5L909.4,744.0L905.3,749.1L903.1,766.3L890.0,783.1L887.8,796.3L877.4,801.9L874.4,809.6L860.4,809.6L840.2,814.5L831.2,820.2L816.8,824.0L801.7,834.2L790.8,847.0L788.9,856.6L791.0,863.7L788.7,876.7L785.7,883.0L776.7,890.0L762.5,912.7L751.2,922.8L742.4,928.9L736.5,941.1L728.1,948.4L722.5,956.5L708.0,963.7L698.5,961.1L691.5,962.5L679.7,957.0L670.9,957.4L663.1,950.3L662.2,957.0L678.5,968.0L676.8,976.9L684.8,982.5L684.1,988.7L671.8,1005.2L652.7,1012.1L626.9,1014.8L612.8,1013.5L615.5,1021.2L612.9,1030.8L615.3,1037.3L607.5,1041.8L594.4,1043.6L582.0,1038.9L577.0,1042.3L578.8,1055.0L587.5,1058.9L594.6,1054.9L598.4,1061.5L586.6,1065.5L576.3,1073.5L574.4,1086.5L571.3,1093.3L559.2,1093.4L549.1,1099.9L545.4,1109.6L558.0,1119.0L570.3,1121.6L565.9,1133.2L550.7,1140.4L542.4,1155.5L530.6,1160.6L525.4,1166.6L529.5,1179.9L538.1,1187.4L532.6,1186.7L521.2,1186.6L515.0,1189.8L503.4,1194.4L501.4,1206.4L495.9,1206.7L481.4,1202.6L466.7,1193.6L450.7,1186.2L446.7,1178.1L450.3,1170.6L443.8,1162.0L442.2,1140.1L447.7,1127.7L461.2,1117.8L441.7,1114.0L454.0,1102.7L458.3,1081.3L472.6,1085.8L479.3,1059.2L470.7,1055.8L466.7,1071.9L458.6,1070.0L462.6,1051.7L467.0,1027.8L472.9,1019.0L469.2,1006.5L468.2,992.0L473.6,991.6L481.5,970.8L490.3,950.3L495.8,931.1L492.8,911.8L496.7,901.2L495.1,885.4L502.7,869.7L505.0,844.8L509.1,818.1L513.1,789.3L512.2,768.3L509.5,750.2L496.6,742.8L495.5,737.5L470.0,724.6L446.9,710.6L437.0,702.6L431.7,692.0L433.8,688.3L422.9,671.4L410.2,647.7L398.1,622.1L392.8,616.3L388.8,606.8L378.8,598.4L369.6,593.2L373.8,587.4L367.6,575.2L371.6,566.2L381.8,558.1L388.7,548.4L385.9,542.8L381.0,548.8L373.3,543.2L375.9,539.5L373.7,527.9L378.2,525.9L380.6,517.9L385.5,509.6L384.5,504.4L391.6,501.7L400.4,496.5L398.7,492.5L403.5,491.6L402.9,485.1L405.9,480.5L412.3,479.6L417.7,471.5L422.6,464.8L417.9,461.7L420.3,454.3L417.4,442.5L420.2,439.1L418.1,428.3L413.0,421.4L408.6,417.7L405.9,410.8L409.1,407.3L405.8,406.5L403.4,402.2L397.0,398.6L391.4,399.4L388.8,403.9L383.6,407.1L380.8,407.6L379.5,410.3L385.6,417.2L382.2,418.9L380.3,420.8L374.3,421.4L372.1,413.8L370.4,416.0L366.2,415.2L363.6,410.0L358.3,409.2L355.0,407.7L349.4,407.7L349.1,410.5L347.6,408.5L340.6,405.7L338.0,403.0L339.5,400.7L339.0,397.9L335.4,394.8L330.4,392.3L326.0,390.7L325.1,386.9L321.7,384.6L322.6,388.3L320.0,391.4L317.0,387.8L312.9,386.6L311.2,384.0L311.3,380.1L312.9,376.0L309.3,374.2L312.3,371.7L307.8,367.7L301.8,362.5L299.0,358.1L293.6,354.1L287.1,348.3L288.5,346.3L290.7,348.2L291.6,347.3L289.4,343.3L285.5,342.2L284.1,345.2L276.6,345.0L272.0,343.8L266.7,341.3L259.6,340.4L255.9,337.7L249.3,335.4L241.3,335.2L235.4,332.7L228.5,327.3L214.0,313.5L207.3,309.4L196.8,306.0L189.6,306.9L179.3,311.8L172.8,313.0L163.7,309.6L154.1,307.2L142.1,301.3L132.5,299.5L117.9,293.5L107.1,287.4L103.9,283.9L96.7,283.2L83.6,279.1L78.2,273.2L64.4,265.9L57.9,257.8L54.9,251.6L59.2,250.3L57.8,246.6L60.8,243.3L60.9,238.9L56.6,233.1L55.4,228.0L51.0,221.5L39.7,208.7L26.8,198.6L20.5,190.6L9.5,185.4L7.2,182.2L9.1,174.3L2.5,171.3L-5.1,165.1L-8.3,156.1L-15.1,155.0L-22.6,148.3L-28.7,142.0L-29.2,138.0L-36.1,128.3L-40.7,118.5L-40.5,113.5L-49.8,108.4L-54.1,109.0L-61.4,105.4L-63.5,110.6L-61.3,116.8L-60.1,126.5L-55.7,131.8L-46.2,140.6L-44.0,143.7L-42.1,144.6L-40.4,149.0L-38.1,148.8L-35.5,157.1L-31.6,160.4L-28.8,164.9L-20.8,171.5L-16.5,183.4L-12.7,189.1L-9.1,195.1L-8.4,201.9L-2.2,202.3L3.0,208.1L7.6,213.9L7.3,216.2L1.9,220.9L-0.4,220.8L-3.8,213.0L-12.2,205.7L-21.5,199.5L-28.1,196.2L-27.6,186.8L-29.6,179.8L-35.7,175.9L-44.5,170.1L-46.3,171.8L-49.5,168.4L-57.4,165.3L-65.0,157.8L-64.1,156.9L-58.7,157.6L-54.0,152.8L-53.5,147.0L-63.4,137.8L-71.0,134.3L-75.7,126.2L-80.5,117.8L-86.4,107.5L-91.7,96.0L-93.8,89.4L-102.1,82.0L-108.1,80.5L-109.5,76.8L-116.7,76.1L-121.4,72.7L-133.3,71.4L-136.6,69.3L-138.1,62.3L-150.6,49.3L-161.3,31.5L-160.9,28.5L-166.5,24.3L-176.5,13.5L-178.3,3.0L-185.1,-4.0L-182.3,-14.7L-182.7,-25.7L-186.9,-35.6L-181.8,-47.7L-180.2,-59.4L-178.7,-71.0L-181.0,-88.3L-185.1,-99.3L-188.8,-105.2L-187.3,-107.7L-168.7,-103.4L-161.8,-91.2L-158.6,-94.6L-160.7,-105.2L-165.1,-115.7L-166.8,-115.7L-191.7,-128.4L-200.9,-133.9L-224.2,-139.2L-231.3,-150.6L-229.5,-158.5L-246.0,-164.0L-248.2,-174.4L-263.8,-183.7L-264.0,-190.3L-271.1,-195.2L-282.4,-199.3L-286.1,-210.5L-302.6,-220.9L-309.6,-233.0L-321.9,-233.8L-342.3,-234.2L-357.4,-237.9L-384.0,-251.2L-396.3,-253.6L-418.8,-258.2L-436.6,-257.1L-461.9,-263.0L-477.2,-268.5L-491.5,-265.8L-488.8,-256.9L-495.9,-256.0L-510.8,-253.4L-522.1,-249.0L-536.4,-246.3L-538.2,-253.9L-532.4,-266.5L-518.7,-270.4L-522.3,-273.7L-538.6,-266.5L-547.4,-257.9L-566.0,-248.8L-556.6,-242.5L-568.7,-233.3L-582.5,-227.9L-595.4,-224.0L-598.6,-218.3L-618.7,-211.7L-622.7,-205.6L-637.7,-200.2L-646.6,-201.1L-658.6,-197.5L-671.6,-193.2L-682.3,-188.9L-704.4,-185.2L-706.4,-187.4L-692.3,-193.4L-679.8,-197.3L-666.1,-204.4L-650.1,-205.8L-643.8,-211.1L-625.9,-218.8L-623.1,-221.4L-613.6,-225.9L-611.4,-235.6L-604.8,-243.2L-619.6,-239.3L-623.8,-241.6L-630.8,-236.9L-639.1,-243.4L-642.6,-238.8L-647.4,-245.2L-660.3,-240.1L-668.2,-240.1L-669.3,-247.7L-666.9,-252.4L-675.2,-257.0L-691.9,-254.6L-702.8,-260.6L-711.6,-263.7L-711.7,-270.9L-721.6,-276.4L-716.6,-283.8L-706.1,-291.0L-701.5,-297.6L-691.1,-298.5L-682.3,-296.5L-671.9,-302.7L-662.6,-301.6L-652.8,-305.6L-655.2,-311.4L-662.4,-313.7L-652.9,-318.7L-660.7,-318.6L-674.4,-315.8L-678.3,-312.9L-688.5,-315.8L-706.6,-314.3L-725.5,-317.4L-730.9,-322.6L-747.1,-330.0L-729.1,-335.4L-700.4,-341.7L-689.8,-341.7L-691.6,-335.3L-664.4,-335.8L-674.9,-343.7L-690.7,-348.6L-699.8,-355.1L-712.2,-360.6L-729.8,-364.6L-722.6,-371.3L-699.8,-371.8L-683.6,-377.6L-680.6,-383.9L-667.4,-390.0L-654.9,-391.5L-630.5,-397.2L-618.7,-396.3L-598.9,-403.2L-579.4,-400.5L-570.1,-394.7L-564.4,-397.2L-542.7,-396.4L-543.5,-393.4L-523.8,-391.2L-510.7,-392.5L-483.6,-388.5L-458.9,-387.3L-449.0,-385.6L-431.9,-387.7L-412.4,-383.8L-398.4,-382.0ZM492.3,282.3L483.8,280.1L477.7,281.0L469.9,280.1L463.9,282.5L457.0,278.4L458.1,274.3L469.9,276.1L479.7,277.1L484.3,274.3L478.4,268.7L478.5,263.8L470.4,261.8L473.3,258.2L481.1,258.8L492.3,260.8L493.9,258.6L503.9,258.7L511.5,262.0L514.9,261.7L517.2,266.2L524.3,266.0L523.9,269.8L529.6,270.3L535.9,275.0L531.1,280.2L525.0,277.4L519.1,278.0L514.9,277.4L512.6,279.7L507.7,280.5L505.7,277.4L501.4,279.2L496.3,288.0L493.0,286.0L492.3,282.3ZM398.8,169.8L404.9,168.8L413.4,169.2L413.7,172.5L399.7,174.6L398.8,169.8ZM414.1,166.6L424.3,172.4L422.1,181.5L419.7,179.9L419.9,173.2L414.2,168.1L414.1,166.6ZM409.0,190.2L412.9,190.7L417.4,201.3L417.4,208.8L414.2,209.4L411.0,202.0L406.2,198.3L409.0,190.2ZM562.1,276.2L568.7,277.4L571.0,279.9L567.7,283.2L558.0,283.1L550.5,283.5L549.7,278.0L551.6,276.2L562.1,276.2ZM417.0,276.6L425.6,277.7L432.4,280.8L434.6,284.3L425.5,284.5L421.7,286.7L414.4,284.6L407.1,280.0L408.6,277.0L414.0,276.1L417.0,276.6ZM356.5,216.1L367.6,217.1L377.8,217.2L389.9,221.6L394.9,226.3L407.0,224.9L411.5,227.9L422.4,235.8L430.4,241.6L434.7,241.5L442.3,244.1L441.4,247.7L450.9,248.2L460.6,253.5L459.1,256.5L450.5,258.1L441.8,258.8L433.0,257.8L414.6,259.0L423.2,251.8L418.0,248.5L409.7,247.6L405.2,243.9L402.2,236.6L394.9,237.1L382.9,233.6L379.1,230.9L362.3,229.0L357.8,226.5L362.6,223.2L350.0,222.6L340.8,229.3L335.5,229.4L333.6,232.6L327.2,234.0L321.8,232.8L328.5,228.8L331.3,224.2L337.1,221.3L343.7,218.8L353.4,217.6L356.5,216.1ZM621.2,375.9L628.6,374.3L631.3,374.7L630.8,384.3L620.1,385.7L617.8,384.6L621.5,381.0L621.2,375.9Z"/><g id="segni"></g></svg>
+    <p class="mappa-info" id="mappa-info" aria-live="polite">Tocca un punto sulla carta o un luogo dell'elenco.</p>
+    <p class="mappa-nota">Carta muta: solo coste e mari. Gli Inca vivono sulle Ande, a migliaia di metri di quota: immagina di coltivare e costruire strade su quelle montagne.</p>
+  </div>
+  <ul class="luoghi" id="luoghi"></ul>
+  <div class="animata" id="carta-animata" aria-labelledby="t-animata">
+    <h4 id="t-animata">🎬 Cambia sguardo: la carta animata</h4>
+    <p>Ora guarda questi luoghi in movimento: confini, Stati ed eserciti che cambiano nel tempo. Poi torna alla carta muta e ritrova i luoghi dell'elenco.</p>
+    <h5>Carte animate</h5>
+    <ul>
+      <li><a href="https://www.youtube.com/results?search_query=carta+animata+Maya+Aztechi+Inca" target="_blank" rel="noopener">Cerca carte animate su questo argomento</a></li>
+      <li><a href="https://www.youtube.com/playlist?list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">Tutte le carte animate di storia di HUB Scuola</a></li>
+    </ul>
+    <p class="nota-video">Video su YouTube, si aprono in una nuova scheda.</p>
+  </div>
+
+  <h3 id="quando"><span>2. Quando?</span></h3>
+  <p class="mestiere">🕐 Collocare nel tempo</p>
+  <ol class="linea">
+    <li class="estremo"><span class="anno">15.000 anni fa</span>Almeno da allora gli esseri umani vivono in America.</li>
+    <li><span class="anno">7000 a.C. ca.</span>In Messico inizia la coltivazione di piante come la zucca e, più tardi, il mais.</li>
+    <li><span class="anno">1200–400 a.C.</span>Civiltà degli Olmechi.</li>
+    <li><span class="anno">250–900 d.C.</span>Periodo di massimo splendore delle città maya.</li>
+    <li><span class="anno">IX secolo</span>Molte città maya del Sud vengono abbandonate.</li>
+    <li><span class="anno">1325</span>Gli Aztechi fondano Tenochtitlan su un'isola del lago Texcoco.</li>
+    <li><span class="anno">1438</span>Pachacútec diventa sovrano inca e inizia la grande espansione.</li>
+    <li><span class="anno">1502</span>Moctezuma II diventa imperatore azteco.</li>
+    <li><span class="anno">1527 ca.</span>L'imperatore inca Huayna Cápac muore, probabilmente di vaiolo: scoppia la guerra tra i suoi figli.</li>
+    <li class="estremo"><span class="anno">1532</span>Arrivo di Pizarro in Perù.</li>
+  </ol>
+
+  <h3 id="chi"><span>3. Chi?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 📖 Lessico — il link apre una voce Treccani in una nuova scheda.</p>
+  <div class="persone">
+    <article class="persona"><span class="sigla" aria-hidden="true">KP</span><div><h4>Pakal il Grande</h4><span class="date">603–683 · Palenque</span><p>Re maya della città di Palenque per quasi settant'anni. La sua tomba, scoperta nel 1952 dentro una piramide, è una delle più famose d'America.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">NZ</span><div><h4>Nezahualcóyotl</h4><span class="date">1402–1472 · Texcoco</span><p>Re di Texcoco, alleato degli Aztechi. Ricordato come architetto, legislatore e poeta.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">PA</span><div><h4>Pachacútec</h4><span class="date">sovrano dal 1438 · Cuzco</span><p>Il sovrano che trasforma il regno di Cuzco in un impero. A lui si attribuisce anche la costruzione di Machu Picchu.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">HC</span><div><h4>Huayna Cápac</h4><span class="date">morto nel 1527 ca. · Perù e Ecuador</span><p>Ultimo grande imperatore inca prima della conquista. Muore durante un'epidemia arrivata dall'Europa prima ancora degli spagnoli.</p></div></article>
+  </div>
+</section>
+
+<!-- ======================= TESTO ======================= -->
+<section class="parte" id="testi" aria-labelledby="t-testi">
+  <p class="etichetta">Testo sintetico / essenziale</p>
+  <h2 id="t-testi">La lezione per intero</h2>
+  <p class="guida">Lo stesso testo in due versioni: il <strong>sintetico</strong> contiene tutte le informazioni, l'<strong>essenziale</strong> le riassume con frasi più brevi. Scegli quella che ti serve.</p>
+  <div class="livelli" role="group" aria-label="Versione del testo">
+    <button type="button" data-livello="sintetico" aria-pressed="true">Sintetico</button>
+    <button type="button" data-livello="essenziale" aria-pressed="false">Essenziale</button>
+  </div>
+  <div id="testo-sintetico">
+    <div class="paragrafo"><h4><span class="n">1</span>Un continente popolato da millenni</h4><p>I primi abitanti dell'America arrivano dall'Asia migliaia di anni fa. Si spostano a piccoli gruppi di cacciatori e raccoglitori e popolano tutto il continente. Nel corso dei millenni alcuni popoli scoprono l'agricoltura: coltivano mais, fagioli, zucche, patate, peperoncino, cacao.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>I Maya</h4><p>I Maya vivono nella penisola dello Yucatán e nelle foreste dell'America centrale. Non hanno un impero unico, ma tante città-stato in guerra tra loro, ciascuna con un re. Costruiscono templi a piramide, osservano il cielo, usano un calendario precisissimo e un sistema di numeri che comprende lo zero. Scrivono con i geroglifici su pietra, ceramica e libri di corteccia.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>Gli Aztechi</h4><p>Gli Aztechi, o Mexica, arrivano da nord e nel 1325 fondano Tenochtitlan su un'isola di un lago. Coltivano su orti galleggianti, le chinampas. Con le guerre sottomettono molti popoli, che devono pagare tributi. Tenochtitlan diventa una città enorme, con canali, templi e un grande mercato. La religione prevede anche sacrifici umani per nutrire gli dei.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>Gli Inca</h4><p>Gli Inca, dal Quattrocento, costruiscono un impero sulle Ande. Il sovrano, figlio del Sole, governa con funzionari e un esercito. Una rete di strade lunga decine di migliaia di chilometri, con ponti sospesi e messaggeri a staffetta, collega l'impero. Coltivano su terrazze in montagna, allevano lama e alpaca e conservano il cibo in grandi magazzini per gli anni difficili.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>Conoscenze diverse</h4><p>Le civiltà americane si sviluppano separate dal resto del mondo, e per questo in modo diverso. Non usano il ferro, il cavallo o la ruota per il trasporto, ma sono abilissime nell'architettura, nell'astronomia, nell'agricoltura, nella lavorazione dell'oro e dei tessuti. Gli Inca non hanno la scrittura, ma registrano numeri e informazioni con i quipu, cordicelle annodate.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>Un'eredità ancora viva</h4><p>La conquista distrugge gli imperi, molti libri e templi. Ma i popoli non scompaiono: oggi milioni di persone parlano ancora lingue maya, il nahuatl degli Aztechi e il quechua degli Inca. E il mondo intero mangia ogni giorno piante coltivate per la prima volta in America.</p></div>
+  </div>
+  <div id="testo-essenziale" class="essenziale" hidden>
+    <div class="paragrafo"><h4><span class="n">1</span>Un continente popolato da millenni</h4><p>I primi americani arrivano dall'Asia migliaia di anni fa. Poi imparano a coltivare mais, patate, fagioli e cacao.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>I Maya</h4><p>I Maya hanno tante città-stato. Costruiscono piramidi, conoscono lo zero e scrivono con i geroglifici.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>Gli Aztechi</h4><p>Gli Aztechi fondano Tenochtitlan nel 1325. Sottomettono molti popoli, che pagano tributi.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>Gli Inca</h4><p>Gli Inca hanno un grande impero sulle Ande, collegato da strade. Coltivano su terrazze e allevano lama.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>Conoscenze diverse</h4><p>Non usano ferro, cavalli né ruote, ma sono bravissimi in architettura, astronomia, agricoltura.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>Un'eredità ancora viva</h4><p>Molti discendenti parlano ancora le lingue antiche. Il mondo mangia piante nate in America.</p></div>
+  </div>
+</section>
+
+<!-- ======================= PERCHÉ ======================= -->
+<section class="parte" id="perche" aria-labelledby="t-perche">
+  <p class="etichetta">Perché?</p>
+  <h2 id="t-perche">Causa, evento, effetto</h2>
+  <p class="guida">Gli storici non si chiedono solo che cosa è successo, ma perché. Leggi la catena da sinistra a destra.</p>
+  <p class="mestiere">🧩 Comprendere fatti e processi storici</p>
+  <div class="catena">
+    <div class="anello causa"><h4>Causa</h4><p>La lunga separazione dell'America dagli altri continenti, l'agricoltura del mais e della patata, ambienti diversi come foreste, altipiani e montagne.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello evento"><h4>Evento</h4><p>Nascono civiltà originali: le città-stato maya, l'impero azteco in Messico, l'impero inca sulle Ande.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello effetto"><h4>Effetto</h4><p>Grandi città, conoscenze astronomiche e agricole, una ricca arte. La separazione dal resto del mondo rende però queste società vulnerabili alle malattie portate dagli europei.</p></div>
+  </div>
+  <div class="ombra">
+    <h4>Ma attenzione</h4>
+    <p>Per secoli gli europei hanno descritto queste civiltà come «selvagge» o «primitive», soprattutto per giustificare la conquista. Gli storici oggi le studiano con fonti archeologiche e documenti indigeni, cercando di capirle senza giudicarle con i criteri europei.</p>
+  </div>
+  <div class="ricorda">
+    <h4>Ricorda</h4>
+    <dl>
+      <dt>Mesoamerica</dt><dd>Messico e America centrale.</dd>
+      <dt>Tenochtitlan</dt><dd>Capitale degli Aztechi, fondata nel 1325.</dd>
+      <dt>Quipu</dt><dd>Cordicelle annodate usate dagli Inca per registrare dati.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ======================= CONCETTI ======================= -->
+<section class="parte" id="concetti" aria-labelledby="t-concetti">
+  <p class="etichetta">Concetti fondamentali</p>
+  <h2 id="t-concetti">Le idee chiave</h2>
+  <p class="guida">Le idee più importanti della lezione, spiegate una per una. Le parole sottolineate a puntini rimandano alle <a href="#parole">Parole chiave</a>.</p>
+  <article class="concetto" id="c-separazione"><h4>Civiltà separate</h4><p>Per migliaia di anni l'America non ha contatti con Europa, Africa e Asia. Le sue civiltà nascono in modo autonomo, con piante, animali e invenzioni diverse.</p></article>
+  <article class="concetto" id="c-citta-stato"><h4>Città-stato o impero?</h4><p>I Maya sono divisi in tante <a class="pk" href="#p-citta-stato">città-stato</a>; Aztechi e Inca costruiscono invece grandi <a class="pk" href="#p-impero">imperi</a> che dominano altri popoli.</p></article>
+  <article class="concetto" id="c-tributo"><h4>Il tributo</h4><p>Gli Aztechi non governano direttamente i popoli sottomessi: chiedono un <a class="pk" href="#p-tributo">tributo</a> di cibo, tessuti, piume, oro. Questi popoli sono scontenti, e molti si alleeranno con gli spagnoli.</p></article>
+  <article class="concetto" id="c-strade"><h4>La rete delle strade</h4><p>Gli Inca costruiscono strade lunghissime con ponti, scale e stazioni di sosta. I messaggeri a staffetta portano notizie da un capo all'altro dell'impero in pochi giorni.</p></article>
+  <article class="concetto" id="c-migrazioni"><h4>Popoli in movimento</h4><p>Anche la storia americana è fatta di migrazioni: i primi arrivati dall'Asia, gli Aztechi che scendono da nord fino al lago Texcoco, gli Inca che spostano interi villaggi per controllare l'impero.</p></article>
+</section>
+
+<!-- ======================= COME ======================= -->
+<section class="parte" id="come" aria-labelledby="t-come">
+  <p class="etichetta">Come?</p>
+  <h2 id="t-come">Come vivono Maya, Aztechi e Inca</h2>
+  <p class="guida">Uno schema per confrontare le tre grandi civiltà.</p>
+  <p class="mestiere">🧩 Organizzare le informazioni · collegamento con Geografia (gli ambienti dell'America latina)</p>
+  <p class="radice">Le tre grandi civiltà precolombiane…</p>
+  <div class="come">
+    <div class="colonna"><h4>Maya</h4><ul><li>Yucatán e America centrale</li><li>città-stato</li><li>scrittura e calendario</li><li>lo zero</li></ul></div>
+    <div class="colonna"><h4>Aztechi</h4><ul><li>Messico centrale</li><li>Tenochtitlan (1325)</li><li>impero tributario</li><li>chinampas</li></ul></div>
+    <div class="colonna"><h4>Inca</h4><ul><li>Ande</li><li>Cuzco</li><li>strade e quipu</li><li>terrazze, lama e alpaca</li></ul></div>
+    <div class="colonna"><h4>Cosa non usano</h4><ul><li>ferro</li><li>cavalli</li><li>ruota per il trasporto</li></ul></div>
+  </div>
+</section>
+
+<!-- ======================= PAROLE CHIAVE ======================= -->
+<section class="parte" id="parole" aria-labelledby="t-parole">
+  <p class="etichetta">Parole chiave</p>
+  <h2 id="t-parole">Le parole della lezione</h2>
+  <p class="guida">Il significato dei termini nuovi, in ordine alfabetico.</p>
+  <dl class="parole">
+    <div class="parola" id="p-chinampas"><dt>Chinampas</dt><dd>Orti costruiti sull'acqua dei laghi dagli Aztechi.</dd></div>
+    <div class="parola" id="p-citta-stato"><dt>Città-stato</dt><dd>Città indipendente che governa il territorio intorno.</dd></div>
+    <div class="parola" id="p-precolombiane"><dt>Civiltà precolombiane</dt><dd>Le civiltà americane sviluppate prima dell'arrivo di Colombo. <a href="https://www.treccani.it/enciclopedia/civilta-precolombiane_(Dizionario-di-Storia)/" target="_blank" rel="noopener">Treccani</a></dd></div>
+    <div class="parola" id="p-impero"><dt>Impero</dt><dd>Grande Stato che domina popoli diversi.</dd></div>
+    <div class="parola" id="p-quipu"><dt>Quipu</dt><dd>Cordicelle annodate usate dagli Inca per contare e registrare.</dd></div>
+    <div class="parola" id="p-tributo"><dt>Tributo</dt><dd>Beni che un popolo sottomesso deve consegnare ai dominatori.</dd></div>
+  </dl>
+</section>
+
+<!-- ======================= STUDIAMO LE FONTI ======================= -->
+<section class="parte" id="lente" aria-labelledby="t-lente">
+  <p class="etichetta">Studiamo le fonti</p>
+  <h2 id="t-lente">Dentro la fonte</h2>
+  <p class="guida">Un antico manoscritto dipinto del Messico meridionale è conservato alla Bodleian Library di Oxford e si può sfogliare su <em>Europeana</em>.</p>
+  <p class="mestiere">📜 Leggere e interpretare le fonti · fonte iconografica</p>
+  <div class="lente">
+    <div class="lente-testa">
+      <p class="testata-giornale">Codice dipinto · Messico, XVI secolo · Europeana</p>
+      <h3>Il Codice Selden</h3>
+    </div>
+    <div class="lente-corpo">
+      <p>I popoli della Mesoamerica scrivevano su lunghe strisce di pelle di cervo o di corteccia, piegate a fisarmonica: i codici. Raccontano con figure e segni le storie delle famiglie reali, le guerre, i matrimoni, le cerimonie. Quasi tutti furono bruciati dagli spagnoli.</p>
+      <p>Il Codice Selden viene dal popolo dei Mixtechi. Fu dipinto nel Cinquecento, poco dopo la conquista, ma nello stile tradizionale: racconta la storia di una dinastia di sovrani.</p>
+      <p class="domanda-guida">Domanda guida: come si «legge» un libro fatto di immagini?</p>
+      <div class="fasi">
+        <div class="fase"><h4>1. Prima di guardare</h4><ol><li>Perché ci sono rimasti così pochi codici precolombiani?</li><li>Che cosa sai della scrittura dei Maya? Rileggi il <a href="#testi">testo</a>.</li></ol></div>
+        <div class="fase"><h4>2. Osservare</h4><ol><li>Apri la fonte: che colori vedi? Quali figure riconosci (persone, animali, oggetti)?</li><li>Le figure sono disposte in un ordine? Cerca linee che guidano la lettura.</li></ol><p style="margin:10px 0 0"><a class="bottone" href="https://www.europeana.eu/en/item/92093/BibliographicResource_1000086140133" target="_blank" rel="noopener">Apri la fonte su Europeana</a></p></div>
+        <div class="fase"><h4>3. Pensare da storici</h4><ol><li>Che differenza c'è tra un codice e un libro europeo dell'epoca?</li><li>Il codice è stato dipinto dopo la conquista: che cosa potrebbe essere cambiato?</li><li>Perché è importante avere fonti scritte dagli stessi popoli americani e non solo dagli europei?</li></ol></div>
+      </div>
+      <ul class="altre-fonti">
+        <li><span class="tipo">Europeana</span><a href="https://www.europeana.eu/en/stories/corn-a-versatile-plant-with-a-long-history" target="_blank" rel="noopener">Il mais: una pianta dalla lunga storia (racconto)</a> · <a href="https://www.europeana.eu/en/exhibitions/edible-plants-from-the-americas/corn" target="_blank" rel="noopener">Piante alimentari dalle Americhe (mostra)</a> · <a href="https://www.europeana.eu/en/item/2058207/10970_objects_H498652" target="_blank" rel="noopener">Un vaso inca (urpu)</a></li>
+        <li><span class="tipo">Treccani ragazzi</span><a href="https://www.treccani.it/enciclopedia/maya_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Maya</a> · <a href="https://www.treccani.it/enciclopedia/aztechi_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Aztechi</a> · <a href="https://www.treccani.it/enciclopedia/inca_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Inca</a> · <a href="https://www.treccani.it/enciclopedia/storia-del-messico_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Messico, storia del</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RIPASSIAMO ======================= -->
+<section class="parte" id="compiti" aria-labelledby="t-compiti">
+  <p class="etichetta">Ripassiamo</p>
+  <h2 id="t-compiti">Le cinque attività dello storico</h2>
+  <p class="guida">Rispondi prima da solo, poi premi «Controlla». Se sbagli, riprova: la soluzione compare con il pulsante «Mostra le soluzioni».</p>
+  <div id="esercizi"></div>
+
+  <p class="fascia" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8"/></svg></span><span>Ripasso finale</span></p>
+  <div class="attivita">
+    <h4>Dieci cose da sapere</h4>
+    <p class="meta">Ricongiungi le due metà di ogni frase.</p>
+    <div id="dieci"></div>
+  </div>
+  <div class="attivita">
+    <h4>Mini-dibattito</h4>
+    <p class="consegna"><strong>Civiltà più o meno avanzate?</strong> Gli Inca non avevano la ruota né la scrittura, ma costruivano strade e ponti sulle Ande e non lasciavano nessuno senza cibo negli anni di carestia. Ha senso dire che una civiltà è «più avanzata» di un'altra? Prepara un argomento a favore e uno contro.</p>
+    <textarea aria-label="I tuoi argomenti" placeholder="Sì, perché… No, perché…"></textarea>
+    <p class="dibattito"><b>Regole:</b> non si interrompe chi parla; si criticano le idee, non le persone; alla fine ognuno scrive una conclusione personale.</p>
+  </div>
+</section>
+</main>
+</div>
+
+<footer>
+<p>Organizzazione della lezione ispirata a <em>Storia facile 2</em> (Modulo 1, cap. 2) e al <em>Tablet degli argomenti di Storia</em> (p. 112), Edizioni Erickson: Prima/Dopo, Idea principale, Perché?, Come?, Parole chiave, testo sintetico ed essenziale, verifiche. Testi originali della lezione.</p>
+  <p>Carta: coste da Natural Earth (dominio pubblico). Fonti: Europeana. Voci collegate: Treccani.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- luoghi ---------- */
+var LUOGHI=[
+{n:"La Venta",ll:[18.1022,-94.04],t:"Centro della civiltà degli Olmechi, famosi per le teste colossali di pietra."},
+ {n:"Tenochtitlan",ll:[19.4326,-99.1332],t:"Capitale degli Aztechi, fondata nel 1325 su un'isola del lago Texcoco."},
+ {n:"Chichén Itzá",ll:[20.6843,-88.5678],t:"Grande città maya dello Yucatán, con la piramide di Kukulkán."},
+ {n:"Tikal",ll:[17.2220,-89.6237],t:"Una delle più grandi città maya del periodo classico, nella foresta del Guatemala."},
+ {n:"Quito",ll:[-0.1807,-78.4678],t:"Nel Nord dell'impero inca, conquistato alla fine del Quattrocento."},
+ {n:"Cuzco",ll:[-13.5319,-71.9675],t:"Capitale degli Inca, considerata il centro sacro dell'impero."}
+];
+var lista=document.getElementById("luoghi"), gruppo=document.getElementById("segni"), info=document.getElementById("mappa-info"), NS="http://www.w3.org/2000/svg";
+function xy(ll){ return [(ll[1]-(-110))*900/70, (40-ll[0])*900/70]; }
+/* posizione dell'etichetta rispetto al punto: [dx, dy, allineamento] */
+var ETI={"La Venta":[-6,24,"end"],"Tenochtitlan":[-4,-16,"middle"],"Chichén Itzá":[10,-4,"start"],"Tikal":[10,8,"start"],"Quito":[10,5,"start"],"Cuzco":[10,5,"start"]};
+var segni=[];
+function scegli(i){
+  segni.forEach(function(g,j){ g.setAttribute("class", j===i ? "segno scelto" : "segno"); g.firstChild.setAttribute("r", j===i ? "8" : "6"); if(j===i) gruppo.appendChild(g); });
+  info.innerHTML=""; var b=document.createElement("strong"); b.textContent=LUOGHI[i].n+": "; info.appendChild(b); info.appendChild(document.createTextNode(LUOGHI[i].t));
+}
+LUOGHI.forEach(function(L,i){
+  var p=xy(L.ll), g=document.createElementNS(NS,"g"), c=document.createElementNS(NS,"circle"), t=document.createElementNS(NS,"text"), e=ETI[L.n]||[14,5,"start"];
+  g.setAttribute("class","segno"); g.setAttribute("tabindex","0"); g.setAttribute("role","button"); g.setAttribute("aria-label",L.n);
+  c.setAttribute("cx",p[0].toFixed(1)); c.setAttribute("cy",p[1].toFixed(1)); c.setAttribute("r","6");
+  t.setAttribute("x",(p[0]+e[0]).toFixed(1)); t.setAttribute("y",(p[1]+e[1]).toFixed(1)); t.setAttribute("text-anchor",e[2]); t.textContent=L.n.replace(/ \(.*\)$/,"");
+  g.appendChild(c); g.appendChild(t); gruppo.appendChild(g); segni.push(g);
+  g.addEventListener("click",function(){ scegli(i); });
+  g.addEventListener("keydown",function(ev){ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); scegli(i); } });
+  var li=document.createElement("li"), bt=document.createElement("button");
+  bt.type="button"; bt.textContent=L.n; bt.addEventListener("click",function(){ scegli(i); document.getElementById("mappa").scrollIntoView({block:"center"}); });
+  li.appendChild(bt); li.appendChild(document.createTextNode(" — "+L.t)); lista.appendChild(li);
+});
+
+/* ---------- indice laterale: evidenzia la parte che si sta leggendo ---------- */
+var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
+function attiva(id){ Array.prototype.forEach.call(voci,function(v){ var on=v.getAttribute("href")==="#"+id; if(on){ v.setAttribute("aria-current","true"); if(navI.scrollWidth>navI.clientWidth){ navI.scrollLeft=v.offsetLeft-16; } } else v.removeAttribute("aria-current"); }); }
+var parti=document.querySelectorAll("section.parte"), attesa=false;
+function guarda(){ attesa=false; var lim=window.innerHeight*0.3, id=parti[0].id;
+  Array.prototype.forEach.call(parti,function(sx){ if(sx.getBoundingClientRect().top<=lim) id=sx.id; });
+  if((window.innerHeight+window.pageYOffset)>=document.documentElement.scrollHeight-4) id=parti[parti.length-1].id;
+  attiva(id); }
+window.addEventListener("scroll",function(){ if(!attesa){ attesa=true; (window.requestAnimationFrame||setTimeout)(guarda); } },{passive:true});
+window.addEventListener("resize",guarda); guarda();
+
+/* ---------- testo sintetico / essenziale ---------- */
+var bot=document.querySelectorAll(".livelli button");
+Array.prototype.forEach.call(bot,function(b){ b.addEventListener("click",function(){
+  var ess=b.getAttribute("data-livello")==="essenziale";
+  document.getElementById("testo-sintetico").hidden=ess; document.getElementById("testo-essenziale").hidden=!ess;
+  Array.prototype.forEach.call(bot,function(x){ x.setAttribute("aria-pressed", x===b ? "true":"false"); });
+});});
+
+/* ---------- esercizi ---------- */
+var ESERCIZI=[
+{gruppo:"tempo", titolo:"Metti in ordine nel tempo", meta:"Abbina ogni evento al periodo in cui accadde.",
+  scelte:["1200–400 a.C.","250–900 d.C.","1325","1438","1502","1532"],
+  righe:[["La civiltà degli Olmechi","1200–400 a.C."],["Splendore delle città maya","250–900 d.C."],["Fondazione di Tenochtitlan","1325"],["Pachacútec diventa sovrano inca","1438"],["Moctezuma II imperatore","1502"],["Arrivo di Pizarro in Perù","1532"]]},
+ {gruppo:"spazio", titolo:"Dove si trova?", meta:"Usa la carta dell'Idea principale per trovare ogni luogo.",
+  scelte:["La Venta","Tenochtitlan","Chichén Itzá","Tikal","Quito","Cuzco"],
+  righe:[["Il centro degli Olmechi","La Venta"],["La capitale azteca","Tenochtitlan"],["La città maya dello Yucatán","Chichén Itzá"],["La città maya nella foresta del Guatemala","Tikal"],["Il Nord dell'impero inca","Quito"],["La capitale inca","Cuzco"]]},
+ {gruppo:"fonti", titolo:"Fatto o interpretazione?", meta:"Uno storico distingue i fatti (si possono verificare) dalle interpretazioni (sono giudizi, opinioni).",
+  scelte:["Fatto","Interpretazione"],
+  righe:[["I Maya usavano un sistema di numeri con lo zero.","Fatto","Lo mostrano le iscrizioni."],["Le civiltà americane erano primitive.","Interpretazione","È un giudizio europeo, usato per giustificare la conquista."],["Gli Inca registravano dati con i quipu.","Fatto","Se ne conservano molti nei musei."],["Il Codice Selden fu dipinto dai Mixtechi.","Fatto","Lo dicono gli studi sul manoscritto."],["Gli Aztechi erano più crudeli degli europei.","Interpretazione","È un giudizio, non un dato verificabile."]]},
+ {gruppo:"processi", titolo:"Quale civiltà?", meta:"Rileggi lo schema «Come?» e abbina ogni elemento alla civiltà giusta.",
+  scelte:["Maya","Aztechi","Inca"],
+  righe:[["Città-stato nello Yucatán","Maya"],["Chinampas","Aztechi"],["Quipu","Inca"],["Geroglifici","Maya"],["Strade sulle Ande","Inca"],["Impero tributario con capitale su un lago","Aztechi"]]},
+ {gruppo:"processi", titolo:"Vero o falso?", meta:"Dopo il controllo leggi la spiegazione: serve a correggere le frasi false.",
+  scelte:["Vero","Falso"],
+  righe:[["I primi americani arrivarono dall'Asia.","Vero"],["Gli Inca usavano i cavalli per viaggiare.","Falso","In America non c'erano cavalli prima degli europei."],["I Maya formavano un unico impero.","Falso","Erano divisi in città-stato."],["Il mais e la patata vengono dall'America.","Vero"],["Oggi nessuno parla più le lingue precolombiane.","Falso","Milioni di persone parlano quechua, nahuatl e lingue maya."]]},
+ {gruppo:"lessico", titolo:"Parole e significati", meta:"Abbina ogni parola alla sua definizione.",
+  scelte:["Civiltà precolombiane","Città-stato","Impero","Tributo","Chinampas","Quipu"],
+  righe:[["Civiltà prima di Colombo","Civiltà precolombiane"],["Città indipendente","Città-stato"],["Grande Stato che domina altri popoli","Impero"],["Beni consegnati ai dominatori","Tributo"],["Orti sull'acqua","Chinampas"],["Cordicelle annodate","Quipu"]]}
+];
+var DIECI=[
+["I primi americani","arrivano dall'Asia migliaia di anni fa."],
+ ["In America si coltivano","mais, patate, fagioli e cacao."],
+ ["I Maya","vivono in città-stato."],
+ ["I Maya conoscono","lo zero e un calendario preciso."],
+ ["Gli Aztechi","fondano Tenochtitlan nel 1325."],
+ ["I popoli sottomessi agli Aztechi","pagano tributi."],
+ ["Gli Inca","costruiscono un impero sulle Ande."],
+ ["Le strade inca","collegano tutto l'impero."],
+ ["I quipu","servono a registrare dati."],
+ ["Ancora oggi milioni di persone","parlano lingue precolombiane."]
+];
+function el(t,attr,txt){ var e=document.createElement(t); if(attr){ for(var k in attr){ e.setAttribute(k,attr[k]); } } if(txt!=null) e.textContent=txt; return e; }
+function mescola(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+function costruisci(cont, scelte, righe, conGruppo){
+  var tab=el("table",{"class":"esercizio"}), tb=el("tbody"); tab.appendChild(tb);
+  var stati=[];
+  righe.forEach(function(r,i){
+    var tr=el("tr"), td1=el("td"), td2=el("td"), td3=el("td",{"class":"esito","aria-live":"polite"});
+    td1.appendChild(document.createTextNode(r[0]));
+    var sp=el("span",{"class":"spiega"}); sp.hidden=true; if(r[2]) sp.textContent=r[2]; td1.appendChild(sp);
+    var s=el("select",{"aria-label":"Risposta: "+r[0]}); s.appendChild(el("option",{value:""},"— scegli —"));
+    scelte.forEach(function(c){ s.appendChild(el("option",{value:c},c)); });
+    td2.appendChild(s); tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tb.appendChild(tr);
+    stati.push({tr:tr,s:s,esito:td3,sp:sp,giusta:r[1]});
+  });
+  cont.appendChild(tab);
+  var com=el("div",{"class":"comandi"}), b1=el("button",{type:"button","class":"bottone"},"Controlla"), b2=el("button",{type:"button","class":"bottone secondario"},"Mostra le soluzioni"), pt=el("span",{"class":"punteggio","aria-live":"polite"});
+  b2.hidden=true; com.appendChild(b1); com.appendChild(b2); com.appendChild(pt); cont.appendChild(com);
+  b1.addEventListener("click",function(){
+    var ok=0, vuote=0;
+    stati.forEach(function(x){
+      x.tr.classList.remove("ok"); x.tr.classList.remove("no");
+      if(!x.s.value){ vuote++; x.esito.textContent=""; return; }
+      var g=x.s.value===x.giusta; if(g) ok++;
+      x.tr.classList.add(g?"ok":"no"); x.esito.textContent=g?"✓":"✗"; x.esito.setAttribute("aria-label",g?"giusto":"sbagliato");
+      if(x.sp.textContent) x.sp.hidden=false;
+    });
+    pt.textContent=ok+" su "+stati.length+(vuote? " · "+vuote+" senza risposta":"");
+    b2.hidden=false;
+  });
+  b2.addEventListener("click",function(){
+    stati.forEach(function(x){ x.s.value=x.giusta; x.tr.classList.remove("no"); x.tr.classList.add("ok"); x.esito.textContent="✓"; if(x.sp.textContent) x.sp.hidden=false; });
+    pt.textContent="Ecco le soluzioni.";
+  });
+}
+var GRUPPI={"tempo": {"c": "#2a7f6f", "n": "Collocare nel tempo", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15.5\" rx=\"2\"/><path d=\"M3.5 10h17M8 3v4M16 3v4\"/><path d=\"M9 14.5h2v3M13.5 14.5h2l-1.5 3\"/></svg>"}, "spazio": {"c": "#b25510", "n": "Collocare nello spazio", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z\"/><path d=\"M9 4.5v13M15 6.5v13\"/></svg>"}, "fonti": {"c": "#55800f", "n": "Leggere e interpretare le fonti", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"5\" y=\"11\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 11V7.5a4 4 0 0 1 7.6-1.8\"/><circle cx=\"12\" cy=\"15.5\" r=\"1.3\"/><path d=\"M12 16.8v1.7\"/></svg>"}, "processi": {"c": "#b0215f", "n": "Comprendere fatti e processi storici", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 4.5l6 3.5-6 3.5zM10 4.5l6 3.5-6 3.5z\"/><path d=\"M20 12.5l-6 3.5 6 3.5zM14 12.5l-6 3.5 6 3.5z\"/></svg>"}, "lessico": {"c": "#6b3f8a", "n": "Conoscere e usare il lessico specifico", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 18.5L8.5 6l4.5 12.5M5.6 14h5.8\"/><path d=\"M15 12.5a2.5 2.5 0 1 1 0 4.5M20 10v8.5\"/></svg>"}, "ripasso": {"c": "#2b5f6b", "n": "Ripasso finale", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8\"/></svg>"}};
+var zona=document.getElementById("esercizi"), ultimo="";
+ESERCIZI.forEach(function(E,i){
+  if(E.gruppo!==ultimo){ var g=GRUPPI[E.gruppo], f=el("p",{"class":"fascia",style:"--c:"+g.c}), t=el("span",{"class":"tondo"}); t.innerHTML=g.i; f.appendChild(t); f.appendChild(el("span",null,g.n)); zona.appendChild(f); ultimo=E.gruppo; }
+  var box=el("div",{"class":"attivita"}); box.appendChild(el("h4",null,(i+1)+". "+E.titolo)); box.appendChild(el("p",{"class":"meta"},E.meta));
+  costruisci(box,E.scelte,mescola(E.righe)); zona.appendChild(box);
+});
+costruisci(document.getElementById("dieci"), mescola(DIECI.map(function(d){return d[1];})), DIECI.map(function(d){ return [d[0]+" …", d[1]]; }));
+})();
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+</body>
+</html>

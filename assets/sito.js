@@ -271,7 +271,13 @@ function paginaMateria(id) {
     var area = document.getElementById("materiali");
     var campo = document.getElementById("cerca");
     var pulsanti = document.querySelectorAll(".classi button");
-    var classe = new URLSearchParams(location.search).get("classe") || "tutte";
+    /* il filtro di classe si ricorda durante la visita: tornando da una lezione all'indice resta quello scelto */
+    var leggiClasse = function () { try { return sessionStorage.getItem("filtro-classe"); } catch (e) { return null; } };
+    var salvaClasse = function (c) { try { sessionStorage.setItem("filtro-classe", c); } catch (e) { } };
+    var classe = new URLSearchParams(location.search).get("classe") || leggiClasse() || "tutte";
+    if (classe !== "tutte" && !new URLSearchParams(location.search).get("classe")) {
+        try { var u0 = new URL(location); u0.searchParams.set("classe", classe); history.replaceState(null, "", u0); } catch (e) { }
+    }
     var libro = new URLSearchParams(location.search).get("libro") || "tutti";
     /* numero originale di ogni lezione, che resta uguale anche quando si filtra */
     tutti.forEach(function (m) { return (m.lezioni || []).forEach(function (l, i) { l._posizione = i + 1; }); });
@@ -436,6 +442,7 @@ function paginaMateria(id) {
     }
     pulsanti.forEach(function (b) { return b.addEventListener("click", function () {
         classe = b.dataset.classe;
+        salvaClasse(classe);
         var url = new URL(location);
         classe === "tutte" ? url.searchParams.delete("classe") : url.searchParams.set("classe", classe);
         history.replaceState(null, "", url);

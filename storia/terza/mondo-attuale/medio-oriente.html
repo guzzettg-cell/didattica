@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>I problemi del Medio Oriente</title>
+<style>
+:root{
+  --sfondo:#f3f3ef; --carta:#ffffff; --tenue-bg:#eaf1f2; --ink:#23262a; --tenue:#5a6066; --filo:#dfe2dd;
+  --accento:#2b5f6b; --accento-2:#1f4a54; --accento-soft:#e1edef;
+  --causa:#8a5a12; --causa-bg:#f8eedb; --evento:#2b5f6b; --evento-bg:#e1edef; --effetto:#6b3f74; --effetto-bg:#f1e6f3;
+  --ombra:#7a3b2e; --ombra-bg:#f7e7e2;
+  --mare:#d7e8ee; --terra:#f4efe2; --ok:#1f7a4d; --ok-bg:#dcf2e6; --no:#b42318; --no-bg:#fde3e1;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --surface:var(--carta); --line:var(--filo); --soft:var(--tenue-bg); --paper:var(--tenue-bg); --accent:var(--accento); --accent-ink:#fff; --muted:var(--tenue); --card:var(--carta);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#f3f3ef;background:var(--sfondo);color:#23262a;color:var(--ink);font:1.08rem/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:1.08rem/1.65 var(--sans)}
+a{color:#2b5f6b;color:var(--accento)}
+a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.salta{position:absolute;left:1rem;top:-6rem;background:#ffffff;background:var(--carta);padding:.8rem 1rem;z-index:20}.salta:focus{top:1rem}
+.foglio{max-width:1280px;margin:32px auto;background:#ffffff;background:var(--carta);border:1px solid #dfe2dd;border:1px solid var(--filo)}
+header.testata{padding:22px 52px 26px;border-top:9px solid #2b5f6b;border-top:9px solid var(--accento);background:#eaf1f2;background:var(--tenue-bg)}
+.indietro{display:inline-block;font-size:.92rem;margin-bottom:18px;text-decoration:none;border-bottom:1px solid currentColor}
+.eyebrow{margin:0 0 6px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:#5a6066;color:var(--tenue);font-weight:700}
+.capitolo{margin:0;font-weight:700;color:#2b5f6b;color:var(--accento)}
+h1{font:700 2.6rem/1.08 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2.6rem/1.08 var(--serif);font-size:clamp(2.1rem,6vw,3.5rem);margin:6px 0 10px}
+.sottotitolo{margin:0;font:italic 1.25rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.25rem/1.4 var(--serif);color:#5a6066;color:var(--tenue)}
+.corpo-lezione{display:grid;grid-template-columns:268px minmax(0,1fr);align-items:start}
+nav.indice{position:-webkit-sticky;position:sticky;top:12px;align-self:start;display:grid;grid-template-columns:minmax(0,1fr);grid-gap:10px;gap:10px;padding:30px 0 24px 28px;max-height:calc(100vh - 24px);overflow-y:auto}
+.indice-titolo{margin:0 0 2px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue)}
+a.voce{display:flex;align-items:center;min-height:54px;padding:4px 12px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;text-decoration:none;font:800 .86rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .86rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em;transition:transform .15s,box-shadow .15s}
+a.voce .tondo{margin-right:10px;flex:none;width:46px;height:46px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+a.voce svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+a.voce:hover{transform:translateX(4px)}
+a.voce[aria-current="true"]{transform:translateX(8px);box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+a.voce:focus-visible{outline:3px solid #23262a;outline:3px solid var(--ink);outline-offset:3px}
+main{padding:10px 52px 40px 40px;min-width:0}
+.fascia{display:flex;align-items:center;margin:28px 0 12px;min-height:50px;padding:4px 16px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;font:800 .95rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .95rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.fascia .tondo{margin-right:10px;flex:none;width:42px;height:42px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+.fascia svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+section.parte{padding:34px 0 8px;border-bottom:1px solid #dfe2dd;border-bottom:1px solid var(--filo);scroll-margin-top:56px}
+section.parte:last-of-type{border-bottom:0}
+h2{font:700 2rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2rem/1.2 var(--serif);margin:0 0 6px}
+.etichetta{display:inline-block;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#2b5f6b;color:var(--accento);margin:0 0 4px}
+.guida{margin:0 0 22px;color:#5a6066;color:var(--tenue);font-size:.98rem;max-width:72ch}
+h3{font:700 1.08rem/1.3 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 1.08rem/1.3 var(--sans);text-transform:uppercase;letter-spacing:.05em;color:#2b5f6b;color:var(--accento);margin:26px 0 12px}
+h3 span{border-bottom:3px dotted #2b5f6b;border-bottom:3px dotted var(--accento);padding-bottom:4px}
+p{margin:0 0 14px}
+.lettura{max-width:74ch}
+.mestiere{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:-4px 0 16px}
+
+/* prima / dopo */
+.primadopo{display:grid;grid-template-columns:1fr auto 1fr;grid-gap:16px;gap:16px;align-items:stretch;margin:6px 0 10px}
+.pd{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:18px 20px;background:#ffffff;background:var(--carta)}
+.pd h3{margin-top:0}
+.pd.ora{background:#e1edef;background:var(--accento-soft);border-color:transparent}
+.freccia{align-self:center;font:700 1.8rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.8rem var(--serif);color:#2b5f6b;color:var(--accento)}
+.pd .link-lez{font-size:.92rem;margin:0}
+.pd-centro{grid-column:1/-1;text-align:center;font:700 1.15rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem/1.4 var(--serif);background:#2b5f6b;background:var(--accento);color:#fff;border-radius:12px;padding:12px 18px;margin:0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pd-centro{color:#0f1416}}
+:root[data-theme="dark"] .pd-centro{color:#0f1416}
+
+/* idea principale */
+.mappa-box{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;margin:16px 0 8px}
+#mappa{display:block;width:100%;height:auto;background:#d7e8ee;background:var(--mare)}
+#mappa .mare{fill:#d7e8ee;fill:var(--mare)}
+#mappa .terra{fill:#f4efe2;fill:var(--terra);stroke:#f4efe2;stroke:var(--terra);stroke-width:1.2;stroke-linejoin:round}
+#mappa .segno{cursor:pointer}
+#mappa .segno circle{fill:#2b5f6b;fill:var(--accento);stroke:#ffffff;stroke:var(--carta);stroke-width:3}
+#mappa .segno text{font:700 17px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 17px var(--sans);fill:#23262a;fill:var(--ink);paint-order:stroke;stroke:#f4efe2;stroke:var(--terra);stroke-width:5px;stroke-linejoin:round}
+#mappa .segno.scelto circle{fill:#d9822b}
+#mappa .segno:focus{outline:none}#mappa .segno:focus-visible circle{stroke:#23262a;stroke:var(--ink);stroke-width:4}
+.mappa-info{margin:0;padding:12px 14px;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);font-size:.98rem;min-height:3.2em}
+.mappa-info strong{color:#2b5f6b;color:var(--accento)}
+.mappa-nota{font-size:.88rem;color:#5a6066;color:var(--tenue);padding:10px 14px;margin:0;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo)}
+.luoghi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));grid-gap:10px;gap:10px;margin:12px 0 0;padding:0;list-style:none}
+.luoghi li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 12px;font-size:.95rem}
+.luoghi button{all:unset;cursor:pointer;font-weight:700;color:#2b5f6b;color:var(--accento)}
+.luoghi button:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.linea{position:relative;margin:8px 0 0;padding:0 0 0 30px;list-style:none}
+.linea::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:3px;background:#2b5f6b;background:var(--accento);border-radius:2px}
+.linea li{position:relative;margin:0 0 12px}
+.linea li::before{content:"";position:absolute;left:-26px;top:.45em;width:13px;height:13px;border-radius:50%;background:#ffffff;background:var(--carta);border:3px solid #2b5f6b;border:3px solid var(--accento)}
+.linea li.estremo::before{background:#2b5f6b;background:var(--accento)}
+.linea .anno{font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);color:#2b5f6b;color:var(--accento);margin-right:8px}
+.linea .pista{display:inline-block;max-width:100%;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;padding:1px 8px;margin-left:6px;color:#5a6066;color:var(--tenue);white-space:nowrap}
+.persone{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-gap:14px;gap:14px}
+.persona{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:54px 1fr;grid-gap:14px;gap:14px;align-items:start}
+.sigla{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#e1edef;background:var(--accento-soft);color:#2b5f6b;color:var(--accento);font:700 1.2rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem var(--serif)}
+.persona h4{margin:0;font:700 1.12rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.12rem/1.3 var(--serif)}
+.persona .date{font-size:.88rem;color:#5a6066;color:var(--tenue);display:block;margin-bottom:6px}
+.persona p{margin:0 0 6px;font-size:.97rem}
+.persona a{font-size:.9rem}
+
+/* perché */
+.catena{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;grid-gap:10px;gap:10px;align-items:stretch}
+.anello{border-radius:12px;padding:16px 18px}
+.anello h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.anello p{margin:0;font-size:.98rem}
+.anello.causa{background:#f8eedb;background:var(--causa-bg)}.anello.causa h4{color:#8a5a12;color:var(--causa)}
+.anello.evento{background:#e1edef;background:var(--evento-bg)}.anello.evento h4{color:#2b5f6b;color:var(--evento)}
+.anello.effetto{background:#f1e6f3;background:var(--effetto-bg)}.anello.effetto h4{color:#6b3f74;color:var(--effetto)}
+.catena .freccia{font-size:1.5rem}
+.ombra{margin:16px 0 0;background:#f7e7e2;background:var(--ombra-bg);border-left:5px solid #7a3b2e;border-left:5px solid var(--ombra);border-radius:0 12px 12px 0;padding:14px 18px}
+.ombra h4{margin:0 0 6px;color:#7a3b2e;color:var(--ombra);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.ombra p{margin:0}
+.ricorda{margin:18px 0 0;border:2px dashed #dfe2dd;border:2px dashed var(--filo);border-radius:12px;padding:14px 18px}
+.ricorda h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+.ricorda dl{margin:0;display:grid;grid-template-columns:max-content 1fr;grid-gap:6px 14px;gap:6px 14px}
+.ricorda dt{font-weight:700}.ricorda dd{margin:0}
+
+/* concetti e come */
+.concetto{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);padding:18px 22px;margin:0 0 16px;scroll-margin-top:60px}
+.concetto h4{font:700 1.3rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.3rem/1.3 var(--serif);margin:0 0 10px}
+.concetto p:last-child{margin-bottom:0}
+.come{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-gap:12px;gap:12px;margin-top:10px}
+.colonna{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:0;overflow:hidden}
+.colonna h4{margin:0;padding:10px 14px;background:#2b5f6b;background:var(--accento);color:#fff;font-size:1rem}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .colonna h4{color:#0f1416}}
+:root[data-theme="dark"] .colonna h4{color:#0f1416}
+.colonna ul{margin:0;padding:12px 14px 12px 30px;font-size:.95rem}
+.colonna li{margin:0 0 6px}
+.radice{text-align:center;font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:999px;padding:8px 16px;max-width:520px;margin:4px auto 10px}
+
+/* parole chiave */
+.parole{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));grid-gap:12px;gap:12px;margin:0;padding:0}
+.parola{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px;scroll-margin-top:60px}
+.parola dt{font:700 1.1rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.1rem var(--serif);color:#2b5f6b;color:var(--accento);margin-bottom:4px}
+.parola dd{margin:0;font-size:.97rem}
+a.pk{color:inherit;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted #2b5f6b;text-decoration:underline dotted var(--accento);text-underline-offset:4px;text-decoration-thickness:2px}
+a.pk:hover{background:#e1edef;background:var(--accento-soft)}
+:target{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:4px}
+
+/* testi */
+.livelli{display:inline-flex;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;overflow:hidden;margin:0 0 18px}
+.livelli button{font:inherit;font-size:.95rem;border:0;background:transparent;color:#23262a;color:var(--ink);padding:7px 16px;cursor:pointer}
+.livelli button[aria-pressed="true"]{background:#2b5f6b;background:var(--accento);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .livelli button[aria-pressed="true"]{color:#0f1416}}
+:root[data-theme="dark"] .livelli button[aria-pressed="true"]{color:#0f1416}
+.paragrafo{margin:0 0 22px;max-width:74ch}
+.paragrafo h4{font:700 1.2rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem/1.3 var(--serif);margin:0 0 6px}
+.paragrafo h4 .n{color:#2b5f6b;color:var(--accento);margin-right:6px}
+.essenziale .paragrafo p{font-size:1.12rem;line-height:1.75}
+
+/* lente */
+.lente{border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:14px;overflow:hidden}
+.lente-testa{background:#2b5f6b;background:var(--accento);color:#fff;padding:16px 22px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lente-testa{color:#0f1416}}
+:root[data-theme="dark"] .lente-testa{color:#0f1416}
+.lente-testa .testata-giornale{margin:0;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.lente-testa h3{margin:4px 0 0;color:inherit;font:700 1.6rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.6rem/1.2 var(--serif);text-transform:none;letter-spacing:0}
+.lente-corpo{padding:18px 22px}
+.domanda-guida{font:italic 1.2rem/1.5 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.2rem/1.5 var(--serif);border-left:4px solid #2b5f6b;border-left:4px solid var(--accento);padding:4px 0 4px 14px;margin:0 0 18px}
+.fasi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-gap:14px;gap:14px}
+.fase{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px}
+.fase h4{margin:0 0 8px;font-size:1rem}
+.fase ol,.fase ul{margin:0;padding-left:20px;font-size:.96rem}
+.fase li{margin:0 0 6px}
+.bottone{display:inline-block;font:inherit;font-weight:700;border-radius:999px;padding:9px 18px;border:2px solid #2b5f6b;border:2px solid var(--accento);background:#2b5f6b;background:var(--accento);color:#fff;text-decoration:none;cursor:pointer}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bottone{color:#0f1416}}
+:root[data-theme="dark"] .bottone{color:#0f1416}
+.bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+:root .bottone.secondario,:root:not([data-theme="light"]) .bottone.secondario,:root[data-theme="dark"] .bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+.bottone[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.altre-fonti{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-gap:8px;gap:8px}
+.altre-fonti li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 14px;font-size:.96rem}
+.altre-fonti .tipo{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue);display:block}
+
+/* compiti */
+.attivita{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:14px;padding:18px 22px;margin:0 0 18px}
+.attivita h4{margin:0 0 4px;font:700 1.25rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.25rem/1.3 var(--serif)}
+.attivita .meta{font-size:.86rem;color:#5a6066;color:var(--tenue);margin:0 0 12px}
+.consegna{margin:0 0 12px}
+table.esercizio{width:100%;border-collapse:collapse;font-size:.97rem}
+table.esercizio td{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:8px 6px;vertical-align:middle}
+table.esercizio td:first-child{width:52%}
+table.esercizio select{font:inherit;font-size:.95rem;width:100%;max-width:100%;padding:5px 6px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:6px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+td.esito{width:34px;text-align:center;font-weight:700}
+tr.ok td.esito{color:#1f7a4d;color:var(--ok)} tr.no td.esito{color:#b42318;color:var(--no)}
+tr.ok{background:#dcf2e6;background:var(--ok-bg)} tr.no{background:#fde3e1;background:var(--no-bg)}
+.spiega{display:block;font-size:.88rem;color:#5a6066;color:var(--tenue);margin-top:4px}
+.comandi{display:flex;flex-wrap:wrap;align-items:center;margin:14px 0 0}
+.comandi>*{margin:0 10px 8px 0}
+.punteggio{font-weight:700}
+textarea{font:inherit;width:100%;min-height:84px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:8px;padding:8px 10px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+.dibattito{margin:14px 0 0;background:#eaf1f2;background:var(--tenue-bg);border-radius:10px;padding:10px 14px;font-size:.95rem}
+.dibattito b{color:#2b5f6b;color:var(--accento)}
+
+footer{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:18px 52px;font-size:.86rem;color:#5a6066;color:var(--tenue)}
+footer p{margin:0 0 6px}
+
+@media (max-width:960px){
+  html{scroll-padding-bottom:84px}
+  .corpo-lezione{display:block}
+  nav.indice{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:90;grid-auto-flow:column;grid-auto-columns:max-content;grid-template-columns:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;max-height:none;grid-gap:8px;gap:8px;padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));background:#ffffff;background:var(--carta);border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);box-shadow:0 -4px 14px rgba(0,0,0,.12)}
+  .foglio{margin-bottom:70px}
+  .indice-titolo{display:none}
+  a.voce{flex:none;min-height:40px;padding:3px 12px 3px 3px;font-size:.74rem;white-space:nowrap}
+  a.voce .tondo{width:34px;height:34px;border-width:2px}
+  a.voce svg{width:18px;height:18px}
+  a.voce:hover,a.voce[aria-current="true"]{transform:none}
+  a.voce[aria-current="true"]{box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+  main{padding:10px 40px 40px}
+}
+@media (max-width:860px){
+  .come{grid-template-columns:1fr 1fr}
+  .fasi{grid-template-columns:1fr}
+  .catena{grid-template-columns:1fr}
+  .catena .freccia{transform:rotate(90deg);justify-self:center;line-height:1}
+}
+@media (max-width:700px){
+  .foglio{margin:0;border:0}
+  header.testata{padding:16px 16px 20px}
+  main{padding:4px 16px 28px}
+  footer{padding:16px}
+  .primadopo{grid-template-columns:1fr}
+  .primadopo .freccia{transform:rotate(90deg);justify-self:center}
+  .come{grid-template-columns:1fr}
+  #mappa .segno text{font-size:30px}
+  .ricorda dl{grid-template-columns:1fr}
+  .ricorda dd{margin-bottom:6px}
+  table.esercizio td{display:block;width:100%!important;border-top:0;padding:4px 6px}
+  table.esercizio tr{display:block;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:6px 0}
+  td.esito{text-align:left}
+}
+@media print{
+  body{background:#fff}.foglio{border:0;margin:0}nav.indice,.indietro,.comandi,.livelli,.mappa-box{display:none}
+  .essenziale-solo{display:none}section.parte{break-inside:avoid-page}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#mappa.mondo .segno text{font-size:14px;stroke-width:4px}
+@media (max-width:700px){#mappa.mondo .segno text{font-size:26px;stroke-width:5px}}
+
+.animata{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);border-radius:12px;padding:14px 16px;margin:16px 0 0;background:#ffffff;background:var(--carta)}
+.animata h4{margin:0 0 6px;font-size:1.02rem}
+.animata p{margin:0 0 8px}
+.animata ul{margin:8px 0 0;padding:0;list-style:none}
+.animata li{margin:0 0 8px;padding-left:24px;position:relative}
+.animata li:before{content:"\25B6";position:absolute;left:2px;top:0;color:#2b5f6b;color:var(--accento);font-size:.85em}
+.animata .nota-video{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:6px 0 0}
+@media print{.animata{display:none}}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<div class="foglio">
+<header class="testata">
+  <a class="indietro" href="../../index.html">← Torna a Storia: tutti i moduli</a>
+  <p class="eyebrow">Storia · Capire il mondo attuale</p>
+  <p class="capitolo">Lezione 3</p>
+  <h1>I problemi del Medio Oriente</h1>
+  <p class="sottotitolo">Dal 1918 a oggi: petrolio, religioni, Stati nuovi e guerre in una regione contesa</p>
+</header>
+<div class="corpo-lezione">
+<nav class="indice" aria-label="Parti della lezione">
+  <p class="indice-titolo">In questa lezione</p>
+  <a class="voce" href="#prima-dopo" style="--c:#3a6ea5"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l3 3-3 3"/><path d="M4 7h13"/><path d="M10 14l-3 3 3 3"/><path d="M20 17H7"/></svg></span><span class="nome">Prima / Dopo</span></a>
+  <a class="voce" href="#idea" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">Idea principale</span></a>
+  <a class="voce" href="#testi" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">Testo sintetico / essenziale</span></a>
+  <a class="voce" href="#perche" style="--c:#b25510"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .9-1 1.6v.6"/><circle cx="12" cy="17" r=".7" fill="currentColor"/></svg></span><span class="nome">Perché?</span></a>
+  <a class="voce" href="#concetti" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4"/><path d="M10.5 12.5L19 4M15.5 7.5l3 3M13 10l2 2"/></svg></span><span class="nome">Concetti fondamentali</span></a>
+  <a class="voce" href="#come" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="4.5" rx="1"/><rect x="3" y="15" width="6" height="5" rx="1"/><rect x="15" y="15" width="6" height="5" rx="1"/><path d="M12 7v4M6 15v-4h12v4"/></svg></span><span class="nome">Come?</span></a>
+  <a class="voce" href="#parole" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">Parole chiave</span></a>
+  <a class="voce" href="#lente" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M20 20l-5.2-5.2"/></svg></span><span class="nome">Studiamo le fonti</span></a>
+  <a class="voce" href="#compiti" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="nome">Ripassiamo</span></a>
+</nav>
+
+<main id="contenuto">
+
+<!-- ======================= PRIMA / DOPO ======================= -->
+<section class="parte" id="prima-dopo" aria-labelledby="t-pd">
+  <p class="etichetta">Per orientarsi</p>
+  <h2 id="t-pd">Prima e dopo</h2>
+  <p class="guida">Il Medio Oriente è una delle regioni più tormentate del mondo di oggi. Per capire le notizie che leggiamo, bisogna partire da lontano.</p>
+  <div class="primadopo">
+    <div class="pd">
+      <h3><span>Prima</span></h3>
+      <p>Per quattro secoli gran parte del Medio Oriente fa parte dell'Impero ottomano. Dopo la Prima guerra mondiale l'impero crolla: Gran Bretagna e Francia si dividono la regione e la governano come <a class="pk" href="#p-mandato">mandati</a>. Intanto molti ebrei, perseguitati in Europa, emigrano in Palestina, dove vivono gli arabi palestinesi. Sotto la sabbia si scopre il petrolio.</p>
+      <p class="link-lez">Ripassa: <a href="../guerre-totalitarismi/primo-dopoguerra.html">Il primo dopoguerra</a> · <a href="../nazismo-guerra-fredda/decolonizzazione.html">Il crollo degli imperi coloniali</a></p>
+    </div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="pd">
+      <h3><span>Dopo</span></h3>
+      <p>La storia del Medio Oriente non è finita: i conflitti continuano e la situazione cambia di settimana in settimana. Questa lezione ti dà gli strumenti per orientarti; per le notizie più recenti bisogna leggere giornali aggiornati e confrontare fonti diverse.</p>
+      <p class="link-lez">Più avanti: <a href="mondo-contemporaneo.html">Il mondo contemporaneo</a></p>
+    </div>
+    <p class="pd-centro">fine dell'Impero ottomano → 1948 → oggi</p>
+  </div>
+</section>
+
+<!-- ======================= IDEA PRINCIPALE ======================= -->
+<section class="parte" id="idea" aria-labelledby="t-idea">
+  <p class="etichetta">Idea principale</p>
+  <h2 id="t-idea">Che cosa, dove, quando, chi</h2>
+  <p class="guida">Prima di studiare i dettagli, guarda l'argomento dall'alto: che cosa succede e dove, in che anni, chi sono i protagonisti.</p>
+
+  <h3 id="dove"><span>1. Dove? Che cosa?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 🗺️ Collocare nello spazio</p>
+  <div class="lettura">
+    <p>Il <strong>Medio Oriente</strong> è la regione tra il Mediterraneo orientale, il mar Rosso e il golfo Persico: Egitto, Israele e Palestina, Libano, Siria, Giordania, Iraq, Iran, Arabia Saudita e gli altri Stati della penisola arabica, la Turchia. Qui sono nate le tre grandi religioni monoteiste, ebraismo, cristianesimo e islam, e qui si trovano le più grandi riserve di <a class="pk" href="#p-petrolio">petrolio</a> del mondo.</p>
+    <p>Il conflitto più lungo è quello tra <strong>Israele</strong> e i <strong>palestinesi</strong>: due popoli che rivendicano la stessa terra. Nel 1948 nasce lo Stato di Israele; i palestinesi non hanno ancora uno Stato pienamente riconosciuto e sovrano. Da allora ci sono state molte guerre, rivolte, attentati, tentativi di pace falliti.</p>
+    <p>Altri conflitti attraversano la regione: la rivalità tra Iran e Arabia Saudita, le guerre in Iraq e in Siria, il <a class="pk" href="#p-terrorismo">terrorismo</a> di gruppi come al-Qaida e lo Stato islamico. Le grandi potenze sono sempre intervenute, per il petrolio e per la posizione strategica della regione.</p>
+  </div>
+  <div class="mappa-box">
+    <svg id="mappa" class="mondo" viewBox="0 0 900 730" role="img" aria-labelledby="mappa-titolo"><title id="mappa-titolo">Carta del Medio Oriente con i luoghi principali</title><rect x="0" y="0" width="900" height="730" class="mare"/><path class="terra" d="M345.5,1135.4L334.3,1165.3L335.7,1179.1L351.2,1188.0L351.9,1194.3L345.3,1209.0L346.7,1216.4L345.1,1228.0L353.6,1243.3L363.7,1267.3L372.5,1272.6L376.5,1283.5L375.5,1307.7L378.5,1329.1L379.4,1367.1L383.7,1379.0L376.5,1396.4L367.0,1413.3L351.5,1428.3L329.3,1437.6L301.9,1449.4L274.5,1475.5L265.1,1480.0L248.1,1497.2L238.0,1502.8L236.0,1520.2L247.6,1538.6L252.3,1552.9L252.6,1560.2L256.9,1559.0L256.2,1582.8L252.3,1594.1L258.0,1598.3L254.4,1608.4L244.2,1617.1L224.2,1625.2L194.9,1638.4L184.3,1647.4L186.4,1657.6L192.6,1659.3L190.5,1672.1L184.3,1689.8L181.5,1710.0L175.2,1721.0L158.6,1733.3L153.9,1736.8L143.5,1749.2L136.8,1761.6L123.0,1779.1L95.5,1804.2L78.3,1818.8L59.9,1829.9L34.5,1839.3L22.2,1840.6L19.0,1847.3L4.2,1843.7L-7.9,1848.3L-34.2,1843.7L-48.9,1846.6L-59.0,1845.3L-84.1,1854.9L-104.9,1858.8L-119.9,1868.0L-131.0,1868.6L-141.2,1859.9L-149.5,1859.5L-160.0,1848.6L-161.1,1852.0L-164.4,1845.4L-164.2,1831.2L-172.1,1814.9L-164.3,1810.4L-164.9,1791.8L-180.8,1769.0L-193.0,1748.4L-193.1,1748.3L-210.5,1716.7L-228.6,1698.4L-238.1,1680.6L-243.5,1656.9L-249.5,1639.3L-257.6,1601.8L-258.2,1572.7L-261.3,1559.5L-270.8,1549.5L-283.4,1529.3L-296.1,1500.2L-301.4,1484.9L-321.2,1461.1L-322.7,1442.5L-325.0,1427.2L-321.6,1405.8L-313.2,1383.5L-311.9,1373.1L-304.0,1351.2L-298.2,1341.2L-284.3,1325.3L-276.4,1314.5L-273.9,1296.4L-275.2,1282.6L-282.5,1273.9L-289.0,1259.2L-294.9,1244.6L-293.6,1239.6L-286.2,1229.9L-293.5,1206.4L-298.5,1190.1L-310.7,1174.7L-308.4,1170.0L-311.8,1162.5L-318.3,1144.2L-338.3,1118.4L-363.2,1093.9L-379.3,1073.8L-394.1,1048.7L-393.3,1040.6L-388.0,1032.8L-382.1,1015.1L-377.2,997.1L-381.8,993.4L-373.4,966.1L-369.9,946.9L-379.3,930.8L-390.5,926.7L-395.4,915.8L-401.7,912.3L-401.3,905.5L-426.6,914.3L-435.8,913.0L-445.2,918.5L-464.6,917.9L-477.7,902.7L-485.6,885.1L-502.9,869.1L-521.2,869.4L-542.7,869.4L-562.7,872.2L-582.3,877.4L-620.5,891.6L-634.0,900.0L-655.9,907.0L-677.6,900.1L-688.6,900.4L-705.6,895.6L-721.2,895.9L-750.0,900.2L-766.9,907.2L-791.0,916.1L-795.7,915.5L-802.1,915.7L-827.2,904.1L-849.2,885.6L-870.0,872.2L-886.4,856.6L-892.9,854.7L-910.4,844.9L-923.0,831.9L-927.3,823.0L-930.3,805.1L-941.0,790.7L-950.5,781.1L-956.7,778.0L-962.7,773.1L-965.5,762.4L-969.1,757.0L-976.1,753.1L-989.2,742.9L-999.4,741.3L-1004.9,734.4L-1004.8,730.7L-1012.2,725.6L-1013.8,720.4L-1017.8,701.7L-1014.6,690.9L-1024.7,672.0L-1036.8,663.3L-1026.1,658.7L-1014.4,641.6L-1008.6,629.1L-1010.7,616.0L-1003.9,604.1L-1000.9,581.1L-1003.5,557.1L-1006.5,545.0L-1004.0,532.9L-1010.4,521.3L-1023.1,510.8L-1022.1,500.6L-1020.9,489.3L-1011.7,482.6L-1003.7,470.0L-1005.3,461.7L-996.9,444.6L-983.3,429.1L-975.2,425.2L-968.7,411.0L-968.1,398.0L-959.4,383.0L-943.2,374.1L-927.7,349.3L-927.3,349.0L-915.1,339.6L-892.4,336.9L-873.3,320.3L-861.0,313.8L-840.7,293.5L-846.9,263.2L-837.6,242.3L-834.3,229.5L-818.7,213.1L-794.3,201.9L-776.3,191.9L-760.0,166.7L-752.4,151.8L-734.4,151.9L-719.8,162.2L-696.7,160.5L-671.5,165.9L-660.9,166.2L-637.5,152.9L-611.2,148.7L-595.9,138.6L-572.4,131.2L-531.2,126.9L-491.0,124.9L-478.7,128.5L-455.8,118.9L-429.8,118.7L-419.9,124.4L-403.2,122.9L-376.8,113.1L-359.7,116.0L-360.5,128.3L-339.8,119.4L-338.1,124.1L-350.3,136.0L-350.4,147.2L-342.0,153.3L-345.2,174.3L-361.2,186.5L-356.6,199.8L-344.0,200.2L-337.9,211.8L-328.6,215.6L-300.1,224.0L-289.8,221.9L-269.5,225.9L-237.3,236.8L-225.9,258.4L-204.0,263.1L-169.8,273.3L-143.9,285.4L-132.0,279.1L-120.3,267.9L-126.0,249.3L-118.4,237.4L-100.9,226.0L-84.1,222.7L-51.2,227.7L-42.9,238.6L-33.8,238.7L-26.1,242.8L-1.9,245.7L4.0,253.7L36.4,253.3L59.8,259.8L83.9,267.0L95.2,270.7L113.9,263.0L123.9,256.0L145.4,254.0L162.7,257.1L169.3,269.2L175.0,261.2L194.4,267.0L213.4,268.4L225.4,262.2L232.4,254.2L230.8,252.8L237.2,241.5L242.1,223.1L245.6,217.0L246.3,216.7L255.0,196.9L267.1,179.8L267.5,178.9L265.3,160.3L271.2,150.3L262.3,139.2L271.5,130.1L256.7,132.2L236.3,126.6L219.5,140.6L182.7,143.3L163.0,130.3L136.7,129.4L131.1,139.5L114.3,142.4L90.8,129.5L64.3,129.9L49.8,105.7L32.1,92.2L43.9,73.3L28.5,61.7L55.4,38.4L92.9,37.5L103.2,19.0L149.5,22.2L178.7,6.4L207.1,-0.4L247.3,-1.0L289.8,16.2L324.7,25.6L353.0,21.8L373.9,24.0L402.7,11.3L406.3,0.9L400.2,-15.7L386.2,-24.7L372.7,-27.5L363.8,-34.9L332.8,-55.4L305.0,-64.6L284.0,-78.9L301.7,-82.8L321.9,-103.2L308.3,-112.8L344.2,-122.7L343.5,-128.0L321.6,-124.1L302.2,-122.1L286.0,-114.3L263.2,-113.0L242.3,-103.9L243.5,-90.9L243.7,-88.8L255.6,-83.0L280.5,-84.4L275.7,-75.7L249.1,-71.5L216.0,-57.4L202.6,-62.4L207.9,-73.8L181.3,-80.9L185.7,-85.6L208.9,-93.7L205.2,-96.6L201.9,-99.3L164.0,-105.4L162.4,-114.5L139.9,-111.5L130.8,-98.1L112.0,-80.1L112.5,-73.9L100.7,-68.6L93.4,-70.9L86.5,-41.5L73.9,-31.4L65.1,-14.1L72.9,-0.2L75.8,9.2L97.0,17.0L92.6,23.0L63.7,24.3L53.3,31.8L33.0,45.0L25.4,33.6L25.7,28.6L10.9,27.9L-1.8,25.6L-31.3,32.0L-14.4,45.6L-26.8,49.6L-40.3,49.6L-53.1,37.1L-57.7,42.4L-52.3,56.9L-40.1,68.3L-49.3,73.7L-35.7,84.9L-23.7,91.9L-23.4,105.7L-45.9,99.2L-38.7,111.7L-54.1,114.2L-44.9,135.7L-61.0,136.0L-81.0,125.4L-90.1,105.9L-94.4,89.8L-103.8,78.6L-116.4,64.7L-117.9,57.8L-122.1,56.1L-122.6,50.7L-136.1,42.5L-138.2,31.0L-136.2,14.4L-132.8,6.8L-136.9,3.0L-142.0,1.1L-148.9,-6.8L-159.4,-11.7L-182.2,-20.7L-196.3,-29.4L-218.6,-36.7L-239.0,-54.5L-234.1,-56.4L-245.2,-66.6L-245.6,-74.8L-261.3,-78.7L-268.7,-68.2L-275.9,-76.3L-275.4,-84.8L-274.5,-85.1L-269.1,-87.4L-288.4,-90.9L-308.2,-82.3L-306.9,-70.2L-309.9,-63.3L-301.9,-50.9L-279.1,-38.6L-266.8,-18.5L-239.8,1.1L-220.7,1.0L-214.8,6.3L-221.6,11.2L-199.8,20.0L-182.0,27.3L-161.1,40.0L-158.6,44.6L-163.1,53.2L-176.6,41.9L-197.8,37.9L-208.0,53.6L-190.5,62.6L-193.3,75.3L-203.5,76.8L-216.5,97.6L-226.6,99.5L-226.5,92.1L-221.5,79.0L-216.3,73.8L-225.7,59.7L-233.2,47.5L-243.3,44.4L-250.4,33.9L-266.1,29.5L-276.6,19.7L-294.7,18.2L-313.7,7.2L-335.9,-8.6L-352.5,-22.6L-360.0,-46.7L-372.1,-49.5L-391.9,-57.5L-403.1,-54.3L-417.2,-43.0L-427.2,-41.2L-449.3,-27.5L-497.3,-34.0L-532.7,-26.1L-535.5,-11.5L-534.2,2.6L-557.2,18.8L-588.4,24.0L-590.6,32.2L-605.5,45.6L-614.9,65.4L-605.4,79.3L-619.4,90.2L-624.7,106.0L-643.1,110.8L-660.3,129.5L-691.2,129.9L-714.4,129.4L-729.6,138.1L-738.9,147.2L-750.8,145.2L-759.8,137.0L-766.7,123.0L-789.4,119.2L-799.2,125.5L-812.0,122.1L-824.5,124.8L-820.9,105.8L-823.1,90.8L-834.0,88.6L-839.9,79.3L-837.9,63.5L-828.2,54.6L-826.5,44.8L-821.4,30.1L-821.9,19.9L-826.8,11.1L-827.9,2.9L-826.6,-14.4L-836.6,-25.0L-802.2,-42.5L-772.4,-38.2L-739.8,-38.3L-713.8,-34.1L-693.7,-35.4L-654.4,-34.6L-641.8,-49.2L-637.1,-97.6L-662.3,-123.2L-680.2,-135.5L-717.3,-144.8L-719.8,-162.6L-688.3,-167.9L-647.5,-161.6L-655.2,-189.2L-632.1,-178.7L-575.6,-197.7L-568.2,-217.6L-546.9,-222.5L-527.5,-227.3L-515.0,-234.0L-493.6,-269.8L-460.3,-280.0L-440.1,-279.3L-435.4,-284.4L-415.1,-285.8L-410.5,-280.4L-394.0,-292.4L-399.6,-301.5L-400.7,-315.3L-410.6,-328.8L-411.3,-353.7L-407.3,-360.2L-400.3,-367.5L-378.9,-369.0L-370.3,-375.8L-350.8,-382.6L-351.6,-370.1L-358.8,-362.2L-355.9,-355.4L-342.6,-351.7L-348.6,-342.5L-355.9,-345.2L-373.4,-327.7L-366.7,-315.8L-366.4,-306.4L-341.8,-300.7L-342.0,-292.1L-317.2,-296.7L-303.6,-303.3L-276.2,-293.7L-264.6,-286.0L-248.1,-293.1L-210.1,-304.4L-179.4,-312.6L-155.2,-308.5L-153.3,-302.6L-129.9,-302.3L-124.3,-313.0L-90.8,-320.8L-96.0,-341.3L-95.1,-359.6L-83.2,-374.9L-60.2,-383.2L-40.9,-365.0L-21.4,-365.5L-16.7,-384.2L-13.9,-398.5L-22.8,-395.4L-38.3,-404.1L-40.4,-418.1L-9.6,-424.8L21.0,-428.4L47.4,-424.4L72.5,-425.1L100.2,-438.5L74.7,-450.1L30.6,-448.1L-12.2,-439.2L-51.8,-434.1L-65.9,-447.4L-89.5,-455.3L-84.1,-479.3L-95.9,-501.2L-84.2,-515.4L-62.2,-530.7L-6.6,-557.1L9.6,-562.2L7.2,-572.5L-26.7,-584.0L-68.6,-577.1L-92.1,-560.1L-88.3,-545.2L-127.0,-525.7L-174.0,-504.7L-191.7,-470.4L-174.3,-453.3L-151.1,-439.8L-173.5,-412.4L-198.8,-406.7L-208.1,-365.9L-221.8,-343.1L-251.3,-345.4L-265.1,-326.1L-293.3,-325.0L-301.0,-348.0L-321.4,-375.6L-339.8,-410.0L-356.2,-425.0L-404.2,-396.8L-436.7,-391.1L-470.3,-403.5L-479.0,-429.6L-486.7,-485.8L-464.3,-501.4L-400.1,-521.9L-352.0,-546.9L-307.5,-580.9L-249.0,-627.8L-208.3,-646.1L-141.5,-676.6L-88.1,-687.3L-48.1,-686.0L-11.0,-706.1L33.3,-705.1L77.0,-709.9L153.1,-692.1L121.7,-685.6L148.4,-670.3L173.5,-678.8L213.4,-664.1L280.1,-658.3L372.0,-630.8L390.7,-619.2L392.2,-603.1L365.3,-590.3L325.5,-583.8L216.9,-602.3L199.1,-599.2L238.7,-581.4L240.3,-570.1L241.9,-545.2L273.2,-537.8L292.2,-531.5L295.4,-543.3L280.7,-553.7L296.2,-563.0L355.0,-547.8L375.4,-553.7L359.1,-571.6L415.8,-595.4L438.2,-594.0L461.0,-585.5L475.1,-602.2L454.8,-616.7L466.8,-631.2L448.9,-646.3L516.9,-638.5L530.8,-624.9L500.0,-621.9L500.1,-608.4L519.3,-600.0L556.9,-605.3L562.8,-620.8L613.6,-632.4L698.5,-653.3L716.8,-652.1L692.9,-637.3L723.1,-634.8L740.5,-643.1L786.1,-643.8L822.2,-653.9L850.0,-639.2L877.5,-655.3L852.1,-669.4L864.7,-677.5L936.6,-670.1L970.3,-662.5L1058.4,-634.7L1074.7,-647.4L1050.0,-660.3L1049.3,-665.4L1019.9,-667.8L1028.0,-679.3L1014.9,-698.3L1014.2,-706.1L1059.1,-728.1L1075.1,-750.2L1093.1,-755.0L1157.6,-748.6L1162.6,-735.1L1139.5,-715.4L1154.7,-707.6L1162.5,-690.6L1157.0,-657.3L1183.8,-642.4L1173.3,-626.1L1125.7,-591.6L1153.6,-588.0L1163.2,-596.8L1190.0,-603.0L1196.5,-615.0L1217.5,-626.6L1203.3,-640.4L1214.7,-656.5L1188.1,-658.5L1182.2,-672.0L1201.6,-696.4L1170.0,-716.3L1213.5,-732.7L1207.9,-750.0L1220.1,-750.5L1232.8,-737.0L1223.3,-713.6L1249.3,-709.1L1238.1,-726.6L1278.9,-736.2L1329.4,-737.5L1374.3,-723.6L1352.7,-743.9L1350.2,-769.8L1392.5,-774.7L1451.1,-773.7L1503.8,-776.8L1484.0,-789.6L1512.1,-805.5L1540.1,-806.2L1587.4,-818.3L1651.6,-821.5L1659.8,-828.2L1723.6,-830.4L1743.5,-825.0L1798.1,-837.9L1842.8,-837.5L1849.5,-848.0L1872.7,-858.4L1930.2,-868.3L1971.9,-860.5L1938.8,-854.4L1993.9,-850.7L2000.4,-838.7L2022.7,-844.6L2093.8,-844.3L2148.6,-832.4L2168.1,-823.3L2162.1,-810.7L2135.2,-803.5L2071.3,-790.0L2053.0,-782.8L2083.2,-779.3L2119.1,-773.2L2141.1,-777.8L2153.4,-762.2L2164.1,-768.5L2203.0,-772.3L2281.1,-768.4L2286.9,-757.0L2388.7,-753.4L2390.0,-771.9L2441.7,-767.7L2480.5,-767.8L2519.8,-755.0L2531.0,-739.4L2516.6,-729.2L2547.1,-710.1L2585.4,-700.2L2608.9,-725.7L2647.9,-714.8L2689.3,-721.3L2736.4,-713.8L2754.3,-720.7L2794.1,-717.3L2776.5,-739.9L2808.7,-750.4L3028.4,-734.6L3049.1,-720.1L3112.7,-701.6L3211.0,-706.2L3259.4,-702.2L3279.6,-692.1L3276.7,-674.3L3306.7,-667.4L3339.3,-672.4L3382.3,-673.0L3428.3,-668.2L3474.4,-670.9L3516.8,-649.3L3546.9,-657.1L3527.3,-672.6L3538.0,-683.4L3615.6,-676.6L3666.2,-678.1L3736.2,-666.5L-4986.5,-655.9L-4926.9,-637.3L-4863.1,-613.1L-4865.2,-598.0L-4848.8,-591.9L-4854.4,-609.6L-4788.4,-606.0L-4740.8,-583.2L-4764.9,-572.6L-4804.8,-570.1L-4805.4,-546.3L-4815.1,-541.3L-4837.9,-542.0L-4856.4,-550.5L-4888.8,-557.6L-4894.2,-568.1L-4919.0,-572.1L-4946.6,-569.0L-4959.8,-577.5L-4954.5,-586.5L-4983.7,-580.7L-4972.7,-569.3L-4986.5,-559.0L3770.1,-558.8L3738.8,-548.1L3707.3,-549.9L3729.2,-537.0L3743.7,-516.9L3754.9,-510.4L3757.7,-500.3L3751.5,-493.9L3706.2,-499.2L3638.1,-480.9L3616.5,-478.0L3579.3,-460.9L3544.0,-446.0L3535.1,-435.0L3500.3,-451.8L3436.9,-432.7L3425.9,-441.7L3402.4,-431.3L3369.9,-434.6L3362.0,-418.7L3332.9,-395.1L3333.7,-385.3L3361.4,-379.8L3358.2,-344.4L3335.6,-343.5L3325.2,-323.2L3335.3,-312.7L3292.8,-300.2L3284.4,-272.5L3248.0,-266.6L3240.7,-241.9L3205.7,-219.2L3196.7,-235.9L3186.3,-271.4L3172.7,-325.5L3184.4,-359.2L3204.9,-373.7L3206.2,-385.1L3244.0,-390.5L3287.4,-421.2L3329.4,-446.2L3373.1,-465.6L3392.6,-499.9L3363.1,-497.8L3348.5,-477.8L3286.7,-451.1L3266.8,-481.0L3204.1,-472.7L3143.1,-432.0L3163.2,-417.0L3109.0,-410.7L3071.3,-408.2L3073.1,-425.8L3035.3,-429.5L3005.2,-417.5L2930.8,-421.7L2850.7,-414.5L2772.0,-367.0L2678.7,-309.6L2717.1,-306.6L2729.0,-291.4L2752.6,-285.9L2768.2,-298.1L2794.9,-296.5L2830.0,-269.7L2830.8,-249.0L2811.8,-224.7L2809.8,-195.7L2798.8,-156.8L2762.2,-121.6L2754.0,-104.8L2720.9,-76.4L2688.2,-48.4L2672.5,-34.0L2640.1,-19.8L2624.8,-19.4L2609.5,-31.2L2576.8,-13.5L2573.0,-5.3L2563.8,-6.8L2553.2,1.4L2546.0,9.7L2546.9,27.2L2534.3,32.5L2530.0,36.9L2520.8,44.0L2504.6,48.0L2494.0,54.6L2493.3,65.1L2490.5,67.8L2500.2,71.7L2513.9,82.4L2534.9,111.1L2540.9,126.9L2541.2,154.9L2532.0,168.3L2509.9,172.9L2490.5,183.0L2468.6,185.1L2465.9,171.9L2470.3,153.6L2459.6,128.3L2477.7,124.2L2461.0,103.4L2449.2,98.8L2446.2,103.3L2439.1,105.4L2438.3,100.8L2432.0,98.5L2425.4,94.7L2432.0,84.0L2437.8,81.1L2435.6,76.7L2441.9,63.5L2440.3,59.6L2426.0,56.9L2414.5,50.4L2380.6,57.4L2362.7,68.8L2336.4,75.5L2349.4,64.2L2344.3,54.7L2363.6,38.4L2350.7,25.6L2329.5,34.2L2302.0,51.1L2287.0,66.8L2263.2,68.0L2250.8,79.3L2263.7,95.8L2283.5,99.8L2284.3,110.7L2303.6,117.8L2330.8,100.5L2352.4,109.9L2368.1,110.5L2372.1,123.3L2337.7,130.1L2326.3,143.2L2302.6,155.4L2290.2,172.5L2316.4,185.8L2325.9,209.8L2340.7,232.0L2357.3,250.7L2356.8,268.8L2341.6,275.4L2347.4,288.4L2361.7,296.0L2358.0,315.8L2351.7,335.1L2338.2,337.2L2320.4,363.6L2300.7,395.5L2278.1,424.5L2244.7,447.0L2210.9,467.5L2183.4,470.3L2168.6,481.0L2160.1,473.1L2146.4,485.2L2112.4,497.4L2086.7,501.1L2078.4,526.8L2064.9,528.3L2058.5,510.6L2064.3,501.2L2031.6,493.4L2020.1,497.4L1987.6,518.2L1967.4,541.1L1962.1,558.0L1980.6,583.7L2003.4,615.5L2025.5,630.5L2040.3,650.0L2051.4,695.0L2048.1,737.8L2027.8,753.8L2000.0,769.5L1980.1,789.8L1949.8,812.4L1941.0,796.9L1947.8,780.3L1929.8,766.6L1909.4,763.0L1899.5,750.3L1887.2,725.2L1865.4,714.0L1844.6,714.5L1848.1,695.4L1826.7,695.5L1824.8,722.3L1811.6,757.8L1803.7,779.3L1805.4,796.9L1821.3,797.6L1831.2,819.8L1835.5,840.9L1849.1,854.8L1863.8,857.7L1876.4,870.3L1882.0,872.6L1896.4,887.2L1906.6,903.5L1908.0,919.9L1905.4,931.0L1907.8,939.3L1909.5,953.7L1918.1,960.4L1927.7,982.0L1927.2,990.2L1910.0,991.8L1886.9,973.8L1858.1,954.5L1855.3,942.1L1841.2,925.8L1837.9,905.7L1829.1,892.4L1831.8,874.7L1826.4,864.4L1816.8,855.0L1812.7,843.0L1799.7,829.3L1787.9,817.7L1784.0,832.0L1779.3,818.5L1781.9,803.3L1789.1,780.0L1786.8,761.9L1794.3,743.3L1786.1,728.9L1788.1,702.4L1778.2,689.8L1770.3,660.7L1765.9,630.0L1755.3,609.8L1739.3,622.0L1711.7,639.4L1698.1,637.2L1683.0,631.5L1691.4,601.4L1686.3,578.6L1667.2,550.5L1670.2,541.8L1655.9,538.6L1638.7,518.8L1631.8,506.2L1630.4,493.8L1625.7,482.0L1615.6,467.9L1593.1,466.9L1595.3,476.9L1587.7,490.5L1577.4,485.5L1573.8,490.0L1567.0,487.3L1557.5,485.1L1554.1,494.0L1537.5,493.7L1507.5,498.7L1508.9,517.1L1495.9,531.4L1460.9,547.8L1433.7,576.4L1415.4,591.8L1391.2,607.7L1391.1,618.9L1379.0,624.9L1357.1,633.6L1345.8,634.9L1338.4,653.4L1343.5,685.1L1344.8,705.3L1334.5,728.4L1334.4,769.7L1321.8,770.9L1310.7,789.4L1318.1,797.4L1295.9,804.4L1287.8,820.9L1278.0,827.9L1255.0,805.1L1243.7,771.1L1234.4,746.5L1225.9,735.1L1212.9,711.7L1206.9,681.3L1202.7,666.1L1180.5,632.7L1170.5,585.5L1163.2,554.4L1163.3,524.9L1158.5,502.2L1123.2,516.7L1106.0,513.8L1074.3,484.3L1085.9,475.5L1078.8,466.0L1050.2,445.3L1032.4,439.2L1025.2,421.7L1006.3,403.2L961.5,407.8L922.0,408.2L887.8,411.6L842.0,404.3L815.4,398.7L788.0,395.5L777.7,365.7L766.1,361.4L747.3,365.7L722.8,377.5L693.1,369.4L668.5,350.7L645.1,343.8L628.8,320.7L610.9,288.3L597.8,292.2L582.3,284.2L573.2,293.7L558.9,292.5L564.0,303.2L561.8,308.8L569.6,327.1L579.1,348.1L591.1,353.7L595.2,362.2L611.9,372.4L613.3,382.4L610.9,390.5L614.0,398.7L621.0,405.5L624.2,413.5L627.8,419.5L626.2,401.8L632.8,389.0L639.4,386.4L646.8,394.0L647.2,408.3L641.9,422.6L646.5,431.9L650.8,430.7L651.8,437.4L670.8,433.5L690.9,434.1L705.6,434.9L722.3,418.4L740.4,402.8L755.8,387.8L762.8,379.6L765.9,381.7L763.6,391.7L760.4,396.1L763.7,415.3L774.6,432.0L788.2,440.8L806.0,444.0L820.4,448.4L831.4,462.3L838.0,470.4L846.7,473.5L846.6,478.9L837.8,493.4L833.9,500.3L823.7,508.0L814.6,524.7L803.5,523.4L798.5,529.2L794.6,541.6L797.6,557.8L795.3,560.8L784.1,560.7L768.9,569.8L766.5,581.7L761.0,586.8L745.8,586.6L736.3,592.7L736.4,602.5L724.6,609.3L711.2,607.0L695.0,615.2L683.7,616.6L666.1,623.1L661.4,633.9L660.9,642.2L636.6,652.5L597.8,663.8L575.9,681.0L565.3,682.4L558.0,680.9L543.7,691.0L528.2,695.7L507.8,696.9L501.7,698.3L496.3,704.8L490.0,706.5L486.2,712.7L474.2,712.2L466.4,715.5L449.6,714.2L443.3,700.0L444.0,686.7L440.0,679.6L435.2,661.6L428.2,651.6L433.1,650.4L430.6,639.3L433.6,634.6L432.5,624.0L429.3,613.6L422.0,606.3L420.1,596.6L407.6,587.8L394.6,567.5L387.7,547.6L370.9,530.9L360.0,526.9L343.9,503.7L341.1,486.8L342.1,472.4L328.2,445.4L316.8,435.9L303.7,430.9L295.6,416.9L297.0,411.5L290.2,398.9L283.1,393.4L273.7,375.3L258.8,355.7L246.4,339.0L234.3,339.1L238.1,325.7L239.2,317.3L242.1,307.5L241.3,304.0L234.5,313.8L229.3,332.2L222.7,344.8L217.0,349.1L208.9,341.2L197.9,330.4L180.6,295.5L178.0,297.7L188.1,323.4L203.1,347.9L221.5,385.7L230.4,398.9L238.3,412.7L260.1,439.6L255.3,443.9L256.1,459.7L284.3,481.5L288.6,486.5L296.5,510.4L291.2,514.8L294.7,539.8L303.6,568.9L312.9,574.8L326.2,583.8L340.3,612.0L347.0,634.3L360.4,646.2L393.5,669.1L407.0,683.0L420.3,697.0L427.9,705.4L439.8,712.7L445.6,720.2L444.8,730.3L430.9,736.2L441.4,742.8L449.3,747.3L454.1,757.4L465.0,767.5L477.1,767.6L500.0,761.4L526.5,758.5L547.9,751.0L560.0,749.3L568.7,744.9L582.5,744.1L590.3,743.6L601.5,740.0L614.4,737.5L626.0,729.2L635.1,729.1L635.7,735.8L633.5,750.0L633.6,762.8L628.4,771.6L621.6,797.9L609.8,825.0L594.8,856.1L573.9,891.8L553.2,919.0L524.5,952.2L500.2,971.9L463.9,996.0L441.2,1014.5L414.6,1044.0L409.0,1056.8L403.4,1062.6L386.4,1072.3L380.4,1082.4L371.3,1084.2L367.8,1101.4L360.0,1111.2L355.3,1127.3L345.5,1135.4ZM580.9,89.5L588.6,107.5L611.7,112.5L628.6,124.7L663.2,128.9L701.2,122.5L703.5,116.8L699.0,99.6L702.5,74.2L683.6,65.9L689.8,49.2L673.7,47.8L679.0,27.3L702.0,33.3L723.3,25.5L705.6,10.9L698.6,-3.0L679.0,3.2L676.6,21.0L668.9,5.3L667.6,-0.7L673.6,-10.8L668.9,-19.3L640.7,-27.6L629.8,-49.4L616.3,-55.6L615.5,-63.5L639.2,-61.2L640.1,-79.0L660.8,-82.9L682.1,-79.3L686.5,-103.0L682.1,-118.0L657.7,-116.9L637.1,-122.8L609.0,-112.1L586.3,-107.0L575.2,-92.6L551.6,-88.6L527.4,-63.5L549.5,-40.4L547.1,-24.0L573.7,4.7L586.5,17.5L598.8,34.7L610.2,35.9L617.6,42.4L597.7,44.3L593.4,63.2L589.2,71.8L580.3,77.4L580.9,89.5ZM31.4,163.0L28.3,170.2L-6.7,172.2L-6.5,168.2L-36.2,163.5L-31.6,153.1L-18.3,161.3L0.6,159.9L18.8,161.6L18.1,165.9L31.4,163.0ZM188.1,166.9L189.8,166.7L193.3,160.9L210.8,161.2L232.9,153.9L216.5,164.3L218.3,168.8L219.0,170.8L194.1,180.7L182.2,177.5L176.5,167.8L188.1,166.9Z"/><g id="segni"></g></svg>
+    <p class="mappa-info" id="mappa-info" aria-live="polite">Tocca un punto sulla carta o un luogo dell'elenco.</p>
+    <p class="mappa-nota">Carta muta: solo le terre emerse, senza confini. Per vedere come cambiano i confini apri <a href="https://geacron.com/home-it/" target="_blank" rel="noopener">GeaCron</a> e confronta il 1914, il 1925 e il 1950.</p>
+  </div>
+  <ul class="luoghi" id="luoghi"></ul>
+  <div class="animata" id="carta-animata" aria-labelledby="t-animata">
+    <h4 id="t-animata">🎬 Cambia sguardo: la carta animata</h4>
+    <p>Ora guarda questi luoghi in movimento: confini, Stati ed eserciti che cambiano nel tempo. Poi torna alla carta muta e ritrova i luoghi dell'elenco.</p>
+    <h5>Carte animate</h5>
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=gakWWXTuF2o" target="_blank" rel="noopener">Arab-Israeli Wars on the Map</a></li>
+      <li><a href="https://www.youtube.com/watch?v=0vwkfJb7FEc" target="_blank" rel="noopener">Israel-Palestine conflict – Summary on a Map</a></li>
+      <li><a href="https://www.youtube.com/results?search_query=carta+animata+conflitto+arabo+israeliano" target="_blank" rel="noopener">Cerca altre carte animate su questo argomento</a></li>
+      <li><a href="https://www.youtube.com/playlist?list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">Tutte le carte animate di storia di HUB Scuola</a></li>
+    </ul>
+    <p class="nota-video">Video su YouTube, si aprono in una nuova scheda. Le «altre carte animate» hanno titoli o didascalie in inglese o francese: osserva soprattutto la carta e le date.</p>
+  </div>
+
+  <h3 id="quando"><span>2. Quando?</span></h3>
+  <p class="mestiere">🕐 Collocare nel tempo · gli ultimi anni sono storia in corso: verifica sempre le notizie più recenti</p>
+  <ol class="linea">
+    <li class="estremo"><span class="anno">1917–20</span>Fine dell'Impero ottomano; Gran Bretagna e Francia si dividono la regione. La Gran Bretagna promette agli ebrei un «focolare nazionale» in Palestina.</li>
+    <li><span class="anno">1947</span>L'ONU propone di dividere la Palestina in due Stati, uno ebraico e uno arabo.</li>
+    <li><span class="anno">1948</span>Nasce lo Stato di Israele; gli Stati arabi vicini lo attaccano e vengono sconfitti. Circa 700.000 palestinesi fuggono o sono cacciati dalle loro case.</li>
+    <li><span class="anno">1956</span>Crisi di Suez.</li>
+    <li><span class="anno">1967</span>Guerra dei sei giorni: Israele occupa la Cisgiordania, Gerusalemme Est, la Striscia di Gaza, il Sinai e le alture del Golan.</li>
+    <li><span class="anno">1973</span>Guerra del Kippur. I Paesi arabi produttori aumentano il prezzo del petrolio: crisi energetica in tutto il mondo.</li>
+    <li><span class="anno">1979</span>Pace tra Egitto e Israele. In Iran una rivoluzione porta al potere un regime islamico.</li>
+    <li><span class="anno">1987</span>Prima intifada: rivolta dei palestinesi nei territori occupati.</li>
+    <li><span class="anno">1990–91</span>L'Iraq di Saddam Hussein invade il Kuwait; una coalizione internazionale lo respinge.</li>
+    <li><span class="anno">1993</span>Accordi di Oslo tra Israele e OLP: nasce l'Autorità nazionale palestinese. Nel 1995 il primo ministro israeliano Rabin viene ucciso da un estremista israeliano.</li>
+    <li><span class="anno">2001–03</span>Attentati dell'11 settembre negli Stati Uniti; guerre in Afghanistan e in Iraq.</li>
+    <li><span class="anno">2011</span>«Primavere arabe»: rivolte popolari in molti Paesi; in Siria comincia una lunga guerra civile.</li>
+    <li><span class="anno">2023</span>7 ottobre: Hamas attacca Israele, uccide circa 1.200 persone e prende circa 250 ostaggi. Israele risponde con una guerra nella Striscia di Gaza che fa decine di migliaia di morti, in gran parte civili, e distrugge gran parte del territorio.</li>
+    <li class="estremo"><span class="anno">2025–26</span>Nell'ottobre 2025 un fragile cessate il fuoco a Gaza. All'inizio del 2026 Israele e Stati Uniti attaccano l'Iran e la guerra coinvolge anche il Libano. La situazione è in continua evoluzione.</li>
+  </ol>
+
+  <h3 id="chi"><span>3. Chi?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 📖 Lessico — il link apre una voce Treccani in una nuova scheda.</p>
+  <div class="persone">
+    <article class="persona"><span class="sigla" aria-hidden="true">DB</span><div><h4>David Ben Gurion</h4><span class="date">1886–1973 · Israele</span><p>Leader del movimento sionista, il 14 maggio 1948 proclama la nascita dello Stato di Israele e ne diventa il primo capo del governo.</p><a href="https://www.treccani.it/enciclopedia/storia-di-israele_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Leggi la voce Treccani «Israele, storia di»</a></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">GN</span><div><h4>Gamal Abdel Nasser</h4><span class="date">1918–1970 · Egitto</span><p>Presidente dell'Egitto, nazionalizza il canale di Suez e vuole unire i popoli arabi. Guida l'Egitto nelle guerre contro Israele.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">YA</span><div><h4>Yasser Arafat</h4><span class="date">1929–2004 · Palestina</span><p>Capo dell'OLP, l'organizzazione dei palestinesi, prima con la lotta armata, poi con le trattative. Nel 1993 firma gli accordi di Oslo.</p><a href="https://www.treccani.it/enciclopedia/storia-della-palestina_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Leggi la voce Treccani «Palestina, storia della»</a></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">YR</span><div><h4>Yitzhak Rabin</h4><span class="date">1922–1995 · Israele</span><p>Generale e poi primo ministro, firma la pace di Oslo con Arafat. Nel 1995 viene ucciso da un estremista israeliano contrario agli accordi.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">GM</span><div><h4>Golda Meir</h4><span class="date">1898–1978 · Israele</span><p>Tra i fondatori di Israele, è una delle prime donne al mondo a guidare un governo (1969–74), negli anni della guerra del Kippur.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">RK</span><div><h4>Ruhollah Khomeini</h4><span class="date">1902–1989 · Iran</span><p>Capo religioso sciita, guida nel 1979 la rivoluzione che abbatte lo scià e crea in Iran una repubblica islamica governata dal clero.</p></div></article>
+  </div>
+</section>
+
+<!-- ======================= TESTO ======================= -->
+<section class="parte" id="testi" aria-labelledby="t-testi">
+  <p class="etichetta">Testo sintetico / essenziale</p>
+  <h2 id="t-testi">La lezione per intero</h2>
+  <p class="guida">Lo stesso testo in due versioni: il <strong>sintetico</strong> contiene tutte le informazioni, l'<strong>essenziale</strong> le riassume con frasi più brevi. Scegli quella che ti serve.</p>
+  <div class="livelli" role="group" aria-label="Versione del testo">
+    <button type="button" data-livello="sintetico" aria-pressed="true">Sintetico</button>
+    <button type="button" data-livello="essenziale" aria-pressed="false">Essenziale</button>
+  </div>
+  <div id="testo-sintetico">
+    <div class="paragrafo"><h4><span class="n">1</span>Confini disegnati da fuori</h4><p>Dopo la Prima guerra mondiale Gran Bretagna e Francia si dividono le terre dell'Impero ottomano: nascono Stati nuovi come l'Iraq, la Siria, il Libano, la Giordania, con confini decisi dagli europei. Agli arabi era stata promessa l'indipendenza, agli ebrei un «focolare nazionale» in Palestina: promesse in contrasto tra loro, che preparano i conflitti futuri.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>La nascita di Israele</h4><p>Il <a class="pk" href="#p-sionismo">sionismo</a>, nato alla fine dell'Ottocento, vuole uno Stato per gli ebrei nella terra dei loro antenati. Dopo la Shoah molti sopravvissuti vanno in Palestina. Nel 1947 l'ONU propone due Stati; gli ebrei accettano, gli arabi rifiutano. Il 14 maggio 1948 nasce Israele, che vince la guerra contro gli Stati arabi vicini. Circa 700.000 palestinesi perdono la casa e diventano <a class="pk" href="#p-profughi">profughi</a>: per loro è la <em>Nakba</em>, la «catastrofe».</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>Le guerre arabo-israeliane</h4><p>Seguono altre guerre. Nel 1967, nella guerra dei sei giorni, Israele occupa la Cisgiordania, Gerusalemme Est e Gaza, dove vivono milioni di palestinesi, e vi costruisce negli anni molti insediamenti di coloni. Nel 1979 l'Egitto firma la pace con Israele e riottiene il Sinai. I palestinesi, guidati dall'OLP di Arafat, lottano per avere uno Stato, anche con il terrorismo; nel 1987 si ribellano nei territori occupati con l'<a class="pk" href="#p-intifada">intifada</a>.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>Speranze di pace e nuova violenza</h4><p>Con gli accordi di Oslo (1993) Israele e OLP si riconoscono a vicenda e nasce l'Autorità nazionale palestinese, che governa parte dei territori. Ma la pace non arriva: l'assassinio di Rabin, gli attentati di gruppi palestinesi come Hamas, l'espansione degli insediamenti, nuove rivolte e guerre. Dal 2007 Hamas controlla la Striscia di Gaza, chiusa da un blocco israeliano ed egiziano. Il 7 ottobre 2023 Hamas compie un attacco in Israele uccidendo circa 1.200 persone; la guerra che segue a Gaza provoca decine di migliaia di morti e una gravissima crisi umanitaria.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>Petrolio, religione, potenze</h4><p>Il Medio Oriente produce gran parte del petrolio del mondo: per questo le grandi potenze vi sono sempre intervenute. Nel 1973 l'aumento del prezzo del petrolio deciso dai Paesi arabi provoca una crisi in tutto il mondo. Dopo la rivoluzione del 1979 l'Iran sciita diventa rivale dell'Arabia Saudita sunnita e degli Stati Uniti. L'Iraq di Saddam Hussein combatte contro l'Iran (1980–88) e invade il Kuwait (1990).</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>Terrorismo, rivolte e guerre del XXI secolo</h4><p>L'11 settembre 2001 il gruppo terrorista al-Qaida colpisce gli Stati Uniti; seguono le guerre in Afghanistan e in Iraq. Nel 2011 le «primavere arabe» rovesciano alcuni dittatori, ma in Siria, Libia e Yemen portano a guerre civili. Lo Stato islamico conquista per alcuni anni parti di Siria e Iraq. Milioni di persone fuggono, anche verso l'Europa. Nel 2026 il conflitto si allarga all'Iran: la storia della regione si sta ancora scrivendo.</p></div>
+  </div>
+  <div id="testo-essenziale" class="essenziale" hidden>
+    <div class="paragrafo"><h4><span class="n">1</span>Confini disegnati da fuori</h4><p>Dopo la Prima guerra mondiale Gran Bretagna e Francia dividono il Medio Oriente e tracciano i confini.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>La nascita di Israele</h4><p>Nel 1948 nasce Israele. Molti palestinesi perdono la casa e diventano profughi.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>Le guerre arabo-israeliane</h4><p>Ci sono molte guerre. Dal 1967 Israele occupa i territori dove vivono i palestinesi.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>Speranze di pace e nuova violenza</h4><p>Nel 1993 si firma un accordo di pace, ma la violenza continua. Dal 2023 c'è una guerra terribile a Gaza.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>Petrolio, religione, potenze</h4><p>Il Medio Oriente ha molto petrolio. Per questo le grandi potenze intervengono. Iran e Arabia Saudita sono rivali.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>Terrorismo, rivolte e guerre del XXI secolo</h4><p>Dopo il 2001 ci sono guerre e terrorismo. Molte persone fuggono dalla regione. I conflitti non sono finiti.</p></div>
+  </div>
+</section>
+
+<!-- ======================= PERCHÉ ======================= -->
+<section class="parte" id="perche" aria-labelledby="t-perche">
+  <p class="etichetta">Perché?</p>
+  <h2 id="t-perche">Causa, evento, effetto</h2>
+  <p class="guida">Non c'è una sola causa: gli storici intrecciano ragioni diverse. Leggi la catena da sinistra a destra.</p>
+  <p class="mestiere">🧩 Comprendere fatti e processi storici</p>
+  <div class="catena">
+    <div class="anello causa"><h4>Causa</h4><p>Confini tracciati dalle potenze europee. Due popoli che rivendicano la stessa terra. Il petrolio e l'interesse delle grandi potenze. Rivalità religiose e politiche tra gli Stati della regione.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello evento"><h4>Evento</h4><p>Dal 1948 a oggi la regione è attraversata da guerre, occupazioni, rivolte, terrorismo e tentativi di pace falliti.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello effetto"><h4>Effetto</h4><p>Milioni di morti e di profughi, Paesi distrutti, paura e odio tra i popoli. Conseguenze in tutto il mondo: crisi del petrolio, terrorismo internazionale, migrazioni.</p></div>
+  </div>
+  <div class="ombra">
+    <h4>Ma attenzione</h4>
+    <p>Su questi temi ognuno tende a vedere solo il dolore della propria parte. Uno storico cerca di ascoltare le ragioni e le sofferenze di tutti: degli israeliani che vivono nella paura degli attentati e dei razzi, dei palestinesi che vivono sotto occupazione o tra le macerie, delle vittime civili da ogni parte. Capire non significa giustificare la violenza, di nessuno.</p>
+  </div>
+  <div class="ricorda">
+    <h4>Ricorda</h4>
+    <dl>
+      <dt>Sunniti e sciiti</dt><dd>I due rami principali dell'islam; la maggioranza dei musulmani è sunnita, l'Iran è a maggioranza sciita.</dd>
+      <dt>Territori occupati</dt><dd>Le terre conquistate da Israele nel 1967 dove vivono i palestinesi.</dd>
+      <dt>Cessate il fuoco</dt><dd>Accordo per sospendere i combattimenti, che non è ancora una pace.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ======================= CONCETTI ======================= -->
+<section class="parte" id="concetti" aria-labelledby="t-concetti">
+  <p class="etichetta">Concetti fondamentali</p>
+  <h2 id="t-concetti">Le idee chiave</h2>
+  <p class="guida">Le idee più importanti della lezione, spiegate una per una. Le parole sottolineate a puntini rimandano alle <a href="#parole">Parole chiave</a>.</p>
+  <article class="concetto" id="c-terra"><h4>Una terra, due popoli</h4><p>Israeliani e palestinesi rivendicano la stessa terra, tra il fiume Giordano e il Mediterraneo. Gli uni vi vedono la patria storica del popolo ebraico e un rifugio dopo la Shoah; gli altri la terra dove hanno vissuto per secoli. Molti pensano che l'unica soluzione siano due Stati, uno accanto all'altro, ma non si è mai riusciti a realizzarla.</p></article>
+  <article class="concetto" id="c-gerusalemme"><h4>Gerusalemme</h4><p>Gerusalemme è sacra a tre religioni: per gli ebrei c'è il Muro occidentale, resto del Tempio; per i cristiani il Santo Sepolcro; per i musulmani la moschea di al-Aqsa. Israeliani e palestinesi la vogliono entrambi come capitale. È uno dei nodi più difficili da sciogliere.</p></article>
+  <article class="concetto" id="c-petrolio"><h4>L'oro nero</h4><p>Il <a class="pk" href="#p-petrolio">petrolio</a> rende ricchissimi alcuni Stati della regione e la rende strategica per tutto il mondo. Molte guerre e molti interventi delle grandi potenze si spiegano anche con il controllo del petrolio e delle rotte che lo trasportano, come il canale di Suez e lo stretto di Hormuz.</p></article>
+  <article class="concetto" id="c-religione"><h4>Religione e politica</h4><p>In molti Paesi della regione religione e politica sono strettamente intrecciate. Movimenti e Stati usano la religione per ottenere consenso; gruppi estremisti, come al-Qaida e lo Stato islamico, la usano per giustificare il <a class="pk" href="#p-terrorismo">terrorismo</a>, le cui vittime sono soprattutto altri musulmani. Ma la grande maggioranza dei credenti, di ogni religione, rifiuta la violenza.</p></article>
+  <article class="concetto" id="c-profughi"><h4>Popoli in fuga</h4><p>Le guerre del Medio Oriente hanno prodotto milioni di <a class="pk" href="#p-profughi">profughi</a>: i palestinesi dal 1948, gli iracheni, i siriani, gli abitanti di Gaza. Molti vivono da decenni in campi profughi; altri cercano rifugio in Europa. Le migrazioni legano la storia di questa regione alla nostra.</p></article>
+</section>
+
+<!-- ======================= COME ======================= -->
+<section class="parte" id="come" aria-labelledby="t-come">
+  <p class="etichetta">Come?</p>
+  <h2 id="t-come">I fili da tenere insieme</h2>
+  <p class="guida">Uno schema per orientarti quando leggi una notizia sul Medio Oriente: quasi sempre c'entra almeno uno di questi quattro fili.</p>
+  <p class="mestiere">🧩 Organizzare le informazioni · usalo con le notizie di oggi</p>
+  <p class="radice">I conflitti del Medio Oriente intrecciano…</p>
+  <div class="come">
+    <div class="colonna"><h4>Terra e Stati</h4><ul><li>confini tracciati dagli europei</li><li>Israele e Palestina</li><li>territori occupati e insediamenti</li></ul></div>
+    <div class="colonna"><h4>Risorse</h4><ul><li>petrolio e gas</li><li>acqua</li><li>canale di Suez e stretto di Hormuz</li></ul></div>
+    <div class="colonna"><h4>Religioni e identità</h4><ul><li>Gerusalemme, città sacra a tre religioni</li><li>sunniti e sciiti</li><li>estremismo e terrorismo</li></ul></div>
+    <div class="colonna"><h4>Potenze esterne</h4><ul><li>Gran Bretagna e Francia (mandati)</li><li>Stati Uniti e URSS (guerra fredda)</li><li>interventi militari dopo il 2001</li></ul></div>
+  </div>
+</section>
+
+<!-- ======================= PAROLE CHIAVE ======================= -->
+<section class="parte" id="parole" aria-labelledby="t-parole">
+  <p class="etichetta">Parole chiave</p>
+  <h2 id="t-parole">Le parole della lezione</h2>
+  <p class="guida">Il significato dei termini nuovi, in ordine alfabetico.</p>
+  <dl class="parole">
+    <div class="parola" id="p-intifada"><dt>Intifada</dt><dd>Parola araba che significa «sollevazione»: le rivolte dei palestinesi contro l'occupazione israeliana (1987 e 2000).</dd></div>
+    <div class="parola" id="p-mandato"><dt>Mandato</dt><dd>Dopo la Prima guerra mondiale, territorio affidato dalla Società delle Nazioni a una potenza (Gran Bretagna o Francia) che doveva amministrarlo fino all'indipendenza.</dd></div>
+    <div class="parola" id="p-petrolio"><dt>Petrolio</dt><dd>Combustibile fossile liquido, chiamato «oro nero»: la principale fonte di energia del Novecento.</dd></div>
+    <div class="parola" id="p-profughi"><dt>Profughi</dt><dd>Persone costrette a lasciare la propria terra a causa della guerra o della persecuzione.</dd></div>
+    <div class="parola" id="p-sionismo"><dt>Sionismo</dt><dd>Movimento nato a fine Ottocento per creare uno Stato ebraico nella terra d'Israele (Sion è un colle di Gerusalemme).</dd></div>
+    <div class="parola" id="p-terrorismo"><dt>Terrorismo</dt><dd>Uso della violenza contro persone innocenti per diffondere paura e ottenere scopi politici.</dd></div>
+  </dl>
+</section>
+
+<!-- ======================= STUDIAMO LE FONTI ======================= -->
+<section class="parte" id="lente" aria-labelledby="t-lente">
+  <p class="etichetta">Studiamo le fonti</p>
+  <h2 id="t-lente">Dentro la notizia</h2>
+  <p class="guida">Come si raccontava in Italia la nascita di Israele? Lo leggiamo nel giornale di Torino, che in quegli anni si chiama <em>La Nuova Stampa</em>.</p>
+  <p class="mestiere">📜 Leggere e interpretare le fonti</p>
+  <div class="lente">
+    <div class="lente-testa">
+      <p class="testata-giornale">La Nuova Stampa · maggio 1948 · articolo da scegliere</p>
+      <h3>Nasce lo Stato di Israele</h3>
+    </div>
+    <div class="lente-corpo">
+      <p>Il 14 maggio 1948, a Tel Aviv, Ben Gurion proclama la nascita dello Stato di Israele. Il giorno dopo gli eserciti degli Stati arabi vicini entrano in Palestina. Per gli ebrei, appena tre anni dopo la Shoah, è la nascita della loro patria; per i palestinesi l'inizio della perdita delle loro case.</p>
+      <p class="domanda-guida">Domanda guida: un giornale italiano del 1948 racconta il punto di vista degli ebrei, quello degli arabi, o tutti e due?</p>
+      <div class="fasi">
+        <div class="fase"><h4>1. Prima di leggere</h4><ol><li>Trova Gerusalemme e la Striscia di Gaza sulla <a href="#dove">carta</a>.</li><li>Che cosa era successo agli ebrei d'Europa negli anni precedenti?</li><li>Chi governava la Palestina fino al 1948?</li></ol></div>
+        <div class="fase"><h4>2. Leggere</h4><ol><li>Leggi l'articolo riadattato e sottolinea in due colori le parole usate per gli ebrei e per gli arabi.</li><li>Cerca le parole difficili in «Per capire».</li></ol><p style="margin:10px 0 0"><a class="bottone" id="link-articolo" href="#" aria-disabled="true">Pagina dell'articolo: in preparazione</a></p></div>
+        <div class="fase"><h4>3. Pensare da storici</h4><ol><li>L'autore prevede una pace o una lunga guerra?</li><li>Che cosa non poteva sapere nel 1948?</li><li>Confronta con un articolo di oggi sullo stesso tema: che cosa è cambiato nel modo di raccontare?</li></ol></div>
+      </div>
+      <ul class="altre-fonti">
+        <li><span class="tipo">Treccani ragazzi</span><a href="https://www.treccani.it/enciclopedia/storia-di-israele_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Israele, storia di</a> · <a href="https://www.treccani.it/enciclopedia/storia-della-palestina_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Palestina, storia della</a> · <a href="https://www.treccani.it/enciclopedia/gerusalemme_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Gerusalemme</a> · <a href="https://www.treccani.it/enciclopedia/ebrei_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Ebrei</a></li>
+        <li><span class="tipo">Treccani · Libro dell'anno</span><a href="https://www.treccani.it/enciclopedia/palestina_(Il-Libro-dell'Anno)/" target="_blank" rel="noopener">Palestina</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RIPASSIAMO ======================= -->
+<section class="parte" id="compiti" aria-labelledby="t-compiti">
+  <p class="etichetta">Ripassiamo</p>
+  <h2 id="t-compiti">Le cinque attività dello storico</h2>
+  <p class="guida">Rispondi prima da solo, poi premi «Controlla». Se sbagli, riprova: la soluzione compare con il pulsante «Mostra le soluzioni».</p>
+  <div id="esercizi"></div>
+
+  <p class="fascia" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8"/></svg></span><span>Ripasso finale</span></p>
+  <div class="attivita">
+    <h4>Dieci cose da sapere</h4>
+    <p class="meta">Ricongiungi le due metà di ogni frase.</p>
+    <div id="dieci"></div>
+  </div>
+  <div class="attivita">
+    <h4>Leggere una notizia di oggi</h4>
+    <p class="consegna"><strong>Scegli un articolo recente sul Medio Oriente</strong> da un giornale o da un sito di informazione affidabile. Quale dei quattro fili dello schema «Come?» ritrovi? Quali parti in causa vengono nominate? Si sente la voce di tutte le parti o solo di alcune?</p>
+    <textarea aria-label="La tua analisi" placeholder="Articolo di… del… Parla di… Il filo è… Le parti nominate sono…"></textarea>
+    <p class="dibattito"><b>Regole:</b> si discute con rispetto per le vittime di tutte le parti; si distinguono i fatti dalle opinioni; si citano sempre le fonti.</p>
+  </div>
+</section>
+</main>
+</div>
+
+<footer>
+<p>Organizzazione della lezione ispirata a <em>Storia facile 3</em> (Modulo 5, cap. 16) e al <em>Tablet degli argomenti di Storia</em> (p. 289), Edizioni Erickson: Prima/Dopo, Idea principale, Perché?, Come?, Parole chiave, testo sintetico ed essenziale, verifiche. Testi originali della lezione; i fatti più recenti sono aggiornati a ottobre 2026.</p>
+  <p>Carta: terre emerse da Natural Earth (dominio pubblico). Voci collegate: Enciclopedia dei ragazzi Treccani.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- luoghi ---------- */
+var LUOGHI=[
+{n:"Gerusalemme",ll:[31.7683,35.2137],t:"Città sacra a ebrei, cristiani e musulmani, contesa tra israeliani e palestinesi."},
+ {n:"Gaza",ll:[31.5017,34.4668],t:"Striscia di terra abitata da circa due milioni di palestinesi, occupata da Israele nel 1967, controllata da Hamas dal 2007, devastata dalla guerra iniziata nel 2023."},
+ {n:"Il Cairo",ll:[30.0444,31.2357],t:"Capitale dell'Egitto, il più popoloso Paese arabo; nel 1979 l'Egitto firma la pace con Israele."},
+ {n:"Beirut",ll:[33.8938,35.5018],t:"Capitale del Libano, devastata da una guerra civile (1975–1990) e coinvolta in molti conflitti con Israele."},
+ {n:"Damasco",ll:[33.5138,36.2765],t:"Capitale della Siria, dove dal 2011 una guerra civile ha fatto centinaia di migliaia di morti e milioni di profughi."},
+ {n:"Baghdad",ll:[33.3152,44.3661],t:"Capitale dell'Iraq di Saddam Hussein, invaso nel 2003 da una coalizione guidata dagli Stati Uniti."},
+ {n:"Teheran",ll:[35.6892,51.389],t:"Capitale dell'Iran, dove nel 1979 nasce la repubblica islamica."},
+ {n:"Riad",ll:[24.7136,46.6753],t:"Capitale dell'Arabia Saudita, uno dei più grandi produttori di petrolio, dove si trovano anche i luoghi santi dell'islam, Mecca e Medina."},
+ {n:"Kuwait",ll:[29.3759,47.9774],t:"Piccolo Stato ricchissimo di petrolio, invaso dall'Iraq nel 1990 e liberato nel 1991."}
+];
+var lista=document.getElementById("luoghi"), gruppo=document.getElementById("segni"), info=document.getElementById("mappa-info"), NS="http://www.w3.org/2000/svg";
+function xy(ll){ return [(ll[1]-(25))*900/37, (42-ll[0])*900/37]; }
+/* posizione dell'etichetta rispetto al punto: [dx, dy, allineamento] */
+var ETI={"Gerusalemme":[12,8,"start"],"Tel Aviv":[-12,-4,"end"],"Gaza":[-12,10,"end"],"Il Cairo":[-12,5,"end"],"Beirut":[-12,-4,"end"],"Damasco":[12,-4,"start"],"Baghdad":[12,5,"start"],"Teheran":[12,5,"start"],"Riad":[12,5,"start"],"Kuwait":[12,5,"start"]};
+var segni=[];
+function scegli(i){
+  segni.forEach(function(g,j){ g.setAttribute("class", j===i ? "segno scelto" : "segno"); g.firstChild.setAttribute("r", j===i ? "8" : "6"); if(j===i) gruppo.appendChild(g); });
+  info.innerHTML=""; var b=document.createElement("strong"); b.textContent=LUOGHI[i].n+": "; info.appendChild(b); info.appendChild(document.createTextNode(LUOGHI[i].t));
+}
+LUOGHI.forEach(function(L,i){
+  var p=xy(L.ll), g=document.createElementNS(NS,"g"), c=document.createElementNS(NS,"circle"), t=document.createElementNS(NS,"text"), e=ETI[L.n]||[14,5,"start"];
+  g.setAttribute("class","segno"); g.setAttribute("tabindex","0"); g.setAttribute("role","button"); g.setAttribute("aria-label",L.n);
+  c.setAttribute("cx",p[0].toFixed(1)); c.setAttribute("cy",p[1].toFixed(1)); c.setAttribute("r","6");
+  t.setAttribute("x",(p[0]+e[0]).toFixed(1)); t.setAttribute("y",(p[1]+e[1]).toFixed(1)); t.setAttribute("text-anchor",e[2]); t.textContent=L.n.replace(/ \(.*\)$/,"");
+  g.appendChild(c); g.appendChild(t); gruppo.appendChild(g); segni.push(g);
+  g.addEventListener("click",function(){ scegli(i); });
+  g.addEventListener("keydown",function(ev){ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); scegli(i); } });
+  var li=document.createElement("li"), bt=document.createElement("button");
+  bt.type="button"; bt.textContent=L.n; bt.addEventListener("click",function(){ scegli(i); document.getElementById("mappa").scrollIntoView({block:"center"}); });
+  li.appendChild(bt); li.appendChild(document.createTextNode(" — "+L.t)); lista.appendChild(li);
+});
+
+/* ---------- indice laterale: evidenzia la parte che si sta leggendo ---------- */
+var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
+function attiva(id){ Array.prototype.forEach.call(voci,function(v){ var on=v.getAttribute("href")==="#"+id; if(on){ v.setAttribute("aria-current","true"); if(navI.scrollWidth>navI.clientWidth){ navI.scrollLeft=v.offsetLeft-16; } } else v.removeAttribute("aria-current"); }); }
+var parti=document.querySelectorAll("section.parte"), attesa=false;
+function guarda(){ attesa=false; var lim=window.innerHeight*0.3, id=parti[0].id;
+  Array.prototype.forEach.call(parti,function(sx){ if(sx.getBoundingClientRect().top<=lim) id=sx.id; });
+  if((window.innerHeight+window.pageYOffset)>=document.documentElement.scrollHeight-4) id=parti[parti.length-1].id;
+  attiva(id); }
+window.addEventListener("scroll",function(){ if(!attesa){ attesa=true; (window.requestAnimationFrame||setTimeout)(guarda); } },{passive:true});
+window.addEventListener("resize",guarda); guarda();
+
+/* ---------- testo sintetico / essenziale ---------- */
+var bot=document.querySelectorAll(".livelli button");
+Array.prototype.forEach.call(bot,function(b){ b.addEventListener("click",function(){
+  var ess=b.getAttribute("data-livello")==="essenziale";
+  document.getElementById("testo-sintetico").hidden=ess; document.getElementById("testo-essenziale").hidden=!ess;
+  Array.prototype.forEach.call(bot,function(x){ x.setAttribute("aria-pressed", x===b ? "true":"false"); });
+});});
+
+/* ---------- esercizi ---------- */
+var ESERCIZI=[
+{gruppo:"tempo", titolo:"Scegli l'anno giusto", meta:"Abbina ogni evento all'anno in cui accadde.",
+  scelte:["1948","1967","1973","1979","1993","2001","2023"],
+  righe:[["Nasce lo Stato di Israele","1948"],["Guerra dei sei giorni","1967"],["Guerra del Kippur e crisi del petrolio","1973"],["Rivoluzione islamica in Iran","1979"],["Accordi di Oslo","1993"],["Attentati dell'11 settembre","2001"],["Attacco di Hamas del 7 ottobre e guerra a Gaza","2023"]]},
+ {gruppo:"spazio", titolo:"Dove si trova?", meta:"Usa la carta dell'Idea principale per trovare ogni luogo.",
+  scelte:["Gerusalemme","Gaza","Il Cairo","Teheran","Baghdad","Riad"],
+  righe:[["La città sacra a tre religioni","Gerusalemme"],["La striscia di terra devastata dalla guerra dal 2023","Gaza"],["La capitale del più popoloso Paese arabo","Il Cairo"],["La capitale della repubblica islamica nata nel 1979","Teheran"],["La capitale dell'Iraq di Saddam Hussein","Baghdad"],["La capitale dell'Arabia Saudita","Riad"]]},
+ {gruppo:"fonti", titolo:"Fatto o interpretazione?", meta:"Uno storico distingue i fatti (si possono verificare) dalle interpretazioni (sono giudizi, opinioni). Su questi temi è ancora più importante.",
+  scelte:["Fatto","Interpretazione"],
+  righe:[["Il 14 maggio 1948 viene proclamato lo Stato di Israele.","Fatto","Esiste la dichiarazione ufficiale."],["Nel 1967 Israele occupa la Cisgiordania e la Striscia di Gaza.","Fatto","Lo provano i documenti e le carte geografiche."],["La colpa di tutti i conflitti è di una sola delle due parti.","Interpretazione","È un giudizio che semplifica una storia molto complessa."],["La soluzione migliore è la creazione di due Stati.","Interpretazione","È un'opinione molto diffusa, ma discussa."],["Il Medio Oriente ha le più grandi riserve di petrolio del mondo.","Fatto","Si verifica con i dati sulla produzione e le riserve."]]},
+ {gruppo:"processi", titolo:"Quale filo?", meta:"Rileggi lo schema «Come?» e abbina ogni fatto al filo a cui appartiene.",
+  scelte:["Terra e Stati","Risorse","Religioni e identità","Potenze esterne"],
+  righe:[["La crisi del prezzo del petrolio del 1973","Risorse"],["La spartizione della Palestina proposta dall'ONU","Terra e Stati"],["La rivalità tra sunniti e sciiti","Religioni e identità"],["L'invasione dell'Iraq guidata dagli Stati Uniti","Potenze esterne"],["Gli insediamenti nei territori occupati","Terra e Stati"]]},
+ {gruppo:"processi", titolo:"Vero o falso?", meta:"Dopo il controllo leggi la spiegazione: serve a correggere le frasi false.",
+  scelte:["Vero","Falso"],
+  righe:[["I confini di molti Stati del Medio Oriente sono stati decisi dagli europei.","Vero"],["Dopo gli accordi di Oslo il conflitto israelo-palestinese finisce.","Falso","La violenza riprende e la pace non viene realizzata."],["Gerusalemme è sacra solo all'ebraismo.","Falso","È sacra a ebraismo, cristianesimo e islam."],["Il terrorismo di gruppi come lo Stato islamico colpisce soprattutto altri musulmani.","Vero"],["Le guerre del Medio Oriente hanno prodotto milioni di profughi.","Vero"]]},
+ {gruppo:"lessico", titolo:"Parole e significati", meta:"Abbina ogni parola alla sua definizione.",
+  scelte:["Sionismo","Intifada","Mandato","Profughi","Terrorismo","Cessate il fuoco"],
+  righe:[["Movimento per uno Stato ebraico nella terra d'Israele","Sionismo"],["Sollevazione dei palestinesi","Intifada"],["Territorio affidato a una potenza dopo la Prima guerra mondiale","Mandato"],["Persone costrette a lasciare la loro terra","Profughi"],["Violenza contro innocenti per diffondere paura","Terrorismo"],["Accordo per sospendere i combattimenti","Cessate il fuoco"]]}
+];
+var DIECI=[
+["Dopo la Prima guerra mondiale","Gran Bretagna e Francia si dividono il Medio Oriente."],
+ ["Nel 1948","nasce lo Stato di Israele."],
+ ["Molti palestinesi","perdono la casa e diventano profughi."],
+ ["Nel 1967 Israele","occupa i territori dove vivono i palestinesi."],
+ ["Gerusalemme è sacra","a ebrei, cristiani e musulmani."],
+ ["Il petrolio","rende la regione importante per tutto il mondo."],
+ ["Nel 1979 in Iran","nasce una repubblica islamica."],
+ ["Con gli accordi di Oslo del 1993","si spera nella pace, che però non arriva."],
+ ["Dopo l'11 settembre 2001","ci sono guerre in Afghanistan e in Iraq."],
+ ["Dal 2023 la guerra a Gaza","provoca una gravissima crisi umanitaria."]
+];
+function el(t,attr,txt){ var e=document.createElement(t); if(attr){ for(var k in attr){ e.setAttribute(k,attr[k]); } } if(txt!=null) e.textContent=txt; return e; }
+function mescola(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+function costruisci(cont, scelte, righe, conGruppo){
+  var tab=el("table",{"class":"esercizio"}), tb=el("tbody"); tab.appendChild(tb);
+  var stati=[];
+  righe.forEach(function(r,i){
+    var tr=el("tr"), td1=el("td"), td2=el("td"), td3=el("td",{"class":"esito","aria-live":"polite"});
+    td1.appendChild(document.createTextNode(r[0]));
+    var sp=el("span",{"class":"spiega"}); sp.hidden=true; if(r[2]) sp.textContent=r[2]; td1.appendChild(sp);
+    var s=el("select",{"aria-label":"Risposta: "+r[0]}); s.appendChild(el("option",{value:""},"— scegli —"));
+    scelte.forEach(function(c){ s.appendChild(el("option",{value:c},c)); });
+    td2.appendChild(s); tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tb.appendChild(tr);
+    stati.push({tr:tr,s:s,esito:td3,sp:sp,giusta:r[1]});
+  });
+  cont.appendChild(tab);
+  var com=el("div",{"class":"comandi"}), b1=el("button",{type:"button","class":"bottone"},"Controlla"), b2=el("button",{type:"button","class":"bottone secondario"},"Mostra le soluzioni"), pt=el("span",{"class":"punteggio","aria-live":"polite"});
+  b2.hidden=true; com.appendChild(b1); com.appendChild(b2); com.appendChild(pt); cont.appendChild(com);
+  b1.addEventListener("click",function(){
+    var ok=0, vuote=0;
+    stati.forEach(function(x){
+      x.tr.classList.remove("ok"); x.tr.classList.remove("no");
+      if(!x.s.value){ vuote++; x.esito.textContent=""; return; }
+      var g=x.s.value===x.giusta; if(g) ok++;
+      x.tr.classList.add(g?"ok":"no"); x.esito.textContent=g?"✓":"✗"; x.esito.setAttribute("aria-label",g?"giusto":"sbagliato");
+      if(x.sp.textContent) x.sp.hidden=false;
+    });
+    pt.textContent=ok+" su "+stati.length+(vuote? " · "+vuote+" senza risposta":"");
+    b2.hidden=false;
+  });
+  b2.addEventListener("click",function(){
+    stati.forEach(function(x){ x.s.value=x.giusta; x.tr.classList.remove("no"); x.tr.classList.add("ok"); x.esito.textContent="✓"; if(x.sp.textContent) x.sp.hidden=false; });
+    pt.textContent="Ecco le soluzioni.";
+  });
+}
+var GRUPPI={"tempo": {"c": "#2a7f6f", "n": "Collocare nel tempo", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15.5\" rx=\"2\"/><path d=\"M3.5 10h17M8 3v4M16 3v4\"/><path d=\"M9 14.5h2v3M13.5 14.5h2l-1.5 3\"/></svg>"}, "spazio": {"c": "#b25510", "n": "Collocare nello spazio", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z\"/><path d=\"M9 4.5v13M15 6.5v13\"/></svg>"}, "fonti": {"c": "#55800f", "n": "Leggere e interpretare le fonti", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"5\" y=\"11\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 11V7.5a4 4 0 0 1 7.6-1.8\"/><circle cx=\"12\" cy=\"15.5\" r=\"1.3\"/><path d=\"M12 16.8v1.7\"/></svg>"}, "processi": {"c": "#b0215f", "n": "Comprendere fatti e processi storici", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 4.5l6 3.5-6 3.5zM10 4.5l6 3.5-6 3.5z\"/><path d=\"M20 12.5l-6 3.5 6 3.5zM14 12.5l-6 3.5 6 3.5z\"/></svg>"}, "lessico": {"c": "#6b3f8a", "n": "Conoscere e usare il lessico specifico", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 18.5L8.5 6l4.5 12.5M5.6 14h5.8\"/><path d=\"M15 12.5a2.5 2.5 0 1 1 0 4.5M20 10v8.5\"/></svg>"}, "ripasso": {"c": "#2b5f6b", "n": "Ripasso finale", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8\"/></svg>"}};
+var zona=document.getElementById("esercizi"), ultimo="";
+ESERCIZI.forEach(function(E,i){
+  if(E.gruppo!==ultimo){ var g=GRUPPI[E.gruppo], f=el("p",{"class":"fascia",style:"--c:"+g.c}), t=el("span",{"class":"tondo"}); t.innerHTML=g.i; f.appendChild(t); f.appendChild(el("span",null,g.n)); zona.appendChild(f); ultimo=E.gruppo; }
+  var box=el("div",{"class":"attivita"}); box.appendChild(el("h4",null,(i+1)+". "+E.titolo)); box.appendChild(el("p",{"class":"meta"},E.meta));
+  costruisci(box,E.scelte,mescola(E.righe)); zona.appendChild(box);
+});
+costruisci(document.getElementById("dieci"), mescola(DIECI.map(function(d){return d[1];})), DIECI.map(function(d){ return [d[0]+" …", d[1]]; }));
+})();
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+</body>
+</html>

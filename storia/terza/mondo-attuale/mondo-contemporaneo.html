@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Il mondo contemporaneo</title>
+<style>
+:root{
+  --sfondo:#f3f3ef; --carta:#ffffff; --tenue-bg:#eaf1f2; --ink:#23262a; --tenue:#5a6066; --filo:#dfe2dd;
+  --accento:#2b5f6b; --accento-2:#1f4a54; --accento-soft:#e1edef;
+  --causa:#8a5a12; --causa-bg:#f8eedb; --evento:#2b5f6b; --evento-bg:#e1edef; --effetto:#6b3f74; --effetto-bg:#f1e6f3;
+  --ombra:#7a3b2e; --ombra-bg:#f7e7e2;
+  --mare:#d7e8ee; --terra:#f4efe2; --ok:#1f7a4d; --ok-bg:#dcf2e6; --no:#b42318; --no-bg:#fde3e1;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --surface:var(--carta); --line:var(--filo); --soft:var(--tenue-bg); --paper:var(--tenue-bg); --accent:var(--accento); --accent-ink:#fff; --muted:var(--tenue); --card:var(--carta);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#f3f3ef;background:var(--sfondo);color:#23262a;color:var(--ink);font:1.08rem/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:1.08rem/1.65 var(--sans)}
+a{color:#2b5f6b;color:var(--accento)}
+a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.salta{position:absolute;left:1rem;top:-6rem;background:#ffffff;background:var(--carta);padding:.8rem 1rem;z-index:20}.salta:focus{top:1rem}
+.foglio{max-width:1280px;margin:32px auto;background:#ffffff;background:var(--carta);border:1px solid #dfe2dd;border:1px solid var(--filo)}
+header.testata{padding:22px 52px 26px;border-top:9px solid #2b5f6b;border-top:9px solid var(--accento);background:#eaf1f2;background:var(--tenue-bg)}
+.indietro{display:inline-block;font-size:.92rem;margin-bottom:18px;text-decoration:none;border-bottom:1px solid currentColor}
+.eyebrow{margin:0 0 6px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:#5a6066;color:var(--tenue);font-weight:700}
+.capitolo{margin:0;font-weight:700;color:#2b5f6b;color:var(--accento)}
+h1{font:700 2.6rem/1.08 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2.6rem/1.08 var(--serif);font-size:clamp(2.1rem,6vw,3.5rem);margin:6px 0 10px}
+.sottotitolo{margin:0;font:italic 1.25rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.25rem/1.4 var(--serif);color:#5a6066;color:var(--tenue)}
+.corpo-lezione{display:grid;grid-template-columns:268px minmax(0,1fr);align-items:start}
+nav.indice{position:-webkit-sticky;position:sticky;top:12px;align-self:start;display:grid;grid-template-columns:minmax(0,1fr);grid-gap:10px;gap:10px;padding:30px 0 24px 28px;max-height:calc(100vh - 24px);overflow-y:auto}
+.indice-titolo{margin:0 0 2px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue)}
+a.voce{display:flex;align-items:center;min-height:54px;padding:4px 12px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;text-decoration:none;font:800 .86rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .86rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em;transition:transform .15s,box-shadow .15s}
+a.voce .tondo{margin-right:10px;flex:none;width:46px;height:46px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+a.voce svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+a.voce:hover{transform:translateX(4px)}
+a.voce[aria-current="true"]{transform:translateX(8px);box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+a.voce:focus-visible{outline:3px solid #23262a;outline:3px solid var(--ink);outline-offset:3px}
+main{padding:10px 52px 40px 40px;min-width:0}
+.fascia{display:flex;align-items:center;margin:28px 0 12px;min-height:50px;padding:4px 16px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;font:800 .95rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .95rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.fascia .tondo{margin-right:10px;flex:none;width:42px;height:42px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+.fascia svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+section.parte{padding:34px 0 8px;border-bottom:1px solid #dfe2dd;border-bottom:1px solid var(--filo);scroll-margin-top:56px}
+section.parte:last-of-type{border-bottom:0}
+h2{font:700 2rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2rem/1.2 var(--serif);margin:0 0 6px}
+.etichetta{display:inline-block;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#2b5f6b;color:var(--accento);margin:0 0 4px}
+.guida{margin:0 0 22px;color:#5a6066;color:var(--tenue);font-size:.98rem;max-width:72ch}
+h3{font:700 1.08rem/1.3 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 1.08rem/1.3 var(--sans);text-transform:uppercase;letter-spacing:.05em;color:#2b5f6b;color:var(--accento);margin:26px 0 12px}
+h3 span{border-bottom:3px dotted #2b5f6b;border-bottom:3px dotted var(--accento);padding-bottom:4px}
+p{margin:0 0 14px}
+.lettura{max-width:74ch}
+.mestiere{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:-4px 0 16px}
+
+/* prima / dopo */
+.primadopo{display:grid;grid-template-columns:1fr auto 1fr;grid-gap:16px;gap:16px;align-items:stretch;margin:6px 0 10px}
+.pd{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:18px 20px;background:#ffffff;background:var(--carta)}
+.pd h3{margin-top:0}
+.pd.ora{background:#e1edef;background:var(--accento-soft);border-color:transparent}
+.freccia{align-self:center;font:700 1.8rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.8rem var(--serif);color:#2b5f6b;color:var(--accento)}
+.pd .link-lez{font-size:.92rem;margin:0}
+.pd-centro{grid-column:1/-1;text-align:center;font:700 1.15rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem/1.4 var(--serif);background:#2b5f6b;background:var(--accento);color:#fff;border-radius:12px;padding:12px 18px;margin:0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pd-centro{color:#0f1416}}
+:root[data-theme="dark"] .pd-centro{color:#0f1416}
+
+/* idea principale */
+.mappa-box{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;margin:16px 0 8px}
+#mappa{display:block;width:100%;height:auto;background:#d7e8ee;background:var(--mare)}
+#mappa .mare{fill:#d7e8ee;fill:var(--mare)}
+#mappa .terra{fill:#f4efe2;fill:var(--terra);stroke:#f4efe2;stroke:var(--terra);stroke-width:1.2;stroke-linejoin:round}
+#mappa .segno{cursor:pointer}
+#mappa .segno circle{fill:#2b5f6b;fill:var(--accento);stroke:#ffffff;stroke:var(--carta);stroke-width:3}
+#mappa .segno text{font:700 17px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 17px var(--sans);fill:#23262a;fill:var(--ink);paint-order:stroke;stroke:#f4efe2;stroke:var(--terra);stroke-width:5px;stroke-linejoin:round}
+#mappa .segno.scelto circle{fill:#d9822b}
+#mappa .segno:focus{outline:none}#mappa .segno:focus-visible circle{stroke:#23262a;stroke:var(--ink);stroke-width:4}
+.mappa-info{margin:0;padding:12px 14px;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);font-size:.98rem;min-height:3.2em}
+.mappa-info strong{color:#2b5f6b;color:var(--accento)}
+.mappa-nota{font-size:.88rem;color:#5a6066;color:var(--tenue);padding:10px 14px;margin:0;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo)}
+.luoghi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));grid-gap:10px;gap:10px;margin:12px 0 0;padding:0;list-style:none}
+.luoghi li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 12px;font-size:.95rem}
+.luoghi button{all:unset;cursor:pointer;font-weight:700;color:#2b5f6b;color:var(--accento)}
+.luoghi button:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.linea{position:relative;margin:8px 0 0;padding:0 0 0 30px;list-style:none}
+.linea::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:3px;background:#2b5f6b;background:var(--accento);border-radius:2px}
+.linea li{position:relative;margin:0 0 12px}
+.linea li::before{content:"";position:absolute;left:-26px;top:.45em;width:13px;height:13px;border-radius:50%;background:#ffffff;background:var(--carta);border:3px solid #2b5f6b;border:3px solid var(--accento)}
+.linea li.estremo::before{background:#2b5f6b;background:var(--accento)}
+.linea .anno{font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);color:#2b5f6b;color:var(--accento);margin-right:8px}
+.linea .pista{display:inline-block;max-width:100%;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;padding:1px 8px;margin-left:6px;color:#5a6066;color:var(--tenue);white-space:nowrap}
+.persone{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-gap:14px;gap:14px}
+.persona{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:54px 1fr;grid-gap:14px;gap:14px;align-items:start}
+.sigla{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#e1edef;background:var(--accento-soft);color:#2b5f6b;color:var(--accento);font:700 1.2rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem var(--serif)}
+.persona h4{margin:0;font:700 1.12rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.12rem/1.3 var(--serif)}
+.persona .date{font-size:.88rem;color:#5a6066;color:var(--tenue);display:block;margin-bottom:6px}
+.persona p{margin:0 0 6px;font-size:.97rem}
+.persona a{font-size:.9rem}
+
+/* perché */
+.catena{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;grid-gap:10px;gap:10px;align-items:stretch}
+.anello{border-radius:12px;padding:16px 18px}
+.anello h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.anello p{margin:0;font-size:.98rem}
+.anello.causa{background:#f8eedb;background:var(--causa-bg)}.anello.causa h4{color:#8a5a12;color:var(--causa)}
+.anello.evento{background:#e1edef;background:var(--evento-bg)}.anello.evento h4{color:#2b5f6b;color:var(--evento)}
+.anello.effetto{background:#f1e6f3;background:var(--effetto-bg)}.anello.effetto h4{color:#6b3f74;color:var(--effetto)}
+.catena .freccia{font-size:1.5rem}
+.ombra{margin:16px 0 0;background:#f7e7e2;background:var(--ombra-bg);border-left:5px solid #7a3b2e;border-left:5px solid var(--ombra);border-radius:0 12px 12px 0;padding:14px 18px}
+.ombra h4{margin:0 0 6px;color:#7a3b2e;color:var(--ombra);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.ombra p{margin:0}
+.ricorda{margin:18px 0 0;border:2px dashed #dfe2dd;border:2px dashed var(--filo);border-radius:12px;padding:14px 18px}
+.ricorda h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+.ricorda dl{margin:0;display:grid;grid-template-columns:max-content 1fr;grid-gap:6px 14px;gap:6px 14px}
+.ricorda dt{font-weight:700}.ricorda dd{margin:0}
+
+/* concetti e come */
+.concetto{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);padding:18px 22px;margin:0 0 16px;scroll-margin-top:60px}
+.concetto h4{font:700 1.3rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.3rem/1.3 var(--serif);margin:0 0 10px}
+.concetto p:last-child{margin-bottom:0}
+.come{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-gap:12px;gap:12px;margin-top:10px}
+.colonna{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:0;overflow:hidden}
+.colonna h4{margin:0;padding:10px 14px;background:#2b5f6b;background:var(--accento);color:#fff;font-size:1rem}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .colonna h4{color:#0f1416}}
+:root[data-theme="dark"] .colonna h4{color:#0f1416}
+.colonna ul{margin:0;padding:12px 14px 12px 30px;font-size:.95rem}
+.colonna li{margin:0 0 6px}
+.radice{text-align:center;font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:999px;padding:8px 16px;max-width:520px;margin:4px auto 10px}
+
+/* parole chiave */
+.parole{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));grid-gap:12px;gap:12px;margin:0;padding:0}
+.parola{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px;scroll-margin-top:60px}
+.parola dt{font:700 1.1rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.1rem var(--serif);color:#2b5f6b;color:var(--accento);margin-bottom:4px}
+.parola dd{margin:0;font-size:.97rem}
+a.pk{color:inherit;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted #2b5f6b;text-decoration:underline dotted var(--accento);text-underline-offset:4px;text-decoration-thickness:2px}
+a.pk:hover{background:#e1edef;background:var(--accento-soft)}
+:target{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:4px}
+
+/* testi */
+.livelli{display:inline-flex;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;overflow:hidden;margin:0 0 18px}
+.livelli button{font:inherit;font-size:.95rem;border:0;background:transparent;color:#23262a;color:var(--ink);padding:7px 16px;cursor:pointer}
+.livelli button[aria-pressed="true"]{background:#2b5f6b;background:var(--accento);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .livelli button[aria-pressed="true"]{color:#0f1416}}
+:root[data-theme="dark"] .livelli button[aria-pressed="true"]{color:#0f1416}
+.paragrafo{margin:0 0 22px;max-width:74ch}
+.paragrafo h4{font:700 1.2rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem/1.3 var(--serif);margin:0 0 6px}
+.paragrafo h4 .n{color:#2b5f6b;color:var(--accento);margin-right:6px}
+.essenziale .paragrafo p{font-size:1.12rem;line-height:1.75}
+
+/* lente */
+.lente{border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:14px;overflow:hidden}
+.lente-testa{background:#2b5f6b;background:var(--accento);color:#fff;padding:16px 22px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lente-testa{color:#0f1416}}
+:root[data-theme="dark"] .lente-testa{color:#0f1416}
+.lente-testa .testata-giornale{margin:0;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.lente-testa h3{margin:4px 0 0;color:inherit;font:700 1.6rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.6rem/1.2 var(--serif);text-transform:none;letter-spacing:0}
+.lente-corpo{padding:18px 22px}
+.domanda-guida{font:italic 1.2rem/1.5 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.2rem/1.5 var(--serif);border-left:4px solid #2b5f6b;border-left:4px solid var(--accento);padding:4px 0 4px 14px;margin:0 0 18px}
+.fasi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-gap:14px;gap:14px}
+.fase{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px}
+.fase h4{margin:0 0 8px;font-size:1rem}
+.fase ol,.fase ul{margin:0;padding-left:20px;font-size:.96rem}
+.fase li{margin:0 0 6px}
+.bottone{display:inline-block;font:inherit;font-weight:700;border-radius:999px;padding:9px 18px;border:2px solid #2b5f6b;border:2px solid var(--accento);background:#2b5f6b;background:var(--accento);color:#fff;text-decoration:none;cursor:pointer}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bottone{color:#0f1416}}
+:root[data-theme="dark"] .bottone{color:#0f1416}
+.bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+:root .bottone.secondario,:root:not([data-theme="light"]) .bottone.secondario,:root[data-theme="dark"] .bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+.bottone[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.altre-fonti{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-gap:8px;gap:8px}
+.altre-fonti li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 14px;font-size:.96rem}
+.altre-fonti .tipo{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue);display:block}
+
+/* compiti */
+.attivita{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:14px;padding:18px 22px;margin:0 0 18px}
+.attivita h4{margin:0 0 4px;font:700 1.25rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.25rem/1.3 var(--serif)}
+.attivita .meta{font-size:.86rem;color:#5a6066;color:var(--tenue);margin:0 0 12px}
+.consegna{margin:0 0 12px}
+table.esercizio{width:100%;border-collapse:collapse;font-size:.97rem}
+table.esercizio td{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:8px 6px;vertical-align:middle}
+table.esercizio td:first-child{width:52%}
+table.esercizio select{font:inherit;font-size:.95rem;width:100%;max-width:100%;padding:5px 6px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:6px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+td.esito{width:34px;text-align:center;font-weight:700}
+tr.ok td.esito{color:#1f7a4d;color:var(--ok)} tr.no td.esito{color:#b42318;color:var(--no)}
+tr.ok{background:#dcf2e6;background:var(--ok-bg)} tr.no{background:#fde3e1;background:var(--no-bg)}
+.spiega{display:block;font-size:.88rem;color:#5a6066;color:var(--tenue);margin-top:4px}
+.comandi{display:flex;flex-wrap:wrap;align-items:center;margin:14px 0 0}
+.comandi>*{margin:0 10px 8px 0}
+.punteggio{font-weight:700}
+textarea{font:inherit;width:100%;min-height:84px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:8px;padding:8px 10px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+.dibattito{margin:14px 0 0;background:#eaf1f2;background:var(--tenue-bg);border-radius:10px;padding:10px 14px;font-size:.95rem}
+.dibattito b{color:#2b5f6b;color:var(--accento)}
+
+footer{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:18px 52px;font-size:.86rem;color:#5a6066;color:var(--tenue)}
+footer p{margin:0 0 6px}
+
+@media (max-width:960px){
+  html{scroll-padding-bottom:84px}
+  .corpo-lezione{display:block}
+  nav.indice{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:90;grid-auto-flow:column;grid-auto-columns:max-content;grid-template-columns:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;max-height:none;grid-gap:8px;gap:8px;padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));background:#ffffff;background:var(--carta);border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);box-shadow:0 -4px 14px rgba(0,0,0,.12)}
+  .foglio{margin-bottom:70px}
+  .indice-titolo{display:none}
+  a.voce{flex:none;min-height:40px;padding:3px 12px 3px 3px;font-size:.74rem;white-space:nowrap}
+  a.voce .tondo{width:34px;height:34px;border-width:2px}
+  a.voce svg{width:18px;height:18px}
+  a.voce:hover,a.voce[aria-current="true"]{transform:none}
+  a.voce[aria-current="true"]{box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+  main{padding:10px 40px 40px}
+}
+@media (max-width:860px){
+  .come{grid-template-columns:1fr 1fr}
+  .fasi{grid-template-columns:1fr}
+  .catena{grid-template-columns:1fr}
+  .catena .freccia{transform:rotate(90deg);justify-self:center;line-height:1}
+}
+@media (max-width:700px){
+  .foglio{margin:0;border:0}
+  header.testata{padding:16px 16px 20px}
+  main{padding:4px 16px 28px}
+  footer{padding:16px}
+  .primadopo{grid-template-columns:1fr}
+  .primadopo .freccia{transform:rotate(90deg);justify-self:center}
+  .come{grid-template-columns:1fr}
+  #mappa .segno text{font-size:30px}
+  .ricorda dl{grid-template-columns:1fr}
+  .ricorda dd{margin-bottom:6px}
+  table.esercizio td{display:block;width:100%!important;border-top:0;padding:4px 6px}
+  table.esercizio tr{display:block;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:6px 0}
+  td.esito{text-align:left}
+}
+@media print{
+  body{background:#fff}.foglio{border:0;margin:0}nav.indice,.indietro,.comandi,.livelli,.mappa-box{display:none}
+  .essenziale-solo{display:none}section.parte{break-inside:avoid-page}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#mappa.mondo .segno text{font-size:14px;stroke-width:4px}
+@media (max-width:700px){#mappa.mondo .segno text{font-size:26px;stroke-width:5px}}
+
+.animata{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);border-radius:12px;padding:14px 16px;margin:16px 0 0;background:#ffffff;background:var(--carta)}
+.animata h4{margin:0 0 6px;font-size:1.02rem}
+.animata p{margin:0 0 8px}
+.animata ul{margin:8px 0 0;padding:0;list-style:none}
+.animata li{margin:0 0 8px;padding-left:24px;position:relative}
+.animata li:before{content:"\25B6";position:absolute;left:2px;top:0;color:#2b5f6b;color:var(--accento);font-size:.85em}
+.animata .nota-video{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:6px 0 0}
+@media print{.animata{display:none}}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<div class="foglio">
+<header class="testata">
+  <a class="indietro" href="../../index.html">← Torna a Storia: tutti i moduli</a>
+  <p class="eyebrow">Storia · Capire il mondo attuale</p>
+  <p class="capitolo">Lezione 5</p>
+  <h1>Il mondo contemporaneo</h1>
+  <p class="sottotitolo">Globalizzazione, rete, clima, migrazioni, nuove potenze: le sfide del nostro tempo</p>
+</header>
+<div class="corpo-lezione">
+<nav class="indice" aria-label="Parti della lezione">
+  <p class="indice-titolo">In questa lezione</p>
+  <a class="voce" href="#prima-dopo" style="--c:#3a6ea5"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l3 3-3 3"/><path d="M4 7h13"/><path d="M10 14l-3 3 3 3"/><path d="M20 17H7"/></svg></span><span class="nome">Prima / Dopo</span></a>
+  <a class="voce" href="#idea" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">Idea principale</span></a>
+  <a class="voce" href="#testi" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">Testo sintetico / essenziale</span></a>
+  <a class="voce" href="#perche" style="--c:#b25510"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .9-1 1.6v.6"/><circle cx="12" cy="17" r=".7" fill="currentColor"/></svg></span><span class="nome">Perché?</span></a>
+  <a class="voce" href="#concetti" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4"/><path d="M10.5 12.5L19 4M15.5 7.5l3 3M13 10l2 2"/></svg></span><span class="nome">Concetti fondamentali</span></a>
+  <a class="voce" href="#come" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="4.5" rx="1"/><rect x="3" y="15" width="6" height="5" rx="1"/><rect x="15" y="15" width="6" height="5" rx="1"/><path d="M12 7v4M6 15v-4h12v4"/></svg></span><span class="nome">Come?</span></a>
+  <a class="voce" href="#parole" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">Parole chiave</span></a>
+  <a class="voce" href="#lente" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M20 20l-5.2-5.2"/></svg></span><span class="nome">Studiamo le fonti</span></a>
+  <a class="voce" href="#compiti" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="nome">Ripassiamo</span></a>
+</nav>
+
+<main id="contenuto">
+
+<!-- ======================= PRIMA / DOPO ======================= -->
+<section class="parte" id="prima-dopo" aria-labelledby="t-pd">
+  <p class="etichetta">Per orientarsi</p>
+  <h2 id="t-pd">Prima e dopo</h2>
+  <p class="guida">L'ultima lezione arriva fino a oggi. Il «dopo» lo state vivendo voi: la storia del mondo contemporaneo si sta ancora scrivendo.</p>
+  <div class="primadopo">
+    <div class="pd">
+      <h3><span>Prima</span></h3>
+      <p>Per tutto il Novecento il mondo è diventato sempre più piccolo: prima il telegrafo e il treno, poi l'aereo, la radio, la televisione. Dopo il 1945 il mondo era diviso in due blocchi; con la fine della guerra fredda, nel 1991, i confini si aprono e gli scambi tra i Paesi crescono come mai prima.</p>
+      <p class="link-lez">Ripassa: <a href="carta-europa.html">Cambia la carta geografica dell'Europa</a> · <a href="../ottocento-novecento/belle-epoque.html">La Belle Époque</a></p>
+    </div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="pd">
+      <h3><span>Dopo</span></h3>
+      <p>Che cosa succederà? Le grandi questioni aperte, il clima, la pace, le disuguaglianze, l'intelligenza artificiale, riguardano la vostra generazione. Conoscere la storia serve anche a questo: a capire da dove vengono i problemi e a partecipare alle scelte da cittadini consapevoli.</p>
+      <p class="link-lez">Collegamenti: Geografia (la globalizzazione, la popolazione, il clima) · Educazione civica (Agenda 2030)</p>
+    </div>
+    <p class="pd-centro">1991 → il mondo globale → oggi</p>
+  </div>
+</section>
+
+<!-- ======================= IDEA PRINCIPALE ======================= -->
+<section class="parte" id="idea" aria-labelledby="t-idea">
+  <p class="etichetta">Idea principale</p>
+  <h2 id="t-idea">Che cosa, dove, quando, chi</h2>
+  <p class="guida">Prima di studiare i dettagli, guarda l'argomento dall'alto: che cosa succede e dove, in che anni, chi sono i protagonisti.</p>
+
+  <h3 id="dove"><span>1. Dove? Che cosa?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 🗺️ Collocare nello spazio</p>
+  <div class="lettura">
+    <p>Dalla fine del Novecento il mondo è sempre più <strong>interconnesso</strong>. Merci, soldi, persone e informazioni viaggiano da un continente all'altro in poche ore o in pochi secondi: è la <a class="pk" href="#p-globalizzazione">globalizzazione</a>. Internet e gli smartphone collegano miliardi di persone.</p>
+    <p>Il mondo non ha più un solo centro. Accanto agli Stati Uniti e all'Europa crescono nuove potenze, soprattutto la <strong>Cina</strong>, diventata la «fabbrica del mondo», e l'<strong>India</strong>, oggi il Paese più popoloso. Milioni di persone sono uscite dalla povertà, ma le <a class="pk" href="#p-disuguaglianze">disuguaglianze</a> restano enormi.</p>
+    <p>Ci sono problemi che nessuno Stato può risolvere da solo: il <a class="pk" href="#p-clima">cambiamento climatico</a>, le pandemie, le <a class="pk" href="#p-migrazioni">migrazioni</a>, il terrorismo, le guerre che tornano anche vicino a noi. Per affrontarli servono collaborazione internazionale e cittadini informati.</p>
+  </div>
+  <div class="mappa-box">
+    <svg id="mappa" class="mondo" viewBox="0 0 900 321" role="img" aria-labelledby="mappa-titolo"><title id="mappa-titolo">Planisfero con i luoghi del mondo contemporaneo</title><rect x="0" y="0" width="900" height="321" class="mare"/><path class="terra" d="M895.2,237.9L895.8,237.4L896.7,238.2L896.3,239.5L894.7,239.9L893.3,239.6L893.0,238.4L894.0,237.5L895.2,237.9ZM-25.7,234.2L-25.2,234.1L-25.5,235.3L-25.7,235.4L898.4,236.1L896.7,236.6L896.4,235.6L897.7,235.1L898.5,235.0L900.0,234.2L-25.7,234.2ZM537.9,204.9L536.8,208.0L536.9,209.5L538.6,210.4L538.6,211.1L537.9,212.7L538.1,213.5L537.9,214.7L538.8,216.3L539.9,218.8L540.8,219.4L541.2,220.5L541.1,223.1L541.4,225.4L541.5,229.4L542.0,230.6L541.2,232.5L540.2,234.3L538.6,235.9L536.2,236.8L533.3,238.1L530.4,240.8L529.5,241.3L527.7,243.1L526.6,243.7L526.4,245.6L527.6,247.5L528.1,249.0L528.1,249.8L528.6,249.7L528.5,252.2L528.1,253.4L528.7,253.8L528.3,254.9L527.2,255.8L525.1,256.7L522.0,258.1L520.9,259.0L521.1,260.1L521.8,260.3L521.6,261.6L520.9,263.5L520.6,265.6L520.0,266.8L518.2,268.1L517.7,268.5L516.6,269.8L515.9,271.1L514.4,272.9L511.5,275.6L509.7,277.1L507.8,278.3L505.1,279.3L503.8,279.4L503.4,280.1L501.9,279.8L500.6,280.3L497.8,279.8L496.3,280.1L495.2,279.9L492.5,281.0L490.3,281.4L488.8,282.3L487.6,282.4L486.5,281.5L485.6,281.4L484.5,280.3L484.4,280.6L484.1,279.9L484.1,278.4L483.2,276.7L484.1,276.2L484.0,274.3L482.3,271.9L481.0,269.7L481.0,269.7L479.2,266.3L477.3,264.4L476.3,262.5L475.7,260.0L475.1,258.2L474.2,254.2L474.1,251.1L473.8,249.7L472.8,248.7L471.5,246.5L470.1,243.4L469.6,241.8L467.5,239.3L467.3,237.3L467.1,235.7L467.4,233.5L468.3,231.1L468.5,230.0L469.3,227.7L469.9,226.6L471.4,225.0L472.2,223.8L472.5,221.9L472.3,220.4L471.6,219.5L470.9,218.0L470.3,216.4L470.4,215.9L471.2,214.9L470.4,212.4L469.9,210.7L468.6,209.0L468.8,208.5L468.5,207.7L467.8,205.8L465.7,203.1L463.0,200.5L461.3,198.4L459.8,195.7L459.8,194.9L460.4,194.0L461.0,192.2L461.5,190.3L461.1,189.9L462.0,187.0L462.3,185.0L461.3,183.3L460.2,182.8L459.6,181.7L459.0,181.3L459.0,180.6L456.3,181.5L455.4,181.4L454.4,182.0L452.3,181.9L450.9,180.3L450.1,178.4L448.3,176.7L446.3,176.8L444.1,176.8L441.9,177.1L439.9,177.6L435.8,179.1L434.4,180.0L432.1,180.7L429.8,180.0L428.6,180.0L426.8,179.5L425.2,179.6L422.1,180.0L420.4,180.8L417.8,181.7L417.3,181.6L416.6,181.7L414.0,180.4L411.7,178.5L409.5,177.1L407.7,175.4L407.0,175.2L405.2,174.2L403.8,172.8L403.4,171.9L403.1,170.0L402.0,168.4L401.0,167.4L400.3,167.1L399.7,166.6L399.4,165.5L399.0,164.9L398.2,164.5L396.9,163.4L395.8,163.2L395.2,162.5L395.2,162.1L394.4,161.6L394.3,161.0L393.8,159.0L394.2,157.9L393.1,155.9L391.8,155.0L393.0,154.5L394.2,152.7L394.8,151.4L394.6,150.0L395.3,148.7L395.6,146.3L395.3,143.8L395.0,142.5L395.3,141.2L394.6,140.0L393.3,138.9L393.4,137.8L393.5,136.6L394.5,135.9L395.3,134.5L395.2,133.7L396.0,131.9L397.5,130.2L398.3,129.8L399.0,128.3L399.1,126.9L400.0,125.3L401.7,124.4L403.4,121.8L403.4,121.7L404.7,120.8L407.1,120.5L409.1,118.7L410.4,118.0L412.6,115.9L411.9,112.7L412.9,110.5L413.2,109.1L414.9,107.4L417.5,106.2L419.4,105.1L421.1,102.5L421.9,100.9L423.8,100.9L425.3,102.0L427.8,101.8L430.4,102.4L431.6,102.4L434.0,101.0L436.8,100.6L438.4,99.5L440.9,98.7L445.3,98.3L449.5,98.1L450.8,98.4L453.2,97.4L456.0,97.4L457.0,98.0L458.8,97.9L461.6,96.8L463.4,97.1L463.3,98.4L465.5,97.5L465.7,98.0L464.4,99.2L464.4,100.4L465.3,101.1L464.9,103.3L463.2,104.6L463.7,106.0L465.1,106.0L465.7,107.2L466.7,107.6L469.7,108.5L470.8,108.3L472.9,108.7L476.3,109.9L477.5,112.2L479.9,112.7L483.5,113.8L486.2,115.0L487.5,114.4L488.7,113.2L488.1,111.2L488.9,110.0L490.8,108.8L492.5,108.4L496.0,108.9L496.9,110.1L497.9,110.1L498.7,110.5L501.2,110.8L501.9,111.7L505.3,111.6L507.8,112.3L510.3,113.1L511.5,113.5L513.5,112.7L514.5,111.9L516.8,111.7L518.6,112.0L519.3,113.3L519.9,112.5L522.0,113.1L524.0,113.2L525.3,112.6L526.0,111.7L525.8,111.6L526.5,110.4L527.0,108.4L527.4,107.8L527.5,107.8L528.4,105.7L529.7,103.9L529.7,103.8L529.5,101.8L530.1,100.7L529.2,99.6L530.1,98.6L528.6,98.8L526.4,98.2L524.6,99.7L520.7,100.0L518.7,98.6L515.9,98.5L515.3,99.6L513.5,99.9L511.0,98.5L508.2,98.6L506.7,96.0L504.8,94.6L506.1,92.6L504.4,91.4L507.3,88.9L511.3,88.8L512.3,86.9L517.2,87.2L520.3,85.5L523.3,84.8L527.6,84.8L532.1,86.6L535.8,87.6L538.7,87.2L541.0,87.4L544.0,86.1L544.4,85.0L543.7,83.2L542.3,82.3L540.8,82.0L539.9,81.2L536.6,79.0L533.7,78.0L531.5,76.5L533.3,76.1L535.5,74.0L534.0,72.9L537.8,71.9L537.7,71.3L535.4,71.7L533.4,71.9L531.7,72.8L529.3,72.9L527.0,73.9L527.2,75.2L527.2,75.5L528.5,76.1L531.1,75.9L530.6,76.8L527.8,77.3L524.3,78.8L522.8,78.3L523.4,77.1L520.6,76.3L521.1,75.8L523.5,75.0L523.1,74.6L522.8,74.4L518.8,73.7L518.6,72.8L516.2,73.1L515.3,74.5L513.3,76.4L513.3,77.0L512.1,77.6L511.3,77.4L510.6,80.5L509.2,81.5L508.3,83.4L509.1,84.8L509.4,85.8L511.7,86.7L511.2,87.3L508.2,87.4L507.1,88.2L504.9,89.6L504.1,88.4L504.1,87.9L502.6,87.8L501.2,87.6L498.1,88.2L499.9,89.7L498.6,90.1L497.2,90.1L495.8,88.8L495.3,89.3L495.9,90.9L497.2,92.1L496.2,92.6L497.7,93.8L498.9,94.6L499.0,96.0L496.6,95.3L497.3,96.7L495.7,96.9L496.7,99.2L495.0,99.2L492.9,98.1L491.9,96.1L491.5,94.3L490.5,93.2L489.1,91.7L489.0,91.0L488.5,90.8L488.5,90.2L487.0,89.4L486.8,88.1L487.0,86.4L487.4,85.6L487.0,85.2L486.4,85.0L485.7,84.1L484.6,83.6L482.2,82.7L480.7,81.7L478.3,81.0L476.2,79.1L476.7,78.9L475.5,77.8L475.5,76.9L473.8,76.5L473.0,77.7L472.3,76.8L472.3,75.9L472.4,75.9L473.0,75.6L470.9,75.2L468.8,76.2L469.0,77.4L468.7,78.2L469.5,79.5L471.9,80.8L473.2,82.9L476.1,85.0L478.1,85.0L478.7,85.5L478.0,86.0L480.3,87.0L482.2,87.7L484.4,89.1L484.7,89.6L484.2,90.5L482.8,89.3L480.5,88.9L479.4,90.5L481.3,91.5L481.0,92.8L479.9,93.0L478.5,95.2L477.5,95.4L477.5,94.6L478.0,93.2L478.6,92.7L477.6,91.2L476.8,89.9L475.7,89.6L475.0,88.4L473.3,88.0L472.2,86.9L470.3,86.8L468.3,85.6L465.9,83.9L464.2,82.5L463.4,79.9L462.1,79.6L460.0,78.8L458.8,79.1L457.3,80.3L456.3,80.5L453.9,82.0L448.9,81.3L445.1,82.1L444.8,83.6L445.0,85.1L442.5,86.8L439.2,87.4L439.0,88.3L437.4,89.7L436.4,91.8L437.4,93.2L435.9,94.4L435.4,96.1L433.4,96.6L431.6,98.6L428.4,98.6L425.9,98.5L424.3,99.5L423.3,100.4L422.1,100.2L421.1,99.3L420.4,97.9L418.0,97.5L416.9,98.1L415.6,97.8L414.3,98.0L414.7,96.0L414.4,94.5L413.3,94.2L412.6,93.2L412.8,91.6L413.9,90.6L414.1,89.6L414.6,88.0L414.5,87.0L414.0,86.0L413.9,85.2L414.0,83.3L413.0,82.2L416.6,80.4L419.8,80.8L423.2,80.8L426.0,81.2L428.1,81.1L432.3,81.2L433.6,79.7L434.1,74.5L431.4,71.8L429.5,70.5L425.6,69.5L425.3,67.7L428.7,67.1L433.0,67.8L432.2,64.9L434.6,66.0L440.6,64.0L441.4,61.9L443.6,61.3L445.7,60.8L447.0,60.1L449.2,56.3L452.8,55.3L454.9,55.3L455.4,54.8L457.6,54.6L458.0,55.2L459.8,53.9L459.2,53.0L459.1,51.5L458.0,50.1L457.9,47.5L458.4,46.8L459.1,46.0L461.4,45.8L462.3,45.1L464.3,44.4L464.3,45.7L463.5,46.6L463.8,47.3L465.2,47.7L464.6,48.6L463.8,48.4L462.0,50.2L462.7,51.5L462.7,52.5L465.3,53.1L465.3,54.0L467.9,53.5L469.3,52.8L472.2,53.8L473.5,54.6L475.2,53.9L479.2,52.7L482.5,51.8L485.0,52.2L485.2,52.9L487.7,52.9L488.3,51.8L491.8,50.9L491.3,48.8L491.4,46.8L492.6,45.2L495.1,44.3L497.1,46.3L499.2,46.2L499.7,44.2L500.0,42.7L499.0,43.1L497.4,42.1L497.2,40.7L500.4,39.9L503.7,39.6L506.4,40.0L509.1,39.9L512.0,38.5L509.3,37.3L504.7,37.5L500.1,38.4L495.9,39.0L494.5,37.6L492.0,36.7L492.5,34.2L491.3,31.9L492.5,30.4L494.9,28.8L500.7,26.0L502.4,25.4L502.2,24.3L498.6,23.1L494.2,23.9L491.7,25.6L492.1,27.2L488.0,29.3L483.0,31.5L481.2,35.1L483.0,36.9L485.5,38.4L483.1,41.3L480.4,41.9L479.4,46.2L478.0,48.6L474.9,48.3L473.4,50.4L470.4,50.5L469.6,48.1L467.5,45.1L465.5,41.5L463.8,39.9L458.7,42.9L455.3,43.5L451.7,42.2L450.8,39.4L450.0,33.5L452.3,31.8L459.1,29.7L464.2,27.0L468.9,23.5L475.1,18.5L479.4,16.6L486.5,13.3L492.1,12.2L496.3,12.3L500.3,10.2L504.9,10.3L509.6,9.8L517.6,11.7L514.3,12.4L517.1,14.0L519.8,13.1L524.0,14.7L531.0,15.3L540.8,18.2L542.7,19.4L542.9,21.1L540.0,22.5L535.8,23.1L524.4,21.2L522.5,21.5L526.7,23.4L526.8,24.6L527.0,27.2L530.3,28.0L532.3,28.7L532.7,27.4L531.1,26.3L532.7,25.3L539.0,26.9L541.1,26.3L539.4,24.4L545.4,21.9L547.8,22.1L550.2,23.0L551.7,21.2L549.5,19.7L550.8,18.1L548.9,16.5L556.1,17.4L557.5,18.8L554.3,19.1L554.3,20.5L556.3,21.4L560.3,20.9L560.9,19.2L566.3,18.0L575.3,15.8L577.2,15.9L574.7,17.5L577.9,17.7L579.7,16.9L584.5,16.8L588.3,15.7L591.3,17.3L594.2,15.6L591.5,14.1L592.8,13.2L600.4,14.0L604.0,14.8L613.3,17.8L615.0,16.4L612.4,15.1L612.3,14.5L609.2,14.3L610.1,13.0L608.7,11.0L608.6,10.2L613.4,7.9L615.1,5.5L617.0,5.0L623.8,5.7L624.3,7.1L621.9,9.2L623.5,10.1L624.3,11.9L623.7,15.4L626.6,16.9L625.5,18.7L620.4,22.3L623.4,22.7L624.4,21.8L627.2,21.1L627.9,19.8L630.1,18.6L628.6,17.2L629.8,15.5L627.0,15.2L626.4,13.8L628.5,11.2L625.1,9.1L629.7,7.4L629.1,5.6L630.4,5.5L631.8,6.9L630.7,9.4L633.5,9.9L632.3,8.0L636.6,7.0L642.0,6.9L646.7,8.4L644.4,6.2L644.2,3.5L648.6,3.0L654.8,3.1L660.4,2.7L658.3,1.4L661.3,-0.3L664.2,-0.4L669.2,-1.6L676.0,-2.0L676.9,-2.7L683.6,-2.9L685.7,-2.4L691.5,-3.7L696.2,-3.7L697.0,-4.8L699.4,-5.9L705.5,-6.9L709.9,-6.1L706.4,-5.5L712.2,-5.1L712.9,-3.8L715.3,-4.4L722.8,-4.4L728.6,-3.1L730.6,-2.2L730.0,-0.8L727.1,-0.1L720.4,1.3L718.5,2.1L721.7,2.5L725.4,3.1L727.8,2.6L729.1,4.3L730.2,3.6L734.3,3.2L742.6,3.6L743.2,4.8L753.9,5.2L754.1,3.3L759.5,3.7L763.7,3.7L767.8,5.0L769.0,6.7L767.5,7.8L770.7,9.8L774.7,10.8L777.2,8.1L781.4,9.3L785.7,8.6L790.7,9.4L792.6,8.7L796.8,9.0L794.9,6.6L798.3,5.5L821.6,7.2L823.8,8.7L830.5,10.7L840.9,10.2L846.0,10.6L848.1,11.7L847.8,13.6L851.0,14.3L854.4,13.8L859.0,13.7L863.9,14.2L868.7,13.9L873.2,16.2L876.4,15.4L874.3,13.8L875.4,12.6L883.7,13.3L889.0,13.2L896.4,14.4L-25.7,15.5L-19.4,17.5L-12.7,20.0L-12.9,21.6L-11.2,22.3L-11.8,20.4L-4.8,20.8L0.3,23.2L-2.3,24.3L-6.5,24.6L-6.6,27.1L-7.6,27.6L-10.0,27.6L-12.0,26.7L-15.4,25.9L-16.0,24.8L-18.6,24.4L-21.5,24.7L-22.9,23.8L-22.3,22.9L-25.4,23.5L-24.3,24.7L-25.7,25.8L900.0,25.8L896.7,26.9L893.3,26.7L895.7,28.1L897.2,30.2L898.4,30.9L898.7,32.0L898.0,32.6L893.2,32.1L886.0,34.0L883.7,34.3L879.8,36.1L876.1,37.7L875.1,38.9L871.5,37.1L864.8,39.1L863.6,38.2L861.1,39.3L857.7,38.9L856.8,40.6L853.8,43.1L853.9,44.1L856.8,44.7L856.4,48.4L854.0,48.5L852.9,50.7L854.0,51.8L849.5,53.1L848.6,56.1L844.8,56.7L844.0,59.3L840.3,61.7L839.4,59.9L838.3,56.2L836.8,50.4L838.1,46.9L840.2,45.3L840.4,44.1L844.4,43.6L849.0,40.3L853.4,37.7L858.0,35.6L860.1,32.0L857.0,32.2L855.4,34.3L848.9,37.2L846.8,34.0L840.1,34.9L833.7,39.2L835.8,40.8L830.1,41.4L826.1,41.7L826.3,39.8L822.3,39.5L819.1,40.7L811.3,40.3L802.8,41.0L794.5,46.1L784.6,52.1L788.7,52.4L789.9,54.1L792.4,54.6L794.1,53.3L796.9,53.5L800.6,56.3L800.7,58.5L798.7,61.1L798.5,64.2L797.3,68.3L793.4,72.0L792.6,73.8L789.1,76.8L785.6,79.7L784.0,81.3L780.5,82.8L778.9,82.8L777.3,81.6L773.8,83.4L773.4,84.3L772.5,84.1L771.3,85.0L770.6,85.9L770.7,87.7L769.3,88.3L768.9,88.8L767.9,89.5L766.2,89.9L765.1,90.6L765.0,91.7L764.7,92.0L765.7,92.4L767.2,93.6L769.4,96.6L770.0,98.3L770.1,101.2L769.1,102.6L766.8,103.1L764.7,104.2L762.4,104.4L762.1,103.0L762.6,101.1L761.4,98.4L763.4,98.0L761.6,95.8L760.3,95.3L760.0,95.8L759.3,96.0L759.2,95.5L758.5,95.3L757.8,94.9L758.5,93.7L759.1,93.4L758.9,93.0L759.6,91.6L759.4,91.2L757.9,90.9L756.7,90.2L753.1,90.9L751.2,92.1L748.4,92.8L749.8,91.6L749.3,90.6L751.3,88.9L749.9,87.6L747.7,88.5L744.8,90.3L743.2,91.9L740.7,92.0L739.4,93.2L740.7,95.0L742.8,95.4L742.9,96.6L745.0,97.3L747.8,95.5L750.1,96.5L751.8,96.5L752.2,97.9L748.6,98.6L747.3,100.0L744.8,101.3L743.5,103.1L746.3,104.5L747.3,107.0L748.9,109.4L750.6,111.4L750.6,113.3L749.0,114.0L749.6,115.3L751.1,116.1L750.7,118.2L750.0,120.3L748.6,120.5L746.7,123.3L744.6,126.7L742.3,129.7L738.7,132.1L735.1,134.3L732.2,134.6L730.7,135.7L729.8,134.9L728.3,136.2L724.7,137.4L722.0,137.8L721.1,140.5L719.7,140.7L719.0,138.8L719.7,137.8L716.2,137.0L715.0,137.4L711.6,139.6L709.4,142.1L708.8,143.8L710.8,146.6L713.2,149.9L715.5,151.5L717.1,153.6L718.3,158.3L717.9,162.9L715.8,164.5L712.9,166.2L710.8,168.3L707.6,170.7L706.6,169.1L707.3,167.4L705.4,165.9L703.3,165.5L702.2,164.2L700.9,161.5L698.6,160.3L696.4,160.4L696.8,158.4L694.5,158.4L694.3,161.2L692.9,165.0L692.1,167.2L692.3,169.1L694.0,169.2L695.0,171.5L695.5,173.8L696.9,175.2L698.5,175.5L699.8,176.9L700.4,177.1L701.9,178.6L703.0,180.4L703.1,182.1L702.9,183.3L703.1,184.2L703.3,185.7L704.2,186.4L705.2,188.7L705.2,189.5L703.3,189.7L700.9,187.8L697.9,185.8L697.6,184.4L696.1,182.7L695.7,180.6L694.8,179.2L695.1,177.3L694.5,176.2L693.5,175.2L693.1,174.0L691.7,172.5L690.4,171.3L690.0,172.8L689.5,171.4L689.8,169.8L690.6,167.3L690.3,165.4L691.1,163.4L690.2,161.9L690.5,159.1L689.4,157.8L688.6,154.7L688.1,151.5L687.0,149.3L685.3,150.6L682.4,152.4L680.9,152.2L679.3,151.6L680.2,148.4L679.7,146.0L677.7,143.1L678.0,142.1L676.5,141.8L674.7,139.7L673.9,138.4L673.8,137.1L673.3,135.8L672.2,134.3L669.8,134.2L670.1,135.3L669.3,136.7L668.2,136.2L667.8,136.7L667.1,136.4L666.1,136.1L665.7,137.1L664.0,137.1L660.8,137.6L660.9,139.5L659.6,141.0L655.9,142.8L653.0,145.8L651.1,147.4L648.5,149.1L648.5,150.3L647.2,150.9L644.9,151.8L643.7,152.0L642.9,153.9L643.5,157.3L643.6,159.4L642.5,161.9L642.5,166.2L641.2,166.4L640.0,168.3L640.8,169.2L638.4,169.9L637.6,171.6L636.5,172.4L634.1,170.0L632.9,166.4L631.9,163.8L631.0,162.6L629.7,160.1L629.0,156.9L628.6,155.3L626.2,151.7L625.2,146.8L624.4,143.5L624.4,140.3L623.9,137.9L620.2,139.5L618.3,139.2L615.0,136.1L616.2,135.1L615.5,134.1L612.5,131.9L610.6,131.3L609.8,129.4L607.8,127.5L603.1,128.0L598.9,128.0L595.3,128.4L590.4,127.6L587.6,127.0L584.7,126.7L583.6,123.5L582.4,123.1L580.4,123.5L577.8,124.8L574.7,123.9L572.1,121.9L569.6,121.2L567.9,118.8L566.0,115.3L564.6,115.8L563.0,114.9L562.0,115.9L560.5,115.8L561.0,116.9L560.8,117.5L561.6,119.4L562.6,121.7L563.9,122.2L564.4,123.1L566.1,124.2L566.3,125.3L566.0,126.1L566.3,127.0L567.1,127.7L567.4,128.6L567.8,129.2L567.6,127.3L568.3,126.0L569.0,125.7L569.8,126.5L569.8,128.0L569.3,129.5L569.8,130.5L570.2,130.4L570.3,131.1L572.3,130.7L574.5,130.8L576.0,130.8L577.8,129.1L579.7,127.4L581.3,125.9L582.1,125.0L582.4,125.2L582.2,126.3L581.8,126.7L582.2,128.8L583.3,130.5L584.8,131.5L586.6,131.8L588.2,132.3L589.3,133.7L590.0,134.6L590.9,134.9L590.9,135.5L590.0,137.0L589.6,137.7L588.5,138.6L587.5,140.3L586.4,140.2L585.8,140.8L585.4,142.1L585.7,143.8L585.5,144.1L584.3,144.1L582.7,145.1L582.5,146.3L581.9,146.9L580.3,146.9L579.3,147.5L579.3,148.6L578.0,149.3L576.6,149.0L574.9,149.9L573.7,150.0L571.8,150.7L571.3,151.9L571.3,152.7L568.7,153.8L564.6,155.0L562.3,156.8L561.2,157.0L560.4,156.8L558.9,157.9L557.3,158.4L555.1,158.5L554.5,158.7L553.9,159.4L553.2,159.5L552.8,160.2L551.6,160.1L550.7,160.5L549.0,160.4L548.3,158.9L548.4,157.5L547.9,156.7L547.4,154.8L546.7,153.7L547.2,153.6L546.9,152.4L547.3,151.9L547.2,150.8L546.8,149.7L546.0,148.9L545.8,147.9L544.5,147.0L543.1,144.8L542.4,142.7L540.6,141.0L539.5,140.6L537.8,138.1L537.5,136.3L537.6,134.8L536.1,131.9L534.9,130.9L533.5,130.4L532.7,128.9L532.8,128.4L532.1,127.0L531.4,126.4L530.4,124.5L528.8,122.5L527.5,120.7L526.2,120.7L526.6,119.3L526.7,118.4L527.0,117.4L526.9,117.0L526.2,118.0L525.7,120.0L525.0,121.3L524.4,121.8L523.5,120.9L522.4,119.8L520.5,116.1L520.2,116.3L521.3,119.0L522.9,121.6L524.8,125.6L525.8,127.0L526.6,128.5L528.9,131.3L528.4,131.8L528.5,133.5L531.5,135.8L531.9,136.3L532.8,138.8L532.2,139.3L532.6,141.9L533.5,145.0L534.5,145.6L535.9,146.6L537.4,149.6L538.1,151.9L539.5,153.2L543.0,155.6L544.5,157.1L545.9,158.5L546.7,159.4L547.9,160.2L548.5,161.0L548.4,162.1L547.0,162.7L548.1,163.4L548.9,163.9L549.4,164.9L550.6,166.0L551.9,166.0L554.3,165.3L557.1,165.0L559.4,164.2L560.6,164.1L561.5,163.6L563.0,163.5L563.8,163.5L565.0,163.1L566.4,162.8L567.6,161.9L568.6,161.9L568.6,162.6L568.4,164.1L568.4,165.5L567.9,166.4L567.1,169.2L565.9,172.1L564.3,175.4L562.1,179.1L559.9,182.0L556.9,185.5L554.3,187.6L550.5,190.1L548.1,192.1L545.3,195.2L544.7,196.6L544.1,197.2L542.3,198.2L541.6,199.3L540.7,199.5L540.3,201.3L539.5,202.3L539.0,204.0L537.9,204.9ZM562.8,94.3L563.7,96.2L566.1,96.8L567.9,98.0L571.5,98.5L575.6,97.8L575.8,97.2L575.3,95.4L575.7,92.7L573.7,91.8L574.3,90.1L572.6,89.9L573.2,87.7L575.6,88.4L577.9,87.6L576.0,86.0L575.3,84.5L573.2,85.2L573.0,87.1L572.1,85.4L572.0,84.8L572.6,83.7L572.1,82.8L569.2,81.9L568.0,79.6L566.6,79.0L566.5,78.1L569.0,78.4L569.1,76.5L571.3,76.1L573.5,76.5L574.0,74.0L573.5,72.4L571.0,72.5L568.8,71.9L565.8,73.0L563.4,73.5L562.2,75.1L559.7,75.5L557.2,78.1L559.5,80.6L559.3,82.3L562.1,85.3L563.4,86.7L564.7,88.5L565.9,88.6L566.7,89.3L564.6,89.5L564.2,91.5L563.7,92.4L562.8,93.0L562.8,94.3ZM74.6,13.6L79.4,14.2L83.5,15.5L86.1,15.7L88.4,14.6L91.5,13.8L95.3,14.1L99.2,13.0L103.4,12.4L105.2,13.4L107.1,12.8L107.6,11.6L109.4,11.9L113.8,14.2L117.2,12.4L117.5,14.4L120.7,14.0L121.7,13.2L124.8,13.4L128.7,14.5L134.7,15.4L138.3,15.8L140.8,15.7L144.3,17.0L140.6,18.3L145.3,18.8L152.2,18.5L154.4,18.1L157.2,19.6L160.0,18.3L157.3,17.2L159.0,16.3L162.1,16.2L164.2,15.9L166.3,16.6L168.8,18.0L171.7,17.7L176.3,18.9L180.2,18.5L184.0,18.6L183.7,17.0L186.0,16.5L190.0,17.4L190.0,19.8L191.6,17.8L193.7,17.8L194.8,15.3L192.1,13.7L189.1,12.6L189.3,9.8L192.3,7.9L195.7,8.3L198.3,9.5L201.8,12.4L199.5,13.6L204.3,14.2L204.3,16.8L207.7,14.8L210.8,16.4L210.0,18.3L212.5,20.1L215.2,18.2L217.1,16.0L217.2,13.2L220.9,13.4L224.7,13.7L228.1,15.0L228.3,16.3L226.4,17.7L228.2,19.0L227.9,20.3L222.8,22.1L219.3,22.5L216.6,21.7L215.8,23.0L213.3,25.2L212.6,26.3L209.6,28.0L205.9,28.2L203.9,29.3L203.7,31.0L200.7,31.3L197.6,33.4L194.8,36.3L193.8,38.3L193.7,41.3L197.4,41.7L198.6,44.1L199.8,46.1L203.4,45.6L208.2,46.7L210.8,47.6L212.6,48.9L215.8,49.6L218.5,50.6L222.8,50.8L225.6,51.0L225.2,53.3L226.0,55.9L227.8,58.7L231.7,61.2L233.6,60.3L235.0,57.7L233.7,53.6L231.9,52.3L236.0,51.1L238.9,49.3L240.3,47.5L240.1,45.8L238.4,43.6L235.2,41.6L238.3,38.9L237.2,36.6L236.3,32.6L238.1,32.0L242.5,32.7L245.1,33.0L247.3,32.3L249.7,33.2L252.8,34.6L253.6,35.6L258.2,35.8L258.1,38.0L259.0,41.3L261.3,41.7L263.2,43.2L266.9,41.7L269.4,38.9L271.1,37.7L273.1,40.0L276.4,43.3L279.3,46.4L278.2,48.0L281.7,49.4L284.0,50.9L288.1,51.6L289.7,52.4L290.7,54.6L292.7,54.9L293.8,55.9L294.0,58.8L292.1,59.7L290.2,60.6L286.0,61.5L282.8,63.7L278.4,64.1L272.9,63.5L269.1,63.5L266.4,63.7L264.3,65.5L261.0,66.7L257.3,70.1L254.3,72.5L256.5,72.0L260.6,68.7L266.0,66.5L269.9,66.3L272.1,67.5L269.7,69.2L270.5,72.0L271.4,74.0L274.7,75.2L279.0,74.9L281.5,72.0L281.7,73.8L283.4,74.8L280.2,76.5L274.5,78.0L271.9,79.0L269.1,80.9L267.1,80.7L267.0,78.5L271.5,76.4L267.4,76.5L264.5,76.8L264.9,77.6L262.2,78.9L259.6,79.8L256.8,80.5L255.5,82.1L255.0,82.6L255.0,84.0L255.9,85.4L256.9,85.4L256.7,84.5L257.4,85.1L257.2,85.8L255.5,86.2L254.3,86.2L252.4,86.6L251.2,86.7L249.7,86.9L247.6,87.6L251.4,87.1L252.1,87.6L248.5,88.4L246.9,88.4L247.0,88.1L246.2,88.8L247.0,88.9L246.4,90.7L244.5,92.7L244.3,92.1L243.8,91.9L242.9,91.3L243.5,92.7L244.1,93.1L244.1,94.1L243.3,95.1L241.9,97.2L241.6,97.1L242.4,95.3L241.1,94.3L240.8,92.2L240.3,93.3L240.9,94.9L239.2,94.5L240.9,95.4L241.1,97.8L241.8,98.0L242.1,98.9L242.4,101.4L240.8,103.4L238.1,104.1L236.4,105.6L235.1,105.8L233.8,106.7L233.5,107.6L230.7,109.3L229.2,110.5L228.0,112.0L227.6,113.8L228.1,115.6L228.9,117.8L230.1,119.6L230.1,120.8L231.3,123.7L231.2,125.5L231.1,126.5L230.5,128.0L229.7,128.4L228.4,128.1L228.0,126.9L227.0,126.3L225.7,124.1L224.5,122.2L224.1,121.2L224.6,119.4L223.9,118.0L221.9,115.9L220.9,115.5L218.3,116.7L217.8,116.5L216.6,115.3L215.0,114.7L212.1,115.0L209.8,114.7L207.8,114.9L206.8,115.3L207.2,116.0L207.2,117.0L207.7,117.5L207.2,117.9L206.3,117.5L205.3,118.0L203.4,117.9L201.5,116.5L199.3,116.9L197.4,116.3L195.8,116.5L193.7,117.1L191.3,119.0L188.8,120.1L187.4,121.3L186.8,122.5L186.7,124.2L186.9,125.5L187.4,126.3L186.4,128.6L185.9,130.4L185.7,133.9L185.5,135.1L185.9,136.5L186.7,137.8L187.2,139.8L188.9,141.7L189.5,143.2L190.5,144.4L193.3,145.1L194.3,146.2L196.6,145.5L198.6,145.2L200.5,144.8L202.1,144.3L203.7,143.3L204.3,141.8L204.6,139.6L205.0,138.9L206.7,138.2L209.5,137.6L211.7,137.7L213.3,137.5L213.9,138.0L213.8,139.2L212.4,140.8L211.8,142.3L212.3,142.8L211.9,143.9L211.3,145.9L210.6,145.2L210.1,145.3L210.1,145.7L210.6,145.7L210.5,146.4L210.1,147.5L210.3,147.9L210.1,148.8L210.2,149.0L209.9,150.4L209.4,151.0L209.0,151.1L208.5,152.0L209.3,152.5L209.5,152.1L210.3,152.4L210.5,152.5L211.1,152.1L211.8,152.0L212.1,152.2L212.5,152.1L213.7,152.3L214.9,152.3L215.7,152.0L216.0,151.7L216.8,151.8L217.4,152.0L218.1,151.9L218.6,151.7L219.8,152.1L220.2,152.1L221.0,152.6L221.7,153.2L222.7,153.6L223.3,154.3L223.1,154.5L223.0,155.1L223.2,156.1L222.7,156.9L222.4,158.0L222.3,159.1L222.4,159.8L222.5,160.9L222.1,161.2L221.9,162.3L222.0,163.0L221.5,163.6L221.6,164.3L222.0,164.7L222.7,166.1L223.7,167.2L224.9,168.3L225.8,169.2L225.7,169.7L226.8,169.8L227.0,169.6L227.7,170.3L229.0,170.1L230.1,169.4L231.6,168.9L232.5,168.1L233.9,168.3L233.8,168.5L235.3,168.6L236.4,169.1L237.3,169.8L238.2,170.6L239.6,170.6L241.5,168.8L242.6,168.6L242.6,167.7L243.1,165.5L244.5,164.4L246.1,164.3L246.3,163.8L248.4,164.0L250.4,162.7L251.4,162.1L252.6,160.9L253.5,161.0L254.2,161.7L253.7,162.6L253.6,163.2L252.1,163.5L253.0,164.6L252.9,166.0L251.8,167.5L252.8,169.5L253.9,169.4L254.5,167.5L253.7,166.6L253.5,164.7L256.7,163.6L256.4,162.4L257.3,161.6L258.2,163.4L260.0,163.4L261.7,164.9L261.8,165.7L264.1,165.7L266.8,165.5L268.3,166.6L270.3,166.9L271.7,166.1L271.8,165.5L274.9,165.3L278.0,165.3L275.8,166.1L276.7,167.3L278.8,167.5L280.7,168.7L281.1,170.8L282.5,170.7L283.5,171.3L285.2,172.3L286.8,174.0L286.8,175.3L287.8,175.3L289.2,176.6L290.2,177.5L293.3,178.0L293.5,177.5L295.6,177.4L298.4,178.1L299.3,178.3L301.2,178.9L303.9,181.1L304.3,182.2L305.2,182.0L305.8,183.5L307.3,188.0L308.6,188.4L308.7,190.2L306.8,192.3L307.6,193.1L312.1,193.5L312.2,196.0L314.2,194.4L317.4,195.3L321.7,196.8L322.9,198.4L322.5,199.8L325.5,199.0L330.5,200.3L334.3,200.2L338.1,202.4L341.4,205.3L343.4,206.0L345.6,206.1L346.5,206.9L347.4,210.2L347.8,211.7L346.8,216.0L345.5,217.7L341.9,221.2L340.2,224.2L338.3,226.4L337.7,226.4L337.0,228.3L337.2,233.1L336.4,237.1L336.2,238.8L335.4,239.8L334.9,243.3L332.3,246.6L331.9,249.3L329.8,250.4L329.2,251.9L326.4,251.9L322.3,252.9L320.5,254.0L317.6,254.8L314.6,256.8L312.4,259.4L312.1,261.3L312.5,262.7L312.0,265.3L311.4,266.6L309.6,268.0L306.8,272.5L304.5,274.6L302.8,275.8L301.6,278.2L299.9,279.7L298.8,281.3L295.9,282.7L294.0,282.2L292.6,282.5L290.2,281.4L288.5,281.5L286.9,280.1L286.7,281.4L290.0,283.6L289.6,285.4L291.2,286.5L291.1,287.7L288.6,291.0L284.8,292.4L279.7,293.0L276.8,292.7L277.4,294.2L276.9,296.2L277.3,297.5L275.8,298.4L273.2,298.7L270.7,297.8L269.7,298.5L270.1,301.0L271.8,301.8L273.2,301.0L274.0,302.3L271.6,303.1L269.5,304.7L269.2,307.3L268.5,308.7L266.1,308.7L264.1,310.0L263.4,311.9L265.9,313.8L268.4,314.3L267.5,316.6L264.4,318.1L262.8,321.1L260.4,322.1L259.4,323.3L260.2,326.0L261.9,327.5L260.8,327.3L258.5,327.3L257.3,328.0L255.0,328.9L254.6,331.3L253.5,331.3L250.6,330.5L247.6,328.7L244.4,327.2L243.6,325.6L244.3,324.1L243.1,322.4L242.7,318.0L243.8,315.5L246.5,313.6L242.6,312.8L245.1,310.5L245.9,306.3L248.8,307.2L250.2,301.8L248.4,301.2L247.6,304.4L246.0,304.0L246.8,300.3L247.7,295.6L248.9,293.8L248.1,291.3L247.9,288.4L249.0,288.3L250.6,284.2L252.4,280.1L253.4,276.2L252.9,272.4L253.6,270.2L253.3,267.1L254.8,263.9L255.3,259.0L256.1,253.6L256.9,247.9L256.7,243.7L256.2,240.0L253.6,238.6L253.4,237.5L248.3,234.9L243.7,232.1L241.7,230.5L240.6,228.4L241.1,227.7L238.9,224.3L236.3,219.5L233.9,214.4L232.8,213.3L232.0,211.4L230.0,209.7L228.2,208.6L229.0,207.5L227.8,205.0L228.6,203.2L230.6,201.6L232.0,199.7L231.5,198.6L230.5,199.8L228.9,198.6L229.5,197.9L229.0,195.6L229.9,195.2L230.4,193.6L231.4,191.9L231.2,190.9L232.6,190.3L234.4,189.3L234.0,188.5L235.0,188.3L234.9,187.0L235.5,186.1L236.7,185.9L237.8,184.3L238.8,183.0L237.9,182.3L238.3,180.9L237.8,178.5L238.3,177.8L237.9,175.7L236.9,174.3L236.0,173.5L235.5,172.2L236.1,171.5L235.5,171.3L235.0,170.4L233.7,169.7L232.6,169.9L232.0,170.8L231.0,171.4L230.4,171.5L230.2,172.1L231.4,173.4L230.7,173.8L230.4,174.2L229.1,174.3L228.7,172.8L228.4,173.2L227.5,173.0L227.0,172.0L225.9,171.8L225.3,171.5L224.2,171.5L224.1,172.1L223.8,171.7L222.4,171.1L221.9,170.6L222.2,170.1L222.1,169.6L221.4,169.0L220.4,168.5L219.5,168.1L219.3,167.4L218.6,166.9L218.8,167.7L218.3,168.3L217.7,167.6L216.9,167.3L216.5,166.8L216.5,166.0L216.9,165.2L216.1,164.8L216.7,164.3L215.9,163.5L214.6,162.5L214.1,161.6L213.0,160.8L211.7,159.7L212.0,159.3L212.4,159.6L212.6,159.5L212.2,158.7L211.4,158.4L211.1,159.0L209.6,159.0L208.7,158.8L207.6,158.3L206.2,158.1L205.5,157.5L204.2,157.1L202.5,157.0L201.4,156.5L200.0,155.5L197.1,152.7L195.7,151.9L193.7,151.2L192.2,151.4L190.1,152.4L188.8,152.6L187.0,151.9L185.1,151.4L182.7,150.3L180.8,149.9L177.9,148.7L175.7,147.5L175.1,146.8L173.6,146.6L171.0,145.8L169.9,144.6L167.2,143.2L165.9,141.6L165.3,140.3L166.1,140.1L165.9,139.3L166.4,138.7L166.5,137.8L165.6,136.6L165.4,135.6L164.5,134.3L162.2,131.7L159.6,129.7L158.4,128.1L156.2,127.1L155.7,126.4L156.1,124.9L154.8,124.3L153.3,123.0L152.6,121.2L151.3,121.0L149.8,119.7L148.6,118.4L148.4,117.6L147.1,115.7L146.1,113.7L146.2,112.7L144.3,111.7L143.5,111.8L142.0,111.1L141.6,112.1L142.0,113.4L142.3,115.3L143.1,116.4L145.1,118.1L145.5,118.7L145.9,118.9L146.2,119.8L146.7,119.8L147.2,121.4L148.0,122.1L148.5,123.0L150.1,124.3L151.0,126.7L151.7,127.8L152.5,129.0L152.6,130.4L153.8,130.5L154.9,131.6L155.8,132.8L155.7,133.2L154.7,134.2L154.2,134.2L153.5,132.6L151.8,131.1L150.0,129.9L148.7,129.2L148.8,127.4L148.4,126.0L147.1,125.2L145.4,124.0L145.0,124.4L144.4,123.7L142.8,123.1L141.3,121.6L141.5,121.4L142.5,121.5L143.5,120.6L143.6,119.4L141.6,117.6L140.1,116.9L139.1,115.2L138.2,113.6L137.0,111.5L136.0,109.2L135.5,107.9L133.9,106.4L132.7,106.1L132.4,105.4L130.9,105.2L130.0,104.5L127.6,104.3L127.0,103.9L126.7,102.5L124.2,99.9L122.0,96.3L122.1,95.7L121.0,94.9L119.0,92.7L118.6,90.6L117.3,89.2L117.8,87.1L117.7,84.9L116.9,82.9L117.9,80.5L118.2,78.1L118.5,75.8L118.1,72.3L117.3,70.1L116.5,69.0L116.8,68.5L120.6,69.3L121.9,71.8L122.6,71.1L122.1,69.0L121.3,66.9L120.9,66.9L115.9,64.3L114.1,63.2L109.5,62.2L108.0,59.9L108.4,58.3L105.1,57.2L104.6,55.1L101.5,53.3L101.5,51.9L100.1,51.0L97.8,50.1L97.1,47.9L93.8,45.8L92.4,43.4L89.9,43.2L85.8,43.2L82.8,42.4L77.5,39.8L75.0,39.3L70.5,38.4L67.0,38.6L61.9,37.4L58.9,36.3L56.0,36.8L56.5,38.6L55.1,38.8L52.1,39.3L49.9,40.2L47.0,40.7L46.6,39.2L47.8,36.7L50.5,35.9L49.8,35.3L46.6,36.7L44.8,38.4L41.1,40.2L43.0,41.5L40.5,43.3L37.8,44.4L35.2,45.2L34.6,46.3L30.6,47.7L29.7,48.9L26.7,50.0L25.0,49.8L22.6,50.5L20.0,51.4L17.8,52.2L13.4,53.0L13.0,52.5L15.8,51.3L18.3,50.5L21.1,49.1L24.3,48.8L25.5,47.8L29.1,46.2L29.7,45.7L31.6,44.8L32.0,42.9L33.3,41.4L30.4,42.1L29.5,41.7L28.1,42.6L26.5,41.3L25.8,42.2L24.8,41.0L22.2,42.0L20.7,42.0L20.4,40.5L20.9,39.5L19.2,38.6L15.9,39.1L13.7,37.9L12.0,37.3L12.0,35.8L10.0,34.7L11.0,33.2L13.1,31.8L14.0,30.5L16.1,30.3L17.8,30.7L19.9,29.5L21.8,29.7L23.7,28.9L23.2,27.7L21.8,27.3L23.7,26.3L22.1,26.3L19.4,26.8L18.6,27.4L16.6,26.8L13.0,27.1L9.2,26.5L8.1,25.5L4.9,24.0L8.5,22.9L14.2,21.7L16.3,21.7L16.0,22.9L21.4,22.8L19.3,21.3L16.1,20.3L14.3,19.0L11.9,17.9L8.3,17.1L9.8,15.7L14.3,15.6L17.6,14.5L18.2,13.2L20.8,12.0L23.3,11.7L28.2,10.6L30.6,10.7L34.5,9.4L38.4,9.9L40.3,11.1L41.4,10.6L45.7,10.7L45.6,11.3L49.5,11.8L52.1,11.5L57.6,12.3L62.5,12.5L64.5,12.9L67.9,12.5L71.8,13.2L74.6,13.6ZM221.2,32.3L223.1,31.1L226.6,31.1L226.5,31.6L223.5,33.0L221.7,33.0L221.2,32.3ZM232.0,5.7L229.2,4.3L229.3,3.4L230.5,3.2L236.4,3.5L240.8,4.9L241.1,5.6L238.3,5.5L235.6,5.5L232.7,5.8L232.0,5.7ZM230.6,33.2L231.6,32.4L232.7,32.5L233.3,33.0L232.3,34.4L231.2,34.2L230.5,33.4L230.6,33.2ZM196.4,0.1L195.0,1.1L191.3,0.9L188.2,0.2L189.5,-1.0L193.2,-1.7L195.5,-0.8L196.4,0.1ZM210.5,1.6L206.3,1.2L199.5,0.4L198.6,-1.0L198.3,-2.3L195.7,-3.4L190.4,-3.7L187.4,-4.5L188.4,-5.6L193.7,-5.4L196.5,-4.6L201.6,-4.6L203.8,-3.7L203.2,-2.8L206.2,-2.2L207.8,-1.6L211.3,-1.5L215.0,-1.2L219.1,-1.8L224.4,-2.0L228.5,-1.8L231.3,-0.9L231.9,0.2L230.2,0.9L226.4,1.4L223.1,1.1L215.8,1.5L210.5,1.6ZM294.2,60.9L292.8,62.5L291.1,64.8L292.8,63.9L294.5,64.4L293.6,65.3L295.9,66.1L297.1,65.4L299.6,66.2L298.8,68.1L300.6,67.7L301.0,69.0L301.8,70.6L300.7,72.9L299.5,73.0L297.8,72.5L298.4,70.4L297.7,70.1L294.7,72.3L293.2,72.2L295.0,71.0L292.5,70.4L289.7,70.5L284.7,70.4L284.3,69.7L285.9,68.8L284.8,68.1L287.0,66.5L289.7,62.4L291.2,61.0L293.5,60.1L294.7,60.2L294.2,60.9ZM221.4,25.4L224.3,26.3L227.2,27.1L227.4,28.3L229.3,28.1L231.2,29.0L228.9,29.8L224.9,29.2L223.4,28.0L220.9,29.4L217.2,30.7L216.3,29.2L212.9,29.5L215.1,28.2L215.4,26.2L216.3,23.8L218.2,24.0L218.6,25.2L220.0,24.8L221.4,25.4ZM234.6,6.8L237.0,5.8L242.7,7.1L246.3,8.3L246.6,9.4L251.4,8.9L254.1,10.5L260.3,11.5L262.5,12.5L264.9,15.0L260.2,16.1L266.3,17.8L270.4,18.4L274.1,20.8L278.1,20.9L277.3,22.7L272.8,25.7L269.6,24.6L265.6,22.1L262.3,22.5L261.9,23.9L264.6,25.4L268.1,26.6L269.2,27.3L270.9,29.8L270.0,31.7L266.7,31.0L260.3,28.9L263.9,31.2L266.6,32.7L267.0,33.6L260.0,32.6L254.5,31.1L251.4,29.8L252.3,29.1L248.5,27.8L244.7,26.5L244.8,27.3L237.3,27.7L235.1,26.8L236.8,24.9L241.7,24.9L247.0,24.5L246.1,23.6L247.0,22.3L250.3,19.8L249.6,18.7L248.6,17.8L244.7,16.6L239.5,15.7L241.1,15.0L238.4,13.4L236.1,13.3L234.1,12.4L232.7,13.2L228.1,13.5L218.7,12.9L213.3,12.2L209.1,11.8L207.0,10.9L209.7,9.7L206.0,9.7L205.2,7.1L207.2,4.8L209.8,3.8L216.4,3.1L214.6,4.7L216.6,6.3L219.0,4.3L225.5,3.2L229.9,5.9L229.5,7.6L234.6,6.8ZM194.1,2.2L199.5,2.3L204.4,2.9L200.6,5.2L197.5,5.7L194.7,7.7L191.8,7.6L190.2,5.3L190.2,4.0L191.6,2.9L194.1,2.2ZM95.9,53.9L98.4,53.7L97.6,56.6L99.8,58.7L98.8,58.7L97.2,57.5L96.3,56.3L95.0,55.5L94.5,54.4L94.7,53.6L95.9,53.9ZM119.6,68.1L118.3,68.5L114.0,67.3L113.3,66.4L111.0,65.5L110.5,64.8L107.8,64.3L106.9,62.9L107.1,62.3L109.8,62.9L111.4,63.3L113.8,63.5L114.6,64.4L115.9,65.6L118.5,66.7L119.6,68.1ZM124.6,1.4L128.3,2.0L134.9,2.1L137.4,2.8L140.1,3.9L136.9,4.6L130.6,6.4L127.4,8.2L127.4,9.3L120.6,10.5L119.3,9.4L113.3,8.1L114.4,7.0L116.2,5.1L118.4,3.4L115.9,1.8L124.6,1.4ZM159.9,-2.2L162.2,-2.6L164.9,-2.5L165.3,-1.2L163.8,-0.0L155.1,0.4L148.6,1.5L144.7,1.6L144.3,0.7L149.7,-0.4L138.1,-0.1L134.5,-0.6L138.0,-3.1L140.4,-3.8L147.6,-2.9L152.2,-1.4L156.7,-1.2L153.0,-3.7L155.4,-4.6L158.0,-4.3L158.9,-3.1L159.9,-2.2ZM163.2,4.9L166.1,6.0L167.7,8.5L168.5,10.3L172.8,11.6L177.5,12.8L177.2,13.9L173.0,14.1L174.6,15.1L173.8,16.1L169.1,15.7L164.7,15.0L161.7,15.1L156.9,16.0L150.3,16.4L145.8,16.6L144.4,15.4L140.9,14.7L138.6,15.0L135.4,13.0L137.1,12.7L141.1,12.2L144.7,12.4L148.1,11.9L143.1,11.3L137.6,11.5L134.0,11.5L132.6,10.5L138.6,9.5L134.6,9.5L130.1,8.8L132.3,6.9L134.1,5.9L140.9,4.3L143.6,4.8L142.3,6.0L148.0,5.3L151.6,6.6L154.5,5.2L156.8,6.1L158.9,8.6L160.2,7.5L158.4,4.9L160.7,4.5L163.2,4.9ZM178.9,5.9L176.0,4.2L179.1,3.0L182.1,3.5L186.7,3.2L187.4,3.9L185.0,5.2L188.9,6.3L188.4,8.6L184.2,9.6L181.7,9.4L180.0,8.4L173.6,6.4L173.6,5.6L178.9,5.9ZM163.0,3.6L166.5,3.5L168.4,4.1L166.2,5.8L162.2,4.0L163.0,3.6ZM183.9,-4.4L185.8,-3.2L185.9,-1.9L184.7,0.0L180.5,0.3L177.7,-0.1L177.8,-1.6L173.6,-1.4L173.4,-3.4L176.2,-3.4L180.0,-4.2L183.7,-4.1L183.9,-4.4ZM243.7,19.4L242.1,20.2L239.2,20.3L238.5,19.1L239.6,17.6L242.0,17.3L244.0,18.0L244.0,19.1L243.7,19.4ZM189.6,14.2L191.2,15.2L189.6,16.1L186.1,15.3L184.0,15.6L180.5,14.4L182.8,13.6L184.6,12.5L187.3,13.2L188.8,13.7L189.6,14.2ZM271.2,64.6L272.1,64.4L275.5,65.0L278.1,66.1L278.2,66.6L277.0,66.6L273.6,65.8L271.2,64.6ZM272.5,71.9L273.4,73.2L275.3,73.5L277.7,73.4L276.4,74.5L275.5,74.7L272.2,73.6L271.6,72.7L272.5,71.9ZM37.5,141.2L38.0,141.4L38.4,141.8L39.1,142.7L39.0,142.8L38.0,143.4L37.2,143.8L36.8,144.2L36.2,143.8L36.2,143.1L35.8,142.2L35.9,141.9L36.4,141.5L36.2,141.0L36.4,140.7L36.5,140.8L37.5,141.2ZM36.0,139.5L35.8,139.8L34.9,140.0L34.5,139.4L34.2,139.2L34.2,139.0L34.4,138.8L35.3,139.1L36.0,139.5ZM34.1,138.4L34.0,138.7L32.6,138.6L32.8,138.3L34.1,138.4ZM30.8,137.0L31.0,137.2L31.7,138.0L31.6,138.2L31.4,138.1L30.5,138.1L30.2,137.5L30.1,137.4L30.8,137.0ZM27.3,135.7L27.4,136.3L27.1,136.6L26.2,136.1L26.4,135.9L26.8,135.7L27.3,135.7ZM9.1,37.6L11.1,37.8L11.4,38.8L9.8,39.2L8.1,38.7L6.5,38.0L9.1,37.6ZM43.1,43.8L44.8,44.0L45.9,44.8L43.7,46.0L41.1,47.0L39.8,46.3L39.4,45.1L41.8,44.2L43.1,43.8ZM-4.5,28.8L-2.9,29.3L-1.3,29.1L0.8,29.7L3.4,30.1L3.2,30.4L1.2,30.9L-0.7,30.4L-1.7,29.9L-4.0,30.0L-4.6,29.8L-4.5,28.8ZM799.7,199.5L804.2,201.3L808.9,202.8L810.7,204.1L812.1,205.4L812.5,206.9L816.8,208.5L817.4,209.9L815.1,210.1L815.6,211.9L817.9,213.5L819.6,216.3L821.1,216.2L821.0,217.3L823.0,217.8L822.2,218.2L824.9,219.3L824.6,220.1L822.9,220.2L822.3,219.6L820.1,219.3L817.5,218.9L815.5,217.3L814.0,215.9L812.7,213.6L809.3,212.5L807.2,213.2L805.6,214.1L805.9,216.0L803.9,216.8L802.5,216.4L799.8,216.3L797.5,214.2L794.9,213.7L794.3,214.4L791.0,214.5L792.1,212.4L793.7,211.7L793.1,208.9L791.8,206.7L786.8,204.6L784.7,204.3L780.9,202.0L780.1,203.2L779.1,203.4L778.5,202.5L778.5,201.4L776.5,200.1L779.3,199.2L781.1,199.2L780.9,198.6L777.2,198.5L776.1,197.0L773.9,196.5L772.8,195.3L776.2,194.6L777.5,193.8L781.7,194.9L782.1,195.8L782.8,200.0L785.5,201.5L787.6,198.8L790.6,197.2L792.8,197.2L795.1,198.1L797.0,199.1L799.7,199.5ZM829.6,202.3L830.6,203.1L830.9,204.4L830.1,205.1L829.6,203.6L829.0,202.6L827.9,201.8L826.4,200.7L824.6,199.9L825.3,199.3L826.7,200.0L827.5,200.6L828.6,201.2L829.6,202.3ZM826.2,207.9L824.8,208.5L823.5,209.1L822.1,209.1L820.0,208.4L818.5,207.6L818.7,206.8L821.1,207.2L822.5,207.0L822.9,205.8L823.2,205.7L823.5,207.1L824.9,206.9L825.7,206.0L827.1,205.1L826.8,203.6L828.3,203.5L828.9,203.9L828.8,205.4L828.0,206.9L826.6,207.2L826.2,207.9ZM835.1,206.6L835.9,207.2L837.1,208.8L838.3,209.7L838.0,210.4L837.3,210.7L836.1,209.7L835.0,208.0L834.5,206.1L834.8,205.8L835.1,206.6ZM758.8,217.0L757.1,218.9L754.9,219.5L754.6,219.2L754.8,218.3L755.9,216.7L758.5,215.7L758.8,215.1L761.0,214.5L762.8,214.5L763.6,214.1L764.6,214.5L763.6,215.1L761.0,216.3L758.8,217.0ZM782.3,210.6L782.0,208.7L782.5,207.7L783.0,206.9L783.6,207.6L783.6,208.8L782.3,210.6ZM734.0,178.8L736.0,177.1L737.3,175.1L738.3,175.0L739.7,176.3L739.8,177.5L741.5,178.2L743.6,179.0L743.4,180.0L741.7,180.1L742.2,181.3L740.3,182.2L738.8,184.5L740.7,187.0L740.2,188.2L743.1,190.5L740.1,190.8L739.2,192.6L739.3,194.9L736.9,196.7L736.8,199.2L735.8,203.2L735.4,202.3L732.5,203.4L731.5,201.8L729.7,201.7L728.4,200.9L725.3,201.8L724.4,200.6L722.7,200.7L720.6,200.4L720.2,197.0L718.9,196.2L717.7,194.0L717.3,191.8L717.6,189.4L719.1,187.7L721.0,188.6L723.0,188.1L723.5,185.9L724.6,185.4L727.7,184.9L729.5,182.8L730.8,181.2L731.8,180.3L734.0,178.8ZM769.8,200.1L772.6,200.8L773.6,202.8L771.4,201.7L769.3,201.5L767.8,201.7L766.0,201.6L766.6,200.2L769.8,200.1ZM763.4,202.6L761.6,202.1L761.1,201.0L763.7,200.9L764.4,201.8L763.4,202.6ZM766.1,187.3L766.3,188.7L767.8,188.9L768.1,189.9L767.9,192.2L766.6,191.9L766.2,193.5L767.3,194.9L766.5,195.2L765.5,193.5L764.7,190.3L765.3,188.2L766.1,187.3ZM753.2,190.6L756.2,190.5L758.7,188.6L759.2,189.2L757.1,191.8L755.2,192.3L752.7,191.8L748.4,191.9L746.2,192.2L745.8,194.2L748.1,196.5L749.5,195.3L754.3,194.4L754.1,195.6L753.0,195.2L751.9,196.8L749.6,197.8L752.0,201.1L751.6,201.9L753.9,204.9L753.8,206.6L752.5,207.3L751.5,206.4L752.7,204.3L750.2,205.3L749.5,204.6L749.9,203.6L748.0,202.1L748.2,199.6L746.5,200.4L746.7,203.4L746.8,207.1L745.2,207.4L744.1,206.7L744.8,204.3L744.4,201.8L743.3,201.8L742.5,200.1L743.6,198.4L744.0,196.3L745.3,192.5L745.8,191.4L748.0,189.5L750.0,190.2L753.2,190.6ZM746.5,219.2L743.1,217.4L745.5,216.9L746.8,217.7L747.7,218.5L747.6,219.2L746.5,219.2ZM749.2,214.8L750.9,214.6L753.2,213.7L752.8,215.1L748.9,215.8L745.5,215.5L745.5,214.6L747.6,214.0L749.2,214.8ZM741.2,214.4L742.8,214.2L743.5,215.2L740.5,215.8L738.7,216.1L737.3,216.1L738.2,214.6L739.6,214.6L740.3,213.7L741.2,214.4ZM716.1,209.4L716.5,210.3L721.4,210.5L722.0,209.5L726.7,210.7L727.7,212.4L731.5,212.9L734.7,214.4L731.7,215.4L728.9,214.3L726.6,214.4L723.9,214.2L721.5,213.7L718.5,212.8L716.6,212.5L715.6,212.8L710.9,211.8L710.4,210.7L708.1,210.5L709.8,208.0L713.0,208.2L715.0,209.2L716.1,209.4ZM705.5,195.6L706.0,197.4L706.9,198.9L708.7,199.1L710.0,200.7L709.3,203.9L709.2,207.9L706.4,208.0L704.2,205.8L700.9,203.7L699.8,202.2L697.9,200.1L696.6,198.1L694.6,194.5L692.4,192.4L691.6,190.2L690.7,188.2L688.4,186.5L687.0,184.3L685.1,182.9L682.4,180.1L682.2,178.8L683.8,178.9L687.8,179.4L690.1,181.9L692.1,183.6L693.5,184.7L695.9,187.5L698.6,187.5L700.7,189.3L702.2,191.4L704.2,192.6L703.1,194.7L704.6,195.6L705.5,195.6ZM252.8,146.5L251.0,146.0L249.8,146.2L248.3,146.0L247.1,146.5L245.7,145.7L245.9,144.9L248.3,145.2L250.2,145.4L251.1,144.9L250.0,143.7L250.0,142.8L248.4,142.4L248.9,141.6L250.5,141.8L252.7,142.2L253.1,141.7L255.1,141.7L256.6,142.4L257.3,142.3L257.7,143.2L259.1,143.2L259.1,144.0L260.2,144.1L261.5,145.0L260.5,146.0L259.3,145.5L258.1,145.6L257.3,145.5L256.8,145.9L255.8,146.1L255.4,145.5L254.6,145.8L253.5,147.6L252.9,147.2L252.8,146.5ZM794.1,-2.9L800.9,-2.8L810.2,-1.4L808.2,0.5L798.7,0.4L794.5,1.0L789.4,-0.7L790.7,-2.4L794.1,-2.9ZM818.3,-0.9L824.7,-0.2L821.8,0.8L817.7,0.6L812.9,-0.4L813.5,-1.3L818.3,-0.9ZM796.8,4.2L799.2,3.2L802.4,2.9L806.1,3.9L806.4,4.6L802.5,4.6L797.2,4.3L796.8,4.2ZM574.7,3.2L580.9,1.0L580.2,-0.2L585.9,-1.6L594.4,-3.2L603.0,-3.7L607.4,-4.7L612.4,-5.0L614.2,-4.0L612.5,-3.2L603.4,-1.9L595.5,-0.7L587.5,1.8L583.7,4.3L579.7,6.8L580.2,8.9L585.1,11.0L583.6,11.2L575.2,10.9L574.5,9.8L569.8,9.1L569.5,7.7L572.1,7.1L572.0,5.7L577.1,3.5L574.7,3.2ZM804.6,54.8L805.5,57.2L805.5,59.8L806.5,62.4L809.1,66.9L805.3,66.1L803.7,69.8L806.2,72.4L806.2,74.2L804.2,72.7L802.5,74.7L802.0,72.5L802.3,70.0L802.0,67.2L802.6,65.3L802.8,61.8L801.2,59.3L801.5,55.8L803.8,54.6L802.8,53.4L804.0,53.1L804.6,54.8ZM-25.7,9.0L-25.4,8.9L-23.2,8.9L-19.5,9.6L-19.7,9.9L-22.4,10.6L-25.7,10.7L897.2,10.8L896.7,10.0L-25.7,9.0ZM234.1,124.0L235.3,123.8L237.0,123.8L237.0,124.5L234.2,124.9L234.1,124.0ZM237.1,123.3L239.1,124.5L238.7,126.3L238.2,126.0L238.3,124.6L237.1,123.6L237.1,123.3ZM236.1,128.0L236.9,128.1L237.8,130.3L237.8,131.8L237.1,131.9L236.5,130.4L235.5,129.7L236.1,128.0ZM316.9,-19.6L325.5,-21.2L334.5,-21.0L337.8,-22.0L346.9,-22.2L367.5,-21.9L383.5,-19.9L378.8,-18.9L369.0,-18.8L355.1,-18.5L356.4,-18.1L365.5,-18.3L373.3,-17.5L378.3,-18.2L380.4,-17.3L377.6,-15.8L384.1,-16.8L396.6,-17.8L404.3,-17.3L405.7,-16.2L395.3,-14.3L393.8,-13.8L385.6,-13.3L391.5,-13.2L388.5,-11.3L386.5,-9.6L386.6,-6.8L389.6,-5.1L385.6,-5.0L381.4,-4.2L386.1,-2.8L386.7,-0.6L384.0,-0.4L387.3,1.8L381.6,2.0L384.6,3.0L383.8,3.9L380.1,4.3L376.5,4.4L379.8,6.1L379.8,7.2L374.7,6.2L373.4,6.9L376.9,7.5L380.2,9.1L381.2,11.2L376.6,11.6L374.6,10.7L371.5,9.2L372.3,10.9L369.4,12.3L376.1,12.4L379.7,12.5L372.8,14.8L365.8,16.8L358.3,17.7L355.4,17.7L352.8,18.7L349.2,21.4L343.7,23.2L341.9,23.3L338.5,23.9L334.8,24.5L332.6,26.1L332.5,27.9L331.2,29.6L327.0,31.7L328.1,33.7L326.9,35.8L325.6,38.3L322.0,38.5L318.2,36.4L313.0,36.4L310.5,35.0L308.8,32.4L304.4,29.2L303.1,27.6L302.7,25.3L299.2,22.9L300.1,21.0L298.4,20.1L300.9,17.1L304.8,16.1L305.8,15.0L306.3,13.0L303.4,14.0L302.0,14.3L299.7,14.7L296.5,13.9L296.4,12.1L297.4,10.7L299.8,10.7L305.0,11.4L300.6,9.8L298.3,8.9L295.7,9.2L293.6,8.6L296.4,6.2L294.9,5.3L292.8,3.5L289.7,0.7L286.5,-0.3L286.5,-1.3L279.6,-2.8L274.1,-3.0L267.3,-2.9L261.0,-2.7L258.0,-3.5L253.5,-5.2L260.3,-6.0L265.5,-6.1L254.5,-6.8L248.7,-7.8L249.0,-8.8L258.8,-10.1L268.2,-11.3L269.2,-12.2L262.2,-13.2L264.5,-14.2L273.4,-16.0L277.1,-16.3L276.0,-17.4L282.1,-18.1L290.0,-18.5L297.9,-18.5L300.7,-17.7L307.6,-19.1L313.7,-18.2L317.3,-18.0L322.7,-17.1L316.5,-18.5L316.9,-19.6ZM614.4,317.9L616.1,318.7L618.5,319.0L618.6,319.5L617.9,320.7L613.9,320.8L613.8,319.5L614.2,318.4L614.4,317.9ZM459.6,83.2L461.3,82.3L461.7,84.5L460.9,86.5L459.7,85.9L459.1,84.2L459.6,83.2ZM266.7,145.2L268.0,145.5L268.5,146.0L267.8,146.6L265.9,146.6L264.4,146.7L264.2,145.6L264.6,145.2L266.7,145.2ZM237.7,145.3L239.4,145.5L240.8,146.2L241.2,146.9L239.4,146.9L238.6,147.3L237.2,146.9L235.7,146.0L236.0,145.4L237.1,145.2L237.7,145.3ZM225.6,133.2L227.8,133.4L229.8,133.4L232.3,134.3L233.3,135.3L235.7,135.0L236.6,135.6L238.8,137.2L240.4,138.3L241.2,138.3L242.7,138.8L242.6,139.5L244.5,139.6L246.4,140.7L246.1,141.3L244.4,141.6L242.7,141.8L240.9,141.6L237.2,141.8L238.9,140.4L237.9,139.7L236.2,139.5L235.3,138.8L234.7,137.3L233.3,137.4L230.9,136.7L230.1,136.2L226.7,135.8L225.9,135.3L226.8,134.6L224.3,134.5L222.4,135.9L221.4,135.9L221.0,136.5L219.7,136.8L218.6,136.6L220.0,135.8L220.5,134.8L221.7,134.3L223.0,133.8L225.0,133.5L225.6,133.2ZM564.5,224.9L565.2,226.0L565.9,227.7L566.3,230.8L566.9,232.0L566.7,233.2L566.2,234.0L565.4,232.5L564.9,233.3L565.4,235.2L565.1,236.2L564.4,236.8L564.3,239.0L563.2,242.0L562.0,245.6L560.4,250.4L559.4,254.0L558.3,257.0L556.2,257.6L553.9,258.7L552.4,258.0L550.4,257.1L549.7,255.8L549.5,253.5L548.6,251.4L548.4,249.6L548.8,247.7L550.0,247.3L550.0,246.4L551.3,244.5L551.5,242.8L550.9,241.6L550.4,240.0L550.2,237.6L551.1,236.2L551.4,234.6L552.7,234.5L554.1,233.9L555.1,233.5L556.2,233.4L557.7,232.0L559.8,230.4L560.6,229.1L560.2,228.0L561.3,228.3L562.7,226.5L562.8,225.0L563.6,223.8L564.5,224.9ZM867.1,233.7L868.7,235.2L867.9,235.5L867.0,234.4L867.1,233.7ZM866.0,233.1L865.7,232.4L865.6,230.5L866.8,231.3L867.3,233.3L866.6,233.0L866.0,233.1ZM504.7,102.1L504.4,102.8L500.7,103.1L500.7,102.6L497.6,102.1L498.1,101.0L499.5,101.9L501.5,101.8L503.4,101.9L503.3,102.4L504.7,102.1ZM421.2,54.3L421.6,56.2L419.7,58.5L415.1,60.0L411.5,59.6L413.6,56.9L412.2,54.3L415.7,52.3L417.7,51.1L419.8,51.0L422.6,52.6L421.2,54.3ZM863.4,247.1L865.5,248.7L866.9,249.8L865.9,250.5L864.5,249.8L862.6,248.6L861.0,247.2L859.3,245.4L858.9,244.6L860.0,244.6L861.5,245.5L862.6,246.3L863.4,247.1ZM854.0,219.8L854.7,220.7L852.9,220.7L852.0,219.1L853.5,219.7L854.0,219.8ZM852.9,217.5L852.5,218.0L850.6,215.8L850.1,214.3L850.9,214.3L851.9,216.3L852.9,217.5ZM850.8,218.2L849.8,218.3L848.2,218.0L847.7,217.6L847.8,216.6L849.5,217.0L850.3,217.6L850.8,218.2ZM847.7,213.5L848.3,214.3L848.4,214.8L846.3,213.7L844.9,212.8L844.0,211.9L844.4,211.7L845.5,212.3L847.7,213.5ZM841.2,210.9L842.2,211.8L841.7,211.9L840.6,211.3L839.6,210.3L839.7,209.8L841.2,210.9ZM892.0,295.9L891.0,297.3L889.7,299.0L887.8,300.1L887.3,299.4L886.2,299.0L887.7,296.9L886.9,295.5L884.1,294.5L884.2,293.5L886.0,292.6L886.5,290.6L886.4,289.0L885.3,287.3L885.4,286.8L884.2,285.7L882.1,283.5L881.1,281.6L882.0,281.4L883.4,282.9L885.4,283.5L886.1,285.8L888.0,288.5L888.1,286.8L889.2,287.5L889.6,289.4L891.7,290.3L893.4,290.5L894.9,289.5L896.2,289.8L895.6,292.1L894.8,293.6L892.8,293.5L892.1,294.3L892.4,295.4L892.0,295.9ZM873.4,304.9L875.6,303.5L877.2,302.2L878.3,300.3L879.3,299.6L879.7,298.2L881.5,297.0L882.1,298.1L882.6,299.1L884.5,298.1L885.2,299.2L885.2,300.3L884.3,301.5L882.6,303.4L881.3,304.4L882.2,305.6L880.2,305.7L878.0,306.6L877.3,308.3L875.9,310.9L873.8,312.1L872.6,312.8L870.2,312.7L868.5,311.9L865.7,311.7L865.3,310.8L866.7,308.9L869.9,306.3L871.6,305.8L873.4,304.9ZM816.9,297.8L818.5,298.0L818.6,301.0L817.8,301.9L817.5,304.0L816.6,303.3L814.8,305.1L814.3,304.9L812.7,304.8L811.1,302.6L810.8,300.9L809.3,298.7L809.3,297.5L811.0,297.8L813.5,298.6L814.9,298.3L816.9,297.8ZM761.5,275.7L758.8,277.0L756.6,277.6L756.1,279.0L755.1,280.0L752.9,280.1L751.3,280.3L749.1,279.8L747.2,280.1L745.4,280.2L743.9,281.6L743.2,281.5L741.9,282.2L740.6,283.0L738.8,282.9L737.0,282.9L734.3,281.3L732.9,280.8L733.0,279.3L734.3,279.0L734.7,278.4L734.6,277.5L734.9,275.7L734.6,274.1L733.3,271.5L732.9,270.1L733.0,268.6L731.9,266.9L731.9,266.2L730.7,265.2L730.4,263.1L728.9,261.1L728.6,260.0L729.7,261.1L728.9,258.7L730.1,259.5L730.9,260.5L730.8,259.2L729.6,257.1L729.3,256.3L728.7,255.6L729.0,254.1L729.5,253.4L729.9,252.2L729.6,250.6L730.7,248.8L730.9,250.8L732.0,249.0L734.0,248.1L735.3,247.0L737.3,246.1L738.4,245.9L739.1,246.2L741.2,245.2L742.7,245.0L743.1,244.4L743.8,244.2L745.2,244.2L747.9,243.5L749.3,242.3L750.0,241.0L751.5,239.7L751.6,238.6L751.7,237.2L753.5,235.0L754.5,237.3L755.6,236.7L754.7,235.5L755.5,234.3L756.7,234.8L757.0,232.9L758.4,231.6L759.0,230.6L760.3,230.2L760.3,229.4L761.5,229.8L761.5,229.1L762.6,228.7L763.9,228.4L765.8,229.6L767.2,231.1L768.8,231.1L770.5,231.4L769.9,229.9L771.1,227.9L772.3,227.2L771.9,226.6L773.0,225.1L774.6,224.2L775.9,224.5L778.1,224.0L778.0,222.7L776.1,221.8L777.5,221.5L779.2,222.1L780.6,223.2L782.7,223.8L783.5,223.6L785.1,224.4L786.6,223.6L787.5,223.8L788.1,223.3L789.3,224.6L788.6,226.0L787.6,227.0L786.8,227.1L787.1,228.1L786.3,229.4L785.4,230.7L785.6,231.4L787.6,232.8L789.6,233.7L790.9,234.6L792.8,236.1L793.5,236.1L794.8,236.7L795.2,237.5L797.7,238.4L799.4,237.5L799.9,236.1L800.4,235.0L800.7,233.6L801.5,231.5L801.2,230.3L801.3,229.6L801.0,228.1L801.4,226.1L801.9,225.6L801.5,224.8L802.1,223.4L802.6,222.0L802.7,221.3L803.6,220.3L804.3,221.5L804.5,223.2L805.2,223.5L805.3,224.6L806.2,225.9L806.4,227.3L806.3,228.2L807.2,230.3L808.9,229.3L809.7,230.4L811.0,231.4L810.7,232.5L811.3,234.7L811.6,236.0L812.3,236.3L813.0,238.5L812.7,239.9L813.6,241.6L816.4,243.0L818.2,244.2L819.9,245.3L819.6,245.9L821.0,247.5L822.0,250.3L823.1,249.7L824.1,250.9L824.7,250.5L825.2,253.2L827.0,254.8L828.2,255.8L830.2,257.8L830.9,259.9L831.0,261.4L830.8,263.0L832.0,265.1L831.9,267.4L831.4,268.6L830.7,270.9L830.8,272.4L830.3,274.2L829.2,276.6L827.3,277.8L826.3,279.8L825.5,281.1L824.7,283.3L823.7,284.6L823.1,286.5L822.7,288.3L822.9,289.1L821.4,290.0L818.5,290.1L816.1,291.1L814.9,292.1L813.4,293.2L811.3,292.1L809.7,291.6L810.1,290.3L808.7,290.8L806.4,292.7L804.2,292.0L802.7,291.5L801.3,291.4L798.8,290.6L797.1,289.0L796.6,287.1L796.1,285.8L794.8,284.7L792.3,284.4L793.2,283.2L792.5,281.3L791.3,283.1L789.0,283.5L790.3,282.1L790.7,280.6L791.7,279.4L791.5,277.5L789.4,279.6L787.8,280.5L786.8,282.6L784.8,281.5L784.9,280.2L783.3,278.3L781.9,277.3L782.4,276.7L779.1,275.2L777.3,275.1L774.8,273.8L770.2,274.1L766.9,275.0L764.0,275.9L761.5,275.7ZM647.5,173.5L647.1,176.2L646.0,176.9L643.8,177.5L642.5,175.5L642.1,171.8L643.2,167.6L645.0,169.0L646.2,170.8L647.5,173.5ZM718.7,146.1L716.5,145.3L716.5,143.1L717.7,141.9L720.5,141.2L722.0,141.2L722.6,142.2L721.5,143.3L720.9,144.8L718.7,146.1ZM750.3,130.1L748.7,134.3L747.6,136.4L746.3,134.2L746.0,132.3L747.5,129.8L749.6,127.8L750.7,128.6L750.3,130.1ZM475.1,94.8L477.1,94.6L476.1,96.6L476.5,97.4L476.0,98.7L474.0,97.7L472.7,97.4L469.1,96.1L469.5,94.8L472.5,95.1L475.1,94.8ZM459.5,87.7L460.8,86.9L462.4,88.7L462.0,92.1L460.8,92.0L459.8,92.8L458.8,92.1L458.7,89.0L458.1,87.6L459.5,87.7ZM469.0,48.6L469.8,49.9L468.2,51.9L465.5,50.5L465.2,49.4L469.0,48.6ZM429.2,55.5L429.2,55.5L429.6,54.0L427.8,52.5L427.8,52.4L424.7,52.0L424.1,51.3L425.0,50.1L424.2,49.4L422.8,50.6L422.6,48.2L421.3,46.8L422.3,44.2L424.3,42.1L426.3,42.3L429.4,42.1L426.7,44.9L429.3,44.5L432.1,44.5L431.4,46.6L429.1,48.9L431.8,49.1L432.0,49.4L434.3,52.4L436.0,52.8L437.6,55.7L438.4,56.8L441.5,57.2L441.2,58.9L439.8,59.6L440.9,61.0L438.6,62.3L435.1,62.3L430.7,63.0L429.5,62.5L427.8,63.7L425.5,63.4L423.7,64.4L422.3,63.9L426.1,61.2L428.4,60.6L428.3,60.6L424.3,60.2L423.6,59.2L426.3,58.4L424.9,57.0L425.4,55.3L429.2,55.5ZM399.8,22.0L399.2,23.6L402.1,25.4L398.8,27.4L391.4,29.1L389.2,29.6L385.8,29.2L378.6,28.4L381.1,27.3L375.5,26.0L380.1,25.5L380.0,24.7L374.6,24.1L376.3,22.5L380.2,22.1L384.2,23.8L388.1,22.4L391.4,23.2L395.6,21.8L399.8,22.0ZM747.9,160.2L746.5,158.2L748.7,158.3L749.6,159.3L749.0,161.5L747.9,160.2ZM752.4,167.2L753.0,166.5L753.3,164.9L754.7,164.7L754.3,166.5L756.2,164.0L756.0,166.4L755.0,167.3L754.2,168.9L753.4,169.7L751.8,167.9L752.4,167.2ZM762.1,171.2L762.4,172.9L762.5,174.4L761.7,176.7L760.7,174.1L759.5,175.4L760.3,177.3L759.6,178.5L756.6,177.0L755.8,175.2L756.6,173.9L755.0,172.7L754.2,173.8L753.0,173.7L751.1,175.1L750.7,174.4L751.7,172.2L753.3,171.5L754.7,170.5L755.6,171.7L757.5,171.0L758.0,169.8L759.8,169.7L759.6,167.8L761.7,169.0L761.9,170.3L762.1,171.2ZM741.9,168.9L738.5,171.3L739.7,169.5L741.6,168.0L743.1,166.2L744.5,163.6L744.9,165.7L743.2,167.1L741.9,168.9ZM751.7,146.0L751.3,147.1L752.2,148.9L751.5,151.0L750.0,151.9L749.6,154.0L750.2,156.0L751.5,156.3L752.7,156.0L755.9,157.4L755.6,158.8L756.5,159.4L756.2,160.6L754.2,159.4L753.2,158.0L752.6,159.0L750.9,157.4L748.6,157.8L747.3,157.2L747.5,156.2L748.3,155.5L747.5,154.9L747.2,155.8L745.9,154.4L745.5,153.2L745.4,150.8L746.5,151.6L746.7,147.6L747.6,145.3L749.1,145.3L750.7,146.0L751.5,145.3L751.7,146.0ZM751.0,163.5L750.6,162.3L752.1,163.1L753.7,163.1L753.7,164.1L752.5,165.2L750.9,166.0L750.8,164.8L751.0,163.5ZM759.9,161.6L760.6,164.5L758.6,163.8L758.7,164.6L759.3,166.2L758.1,166.8L758.0,165.0L757.2,164.9L756.8,163.3L758.3,163.5L758.3,162.5L756.7,160.6L759.2,160.6L759.9,161.6ZM802.0,92.1L799.6,94.7L799.7,97.3L798.7,99.4L799.1,100.7L797.8,102.5L794.5,103.7L790.0,103.9L786.3,106.8L784.6,105.8L784.5,103.9L780.0,104.5L777.0,105.7L774.0,105.7L776.6,107.6L774.9,112.0L773.2,113.1L771.9,112.1L772.6,109.7L771.0,109.0L769.9,107.2L772.3,106.4L773.7,104.8L776.3,103.5L778.2,101.7L783.3,101.0L786.0,101.5L788.7,96.9L790.4,98.2L794.2,95.6L795.7,94.6L797.3,91.4L796.8,88.6L797.9,86.9L800.7,86.5L802.1,90.0L802.0,92.1ZM809.0,79.8L810.8,78.7L811.4,81.6L807.6,82.3L805.3,84.9L801.3,83.1L799.9,85.9L797.0,86.0L796.7,83.4L797.9,81.4L800.7,81.3L801.4,77.7L802.2,75.7L805.2,78.4L807.2,79.3L809.0,79.8ZM777.5,106.8L779.0,105.3L780.4,105.6L781.5,104.5L783.4,105.0L783.7,105.9L782.2,107.5L781.2,106.7L779.9,107.3L779.2,108.8L777.5,108.0L777.5,106.8ZM521.3,102.5L521.5,102.5L521.9,101.9L523.7,101.9L526.1,101.1L524.3,102.2L524.5,102.7L524.6,102.9L521.9,104.0L520.7,103.6L520.1,102.6L521.3,102.5ZM278.5,165.2L280.0,164.9L280.6,164.9L280.5,166.9L278.3,167.1L277.8,166.9L278.6,166.2L278.5,165.2Z"/><g id="segni"></g></svg>
+    <p class="mappa-info" id="mappa-info" aria-live="polite">Tocca un punto sulla carta o un luogo dell'elenco.</p>
+    <p class="mappa-nota">Carta muta: solo le terre emerse. Prova a collegare con delle linee i luoghi della carta: ti accorgerai di quanto il mondo di oggi sia intrecciato.</p>
+  </div>
+  <ul class="luoghi" id="luoghi"></ul>
+  <div class="animata" id="carta-animata" aria-labelledby="t-animata">
+    <h4 id="t-animata">🎬 Cambia sguardo: la carta animata</h4>
+    <p>Ora guarda questi luoghi in movimento: confini, Stati ed eserciti che cambiano nel tempo. Poi torna alla carta muta e ritrova i luoghi dell'elenco.</p>
+    <h5>Carte animate HUB Scuola</h5>
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=sYar63tC1lU&amp;list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">Le economie del mondo agli inizi degli anni 2000</a></li>
+    </ul>
+    <h5>Altre carte animate</h5>
+    <ul>
+      <li><a href="https://www.youtube.com/results?search_query=carta+animata+mondo+dopo+il+1989" target="_blank" rel="noopener">Cerca altre carte animate su questo argomento</a></li>
+      <li><a href="https://www.youtube.com/playlist?list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">Tutte le carte animate di storia di HUB Scuola</a></li>
+    </ul>
+    <p class="nota-video">Video su YouTube, si aprono in una nuova scheda.</p>
+  </div>
+
+  <h3 id="quando"><span>2. Quando?</span></h3>
+  <p class="mestiere">🕐 Collocare nel tempo · le etichette indicano le piste del percorso «Un mondo sempre più piccolo»</p>
+  <ol class="linea">
+    <li class="estremo"><span class="anno">1948</span>L'ONU approva la Dichiarazione universale dei diritti umani.</li>
+    <li><span class="anno">1969</span>Primo collegamento tra computer della rete che diventerà Internet. Lo stesso anno, l'uomo sulla Luna.<span class="pista">Comunicazione</span><span class="pista">Spazio</span></li>
+    <li><span class="anno">1991</span>Al CERN di Ginevra Tim Berners-Lee mette in rete il primo sito del World Wide Web.<span class="pista">Comunicazione</span></li>
+    <li><span class="anno">1992</span>Conferenza di Rio de Janeiro: per la prima volta gli Stati discutono insieme di ambiente e clima.</li>
+    <li><span class="anno">2001</span>11 settembre: attentati terroristici negli Stati Uniti. La Cina entra nell'Organizzazione mondiale del commercio.</li>
+    <li><span class="anno">2007–08</span>Arrivano gli smartphone. Una grave crisi finanziaria parte dagli Stati Uniti e colpisce tutto il mondo.<span class="pista">Comunicazione</span></li>
+    <li><span class="anno">2015</span>Accordo di Parigi sul clima. L'ONU approva l'Agenda 2030 per lo sviluppo sostenibile. Più di un milione di profughi arriva in Europa.</li>
+    <li><span class="anno">2020</span>La pandemia di Covid-19 ferma il mondo: milioni di morti, scuole chiuse, lezioni a distanza.</li>
+    <li><span class="anno">2022</span>La Russia invade l'Ucraina. Si diffondono i programmi di intelligenza artificiale che scrivono testi e creano immagini.</li>
+    <li class="estremo"><span class="anno">oggi</span>Guerre in Europa e in Medio Oriente, nuove tensioni tra le grandi potenze, eventi climatici estremi: la storia continua.</li>
+  </ol>
+
+  <h3 id="chi"><span>3. Chi?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 📖 Lessico — il link apre una voce Treccani in una nuova scheda.</p>
+  <div class="persone">
+    <article class="persona"><span class="sigla" aria-hidden="true">ER</span><div><h4>Eleanor Roosevelt</h4><span class="date">1884–1962 · Stati Uniti</span><p>Vedova del presidente Roosevelt, guida la commissione dell'ONU che scrive la Dichiarazione universale dei diritti umani (1948).</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">TB</span><div><h4>Tim Berners-Lee</h4><span class="date">1955 · Gran Bretagna</span><p>Informatico, al CERN di Ginevra inventa il World Wide Web, il sistema di pagine e collegamenti che usiamo ogni giorno, e lo lascia libero a tutti.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">WM</span><div><h4>Wangari Maathai</h4><span class="date">1940–2011 · Kenya</span><p>Biologa, fonda un movimento di donne che pianta decine di milioni di alberi in Africa. Nel 2004 è la prima donna africana a ricevere il Nobel per la pace.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">MY</span><div><h4>Malala Yousafzai</h4><span class="date">1997 · Pakistan</span><p>Da ragazzina difende il diritto delle bambine di andare a scuola; a 15 anni sopravvive a un attentato dei talebani. Nel 2014, a 17 anni, riceve il Nobel per la pace.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">GT</span><div><h4>Greta Thunberg</h4><span class="date">2003 · Svezia</span><p>Nel 2018, a 15 anni, comincia uno sciopero scolastico per il clima davanti al parlamento svedese, che diventa un movimento di giovani in tutto il mondo.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">SC</span><div><h4>Samantha Cristoforetti</h4><span class="date">1977 · Italia</span><p>Prima donna italiana nello spazio. Dalla Stazione spaziale internazionale, costruita insieme da Paesi un tempo rivali, mostra la Terra fragile e senza confini.</p></div></article>
+  </div>
+</section>
+
+<!-- ======================= TESTO ======================= -->
+<section class="parte" id="testi" aria-labelledby="t-testi">
+  <p class="etichetta">Testo sintetico / essenziale</p>
+  <h2 id="t-testi">La lezione per intero</h2>
+  <p class="guida">Lo stesso testo in due versioni: il <strong>sintetico</strong> contiene tutte le informazioni, l'<strong>essenziale</strong> le riassume con frasi più brevi. Scegli quella che ti serve.</p>
+  <div class="livelli" role="group" aria-label="Versione del testo">
+    <button type="button" data-livello="sintetico" aria-pressed="true">Sintetico</button>
+    <button type="button" data-livello="essenziale" aria-pressed="false">Essenziale</button>
+  </div>
+  <div id="testo-sintetico">
+    <div class="paragrafo"><h4><span class="n">1</span>Un mondo globale</h4><p>Dopo la fine della guerra fredda il commercio mondiale cresce enormemente. Un telefono può essere progettato negli Stati Uniti, montato in Cina con componenti di dieci Paesi e venduto in tutto il mondo. Le grandi imprese diventano <a class="pk" href="#p-multinazionali">multinazionali</a>. La globalizzazione porta prodotti a basso prezzo e nuove possibilità, ma anche la chiusura di fabbriche nei Paesi ricchi e lavoro sottopagato in quelli poveri.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>La rivoluzione digitale</h4><p>Internet, nato da una rete militare e universitaria americana, diventa negli anni Novanta, con il World Wide Web, uno strumento di tutti. Con gli smartphone e i social network miliardi di persone comunicano, studiano, comprano, si informano in rete. È una rivoluzione paragonabile a quella della stampa, con grandi opportunità e nuovi rischi: notizie false, dipendenza, controllo dei dati personali. Ora arriva l'intelligenza artificiale.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>Nuove potenze</h4><p>Dopo il 1991 gli Stati Uniti restano l'unica superpotenza, ma presto non sono più soli. La Cina, con riforme economiche e un governo comunista che non concede libertà politiche, diventa la seconda economia del mondo. Crescono anche l'India, il Brasile, molti Paesi asiatici. La Russia torna a una politica di potenza. Il mondo diventa <a class="pk" href="#p-multipolare">multipolare</a>.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>Terrorismo e nuove guerre</h4><p>L'11 settembre 2001 diciannove terroristi di al-Qaida dirottano aerei di linea e li lanciano contro le Torri gemelle di New York e il Pentagono: muoiono quasi tremila persone. Seguono le guerre in Afghanistan e in Iraq e attentati anche in Europa. Negli anni Venti tornano le guerre tra Stati, come l'invasione russa dell'Ucraina, e nuove guerre in Medio Oriente.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>Persone in movimento</h4><p>Guerre, povertà, disastri ambientali spingono milioni di persone a lasciare il proprio Paese. Molte attraversano il Mediterraneo su barconi per raggiungere l'Europa, e migliaia muoiono in mare. L'Italia, che per un secolo è stata un Paese di emigranti, è diventata un Paese di immigrazione. Accogliere e integrare è una delle grandi sfide di oggi.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>Un pianeta da proteggere</h4><p>L'uso di carbone, petrolio e gas, iniziato con la rivoluzione industriale, ha aumentato la quantità di anidride carbonica nell'aria e riscaldato il pianeta. Le conseguenze sono già visibili: ghiacciai che si sciolgono, siccità, alluvioni, ondate di calore. Con gli accordi internazionali, come quello di Parigi del 2015, gli Stati si impegnano a ridurre le emissioni. Nel 2020 la pandemia di Covid-19 ha mostrato quanto siamo legati gli uni agli altri.</p></div>
+  </div>
+  <div id="testo-essenziale" class="essenziale" hidden>
+    <div class="paragrafo"><h4><span class="n">1</span>Un mondo globale</h4><p>Merci, soldi e persone viaggiano in tutto il mondo. È la globalizzazione.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>La rivoluzione digitale</h4><p>Internet e gli smartphone collegano miliardi di persone. Ci sono opportunità e rischi.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>Nuove potenze</h4><p>Oltre agli Stati Uniti crescono la Cina e l'India. Il mondo ha più centri di potere.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>Terrorismo e nuove guerre</h4><p>Nel 2001 attentati terroristici colpiscono New York. Oggi ci sono di nuovo guerre, anche in Europa.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>Persone in movimento</h4><p>Milioni di persone lasciano il loro Paese. L'Italia è diventata un Paese di immigrazione.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>Un pianeta da proteggere</h4><p>Il pianeta si sta riscaldando. Gli Stati cercano di collaborare per ridurre l'inquinamento.</p></div>
+  </div>
+</section>
+
+<!-- ======================= PERCHÉ ======================= -->
+<section class="parte" id="perche" aria-labelledby="t-perche">
+  <p class="etichetta">Perché?</p>
+  <h2 id="t-perche">Causa, evento, effetto</h2>
+  <p class="guida">Gli storici non si chiedono solo che cosa è successo, ma perché. Leggi la catena da sinistra a destra.</p>
+  <p class="mestiere">🧩 Comprendere fatti e processi storici</p>
+  <div class="catena">
+    <div class="anello causa"><h4>Causa</h4><p>Fine della guerra fredda e apertura dei mercati. Trasporti veloci ed economici. La rivoluzione digitale. La crescita della popolazione e dei consumi.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello evento"><h4>Evento</h4><p>Il mondo diventa globale e interconnesso: si scambiano merci, informazioni, persone, idee, ma anche crisi, malattie e inquinamento.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello effetto"><h4>Effetto</h4><p>Meno povertà nel mondo, ma più disuguaglianze. Nuove potenze. Problemi globali, clima, migrazioni, pandemie, che richiedono risposte comuni.</p></div>
+  </div>
+  <div class="ombra">
+    <h4>Ma attenzione</h4>
+    <p>Studiare il presente con gli strumenti dello storico è difficile: non sappiamo ancora come andrà a finire, e siamo dentro gli avvenimenti. Per questo bisogna essere ancora più prudenti: verificare le notizie, confrontare fonti diverse, distinguere i fatti dalle opinioni, diffidare di chi offre spiegazioni troppo semplici.</p>
+  </div>
+  <div class="ricorda">
+    <h4>Ricorda</h4>
+    <dl>
+      <dt>Interconnesso</dt><dd>Collegato con molti altri, in modo che quello che succede in un punto ha effetti altrove.</dd>
+      <dt>Pandemia</dt><dd>Epidemia che si diffonde in tutto il mondo.</dd>
+      <dt>Sostenibile</dt><dd>Che soddisfa i bisogni di oggi senza togliere risorse alle generazioni future.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ======================= CONCETTI ======================= -->
+<section class="parte" id="concetti" aria-labelledby="t-concetti">
+  <p class="etichetta">Concetti fondamentali</p>
+  <h2 id="t-concetti">Le idee chiave</h2>
+  <p class="guida">Le idee più importanti della lezione, spiegate una per una. Le parole sottolineate a puntini rimandano alle <a href="#parole">Parole chiave</a>.</p>
+  <article class="concetto" id="c-piccolo"><h4>Un mondo sempre più piccolo</h4><p>All'inizio del Novecento un telegramma attraversava l'oceano in pochi minuti e sembrava un miracolo; oggi una videochiamata collega in un istante due persone ai capi opposti del pianeta. La <a class="pk" href="#p-globalizzazione">globalizzazione</a> è l'ultima tappa di un processo cominciato con le scoperte geografiche e accelerato dalle rivoluzioni industriali.</p></article>
+  <article class="concetto" id="c-diritti"><h4>I diritti umani</h4><p>Dopo gli orrori della Seconda guerra mondiale l'ONU proclama nel 1948 che tutti gli esseri umani nascono liberi e uguali in dignità e diritti. È un principio che vale per tutti, ma ancora oggi in molti Paesi è violato: libertà di parola, istruzione per le bambine, uguaglianza davanti alla legge sono conquiste da difendere.</p></article>
+  <article class="concetto" id="c-disuguaglianze"><h4>Ricchi e poveri</h4><p>Negli ultimi decenni centinaia di milioni di persone, soprattutto in Asia, sono uscite dalla povertà estrema. Ma le <a class="pk" href="#p-disuguaglianze">disuguaglianze</a> sono cresciute: tra Paesi ricchi e poveri e, dentro ogni Paese, tra chi ha moltissimo e chi ha pochissimo.</p></article>
+  <article class="concetto" id="c-clima"><h4>Il clima, una sfida comune</h4><p>Il <a class="pk" href="#p-clima">cambiamento climatico</a> non rispetta i confini: le emissioni di un Paese riscaldano tutto il pianeta, e spesso a soffrirne di più sono i Paesi più poveri. Per questo servono accordi tra tutti gli Stati e cambiamenti nel modo di produrre energia, di muoversi, di consumare.</p></article>
+  <article class="concetto" id="c-informazione"><h4>Cittadini informati</h4><p>Nella rete circolano informazioni vere e false, spesso mescolate. Saper cercare le fonti, verificarle e confrontarle, come fa lo storico con i documenti, è una competenza indispensabile per essere cittadini liberi in una democrazia.</p></article>
+</section>
+
+<!-- ======================= COME ======================= -->
+<section class="parte" id="come" aria-labelledby="t-come">
+  <p class="etichetta">Come?</p>
+  <h2 id="t-come">Le sfide del nostro tempo</h2>
+  <p class="guida">Uno schema per vedere tutto insieme: quattro grandi temi del mondo di oggi, con un esempio e una domanda aperta per ciascuno.</p>
+  <p class="mestiere">🧩 Organizzare le informazioni · collegamento con Educazione civica (Agenda 2030)</p>
+  <p class="radice">Il mondo contemporaneo affronta sfide globali</p>
+  <div class="come">
+    <div class="colonna"><h4>Economia globale</h4><ul><li>commercio mondiale</li><li>multinazionali</li><li>crisi del 2008</li><li>domanda: chi guadagna e chi perde?</li></ul></div>
+    <div class="colonna"><h4>Tecnologia</h4><ul><li>Internet e smartphone</li><li>social network</li><li>intelligenza artificiale</li><li>domanda: come usarla bene?</li></ul></div>
+    <div class="colonna"><h4>Ambiente</h4><ul><li>riscaldamento globale</li><li>accordo di Parigi</li><li>energie rinnovabili</li><li>domanda: che cosa posso fare io?</li></ul></div>
+    <div class="colonna"><h4>Pace e diritti</h4><ul><li>terrorismo e nuove guerre</li><li>migrazioni e profughi</li><li>diritti umani</li><li>domanda: come costruire la pace?</li></ul></div>
+  </div>
+</section>
+
+<!-- ======================= PAROLE CHIAVE ======================= -->
+<section class="parte" id="parole" aria-labelledby="t-parole">
+  <p class="etichetta">Parole chiave</p>
+  <h2 id="t-parole">Le parole della lezione</h2>
+  <p class="guida">Il significato dei termini nuovi, in ordine alfabetico.</p>
+  <dl class="parole">
+    <div class="parola" id="p-clima"><dt>Cambiamento climatico</dt><dd>Il riscaldamento del pianeta causato soprattutto dai gas prodotti dalle attività umane, con effetti su tutto il clima. <a href="https://www.treccani.it/enciclopedia/clima_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Treccani ragazzi «Clima»</a></dd></div>
+    <div class="parola" id="p-disuguaglianze"><dt>Disuguaglianze</dt><dd>Le differenze di ricchezza, di opportunità e di diritti tra Paesi e tra persone.</dd></div>
+    <div class="parola" id="p-globalizzazione"><dt>Globalizzazione</dt><dd>Il processo per cui economie, culture e società di tutto il mondo diventano sempre più collegate. <a href="https://www.treccani.it/enciclopedia/globalizzazione_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Treccani ragazzi</a></dd></div>
+    <div class="parola" id="p-migrazioni"><dt>Migrazioni</dt><dd>Spostamenti di persone da un Paese all'altro per cercare lavoro, sicurezza o una vita migliore. <a href="https://www.treccani.it/enciclopedia/emigrazione-e-immigrazione_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Treccani ragazzi</a></dd></div>
+    <div class="parola" id="p-multinazionali"><dt>Multinazionale</dt><dd>Grande impresa che produce e vende in molti Paesi del mondo.</dd></div>
+    <div class="parola" id="p-multipolare"><dt>Mondo multipolare</dt><dd>Un mondo in cui non c'è una sola superpotenza, ma diversi centri di potere.</dd></div>
+  </dl>
+</section>
+
+<!-- ======================= STUDIAMO LE FONTI ======================= -->
+<section class="parte" id="lente" aria-labelledby="t-lente">
+  <p class="etichetta">Studiamo le fonti</p>
+  <h2 id="t-lente">Dentro la notizia</h2>
+  <p class="guida">Come si racconta un evento visto in diretta da tutto il mondo? Lo leggiamo in <em>La Stampa</em> di Torino.</p>
+  <p class="mestiere">📜 Leggere e interpretare le fonti</p>
+  <div class="lente">
+    <div class="lente-testa">
+      <p class="testata-giornale">La Stampa · 12 settembre 2001 · articolo da scegliere</p>
+      <h3>L'attacco all'America</h3>
+    </div>
+    <div class="lente-corpo">
+      <p>L'11 settembre 2001 il secondo aereo colpisce le Torri gemelle mentre le televisioni di tutto il mondo trasmettono in diretta. Per la prima volta un evento storico viene visto nello stesso momento da centinaia di milioni di persone. La mattina dopo i giornali escono con titoli enormi.</p>
+      <p class="domanda-guida">Domanda guida: che cosa può aggiungere un giornale, il giorno dopo, a immagini che tutti hanno già visto in televisione?</p>
+      <div class="fasi">
+        <div class="fase"><h4>1. Prima di leggere</h4><ol><li>Trova New York sulla <a href="#dove">carta</a>.</li><li>Chiedi a un adulto della tua famiglia dov'era e che cosa ha pensato quel giorno.</li><li>Ritrova il 2001 sulla <a href="#quando">linea del tempo</a>.</li></ol></div>
+        <div class="fase"><h4>2. Leggere</h4><ol><li>Leggi l'articolo riadattato e sottolinea in due colori i fatti certi e le ipotesi.</li><li>Cerca le parole difficili in «Per capire».</li></ol><p style="margin:10px 0 0"><a class="bottone" id="link-articolo" href="#" aria-disabled="true">Pagina dell'articolo: in preparazione</a></p></div>
+        <div class="fase"><h4>3. Pensare da storici</h4><ol><li>Che cosa sapeva il giornalista la sera dell'11 settembre e che cosa non sapeva ancora?</li><li>Confronta questo articolo con la testimonianza raccolta in famiglia: che tipo di fonte è ciascuno?</li><li>Che cosa ci dice questa fonte sul modo in cui oggi viviamo le notizie?</li></ol></div>
+      </div>
+      <ul class="altre-fonti">
+        <li><span class="tipo">Treccani ragazzi</span><a href="https://www.treccani.it/enciclopedia/globalizzazione_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Globalizzazione</a> · <a href="https://www.treccani.it/enciclopedia/clima_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Clima</a> · <a href="https://www.treccani.it/enciclopedia/emigrazione-e-immigrazione_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Emigrazione e immigrazione</a></li>
+        <li><span class="tipo">Treccani · Atlante geopolitico</span><a href="https://www.treccani.it/enciclopedia/la-sfida-dei-cambiamenti-climatici_(Atlante-Geopolitico)/" target="_blank" rel="noopener">La sfida dei cambiamenti climatici</a> · <a href="https://www.treccani.it/enciclopedia/le-migrazioni-sfida-e-risorsa-nel-21-secolo_(Atlante-Geopolitico)/" target="_blank" rel="noopener">Le migrazioni: sfida e risorsa</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RIPASSIAMO ======================= -->
+<section class="parte" id="compiti" aria-labelledby="t-compiti">
+  <p class="etichetta">Ripassiamo</p>
+  <h2 id="t-compiti">Le cinque attività dello storico</h2>
+  <p class="guida">Rispondi prima da solo, poi premi «Controlla». Se sbagli, riprova: la soluzione compare con il pulsante «Mostra le soluzioni».</p>
+  <div id="esercizi"></div>
+
+  <p class="fascia" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8"/></svg></span><span>Ripasso finale</span></p>
+  <div class="attivita">
+    <h4>Dieci cose da sapere</h4>
+    <p class="meta">Ricongiungi le due metà di ogni frase.</p>
+    <div id="dieci"></div>
+  </div>
+  <div class="attivita">
+    <h4>Mini-dibattito finale</h4>
+    <p class="consegna"><strong>Un mondo sempre più piccolo: è un bene o un problema?</strong> Ripensa a tutto il percorso, dalla Belle Époque a oggi. Prepara tre argomenti per il «bene» e tre per il «problema», ognuno con un esempio di un'epoca diversa.</p>
+    <textarea aria-label="I tuoi argomenti" placeholder="È un bene perché… (esempio del…) È un problema perché… (esempio del…)"></textarea>
+    <p class="dibattito"><b>Regole:</b> non si interrompe chi parla; si criticano le idee, non le persone; alla fine ognuno scrive una conclusione personale.</p>
+  </div>
+</section>
+</main>
+</div>
+
+<footer>
+<p>Organizzazione della lezione ispirata a <em>Storia facile 3</em> (Modulo 5, cap. 18) e al <em>Tablet degli argomenti di Storia</em> (p. 289), Edizioni Erickson: Prima/Dopo, Idea principale, Perché?, Come?, Parole chiave, testo sintetico ed essenziale, verifiche. Testi originali della lezione; i fatti più recenti sono aggiornati a ottobre 2026.</p>
+  <p>Carta: terre emerse da Natural Earth (dominio pubblico). Voci collegate: Treccani.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- luoghi ---------- */
+var LUOGHI=[
+{n:"New York",ll:[40.7128,-74.006],t:"Sede dell'ONU, dove nel 1948 si lavora alla Dichiarazione dei diritti umani. L'11 settembre 2001 gli attentati distruggono le Torri gemelle."},
+ {n:"San Francisco",ll:[37.7749,-122.4194],t:"Vicino alla città c'è la Silicon Valley, dove nascono molte delle grandi imprese del digitale."},
+ {n:"Rio de Janeiro",ll:[-22.9068,-43.1729],t:"Nel 1992 ospita la prima grande conferenza mondiale sull'ambiente e lo sviluppo."},
+ {n:"Ginevra",ll:[46.2044,6.1432],t:"Al CERN, nel 1991, nasce il World Wide Web."},
+ {n:"Lampedusa",ll:[35.5,12.6],t:"Isola italiana più vicina all'Africa, punto d'arrivo di molti migranti che attraversano il Mediterraneo."},
+ {n:"Kiev",ll:[50.4501,30.5234],t:"Capitale dell'Ucraina, invasa dalla Russia nel 2022."},
+ {n:"Wuhan",ll:[30.5928,114.3055],t:"Città cinese dove, alla fine del 2019, vengono scoperti i primi casi di Covid-19."},
+ {n:"Nuova Delhi",ll:[28.6139,77.209],t:"Capitale dell'India, che nel 2023 è diventata il Paese più popoloso del mondo."},
+ {n:"Kyoto",ll:[35.0116,135.7681],t:"Nel 1997 vi si firma il primo grande accordo internazionale per ridurre le emissioni di gas serra."},
+ {n:"Nairobi",ll:[-1.2921,36.8219],t:"Qui ha sede il Programma ambientale dell'ONU; dal Kenya parte il movimento di Wangari Maathai che pianta alberi."}
+];
+var lista=document.getElementById("luoghi"), gruppo=document.getElementById("segni"), info=document.getElementById("mappa-info"), NS="http://www.w3.org/2000/svg";
+function xy(ll){ return [(ll[1]-(-170))*900/350, (75-ll[0])*900/350]; }
+/* posizione dell'etichetta rispetto al punto: [dx, dy, allineamento] */
+var ETI={"New York":[0,28,"middle"],"San Francisco":[0,-14,"middle"],"Rio de Janeiro":[10,5,"start"],"Ginevra":[-10,-4,"end"],"Lampedusa":[-10,12,"end"],"Kiev":[10,-4,"start"],"Wuhan":[-10,-4,"end"],"Nuova Delhi":[-10,12,"end"],"Kyoto":[10,5,"start"],"Nairobi":[10,5,"start"]};
+var segni=[];
+function scegli(i){
+  segni.forEach(function(g,j){ g.setAttribute("class", j===i ? "segno scelto" : "segno"); g.firstChild.setAttribute("r", j===i ? "8" : "6"); if(j===i) gruppo.appendChild(g); });
+  info.innerHTML=""; var b=document.createElement("strong"); b.textContent=LUOGHI[i].n+": "; info.appendChild(b); info.appendChild(document.createTextNode(LUOGHI[i].t));
+}
+LUOGHI.forEach(function(L,i){
+  var p=xy(L.ll), g=document.createElementNS(NS,"g"), c=document.createElementNS(NS,"circle"), t=document.createElementNS(NS,"text"), e=ETI[L.n]||[14,5,"start"];
+  g.setAttribute("class","segno"); g.setAttribute("tabindex","0"); g.setAttribute("role","button"); g.setAttribute("aria-label",L.n);
+  c.setAttribute("cx",p[0].toFixed(1)); c.setAttribute("cy",p[1].toFixed(1)); c.setAttribute("r","6");
+  t.setAttribute("x",(p[0]+e[0]).toFixed(1)); t.setAttribute("y",(p[1]+e[1]).toFixed(1)); t.setAttribute("text-anchor",e[2]); t.textContent=L.n.replace(/ \(.*\)$/,"");
+  g.appendChild(c); g.appendChild(t); gruppo.appendChild(g); segni.push(g);
+  g.addEventListener("click",function(){ scegli(i); });
+  g.addEventListener("keydown",function(ev){ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); scegli(i); } });
+  var li=document.createElement("li"), bt=document.createElement("button");
+  bt.type="button"; bt.textContent=L.n; bt.addEventListener("click",function(){ scegli(i); document.getElementById("mappa").scrollIntoView({block:"center"}); });
+  li.appendChild(bt); li.appendChild(document.createTextNode(" — "+L.t)); lista.appendChild(li);
+});
+
+/* ---------- indice laterale: evidenzia la parte che si sta leggendo ---------- */
+var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
+function attiva(id){ Array.prototype.forEach.call(voci,function(v){ var on=v.getAttribute("href")==="#"+id; if(on){ v.setAttribute("aria-current","true"); if(navI.scrollWidth>navI.clientWidth){ navI.scrollLeft=v.offsetLeft-16; } } else v.removeAttribute("aria-current"); }); }
+var parti=document.querySelectorAll("section.parte"), attesa=false;
+function guarda(){ attesa=false; var lim=window.innerHeight*0.3, id=parti[0].id;
+  Array.prototype.forEach.call(parti,function(sx){ if(sx.getBoundingClientRect().top<=lim) id=sx.id; });
+  if((window.innerHeight+window.pageYOffset)>=document.documentElement.scrollHeight-4) id=parti[parti.length-1].id;
+  attiva(id); }
+window.addEventListener("scroll",function(){ if(!attesa){ attesa=true; (window.requestAnimationFrame||setTimeout)(guarda); } },{passive:true});
+window.addEventListener("resize",guarda); guarda();
+
+/* ---------- testo sintetico / essenziale ---------- */
+var bot=document.querySelectorAll(".livelli button");
+Array.prototype.forEach.call(bot,function(b){ b.addEventListener("click",function(){
+  var ess=b.getAttribute("data-livello")==="essenziale";
+  document.getElementById("testo-sintetico").hidden=ess; document.getElementById("testo-essenziale").hidden=!ess;
+  Array.prototype.forEach.call(bot,function(x){ x.setAttribute("aria-pressed", x===b ? "true":"false"); });
+});});
+
+/* ---------- esercizi ---------- */
+var ESERCIZI=[
+{gruppo:"tempo", titolo:"Scegli l'anno giusto", meta:"Abbina ogni evento all'anno in cui accadde.",
+  scelte:["1948","1991","1992","2001","2015","2020","2022"],
+  righe:[["Dichiarazione universale dei diritti umani","1948"],["Nasce il World Wide Web","1991"],["Conferenza di Rio sull'ambiente","1992"],["Attentati dell'11 settembre","2001"],["Accordo di Parigi sul clima","2015"],["Pandemia di Covid-19","2020"],["Invasione russa dell'Ucraina","2022"]]},
+ {gruppo:"spazio", titolo:"Dove successe?", meta:"Usa la carta dell'Idea principale per trovare il luogo di ogni evento.",
+  scelte:["New York","Ginevra","Rio de Janeiro","Lampedusa","Wuhan","Kyoto"],
+  righe:[["Gli attentati alle Torri gemelle","New York"],["La nascita del World Wide Web","Ginevra"],["La prima grande conferenza sull'ambiente","Rio de Janeiro"],["Un approdo dei migranti nel Mediterraneo","Lampedusa"],["I primi casi di Covid-19","Wuhan"],["Il primo grande accordo sulle emissioni","Kyoto"]]},
+ {gruppo:"fonti", titolo:"Fatto o interpretazione?", meta:"Uno storico distingue i fatti (si possono verificare) dalle interpretazioni (sono giudizi, opinioni). Nel mondo di oggi è più importante che mai.",
+  scelte:["Fatto","Interpretazione"],
+  righe:[["Nel 2015 quasi tutti gli Stati firmano l'accordo di Parigi sul clima.","Fatto","Si verifica sui documenti dell'ONU."],["La globalizzazione ha fatto bene a tutti.","Interpretazione","È un giudizio: per alcuni ha portato benessere, per altri ha tolto lavoro."],["La temperatura media della Terra è aumentata nell'ultimo secolo.","Fatto","Lo mostrano le misurazioni scientifiche di tutto il mondo."],["Internet ha reso le persone più sole.","Interpretazione","È un'opinione discussa, non un fatto dimostrato."],["Nel 2023 l'India supera la Cina per numero di abitanti.","Fatto","Lo indicano le stime dell'ONU."]]},
+ {gruppo:"processi", titolo:"Quale sfida?", meta:"Rileggi lo schema «Come?» e abbina ogni fatto alla sfida a cui appartiene.",
+  scelte:["Economia globale","Tecnologia","Ambiente","Pace e diritti"],
+  righe:[["La crisi finanziaria del 2008","Economia globale"],["La diffusione degli smartphone","Tecnologia"],["L'accordo di Parigi","Ambiente"],["La Dichiarazione universale dei diritti umani","Pace e diritti"],["Le multinazionali","Economia globale"],["L'intelligenza artificiale","Tecnologia"]]},
+ {gruppo:"processi", titolo:"Vero o falso?", meta:"Dopo il controllo leggi la spiegazione: serve a correggere le frasi false.",
+  scelte:["Vero","Falso"],
+  righe:[["Dopo la guerra fredda il commercio mondiale cresce molto.","Vero"],["Oggi gli Stati Uniti sono l'unica grande potenza del mondo.","Falso","Crescono la Cina, l'India e altri Paesi: il mondo è multipolare."],["L'Italia è sempre stata un Paese di immigrazione.","Falso","Per un secolo è stata soprattutto un Paese di emigranti."],["Il cambiamento climatico può essere affrontato solo con la collaborazione tra Stati.","Vero"],["Tutte le informazioni che si trovano in rete sono affidabili.","Falso","Bisogna sempre verificare le fonti."]]},
+ {gruppo:"lessico", titolo:"Parole e significati", meta:"Abbina ogni parola alla sua definizione.",
+  scelte:["Globalizzazione","Multinazionale","Pandemia","Sostenibile","Mondo multipolare","Migrazioni"],
+  righe:[["Il mondo sempre più collegato","Globalizzazione"],["Impresa che lavora in molti Paesi","Multinazionale"],["Epidemia diffusa in tutto il mondo","Pandemia"],["Che non toglie risorse alle generazioni future","Sostenibile"],["Mondo con diversi centri di potere","Mondo multipolare"],["Spostamenti di persone da un Paese all'altro","Migrazioni"]]}
+];
+var DIECI=[
+["Dopo la guerra fredda","il mondo diventa sempre più globale."],
+ ["Internet e gli smartphone","collegano miliardi di persone."],
+ ["Accanto agli Stati Uniti","crescono la Cina e l'India."],
+ ["L'11 settembre 2001","attentati terroristici colpiscono gli Stati Uniti."],
+ ["Molte persone lasciano il loro Paese","a causa di guerre e povertà."],
+ ["L'Italia, che era un Paese di emigranti,","è diventata un Paese di immigrazione."],
+ ["Il riscaldamento globale","è causato soprattutto dalle attività umane."],
+ ["Con l'accordo di Parigi","gli Stati si impegnano a ridurre le emissioni."],
+ ["Nel 2020 la pandemia","mostra quanto il mondo è collegato."],
+ ["Per essere cittadini consapevoli","bisogna verificare le fonti."]
+];
+function el(t,attr,txt){ var e=document.createElement(t); if(attr){ for(var k in attr){ e.setAttribute(k,attr[k]); } } if(txt!=null) e.textContent=txt; return e; }
+function mescola(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+function costruisci(cont, scelte, righe, conGruppo){
+  var tab=el("table",{"class":"esercizio"}), tb=el("tbody"); tab.appendChild(tb);
+  var stati=[];
+  righe.forEach(function(r,i){
+    var tr=el("tr"), td1=el("td"), td2=el("td"), td3=el("td",{"class":"esito","aria-live":"polite"});
+    td1.appendChild(document.createTextNode(r[0]));
+    var sp=el("span",{"class":"spiega"}); sp.hidden=true; if(r[2]) sp.textContent=r[2]; td1.appendChild(sp);
+    var s=el("select",{"aria-label":"Risposta: "+r[0]}); s.appendChild(el("option",{value:""},"— scegli —"));
+    scelte.forEach(function(c){ s.appendChild(el("option",{value:c},c)); });
+    td2.appendChild(s); tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tb.appendChild(tr);
+    stati.push({tr:tr,s:s,esito:td3,sp:sp,giusta:r[1]});
+  });
+  cont.appendChild(tab);
+  var com=el("div",{"class":"comandi"}), b1=el("button",{type:"button","class":"bottone"},"Controlla"), b2=el("button",{type:"button","class":"bottone secondario"},"Mostra le soluzioni"), pt=el("span",{"class":"punteggio","aria-live":"polite"});
+  b2.hidden=true; com.appendChild(b1); com.appendChild(b2); com.appendChild(pt); cont.appendChild(com);
+  b1.addEventListener("click",function(){
+    var ok=0, vuote=0;
+    stati.forEach(function(x){
+      x.tr.classList.remove("ok"); x.tr.classList.remove("no");
+      if(!x.s.value){ vuote++; x.esito.textContent=""; return; }
+      var g=x.s.value===x.giusta; if(g) ok++;
+      x.tr.classList.add(g?"ok":"no"); x.esito.textContent=g?"✓":"✗"; x.esito.setAttribute("aria-label",g?"giusto":"sbagliato");
+      if(x.sp.textContent) x.sp.hidden=false;
+    });
+    pt.textContent=ok+" su "+stati.length+(vuote? " · "+vuote+" senza risposta":"");
+    b2.hidden=false;
+  });
+  b2.addEventListener("click",function(){
+    stati.forEach(function(x){ x.s.value=x.giusta; x.tr.classList.remove("no"); x.tr.classList.add("ok"); x.esito.textContent="✓"; if(x.sp.textContent) x.sp.hidden=false; });
+    pt.textContent="Ecco le soluzioni.";
+  });
+}
+var GRUPPI={"tempo": {"c": "#2a7f6f", "n": "Collocare nel tempo", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15.5\" rx=\"2\"/><path d=\"M3.5 10h17M8 3v4M16 3v4\"/><path d=\"M9 14.5h2v3M13.5 14.5h2l-1.5 3\"/></svg>"}, "spazio": {"c": "#b25510", "n": "Collocare nello spazio", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z\"/><path d=\"M9 4.5v13M15 6.5v13\"/></svg>"}, "fonti": {"c": "#55800f", "n": "Leggere e interpretare le fonti", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"5\" y=\"11\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 11V7.5a4 4 0 0 1 7.6-1.8\"/><circle cx=\"12\" cy=\"15.5\" r=\"1.3\"/><path d=\"M12 16.8v1.7\"/></svg>"}, "processi": {"c": "#b0215f", "n": "Comprendere fatti e processi storici", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 4.5l6 3.5-6 3.5zM10 4.5l6 3.5-6 3.5z\"/><path d=\"M20 12.5l-6 3.5 6 3.5zM14 12.5l-6 3.5 6 3.5z\"/></svg>"}, "lessico": {"c": "#6b3f8a", "n": "Conoscere e usare il lessico specifico", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 18.5L8.5 6l4.5 12.5M5.6 14h5.8\"/><path d=\"M15 12.5a2.5 2.5 0 1 1 0 4.5M20 10v8.5\"/></svg>"}, "ripasso": {"c": "#2b5f6b", "n": "Ripasso finale", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8\"/></svg>"}};
+var zona=document.getElementById("esercizi"), ultimo="";
+ESERCIZI.forEach(function(E,i){
+  if(E.gruppo!==ultimo){ var g=GRUPPI[E.gruppo], f=el("p",{"class":"fascia",style:"--c:"+g.c}), t=el("span",{"class":"tondo"}); t.innerHTML=g.i; f.appendChild(t); f.appendChild(el("span",null,g.n)); zona.appendChild(f); ultimo=E.gruppo; }
+  var box=el("div",{"class":"attivita"}); box.appendChild(el("h4",null,(i+1)+". "+E.titolo)); box.appendChild(el("p",{"class":"meta"},E.meta));
+  costruisci(box,E.scelte,mescola(E.righe)); zona.appendChild(box);
+});
+costruisci(document.getElementById("dieci"), mescola(DIECI.map(function(d){return d[1];})), DIECI.map(function(d){ return [d[0]+" …", d[1]]; }));
+})();
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+</body>
+</html>

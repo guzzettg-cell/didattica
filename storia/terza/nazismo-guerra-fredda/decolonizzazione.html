@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Il crollo degli imperi coloniali</title>
+<style>
+:root{
+  --sfondo:#f3f3ef; --carta:#ffffff; --tenue-bg:#eaf1f2; --ink:#23262a; --tenue:#5a6066; --filo:#dfe2dd;
+  --accento:#2b5f6b; --accento-2:#1f4a54; --accento-soft:#e1edef;
+  --causa:#8a5a12; --causa-bg:#f8eedb; --evento:#2b5f6b; --evento-bg:#e1edef; --effetto:#6b3f74; --effetto-bg:#f1e6f3;
+  --ombra:#7a3b2e; --ombra-bg:#f7e7e2;
+  --mare:#d7e8ee; --terra:#f4efe2; --ok:#1f7a4d; --ok-bg:#dcf2e6; --no:#b42318; --no-bg:#fde3e1;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --surface:var(--carta); --line:var(--filo); --soft:var(--tenue-bg); --paper:var(--tenue-bg); --accent:var(--accento); --accent-ink:#fff; --muted:var(--tenue); --card:var(--carta);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#f3f3ef;background:var(--sfondo);color:#23262a;color:var(--ink);font:1.08rem/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:1.08rem/1.65 var(--sans)}
+a{color:#2b5f6b;color:var(--accento)}
+a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.salta{position:absolute;left:1rem;top:-6rem;background:#ffffff;background:var(--carta);padding:.8rem 1rem;z-index:20}.salta:focus{top:1rem}
+.foglio{max-width:1280px;margin:32px auto;background:#ffffff;background:var(--carta);border:1px solid #dfe2dd;border:1px solid var(--filo)}
+header.testata{padding:22px 52px 26px;border-top:9px solid #2b5f6b;border-top:9px solid var(--accento);background:#eaf1f2;background:var(--tenue-bg)}
+.indietro{display:inline-block;font-size:.92rem;margin-bottom:18px;text-decoration:none;border-bottom:1px solid currentColor}
+.eyebrow{margin:0 0 6px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:#5a6066;color:var(--tenue);font-weight:700}
+.capitolo{margin:0;font-weight:700;color:#2b5f6b;color:var(--accento)}
+h1{font:700 2.6rem/1.08 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2.6rem/1.08 var(--serif);font-size:clamp(2.1rem,6vw,3.5rem);margin:6px 0 10px}
+.sottotitolo{margin:0;font:italic 1.25rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.25rem/1.4 var(--serif);color:#5a6066;color:var(--tenue)}
+.corpo-lezione{display:grid;grid-template-columns:268px minmax(0,1fr);align-items:start}
+nav.indice{position:-webkit-sticky;position:sticky;top:12px;align-self:start;display:grid;grid-template-columns:minmax(0,1fr);grid-gap:10px;gap:10px;padding:30px 0 24px 28px;max-height:calc(100vh - 24px);overflow-y:auto}
+.indice-titolo{margin:0 0 2px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue)}
+a.voce{display:flex;align-items:center;min-height:54px;padding:4px 12px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;text-decoration:none;font:800 .86rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .86rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em;transition:transform .15s,box-shadow .15s}
+a.voce .tondo{margin-right:10px;flex:none;width:46px;height:46px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+a.voce svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+a.voce:hover{transform:translateX(4px)}
+a.voce[aria-current="true"]{transform:translateX(8px);box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+a.voce:focus-visible{outline:3px solid #23262a;outline:3px solid var(--ink);outline-offset:3px}
+main{padding:10px 52px 40px 40px;min-width:0}
+.fascia{display:flex;align-items:center;margin:28px 0 12px;min-height:50px;padding:4px 16px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;font:800 .95rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .95rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.fascia .tondo{margin-right:10px;flex:none;width:42px;height:42px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+.fascia svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+section.parte{padding:34px 0 8px;border-bottom:1px solid #dfe2dd;border-bottom:1px solid var(--filo);scroll-margin-top:56px}
+section.parte:last-of-type{border-bottom:0}
+h2{font:700 2rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2rem/1.2 var(--serif);margin:0 0 6px}
+.etichetta{display:inline-block;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#2b5f6b;color:var(--accento);margin:0 0 4px}
+.guida{margin:0 0 22px;color:#5a6066;color:var(--tenue);font-size:.98rem;max-width:72ch}
+h3{font:700 1.08rem/1.3 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 1.08rem/1.3 var(--sans);text-transform:uppercase;letter-spacing:.05em;color:#2b5f6b;color:var(--accento);margin:26px 0 12px}
+h3 span{border-bottom:3px dotted #2b5f6b;border-bottom:3px dotted var(--accento);padding-bottom:4px}
+p{margin:0 0 14px}
+.lettura{max-width:74ch}
+.mestiere{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:-4px 0 16px}
+
+/* prima / dopo */
+.primadopo{display:grid;grid-template-columns:1fr auto 1fr;grid-gap:16px;gap:16px;align-items:stretch;margin:6px 0 10px}
+.pd{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:18px 20px;background:#ffffff;background:var(--carta)}
+.pd h3{margin-top:0}
+.pd.ora{background:#e1edef;background:var(--accento-soft);border-color:transparent}
+.freccia{align-self:center;font:700 1.8rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.8rem var(--serif);color:#2b5f6b;color:var(--accento)}
+.pd .link-lez{font-size:.92rem;margin:0}
+.pd-centro{grid-column:1/-1;text-align:center;font:700 1.15rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem/1.4 var(--serif);background:#2b5f6b;background:var(--accento);color:#fff;border-radius:12px;padding:12px 18px;margin:0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pd-centro{color:#0f1416}}
+:root[data-theme="dark"] .pd-centro{color:#0f1416}
+
+/* idea principale */
+.mappa-box{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;margin:16px 0 8px}
+#mappa{display:block;width:100%;height:auto;background:#d7e8ee;background:var(--mare)}
+#mappa .mare{fill:#d7e8ee;fill:var(--mare)}
+#mappa .terra{fill:#f4efe2;fill:var(--terra);stroke:#f4efe2;stroke:var(--terra);stroke-width:1.2;stroke-linejoin:round}
+#mappa .segno{cursor:pointer}
+#mappa .segno circle{fill:#2b5f6b;fill:var(--accento);stroke:#ffffff;stroke:var(--carta);stroke-width:3}
+#mappa .segno text{font:700 17px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 17px var(--sans);fill:#23262a;fill:var(--ink);paint-order:stroke;stroke:#f4efe2;stroke:var(--terra);stroke-width:5px;stroke-linejoin:round}
+#mappa .segno.scelto circle{fill:#d9822b}
+#mappa .segno:focus{outline:none}#mappa .segno:focus-visible circle{stroke:#23262a;stroke:var(--ink);stroke-width:4}
+.mappa-info{margin:0;padding:12px 14px;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);font-size:.98rem;min-height:3.2em}
+.mappa-info strong{color:#2b5f6b;color:var(--accento)}
+.mappa-nota{font-size:.88rem;color:#5a6066;color:var(--tenue);padding:10px 14px;margin:0;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo)}
+.luoghi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));grid-gap:10px;gap:10px;margin:12px 0 0;padding:0;list-style:none}
+.luoghi li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 12px;font-size:.95rem}
+.luoghi button{all:unset;cursor:pointer;font-weight:700;color:#2b5f6b;color:var(--accento)}
+.luoghi button:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.linea{position:relative;margin:8px 0 0;padding:0 0 0 30px;list-style:none}
+.linea::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:3px;background:#2b5f6b;background:var(--accento);border-radius:2px}
+.linea li{position:relative;margin:0 0 12px}
+.linea li::before{content:"";position:absolute;left:-26px;top:.45em;width:13px;height:13px;border-radius:50%;background:#ffffff;background:var(--carta);border:3px solid #2b5f6b;border:3px solid var(--accento)}
+.linea li.estremo::before{background:#2b5f6b;background:var(--accento)}
+.linea .anno{font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);color:#2b5f6b;color:var(--accento);margin-right:8px}
+.linea .pista{display:inline-block;max-width:100%;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;padding:1px 8px;margin-left:6px;color:#5a6066;color:var(--tenue);white-space:nowrap}
+.persone{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-gap:14px;gap:14px}
+.persona{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:54px 1fr;grid-gap:14px;gap:14px;align-items:start}
+.sigla{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#e1edef;background:var(--accento-soft);color:#2b5f6b;color:var(--accento);font:700 1.2rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem var(--serif)}
+.persona h4{margin:0;font:700 1.12rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.12rem/1.3 var(--serif)}
+.persona .date{font-size:.88rem;color:#5a6066;color:var(--tenue);display:block;margin-bottom:6px}
+.persona p{margin:0 0 6px;font-size:.97rem}
+.persona a{font-size:.9rem}
+
+/* perché */
+.catena{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;grid-gap:10px;gap:10px;align-items:stretch}
+.anello{border-radius:12px;padding:16px 18px}
+.anello h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.anello p{margin:0;font-size:.98rem}
+.anello.causa{background:#f8eedb;background:var(--causa-bg)}.anello.causa h4{color:#8a5a12;color:var(--causa)}
+.anello.evento{background:#e1edef;background:var(--evento-bg)}.anello.evento h4{color:#2b5f6b;color:var(--evento)}
+.anello.effetto{background:#f1e6f3;background:var(--effetto-bg)}.anello.effetto h4{color:#6b3f74;color:var(--effetto)}
+.catena .freccia{font-size:1.5rem}
+.ombra{margin:16px 0 0;background:#f7e7e2;background:var(--ombra-bg);border-left:5px solid #7a3b2e;border-left:5px solid var(--ombra);border-radius:0 12px 12px 0;padding:14px 18px}
+.ombra h4{margin:0 0 6px;color:#7a3b2e;color:var(--ombra);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.ombra p{margin:0}
+.ricorda{margin:18px 0 0;border:2px dashed #dfe2dd;border:2px dashed var(--filo);border-radius:12px;padding:14px 18px}
+.ricorda h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+.ricorda dl{margin:0;display:grid;grid-template-columns:max-content 1fr;grid-gap:6px 14px;gap:6px 14px}
+.ricorda dt{font-weight:700}.ricorda dd{margin:0}
+
+/* concetti e come */
+.concetto{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);padding:18px 22px;margin:0 0 16px;scroll-margin-top:60px}
+.concetto h4{font:700 1.3rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.3rem/1.3 var(--serif);margin:0 0 10px}
+.concetto p:last-child{margin-bottom:0}
+.come{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-gap:12px;gap:12px;margin-top:10px}
+.colonna{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:0;overflow:hidden}
+.colonna h4{margin:0;padding:10px 14px;background:#2b5f6b;background:var(--accento);color:#fff;font-size:1rem}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .colonna h4{color:#0f1416}}
+:root[data-theme="dark"] .colonna h4{color:#0f1416}
+.colonna ul{margin:0;padding:12px 14px 12px 30px;font-size:.95rem}
+.colonna li{margin:0 0 6px}
+.radice{text-align:center;font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:999px;padding:8px 16px;max-width:520px;margin:4px auto 10px}
+
+/* parole chiave */
+.parole{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));grid-gap:12px;gap:12px;margin:0;padding:0}
+.parola{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px;scroll-margin-top:60px}
+.parola dt{font:700 1.1rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.1rem var(--serif);color:#2b5f6b;color:var(--accento);margin-bottom:4px}
+.parola dd{margin:0;font-size:.97rem}
+a.pk{color:inherit;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted #2b5f6b;text-decoration:underline dotted var(--accento);text-underline-offset:4px;text-decoration-thickness:2px}
+a.pk:hover{background:#e1edef;background:var(--accento-soft)}
+:target{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:4px}
+
+/* testi */
+.livelli{display:inline-flex;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;overflow:hidden;margin:0 0 18px}
+.livelli button{font:inherit;font-size:.95rem;border:0;background:transparent;color:#23262a;color:var(--ink);padding:7px 16px;cursor:pointer}
+.livelli button[aria-pressed="true"]{background:#2b5f6b;background:var(--accento);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .livelli button[aria-pressed="true"]{color:#0f1416}}
+:root[data-theme="dark"] .livelli button[aria-pressed="true"]{color:#0f1416}
+.paragrafo{margin:0 0 22px;max-width:74ch}
+.paragrafo h4{font:700 1.2rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem/1.3 var(--serif);margin:0 0 6px}
+.paragrafo h4 .n{color:#2b5f6b;color:var(--accento);margin-right:6px}
+.essenziale .paragrafo p{font-size:1.12rem;line-height:1.75}
+
+/* lente */
+.lente{border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:14px;overflow:hidden}
+.lente-testa{background:#2b5f6b;background:var(--accento);color:#fff;padding:16px 22px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lente-testa{color:#0f1416}}
+:root[data-theme="dark"] .lente-testa{color:#0f1416}
+.lente-testa .testata-giornale{margin:0;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.lente-testa h3{margin:4px 0 0;color:inherit;font:700 1.6rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.6rem/1.2 var(--serif);text-transform:none;letter-spacing:0}
+.lente-corpo{padding:18px 22px}
+.domanda-guida{font:italic 1.2rem/1.5 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.2rem/1.5 var(--serif);border-left:4px solid #2b5f6b;border-left:4px solid var(--accento);padding:4px 0 4px 14px;margin:0 0 18px}
+.fasi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-gap:14px;gap:14px}
+.fase{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px}
+.fase h4{margin:0 0 8px;font-size:1rem}
+.fase ol,.fase ul{margin:0;padding-left:20px;font-size:.96rem}
+.fase li{margin:0 0 6px}
+.bottone{display:inline-block;font:inherit;font-weight:700;border-radius:999px;padding:9px 18px;border:2px solid #2b5f6b;border:2px solid var(--accento);background:#2b5f6b;background:var(--accento);color:#fff;text-decoration:none;cursor:pointer}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bottone{color:#0f1416}}
+:root[data-theme="dark"] .bottone{color:#0f1416}
+.bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+:root .bottone.secondario,:root:not([data-theme="light"]) .bottone.secondario,:root[data-theme="dark"] .bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+.bottone[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.altre-fonti{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-gap:8px;gap:8px}
+.altre-fonti li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 14px;font-size:.96rem}
+.altre-fonti .tipo{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue);display:block}
+
+/* compiti */
+.attivita{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:14px;padding:18px 22px;margin:0 0 18px}
+.attivita h4{margin:0 0 4px;font:700 1.25rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.25rem/1.3 var(--serif)}
+.attivita .meta{font-size:.86rem;color:#5a6066;color:var(--tenue);margin:0 0 12px}
+.consegna{margin:0 0 12px}
+table.esercizio{width:100%;border-collapse:collapse;font-size:.97rem}
+table.esercizio td{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:8px 6px;vertical-align:middle}
+table.esercizio td:first-child{width:52%}
+table.esercizio select{font:inherit;font-size:.95rem;width:100%;max-width:100%;padding:5px 6px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:6px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+td.esito{width:34px;text-align:center;font-weight:700}
+tr.ok td.esito{color:#1f7a4d;color:var(--ok)} tr.no td.esito{color:#b42318;color:var(--no)}
+tr.ok{background:#dcf2e6;background:var(--ok-bg)} tr.no{background:#fde3e1;background:var(--no-bg)}
+.spiega{display:block;font-size:.88rem;color:#5a6066;color:var(--tenue);margin-top:4px}
+.comandi{display:flex;flex-wrap:wrap;align-items:center;margin:14px 0 0}
+.comandi>*{margin:0 10px 8px 0}
+.punteggio{font-weight:700}
+textarea{font:inherit;width:100%;min-height:84px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:8px;padding:8px 10px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+.dibattito{margin:14px 0 0;background:#eaf1f2;background:var(--tenue-bg);border-radius:10px;padding:10px 14px;font-size:.95rem}
+.dibattito b{color:#2b5f6b;color:var(--accento)}
+
+footer{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:18px 52px;font-size:.86rem;color:#5a6066;color:var(--tenue)}
+footer p{margin:0 0 6px}
+
+@media (max-width:960px){
+  html{scroll-padding-bottom:84px}
+  .corpo-lezione{display:block}
+  nav.indice{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:90;grid-auto-flow:column;grid-auto-columns:max-content;grid-template-columns:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;max-height:none;grid-gap:8px;gap:8px;padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));background:#ffffff;background:var(--carta);border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);box-shadow:0 -4px 14px rgba(0,0,0,.12)}
+  .foglio{margin-bottom:70px}
+  .indice-titolo{display:none}
+  a.voce{flex:none;min-height:40px;padding:3px 12px 3px 3px;font-size:.74rem;white-space:nowrap}
+  a.voce .tondo{width:34px;height:34px;border-width:2px}
+  a.voce svg{width:18px;height:18px}
+  a.voce:hover,a.voce[aria-current="true"]{transform:none}
+  a.voce[aria-current="true"]{box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+  main{padding:10px 40px 40px}
+}
+@media (max-width:860px){
+  .come{grid-template-columns:1fr 1fr}
+  .fasi{grid-template-columns:1fr}
+  .catena{grid-template-columns:1fr}
+  .catena .freccia{transform:rotate(90deg);justify-self:center;line-height:1}
+}
+@media (max-width:700px){
+  .foglio{margin:0;border:0}
+  header.testata{padding:16px 16px 20px}
+  main{padding:4px 16px 28px}
+  footer{padding:16px}
+  .primadopo{grid-template-columns:1fr}
+  .primadopo .freccia{transform:rotate(90deg);justify-self:center}
+  .come{grid-template-columns:1fr}
+  #mappa .segno text{font-size:30px}
+  .ricorda dl{grid-template-columns:1fr}
+  .ricorda dd{margin-bottom:6px}
+  table.esercizio td{display:block;width:100%!important;border-top:0;padding:4px 6px}
+  table.esercizio tr{display:block;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:6px 0}
+  td.esito{text-align:left}
+}
+@media print{
+  body{background:#fff}.foglio{border:0;margin:0}nav.indice,.indietro,.comandi,.livelli,.mappa-box{display:none}
+  .essenziale-solo{display:none}section.parte{break-inside:avoid-page}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#mappa.mondo .segno text{font-size:14px;stroke-width:4px}
+@media (max-width:700px){#mappa.mondo .segno text{font-size:26px;stroke-width:5px}}
+
+.animata{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);border-radius:12px;padding:14px 16px;margin:16px 0 0;background:#ffffff;background:var(--carta)}
+.animata h4{margin:0 0 6px;font-size:1.02rem}
+.animata p{margin:0 0 8px}
+.animata ul{margin:8px 0 0;padding:0;list-style:none}
+.animata li{margin:0 0 8px;padding-left:24px;position:relative}
+.animata li:before{content:"\25B6";position:absolute;left:2px;top:0;color:#2b5f6b;color:var(--accento);font-size:.85em}
+.animata .nota-video{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:6px 0 0}
+@media print{.animata{display:none}}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<div class="foglio">
+<header class="testata">
+  <a class="indietro" href="../../index.html">← Torna a Storia: tutti i moduli</a>
+  <p class="eyebrow">Storia · Dal nazismo alla guerra fredda</p>
+  <p class="capitolo">Lezione 5</p>
+  <h1>Il crollo degli imperi coloniali</h1>
+  <p class="sottotitolo">1945–1975: la decolonizzazione e la nascita di nuovi Stati in Asia e in Africa</p>
+</header>
+<div class="corpo-lezione">
+<nav class="indice" aria-label="Parti della lezione">
+  <p class="indice-titolo">In questa lezione</p>
+  <a class="voce" href="#prima-dopo" style="--c:#3a6ea5"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l3 3-3 3"/><path d="M4 7h13"/><path d="M10 14l-3 3 3 3"/><path d="M20 17H7"/></svg></span><span class="nome">Prima / Dopo</span></a>
+  <a class="voce" href="#idea" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">Idea principale</span></a>
+  <a class="voce" href="#testi" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">Testo sintetico / essenziale</span></a>
+  <a class="voce" href="#perche" style="--c:#b25510"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .9-1 1.6v.6"/><circle cx="12" cy="17" r=".7" fill="currentColor"/></svg></span><span class="nome">Perché?</span></a>
+  <a class="voce" href="#concetti" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4"/><path d="M10.5 12.5L19 4M15.5 7.5l3 3M13 10l2 2"/></svg></span><span class="nome">Concetti fondamentali</span></a>
+  <a class="voce" href="#come" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="4.5" rx="1"/><rect x="3" y="15" width="6" height="5" rx="1"/><rect x="15" y="15" width="6" height="5" rx="1"/><path d="M12 7v4M6 15v-4h12v4"/></svg></span><span class="nome">Come?</span></a>
+  <a class="voce" href="#parole" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">Parole chiave</span></a>
+  <a class="voce" href="#lente" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M20 20l-5.2-5.2"/></svg></span><span class="nome">Studiamo le fonti</span></a>
+  <a class="voce" href="#compiti" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="nome">Ripassiamo</span></a>
+</nav>
+
+<main id="contenuto">
+
+<!-- ======================= PRIMA / DOPO ======================= -->
+<section class="parte" id="prima-dopo" aria-labelledby="t-pd">
+  <p class="etichetta">Per orientarsi</p>
+  <h2 id="t-pd">Prima e dopo</h2>
+  <p class="guida">In trent'anni gli imperi coloniali costruiti dagli europei crollano. Nascono decine di nuovi Stati, e la carta del mondo cambia completamente.</p>
+  <div class="primadopo">
+    <div class="pd">
+      <h3><span>Prima</span></h3>
+      <p>Tra Ottocento e Novecento le potenze europee si sono divise quasi tutta l'Africa e gran parte dell'Asia. Nelle colonie crescono però movimenti che chiedono l'indipendenza, come in India. Le due guerre mondiali indeboliscono le potenze europee e milioni di soldati delle colonie combattono per loro.</p>
+      <p class="link-lez">Ripassa: <a href="../ottocento-novecento/imperi-coloniali.html">Gli imperi coloniali</a> · <a href="seconda-guerra-mondiale.html">La seconda guerra mondiale</a></p>
+    </div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="pd">
+      <h3><span>Dopo</span></h3>
+      <p>I nuovi Stati devono affrontare povertà, confini tracciati dagli europei, guerre civili e dittature. Molti restano dipendenti economicamente dagli ex colonizzatori o dalle superpotenze. In Sudafrica il regime razzista dell'<em>apartheid</em> finisce solo nel 1994, con l'elezione di Nelson Mandela.</p>
+      <p class="link-lez">Più avanti: <a href="../mondo-attuale/medio-oriente.html">I problemi del Medio Oriente</a> · <a href="../mondo-attuale/mondo-contemporaneo.html">Il mondo contemporaneo</a></p>
+    </div>
+    <p class="pd-centro">imperi coloniali → 1945–1975 → nuovi Stati</p>
+  </div>
+</section>
+
+<!-- ======================= IDEA PRINCIPALE ======================= -->
+<section class="parte" id="idea" aria-labelledby="t-idea">
+  <p class="etichetta">Idea principale</p>
+  <h2 id="t-idea">Che cosa, dove, quando, chi</h2>
+  <p class="guida">Prima di studiare i dettagli, guarda l'argomento dall'alto: che cosa succede e dove, in che anni, chi sono i protagonisti.</p>
+
+  <h3 id="dove"><span>1. Dove? Che cosa?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 🗺️ Collocare nello spazio</p>
+  <div class="lettura">
+    <p>Dopo la Seconda guerra mondiale le colonie chiedono la libertà. La chiamiamo <a class="pk" href="#p-decolonizzazione">decolonizzazione</a>: il passaggio delle colonie all'indipendenza, tra il 1945 e la metà degli anni Settanta.</p>
+    <p>Comincia in <strong>Asia</strong>: nel 1947 l'<strong>India</strong> diventa indipendente dalla Gran Bretagna, grazie soprattutto alla lotta non violenta di <strong>Gandhi</strong>; seguono l'Indonesia, il Vietnam e gli altri Paesi. Poi tocca all'<strong>Africa</strong>: nel 1960, l'«anno dell'Africa», diventano indipendenti diciassette Stati.</p>
+    <p>In alcuni casi l'indipendenza arriva con accordi pacifici; in altri dopo guerre lunghe e sanguinose, come in <strong>Vietnam</strong> e in <strong>Algeria</strong>, dove la Francia non vuole lasciare. Le superpotenze della guerra fredda cercano di portare i nuovi Stati dalla loro parte; molti scelgono di non schierarsi, ma restano poveri e spesso instabili.</p>
+  </div>
+  <div class="mappa-box">
+    <svg id="mappa" class="mondo" viewBox="0 0 900 514" role="img" aria-labelledby="mappa-titolo"><title id="mappa-titolo">Planisfero con i luoghi della decolonizzazione</title><rect x="0" y="0" width="900" height="514" class="mare"/><path class="terra" d="M330.2,342.9L327.8,349.2L328.1,352.2L331.4,354.0L331.6,355.4L330.1,358.5L330.4,360.0L330.1,362.5L331.9,365.7L334.0,370.8L335.9,371.9L336.7,374.2L336.5,379.3L337.2,383.9L337.4,391.9L338.3,394.4L336.7,398.1L334.7,401.7L331.5,404.8L326.8,406.8L321.0,409.3L315.2,414.8L313.2,415.8L309.6,419.4L307.5,420.6L307.0,424.3L309.5,428.2L310.5,431.2L310.6,432.7L311.5,432.5L311.3,437.5L310.5,439.9L311.7,440.8L310.9,442.9L308.8,444.7L304.5,446.5L298.4,449.3L296.1,451.2L296.5,453.3L297.9,453.7L297.4,456.4L296.1,460.1L295.5,464.4L294.2,466.7L290.7,469.3L289.7,470.1L287.5,472.7L286.1,475.3L283.1,479.0L277.3,484.3L273.7,487.4L269.8,489.7L264.4,491.7L261.8,492.0L261.2,493.4L258.0,492.7L255.5,493.7L249.9,492.7L246.8,493.3L244.7,493.0L239.4,495.0L235.0,495.9L231.8,497.8L229.4,497.9L227.3,496.1L225.5,496.0L223.3,493.7L223.1,494.4L222.4,493.0L222.4,490.0L220.8,486.6L222.4,485.6L222.3,481.7L218.9,476.9L216.3,472.5L216.3,472.5L212.6,465.8L208.8,461.9L206.8,458.2L205.7,453.2L204.4,449.4L202.7,441.5L202.5,435.4L201.9,432.6L199.9,430.5L197.2,426.2L194.5,420.0L193.4,416.8L189.2,411.8L188.9,407.8L188.4,404.6L189.1,400.1L190.9,395.4L191.2,393.2L192.9,388.5L194.1,386.4L197.0,383.1L198.7,380.8L199.2,377.0L199.0,374.0L197.4,372.2L196.0,369.1L194.8,366.0L195.1,364.9L196.6,362.9L195.1,357.9L194.0,354.5L191.5,351.2L191.9,350.2L191.2,348.6L189.8,344.8L185.6,339.3L180.3,334.1L176.9,329.9L173.8,324.6L174.0,322.9L175.1,321.2L176.3,317.5L177.4,313.7L176.4,312.9L178.2,307.1L178.9,303.1L176.9,299.7L174.6,298.8L173.6,296.5L172.2,295.7L172.3,294.3L166.9,296.2L165.0,295.9L163.0,297.0L158.9,296.9L156.1,293.7L154.5,290.0L150.8,286.6L146.9,286.7L142.4,286.7L138.2,287.3L134.0,288.4L126.0,291.4L123.1,293.1L118.5,294.6L113.9,293.2L111.5,293.2L108.0,292.2L104.7,292.3L98.6,293.2L95.0,294.7L89.9,296.5L88.9,296.4L87.6,296.5L82.3,294.0L77.6,290.1L73.2,287.3L69.7,284.0L68.4,283.6L64.7,281.5L62.0,278.8L61.1,276.9L60.4,273.1L58.2,270.0L56.2,268.0L54.9,267.3L53.6,266.3L53.0,264.1L52.2,262.9L50.8,262.1L48.0,259.9L45.8,259.6L44.7,258.1L44.7,257.4L43.1,256.3L42.8,255.2L42.0,251.2L42.6,248.9L40.5,244.9L37.9,243.1L40.2,242.1L42.7,238.5L43.9,235.9L43.5,233.1L44.9,230.6L45.5,225.7L45.0,220.6L44.3,218.1L44.9,215.5L43.5,213.1L40.8,210.9L41.0,208.7L41.3,206.3L43.2,204.9L44.9,202.2L44.6,200.5L46.4,196.9L49.2,193.6L51.0,192.8L52.3,189.8L52.4,187.0L54.3,183.8L57.7,182.0L61.0,176.7L61.1,176.6L63.7,174.7L68.5,174.1L72.5,170.6L75.1,169.2L79.4,164.9L78.1,158.5L80.1,154.1L80.7,151.4L84.1,147.9L89.2,145.6L93.0,143.4L96.5,138.1L98.1,135.0L101.9,135.0L105.0,137.2L109.8,136.8L115.2,137.9L117.4,138.0L122.4,135.2L127.9,134.3L131.2,132.2L136.1,130.6L144.8,129.7L153.3,129.3L155.9,130.0L160.8,128.0L166.3,128.0L168.4,129.2L171.9,128.9L177.5,126.8L181.1,127.4L180.9,130.0L185.3,128.1L185.7,129.1L183.1,131.6L183.1,134.0L184.8,135.3L184.2,139.7L180.8,142.3L181.8,145.1L184.4,145.2L185.7,147.6L187.7,148.4L193.7,150.2L195.9,149.8L200.2,150.6L207.0,152.9L209.4,157.5L214.0,158.5L221.2,160.6L226.7,163.2L229.2,161.9L231.7,159.5L230.5,155.6L232.1,153.1L235.8,150.6L239.4,150.0L246.3,151.0L248.1,153.3L250.0,153.3L251.6,154.2L256.7,154.8L258.0,156.5L264.8,156.4L269.8,157.8L274.9,159.3L277.3,160.1L281.2,158.5L283.3,157.0L287.9,156.6L291.5,157.2L292.9,159.8L294.1,158.1L298.2,159.3L302.3,159.6L304.8,158.3L306.3,156.6L305.9,156.3L307.3,153.9L308.3,150.0L309.1,148.7L309.2,148.7L311.1,144.5L313.6,140.9L313.7,140.7L313.2,136.7L314.5,134.6L312.6,132.3L314.5,130.4L311.4,130.8L307.1,129.6L303.6,132.6L295.8,133.2L291.6,130.4L286.0,130.2L284.9,132.4L281.3,133.0L276.3,130.2L270.7,130.3L267.7,125.2L263.9,122.4L266.4,118.4L263.2,115.9L268.9,111.0L276.8,110.8L279.0,106.9L288.7,107.6L294.9,104.2L300.9,102.8L309.4,102.6L318.4,106.3L325.8,108.3L331.8,107.5L336.2,107.9L342.3,105.2L343.1,103.1L341.8,99.5L338.8,97.6L335.9,97.1L334.1,95.5L327.5,91.1L321.6,89.2L317.2,86.2L320.9,85.3L325.2,81.0L322.3,79.0L329.9,76.9L329.8,75.8L325.1,76.6L321.0,77.0L317.6,78.7L312.8,79.0L308.4,80.9L308.6,83.6L308.7,84.1L311.2,85.3L316.4,85.0L315.4,86.8L309.8,87.7L302.8,90.7L300.0,89.7L301.1,87.3L295.5,85.7L296.4,84.8L301.3,83.0L300.5,82.4L299.8,81.9L291.8,80.6L291.5,78.7L286.7,79.3L284.8,82.1L280.8,85.9L280.9,87.2L278.4,88.4L276.9,87.9L275.4,94.1L272.8,96.2L270.9,99.9L272.5,102.8L273.2,104.8L277.7,106.5L276.7,107.7L270.6,108.0L268.4,109.6L264.1,112.4L262.5,110.0L262.6,108.9L259.4,108.8L256.8,108.3L250.5,109.6L254.1,112.5L251.5,113.3L248.6,113.3L245.9,110.7L244.9,111.8L246.1,114.9L248.7,117.3L246.7,118.4L249.6,120.8L252.1,122.3L252.2,125.2L247.4,123.8L249.0,126.5L245.7,127.0L247.6,131.5L244.2,131.6L240.0,129.4L238.1,125.3L237.2,121.8L235.2,119.5L232.5,116.5L232.2,115.1L231.3,114.7L231.2,113.6L228.4,111.9L227.9,109.4L228.4,105.9L229.1,104.3L228.2,103.5L227.1,103.1L225.7,101.4L223.4,100.4L218.6,98.5L215.6,96.6L210.9,95.1L206.6,91.3L207.7,90.9L205.3,88.8L205.2,87.0L201.9,86.2L200.3,88.4L198.8,86.7L198.9,84.9L199.1,84.9L200.3,84.4L196.2,83.6L192.0,85.5L192.3,88.0L191.6,89.5L193.3,92.1L198.1,94.7L200.7,98.9L206.5,103.1L210.5,103.1L211.7,104.2L210.3,105.2L214.9,107.1L218.7,108.6L223.1,111.3L223.6,112.3L222.7,114.1L219.8,111.7L215.3,110.9L213.2,114.2L216.9,116.1L216.3,118.8L214.1,119.1L211.4,123.5L209.2,123.9L209.2,122.3L210.3,119.6L211.4,118.5L209.4,115.5L207.8,112.9L205.7,112.3L204.2,110.0L200.9,109.1L198.7,107.0L194.8,106.7L190.8,104.4L186.1,101.0L182.6,98.1L181.0,93.0L178.5,92.4L174.3,90.7L171.9,91.4L168.9,93.8L166.8,94.1L162.1,97.1L152.0,95.7L144.5,97.3L143.9,100.4L144.2,103.4L139.3,106.8L132.7,107.9L132.3,109.7L129.1,112.5L127.1,116.7L129.1,119.6L126.2,121.9L125.1,125.3L121.2,126.3L117.5,130.2L111.0,130.3L106.1,130.2L102.9,132.0L100.9,134.0L98.4,133.6L96.5,131.8L95.0,128.9L90.2,128.1L88.2,129.4L85.5,128.7L82.8,129.2L83.6,125.2L83.1,122.1L80.8,121.6L79.6,119.6L80.0,116.3L82.0,114.4L82.4,112.3L83.5,109.2L83.4,107.1L82.3,105.2L82.1,103.5L82.4,99.8L80.3,97.6L87.5,93.9L93.8,94.8L100.7,94.8L106.2,95.6L110.5,95.4L118.8,95.5L121.5,92.5L122.4,82.2L117.1,76.8L113.3,74.2L105.5,72.2L105.0,68.5L111.6,67.4L120.2,68.7L118.6,62.9L123.5,65.1L135.4,61.1L137.0,56.8L141.5,55.8L145.6,54.8L148.3,53.4L152.8,45.8L159.8,43.7L164.1,43.8L165.1,42.7L169.4,42.4L170.3,43.6L173.8,41.0L172.7,39.1L172.4,36.2L170.3,33.3L170.2,28.1L171.0,26.7L172.5,25.2L177.0,24.8L178.8,23.4L183.0,22.0L182.8,24.6L181.3,26.3L181.9,27.7L184.7,28.5L183.4,30.4L181.9,29.9L178.2,33.6L179.6,36.1L179.7,38.1L184.9,39.3L184.8,41.1L190.1,40.1L193.0,38.7L198.8,40.8L201.2,42.4L204.7,40.9L212.7,38.5L219.2,36.8L224.3,37.6L224.7,38.9L229.7,38.9L230.9,36.7L237.9,35.0L236.9,30.7L237.0,26.8L239.6,23.6L244.4,21.8L248.5,25.7L252.6,25.6L253.6,21.6L254.2,18.6L252.3,19.3L249.1,17.4L248.6,14.5L255.1,13.0L261.6,12.3L267.2,13.1L272.5,13.0L278.3,10.1L272.9,7.7L263.6,8.1L254.6,10.0L246.2,11.1L243.2,8.3L238.2,6.6L239.4,1.5L236.9,-3.1L239.3,-6.1L244.0,-9.4L255.8,-14.9L259.2,-16.0L258.7,-18.2L251.5,-20.6L242.6,-19.2L237.7,-15.6L238.5,-12.4L230.3,-8.3L220.4,-3.9L216.6,3.4L220.3,7.0L225.2,9.9L220.5,15.7L215.1,16.9L213.2,25.5L210.2,30.3L204.0,29.8L201.1,33.9L195.1,34.1L193.5,29.3L189.2,23.4L185.3,16.2L181.8,13.0L171.7,19.0L164.8,20.2L157.7,17.5L155.9,12.0L154.2,0.2L159.0,-3.2L172.6,-7.5L182.7,-12.8L192.1,-20.0L204.5,-29.9L213.1,-33.8L227.2,-40.2L238.5,-42.5L247.0,-42.2L254.8,-46.4L264.2,-46.2L273.4,-47.2L289.5,-43.5L282.9,-42.1L288.5,-38.9L293.8,-40.7L302.3,-37.5L316.4,-36.3L335.8,-30.5L339.7,-28.1L340.1,-24.6L334.4,-21.9L326.0,-20.6L303.0,-24.5L299.2,-23.8L307.6,-20.1L307.9,-17.7L308.3,-12.4L314.9,-10.8L318.9,-9.5L319.6,-12.0L316.5,-14.2L319.8,-16.2L332.2,-13.0L336.5,-14.2L333.1,-18.0L345.1,-23.0L349.8,-22.7L354.6,-20.9L357.6,-24.5L353.3,-27.5L355.8,-30.6L352.1,-33.8L366.4,-32.1L369.4,-29.3L362.9,-28.6L362.9,-25.8L366.9,-24.0L374.9,-25.1L376.1,-28.4L386.9,-30.9L404.8,-35.3L408.7,-35.0L403.7,-31.9L410.0,-31.4L413.7,-33.1L423.3,-33.3L431.0,-35.4L436.8,-32.3L442.7,-35.7L437.3,-38.7L440.0,-40.4L455.2,-38.8L462.3,-37.2L480.9,-31.3L484.4,-34.0L479.1,-36.7L479.0,-37.8L472.8,-38.3L474.5,-40.8L471.7,-44.8L471.6,-46.4L481.1,-51.1L484.4,-55.8L488.3,-56.8L501.9,-55.4L502.9,-52.6L498.1,-48.4L501.3,-46.7L502.9,-43.2L501.8,-36.1L507.4,-33.0L505.2,-29.5L495.1,-22.2L501.0,-21.5L503.1,-23.3L508.7,-24.6L510.1,-27.2L514.6,-29.6L511.6,-32.6L514.0,-35.9L508.3,-36.4L507.1,-39.2L511.2,-44.4L504.5,-48.6L513.7,-52.0L512.5,-55.7L515.1,-55.8L517.8,-53.0L515.8,-48.0L521.3,-47.1L518.9,-50.8L527.5,-52.8L538.2,-53.1L547.7,-50.1L543.1,-54.4L542.6,-59.9L551.6,-60.9L563.9,-60.7L575.1,-61.4L570.9,-64.1L576.9,-67.5L582.8,-67.6L592.8,-70.1L606.3,-70.8L608.1,-72.2L621.6,-72.7L625.8,-71.6L637.3,-74.3L646.8,-74.2L648.2,-76.4L653.1,-78.6L665.2,-80.7L674.1,-79.1L667.1,-77.8L678.7,-77.0L680.1,-74.5L684.8,-75.7L699.8,-75.7L711.4,-73.1L715.5,-71.2L714.3,-68.5L708.6,-67.0L695.1,-64.2L691.2,-62.6L697.6,-61.9L705.2,-60.6L709.8,-61.6L712.4,-58.3L714.7,-59.6L722.9,-60.4L739.4,-59.6L740.7,-57.2L762.2,-56.4L762.5,-60.4L773.4,-59.4L781.6,-59.5L789.9,-56.8L792.3,-53.5L789.2,-51.3L795.7,-47.3L803.8,-45.2L808.7,-50.6L817.0,-48.3L825.7,-49.7L835.7,-48.1L839.5,-49.5L847.9,-48.8L844.2,-53.6L851.0,-55.8L897.4,-52.5L901.8,-49.4L915.3,-45.5L936.0,-46.5L946.3,-45.6L950.5,-43.5L949.9,-39.7L956.3,-38.3L963.2,-39.3L972.3,-39.4L982.0,-38.4L991.7,-39.0L1000.7,-34.4L1007.1,-36.1L1002.9,-39.4L1005.2,-41.6L1021.6,-40.2L1032.3,-40.5L1047.1,-38.1L-797.1,-35.8L-784.5,-31.9L-771.1,-26.8L-771.5,-23.6L-768.0,-22.3L-769.2,-26.0L-755.3,-25.3L-745.2,-20.5L-750.3,-18.2L-758.7,-17.7L-758.9,-12.7L-760.9,-11.6L-765.7,-11.7L-769.6,-13.5L-776.5,-15.0L-777.6,-17.3L-782.9,-18.1L-788.7,-17.4L-791.5,-19.2L-790.4,-21.1L-796.6,-19.9L-794.2,-17.5L-797.1,-15.3L1054.2,-15.3L1047.6,-13.0L1041.0,-13.4L1045.6,-10.7L1048.7,-6.4L1051.0,-5.1L1051.6,-2.9L1050.3,-1.6L1040.7,-2.7L1026.3,1.2L1021.8,1.8L1013.9,5.4L1006.4,8.6L1004.6,10.9L997.2,7.3L983.8,11.4L981.5,9.5L976.5,11.7L969.6,11.0L968.0,14.3L961.8,19.3L962.0,21.4L967.8,22.6L967.2,30.0L962.4,30.2L960.2,34.5L962.3,36.7L953.3,39.4L951.5,45.2L943.9,46.5L942.3,51.7L934.9,56.5L933.0,53.0L930.8,45.5L927.9,34.0L930.4,26.9L934.8,23.8L935.0,21.4L943.0,20.3L952.2,13.8L961.1,8.5L970.3,4.4L974.4,-2.8L968.2,-2.4L965.1,1.8L952.0,7.5L947.8,1.2L934.6,2.9L921.7,11.5L925.9,14.7L914.5,16.0L906.5,16.6L906.9,12.8L898.9,12.1L892.5,14.6L876.8,13.7L859.9,15.2L843.2,25.3L823.5,37.4L831.6,38.0L834.1,41.3L839.1,42.4L842.4,39.8L848.1,40.2L855.5,45.8L855.7,50.2L851.6,55.3L851.2,61.5L848.9,69.7L841.1,77.1L839.4,80.7L832.4,86.7L825.5,92.6L822.2,95.7L815.3,98.7L812.1,98.7L808.9,96.3L802.0,100.0L801.2,101.7L799.2,101.4L797.0,103.2L795.4,104.9L795.6,108.6L793.0,109.7L792.0,110.6L790.1,112.2L786.7,113.0L784.5,114.4L784.3,116.6L783.7,117.2L785.8,118.0L788.7,120.3L793.1,126.3L794.4,129.7L794.4,135.6L792.5,138.4L787.8,139.4L783.7,141.6L779.1,142.0L778.5,139.2L779.4,135.3L777.2,130.0L781.0,129.1L777.5,124.7L775.0,123.7L774.3,124.7L772.8,125.1L772.7,124.2L771.3,123.7L769.9,122.9L771.3,120.6L772.6,120.0L772.1,119.1L773.4,116.3L773.1,115.5L770.1,114.9L767.6,113.5L760.5,115.0L756.7,117.4L751.1,118.8L753.9,116.4L752.8,114.4L756.9,111.0L754.1,108.3L749.7,110.1L743.9,113.7L740.7,117.0L735.7,117.2L733.0,119.6L735.7,123.1L739.9,124.0L740.1,126.3L744.2,127.8L749.9,124.1L754.5,126.1L757.8,126.2L758.7,128.9L751.4,130.4L749.0,133.1L744.0,135.7L741.4,139.3L746.9,142.2L748.9,147.2L752.0,151.9L755.5,155.9L755.4,159.7L752.2,161.1L753.4,163.8L756.5,165.4L755.7,169.6L754.4,173.7L751.5,174.2L747.7,179.7L743.6,186.5L738.8,192.6L731.7,197.4L724.6,201.7L718.8,202.3L715.6,204.6L713.9,202.9L711.0,205.5L703.8,208.0L698.3,208.8L696.6,214.2L693.7,214.5L692.4,210.8L693.6,208.8L686.7,207.2L684.3,208.0L677.4,212.4L673.1,217.3L672.0,220.8L675.9,226.3L680.7,233.0L685.4,236.2L688.5,240.3L690.9,249.8L690.2,258.9L685.9,262.2L680.0,265.6L675.8,269.8L669.4,274.6L667.5,271.3L669.0,267.8L665.1,264.9L660.8,264.2L658.8,261.5L656.2,256.2L651.5,253.8L647.1,253.9L647.9,249.9L643.4,249.9L642.9,255.6L640.2,263.1L638.5,267.6L638.9,271.3L642.2,271.5L644.3,276.2L645.2,280.6L648.1,283.6L651.2,284.2L653.9,286.9L655.1,287.3L658.1,290.4L660.2,293.9L660.5,297.4L660.0,299.7L660.5,301.5L660.9,304.5L662.7,305.9L664.7,310.5L664.6,312.2L661.0,312.6L656.1,308.7L650.0,304.7L649.4,302.0L646.4,298.6L645.7,294.3L643.9,291.5L644.4,287.8L643.3,285.6L641.3,283.6L640.4,281.1L637.7,278.2L635.2,275.7L634.3,278.8L633.3,275.9L633.9,272.7L635.4,267.8L634.9,264.0L636.5,260.0L634.8,257.0L635.2,251.4L633.1,248.7L631.4,242.5L630.5,236.1L628.3,231.8L624.9,234.4L619.0,238.0L616.2,237.6L613.0,236.4L614.8,230.0L613.7,225.2L609.6,219.3L610.3,217.4L607.3,216.7L603.6,212.6L602.1,209.9L601.8,207.3L600.9,204.8L598.7,201.8L594.0,201.6L594.4,203.7L592.8,206.6L590.6,205.5L589.9,206.5L588.4,205.9L586.4,205.4L585.7,207.3L582.2,207.2L575.9,208.3L576.2,212.2L573.4,215.2L566.0,218.7L560.3,224.7L556.4,228.0L551.3,231.3L551.3,233.7L548.7,235.0L544.1,236.8L541.7,237.1L540.1,241.0L541.2,247.7L541.5,252.0L539.3,256.9L539.3,265.6L536.6,265.8L534.3,269.8L535.8,271.5L531.1,272.9L529.4,276.4L527.3,277.9L522.5,273.1L520.1,265.9L518.1,260.7L516.3,258.3L513.6,253.3L512.3,246.9L511.4,243.7L506.7,236.6L504.6,226.7L503.1,220.1L503.1,213.8L502.1,209.0L494.6,212.1L491.0,211.5L484.3,205.3L486.7,203.4L485.2,201.4L479.2,197.0L475.4,195.7L473.9,192.0L469.9,188.1L460.4,189.1L452.1,189.2L444.8,189.9L435.2,188.3L429.6,187.1L423.8,186.5L421.6,180.2L419.1,179.3L415.1,180.2L410.0,182.7L403.7,181.0L398.5,177.0L393.5,175.6L390.1,170.7L386.3,163.8L383.5,164.6L380.3,162.9L378.3,164.9L375.3,164.7L376.4,167.0L375.9,168.1L377.6,172.0L379.6,176.5L382.1,177.6L383.0,179.4L386.5,181.6L386.8,183.7L386.3,185.4L387.0,187.2L388.4,188.6L389.1,190.3L389.9,191.5L389.5,187.8L390.9,185.1L392.3,184.6L393.9,186.2L394.0,189.2L392.9,192.2L393.8,194.2L394.7,193.9L394.9,195.3L399.0,194.5L403.2,194.6L406.3,194.8L409.9,191.3L413.7,188.0L416.9,184.9L418.4,183.1L419.1,183.6L418.6,185.7L417.9,186.6L418.6,190.7L420.9,194.2L423.8,196.0L427.6,196.7L430.6,197.7L432.9,200.6L434.3,202.3L436.2,203.0L436.1,204.1L434.3,207.2L433.5,208.6L431.3,210.3L429.4,213.8L427.0,213.5L426.0,214.7L425.1,217.4L425.8,220.8L425.3,221.4L422.9,221.4L419.7,223.3L419.2,225.8L418.0,226.9L414.8,226.9L412.8,228.2L412.8,230.3L410.4,231.7L407.5,231.2L404.1,232.9L401.7,233.2L398.0,234.6L397.0,236.9L396.9,238.6L391.7,240.8L383.5,243.2L378.9,246.8L376.7,247.1L375.1,246.8L372.1,249.0L368.8,249.9L364.5,250.2L363.2,250.5L362.1,251.9L360.7,252.2L359.9,253.5L357.4,253.4L355.8,254.1L352.2,253.9L350.9,250.9L351.0,248.1L350.2,246.5L349.2,242.7L347.7,240.6L348.7,240.4L348.2,238.0L348.8,237.0L348.6,234.8L347.9,232.6L346.4,231.0L346.0,229.0L343.3,227.1L340.6,222.8L339.1,218.6L335.6,215.1L333.3,214.3L329.9,209.4L329.3,205.8L329.5,202.7L326.5,197.0L324.1,195.0L321.4,194.0L319.7,191.0L319.9,189.9L318.5,187.2L317.0,186.0L315.0,182.2L311.9,178.1L309.2,174.5L306.7,174.6L307.5,171.7L307.7,169.9L308.3,167.9L308.2,167.1L306.7,169.2L305.6,173.1L304.2,175.8L303.0,176.7L301.3,175.0L299.0,172.7L295.3,165.3L294.8,165.8L296.9,171.2L300.1,176.4L304.0,184.4L305.9,187.2L307.5,190.1L312.1,195.8L311.1,196.7L311.3,200.0L317.3,204.7L318.2,205.7L319.8,210.8L318.7,211.7L319.4,217.0L321.3,223.1L323.3,224.4L326.1,226.3L329.1,232.3L330.5,237.0L333.3,239.5L340.3,244.3L343.2,247.3L346.0,250.2L347.6,252.0L350.1,253.5L351.3,255.1L351.2,257.3L348.3,258.5L350.5,259.9L352.1,260.9L353.1,263.0L355.5,265.1L358.0,265.2L362.9,263.8L368.5,263.2L373.0,261.6L375.5,261.3L377.4,260.4L380.3,260.2L382.0,260.1L384.3,259.3L387.0,258.8L389.5,257.0L391.4,257.0L391.5,258.4L391.1,261.4L391.1,264.1L390.0,266.0L388.6,271.6L386.1,277.3L382.9,283.9L378.5,291.4L374.1,297.2L368.0,304.2L362.9,308.3L355.2,313.4L350.4,317.4L344.8,323.6L343.6,326.3L342.4,327.5L338.8,329.6L337.6,331.7L335.6,332.1L334.9,335.7L333.3,337.8L332.3,341.2L330.2,342.9ZM380.0,121.8L381.6,125.6L386.5,126.6L390.0,129.2L397.4,130.1L405.4,128.8L405.9,127.5L404.9,123.9L405.7,118.5L401.7,116.8L403.0,113.3L399.6,113.0L400.7,108.6L405.6,109.9L410.1,108.3L406.3,105.2L404.9,102.2L400.7,103.5L400.2,107.3L398.6,104.0L398.3,102.7L399.6,100.6L398.6,98.8L392.6,97.0L390.3,92.4L387.5,91.1L387.3,89.4L392.3,89.9L392.5,86.2L396.9,85.3L401.4,86.1L402.3,81.1L401.4,77.9L396.2,78.1L391.8,76.9L385.9,79.2L381.1,80.2L378.7,83.3L373.8,84.1L368.7,89.4L373.3,94.3L372.8,97.8L378.4,103.8L381.1,106.5L383.7,110.2L386.2,110.4L387.7,111.8L383.5,112.2L382.6,116.2L381.7,118.0L379.8,119.2L380.0,121.8ZM853.7,332.2L862.6,335.8L872.1,338.7L875.7,341.3L878.5,343.9L879.3,347.0L887.9,350.1L889.2,352.9L884.4,353.4L885.6,356.8L890.2,360.2L893.5,365.7L896.4,365.5L896.2,367.8L900.2,368.7L898.7,369.6L904.1,371.8L903.6,373.3L900.2,373.6L898.9,372.3L894.5,371.7L889.3,371.0L885.3,367.7L882.3,364.8L879.7,360.3L873.0,358.1L868.6,359.6L865.5,361.3L866.1,365.1L862.1,366.8L859.2,366.0L853.9,365.7L849.3,361.5L844.1,360.5L842.8,362.0L836.3,362.1L838.5,357.9L841.7,356.5L840.4,350.9L837.9,346.6L827.9,342.2L823.7,341.8L816.0,337.1L814.5,339.6L812.5,340.0L811.3,338.1L811.3,335.9L807.4,333.4L812.9,331.5L816.6,331.6L816.2,330.2L808.6,330.2L806.6,327.2L802.0,326.2L799.8,323.7L806.7,322.4L809.4,320.8L817.6,322.9L818.4,324.8L819.9,333.1L825.2,336.2L829.5,330.7L835.4,327.6L840.0,327.6L844.4,329.4L848.2,331.2L853.7,332.2ZM906.7,348.9L903.9,350.1L901.2,351.3L898.5,351.3L894.3,349.9L891.4,348.4L891.8,346.8L896.4,347.6L899.2,347.2L900.0,344.7L900.7,344.6L901.2,347.3L904.2,346.9L905.6,345.2L908.5,343.3L907.9,340.3L911.0,340.2L912.0,341.0L911.9,343.9L910.2,347.0L907.5,347.4L906.7,348.9ZM771.9,367.2L768.5,371.0L764.1,372.1L763.5,371.5L764.0,369.8L766.2,366.6L771.3,364.6L771.9,363.4L776.3,362.2L779.9,362.0L781.5,361.4L783.4,362.0L781.5,363.4L776.2,365.7L771.9,367.2ZM818.8,354.3L818.3,350.4L819.2,348.6L820.3,346.9L821.4,348.4L821.4,350.8L818.8,354.3ZM722.3,290.8L726.3,287.3L728.9,283.2L730.9,283.2L733.6,285.8L733.8,288.1L737.2,289.5L741.5,291.0L741.1,293.1L737.7,293.3L738.6,295.8L734.8,297.6L731.9,302.2L735.7,307.1L734.8,309.5L740.6,314.2L734.5,314.8L732.7,318.3L733.0,323.0L728.0,326.5L727.9,331.6L725.9,339.5L725.2,337.7L719.3,340.0L717.3,336.8L713.6,336.5L711.0,334.9L704.9,336.7L703.0,334.3L699.7,334.5L695.4,333.9L694.6,327.0L692.1,325.6L689.6,321.2L688.9,316.7L689.5,312.0L692.5,308.5L696.3,310.3L700.3,309.3L701.3,305.0L703.5,304.0L709.7,302.9L713.4,298.8L715.9,295.6L718.0,293.7L722.3,290.8ZM793.9,333.3L799.6,334.8L801.4,338.7L797.1,336.6L792.8,336.2L789.9,336.5L786.3,336.3L787.5,333.5L793.9,333.3ZM781.1,338.4L777.5,337.4L776.5,335.2L781.7,334.9L783.0,336.6L781.1,338.4ZM786.5,307.7L786.9,310.5L789.9,310.9L790.4,313.0L790.1,317.5L787.5,317.0L786.7,320.2L788.8,322.9L787.4,323.5L785.3,320.2L783.8,313.7L784.8,309.5L786.5,307.7ZM760.8,314.4L766.7,314.1L771.8,310.4L772.7,311.6L768.5,316.7L764.7,317.6L759.7,316.6L751.1,316.9L746.6,317.6L745.9,321.5L750.5,326.1L753.3,323.8L762.9,322.0L762.5,324.4L760.2,323.6L758.0,326.7L753.5,328.7L758.3,335.2L757.4,337.0L762.0,342.9L762.0,346.3L759.2,347.8L757.2,346.0L759.7,341.8L754.6,343.8L753.4,342.4L754.0,340.4L750.3,337.4L750.7,332.4L747.3,333.9L747.7,339.9L747.9,347.3L744.7,348.0L742.5,346.5L743.9,341.8L743.1,336.8L741.0,336.8L739.4,333.3L741.5,329.9L742.2,325.8L744.8,318.1L745.9,315.9L750.3,312.1L754.3,313.6L760.8,314.4ZM747.2,371.6L740.4,368.0L745.2,367.0L747.9,368.6L749.7,370.1L749.4,371.5L747.2,371.6ZM752.6,362.8L756.0,362.4L760.6,360.5L759.9,363.3L752.2,364.8L745.3,364.2L745.3,362.3L749.4,361.2L752.6,362.8ZM736.8,361.9L739.9,361.4L741.2,363.6L735.3,364.7L731.7,365.4L728.9,365.3L730.7,362.4L733.5,362.3L734.9,360.5L736.8,361.9ZM686.5,351.9L687.2,353.7L697.1,354.2L698.2,352.1L707.7,354.6L709.6,357.9L717.3,358.9L723.6,361.9L717.8,363.9L712.1,361.8L707.5,361.9L702.1,361.6L697.3,360.6L691.3,358.7L687.6,358.2L685.4,358.8L676.1,356.7L675.2,354.5L670.4,354.1L674.0,349.2L680.2,349.5L684.4,351.5L686.5,351.9ZM665.3,324.4L666.2,328.0L668.0,330.9L671.8,331.3L674.3,334.6L673.0,341.0L672.8,349.0L667.1,349.1L662.7,344.8L656.2,340.6L653.9,337.4L650.1,333.3L647.5,329.4L643.6,322.2L639.1,317.9L637.6,313.5L635.7,309.5L631.0,306.2L628.3,301.8L624.5,299.0L619.1,293.3L618.7,290.7L622.0,290.9L629.9,291.9L634.5,296.9L638.5,300.4L641.3,302.5L646.2,308.1L651.4,308.1L655.7,311.7L658.7,316.0L662.6,318.3L660.5,322.5L663.5,324.3L665.3,324.4ZM863.6,42.7L865.3,47.6L865.2,52.7L867.3,57.9L872.5,67.0L864.9,65.3L861.7,72.7L866.8,78.0L866.6,81.6L862.7,78.5L859.3,82.5L858.4,78.1L859.0,73.1L858.4,67.6L859.6,63.7L859.8,56.8L856.8,51.8L857.2,44.7L862.0,42.4L859.9,40.0L862.2,39.3L863.6,42.7ZM-111.9,-106.1L-94.7,-109.2L-76.6,-108.9L-70.1,-110.8L-51.9,-111.3L-10.8,-110.7L21.4,-106.6L11.9,-104.6L-7.8,-104.4L-35.5,-103.9L-32.9,-103.0L-14.7,-103.5L0.8,-101.8L10.8,-103.3L15.1,-101.5L9.4,-98.5L22.5,-100.4L47.5,-102.4L62.9,-101.4L65.8,-99.2L44.8,-95.6L41.9,-94.4L25.5,-93.5L37.4,-93.2L31.4,-89.5L27.2,-86.2L27.4,-80.4L33.6,-77.1L25.5,-76.9L17.1,-75.2L26.6,-72.5L27.8,-68.1L22.3,-67.7L28.9,-63.2L17.5,-62.9L23.5,-60.8L21.8,-59.0L14.6,-58.2L7.4,-58.2L13.8,-54.7L13.9,-52.4L3.7,-54.5L1.1,-53.1L8.0,-51.8L14.8,-48.7L16.7,-44.6L7.5,-43.6L3.6,-45.5L-2.8,-48.5L-1.0,-45.0L-7.0,-42.3L6.6,-42.1L13.6,-41.8L-0.2,-37.3L-14.1,-33.3L-29.2,-31.5L-34.8,-31.5L-40.2,-29.5L-47.3,-24.1L-58.4,-20.5L-61.9,-20.3L-68.8,-19.0L-76.2,-17.8L-80.6,-14.6L-80.7,-11.0L-83.3,-7.6L-91.6,-3.5L-89.6,0.5L-91.9,4.8L-94.5,9.8L-101.8,10.1L-109.3,5.9L-119.6,5.9L-124.6,3.1L-128.1,-2.0L-137.0,-8.4L-139.6,-11.7L-140.3,-16.3L-147.4,-21.1L-145.5,-24.9L-149.0,-26.7L-143.9,-32.7L-136.2,-34.6L-134.1,-36.8L-133.0,-40.8L-138.9,-39.0L-141.7,-38.2L-146.3,-37.5L-152.7,-39.1L-153.0,-42.6L-151.0,-45.4L-146.2,-45.4L-135.7,-44.1L-144.6,-47.3L-149.2,-49.1L-154.3,-48.4L-158.6,-49.7L-152.8,-54.4L-156.0,-56.4L-160.0,-59.9L-166.2,-65.4L-172.8,-67.4L-172.7,-69.5L-186.5,-72.5L-197.4,-72.9L-211.2,-72.7L-223.7,-72.3L-229.7,-73.9L-238.6,-77.2L-225.1,-78.8L-214.8,-79.1L-236.8,-80.4L-248.4,-82.5L-247.7,-84.5L-228.2,-87.0L-209.4,-89.5L-207.4,-91.3L-221.3,-93.2L-216.8,-95.2L-199.0,-98.8L-191.5,-99.4L-193.6,-101.7L-181.4,-103.0L-165.6,-103.8L-149.8,-103.9L-144.2,-102.3L-130.6,-105.1L-118.3,-103.2L-111.1,-102.8L-100.4,-101.1L-112.6,-103.9L-111.9,-106.1ZM173.6,99.6L176.9,97.7L177.7,102.1L176.0,106.0L173.7,105.0L172.5,101.5L173.6,99.6ZM383.4,383.0L384.7,385.2L386.0,388.6L386.8,394.8L388.2,397.2L387.7,399.6L386.7,401.1L385.0,398.1L384.0,399.7L385.0,403.5L384.6,405.6L383.1,406.8L382.8,411.2L380.8,417.2L378.2,424.3L375.1,434.0L373.1,441.2L370.8,447.1L366.6,448.3L362.1,450.5L359.1,449.2L355.1,447.4L353.6,444.7L353.3,440.1L351.5,436.0L351.0,432.3L351.9,428.6L354.3,427.7L354.3,426.0L356.8,422.1L357.3,418.8L356.0,416.4L355.1,413.1L354.7,408.4L356.5,405.5L357.2,402.3L359.7,402.1L362.6,401.0L364.5,400.1L366.8,400.0L369.7,397.1L373.9,393.9L375.5,391.3L374.7,389.1L376.9,389.7L379.8,386.2L379.9,383.1L381.6,380.8L383.4,383.0ZM263.8,137.3L263.1,138.8L255.7,139.3L255.8,138.4L249.5,137.4L250.5,135.2L253.3,137.0L257.3,136.7L261.1,137.0L261.0,137.9L263.8,137.3ZM96.7,41.8L97.6,45.5L93.7,50.1L84.5,53.1L77.3,52.4L81.4,47.0L78.7,41.8L85.7,37.7L89.6,35.3L93.9,35.1L99.5,38.3L96.7,41.8ZM777.3,484.5L771.9,487.2L767.4,488.4L766.4,491.1L764.5,493.1L760.2,493.3L756.9,493.7L752.4,492.8L748.7,493.4L745.2,493.6L742.1,496.3L740.6,496.1L738.0,497.6L735.6,499.2L731.8,499.0L728.4,499.0L722.9,495.7L720.1,494.7L720.2,491.8L722.8,491.1L723.7,489.9L723.5,488.1L724.1,484.5L723.5,481.4L720.8,476.2L720.0,473.3L720.2,470.4L718.2,467.0L718.0,465.5L715.7,463.5L715.1,459.4L712.2,455.4L711.5,453.2L713.7,455.4L712.0,450.6L714.5,452.1L716.1,454.1L716.0,451.5L713.4,447.4L712.9,445.8L711.7,444.3L712.3,441.3L713.3,440.0L714.0,437.5L713.5,434.4L715.6,430.7L716.0,434.7L718.2,431.1L722.4,429.4L724.9,427.2L728.8,425.3L731.1,424.9L732.6,425.6L736.6,423.6L739.7,423.1L740.5,421.9L741.9,421.5L744.7,421.6L750.1,420.1L752.9,417.8L754.2,415.1L757.2,412.4L757.5,410.4L757.6,407.6L761.2,403.2L763.4,407.7L765.6,406.6L763.7,404.2L765.3,401.7L767.6,402.8L768.2,398.9L771.1,396.4L772.3,394.4L774.9,393.5L775.0,392.0L777.2,392.6L777.3,391.4L779.6,390.6L782.0,389.9L785.8,392.3L788.7,395.3L791.9,395.4L795.2,395.8L794.1,393.0L796.6,388.9L798.9,387.6L798.1,386.3L800.3,383.3L803.4,381.5L806.1,382.1L810.4,381.2L810.3,378.5L806.5,376.8L809.3,376.1L812.7,377.4L815.4,379.5L819.7,380.8L821.2,380.3L824.4,381.8L827.4,380.4L829.3,380.8L830.5,379.8L832.9,382.4L831.5,385.1L829.6,387.2L827.8,387.4L828.4,389.4L826.9,392.0L825.1,394.5L825.4,396.0L829.5,398.8L833.5,400.5L836.1,402.3L839.9,405.3L841.3,405.3L844.0,406.6L844.8,408.2L849.7,409.9L853.1,408.2L854.1,405.4L855.1,403.1L855.8,400.3L857.3,396.2L856.6,393.7L857.0,392.3L856.4,389.3L857.1,385.4L858.1,384.4L857.3,382.7L858.5,379.9L859.5,377.1L859.6,375.7L861.5,373.7L863.0,376.2L863.3,379.5L864.6,380.1L864.8,382.2L866.7,384.9L867.1,387.8L866.9,389.6L868.7,393.7L872.0,391.7L873.8,393.9L876.2,395.9L875.7,398.2L876.8,402.6L877.6,405.2L878.9,405.8L880.2,410.2L879.7,412.9L881.4,416.4L887.0,419.0L890.6,421.5L894.1,423.7L893.4,425.0L896.3,428.2L898.3,433.8L900.4,432.6L902.5,434.9L903.7,434.1L904.6,439.5L908.3,442.7L910.7,444.6L914.7,448.8L916.1,452.9L916.3,455.9L915.9,459.1L918.4,463.4L918.1,468.0L917.2,470.4L915.8,474.9L915.9,477.9L914.9,481.6L912.6,486.3L908.8,488.8L906.9,492.8L905.2,495.3L903.7,499.8L901.7,502.3L900.4,506.2L899.7,509.7L900.0,511.3L897.0,513.1L891.3,513.3L886.5,515.4L884.2,517.4L881.1,519.6L876.8,517.3L873.7,516.4L874.5,513.7L871.6,514.7L867.1,518.5L862.7,517.1L859.8,516.2L856.8,515.9L851.8,514.4L848.5,511.2L847.6,507.3L846.4,504.7L843.9,502.6L838.9,502.0L840.6,499.5L839.4,495.7L836.8,499.2L832.3,500.2L835.0,497.4L835.7,494.4L837.7,491.9L837.3,488.1L833.1,492.4L829.9,494.2L827.9,498.3L823.9,496.2L824.1,493.5L820.9,489.7L818.2,487.8L819.1,486.6L812.5,483.5L808.9,483.3L804.0,480.8L794.7,481.3L788.1,483.2L782.2,484.9L777.3,484.5ZM549.2,280.2L548.4,285.5L546.3,287.0L541.8,288.2L539.3,284.1L538.4,276.7L540.8,268.3L544.3,271.2L546.7,274.8L549.2,280.2ZM691.6,225.3L687.4,223.7L687.2,219.2L689.8,216.9L695.4,215.5L698.3,215.6L699.5,217.6L697.2,219.8L696.0,222.8L691.6,225.3ZM754.9,193.4L751.8,201.6L749.6,205.9L746.9,201.5L746.3,197.7L749.3,192.7L753.4,188.8L755.8,190.3L754.9,193.4ZM204.5,122.7L208.4,122.2L206.5,126.3L207.3,127.9L206.2,130.5L202.3,128.6L199.7,128.0L192.5,125.4L193.2,122.8L199.2,123.2L204.5,122.7ZM173.4,108.5L175.9,106.9L179.0,110.6L178.3,117.4L176.0,117.0L173.9,118.8L171.9,117.4L171.7,111.2L170.5,108.3L173.4,108.5ZM192.2,30.3L193.8,32.9L190.8,37.0L185.4,34.1L184.6,32.0L192.2,30.3ZM112.7,44.2L112.7,44.2L113.4,41.2L110.0,38.1L109.9,38.0L103.7,37.1L102.4,35.7L104.3,33.4L102.6,32.0L99.8,34.4L99.5,29.4L96.9,26.8L98.8,21.5L102.8,17.3L106.9,17.7L113.1,17.3L107.6,22.9L112.9,22.2L118.5,22.2L117.2,26.4L112.5,31.0L117.8,31.3L118.2,31.9L122.8,37.9L126.4,38.8L129.5,44.6L131.0,46.6L137.2,47.6L136.6,50.9L134.0,52.4L136.0,55.1L131.4,57.8L124.5,57.7L115.8,59.1L113.4,58.1L110.0,60.5L105.2,60.0L101.6,61.9L98.9,60.9L106.4,55.5L111.0,54.4L111.0,54.4L102.9,53.5L101.5,51.5L106.9,49.9L104.0,47.1L105.0,43.7L112.7,44.2ZM750.0,253.5L747.4,249.6L751.8,249.8L753.6,251.6L752.2,256.1L750.0,253.5ZM759.0,267.5L760.3,266.1L760.9,262.9L763.7,262.6L762.9,266.1L766.7,261.1L766.2,266.0L764.3,267.7L762.7,270.9L761.1,272.5L758.0,268.9L759.0,267.5ZM778.5,275.6L779.0,279.0L779.3,281.9L777.6,286.6L775.7,281.3L773.3,284.0L774.9,287.7L773.5,290.2L767.4,287.2L766.0,283.4L767.5,281.0L764.3,278.6L762.7,280.7L760.2,280.5L756.4,283.4L755.6,281.9L757.6,277.5L760.8,276.1L763.6,274.1L765.5,276.5L769.4,275.1L770.2,272.8L773.8,272.6L773.6,268.7L777.7,271.1L778.1,273.7L778.5,275.6ZM738.0,270.9L731.2,275.8L733.7,272.2L737.4,269.1L740.5,265.5L743.2,260.4L744.1,264.6L740.7,267.4L738.0,270.9ZM757.7,225.1L756.9,227.3L758.6,230.9L757.3,235.2L754.3,236.9L753.5,241.1L754.6,245.2L757.3,245.7L759.6,245.1L766.0,248.0L765.5,250.8L767.2,252.0L766.7,254.4L762.7,251.9L760.8,249.2L759.5,251.0L756.2,248.0L751.5,248.7L748.9,247.6L749.2,245.5L750.8,244.2L749.3,243.0L748.6,244.8L746.1,241.9L745.3,239.6L745.1,234.7L747.2,236.4L747.7,228.3L749.4,223.7L752.5,223.7L755.7,225.2L757.3,223.8L757.7,225.1ZM756.2,260.2L755.4,257.7L758.5,259.3L761.8,259.3L761.7,261.4L759.3,263.6L756.0,265.2L755.8,262.8L756.2,260.2ZM774.0,256.3L775.5,262.0L771.5,260.7L771.6,262.4L772.8,265.6L770.4,266.7L770.2,263.1L768.6,262.8L767.8,259.7L770.9,260.2L770.8,258.2L767.7,254.3L772.6,254.4L774.0,256.3ZM858.3,117.4L853.5,122.5L853.6,127.8L851.7,131.9L852.6,134.5L849.9,138.1L843.3,140.6L834.3,140.9L826.9,146.8L823.5,144.8L823.3,140.9L814.3,142.1L808.2,144.5L802.2,144.6L807.4,148.4L804.0,157.1L800.7,159.3L798.2,157.3L799.5,152.6L796.2,151.1L794.1,147.6L799.0,146.0L801.7,142.8L806.8,140.1L810.6,136.6L820.8,135.1L826.3,136.1L831.7,127.0L835.1,129.5L842.7,124.3L845.6,122.3L848.8,116.0L848.0,110.2L850.1,107.0L855.6,106.1L858.4,113.2L858.3,117.4ZM872.3,92.8L875.9,90.6L877.1,96.4L869.5,97.8L864.9,102.9L856.9,99.4L854.1,105.0L848.3,105.1L847.6,100.0L850.2,96.0L855.7,95.7L857.2,88.6L858.7,84.6L864.7,89.9L868.7,91.7L872.3,92.8ZM809.3,146.8L812.2,143.7L815.1,144.3L817.2,142.1L821.0,143.2L821.7,145.0L818.8,148.1L816.7,146.5L814.0,147.7L812.7,150.7L809.3,149.2L809.3,146.8ZM296.9,138.1L297.3,138.1L298.0,136.9L301.7,136.9L306.4,135.4L302.9,137.6L303.3,138.6L303.4,139.0L298.2,141.1L295.7,140.4L294.5,138.3L296.9,138.1Z"/><g id="segni"></g></svg>
+    <p class="mappa-info" id="mappa-info" aria-live="polite">Tocca un punto sulla carta o un luogo dell'elenco.</p>
+    <p class="mappa-nota">Carta muta: solo le terre emerse, senza confini. Per vedere come cambia la carta politica apri <a href="https://geacron.com/home-it/" target="_blank" rel="noopener">GeaCron</a> e confronta il 1945 con il 1975.</p>
+  </div>
+  <ul class="luoghi" id="luoghi"></ul>
+  <div class="animata" id="carta-animata" aria-labelledby="t-animata">
+    <h4 id="t-animata">🎬 Cambia sguardo: la carta animata</h4>
+    <p>Ora guarda questi luoghi in movimento: confini, Stati ed eserciti che cambiano nel tempo. Poi torna alla carta muta e ritrova i luoghi dell'elenco.</p>
+    <h5>Carte animate HUB Scuola</h5>
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=sZdxM4MXoM8&amp;list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">La decolonizzazione di Asia e Africa</a></li>
+    </ul>
+    <h5>Altre carte animate</h5>
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=QIVHplj1zgU" target="_blank" rel="noopener">Decolonizing Asia and Africa in 3 minutes</a></li>
+      <li><a href="https://www.youtube.com/results?search_query=carta+animata+decolonizzazione" target="_blank" rel="noopener">Cerca altre carte animate su questo argomento</a></li>
+      <li><a href="https://www.youtube.com/playlist?list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">Tutte le carte animate di storia di HUB Scuola</a></li>
+    </ul>
+    <p class="nota-video">Video su YouTube, si aprono in una nuova scheda. Le «altre carte animate» hanno titoli o didascalie in inglese o francese: osserva soprattutto la carta e le date.</p>
+  </div>
+
+  <h3 id="quando"><span>2. Quando?</span></h3>
+  <p class="mestiere">🕐 Collocare nel tempo</p>
+  <ol class="linea">
+    <li class="estremo"><span class="anno">1947</span>India e Pakistan diventano indipendenti dalla Gran Bretagna. Milioni di profughi, centinaia di migliaia di morti nella divisione.</li>
+    <li><span class="anno">1949</span>L'Indonesia ottiene l'indipendenza dall'Olanda dopo quattro anni di guerra.</li>
+    <li><span class="anno">1954</span>A Dien Bien Phu i vietnamiti sconfiggono i francesi: la Francia lascia l'Indocina. In Algeria comincia la guerra d'indipendenza.</li>
+    <li><span class="anno">1955</span>Conferenza di Bandung: i Paesi di Asia e Africa si incontrano e condannano il colonialismo.</li>
+    <li><span class="anno">1956</span>L'Egitto nazionalizza il canale di Suez; Gran Bretagna e Francia intervengono, ma devono ritirarsi.</li>
+    <li><span class="anno">1957</span>Il Ghana è il primo Stato dell'Africa nera a diventare indipendente.</li>
+    <li><span class="anno">1960</span>«Anno dell'Africa»: diciassette nuovi Stati, tra cui la Nigeria e il Congo, dove scoppia subito una guerra civile.</li>
+    <li><span class="anno">1962</span>L'Algeria diventa indipendente dopo otto anni di guerra con la Francia.</li>
+    <li><span class="anno">1975</span>Angola e Mozambico indipendenti dal Portogallo. Finisce la guerra del Vietnam.</li>
+    <li class="estremo"><span class="anno">1994</span>In Sudafrica, dopo la fine dell'apartheid, Nelson Mandela diventa presidente.</li>
+  </ol>
+
+  <h3 id="chi"><span>3. Chi?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 📖 Lessico — il link apre una voce Treccani in una nuova scheda.</p>
+  <div class="persone">
+    <article class="persona"><span class="sigla" aria-hidden="true">MG</span><div><h4>Mohandas Gandhi</h4><span class="date">1869–1948 · India</span><p>Chiamato «Mahatma», grande anima. Guida gli indiani contro il dominio britannico con la non violenza: marce, boicottaggi, digiuni, disobbedienza civile. Viene ucciso nel 1948 da un fanatico indù.</p><a href="https://www.treccani.it/enciclopedia/mohandas-karamchand-gandhi_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Leggi la voce Treccani</a></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">JN</span><div><h4>Jawaharlal Nehru</h4><span class="date">1889–1964 · India</span><p>Compagno di lotta di Gandhi, è il primo capo del governo dell'India indipendente. È tra i fondatori del movimento dei Paesi non allineati.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">HM</span><div><h4>Ho Chi Minh</h4><span class="date">1890–1969 · Vietnam</span><p>Capo comunista dei vietnamiti, guida la guerra contro i francesi e poi contro gli americani, per l'indipendenza e l'unificazione del Vietnam.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">KN</span><div><h4>Kwame Nkrumah</h4><span class="date">1909–1972 · Ghana</span><p>Porta il Ghana all'indipendenza nel 1957, primo Paese dell'Africa nera. Sogna un'Africa unita, ma governa sempre più come un dittatore.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">PL</span><div><h4>Patrice Lumumba</h4><span class="date">1925–1961 · Congo</span><p>Primo capo del governo del Congo indipendente. In piena guerra civile viene deposto e ucciso, anche con la complicità di potenze straniere.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">NM</span><div><h4>Nelson Mandela</h4><span class="date">1918–2013 · Sudafrica</span><p>Lotta contro l'apartheid, il sistema che separava bianchi e neri. Passa 27 anni in prigione; liberato, diventa nel 1994 il primo presidente nero del Sudafrica.</p><a href="https://www.treccani.it/enciclopedia/nelson-rolihlahla-mandela/" target="_blank" rel="noopener">Leggi la voce Treccani</a></div></article>
+  </div>
+</section>
+
+<!-- ======================= TESTO ======================= -->
+<section class="parte" id="testi" aria-labelledby="t-testi">
+  <p class="etichetta">Testo sintetico / essenziale</p>
+  <h2 id="t-testi">La lezione per intero</h2>
+  <p class="guida">Lo stesso testo in due versioni: il <strong>sintetico</strong> contiene tutte le informazioni, l'<strong>essenziale</strong> le riassume con frasi più brevi. Scegli quella che ti serve.</p>
+  <div class="livelli" role="group" aria-label="Versione del testo">
+    <button type="button" data-livello="sintetico" aria-pressed="true">Sintetico</button>
+    <button type="button" data-livello="essenziale" aria-pressed="false">Essenziale</button>
+  </div>
+  <div id="testo-sintetico">
+    <div class="paragrafo"><h4><span class="n">1</span>Perché gli imperi crollano</h4><p>Dopo la Seconda guerra mondiale le potenze coloniali, Gran Bretagna e Francia in testa, sono indebolite e piene di debiti. Nelle colonie sono cresciuti movimenti nazionalisti guidati da giovani che hanno studiato in Europa e che usano proprio le idee europee di libertà e di nazione. L'ONU proclama il diritto dei popoli all'autodeterminazione, e le due superpotenze, per motivi diversi, sono contrarie ai vecchi imperi.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>L'India e la non violenza</h4><p>In India il Partito del Congresso, guidato da Gandhi e Nehru, lotta per l'indipendenza con la <a class="pk" href="#p-non-violenza">non violenza</a>: marce, boicottaggio dei prodotti inglesi, disobbedienza alle leggi ingiuste. Nel 1947 la Gran Bretagna se ne va. Ma il territorio viene diviso tra l'India, a maggioranza indù, e il Pakistan, musulmano: milioni di persone sono costrette a spostarsi e scoppiano violenze terribili.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>Guerre di liberazione</h4><p>Dove le potenze coloniali non vogliono andarsene, l'indipendenza si conquista con le armi. Nel Sud-Est asiatico l'Olanda perde l'Indonesia e la Francia l'Indocina, dopo la sconfitta di Dien Bien Phu (1954). In Algeria, dove vivono un milione di coloni francesi, la guerra dura otto anni (1954–62) e fa centinaia di migliaia di morti.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>L'Africa diventa indipendente</h4><p>Nel 1957 il Ghana è il primo Stato indipendente dell'Africa nera. Nel 1960 nascono diciassette nuovi Stati, soprattutto dalle colonie francesi. Le colonie portoghesi, come l'Angola e il Mozambico, diventano indipendenti solo nel 1975, dopo lunghe guerre. Anche l'Italia aveva perso le sue colonie con la guerra; la Somalia, che amministrava per conto dell'ONU, diventa indipendente nel 1960.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>Il Terzo mondo e i non allineati</h4><p>Nel 1955, a Bandung, in Indonesia, si incontrano i capi di 29 Paesi asiatici e africani: condannano il colonialismo e chiedono di non essere coinvolti nella guerra fredda. Nasce l'idea dei Paesi <a class="pk" href="#p-non-allineati">non allineati</a>. Si comincia a parlare di <a class="pk" href="#p-terzo-mondo">Terzo mondo</a> per indicare i Paesi poveri che non appartengono né al blocco occidentale né a quello sovietico.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>Le difficoltà dei nuovi Stati</h4><p>I nuovi Stati hanno confini tracciati dagli europei, che dividono popoli e ne uniscono di nemici; poche scuole, ospedali e strade; economie basate su un solo prodotto da esportare. Spesso restano dipendenti dalle ex potenze coloniali (<a class="pk" href="#p-neocolonialismo">neocolonialismo</a>). In molti Paesi scoppiano guerre civili e prendono il potere dittatori, a volte sostenuti dalle superpotenze.</p></div>
+  </div>
+  <div id="testo-essenziale" class="essenziale" hidden>
+    <div class="paragrafo"><h4><span class="n">1</span>Perché gli imperi crollano</h4><p>Dopo la guerra le potenze europee sono deboli. Nelle colonie i popoli vogliono l'indipendenza.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>L'India e la non violenza</h4><p>Gandhi guida gli indiani con la non violenza. Nel 1947 l'India diventa indipendente.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>Guerre di liberazione</h4><p>In Vietnam e in Algeria l'indipendenza arriva dopo lunghe guerre contro la Francia.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>L'Africa diventa indipendente</h4><p>Nel 1960 diventano indipendenti diciassette Stati africani.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>Il Terzo mondo e i non allineati</h4><p>Molti nuovi Stati non vogliono schierarsi nella guerra fredda.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>Le difficoltà dei nuovi Stati</h4><p>I nuovi Stati sono poveri e hanno confini decisi dagli europei. Spesso ci sono guerre civili e dittature.</p></div>
+  </div>
+</section>
+
+<!-- ======================= PERCHÉ ======================= -->
+<section class="parte" id="perche" aria-labelledby="t-perche">
+  <p class="etichetta">Perché?</p>
+  <h2 id="t-perche">Causa, evento, effetto</h2>
+  <p class="guida">Gli storici non si chiedono solo che cosa è successo, ma perché. Leggi la catena da sinistra a destra.</p>
+  <p class="mestiere">🧩 Comprendere fatti e processi storici</p>
+  <div class="catena">
+    <div class="anello causa"><h4>Causa</h4><p>Le potenze europee sono indebolite dalla guerra. Nelle colonie crescono i movimenti per l'indipendenza. L'ONU e le superpotenze sono contrarie al colonialismo.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello evento"><h4>Evento</h4><p>Tra il 1945 e il 1975 quasi tutte le colonie in Asia e in Africa diventano Stati indipendenti, a volte con accordi, a volte con guerre.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello effetto"><h4>Effetto</h4><p>Nascono decine di nuovi Stati e l'ONU si allarga. Ma molti restano poveri, instabili e dipendenti; i confini coloniali provocano conflitti. Milioni di persone dalle ex colonie emigrano in Europa.</p></div>
+  </div>
+  <div class="ombra">
+    <h4>Ma attenzione</h4>
+    <p>L'indipendenza politica non basta a cancellare decenni di sfruttamento. Le economie delle ex colonie erano state costruite per esportare materie prime verso l'Europa, non per far vivere bene i loro abitanti. Molti problemi dell'Africa e dell'Asia di oggi hanno radici nella storia coloniale.</p>
+  </div>
+  <div class="ricorda">
+    <h4>Ricorda</h4>
+    <dl>
+      <dt>Indipendenza</dt><dd>La condizione di uno Stato che non dipende da un altro e si governa da sé.</dd>
+      <dt>Nazionalizzare</dt><dd>Far passare un'impresa o un bene sotto il controllo dello Stato.</dd>
+      <dt>Profughi</dt><dd>Persone costrette a lasciare la propria terra a causa della guerra o della persecuzione.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ======================= CONCETTI ======================= -->
+<section class="parte" id="concetti" aria-labelledby="t-concetti">
+  <p class="etichetta">Concetti fondamentali</p>
+  <h2 id="t-concetti">Le idee chiave</h2>
+  <p class="guida">Le idee più importanti della lezione, spiegate una per una. Le parole sottolineate a puntini rimandano alle <a href="#parole">Parole chiave</a>.</p>
+  <article class="concetto" id="c-decolonizzazione"><h4>Che cos'è la decolonizzazione</h4><p>La <a class="pk" href="#p-decolonizzazione">decolonizzazione</a> è la fine del dominio coloniale e la nascita di Stati indipendenti. Nel 1945 le Nazioni Unite avevano 51 membri; nel 1980 sono circa 150. È uno dei cambiamenti più grandi del Novecento.</p></article>
+  <article class="concetto" id="c-vie"><h4>Due strade verso l'indipendenza</h4><p>Alcuni popoli ottengono l'indipendenza con trattative e proteste pacifiche, come l'India con la <a class="pk" href="#p-non-violenza">non violenza</a> di Gandhi o il Ghana. Altri devono combattere guerre lunghe e crudeli, come il Vietnam e l'Algeria, dove i colonizzatori usano anche la tortura.</p></article>
+  <article class="concetto" id="c-confini"><h4>Il problema dei confini</h4><p>I confini dei nuovi Stati africani sono quasi sempre quelli tracciati dagli europei alla fine dell'Ottocento. Per evitare guerre senza fine, gli Stati africani decidono di mantenerli. Ma dentro questi confini vivono popoli diversi, e le rivalità esplodono spesso in guerre civili.</p></article>
+  <article class="concetto" id="c-guerra-fredda"><h4>Decolonizzazione e guerra fredda</h4><p>Stati Uniti e URSS cercano alleati tra i nuovi Stati, con aiuti economici, armi, consiglieri. Alcuni Paesi diventano campi di battaglia della guerra fredda, come il Vietnam, il Congo o l'Angola. Altri cercano una «terza via» nel movimento dei <a class="pk" href="#p-non-allineati">non allineati</a>.</p></article>
+  <article class="concetto" id="c-apartheid"><h4>L'apartheid</h4><p>In Sudafrica, indipendente dalla Gran Bretagna, la minoranza bianca impone dal 1948 l'<a class="pk" href="#p-apartheid">apartheid</a>: leggi che separano bianchi e neri in tutto, dalle scuole agli autobus, e tolgono ai neri ogni diritto politico. La lotta di Nelson Mandela e la pressione di tutto il mondo lo fanno finire all'inizio degli anni Novanta.</p></article>
+</section>
+
+<!-- ======================= COME ======================= -->
+<section class="parte" id="come" aria-labelledby="t-come">
+  <p class="etichetta">Come?</p>
+  <h2 id="t-come">Le tappe della decolonizzazione</h2>
+  <p class="guida">Uno schema per vedere tutto insieme: dove e quando crollano gli imperi coloniali.</p>
+  <p class="mestiere">🧩 Organizzare le informazioni · 🗺️ ritrova i luoghi sulla carta</p>
+  <p class="radice">Dall'Asia all'Africa, in trent'anni</p>
+  <div class="come">
+    <div class="colonna"><h4>Asia · 1945–1954</h4><ul><li>India e Pakistan (1947)</li><li>Indonesia (1949)</li><li>Indocina: Vietnam, Laos, Cambogia (1954)</li></ul></div>
+    <div class="colonna"><h4>Nord Africa · 1951–1962</h4><ul><li>Libia (1951)</li><li>Marocco e Tunisia (1956)</li><li>Egitto e il canale di Suez (1956)</li><li>Algeria (1962)</li></ul></div>
+    <div class="colonna"><h4>Africa a sud del Sahara · 1957–1966</h4><ul><li>Ghana (1957)</li><li>«anno dell'Africa» (1960)</li><li>Kenya (1963)</li></ul></div>
+    <div class="colonna"><h4>Ultime colonie · fino al 1975</h4><ul><li>Angola e Mozambico (1975)</li><li>fine dell'apartheid in Sudafrica (1991–94)</li></ul></div>
+  </div>
+</section>
+
+<!-- ======================= PAROLE CHIAVE ======================= -->
+<section class="parte" id="parole" aria-labelledby="t-parole">
+  <p class="etichetta">Parole chiave</p>
+  <h2 id="t-parole">Le parole della lezione</h2>
+  <p class="guida">Il significato dei termini nuovi, in ordine alfabetico.</p>
+  <dl class="parole">
+    <div class="parola" id="p-apartheid"><dt>Apartheid</dt><dd>Parola che significa «separazione»: il sistema di leggi razziste del Sudafrica (1948–1991). <a href="https://www.treccani.it/enciclopedia/apartheid_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Treccani ragazzi</a></dd></div>
+    <div class="parola" id="p-decolonizzazione"><dt>Decolonizzazione</dt><dd>Il processo con cui le colonie diventano Stati indipendenti, soprattutto tra il 1945 e il 1975. <a href="https://www.treccani.it/enciclopedia/decolonizzazione/" target="_blank" rel="noopener">Treccani</a></dd></div>
+    <div class="parola" id="p-neocolonialismo"><dt>Neocolonialismo</dt><dd>Il controllo economico e politico che le ex potenze coloniali o le grandi potenze continuano ad avere sui nuovi Stati.</dd></div>
+    <div class="parola" id="p-non-allineati"><dt>Non allineati</dt><dd>I Paesi che durante la guerra fredda non vogliono stare né con gli Stati Uniti né con l'Unione Sovietica.</dd></div>
+    <div class="parola" id="p-non-violenza"><dt>Non violenza</dt><dd>Metodo di lotta che rifiuta le armi e usa la disobbedienza civile, i boicottaggi, le marce. <a href="https://www.treccani.it/enciclopedia/disobbedienza-civile_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Treccani ragazzi «Disobbedienza civile»</a></dd></div>
+    <div class="parola" id="p-terzo-mondo"><dt>Terzo mondo</dt><dd>Espressione nata negli anni Cinquanta per indicare i Paesi poveri, in gran parte ex colonie, distinti dal blocco occidentale e da quello sovietico.</dd></div>
+  </dl>
+</section>
+
+<!-- ======================= STUDIAMO LE FONTI ======================= -->
+<section class="parte" id="lente" aria-labelledby="t-lente">
+  <p class="etichetta">Studiamo le fonti</p>
+  <h2 id="t-lente">Dentro la notizia</h2>
+  <p class="guida">Come veniva raccontata in Italia la fine di un grande impero? Lo leggiamo nel giornale di Torino, che in quegli anni si chiama <em>La Nuova Stampa</em>.</p>
+  <p class="mestiere">📜 Leggere e interpretare le fonti</p>
+  <div class="lente">
+    <div class="lente-testa">
+      <p class="testata-giornale">La Nuova Stampa · agosto 1947 · articolo da scegliere</p>
+      <h3>L'India indipendente</h3>
+    </div>
+    <div class="lente-corpo">
+      <p>A mezzanotte tra il 14 e il 15 agosto 1947 l'India diventa indipendente; il giorno prima è nato il Pakistan. Nehru parla al nuovo parlamento di un «appuntamento con il destino». Ma nelle stesse ore, nelle regioni divise tra i due Stati, cominciano le violenze tra indù, musulmani e sikh.</p>
+      <p class="domanda-guida">Domanda guida: un giornale europeo racconta l'indipendenza dell'India come una festa, una perdita per l'Europa o una tragedia? Che spazio dà a Gandhi?</p>
+      <div class="fasi">
+        <div class="fase"><h4>1. Prima di leggere</h4><ol><li>Trova l'India sulla <a href="#dove">carta</a>.</li><li>Chi governava l'India prima del 1947?</li><li>Che cosa significa «non violenza»?</li></ol></div>
+        <div class="fase"><h4>2. Leggere</h4><ol><li>Leggi l'articolo riadattato e sottolinea in due colori le notizie di festa e quelle di violenza.</li><li>Cerca le parole difficili in «Per capire».</li></ol><p style="margin:10px 0 0"><a class="bottone" id="link-articolo" href="#" aria-disabled="true">Pagina dell'articolo: in preparazione</a></p></div>
+        <div class="fase"><h4>3. Pensare da storici</h4><ol><li>Da quale punto di vista è scritto l'articolo: europeo o indiano?</li><li>Ci sono parole che oggi non useremmo più?</li><li>Come racconterebbe la stessa notizia un giornale indiano?</li></ol></div>
+      </div>
+      <ul class="altre-fonti">
+        <li><span class="tipo">Treccani ragazzi</span><a href="https://www.treccani.it/enciclopedia/mohandas-karamchand-gandhi_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Gandhi</a> · <a href="https://www.treccani.it/enciclopedia/storia-della-india_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">India, storia della</a> · <a href="https://www.treccani.it/enciclopedia/apartheid_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Apartheid</a> · <a href="https://www.treccani.it/enciclopedia/repubblica-sudafricana_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Repubblica Sudafricana</a></li>
+        <li><span class="tipo">Treccani</span><a href="https://www.treccani.it/enciclopedia/decolonizzazione/" target="_blank" rel="noopener">Decolonizzazione</a> · <a href="https://www.treccani.it/enciclopedia/nelson-rolihlahla-mandela/" target="_blank" rel="noopener">Nelson Mandela</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RIPASSIAMO ======================= -->
+<section class="parte" id="compiti" aria-labelledby="t-compiti">
+  <p class="etichetta">Ripassiamo</p>
+  <h2 id="t-compiti">Le cinque attività dello storico</h2>
+  <p class="guida">Rispondi prima da solo, poi premi «Controlla». Se sbagli, riprova: la soluzione compare con il pulsante «Mostra le soluzioni».</p>
+  <div id="esercizi"></div>
+
+  <p class="fascia" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8"/></svg></span><span>Ripasso finale</span></p>
+  <div class="attivita">
+    <h4>Dieci cose da sapere</h4>
+    <p class="meta">Ricongiungi le due metà di ogni frase.</p>
+    <div id="dieci"></div>
+  </div>
+  <div class="attivita">
+    <h4>Mini-dibattito</h4>
+    <p class="consegna"><strong>Non violenza o lotta armata?</strong> Confronta la strada dell'India con quella dell'Algeria. Prepara tre argomenti per ciascuna e spiega quale ti sembra più giusta, e se secondo te dipende dalla situazione.</p>
+    <textarea aria-label="I tuoi argomenti" placeholder="La non violenza… La lotta armata… Secondo me…"></textarea>
+    <p class="dibattito"><b>Regole:</b> non si interrompe chi parla; si criticano le idee, non le persone; alla fine ognuno scrive una conclusione personale.</p>
+  </div>
+</section>
+</main>
+</div>
+
+<footer>
+<p>Organizzazione della lezione ispirata a <em>Storia facile 3</em> (Modulo 5, cap. 14) e al <em>Tablet degli argomenti di Storia</em> (p. 283), Edizioni Erickson: Prima/Dopo, Idea principale, Perché?, Come?, Parole chiave, testo sintetico ed essenziale, verifiche. Testi originali della lezione.</p>
+  <p>Carta: terre emerse da Natural Earth (dominio pubblico). Voci collegate: Enciclopedia dei ragazzi Treccani.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- luoghi ---------- */
+var LUOGHI=[
+{n:"Delhi (India)",ll:[28.61,77.21],t:"Il 15 agosto 1947 l'India diventa indipendente; Nehru è il primo capo del governo."},
+ {n:"Bandung (Indonesia)",ll:[-6.91,107.61],t:"Nel 1955 vi si incontrano 29 Paesi di Asia e Africa contro il colonialismo. L'Indonesia era diventata indipendente dall'Olanda nel 1949."},
+ {n:"Dien Bien Phu (Vietnam)",ll:[21.39,103.02],t:"Nel 1954 i vietnamiti sconfiggono i francesi: finisce l'Indocina francese."},
+ {n:"Algeri (Algeria)",ll:[36.75,3.06],t:"Capitale dell'Algeria, teatro di una guerra durissima con la Francia (1954–62)."},
+ {n:"Suez (Egitto)",ll:[30.6,32.33],t:"Nel 1956 l'Egitto di Nasser nazionalizza il canale; Gran Bretagna e Francia intervengono, ma devono ritirarsi."},
+ {n:"Accra (Ghana)",ll:[5.6,-0.19],t:"Nel 1957 il Ghana è il primo Stato indipendente dell'Africa nera."},
+ {n:"Léopoldville (Congo)",ll:[-4.32,15.31],t:"Oggi Kinshasa. Nel 1960 il Congo diventa indipendente dal Belgio e precipita subito nella guerra civile."},
+ {n:"Nairobi (Kenya)",ll:[-1.29,36.82],t:"Il Kenya diventa indipendente dalla Gran Bretagna nel 1963, dopo una rivolta repressa con grande violenza."},
+ {n:"Luanda (Angola)",ll:[-8.84,13.23],t:"Le colonie portoghesi, come l'Angola, ottengono l'indipendenza solo nel 1975."},
+ {n:"Johannesburg (Sudafrica)",ll:[-26.2,28.05],t:"Nel Sudafrica dell'apartheid (1948–1991) i neri sono esclusi da ogni diritto. Nel 1994 Mandela diventa presidente."}
+];
+var lista=document.getElementById("luoghi"), gruppo=document.getElementById("segni"), info=document.getElementById("mappa-info"), NS="http://www.w3.org/2000/svg";
+function xy(ll){ return [(ll[1]-(-25))*900/175, (62-ll[0])*900/175]; }
+/* posizione dell'etichetta rispetto al punto: [dx, dy, allineamento] */
+var ETI={"Delhi (India)":[10,4,"start"],"Bandung (Indonesia)":[-10,14,"end"],"Dien Bien Phu (Vietnam)":[-10,-6,"end"],"Algeri (Algeria)":[10,-6,"start"],"Suez (Egitto)":[10,-4,"start"],"Accra (Ghana)":[-10,5,"end"],"Léopoldville (Congo)":[-10,-2,"end"],"Nairobi (Kenya)":[10,5,"start"],"Luanda (Angola)":[-10,12,"end"],"Johannesburg (Sudafrica)":[10,5,"start"]};
+var segni=[];
+function scegli(i){
+  segni.forEach(function(g,j){ g.setAttribute("class", j===i ? "segno scelto" : "segno"); g.firstChild.setAttribute("r", j===i ? "8" : "6"); if(j===i) gruppo.appendChild(g); });
+  info.innerHTML=""; var b=document.createElement("strong"); b.textContent=LUOGHI[i].n+": "; info.appendChild(b); info.appendChild(document.createTextNode(LUOGHI[i].t));
+}
+LUOGHI.forEach(function(L,i){
+  var p=xy(L.ll), g=document.createElementNS(NS,"g"), c=document.createElementNS(NS,"circle"), t=document.createElementNS(NS,"text"), e=ETI[L.n]||[14,5,"start"];
+  g.setAttribute("class","segno"); g.setAttribute("tabindex","0"); g.setAttribute("role","button"); g.setAttribute("aria-label",L.n);
+  c.setAttribute("cx",p[0].toFixed(1)); c.setAttribute("cy",p[1].toFixed(1)); c.setAttribute("r","6");
+  t.setAttribute("x",(p[0]+e[0]).toFixed(1)); t.setAttribute("y",(p[1]+e[1]).toFixed(1)); t.setAttribute("text-anchor",e[2]); t.textContent=L.n.replace(/ \(.*\)$/,"");
+  g.appendChild(c); g.appendChild(t); gruppo.appendChild(g); segni.push(g);
+  g.addEventListener("click",function(){ scegli(i); });
+  g.addEventListener("keydown",function(ev){ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); scegli(i); } });
+  var li=document.createElement("li"), bt=document.createElement("button");
+  bt.type="button"; bt.textContent=L.n; bt.addEventListener("click",function(){ scegli(i); document.getElementById("mappa").scrollIntoView({block:"center"}); });
+  li.appendChild(bt); li.appendChild(document.createTextNode(" — "+L.t)); lista.appendChild(li);
+});
+
+/* ---------- indice laterale: evidenzia la parte che si sta leggendo ---------- */
+var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
+function attiva(id){ Array.prototype.forEach.call(voci,function(v){ var on=v.getAttribute("href")==="#"+id; if(on){ v.setAttribute("aria-current","true"); if(navI.scrollWidth>navI.clientWidth){ navI.scrollLeft=v.offsetLeft-16; } } else v.removeAttribute("aria-current"); }); }
+var parti=document.querySelectorAll("section.parte"), attesa=false;
+function guarda(){ attesa=false; var lim=window.innerHeight*0.3, id=parti[0].id;
+  Array.prototype.forEach.call(parti,function(sx){ if(sx.getBoundingClientRect().top<=lim) id=sx.id; });
+  if((window.innerHeight+window.pageYOffset)>=document.documentElement.scrollHeight-4) id=parti[parti.length-1].id;
+  attiva(id); }
+window.addEventListener("scroll",function(){ if(!attesa){ attesa=true; (window.requestAnimationFrame||setTimeout)(guarda); } },{passive:true});
+window.addEventListener("resize",guarda); guarda();
+
+/* ---------- testo sintetico / essenziale ---------- */
+var bot=document.querySelectorAll(".livelli button");
+Array.prototype.forEach.call(bot,function(b){ b.addEventListener("click",function(){
+  var ess=b.getAttribute("data-livello")==="essenziale";
+  document.getElementById("testo-sintetico").hidden=ess; document.getElementById("testo-essenziale").hidden=!ess;
+  Array.prototype.forEach.call(bot,function(x){ x.setAttribute("aria-pressed", x===b ? "true":"false"); });
+});});
+
+/* ---------- esercizi ---------- */
+var ESERCIZI=[
+{gruppo:"tempo", titolo:"Scegli l'anno giusto", meta:"Abbina ogni evento all'anno in cui accadde.",
+  scelte:["1947","1954","1955","1957","1960","1962","1994"],
+  righe:[["Indipendenza dell'India","1947"],["Sconfitta francese a Dien Bien Phu","1954"],["Conferenza di Bandung","1955"],["Indipendenza del Ghana","1957"],["«Anno dell'Africa»","1960"],["Indipendenza dell'Algeria","1962"],["Mandela presidente del Sudafrica","1994"]]},
+ {gruppo:"spazio", titolo:"Da chi si liberarono?", meta:"Abbina ogni Paese alla potenza coloniale da cui ottenne l'indipendenza.",
+  scelte:["Gran Bretagna","Francia","Olanda","Belgio","Portogallo"],
+  righe:[["India","Gran Bretagna"],["Algeria","Francia"],["Indonesia","Olanda"],["Congo","Belgio"],["Angola","Portogallo"],["Vietnam","Francia"],["Ghana","Gran Bretagna"]]},
+ {gruppo:"fonti", titolo:"Fatto o interpretazione?", meta:"Uno storico distingue i fatti (si possono verificare) dalle interpretazioni (sono giudizi, opinioni).",
+  scelte:["Fatto","Interpretazione"],
+  righe:[["Il 15 agosto 1947 l'India diventa indipendente.","Fatto","Si verifica con i documenti ufficiali."],["Gli europei hanno portato il progresso nelle colonie.","Interpretazione","È un giudizio molto discusso: insieme a strade e scuole portarono sfruttamento e violenza."],["Nel 1960 diventano indipendenti diciassette Stati africani.","Fatto","Si verifica con le date di indipendenza."],["La non violenza è sempre la strada migliore.","Interpretazione","È un'opinione, anche se condivisa da molti."],["Nelson Mandela passa 27 anni in prigione.","Fatto","Si verifica con i documenti dei processi e della liberazione."]]},
+ {gruppo:"processi", titolo:"Pace o guerra?", meta:"Rileggi i concetti fondamentali: l'indipendenza arrivò soprattutto con trattative pacifiche o con una guerra?",
+  scelte:["Soprattutto pacifica","Con una lunga guerra"],
+  righe:[["India","Soprattutto pacifica"],["Ghana","Soprattutto pacifica"],["Algeria","Con una lunga guerra"],["Vietnam","Con una lunga guerra"],["Angola","Con una lunga guerra"]]},
+ {gruppo:"processi", titolo:"Vero o falso?", meta:"Dopo il controllo leggi la spiegazione: serve a correggere le frasi false.",
+  scelte:["Vero","Falso"],
+  righe:[["La decolonizzazione comincia in Africa e poi arriva in Asia.","Falso","Comincia in Asia (India, 1947) e poi arriva in Africa."],["Gandhi guida la lotta indiana con la non violenza.","Vero"],["I nuovi Stati africani disegnano confini nuovi, diversi da quelli coloniali.","Falso","Mantengono quasi sempre i confini tracciati dagli europei."],["Molti nuovi Stati scelgono di non schierarsi nella guerra fredda.","Vero"],["Con l'indipendenza finiscono subito tutti i problemi delle ex colonie.","Falso","Restano povertà, dipendenza economica, guerre civili e dittature."]]},
+ {gruppo:"lessico", titolo:"Parole e significati", meta:"Abbina ogni parola alla sua definizione.",
+  scelte:["Decolonizzazione","Non violenza","Apartheid","Non allineati","Neocolonialismo","Terzo mondo"],
+  righe:[["Il passaggio delle colonie all'indipendenza","Decolonizzazione"],["Lotta senza armi, con disobbedienza e boicottaggi","Non violenza"],["Le leggi razziste del Sudafrica","Apartheid"],["Paesi che non stanno con nessuna superpotenza","Non allineati"],["Controllo economico sulle ex colonie","Neocolonialismo"],["I Paesi poveri, spesso ex colonie, fuori dai due blocchi","Terzo mondo"]]}
+];
+var DIECI=[
+["Dopo la Seconda guerra mondiale","le colonie chiedono l'indipendenza."],
+ ["Le potenze europee","sono indebolite dalla guerra."],
+ ["Nel 1947 l'India","diventa indipendente grazie anche a Gandhi."],
+ ["Gandhi lotta","con la non violenza."],
+ ["In Vietnam e in Algeria","l'indipendenza arriva dopo lunghe guerre."],
+ ["Nel 1955 a Bandung","i Paesi di Asia e Africa condannano il colonialismo."],
+ ["Nel 1960, l'anno dell'Africa,","nascono diciassette nuovi Stati."],
+ ["I confini dei nuovi Stati africani","sono quelli tracciati dagli europei."],
+ ["Molti nuovi Stati","restano poveri e dipendenti."],
+ ["In Sudafrica l'apartheid","finisce solo all'inizio degli anni Novanta."]
+];
+function el(t,attr,txt){ var e=document.createElement(t); if(attr){ for(var k in attr){ e.setAttribute(k,attr[k]); } } if(txt!=null) e.textContent=txt; return e; }
+function mescola(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+function costruisci(cont, scelte, righe, conGruppo){
+  var tab=el("table",{"class":"esercizio"}), tb=el("tbody"); tab.appendChild(tb);
+  var stati=[];
+  righe.forEach(function(r,i){
+    var tr=el("tr"), td1=el("td"), td2=el("td"), td3=el("td",{"class":"esito","aria-live":"polite"});
+    td1.appendChild(document.createTextNode(r[0]));
+    var sp=el("span",{"class":"spiega"}); sp.hidden=true; if(r[2]) sp.textContent=r[2]; td1.appendChild(sp);
+    var s=el("select",{"aria-label":"Risposta: "+r[0]}); s.appendChild(el("option",{value:""},"— scegli —"));
+    scelte.forEach(function(c){ s.appendChild(el("option",{value:c},c)); });
+    td2.appendChild(s); tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tb.appendChild(tr);
+    stati.push({tr:tr,s:s,esito:td3,sp:sp,giusta:r[1]});
+  });
+  cont.appendChild(tab);
+  var com=el("div",{"class":"comandi"}), b1=el("button",{type:"button","class":"bottone"},"Controlla"), b2=el("button",{type:"button","class":"bottone secondario"},"Mostra le soluzioni"), pt=el("span",{"class":"punteggio","aria-live":"polite"});
+  b2.hidden=true; com.appendChild(b1); com.appendChild(b2); com.appendChild(pt); cont.appendChild(com);
+  b1.addEventListener("click",function(){
+    var ok=0, vuote=0;
+    stati.forEach(function(x){
+      x.tr.classList.remove("ok"); x.tr.classList.remove("no");
+      if(!x.s.value){ vuote++; x.esito.textContent=""; return; }
+      var g=x.s.value===x.giusta; if(g) ok++;
+      x.tr.classList.add(g?"ok":"no"); x.esito.textContent=g?"✓":"✗"; x.esito.setAttribute("aria-label",g?"giusto":"sbagliato");
+      if(x.sp.textContent) x.sp.hidden=false;
+    });
+    pt.textContent=ok+" su "+stati.length+(vuote? " · "+vuote+" senza risposta":"");
+    b2.hidden=false;
+  });
+  b2.addEventListener("click",function(){
+    stati.forEach(function(x){ x.s.value=x.giusta; x.tr.classList.remove("no"); x.tr.classList.add("ok"); x.esito.textContent="✓"; if(x.sp.textContent) x.sp.hidden=false; });
+    pt.textContent="Ecco le soluzioni.";
+  });
+}
+var GRUPPI={"tempo": {"c": "#2a7f6f", "n": "Collocare nel tempo", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15.5\" rx=\"2\"/><path d=\"M3.5 10h17M8 3v4M16 3v4\"/><path d=\"M9 14.5h2v3M13.5 14.5h2l-1.5 3\"/></svg>"}, "spazio": {"c": "#b25510", "n": "Collocare nello spazio", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z\"/><path d=\"M9 4.5v13M15 6.5v13\"/></svg>"}, "fonti": {"c": "#55800f", "n": "Leggere e interpretare le fonti", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"5\" y=\"11\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 11V7.5a4 4 0 0 1 7.6-1.8\"/><circle cx=\"12\" cy=\"15.5\" r=\"1.3\"/><path d=\"M12 16.8v1.7\"/></svg>"}, "processi": {"c": "#b0215f", "n": "Comprendere fatti e processi storici", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 4.5l6 3.5-6 3.5zM10 4.5l6 3.5-6 3.5z\"/><path d=\"M20 12.5l-6 3.5 6 3.5zM14 12.5l-6 3.5 6 3.5z\"/></svg>"}, "lessico": {"c": "#6b3f8a", "n": "Conoscere e usare il lessico specifico", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 18.5L8.5 6l4.5 12.5M5.6 14h5.8\"/><path d=\"M15 12.5a2.5 2.5 0 1 1 0 4.5M20 10v8.5\"/></svg>"}, "ripasso": {"c": "#2b5f6b", "n": "Ripasso finale", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8\"/></svg>"}};
+var zona=document.getElementById("esercizi"), ultimo="";
+ESERCIZI.forEach(function(E,i){
+  if(E.gruppo!==ultimo){ var g=GRUPPI[E.gruppo], f=el("p",{"class":"fascia",style:"--c:"+g.c}), t=el("span",{"class":"tondo"}); t.innerHTML=g.i; f.appendChild(t); f.appendChild(el("span",null,g.n)); zona.appendChild(f); ultimo=E.gruppo; }
+  var box=el("div",{"class":"attivita"}); box.appendChild(el("h4",null,(i+1)+". "+E.titolo)); box.appendChild(el("p",{"class":"meta"},E.meta));
+  costruisci(box,E.scelte,mescola(E.righe)); zona.appendChild(box);
+});
+costruisci(document.getElementById("dieci"), mescola(DIECI.map(function(d){return d[1];})), DIECI.map(function(d){ return [d[0]+" …", d[1]]; }));
+})();
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+</body>
+</html>

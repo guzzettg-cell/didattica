@@ -1003,10 +1003,42 @@ const MODULI = [
     titolo: "Flussi migratori",
     descrizione: "Primo quadrimestre, in collegamento con Geografia, Italiano ed Educazione civica.",
     lezioni: [
-      { titolo: "La scoperta dei nuovi mondi", dipartimento: true, indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112", attivita: [] },
-      { titolo: "L'età dei conquistadores", dipartimento: true, indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112", attivita: [] },
-      { titolo: "Le civiltà precolombiane", dipartimento: true, indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112", attivita: [] },
-      { titolo: "La tratta degli schiavi", dipartimento: true, indice: "Storia facile 2, M3 cap. 9 · Tablet p. 112", attivita: [] }
+      {
+        titolo: "La scoperta dei nuovi mondi",
+        dipartimento: true,
+        descrizione: "Portoghesi e spagnoli negli oceani: Colombo, Vasco da Gama, Magellano, lo scambio colombiano. Dentro la fonte: la lettera di Colombo del 1493 (Europeana).",
+        indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112",
+        link: "storia/seconda/flussi-migratori/scoperta-nuovi-mondi.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "L'età dei conquistadores",
+        dipartimento: true,
+        descrizione: "Cortés e Pizarro abbattono gli imperi azteco e inca; encomienda, epidemie, Las Casas. Dentro la fonte: le lettere di Cortés a Carlo V (Europeana).",
+        indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112",
+        link: "storia/seconda/flussi-migratori/conquistadores.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "Le civiltà precolombiane",
+        dipartimento: true,
+        descrizione: "Dai primi abitanti venuti dall'Asia a Maya, Aztechi e Inca. Dentro la fonte: il Codice Selden (Europeana).",
+        indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112",
+        link: "storia/seconda/flussi-migratori/civilta-precolombiane.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "La tratta degli schiavi",
+        dipartimento: true,
+        descrizione: "La più grande migrazione forzata della storia: commercio triangolare, piantagioni, resistenza e abolizione. Dentro la fonte su Europeana.",
+        indice: "Storia facile 2, M3 cap. 9 · Tablet p. 112",
+        link: "storia/seconda/flussi-migratori/tratta-schiavi.html",
+        data: "2026-10-29",
+        attivita: []
+      }
     ]
   },
   {
@@ -1016,12 +1048,60 @@ const MODULI = [
     titolo: "Sistemi di produzione, organizzazione sociale e vita quotidiana",
     descrizione: "Primo e secondo quadrimestre.",
     lezioni: [
-      { titolo: "La rivoluzione agricola: nuove risorse, ripresa dei commerci, la società comunale", dipartimento: true, indice: "Storia facile 1, M3 capp. 10 e 12 · Tablet pp. 53, 65", attivita: [] },
-      { titolo: "La civiltà rinascimentale", dipartimento: true, indice: "Storia facile 2, M1 cap. 1 · Tablet p. 102", attivita: [] },
-      { titolo: "Gli imperi coloniali", dipartimento: true, indice: "Storia facile 2, M3 cap. 9 · Tablet p. 112", attivita: [] },
-      { titolo: "Il sistema mondiale nei secoli XVII e XVIII", dipartimento: true, indice: "Storia facile 2, M2 cap. 7 · Tablet p. 154", attivita: [] },
-      { titolo: "La rivoluzione industriale: nuove risorse e sistemi di produzione", dipartimento: true, indice: "Storia facile 2, M3 cap. 11 · Tablet p. 165", attivita: [] },
-      { titolo: "Città, proletariato e capitalismo", dipartimento: true, indice: "Storia facile 2, M3 cap. 11 · Tablet p. 165", attivita: [] }
+      {
+        titolo: "La rivoluzione agricola: nuove risorse, ripresa dei commerci, la società comunale",
+        dipartimento: true,
+        descrizione: "Dopo il Mille: nuove tecniche agricole, crescita della popolazione, mercanti e città. Con carta, testo su due livelli e Dentro la fonte (Europeana).",
+        indice: "Storia facile 1, M3 capp. 10 e 12 · Tablet pp. 53, 65",
+        link: "storia/seconda/sistemi-produzione/rivoluzione-agricola-comuni.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "La civiltà rinascimentale",
+        dipartimento: true,
+        descrizione: "Umanesimo e Rinascimento: Firenze, i mecenati, la stampa. Dentro la fonte: la Bibbia di Gutenberg su Europeana.",
+        indice: "Storia facile 2, M1 cap. 1 · Tablet p. 102",
+        link: "storia/seconda/sistemi-produzione/civilta-rinascimentale.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "Gli imperi coloniali",
+        dipartimento: true,
+        descrizione: "Spagna e Portogallo nel mondo: conquiste, sfruttamento, scambio colombiano. Con planisfero e Dentro la fonte (Europeana).",
+        indice: "Storia facile 2, M3 cap. 9 · Tablet p. 112",
+        link: "storia/seconda/sistemi-produzione/imperi-coloniali.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "Il sistema mondiale nei secoli XVII e XVIII",
+        dipartimento: true,
+        descrizione: "Compagnie delle Indie, commercio triangolare, Olanda e Inghilterra. Dentro la fonte: un mercante della VOC su Europeana.",
+        indice: "Storia facile 2, M2 cap. 7 · Tablet p. 154",
+        link: "storia/seconda/sistemi-produzione/sistema-mondiale.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "La rivoluzione industriale: nuove risorse e sistemi di produzione",
+        dipartimento: true,
+        descrizione: "Macchine, vapore, carbone e fabbriche nell'Inghilterra del Settecento. Con carta, testo su due livelli e Dentro la fonte (Europeana).",
+        indice: "Storia facile 2, M3 cap. 11 · Tablet p. 165",
+        link: "storia/seconda/sistemi-produzione/rivoluzione-industriale.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "Città, proletariato e capitalismo",
+        dipartimento: true,
+        descrizione: "La società industriale: borghesia e proletariato, lavoro minorile, sindacati e socialismo. Dentro la fonte: bambini nelle miniere (Europeana).",
+        indice: "Storia facile 2, M3 cap. 11 · Tablet p. 165",
+        link: "storia/seconda/sistemi-produzione/citta-proletariato-capitalismo.html",
+        data: "2026-10-29",
+        attivita: []
+      }
     ]
   },
   {
@@ -1031,19 +1111,121 @@ const MODULI = [
     titolo: "Lo Stato e le forme di governo",
     descrizione: "Primo e secondo quadrimestre, in collegamento con Italiano ed Educazione civica.",
     lezioni: [
-      { titolo: "I Comuni", dipartimento: true, indice: "Storia facile 1, M3 cap. 12 · Tablet p. 65", attivita: [] },
-      { titolo: "Le monarchie nazionali", dipartimento: true, indice: "Storia facile 1, M4 cap. 15 · Tablet p. 96", attivita: [] },
-      { titolo: "Le Signorie e gli altri Stati regionali", dipartimento: true, indice: "Storia facile 1, M4 cap. 17 · Tablet p. 91", attivita: [] },
-      { titolo: "Riforma e Controriforma", dipartimento: true, indice: "Storia facile 2, M1 cap. 4 · Tablet p. 123", attivita: [] },
-      { titolo: "L'Assolutismo", dipartimento: true, indice: "Storia facile 2, M2 cap. 7 · Tablet p. 144", attivita: [] },
-      { titolo: "La monarchia parlamentare inglese", dipartimento: true, indice: "Storia facile 2, M2 cap. 7 · Tablet p. 149", attivita: [] },
-      { titolo: "L'Illuminismo", dipartimento: true, indice: "Storia facile 2, M3 cap. 8 · Tablet p. 159", attivita: [] },
-      { titolo: "La Rivoluzione americana", dipartimento: true, indice: "Storia facile 2, M3 cap. 10 · Tablet p. 170", attivita: [] },
-      { titolo: "La Rivoluzione francese", dipartimento: true, indice: "Storia facile 2, M3 cap. 12 · Tablet p. 175", attivita: [] },
-      { titolo: "L'impero napoleonico", dipartimento: true, indice: "Storia facile 2, M3 cap. 13 · Tablet p. 180", attivita: [] },
-      { titolo: "Il Congresso di Vienna e la Restaurazione", descrizione: "Lezione extra: capitolo di Storia facile e del Tablet che non è nella programmazione di dipartimento.", indice: "Storia facile 2, M4 cap. 14 · Tablet p. 186", attivita: [] },
-      { titolo: "Il Risorgimento", dipartimento: true, indice: "Storia facile 2, M4 cap. 15 · Tablet p. 192", attivita: [] },
-      { titolo: "L'unità d'Italia", descrizione: "Lezione extra: capitolo di Storia facile e del Tablet che non è nella programmazione di dipartimento.", indice: "Storia facile 2, M4 cap. 16 · Tablet p. 192", attivita: [] }
+      {
+        titolo: "I Comuni",
+        dipartimento: true,
+        descrizione: "XI–XIII secolo: le città si governano da sole, la Lega lombarda, guelfi e ghibellini. Dentro la fonte: il Buon Governo di Lorenzetti (Europeana).",
+        indice: "Storia facile 1, M3 cap. 12 · Tablet p. 65",
+        link: "storia/seconda/stato-governo/comuni.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "Le monarchie nazionali",
+        dipartimento: true,
+        descrizione: "Francia, Inghilterra e Spagna: Magna Charta, guerra dei Cent'anni, Reconquista. Dentro la fonte su Europeana.",
+        indice: "Storia facile 1, M4 cap. 15 · Tablet p. 96",
+        link: "storia/seconda/stato-governo/monarchie-nazionali.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "Le Signorie e gli altri Stati regionali",
+        dipartimento: true,
+        descrizione: "Dal Comune alla Signoria, gli Stati regionali, la pace di Lodi. Dentro la fonte: il corteo dei Magi dei Medici (Europeana).",
+        indice: "Storia facile 1, M4 cap. 17 · Tablet p. 91",
+        link: "storia/seconda/stato-governo/signorie.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "Riforma e Controriforma",
+        dipartimento: true,
+        descrizione: "Lutero, Calvino, Enrico VIII e la risposta cattolica del Concilio di Trento. Dentro la fonte: le 95 tesi (Europeana).",
+        indice: "Storia facile 2, M1 cap. 4 · Tablet p. 123",
+        link: "storia/seconda/stato-governo/riforma-controriforma.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "L'Assolutismo",
+        dipartimento: true,
+        descrizione: "Luigi XIV, Versailles e il potere assoluto. Dentro la fonte: il ritratto del Re Sole (Europeana).",
+        indice: "Storia facile 2, M2 cap. 7 · Tablet p. 144",
+        link: "storia/seconda/stato-governo/assolutismo.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "La monarchia parlamentare inglese",
+        dipartimento: true,
+        descrizione: "Guerra civile, Cromwell, Gloriosa rivoluzione e Bill of Rights. Dentro la fonte su Europeana.",
+        indice: "Storia facile 2, M2 cap. 7 · Tablet p. 149",
+        link: "storia/seconda/stato-governo/monarchia-parlamentare.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "L'Illuminismo",
+        dipartimento: true,
+        descrizione: "Ragione, separazione dei poteri, tolleranza, Beccaria. Dentro la fonte: le tavole dell'Enciclopedia (Europeana).",
+        indice: "Storia facile 2, M3 cap. 8 · Tablet p. 159",
+        link: "storia/seconda/stato-governo/illuminismo.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "La Rivoluzione americana",
+        dipartimento: true,
+        descrizione: "Dalle tasse al Tea Party, la Dichiarazione d'indipendenza e la Costituzione. Con carta delle tredici colonie e Dentro la fonte (Europeana).",
+        indice: "Storia facile 2, M3 cap. 10 · Tablet p. 170",
+        link: "storia/seconda/stato-governo/rivoluzione-americana.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "La Rivoluzione francese",
+        dipartimento: true,
+        descrizione: "1789–1799: Stati generali, Bastiglia, diritti dell'uomo, Repubblica e Terrore. Dentro la fonte: la Dichiarazione dei diritti (Europeana).",
+        indice: "Storia facile 2, M3 cap. 12 · Tablet p. 175",
+        link: "storia/seconda/stato-governo/rivoluzione-francese.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "L'impero napoleonico",
+        dipartimento: true,
+        descrizione: "Napoleone dal colpo di Stato a Waterloo: Codice civile, conquiste, propaganda. Dentro la fonte su Europeana.",
+        indice: "Storia facile 2, M3 cap. 13 · Tablet p. 180",
+        link: "storia/seconda/stato-governo/impero-napoleonico.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "Il Congresso di Vienna e la Restaurazione",
+        descrizione: "Lezione extra: capitolo di Storia facile e del Tablet che non è nella programmazione di dipartimento. Con carta, testo su due livelli e Dentro la fonte (Europeana).",
+        indice: "Storia facile 2, M4 cap. 14 · Tablet p. 186",
+        link: "storia/seconda/stato-governo/congresso-vienna.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "Il Risorgimento",
+        dipartimento: true,
+        descrizione: "Mazzini, i moderati, il 1848 e il Piemonte di Cavour. Dentro la fonte: un manifesto di Garibaldi del 1849 (Europeana).",
+        indice: "Storia facile 2, M4 cap. 15 · Tablet p. 192",
+        link: "storia/seconda/stato-governo/risorgimento.html",
+        data: "2026-10-29",
+        attivita: []
+      },
+      {
+        titolo: "L'unità d'Italia",
+        descrizione: "Lezione extra: capitolo di Storia facile e del Tablet che non è nella programmazione di dipartimento. Con carta, testo su due livelli e Dentro la fonte (Europeana).",
+        indice: "Storia facile 2, M4 cap. 16 · Tablet p. 192",
+        link: "storia/seconda/stato-governo/unita-italia.html",
+        data: "2026-10-29",
+        attivita: []
+      }
     ]
   },
 
@@ -1055,9 +1237,31 @@ const MODULI = [
     titolo: "L'Europa e il mondo tra Ottocento e Novecento",
     descrizione: "Primo quadrimestre, in collegamento con Geografia e Tecnologia.",
     lezioni: [
-      { titolo: "L'Italia dopo l'Unità", descrizione: "Lezione extra: non è nella programmazione di dipartimento. Destra e Sinistra storica, questione meridionale: il ponte tra il Risorgimento (seconda) e il Novecento.", indice: "Storia facile 3, M1 cap. 1 · Tablet p. 210", attivita: [] },
-      { titolo: "Gli imperi coloniali", dipartimento: true, descrizione: "Colonialismo, imperialismo e nazionalismo: le rivalità tra le potenze europee.", indice: "Storia facile 3, M1 cap. 2 · Tablet p. 216", attivita: [] },
-      { titolo: "La seconda rivoluzione industriale", descrizione: "Lezione extra: non è nominata nella programmazione di dipartimento (Storia facile e Tablet la mettono alla fine della seconda). Acciaio, elettricità, chimica, petrolio: le basi dei «miracoli del progresso».", indice: "Storia facile 2, M4 cap. 17 · Tablet p. 200", attivita: [] },
+      {
+        titolo: "L'Italia dopo l'Unità",
+        descrizione: "Lezione extra: non è nella programmazione di dipartimento. Destra e Sinistra storica, questione meridionale: il ponte tra il Risorgimento (seconda) e il Novecento.",
+        indice: "Storia facile 3, M1 cap. 1 · Tablet p. 210",
+        link: "storia/terza/ottocento-novecento/italia-dopo-unita.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "Gli imperi coloniali",
+        dipartimento: true,
+        descrizione: "1870–1914: colonialismo, imperialismo e nazionalismo, la spartizione dell'Africa, l'Italia ad Adua e in Libia. Con carta del mondo, testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M1 cap. 2 · Tablet p. 216",
+        link: "storia/terza/ottocento-novecento/imperi-coloniali.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "La seconda rivoluzione industriale",
+        descrizione: "Lezione extra: non è nominata nella programmazione di dipartimento (Storia facile e Tablet la mettono alla fine della seconda). Acciaio, elettricità, chimica, petrolio: le basi dei «miracoli del progresso».",
+        indice: "Storia facile 2, M4 cap. 17 · Tablet p. 200",
+        link: "storia/terza/ottocento-novecento/seconda-rivoluzione-industriale.html",
+        data: "2026-10-28",
+        attivita: []
+      },
       {
         titolo: "La Belle Époque",
         dipartimento: true,
@@ -1067,10 +1271,40 @@ const MODULI = [
         data: "2026-10-28",
         attivita: []
       },
-      { titolo: "I miracoli del progresso e delle scienze", dipartimento: true, indice: "Storia facile 3, M1 cap. 3 · Tablet pp. 222–224", attivita: [] },
-      { titolo: "La società di massa", dipartimento: true, indice: "Storia facile 3, M1 cap. 3 · Tablet pp. 224–225", attivita: [] },
-      { titolo: "La grande emigrazione", descrizione: "Lezione extra: non è nella programmazione di dipartimento. Milioni di italiani verso le Americhe tra Ottocento e Novecento.", indice: "Storia facile 3, M1 cap. 3 · Tablet p. 227", attivita: [] },
-      { titolo: "L'età giolittiana", descrizione: "Lezione extra: non è nella programmazione di dipartimento. L'Italia dal 1901 al 1914: industria, riforme, suffragio universale maschile, guerra di Libia.", indice: "Storia facile 3, M1 cap. 3 · Tablet p. 227", attivita: [] }
+      {
+        titolo: "I miracoli del progresso e delle scienze",
+        dipartimento: true,
+        descrizione: "Vaccini, raggi X, radioattività, relatività, automobile e aeroplano: la scienza cambia la vita, ma serve anche alla guerra. Con testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M1 cap. 3 · Tablet pp. 222–224",
+        link: "storia/terza/ottocento-novecento/progresso-scienze.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "La società di massa",
+        dipartimento: true,
+        descrizione: "Scuola, giornali, grandi magazzini, sport, sindacati, partiti e voto: milioni di persone comuni entrano nella storia. Con testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M1 cap. 3 · Tablet pp. 224–225",
+        link: "storia/terza/ottocento-novecento/societa-di-massa.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "La grande emigrazione",
+        descrizione: "Lezione extra: non è nella programmazione di dipartimento. Milioni di italiani verso le Americhe tra Ottocento e Novecento.",
+        indice: "Storia facile 3, M1 cap. 3 · Tablet p. 227",
+        link: "storia/terza/ottocento-novecento/grande-emigrazione.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "L'età giolittiana",
+        descrizione: "Lezione extra: non è nella programmazione di dipartimento. L'Italia dal 1901 al 1914: industria, riforme, suffragio universale maschile, guerra di Libia.",
+        indice: "Storia facile 3, M1 cap. 3 · Tablet p. 227",
+        link: "storia/terza/ottocento-novecento/eta-giolittiana.html",
+        data: "2026-10-28",
+        attivita: []
+      }
     ]
   },
   {
@@ -1080,10 +1314,42 @@ const MODULI = [
     titolo: "Guerra, rivoluzioni, totalitarismi",
     descrizione: "Primo quadrimestre, in collegamento con Geografia e Religione.",
     lezioni: [
-      { titolo: "La prima guerra mondiale", dipartimento: true, indice: "Storia facile 3, M2 capp. 4–5 · Tablet p. 232", attivita: [] },
-      { titolo: "La Rivoluzione russa e lo stalinismo", dipartimento: true, indice: "Storia facile 3, M3 cap. 6 · Tablet p. 240", attivita: [] },
-      { titolo: "Il primo dopoguerra", dipartimento: true, indice: "Storia facile 3, M2 cap. 5 · Tablet p. 246", attivita: [] },
-      { titolo: "Il fascismo in Italia", dipartimento: true, indice: "Storia facile 3, M3 cap. 7 · Tablet p. 251", attivita: [] }
+      {
+        titolo: "La prima guerra mondiale",
+        dipartimento: true,
+        descrizione: "1914–1918: cause e occasione, la guerra di trincea, l'Italia dalla neutralità a Vittorio Veneto, la guerra totale. Con carta, testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M2 capp. 4–5 · Tablet p. 232",
+        link: "storia/terza/guerre-totalitarismi/prima-guerra-mondiale.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "La Rivoluzione russa e lo stalinismo",
+        dipartimento: true,
+        descrizione: "Dalla caduta dello zar alla Rivoluzione d'ottobre, la nascita dell'URSS, Stalin: piani quinquennali, collettivizzazione, purghe e gulag. Con carta, testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M3 cap. 6 · Tablet p. 240",
+        link: "storia/terza/guerre-totalitarismi/rivoluzione-russa.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "Il primo dopoguerra",
+        dipartimento: true,
+        descrizione: "1918–1929: Versailles e la nuova carta dell'Europa, la «vittoria mutilata» e il biennio rosso, la Germania di Weimar, la crisi del 1929. Con carta, testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M2 cap. 5 · Tablet p. 246",
+        link: "storia/terza/guerre-totalitarismi/primo-dopoguerra.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "Il fascismo in Italia",
+        dipartimento: true,
+        descrizione: "Squadrismo, marcia su Roma, delitto Matteotti, la dittatura e il consenso, l'impero e le leggi razziali; gli antifascisti. Con carta, testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M3 cap. 7 · Tablet p. 251",
+        link: "storia/terza/guerre-totalitarismi/fascismo.html",
+        data: "2026-10-28",
+        attivita: []
+      }
     ]
   },
   {
@@ -1093,11 +1359,51 @@ const MODULI = [
     titolo: "Dal nazismo alla guerra fredda",
     descrizione: "Secondo quadrimestre, in collegamento con Geografia, Italiano e Religione.",
     lezioni: [
-      { titolo: "Il nazismo", dipartimento: true, indice: "Storia facile 3, M3 cap. 8 · Tablet p. 257", attivita: [] },
-      { titolo: "La seconda guerra mondiale", dipartimento: true, indice: "Storia facile 3, M4 capp. 9 e 11 · Tablet p. 262", attivita: [] },
-      { titolo: "La Resistenza in Italia e in Europa", dipartimento: true, descrizione: "Nella programmazione di dipartimento è tra le conoscenze («Resistenza e formazione della Repubblica italiana»), non tra i moduli.", indice: "Storia facile 3, M4 cap. 10 · Tablet p. 262", attivita: [] },
-      { titolo: "L'Europa divisa", dipartimento: true, indice: "Storia facile 3, M5 cap. 12 (La guerra fredda) · Tablet p. 271", attivita: [] },
-      { titolo: "Il crollo degli imperi coloniali", dipartimento: true, indice: "Storia facile 3, M5 cap. 14 · Tablet p. 283", attivita: [] }
+      {
+        titolo: "Il nazismo",
+        dipartimento: true,
+        descrizione: "La Repubblica di Weimar e la crisi, Hitler al potere, lo Stato totalitario, la persecuzione degli ebrei, la strada verso la guerra. Con carta, testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M3 cap. 8 · Tablet p. 257",
+        link: "storia/terza/nazismo-guerra-fredda/nazismo.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "La seconda guerra mondiale",
+        dipartimento: true,
+        descrizione: "1939–1945: guerra lampo, guerra mondiale, la svolta, l'Italia dal 1940 all'8 settembre, la Shoah, la fine e l'età atomica. Con carta, testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M4 capp. 9 e 11 · Tablet p. 262",
+        link: "storia/terza/nazismo-guerra-fredda/seconda-guerra-mondiale.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "La Resistenza in Italia e in Europa",
+        dipartimento: true,
+        descrizione: "L'8 settembre, i partigiani e il CLN, le donne, la resistenza civile, le stragi, il 25 aprile; le resistenze europee. Nella programmazione di dipartimento è tra le conoscenze («Resistenza e formazione della Repubblica italiana»), non tra i moduli.",
+        indice: "Storia facile 3, M4 cap. 10 · Tablet p. 262",
+        link: "storia/terza/nazismo-guerra-fredda/resistenza.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "L'Europa divisa",
+        dipartimento: true,
+        descrizione: "La guerra fredda: cortina di ferro, NATO e Patto di Varsavia, Berlino e il muro, l'equilibrio del terrore, Ungheria e Praga, la corsa allo spazio. Con carta, testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M5 cap. 12 (La guerra fredda) · Tablet p. 271",
+        link: "storia/terza/nazismo-guerra-fredda/europa-divisa.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "Il crollo degli imperi coloniali",
+        dipartimento: true,
+        descrizione: "1945–1975: l'India di Gandhi, Vietnam e Algeria, l'anno dell'Africa, Bandung e i non allineati, le difficoltà dei nuovi Stati, l'apartheid. Con carta, testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M5 cap. 14 · Tablet p. 283",
+        link: "storia/terza/nazismo-guerra-fredda/decolonizzazione.html",
+        data: "2026-10-28",
+        attivita: []
+      }
     ]
   },
   {
@@ -1107,11 +1413,50 @@ const MODULI = [
     titolo: "Capire il mondo attuale",
     descrizione: "Secondo quadrimestre, in collegamento con Geografia, Scienze e Tecnologia.",
     lezioni: [
-      { titolo: "La nascita della Repubblica italiana", dipartimento: true, indice: "Storia facile 3, M5 cap. 13 · Tablet p. 278", attivita: [] },
-      { titolo: "La Ricostruzione e il miracolo economico", descrizione: "Lezione extra: capitolo di Storia facile e del Tablet che non è nella programmazione di dipartimento.", indice: "Storia facile 3, M5 cap. 13 · Tablet p. 278", attivita: [] },
-      { titolo: "I problemi del Medio Oriente", dipartimento: true, indice: "Storia facile 3, M5 cap. 16 · Tablet p. 289", attivita: [] },
-      { titolo: "Cambia la carta geografica dell'Europa", dipartimento: true, indice: "Storia facile 3, M5 capp. 15 e 17 · Tablet p. 271", attivita: [] },
-      { titolo: "Il mondo contemporaneo", dipartimento: true, indice: "Storia facile 3, M5 cap. 18 · Tablet p. 289", attivita: [] }
+      {
+        titolo: "La nascita della Repubblica italiana",
+        dipartimento: true,
+        descrizione: "1945–1948: il voto alle donne, il referendum del 2 giugno, l'Assemblea costituente e i principi della Costituzione, il trattato di pace e l'esodo, il 18 aprile 1948. Con carta, testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M5 cap. 13 · Tablet p. 278",
+        link: "storia/terza/mondo-attuale/nascita-repubblica.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "La Ricostruzione e il miracolo economico",
+        descrizione: "Lezione extra: capitolo di Storia facile e del Tablet che non è nella programmazione di dipartimento.",
+        indice: "Storia facile 3, M5 cap. 13 · Tablet p. 278",
+        link: "storia/terza/mondo-attuale/miracolo-economico.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "I problemi del Medio Oriente",
+        dipartimento: true,
+        descrizione: "Dalla fine dell'Impero ottomano a oggi: la nascita di Israele e la questione palestinese, petrolio e religioni, le guerre fino al 2026. Con carta, testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M5 cap. 16 · Tablet p. 289",
+        link: "storia/terza/mondo-attuale/medio-oriente.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "Cambia la carta geografica dell'Europa",
+        dipartimento: true,
+        descrizione: "Dal 1989 a oggi: la caduta del muro, la fine dell'URSS, le guerre jugoslave, l'Unione europea e il suo allargamento, la guerra in Ucraina. Con carta, testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M5 capp. 15 e 17 · Tablet p. 271",
+        link: "storia/terza/mondo-attuale/carta-europa.html",
+        data: "2026-10-28",
+        attivita: []
+      },
+      {
+        titolo: "Il mondo contemporaneo",
+        dipartimento: true,
+        descrizione: "Globalizzazione, rivoluzione digitale, nuove potenze, terrorismo, migrazioni, clima e pandemia: le sfide del nostro tempo. Con carta, testo su due livelli e Studiamo le fonti (La Stampa).",
+        indice: "Storia facile 3, M5 cap. 18 · Tablet p. 289",
+        link: "storia/terza/mondo-attuale/mondo-contemporaneo.html",
+        data: "2026-10-28",
+        attivita: []
+      }
     ]
   }
 ];

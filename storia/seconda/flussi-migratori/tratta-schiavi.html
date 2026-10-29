@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La tratta degli schiavi</title>
+<style>
+:root{
+  --sfondo:#f3f3ef; --carta:#ffffff; --tenue-bg:#eaf1f2; --ink:#23262a; --tenue:#5a6066; --filo:#dfe2dd;
+  --accento:#2b5f6b; --accento-2:#1f4a54; --accento-soft:#e1edef;
+  --causa:#8a5a12; --causa-bg:#f8eedb; --evento:#2b5f6b; --evento-bg:#e1edef; --effetto:#6b3f74; --effetto-bg:#f1e6f3;
+  --ombra:#7a3b2e; --ombra-bg:#f7e7e2;
+  --mare:#d7e8ee; --terra:#f4efe2; --ok:#1f7a4d; --ok-bg:#dcf2e6; --no:#b42318; --no-bg:#fde3e1;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --surface:var(--carta); --line:var(--filo); --soft:var(--tenue-bg); --paper:var(--tenue-bg); --accent:var(--accento); --accent-ink:#fff; --muted:var(--tenue); --card:var(--carta);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#f3f3ef;background:var(--sfondo);color:#23262a;color:var(--ink);font:1.08rem/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:1.08rem/1.65 var(--sans)}
+a{color:#2b5f6b;color:var(--accento)}
+a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.salta{position:absolute;left:1rem;top:-6rem;background:#ffffff;background:var(--carta);padding:.8rem 1rem;z-index:20}.salta:focus{top:1rem}
+.foglio{max-width:1280px;margin:32px auto;background:#ffffff;background:var(--carta);border:1px solid #dfe2dd;border:1px solid var(--filo)}
+header.testata{padding:22px 52px 26px;border-top:9px solid #2b5f6b;border-top:9px solid var(--accento);background:#eaf1f2;background:var(--tenue-bg)}
+.indietro{display:inline-block;font-size:.92rem;margin-bottom:18px;text-decoration:none;border-bottom:1px solid currentColor}
+.eyebrow{margin:0 0 6px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:#5a6066;color:var(--tenue);font-weight:700}
+.capitolo{margin:0;font-weight:700;color:#2b5f6b;color:var(--accento)}
+h1{font:700 2.6rem/1.08 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2.6rem/1.08 var(--serif);font-size:clamp(2.1rem,6vw,3.5rem);margin:6px 0 10px}
+.sottotitolo{margin:0;font:italic 1.25rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.25rem/1.4 var(--serif);color:#5a6066;color:var(--tenue)}
+.corpo-lezione{display:grid;grid-template-columns:268px minmax(0,1fr);align-items:start}
+nav.indice{position:-webkit-sticky;position:sticky;top:12px;align-self:start;display:grid;grid-template-columns:minmax(0,1fr);grid-gap:10px;gap:10px;padding:30px 0 24px 28px;max-height:calc(100vh - 24px);overflow-y:auto}
+.indice-titolo{margin:0 0 2px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue)}
+a.voce{display:flex;align-items:center;min-height:54px;padding:4px 12px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;text-decoration:none;font:800 .86rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .86rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em;transition:transform .15s,box-shadow .15s}
+a.voce .tondo{margin-right:10px;flex:none;width:46px;height:46px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+a.voce svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+a.voce:hover{transform:translateX(4px)}
+a.voce[aria-current="true"]{transform:translateX(8px);box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+a.voce:focus-visible{outline:3px solid #23262a;outline:3px solid var(--ink);outline-offset:3px}
+main{padding:10px 52px 40px 40px;min-width:0}
+.fascia{display:flex;align-items:center;margin:28px 0 12px;min-height:50px;padding:4px 16px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;font:800 .95rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .95rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.fascia .tondo{margin-right:10px;flex:none;width:42px;height:42px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+.fascia svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+section.parte{padding:34px 0 8px;border-bottom:1px solid #dfe2dd;border-bottom:1px solid var(--filo);scroll-margin-top:56px}
+section.parte:last-of-type{border-bottom:0}
+h2{font:700 2rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2rem/1.2 var(--serif);margin:0 0 6px}
+.etichetta{display:inline-block;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#2b5f6b;color:var(--accento);margin:0 0 4px}
+.guida{margin:0 0 22px;color:#5a6066;color:var(--tenue);font-size:.98rem;max-width:72ch}
+h3{font:700 1.08rem/1.3 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 1.08rem/1.3 var(--sans);text-transform:uppercase;letter-spacing:.05em;color:#2b5f6b;color:var(--accento);margin:26px 0 12px}
+h3 span{border-bottom:3px dotted #2b5f6b;border-bottom:3px dotted var(--accento);padding-bottom:4px}
+p{margin:0 0 14px}
+.lettura{max-width:74ch}
+.mestiere{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:-4px 0 16px}
+
+/* prima / dopo */
+.primadopo{display:grid;grid-template-columns:1fr auto 1fr;grid-gap:16px;gap:16px;align-items:stretch;margin:6px 0 10px}
+.pd{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:18px 20px;background:#ffffff;background:var(--carta)}
+.pd h3{margin-top:0}
+.pd.ora{background:#e1edef;background:var(--accento-soft);border-color:transparent}
+.freccia{align-self:center;font:700 1.8rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.8rem var(--serif);color:#2b5f6b;color:var(--accento)}
+.pd .link-lez{font-size:.92rem;margin:0}
+.pd-centro{grid-column:1/-1;text-align:center;font:700 1.15rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem/1.4 var(--serif);background:#2b5f6b;background:var(--accento);color:#fff;border-radius:12px;padding:12px 18px;margin:0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pd-centro{color:#0f1416}}
+:root[data-theme="dark"] .pd-centro{color:#0f1416}
+
+/* idea principale */
+.mappa-box{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;margin:16px 0 8px}
+#mappa{display:block;width:100%;height:auto;background:#d7e8ee;background:var(--mare)}
+#mappa .mare{fill:#d7e8ee;fill:var(--mare)}
+#mappa .terra{fill:#f4efe2;fill:var(--terra);stroke:#f4efe2;stroke:var(--terra);stroke-width:1.2;stroke-linejoin:round}
+#mappa .segno{cursor:pointer}
+#mappa .segno circle{fill:#2b5f6b;fill:var(--accento);stroke:#ffffff;stroke:var(--carta);stroke-width:3}
+#mappa .segno text{font:700 17px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 17px var(--sans);fill:#23262a;fill:var(--ink);paint-order:stroke;stroke:#f4efe2;stroke:var(--terra);stroke-width:5px;stroke-linejoin:round}
+#mappa .segno.scelto circle{fill:#d9822b}
+#mappa .segno:focus{outline:none}#mappa .segno:focus-visible circle{stroke:#23262a;stroke:var(--ink);stroke-width:4}
+.mappa-info{margin:0;padding:12px 14px;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);font-size:.98rem;min-height:3.2em}
+.mappa-info strong{color:#2b5f6b;color:var(--accento)}
+.mappa-nota{font-size:.88rem;color:#5a6066;color:var(--tenue);padding:10px 14px;margin:0;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo)}
+.luoghi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));grid-gap:10px;gap:10px;margin:12px 0 0;padding:0;list-style:none}
+.luoghi li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 12px;font-size:.95rem}
+.luoghi button{all:unset;cursor:pointer;font-weight:700;color:#2b5f6b;color:var(--accento)}
+.luoghi button:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.linea{position:relative;margin:8px 0 0;padding:0 0 0 30px;list-style:none}
+.linea::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:3px;background:#2b5f6b;background:var(--accento);border-radius:2px}
+.linea li{position:relative;margin:0 0 12px}
+.linea li::before{content:"";position:absolute;left:-26px;top:.45em;width:13px;height:13px;border-radius:50%;background:#ffffff;background:var(--carta);border:3px solid #2b5f6b;border:3px solid var(--accento)}
+.linea li.estremo::before{background:#2b5f6b;background:var(--accento)}
+.linea .anno{font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);color:#2b5f6b;color:var(--accento);margin-right:8px}
+.linea .pista{display:inline-block;max-width:100%;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;padding:1px 8px;margin-left:6px;color:#5a6066;color:var(--tenue);white-space:nowrap}
+.persone{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-gap:14px;gap:14px}
+.persona{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:54px 1fr;grid-gap:14px;gap:14px;align-items:start}
+.sigla{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#e1edef;background:var(--accento-soft);color:#2b5f6b;color:var(--accento);font:700 1.2rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem var(--serif)}
+.persona h4{margin:0;font:700 1.12rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.12rem/1.3 var(--serif)}
+.persona .date{font-size:.88rem;color:#5a6066;color:var(--tenue);display:block;margin-bottom:6px}
+.persona p{margin:0 0 6px;font-size:.97rem}
+.persona a{font-size:.9rem}
+
+/* perché */
+.catena{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;grid-gap:10px;gap:10px;align-items:stretch}
+.anello{border-radius:12px;padding:16px 18px}
+.anello h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.anello p{margin:0;font-size:.98rem}
+.anello.causa{background:#f8eedb;background:var(--causa-bg)}.anello.causa h4{color:#8a5a12;color:var(--causa)}
+.anello.evento{background:#e1edef;background:var(--evento-bg)}.anello.evento h4{color:#2b5f6b;color:var(--evento)}
+.anello.effetto{background:#f1e6f3;background:var(--effetto-bg)}.anello.effetto h4{color:#6b3f74;color:var(--effetto)}
+.catena .freccia{font-size:1.5rem}
+.ombra{margin:16px 0 0;background:#f7e7e2;background:var(--ombra-bg);border-left:5px solid #7a3b2e;border-left:5px solid var(--ombra);border-radius:0 12px 12px 0;padding:14px 18px}
+.ombra h4{margin:0 0 6px;color:#7a3b2e;color:var(--ombra);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.ombra p{margin:0}
+.ricorda{margin:18px 0 0;border:2px dashed #dfe2dd;border:2px dashed var(--filo);border-radius:12px;padding:14px 18px}
+.ricorda h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+.ricorda dl{margin:0;display:grid;grid-template-columns:max-content 1fr;grid-gap:6px 14px;gap:6px 14px}
+.ricorda dt{font-weight:700}.ricorda dd{margin:0}
+
+/* concetti e come */
+.concetto{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);padding:18px 22px;margin:0 0 16px;scroll-margin-top:60px}
+.concetto h4{font:700 1.3rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.3rem/1.3 var(--serif);margin:0 0 10px}
+.concetto p:last-child{margin-bottom:0}
+.come{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-gap:12px;gap:12px;margin-top:10px}
+.colonna{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:0;overflow:hidden}
+.colonna h4{margin:0;padding:10px 14px;background:#2b5f6b;background:var(--accento);color:#fff;font-size:1rem}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .colonna h4{color:#0f1416}}
+:root[data-theme="dark"] .colonna h4{color:#0f1416}
+.colonna ul{margin:0;padding:12px 14px 12px 30px;font-size:.95rem}
+.colonna li{margin:0 0 6px}
+.radice{text-align:center;font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:999px;padding:8px 16px;max-width:520px;margin:4px auto 10px}
+
+/* parole chiave */
+.parole{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));grid-gap:12px;gap:12px;margin:0;padding:0}
+.parola{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px;scroll-margin-top:60px}
+.parola dt{font:700 1.1rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.1rem var(--serif);color:#2b5f6b;color:var(--accento);margin-bottom:4px}
+.parola dd{margin:0;font-size:.97rem}
+a.pk{color:inherit;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted #2b5f6b;text-decoration:underline dotted var(--accento);text-underline-offset:4px;text-decoration-thickness:2px}
+a.pk:hover{background:#e1edef;background:var(--accento-soft)}
+:target{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:4px}
+
+/* testi */
+.livelli{display:inline-flex;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;overflow:hidden;margin:0 0 18px}
+.livelli button{font:inherit;font-size:.95rem;border:0;background:transparent;color:#23262a;color:var(--ink);padding:7px 16px;cursor:pointer}
+.livelli button[aria-pressed="true"]{background:#2b5f6b;background:var(--accento);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .livelli button[aria-pressed="true"]{color:#0f1416}}
+:root[data-theme="dark"] .livelli button[aria-pressed="true"]{color:#0f1416}
+.paragrafo{margin:0 0 22px;max-width:74ch}
+.paragrafo h4{font:700 1.2rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem/1.3 var(--serif);margin:0 0 6px}
+.paragrafo h4 .n{color:#2b5f6b;color:var(--accento);margin-right:6px}
+.essenziale .paragrafo p{font-size:1.12rem;line-height:1.75}
+
+/* lente */
+.lente{border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:14px;overflow:hidden}
+.lente-testa{background:#2b5f6b;background:var(--accento);color:#fff;padding:16px 22px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lente-testa{color:#0f1416}}
+:root[data-theme="dark"] .lente-testa{color:#0f1416}
+.lente-testa .testata-giornale{margin:0;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.lente-testa h3{margin:4px 0 0;color:inherit;font:700 1.6rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.6rem/1.2 var(--serif);text-transform:none;letter-spacing:0}
+.lente-corpo{padding:18px 22px}
+.domanda-guida{font:italic 1.2rem/1.5 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.2rem/1.5 var(--serif);border-left:4px solid #2b5f6b;border-left:4px solid var(--accento);padding:4px 0 4px 14px;margin:0 0 18px}
+.fasi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-gap:14px;gap:14px}
+.fase{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px}
+.fase h4{margin:0 0 8px;font-size:1rem}
+.fase ol,.fase ul{margin:0;padding-left:20px;font-size:.96rem}
+.fase li{margin:0 0 6px}
+.bottone{display:inline-block;font:inherit;font-weight:700;border-radius:999px;padding:9px 18px;border:2px solid #2b5f6b;border:2px solid var(--accento);background:#2b5f6b;background:var(--accento);color:#fff;text-decoration:none;cursor:pointer}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bottone{color:#0f1416}}
+:root[data-theme="dark"] .bottone{color:#0f1416}
+.bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+:root .bottone.secondario,:root:not([data-theme="light"]) .bottone.secondario,:root[data-theme="dark"] .bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+.bottone[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.altre-fonti{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-gap:8px;gap:8px}
+.altre-fonti li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 14px;font-size:.96rem}
+.altre-fonti .tipo{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue);display:block}
+
+/* compiti */
+.attivita{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:14px;padding:18px 22px;margin:0 0 18px}
+.attivita h4{margin:0 0 4px;font:700 1.25rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.25rem/1.3 var(--serif)}
+.attivita .meta{font-size:.86rem;color:#5a6066;color:var(--tenue);margin:0 0 12px}
+.consegna{margin:0 0 12px}
+table.esercizio{width:100%;border-collapse:collapse;font-size:.97rem}
+table.esercizio td{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:8px 6px;vertical-align:middle}
+table.esercizio td:first-child{width:52%}
+table.esercizio select{font:inherit;font-size:.95rem;width:100%;max-width:100%;padding:5px 6px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:6px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+td.esito{width:34px;text-align:center;font-weight:700}
+tr.ok td.esito{color:#1f7a4d;color:var(--ok)} tr.no td.esito{color:#b42318;color:var(--no)}
+tr.ok{background:#dcf2e6;background:var(--ok-bg)} tr.no{background:#fde3e1;background:var(--no-bg)}
+.spiega{display:block;font-size:.88rem;color:#5a6066;color:var(--tenue);margin-top:4px}
+.comandi{display:flex;flex-wrap:wrap;align-items:center;margin:14px 0 0}
+.comandi>*{margin:0 10px 8px 0}
+.punteggio{font-weight:700}
+textarea{font:inherit;width:100%;min-height:84px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:8px;padding:8px 10px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+.dibattito{margin:14px 0 0;background:#eaf1f2;background:var(--tenue-bg);border-radius:10px;padding:10px 14px;font-size:.95rem}
+.dibattito b{color:#2b5f6b;color:var(--accento)}
+
+footer{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:18px 52px;font-size:.86rem;color:#5a6066;color:var(--tenue)}
+footer p{margin:0 0 6px}
+
+@media (max-width:960px){
+  html{scroll-padding-bottom:84px}
+  .corpo-lezione{display:block}
+  nav.indice{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:90;grid-auto-flow:column;grid-auto-columns:max-content;grid-template-columns:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;max-height:none;grid-gap:8px;gap:8px;padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));background:#ffffff;background:var(--carta);border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);box-shadow:0 -4px 14px rgba(0,0,0,.12)}
+  .foglio{margin-bottom:70px}
+  .indice-titolo{display:none}
+  a.voce{flex:none;min-height:40px;padding:3px 12px 3px 3px;font-size:.74rem;white-space:nowrap}
+  a.voce .tondo{width:34px;height:34px;border-width:2px}
+  a.voce svg{width:18px;height:18px}
+  a.voce:hover,a.voce[aria-current="true"]{transform:none}
+  a.voce[aria-current="true"]{box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+  main{padding:10px 40px 40px}
+}
+@media (max-width:860px){
+  .come{grid-template-columns:1fr 1fr}
+  .fasi{grid-template-columns:1fr}
+  .catena{grid-template-columns:1fr}
+  .catena .freccia{transform:rotate(90deg);justify-self:center;line-height:1}
+}
+@media (max-width:700px){
+  .foglio{margin:0;border:0}
+  header.testata{padding:16px 16px 20px}
+  main{padding:4px 16px 28px}
+  footer{padding:16px}
+  .primadopo{grid-template-columns:1fr}
+  .primadopo .freccia{transform:rotate(90deg);justify-self:center}
+  .come{grid-template-columns:1fr}
+  #mappa .segno text{font-size:30px}
+  .ricorda dl{grid-template-columns:1fr}
+  .ricorda dd{margin-bottom:6px}
+  table.esercizio td{display:block;width:100%!important;border-top:0;padding:4px 6px}
+  table.esercizio tr{display:block;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:6px 0}
+  td.esito{text-align:left}
+}
+@media print{
+  body{background:#fff}.foglio{border:0;margin:0}nav.indice,.indietro,.comandi,.livelli,.mappa-box{display:none}
+  .essenziale-solo{display:none}section.parte{break-inside:avoid-page}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#mappa.mondo .segno text{font-size:14px;stroke-width:4px}
+@media (max-width:700px){#mappa.mondo .segno text{font-size:26px;stroke-width:5px}}
+
+.animata{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);border-radius:12px;padding:14px 16px;margin:16px 0 0;background:#ffffff;background:var(--carta)}
+.animata h4{margin:0 0 6px;font-size:1.02rem}
+.animata p{margin:0 0 8px}
+.animata ul{margin:8px 0 0;padding:0;list-style:none}
+.animata li{margin:0 0 8px;padding-left:24px;position:relative}
+.animata li:before{content:"\25B6";position:absolute;left:2px;top:0;color:#2b5f6b;color:var(--accento);font-size:.85em}
+.animata h5{margin:10px 0 2px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+.animata .nota-video{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:6px 0 0}
+@media print{.animata{display:none}}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<div class="foglio">
+<header class="testata">
+  <a class="indietro" href="../../index.html">← Torna a Storia: tutti i moduli</a>
+  <p class="eyebrow">Storia · Flussi migratori</p>
+  <p class="capitolo">Lezione 4</p>
+  <h1>La tratta degli schiavi</h1>
+  <p class="sottotitolo">XVI–XIX secolo: milioni di africani deportati in America</p>
+</header>
+<div class="corpo-lezione">
+<nav class="indice" aria-label="Parti della lezione">
+  <p class="indice-titolo">In questa lezione</p>
+  <a class="voce" href="#prima-dopo" style="--c:#3a6ea5"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l3 3-3 3"/><path d="M4 7h13"/><path d="M10 14l-3 3 3 3"/><path d="M20 17H7"/></svg></span><span class="nome">Prima / Dopo</span></a>
+  <a class="voce" href="#idea" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">Idea principale</span></a>
+  <a class="voce" href="#testi" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">Testo sintetico / essenziale</span></a>
+  <a class="voce" href="#perche" style="--c:#b25510"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .9-1 1.6v.6"/><circle cx="12" cy="17" r=".7" fill="currentColor"/></svg></span><span class="nome">Perché?</span></a>
+  <a class="voce" href="#concetti" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4"/><path d="M10.5 12.5L19 4M15.5 7.5l3 3M13 10l2 2"/></svg></span><span class="nome">Concetti fondamentali</span></a>
+  <a class="voce" href="#come" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="4.5" rx="1"/><rect x="3" y="15" width="6" height="5" rx="1"/><rect x="15" y="15" width="6" height="5" rx="1"/><path d="M12 7v4M6 15v-4h12v4"/></svg></span><span class="nome">Come?</span></a>
+  <a class="voce" href="#parole" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">Parole chiave</span></a>
+  <a class="voce" href="#lente" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M20 20l-5.2-5.2"/></svg></span><span class="nome">Studiamo le fonti</span></a>
+  <a class="voce" href="#compiti" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="nome">Ripassiamo</span></a>
+</nav>
+
+<main id="contenuto">
+
+<!-- ======================= PRIMA / DOPO ======================= -->
+<section class="parte" id="prima-dopo" aria-labelledby="t-pd">
+  <p class="etichetta">Per orientarsi</p>
+  <h2 id="t-pd">Prima e dopo</h2>
+  <p class="guida">È la più grande migrazione forzata della storia: per oltre tre secoli più di dodici milioni di donne, uomini e bambini africani vengono caricati sulle navi e portati in America come schiavi.</p>
+  <div class="primadopo">
+    <div class="pd">
+      <h3><span>Prima</span></h3>
+      <p>Dopo la conquista, in America le popolazioni indigene diminuiscono drasticamente per le malattie e il lavoro forzato. I coloni europei vogliono coltivare zucchero, tabacco e cotone nelle piantagioni e hanno bisogno di moltissima manodopera.</p>
+      <p class="link-lez">Ripassa: <a href="conquistadores.html">L'età dei conquistadores</a> · <a href="civilta-precolombiane.html">Le civiltà precolombiane</a></p>
+    </div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="pd">
+      <h3><span>Dopo</span></h3>
+      <p>Nell'Ottocento la tratta e poi la schiavitù vengono abolite, Paese dopo Paese. Ma il razzismo nato per giustificarle lascia tracce profonde fino a oggi.</p>
+      <p class="link-lez">Più avanti: <a href="../sistemi-produzione/sistema-mondiale.html">Il sistema mondiale nei secoli XVII e XVIII</a> · <a href="../sistemi-produzione/imperi-coloniali.html">Gli imperi coloniali</a></p>
+    </div>
+    <p class="pd-centro">1501 → la tratta atlantica → 1866</p>
+  </div>
+</section>
+
+<!-- ======================= IDEA PRINCIPALE ======================= -->
+<section class="parte" id="idea" aria-labelledby="t-idea">
+  <p class="etichetta">Idea principale</p>
+  <h2 id="t-idea">Che cosa, dove, quando, chi</h2>
+  <p class="guida">Prima di studiare i dettagli, guarda l'argomento dall'alto: che cosa succede e dove, in che anni, chi sono i protagonisti.</p>
+
+  <h3 id="dove"><span>1. Dove? Che cosa?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 🗺️ Collocare nello spazio</p>
+  <div class="lettura">
+    <p>La <a class="pk" href="#p-tratta">tratta</a> atlantica collega tre continenti. Navi partono dai porti europei, come <strong>Liverpool</strong>, Nantes o Lisbona, cariche di tessuti, armi, alcolici. Sulla costa dell'Africa occidentale, in luoghi come l'isola di <strong>Gorée</strong> o il castello di <strong>Elmina</strong>, e più a sud a <strong>Luanda</strong>, queste merci vengono scambiate con prigionieri africani.</p>
+    <p>I prigionieri attraversano l'oceano ammassati nelle stive, in condizioni terribili: è la «traversata di mezzo». Chi sopravvive viene venduto nei porti americani, come <strong>Salvador de Bahia</strong> in Brasile, <strong>Kingston</strong> in Giamaica o <strong>Charleston</strong> in Nord America, e costretto a lavorare nelle <a class="pk" href="#p-piantagione">piantagioni</a> e nelle miniere.</p>
+    <p>Le navi tornano in Europa cariche di zucchero, caffè, tabacco, cotone prodotti dagli schiavi. È il <a class="pk" href="#p-triangolare">commercio triangolare</a>, che arricchisce mercanti, porti e banche europee.</p>
+  </div>
+  <div class="mappa-box">
+    <svg id="mappa" class="mondo" viewBox="0 0 900 684" role="img" aria-labelledby="mappa-titolo"><title id="mappa-titolo">Carta dell'Oceano Atlantico con i luoghi della tratta degli schiavi</title><rect x="0" y="0" width="900" height="684" class="mare"/><path class="terra" d="M966.3,429.7L962.9,438.5L963.4,442.6L968.0,445.3L968.2,447.1L966.2,451.5L966.6,453.7L966.2,457.1L968.7,461.6L971.7,468.7L974.3,470.3L975.4,473.5L975.1,480.7L976.0,487.0L976.3,498.3L977.6,501.8L975.4,506.9L972.6,511.9L968.0,516.4L961.5,519.1L953.4,522.6L945.2,530.4L942.5,531.7L937.4,536.8L934.5,538.4L933.9,543.6L937.3,549.0L938.7,553.2L938.8,555.4L940.1,555.1L939.8,562.1L938.7,565.5L940.4,566.7L939.3,569.7L936.3,572.2L930.4,574.7L921.7,578.6L918.5,581.2L919.2,584.3L921.0,584.8L920.4,588.5L918.6,593.8L917.7,599.8L915.9,603.0L910.9,606.7L909.5,607.7L906.5,611.4L904.5,615.0L900.4,620.2L892.3,627.6L887.2,632.0L881.7,635.2L874.2,638.0L870.6,638.4L869.6,640.4L865.2,639.3L861.7,640.7L853.9,639.3L849.5,640.2L846.5,639.8L839.1,642.7L833.0,643.8L828.5,646.5L825.2,646.7L822.2,644.1L819.8,644.0L816.6,640.8L816.3,641.8L815.4,639.8L815.4,635.6L813.1,630.8L815.4,629.5L815.2,624.0L810.5,617.2L806.9,611.1L806.8,611.1L801.7,601.8L796.3,596.3L793.5,591.1L791.9,584.0L790.2,578.8L787.7,567.7L787.6,559.1L786.7,555.2L783.9,552.2L780.1,546.3L776.3,537.7L774.8,533.1L768.9,526.1L768.5,520.6L767.8,516.0L768.8,509.7L771.3,503.1L771.7,500.0L774.0,493.5L775.7,490.6L779.8,485.9L782.2,482.7L782.9,477.3L782.5,473.3L780.4,470.7L778.5,466.3L776.7,462.0L777.1,460.5L779.3,457.6L777.1,450.7L775.6,445.9L772.0,441.3L772.7,439.9L771.7,437.7L769.8,432.3L763.9,424.6L756.5,417.4L751.7,411.4L747.3,404.0L747.6,401.6L749.2,399.3L750.9,394.1L752.3,388.7L751.0,387.6L753.5,379.6L754.5,373.9L751.7,369.1L748.4,367.9L747.0,364.7L745.1,363.6L745.2,361.6L737.7,364.2L735.0,363.9L732.2,365.5L726.5,365.3L722.6,360.8L720.2,355.6L715.1,350.9L709.7,350.9L703.4,350.9L697.4,351.8L691.6,353.3L680.3,357.5L676.3,360.0L669.9,362.1L663.4,360.0L660.2,360.1L655.1,358.7L650.5,358.8L642.0,360.0L637.0,362.1L629.9,364.8L628.5,364.6L626.6,364.6L619.2,361.2L612.6,355.7L606.5,351.8L601.6,347.1L599.7,346.6L594.5,343.7L590.8,339.9L589.5,337.2L588.6,331.9L585.5,327.6L582.7,324.8L580.8,323.9L579.0,322.5L578.2,319.3L577.1,317.7L575.1,316.5L571.2,313.5L568.2,313.0L566.5,311.0L566.6,309.9L564.4,308.4L563.9,306.8L562.7,301.3L563.7,298.1L560.7,292.5L557.1,289.9L560.3,288.6L563.7,283.5L565.5,279.8L564.8,275.9L566.9,272.4L567.7,265.6L567.0,258.5L566.1,254.9L566.8,251.3L564.9,247.9L561.2,244.8L561.5,241.8L561.8,238.4L564.5,236.5L566.9,232.7L566.4,230.3L568.9,225.2L572.9,220.6L575.4,219.5L577.3,215.3L577.4,211.4L580.0,207.0L584.8,204.3L589.4,197.0L589.5,196.9L593.1,194.1L599.8,193.3L605.5,188.4L609.1,186.5L615.1,180.5L613.3,171.5L616.1,165.3L617.0,161.5L621.7,156.7L628.9,153.4L634.2,150.4L639.0,142.9L641.3,138.5L646.6,138.6L650.9,141.6L657.8,141.1L665.2,142.7L668.4,142.8L675.3,138.9L683.1,137.6L687.6,134.6L694.6,132.4L706.8,131.2L718.7,130.6L722.3,131.6L729.1,128.8L736.8,128.7L739.7,130.4L744.6,130.0L752.5,127.1L757.5,127.9L757.3,131.6L763.4,128.9L763.9,130.3L760.3,133.9L760.3,137.2L762.8,139.0L761.8,145.2L757.1,148.8L758.5,152.7L762.2,152.9L764.0,156.3L766.7,157.4L775.2,159.9L778.2,159.3L784.2,160.5L793.8,163.7L797.1,170.1L803.6,171.5L813.7,174.5L821.4,178.1L824.9,176.2L828.4,172.9L826.7,167.4L829.0,163.9L834.1,160.5L839.1,159.5L848.8,161.0L851.3,164.2L854.0,164.2L856.3,165.5L863.4,166.3L865.2,168.7L874.8,168.6L881.7,170.5L888.8,172.6L892.2,173.7L897.7,171.4L900.7,169.4L907.0,168.8L912.2,169.7L914.1,173.3L915.8,170.9L921.5,172.6L927.2,173.0L930.7,171.2L932.8,168.9L932.3,168.4L934.2,165.1L935.7,159.6L936.7,157.8L936.9,157.8L939.5,151.9L943.1,146.8L943.2,146.6L942.5,141.0L944.3,138.1L941.6,134.8L944.4,132.1L940.0,132.7L933.9,131.1L929.0,135.2L918.1,136.0L912.2,132.2L904.5,131.9L902.8,134.9L897.8,135.8L890.9,131.9L883.0,132.1L878.8,124.9L873.5,120.9L877.0,115.3L872.4,111.9L880.4,105.0L891.5,104.7L894.5,99.2L908.2,100.2L916.9,95.5L925.3,93.5L937.2,93.3L949.8,98.4L960.1,101.2L968.5,100.1L974.7,100.7L983.2,96.9L984.3,93.9L982.5,89.0L978.3,86.3L974.3,85.5L971.7,83.3L962.5,77.2L954.3,74.5L948.1,70.2L953.3,69.1L959.3,63.1L955.2,60.2L965.9,57.3L965.7,55.7L959.2,56.9L953.5,57.4L948.7,59.8L941.9,60.2L935.7,62.8L936.1,66.7L936.1,67.3L939.7,69.0L947.0,68.6L945.6,71.2L937.7,72.4L927.9,76.6L924.0,75.1L925.5,71.8L917.7,69.6L919.0,68.3L925.8,65.9L924.7,65.0L923.7,64.2L912.6,62.4L912.1,59.7L905.4,60.6L902.7,64.6L897.2,69.9L897.3,71.7L893.8,73.3L891.6,72.6L889.6,81.3L885.9,84.3L883.3,89.4L885.6,93.5L886.4,96.3L892.7,98.6L891.4,100.4L882.8,100.8L879.8,103.0L873.8,106.9L871.5,103.5L871.6,102.1L867.2,101.9L863.5,101.2L854.7,103.1L859.7,107.1L856.1,108.3L852.1,108.3L848.3,104.6L846.9,106.2L848.5,110.5L852.1,113.8L849.4,115.4L853.4,118.7L857.0,120.8L857.1,124.9L850.4,123.0L852.5,126.7L848.0,127.4L850.7,133.8L845.9,133.9L840.0,130.7L837.3,125.0L836.1,120.2L833.3,116.9L829.6,112.7L829.1,110.7L827.8,110.2L827.7,108.6L823.7,106.2L823.1,102.8L823.7,97.9L824.7,95.6L823.5,94.5L822.0,93.9L819.9,91.6L816.8,90.1L810.1,87.5L805.9,84.9L799.3,82.7L793.3,77.5L794.7,76.9L791.4,73.9L791.3,71.4L786.7,70.3L784.5,73.4L782.3,71.0L782.5,68.5L782.7,68.4L784.4,67.7L778.6,66.7L772.8,69.3L773.2,72.8L772.3,74.9L774.6,78.5L781.4,82.2L785.0,88.1L793.0,93.9L798.7,93.9L800.4,95.5L798.4,96.9L804.9,99.5L810.1,101.7L816.3,105.4L817.1,106.8L815.7,109.4L811.7,106.0L805.4,104.8L802.4,109.5L807.6,112.1L806.8,115.9L803.8,116.3L799.9,122.5L796.9,123.1L796.9,120.9L798.4,117.0L800.0,115.5L797.2,111.3L795.0,107.7L792.0,106.8L789.9,103.6L785.2,102.3L782.1,99.4L776.8,99.0L771.2,95.7L764.6,91.0L759.7,86.9L757.4,79.8L753.9,78.9L748.0,76.6L744.7,77.5L740.5,80.9L737.5,81.4L731.0,85.5L716.8,83.5L706.3,85.9L705.5,90.2L705.9,94.4L699.1,99.2L689.8,100.7L689.2,103.1L684.8,107.1L682.0,113.0L684.8,117.1L680.6,120.3L679.1,125.0L673.6,126.4L668.5,131.9L659.4,132.1L652.5,131.9L648.0,134.5L645.3,137.2L641.8,136.6L639.1,134.2L637.0,130.0L630.3,128.9L627.4,130.8L623.6,129.7L619.9,130.5L621.0,124.9L620.4,120.5L617.1,119.8L615.4,117.1L616.0,112.4L618.8,109.8L619.4,106.8L620.9,102.5L620.7,99.5L619.3,96.9L619.0,94.5L619.3,89.3L616.4,86.2L626.5,81.0L635.4,82.3L645.0,82.3L652.7,83.5L658.7,83.1L670.3,83.4L674.0,79.0L675.4,64.7L668.0,57.1L662.7,53.5L651.7,50.7L650.9,45.5L660.3,43.9L672.3,45.8L670.1,37.6L676.9,40.7L693.6,35.1L695.8,29.2L702.1,27.7L707.9,26.3L711.6,24.3L717.9,13.7L727.7,10.7L733.7,10.9L735.1,9.4L741.1,9.0L742.5,10.6L747.4,7.1L745.7,4.3L745.4,0.3L742.5,-3.7L742.3,-11.1L743.4,-13.0L745.5,-15.2L751.8,-15.6L754.4,-17.6L760.2,-19.7L759.9,-16.0L757.8,-13.6L758.7,-11.6L762.6,-10.5L760.8,-7.8L758.7,-8.6L753.5,-3.4L755.4,0.1L755.6,2.9L762.8,4.6L762.8,7.1L770.1,5.8L774.1,3.8L782.3,6.7L785.7,9.0L790.6,6.8L801.8,3.5L810.9,1.1L818.1,2.3L818.6,4.0L825.6,4.1L827.2,1.0L837.1,-1.4L835.6,-7.4L835.9,-12.8L839.4,-17.4L846.2,-19.8L851.9,-14.4L857.7,-14.6L859.1,-20.1L859.9,-24.4L857.2,-23.4L852.7,-26.0L852.1,-30.2L861.2,-32.1L870.2,-33.2L878.0,-32.0L885.5,-32.2L893.7,-36.2L886.1,-39.6L873.0,-39.0L860.4,-36.4L848.7,-34.9L844.5,-38.8L837.5,-41.2L839.1,-48.3L835.6,-54.8L839.1,-59.0L845.6,-63.5L862.1,-71.3L866.9,-72.8L866.1,-75.9L856.1,-79.3L843.7,-77.2L836.7,-72.2L837.8,-67.8L826.4,-62.0L812.5,-55.8L807.3,-45.7L812.4,-40.6L819.3,-36.6L812.7,-28.5L805.2,-26.8L802.4,-14.7L798.3,-7.9L789.6,-8.6L785.5,-2.9L777.2,-2.6L774.9,-9.4L768.9,-17.6L763.4,-27.8L758.6,-32.2L744.4,-23.9L734.7,-22.2L724.8,-25.8L722.2,-33.6L719.9,-50.2L726.6,-54.8L745.6,-60.9L759.8,-68.3L773.0,-78.3L790.3,-92.2L802.3,-97.7L822.1,-106.7L837.9,-109.8L849.8,-109.5L860.7,-115.4L873.9,-115.1L886.8,-116.5L909.3,-111.3L900.0,-109.3L907.9,-104.8L915.4,-107.3L927.2,-103.0L946.9,-101.3L974.1,-93.1L979.6,-89.7L980.1,-84.9L972.1,-81.1L960.3,-79.2L928.2,-84.7L922.9,-83.8L934.7,-78.5L935.1,-75.1L935.6,-67.8L944.9,-65.6L950.5,-63.7L951.4,-67.2L947.1,-70.3L951.7,-73.0L969.1,-68.6L975.1,-70.3L970.3,-75.6L987.1,-82.6L993.7,-82.2L1000.4,-79.7L1004.6,-84.6L998.6,-88.9L1002.2,-93.2L996.9,-97.7L1017.0,-95.4L1021.1,-91.4L1012.0,-90.5L1012.0,-86.5L1017.7,-84.0L1028.8,-85.6L1030.6,-90.2L1045.6,-93.6L1070.8,-99.8L1076.2,-99.4L1069.1,-95.0L1078.0,-94.3L1083.2,-96.8L1096.7,-97.0L1107.4,-99.9L1115.6,-95.6L1123.8,-100.4L1116.2,-104.5L1120.0,-106.9L1141.2,-104.7L1151.2,-102.5L1177.3,-94.3L1182.1,-98.0L1174.8,-101.8L1174.6,-103.4L1165.9,-104.1L1168.3,-107.5L1164.4,-113.1L1164.2,-115.4L1177.5,-121.9L1182.2,-128.5L1187.6,-129.9L1206.6,-128.0L1208.1,-124.0L1201.3,-118.1L1205.8,-115.8L1208.1,-110.8L1206.5,-101.0L1214.4,-96.5L1211.3,-91.7L1197.2,-81.5L1205.5,-80.4L1208.3,-83.0L1216.2,-84.9L1218.2,-88.5L1224.4,-91.9L1220.2,-96.0L1223.5,-100.7L1215.7,-101.3L1213.9,-105.3L1219.7,-112.5L1210.3,-118.4L1223.2,-123.3L1221.5,-128.4L1225.2,-128.6L1228.9,-124.6L1226.1,-117.6L1233.8,-116.3L1230.5,-121.5L1242.5,-124.3L1257.5,-124.7L1270.8,-120.6L1264.4,-126.6L1263.7,-134.3L1276.2,-135.7L1293.5,-135.4L1309.1,-136.3L1303.3,-140.1L1311.6,-144.8L1319.9,-145.0L1333.9,-148.6L1352.9,-149.6L1355.3,-151.5L1374.2,-152.2L1380.1,-150.6L1396.2,-154.4L1409.5,-154.3L1411.5,-157.4L1418.3,-160.5L1435.3,-163.4L1447.7,-161.1L1437.9,-159.3L1454.2,-158.2L1456.1,-154.7L1462.7,-156.4L1483.8,-156.3L1500.0,-152.8L1505.8,-150.1L1504.0,-146.4L1496.0,-144.2L1477.1,-140.2L1471.7,-138.1L1480.6,-137.1L1491.2,-135.3L1497.8,-136.6L1501.4,-132.0L1504.6,-133.9L1516.1,-135.0L1539.2,-133.8L1540.9,-130.5L1571.1,-129.4L1571.4,-134.9L1586.7,-133.6L1598.2,-133.7L1609.9,-129.9L1613.2,-125.3L1608.9,-122.3L1617.9,-116.6L1629.3,-113.7L1636.2,-121.2L1647.8,-118.0L1660.0,-119.9L1674.0,-117.7L1679.3,-119.7L1691.1,-118.7L1685.9,-125.4L1695.4,-128.5L1760.4,-123.8L1766.5,-119.6L1785.4,-114.1L1814.4,-115.4L1828.8,-114.2L1834.8,-111.3L1833.9,-106.0L1842.8,-104.0L1852.4,-105.4L1865.2,-105.6L1878.8,-104.2L1892.4,-105.0L1905.0,-98.6L1913.9,-100.9L1908.1,-105.5L1911.3,-108.7L1934.2,-106.7L1949.2,-107.1L1969.9,-103.7L-612.0,-100.5L-594.3,-95.0L-575.5,-87.9L-576.1,-83.4L-571.3,-81.6L-572.9,-86.8L-553.4,-85.8L-539.3,-79.0L-546.4,-75.9L-558.2,-75.2L-558.4,-68.1L-561.3,-66.6L-568.0,-66.8L-573.5,-69.3L-583.1,-71.4L-584.7,-74.6L-592.0,-75.7L-600.2,-74.8L-604.1,-77.3L-602.5,-80.0L-611.2,-78.3L-607.9,-74.9L-612.0,-71.9L1979.9,-71.8L1970.7,-68.6L1961.4,-69.2L1967.8,-65.3L1972.1,-59.4L1975.5,-57.5L1976.3,-54.5L1974.5,-52.6L1961.0,-54.2L1940.9,-48.7L1934.5,-47.9L1923.5,-42.8L1913.0,-38.4L1910.4,-35.1L1900.1,-40.1L1881.3,-34.5L1878.1,-37.1L1871.1,-34.1L1861.5,-35.1L1859.2,-30.3L1850.5,-23.4L1850.8,-20.4L1859.0,-18.8L1858.0,-8.3L1851.3,-8.1L1848.2,-2.1L1851.3,1.0L1838.7,4.7L1836.2,12.9L1825.4,14.7L1823.3,22.0L1812.9,28.7L1810.2,23.8L1807.1,13.3L1803.1,-2.7L1806.6,-12.7L1812.7,-17.0L1813.0,-20.4L1824.2,-22.0L1837.1,-31.1L1849.5,-38.5L1862.4,-44.2L1868.2,-54.4L1859.5,-53.8L1855.1,-47.8L1836.9,-39.9L1831.0,-48.8L1812.4,-46.3L1794.4,-34.3L1800.3,-29.8L1784.3,-28.0L1773.1,-27.2L1773.6,-32.4L1762.5,-33.5L1753.5,-30.0L1731.5,-31.2L1707.8,-29.1L1684.5,-15.0L1656.9,1.9L1668.3,2.8L1671.8,7.4L1678.8,9.0L1683.4,5.4L1691.3,5.8L1701.7,13.8L1701.9,19.9L1696.3,27.1L1695.7,35.7L1692.4,47.2L1681.6,57.6L1679.2,62.6L1669.4,71.0L1659.7,79.3L1655.1,83.5L1645.5,87.8L1640.9,87.8L1636.4,84.4L1626.7,89.6L1625.6,92.0L1622.9,91.6L1619.8,94.0L1617.6,96.5L1617.9,101.6L1614.2,103.2L1612.9,104.5L1610.2,106.6L1605.4,107.8L1602.2,109.7L1602.0,112.9L1601.2,113.7L1604.1,114.8L1608.1,118.0L1614.3,126.5L1616.1,131.1L1616.2,139.4L1613.5,143.4L1606.9,144.8L1601.2,147.8L1594.7,148.4L1593.9,144.5L1595.2,139.1L1592.1,131.6L1597.4,130.4L1592.5,124.2L1589.0,122.8L1588.1,124.2L1586.0,124.8L1585.7,123.4L1583.9,122.8L1581.9,121.6L1583.9,118.5L1585.6,117.6L1584.9,116.3L1586.8,112.4L1586.3,111.2L1582.1,110.4L1578.7,108.5L1568.6,110.6L1563.4,114.0L1555.6,115.9L1559.4,112.6L1557.9,109.8L1563.6,105.0L1559.8,101.2L1553.5,103.7L1545.4,108.7L1541.0,113.4L1533.9,113.7L1530.2,117.1L1534.0,122.0L1539.9,123.1L1540.2,126.4L1545.9,128.5L1553.9,123.3L1560.3,126.1L1565.0,126.3L1566.1,130.1L1555.9,132.1L1552.6,136.0L1545.6,139.6L1541.9,144.7L1549.6,148.6L1552.5,155.7L1556.9,162.3L1561.8,167.8L1561.6,173.2L1557.1,175.1L1558.8,179.0L1563.1,181.2L1562.0,187.1L1560.1,192.8L1556.1,193.4L1550.8,201.2L1545.0,210.7L1538.3,219.3L1528.4,225.9L1518.4,232.0L1510.3,232.8L1505.9,236.0L1503.4,233.6L1499.3,237.2L1489.3,240.8L1481.7,241.9L1479.2,249.5L1475.2,250.0L1473.3,244.7L1475.0,242.0L1465.4,239.7L1462.0,240.8L1452.3,247.0L1446.4,253.8L1444.8,258.8L1450.3,266.4L1457.0,275.8L1463.5,280.2L1467.9,286.0L1471.2,299.3L1470.3,312.0L1464.2,316.7L1456.0,321.4L1450.1,327.4L1441.1,334.1L1438.5,329.5L1440.5,324.6L1435.2,320.5L1429.2,319.4L1426.3,315.7L1422.6,308.3L1416.2,305.0L1410.0,305.1L1411.1,299.4L1404.7,299.5L1404.1,307.4L1400.2,317.9L1397.9,324.3L1398.4,329.5L1403.1,329.7L1406.0,336.3L1407.3,342.5L1411.3,346.6L1415.7,347.5L1419.4,351.2L1421.1,351.9L1425.3,356.2L1428.3,361.0L1428.8,365.9L1428.0,369.2L1428.7,371.6L1429.2,375.9L1431.8,377.9L1434.6,384.3L1434.5,386.7L1429.4,387.2L1422.5,381.8L1414.0,376.1L1413.2,372.5L1409.0,367.6L1408.0,361.7L1405.4,357.8L1406.2,352.5L1404.6,349.5L1401.8,346.7L1400.6,343.1L1396.7,339.1L1393.2,335.6L1392.1,339.9L1390.7,335.9L1391.5,331.4L1393.6,324.5L1392.9,319.1L1395.1,313.6L1392.7,309.4L1393.3,301.5L1390.3,297.8L1388.0,289.2L1386.7,280.1L1383.6,274.1L1378.8,277.7L1370.7,282.9L1366.6,282.2L1362.2,280.5L1364.7,271.6L1363.1,264.9L1357.5,256.6L1358.4,254.0L1354.2,253.0L1349.0,247.2L1347.0,243.4L1346.6,239.8L1345.2,236.3L1342.2,232.1L1335.6,231.8L1336.2,234.8L1334.0,238.8L1330.9,237.3L1329.8,238.6L1327.8,237.8L1325.0,237.2L1324.0,239.8L1319.1,239.7L1310.2,241.2L1310.6,246.7L1306.8,250.9L1296.4,255.8L1288.4,264.2L1283.0,268.8L1275.8,273.5L1275.8,276.8L1272.2,278.6L1265.7,281.2L1262.3,281.5L1260.2,287.0L1261.7,296.4L1262.1,302.4L1259.0,309.2L1259.0,321.4L1255.2,321.8L1252.0,327.3L1254.2,329.6L1247.6,331.7L1245.2,336.6L1242.3,338.6L1235.5,331.9L1232.1,321.8L1229.4,314.6L1226.9,311.2L1223.0,304.3L1221.2,295.3L1220.0,290.8L1213.4,280.9L1210.5,266.9L1208.3,257.7L1208.3,249.0L1206.9,242.2L1196.5,246.5L1191.4,245.7L1182.0,237.0L1185.4,234.4L1183.3,231.5L1174.9,225.4L1169.6,223.6L1167.5,218.4L1161.9,212.9L1148.6,214.3L1136.9,214.4L1126.8,215.4L1113.2,213.3L1105.4,211.6L1097.3,210.7L1094.2,201.8L1090.8,200.6L1085.2,201.9L1077.9,205.3L1069.2,203.0L1061.9,197.4L1055.0,195.4L1050.1,188.5L1044.8,178.9L1041.0,180.1L1036.4,177.7L1033.7,180.5L1029.4,180.2L1030.9,183.4L1030.3,185.0L1032.6,190.4L1035.4,196.6L1039.0,198.3L1040.2,200.8L1045.1,203.8L1045.5,206.8L1044.8,209.2L1045.7,211.6L1047.8,213.6L1048.8,216.0L1049.8,217.8L1049.4,212.5L1051.3,208.8L1053.3,208.0L1055.5,210.2L1055.6,214.4L1054.0,218.7L1055.4,221.4L1056.6,221.1L1056.9,223.1L1062.6,221.9L1068.5,222.1L1072.9,222.3L1077.8,217.5L1083.2,212.8L1087.7,208.4L1089.8,205.9L1090.7,206.6L1090.0,209.5L1089.1,210.9L1090.1,216.5L1093.3,221.5L1097.3,224.1L1102.6,225.0L1106.9,226.3L1110.1,230.5L1112.0,232.8L1114.6,233.8L1114.6,235.4L1112.0,239.7L1110.8,241.7L1107.8,244.0L1105.1,248.9L1101.8,248.5L1100.3,250.2L1099.2,253.9L1100.1,258.7L1099.4,259.6L1096.1,259.6L1091.6,262.3L1090.9,265.8L1089.3,267.3L1084.8,267.2L1081.9,269.0L1082.0,272.0L1078.5,274.0L1074.5,273.3L1069.7,275.7L1066.4,276.1L1061.2,278.0L1059.8,281.2L1059.6,283.7L1052.4,286.7L1040.9,290.1L1034.5,295.2L1031.3,295.6L1029.2,295.2L1024.9,298.1L1020.4,299.5L1014.3,299.9L1012.5,300.3L1010.9,302.2L1009.0,302.7L1007.9,304.6L1004.4,304.4L1002.1,305.4L997.1,305.0L995.2,300.8L995.4,296.9L994.2,294.8L992.8,289.4L990.8,286.5L992.2,286.1L991.5,282.8L992.3,281.4L992.0,278.3L991.1,275.2L988.9,273.1L988.3,270.2L984.6,267.6L980.8,261.6L978.8,255.7L973.8,250.7L970.6,249.6L965.8,242.7L965.0,237.7L965.3,233.4L961.2,225.4L957.8,222.6L953.9,221.1L951.5,217.0L951.9,215.4L949.9,211.7L947.8,210.1L945.0,204.7L940.6,198.9L936.9,193.9L933.3,194.0L934.5,190.0L934.8,187.5L935.7,184.6L935.4,183.6L933.4,186.5L931.9,191.9L929.9,195.7L928.2,196.9L925.8,194.6L922.6,191.4L917.5,181.1L916.7,181.7L919.7,189.3L924.1,196.6L929.6,207.8L932.2,211.7L934.5,215.8L941.0,223.7L939.6,225.0L939.8,229.7L948.2,236.1L949.4,237.6L951.8,244.7L950.2,246.0L951.2,253.4L953.9,262.0L956.6,263.7L960.6,266.4L964.7,274.8L966.7,281.4L970.7,284.9L980.5,291.7L984.5,295.8L988.4,299.9L990.6,302.4L994.2,304.6L995.9,306.8L995.7,309.8L991.6,311.5L994.6,313.5L997.0,314.8L998.4,317.8L1001.6,320.8L1005.2,320.8L1012.0,319.0L1019.8,318.1L1026.2,315.9L1029.8,315.4L1032.3,314.1L1036.4,313.8L1038.7,313.7L1042.0,312.6L1045.9,311.9L1049.3,309.4L1052.0,309.4L1052.2,311.4L1051.5,315.6L1051.5,319.4L1050.0,322.0L1048.0,329.8L1044.5,337.8L1040.1,347.0L1033.9,357.6L1027.7,365.6L1019.3,375.4L1012.1,381.3L1001.3,388.4L994.6,393.9L986.7,402.6L985.1,406.4L983.4,408.1L978.4,411.0L976.6,414.0L973.9,414.5L972.9,419.6L970.6,422.5L969.2,427.3L966.3,429.7ZM-331.1,-105.9L-317.7,-104.2L-306.3,-100.7L-298.8,-100.1L-292.5,-103.1L-283.8,-105.3L-273.1,-104.4L-262.3,-107.6L-250.5,-109.4L-245.6,-106.4L-240.2,-108.1L-238.6,-111.5L-233.6,-110.7L-221.4,-104.3L-211.9,-109.1L-210.9,-103.7L-202.0,-104.9L-199.3,-107.0L-190.6,-106.5L-179.6,-103.5L-162.8,-100.9L-152.8,-99.7L-145.8,-100.1L-136.1,-96.5L-146.2,-92.9L-133.2,-91.4L-113.7,-92.2L-107.6,-93.5L-99.9,-89.1L-92.1,-92.8L-99.5,-95.8L-94.8,-98.3L-86.1,-98.6L-80.3,-99.4L-74.5,-97.6L-67.2,-93.7L-59.2,-94.3L-46.5,-91.1L-35.3,-92.2L-24.8,-92.0L-25.6,-96.5L-19.2,-97.8L-8.1,-95.3L-8.1,-88.5L-3.5,-94.3L2.3,-94.1L5.5,-101.3L-2.2,-105.7L-10.6,-108.6L-10.0,-116.6L-1.5,-121.8L8.0,-120.7L15.3,-117.5L25.1,-109.4L18.7,-105.8L32.1,-104.4L32.0,-97.0L41.7,-102.7L50.3,-98.0L48.1,-92.7L55.1,-87.8L62.6,-93.0L67.8,-99.2L68.3,-107.2L78.5,-106.6L89.1,-105.5L98.8,-102.0L99.2,-98.4L93.9,-94.6L98.9,-90.7L98.0,-87.2L83.9,-82.2L73.9,-81.1L66.5,-83.2L64.3,-79.6L57.4,-73.5L55.3,-70.4L46.9,-65.5L36.6,-65.0L30.9,-62.0L30.5,-57.3L22.1,-56.4L13.3,-50.6L5.5,-42.5L2.7,-36.8L2.3,-28.4L12.9,-27.2L16.1,-20.5L19.5,-15.0L29.5,-16.5L42.9,-13.3L50.1,-10.6L55.3,-7.2L64.3,-5.2L71.9,-2.2L83.8,-1.8L91.6,-1.1L90.5,5.2L92.7,12.4L97.9,20.5L108.6,27.3L114.2,25.0L118.1,17.6L114.3,6.2L109.2,2.4L120.8,-1.0L128.9,-6.0L132.9,-11.0L132.3,-15.9L127.4,-22.0L118.7,-27.4L127.2,-34.9L124.0,-41.5L121.6,-52.7L126.6,-54.4L139.0,-52.4L146.4,-51.7L152.4,-53.6L159.0,-51.2L167.9,-47.0L170.1,-44.2L182.9,-43.6L182.7,-37.6L185.1,-28.5L191.7,-27.4L196.9,-23.1L207.3,-27.1L214.2,-35.1L219.0,-38.4L224.6,-32.0L234.0,-22.8L241.9,-14.2L239.0,-9.6L248.6,-5.6L255.1,-1.5L266.6,0.4L271.2,2.7L274.1,8.8L279.7,9.7L282.6,12.5L283.1,20.5L277.8,23.2L272.7,25.8L260.8,28.3L251.8,34.3L239.6,35.4L224.2,33.9L213.4,33.9L205.9,34.4L199.9,39.5L190.7,42.7L180.3,52.2L172.0,58.9L178.2,57.7L189.7,48.2L204.8,42.2L215.6,41.5L222.0,45.1L215.2,49.9L217.4,57.7L219.8,63.1L229.2,66.7L241.1,65.6L248.3,57.5L248.8,62.8L253.4,65.4L244.5,70.1L228.6,74.4L221.4,77.3L213.4,82.5L207.9,81.9L207.6,75.8L220.1,69.9L208.6,70.1L200.6,71.0L201.8,73.4L194.2,76.9L186.8,79.3L179.2,81.5L175.4,85.8L174.1,87.4L174.1,91.2L176.4,95.0L179.4,95.2L178.7,92.6L180.8,94.2L180.3,96.2L175.4,97.4L171.9,97.2L166.6,98.5L163.5,98.9L159.3,99.2L153.3,101.3L163.9,99.9L166.0,101.3L155.9,103.5L151.3,103.5L151.5,102.6L149.4,104.6L151.5,104.9L149.9,110.1L144.7,115.6L144.1,113.8L142.6,113.4L140.2,111.6L141.7,115.5L143.5,116.8L143.6,119.5L141.3,122.3L137.2,128.0L136.6,127.7L138.8,122.8L135.1,120.1L134.3,114.1L132.9,117.2L134.4,121.8L129.7,120.7L134.6,123.0L134.9,129.8L137.0,130.3L137.7,132.8L138.8,140.0L134.2,145.4L126.7,147.5L122.0,151.7L118.4,152.2L114.8,154.8L113.7,157.3L105.8,161.9L101.8,165.4L98.4,169.6L97.3,174.7L98.6,179.7L100.9,185.9L104.2,191.0L104.2,194.1L107.6,202.5L107.4,207.3L107.1,210.1L105.3,214.5L103.1,215.4L99.6,214.6L98.4,211.4L95.7,209.7L91.9,203.5L88.5,198.0L87.4,195.2L88.9,190.4L86.9,186.5L81.3,180.5L78.5,179.4L71.2,182.6L69.9,182.3L66.4,178.9L61.9,177.1L53.8,178.0L47.4,177.2L41.9,177.7L38.9,178.8L40.2,180.8L40.1,183.7L41.6,185.1L40.3,186.0L37.6,185.0L34.9,186.4L29.7,186.1L24.3,182.3L18.0,183.2L12.8,181.6L8.3,182.1L2.2,183.7L-4.3,189.1L-11.5,192.2L-15.4,195.6L-17.1,198.9L-17.1,203.8L-16.8,207.3L-15.4,209.7L-18.2,216.1L-19.5,221.2L-20.0,230.9L-20.7,234.4L-19.4,238.3L-17.2,241.8L-15.8,247.4L-11.0,252.8L-9.3,256.9L-6.5,260.4L1.2,262.3L4.1,265.4L10.4,263.3L15.9,262.6L21.3,261.3L25.9,260.1L30.4,257.2L32.2,253.0L32.7,246.9L34.0,244.8L38.9,242.9L46.5,241.2L52.9,241.5L57.2,240.9L58.9,242.4L58.7,245.9L54.9,250.2L53.1,254.5L54.5,255.8L53.4,258.9L51.6,264.5L49.7,262.7L48.2,262.8L48.3,263.9L49.6,263.9L49.5,265.8L48.3,269.0L49.0,270.1L48.2,272.7L48.7,273.3L47.9,277.0L46.4,278.9L45.1,279.1L43.7,281.6L46.0,282.9L46.7,281.8L48.8,282.8L49.5,283.0L51.1,281.8L53.2,281.7L53.8,282.3L55.0,281.9L58.3,282.6L61.6,282.4L63.9,281.6L64.8,280.8L67.1,281.1L68.8,281.6L70.7,281.5L72.1,280.8L75.4,281.8L76.5,282.0L78.7,283.3L80.8,284.9L83.4,286.0L85.3,288.0L84.7,288.7L84.3,290.3L85.1,293.0L83.4,295.4L82.7,298.3L82.4,301.5L82.8,303.3L83.0,306.6L81.9,307.3L81.2,310.4L81.7,312.3L80.3,314.1L80.6,316.1L81.7,317.2L83.5,321.1L86.3,324.0L89.7,327.1L92.3,329.7L92.1,331.2L95.0,331.6L95.6,331.0L97.6,332.7L101.2,332.2L104.3,330.4L108.6,328.9L111.1,326.8L115.0,327.2L114.8,327.9L118.8,328.2L122.0,329.4L124.3,331.6L127.1,333.6L130.8,333.8L136.2,328.8L139.1,328.0L139.2,325.6L140.5,319.5L144.7,316.2L149.2,316.1L149.8,314.6L155.4,315.2L161.1,311.5L163.9,309.9L167.4,306.5L169.9,306.9L171.8,308.8L170.4,311.2L170.2,312.9L166.0,313.7L168.3,317.0L168.3,320.8L165.1,325.0L167.8,330.7L170.9,330.2L172.5,325.0L170.3,322.5L169.9,317.0L178.9,314.1L177.9,310.7L180.4,308.4L183.0,313.5L188.1,313.6L192.7,317.6L193.0,320.0L199.5,320.1L207.2,319.3L211.3,322.5L216.8,323.5L220.8,321.2L220.9,319.4L229.8,319.0L238.5,318.8L232.4,321.0L234.8,324.4L240.6,324.9L246.0,328.5L247.2,334.2L250.9,334.1L253.7,335.8L258.5,338.4L262.9,343.1L263.1,346.8L265.8,347.0L269.7,350.5L272.5,353.0L281.2,354.4L281.9,353.1L287.8,352.6L295.5,354.5L298.0,355.3L303.2,357.0L310.9,363.1L312.1,366.1L314.5,365.7L316.3,369.7L320.3,382.3L324.2,383.5L324.4,388.5L319.0,394.4L321.2,396.6L333.9,397.7L334.2,404.9L339.7,400.2L348.7,402.8L360.7,407.2L364.2,411.4L363.0,415.4L371.4,413.2L385.4,417.0L396.1,416.7L406.8,422.6L416.0,430.7L421.5,432.8L427.7,433.1L430.3,435.3L432.7,444.5L433.9,448.9L431.1,460.8L427.4,465.5L417.3,475.5L412.7,483.6L407.3,489.9L405.6,490.0L403.5,495.3L404.0,508.8L402.1,519.9L401.3,524.6L399.0,527.5L397.7,537.1L390.4,546.5L389.2,553.9L383.4,557.1L381.7,561.4L373.9,561.4L362.5,564.1L357.5,567.3L349.4,569.4L340.9,575.2L334.8,582.3L333.8,587.7L335.0,591.7L333.6,598.9L332.0,602.5L327.0,606.4L319.0,619.1L312.7,624.8L307.8,628.2L304.5,635.0L299.7,639.1L296.6,643.7L288.5,647.7L283.2,646.2L279.2,647.0L272.6,643.9L267.7,644.1L263.3,640.2L262.8,643.9L272.0,650.1L271.0,655.0L275.5,658.2L275.1,661.7L268.2,670.9L257.5,674.8L243.1,676.3L235.2,675.6L236.7,679.9L235.2,685.2L236.6,688.9L232.2,691.4L224.9,692.4L217.9,689.8L215.1,691.7L216.2,698.8L221.0,701.0L225.0,698.7L227.1,702.5L220.5,704.7L214.7,709.2L213.6,716.4L211.9,720.3L205.1,720.3L199.5,724.0L197.4,729.4L204.5,734.6L211.4,736.1L208.9,742.6L200.4,746.6L195.7,755.1L189.1,757.9L186.2,761.3L188.5,768.8L193.3,772.9L190.3,772.6L183.9,772.5L180.4,774.3L173.9,776.9L172.8,783.6L169.7,783.8L161.6,781.4L153.3,776.4L144.4,772.3L142.1,767.7L144.2,763.5L140.5,758.7L139.6,746.5L142.7,739.5L150.3,734.0L139.4,731.9L146.2,725.5L148.7,713.5L156.7,716.1L160.4,701.2L155.6,699.2L153.3,708.2L148.8,707.2L151.1,696.9L153.5,683.6L156.8,678.7L154.7,671.6L154.2,663.5L157.2,663.3L161.6,651.7L166.6,640.2L169.7,629.4L168.0,618.6L170.1,612.7L169.3,603.8L173.5,595.0L174.8,581.1L177.1,566.1L179.3,550.0L178.8,538.2L177.3,528.1L170.1,524.0L169.5,521.0L155.2,513.8L142.3,505.9L136.7,501.5L133.8,495.5L134.9,493.5L128.8,484.0L121.7,470.7L114.9,456.4L112.0,453.1L109.7,447.8L104.1,443.1L99.0,440.2L101.3,437.0L97.9,430.1L100.1,425.1L105.8,420.5L109.6,415.1L108.1,412.0L105.3,415.3L101.0,412.2L102.5,410.1L101.3,403.6L103.8,402.5L105.1,398.0L107.9,393.4L107.3,390.5L111.3,388.9L116.2,386.1L115.3,383.8L117.9,383.3L117.6,379.7L119.3,377.1L122.9,376.6L125.9,372.1L128.7,368.3L126.0,366.6L127.4,362.4L125.8,355.8L127.3,353.9L126.2,347.8L123.3,344.0L120.8,341.9L119.3,338.0L121.1,336.1L119.3,335.6L117.9,333.2L114.3,331.2L111.2,331.7L109.7,334.2L106.8,336.0L105.2,336.2L104.5,337.7L108.0,341.7L106.0,342.6L105.0,343.6L101.6,344.0L100.4,339.7L99.4,340.9L97.0,340.5L95.6,337.6L92.6,337.1L90.8,336.3L87.7,336.3L87.5,337.9L86.7,336.8L82.7,335.2L81.3,333.7L82.1,332.4L81.8,330.8L79.8,329.1L77.0,327.7L74.5,326.8L74.1,324.7L72.2,323.4L72.6,325.5L71.2,327.2L69.5,325.2L67.2,324.5L66.3,323.0L66.3,320.8L67.2,318.6L65.2,317.6L66.9,316.2L64.4,313.9L61.0,311.0L59.4,308.6L56.4,306.3L52.8,303.1L53.6,301.9L54.8,303.0L55.3,302.5L54.1,300.3L51.9,299.6L51.1,301.3L46.9,301.2L44.3,300.5L41.3,299.1L37.4,298.7L35.3,297.1L31.6,295.8L27.1,295.7L23.8,294.3L20.0,291.3L11.8,283.6L8.1,281.2L2.2,279.3L-1.8,279.9L-7.6,282.6L-11.2,283.3L-16.3,281.4L-21.7,280.0L-28.4,276.7L-33.8,275.7L-42.0,272.4L-48.0,268.9L-49.8,267.0L-53.8,266.6L-61.2,264.3L-64.2,261.0L-72.0,256.9L-75.6,252.4L-77.3,248.9L-74.9,248.2L-75.6,246.1L-73.9,244.3L-73.9,241.8L-76.3,238.5L-77.0,235.7L-79.4,232.0L-85.7,224.9L-93.0,219.2L-96.5,214.8L-102.7,211.8L-104.0,210.1L-102.9,205.6L-106.6,203.9L-110.8,200.4L-112.6,195.4L-116.5,194.8L-120.7,191.0L-124.1,187.5L-124.4,185.3L-128.2,179.8L-130.8,174.3L-130.7,171.6L-135.9,168.7L-138.3,169.0L-142.4,167.0L-143.5,170.0L-142.4,173.4L-141.7,178.8L-139.2,181.8L-133.8,186.8L-132.7,188.4L-131.6,189.0L-130.6,191.4L-129.3,191.3L-127.9,196.0L-125.7,197.8L-124.2,200.4L-119.6,204.0L-117.3,210.7L-115.1,213.9L-113.1,217.3L-112.7,221.0L-109.3,221.3L-106.3,224.6L-103.8,227.8L-103.9,229.1L-106.9,231.7L-108.2,231.7L-110.1,227.3L-114.8,223.2L-120.0,219.7L-123.7,217.9L-123.5,212.6L-124.6,208.7L-128.0,206.5L-132.9,203.3L-133.9,204.2L-135.7,202.3L-140.1,200.6L-144.4,196.4L-143.9,195.9L-140.9,196.3L-138.2,193.6L-138.0,190.3L-143.5,185.2L-147.7,183.2L-150.4,178.7L-153.1,174.0L-156.4,168.2L-159.3,161.7L-160.5,158.1L-165.2,153.9L-168.6,153.1L-169.3,151.0L-173.4,150.6L-176.0,148.7L-182.7,148.0L-184.5,146.8L-185.4,142.9L-192.4,135.6L-198.3,125.6L-198.1,124.0L-201.3,121.6L-206.8,115.5L-207.8,109.7L-211.7,105.7L-210.1,99.8L-210.3,93.6L-212.6,88.1L-209.8,81.3L-208.9,74.8L-208.1,68.2L-209.4,58.6L-211.7,52.4L-213.7,49.1L-212.9,47.7L-202.5,50.1L-198.6,56.9L-196.8,55.0L-198.0,49.1L-200.4,43.2L-201.4,43.2L-215.3,36.1L-220.5,33.0L-233.5,30.0L-237.6,23.7L-236.5,19.2L-245.7,16.2L-247.0,10.4L-255.7,5.1L-255.9,1.4L-259.8,-1.3L-266.2,-3.6L-268.2,-9.9L-277.5,-15.7L-281.4,-22.5L-288.3,-22.9L-299.7,-23.1L-308.2,-25.2L-323.0,-32.7L-329.9,-34.0L-342.5,-36.6L-352.5,-36.0L-366.7,-39.3L-375.2,-42.4L-383.2,-40.9L-381.7,-35.8L-385.7,-35.4L-394.0,-33.9L-400.4,-31.5L-408.4,-29.9L-409.4,-34.2L-406.1,-41.2L-398.5,-43.4L-400.5,-45.3L-409.6,-41.2L-414.6,-36.4L-424.9,-31.3L-419.7,-27.8L-426.5,-22.7L-434.2,-19.6L-441.4,-17.4L-443.2,-14.3L-454.5,-10.5L-456.7,-7.2L-465.1,-4.1L-470.1,-4.6L-476.8,-2.6L-484.1,-0.2L-490.1,2.2L-502.5,4.3L-503.6,3.1L-495.7,-0.3L-488.7,-2.5L-481.0,-6.4L-472.1,-7.3L-468.5,-10.2L-458.5,-14.5L-456.9,-16.0L-451.6,-18.5L-450.4,-24.0L-446.7,-28.2L-455.0,-26.0L-457.3,-27.3L-461.2,-24.7L-465.9,-28.3L-467.9,-25.7L-470.6,-29.3L-477.8,-26.4L-482.2,-26.4L-482.8,-30.7L-481.5,-33.4L-486.1,-35.9L-495.5,-34.6L-501.6,-37.9L-506.5,-39.7L-506.5,-43.7L-512.1,-46.8L-509.3,-50.9L-503.4,-55.0L-500.9,-58.7L-495.0,-59.2L-490.1,-58.0L-484.3,-61.5L-479.1,-60.9L-473.6,-63.1L-474.9,-66.4L-478.9,-67.7L-473.6,-70.5L-478.0,-70.4L-485.7,-68.8L-487.9,-67.2L-493.5,-68.8L-503.7,-68.0L-514.3,-69.7L-517.3,-72.6L-526.4,-76.8L-516.3,-79.8L-500.2,-83.4L-494.3,-83.4L-495.3,-79.7L-480.1,-80.0L-485.9,-84.5L-494.8,-87.2L-499.9,-90.8L-506.8,-93.9L-516.7,-96.2L-512.7,-100.0L-499.9,-100.2L-490.8,-103.5L-489.1,-107.0L-481.8,-110.4L-474.7,-111.2L-461.1,-114.4L-454.5,-113.9L-443.4,-117.8L-432.5,-116.3L-427.3,-113.0L-424.1,-114.4L-411.9,-114.0L-412.3,-112.3L-401.3,-111.1L-394.0,-111.8L-378.8,-109.5L-365.0,-108.9L-359.4,-107.9L-349.8,-109.1L-338.9,-106.9L-331.1,-105.9ZM283.7,26.5L279.8,31.0L275.1,37.3L279.8,34.9L284.6,36.5L282.1,39.0L288.5,40.9L291.8,39.2L299.0,41.4L296.7,46.7L301.8,45.5L302.7,49.3L304.9,53.7L301.9,60.1L298.7,60.3L293.9,59.0L295.5,53.1L293.5,52.2L285.1,58.4L280.8,58.2L285.9,54.8L279.0,53.0L271.3,53.5L257.3,53.3L256.2,51.1L260.7,48.6L257.5,46.6L263.6,42.3L271.0,30.8L275.5,26.7L281.7,24.2L285.1,24.6L283.7,26.5ZM219.5,36.9L222.0,36.3L231.4,38.1L238.8,41.1L239.0,42.4L235.5,42.6L226.2,40.3L219.5,36.9ZM223.1,57.3L225.6,60.8L230.8,61.8L237.5,61.6L234.0,64.6L231.3,65.0L222.2,62.0L220.4,59.6L223.1,57.3ZM167.7,266.1L162.9,264.9L159.5,265.4L155.1,264.8L151.8,266.2L147.9,263.9L148.5,261.6L155.2,262.6L160.6,263.2L163.2,261.6L159.9,258.5L160.0,255.7L155.4,254.6L157.0,252.6L161.4,252.9L167.7,254.1L168.6,252.8L174.2,252.9L178.5,254.7L180.4,254.5L181.7,257.1L185.6,256.9L185.4,259.1L188.6,259.3L192.1,262.0L189.4,264.9L186.0,263.4L182.7,263.7L180.3,263.3L179.0,264.6L176.3,265.1L175.2,263.3L172.8,264.4L169.9,269.3L168.1,268.1L167.7,266.1ZM115.3,203.1L118.7,202.5L123.5,202.8L123.7,204.6L115.8,205.8L115.3,203.1ZM123.9,201.3L129.6,204.5L128.4,209.7L127.0,208.8L127.1,205.0L123.9,202.1L123.9,201.3ZM121.0,214.5L123.2,214.8L125.7,220.8L125.7,224.9L124.0,225.3L122.2,221.1L119.5,219.1L121.0,214.5ZM747.0,89.1L751.6,86.3L752.8,92.5L750.4,98.1L747.2,96.6L745.5,91.7L747.0,89.1ZM206.8,262.7L210.4,263.3L211.7,264.8L209.9,266.6L204.5,266.5L200.3,266.8L199.8,263.7L200.9,262.7L206.8,262.7ZM125.5,262.9L130.4,263.5L134.2,265.2L135.4,267.2L130.3,267.3L128.1,268.6L124.1,267.4L120.0,264.8L120.8,263.1L123.9,262.6L125.5,262.9ZM91.7,229.0L97.9,229.6L103.6,229.6L110.3,232.1L113.2,234.7L119.9,233.9L122.5,235.6L128.5,240.1L133.0,243.3L135.4,243.2L139.7,244.7L139.2,246.7L144.5,247.0L149.9,250.0L149.1,251.6L144.3,252.5L139.4,252.9L134.5,252.3L124.2,253.0L129.0,249.0L126.1,247.2L121.4,246.7L118.9,244.6L117.2,240.5L113.1,240.8L106.4,238.8L104.3,237.3L94.9,236.2L92.4,234.8L95.1,233.0L88.0,232.6L82.8,236.4L79.9,236.5L78.8,238.2L75.2,239.0L72.2,238.4L76.0,236.1L77.5,233.5L80.8,231.9L84.5,230.5L89.9,229.8L91.7,229.0ZM873.3,141.8L872.4,144.0L862.0,144.6L862.1,143.4L853.3,142.0L854.6,138.9L858.6,141.3L864.2,140.9L869.6,141.4L869.4,142.7L873.3,141.8ZM639.4,8.2L640.6,13.3L635.1,19.7L622.3,24.0L612.2,22.9L618.0,15.4L614.2,8.1L624.0,2.4L629.5,-1.0L635.5,-1.2L643.2,3.2L639.4,8.2ZM790.3,121.4L795.8,120.7L793.2,126.4L794.2,128.6L792.7,132.3L787.2,129.6L783.5,128.8L773.5,125.2L774.5,121.5L782.9,122.1L790.3,121.4ZM746.7,101.5L750.3,99.3L754.6,104.4L753.6,113.9L750.3,113.5L747.4,115.9L744.7,114.0L744.4,105.3L742.7,101.2L746.7,101.5ZM773.1,-8.0L775.4,-4.4L771.1,1.4L763.5,-2.6L762.5,-5.6L773.1,-8.0ZM661.7,11.5L661.7,11.5L662.8,7.3L658.0,2.9L657.9,2.8L649.1,1.5L647.4,-0.4L650.0,-3.7L647.6,-5.6L643.8,-2.2L643.3,-9.2L639.7,-12.8L642.3,-20.3L647.9,-26.1L653.7,-25.6L662.4,-26.2L654.7,-18.4L662.0,-19.4L669.9,-19.3L668.0,-13.5L661.5,-7.0L669.0,-6.5L669.5,-5.8L676.0,2.7L680.9,3.9L685.3,12.1L687.4,14.9L696.1,16.3L695.2,20.9L691.6,23.0L694.4,26.7L688.0,30.5L678.3,30.4L666.1,32.4L662.7,31.0L658.0,34.4L651.3,33.5L646.2,36.3L642.4,34.9L653.0,27.3L659.4,25.7L659.4,25.7L648.1,24.5L646.1,21.7L653.6,19.4L649.7,15.5L651.0,10.8L661.7,11.5ZM239.9,318.5L244.0,317.6L245.5,317.8L245.3,323.2L239.2,324.0L238.0,323.4L240.1,321.4L239.9,318.5Z"/><g id="segni"></g></svg>
+    <p class="mappa-info" id="mappa-info" aria-live="polite">Tocca un punto sulla carta o un luogo dell'elenco.</p>
+    <p class="mappa-nota">Carta muta: solo coste e mari. Unisci con il dito Europa, Africa e America: ecco il triangolo del commercio.</p>
+  </div>
+  <ul class="luoghi" id="luoghi"></ul>
+  <div class="animata" id="carta-animata" aria-labelledby="t-animata">
+    <h4 id="t-animata">🎬 Cambia sguardo: la carta animata</h4>
+    <p>Ora guarda questi luoghi in movimento: confini, Stati ed eserciti che cambiano nel tempo. Poi torna alla carta muta e ritrova i luoghi dell'elenco.</p>
+    <h5>Carte animate HUB Scuola</h5>
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=543HprKLiTk&amp;list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">Gli imperi coloniali nel Settecento</a></li>
+    </ul>
+    <h5>Altre carte animate</h5>
+    <ul>
+      <li><a href="https://www.youtube.com/results?search_query=carta+animata+tratta+degli+schiavi+commercio+triangolare" target="_blank" rel="noopener">Cerca altre carte animate su questo argomento</a></li>
+      <li><a href="https://www.youtube.com/playlist?list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">Tutte le carte animate di storia di HUB Scuola</a></li>
+    </ul>
+    <p class="nota-video">Video su YouTube, si aprono in una nuova scheda.</p>
+  </div>
+
+  <h3 id="quando"><span>2. Quando?</span></h3>
+  <p class="mestiere">🕐 Collocare nel tempo</p>
+  <ol class="linea">
+    <li class="estremo"><span class="anno">1444</span>I portoghesi vendono a Lagos, in Portogallo, i primi prigionieri africani catturati sulla costa.</li>
+    <li><span class="anno">1501</span>Primo invio di africani schiavizzati nelle colonie spagnole d'America.</li>
+    <li><span class="anno">1530 ca.</span>In Brasile si diffondono le piantagioni di canna da zucchero.</li>
+    <li><span class="anno">1605–1694</span>In Brasile resiste Palmares, una comunità di schiavi fuggiti.</li>
+    <li><span class="anno">1700–1800</span>Il secolo con il maggior numero di deportazioni.</li>
+    <li><span class="anno">1789</span>Olaudah Equiano pubblica a Londra il racconto della sua vita.</li>
+    <li><span class="anno">1791</span>Rivolta degli schiavi a Saint-Domingue: nel 1804 nasce Haiti, primo Stato fondato da ex schiavi.</li>
+    <li><span class="anno">1807</span>La Gran Bretagna vieta la tratta.</li>
+    <li><span class="anno">1833</span>La Gran Bretagna abolisce la schiavitù nelle sue colonie.</li>
+    <li><span class="anno">1848</span>La Francia abolisce definitivamente la schiavitù.</li>
+    <li><span class="anno">1865</span>Gli Stati Uniti aboliscono la schiavitù dopo la guerra civile.</li>
+    <li class="estremo"><span class="anno">1888</span>Il Brasile è l'ultimo Paese delle Americhe ad abolire la schiavitù.</li>
+  </ol>
+
+  <h3 id="chi"><span>3. Chi?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 📖 Lessico — il link apre una voce Treccani in una nuova scheda.</p>
+  <div class="persone">
+    <article class="persona"><span class="sigla" aria-hidden="true">NZ</span><div><h4>Nzinga</h4><span class="date">1583 ca.–1663 · Angola</span><p>Regina di Ndongo e Matamba. Per decenni combatte e tratta con i portoghesi che cercano schiavi nel suo regno.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">JC</span><div><h4>Jacobus Capitein</h4><span class="date">1717 ca.–1747 · Africa e Paesi Bassi</span><p>Rapito da bambino in Africa e portato nei Paesi Bassi, studia teologia e torna a Elmina come pastore. La sua storia mostra le contraddizioni dell'epoca.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">OE</span><div><h4>Olaudah Equiano</h4><span class="date">1745 ca.–1797 · Africa, America, Inghilterra</span><p>Rapito da bambino, schiavo su navi e piantagioni, riesce a comprare la sua libertà. Il suo libro racconta la tratta dal punto di vista di chi l'ha subita.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">ZP</span><div><h4>Zumbi dei Palmares</h4><span class="date">1655–1695 · Brasile</span><p>Ultimo capo di Palmares, la grande comunità di schiavi fuggiti. Oggi in Brasile il giorno della sua morte è la Giornata della coscienza nera.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">TL</span><div><h4>Toussaint Louverture</h4><span class="date">1743–1803 · Haiti</span><p>Ex schiavo, guida la rivoluzione di Saint-Domingue, che porterà alla nascita di Haiti.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">WW</span><div><h4>William Wilberforce</h4><span class="date">1759–1833 · Inghilterra</span><p>Deputato inglese, per vent'anni si batte in Parlamento per abolire la tratta, con il sostegno di un grande movimento popolare.</p></div></article>
+  </div>
+</section>
+
+<!-- ======================= TESTO ======================= -->
+<section class="parte" id="testi" aria-labelledby="t-testi">
+  <p class="etichetta">Testo sintetico / essenziale</p>
+  <h2 id="t-testi">La lezione per intero</h2>
+  <p class="guida">Lo stesso testo in due versioni: il <strong>sintetico</strong> contiene tutte le informazioni, l'<strong>essenziale</strong> le riassume con frasi più brevi. Scegli quella che ti serve.</p>
+  <div class="livelli" role="group" aria-label="Versione del testo">
+    <button type="button" data-livello="sintetico" aria-pressed="true">Sintetico</button>
+    <button type="button" data-livello="essenziale" aria-pressed="false">Essenziale</button>
+  </div>
+  <div id="testo-sintetico">
+    <div class="paragrafo"><h4><span class="n">1</span>Perché la tratta</h4><p>Nelle colonie americane le piantagioni di zucchero, tabacco e poi cotone e caffè richiedono moltissima manodopera. Gli indigeni sono morti in massa o fuggiti; i coloni europei sono pochi. I mercanti europei cominciano allora a portare in America prigionieri africani, che vengono comprati e venduti come merci.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>La cattura in Africa</h4><p>Gli europei di solito non entrano nell'interno dell'Africa: comprano i prigionieri da mercanti e sovrani africani, che li catturano con guerre e razzie, in cambio di tessuti, armi, alcolici, oggetti di metallo. Lungo la costa sorgono fortezze e prigioni dove i prigionieri aspettano le navi, a volte per mesi.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>La traversata</h4><p>La traversata dell'Atlantico dura da uno a tre mesi. Le persone sono incatenate e ammassate nelle stive, con poca aria, poco cibo, poca acqua. Malattie e violenze uccidono moltissimi: secondo le stime degli storici, più di un milione e mezzo di persone muore durante il viaggio. Ci sono anche rivolte a bordo, quasi sempre represse.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>La vita nelle piantagioni</h4><p>Nelle piantagioni gli schiavi lavorano dall'alba al tramonto, sotto la frusta dei sorveglianti. Possono essere venduti, separati dai figli, puniti con crudeltà. Sono considerati proprietà del padrone. Eppure mantengono lingue, musiche, religioni, storie, che si mescolano con quelle europee e americane e danno vita a culture nuove.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>La resistenza</h4><p>Gli schiavi resistono in molti modi: lavorano piano, rompono gli attrezzi, fuggono. In Brasile e nei Caraibi gli schiavi fuggiti fondano comunità libere, come Palmares. Nel 1791 gli schiavi di Saint-Domingue si ribellano e nel 1804 fondano Haiti, la prima repubblica nata da una rivolta di schiavi.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>L'abolizione</h4><p>Alla fine del Settecento in Europa e in America nasce un movimento abolizionista: ex schiavi come Equiano, religiosi, deputati come Wilberforce, migliaia di cittadini che firmano petizioni e boicottano lo zucchero. Nell'Ottocento la tratta e poi la schiavitù vengono abolite, l'ultima volta in Brasile nel 1888.</p></div>
+  </div>
+  <div id="testo-essenziale" class="essenziale" hidden>
+    <div class="paragrafo"><h4><span class="n">1</span>Perché la tratta</h4><p>Le piantagioni hanno bisogno di lavoratori. I mercanti portano dall'Africa prigionieri da vendere come schiavi.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>La cattura in Africa</h4><p>I prigionieri sono catturati in Africa e venduti agli europei in cambio di merci.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>La traversata</h4><p>Il viaggio è terribile. Più di un milione e mezzo di persone muore in mare.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>La vita nelle piantagioni</h4><p>Gli schiavi lavorano duramente e sono proprietà del padrone. Ma conservano musiche, lingue e tradizioni.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>La resistenza</h4><p>Gli schiavi resistono e fuggono. Nel 1804 gli schiavi ribelli fondano Haiti.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>L'abolizione</h4><p>Nasce un movimento contro la schiavitù. Nell'Ottocento la tratta e la schiavitù vengono abolite.</p></div>
+  </div>
+</section>
+
+<!-- ======================= PERCHÉ ======================= -->
+<section class="parte" id="perche" aria-labelledby="t-perche">
+  <p class="etichetta">Perché?</p>
+  <h2 id="t-perche">Causa, evento, effetto</h2>
+  <p class="guida">Gli storici non si chiedono solo che cosa è successo, ma perché. Leggi la catena da sinistra a destra.</p>
+  <p class="mestiere">🧩 Comprendere fatti e processi storici</p>
+  <div class="catena">
+    <div class="anello causa"><h4>Causa</h4><p>Le piantagioni americane richiedono moltissima manodopera; gli indigeni sono decimati; il commercio di schiavi è molto redditizio per mercanti europei e per alcuni sovrani africani.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello evento"><h4>Evento</h4><p>Dal Cinquecento all'Ottocento più di dodici milioni di africani vengono deportati in America attraverso l'Atlantico.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello effetto"><h4>Effetto</h4><p>Enormi guadagni per l'Europa e le colonie; lo spopolamento e le guerre in molte regioni dell'Africa; la nascita di comunità afroamericane e di culture nuove; un razzismo che dura ancora.</p></div>
+  </div>
+  <div class="ombra">
+    <h4>Ma attenzione</h4>
+    <p>Per giustificare la schiavitù, molti europei e americani sostennero che gli africani fossero inferiori per natura. Questa idea, il razzismo, non ha alcuna base scientifica, ma ha influenzato leggi e mentalità molto a lungo, anche dopo la fine della schiavitù.</p>
+  </div>
+  <div class="ricorda">
+    <h4>Ricorda</h4>
+    <dl>
+      <dt>Tratta</dt><dd>Commercio di esseri umani.</dd>
+      <dt>Commercio triangolare</dt><dd>Europa, Africa e America collegate dal traffico di merci e di schiavi.</dd>
+      <dt>1888</dt><dd>Il Brasile abolisce la schiavitù, ultimo Paese delle Americhe.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ======================= CONCETTI ======================= -->
+<section class="parte" id="concetti" aria-labelledby="t-concetti">
+  <p class="etichetta">Concetti fondamentali</p>
+  <h2 id="t-concetti">Le idee chiave</h2>
+  <p class="guida">Le idee più importanti della lezione, spiegate una per una. Le parole sottolineate a puntini rimandano alle <a href="#parole">Parole chiave</a>.</p>
+  <article class="concetto" id="c-migrazione-forzata"><h4>Una migrazione forzata</h4><p>La tratta è la più grande <a class="pk" href="#p-migrazione-forzata">migrazione forzata</a> della storia: le persone non scelgono di partire, ma vengono catturate, vendute e trasportate contro la loro volontà.</p></article>
+  <article class="concetto" id="c-merce"><h4>Persone trattate come merci</h4><p>Lo schiavo non ha diritti: può essere comprato, venduto, ereditato. Nei registri delle navi e delle piantagioni le persone compaiono accanto alle botti e agli attrezzi.</p></article>
+  <article class="concetto" id="c-triangolo"><h4>Il triangolo atlantico</h4><p>Il <a class="pk" href="#p-triangolare">commercio triangolare</a> collega i porti europei, le coste africane e le piantagioni americane. Ogni tratto del viaggio produce guadagni per chi organizza il commercio.</p></article>
+  <article class="concetto" id="c-resistenza"><h4>Resistere</h4><p>Rivolte, fughe, comunità libere, ma anche canti, religioni e lingue conservate: la resistenza degli schiavi è parte fondamentale di questa storia.</p></article>
+  <article class="concetto" id="c-diaspora"><h4>La diaspora africana</h4><p>Oggi decine di milioni di persone in America discendono dagli africani deportati. Musica, cucina, religioni e lingue di molti Paesi americani portano il segno di questa <a class="pk" href="#p-diaspora">diaspora</a>.</p></article>
+</section>
+
+<!-- ======================= COME ======================= -->
+<section class="parte" id="come" aria-labelledby="t-come">
+  <p class="etichetta">Come?</p>
+  <h2 id="t-come">Come funziona il commercio triangolare</h2>
+  <p class="guida">Uno schema per seguire il viaggio delle navi e delle merci.</p>
+  <p class="mestiere">🧩 Organizzare le informazioni · collegamento con Geografia e con Educazione civica (le migrazioni forzate di oggi)</p>
+  <p class="radice">Le navi della tratta…</p>
+  <div class="come">
+    <div class="colonna"><h4>Dall'Europa all'Africa</h4><ul><li>tessuti, armi, alcolici</li><li>porti come Liverpool, Nantes, Lisbona</li></ul></div>
+    <div class="colonna"><h4>Dall'Africa all'America</h4><ul><li>prigionieri africani</li><li>la traversata di mezzo</li><li>vendita nei porti americani</li></ul></div>
+    <div class="colonna"><h4>Dall'America all'Europa</h4><ul><li>zucchero, caffè, tabacco, cotone</li><li>prodotti nelle piantagioni</li></ul></div>
+    <div class="colonna"><h4>Chi si arricchisce</h4><ul><li>mercanti e armatori</li><li>proprietari delle piantagioni</li><li>banche e porti europei</li></ul></div>
+  </div>
+</section>
+
+<!-- ======================= PAROLE CHIAVE ======================= -->
+<section class="parte" id="parole" aria-labelledby="t-parole">
+  <p class="etichetta">Parole chiave</p>
+  <h2 id="t-parole">Le parole della lezione</h2>
+  <p class="guida">Il significato dei termini nuovi, in ordine alfabetico.</p>
+  <dl class="parole">
+    <div class="parola" id="p-abolizionismo"><dt>Abolizionismo</dt><dd>Movimento per abolire la tratta e la schiavitù.</dd></div>
+    <div class="parola" id="p-triangolare"><dt>Commercio triangolare</dt><dd>Traffico di merci e schiavi tra Europa, Africa e America.</dd></div>
+    <div class="parola" id="p-diaspora"><dt>Diaspora</dt><dd>Dispersione di un popolo lontano dalla sua terra d'origine.</dd></div>
+    <div class="parola" id="p-migrazione-forzata"><dt>Migrazione forzata</dt><dd>Spostamento di persone costrette a lasciare la loro terra.</dd></div>
+    <div class="parola" id="p-piantagione"><dt>Piantagione</dt><dd>Grande azienda agricola dove si coltiva un solo prodotto da vendere.</dd></div>
+    <div class="parola" id="p-schiavitu"><dt>Schiavitù</dt><dd>Condizione di chi è proprietà di un'altra persona e non ha diritti. <a href="https://www.treccani.it/enciclopedia/schiavitu_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Treccani ragazzi</a></dd></div>
+    <div class="parola" id="p-tratta"><dt>Tratta</dt><dd>Commercio di esseri umani. <a href="https://www.treccani.it/enciclopedia/tratta/" target="_blank" rel="noopener">Treccani</a></dd></div>
+  </dl>
+</section>
+
+<!-- ======================= STUDIAMO LE FONTI ======================= -->
+<section class="parte" id="lente" aria-labelledby="t-lente">
+  <p class="etichetta">Studiamo le fonti</p>
+  <h2 id="t-lente">Dentro la fonte</h2>
+  <p class="guida">Un dipinto conservato al Rijksmuseum di Amsterdam e consultabile su <em>Europeana</em> mostra un mercante olandese accanto a persone schiavizzate.</p>
+  <p class="mestiere">📜 Leggere e interpretare le fonti · fonte iconografica</p>
+  <div class="lente">
+    <div class="lente-testa">
+      <p class="testata-giornale">Dipinto · Rijksmuseum, Amsterdam · Europeana</p>
+      <h3>Mercante olandese con schiavi</h3>
+    </div>
+    <div class="lente-corpo">
+      <p>I Paesi Bassi, come Portogallo, Spagna, Inghilterra e Francia, parteciparono alla tratta: la Compagnia olandese delle Indie occidentali controllava fortezze in Africa, come Elmina, e piantagioni in America.</p>
+      <p>Per secoli i ritratti di ricchi europei hanno mostrato servitori e schiavi africani come «accessori» che sottolineavano la ricchezza del padrone. Oggi i musei rileggono queste opere chiedendosi chi erano le persone ritratte.</p>
+      <p class="domanda-guida">Domanda guida: chi è al centro di questo dipinto, e chi invece è messo ai margini? Che cosa ci dice sul modo di guardare le persone schiavizzate?</p>
+      <div class="fasi">
+        <div class="fase"><h4>1. Prima di guardare</h4><ol><li>Che cos'è il commercio triangolare? Rileggi lo schema <a href="#come">Come?</a></li><li>Trova Elmina sulla <a href="#dove">carta</a>.</li></ol></div>
+        <div class="fase"><h4>2. Osservare</h4><ol><li>Apri l'immagine: come sono vestite le persone? Dove sono collocate? Che cosa fanno?</li><li>Leggi la scheda: chi ha dipinto il quadro? Quando? Che titolo gli è stato dato?</li></ol><p style="margin:10px 0 0"><a class="bottone" href="https://www.europeana.eu/en/item/90402/SK_A_4988" target="_blank" rel="noopener">Apri la fonte su Europeana</a></p></div>
+        <div class="fase"><h4>3. Pensare da storici</h4><ol><li>Chi ha commissionato il dipinto? Che immagine di sé voleva dare?</li><li>Delle persone schiavizzate non conosciamo il nome: perché?</li><li>Come potremmo conoscere la loro storia? Leggi il racconto su Jacobus Capitein qui sotto.</li></ol></div>
+      </div>
+      <ul class="altre-fonti">
+        <li><span class="tipo">Europeana</span><a href="https://www.europeana.eu/en/stories/the-unusual-story-of-jacobus-capitein" target="_blank" rel="noopener">La storia di Jacobus Capitein (racconto)</a> · <a href="https://www.europeana.eu/en/stories/pauline-villeneuve" target="_blank" rel="noopener">Pauline Villeneuve e la lotta per la libertà (racconto)</a> · <a href="https://www.europeana.eu/en/stories/frederick-douglass-in-europe" target="_blank" rel="noopener">Frederick Douglass in Europa (racconto)</a> · <a href="https://www.europeana.eu/en/collections/person/146855-josiah-wedgwood" target="_blank" rel="noopener">Josiah Wedgwood e il medaglione abolizionista (raccolta)</a></li>
+        <li><span class="tipo">Treccani</span><a href="https://www.treccani.it/enciclopedia/schiavitu_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Schiavitù</a> · <a href="https://www.treccani.it/enciclopedia/tratta/" target="_blank" rel="noopener">Tratta</a> · <a href="https://www.treccani.it/enciclopedia/emigrazione-e-immigrazione_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Emigrazione e immigrazione</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RIPASSIAMO ======================= -->
+<section class="parte" id="compiti" aria-labelledby="t-compiti">
+  <p class="etichetta">Ripassiamo</p>
+  <h2 id="t-compiti">Le cinque attività dello storico</h2>
+  <p class="guida">Rispondi prima da solo, poi premi «Controlla». Se sbagli, riprova: la soluzione compare con il pulsante «Mostra le soluzioni».</p>
+  <div id="esercizi"></div>
+
+  <p class="fascia" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8"/></svg></span><span>Ripasso finale</span></p>
+  <div class="attivita">
+    <h4>Dieci cose da sapere</h4>
+    <p class="meta">Ricongiungi le due metà di ogni frase.</p>
+    <div id="dieci"></div>
+  </div>
+  <div class="attivita">
+    <h4>Mini-dibattito</h4>
+    <p class="consegna"><strong>Chi è responsabile?</strong> Nella tratta erano coinvolti mercanti europei, sovrani e mercanti africani, proprietari di piantagioni americani, banche, consumatori di zucchero. Si possono distribuire le responsabilità? Ha senso oggi chiedere scusa o riparare? Prepara due argomenti e confrontali con i compagni.</p>
+    <textarea aria-label="I tuoi argomenti" placeholder="I responsabili erano… Oggi secondo me…"></textarea>
+    <p class="dibattito"><b>Regole:</b> non si interrompe chi parla; si criticano le idee, non le persone; alla fine ognuno scrive una conclusione personale.</p>
+  </div>
+</section>
+</main>
+</div>
+
+<footer>
+<p>Organizzazione della lezione ispirata a <em>Storia facile 2</em> (Modulo 3, cap. 9) e al <em>Tablet degli argomenti di Storia</em> (p. 112), Edizioni Erickson: Prima/Dopo, Idea principale, Perché?, Come?, Parole chiave, testo sintetico ed essenziale, verifiche. Testi originali della lezione.</p>
+  <p>Carta: coste da Natural Earth (dominio pubblico). Fonti: Europeana. Voci collegate: Treccani.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- luoghi ---------- */
+var LUOGHI=[
+{n:"Liverpool",ll:[53.4084,-2.9916],t:"Nel Settecento il più importante porto europeo della tratta."},
+ {n:"Gorée",ll:[14.6672,-17.3985],t:"Isola davanti a Dakar, in Senegal, oggi luogo della memoria della tratta."},
+ {n:"Elmina",ll:[5.0847,-1.3509],t:"Castello sulla costa dell'attuale Ghana, costruito dai portoghesi e poi passato agli olandesi."},
+ {n:"Luanda",ll:[-8.8390,13.2894],t:"Porto dell'Angola portoghese da cui partirono milioni di prigionieri, soprattutto verso il Brasile."},
+ {n:"Salvador de Bahia",ll:[-12.9714,-38.5014],t:"Capitale del Brasile coloniale, uno dei principali porti d'arrivo degli schiavi."},
+ {n:"Kingston",ll:[17.9714,-76.7931],t:"In Giamaica, isola inglese delle piantagioni di zucchero."},
+ {n:"Charleston",ll:[32.7765,-79.9311],t:"Porto del Nord America dove arrivavano gli schiavi destinati alle piantagioni di riso e cotone."}
+];
+var lista=document.getElementById("luoghi"), gruppo=document.getElementById("segni"), info=document.getElementById("mappa-info"), NS="http://www.w3.org/2000/svg";
+function xy(ll){ return [(ll[1]-(-95))*900/125, (55-ll[0])*900/125]; }
+/* posizione dell'etichetta rispetto al punto: [dx, dy, allineamento] */
+var ETI={"Liverpool":[10,26,"start"],"Gorée":[-10,5,"end"],"Elmina":[0,22,"middle"],"Luanda":[10,5,"start"],"Salvador de Bahia":[-10,5,"end"],"Kingston":[10,8,"start"],"Charleston":[10,5,"start"]};
+var segni=[];
+function scegli(i){
+  segni.forEach(function(g,j){ g.setAttribute("class", j===i ? "segno scelto" : "segno"); g.firstChild.setAttribute("r", j===i ? "8" : "6"); if(j===i) gruppo.appendChild(g); });
+  info.innerHTML=""; var b=document.createElement("strong"); b.textContent=LUOGHI[i].n+": "; info.appendChild(b); info.appendChild(document.createTextNode(LUOGHI[i].t));
+}
+LUOGHI.forEach(function(L,i){
+  var p=xy(L.ll), g=document.createElementNS(NS,"g"), c=document.createElementNS(NS,"circle"), t=document.createElementNS(NS,"text"), e=ETI[L.n]||[14,5,"start"];
+  g.setAttribute("class","segno"); g.setAttribute("tabindex","0"); g.setAttribute("role","button"); g.setAttribute("aria-label",L.n);
+  c.setAttribute("cx",p[0].toFixed(1)); c.setAttribute("cy",p[1].toFixed(1)); c.setAttribute("r","6");
+  t.setAttribute("x",(p[0]+e[0]).toFixed(1)); t.setAttribute("y",(p[1]+e[1]).toFixed(1)); t.setAttribute("text-anchor",e[2]); t.textContent=L.n.replace(/ \(.*\)$/,"");
+  g.appendChild(c); g.appendChild(t); gruppo.appendChild(g); segni.push(g);
+  g.addEventListener("click",function(){ scegli(i); });
+  g.addEventListener("keydown",function(ev){ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); scegli(i); } });
+  var li=document.createElement("li"), bt=document.createElement("button");
+  bt.type="button"; bt.textContent=L.n; bt.addEventListener("click",function(){ scegli(i); document.getElementById("mappa").scrollIntoView({block:"center"}); });
+  li.appendChild(bt); li.appendChild(document.createTextNode(" — "+L.t)); lista.appendChild(li);
+});
+
+/* ---------- indice laterale: evidenzia la parte che si sta leggendo ---------- */
+var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
+function attiva(id){ Array.prototype.forEach.call(voci,function(v){ var on=v.getAttribute("href")==="#"+id; if(on){ v.setAttribute("aria-current","true"); if(navI.scrollWidth>navI.clientWidth){ navI.scrollLeft=v.offsetLeft-16; } } else v.removeAttribute("aria-current"); }); }
+var parti=document.querySelectorAll("section.parte"), attesa=false;
+function guarda(){ attesa=false; var lim=window.innerHeight*0.3, id=parti[0].id;
+  Array.prototype.forEach.call(parti,function(sx){ if(sx.getBoundingClientRect().top<=lim) id=sx.id; });
+  if((window.innerHeight+window.pageYOffset)>=document.documentElement.scrollHeight-4) id=parti[parti.length-1].id;
+  attiva(id); }
+window.addEventListener("scroll",function(){ if(!attesa){ attesa=true; (window.requestAnimationFrame||setTimeout)(guarda); } },{passive:true});
+window.addEventListener("resize",guarda); guarda();
+
+/* ---------- testo sintetico / essenziale ---------- */
+var bot=document.querySelectorAll(".livelli button");
+Array.prototype.forEach.call(bot,function(b){ b.addEventListener("click",function(){
+  var ess=b.getAttribute("data-livello")==="essenziale";
+  document.getElementById("testo-sintetico").hidden=ess; document.getElementById("testo-essenziale").hidden=!ess;
+  Array.prototype.forEach.call(bot,function(x){ x.setAttribute("aria-pressed", x===b ? "true":"false"); });
+});});
+
+/* ---------- esercizi ---------- */
+var ESERCIZI=[
+{gruppo:"tempo", titolo:"Scegli l'anno giusto", meta:"Abbina ogni evento all'anno in cui accadde.",
+  scelte:["1501","1789","1804","1807","1865","1888"],
+  righe:[["Primi africani schiavizzati nelle colonie spagnole","1501"],["Il libro di Equiano","1789"],["Nasce Haiti","1804"],["La Gran Bretagna vieta la tratta","1807"],["Gli Stati Uniti aboliscono la schiavitù","1865"],["Il Brasile abolisce la schiavitù","1888"]]},
+ {gruppo:"spazio", titolo:"Dove si trova?", meta:"Usa la carta dell'Idea principale per trovare ogni luogo.",
+  scelte:["Liverpool","Gorée","Elmina","Luanda","Salvador de Bahia","Kingston","Charleston"],
+  righe:[["Il grande porto europeo della tratta","Liverpool"],["L'isola davanti a Dakar","Gorée"],["Il castello sulla costa del Ghana","Elmina"],["Il porto dell'Angola","Luanda"],["Il porto d'arrivo in Brasile","Salvador de Bahia"],["L'isola dello zucchero inglese","Kingston"],["Il porto delle piantagioni di riso e cotone","Charleston"]]},
+ {gruppo:"fonti", titolo:"Fatto o interpretazione?", meta:"Uno storico distingue i fatti (si possono verificare) dalle interpretazioni (sono giudizi, opinioni).",
+  scelte:["Fatto","Interpretazione"],
+  righe:[["Più di dodici milioni di africani furono imbarcati verso l'America.","Fatto","È una stima basata sui registri di migliaia di viaggi."],["Gli africani erano inferiori per natura.","Interpretazione","È un'idea razzista, falsa e senza basi scientifiche."],["Nel 1804 nasce Haiti.","Fatto","Esiste la dichiarazione d'indipendenza."],["La ricchezza dell'Europa nasce in gran parte dalla tratta.","Interpretazione","È una tesi discussa dagli storici."],["Equiano pubblicò la sua autobiografia nel 1789.","Fatto","Esiste la prima edizione."]]},
+ {gruppo:"processi", titolo:"Quale tratto del triangolo?", meta:"Rileggi lo schema «Come?» e abbina ogni carico al tratto giusto.",
+  scelte:["Europa → Africa","Africa → America","America → Europa"],
+  righe:[["Tessuti e armi","Europa → Africa"],["Prigionieri africani","Africa → America"],["Zucchero e caffè","America → Europa"],["Alcolici","Europa → Africa"],["Cotone e tabacco","America → Europa"],["La traversata di mezzo","Africa → America"]]},
+ {gruppo:"processi", titolo:"Vero o falso?", meta:"Dopo il controllo leggi la spiegazione: serve a correggere le frasi false.",
+  scelte:["Vero","Falso"],
+  righe:[["Gli schiavi non opposero alcuna resistenza.","Falso","Ci furono rivolte, fughe e comunità libere."],["Molti prigionieri morivano durante la traversata.","Vero"],["Il Brasile fu il primo Paese ad abolire la schiavitù.","Falso","Fu l'ultimo delle Americhe, nel 1888."],["Alla tratta parteciparono diversi Paesi europei.","Vero"],["La tratta è una migrazione forzata.","Vero"]]},
+ {gruppo:"lessico", titolo:"Parole e significati", meta:"Abbina ogni parola alla sua definizione.",
+  scelte:["Tratta","Schiavitù","Piantagione","Migrazione forzata","Diaspora","Abolizionismo"],
+  righe:[["Commercio di esseri umani","Tratta"],["Essere proprietà di un altro","Schiavitù"],["Grande azienda agricola con un solo prodotto","Piantagione"],["Spostamento non scelto","Migrazione forzata"],["Dispersione di un popolo","Diaspora"],["Movimento contro la schiavitù","Abolizionismo"]]}
+];
+var DIECI=[
+["Le piantagioni americane","richiedono molta manodopera."],
+ ["I prigionieri africani","vengono venduti come merci."],
+ ["Il commercio triangolare","collega Europa, Africa e America."],
+ ["Durante la traversata","muoiono moltissime persone."],
+ ["Gli schiavi","sono proprietà del padrone."],
+ ["Gli schiavi resistono","con rivolte e fughe."],
+ ["Nel 1804","gli schiavi ribelli fondano Haiti."],
+ ["Il movimento abolizionista","chiede la fine della tratta."],
+ ["Il Brasile","abolisce la schiavitù nel 1888."],
+ ["La tratta","è la più grande migrazione forzata della storia."]
+];
+function el(t,attr,txt){ var e=document.createElement(t); if(attr){ for(var k in attr){ e.setAttribute(k,attr[k]); } } if(txt!=null) e.textContent=txt; return e; }
+function mescola(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+function costruisci(cont, scelte, righe, conGruppo){
+  var tab=el("table",{"class":"esercizio"}), tb=el("tbody"); tab.appendChild(tb);
+  var stati=[];
+  righe.forEach(function(r,i){
+    var tr=el("tr"), td1=el("td"), td2=el("td"), td3=el("td",{"class":"esito","aria-live":"polite"});
+    td1.appendChild(document.createTextNode(r[0]));
+    var sp=el("span",{"class":"spiega"}); sp.hidden=true; if(r[2]) sp.textContent=r[2]; td1.appendChild(sp);
+    var s=el("select",{"aria-label":"Risposta: "+r[0]}); s.appendChild(el("option",{value:""},"— scegli —"));
+    scelte.forEach(function(c){ s.appendChild(el("option",{value:c},c)); });
+    td2.appendChild(s); tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tb.appendChild(tr);
+    stati.push({tr:tr,s:s,esito:td3,sp:sp,giusta:r[1]});
+  });
+  cont.appendChild(tab);
+  var com=el("div",{"class":"comandi"}), b1=el("button",{type:"button","class":"bottone"},"Controlla"), b2=el("button",{type:"button","class":"bottone secondario"},"Mostra le soluzioni"), pt=el("span",{"class":"punteggio","aria-live":"polite"});
+  b2.hidden=true; com.appendChild(b1); com.appendChild(b2); com.appendChild(pt); cont.appendChild(com);
+  b1.addEventListener("click",function(){
+    var ok=0, vuote=0;
+    stati.forEach(function(x){
+      x.tr.classList.remove("ok"); x.tr.classList.remove("no");
+      if(!x.s.value){ vuote++; x.esito.textContent=""; return; }
+      var g=x.s.value===x.giusta; if(g) ok++;
+      x.tr.classList.add(g?"ok":"no"); x.esito.textContent=g?"✓":"✗"; x.esito.setAttribute("aria-label",g?"giusto":"sbagliato");
+      if(x.sp.textContent) x.sp.hidden=false;
+    });
+    pt.textContent=ok+" su "+stati.length+(vuote? " · "+vuote+" senza risposta":"");
+    b2.hidden=false;
+  });
+  b2.addEventListener("click",function(){
+    stati.forEach(function(x){ x.s.value=x.giusta; x.tr.classList.remove("no"); x.tr.classList.add("ok"); x.esito.textContent="✓"; if(x.sp.textContent) x.sp.hidden=false; });
+    pt.textContent="Ecco le soluzioni.";
+  });
+}
+var GRUPPI={"tempo": {"c": "#2a7f6f", "n": "Collocare nel tempo", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15.5\" rx=\"2\"/><path d=\"M3.5 10h17M8 3v4M16 3v4\"/><path d=\"M9 14.5h2v3M13.5 14.5h2l-1.5 3\"/></svg>"}, "spazio": {"c": "#b25510", "n": "Collocare nello spazio", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z\"/><path d=\"M9 4.5v13M15 6.5v13\"/></svg>"}, "fonti": {"c": "#55800f", "n": "Leggere e interpretare le fonti", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"5\" y=\"11\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 11V7.5a4 4 0 0 1 7.6-1.8\"/><circle cx=\"12\" cy=\"15.5\" r=\"1.3\"/><path d=\"M12 16.8v1.7\"/></svg>"}, "processi": {"c": "#b0215f", "n": "Comprendere fatti e processi storici", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 4.5l6 3.5-6 3.5zM10 4.5l6 3.5-6 3.5z\"/><path d=\"M20 12.5l-6 3.5 6 3.5zM14 12.5l-6 3.5 6 3.5z\"/></svg>"}, "lessico": {"c": "#6b3f8a", "n": "Conoscere e usare il lessico specifico", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 18.5L8.5 6l4.5 12.5M5.6 14h5.8\"/><path d=\"M15 12.5a2.5 2.5 0 1 1 0 4.5M20 10v8.5\"/></svg>"}, "ripasso": {"c": "#2b5f6b", "n": "Ripasso finale", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8\"/></svg>"}};
+var zona=document.getElementById("esercizi"), ultimo="";
+ESERCIZI.forEach(function(E,i){
+  if(E.gruppo!==ultimo){ var g=GRUPPI[E.gruppo], f=el("p",{"class":"fascia",style:"--c:"+g.c}), t=el("span",{"class":"tondo"}); t.innerHTML=g.i; f.appendChild(t); f.appendChild(el("span",null,g.n)); zona.appendChild(f); ultimo=E.gruppo; }
+  var box=el("div",{"class":"attivita"}); box.appendChild(el("h4",null,(i+1)+". "+E.titolo)); box.appendChild(el("p",{"class":"meta"},E.meta));
+  costruisci(box,E.scelte,mescola(E.righe)); zona.appendChild(box);
+});
+costruisci(document.getElementById("dieci"), mescola(DIECI.map(function(d){return d[1];})), DIECI.map(function(d){ return [d[0]+" …", d[1]]; }));
+})();
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+</body>
+</html>

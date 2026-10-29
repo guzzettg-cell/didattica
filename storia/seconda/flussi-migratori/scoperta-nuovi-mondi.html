@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La scoperta dei nuovi mondi</title>
+<style>
+:root{
+  --sfondo:#f3f3ef; --carta:#ffffff; --tenue-bg:#eaf1f2; --ink:#23262a; --tenue:#5a6066; --filo:#dfe2dd;
+  --accento:#2b5f6b; --accento-2:#1f4a54; --accento-soft:#e1edef;
+  --causa:#8a5a12; --causa-bg:#f8eedb; --evento:#2b5f6b; --evento-bg:#e1edef; --effetto:#6b3f74; --effetto-bg:#f1e6f3;
+  --ombra:#7a3b2e; --ombra-bg:#f7e7e2;
+  --mare:#d7e8ee; --terra:#f4efe2; --ok:#1f7a4d; --ok-bg:#dcf2e6; --no:#b42318; --no-bg:#fde3e1;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --surface:var(--carta); --line:var(--filo); --soft:var(--tenue-bg); --paper:var(--tenue-bg); --accent:var(--accento); --accent-ink:#fff; --muted:var(--tenue); --card:var(--carta);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#f3f3ef;background:var(--sfondo);color:#23262a;color:var(--ink);font:1.08rem/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:1.08rem/1.65 var(--sans)}
+a{color:#2b5f6b;color:var(--accento)}
+a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.salta{position:absolute;left:1rem;top:-6rem;background:#ffffff;background:var(--carta);padding:.8rem 1rem;z-index:20}.salta:focus{top:1rem}
+.foglio{max-width:1280px;margin:32px auto;background:#ffffff;background:var(--carta);border:1px solid #dfe2dd;border:1px solid var(--filo)}
+header.testata{padding:22px 52px 26px;border-top:9px solid #2b5f6b;border-top:9px solid var(--accento);background:#eaf1f2;background:var(--tenue-bg)}
+.indietro{display:inline-block;font-size:.92rem;margin-bottom:18px;text-decoration:none;border-bottom:1px solid currentColor}
+.eyebrow{margin:0 0 6px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:#5a6066;color:var(--tenue);font-weight:700}
+.capitolo{margin:0;font-weight:700;color:#2b5f6b;color:var(--accento)}
+h1{font:700 2.6rem/1.08 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2.6rem/1.08 var(--serif);font-size:clamp(2.1rem,6vw,3.5rem);margin:6px 0 10px}
+.sottotitolo{margin:0;font:italic 1.25rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.25rem/1.4 var(--serif);color:#5a6066;color:var(--tenue)}
+.corpo-lezione{display:grid;grid-template-columns:268px minmax(0,1fr);align-items:start}
+nav.indice{position:-webkit-sticky;position:sticky;top:12px;align-self:start;display:grid;grid-template-columns:minmax(0,1fr);grid-gap:10px;gap:10px;padding:30px 0 24px 28px;max-height:calc(100vh - 24px);overflow-y:auto}
+.indice-titolo{margin:0 0 2px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue)}
+a.voce{display:flex;align-items:center;min-height:54px;padding:4px 12px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;text-decoration:none;font:800 .86rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .86rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em;transition:transform .15s,box-shadow .15s}
+a.voce .tondo{margin-right:10px;flex:none;width:46px;height:46px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+a.voce svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+a.voce:hover{transform:translateX(4px)}
+a.voce[aria-current="true"]{transform:translateX(8px);box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+a.voce:focus-visible{outline:3px solid #23262a;outline:3px solid var(--ink);outline-offset:3px}
+main{padding:10px 52px 40px 40px;min-width:0}
+.fascia{display:flex;align-items:center;margin:28px 0 12px;min-height:50px;padding:4px 16px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;font:800 .95rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .95rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.fascia .tondo{margin-right:10px;flex:none;width:42px;height:42px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+.fascia svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+section.parte{padding:34px 0 8px;border-bottom:1px solid #dfe2dd;border-bottom:1px solid var(--filo);scroll-margin-top:56px}
+section.parte:last-of-type{border-bottom:0}
+h2{font:700 2rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2rem/1.2 var(--serif);margin:0 0 6px}
+.etichetta{display:inline-block;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#2b5f6b;color:var(--accento);margin:0 0 4px}
+.guida{margin:0 0 22px;color:#5a6066;color:var(--tenue);font-size:.98rem;max-width:72ch}
+h3{font:700 1.08rem/1.3 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 1.08rem/1.3 var(--sans);text-transform:uppercase;letter-spacing:.05em;color:#2b5f6b;color:var(--accento);margin:26px 0 12px}
+h3 span{border-bottom:3px dotted #2b5f6b;border-bottom:3px dotted var(--accento);padding-bottom:4px}
+p{margin:0 0 14px}
+.lettura{max-width:74ch}
+.mestiere{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:-4px 0 16px}
+
+/* prima / dopo */
+.primadopo{display:grid;grid-template-columns:1fr auto 1fr;grid-gap:16px;gap:16px;align-items:stretch;margin:6px 0 10px}
+.pd{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:18px 20px;background:#ffffff;background:var(--carta)}
+.pd h3{margin-top:0}
+.pd.ora{background:#e1edef;background:var(--accento-soft);border-color:transparent}
+.freccia{align-self:center;font:700 1.8rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.8rem var(--serif);color:#2b5f6b;color:var(--accento)}
+.pd .link-lez{font-size:.92rem;margin:0}
+.pd-centro{grid-column:1/-1;text-align:center;font:700 1.15rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem/1.4 var(--serif);background:#2b5f6b;background:var(--accento);color:#fff;border-radius:12px;padding:12px 18px;margin:0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pd-centro{color:#0f1416}}
+:root[data-theme="dark"] .pd-centro{color:#0f1416}
+
+/* idea principale */
+.mappa-box{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;margin:16px 0 8px}
+#mappa{display:block;width:100%;height:auto;background:#d7e8ee;background:var(--mare)}
+#mappa .mare{fill:#d7e8ee;fill:var(--mare)}
+#mappa .terra{fill:#f4efe2;fill:var(--terra);stroke:#f4efe2;stroke:var(--terra);stroke-width:1.2;stroke-linejoin:round}
+#mappa .segno{cursor:pointer}
+#mappa .segno circle{fill:#2b5f6b;fill:var(--accento);stroke:#ffffff;stroke:var(--carta);stroke-width:3}
+#mappa .segno text{font:700 17px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 17px var(--sans);fill:#23262a;fill:var(--ink);paint-order:stroke;stroke:#f4efe2;stroke:var(--terra);stroke-width:5px;stroke-linejoin:round}
+#mappa .segno.scelto circle{fill:#d9822b}
+#mappa .segno:focus{outline:none}#mappa .segno:focus-visible circle{stroke:#23262a;stroke:var(--ink);stroke-width:4}
+.mappa-info{margin:0;padding:12px 14px;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);font-size:.98rem;min-height:3.2em}
+.mappa-info strong{color:#2b5f6b;color:var(--accento)}
+.mappa-nota{font-size:.88rem;color:#5a6066;color:var(--tenue);padding:10px 14px;margin:0;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo)}
+.luoghi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));grid-gap:10px;gap:10px;margin:12px 0 0;padding:0;list-style:none}
+.luoghi li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 12px;font-size:.95rem}
+.luoghi button{all:unset;cursor:pointer;font-weight:700;color:#2b5f6b;color:var(--accento)}
+.luoghi button:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.linea{position:relative;margin:8px 0 0;padding:0 0 0 30px;list-style:none}
+.linea::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:3px;background:#2b5f6b;background:var(--accento);border-radius:2px}
+.linea li{position:relative;margin:0 0 12px}
+.linea li::before{content:"";position:absolute;left:-26px;top:.45em;width:13px;height:13px;border-radius:50%;background:#ffffff;background:var(--carta);border:3px solid #2b5f6b;border:3px solid var(--accento)}
+.linea li.estremo::before{background:#2b5f6b;background:var(--accento)}
+.linea .anno{font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);color:#2b5f6b;color:var(--accento);margin-right:8px}
+.linea .pista{display:inline-block;max-width:100%;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;padding:1px 8px;margin-left:6px;color:#5a6066;color:var(--tenue);white-space:nowrap}
+.persone{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-gap:14px;gap:14px}
+.persona{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:54px 1fr;grid-gap:14px;gap:14px;align-items:start}
+.sigla{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#e1edef;background:var(--accento-soft);color:#2b5f6b;color:var(--accento);font:700 1.2rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem var(--serif)}
+.persona h4{margin:0;font:700 1.12rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.12rem/1.3 var(--serif)}
+.persona .date{font-size:.88rem;color:#5a6066;color:var(--tenue);display:block;margin-bottom:6px}
+.persona p{margin:0 0 6px;font-size:.97rem}
+.persona a{font-size:.9rem}
+
+/* perché */
+.catena{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;grid-gap:10px;gap:10px;align-items:stretch}
+.anello{border-radius:12px;padding:16px 18px}
+.anello h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.anello p{margin:0;font-size:.98rem}
+.anello.causa{background:#f8eedb;background:var(--causa-bg)}.anello.causa h4{color:#8a5a12;color:var(--causa)}
+.anello.evento{background:#e1edef;background:var(--evento-bg)}.anello.evento h4{color:#2b5f6b;color:var(--evento)}
+.anello.effetto{background:#f1e6f3;background:var(--effetto-bg)}.anello.effetto h4{color:#6b3f74;color:var(--effetto)}
+.catena .freccia{font-size:1.5rem}
+.ombra{margin:16px 0 0;background:#f7e7e2;background:var(--ombra-bg);border-left:5px solid #7a3b2e;border-left:5px solid var(--ombra);border-radius:0 12px 12px 0;padding:14px 18px}
+.ombra h4{margin:0 0 6px;color:#7a3b2e;color:var(--ombra);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.ombra p{margin:0}
+.ricorda{margin:18px 0 0;border:2px dashed #dfe2dd;border:2px dashed var(--filo);border-radius:12px;padding:14px 18px}
+.ricorda h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+.ricorda dl{margin:0;display:grid;grid-template-columns:max-content 1fr;grid-gap:6px 14px;gap:6px 14px}
+.ricorda dt{font-weight:700}.ricorda dd{margin:0}
+
+/* concetti e come */
+.concetto{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);padding:18px 22px;margin:0 0 16px;scroll-margin-top:60px}
+.concetto h4{font:700 1.3rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.3rem/1.3 var(--serif);margin:0 0 10px}
+.concetto p:last-child{margin-bottom:0}
+.come{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-gap:12px;gap:12px;margin-top:10px}
+.colonna{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:0;overflow:hidden}
+.colonna h4{margin:0;padding:10px 14px;background:#2b5f6b;background:var(--accento);color:#fff;font-size:1rem}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .colonna h4{color:#0f1416}}
+:root[data-theme="dark"] .colonna h4{color:#0f1416}
+.colonna ul{margin:0;padding:12px 14px 12px 30px;font-size:.95rem}
+.colonna li{margin:0 0 6px}
+.radice{text-align:center;font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:999px;padding:8px 16px;max-width:520px;margin:4px auto 10px}
+
+/* parole chiave */
+.parole{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));grid-gap:12px;gap:12px;margin:0;padding:0}
+.parola{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px;scroll-margin-top:60px}
+.parola dt{font:700 1.1rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.1rem var(--serif);color:#2b5f6b;color:var(--accento);margin-bottom:4px}
+.parola dd{margin:0;font-size:.97rem}
+a.pk{color:inherit;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted #2b5f6b;text-decoration:underline dotted var(--accento);text-underline-offset:4px;text-decoration-thickness:2px}
+a.pk:hover{background:#e1edef;background:var(--accento-soft)}
+:target{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:4px}
+
+/* testi */
+.livelli{display:inline-flex;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;overflow:hidden;margin:0 0 18px}
+.livelli button{font:inherit;font-size:.95rem;border:0;background:transparent;color:#23262a;color:var(--ink);padding:7px 16px;cursor:pointer}
+.livelli button[aria-pressed="true"]{background:#2b5f6b;background:var(--accento);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .livelli button[aria-pressed="true"]{color:#0f1416}}
+:root[data-theme="dark"] .livelli button[aria-pressed="true"]{color:#0f1416}
+.paragrafo{margin:0 0 22px;max-width:74ch}
+.paragrafo h4{font:700 1.2rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem/1.3 var(--serif);margin:0 0 6px}
+.paragrafo h4 .n{color:#2b5f6b;color:var(--accento);margin-right:6px}
+.essenziale .paragrafo p{font-size:1.12rem;line-height:1.75}
+
+/* lente */
+.lente{border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:14px;overflow:hidden}
+.lente-testa{background:#2b5f6b;background:var(--accento);color:#fff;padding:16px 22px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lente-testa{color:#0f1416}}
+:root[data-theme="dark"] .lente-testa{color:#0f1416}
+.lente-testa .testata-giornale{margin:0;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.lente-testa h3{margin:4px 0 0;color:inherit;font:700 1.6rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.6rem/1.2 var(--serif);text-transform:none;letter-spacing:0}
+.lente-corpo{padding:18px 22px}
+.domanda-guida{font:italic 1.2rem/1.5 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.2rem/1.5 var(--serif);border-left:4px solid #2b5f6b;border-left:4px solid var(--accento);padding:4px 0 4px 14px;margin:0 0 18px}
+.fasi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-gap:14px;gap:14px}
+.fase{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px}
+.fase h4{margin:0 0 8px;font-size:1rem}
+.fase ol,.fase ul{margin:0;padding-left:20px;font-size:.96rem}
+.fase li{margin:0 0 6px}
+.bottone{display:inline-block;font:inherit;font-weight:700;border-radius:999px;padding:9px 18px;border:2px solid #2b5f6b;border:2px solid var(--accento);background:#2b5f6b;background:var(--accento);color:#fff;text-decoration:none;cursor:pointer}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bottone{color:#0f1416}}
+:root[data-theme="dark"] .bottone{color:#0f1416}
+.bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+:root .bottone.secondario,:root:not([data-theme="light"]) .bottone.secondario,:root[data-theme="dark"] .bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+.bottone[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.altre-fonti{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-gap:8px;gap:8px}
+.altre-fonti li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 14px;font-size:.96rem}
+.altre-fonti .tipo{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue);display:block}
+
+/* compiti */
+.attivita{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:14px;padding:18px 22px;margin:0 0 18px}
+.attivita h4{margin:0 0 4px;font:700 1.25rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.25rem/1.3 var(--serif)}
+.attivita .meta{font-size:.86rem;color:#5a6066;color:var(--tenue);margin:0 0 12px}
+.consegna{margin:0 0 12px}
+table.esercizio{width:100%;border-collapse:collapse;font-size:.97rem}
+table.esercizio td{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:8px 6px;vertical-align:middle}
+table.esercizio td:first-child{width:52%}
+table.esercizio select{font:inherit;font-size:.95rem;width:100%;max-width:100%;padding:5px 6px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:6px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+td.esito{width:34px;text-align:center;font-weight:700}
+tr.ok td.esito{color:#1f7a4d;color:var(--ok)} tr.no td.esito{color:#b42318;color:var(--no)}
+tr.ok{background:#dcf2e6;background:var(--ok-bg)} tr.no{background:#fde3e1;background:var(--no-bg)}
+.spiega{display:block;font-size:.88rem;color:#5a6066;color:var(--tenue);margin-top:4px}
+.comandi{display:flex;flex-wrap:wrap;align-items:center;margin:14px 0 0}
+.comandi>*{margin:0 10px 8px 0}
+.punteggio{font-weight:700}
+textarea{font:inherit;width:100%;min-height:84px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:8px;padding:8px 10px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+.dibattito{margin:14px 0 0;background:#eaf1f2;background:var(--tenue-bg);border-radius:10px;padding:10px 14px;font-size:.95rem}
+.dibattito b{color:#2b5f6b;color:var(--accento)}
+
+footer{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:18px 52px;font-size:.86rem;color:#5a6066;color:var(--tenue)}
+footer p{margin:0 0 6px}
+
+@media (max-width:960px){
+  html{scroll-padding-bottom:84px}
+  .corpo-lezione{display:block}
+  nav.indice{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:90;grid-auto-flow:column;grid-auto-columns:max-content;grid-template-columns:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;max-height:none;grid-gap:8px;gap:8px;padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));background:#ffffff;background:var(--carta);border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);box-shadow:0 -4px 14px rgba(0,0,0,.12)}
+  .foglio{margin-bottom:70px}
+  .indice-titolo{display:none}
+  a.voce{flex:none;min-height:40px;padding:3px 12px 3px 3px;font-size:.74rem;white-space:nowrap}
+  a.voce .tondo{width:34px;height:34px;border-width:2px}
+  a.voce svg{width:18px;height:18px}
+  a.voce:hover,a.voce[aria-current="true"]{transform:none}
+  a.voce[aria-current="true"]{box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+  main{padding:10px 40px 40px}
+}
+@media (max-width:860px){
+  .come{grid-template-columns:1fr 1fr}
+  .fasi{grid-template-columns:1fr}
+  .catena{grid-template-columns:1fr}
+  .catena .freccia{transform:rotate(90deg);justify-self:center;line-height:1}
+}
+@media (max-width:700px){
+  .foglio{margin:0;border:0}
+  header.testata{padding:16px 16px 20px}
+  main{padding:4px 16px 28px}
+  footer{padding:16px}
+  .primadopo{grid-template-columns:1fr}
+  .primadopo .freccia{transform:rotate(90deg);justify-self:center}
+  .come{grid-template-columns:1fr}
+  #mappa .segno text{font-size:30px}
+  .ricorda dl{grid-template-columns:1fr}
+  .ricorda dd{margin-bottom:6px}
+  table.esercizio td{display:block;width:100%!important;border-top:0;padding:4px 6px}
+  table.esercizio tr{display:block;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:6px 0}
+  td.esito{text-align:left}
+}
+@media print{
+  body{background:#fff}.foglio{border:0;margin:0}nav.indice,.indietro,.comandi,.livelli,.mappa-box{display:none}
+  .essenziale-solo{display:none}section.parte{break-inside:avoid-page}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#mappa.mondo .segno text{font-size:14px;stroke-width:4px}
+@media (max-width:700px){#mappa.mondo .segno text{font-size:26px;stroke-width:5px}}
+
+.animata{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);border-radius:12px;padding:14px 16px;margin:16px 0 0;background:#ffffff;background:var(--carta)}
+.animata h4{margin:0 0 6px;font-size:1.02rem}
+.animata p{margin:0 0 8px}
+.animata ul{margin:8px 0 0;padding:0;list-style:none}
+.animata li{margin:0 0 8px;padding-left:24px;position:relative}
+.animata li:before{content:"\25B6";position:absolute;left:2px;top:0;color:#2b5f6b;color:var(--accento);font-size:.85em}
+.animata h5{margin:10px 0 2px;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+.animata .nota-video{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:6px 0 0}
+@media print{.animata{display:none}}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<div class="foglio">
+<header class="testata">
+  <a class="indietro" href="../../index.html">← Torna a Storia: tutti i moduli</a>
+  <p class="eyebrow">Storia · Flussi migratori</p>
+  <p class="capitolo">Lezione 1</p>
+  <h1>La scoperta dei nuovi mondi</h1>
+  <p class="sottotitolo">XV–XVI secolo: i navigatori europei attraversano gli oceani</p>
+</header>
+<div class="corpo-lezione">
+<nav class="indice" aria-label="Parti della lezione">
+  <p class="indice-titolo">In questa lezione</p>
+  <a class="voce" href="#prima-dopo" style="--c:#3a6ea5"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l3 3-3 3"/><path d="M4 7h13"/><path d="M10 14l-3 3 3 3"/><path d="M20 17H7"/></svg></span><span class="nome">Prima / Dopo</span></a>
+  <a class="voce" href="#idea" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">Idea principale</span></a>
+  <a class="voce" href="#testi" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">Testo sintetico / essenziale</span></a>
+  <a class="voce" href="#perche" style="--c:#b25510"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .9-1 1.6v.6"/><circle cx="12" cy="17" r=".7" fill="currentColor"/></svg></span><span class="nome">Perché?</span></a>
+  <a class="voce" href="#concetti" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4"/><path d="M10.5 12.5L19 4M15.5 7.5l3 3M13 10l2 2"/></svg></span><span class="nome">Concetti fondamentali</span></a>
+  <a class="voce" href="#come" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="4.5" rx="1"/><rect x="3" y="15" width="6" height="5" rx="1"/><rect x="15" y="15" width="6" height="5" rx="1"/><path d="M12 7v4M6 15v-4h12v4"/></svg></span><span class="nome">Come?</span></a>
+  <a class="voce" href="#parole" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">Parole chiave</span></a>
+  <a class="voce" href="#lente" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M20 20l-5.2-5.2"/></svg></span><span class="nome">Studiamo le fonti</span></a>
+  <a class="voce" href="#compiti" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="nome">Ripassiamo</span></a>
+</nav>
+
+<main id="contenuto">
+
+<!-- ======================= PRIMA / DOPO ======================= -->
+<section class="parte" id="prima-dopo" aria-labelledby="t-pd">
+  <p class="etichetta">Per orientarsi</p>
+  <h2 id="t-pd">Prima e dopo</h2>
+  <p class="guida">Alla fine del Quattrocento gli europei si spingono negli oceani e incontrano terre e popoli di cui non sapevano nulla. Comincia un movimento di persone, merci, piante e idee che cambierà il mondo intero.</p>
+  <div class="primadopo">
+    <div class="pd">
+      <h3><span>Prima</span></h3>
+      <p>Nel Medioevo gli europei conoscono solo l'Europa, il Nord Africa e una parte dell'Asia. Le spezie e la seta arrivano dall'Oriente attraverso lunghe vie di terra e i porti del Mediterraneo, controllati da mercanti arabi, turchi e veneziani.</p>
+      <p class="link-lez">Ripassa: <a href="../stato-governo/monarchie-nazionali.html">Le monarchie nazionali</a> · <a href="../sistemi-produzione/civilta-rinascimentale.html">La civiltà rinascimentale</a></p>
+    </div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="pd">
+      <h3><span>Dopo</span></h3>
+      <p>Dopo le scoperte, migliaia di europei attraversano l'Atlantico per conquistare e colonizzare l'America. Gli imperi azteco e inca crollano in pochi anni.</p>
+      <p class="link-lez">Più avanti: <a href="conquistadores.html">L'età dei conquistadores</a> · <a href="civilta-precolombiane.html">Le civiltà precolombiane</a></p>
+    </div>
+    <p class="pd-centro">1415 → l'età delle esplorazioni → 1522</p>
+  </div>
+</section>
+
+<!-- ======================= IDEA PRINCIPALE ======================= -->
+<section class="parte" id="idea" aria-labelledby="t-idea">
+  <p class="etichetta">Idea principale</p>
+  <h2 id="t-idea">Che cosa, dove, quando, chi</h2>
+  <p class="guida">Prima di studiare i dettagli, guarda l'argomento dall'alto: che cosa succede e dove, in che anni, chi sono i protagonisti.</p>
+
+  <h3 id="dove"><span>1. Dove? Che cosa?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 🗺️ Collocare nello spazio</p>
+  <div class="lettura">
+    <p>Nel Quattrocento il <strong>Portogallo</strong> comincia a esplorare la costa dell'Africa, cercando oro, schiavi e una via per l'India che eviti il Mediterraneo. Nel 1488 Bartolomeo Dias doppia il <strong>Capo di Buona Speranza</strong>; nel 1498 Vasco da Gama arriva a <strong>Calicut</strong>, in India.</p>
+    <p>Nel 1492 Cristoforo Colombo, un genovese al servizio dei re di Spagna, parte da <strong>Palos</strong> per raggiungere l'Asia navigando verso ovest. Il 12 ottobre sbarca a <strong>San Salvador</strong>, un'isola delle Bahamas. Crede di essere arrivato nelle Indie, ma ha raggiunto un continente sconosciuto agli europei: l'<a class="pk" href="#p-nuovo-mondo">America</a>.</p>
+    <p>Tra il 1519 e il 1522 la spedizione di Ferdinando Magellano attraversa lo <strong>stretto</strong> che porta il suo nome, entra nel Pacifico e torna in Spagna: è la prima <a class="pk" href="#p-circumnavigazione">circumnavigazione</a> della Terra.</p>
+  </div>
+  <div class="mappa-box">
+    <svg id="mappa" class="mondo" viewBox="0 0 900 530" role="img" aria-labelledby="mappa-titolo"><title id="mappa-titolo">Carta del mondo con i luoghi delle grandi esplorazioni</title><rect x="0" y="0" width="900" height="530" class="mare"/><path class="terra" d="M696.0,273.4L693.7,279.5L694.0,282.4L697.2,284.2L697.3,285.5L696.0,288.5L696.3,290.0L695.9,292.4L697.7,295.6L699.8,300.5L701.6,301.6L702.4,303.8L702.2,308.8L702.8,313.2L703.0,321.0L703.9,323.5L702.4,327.0L700.4,330.5L697.3,333.6L692.7,335.5L687.0,337.9L681.4,343.3L679.5,344.2L676.0,347.8L673.9,348.9L673.5,352.5L675.9,356.3L676.9,359.2L676.9,360.7L677.8,360.5L677.7,365.4L676.9,367.7L678.0,368.5L677.3,370.6L675.2,372.4L671.1,374.1L665.1,376.8L662.9,378.6L663.3,380.7L664.6,381.1L664.2,383.7L662.9,387.3L662.3,391.5L661.0,393.8L657.6,396.3L656.6,397.0L654.5,399.6L653.1,402.1L650.3,405.7L644.6,410.9L641.1,413.9L637.3,416.1L632.1,418.1L629.6,418.3L628.9,419.7L625.9,419.0L623.4,419.9L618.0,419.0L614.9,419.6L612.9,419.3L607.7,421.3L603.4,422.1L600.4,424.0L598.1,424.1L596.0,422.3L594.3,422.2L592.1,420.0L591.9,420.7L591.2,419.3L591.3,416.4L589.6,413.1L591.2,412.1L591.1,408.3L587.8,403.6L585.3,399.4L585.3,399.4L581.7,392.9L578.0,389.1L576.1,385.5L574.9,380.6L573.7,377.0L572.0,369.3L571.9,363.3L571.3,360.6L569.3,358.5L566.8,354.4L564.1,348.4L563.0,345.2L559.0,340.3L558.7,336.5L558.2,333.4L558.9,329.0L560.6,324.4L560.9,322.2L562.5,317.7L563.7,315.7L566.6,312.4L568.2,310.2L568.7,306.5L568.4,303.7L566.9,301.9L565.6,298.8L564.4,295.8L564.6,294.8L566.2,292.8L564.7,288.0L563.6,284.6L561.1,281.5L561.6,280.5L560.9,278.9L559.6,275.2L555.5,269.9L550.3,264.8L547.0,260.7L544.0,255.6L544.1,253.9L545.2,252.3L546.4,248.7L547.5,245.0L546.5,244.2L548.2,238.6L549.0,234.6L547.0,231.3L544.7,230.5L543.7,228.2L542.4,227.5L542.5,226.1L537.3,227.9L535.4,227.7L533.5,228.8L529.5,228.7L526.8,225.6L525.2,221.9L521.6,218.7L517.9,218.7L513.5,218.7L509.3,219.3L505.3,220.4L497.5,223.3L494.7,225.0L490.2,226.4L485.7,225.0L483.4,225.1L480.0,224.1L476.8,224.2L470.8,225.0L467.4,226.5L462.4,228.3L461.4,228.2L460.1,228.2L455.0,225.8L450.4,222.0L446.2,219.3L442.8,216.1L441.5,215.7L437.9,213.7L435.3,211.0L434.4,209.2L433.8,205.5L431.6,202.5L429.6,200.6L428.4,199.9L427.1,198.9L426.5,196.7L425.8,195.6L424.4,194.8L421.7,192.7L419.6,192.4L418.4,191.0L418.5,190.2L416.9,189.1L416.6,188.1L415.8,184.2L416.4,182.0L414.4,178.1L411.9,176.4L414.1,175.4L416.5,171.9L417.7,169.3L417.2,166.6L418.6,164.2L419.3,159.5L418.7,154.5L418.1,152.0L418.6,149.5L417.3,147.2L414.7,145.0L414.9,142.9L415.1,140.6L417.0,139.2L418.7,136.6L418.4,134.9L420.1,131.4L422.9,128.2L424.6,127.4L425.9,124.5L426.0,121.8L427.8,118.7L431.1,116.9L434.3,111.8L434.4,111.7L436.9,109.8L441.6,109.3L445.5,105.8L448.0,104.5L452.2,100.3L450.9,94.1L452.8,89.8L453.5,87.2L456.7,83.8L461.7,81.5L465.4,79.4L468.8,74.3L470.3,71.2L474.0,71.2L477.0,73.3L481.8,73.0L487.0,74.1L489.2,74.2L494.0,71.4L499.4,70.6L502.5,68.5L507.3,67.0L515.8,66.1L524.1,65.7L526.6,66.4L531.3,64.5L536.7,64.4L538.7,65.6L542.1,65.3L547.5,63.2L551.1,63.8L550.9,66.4L555.1,64.5L555.5,65.5L553.0,68.0L553.0,70.3L554.7,71.5L554.0,75.8L550.8,78.3L551.7,81.1L554.3,81.2L555.5,83.5L557.4,84.3L563.3,86.0L565.4,85.6L569.6,86.4L576.2,88.7L578.6,93.1L583.1,94.1L590.1,96.2L595.4,98.7L597.9,97.4L600.3,95.1L599.1,91.2L600.7,88.8L604.3,86.5L607.7,85.8L614.5,86.8L616.2,89.0L618.1,89.1L619.6,89.9L624.6,90.5L625.8,92.2L632.5,92.1L637.3,93.4L642.2,94.9L644.6,95.7L648.4,94.1L650.5,92.6L654.9,92.2L658.4,92.9L659.8,95.3L661.0,93.7L665.0,94.9L668.9,95.2L671.3,93.9L672.8,92.3L672.4,92.0L673.8,89.6L674.8,85.9L675.5,84.6L675.6,84.5L677.4,80.5L679.9,76.9L680.0,76.8L679.5,72.9L680.7,70.9L678.9,68.6L680.8,66.7L677.8,67.2L673.6,66.0L670.1,68.9L662.6,69.5L658.5,66.8L653.1,66.6L651.9,68.7L648.5,69.3L643.7,66.6L638.2,66.7L635.2,61.7L631.6,59.0L634.0,55.1L630.9,52.7L636.4,47.9L644.1,47.7L646.2,43.9L655.7,44.6L661.7,41.3L667.6,39.9L675.8,39.8L684.6,43.3L691.7,45.3L697.6,44.5L701.9,44.9L707.8,42.3L708.5,40.2L707.3,36.8L704.4,34.9L701.6,34.4L699.8,32.8L693.4,28.6L687.7,26.7L683.4,23.8L687.0,23.0L691.2,18.8L688.4,16.8L695.7,14.8L695.6,13.7L691.1,14.5L687.1,14.9L683.8,16.5L679.1,16.8L674.8,18.6L675.1,21.3L675.1,21.7L677.5,22.9L682.7,22.7L681.7,24.4L676.2,25.3L669.4,28.2L666.6,27.2L667.7,24.8L662.3,23.4L663.2,22.4L667.9,20.7L667.2,20.1L666.5,19.6L658.7,18.3L658.4,16.5L653.7,17.1L651.9,19.8L648.0,23.5L648.1,24.8L645.7,25.9L644.2,25.4L642.8,31.5L640.2,33.5L638.4,37.1L640.0,40.0L640.6,41.9L644.9,43.5L644.0,44.7L638.1,45.0L636.0,46.5L631.8,49.2L630.2,46.9L630.3,45.9L627.2,45.7L624.6,45.3L618.6,46.6L622.0,49.4L619.5,50.2L616.7,50.2L614.1,47.6L613.1,48.7L614.3,51.7L616.8,54.0L614.9,55.1L617.7,57.5L620.1,58.9L620.2,61.7L615.6,60.4L617.0,63.0L613.9,63.5L615.8,67.9L612.5,68.0L608.4,65.8L606.5,61.8L605.6,58.5L603.7,56.1L601.1,53.3L600.8,51.9L599.9,51.5L599.8,50.4L597.0,48.7L596.6,46.4L597.0,43.0L597.7,41.4L596.8,40.6L595.8,40.2L594.4,38.6L592.2,37.6L587.5,35.8L584.6,34.0L580.1,32.5L575.9,28.8L576.9,28.4L574.6,26.3L574.5,24.6L571.3,23.8L569.8,26.0L568.3,24.3L568.4,22.6L568.6,22.5L569.7,22.0L565.7,21.3L561.6,23.1L561.9,25.6L561.3,27.0L562.9,29.5L567.6,32.1L570.2,36.2L575.7,40.2L579.6,40.2L580.8,41.3L579.4,42.3L583.9,44.1L587.6,45.6L591.9,48.2L592.4,49.2L591.5,50.9L588.7,48.6L584.3,47.8L582.3,51.0L585.9,52.9L585.3,55.5L583.2,55.8L580.5,60.1L578.4,60.5L578.4,58.9L579.5,56.2L580.5,55.2L578.6,52.3L577.1,49.8L575.0,49.1L573.5,47.0L570.3,46.1L568.1,44.1L564.4,43.7L560.5,41.5L556.0,38.2L552.6,35.3L551.0,30.4L548.5,29.8L544.5,28.2L542.1,28.8L539.2,31.2L537.2,31.5L532.6,34.4L522.8,33.0L515.5,34.6L514.9,37.6L515.2,40.5L510.5,43.9L504.1,44.9L503.6,46.6L500.5,49.4L498.6,53.4L500.5,56.3L497.7,58.5L496.6,61.8L492.8,62.8L489.3,66.6L482.9,66.7L478.2,66.6L475.0,68.4L473.1,70.3L470.7,69.8L468.8,68.2L467.4,65.3L462.7,64.5L460.7,65.8L458.1,65.1L455.5,65.7L456.3,61.7L455.8,58.7L453.6,58.2L452.4,56.3L452.8,53.0L454.8,51.2L455.1,49.2L456.2,46.2L456.1,44.1L455.0,42.3L454.8,40.6L455.1,37.0L453.0,34.9L460.1,31.3L466.2,32.2L472.9,32.1L478.3,33.0L482.4,32.7L490.5,32.9L493.1,29.9L494.0,19.9L488.9,14.7L485.2,12.2L477.5,10.2L477.0,6.6L483.5,5.5L491.9,6.8L490.3,1.1L495.1,3.3L506.7,-0.6L508.2,-4.7L512.6,-5.7L516.6,-6.7L519.1,-8.1L523.5,-15.5L530.4,-17.6L534.5,-17.4L535.5,-18.5L539.7,-18.7L540.6,-17.6L544.0,-20.1L542.9,-22.0L542.6,-24.8L540.6,-27.6L540.5,-32.7L541.3,-34.0L542.7,-35.5L547.1,-35.9L548.9,-37.2L552.9,-38.7L552.7,-36.1L551.3,-34.5L551.8,-33.0L554.6,-32.3L553.3,-30.4L551.8,-31.0L548.2,-27.4L549.6,-24.9L549.7,-23.0L554.7,-21.8L554.7,-20.0L559.8,-21.0L562.6,-22.4L568.2,-20.4L570.6,-18.8L574.0,-20.3L581.8,-22.6L588.1,-24.3L593.1,-23.4L593.5,-22.2L598.3,-22.1L599.4,-24.3L606.3,-25.9L605.3,-30.2L605.5,-33.9L607.9,-37.1L612.6,-38.8L616.6,-35.0L620.6,-35.1L621.6,-39.0L622.1,-41.9L620.3,-41.3L617.1,-43.1L616.7,-45.9L623.0,-47.3L629.3,-48.1L634.7,-47.2L639.9,-47.4L645.6,-50.1L640.4,-52.5L631.3,-52.1L622.5,-50.3L614.3,-49.2L611.4,-52.0L606.6,-53.6L607.7,-58.5L605.3,-63.0L607.7,-66.0L612.2,-69.1L623.7,-74.5L627.0,-75.6L626.5,-77.7L619.5,-80.0L610.9,-78.6L606.1,-75.1L606.8,-72.1L598.9,-68.1L589.2,-63.7L585.6,-56.7L589.2,-53.2L593.9,-50.4L589.3,-44.8L584.1,-43.6L582.2,-35.2L579.4,-30.5L573.3,-31.0L570.5,-27.0L564.7,-26.8L563.1,-31.5L558.9,-37.2L555.1,-44.3L551.8,-47.4L541.9,-41.6L535.2,-40.4L528.3,-42.9L526.5,-48.3L525.0,-59.9L529.6,-63.1L542.8,-67.3L552.6,-72.4L561.8,-79.4L573.8,-89.1L582.2,-92.8L595.9,-99.1L606.9,-101.3L615.1,-101.0L622.7,-105.2L631.8,-104.9L640.8,-105.9L656.5,-102.3L650.0,-100.9L655.5,-97.8L660.7,-99.5L668.9,-96.5L682.6,-95.3L701.5,-89.7L705.3,-87.3L705.6,-84.0L700.1,-81.3L691.9,-80.0L669.6,-83.8L665.9,-83.2L674.1,-79.5L674.4,-77.2L674.7,-72.1L681.2,-70.5L685.1,-69.3L685.7,-71.7L682.7,-73.8L685.9,-75.7L698.0,-72.6L702.2,-73.8L698.8,-77.5L710.5,-82.4L715.1,-82.1L719.8,-80.3L722.7,-83.8L718.5,-86.8L720.9,-89.8L717.3,-92.9L731.3,-91.2L734.1,-88.4L727.8,-87.8L727.8,-85.1L731.7,-83.3L739.5,-84.4L740.7,-87.6L751.1,-90.0L768.6,-94.3L772.4,-94.0L767.4,-91.0L773.6,-90.5L777.2,-92.2L786.6,-92.3L794.0,-94.4L799.7,-91.4L805.4,-94.7L800.1,-97.6L802.8,-99.3L817.5,-97.7L824.4,-96.2L842.6,-90.5L845.9,-93.1L840.8,-95.7L840.7,-96.8L834.7,-97.3L836.3,-99.6L833.6,-103.5L833.5,-105.1L842.7,-109.7L846.0,-114.2L849.7,-115.2L862.9,-113.9L864.0,-111.1L859.2,-107.0L862.4,-105.4L864.0,-102.0L862.8,-95.1L868.3,-92.0L866.2,-88.7L856.4,-81.6L862.1,-80.9L864.1,-82.7L869.6,-83.9L870.9,-86.4L875.3,-88.8L872.3,-91.6L874.7,-94.9L869.2,-95.4L868.0,-98.1L872.0,-103.2L865.5,-107.2L874.4,-110.6L873.3,-114.2L875.8,-114.3L878.4,-111.5L876.4,-106.7L881.8,-105.8L879.5,-109.4L887.9,-111.3L898.3,-111.6L907.5,-108.7L903.1,-112.9L902.5,-118.2L911.2,-119.3L923.3,-119.0L934.1,-119.7L930.1,-122.3L935.8,-125.6L941.6,-125.7L951.3,-128.2L964.5,-128.9L966.2,-130.2L979.3,-130.7L983.4,-129.6L994.6,-132.2L1003.8,-132.1L1005.2,-134.3L1010.0,-136.4L1021.8,-138.5L1030.3,-136.9L1023.5,-135.6L1034.8,-134.9L1036.2,-132.4L1040.8,-133.6L1055.4,-133.6L1066.7,-131.1L1070.7,-129.2L1069.4,-126.6L1063.9,-125.2L1050.8,-122.4L1047.0,-120.9L1053.2,-120.2L1060.6,-118.9L1065.1,-119.9L1067.6,-116.7L1069.8,-118.0L1077.8,-118.8L1093.9,-117.9L1095.1,-115.6L1116.0,-114.9L1116.3,-118.7L1126.9,-117.8L1134.9,-117.8L1143.0,-115.2L1145.3,-112.0L1142.3,-109.9L1148.6,-106.0L1156.4,-103.9L1161.3,-109.2L1169.3,-106.9L1177.8,-108.3L1187.5,-106.7L1191.2,-108.1L1199.4,-107.4L1195.7,-112.1L1202.3,-114.2L1247.5,-111.0L1251.8,-108.0L1264.8,-104.2L1285.0,-105.2L1295.0,-104.3L1299.1,-102.3L1298.6,-98.6L1304.7,-97.2L1311.4,-98.2L1320.3,-98.3L1329.7,-97.4L1339.2,-97.9L1347.9,-93.5L1354.1,-95.1L1350.0,-98.3L1352.3,-100.5L1368.2,-99.1L1378.6,-99.4L1393.0,-97.0L-400.0,-94.8L-387.7,-91.0L-374.6,-86.0L-375.1,-82.9L-371.7,-81.7L-372.9,-85.3L-359.3,-84.6L-349.5,-79.9L-354.5,-77.7L-362.6,-77.2L-362.8,-72.3L-364.8,-71.3L-369.5,-71.4L-373.3,-73.2L-379.9,-74.6L-381.0,-76.8L-386.1,-77.6L-391.8,-77.0L-394.5,-78.7L-393.4,-80.6L-399.4,-79.4L-397.2,-77.0L-400.0,-74.9L1400.0,-74.9L1393.5,-72.7L1387.1,-73.0L1391.6,-70.4L1394.5,-66.3L1396.8,-64.9L1397.4,-62.8L1396.1,-61.5L1386.8,-62.6L1372.8,-58.8L1368.4,-58.3L1360.7,-54.7L1353.5,-51.7L1351.7,-49.4L1344.5,-52.9L1331.5,-48.9L1329.2,-50.8L1324.4,-48.7L1317.7,-49.3L1316.1,-46.1L1310.1,-41.2L1310.3,-39.2L1316.0,-38.1L1315.3,-30.8L1310.6,-30.6L1308.5,-26.4L1310.6,-24.3L1301.8,-21.7L1300.1,-16.0L1292.6,-14.8L1291.2,-9.7L1284.0,-5.1L1282.1,-8.5L1280.0,-15.8L1277.2,-26.9L1279.6,-33.8L1283.8,-36.8L1284.0,-39.2L1291.8,-40.3L1300.7,-46.6L1309.4,-51.7L1318.4,-55.7L1322.4,-62.8L1316.3,-62.3L1313.3,-58.2L1300.6,-52.7L1296.5,-58.9L1283.6,-57.2L1271.1,-48.8L1275.2,-45.7L1264.1,-44.4L1256.3,-43.9L1256.7,-47.5L1248.9,-48.3L1242.7,-45.8L1227.4,-46.7L1211.0,-45.2L1194.8,-35.4L1175.6,-23.6L1183.5,-23.0L1186.0,-19.9L1190.8,-18.8L1194.0,-21.3L1199.5,-20.9L1206.7,-15.4L1206.9,-11.2L1203.0,-6.2L1202.6,-0.2L1200.3,7.8L1192.8,15.0L1191.1,18.5L1184.3,24.3L1177.6,30.1L1174.3,33.0L1167.7,35.9L1164.5,36.0L1161.4,33.6L1154.7,37.2L1153.9,38.9L1152.0,38.6L1149.8,40.3L1148.3,42.0L1148.5,45.6L1145.9,46.7L1145.0,47.6L1143.2,49.0L1139.8,49.9L1137.7,51.2L1137.5,53.4L1136.9,53.9L1138.9,54.7L1141.8,56.9L1146.1,62.8L1147.3,66.1L1147.3,71.8L1145.5,74.6L1140.9,75.5L1136.9,77.6L1132.4,78.1L1131.9,75.3L1132.8,71.6L1130.6,66.4L1134.3,65.5L1130.9,61.3L1128.4,60.3L1127.8,61.2L1126.4,61.7L1126.2,60.7L1124.9,60.3L1123.6,59.5L1124.9,57.3L1126.1,56.7L1125.7,55.8L1126.9,53.1L1126.6,52.2L1123.7,51.7L1121.3,50.4L1114.3,51.8L1110.7,54.2L1105.3,55.5L1107.9,53.2L1106.9,51.2L1110.8,47.9L1108.2,45.3L1103.8,47.0L1098.2,50.5L1095.1,53.7L1090.2,54.0L1087.7,56.3L1090.3,59.7L1094.4,60.5L1094.6,62.8L1098.5,64.2L1104.1,60.7L1108.6,62.6L1111.8,62.7L1112.6,65.3L1105.5,66.7L1103.2,69.4L1098.3,71.9L1095.8,75.5L1101.1,78.2L1103.1,83.1L1106.1,87.7L1109.5,91.5L1109.5,95.3L1106.3,96.6L1107.5,99.3L1110.5,100.8L1109.7,104.9L1108.4,108.9L1105.6,109.3L1102.0,114.7L1097.9,121.3L1093.3,127.3L1086.4,131.9L1079.5,136.1L1073.8,136.7L1070.8,138.9L1069.0,137.3L1066.2,139.7L1059.2,142.2L1053.9,143.0L1052.2,148.3L1049.4,148.6L1048.1,145.0L1049.3,143.0L1042.6,141.4L1040.2,142.2L1033.6,146.5L1029.4,151.2L1028.3,154.7L1032.1,160.0L1036.8,166.5L1041.3,169.6L1044.4,173.6L1046.7,182.9L1046.0,191.7L1041.8,195.0L1036.1,198.2L1032.0,202.3L1025.8,207.0L1024.0,203.8L1025.4,200.4L1021.7,197.6L1017.5,196.8L1015.5,194.2L1012.9,189.1L1008.4,186.8L1004.2,186.9L1004.9,182.9L1000.5,183.0L1000.1,188.5L997.4,195.8L995.8,200.2L996.1,203.8L999.4,204.0L1001.4,208.5L1002.3,212.9L1005.1,215.7L1008.1,216.3L1010.7,218.9L1011.9,219.4L1014.8,222.4L1016.9,225.7L1017.2,229.1L1016.7,231.4L1017.2,233.1L1017.5,236.0L1019.3,237.4L1021.2,241.8L1021.2,243.5L1017.6,243.9L1012.9,240.2L1006.9,236.2L1006.4,233.6L1003.5,230.3L1002.8,226.2L1001.0,223.4L1001.5,219.8L1000.4,217.7L998.5,215.8L997.6,213.3L994.9,210.5L992.5,208.1L991.7,211.0L990.7,208.3L991.3,205.1L992.8,200.3L992.3,196.6L993.8,192.8L992.1,189.8L992.5,184.4L990.5,181.8L988.9,175.8L988.0,169.5L985.8,165.4L982.5,167.9L976.9,171.4L974.0,171.0L970.9,169.8L972.7,163.6L971.6,158.9L967.7,153.2L968.3,151.4L965.4,150.7L961.8,146.6L960.4,144.0L960.1,141.5L959.2,139.1L957.1,136.2L952.5,136.0L952.9,138.0L951.4,140.8L949.2,139.8L948.5,140.7L947.1,140.2L945.2,139.7L944.5,141.5L941.0,141.5L934.9,142.5L935.2,146.3L932.5,149.2L925.3,152.6L919.7,158.5L915.9,161.6L911.0,164.9L911.0,167.2L908.5,168.4L904.0,170.2L901.6,170.5L900.1,174.3L901.2,180.8L901.4,185.0L899.3,189.7L899.3,198.2L896.7,198.5L894.4,202.3L895.9,203.9L891.4,205.3L889.7,208.7L887.7,210.2L883.0,205.5L880.7,198.5L878.7,193.5L877.0,191.1L874.3,186.3L873.1,180.0L872.2,176.9L867.7,170.0L865.6,160.4L864.1,154.0L864.1,147.9L863.1,143.2L855.9,146.2L852.3,145.6L845.8,139.6L848.2,137.7L846.7,135.8L840.9,131.5L837.2,130.3L835.7,126.7L831.9,122.9L822.6,123.8L814.5,123.9L807.5,124.6L798.1,123.1L792.6,121.9L787.0,121.3L784.9,115.2L782.5,114.3L778.6,115.2L773.6,117.6L767.5,115.9L762.4,112.1L757.6,110.7L754.3,105.9L750.6,99.3L747.9,100.1L744.7,98.4L742.8,100.4L739.9,100.1L740.9,102.3L740.5,103.5L742.1,107.2L744.0,111.6L746.5,112.7L747.3,114.4L750.8,116.6L751.1,118.6L750.6,120.3L751.2,122.0L752.6,123.4L753.3,125.0L754.0,126.2L753.7,122.6L755.1,120.0L756.4,119.4L758.0,121.0L758.0,123.9L756.9,126.9L757.9,128.8L758.8,128.5L759.0,129.9L762.9,129.1L767.0,129.2L770.0,129.4L773.5,126.0L777.2,122.8L780.4,119.7L781.8,118.0L782.4,118.5L782.0,120.5L781.3,121.4L782.0,125.4L784.2,128.8L787.0,130.6L790.7,131.3L793.6,132.2L795.9,135.0L797.2,136.7L799.0,137.3L799.0,138.4L797.2,141.4L796.4,142.8L794.3,144.4L792.4,147.9L790.2,147.6L789.1,148.8L788.3,151.3L788.9,154.7L788.5,155.3L786.2,155.3L783.0,157.1L782.6,159.6L781.4,160.6L778.3,160.6L776.3,161.8L776.4,163.9L774.0,165.3L771.2,164.8L767.9,166.5L765.5,166.7L761.9,168.1L761.0,170.3L760.8,172.0L755.9,174.1L747.9,176.5L743.4,180.0L741.2,180.3L739.7,180.0L736.8,182.0L733.6,183.0L729.4,183.3L728.1,183.5L727.0,184.9L725.7,185.2L724.9,186.5L722.5,186.4L720.9,187.1L717.4,186.8L716.1,183.9L716.3,181.2L715.4,179.7L714.5,176.0L713.0,173.9L714.0,173.7L713.5,171.4L714.1,170.4L713.9,168.3L713.2,166.1L711.7,164.6L711.3,162.6L708.8,160.8L706.1,156.6L704.7,152.6L701.2,149.1L699.0,148.3L695.7,143.5L695.1,140.1L695.3,137.1L692.5,131.6L690.1,129.6L687.4,128.6L685.8,125.7L686.0,124.6L684.7,122.0L683.2,120.9L681.3,117.1L678.2,113.1L675.7,109.7L673.2,109.7L673.9,107.0L674.2,105.2L674.8,103.2L674.6,102.5L673.2,104.5L672.1,108.3L670.8,110.9L669.6,111.8L667.9,110.1L665.7,107.9L662.1,100.7L661.6,101.2L663.7,106.5L666.7,111.5L670.5,119.3L672.4,122.0L674.0,124.8L678.5,130.4L677.5,131.2L677.6,134.5L683.4,139.0L684.3,140.0L686.0,144.9L684.9,145.8L685.6,151.0L687.4,156.9L689.3,158.2L692.1,160.0L695.0,165.8L696.3,170.4L699.1,172.8L705.9,177.5L708.7,180.4L711.4,183.3L713.0,185.0L715.4,186.5L716.6,188.0L716.4,190.1L713.6,191.3L715.7,192.7L717.4,193.6L718.3,195.7L720.6,197.8L723.1,197.8L727.8,196.5L733.2,195.9L737.6,194.4L740.1,194.0L741.9,193.1L744.7,192.9L746.3,192.8L748.6,192.1L751.3,191.6L753.7,189.9L755.6,189.9L755.7,191.3L755.2,194.2L755.2,196.8L754.2,198.6L752.8,204.0L750.4,209.6L747.3,216.0L743.0,223.3L738.7,228.9L732.8,235.7L727.8,239.8L720.3,244.7L715.7,248.5L710.2,254.6L709.1,257.2L707.9,258.4L704.4,260.4L703.2,262.5L701.3,262.9L700.6,266.4L699.0,268.4L698.0,271.7L696.0,273.4ZM744.4,58.4L746.0,62.1L750.7,63.1L754.2,65.6L761.3,66.5L769.1,65.2L769.6,64.0L768.7,60.5L769.4,55.2L765.5,53.6L766.8,50.1L763.5,49.8L764.6,45.6L769.3,46.8L773.7,45.2L770.0,42.2L768.6,39.4L764.6,40.7L764.1,44.3L762.5,41.1L762.2,39.9L763.5,37.8L762.5,36.0L756.7,34.3L754.5,29.8L751.7,28.6L751.5,27.0L756.4,27.4L756.6,23.8L760.8,23.0L765.2,23.7L766.1,18.8L765.2,15.7L760.2,16.0L756.0,14.8L750.2,17.0L745.5,18.0L743.2,21.0L738.4,21.8L733.4,27.0L738.0,31.7L737.5,35.1L742.9,41.0L745.5,43.6L748.1,47.1L750.4,47.4L752.0,48.7L747.9,49.1L747.0,53.0L746.1,54.8L744.3,55.9L744.4,58.4ZM-204.9,-98.6L-195.6,-97.4L-187.7,-94.9L-182.5,-94.5L-178.1,-96.6L-172.1,-98.1L-164.6,-97.5L-157.2,-99.7L-149.0,-101.0L-145.5,-98.9L-141.8,-100.1L-140.7,-102.4L-137.2,-101.9L-128.8,-97.4L-122.1,-100.8L-121.4,-97.0L-115.3,-97.8L-113.4,-99.3L-107.4,-99.0L-99.7,-96.9L-88.0,-95.1L-81.1,-94.2L-76.2,-94.5L-69.5,-92.0L-76.5,-89.5L-67.5,-88.4L-54.0,-89.0L-49.7,-89.9L-44.4,-86.9L-39.0,-89.4L-44.1,-91.6L-40.8,-93.3L-34.8,-93.5L-30.7,-94.0L-26.7,-92.8L-21.7,-90.1L-16.1,-90.5L-7.3,-88.2L0.5,-89.0L7.8,-88.9L7.2,-92.0L11.6,-92.9L19.4,-91.2L19.4,-86.5L22.6,-90.5L26.6,-90.3L28.8,-95.3L23.5,-98.4L17.6,-100.4L18.0,-106.0L24.0,-109.6L30.5,-108.8L35.6,-106.6L42.4,-101.0L38.0,-98.5L47.3,-97.5L47.3,-92.4L53.9,-96.3L59.9,-93.1L58.4,-89.4L63.3,-86.0L68.5,-89.6L72.1,-93.9L72.4,-99.4L79.5,-99.0L86.9,-98.3L93.6,-95.8L93.9,-93.3L90.2,-90.7L93.7,-88.0L93.1,-85.6L83.3,-82.1L76.3,-81.3L71.2,-82.8L69.7,-80.3L64.8,-76.1L63.4,-73.9L57.6,-70.5L50.4,-70.2L46.5,-68.1L46.2,-64.8L40.3,-64.2L34.2,-60.1L28.8,-54.5L26.9,-50.6L26.6,-44.7L33.9,-43.9L36.2,-39.2L38.5,-35.4L45.5,-36.4L54.8,-34.3L59.8,-32.4L63.4,-30.0L69.6,-28.6L74.9,-26.5L83.2,-26.2L88.6,-25.7L87.8,-21.4L89.4,-16.4L93.0,-10.8L100.4,-6.0L104.3,-7.7L107.0,-12.8L104.4,-20.7L100.9,-23.3L108.9,-25.7L114.5,-29.2L117.3,-32.7L116.9,-36.0L113.5,-40.3L107.4,-44.0L113.3,-49.3L111.1,-53.8L109.5,-61.6L113.0,-62.8L121.5,-61.4L126.7,-60.9L130.8,-62.2L135.5,-60.5L141.6,-57.6L143.1,-55.7L152.0,-55.3L151.9,-51.1L153.6,-44.8L158.1,-44.0L161.7,-41.1L169.0,-43.8L173.8,-49.4L177.1,-51.7L181.0,-47.2L187.5,-40.8L193.0,-34.8L191.0,-31.7L197.7,-28.9L202.2,-26.0L210.1,-24.7L213.3,-23.1L215.3,-18.9L219.2,-18.2L221.2,-16.4L221.6,-10.7L217.9,-8.9L214.4,-7.1L206.1,-5.3L199.8,-1.2L191.4,-0.4L180.7,-1.5L173.2,-1.5L168.0,-1.1L163.8,2.4L157.4,4.7L150.2,11.3L144.5,15.9L148.7,15.1L156.7,8.5L167.2,4.3L174.7,3.8L179.1,6.3L174.4,9.6L176.0,15.0L177.6,18.8L184.1,21.3L192.4,20.6L197.4,15.0L197.7,18.6L201.0,20.4L194.8,23.7L183.7,26.6L178.8,28.7L173.2,32.3L169.4,31.9L169.2,27.7L177.9,23.5L169.9,23.7L164.3,24.3L165.2,26.0L159.8,28.4L154.7,30.1L149.4,31.6L146.8,34.6L145.9,35.7L145.9,38.3L147.5,41.0L149.6,41.1L149.1,39.3L150.6,40.4L150.2,41.8L146.8,42.6L144.4,42.5L140.7,43.4L138.5,43.6L135.6,43.9L131.5,45.3L138.8,44.4L140.3,45.3L133.3,46.8L130.1,46.9L130.2,46.2L128.7,47.6L130.2,47.9L129.1,51.5L125.5,55.3L125.1,54.0L124.0,53.8L122.4,52.5L123.4,55.2L124.6,56.1L124.7,58.0L123.1,59.9L120.3,63.9L119.8,63.7L121.4,60.3L118.8,58.4L118.2,54.3L117.3,56.4L118.4,59.6L115.1,58.8L118.5,60.4L118.7,65.2L120.1,65.5L120.7,67.2L121.4,72.2L118.2,76.0L113.0,77.4L109.7,80.4L107.2,80.7L104.7,82.5L104.0,84.2L98.5,87.5L95.7,89.8L93.3,92.8L92.5,96.3L93.4,99.8L95.1,104.1L97.3,107.6L97.3,109.8L99.7,115.6L99.6,119.0L99.3,120.9L98.1,124.0L96.6,124.6L94.1,124.0L93.3,121.8L91.5,120.7L88.8,116.4L86.5,112.5L85.7,110.6L86.7,107.2L85.4,104.5L81.5,100.3L79.5,99.6L74.4,101.8L73.6,101.6L71.1,99.2L68.0,98.0L62.4,98.6L57.9,98.1L54.1,98.4L52.0,99.2L52.9,100.5L52.8,102.6L53.9,103.5L53.0,104.2L51.1,103.5L49.2,104.4L45.6,104.3L41.9,101.6L37.5,102.2L33.9,101.1L30.8,101.4L26.6,102.6L22.0,106.3L17.0,108.5L14.3,110.9L13.2,113.1L13.1,116.5L13.4,119.0L14.3,120.7L12.4,125.0L11.5,128.6L11.1,135.3L10.6,137.8L11.5,140.5L13.1,142.9L14.1,146.8L17.4,150.5L18.5,153.4L20.5,155.9L25.8,157.2L27.9,159.3L32.3,157.9L36.1,157.4L39.8,156.5L43.0,155.6L46.1,153.6L47.3,150.7L47.7,146.5L48.6,145.0L52.0,143.7L57.3,142.5L61.7,142.7L64.7,142.3L65.9,143.3L65.8,145.8L63.1,148.7L61.9,151.8L62.8,152.6L62.1,154.8L60.8,158.7L59.5,157.4L58.5,157.5L58.5,158.2L59.5,158.3L59.4,159.6L58.6,161.8L59.0,162.6L58.5,164.3L58.8,164.8L58.2,167.3L57.2,168.7L56.3,168.8L55.4,170.6L57.0,171.5L57.4,170.7L58.9,171.4L59.4,171.6L60.5,170.7L61.9,170.6L62.4,171.0L63.2,170.8L65.5,171.2L67.8,171.1L69.4,170.5L70.0,170.0L71.6,170.2L72.8,170.6L74.1,170.5L75.1,170.0L77.4,170.7L78.2,170.8L79.7,171.8L81.1,172.9L82.9,173.6L84.3,175.0L83.8,175.5L83.6,176.6L84.1,178.4L82.9,180.2L82.4,182.2L82.2,184.4L82.5,185.7L82.6,187.9L81.9,188.4L81.4,190.5L81.7,191.9L80.7,193.1L80.9,194.5L81.7,195.3L83.0,198.0L84.9,200.0L87.3,202.2L89.1,204.0L89.0,205.0L91.0,205.2L91.4,204.8L92.8,206.1L95.3,205.7L97.4,204.4L100.4,203.4L102.1,201.9L104.9,202.2L104.7,202.7L107.5,202.9L109.7,203.8L111.3,205.3L113.2,206.7L115.8,206.8L119.6,203.3L121.6,202.8L121.7,201.1L122.6,196.9L125.5,194.6L128.6,194.5L129.0,193.4L132.9,193.9L136.9,191.3L138.8,190.2L141.2,187.8L143.0,188.1L144.3,189.4L143.3,191.1L143.2,192.3L140.3,192.9L141.9,195.1L141.8,197.8L139.6,200.7L141.5,204.6L143.7,204.3L144.8,200.7L143.2,198.9L143.0,195.2L149.2,193.1L148.5,190.8L150.3,189.2L152.1,192.7L155.6,192.8L158.8,195.6L159.0,197.2L163.5,197.3L168.9,196.8L171.7,199.0L175.6,199.6L178.3,198.1L178.4,196.8L184.6,196.5L190.6,196.4L186.4,197.9L188.1,200.3L192.1,200.6L195.8,203.1L196.7,207.1L199.2,207.0L201.2,208.2L204.5,210.0L207.6,213.3L207.7,215.8L209.6,216.0L212.3,218.4L214.3,220.1L220.3,221.1L220.8,220.2L224.8,219.9L230.2,221.2L231.9,221.8L235.6,223.0L240.9,227.2L241.7,229.2L243.4,229.0L244.7,231.8L247.4,240.5L250.1,241.3L250.3,244.8L246.5,248.9L248.1,250.4L256.9,251.2L257.1,256.2L260.9,252.9L267.2,254.7L275.5,257.8L277.9,260.7L277.1,263.5L282.9,261.9L292.6,264.6L300.1,264.4L307.5,268.5L313.9,274.1L317.7,275.5L322.0,275.7L323.8,277.3L325.5,283.7L326.3,286.7L324.4,295.0L321.8,298.2L314.8,305.2L311.6,310.9L307.9,315.2L306.6,315.3L305.2,319.0L305.6,328.3L304.2,336.0L303.7,339.3L302.1,341.3L301.2,348.0L296.1,354.5L295.3,359.7L291.2,361.8L290.1,364.9L284.6,364.8L276.8,366.8L273.2,369.0L267.6,370.4L261.8,374.4L257.5,379.4L256.8,383.1L257.6,385.9L256.7,390.9L255.6,393.4L252.1,396.1L246.5,404.9L242.1,408.9L238.7,411.2L236.4,416.0L233.1,418.8L231.0,422.0L225.3,424.8L221.6,423.8L218.9,424.3L214.3,422.2L210.9,422.3L207.9,419.5L207.5,422.2L213.9,426.4L213.2,429.9L216.3,432.1L216.1,434.5L211.3,440.9L203.8,443.6L193.8,444.6L188.3,444.1L189.4,447.1L188.4,450.9L189.3,453.4L186.3,455.1L181.2,455.8L176.3,454.0L174.4,455.3L175.1,460.3L178.5,461.8L181.2,460.2L182.7,462.8L178.1,464.4L174.1,467.5L173.4,472.5L172.2,475.2L167.5,475.2L163.5,477.8L162.1,481.5L167.0,485.2L171.8,486.2L170.1,490.7L164.2,493.5L160.9,499.3L156.3,501.3L154.3,503.7L155.9,508.9L159.2,511.8L157.1,511.5L152.7,511.5L150.3,512.7L145.8,514.5L145.0,519.2L142.8,519.3L137.2,517.7L131.5,514.2L125.3,511.3L123.7,508.1L125.1,505.2L122.6,501.9L122.0,493.4L124.1,488.6L129.4,484.7L121.8,483.2L126.5,478.8L128.2,470.5L133.8,472.3L136.4,461.9L133.1,460.6L131.5,466.8L128.3,466.1L129.9,459.0L131.6,449.7L133.9,446.3L132.5,441.4L132.1,435.8L134.2,435.6L137.2,427.5L140.7,419.5L142.8,412.1L141.7,404.6L143.2,400.5L142.5,394.3L145.5,388.2L146.4,378.5L148.0,368.1L149.5,357.0L149.2,348.8L148.1,341.7L143.1,338.9L142.7,336.8L132.8,331.8L123.8,326.3L120.0,323.2L117.9,319.1L118.7,317.7L114.5,311.1L109.5,301.9L104.8,291.9L102.8,289.7L101.2,286.0L97.3,282.7L93.7,280.7L95.4,278.4L93.0,273.7L94.5,270.2L98.5,267.0L101.1,263.3L100.1,261.1L98.2,263.4L95.2,261.2L96.2,259.8L95.3,255.3L97.1,254.5L98.0,251.4L99.9,248.2L99.5,246.2L102.3,245.1L105.7,243.1L105.0,241.5L106.9,241.2L106.7,238.7L107.9,236.9L110.3,236.5L112.4,233.4L114.4,230.8L112.5,229.6L113.5,226.7L112.3,222.1L113.4,220.8L112.6,216.5L110.6,213.9L108.9,212.4L107.9,209.7L109.1,208.4L107.8,208.1L106.9,206.4L104.4,205.0L102.2,205.3L101.2,207.1L99.2,208.3L98.1,208.5L97.6,209.5L100.0,212.3L98.6,212.9L97.9,213.6L95.6,213.9L94.7,210.9L94.1,211.8L92.4,211.5L91.4,209.5L89.3,209.1L88.0,208.5L85.9,208.5L85.8,209.6L85.2,208.9L82.5,207.8L81.5,206.7L82.0,205.8L81.8,204.7L80.4,203.5L78.5,202.6L76.8,201.9L76.4,200.5L75.1,199.6L75.4,201.0L74.4,202.2L73.3,200.8L71.7,200.3L71.0,199.3L71.0,197.8L71.7,196.2L70.3,195.5L71.4,194.6L69.7,193.0L67.4,191.0L66.3,189.3L64.2,187.7L61.7,185.5L62.2,184.7L63.0,185.4L63.4,185.1L62.6,183.5L61.0,183.1L60.5,184.3L57.6,184.2L55.8,183.7L53.7,182.7L50.9,182.4L49.5,181.3L47.0,180.4L43.8,180.4L41.5,179.4L38.9,177.3L33.2,171.9L30.6,170.3L26.6,169.0L23.7,169.4L19.7,171.2L17.2,171.7L13.7,170.4L9.9,169.5L5.3,167.2L1.5,166.5L-4.1,164.1L-8.3,161.8L-9.6,160.4L-12.4,160.1L-17.5,158.5L-19.6,156.3L-25.0,153.4L-27.5,150.3L-28.7,147.8L-27.0,147.3L-27.5,145.9L-26.4,144.6L-26.3,142.9L-28.0,140.6L-28.5,138.7L-30.2,136.1L-34.5,131.2L-39.6,127.3L-42.0,124.1L-46.3,122.1L-47.2,120.9L-46.5,117.8L-49.0,116.6L-52.0,114.2L-53.2,110.7L-55.9,110.3L-58.8,107.7L-61.1,105.2L-61.4,103.7L-64.0,99.9L-65.8,96.1L-65.7,94.1L-69.4,92.2L-71.0,92.4L-73.9,91.0L-74.7,93.0L-73.9,95.4L-73.4,99.2L-71.7,101.2L-68.0,104.7L-67.1,105.9L-66.4,106.2L-65.7,107.9L-64.8,107.9L-63.8,111.1L-62.3,112.4L-61.2,114.1L-58.1,116.7L-56.4,121.3L-54.9,123.5L-53.6,125.9L-53.3,128.5L-50.9,128.7L-48.9,130.9L-47.1,133.2L-47.2,134.1L-49.3,135.9L-50.1,135.9L-51.5,132.8L-54.7,130.0L-58.4,127.6L-60.9,126.3L-60.8,122.6L-61.5,119.9L-63.9,118.4L-67.3,116.2L-68.0,116.8L-69.2,115.5L-72.3,114.3L-75.3,111.4L-74.9,111.0L-72.8,111.3L-71.0,109.4L-70.8,107.2L-74.7,103.6L-77.6,102.2L-79.4,99.1L-81.3,95.8L-83.6,91.8L-85.6,87.3L-86.5,84.8L-89.7,81.9L-92.1,81.3L-92.6,79.9L-95.4,79.6L-97.2,78.3L-101.8,77.8L-103.1,77.0L-103.7,74.2L-108.6,69.2L-112.7,62.2L-112.6,61.1L-114.8,59.4L-118.6,55.2L-119.3,51.2L-122.0,48.4L-120.9,44.3L-121.1,40.0L-122.7,36.2L-120.7,31.5L-120.1,26.9L-119.5,22.4L-120.4,15.7L-122.0,11.4L-123.4,9.1L-122.8,8.1L-115.6,9.8L-112.9,14.5L-111.7,13.2L-112.5,9.1L-114.2,5.0L-114.9,5.0L-124.5,0.1L-128.1,-2.1L-137.2,-4.1L-140.0,-8.6L-139.2,-11.6L-145.7,-13.8L-146.5,-17.8L-152.6,-21.4L-152.7,-24.0L-155.4,-25.9L-159.8,-27.5L-161.2,-31.8L-167.7,-35.9L-170.4,-40.6L-175.2,-40.9L-183.1,-41.1L-189.0,-42.5L-199.3,-47.7L-204.1,-48.6L-212.9,-50.4L-219.8,-50.0L-229.6,-52.3L-235.6,-54.4L-241.1,-53.4L-240.1,-49.9L-242.9,-49.6L-248.6,-48.5L-253.0,-46.8L-258.6,-45.8L-259.3,-48.7L-257.0,-53.6L-251.7,-55.2L-253.1,-56.4L-259.5,-53.6L-262.9,-50.3L-270.1,-46.8L-266.4,-44.3L-271.2,-40.7L-276.5,-38.6L-281.5,-37.1L-282.8,-34.9L-290.6,-32.3L-292.2,-30.0L-298.0,-27.8L-301.4,-28.2L-306.1,-26.8L-311.2,-25.1L-315.3,-23.5L-323.9,-22.0L-324.7,-22.9L-319.2,-25.2L-314.4,-26.7L-309.0,-29.5L-302.8,-30.0L-300.4,-32.1L-293.4,-35.1L-292.3,-36.1L-288.6,-37.8L-287.8,-41.6L-285.2,-44.6L-291.0,-43.1L-292.6,-43.9L-295.3,-42.1L-298.6,-44.7L-299.9,-42.9L-301.8,-45.4L-306.8,-43.4L-309.8,-43.4L-310.3,-46.3L-309.4,-48.2L-312.6,-49.9L-319.1,-49.0L-323.3,-51.3L-326.7,-52.5L-326.8,-55.4L-330.6,-57.5L-328.7,-60.4L-324.6,-63.2L-322.8,-65.7L-318.8,-66.1L-315.3,-65.3L-311.3,-67.7L-307.7,-67.3L-303.9,-68.8L-304.8,-71.1L-307.6,-72.0L-303.9,-73.9L-307.0,-73.9L-312.3,-72.8L-313.8,-71.7L-317.7,-72.8L-324.8,-72.2L-332.1,-73.4L-334.2,-75.4L-340.5,-78.4L-333.5,-80.4L-322.4,-82.9L-318.3,-82.9L-318.9,-80.4L-308.4,-80.6L-312.4,-83.7L-318.6,-85.6L-322.1,-88.1L-327.0,-90.2L-333.8,-91.8L-331.0,-94.4L-322.1,-94.6L-315.8,-96.9L-314.7,-99.3L-309.5,-101.7L-304.7,-102.2L-295.2,-104.5L-290.6,-104.1L-282.9,-106.8L-275.3,-105.7L-271.7,-103.5L-269.5,-104.5L-261.1,-104.2L-261.3,-103.0L-253.7,-102.1L-248.6,-102.6L-238.1,-101.1L-228.5,-100.6L-224.6,-99.9L-217.9,-100.8L-210.4,-99.3L-204.9,-98.6ZM222.0,-6.6L219.3,-3.4L216.0,0.9L219.3,-0.7L222.6,0.3L220.9,2.1L225.3,3.4L227.6,2.2L232.6,3.8L231.1,7.4L234.6,6.6L235.2,9.2L236.8,12.3L234.7,16.7L232.4,16.9L229.1,16.0L230.2,11.9L228.8,11.2L223.0,15.6L220.0,15.4L223.5,13.1L218.7,11.8L213.4,12.1L203.7,12.0L202.9,10.5L206.0,8.7L203.8,7.4L208.0,4.4L213.2,-3.6L216.3,-6.4L220.6,-8.2L223.0,-7.9L222.0,-6.6ZM177.4,0.6L179.1,0.2L185.7,1.5L190.8,3.6L191.0,4.5L188.5,4.6L182.1,3.0L177.4,0.6ZM179.9,14.8L181.7,17.3L185.3,17.9L189.9,17.8L187.5,19.8L185.6,20.2L179.3,18.0L178.0,16.4L179.9,14.8ZM156.8,513.2L158.7,515.5L161.2,519.2L167.7,522.3L174.7,523.5L172.5,526.0L167.7,526.2L165.2,524.5L163.5,526.5L159.3,528.1L156.8,527.9L153.8,527.5L150.2,526.0L145.0,525.3L138.7,522.5L133.6,519.8L126.7,514.2L130.8,515.2L137.8,518.6L144.5,520.4L147.0,518.1L148.7,514.7L153.3,512.6L156.8,513.2ZM141.5,159.8L138.1,158.9L135.8,159.3L132.7,158.9L130.4,159.8L127.7,158.3L128.1,156.7L132.8,157.4L136.5,157.8L138.3,156.7L136.0,154.5L136.1,152.6L132.9,151.8L134.0,150.4L137.1,150.6L141.4,151.4L142.1,150.6L146.0,150.6L148.9,151.9L150.2,151.8L151.1,153.5L153.9,153.4L153.7,154.9L156.0,155.1L158.4,156.9L156.5,159.0L154.2,157.9L151.9,158.1L150.2,157.9L149.3,158.8L147.4,159.1L146.6,157.9L145.0,158.6L143.0,162.0L141.7,161.2L141.5,159.8ZM105.1,116.0L107.4,115.7L110.8,115.8L110.9,117.1L105.4,117.9L105.1,116.0ZM111.0,114.8L115.0,117.0L114.1,120.6L113.2,120.0L113.3,117.4L111.1,115.4L111.0,114.8ZM109.0,124.0L110.6,124.1L112.3,128.3L112.3,131.2L111.1,131.5L109.8,128.6L108.0,127.1L109.0,124.0ZM194.0,509.2L200.0,506.3L204.2,507.5L207.3,505.5L211.3,507.7L209.8,509.5L203.0,511.0L200.8,509.2L196.5,511.5L194.0,509.2ZM844.7,493.1L847.9,494.7L852.6,495.3L852.8,496.3L851.4,498.5L843.7,498.9L843.6,496.2L844.3,494.1L844.7,493.1ZM543.7,36.9L547.0,34.9L547.8,39.2L546.1,43.1L543.9,42.1L542.7,38.7L543.7,36.9ZM168.6,157.4L171.1,157.9L172.0,158.9L170.8,160.1L167.0,160.1L164.1,160.3L163.8,158.1L164.5,157.4L168.6,157.4ZM112.2,157.5L115.5,158.0L118.2,159.2L119.0,160.6L115.5,160.7L114.0,161.5L111.2,160.7L108.3,158.9L108.9,157.7L111.0,157.4L112.2,157.5ZM88.7,134.1L93.0,134.4L96.9,134.5L101.6,136.2L103.6,138.0L108.3,137.4L110.0,138.6L114.3,141.7L117.4,144.0L119.0,143.9L122.0,144.9L121.6,146.3L125.3,146.5L129.1,148.6L128.5,149.7L125.2,150.4L121.8,150.6L118.4,150.2L111.2,150.7L114.6,147.9L112.5,146.6L109.3,146.3L107.6,144.9L106.4,142.0L103.6,142.2L98.9,140.9L97.4,139.8L90.9,139.0L89.2,138.1L91.0,136.8L86.1,136.6L82.5,139.2L80.5,139.2L79.7,140.4L77.3,141.0L75.1,140.5L77.8,139.0L78.8,137.2L81.1,136.1L83.7,135.1L87.4,134.6L88.7,134.1ZM747.7,312.4L749.0,314.5L750.3,317.8L751.1,323.8L752.4,326.1L751.9,328.5L751.0,330.0L749.3,327.1L748.4,328.5L749.3,332.3L748.9,334.4L747.5,335.5L747.2,339.8L745.2,345.6L742.7,352.5L739.6,362.0L737.7,368.9L735.5,374.7L731.4,375.9L727.0,378.0L724.2,376.7L720.2,374.9L718.8,372.3L718.5,367.9L716.7,363.9L716.3,360.3L717.2,356.7L719.5,355.8L719.5,354.1L721.9,350.4L722.3,347.2L721.2,344.8L720.2,341.7L719.8,337.1L721.6,334.3L722.2,331.1L724.7,330.9L727.5,329.9L729.4,329.0L731.6,328.9L734.4,326.1L738.5,323.0L740.0,320.5L739.3,318.3L741.5,318.9L744.2,315.4L744.3,312.4L746.0,310.2L747.7,312.4ZM631.4,73.5L630.8,75.0L623.6,75.4L623.7,74.6L617.6,73.6L618.5,71.5L621.2,73.2L625.1,72.9L628.9,73.2L628.7,74.1L631.4,73.5ZM908.9,212.4L908.2,217.6L906.1,219.0L901.7,220.2L899.4,216.2L898.5,209.0L900.7,200.9L904.2,203.7L906.5,207.2L908.9,212.4ZM573.8,59.3L577.6,58.8L575.8,62.8L576.5,64.3L575.5,66.9L571.7,65.0L569.1,64.5L562.2,61.9L562.8,59.4L568.7,59.8L573.8,59.3ZM543.6,45.5L546.1,44.0L549.0,47.5L548.3,54.1L546.1,53.8L544.0,55.5L542.1,54.1L541.9,48.1L540.8,45.2L543.6,45.5ZM484.5,-17.0L484.5,-17.0L485.3,-19.9L481.9,-23.0L481.8,-23.1L475.8,-24.0L474.6,-25.3L476.4,-27.5L474.8,-28.9L472.1,-26.6L471.8,-31.4L469.2,-33.9L471.1,-39.1L475.0,-43.2L478.9,-42.8L485.0,-43.2L479.6,-37.8L484.7,-38.4L490.2,-38.4L488.9,-34.4L484.4,-29.9L489.6,-29.5L490.0,-29.0L494.4,-23.1L497.8,-22.3L500.9,-16.6L502.3,-14.7L508.4,-13.7L507.8,-10.5L505.2,-9.0L507.2,-6.5L502.7,-3.8L496.1,-3.9L487.6,-2.5L485.2,-3.5L481.9,-1.1L477.3,-1.7L473.8,0.2L471.1,-0.8L478.4,-6.1L482.9,-7.1L482.9,-7.1L475.1,-8.0L473.7,-10.0L478.9,-11.5L476.2,-14.2L477.1,-17.5L484.5,-17.0ZM663.7,74.3L664.0,74.3L664.7,73.1L668.3,73.1L672.9,71.6L669.5,73.8L669.9,74.7L670.0,75.1L664.9,77.1L662.4,76.5L661.3,74.5L663.7,74.3ZM191.6,196.2L194.5,195.5L195.5,195.7L195.3,199.4L191.1,200.0L190.2,199.6L191.7,198.2L191.6,196.2Z"/><g id="segni"></g></svg>
+    <p class="mappa-info" id="mappa-info" aria-live="polite">Tocca un punto sulla carta o un luogo dell'elenco.</p>
+    <p class="mappa-nota">Carta muta: solo coste e mari. Segui con il dito le rotte: i portoghesi verso sud e verso est, gli spagnoli verso ovest.</p>
+  </div>
+  <ul class="luoghi" id="luoghi"></ul>
+  <div class="animata" id="carta-animata" aria-labelledby="t-animata">
+    <h4 id="t-animata">🎬 Cambia sguardo: la carta animata</h4>
+    <p>Ora guarda questi luoghi in movimento: confini, Stati ed eserciti che cambiano nel tempo. Poi torna alla carta muta e ritrova i luoghi dell'elenco.</p>
+    <h5>Carte animate HUB Scuola</h5>
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=oWMr-7Cqt4k&amp;list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">Le rotte dei navigatori europei</a></li>
+    </ul>
+    <h5>Altre carte animate</h5>
+    <ul>
+      <li><a href="https://www.youtube.com/results?search_query=carta+animata+scoperte+geografiche+Colombo" target="_blank" rel="noopener">Cerca altre carte animate su questo argomento</a></li>
+      <li><a href="https://www.youtube.com/playlist?list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">Tutte le carte animate di storia di HUB Scuola</a></li>
+    </ul>
+    <p class="nota-video">Video su YouTube, si aprono in una nuova scheda.</p>
+  </div>
+
+  <h3 id="quando"><span>2. Quando?</span></h3>
+  <p class="mestiere">🕐 Collocare nel tempo</p>
+  <ol class="linea">
+    <li class="estremo"><span class="anno">1415</span>I portoghesi conquistano Ceuta, in Marocco: inizia l'espansione oltremare.</li>
+    <li><span class="anno">1488</span>Bartolomeo Dias doppia il Capo di Buona Speranza.</li>
+    <li><span class="anno">1492</span>12 ottobre: Cristoforo Colombo sbarca a San Salvador.</li>
+    <li><span class="anno">1493</span>Si stampa in tutta Europa la lettera di Colombo sulle isole scoperte.</li>
+    <li><span class="anno">1494</span>Trattato di Tordesillas: Spagna e Portogallo si dividono le terre da scoprire.</li>
+    <li><span class="anno">1498</span>Vasco da Gama arriva in India per mare.</li>
+    <li><span class="anno">1500</span>Pedro Álvares Cabral arriva in Brasile.</li>
+    <li><span class="anno">1507</span>In una carta geografica il nuovo continente viene chiamato per la prima volta «America».</li>
+    <li class="estremo"><span class="anno">1519–22</span>La spedizione di Magellano compie il giro del mondo.</li>
+  </ol>
+
+  <h3 id="chi"><span>3. Chi?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 📖 Lessico — il link apre una voce Treccani in una nuova scheda.</p>
+  <div class="persone">
+    <article class="persona"><span class="sigla" aria-hidden="true">EN</span><div><h4>Enrico il Navigatore</h4><span class="date">1394–1460 · Portogallo</span><p>Principe portoghese. Finanzia per decenni le spedizioni lungo la costa africana e raccoglie esperti di navigazione e di carte.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">CC</span><div><h4>Cristoforo Colombo</h4><span class="date">1451–1506 · Genova e Spagna</span><p>Navigatore genovese. Convinto che la Terra sia più piccola di quanto si pensasse, cerca di raggiungere l'Asia verso ovest. Compie quattro viaggi e muore convinto di essere stato in Asia.</p><a href="https://www.treccani.it/enciclopedia/cristoforo-colombo_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Leggi la voce Treccani</a></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">VG</span><div><h4>Vasco da Gama</h4><span class="date">1469 ca.–1524 · Portogallo</span><p>Comandante della flotta che per prima arriva in India circumnavigando l'Africa.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">AV</span><div><h4>Amerigo Vespucci</h4><span class="date">1454–1512 · Firenze</span><p>Navigatore e mercante fiorentino. Capisce e scrive che le terre raggiunte sono un «mondo nuovo»: da lui il continente prenderà il nome.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">FM</span><div><h4>Ferdinando Magellano</h4><span class="date">1480 ca.–1521 · Portogallo e Spagna</span><p>Guida la spedizione che compie il primo giro del mondo. Muore nelle Filippine; tornano in Spagna solo una nave e 18 uomini.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">AP</span><div><h4>Antonio Pigafetta</h4><span class="date">1490 ca.–1531 ca. · Vicenza</span><p>Viaggia con Magellano e scrive il diario della spedizione: è una delle nostre fonti principali.</p></div></article>
+  </div>
+</section>
+
+<!-- ======================= TESTO ======================= -->
+<section class="parte" id="testi" aria-labelledby="t-testi">
+  <p class="etichetta">Testo sintetico / essenziale</p>
+  <h2 id="t-testi">La lezione per intero</h2>
+  <p class="guida">Lo stesso testo in due versioni: il <strong>sintetico</strong> contiene tutte le informazioni, l'<strong>essenziale</strong> le riassume con frasi più brevi. Scegli quella che ti serve.</p>
+  <div class="livelli" role="group" aria-label="Versione del testo">
+    <button type="button" data-livello="sintetico" aria-pressed="true">Sintetico</button>
+    <button type="button" data-livello="essenziale" aria-pressed="false">Essenziale</button>
+  </div>
+  <div id="testo-sintetico">
+    <div class="paragrafo"><h4><span class="n">1</span>Perché partire?</h4><p>Alla fine del Medioevo gli europei vogliono spezie, seta e oro dall'Oriente. Ma le vie di terra sono lunghe e controllate da altri popoli, e dopo la caduta di Costantinopoli (1453) diventano ancora più difficili. Trovare una via per mare significa arricchirsi. Ci sono anche motivi religiosi: diffondere il cristianesimo.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>Le nuove tecniche</h4><p>Le esplorazioni sono possibili grazie a nuove tecniche: la caravella, una nave leggera che può navigare anche controvento; la bussola; l'astrolabio, che permette di calcolare la latitudine osservando le stelle; carte nautiche sempre più precise. Molte di queste conoscenze arrivano dal mondo arabo e dal Mediterraneo.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>I portoghesi verso l'India</h4><p>Il Portogallo esplora per decenni la costa dell'Africa, costruendo fortezze e scali commerciali. Nel 1488 Dias arriva alla punta meridionale dell'Africa; nel 1498 Vasco da Gama raggiunge l'India. I portoghesi creano un impero commerciale fatto di porti, dall'Africa alla Cina.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>Colombo verso ovest</h4><p>Colombo propone ai re di Spagna di raggiungere l'Asia navigando verso ovest. Isabella e Ferdinando, appena conquistata Granada, accettano. Con tre navi parte da Palos il 3 agosto 1492 e il 12 ottobre arriva in un'isola delle Bahamas, abitata dai Taíno. Colombo crede di essere in Asia: per questo gli abitanti vengono chiamati «indiani».</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>Un mondo nuovo</h4><p>Il Trattato di Tordesillas (1494) divide il mondo con una linea: le terre a ovest alla Spagna, quelle a est al Portogallo, che così ottiene il Brasile. Amerigo Vespucci capisce che si tratta di un nuovo continente. Nel 1507 un cartografo tedesco lo chiama America. La spedizione di Magellano (1519–1522) dimostra che la Terra si può circumnavigare.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>L'inizio dei grandi movimenti di persone</h4><p>Le scoperte aprono un'epoca di grandi spostamenti: europei che partono per l'America, popoli americani decimati dalle malattie, milioni di africani deportati come schiavi. Tra i continenti viaggiano anche piante e animali: in Europa arrivano mais, patate, pomodori, cacao; in America cavalli, buoi, grano, canna da zucchero.</p></div>
+  </div>
+  <div id="testo-essenziale" class="essenziale" hidden>
+    <div class="paragrafo"><h4><span class="n">1</span>Perché partire?</h4><p>Gli europei vogliono le spezie e l'oro dell'Oriente. Cercano una via per mare per arrivarci senza intermediari.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>Le nuove tecniche</h4><p>Caravella, bussola, astrolabio e nuove carte permettono di navigare in mare aperto.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>I portoghesi verso l'India</h4><p>I portoghesi girano intorno all'Africa e arrivano in India nel 1498.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>Colombo verso ovest</h4><p>Nel 1492 Colombo arriva in America, ma crede di essere in Asia.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>Un mondo nuovo</h4><p>Spagna e Portogallo si dividono il mondo. Vespucci capisce che l'America è un nuovo continente.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>L'inizio dei grandi movimenti di persone</h4><p>Iniziano grandi spostamenti di persone, piante e animali tra i continenti.</p></div>
+  </div>
+</section>
+
+<!-- ======================= PERCHÉ ======================= -->
+<section class="parte" id="perche" aria-labelledby="t-perche">
+  <p class="etichetta">Perché?</p>
+  <h2 id="t-perche">Causa, evento, effetto</h2>
+  <p class="guida">Gli storici non si chiedono solo che cosa è successo, ma perché. Leggi la catena da sinistra a destra.</p>
+  <p class="mestiere">🧩 Comprendere fatti e processi storici</p>
+  <div class="catena">
+    <div class="anello causa"><h4>Causa</h4><p>Gli europei vogliono le ricchezze dell'Oriente senza intermediari; hanno nuove tecniche di navigazione; le monarchie di Portogallo e Spagna finanziano le spedizioni.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello evento"><h4>Evento</h4><p>I portoghesi arrivano in India circumnavigando l'Africa; Colombo raggiunge l'America (1492); Magellano compie il giro del mondo (1519–1522).</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello effetto"><h4>Effetto</h4><p>Si apre un'epoca di scambi e migrazioni tra i continenti. Gli europei conquistano l'America; il centro dei commerci si sposta dal Mediterraneo all'Atlantico.</p></div>
+  </div>
+  <div class="ombra">
+    <h4>Ma attenzione</h4>
+    <p>Diciamo che Colombo «scoprì» l'America, ma il continente era abitato da milioni di persone da migliaia di anni, e i vichinghi vi erano già arrivati intorno all'anno Mille. «Scoperta» è il punto di vista degli europei: per i popoli americani fu l'inizio di un'invasione.</p>
+  </div>
+  <div class="ricorda">
+    <h4>Ricorda</h4>
+    <dl>
+      <dt>Caravella</dt><dd>Nave leggera e veloce usata dagli esploratori.</dd>
+      <dt>Trattato di Tordesillas</dt><dd>Accordo del 1494 tra Spagna e Portogallo per dividersi le nuove terre.</dd>
+      <dt>12 ottobre 1492</dt><dd>Colombo arriva in America.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ======================= CONCETTI ======================= -->
+<section class="parte" id="concetti" aria-labelledby="t-concetti">
+  <p class="etichetta">Concetti fondamentali</p>
+  <h2 id="t-concetti">Le idee chiave</h2>
+  <p class="guida">Le idee più importanti della lezione, spiegate una per una. Le parole sottolineate a puntini rimandano alle <a href="#parole">Parole chiave</a>.</p>
+  <article class="concetto" id="c-rotta"><h4>Una nuova rotta</h4><p>Il Mediterraneo era il centro dei commerci; dopo le scoperte il centro diventa l'Oceano Atlantico. Città come Lisbona, Siviglia e poi Anversa e Amsterdam crescono; Venezia e Genova perdono importanza.</p></article>
+  <article class="concetto" id="c-tecnica"><h4>Navigare in mare aperto</h4><p>Prima si navigava soprattutto vicino alla costa. Con la caravella, la bussola e l'astrolabio si può affrontare l'oceano per settimane senza vedere terra.</p></article>
+  <article class="concetto" id="c-nuovo-mondo"><h4>Un «mondo nuovo»</h4><p>Per gli europei l'America è un <a class="pk" href="#p-nuovo-mondo">Nuovo Mondo</a>, sconosciuto agli antichi. Questo mette in crisi l'idea che i libri antichi contenessero già tutto il sapere.</p></article>
+  <article class="concetto" id="c-scambio"><h4>Lo scambio colombiano</h4><p>Piante, animali e malattie attraversano l'oceano nei due sensi. È lo <a class="pk" href="#p-scambio">scambio colombiano</a>: cambia per sempre l'alimentazione di tutto il mondo.</p></article>
+  <article class="concetto" id="c-punto-di-vista"><h4>Il punto di vista</h4><p>Le stesse vicende possono essere raccontate come «scoperta», «incontro» o «conquista». Lo storico deve chiedersi sempre chi racconta e da quale punto di vista.</p></article>
+</section>
+
+<!-- ======================= COME ======================= -->
+<section class="parte" id="come" aria-labelledby="t-come">
+  <p class="etichetta">Come?</p>
+  <h2 id="t-come">Come si esplorano gli oceani</h2>
+  <p class="guida">Uno schema per confrontare i grandi viaggi.</p>
+  <p class="mestiere">🧩 Organizzare le informazioni · collegamento con Geografia (orientamento, latitudine e longitudine)</p>
+  <p class="radice">I grandi viaggi seguono rotte diverse…</p>
+  <div class="come">
+    <div class="colonna"><h4>Portoghesi verso sud e verso est</h4><ul><li>costa africana</li><li>Dias, Capo di Buona Speranza (1488)</li><li>Vasco da Gama in India (1498)</li></ul></div>
+    <div class="colonna"><h4>Spagnoli verso ovest</h4><ul><li>Colombo (1492)</li><li>le Antille</li><li>Tordesillas (1494)</li></ul></div>
+    <div class="colonna"><h4>Il giro del mondo</h4><ul><li>Magellano (1519–1522)</li><li>lo stretto e il Pacifico</li><li>il diario di Pigafetta</li></ul></div>
+    <div class="colonna"><h4>Gli strumenti</h4><ul><li>caravella</li><li>bussola</li><li>astrolabio</li><li>carte nautiche</li></ul></div>
+  </div>
+</section>
+
+<!-- ======================= PAROLE CHIAVE ======================= -->
+<section class="parte" id="parole" aria-labelledby="t-parole">
+  <p class="etichetta">Parole chiave</p>
+  <h2 id="t-parole">Le parole della lezione</h2>
+  <p class="guida">Il significato dei termini nuovi, in ordine alfabetico.</p>
+  <dl class="parole">
+    <div class="parola" id="p-astrolabio"><dt>Astrolabio</dt><dd>Strumento per misurare l'altezza delle stelle e calcolare la latitudine.</dd></div>
+    <div class="parola" id="p-caravella"><dt>Caravella</dt><dd>Nave leggera a vele latine e quadre, adatta a navigare in oceano.</dd></div>
+    <div class="parola" id="p-circumnavigazione"><dt>Circumnavigazione</dt><dd>Viaggio intorno a un continente o a tutta la Terra.</dd></div>
+    <div class="parola" id="p-nuovo-mondo"><dt>Nuovo Mondo</dt><dd>Nome dato dagli europei all'America. <a href="https://www.treccani.it/enciclopedia/storia-della-america_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Treccani ragazzi: America, storia della</a></dd></div>
+    <div class="parola" id="p-scambio"><dt>Scambio colombiano</dt><dd>Passaggio di piante, animali, malattie e persone tra America ed Europa dopo il 1492.</dd></div>
+    <div class="parola" id="p-spezie"><dt>Spezie</dt><dd>Sostanze vegetali per insaporire e conservare i cibi, come pepe, cannella, chiodi di garofano.</dd></div>
+  </dl>
+</section>
+
+<!-- ======================= STUDIAMO LE FONTI ======================= -->
+<section class="parte" id="lente" aria-labelledby="t-lente">
+  <p class="etichetta">Studiamo le fonti</p>
+  <h2 id="t-lente">Dentro la fonte</h2>
+  <p class="guida">La lettera in cui Colombo racconta il suo primo viaggio fu stampata in molte città d'Europa nel 1493. Alcune di queste edizioni si possono sfogliare su <em>Europeana</em>.</p>
+  <p class="mestiere">📜 Leggere e interpretare le fonti · fonte scritta</p>
+  <div class="lente">
+    <div class="lente-testa">
+      <p class="testata-giornale">Libro a stampa · 1493 · Europeana</p>
+      <h3>La lettera di Colombo sulle isole appena scoperte</h3>
+    </div>
+    <div class="lente-corpo">
+      <p>Tornato in Spagna, Colombo scrive ai re e ai loro funzionari una lettera che descrive le isole, la natura e gli abitanti. La lettera viene tradotta in latino e stampata in molte città: in pochi mesi la notizia si diffonde in tutta Europa.</p>
+      <p>Il titolo latino dice: «Lettera di Cristoforo Colombo, al quale la nostra epoca deve molto, sulle isole dell'India al di là del Gange appena scoperte». Colombo è convinto di essere arrivato in Asia.</p>
+      <p class="domanda-guida">Domanda guida: come fanno gli europei del 1493 a sapere che cosa ha trovato Colombo? Di chi è lo sguardo con cui conoscono l'America?</p>
+      <div class="fasi">
+        <div class="fase"><h4>1. Prima di guardare</h4><ol><li>Dove crede di essere arrivato Colombo? Rileggi il <a href="#testi">testo</a>.</li><li>Ritrova il 1493 sulla <a href="#quando">linea del tempo</a>.</li></ol></div>
+        <div class="fase"><h4>2. Osservare</h4><ol><li>Apri la fonte: in che lingua è scritta? Ci sono immagini?</li><li>Se ci sono illustrazioni, che cosa mostrano? Navi, isole, abitanti?</li></ol><p style="margin:10px 0 0"><a class="bottone" href="https://www.europeana.eu/en/item/358/item_473STZOB3WZEFQ3UDZDYWUCUBDA4T7X3" target="_blank" rel="noopener">Apri la fonte su Europeana</a></p></div>
+        <div class="fase"><h4>3. Pensare da storici</h4><ol><li>Perché la lettera viene stampata e non solo copiata a mano? Collegala alla lezione sulla stampa.</li><li>Colombo voleva convincere i re a finanziare altri viaggi: come può aver descritto quelle terre?</li><li>Che cosa manca in questa fonte? Chi non ha potuto raccontare la sua versione?</li></ol></div>
+      </div>
+      <ul class="altre-fonti">
+        <li><span class="tipo">Europeana</span><a href="https://www.europeana.eu/en/item/368/item_VFXZOHJFHAKVJJUE56QKQ5EP476XAWEH" target="_blank" rel="noopener">Un'altra edizione della lettera di Colombo</a> · <a href="https://www.europeana.eu/en/stories/did-columbus-really-see-mermaids" target="_blank" rel="noopener">Colombo vide davvero le sirene? (racconto)</a> · <a href="https://www.europeana.eu/en/collections/person/167037-amerigo-vespucci" target="_blank" rel="noopener">Amerigo Vespucci (raccolta)</a></li>
+        <li><span class="tipo">Treccani</span><a href="https://www.treccani.it/enciclopedia/cristoforo-colombo_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Cristoforo Colombo</a> · <a href="https://www.treccani.it/enciclopedia/navigazione_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Navigazione</a> · <a href="https://www.treccani.it/enciclopedia/esplorazioni-geografiche_(Dizionario-di-Storia)/" target="_blank" rel="noopener">Esplorazioni geografiche</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RIPASSIAMO ======================= -->
+<section class="parte" id="compiti" aria-labelledby="t-compiti">
+  <p class="etichetta">Ripassiamo</p>
+  <h2 id="t-compiti">Le cinque attività dello storico</h2>
+  <p class="guida">Rispondi prima da solo, poi premi «Controlla». Se sbagli, riprova: la soluzione compare con il pulsante «Mostra le soluzioni».</p>
+  <div id="esercizi"></div>
+
+  <p class="fascia" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8"/></svg></span><span>Ripasso finale</span></p>
+  <div class="attivita">
+    <h4>Dieci cose da sapere</h4>
+    <p class="meta">Ricongiungi le due metà di ogni frase.</p>
+    <div id="dieci"></div>
+  </div>
+  <div class="attivita">
+    <h4>Mini-dibattito</h4>
+    <p class="consegna"><strong>Scoperta, incontro o conquista?</strong> Come chiameresti il 12 ottobre 1492? Prepara un argomento per ciascuna delle tre parole: «scoperta», «incontro», «conquista». Poi scegli quella che ti sembra più giusta e spiega perché.</p>
+    <textarea aria-label="I tuoi argomenti" placeholder="Scoperta perché… Incontro perché… Conquista perché… Io scelgo…"></textarea>
+    <p class="dibattito"><b>Regole:</b> non si interrompe chi parla; si criticano le idee, non le persone; alla fine ognuno scrive una conclusione personale.</p>
+  </div>
+</section>
+</main>
+</div>
+
+<footer>
+<p>Organizzazione della lezione ispirata a <em>Storia facile 2</em> (Modulo 1, cap. 2) e al <em>Tablet degli argomenti di Storia</em> (p. 112), Edizioni Erickson: Prima/Dopo, Idea principale, Perché?, Come?, Parole chiave, testo sintetico ed essenziale, verifiche. Testi originali della lezione.</p>
+  <p>Carta: coste da Natural Earth (dominio pubblico). Fonti: Europeana. Voci collegate: Treccani.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- luoghi ---------- */
+var LUOGHI=[
+{n:"Palos",ll:[37.2283,-6.8936],t:"Porto della Spagna da cui Colombo parte il 3 agosto 1492."},
+ {n:"San Salvador",ll:[24.05,-74.5],t:"Isola delle Bahamas dove Colombo sbarca il 12 ottobre 1492."},
+ {n:"Porto Seguro",ll:[-16.45,-39.06],t:"In Brasile: qui nel 1500 arriva il portoghese Cabral."},
+ {n:"Capo di Buona Speranza",ll:[-34.36,18.47],t:"La punta meridionale dell'Africa, doppiata da Dias nel 1488."},
+ {n:"Calicut",ll:[11.25,75.78],t:"Porto dell'India, mercato delle spezie, raggiunto da Vasco da Gama nel 1498."},
+ {n:"Stretto di Magellano",ll:[-53.5,-70.9],t:"Passaggio tra Atlantico e Pacifico, attraversato da Magellano nel 1520."}
+];
+var lista=document.getElementById("luoghi"), gruppo=document.getElementById("segni"), info=document.getElementById("mappa-info"), NS="http://www.w3.org/2000/svg";
+function xy(ll){ return [(ll[1]-(-100))*900/180, (50-ll[0])*900/180]; }
+/* posizione dell'etichetta rispetto al punto: [dx, dy, allineamento] */
+var ETI={"Palos":[10,5,"start"],"San Salvador":[10,5,"start"],"Porto Seguro":[10,5,"start"],"Capo di Buona Speranza":[-10,5,"end"],"Calicut":[-10,5,"end"],"Stretto di Magellano":[10,-4,"start"]};
+var segni=[];
+function scegli(i){
+  segni.forEach(function(g,j){ g.setAttribute("class", j===i ? "segno scelto" : "segno"); g.firstChild.setAttribute("r", j===i ? "8" : "6"); if(j===i) gruppo.appendChild(g); });
+  info.innerHTML=""; var b=document.createElement("strong"); b.textContent=LUOGHI[i].n+": "; info.appendChild(b); info.appendChild(document.createTextNode(LUOGHI[i].t));
+}
+LUOGHI.forEach(function(L,i){
+  var p=xy(L.ll), g=document.createElementNS(NS,"g"), c=document.createElementNS(NS,"circle"), t=document.createElementNS(NS,"text"), e=ETI[L.n]||[14,5,"start"];
+  g.setAttribute("class","segno"); g.setAttribute("tabindex","0"); g.setAttribute("role","button"); g.setAttribute("aria-label",L.n);
+  c.setAttribute("cx",p[0].toFixed(1)); c.setAttribute("cy",p[1].toFixed(1)); c.setAttribute("r","6");
+  t.setAttribute("x",(p[0]+e[0]).toFixed(1)); t.setAttribute("y",(p[1]+e[1]).toFixed(1)); t.setAttribute("text-anchor",e[2]); t.textContent=L.n.replace(/ \(.*\)$/,"");
+  g.appendChild(c); g.appendChild(t); gruppo.appendChild(g); segni.push(g);
+  g.addEventListener("click",function(){ scegli(i); });
+  g.addEventListener("keydown",function(ev){ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); scegli(i); } });
+  var li=document.createElement("li"), bt=document.createElement("button");
+  bt.type="button"; bt.textContent=L.n; bt.addEventListener("click",function(){ scegli(i); document.getElementById("mappa").scrollIntoView({block:"center"}); });
+  li.appendChild(bt); li.appendChild(document.createTextNode(" — "+L.t)); lista.appendChild(li);
+});
+
+/* ---------- indice laterale: evidenzia la parte che si sta leggendo ---------- */
+var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
+function attiva(id){ Array.prototype.forEach.call(voci,function(v){ var on=v.getAttribute("href")==="#"+id; if(on){ v.setAttribute("aria-current","true"); if(navI.scrollWidth>navI.clientWidth){ navI.scrollLeft=v.offsetLeft-16; } } else v.removeAttribute("aria-current"); }); }
+var parti=document.querySelectorAll("section.parte"), attesa=false;
+function guarda(){ attesa=false; var lim=window.innerHeight*0.3, id=parti[0].id;
+  Array.prototype.forEach.call(parti,function(sx){ if(sx.getBoundingClientRect().top<=lim) id=sx.id; });
+  if((window.innerHeight+window.pageYOffset)>=document.documentElement.scrollHeight-4) id=parti[parti.length-1].id;
+  attiva(id); }
+window.addEventListener("scroll",function(){ if(!attesa){ attesa=true; (window.requestAnimationFrame||setTimeout)(guarda); } },{passive:true});
+window.addEventListener("resize",guarda); guarda();
+
+/* ---------- testo sintetico / essenziale ---------- */
+var bot=document.querySelectorAll(".livelli button");
+Array.prototype.forEach.call(bot,function(b){ b.addEventListener("click",function(){
+  var ess=b.getAttribute("data-livello")==="essenziale";
+  document.getElementById("testo-sintetico").hidden=ess; document.getElementById("testo-essenziale").hidden=!ess;
+  Array.prototype.forEach.call(bot,function(x){ x.setAttribute("aria-pressed", x===b ? "true":"false"); });
+});});
+
+/* ---------- esercizi ---------- */
+var ESERCIZI=[
+{gruppo:"tempo", titolo:"Scegli l'anno giusto", meta:"Abbina ogni evento all'anno in cui accadde.",
+  scelte:["1488","1492","1494","1498","1500","1522"],
+  righe:[["Dias doppia il Capo di Buona Speranza","1488"],["Colombo arriva in America","1492"],["Trattato di Tordesillas","1494"],["Vasco da Gama arriva in India","1498"],["Cabral arriva in Brasile","1500"],["Torna in Spagna la nave di Magellano","1522"]]},
+ {gruppo:"spazio", titolo:"Dove successe?", meta:"Usa la carta dell'Idea principale per trovare il luogo di ogni evento.",
+  scelte:["Palos","San Salvador","Porto Seguro","Capo di Buona Speranza","Calicut","Stretto di Magellano"],
+  righe:[["Partenza di Colombo","Palos"],["Primo sbarco di Colombo","San Salvador"],["Arrivo di Cabral in Brasile","Porto Seguro"],["La punta meridionale dell'Africa","Capo di Buona Speranza"],["Il porto delle spezie in India","Calicut"],["Il passaggio verso il Pacifico","Stretto di Magellano"]]},
+ {gruppo:"fonti", titolo:"Fatto o interpretazione?", meta:"Uno storico distingue i fatti (si possono verificare) dalle interpretazioni (sono giudizi, opinioni).",
+  scelte:["Fatto","Interpretazione"],
+  righe:[["Il 12 ottobre 1492 Colombo sbarca in un'isola delle Bahamas.","Fatto","Lo racconta il suo diario di bordo."],["Colombo scoprì l'America.","Interpretazione","È il punto di vista europeo: il continente era già abitato."],["La lettera di Colombo fu stampata in molte città nel 1493.","Fatto","Esistono le edizioni a stampa."],["Le scoperte geografiche furono un progresso per l'umanità.","Interpretazione","È un giudizio: per i popoli americani furono una catastrofe."],["La spedizione di Magellano tornò con una sola nave.","Fatto","Lo racconta Pigafetta."]]},
+ {gruppo:"processi", titolo:"Chi esplora dove?", meta:"Rileggi lo schema «Come?» e abbina ogni viaggio alla rotta giusta.",
+  scelte:["Portoghesi","Spagnoli","Giro del mondo"],
+  righe:[["Bartolomeo Dias","Portoghesi"],["Cristoforo Colombo","Spagnoli"],["Ferdinando Magellano","Giro del mondo"],["Vasco da Gama","Portoghesi"],["Le Antille","Spagnoli"],["Il Pacifico","Giro del mondo"]]},
+ {gruppo:"processi", titolo:"Vero o falso?", meta:"Dopo il controllo leggi la spiegazione: serve a correggere le frasi false.",
+  scelte:["Vero","Falso"],
+  righe:[["Colombo sapeva di essere arrivato in un nuovo continente.","Falso","Credeva di essere in Asia."],["Il continente prende il nome da Amerigo Vespucci.","Vero"],["I portoghesi raggiungono l'India girando intorno all'Africa.","Vero"],["Con Tordesillas il Brasile tocca alla Spagna.","Falso","Tocca al Portogallo."],["Dall'America arrivano in Europa mais, patate e pomodori.","Vero"]]},
+ {gruppo:"lessico", titolo:"Parole e significati", meta:"Abbina ogni parola alla sua definizione.",
+  scelte:["Caravella","Astrolabio","Circumnavigazione","Nuovo Mondo","Scambio colombiano","Spezie"],
+  righe:[["Nave per l'oceano","Caravella"],["Strumento per calcolare la latitudine","Astrolabio"],["Giro intorno alla Terra","Circumnavigazione"],["Nome europeo dell'America","Nuovo Mondo"],["Piante e animali tra i continenti","Scambio colombiano"],["Pepe, cannella, chiodi di garofano","Spezie"]]}
+];
+var DIECI=[
+["Gli europei cercano","una via per mare verso l'Oriente."],
+ ["La caravella","permette di navigare in oceano."],
+ ["I portoghesi","esplorano la costa africana."],
+ ["Nel 1498 Vasco da Gama","arriva in India."],
+ ["Nel 1492 Colombo","arriva in America."],
+ ["Colombo crede","di essere in Asia."],
+ ["Con Tordesillas","Spagna e Portogallo si dividono il mondo."],
+ ["Vespucci capisce","che l'America è un nuovo continente."],
+ ["Magellano","guida il primo giro del mondo."],
+ ["Lo scambio colombiano","cambia l'alimentazione del mondo."]
+];
+function el(t,attr,txt){ var e=document.createElement(t); if(attr){ for(var k in attr){ e.setAttribute(k,attr[k]); } } if(txt!=null) e.textContent=txt; return e; }
+function mescola(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+function costruisci(cont, scelte, righe, conGruppo){
+  var tab=el("table",{"class":"esercizio"}), tb=el("tbody"); tab.appendChild(tb);
+  var stati=[];
+  righe.forEach(function(r,i){
+    var tr=el("tr"), td1=el("td"), td2=el("td"), td3=el("td",{"class":"esito","aria-live":"polite"});
+    td1.appendChild(document.createTextNode(r[0]));
+    var sp=el("span",{"class":"spiega"}); sp.hidden=true; if(r[2]) sp.textContent=r[2]; td1.appendChild(sp);
+    var s=el("select",{"aria-label":"Risposta: "+r[0]}); s.appendChild(el("option",{value:""},"— scegli —"));
+    scelte.forEach(function(c){ s.appendChild(el("option",{value:c},c)); });
+    td2.appendChild(s); tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tb.appendChild(tr);
+    stati.push({tr:tr,s:s,esito:td3,sp:sp,giusta:r[1]});
+  });
+  cont.appendChild(tab);
+  var com=el("div",{"class":"comandi"}), b1=el("button",{type:"button","class":"bottone"},"Controlla"), b2=el("button",{type:"button","class":"bottone secondario"},"Mostra le soluzioni"), pt=el("span",{"class":"punteggio","aria-live":"polite"});
+  b2.hidden=true; com.appendChild(b1); com.appendChild(b2); com.appendChild(pt); cont.appendChild(com);
+  b1.addEventListener("click",function(){
+    var ok=0, vuote=0;
+    stati.forEach(function(x){
+      x.tr.classList.remove("ok"); x.tr.classList.remove("no");
+      if(!x.s.value){ vuote++; x.esito.textContent=""; return; }
+      var g=x.s.value===x.giusta; if(g) ok++;
+      x.tr.classList.add(g?"ok":"no"); x.esito.textContent=g?"✓":"✗"; x.esito.setAttribute("aria-label",g?"giusto":"sbagliato");
+      if(x.sp.textContent) x.sp.hidden=false;
+    });
+    pt.textContent=ok+" su "+stati.length+(vuote? " · "+vuote+" senza risposta":"");
+    b2.hidden=false;
+  });
+  b2.addEventListener("click",function(){
+    stati.forEach(function(x){ x.s.value=x.giusta; x.tr.classList.remove("no"); x.tr.classList.add("ok"); x.esito.textContent="✓"; if(x.sp.textContent) x.sp.hidden=false; });
+    pt.textContent="Ecco le soluzioni.";
+  });
+}
+var GRUPPI={"tempo": {"c": "#2a7f6f", "n": "Collocare nel tempo", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15.5\" rx=\"2\"/><path d=\"M3.5 10h17M8 3v4M16 3v4\"/><path d=\"M9 14.5h2v3M13.5 14.5h2l-1.5 3\"/></svg>"}, "spazio": {"c": "#b25510", "n": "Collocare nello spazio", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z\"/><path d=\"M9 4.5v13M15 6.5v13\"/></svg>"}, "fonti": {"c": "#55800f", "n": "Leggere e interpretare le fonti", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"5\" y=\"11\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 11V7.5a4 4 0 0 1 7.6-1.8\"/><circle cx=\"12\" cy=\"15.5\" r=\"1.3\"/><path d=\"M12 16.8v1.7\"/></svg>"}, "processi": {"c": "#b0215f", "n": "Comprendere fatti e processi storici", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 4.5l6 3.5-6 3.5zM10 4.5l6 3.5-6 3.5z\"/><path d=\"M20 12.5l-6 3.5 6 3.5zM14 12.5l-6 3.5 6 3.5z\"/></svg>"}, "lessico": {"c": "#6b3f8a", "n": "Conoscere e usare il lessico specifico", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 18.5L8.5 6l4.5 12.5M5.6 14h5.8\"/><path d=\"M15 12.5a2.5 2.5 0 1 1 0 4.5M20 10v8.5\"/></svg>"}, "ripasso": {"c": "#2b5f6b", "n": "Ripasso finale", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8\"/></svg>"}};
+var zona=document.getElementById("esercizi"), ultimo="";
+ESERCIZI.forEach(function(E,i){
+  if(E.gruppo!==ultimo){ var g=GRUPPI[E.gruppo], f=el("p",{"class":"fascia",style:"--c:"+g.c}), t=el("span",{"class":"tondo"}); t.innerHTML=g.i; f.appendChild(t); f.appendChild(el("span",null,g.n)); zona.appendChild(f); ultimo=E.gruppo; }
+  var box=el("div",{"class":"attivita"}); box.appendChild(el("h4",null,(i+1)+". "+E.titolo)); box.appendChild(el("p",{"class":"meta"},E.meta));
+  costruisci(box,E.scelte,mescola(E.righe)); zona.appendChild(box);
+});
+costruisci(document.getElementById("dieci"), mescola(DIECI.map(function(d){return d[1];})), DIECI.map(function(d){ return [d[0]+" …", d[1]]; }));
+})();
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+</body>
+</html>

@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La civiltà rinascimentale</title>
+<style>
+:root{
+  --sfondo:#f3f3ef; --carta:#ffffff; --tenue-bg:#eaf1f2; --ink:#23262a; --tenue:#5a6066; --filo:#dfe2dd;
+  --accento:#2b5f6b; --accento-2:#1f4a54; --accento-soft:#e1edef;
+  --causa:#8a5a12; --causa-bg:#f8eedb; --evento:#2b5f6b; --evento-bg:#e1edef; --effetto:#6b3f74; --effetto-bg:#f1e6f3;
+  --ombra:#7a3b2e; --ombra-bg:#f7e7e2;
+  --mare:#d7e8ee; --terra:#f4efe2; --ok:#1f7a4d; --ok-bg:#dcf2e6; --no:#b42318; --no-bg:#fde3e1;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --surface:var(--carta); --line:var(--filo); --soft:var(--tenue-bg); --paper:var(--tenue-bg); --accent:var(--accento); --accent-ink:#fff; --muted:var(--tenue); --card:var(--carta);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#f3f3ef;background:var(--sfondo);color:#23262a;color:var(--ink);font:1.08rem/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:1.08rem/1.65 var(--sans)}
+a{color:#2b5f6b;color:var(--accento)}
+a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.salta{position:absolute;left:1rem;top:-6rem;background:#ffffff;background:var(--carta);padding:.8rem 1rem;z-index:20}.salta:focus{top:1rem}
+.foglio{max-width:1280px;margin:32px auto;background:#ffffff;background:var(--carta);border:1px solid #dfe2dd;border:1px solid var(--filo)}
+header.testata{padding:22px 52px 26px;border-top:9px solid #2b5f6b;border-top:9px solid var(--accento);background:#eaf1f2;background:var(--tenue-bg)}
+.indietro{display:inline-block;font-size:.92rem;margin-bottom:18px;text-decoration:none;border-bottom:1px solid currentColor}
+.eyebrow{margin:0 0 6px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:#5a6066;color:var(--tenue);font-weight:700}
+.capitolo{margin:0;font-weight:700;color:#2b5f6b;color:var(--accento)}
+h1{font:700 2.6rem/1.08 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2.6rem/1.08 var(--serif);font-size:clamp(2.1rem,6vw,3.5rem);margin:6px 0 10px}
+.sottotitolo{margin:0;font:italic 1.25rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.25rem/1.4 var(--serif);color:#5a6066;color:var(--tenue)}
+.corpo-lezione{display:grid;grid-template-columns:268px minmax(0,1fr);align-items:start}
+nav.indice{position:-webkit-sticky;position:sticky;top:12px;align-self:start;display:grid;grid-template-columns:minmax(0,1fr);grid-gap:10px;gap:10px;padding:30px 0 24px 28px;max-height:calc(100vh - 24px);overflow-y:auto}
+.indice-titolo{margin:0 0 2px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue)}
+a.voce{display:flex;align-items:center;min-height:54px;padding:4px 12px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;text-decoration:none;font:800 .86rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .86rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em;transition:transform .15s,box-shadow .15s}
+a.voce .tondo{margin-right:10px;flex:none;width:46px;height:46px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+a.voce svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+a.voce:hover{transform:translateX(4px)}
+a.voce[aria-current="true"]{transform:translateX(8px);box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+a.voce:focus-visible{outline:3px solid #23262a;outline:3px solid var(--ink);outline-offset:3px}
+main{padding:10px 52px 40px 40px;min-width:0}
+.fascia{display:flex;align-items:center;margin:28px 0 12px;min-height:50px;padding:4px 16px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;font:800 .95rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .95rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.fascia .tondo{margin-right:10px;flex:none;width:42px;height:42px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+.fascia svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+section.parte{padding:34px 0 8px;border-bottom:1px solid #dfe2dd;border-bottom:1px solid var(--filo);scroll-margin-top:56px}
+section.parte:last-of-type{border-bottom:0}
+h2{font:700 2rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2rem/1.2 var(--serif);margin:0 0 6px}
+.etichetta{display:inline-block;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#2b5f6b;color:var(--accento);margin:0 0 4px}
+.guida{margin:0 0 22px;color:#5a6066;color:var(--tenue);font-size:.98rem;max-width:72ch}
+h3{font:700 1.08rem/1.3 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 1.08rem/1.3 var(--sans);text-transform:uppercase;letter-spacing:.05em;color:#2b5f6b;color:var(--accento);margin:26px 0 12px}
+h3 span{border-bottom:3px dotted #2b5f6b;border-bottom:3px dotted var(--accento);padding-bottom:4px}
+p{margin:0 0 14px}
+.lettura{max-width:74ch}
+.mestiere{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:-4px 0 16px}
+
+/* prima / dopo */
+.primadopo{display:grid;grid-template-columns:1fr auto 1fr;grid-gap:16px;gap:16px;align-items:stretch;margin:6px 0 10px}
+.pd{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:18px 20px;background:#ffffff;background:var(--carta)}
+.pd h3{margin-top:0}
+.pd.ora{background:#e1edef;background:var(--accento-soft);border-color:transparent}
+.freccia{align-self:center;font:700 1.8rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.8rem var(--serif);color:#2b5f6b;color:var(--accento)}
+.pd .link-lez{font-size:.92rem;margin:0}
+.pd-centro{grid-column:1/-1;text-align:center;font:700 1.15rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem/1.4 var(--serif);background:#2b5f6b;background:var(--accento);color:#fff;border-radius:12px;padding:12px 18px;margin:0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pd-centro{color:#0f1416}}
+:root[data-theme="dark"] .pd-centro{color:#0f1416}
+
+/* idea principale */
+.mappa-box{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;margin:16px 0 8px}
+#mappa{display:block;width:100%;height:auto;background:#d7e8ee;background:var(--mare)}
+#mappa .mare{fill:#d7e8ee;fill:var(--mare)}
+#mappa .terra{fill:#f4efe2;fill:var(--terra);stroke:#f4efe2;stroke:var(--terra);stroke-width:1.2;stroke-linejoin:round}
+#mappa .segno{cursor:pointer}
+#mappa .segno circle{fill:#2b5f6b;fill:var(--accento);stroke:#ffffff;stroke:var(--carta);stroke-width:3}
+#mappa .segno text{font:700 17px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 17px var(--sans);fill:#23262a;fill:var(--ink);paint-order:stroke;stroke:#f4efe2;stroke:var(--terra);stroke-width:5px;stroke-linejoin:round}
+#mappa .segno.scelto circle{fill:#d9822b}
+#mappa .segno:focus{outline:none}#mappa .segno:focus-visible circle{stroke:#23262a;stroke:var(--ink);stroke-width:4}
+.mappa-info{margin:0;padding:12px 14px;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);font-size:.98rem;min-height:3.2em}
+.mappa-info strong{color:#2b5f6b;color:var(--accento)}
+.mappa-nota{font-size:.88rem;color:#5a6066;color:var(--tenue);padding:10px 14px;margin:0;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo)}
+.luoghi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));grid-gap:10px;gap:10px;margin:12px 0 0;padding:0;list-style:none}
+.luoghi li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 12px;font-size:.95rem}
+.luoghi button{all:unset;cursor:pointer;font-weight:700;color:#2b5f6b;color:var(--accento)}
+.luoghi button:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.linea{position:relative;margin:8px 0 0;padding:0 0 0 30px;list-style:none}
+.linea::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:3px;background:#2b5f6b;background:var(--accento);border-radius:2px}
+.linea li{position:relative;margin:0 0 12px}
+.linea li::before{content:"";position:absolute;left:-26px;top:.45em;width:13px;height:13px;border-radius:50%;background:#ffffff;background:var(--carta);border:3px solid #2b5f6b;border:3px solid var(--accento)}
+.linea li.estremo::before{background:#2b5f6b;background:var(--accento)}
+.linea .anno{font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);color:#2b5f6b;color:var(--accento);margin-right:8px}
+.linea .pista{display:inline-block;max-width:100%;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;padding:1px 8px;margin-left:6px;color:#5a6066;color:var(--tenue);white-space:nowrap}
+.persone{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-gap:14px;gap:14px}
+.persona{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:54px 1fr;grid-gap:14px;gap:14px;align-items:start}
+.sigla{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#e1edef;background:var(--accento-soft);color:#2b5f6b;color:var(--accento);font:700 1.2rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem var(--serif)}
+.persona h4{margin:0;font:700 1.12rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.12rem/1.3 var(--serif)}
+.persona .date{font-size:.88rem;color:#5a6066;color:var(--tenue);display:block;margin-bottom:6px}
+.persona p{margin:0 0 6px;font-size:.97rem}
+.persona a{font-size:.9rem}
+
+/* perché */
+.catena{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;grid-gap:10px;gap:10px;align-items:stretch}
+.anello{border-radius:12px;padding:16px 18px}
+.anello h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.anello p{margin:0;font-size:.98rem}
+.anello.causa{background:#f8eedb;background:var(--causa-bg)}.anello.causa h4{color:#8a5a12;color:var(--causa)}
+.anello.evento{background:#e1edef;background:var(--evento-bg)}.anello.evento h4{color:#2b5f6b;color:var(--evento)}
+.anello.effetto{background:#f1e6f3;background:var(--effetto-bg)}.anello.effetto h4{color:#6b3f74;color:var(--effetto)}
+.catena .freccia{font-size:1.5rem}
+.ombra{margin:16px 0 0;background:#f7e7e2;background:var(--ombra-bg);border-left:5px solid #7a3b2e;border-left:5px solid var(--ombra);border-radius:0 12px 12px 0;padding:14px 18px}
+.ombra h4{margin:0 0 6px;color:#7a3b2e;color:var(--ombra);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.ombra p{margin:0}
+.ricorda{margin:18px 0 0;border:2px dashed #dfe2dd;border:2px dashed var(--filo);border-radius:12px;padding:14px 18px}
+.ricorda h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+.ricorda dl{margin:0;display:grid;grid-template-columns:max-content 1fr;grid-gap:6px 14px;gap:6px 14px}
+.ricorda dt{font-weight:700}.ricorda dd{margin:0}
+
+/* concetti e come */
+.concetto{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);padding:18px 22px;margin:0 0 16px;scroll-margin-top:60px}
+.concetto h4{font:700 1.3rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.3rem/1.3 var(--serif);margin:0 0 10px}
+.concetto p:last-child{margin-bottom:0}
+.come{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-gap:12px;gap:12px;margin-top:10px}
+.colonna{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:0;overflow:hidden}
+.colonna h4{margin:0;padding:10px 14px;background:#2b5f6b;background:var(--accento);color:#fff;font-size:1rem}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .colonna h4{color:#0f1416}}
+:root[data-theme="dark"] .colonna h4{color:#0f1416}
+.colonna ul{margin:0;padding:12px 14px 12px 30px;font-size:.95rem}
+.colonna li{margin:0 0 6px}
+.radice{text-align:center;font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:999px;padding:8px 16px;max-width:520px;margin:4px auto 10px}
+
+/* parole chiave */
+.parole{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));grid-gap:12px;gap:12px;margin:0;padding:0}
+.parola{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px;scroll-margin-top:60px}
+.parola dt{font:700 1.1rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.1rem var(--serif);color:#2b5f6b;color:var(--accento);margin-bottom:4px}
+.parola dd{margin:0;font-size:.97rem}
+a.pk{color:inherit;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted #2b5f6b;text-decoration:underline dotted var(--accento);text-underline-offset:4px;text-decoration-thickness:2px}
+a.pk:hover{background:#e1edef;background:var(--accento-soft)}
+:target{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:4px}
+
+/* testi */
+.livelli{display:inline-flex;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;overflow:hidden;margin:0 0 18px}
+.livelli button{font:inherit;font-size:.95rem;border:0;background:transparent;color:#23262a;color:var(--ink);padding:7px 16px;cursor:pointer}
+.livelli button[aria-pressed="true"]{background:#2b5f6b;background:var(--accento);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .livelli button[aria-pressed="true"]{color:#0f1416}}
+:root[data-theme="dark"] .livelli button[aria-pressed="true"]{color:#0f1416}
+.paragrafo{margin:0 0 22px;max-width:74ch}
+.paragrafo h4{font:700 1.2rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem/1.3 var(--serif);margin:0 0 6px}
+.paragrafo h4 .n{color:#2b5f6b;color:var(--accento);margin-right:6px}
+.essenziale .paragrafo p{font-size:1.12rem;line-height:1.75}
+
+/* lente */
+.lente{border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:14px;overflow:hidden}
+.lente-testa{background:#2b5f6b;background:var(--accento);color:#fff;padding:16px 22px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lente-testa{color:#0f1416}}
+:root[data-theme="dark"] .lente-testa{color:#0f1416}
+.lente-testa .testata-giornale{margin:0;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.lente-testa h3{margin:4px 0 0;color:inherit;font:700 1.6rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.6rem/1.2 var(--serif);text-transform:none;letter-spacing:0}
+.lente-corpo{padding:18px 22px}
+.domanda-guida{font:italic 1.2rem/1.5 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.2rem/1.5 var(--serif);border-left:4px solid #2b5f6b;border-left:4px solid var(--accento);padding:4px 0 4px 14px;margin:0 0 18px}
+.fasi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-gap:14px;gap:14px}
+.fase{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px}
+.fase h4{margin:0 0 8px;font-size:1rem}
+.fase ol,.fase ul{margin:0;padding-left:20px;font-size:.96rem}
+.fase li{margin:0 0 6px}
+.bottone{display:inline-block;font:inherit;font-weight:700;border-radius:999px;padding:9px 18px;border:2px solid #2b5f6b;border:2px solid var(--accento);background:#2b5f6b;background:var(--accento);color:#fff;text-decoration:none;cursor:pointer}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bottone{color:#0f1416}}
+:root[data-theme="dark"] .bottone{color:#0f1416}
+.bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+:root .bottone.secondario,:root:not([data-theme="light"]) .bottone.secondario,:root[data-theme="dark"] .bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+.bottone[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.altre-fonti{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-gap:8px;gap:8px}
+.altre-fonti li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 14px;font-size:.96rem}
+.altre-fonti .tipo{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue);display:block}
+
+/* compiti */
+.attivita{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:14px;padding:18px 22px;margin:0 0 18px}
+.attivita h4{margin:0 0 4px;font:700 1.25rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.25rem/1.3 var(--serif)}
+.attivita .meta{font-size:.86rem;color:#5a6066;color:var(--tenue);margin:0 0 12px}
+.consegna{margin:0 0 12px}
+table.esercizio{width:100%;border-collapse:collapse;font-size:.97rem}
+table.esercizio td{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:8px 6px;vertical-align:middle}
+table.esercizio td:first-child{width:52%}
+table.esercizio select{font:inherit;font-size:.95rem;width:100%;max-width:100%;padding:5px 6px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:6px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+td.esito{width:34px;text-align:center;font-weight:700}
+tr.ok td.esito{color:#1f7a4d;color:var(--ok)} tr.no td.esito{color:#b42318;color:var(--no)}
+tr.ok{background:#dcf2e6;background:var(--ok-bg)} tr.no{background:#fde3e1;background:var(--no-bg)}
+.spiega{display:block;font-size:.88rem;color:#5a6066;color:var(--tenue);margin-top:4px}
+.comandi{display:flex;flex-wrap:wrap;align-items:center;margin:14px 0 0}
+.comandi>*{margin:0 10px 8px 0}
+.punteggio{font-weight:700}
+textarea{font:inherit;width:100%;min-height:84px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:8px;padding:8px 10px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+.dibattito{margin:14px 0 0;background:#eaf1f2;background:var(--tenue-bg);border-radius:10px;padding:10px 14px;font-size:.95rem}
+.dibattito b{color:#2b5f6b;color:var(--accento)}
+
+footer{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:18px 52px;font-size:.86rem;color:#5a6066;color:var(--tenue)}
+footer p{margin:0 0 6px}
+
+@media (max-width:960px){
+  html{scroll-padding-bottom:84px}
+  .corpo-lezione{display:block}
+  nav.indice{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:90;grid-auto-flow:column;grid-auto-columns:max-content;grid-template-columns:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;max-height:none;grid-gap:8px;gap:8px;padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));background:#ffffff;background:var(--carta);border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);box-shadow:0 -4px 14px rgba(0,0,0,.12)}
+  .foglio{margin-bottom:70px}
+  .indice-titolo{display:none}
+  a.voce{flex:none;min-height:40px;padding:3px 12px 3px 3px;font-size:.74rem;white-space:nowrap}
+  a.voce .tondo{width:34px;height:34px;border-width:2px}
+  a.voce svg{width:18px;height:18px}
+  a.voce:hover,a.voce[aria-current="true"]{transform:none}
+  a.voce[aria-current="true"]{box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+  main{padding:10px 40px 40px}
+}
+@media (max-width:860px){
+  .come{grid-template-columns:1fr 1fr}
+  .fasi{grid-template-columns:1fr}
+  .catena{grid-template-columns:1fr}
+  .catena .freccia{transform:rotate(90deg);justify-self:center;line-height:1}
+}
+@media (max-width:700px){
+  .foglio{margin:0;border:0}
+  header.testata{padding:16px 16px 20px}
+  main{padding:4px 16px 28px}
+  footer{padding:16px}
+  .primadopo{grid-template-columns:1fr}
+  .primadopo .freccia{transform:rotate(90deg);justify-self:center}
+  .come{grid-template-columns:1fr}
+  #mappa .segno text{font-size:30px}
+  .ricorda dl{grid-template-columns:1fr}
+  .ricorda dd{margin-bottom:6px}
+  table.esercizio td{display:block;width:100%!important;border-top:0;padding:4px 6px}
+  table.esercizio tr{display:block;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:6px 0}
+  td.esito{text-align:left}
+}
+@media print{
+  body{background:#fff}.foglio{border:0;margin:0}nav.indice,.indietro,.comandi,.livelli,.mappa-box{display:none}
+  .essenziale-solo{display:none}section.parte{break-inside:avoid-page}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#mappa.mondo .segno text{font-size:14px;stroke-width:4px}
+@media (max-width:700px){#mappa.mondo .segno text{font-size:26px;stroke-width:5px}}
+
+.animata{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);border-radius:12px;padding:14px 16px;margin:16px 0 0;background:#ffffff;background:var(--carta)}
+.animata h4{margin:0 0 6px;font-size:1.02rem}
+.animata p{margin:0 0 8px}
+.animata ul{margin:8px 0 0;padding:0;list-style:none}
+.animata li{margin:0 0 8px;padding-left:24px;position:relative}
+.animata li:before{content:"\25B6";position:absolute;left:2px;top:0;color:#2b5f6b;color:var(--accento);font-size:.85em}
+.animata .nota-video{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:6px 0 0}
+@media print{.animata{display:none}}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<div class="foglio">
+<header class="testata">
+  <a class="indietro" href="../../index.html">← Torna a Storia: tutti i moduli</a>
+  <p class="eyebrow">Storia · Sistemi di produzione, organizzazione sociale e vita quotidiana</p>
+  <p class="capitolo">Lezione 2</p>
+  <h1>La civiltà rinascimentale</h1>
+  <p class="sottotitolo">XV–XVI secolo: l'uomo al centro, l'arte, la stampa e le corti</p>
+</header>
+<div class="corpo-lezione">
+<nav class="indice" aria-label="Parti della lezione">
+  <p class="indice-titolo">In questa lezione</p>
+  <a class="voce" href="#prima-dopo" style="--c:#3a6ea5"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l3 3-3 3"/><path d="M4 7h13"/><path d="M10 14l-3 3 3 3"/><path d="M20 17H7"/></svg></span><span class="nome">Prima / Dopo</span></a>
+  <a class="voce" href="#idea" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">Idea principale</span></a>
+  <a class="voce" href="#testi" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">Testo sintetico / essenziale</span></a>
+  <a class="voce" href="#perche" style="--c:#b25510"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .9-1 1.6v.6"/><circle cx="12" cy="17" r=".7" fill="currentColor"/></svg></span><span class="nome">Perché?</span></a>
+  <a class="voce" href="#concetti" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4"/><path d="M10.5 12.5L19 4M15.5 7.5l3 3M13 10l2 2"/></svg></span><span class="nome">Concetti fondamentali</span></a>
+  <a class="voce" href="#come" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="4.5" rx="1"/><rect x="3" y="15" width="6" height="5" rx="1"/><rect x="15" y="15" width="6" height="5" rx="1"/><path d="M12 7v4M6 15v-4h12v4"/></svg></span><span class="nome">Come?</span></a>
+  <a class="voce" href="#parole" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">Parole chiave</span></a>
+  <a class="voce" href="#lente" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M20 20l-5.2-5.2"/></svg></span><span class="nome">Studiamo le fonti</span></a>
+  <a class="voce" href="#compiti" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="nome">Ripassiamo</span></a>
+</nav>
+
+<main id="contenuto">
+
+<!-- ======================= PRIMA / DOPO ======================= -->
+<section class="parte" id="prima-dopo" aria-labelledby="t-pd">
+  <p class="etichetta">Per orientarsi</p>
+  <h2 id="t-pd">Prima e dopo</h2>
+  <p class="guida">Dopo la crisi del Trecento, le ricche città italiane diventano il laboratorio di una nuova civiltà che si diffonde in tutta Europa.</p>
+  <div class="primadopo">
+    <div class="pd">
+      <h3><span>Prima</span></h3>
+      <p>Nei secoli dopo il Mille i commerci e le città crescono; mercanti e banchieri italiani diventano ricchissimi. Nel Trecento poeti come Petrarca e Boccaccio cominciano a cercare e studiare gli antichi testi latini e greci. Poi arrivano la peste del 1348 e la crisi. Molti Comuni diventano Signorie.</p>
+      <p class="link-lez">Ripassa: <a href="rivoluzione-agricola-comuni.html">La rivoluzione agricola, i commerci e la società comunale</a> · <a href="../stato-governo/signorie.html">Le Signorie e gli altri Stati regionali</a></p>
+    </div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="pd">
+      <h3><span>Dopo</span></h3>
+      <p>Dal 1494 l'Italia diventa campo di battaglia tra Francia e Spagna e perde la sua indipendenza politica. Ma le idee del Rinascimento si diffondono in Europa grazie alla stampa e preparano le grandi novità del Cinquecento: le esplorazioni, la Riforma protestante, la rivoluzione scientifica.</p>
+      <p class="link-lez">Più avanti: <a href="imperi-coloniali.html">Gli imperi coloniali</a> · <a href="../stato-governo/riforma-controriforma.html">Riforma e Controriforma</a></p>
+    </div>
+    <p class="pd-centro">XV secolo → Umanesimo e Rinascimento → XVI secolo</p>
+  </div>
+</section>
+
+<!-- ======================= IDEA PRINCIPALE ======================= -->
+<section class="parte" id="idea" aria-labelledby="t-idea">
+  <p class="etichetta">Idea principale</p>
+  <h2 id="t-idea">Che cosa, dove, quando, chi</h2>
+  <p class="guida">Prima di studiare i dettagli, guarda l'argomento dall'alto: che cosa succede e dove, in che anni, chi sono i protagonisti.</p>
+
+  <h3 id="dove"><span>1. Dove? Che cosa?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 🗺️ Collocare nello spazio</p>
+  <div class="lettura">
+    <p>Tra il Quattrocento e il Cinquecento, nelle città italiane, nasce una nuova cultura. Gli <a class="pk" href="#p-umanesimo">umanisti</a> studiano gli autori greci e latini e pensano che l'uomo, con la sua intelligenza, possa conoscere e cambiare il mondo. Gli artisti rappresentano la realtà in modo nuovo, con la <a class="pk" href="#p-prospettiva">prospettiva</a> e lo studio del corpo umano. Gli storici chiamano questo periodo <a class="pk" href="#p-rinascimento">Rinascimento</a>.</p>
+    <p>I centri principali sono <strong>Firenze</strong>, dove governano i Medici, <strong>Roma</strong> dei papi, <strong>Venezia</strong>, <strong>Milano</strong> e le piccole corti di <strong>Urbino</strong>, <strong>Mantova</strong>, <strong>Ferrara</strong>. Principi e banchieri fanno a gara a chiamare artisti e studiosi: è il <a class="pk" href="#p-mecenatismo">mecenatismo</a>.</p>
+    <p>Intanto a <strong>Magonza</strong>, in Germania, Gutenberg inventa la <a class="pk" href="#p-stampa">stampa a caratteri mobili</a>. I libri costano meno, si moltiplicano e fanno viaggiare le idee in tutta Europa.</p>
+  </div>
+  <div class="mappa-box">
+    <svg id="mappa" viewBox="0 105 900 687" role="img" aria-labelledby="mappa-titolo"><title id="mappa-titolo">Carta dell'Europa con i luoghi del Rinascimento</title><rect x="0" y="0" width="900" height="822.0" class="mare"/><path class="terra" d="M694.6,214.4L657.9,214.8L633.2,211.4L637.8,198.3L665.3,188.6L686.3,193.8L695.2,198.6L693.0,206.8L694.6,214.4ZM2855.6,576.3L2852.8,571.0L2852.7,555.8L2862.9,555.0L2865.8,519.7L2860.5,494.1L2877.6,483.6L2902.0,488.9L2915.4,459.8L2922.3,427.0L2930.0,416.1L2940.5,389.2L2907.4,398.0L2890.2,409.8L2859.7,409.8L2851.6,381.7L2828.0,360.5L2793.2,350.9L2785.8,321.6L2778.8,303.2L2771.3,290.4L2758.9,260.2L2741.3,249.3L2711.5,240.4L2684.9,241.2L2660.1,246.5L2643.6,261.4L2654.5,268.5L2654.8,285.0L2643.6,294.6L2625.6,326.3L2625.8,339.5L2597.6,358.3L2573.6,347.1L2549.7,349.5L2539.2,339.5L2527.3,336.3L2498.0,357.4L2471.6,362.3L2453.3,369.7L2428.1,364.9L2409.5,365.2L2397.4,349.9L2377.8,335.5L2357.7,331.6L2332.4,335.5L2313.5,341.0L2285.1,328.5L2281.3,306.1L2257.8,298.4L2239.6,294.9L2217.2,282.6L2196.5,313.5L2204.6,331.1L2185.2,351.9L2156.3,344.4L2136.3,343.3L2122.9,329.3L2102.1,328.9L2084.7,319.7L2054.2,333.8L2016.1,359.6L1995.1,364.7L1987.2,367.2L1976.6,348.9L1950.8,352.9L1942.3,340.2L1928.3,334.4L1918.7,317.2L1907.6,311.8L1878.9,319.4L1851.3,302.2L1840.7,317.9L1796.0,242.0L1770.5,218.9L1777.8,209.5L1727.7,237.7L1708.5,239.4L1710.1,223.1L1684.5,212.9L1663.6,220.2L1657.3,189.2L1621.4,182.8L1603.4,195.2L1553.3,206.2L1543.5,213.6L1468.7,224.0L1459.6,234.2L1474.0,254.7L1454.8,262.4L1458.6,270.6L1439.4,285.1L1471.8,305.7L1466.8,319.8L1438.6,318.6L1432.9,327.4L1407.2,311.9L1375.6,312.6L1354.3,325.1L1330.6,313.1L1286.6,292.4L1255.3,293.1L1214.1,325.7L1211.5,347.5L1191.0,330.2L1175.0,363.0L1180.9,369.1L1169.3,391.7L1186.3,412.0L1201.2,411.2L1213.9,431.1L1211.8,446.5L1222.1,451.4L1212.9,469.1L1193.5,474.0L1173.7,504.8L1191.8,533.2L1189.9,553.4L1211.7,588.6L1199.7,600.6L1196.3,608.2L1187.5,606.2L1173.7,588.0L1168.1,587.0L1155.5,580.1L1149.4,567.8L1130.8,561.6L1118.6,566.3L1115.1,560.7L1087.9,546.4L1058.5,541.5L1041.5,536.4L1039.1,540.0L1013.6,514.7L990.8,503.4L973.5,485.9L988.1,481.1L1004.7,456.1L993.5,444.2L1023.0,432.0L1022.4,425.5L1004.5,430.3L1005.1,417.1L1015.4,408.7L1034.8,406.5L1037.9,396.6L1033.5,380.1L1041.6,364.4L1041.4,355.7L1011.9,345.9L1000.2,346.2L987.8,332.2L972.5,337.0L947.2,326.5L947.6,320.6L940.5,307.6L924.5,306.2L922.8,296.9L927.9,290.8L915.0,274.0L894.3,276.8L888.3,275.3L883.2,282.1L875.7,280.9L870.8,261.8L866.1,251.8L870.0,249.1L886.1,250.1L893.9,243.5L888.1,235.6L874.7,230.3L875.8,224.9L867.7,219.5L855.1,199.9L859.5,191.8L857.5,177.8L837.9,170.7L827.4,174.2L824.6,166.9L803.5,159.3L797.1,141.7L795.4,127.2L785.7,120.3L794.4,110.9L788.4,83.0L802.6,65.7L799.6,60.5L822.4,44.0L801.4,29.8L844.2,-8.4L862.8,-25.6L870.3,-40.9L840.7,-61.4L848.9,-80.8L830.9,-103.1L844.3,-128.7L821.1,-162.7L839.5,-185.3L808.9,-205.2L811.9,-226.1L828.0,-228.9L862.1,-240.8L882.6,-251.3L915.5,-233.2L970.3,-226.1L1045.9,-192.3L1061.2,-178.1L1062.5,-158.2L1040.3,-142.5L1007.6,-134.5L918.4,-157.2L903.7,-153.4L936.3,-131.5L937.6,-117.7L938.9,-87.1L964.7,-78.0L980.3,-70.3L982.9,-84.7L970.8,-97.6L983.5,-108.9L1031.9,-90.3L1048.7,-97.6L1035.3,-119.5L1081.9,-148.7L1100.3,-147.0L1119.0,-136.6L1130.6,-157.1L1114.0,-174.9L1123.8,-192.8L1109.1,-211.4L1165.0,-201.7L1176.4,-185.0L1151.1,-181.3L1151.2,-164.7L1167.0,-154.4L1197.9,-160.9L1202.8,-180.0L1244.5,-194.3L1314.4,-219.9L1329.4,-218.4L1309.8,-200.3L1334.5,-197.2L1348.8,-207.4L1386.4,-208.2L1416.0,-220.6L1438.8,-202.6L1461.5,-222.4L1440.6,-239.7L1451.0,-249.6L1510.1,-240.5L1537.8,-231.2L1610.2,-197.0L1623.6,-212.7L1603.3,-228.5L1602.7,-234.8L1578.6,-237.8L1585.2,-251.9L1574.5,-275.2L1573.9,-284.8L1610.8,-311.9L1624.0,-339.0L1638.8,-344.9L1691.8,-337.0L1695.9,-320.4L1677.0,-296.2L1689.4,-286.6L1695.8,-265.7L1691.3,-224.8L1713.4,-206.5L1704.7,-186.5L1665.6,-144.1L1688.5,-139.7L1696.4,-150.4L1718.4,-158.1L1723.8,-172.9L1741.0,-187.1L1729.4,-204.1L1738.7,-223.9L1716.8,-226.3L1712.0,-242.9L1728.0,-272.9L1702.0,-297.3L1737.8,-317.4L1733.2,-338.7L1743.2,-339.4L1753.6,-322.8L1745.8,-294.0L1767.2,-288.5L1758.0,-310.1L1791.5,-321.8L1833.1,-323.4L1870.0,-306.4L1852.2,-331.3L1850.2,-363.1L1885.0,-369.1L1933.1,-367.8L1976.5,-371.7L1960.2,-387.4L1983.3,-407.0L2006.3,-407.8L2045.2,-422.6L2098.0,-426.6L2104.7,-434.8L2157.2,-437.6L2173.5,-430.9L2218.5,-446.7L2255.2,-446.2L2260.7,-459.1L2279.8,-471.9L2327.0,-484.1L2361.3,-474.5L2334.1,-467.1L2379.4,-462.5L2384.8,-447.8L2403.1,-455.0L2461.5,-454.6L2506.6,-440.0L2522.7,-428.8L2517.7,-413.3L2495.6,-404.5L2443.0,-387.9L2428.0,-379.0L2452.8,-374.8L2482.4,-367.3L2500.4,-372.9L2510.6,-353.8L2519.4,-361.5L2551.3,-366.2L2615.6,-361.3L2620.4,-347.3L2704.0,-342.9L2705.1,-365.7L2747.6,-360.4L2779.5,-360.6L2811.8,-344.9L2821.0,-325.7L2809.2,-313.2L2834.3,-289.7L2865.8,-277.6L2885.1,-308.9L2917.2,-295.5L2951.2,-303.5L2990.0,-294.3L3004.6,-302.7L3037.4,-298.5L3022.9,-326.3L3049.4,-339.2L3230.0,-319.8L3247.0,-302.1L3299.3,-279.2L3380.1,-284.9L3419.9,-280.0L3436.6,-267.6L3434.2,-245.8L3458.8,-237.3L3485.6,-243.4L3521.0,-244.1L3558.8,-238.3L3596.7,-241.6L3631.6,-215.0L3656.3,-224.6L3640.2,-243.7L3649.1,-256.9L3712.8,-248.6L3754.5,-250.4L3812.0,-236.1L-3360.0,-223.1L-3311.0,-200.3L-3258.6,-170.5L-3260.3,-152.0L-3246.8,-144.5L-3251.4,-166.2L-3197.1,-161.8L-3158.0,-133.8L-3177.8,-120.8L-3210.6,-117.7L-3211.1,-88.5L-3219.1,-82.3L-3237.8,-83.2L-3253.1,-93.6L-3279.6,-102.3L-3284.1,-115.3L-3304.5,-120.1L-3327.2,-116.3L-3338.0,-126.8L-3333.7,-137.8L-3357.7,-130.8L-3348.6,-116.7L-3360.0,-104.0L3839.9,-103.9L3814.2,-90.7L3788.2,-92.9L3806.2,-77.0L3818.2,-52.4L3827.4,-44.3L3829.7,-32.0L3824.6,-24.0L3787.3,-30.5L3731.4,-8.0L3713.6,-4.5L3683.0,16.5L3654.0,34.8L3646.6,48.4L3618.0,27.7L3565.9,51.2L3556.8,40.1L3537.5,52.9L3510.8,48.8L3504.3,68.4L3480.4,97.3L3481.1,109.4L3503.8,116.1L3501.2,159.6L3482.6,160.7L3474.0,185.7L3482.4,198.6L3447.4,213.9L3440.5,248.0L3410.6,255.3L3404.6,285.6L3375.8,313.5L3368.4,292.9L3359.8,249.3L3348.7,182.9L3358.3,141.5L3375.2,123.6L3376.2,109.6L3407.3,103.0L3443.0,65.3L3477.5,34.6L3513.4,10.7L3529.5,-31.4L3505.2,-28.9L3493.2,-4.2L3442.4,28.6L3426.1,-8.2L3374.4,2.0L3324.3,52.1L3340.9,70.4L3296.3,78.2L3265.3,81.3L3266.7,59.7L3235.7,55.1L3210.9,69.8L3149.7,64.7L3083.9,73.5L3019.2,131.8L2942.5,202.4L2974.0,206.1L2983.8,224.8L3003.3,231.5L3016.1,216.6L3038.1,218.5L3066.9,251.4L3067.6,276.8L3052.0,306.7L3050.3,342.4L3041.2,390.2L3011.1,433.4L3004.4,454.1L2977.2,488.9L2950.3,523.4L2937.4,541.1L2910.8,558.6L2898.2,559.0L2885.6,544.5L2858.7,566.3L2855.6,576.3ZM908.7,464.1L914.0,456.7L928.2,463.2L934.6,464.3L937.2,470.2L940.2,471.2L940.4,473.7L950.2,480.9L970.6,479.1L966.7,489.8L944.8,495.0L917.6,512.3L906.5,506.2L910.9,492.1L889.1,483.4L892.7,477.7L911.7,467.7L908.7,464.1ZM862.1,-240.8L828.0,-228.9L811.9,-226.1L820.3,-247.1L794.7,-259.0L763.6,-248.8L753.8,-226.9L734.7,-213.7L713.2,-220.9L687.2,-219.4L664.9,-235.2L652.9,-227.3L640.5,-226.1L637.6,-206.4L599.9,-211.3L594.6,-194.6L575.3,-194.7L562.2,-173.4L542.2,-140.3L511.1,-98.2L518.4,-88.0L511.4,-76.2L491.6,-76.7L478.6,-48.7L479.9,-9.0L492.6,6.2L486.0,41.3L469.4,61.8L460.6,79.0L447.1,60.7L407.7,95.3L380.9,102.3L353.3,87.0L346.2,54.9L339.8,-14.1L358.3,-33.3L411.0,-58.4L450.6,-89.2L487.1,-130.9L535.2,-188.6L568.7,-211.1L623.7,-248.6L667.6,-261.7L700.5,-260.1L730.9,-284.9L767.4,-283.5L803.3,-289.5L865.9,-267.6L840.1,-259.6L862.1,-240.8ZM-695.3,-631.5L-628.1,-649.4L-557.9,-648.0L-532.5,-659.0L-461.8,-661.9L-302.0,-658.2L-176.9,-634.4L-213.9,-623.0L-290.3,-621.6L-398.0,-618.7L-388.0,-613.4L-317.1,-616.7L-256.9,-606.4L-218.0,-615.5L-201.4,-604.8L-223.4,-587.4L-172.5,-598.5L-75.4,-610.1L-15.4,-604.3L-4.2,-591.5L-85.7,-570.3L-97.0,-563.4L-160.9,-558.2L-114.6,-556.8L-138.0,-535.0L-154.1,-515.7L-153.4,-482.4L-129.5,-462.8L-160.7,-461.6L-193.6,-452.2L-156.7,-436.3L-152.0,-410.9L-173.4,-408.1L-147.5,-382.4L-191.9,-380.3L-168.7,-368.1L-175.3,-357.6L-203.4,-353.0L-231.4,-352.9L-206.3,-332.7L-206.0,-319.4L-245.5,-331.7L-255.8,-323.7L-228.8,-316.2L-202.6,-298.0L-195.1,-273.9L-230.7,-268.1L-246.1,-279.7L-270.9,-296.9L-264.0,-276.6L-287.2,-260.8L-234.5,-259.6L-206.9,-257.9L-260.6,-231.9L-314.9,-208.3L-373.5,-198.0L-395.5,-197.9L-416.3,-186.4L-444.0,-154.8L-487.0,-133.9L-500.9,-132.6L-527.5,-125.3L-556.2,-118.3L-573.4,-99.9L-573.6,-78.9L-583.8,-59.2L-616.4,-35.4L-608.3,-12.0L-617.3,12.7L-627.6,41.9L-655.7,43.7L-685.2,19.3L-725.3,19.2L-744.6,2.8L-758.0,-26.4L-792.7,-63.6L-802.8,-83.1L-805.6,-109.9L-833.2,-137.5L-826.0,-159.5L-839.4,-170.0L-819.6,-205.0L-789.5,-216.1L-781.6,-228.6L-777.4,-251.9L-800.3,-241.4L-811.2,-236.9L-829.1,-232.7L-853.7,-242.4L-855.0,-262.7L-847.2,-278.6L-828.6,-279.0L-787.8,-271.1L-822.2,-290.1L-840.1,-300.3L-860.0,-296.1L-876.7,-303.5L-854.4,-331.4L-866.5,-342.5L-882.4,-363.2L-906.5,-394.8L-931.9,-406.5L-931.7,-419.0L-985.3,-436.5L-1027.8,-438.7L-1081.3,-437.4L-1130.1,-435.2L-1153.3,-444.7L-1188.0,-463.5L-1135.5,-473.0L-1095.3,-474.5L-1180.8,-482.3L-1226.0,-494.5L-1223.2,-506.1L-1147.5,-520.5L-1074.2,-534.9L-1066.5,-545.7L-1120.5,-556.5L-1103.0,-568.4L-1033.8,-589.3L-1004.7,-592.4L-1013.0,-605.9L-965.6,-613.7L-904.1,-618.5L-842.7,-618.7L-820.9,-609.4L-767.8,-625.8L-720.1,-614.7L-692.0,-612.3L-650.5,-602.6L-698.0,-618.7L-695.3,-631.5ZM363.7,359.8L373.2,367.6L402.0,373.1L391.9,393.5L389.4,414.8L383.8,420.0L374.7,417.2L375.4,424.8L360.8,441.6L360.4,455.1L370.0,450.5L376.8,463.6L376.0,472.0L381.9,483.2L375.0,492.3L380.1,515.5L391.0,519.3L388.7,532.2L370.6,549.1L331.1,541.0L302.0,550.7L299.7,568.7L276.5,572.6L254.0,559.1L246.7,565.5L209.9,551.9L201.9,540.3L212.3,522.4L216.1,462.9L195.5,431.5L180.7,416.4L150.2,404.9L148.2,383.1L174.1,376.5L207.6,384.2L201.3,350.4L220.2,363.2L266.7,339.9L272.8,315.4L290.3,309.4L293.2,319.9L302.5,320.4L311.7,332.4L325.7,346.5L336.0,344.2L353.5,357.8L358.0,360.4L363.7,359.8ZM414.9,564.1L427.8,552.7L431.2,578.3L424.6,601.4L415.5,595.3L410.9,575.2L414.9,564.1ZM954.4,860.5L950.9,870.0L943.7,865.8L939.5,885.7L944.5,889.1L939.4,893.2L938.5,901.1L947.9,897.0L948.5,908.7L938.4,956.4L936.5,948.7L925.3,905.1L931.1,895.2L929.7,893.5L935.1,879.6L939.1,857.0L942.0,849.5L942.5,849.2L949.2,849.2L951.0,843.9L956.4,843.5L956.7,855.8L954.0,860.3L954.4,860.5ZM956.4,843.5L951.0,843.9L949.2,849.2L942.5,849.2L949.7,824.8L959.6,803.7L960.0,802.7L969.0,804.2L972.2,815.9L961.3,827.2L956.4,843.5ZM947.9,897.0L938.5,901.1L939.4,893.2L944.5,889.1L939.5,885.7L943.7,865.8L950.9,870.0L950.9,888.3L947.9,897.0ZM429.6,932.3L421.1,878.7L408.8,866.6L408.6,859.4L392.2,841.6L390.5,819.1L402.8,802.4L407.5,777.7L404.3,749.2L408.4,733.9L430.2,721.8L444.2,725.4L443.6,740.5L460.6,729.6L462.0,735.3L452.0,750.0L451.9,763.8L458.8,771.2L456.2,797.1L443.0,812.1L446.8,828.4L457.1,828.9L462.2,843.1L469.8,847.7L468.6,870.7L458.9,879.3L452.7,888.9L439.0,900.4L441.1,912.8L439.4,925.4L429.6,932.3ZM66.3,1019.3L66.7,1013.6L66.7,1011.6L66.5,976.1L98.8,954.1L118.8,949.5L135.1,941.5L142.8,926.6L166.2,914.7L167.0,892.6L178.6,890.0L187.7,878.9L213.8,873.9L217.5,862.3L212.2,855.9L205.3,824.4L204.1,806.2L196.6,787.0L215.8,770.7L237.4,765.5L250.0,753.2L269.3,744.1L303.3,738.8L336.3,736.3L346.4,740.7L365.2,729.0L386.6,728.8L394.8,735.7L408.4,733.9L404.3,749.2L407.5,777.7L402.8,802.4L390.5,819.1L392.2,841.6L408.6,859.4L408.8,866.6L421.1,878.7L429.6,932.3L436.1,958.7L437.2,972.6L433.6,997.0L435.2,1010.6L432.6,1027.0L434.3,1045.8L426.4,1058.2L438.2,1080.1L439.0,1092.8L446.1,1109.5L455.5,1104.0L471.2,1117.9L480.0,1136.7L411.5,1193.6L353.6,1252.4L325.4,1265.7L303.2,1268.6L303.0,1249.6L293.7,1244.7L281.2,1236.2L276.5,1222.2L209.0,1156.9L141.5,1091.7L66.3,1019.3ZM950.9,870.0L954.4,860.5L976.7,872.4L1015.8,840.5L1023.9,876.9L1020.1,881.4L980.1,896.4L1000.0,926.3L993.4,931.4L990.1,941.4L974.8,945.5L970.1,956.3L961.4,965.5L939.1,960.8L938.4,956.4L948.5,908.7L947.9,897.0L950.9,888.3L950.9,870.0ZM954.4,860.5L954.0,860.3L956.7,855.8L956.4,843.5L961.3,827.2L972.2,815.9L969.0,804.2L960.0,802.7L958.1,779.8L963.0,767.5L968.3,761.0L973.7,754.4L974.8,737.8L981.4,743.6L1003.4,735.2L1014.0,740.9L1030.5,740.8L1053.5,729.6L1064.2,730.1L1087.0,725.4L1076.8,744.1L1065.8,751.5L1067.7,773.3L1060.1,809.4L1015.8,840.5L976.7,872.4L954.4,860.5ZM460.6,79.0L469.4,61.8L486.0,41.3L492.6,6.2L479.9,-9.0L478.6,-48.7L491.6,-76.7L511.4,-76.2L518.4,-88.0L511.1,-98.2L542.2,-140.3L562.2,-173.4L575.3,-194.7L594.6,-194.6L599.9,-211.3L637.6,-206.4L640.5,-226.1L652.9,-227.3L679.6,-212.7L710.8,-192.4L711.4,-146.3L718.0,-134.7L683.6,-126.3L664.3,-105.4L667.4,-87.1L635.6,-63.1L596.9,-37.3L582.4,4.8L596.7,25.8L615.7,42.4L597.4,76.1L576.6,83.1L568.9,133.3L557.6,161.3L533.4,158.4L522.0,182.1L498.9,183.4L492.5,155.2L475.8,121.3L460.6,79.0ZM803.5,159.3L824.6,166.9L827.4,174.2L837.9,170.7L857.5,177.8L859.5,191.8L855.1,199.9L867.7,219.5L875.8,224.9L874.7,230.3L888.1,235.6L893.9,243.5L886.1,250.1L870.0,249.1L866.1,251.8L870.8,261.8L875.7,280.9L858.5,282.7L852.4,289.2L851.1,304.3L843.1,301.4L825.1,302.8L819.9,295.9L812.4,301.1L804.8,296.7L789.1,296.1L766.8,289.0L746.6,286.6L731.1,287.3L720.1,295.4L710.6,296.6L710.1,283.3L704.0,269.4L716.0,263.3L716.1,251.4L710.6,240.0L709.7,226.8L729.0,227.0L750.7,215.7L755.3,198.9L771.8,189.3L769.9,175.9L782.1,170.9L803.5,159.3ZM875.7,280.9L883.2,282.1L888.3,275.3L894.3,276.8L915.0,274.0L927.9,290.8L922.8,296.9L924.5,306.2L940.5,307.6L947.6,320.6L947.2,326.5L972.5,337.0L987.8,332.2L1000.2,346.2L1011.9,345.9L1041.4,355.7L1041.6,364.4L1033.5,380.1L1037.9,396.6L1034.8,406.5L1015.4,408.7L1005.1,417.1L1004.5,430.3L988.5,432.8L975.2,442.4L956.4,444.0L939.2,455.1L940.2,471.2L937.2,470.2L934.6,464.3L928.2,463.2L914.0,456.7L908.7,464.1L906.0,460.9L874.9,453.3L873.5,442.2L855.0,445.9L847.6,462.3L832.1,484.4L823.0,479.3L813.6,484.1L804.7,478.6L809.7,475.4L813.2,465.1L818.7,455.6L817.3,450.2L821.4,447.8L823.4,451.9L835.2,452.8L840.5,450.6L836.8,447.6L838.1,443.1L831.2,435.5L828.3,423.0L821.0,418.1L822.4,408.0L813.4,400.0L805.2,398.9L790.5,389.6L777.2,392.5L772.4,396.9L763.9,396.9L758.9,403.9L744.2,406.8L737.3,411.4L728.1,404.1L715.2,403.9L702.9,400.6L694.2,407.1L692.8,399.0L681.7,390.9L685.6,378.8L691.2,371.0L695.5,372.8L690.4,359.3L708.5,334.5L718.5,331.0L720.6,322.6L710.6,296.6L720.1,295.4L731.1,287.3L746.6,286.6L766.8,289.0L789.1,296.1L804.8,296.7L812.4,301.1L819.9,295.9L825.1,302.8L843.1,301.4L851.1,304.3L852.4,289.2L858.5,282.7L875.7,280.9ZM709.7,226.8L710.6,240.0L716.1,251.4L716.0,263.3L704.0,269.4L710.1,283.3L710.6,296.6L720.6,322.6L718.5,331.0L708.5,334.5L690.4,359.3L695.5,372.8L691.2,371.0L672.2,359.6L657.8,363.8L648.4,360.7L636.5,367.1L626.4,356.5L618.2,360.6L617.0,358.8L607.9,344.1L593.0,342.2L591.1,332.9L577.4,329.6L574.4,337.3L563.5,331.1L564.8,322.9L549.9,320.3L540.4,310.6L532.1,291.6L533.7,281.2L528.8,265.3L521.5,254.6L527.0,246.6L522.4,231.5L536.0,222.7L567.3,208.8L592.5,198.7L612.4,203.8L613.9,211.1L633.2,211.4L657.9,214.8L694.6,214.4L704.9,217.6L709.7,226.8ZM579.6,399.8L578.1,412.0L566.8,412.1L570.7,418.6L564.0,437.8L560.2,442.9L542.7,443.6L532.6,450.4L516.2,448.1L487.5,440.3L483.0,430.0L463.3,435.1L461.0,440.8L448.8,436.6L438.6,435.8L429.6,430.3L432.6,423.0L431.9,417.7L437.9,416.1L448.0,424.4L450.9,416.5L468.5,417.7L482.8,412.4L492.4,413.3L498.7,419.4L500.5,414.3L497.7,394.9L504.9,391.1L511.9,377.3L526.7,386.9L538.0,374.7L545.1,372.5L560.6,381.6L570.0,380.0L579.2,385.7L577.6,389.4L579.6,399.8ZM681.7,390.9L692.8,399.0L694.2,407.1L682.0,413.3L672.5,433.6L660.4,453.9L644.4,459.5L631.9,458.2L616.6,466.0L609.1,470.5L592.6,464.7L577.6,451.9L571.3,448.2L567.4,438.1L564.0,437.8L570.7,418.6L566.8,412.1L578.1,412.0L579.6,399.8L589.7,407.5L597.2,410.7L613.9,407.1L615.5,401.1L623.5,400.2L633.2,395.5L635.4,397.4L644.8,393.7L649.5,386.7L656.1,384.8L677.4,394.0L681.7,390.9ZM772.4,396.9L777.2,392.5L790.5,389.6L805.2,398.9L813.4,400.0L822.4,408.0L821.0,418.1L828.3,423.0L831.2,435.5L838.1,443.1L836.8,447.6L840.5,450.6L835.2,452.8L823.4,451.9L821.4,447.8L817.3,450.2L818.7,455.6L813.2,465.1L809.7,475.4L804.7,478.6L801.1,464.9L803.2,452.2L802.6,439.1L791.1,421.3L784.6,408.7L778.5,399.8L772.4,396.9ZM804.7,478.6L813.6,484.1L823.0,479.3L832.1,484.4L832.5,492.1L822.8,498.6L816.8,495.7L811.1,531.8L799.4,528.7L784.9,517.8L761.3,524.8L751.4,532.4L722.0,530.8L706.7,526.1L698.9,528.3L693.1,516.0L689.5,510.8L694.1,505.8L689.2,502.1L682.9,508.8L671.2,500.1L669.7,487.7L657.5,480.7L655.3,471.2L644.4,459.5L660.4,453.9L672.5,433.6L682.0,413.3L694.2,407.1L702.9,400.6L715.2,403.9L728.1,404.1L737.3,411.4L744.2,406.8L758.9,403.9L763.9,396.9L772.4,396.9L778.5,399.8L784.6,408.7L791.1,421.3L802.6,439.1L803.2,452.2L801.1,464.9L804.7,478.6ZM769.9,175.9L771.8,189.3L755.3,198.9L750.7,215.7L729.0,227.0L709.7,226.8L704.9,217.6L694.6,214.4L693.0,206.8L695.2,198.6L686.3,193.8L665.3,188.6L661.1,163.5L684.0,154.3L717.5,156.2L737.2,153.2L740.0,159.5L750.7,161.4L769.9,175.9ZM785.7,120.3L795.4,127.2L797.1,141.7L803.5,159.3L782.1,170.9L769.9,175.9L750.7,161.4L740.0,159.5L737.2,153.2L717.5,156.2L684.0,154.3L661.1,163.5L661.8,141.0L671.6,122.2L690.5,112.0L706.4,134.3L722.4,133.7L726.3,110.8L743.3,105.5L752.0,109.2L769.2,120.3L785.7,120.3ZM799.6,60.5L802.6,65.7L788.4,83.0L794.4,110.9L785.7,120.3L769.2,120.3L752.0,109.2L743.3,105.5L726.3,110.8L728.6,93.1L721.2,96.9L708.5,86.3L706.8,69.1L732.1,60.8L757.3,56.5L779.0,61.4L799.6,60.5ZM522.4,231.5L527.0,246.6L521.5,254.6L528.8,265.3L533.7,281.2L532.1,291.6L540.4,310.6L531.4,313.8L526.2,310.3L521.1,316.0L506.7,321.8L499.3,329.2L484.8,335.8L488.3,344.7L490.5,357.3L500.6,364.5L511.9,377.3L504.9,391.1L497.7,394.9L500.5,414.3L498.7,419.4L492.4,413.3L482.8,412.4L468.5,417.7L450.9,416.5L448.0,424.4L437.9,416.1L431.9,417.7L410.5,408.6L406.4,415.0L389.4,414.8L391.9,393.5L402.0,373.1L373.2,367.6L363.7,359.8L364.9,346.7L360.9,339.9L363.2,319.7L359.8,288.4L371.8,288.4L376.8,277.1L381.8,249.8L378.1,239.7L382.0,233.3L398.7,231.7L402.5,238.3L416.0,223.6L411.5,212.3L410.5,195.4L425.7,199.3L438.5,194.8L438.8,206.3L459.0,213.3L458.8,223.9L479.2,218.3L490.4,210.1L512.9,221.9L522.4,231.5ZM693.1,516.0L698.9,528.3L706.7,526.1L722.0,530.8L751.4,532.4L761.3,524.8L784.9,517.8L799.4,528.7L811.1,531.8L800.8,544.2L793.5,565.6L799.9,582.6L782.7,578.6L762.3,588.0L762.1,602.9L744.0,605.7L729.9,595.3L713.9,603.5L699.0,602.6L697.6,582.9L687.6,573.3L690.9,569.0L688.7,565.5L692.1,556.0L699.7,546.6L690.0,533.7L688.2,522.8L693.1,516.0ZM765.8,783.1L763.3,791.9L734.5,794.5L734.7,789.5L710.3,783.7L714.0,771.0L725.0,781.1L740.5,779.3L755.4,781.5L754.9,786.7L765.8,783.1ZM699.0,602.6L713.9,603.5L729.9,595.3L744.0,605.7L762.1,602.9L762.3,588.0L772.0,596.0L765.9,614.6L761.1,618.0L748.9,617.2L738.5,614.3L714.3,622.1L728.1,638.9L718.0,643.8L706.9,643.8L696.3,628.4L692.6,635.0L697.0,652.8L707.0,666.8L699.5,673.4L710.6,687.2L720.5,695.8L720.8,712.7L702.3,704.8L708.2,720.1L695.5,723.2L703.1,749.5L689.8,750.0L673.4,737.0L665.9,713.0L662.4,693.1L654.6,679.4L644.3,662.3L643.0,653.8L652.3,639.3L653.5,629.6L660.0,625.3L660.4,617.5L673.5,614.8L681.1,608.3L691.9,608.9L695.2,603.6L699.0,602.6ZM1135.4,727.2L1125.9,732.2L1118.9,724.7L1095.5,720.8L1087.0,725.4L1064.2,730.1L1053.5,729.6L1030.5,740.8L1014.0,740.9L1003.4,735.2L981.4,743.6L974.8,737.8L973.7,754.4L968.3,761.0L963.0,767.5L955.7,753.9L963.2,742.7L951.0,745.3L934.3,738.4L920.5,755.6L890.2,759.0L874.0,742.9L852.4,741.9L847.8,754.3L834.0,757.8L814.7,742.0L792.9,742.5L781.0,712.8L766.4,696.2L776.1,673.0L763.4,658.6L785.6,630.1L816.4,628.9L824.8,606.2L862.9,610.1L887.0,590.7L910.3,582.3L943.3,581.6L978.3,602.7L1007.0,614.3L1030.2,609.7L1047.5,612.3L1071.1,596.7L1092.4,595.3L1111.7,610.0L1115.1,620.5L1113.1,635.1L1128.0,642.5L1135.9,651.2L1122.2,659.7L1128.5,694.0L1124.5,703.3L1135.4,727.2ZM762.3,588.0L782.7,578.6L799.9,582.6L802.3,594.1L819.8,603.7L816.1,611.1L792.4,612.8L783.9,622.0L767.2,638.1L760.9,624.1L761.1,618.0L765.9,614.6L772.0,596.0L762.3,588.0ZM660.4,617.5L660.0,625.3L653.5,629.6L652.3,639.3L643.0,653.8L639.6,651.8L639.2,645.2L628.1,635.1L626.4,620.9L628.0,600.5L630.8,591.2L627.4,586.5L626.1,577.0L634.7,562.3L636.0,567.9L641.4,565.2L645.7,573.3L650.4,576.3L651.8,587.2L649.3,597.3L652.1,610.2L660.4,617.5ZM571.3,448.2L577.6,451.9L592.6,464.7L609.1,470.5L616.6,466.0L621.4,477.6L627.8,486.1L620.1,497.4L611.1,490.7L597.2,491.1L580.0,486.2L570.7,486.8L566.3,493.1L559.2,486.2L555.0,498.6L564.8,512.6L569.2,521.8L578.3,533.0L585.9,539.6L593.5,552.1L611.2,563.4L609.0,568.5L590.2,557.5L578.6,546.7L560.3,537.8L543.5,515.8L547.6,513.5L538.4,501.0L538.0,490.9L525.2,486.2L519.0,499.1L513.1,489.1L513.6,478.7L514.3,478.2L528.3,479.2L531.9,474.2L538.7,479.1L546.5,479.7L546.5,471.3L553.5,468.3L555.4,456.2L571.3,448.2ZM431.9,417.7L432.6,423.0L429.6,430.3L438.6,435.8L448.8,436.6L447.3,448.8L438.5,453.9L423.6,450.1L419.3,462.2L409.8,463.2L406.4,458.4L395.1,468.5L385.5,469.9L376.8,463.6L370.0,450.5L360.4,455.1L360.8,441.6L375.4,424.8L374.7,417.2L383.8,420.0L389.4,414.8L406.4,415.0L410.5,408.6L431.9,417.7ZM360.9,339.9L364.9,346.7L363.7,359.8L358.0,360.4L353.5,357.8L355.7,341.0L360.9,339.9ZM363.2,319.7L360.9,339.9L355.7,341.0L353.5,357.8L336.0,344.2L325.7,346.5L311.7,332.4L302.5,320.4L293.2,319.9L290.3,309.4L306.3,303.5L321.0,305.9L339.5,299.7L352.1,312.7L363.2,319.7ZM378.1,239.7L381.8,249.8L376.8,277.1L371.8,288.4L359.8,288.4L363.2,319.7L352.1,312.7L339.5,299.7L321.0,305.9L306.3,303.5L316.6,295.3L334.1,251.3L361.5,238.8L378.1,239.7ZM59.3,586.4L66.6,578.8L74.7,574.5L79.8,589.1L91.6,589.1L95.0,585.3L106.6,586.3L112.2,601.3L102.9,609.4L102.7,632.7L99.5,637.1L98.7,651.3L90.1,653.7L98.1,671.6L92.5,691.3L99.4,700.1L96.7,708.3L89.3,719.5L90.9,729.4L82.9,737.1L72.3,732.9L62.1,736.2L65.1,712.8L63.2,694.5L54.3,691.7L49.5,680.3L51.0,660.8L59.0,649.9L60.5,637.8L64.6,619.9L64.2,607.2L60.2,596.5L59.3,586.4ZM90.9,729.4L89.3,719.5L96.7,708.3L99.4,700.1L92.5,691.3L98.1,671.6L90.1,653.7L98.7,651.3L99.5,637.1L102.7,632.7L102.9,609.4L112.2,601.3L106.6,586.3L95.0,585.3L91.6,589.1L79.8,589.1L74.7,574.5L66.6,578.8L59.3,586.4L60.3,565.1L52.1,552.1L80.4,530.6L104.9,536.0L131.7,535.8L153.1,540.9L169.6,539.3L201.9,540.3L209.9,551.9L246.7,565.5L254.0,559.1L276.5,572.6L299.7,568.7L300.8,586.1L281.9,606.0L256.2,612.3L254.4,622.4L242.1,638.9L234.4,663.2L242.2,680.3L230.7,693.6L226.4,713.1L211.2,719.0L197.1,742.0L171.7,742.5L152.6,741.9L140.1,752.5L132.5,763.8L122.7,761.3L115.3,751.2L109.6,734.0L90.9,729.4ZM116.1,228.1L119.4,249.5L104.2,276.2L68.7,293.8L40.5,289.3L56.7,258.1L46.2,227.7L73.4,204.3L88.5,190.3L92.7,206.4L88.5,222.4L100.9,221.9L116.1,228.1ZM448.8,436.6L461.0,440.8L463.3,435.1L483.0,430.0L487.5,440.3L516.2,448.1L513.9,462.8L518.8,475.5L502.8,471.2L486.6,481.8L487.6,496.6L485.2,505.1L491.8,520.3L510.5,535.4L520.6,560.1L542.9,584.2L558.5,584.0L563.4,590.6L557.8,596.6L575.7,607.4L590.4,616.4L607.5,632.0L609.6,637.6L605.9,648.3L594.8,634.3L577.4,629.4L569.0,648.7L583.4,659.8L581.0,675.4L572.7,677.2L562.0,702.8L553.7,705.1L553.7,696.0L557.8,679.9L562.2,673.6L554.4,656.3L548.3,641.2L540.0,637.4L534.1,624.5L521.2,619.1L512.6,607.1L497.7,605.2L482.1,591.7L463.8,572.2L450.2,555.0L444.0,525.4L434.1,522.0L417.8,512.1L408.6,516.2L397.0,530.0L388.7,532.2L391.0,519.3L380.1,515.5L375.0,492.3L381.9,483.2L376.0,472.0L376.8,463.6L385.5,469.9L395.1,468.5L406.4,458.4L409.8,463.2L419.3,462.2L423.6,450.1L438.5,453.9L447.3,448.8L448.8,436.6ZM535.2,698.1L550.4,695.5L543.2,719.0L546.2,728.3L542.0,743.6L526.7,732.4L516.5,729.2L488.7,714.0L491.4,698.6L514.8,701.3L535.2,698.1ZM414.2,615.7L424.2,606.5L436.2,627.7L433.4,667.2L424.3,665.3L416.1,675.3L408.6,667.4L407.8,631.3L403.2,614.2L414.2,615.7ZM438.5,194.8L425.7,199.3L410.5,195.4L402.4,178.8L401.8,148.2L405.1,140.2L410.9,131.2L428.5,129.4L435.5,121.1L451.6,112.7L450.9,128.1L445.0,137.8L447.4,146.2L458.3,150.7L453.4,161.9L447.4,158.7L433.0,180.2L438.5,194.8ZM487.4,161.1L493.8,176.1L481.8,200.2L460.9,183.4L458.1,171.0L487.4,161.1ZM116.1,228.1L100.9,221.9L88.5,222.4L92.7,206.4L88.5,190.3L105.3,189.1L126.8,207.6L116.1,228.1ZM178.1,242.0L178.2,242.0L181.1,224.6L167.7,206.2L167.4,205.8L143.1,200.5L138.4,192.5L145.6,179.1L139.0,170.9L128.3,185.0L127.1,156.2L117.0,141.0L124.3,110.0L139.8,85.8L155.8,88.1L179.9,85.7L158.5,118.0L178.9,113.9L200.8,114.0L195.6,138.4L177.6,165.2L198.3,167.1L199.9,170.2L217.7,205.5L231.4,210.3L243.7,244.4L249.4,256.1L273.7,261.9L271.2,281.0L261.0,289.7L269.0,305.2L251.0,320.8L224.3,320.5L190.2,328.8L180.9,322.9L167.7,336.9L149.2,333.5L135.1,344.9L124.5,339.0L153.8,307.5L171.7,301.1L171.6,301.1L140.3,296.1L134.6,284.2L155.6,275.0L144.6,258.8L148.4,239.2L178.1,242.0ZM-50.2,-148.1L-54.8,-128.8L-32.2,-108.4L-58.2,-85.6L-115.9,-65.1L-133.1,-59.7L-159.4,-64.1L-215.2,-73.5L-195.6,-86.8L-239.1,-101.4L-203.7,-107.1L-204.6,-115.9L-246.5,-122.9L-233.0,-142.4L-202.7,-146.8L-171.5,-126.5L-141.1,-142.8L-116.0,-134.3L-83.4,-150.2L-50.2,-148.1ZM516.2,448.1L532.6,450.4L542.7,443.6L560.2,442.9L564.0,437.8L567.4,438.1L571.3,448.2L555.4,456.2L553.5,468.3L546.5,471.3L546.5,479.7L538.7,479.1L531.9,474.2L528.3,479.2L514.3,478.2L518.8,475.5L513.9,462.8L516.2,448.1ZM811.9,-226.1L808.9,-205.2L839.5,-185.3L821.1,-162.7L844.3,-128.7L830.9,-103.1L848.9,-80.8L840.7,-61.4L870.3,-40.9L862.8,-25.6L844.2,-8.4L801.4,29.8L765.1,32.2L729.9,43.1L697.4,49.4L685.8,33.1L666.4,23.3L670.9,-6.1L661.2,-33.1L670.7,-50.5L688.9,-69.3L734.6,-101.7L747.9,-107.9L745.9,-120.6L718.0,-134.7L711.4,-146.3L710.8,-192.4L679.6,-212.7L652.9,-227.3L664.9,-235.2L687.2,-219.4L713.2,-220.9L734.7,-213.7L753.8,-226.9L763.6,-248.8L794.7,-259.0L820.3,-247.1L811.9,-226.1ZM691.2,371.0L685.6,378.8L681.7,390.9L677.4,394.0L656.1,384.8L649.5,386.7L644.8,393.7L635.4,397.4L633.2,395.5L623.5,400.2L615.5,401.1L613.9,407.1L597.2,410.7L589.7,407.5L579.6,399.8L577.6,389.4L579.2,385.7L582.0,379.1L590.9,379.6L597.7,376.5L598.2,373.7L602.1,372.3L603.4,365.5L608.0,364.2L611.1,358.8L617.0,358.8L618.2,360.6L626.4,356.5L636.5,367.1L648.4,360.7L657.8,363.8L672.2,359.6L691.2,371.0ZM540.4,310.6L549.9,320.3L564.8,322.9L563.5,331.1L574.4,337.3L577.4,329.6L591.1,332.9L593.0,342.2L607.9,344.1L617.0,358.8L611.1,358.8L608.0,364.2L603.4,365.5L602.1,372.3L598.2,373.7L597.7,376.5L590.9,379.6L582.0,379.1L579.2,385.7L570.0,380.0L560.6,381.6L545.1,372.5L538.0,374.7L526.7,386.9L511.9,377.3L500.6,364.5L490.5,357.3L488.3,344.7L484.8,335.8L499.3,329.2L506.7,321.8L521.1,316.0L526.2,310.3L531.4,313.8L540.4,310.6ZM939.1,960.8L961.4,965.5L970.1,956.3L974.8,945.5L990.1,941.4L993.4,931.4L1000.0,926.3L980.1,896.4L1020.1,881.4L1023.9,876.9L1048.0,885.0L1077.8,906.0L1134.2,966.1L1171.4,968.4L1189.2,971.3L1194.2,985.6L1208.3,984.8L1216.1,1010.6L1226.0,1017.4L1229.4,1027.9L1243.1,1040.5L1244.2,1052.8L1242.3,1062.7L1244.8,1072.8L1250.6,1081.2L1253.2,1091.0L1256.2,1098.3L1262.2,1104.2L1267.8,1102.1L1271.6,1113.5L1272.4,1120.4L1280.0,1150.7L1340.1,1165.8L1344.2,1159.5L1353.3,1180.6L1340.0,1240.4L1280.0,1270.3L1222.3,1281.8L1203.7,1295.2L1189.4,1326.6L1180.0,1331.6L1175.0,1321.6L1167.3,1323.1L1148.0,1320.1L1144.4,1317.1L1121.3,1317.8L1115.9,1320.5L1107.6,1312.8L1102.3,1327.4L1104.3,1340.0L1095.6,1349.6L1093.0,1336.8L1087.0,1327.8L1085.4,1315.9L1075.1,1305.2L1064.4,1280.1L1058.8,1255.7L1044.9,1235.2L1036.0,1230.3L1022.8,1201.8L1020.5,1181.0L1021.3,1163.3L1009.9,1130.2L1000.5,1118.5L989.7,1112.3L983.1,1095.2L984.2,1088.4L978.6,1073.0L972.8,1066.3L965.0,1044.0L952.8,1019.9L942.6,999.4L932.6,999.6L935.8,983.1L936.6,972.7L939.1,960.8ZM894.7,787.9L896.0,787.7L898.9,780.5L913.3,780.9L931.5,772.0L918.0,784.7L919.5,790.3L917.3,789.3L913.5,791.5L910.5,790.9L909.5,792.0L909.1,789.1L907.7,787.2L903.8,786.9L898.4,789.5L894.7,787.9ZM894.7,787.9L898.4,789.5L903.8,786.9L907.7,787.2L909.1,789.1L909.5,792.0L910.5,790.9L913.5,791.5L917.3,789.3L919.5,790.3L920.1,792.8L899.6,804.9L889.8,801.0L885.2,789.0L894.7,787.9ZM196.6,787.0L204.1,806.2L205.3,824.4L212.2,855.9L217.5,862.3L213.8,873.9L187.7,878.9L178.6,890.0L167.0,892.6L166.2,914.7L142.8,926.6L135.1,941.5L118.8,949.5L98.8,954.1L66.5,976.1L66.7,1011.6L63.6,1011.6L64.1,1027.6L51.8,1028.6L45.3,1035.3L36.2,1035.3L29.0,1031.5L12.2,1034.7L5.6,1057.9L-0.6,1060.2L-10.0,1097.9L-37.8,1130.1L-44.4,1171.4L-52.6,1184.8L-55.0,1195.5L-100.0,1198.0L-100.4,1197.9L-99.4,1184.1L-91.8,1175.9L-85.3,1160.3L-86.6,1150.2L-79.6,1129.1L-68.5,1110.1L-61.8,1105.3L-56.5,1087.9L-56.0,1072.0L-48.8,1053.5L-35.5,1042.6L-22.8,1012.1L-22.4,1011.7L-12.4,1000.2L6.2,996.9L21.9,976.4L32.0,968.4L48.7,943.5L43.7,906.3L51.3,880.6L54.0,864.8L66.9,844.7L86.9,831.0L101.7,818.7L115.1,787.7L121.4,769.4L136.1,769.5L148.2,782.2L167.2,780.1L187.9,786.7L196.6,787.0ZM977.3,1180.6L898.0,1180.6L820.4,1180.6L740.0,1180.6L740.0,1070.6L740.0,964.3L734.0,940.2L739.1,921.8L736.0,909.0L743.3,894.6L769.9,894.1L789.2,902.0L809.0,910.9L818.3,915.5L833.7,906.0L841.9,897.5L859.5,895.0L873.8,898.8L879.2,913.6L883.9,903.8L899.9,910.9L915.5,912.6L925.3,905.1L936.5,948.7L938.4,956.4L932.8,968.4L928.5,991.0L923.1,1006.6L918.4,1011.8L911.7,1002.1L902.7,988.8L888.5,946.0L886.4,948.7L894.7,980.2L907.0,1010.3L922.1,1056.8L929.4,1073.1L935.9,1090.0L953.9,1123.1L949.9,1128.3L950.5,1147.7L973.8,1174.5L977.3,1180.6ZM740.0,1180.6L740.0,1240.3L717.0,1240.4L716.8,1253.0L637.0,1195.7L557.2,1138.5L537.0,1154.8L522.9,1166.0L511.6,1149.6L480.0,1136.7L471.2,1117.9L455.5,1104.0L446.1,1109.5L439.0,1092.8L438.2,1080.1L426.4,1058.2L434.3,1045.8L432.6,1027.0L435.2,1010.6L433.6,997.0L437.2,972.6L436.1,958.7L429.6,932.3L439.4,925.4L441.1,912.8L439.0,900.4L452.7,888.9L458.9,879.3L468.6,870.7L469.8,847.7L493.3,858.1L501.7,855.5L518.4,860.4L544.9,873.8L554.2,900.4L572.2,906.2L600.4,918.7L621.7,933.5L631.5,925.8L641.1,912.0L636.4,889.2L642.7,874.6L657.1,860.6L670.9,856.5L697.9,862.7L704.7,876.0L712.2,876.1L718.6,881.2L738.4,884.8L743.3,894.6L736.0,909.0L739.1,921.8L734.0,940.2L740.0,964.3L740.0,1070.6L740.0,1180.6ZM611.2,563.4L593.5,552.1L585.9,539.6L578.3,533.0L569.2,521.8L564.8,512.6L555.0,498.6L559.2,486.2L566.3,493.1L570.7,486.8L580.0,486.2L597.2,491.1L611.1,490.7L620.1,497.4L627.3,497.3L622.4,510.4L632.0,521.9L629.1,536.0L624.4,537.3L620.6,540.0L614.2,547.0L611.2,563.4ZM687.6,573.3L697.6,582.9L699.0,602.6L695.2,603.6L691.9,608.9L681.1,608.3L673.5,614.8L660.4,617.5L652.1,610.2L649.3,597.3L651.8,587.2L654.3,587.4L655.3,581.3L667.1,576.7L671.5,575.5L678.4,573.7L687.6,573.3ZM616.6,466.0L631.9,458.2L644.4,459.5L655.3,471.2L657.5,480.7L669.7,487.7L671.2,500.1L682.9,508.8L689.2,502.1L694.1,505.8L689.5,510.8L693.1,516.0L688.2,522.8L690.0,533.7L699.7,546.6L692.1,556.0L688.7,565.5L690.9,569.0L687.6,573.3L678.4,573.7L671.5,575.5L670.9,573.3L673.3,569.7L675.5,562.4L672.7,562.6L668.8,557.1L665.5,555.6L662.9,550.9L659.2,549.1L656.3,544.8L652.7,546.5L649.9,556.4L645.2,558.6L646.8,556.0L639.1,549.8L632.6,546.6L629.7,542.4L624.4,537.3L629.1,536.0L632.0,521.9L622.4,510.4L627.3,497.3L620.1,497.4L627.8,486.1L621.4,477.6L616.6,466.0ZM641.4,565.2L636.0,567.9L634.7,562.3L626.1,577.0L627.4,586.5L623.2,584.2L617.6,574.5L609.0,568.5L611.2,563.4L614.2,547.0L620.6,540.0L624.4,537.3L629.7,542.4L632.6,546.6L639.1,549.8L646.8,556.0L645.2,558.6L641.4,565.2ZM651.8,587.2L650.4,576.3L645.7,573.3L641.4,565.2L645.2,558.6L649.9,556.4L652.7,546.5L656.3,544.8L659.2,549.1L662.9,550.9L665.5,555.6L668.8,557.1L672.7,562.6L675.5,562.4L673.3,569.7L670.9,573.3L671.5,575.5L667.1,576.7L655.3,581.3L654.3,587.4L651.8,587.2Z"/><g id="segni"></g></svg>
+    <p class="mappa-info" id="mappa-info" aria-live="polite">Tocca un punto sulla carta o un luogo dell'elenco.</p>
+    <p class="mappa-nota">Carta muta: solo coste e mari. Nota quanti centri del Rinascimento si trovano in Italia, in pochi chilometri.</p>
+  </div>
+  <ul class="luoghi" id="luoghi"></ul>
+  <div class="animata" id="carta-animata" aria-labelledby="t-animata">
+    <h4 id="t-animata">🎬 Cambia sguardo: la carta animata</h4>
+    <p>Ora guarda questi luoghi in movimento: confini, Stati ed eserciti che cambiano nel tempo. Poi torna alla carta muta e ritrova i luoghi dell'elenco.</p>
+    <h5>Carte animate HUB Scuola</h5>
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=Q7vQ5yfna4Q&amp;list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">Le corti umanistico-rinascimentali e la diffusione della stampa</a></li>
+    </ul>
+    <h5>Altre carte animate</h5>
+    <ul>
+      <li><a href="https://www.youtube.com/results?search_query=carta+animata+Italia+del+Rinascimento" target="_blank" rel="noopener">Cerca altre carte animate su questo argomento</a></li>
+      <li><a href="https://www.youtube.com/playlist?list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">Tutte le carte animate di storia di HUB Scuola</a></li>
+    </ul>
+    <p class="nota-video">Video su YouTube, si aprono in una nuova scheda.</p>
+  </div>
+
+  <h3 id="quando"><span>2. Quando?</span></h3>
+  <p class="mestiere">🕐 Collocare nel tempo · le etichette indicano le piste del percorso «Un mondo sempre più piccolo»</p>
+  <ol class="linea">
+    <li class="estremo"><span class="anno">1350 circa</span>Petrarca cerca nelle biblioteche i manoscritti degli autori antichi.</li>
+    <li><span class="anno">1420–36</span>Brunelleschi costruisce la cupola di Santa Maria del Fiore a Firenze.</li>
+    <li><span class="anno">1440</span>L'umanista Lorenzo Valla dimostra che un documento famoso, la «donazione di Costantino», è falso.</li>
+    <li><span class="anno">1453</span>I turchi conquistano Costantinopoli; molti studiosi greci si rifugiano in Italia.</li>
+    <li><span class="anno">1455 circa</span>A Magonza Gutenberg stampa la Bibbia a caratteri mobili.<span class="pista">Comunicazione</span></li>
+    <li><span class="anno">1469–92</span>Lorenzo il Magnifico governa Firenze.</li>
+    <li><span class="anno">1492</span>Cristoforo Colombo arriva in America.</li>
+    <li><span class="anno">1495–98</span>Leonardo dipinge l'Ultima cena a Milano.</li>
+    <li><span class="anno">1501</span>A Venezia Aldo Manuzio stampa i primi libri tascabili.<span class="pista">Comunicazione</span></li>
+    <li><span class="anno">1508–12</span>Michelangelo affresca la volta della Cappella Sistina; Raffaello lavora nelle Stanze del Vaticano.</li>
+    <li class="estremo"><span class="anno">1543</span>Copernico sostiene che la Terra gira intorno al Sole.</li>
+  </ol>
+
+  <h3 id="chi"><span>3. Chi?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 📖 Lessico — il link apre una voce Treccani in una nuova scheda.</p>
+  <div class="persone">
+    <article class="persona"><span class="sigla" aria-hidden="true">LM</span><div><h4>Lorenzo de' Medici</h4><span class="date">1449–1492 · Firenze</span><p>Detto il Magnifico, banchiere e signore di Firenze, poeta egli stesso. Protegge artisti e filosofi e cerca di mantenere la pace tra gli Stati italiani.</p><a href="https://www.treccani.it/enciclopedia/lorenzo-il-magnifico_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Leggi la voce Treccani</a></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">LV</span><div><h4>Leonardo da Vinci</h4><span class="date">1452–1519 · Vinci, Milano, Francia</span><p>Pittore, ingegnere, scienziato: studia il volo degli uccelli, l'anatomia, l'acqua, progetta macchine. È il modello dell'«uomo universale» del Rinascimento.</p><a href="https://www.treccani.it/enciclopedia/arte-del-rinascimento_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Leggi la voce Treccani «Rinascimento, arte del»</a></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">MB</span><div><h4>Michelangelo Buonarroti</h4><span class="date">1475–1564 · Firenze e Roma</span><p>Scultore, pittore, architetto e poeta. Scolpisce il David, affresca la Cappella Sistina, progetta la cupola di San Pietro.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">JG</span><div><h4>Johannes Gutenberg</h4><span class="date">1400 circa–1468 · Magonza</span><p>Orafo tedesco, inventa un sistema per stampare con lettere di metallo mobili e un nuovo tipo di torchio. Il suo primo grande libro è la Bibbia.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">IE</span><div><h4>Isabella d'Este</h4><span class="date">1474–1539 · Ferrara e Mantova</span><p>Marchesa di Mantova, colta e abilissima in politica. Raccoglie opere d'arte e libri e chiama alla sua corte pittori e musicisti.</p></div></article>
+    <article class="persona"><span class="sigla" aria-hidden="true">ER</span><div><h4>Erasmo da Rotterdam</h4><span class="date">1466 circa–1536 · Paesi Bassi</span><p>Il più famoso umanista d'Europa. Studia la Bibbia nei testi originali e critica con ironia i vizi della Chiesa del suo tempo.</p></div></article>
+  </div>
+</section>
+
+<!-- ======================= TESTO ======================= -->
+<section class="parte" id="testi" aria-labelledby="t-testi">
+  <p class="etichetta">Testo sintetico / essenziale</p>
+  <h2 id="t-testi">La lezione per intero</h2>
+  <p class="guida">Lo stesso testo in due versioni: il <strong>sintetico</strong> contiene tutte le informazioni, l'<strong>essenziale</strong> le riassume con frasi più brevi. Scegli quella che ti serve.</p>
+  <div class="livelli" role="group" aria-label="Versione del testo">
+    <button type="button" data-livello="sintetico" aria-pressed="true">Sintetico</button>
+    <button type="button" data-livello="essenziale" aria-pressed="false">Essenziale</button>
+  </div>
+  <div id="testo-sintetico">
+    <div class="paragrafo"><h4><span class="n">1</span>L'Umanesimo</h4><p>A partire da Petrarca, gli studiosi italiani cercano nelle biblioteche dei monasteri i manoscritti degli autori latini e greci, li copiano, li correggono, li studiano. Sono gli umanisti, perché si dedicano agli <em>studia humanitatis</em>: grammatica, poesia, storia, filosofia. Credono che studiare gli antichi renda gli uomini migliori e capaci di vivere bene nella città.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>Un nuovo modo di guardare il mondo</h4><p>Gli umanisti non rifiutano la fede, ma mettono al centro l'uomo, la sua dignità, la sua libertà, la sua capacità di conoscere. Usano la ragione e il confronto tra i testi per scoprire la verità: Lorenzo Valla dimostra così che un documento attribuito all'imperatore Costantino è un falso medievale. È la nascita della critica delle fonti.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>L'arte del Rinascimento</h4><p>Gli artisti studiano le rovine romane, la matematica, il corpo umano. Brunelleschi inventa le regole della prospettiva, che permette di rappresentare lo spazio come lo vede l'occhio. Masaccio, Botticelli, Leonardo, Michelangelo, Raffaello creano opere che diventano un modello per tutta Europa. L'artista non è più un semplice artigiano, ma un intellettuale stimato.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>Corti e mecenati</h4><p>Il Rinascimento è possibile grazie alla ricchezza delle città italiane. Banchieri come i Medici, papi, duchi e marchesi spendono enormi somme per palazzi, chiese, quadri, biblioteche. Lo fanno per amore della bellezza, ma anche per mostrare il proprio potere e prestigio. Le corti, come Urbino, Mantova e Ferrara, diventano centri di cultura.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>La rivoluzione della stampa</h4><p>Prima i libri si copiavano a mano: ci volevano mesi e costavano moltissimo. Verso il 1455 Gutenberg stampa a Magonza la Bibbia con caratteri mobili di metallo. In pochi decenni le tipografie si diffondono in tutta Europa; Venezia diventa la capitale della stampa. Entro il 1500 si stampano milioni di copie di libri: le idee viaggiano come mai prima.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>Luci e ombre</h4><p>Il Rinascimento è la civiltà di una piccola élite di ricchi e colti; la maggior parte della gente resta povera e analfabeta. Mentre l'arte fiorisce, gli Stati italiani sono divisi e rivali, e dal 1494 vengono invasi da francesi e spagnoli. Ma le idee rinascimentali, grazie ai libri, conquistano l'Europa intera.</p></div>
+  </div>
+  <div id="testo-essenziale" class="essenziale" hidden>
+    <div class="paragrafo"><h4><span class="n">1</span>L'Umanesimo</h4><p>Gli umanisti studiano i libri degli antichi greci e romani.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>Un nuovo modo di guardare il mondo</h4><p>Mettono al centro l'uomo e la sua intelligenza. Usano la ragione per scoprire la verità.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>L'arte del Rinascimento</h4><p>Gli artisti usano la prospettiva e studiano il corpo umano. Leonardo e Michelangelo sono i più famosi.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>Corti e mecenati</h4><p>Signori e banchieri pagano artisti e studiosi. Le corti diventano centri di cultura.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>La rivoluzione della stampa</h4><p>Gutenberg inventa la stampa. I libri costano meno e le idee si diffondono.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>Luci e ombre</h4><p>Il Rinascimento riguarda soprattutto i ricchi. L'Italia è divisa e viene invasa.</p></div>
+  </div>
+</section>
+
+<!-- ======================= PERCHÉ ======================= -->
+<section class="parte" id="perche" aria-labelledby="t-perche">
+  <p class="etichetta">Perché?</p>
+  <h2 id="t-perche">Causa, evento, effetto</h2>
+  <p class="guida">Gli storici non si chiedono solo che cosa è successo, ma perché. Leggi la catena da sinistra a destra.</p>
+  <p class="mestiere">🧩 Comprendere fatti e processi storici</p>
+  <div class="catena">
+    <div class="anello causa"><h4>Causa</h4><p>Città italiane ricche di mercanti e banchieri. Signori che cercano prestigio. La riscoperta dei testi antichi, anche grazie agli studiosi greci fuggiti da Costantinopoli.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello evento"><h4>Evento</h4><p>Nel Quattrocento e nel Cinquecento nasce in Italia una nuova cultura che mette l'uomo al centro: l'Umanesimo e il Rinascimento.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello effetto"><h4>Effetto</h4><p>Capolavori dell'arte e dell'architettura; nuovo metodo critico nello studio; grazie alla stampa le idee si diffondono in Europa e preparano Riforma e scienza moderna.</p></div>
+  </div>
+  <div class="ombra">
+    <h4>Ma attenzione</h4>
+    <p>Il nome «Rinascimento» lo hanno dato gli uomini di quell'epoca e gli storici dell'Ottocento, per dire che dopo un Medioevo «buio» la civiltà era rinata. Oggi sappiamo che il Medioevo non era affatto buio: senza le università, i monasteri e le città medievali il Rinascimento non sarebbe esistito.</p>
+  </div>
+  <div class="ricorda">
+    <h4>Ricorda</h4>
+    <dl>
+      <dt>Manoscritto</dt><dd>Libro scritto a mano.</dd>
+      <dt>Corte</dt><dd>L'insieme delle persone che vivono intorno a un signore: familiari, funzionari, artisti, servitori.</dd>
+      <dt>Classico</dt><dd>Che appartiene alla cultura dell'antica Grecia e di Roma.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ======================= CONCETTI ======================= -->
+<section class="parte" id="concetti" aria-labelledby="t-concetti">
+  <p class="etichetta">Concetti fondamentali</p>
+  <h2 id="t-concetti">Le idee chiave</h2>
+  <p class="guida">Le idee più importanti della lezione, spiegate una per una. Le parole sottolineate a puntini rimandano alle <a href="#parole">Parole chiave</a>.</p>
+  <article class="concetto" id="c-uomo"><h4>L'uomo al centro</h4><p>Per gli umanisti l'uomo è libero di costruire il proprio destino con l'intelligenza e la volontà. Non è una negazione di Dio, ma una nuova fiducia nelle capacità umane. L'ideale è l'«uomo universale», che sa di arte, scienza, poesia e politica.</p></article>
+  <article class="concetto" id="c-antichi"><h4>Il ritorno agli antichi</h4><p>Gli umanisti vogliono leggere gli autori classici nei testi originali, liberati dagli errori dei copisti. Imparano il greco, confrontano i manoscritti, correggono. Questo metodo, la <a class="pk" href="#p-filologia">filologia</a>, insegna a non fidarsi ciecamente di un documento.</p></article>
+  <article class="concetto" id="c-prospettiva"><h4>La prospettiva</h4><p>Con la <a class="pk" href="#p-prospettiva">prospettiva</a> gli artisti rappresentano su una superficie piatta lo spazio in profondità, con regole matematiche. Arte e scienza si incontrano: il pittore deve conoscere la geometria, l'anatomia, la luce.</p></article>
+  <article class="concetto" id="c-mecenati"><h4>Il mecenatismo</h4><p>Il <a class="pk" href="#p-mecenatismo">mecenate</a> finanzia artisti e studiosi. In cambio ottiene opere che celebrano la sua famiglia e il suo potere. Il Rinascimento è anche un grande investimento di ricchezza in bellezza e prestigio.</p></article>
+  <article class="concetto" id="c-stampa"><h4>La stampa cambia il mondo</h4><p>Con la <a class="pk" href="#p-stampa">stampa</a> uno stesso testo può essere letto contemporaneamente da migliaia di persone in luoghi diversi. Aumentano i lettori, nascono nuovi mestieri, le idee non si possono più fermare facilmente. È la prima grande rivoluzione della comunicazione dell'età moderna.</p></article>
+</section>
+
+<!-- ======================= COME ======================= -->
+<section class="parte" id="come" aria-labelledby="t-come">
+  <p class="etichetta">Come?</p>
+  <h2 id="t-come">I quattro volti del Rinascimento</h2>
+  <p class="guida">Uno schema per vedere tutto insieme: dove si esprime la nuova civiltà.</p>
+  <p class="mestiere">🧩 Organizzare le informazioni · collegamento con Arte e immagine</p>
+  <p class="radice">Il Rinascimento cambia…</p>
+  <div class="come">
+    <div class="colonna"><h4>… lo studio</h4><ul><li>riscoperta dei classici</li><li>studio del greco</li><li>filologia e critica delle fonti</li></ul></div>
+    <div class="colonna"><h4>… l'arte</h4><ul><li>prospettiva</li><li>studio del corpo umano</li><li>architettura ispirata a Roma antica</li><li>l'artista intellettuale</li></ul></div>
+    <div class="colonna"><h4>… la comunicazione</h4><ul><li>stampa a caratteri mobili</li><li>libri più economici</li><li>tipografie in tutta Europa</li></ul></div>
+    <div class="colonna"><h4>… la scienza</h4><ul><li>osservazione della natura</li><li>disegni di Leonardo</li><li>Copernico e il Sole al centro</li></ul></div>
+  </div>
+</section>
+
+<!-- ======================= PAROLE CHIAVE ======================= -->
+<section class="parte" id="parole" aria-labelledby="t-parole">
+  <p class="etichetta">Parole chiave</p>
+  <h2 id="t-parole">Le parole della lezione</h2>
+  <p class="guida">Il significato dei termini nuovi, in ordine alfabetico.</p>
+  <dl class="parole">
+    <div class="parola" id="p-filologia"><dt>Filologia</dt><dd>Lo studio dei testi antichi per ricostruire la loro forma originale.</dd></div>
+    <div class="parola" id="p-mecenatismo"><dt>Mecenatismo</dt><dd>L'aiuto economico dato da un ricco o da un potente ad artisti e studiosi.</dd></div>
+    <div class="parola" id="p-prospettiva"><dt>Prospettiva</dt><dd>Tecnica per rappresentare su una superficie piana gli oggetti nello spazio, come appaiono all'occhio.</dd></div>
+    <div class="parola" id="p-rinascimento"><dt>Rinascimento</dt><dd>La civiltà nata in Italia nel Quattrocento e nel Cinquecento, che si ispira ai classici e mette al centro l'uomo. <a href="https://www.treccani.it/enciclopedia/cultura-del-rinascimento_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Treccani ragazzi</a></dd></div>
+    <div class="parola" id="p-stampa"><dt>Stampa a caratteri mobili</dt><dd>Tecnica che usa lettere di metallo singole, composte e ricomposte, per stampare molte copie di un testo.</dd></div>
+    <div class="parola" id="p-umanesimo"><dt>Umanesimo</dt><dd>Movimento culturale che studia i classici e valorizza l'uomo e le sue capacità. <a href="https://www.treccani.it/enciclopedia/umanesimo_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Treccani ragazzi</a></dd></div>
+  </dl>
+</section>
+
+<!-- ======================= STUDIAMO LE FONTI ======================= -->
+<section class="parte" id="lente" aria-labelledby="t-lente">
+  <p class="etichetta">Studiamo le fonti</p>
+  <h2 id="t-lente">Dentro la fonte</h2>
+  <p class="guida">Il primo grande libro stampato in Europa si può sfogliare online su <em>Europeana</em>, la biblioteca digitale del patrimonio culturale europeo.</p>
+  <p class="mestiere">📜 Leggere e interpretare le fonti · fonte materiale e scritta</p>
+  <div class="lente">
+    <div class="lente-testa">
+      <p class="testata-giornale">Libro a stampa · Magonza, 1452–1455 · Europeana</p>
+      <h3>La Bibbia di Gutenberg</h3>
+    </div>
+    <div class="lente-corpo">
+      <p>È detta anche «Bibbia a 42 linee», perché ogni colonna di testo ha 42 righe. Ne furono stampate circa 180 copie, alcune su carta e alcune su pergamena; oggi ne restano meno di cinquanta. Le lettere iniziali e le decorazioni venivano spesso aggiunte a mano, come nei manoscritti.</p>
+      <p class="domanda-guida">Domanda guida: un libro stampato nel 1455 assomiglia di più a un manoscritto medievale o a un libro di oggi? Che cosa ci dice questo sul passaggio da un'epoca all'altra?</p>
+      <div class="fasi">
+        <div class="fase"><h4>1. Prima di guardare</h4><ol><li>Come si facevano i libri prima della stampa?</li><li>Trova Magonza sulla <a href="#dove">carta</a>.</li><li>Ritrova il 1455 sulla <a href="#quando">linea del tempo</a>.</li></ol></div>
+        <div class="fase"><h4>2. Osservare</h4><ol><li>Apri la pagina e descrivi: colonne, caratteri, colori, decorazioni.</li><li>Trova che cosa è stampato e che cosa invece è stato aggiunto a mano.</li></ol><p style="margin:10px 0 0"><a class="bottone" href="https://www.europeana.eu/en/item/440/item_MZF6URNJD2PP3GQ25FPBSCIIEWDZW2NS" target="_blank" rel="noopener">Apri la fonte su Europeana</a></p></div>
+        <div class="fase"><h4>3. Pensare da storici</h4><ol><li>Perché il primo grande libro stampato è proprio la Bibbia?</li><li>Chi poteva comprare questo libro?</li><li>Quali cambiamenti porterà la stampa nei decenni successivi?</li></ol></div>
+      </div>
+      <ul class="altre-fonti">
+        <li><span class="tipo">Europeana</span><a href="https://www.europeana.eu/en/stories/europes-first-printed-book" target="_blank" rel="noopener">Il primo libro stampato d'Europa (racconto)</a> · <a href="https://www.europeana.eu/en/stories/from-manuscript-production-to-the-printing-press" target="_blank" rel="noopener">Dal manoscritto alla stampa</a> · <a href="https://www.europeana.eu/it/search?query=incunabolo" target="_blank" rel="noopener">Cerca altri incunaboli</a></li>
+        <li><span class="tipo">Treccani ragazzi</span><a href="https://www.treccani.it/enciclopedia/umanesimo_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Umanesimo</a> · <a href="https://www.treccani.it/enciclopedia/cultura-del-rinascimento_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Rinascimento, cultura del</a> · <a href="https://www.treccani.it/enciclopedia/arte-del-rinascimento_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Rinascimento, arte del</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RIPASSIAMO ======================= -->
+<section class="parte" id="compiti" aria-labelledby="t-compiti">
+  <p class="etichetta">Ripassiamo</p>
+  <h2 id="t-compiti">Le cinque attività dello storico</h2>
+  <p class="guida">Rispondi prima da solo, poi premi «Controlla». Se sbagli, riprova: la soluzione compare con il pulsante «Mostra le soluzioni».</p>
+  <div id="esercizi"></div>
+
+  <p class="fascia" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8"/></svg></span><span>Ripasso finale</span></p>
+  <div class="attivita">
+    <h4>Dieci cose da sapere</h4>
+    <p class="meta">Ricongiungi le due metà di ogni frase.</p>
+    <div id="dieci"></div>
+  </div>
+  <div class="attivita">
+    <h4>Mini-dibattito</h4>
+    <p class="consegna"><strong>La stampa e Internet: due rivoluzioni a confronto.</strong> Prepara tre somiglianze e tre differenze tra l'invenzione della stampa nel Quattrocento e la diffusione di Internet oggi.</p>
+    <textarea aria-label="I tuoi argomenti" placeholder="Somiglianze… Differenze… Secondo me…"></textarea>
+    <p class="dibattito"><b>Regole:</b> non si interrompe chi parla; si criticano le idee, non le persone; alla fine ognuno scrive una conclusione personale.</p>
+  </div>
+</section>
+</main>
+</div>
+
+<footer>
+<p>Organizzazione della lezione ispirata a <em>Storia facile 2</em> (Modulo 1, cap. 1) e al <em>Tablet degli argomenti di Storia</em> (p. 102), Edizioni Erickson: Prima/Dopo, Idea principale, Perché?, Come?, Parole chiave, testo sintetico ed essenziale, verifiche. Testi originali della lezione.</p>
+  <p>Carta: coste da Natural Earth (dominio pubblico). Fonte: Europeana. Voci collegate: Enciclopedia dei ragazzi Treccani.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- luoghi ---------- */
+var LUOGHI=[
+{n:"Firenze",ll:[43.7696,11.2558],t:"La culla del Rinascimento: la cupola di Brunelleschi, i Medici, Botticelli, il giovane Michelangelo."},
+ {n:"Roma",ll:[41.9028,12.4964],t:"I papi chiamano i più grandi artisti: Michelangelo affresca la Cappella Sistina, Raffaello le Stanze vaticane."},
+ {n:"Venezia",ll:[45.4408,12.3155],t:"Capitale europea della stampa: qui Aldo Manuzio pubblica i primi libri tascabili."},
+ {n:"Milano",ll:[45.4642,9.19],t:"Alla corte degli Sforza lavora Leonardo, che dipinge l'Ultima cena."},
+ {n:"Urbino",ll:[43.7262,12.6365],t:"Piccola corte di Federico da Montefeltro, con un celebre palazzo e una ricca biblioteca. Qui nasce Raffaello."},
+ {n:"Magonza",ll:[49.9929,8.2473],t:"Qui, verso il 1455, Gutenberg stampa la Bibbia a caratteri mobili."},
+ {n:"Amboise",ll:[47.4133,0.9822],t:"In Francia. Leonardo vi trascorre gli ultimi anni, ospite del re Francesco I, e vi muore nel 1519."}
+];
+var lista=document.getElementById("luoghi"), gruppo=document.getElementById("segni"), info=document.getElementById("mappa-info"), NS="http://www.w3.org/2000/svg";
+var K=0.669131, SX=29.8895, LON0=-12, LAT1=61.5;
+function xy(ll){ return [(ll[1]-LON0)*K*SX, (LAT1-ll[0])*SX]; }
+/* posizione dell'etichetta rispetto al punto: [dx, dy, allineamento] */
+var ETI={"Firenze":[-14,8,"end"],"Roma":[-14,5,"end"],"Venezia":[14,-4,"start"],"Milano":[-14,-4,"end"],"Urbino":[14,8,"start"],"Mantova":[0,26,"middle"],"Magonza":[14,5,"start"],"Amboise":[-14,5,"end"]};
+var segni=[];
+function scegli(i){
+  segni.forEach(function(g,j){ g.setAttribute("class", j===i ? "segno scelto" : "segno"); g.firstChild.setAttribute("r", j===i ? "11" : "8"); if(j===i) gruppo.appendChild(g); });
+  info.innerHTML=""; var b=document.createElement("strong"); b.textContent=LUOGHI[i].n+": "; info.appendChild(b); info.appendChild(document.createTextNode(LUOGHI[i].t));
+}
+LUOGHI.forEach(function(L,i){
+  var p=xy(L.ll), g=document.createElementNS(NS,"g"), c=document.createElementNS(NS,"circle"), t=document.createElementNS(NS,"text"), e=ETI[L.n]||[14,5,"start"];
+  g.setAttribute("class","segno"); g.setAttribute("tabindex","0"); g.setAttribute("role","button"); g.setAttribute("aria-label",L.n);
+  c.setAttribute("cx",p[0].toFixed(1)); c.setAttribute("cy",p[1].toFixed(1)); c.setAttribute("r","8");
+  t.setAttribute("x",(p[0]+e[0]).toFixed(1)); t.setAttribute("y",(p[1]+e[1]).toFixed(1)); t.setAttribute("text-anchor",e[2]); t.textContent=L.n.replace(/ \(.*\)$/,"");
+  g.appendChild(c); g.appendChild(t); gruppo.appendChild(g); segni.push(g);
+  g.addEventListener("click",function(){ scegli(i); });
+  g.addEventListener("keydown",function(ev){ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); scegli(i); } });
+  var li=document.createElement("li"), bt=document.createElement("button");
+  bt.type="button"; bt.textContent=L.n; bt.addEventListener("click",function(){ scegli(i); document.getElementById("mappa").scrollIntoView({block:"center"}); });
+  li.appendChild(bt); li.appendChild(document.createTextNode(" — "+L.t)); lista.appendChild(li);
+});
+
+/* ---------- indice laterale: evidenzia la parte che si sta leggendo ---------- */
+var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
+function attiva(id){ Array.prototype.forEach.call(voci,function(v){ var on=v.getAttribute("href")==="#"+id; if(on){ v.setAttribute("aria-current","true"); if(navI.scrollWidth>navI.clientWidth){ navI.scrollLeft=v.offsetLeft-16; } } else v.removeAttribute("aria-current"); }); }
+var parti=document.querySelectorAll("section.parte"), attesa=false;
+function guarda(){ attesa=false; var lim=window.innerHeight*0.3, id=parti[0].id;
+  Array.prototype.forEach.call(parti,function(sx){ if(sx.getBoundingClientRect().top<=lim) id=sx.id; });
+  if((window.innerHeight+window.pageYOffset)>=document.documentElement.scrollHeight-4) id=parti[parti.length-1].id;
+  attiva(id); }
+window.addEventListener("scroll",function(){ if(!attesa){ attesa=true; (window.requestAnimationFrame||setTimeout)(guarda); } },{passive:true});
+window.addEventListener("resize",guarda); guarda();
+
+/* ---------- testo sintetico / essenziale ---------- */
+var bot=document.querySelectorAll(".livelli button");
+Array.prototype.forEach.call(bot,function(b){ b.addEventListener("click",function(){
+  var ess=b.getAttribute("data-livello")==="essenziale";
+  document.getElementById("testo-sintetico").hidden=ess; document.getElementById("testo-essenziale").hidden=!ess;
+  Array.prototype.forEach.call(bot,function(x){ x.setAttribute("aria-pressed", x===b ? "true":"false"); });
+});});
+
+/* ---------- esercizi ---------- */
+var ESERCIZI=[
+{gruppo:"tempo", titolo:"Scegli l'anno giusto", meta:"Abbina ogni evento all'anno in cui accadde.",
+  scelte:["1453","1455","1469","1492","1508","1543"],
+  righe:[["I turchi conquistano Costantinopoli","1453"],["Gutenberg stampa la Bibbia (circa)","1455"],["Lorenzo il Magnifico comincia a governare Firenze","1469"],["Colombo arriva in America","1492"],["Michelangelo comincia la volta della Cappella Sistina","1508"],["Copernico pubblica la sua teoria","1543"]]},
+ {gruppo:"spazio", titolo:"Dove successe?", meta:"Usa la carta dell'Idea principale per trovare il luogo di ogni evento.",
+  scelte:["Firenze","Roma","Venezia","Milano","Urbino","Magonza"],
+  righe:[["La cupola di Brunelleschi","Firenze"],["La Cappella Sistina","Roma"],["I libri tascabili di Aldo Manuzio","Venezia"],["L'Ultima cena di Leonardo","Milano"],["La corte di Federico da Montefeltro","Urbino"],["La Bibbia di Gutenberg","Magonza"]]},
+ {gruppo:"fonti", titolo:"Fatto o interpretazione?", meta:"Uno storico distingue i fatti (si possono verificare) dalle interpretazioni (sono giudizi, opinioni).",
+  scelte:["Fatto","Interpretazione"],
+  righe:[["La Bibbia di Gutenberg ha 42 righe per colonna.","Fatto","Si verifica osservando le copie conservate."],["Il Medioevo fu un'età buia.","Interpretazione","È un giudizio degli umanisti, oggi considerato sbagliato."],["Lorenzo Valla dimostra che la donazione di Costantino è un falso.","Fatto","Esiste il suo scritto e la dimostrazione è accettata dagli storici."],["Michelangelo è il più grande artista di tutti i tempi.","Interpretazione","È un'opinione."],["Leonardo muore in Francia nel 1519.","Fatto","Si verifica con i documenti."]]},
+ {gruppo:"processi", titolo:"Causa, evento o effetto?", meta:"Rileggi il «Perché?» e collega ogni frase al suo posto nella catena.",
+  scelte:["Causa","Evento","Effetto"],
+  righe:[["Le città italiane sono ricche di mercanti e banchieri.","Causa"],["Gli studiosi riscoprono i testi antichi.","Causa"],["Nasce una cultura che mette l'uomo al centro.","Evento"],["Grazie alla stampa le idee si diffondono in Europa.","Effetto"],["Si creano capolavori dell'arte.","Effetto"]]},
+ {gruppo:"processi", titolo:"Vero o falso?", meta:"Dopo il controllo leggi la spiegazione: serve a correggere le frasi false.",
+  scelte:["Vero","Falso"],
+  righe:[["Gli umanisti rifiutano completamente la religione.","Falso","Non la rifiutano: mettono al centro l'uomo, ma restano in gran parte credenti."],["La prospettiva usa regole matematiche.","Vero"],["Prima della stampa i libri si copiavano a mano.","Vero"],["Il Rinascimento riguarda allo stesso modo ricchi e poveri.","Falso","Riguarda soprattutto una piccola élite."],["Dal 1494 l'Italia viene invasa da eserciti stranieri.","Vero"]]},
+ {gruppo:"lessico", titolo:"Parole e significati", meta:"Abbina ogni parola alla sua definizione.",
+  scelte:["Umanesimo","Rinascimento","Mecenatismo","Prospettiva","Filologia","Manoscritto"],
+  righe:[["Movimento che studia i classici e valorizza l'uomo","Umanesimo"],["La civiltà italiana del Quattro e Cinquecento","Rinascimento"],["L'aiuto dei potenti ad artisti e studiosi","Mecenatismo"],["Tecnica per rappresentare la profondità","Prospettiva"],["Studio dei testi per ricostruirne la forma originale","Filologia"],["Libro scritto a mano","Manoscritto"]]}
+];
+var DIECI=[
+["Gli umanisti","studiano i testi degli antichi greci e romani."],
+ ["L'Umanesimo","mette al centro l'uomo e la sua intelligenza."],
+ ["Il Rinascimento","nasce nelle città italiane del Quattrocento."],
+ ["Gli artisti","usano la prospettiva e studiano il corpo umano."],
+ ["I mecenati","finanziano artisti e studiosi."],
+ ["Firenze, con i Medici,","è la culla del Rinascimento."],
+ ["Verso il 1455 Gutenberg","stampa la Bibbia a caratteri mobili."],
+ ["Con la stampa","i libri costano meno e le idee viaggiano."],
+ ["Leonardo è il modello","dell'uomo universale."],
+ ["Il Rinascimento riguarda soprattutto","una piccola élite di ricchi e colti."]
+];
+function el(t,attr,txt){ var e=document.createElement(t); if(attr){ for(var k in attr){ e.setAttribute(k,attr[k]); } } if(txt!=null) e.textContent=txt; return e; }
+function mescola(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+function costruisci(cont, scelte, righe, conGruppo){
+  var tab=el("table",{"class":"esercizio"}), tb=el("tbody"); tab.appendChild(tb);
+  var stati=[];
+  righe.forEach(function(r,i){
+    var tr=el("tr"), td1=el("td"), td2=el("td"), td3=el("td",{"class":"esito","aria-live":"polite"});
+    td1.appendChild(document.createTextNode(r[0]));
+    var sp=el("span",{"class":"spiega"}); sp.hidden=true; if(r[2]) sp.textContent=r[2]; td1.appendChild(sp);
+    var s=el("select",{"aria-label":"Risposta: "+r[0]}); s.appendChild(el("option",{value:""},"— scegli —"));
+    scelte.forEach(function(c){ s.appendChild(el("option",{value:c},c)); });
+    td2.appendChild(s); tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tb.appendChild(tr);
+    stati.push({tr:tr,s:s,esito:td3,sp:sp,giusta:r[1]});
+  });
+  cont.appendChild(tab);
+  var com=el("div",{"class":"comandi"}), b1=el("button",{type:"button","class":"bottone"},"Controlla"), b2=el("button",{type:"button","class":"bottone secondario"},"Mostra le soluzioni"), pt=el("span",{"class":"punteggio","aria-live":"polite"});
+  b2.hidden=true; com.appendChild(b1); com.appendChild(b2); com.appendChild(pt); cont.appendChild(com);
+  b1.addEventListener("click",function(){
+    var ok=0, vuote=0;
+    stati.forEach(function(x){
+      x.tr.classList.remove("ok"); x.tr.classList.remove("no");
+      if(!x.s.value){ vuote++; x.esito.textContent=""; return; }
+      var g=x.s.value===x.giusta; if(g) ok++;
+      x.tr.classList.add(g?"ok":"no"); x.esito.textContent=g?"✓":"✗"; x.esito.setAttribute("aria-label",g?"giusto":"sbagliato");
+      if(x.sp.textContent) x.sp.hidden=false;
+    });
+    pt.textContent=ok+" su "+stati.length+(vuote? " · "+vuote+" senza risposta":"");
+    b2.hidden=false;
+  });
+  b2.addEventListener("click",function(){
+    stati.forEach(function(x){ x.s.value=x.giusta; x.tr.classList.remove("no"); x.tr.classList.add("ok"); x.esito.textContent="✓"; if(x.sp.textContent) x.sp.hidden=false; });
+    pt.textContent="Ecco le soluzioni.";
+  });
+}
+var GRUPPI={"tempo": {"c": "#2a7f6f", "n": "Collocare nel tempo", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15.5\" rx=\"2\"/><path d=\"M3.5 10h17M8 3v4M16 3v4\"/><path d=\"M9 14.5h2v3M13.5 14.5h2l-1.5 3\"/></svg>"}, "spazio": {"c": "#b25510", "n": "Collocare nello spazio", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z\"/><path d=\"M9 4.5v13M15 6.5v13\"/></svg>"}, "fonti": {"c": "#55800f", "n": "Leggere e interpretare le fonti", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"5\" y=\"11\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 11V7.5a4 4 0 0 1 7.6-1.8\"/><circle cx=\"12\" cy=\"15.5\" r=\"1.3\"/><path d=\"M12 16.8v1.7\"/></svg>"}, "processi": {"c": "#b0215f", "n": "Comprendere fatti e processi storici", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 4.5l6 3.5-6 3.5zM10 4.5l6 3.5-6 3.5z\"/><path d=\"M20 12.5l-6 3.5 6 3.5zM14 12.5l-6 3.5 6 3.5z\"/></svg>"}, "lessico": {"c": "#6b3f8a", "n": "Conoscere e usare il lessico specifico", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 18.5L8.5 6l4.5 12.5M5.6 14h5.8\"/><path d=\"M15 12.5a2.5 2.5 0 1 1 0 4.5M20 10v8.5\"/></svg>"}, "ripasso": {"c": "#2b5f6b", "n": "Ripasso finale", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8\"/></svg>"}};
+var zona=document.getElementById("esercizi"), ultimo="";
+ESERCIZI.forEach(function(E,i){
+  if(E.gruppo!==ultimo){ var g=GRUPPI[E.gruppo], f=el("p",{"class":"fascia",style:"--c:"+g.c}), t=el("span",{"class":"tondo"}); t.innerHTML=g.i; f.appendChild(t); f.appendChild(el("span",null,g.n)); zona.appendChild(f); ultimo=E.gruppo; }
+  var box=el("div",{"class":"attivita"}); box.appendChild(el("h4",null,(i+1)+". "+E.titolo)); box.appendChild(el("p",{"class":"meta"},E.meta));
+  costruisci(box,E.scelte,mescola(E.righe)); zona.appendChild(box);
+});
+costruisci(document.getElementById("dieci"), mescola(DIECI.map(function(d){return d[1];})), DIECI.map(function(d){ return [d[0]+" …", d[1]]; }));
+})();
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+</body>
+</html>

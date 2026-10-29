@@ -160,7 +160,13 @@ function paginaMateria(id) {
   const area = document.getElementById("materiali");
   const campo = document.getElementById("cerca");
   const pulsanti = document.querySelectorAll(".classi button");
-  let classe = new URLSearchParams(location.search).get("classe") || "tutte";
+  /* il filtro di classe si ricorda durante la visita: tornando da una lezione all'indice resta quello scelto */
+  const leggiClasse = () => { try { return sessionStorage.getItem("filtro-classe"); } catch (e) { return null; } };
+  const salvaClasse = c => { try { sessionStorage.setItem("filtro-classe", c); } catch (e) {} };
+  let classe = new URLSearchParams(location.search).get("classe") || leggiClasse() || "tutte";
+  if (classe !== "tutte" && !new URLSearchParams(location.search).get("classe")) {
+    const u0 = new URL(location); u0.searchParams.set("classe", classe); history.replaceState(null, "", u0);
+  }
   let libro = new URLSearchParams(location.search).get("libro") || "tutti";
   /* numero originale di ogni lezione, che resta uguale anche quando si filtra */
   tutti.forEach(m => (m.lezioni || []).forEach((l, i) => { l._posizione = i + 1; }));
@@ -318,6 +324,7 @@ function paginaMateria(id) {
 
   pulsanti.forEach(b => b.addEventListener("click", () => {
     classe = b.dataset.classe;
+    salvaClasse(classe);
     const url = new URL(location);
     classe === "tutte" ? url.searchParams.delete("classe") : url.searchParams.set("classe", classe);
     history.replaceState(null, "", url);
