@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El planeta Tierra · CLIL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{--paper:#eef1f5;--card:#fff;--ink:#152131;--muted:#566476;--line:#d3dbe4;--accent:#c2410c;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;--body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif}
+@media (prefers-color-scheme: dark){:root{--paper:#0b111a;--card:#121b28;--ink:#e5ecf4;--muted:#97a6b8;--line:#243244;--accent:#fb923c;color-scheme:dark}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 16px 48px;display:grid;gap:20px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,5vw,3.2rem);line-height:1;margin:4px 0 0}
+p{margin:0;max-width:70ch;color:var(--muted)}
+ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;counter-reset:n}
+li a{display:grid;gap:4px;align-content:start;height:100%;box-sizing:border-box;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;color:inherit;text-decoration:none}
+li a:hover,li a:focus-visible{border-color:var(--accent);outline:none;box-shadow:0 0 0 2px var(--accent)}
+li b{font-family:var(--display);font-size:1.2rem}
+.d{font-size:.9rem;color:var(--muted)}
+.indietro{display:inline-block;margin-bottom:14px;font-weight:700;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.indietro:hover{text-decoration-thickness:2px}
+footer{font-size:.85rem;color:var(--muted)}
+.lang a{font-weight:700;color:var(--accent)}
+.cap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:grid;gap:10px}
+.cap h2{font-family:var(--display);font-weight:800;font-size:1.35rem;margin:0;display:flex;gap:10px;align-items:center}
+.cap h2 span{display:inline-grid;place-items:center;min-width:32px;height:32px;border-radius:999px;background:var(--accent);color:#fff;font-size:1rem}
+.cap p{color:var(--ink);font-size:1.05rem;line-height:1.6}
+.cap b{color:var(--accent)}
+.tools{display:flex;flex-wrap:wrap;gap:8px}
+.tool{justify-self:start;display:inline-block;font-weight:700;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:6px 14px;text-decoration:none}
+.tool:hover,.tool:focus-visible{background:var(--accent);color:#fff;outline:none}
+.extra{border-style:dashed}
+table{border-collapse:collapse;width:100%;max-width:640px;font-size:.98rem}
+th,td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);color:var(--muted)}
+td:first-child{font-weight:700}
+@media print{.tool,.zm,.indietro,.lang{display:none!important}.cap{break-inside:avoid}}
+</style>
+
+<style>
+/* ===== CLIL: attività aggiunte ===== */
+:root{--ok:#15803d;--ko:#b91c1c;--soft:#fff4ec}
+@media (prefers-color-scheme: dark){:root{--ok:#4ade80;--ko:#f87171;--soft:#2a1a10}}
+.clil-tag{justify-self:start;display:inline-block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:2px 10px}
+.cap h3{font-family:var(--display);font-weight:800;font-size:1.05rem;margin:4px 0 0}
+.obj{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.obj div{background:var(--paper);border-radius:12px;padding:12px 14px}
+.obj b{display:block;font-family:var(--display);color:var(--accent);margin-bottom:4px}
+.obj ul,.cando ul{margin:0;padding-left:18px}
+.obj li{margin:2px 0}
+/* vero/falso */
+.vf{display:grid;gap:8px;margin:0;padding:0;list-style:none;counter-reset:vf}
+.vf li{position:relative;display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.vf li::before{counter-increment:vf;content:counter(vf)". ";font-weight:700;color:var(--muted);position:absolute;left:-26px;top:9px}
+.vf{padding-left:26px;grid-template-columns:1fr;gap:0}
+.vf .q{font-size:1.02rem}
+.vf .bt{display:flex;gap:6px}
+.vf .why{grid-column:1/-1;font-size:.92rem;color:var(--muted)}
+.vf .before{font-size:.85rem;color:var(--muted)}
+.pick{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 14px;font:inherit;font-weight:700;cursor:pointer}
+.pick:hover{border-color:var(--accent)}
+.pick[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.pick.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.pick.ko{background:var(--ko);border-color:var(--ko);color:#fff}
+.act{justify-self:start;font:inherit;font-weight:700;background:var(--accent);color:#fff;border:0;border-radius:999px;padding:8px 18px;cursor:pointer}
+.act.sec{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.score{font-weight:700}
+/* banco de frases */
+.chunks{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.chunks section{background:var(--paper);border-radius:12px;padding:10px 12px}
+.chunks h3{margin:0 0 6px}
+.say{display:flex;width:100%;text-align:left;gap:8px;align-items:center;background:none;border:0;padding:4px 0;color:var(--ink);font:inherit;font-size:1rem;cursor:pointer}
+.say::before{content:"🔊";font-size:.85rem;opacity:.6}
+.say:hover{color:var(--accent)}.say:hover::before{opacity:1}
+.fab{position:fixed;left:12px;bottom:12px;z-index:90;background:var(--accent);color:#fff;font-weight:700;border-radius:999px;padding:10px 16px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+/* comprueba (per apartado) */
+.check{border-top:1px dashed var(--line);padding-top:10px;display:grid;gap:8px}
+.check .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.check .lab{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--muted);min-width:92px}
+.check .fb{font-weight:700}
+.check .fb.ok{color:var(--ok)}.check .fb.ko{color:var(--ko)}
+.reveal{font:inherit;font-size:.9rem;background:none;border:0;color:var(--accent);text-decoration:underline;cursor:pointer;padding:0}
+.ans{color:var(--ok);font-weight:700}
+/* jigsaw */
+.steps{margin:0;padding-left:22px;display:block;list-style:decimal}
+.steps b{font-family:var(--body);font-size:1rem}
+.steps li{margin:4px 0}
+.groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.group{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:6px;align-content:start}
+.group .gl{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent);color:#fff;font-family:var(--display);font-weight:800}
+.group ul{margin:0;padding-left:18px}
+.group .d a{color:var(--accent)}
+.icq{background:var(--soft);border-radius:12px;padding:10px 14px}
+.icq ul{margin:4px 0 0;padding-left:18px}
+.ficha td{height:46px;vertical-align:top}
+.ficha td:first-child{width:90px}
+/* exit ticket */
+.ticket{display:grid;gap:10px}
+.ticket label{font-weight:700}
+.ticket textarea{width:100%;box-sizing:border-box;font:inherit;border:1px solid var(--line);border-radius:10px;padding:8px;background:var(--paper);color:var(--ink);min-height:44px}
+.cando table{max-width:none}
+.cando td{vertical-align:middle}
+.cando td:first-child{font-weight:400}
+.emo{display:flex;gap:4px}
+.emo label{cursor:pointer;font-size:1.3rem;padding:2px 6px;border-radius:8px;border:1px solid transparent}
+.emo input{position:absolute;opacity:0;width:1px;height:1px}
+.emo input:checked+span{outline:2px solid var(--accent);border-radius:8px}
+.emo input:focus-visible+span{outline:2px dashed var(--accent)}
+/* guida docente */
+details.docente{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:12px 18px}
+details.docente summary{cursor:pointer;font-weight:700;font-family:var(--display);font-size:1.05rem}
+details.docente p,details.docente li{color:var(--ink);font-size:.95rem}
+details.docente table{max-width:none;margin-top:8px}
+details.docente td:first-child{white-space:nowrap}
+@media print{.fab,.act,.pick,.reveal,.say::before,details.docente{display:none!important}.check{display:none}.ticket textarea{border:1px solid #999;min-height:60px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><a class="indietro" href="../../index.html#modulo-terza-i">← Geografia: todos los módulos</a><div class="eyebrow">Geografía · Versión en español</div><h1>El planeta Tierra</h1></header>
+  <p>Un resumen fácil del tema y, para cada parte, una herramienta interactiva para ver cómo funciona. Lee un apartado, abre su herramienta, contesta a «Comprueba» y vuelve aquí. Las palabras en <b>negrita</b> están en el glosario del final.</p>
+  <p class="lang"><a href="../../terza/la-terra/index.html">Versione italiana</a></p>
+
+  <details class="docente">
+    <summary>Guida per il docente (in italiano) — come usare le attività CLIL di questa pagina</summary>
+    <p style="margin-top:8px">La pagina segue una sequenza CLIL in due incontri da circa 60 minuti. Le attività segnate con l'etichetta <span class="clil-tag">CLIL</span> sono nuove; testi e strumenti restano quelli di prima.</p>
+    <table>
+      <thead><tr><th>Fase</th><th>Attività</th><th>Tempo</th><th>Da dove viene</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Avvio</td><td>Leggere insieme gli obiettivi; vero o falso «antes» individuale</td><td>10′</td><td>Obiettivi visibili (4C); attivazione delle preconoscenze</td></tr>
+        <tr><td>2 · Lingua</td><td>Banco de frases: ascolto e ripetizione corale di 5–6 frasi</td><td>5′</td><td>Formulaic language e chunks</td></tr>
+        <tr><td>3 · Esperti</td><td>Jigsaw: gruppi A–D leggono i loro apartados, usano lo strumento, rispondono a «Comprueba»</td><td>25′</td><td>Jigsaw reading; scanning e CCQ</td></tr>
+        <tr><td>4 · Scambio</td><td>Gruppi misti: ogni esperto spiega in 2 minuti, gli altri completano la ficha</td><td>25′</td><td>Info gap; speaking con frasi modello</td></tr>
+        <tr><td>5 · Verifica</td><td>Vero o falso «después», confronto con «antes»</td><td>10′</td><td>Valutazione formativa</td></tr>
+        <tr><td>6 · Chiusura</td><td>Exit ticket 3-2-1 e autovalutazione</td><td>5–10′</td><td>Exit ticket; assessment as learning</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:8px">Prima di ogni consegna usa le domande di controllo (ICQ) del riquadro arancione invece di «¿Lo habéis entendido?». Le domande «Comprueba» sono CCQ brevi, con due possibilità: puoi farle anche a voce, a tutta la classe.</p>
+  </details>
+
+  <section class="cap" id="objetivos">
+    <span class="clil-tag">CLIL · Antes de empezar</span>
+    <h2>Hoy aprendo…</h2>
+    <div class="obj">
+      <div><b>Contenido</b><ul><li>cómo es la Tierra y cómo se representa</li><li>cómo se mueve y por qué hay día, noche y estaciones</li><li>cómo es por dentro y por fuera</li></ul></div>
+      <div><b>Pensamiento</b><ul><li>explicar una causa y su efecto</li><li>comparar (más grande, más caliente…)</li><li>ordenar las etapas de un proceso</li></ul></div>
+      <div><b>Comunicación</b><ul><li>usar las palabras del glosario</li><li>explicar a mis compañeros una parte del tema</li><li>decir si estoy de acuerdo o no</li></ul></div>
+      <div><b>Cultura y trabajo</b><ul><li>trabajar en grupo como «experto»</li><li>pensar en cómo cuidar los océanos y el agua</li></ul></div>
+    </div>
+  </section>
+
+  <section class="cap" id="vf-antes">
+    <span class="clil-tag">CLIL · ¿Qué sé ya?</span>
+    <h2>¿Verdadero o falso? Antes de leer</h2>
+    <p>Todavía no leas el texto. Elige <b>V</b> (verdadero) o <b>F</b> (falso) solo con lo que ya sabes. No pasa nada si te equivocas: al final de la página vuelves a contestar y comparas.</p>
+    <ol class="vf" data-vf="antes"></ol>
+    <p class="d" data-vf-status></p>
+  </section>
+
+  <section class="cap" id="frases">
+    <span class="clil-tag">CLIL · Lengua para trabajar</span>
+    <h2>Banco de frases</h2>
+    <p>Usa estas frases para hablar y escribir. Haz clic en una frase para escucharla.</p>
+    <div class="chunks">
+      <section><h3>Para explicar</h3>
+        <button class="say">Esto pasa porque…</button><button class="say">Por eso…</button><button class="say">Sirve para…</button><button class="say">Se llama… y es…</button></section>
+      <section><h3>Para ordenar</h3>
+        <button class="say">Primero…, después…, al final…</button><button class="say">Hace millones de años…, ahora…</button><button class="say">Desde fuera hacia dentro hay…</button></section>
+      <section><h3>Para comparar</h3>
+        <button class="say">El núcleo es más caliente que el manto.</button><button class="say">Se parece a…, pero…</button><button class="say">La diferencia es que…</button></section>
+      <section><h3>Para dar mi opinión</h3>
+        <button class="say">Creo que…</button><button class="say">Estoy de acuerdo porque…</button><button class="say">No estoy de acuerdo porque…</button></section>
+      <section><h3>En clase</h3>
+        <button class="say">¿Cómo se dice… en español?</button><button class="say">¿Qué significa…?</button><button class="say">¿Puedes repetir, por favor?</button><button class="say">Me toca a mí. Te toca a ti.</button></section>
+    </div>
+  </section>
+
+  <section class="cap" id="expertos">
+    <span class="clil-tag">CLIL · Trabajo en grupo</span>
+    <h2>Somos expertos</h2>
+    <p>La clase se divide en 4 grupos de expertos. Cada grupo estudia solo sus apartados y su herramienta. Después formáis grupos nuevos, con un experto de cada grupo, y os explicáis el tema unos a otros.</p>
+    <ol class="steps">
+      <li><b>Grupos de expertos (25 min):</b> leed vuestros apartados, abrid la herramienta y contestad a «Comprueba». Preparad 3 frases para explicar el tema.</li>
+      <li><b>Grupos mixtos (25 min):</b> cada experto explica su parte en 2 minutos, con el banco de frases. Los demás completan la ficha de intercambio.</li>
+      <li><b>Todos juntos:</b> contestad otra vez al verdadero o falso.</li>
+    </ol>
+    <div class="groups">
+      <div class="group"><span class="gl">A</span><b>Apartados 1 y 2</b><span class="d">La forma de la Tierra y los mapas</span>
+        <ul><li>Con la herramienta, encontrad un punto y decid su latitud y su longitud.</li><li>¿Qué proyección hace Groenlandia muy grande?</li><li>¿Por qué un mapa plano deforma la Tierra?</li></ul></div>
+      <div class="group"><span class="gl">B</span><b>Apartados 3, 4 y 5</b><span class="d">La Tierra en el espacio y sus movimientos</span>
+        <ul><li>¿Qué planeta tarda más en dar la vuelta al Sol?</li><li>¿Por dónde sale el Sol? ¿Por qué?</li><li>Si en Greenwich son las 12:00, ¿qué hora es en Italia?</li></ul></div>
+      <div class="group"><span class="gl">C</span><b>Apartados 6 y 7</b><span class="d">Dentro de la Tierra y los continentes</span>
+        <ul><li>Nombrad las capas en orden, desde fuera hacia dentro.</li><li>¿Dónde hay muchos volcanes y terremotos?</li><li>¿Cómo se llamaba el gran continente único?</li></ul></div>
+      <div class="group"><span class="gl">D</span><b>Apartados 8, 9 y 10</b><span class="d">Relieve, océanos, ríos y lagos</span>
+        <ul><li>Buscad en el mapa una cordillera, un escudo y una llanura aluvial.</li><li>¿Cuáles son los 3 grandes océanos?</li><li>¿Dónde está el agua dulce de la Tierra?</li></ul></div>
+    </div>
+    <div class="icq"><b>Antes de empezar, contesta (profesor/a):</b>
+      <ul><li>¿Estudias todos los apartados o solo los de tu grupo?</li><li>¿Cuántos minutos tenéis en el grupo de expertos?</li><li>En el grupo mixto, ¿cuánto tiempo habla cada experto?</li><li>¿Podéis hablar en italiano? ¿Cuándo?</li><li>¿Qué hacen los compañeros mientras habla el experto?</li></ul></div>
+    <h3>Ficha de intercambio <span class="d">(se puede imprimir)</span></h3>
+    <table class="ficha">
+      <thead><tr><th>Grupo</th><th>2 cosas importantes</th><th>1 palabra nueva</th></tr></thead>
+      <tbody><tr><td>A</td><td></td><td></td></tr><tr><td>B</td><td></td><td></td></tr><tr><td>C</td><td></td><td></td></tr><tr><td>D</td><td></td><td></td></tr></tbody>
+    </table>
+  </section>
+
+  <section class="cap">
+    <h2><span>1</span>¿Cómo es la Tierra?</h2>
+    <p>La Tierra tiene forma de <b>esfera</b>, un poco <b>achatada</b> en los polos. Su radio mide unos 6370 km. Para orientarnos, dibujamos sobre ella unas líneas imaginarias: los <b>meridianos</b> y los <b>paralelos</b>. Juntos forman la <b>cuadrícula geográfica</b>. Con dos números, la <b>latitud</b> y la <b>longitud</b>, podemos encontrar cualquier punto de la Tierra.</p>
+    <div class="check" data-k="1"></div>
+    <a class="tool" href="lecciones/cuadricula.html">Herramienta: ¿Dónde está el punto P? →</a>
+  </section>
+
+  <section class="cap">
+    <h2><span>2</span>Cómo se representa la Tierra</h2>
+    <p>El <b>globo terráqueo</b> representa la Tierra de forma correcta, porque también es una esfera. Una hoja de papel, en cambio, es plana: para dibujar la Tierra en un mapa hay que deformarla un poco. Las técnicas para hacerlo se llaman <b>proyecciones cartográficas</b>. El mapa de toda la Tierra se llama <b>planisferio</b>: es un mapa a pequeña escala.</p>
+    <div class="check" data-k="2"></div>
+    <a class="tool" href="lecciones/proyecciones.html">Herramienta: Del globo al mapa →</a>
+  </section>
+
+  <section class="cap">
+    <h2><span>3</span>La Tierra en el espacio</h2>
+    <p>La Tierra es uno de los 8 <b>planetas</b> del <b>sistema solar</b>. Alrededor del Sol giran también cuerpos más pequeños: satélites, asteroides y cometas. La Tierra tiene un satélite: la <b>Luna</b>. Los planetas forman dos grupos: los <b>planetas interiores</b>, como la Tierra, y los <b>planetas exteriores</b>.</p>
+    <div class="check" data-k="3"></div>
+    <a class="tool" href="lecciones/sistema-solar.html">Herramienta: El sistema solar →</a>
+  </section>
+
+  <section class="cap">
+    <h2><span>4</span>Los movimientos de la Tierra</h2>
+    <p><b>Rotación</b>: la Tierra gira sobre su eje y da una vuelta completa en 24 horas. Por eso hay día y noche, y el Sol parece moverse en el cielo.</p>
+    <p><b>Traslación</b>: la Tierra gira alrededor del Sol y da una vuelta completa en unos 365 días. Su eje está inclinado: por eso el día y la noche no duran lo mismo durante el año, y hay <b>estaciones</b>.</p>
+    <div class="check" data-k="4"></div>
+    <div class="tools">
+      <a class="tool" href="lecciones/rotacion.html">Herramienta: La Tierra gira, el Sol sale →</a>
+      <a class="tool" href="lecciones/crepusculo.html">Herramienta: El crepúsculo →</a>
+      <a class="tool" href="lecciones/traslacion.html">Herramienta: El movimiento de traslación →</a>
+    </div>
+  </section>
+
+  <section class="cap">
+    <h2><span>5</span>Los husos horarios</h2>
+    <p>Como la Tierra gira, el Sol no sale ni se pone a la misma hora en todos los lugares. Por eso la Tierra está dividida en 24 <b>husos horarios</b>. Dentro de cada huso, todos los relojes marcan la misma hora.</p>
+    <div class="check" data-k="5"></div>
+    <a class="tool" href="lecciones/husos-horarios.html">Herramienta: ¿Qué hora es en el mundo? →</a>
+  </section>
+
+  <section class="cap">
+    <h2><span>6</span>La estructura de la Tierra</h2>
+    <p>La Tierra se formó hace unos 4500 millones de años, con polvo y gas, junto con el sistema solar. Tiene tres capas: la <b>corteza</b>, sólida y fría; el <b>manto</b>, muy caliente; y el <b>núcleo</b>, todavía más caliente. La corteza y la parte de arriba del manto forman la <b>litosfera</b>, que está dividida en <b>placas tectónicas</b>.</p>
+    <p>Cuando las placas se mueven, se producen <b>volcanes</b> y <b>terremotos</b>. Muchas veces aparecen en los mismos lugares y pueden ser muy peligrosos para las personas.</p>
+    <div class="check" data-k="6"></div>
+    <a class="tool" href="lecciones/estructura-tierra.html">Herramienta: Dentro de la Tierra →</a>
+  </section>
+
+  <section class="cap">
+    <h2><span>7</span>Los continentes</h2>
+    <p>Hay 6 continentes: Europa, Asia, África, América, Oceanía y la Antártida. Hace muchos millones de años formaban un solo gran continente, <b>Pangea</b>, que después se rompió en varias partes.</p>
+    <div class="check" data-k="7"></div>
+    <a class="tool" href="lecciones/continentes.html">Herramienta: Los continentes →</a>
+  </section>
+
+  <section class="cap">
+    <h2><span>8</span>Las montañas y las llanuras</h2>
+    <p>En la Tierra hay grandes <b>cordilleras</b>, como el Himalaya o las cordilleras de América. Las grandes zonas llanas son antiguos <b>escudos</b>, muy viejos y planos, o <b>llanuras aluviales</b> más recientes, formadas por los materiales que traen los ríos.</p>
+    <div class="check" data-k="8"></div>
+  </section>
+
+  <section class="cap">
+    <h2><span>9</span>Los océanos y los mares</h2>
+    <p>Los océanos cubren dos tercios de la superficie de la Tierra. Los 3 grandes océanos son el <b>Pacífico</b>, el <b>Atlántico</b> y el <b>Índico</b>: están unidos entre sí y tienen muchos mares. Las <b>corrientes marinas</b> llevan agua cálida y agua fría, y cambian el clima.</p>
+    <p>Los océanos están en peligro por la <b>sobrepesca</b>, la <b>contaminación</b> y el <b>calentamiento global</b>.</p>
+    <div class="check" data-k="9"></div>
+  </section>
+
+  <section class="cap">
+    <h2><span>10</span>Los ríos y los lagos</h2>
+    <p>El <b>agua dulce</b> es solo una pequeña parte del agua de la Tierra (la <b>hidrosfera</b>), pero es necesaria para la vida. Está en los ríos, los lagos, los glaciares, bajo la tierra (los <b>acuíferos</b>) y en todos los seres vivos.</p>
+    <div class="check" data-k="10"></div>
+    <a class="tool" href="lecciones/relieve-aguas.html">Herramienta para 8, 9 y 10: Relieve, océanos, ríos y lagos →</a>
+  </section>
+
+  <section class="cap extra">
+    <h2><span>+</span>Para saber más: la atmósfera</h2>
+    <p>La Tierra está rodeada por una capa de aire, la atmósfera. Descubre de qué está hecha, cómo cambia la temperatura cuando subimos y cómo se forman los vientos.</p>
+    <a class="tool" href="lecciones/atmosfera.html">Herramienta: La atmósfera →</a>
+  </section>
+
+
+  <section class="cap" id="vf-despues">
+    <span class="clil-tag">CLIL · ¿Qué he aprendido?</span>
+    <h2>¿Verdadero o falso? Después de leer</h2>
+    <p>Contesta otra vez. Debajo de cada frase ves lo que contestaste al principio. Después pulsa «Comprobar».</p>
+    <ol class="vf" data-vf="despues"></ol>
+    <button class="act" type="button" data-vf-check>Comprobar</button>
+    <p class="score" data-vf-score></p>
+  </section>
+
+  <section class="cap" id="ticket">
+    <span class="clil-tag">CLIL · Billete de salida</span>
+    <h2>Antes de salir: 3 · 2 · 1</h2>
+    <div class="ticket">
+      <label for="t3">3 palabras nuevas que he aprendido</label><textarea id="t3" rows="2"></textarea>
+      <label for="t2">2 cosas que ahora sé explicar</label><textarea id="t2" rows="2"></textarea>
+      <label for="t1">1 pregunta que todavía tengo</label><textarea id="t1" rows="2"></textarea>
+    </div>
+    <div class="cando">
+      <h3>¿Cómo voy?</h3>
+      <table>
+        <thead><tr><th>Sé…</th><th>😀 sí · 🙂 más o menos · 😟 todavía no</th></tr></thead>
+        <tbody data-cando></tbody>
+      </table>
+    </div>
+    <button class="act sec" type="button" onclick="window.print()">Imprimir la ficha</button>
+  </section>
+
+  <section class="cap" id="glosario">
+    <h2>Glosario español – italiano</h2>
+    <p class="d">¡Cuidado con los falsos amigos! En español la <i>traslación</i> es la <i>rivoluzione</i> de la Tierra.</p>
+    <table>
+      <thead><tr><th>Español</th><th>Italiano</th></tr></thead>
+      <tbody>
+        <tr><td>esfera achatada en los polos</td><td>sfera schiacciata ai poli</td></tr>
+        <tr><td>la cuadrícula geográfica</td><td>il reticolato geografico</td></tr>
+        <tr><td>el ecuador</td><td>l'Equatore</td></tr>
+        <tr><td>el globo terráqueo</td><td>il globo</td></tr>
+        <tr><td>la proyección cartográfica</td><td>la proiezione cartografica</td></tr>
+        <tr><td>el planisferio</td><td>il planisfero</td></tr>
+        <tr><td>la rotación</td><td>la rotazione</td></tr>
+        <tr><td>la traslación</td><td>la rivoluzione</td></tr>
+        <tr><td>el eje</td><td>l'asse</td></tr>
+        <tr><td>el amanecer / el atardecer</td><td>l'alba / il tramonto</td></tr>
+        <tr><td>el huso horario</td><td>il fuso orario</td></tr>
+        <tr><td>la corteza</td><td>la crosta</td></tr>
+        <tr><td>el manto</td><td>il mantello</td></tr>
+        <tr><td>el núcleo</td><td>il nucleo</td></tr>
+        <tr><td>la placa tectónica</td><td>la placca tettonica</td></tr>
+        <tr><td>el terremoto</td><td>il terremoto</td></tr>
+        <tr><td>la cordillera</td><td>la catena montuosa</td></tr>
+        <tr><td>el escudo</td><td>lo scudo</td></tr>
+        <tr><td>la llanura aluvial</td><td>la pianura alluvionale</td></tr>
+        <tr><td>la corriente marina</td><td>la corrente marina</td></tr>
+        <tr><td>la sobrepesca</td><td>la pesca eccessiva</td></tr>
+        <tr><td>el calentamiento global</td><td>il riscaldamento globale</td></tr>
+        <tr><td>el agua dulce</td><td>l'acqua dolce</td></tr>
+        <tr><td>el acuífero</td><td>la falda acquifera</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>Mapa de las placas: de Fradeve11, dominio público, Wikimedia Commons. Animación de Pangea: U.S. Geological Survey, dominio público. Todos los demás dibujos los generan las propias páginas.</footer>
+</div>
+<a class="fab" href="#frases">💬 Frases</a>
+
+<script>
+/* ===== CLIL: attività aggiunte ===== */
+(function(){
+  var KEY='tierra-clil-vf';
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ return {}; } }
+  function save(s){ try{ localStorage.setItem(KEY,JSON.stringify(s)); }catch(e){} }
+  var st=load(); st.antes=st.antes||{}; st.despues=st.despues||{};
+
+  var VF=[
+    ['La Tierra es una esfera perfecta.','F','Es una esfera un poco achatada en los polos (apartado 1).'],
+    ['Con la latitud y la longitud podemos encontrar cualquier punto de la Tierra.','V','Son dos números que indican un punto exacto (apartado 1).'],
+    ['Un mapa plano representa la Tierra sin deformarla.','F','Para pasar de la esfera al papel hay que deformarla un poco (apartado 2).'],
+    ['La Luna es un planeta.','F','La Luna es el satélite de la Tierra (apartado 3).'],
+    ['La Tierra da una vuelta alrededor del Sol en 24 horas.','F','En 24 horas gira sobre su eje (rotación); alrededor del Sol tarda unos 365 días (apartado 4).'],
+    ['En Italia y en Nueva York los relojes marcan la misma hora.','F','Están en husos horarios distintos (apartado 5).'],
+    ['Los volcanes y los terremotos aparecen muchas veces en los mismos lugares.','V','Aparecen donde se mueven las placas tectónicas (apartado 6).'],
+    ['Hace millones de años los continentes estaban unidos.','V','Formaban un solo gran continente: Pangea (apartado 7).'],
+    ['Los océanos cubren dos tercios de la superficie de la Tierra.','V','Apartado 9.'],
+    ['La mayor parte del agua de la Tierra es dulce.','F','El agua dulce es solo una pequeña parte de la hidrosfera (apartado 10).']
+  ];
+
+  function btn(txt,on){ var b=document.createElement('button'); b.type='button'; b.className='pick'; b.textContent=txt; b.setAttribute('aria-pressed',on?'true':'false'); return b; }
+
+  document.querySelectorAll('[data-vf]').forEach(function(ol){
+    var phase=ol.getAttribute('data-vf');
+    VF.forEach(function(item,i){
+      var li=document.createElement('li');
+      var q=document.createElement('span'); q.className='q'; q.textContent=item[0]; li.appendChild(q);
+      var bt=document.createElement('span'); bt.className='bt';
+      ['V','F'].forEach(function(v){
+        var b=btn(v,st[phase][i]===v); b.setAttribute('aria-label',(v==='V'?'Verdadero':'Falso')+': '+item[0]); b.dataset.v=v;
+        b.addEventListener('click',function(){
+          st[phase][i]=v; save(st);
+          bt.querySelectorAll('.pick').forEach(function(x){ x.setAttribute('aria-pressed',x.dataset.v===v?'true':'false'); x.classList.remove('ok','ko'); });
+          if(phase==='antes') status();
+          var w=li.querySelector('.why'); if(w) w.remove();
+        });
+        bt.appendChild(b);
+      });
+      li.appendChild(bt);
+      if(phase==='despues'){ var bf=document.createElement('span'); bf.className='before'; bf.dataset.i=i; li.appendChild(bf); }
+      ol.appendChild(li);
+    });
+  });
+
+  function status(){
+    var n=Object.keys(st.antes).length, el=document.querySelector('[data-vf-status]');
+    if(el) el.textContent=n<VF.length?('Has contestado '+n+' de '+VF.length+'.'):'¡Muy bien! Ahora lee el texto y descubre si tenías razón.';
+    document.querySelectorAll('.before').forEach(function(bf){ var a=st.antes[bf.dataset.i]; bf.textContent=a?('Al principio contestaste: '+(a==='V'?'verdadero':'falso')):'Al principio no contestaste.'; });
+  }
+  status();
+
+  var chk=document.querySelector('[data-vf-check]');
+  if(chk) chk.addEventListener('click',function(){
+    var ol=document.querySelector('[data-vf="despues"]'), ok=0, okA=0;
+    ol.querySelectorAll('li').forEach(function(li,i){
+      var right=VF[i][1], mine=st.despues[i];
+      if(st.antes[i]===right) okA++;
+      li.querySelectorAll('.pick').forEach(function(b){ b.classList.remove('ok','ko'); if(b.dataset.v===right) b.classList.add('ok'); else if(b.dataset.v===mine) b.classList.add('ko'); });
+      if(mine===right) ok++;
+      var w=li.querySelector('.why'); if(!w){ w=document.createElement('span'); w.className='why'; li.appendChild(w); }
+      w.textContent=(mine===right?'✔ ':'✘ ')+(right==='V'?'Verdadero. ':'Falso. ')+VF[i][2];
+    });
+    document.querySelector('[data-vf-score]').textContent='Ahora: '+ok+' de '+VF.length+' · Al principio: '+okA+' de '+VF.length;
+  });
+
+  /* Comprueba: una pregunta para buscar en el texto y una CCQ con dos opciones */
+  var CK={
+    1:[['¿Cuánto mide el radio de la Tierra?','Unos 6370 km.'],['¿Los meridianos se ven de verdad sobre la Tierra?',['Sí','No'],1,'Son líneas imaginarias.']],
+    2:[['¿Cómo se llama el mapa de toda la Tierra?','El planisferio.'],['¿El globo terráqueo deforma la Tierra?',['Sí','No'],1,'El globo es una esfera, como la Tierra.']],
+    3:[['¿Cuántos planetas hay en el sistema solar?','8 planetas.'],['La Tierra es un planeta…',['interior','exterior'],0,'Es un planeta interior.']],
+    4:[['¿Cuánto tarda la Tierra en dar una vuelta alrededor del Sol?','Unos 365 días.'],['Hay día y noche por…',['la rotación','la traslación'],0,'La Tierra gira sobre su eje en 24 horas.']],
+    5:[['¿En cuántos husos horarios está dividida la Tierra?','En 24.'],['Dentro del mismo huso, ¿los relojes marcan horas distintas?',['Sí','No'],1,'Marcan todos la misma hora.']],
+    6:[['¿Cuándo se formó la Tierra?','Hace unos 4500 millones de años.'],['¿Qué capa es más caliente?',['el manto','el núcleo'],1,'El núcleo es todavía más caliente que el manto.']],
+    7:[['¿Cómo se llamaba el gran continente único?','Pangea.'],['¿Cuántos continentes hay en esta lección?',['6','7'],0,'Europa, Asia, África, América, Oceanía y la Antártida.']],
+    8:[['Nombra una gran cordillera.','El Himalaya o las cordilleras de América.'],['Los escudos son…',['jóvenes','antiguos'],1,'Son muy viejos y planos.']],
+    9:[['¿Cuáles son los 3 grandes océanos?','El Pacífico, el Atlántico y el Índico.'],['¿Las corrientes marinas cambian el clima?',['Sí','No'],0,'Llevan agua cálida y agua fría.']],
+    10:[['¿Dónde está el agua dulce? Nombra 3 lugares.','Ríos, lagos, glaciares, acuíferos y seres vivos.'],['El agua dulce es…',['la mayor parte del agua','una pequeña parte del agua'],1,'Es solo una pequeña parte, pero es necesaria para la vida.']]
+  };
+  document.querySelectorAll('.check[data-k]').forEach(function(box){
+    var d=CK[box.dataset.k]; if(!d) return;
+    var h=document.createElement('span'); h.className='clil-tag'; h.textContent='Comprueba'; box.appendChild(h);
+    var r1=document.createElement('div'); r1.className='row';
+    r1.innerHTML='<span class="lab">Busca</span><span></span>';
+    r1.children[1].textContent=d[0][0];
+    var rv=document.createElement('button'); rv.type='button'; rv.className='reveal'; rv.textContent='Ver la respuesta';
+    rv.addEventListener('click',function(){ var a=document.createElement('span'); a.className='ans'; a.textContent=d[0][1]; rv.replaceWith(a); });
+    r1.appendChild(rv); box.appendChild(r1);
+    var r2=document.createElement('div'); r2.className='row';
+    r2.innerHTML='<span class="lab">Piensa</span><span></span>'; r2.children[1].textContent=d[1][0];
+    var fb=document.createElement('span'); fb.className='fb';
+    d[1][1].forEach(function(o,j){
+      var b=btn(o,false);
+      b.addEventListener('click',function(){
+        r2.querySelectorAll('.pick').forEach(function(x){ x.classList.remove('ok','ko'); });
+        var good=j===d[1][2]; b.classList.add(good?'ok':'ko');
+        fb.className='fb '+(good?'ok':'ko'); fb.textContent=good?('¡Sí! '+d[1][3]):'Vuelve a leer el apartado.';
+      });
+      r2.appendChild(b);
+    });
+    r2.appendChild(fb); box.appendChild(r2);
+  });
+
+  /* Banco de frases: lectura en voz alta en español */
+  var voice=null;
+  function pickVoice(){ try{ var v=speechSynthesis.getVoices(); voice=v.filter(function(x){return /^es-ES/i.test(x.lang);})[0]||v.filter(function(x){return /^es/i.test(x.lang);})[0]||null; }catch(e){} }
+  if('speechSynthesis' in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+  document.querySelectorAll('.say').forEach(function(b){
+    b.type='button';
+    b.addEventListener('click',function(){
+      if(!('speechSynthesis' in window)) return;
+      speechSynthesis.cancel();
+      var u=new SpeechSynthesisUtterance(b.textContent.replace(/…/g,'')); u.lang='es-ES'; u.rate=.9; if(voice) u.voice=voice;
+      speechSynthesis.speak(u);
+    });
+  });
+
+  /* Autoevaluación */
+  var CAN=['decir qué es la cuadrícula geográfica','explicar por qué hay día y noche','explicar por qué hay estaciones','nombrar las capas de la Tierra','nombrar los continentes y los océanos','explicar mi parte a los compañeros en español'];
+  var tb=document.querySelector('[data-cando]');
+  if(tb) CAN.forEach(function(c,i){
+    var tr=document.createElement('tr'), td=document.createElement('td'); td.textContent='…'+c; tr.appendChild(td);
+    var t2=document.createElement('td'), e=document.createElement('div'); e.className='emo';
+    [['😀','sí'],['🙂','más o menos'],['😟','todavía no']].forEach(function(x){
+      var l=document.createElement('label'); l.title=x[1];
+      l.innerHTML='<input type="radio" name="can'+i+'"><span></span>'; l.querySelector('span').textContent=x[0]; l.querySelector('input').setAttribute('aria-label',c+': '+x[1]);
+      e.appendChild(l);
+    });
+    t2.appendChild(e); tr.appendChild(t2); tb.appendChild(tr);
+  });
+})();
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+</body>
+</html>

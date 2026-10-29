@@ -255,6 +255,156 @@ footer p{margin:0 0 6px}
 .animata li:before{content:"\25B6";position:absolute;left:2px;top:0;color:#2b5f6b;color:var(--accento);font-size:.85em}
 .animata .nota-video{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:6px 0 0}
 @media print{.animata{display:none}}
+
+.primadopo.solo-prima{grid-template-columns:1fr}
+.dopo-box{border-left:5px solid #2b5f6b;border-left:5px solid var(--accento)}
+.prepara{margin:16px 0 0}
+
+.tlwrap{--bg:#f6f7f5;--surface:#ffffff;--ink:#23262a;--muted:#5a6066;--line:#dfe2dd;--soft:#e1edef;--accent:#2b5f6b;--accent-ink:#ffffff;--ok:#1d8a52;--ko:#cf2f28;--stage:#1b2233;--display:Georgia,"Iowan Old Style","Times New Roman",serif;--body:inherit;margin:14px 0 6px;padding:16px;border:1px solid #dfe2dd;border-radius:14px;background:#ffffff;color:#23262a}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tlwrap{--bg:#0f1416;--surface:#161d20;--ink:#e7ecee;--muted:#9fb0b6;--line:#2b373b;--soft:#1f2b2f;--accent:#7cc0cc;--accent-ink:#0f1416;--ok:#45c983;--ko:#ff6b62;--stage:#0a0e10;background:#161d20;color:#e7ecee;border-color:#2b373b}}
+:root[data-theme="dark"] .tlwrap{--bg:#0f1416;--surface:#161d20;--ink:#e7ecee;--muted:#9fb0b6;--line:#2b373b;--soft:#1f2b2f;--accent:#7cc0cc;--accent-ink:#0f1416;--ok:#45c983;--ko:#ff6b62;--stage:#0a0e10;background:#161d20;color:#e7ecee;border-color:#2b373b}
+.tlwrap *{box-sizing:border-box}
+.tlwrap [hidden]{display:none!important}
+.tlwrap button,.tlwrap select{font:inherit;color:inherit}
+.tlwrap :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.tlwrap .tl-title{font-size:1.4rem}
+/* vecchi browser senza aspect-ratio */
+@supports not (aspect-ratio:1/1){.tlwrap .tl-view,.tlwrap .cf-view{height:0;padding-top:62.5%}.tlwrap .or-drop{height:0;padding-top:75%;position:relative}.tlwrap .or-drop img,.tlwrap .or-drop .q{position:absolute;top:0;left:0}.tlwrap .or-th{height:99px}}
+.tlwrap .cf-a{-webkit-clip-path:inset(0 50% 0 0)}
+.linea-elenco{margin:8px 0 0}
+.linea-elenco summary{cursor:pointer;font-weight:700;color:#2b5f6b;color:var(--accento)}
+.fonti-immagini{font-size:.86rem;color:#5a6066;color:var(--tenue);margin:6px 0 0}
+@media print{.tlwrap{display:none}.linea-elenco > *{display:block}}
+
+/* Stili condivisi con la pagina per gli studenti */
+.tlwrap .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 15px;font-weight:700;cursor:pointer;text-decoration:none}
+.tlwrap .btn:hover{border-color:var(--accent)}
+.tlwrap .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.tlwrap .btn.small{padding:5px 10px;font-size:.88rem;border-radius:8px}
+.tlwrap .btn[disabled]{opacity:.45;cursor:default}
+
+.tl{max-width:1000px;margin:0 auto;display:grid;gap:14px}
+.tl-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:10px}
+.tl-kind{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.tl-title{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,4vw,2.5rem);line-height:1.05;margin:0;text-wrap:balance}
+.tl-sub{margin:2px 0 0;color:var(--muted)}
+.tl-modes{display:flex;gap:4px;background:var(--soft);padding:4px;border-radius:999px;flex-wrap:wrap}
+.tl-modes button{border:0;background:none;padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:700;color:var(--muted)}
+.tl-modes button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgb(0 0 0 / .14)}
+.tl-empty{text-align:center;color:var(--muted);padding:40px 16px;border:2px dashed var(--line);border-radius:14px}
+
+/* Esplora */
+.tl-view,.cf-view{position:relative;width:100%;aspect-ratio:16/10;background:var(--stage);border-radius:14px;overflow:hidden}
+.tl-view img,.cf-view img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.tl-view img{opacity:0;transition:opacity .12s linear}
+.tl-badge{z-index:5;position:absolute;left:14px;top:12px;background:rgb(0 0 0 / .6);color:#fff;font-family:var(--display);font-weight:800;font-size:clamp(1.2rem,3vw,2rem);padding:2px 14px;border-radius:10px;line-height:1.3}
+.tl-cap{min-height:3.2em;display:grid;gap:2px}
+.tl-cap b{font-family:var(--display);font-size:1.25rem;color:var(--accent)}
+.tl-cap small{color:var(--muted)}
+.tl-track{position:relative;padding:34px 13px 34px}
+.tl-in{position:relative;height:6px;background:var(--soft);border-radius:99px}
+.tl-fill{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:99px}
+.tl-mark{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;border:3px solid var(--accent);background:var(--surface);padding:0;cursor:pointer;z-index:2}
+.tl-mark.on{background:var(--accent)}
+.tl-mark span{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.85rem;font-weight:700;color:var(--muted);bottom:20px}
+.tl-mark.giu span{bottom:auto;top:20px}
+.tl-mark.on span{color:var(--ink)}
+.tl-range{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);width:100%;margin:0;background:none;-webkit-appearance:none;appearance:none;height:30px;z-index:3;pointer-events:none}
+.tl-range::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--ink);border:4px solid var(--surface);box-shadow:0 1px 4px rgb(0 0 0 / .4);cursor:grab;pointer-events:auto}
+.tl-range::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ink);border:4px solid var(--surface);box-shadow:0 1px 4px rgb(0 0 0 / .4);cursor:grab;pointer-events:auto}
+.tl-range::-moz-range-track{background:none}
+.tl-ctrl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+
+/* Confronta */
+.cf-sel{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.cf-sel label{display:flex;gap:6px;align-items:center;font-weight:700}
+.cf-sel select{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+.cf-view{touch-action:none;cursor:ew-resize}
+.cf-a{position:absolute;inset:0}
+.cf-h{position:absolute;top:0;bottom:0;width:4px;margin-left:-2px;background:#fff;box-shadow:0 0 6px rgb(0 0 0 / .5);pointer-events:none}
+.cf-h span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;background:#fff;color:#172036;display:grid;place-items:center;font-weight:800;box-shadow:0 1px 6px rgb(0 0 0 / .4)}
+.cf-la,.cf-lb{position:absolute;top:12px;background:rgb(0 0 0 / .6);color:#fff;font-family:var(--display);font-weight:800;font-size:1.3rem;padding:0 12px;border-radius:9px;pointer-events:none}
+.cf-la{left:12px}.cf-lb{right:12px}
+.cf-range{width:100%;accent-color:var(--accent)}
+
+/* Metti in ordine */
+.or-hint{margin:0;font-weight:700;color:var(--muted)}
+.or-dir{display:flex;justify-content:space-between;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.or-slots{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:10px;position:relative}
+.or-slots::before{content:"";position:absolute;left:0;right:0;bottom:calc(1.3em + 11px);height:4px;background:var(--line);border-radius:99px}
+.or-slot{display:grid;gap:6px;justify-items:center;position:relative}
+.or-drop{width:100%;aspect-ratio:4/3;border:2px dashed var(--line);border-radius:10px;background:var(--surface);display:grid;place-items:center;overflow:hidden;cursor:pointer;padding:0}
+.or-drop.over{border-color:var(--accent);background:var(--soft)}
+.or-drop img{width:100%;height:100%;object-fit:cover;display:block}
+.or-drop .q{color:var(--muted);font-family:var(--display);font-size:1.4rem}
+.or-lab{font-weight:700;font-size:.9rem;min-height:1.4em;text-align:center}
+.or-dot{width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--muted);z-index:1}
+.or-slot.ok .or-drop{border:3px solid var(--ok)}.or-slot.ok .or-dot{background:var(--ok);border-color:var(--ok)}
+.or-slot.ko .or-drop{border:3px solid var(--ko)}.or-slot.ko .or-dot{background:var(--ko);border-color:var(--ko)}
+.or-real{font-size:.8rem;color:var(--muted);line-height:1.3em;min-height:1.3em}
+.or-pool{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;min-height:90px;padding:10px;border-radius:12px;background:var(--soft)}
+.or-th{width:132px;aspect-ratio:4/3;border:3px solid transparent;border-radius:10px;overflow:hidden;padding:0;background:var(--surface);cursor:grab;box-shadow:0 2px 5px rgb(0 0 0 / .18)}
+.or-th img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.or-th.sel,.or-drop.sel{outline:4px solid var(--ink);outline-offset:2px}
+.or-res{font-family:var(--display);font-size:1.4rem;font-weight:800;text-align:center;min-height:1.5em}
+.or-res.ok{color:var(--ok)}
+.tl.lim .tl-mark span{font-size:1.1rem}.tl.lim .tl-cap{font-size:1.25rem}.tl.lim .or-th{width:170px}
+.tl:fullscreen{max-width:none;padding:18px;background:var(--bg);overflow:auto}
+@media (max-width:600px){.or-slots{grid-template-columns:repeat(2,minmax(0,1fr))}.or-slots::before{display:none}.or-th{width:100px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.tlwrap .or-evento{margin:0;min-height:2.9em;padding:8px 12px;border-radius:10px;background:var(--soft);font-size:1rem}
+.tlwrap .or-evento b{color:var(--accent)}
+.tlwrap .tl-scena{display:grid;grid-template-columns:minmax(200px,30%) minmax(0,1fr);grid-gap:18px;gap:18px;align-items:start}
+.tlwrap .tl-lato{display:flex;flex-direction:column;gap:12px;padding-top:2px}
+.tlwrap .tl-lato .tl-cap b{font-size:2rem;line-height:1.1}
+.tlwrap .tl-lato .tl-cap{min-height:0;gap:8px}
+.tlwrap .tl-lato .tl-ctrl{justify-content:flex-start}
+.tlwrap .tl-stage{position:relative}
+.tlwrap .tl-badge{display:none}
+.tlwrap .tl-fonte{display:block;margin-top:6px;font-size:.82rem;color:var(--muted)}
+.tlwrap .tl-track{padding:30px 13px 30px}
+.tlwrap .tl-freccia{position:absolute;top:50%;margin-top:-26px;width:52px;height:52px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:#172036;font:700 2.2rem/1 Georgia,serif;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.35);z-index:6;display:flex;align-items:center;justify-content:center;padding:0 0 5px}
+.tlwrap .tl-freccia:hover{background:#fff}
+.tlwrap .tl-freccia.sx{left:10px}.tlwrap .tl-freccia.dx{right:10px}
+@media (max-width:760px){.tlwrap .tl-mark span{display:none}.tlwrap .tl-mark.on span{display:block;bottom:20px;top:auto}.tlwrap .tl-track{padding:30px 13px 14px}.tlwrap .tl-scena{grid-template-columns:1fr}.tlwrap .tl-stage{order:-1}.tlwrap .tl-lato .tl-cap b{font-size:1.5rem}.tlwrap .tl-freccia{width:42px;height:42px;margin-top:-21px;font-size:1.8rem}}
+.tlwrap .tl-view{cursor:zoom-in}
+.tl-lente{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;background:rgba(10,14,18,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:52px 16px 16px;color:#fff}
+.tl-lente-img{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center;overflow:auto;-webkit-overflow-scrolling:touch}
+.tl-lente img{max-width:100%;max-height:100%;cursor:zoom-in;display:block;margin:auto}
+.tl-lente.zoom .tl-lente-img{display:block}
+.tl-lente.zoom img{max-width:none;max-height:none;width:220%;cursor:zoom-out}
+.tl-lente p{max-width:900px;margin:12px auto 0;font-size:1rem;line-height:1.45;text-align:center}
+.tl-lente .tl-aiuto{font-size:.82rem;opacity:.7;margin-top:4px}
+.tl-chiudi{position:absolute;top:8px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:#fff;color:#172036;font:700 1.1rem/1 system-ui,sans-serif;cursor:pointer}
+.dettaglio-fonte{margin:14px 0 0}
+.fonte-intera .dettaglio-apri{max-width:none}
+.dettaglio-apri{display:block;position:relative;width:100%;max-width:520px;padding:0;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;background:none;cursor:zoom-in}
+.dettaglio-apri img{display:block;width:100%;height:auto}
+.dettaglio-apri span{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.65);color:#fff;font-weight:700;font-size:.9rem;padding:5px 12px;border-radius:999px}
+.dettaglio-fonte figcaption{font-size:.86rem;color:#5a6066;color:var(--tenue);margin-top:6px}
+.embed-fonte{position:relative;width:100%;padding-top:75%;margin:12px 0 4px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;background:#f6f7f5}
+.embed-fonte iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+@media print{.embed-fonte{display:none}}
+
+/* indice riducibile */
+.indice-riduci{display:none}
+@media (min-width:961px){
+  .indice-testa{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .indice-riduci{display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:50%;border:1px solid #dfe2dd;border:1px solid var(--filo);background:#ffffff;background:var(--carta);color:#5a6066;color:var(--tenue);font:700 1rem/1 system-ui,sans-serif;cursor:pointer;padding:0}
+  .indice-riduci:hover{color:#23262a;color:var(--ink)}
+  .corpo-lezione{transition:grid-template-columns .2s}
+  .corpo-lezione.indice-ridotto{grid-template-columns:84px minmax(0,1fr)}
+  .indice-ridotto nav.indice{padding-left:16px;padding-right:0;overflow:visible;z-index:20;grid-gap:8px;gap:8px}
+  .indice-ridotto .indice-testa{justify-content:center;width:52px}
+  .indice-ridotto .indice-titolo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .indice-ridotto a.voce{position:relative;width:52px;min-height:52px;padding:4px;justify-content:center;border-radius:999px}
+  .indice-ridotto a.voce .tondo{margin-right:0}
+  .indice-ridotto a.voce:hover{transform:none}
+  .indice-ridotto a.voce .nome{position:absolute;left:62px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);white-space:nowrap;background:#23262a;color:#fff;padding:7px 12px;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .12s;z-index:30}
+  .indice-ridotto a.voce .nome:before{content:"";position:absolute;left:-6px;top:50%;margin-top:-6px;border:6px solid transparent;border-left:0;border-right-color:#23262a}
+  .indice-ridotto a.voce:hover .nome,.indice-ridotto a.voce:focus .nome{opacity:1}
+}
 </style>
 </head>
 <body>
@@ -269,8 +419,8 @@ footer p{margin:0 0 6px}
 </header>
 <div class="corpo-lezione">
 <nav class="indice" aria-label="Parti della lezione">
-  <p class="indice-titolo">In questa lezione</p>
-  <a class="voce" href="#prima-dopo" style="--c:#3a6ea5"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l3 3-3 3"/><path d="M4 7h13"/><path d="M10 14l-3 3 3 3"/><path d="M20 17H7"/></svg></span><span class="nome">Prima / Dopo</span></a>
+  <div class="indice-testa"><p class="indice-titolo">In questa lezione</p><button type="button" class="indice-riduci" aria-pressed="false" aria-label="Riduci l'indice alle sole icone" title="Riduci l'indice alle sole icone">&laquo;</button></div>
+  <a class="voce" href="#prima-dopo" style="--c:#3a6ea5"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l3 3-3 3"/><path d="M4 7h13"/><path d="M10 14l-3 3 3 3"/><path d="M20 17H7"/></svg></span><span class="nome">Prima</span></a>
   <a class="voce" href="#idea" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">Idea principale</span></a>
   <a class="voce" href="#testi" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">Testo sintetico / essenziale</span></a>
   <a class="voce" href="#perche" style="--c:#b25510"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .9-1 1.6v.6"/><circle cx="12" cy="17" r=".7" fill="currentColor"/></svg></span><span class="nome">Perché?</span></a>
@@ -279,6 +429,7 @@ footer p{margin:0 0 6px}
   <a class="voce" href="#parole" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">Parole chiave</span></a>
   <a class="voce" href="#lente" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M20 20l-5.2-5.2"/></svg></span><span class="nome">Studiamo le fonti</span></a>
   <a class="voce" href="#compiti" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="nome">Ripassiamo</span></a>
+  <a class="voce" href="#dopo" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14"/><path d="M13 6l6 6-6 6"/></svg></span><span class="nome">E dopo?</span></a>
 </nav>
 
 <main id="contenuto">
@@ -286,19 +437,13 @@ footer p{margin:0 0 6px}
 <!-- ======================= PRIMA / DOPO ======================= -->
 <section class="parte" id="prima-dopo" aria-labelledby="t-pd">
   <p class="etichetta">Per orientarsi</p>
-  <h2 id="t-pd">Prima e dopo</h2>
+  <h2 id="t-pd">Da dove partiamo</h2>
   <p class="guida">Per la prima volta delle colonie si ribellano alla madrepatria, conquistano l'indipendenza e fondano una repubblica basata sui diritti dell'uomo.</p>
-  <div class="primadopo">
+  <div class="primadopo solo-prima">
     <div class="pd">
       <h3><span>Prima</span></h3>
       <p>Nel Seicento e nel Settecento gli inglesi fondano tredici colonie sulla costa atlantica del Nord America. I coloni hanno proprie assemblee e sono abituati a un certo autogoverno. In Europa gli illuministi parlano di diritti naturali e di sovranità popolare.</p>
       <p class="link-lez">Ripassa: <a href="monarchia-parlamentare.html">La monarchia parlamentare inglese</a> · <a href="illuminismo.html">L'Illuminismo</a> · <a href="../sistemi-produzione/sistema-mondiale.html">Il sistema mondiale</a></p>
-    </div>
-    <div class="freccia" aria-hidden="true">→</div>
-    <div class="pd">
-      <h3><span>Dopo</span></h3>
-      <p>L'esempio americano incoraggia i francesi, che nel 1789 iniziano la loro rivoluzione. Nell'Ottocento gli Stati Uniti si espandono verso ovest e diventano una grande potenza.</p>
-      <p class="link-lez">Più avanti: <a href="rivoluzione-francese.html">La Rivoluzione francese</a></p>
     </div>
     <p class="pd-centro">1763 → la Rivoluzione americana → 1789</p>
   </div>
@@ -341,6 +486,10 @@ footer p{margin:0 0 6px}
 
   <h3 id="quando"><span>2. Quando?</span></h3>
   <p class="mestiere">🕐 Collocare nel tempo</p>
+  <div class="tlwrap" id="linea-immagini"></div>
+  <p class="fonti-immagini">Da dove vengono le immagini: <a href="https://commons.wikimedia.org/wiki/File:The_Boston_Massacre_MET_DT2086.jpg" target="_blank" rel="noopener">1770</a> · <a href="https://commons.wikimedia.org/wiki/File:Boston_Tea_Party_Currier_colored.jpg" target="_blank" rel="noopener">1773</a> · <a href="https://commons.wikimedia.org/wiki/File:The_Battle_of_Lexington.jpg" target="_blank" rel="noopener">1775</a> · <a href="https://commons.wikimedia.org/wiki/File:Declaration_of_Independence_(1819),_by_John_Trumbull.jpg" target="_blank" rel="noopener">1776</a> · <a href="https://commons.wikimedia.org/wiki/File:Surrender_of_Lord_Cornwallis.jpg" target="_blank" rel="noopener">1781</a> · <a href="https://commons.wikimedia.org/wiki/File:Treaty_of_Paris_by_Benjamin_West_1783.jpg" target="_blank" rel="noopener">1783</a> · <a href="https://commons.wikimedia.org/wiki/File:Scene_at_the_Signing_of_the_Constitution_of_the_United_States.jpg" target="_blank" rel="noopener">1787</a> · <a href="https://commons.wikimedia.org/wiki/File:Ramon_Elorriaga_-_Inauguration_of_George_Washington.jpg" target="_blank" rel="noopener">1789</a>.</p>
+  <details class="linea-elenco">
+    <summary>Tutte le date della lezione, in elenco</summary>
   <ol class="linea">
     <li class="estremo"><span class="anno">1763</span>Fine della guerra dei Sette anni: la Gran Bretagna vince ma è piena di debiti.</li>
     <li><span class="anno">1765</span>Legge sul bollo (Stamp Act): una tassa su giornali e documenti delle colonie.</li>
@@ -355,6 +504,7 @@ footer p{margin:0 0 6px}
     <li><span class="anno">1787</span>A Filadelfia si scrive la Costituzione.</li>
     <li class="estremo"><span class="anno">1789</span>George Washington diventa il primo presidente.</li>
   </ol>
+  </details>
 
   <h3 id="chi"><span>3. Chi?</span></h3>
   <p class="mestiere">🧩 Comprendere · 📖 Lessico — il link apre una voce Treccani in una nuova scheda.</p>
@@ -468,25 +618,33 @@ footer p{margin:0 0 6px}
 <section class="parte" id="lente" aria-labelledby="t-lente">
   <p class="etichetta">Studiamo le fonti</p>
   <h2 id="t-lente">Dentro la fonte</h2>
-  <p class="guida">Una raccolta di antiche incisioni sui primi anni degli Stati Uniti è conservata all'Università di Alcalá, in Spagna, e consultabile su <em>Europeana</em>.</p>
+  <p class="guida">Una stampa del 1778 racconta la Rivoluzione americana come uno spettacolo di lanterna magica. La troviamo su <em>Europeana</em>, dalle collezioni del Rijksmuseum di Amsterdam.</p>
   <p class="mestiere">📜 Leggere e interpretare le fonti · fonte iconografica</p>
   <div class="lente">
     <div class="lente-testa">
-      <p class="testata-giornale">Incisioni · 1787–1789 · Europeana</p>
-      <h3>Washington, Jefferson e la nascita degli Stati Uniti</h3>
+      <p class="testata-giornale">Stampa · 1778 · Rijksmuseum, Amsterdam · Europeana</p>
+      <h3>«The Tea-Tax-Tempest»: la tempesta della tassa sul tè</h3>
     </div>
     <div class="lente-corpo">
-      <p>La scheda raccoglie immagini di incisioni realizzate tra il 1787 e il 1789, proprio negli anni in cui nasceva la Costituzione e Washington diventava presidente. Raffigurano i protagonisti e i primi avvenimenti della storia americana: la Dichiarazione d'indipendenza, la Costituzione, il primo presidente.</p>
-      <p>Le incisioni si potevano stampare in molte copie: erano il modo più rapido per far conoscere i volti dei protagonisti in America e in Europa.</p>
-      <p class="domanda-guida">Domanda guida: perché in Europa, e perfino in Spagna, interessava conoscere i volti e le vicende dei rivoluzionari americani?</p>
+      <p>Il titolo inglese della stampa è «The Tea-Tax-Tempest, or the Anglo-American Revolution», cioè «La tempesta della tassa sul tè, ovvero la rivoluzione anglo-americana». Fu pubblicata nel 1778, mentre la guerra era ancora in corso.</p>
+      <p>A destra un vecchio con le ali, il Tempo, tiene in mano una lanterna magica, l'antenato del proiettore: sul muro proietta una scena luminosa. Ad assistere ci sono figure che rappresentano i continenti. Sotto la stampa due medaglioni ricordano altre lotte per la libertà, quelle dell'Olanda e della Svizzera.</p>
+      <p class="domanda-guida">Domanda guida: perché un incisore europeo del 1778 racconta la rivoluzione americana come uno spettacolo? Che cosa pensa di quello che sta succedendo?</p>
+      <figure class="dettaglio-fonte fonte-intera">
+        <button type="button" class="dettaglio-apri" data-src="img/rivoluzione-americana/tea-tax-tempest-1778.jpg" data-cap="La stampa intera: «The Tea-Tax-Tempest, or the Anglo-American Revolution», 1778. Rijksmuseum, Amsterdam (pubblico dominio)."><img src="img/rivoluzione-americana/tea-tax-tempest-1778.jpg" alt="La stampa «The Tea-Tax-Tempest», 1778"><span>🔍 Ingrandisci la stampa</span></button>
+        <figcaption>La stampa intera. Fonte: Rijksmuseum, Amsterdam · pubblico dominio · <a href="https://www.europeana.eu/it/item/90402/RP_P_2013_25_6" target="_blank" rel="noopener">scheda su Europeana</a></figcaption>
+      </figure>
+      <figure class="dettaglio-fonte">
+        <button type="button" class="dettaglio-apri" data-src="img/rivoluzione-americana/dettaglio-lanterna-magica.jpg" data-cap="Dettaglio – L&#x27;immagine proiettata dalla lanterna magica. Al centro una teiera esplode sul fuoco: è la tassa sul tè che fa scoppiare tutto. A sinistra il leone britannico e i soldati inglesi sono travolti e fuggono; a destra l&#x27;America, rappresentata come un nativo americano con le piume, avanza con i ribelli; in basso il gallo, simbolo della Francia, sembra soffiare sul fuoco con un mantice."><img src="img/rivoluzione-americana/dettaglio-lanterna-magica.jpg" alt="Dettaglio: la scena proiettata dalla lanterna magica"><span>🔍 Ingrandisci il dettaglio</span></button>
+        <figcaption>Il dettaglio: la scena proiettata dalla lanterna magica.</figcaption>
+      </figure>
       <div class="fasi">
-        <div class="fase"><h4>1. Prima di guardare</h4><ol><li>Chi sono Washington e Jefferson? Rileggi la sezione <a href="#chi">Chi?</a></li><li>Trova Filadelfia sulla <a href="#dove">carta</a>.</li></ol></div>
-        <div class="fase"><h4>2. Osservare</h4><ol><li>Apri la fonte: come sono rappresentati Washington e Jefferson? Che cosa indossano?</li><li>Ci sono simboli (bandiere, aquile, figure allegoriche)? Che cosa significano?</li></ol><p style="margin:10px 0 0"><a class="bottone" href="https://www.europeana.eu/en/item/541/https___hispana_mcu_es_lod_oai_ebuah_uah_es_10017____5276_ent0" target="_blank" rel="noopener">Apri la fonte su Europeana</a></p></div>
-        <div class="fase"><h4>3. Pensare da storici</h4><ol><li>Le incisioni sono contemporanee ai fatti: perché questo le rende fonti preziose?</li><li>A chi erano rivolte queste immagini?</li><li>La Spagna era una monarchia con molte colonie in America: che effetto poteva fare questo esempio?</li></ol></div>
+        <div class="fase"><h4>1. Prima di guardare</h4><ol><li>Che cos'è il Boston Tea Party? Guarda l'immagine del 1773 nella <a href="#quando">linea del tempo</a>.</li><li>Che cos'era una lanterna magica?</li></ol></div>
+        <div class="fase"><h4>2. Osservare</h4><ol><li>Chi guarda la proiezione? Riconosci le figure che rappresentano i continenti?</li><li>Ingrandisci il dettaglio della scena proiettata: che cosa c'è al centro? Chi fugge e chi avanza?</li></ol></div>
+        <div class="fase"><h4>3. Pensare da storici</h4><ol><li>Il leone e il gallo sono simboli di due Paesi: quali?</li><li>Che cosa hanno in comune Olanda, Svizzera e America, ricordate nei due medaglioni?</li><li>La stampa è dalla parte degli inglesi o degli americani? Da che cosa lo capisci?</li></ol></div>
       </div>
       <ul class="altre-fonti">
-        <li><span class="tipo">Europeana</span><a href="https://www.europeana.eu/it/search?query=American%20Revolution" target="_blank" rel="noopener">Rivoluzione americana (ricerca)</a> · <a href="https://www.europeana.eu/it/search?query=Benjamin%20Franklin" target="_blank" rel="noopener">Benjamin Franklin (ricerca)</a> · <a href="https://www.europeana.eu/it/search?query=La%20Fayette" target="_blank" rel="noopener">La Fayette (ricerca)</a></li>
-        <li><span class="tipo">Treccani ragazzi</span><a href="https://www.treccani.it/enciclopedia/rivoluzione-americana_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Rivoluzione americana</a> · <a href="https://www.treccani.it/enciclopedia/george-washington_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">George Washington</a> · <a href="https://www.treccani.it/enciclopedia/thomas-jefferson_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Thomas Jefferson</a> · <a href="https://www.treccani.it/enciclopedia/stati-uniti-d-america-storia-degli_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Stati Uniti, storia degli</a></li>
+        <li><span class="tipo">Europeana</span><a href="https://www.europeana.eu/it/item/541/https___hispana_mcu_es_lod_oai_ebuah_uah_es_10017____5276_ent0" target="_blank" rel="noopener"''>Incisioni su Washington, Jefferson e la nascita degli Stati Uniti (1787–1789)</a> · <a href="https://www.europeana.eu/it/search?query=American%20Revolution" target="_blank" rel="noopener"''>Rivoluzione americana (ricerca)</a> · <a href="https://www.europeana.eu/it/search?query=Benjamin%20Franklin" target="_blank" rel="noopener"''>Benjamin Franklin (ricerca)</a></li>
+        <li><span class="tipo">Treccani ragazzi</span><a href="https://www.treccani.it/enciclopedia/rivoluzione-americana_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener"''>Rivoluzione americana</a> · <a href="https://www.treccani.it/enciclopedia/george-washington_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener"''>George Washington</a> · <a href="https://www.treccani.it/enciclopedia/thomas-jefferson_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener"''>Thomas Jefferson</a> · <a href="https://www.treccani.it/enciclopedia/stati-uniti-d-america-storia-degli_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener"''>Stati Uniti, storia degli</a></li>
       </ul>
     </div>
   </div>
@@ -510,6 +668,22 @@ footer p{margin:0 0 6px}
     <p class="consegna"><strong>Uguali, ma non tutti?</strong> La Dichiarazione dice che tutti gli uomini sono creati uguali, ma chi l'ha scritta possedeva schiavi. È una contraddizione che toglie valore a quelle parole, oppure quelle parole sono servite più tardi proprio per liberare gli schiavi? Prepara argomenti per entrambe le posizioni.</p>
     <textarea aria-label="I tuoi argomenti" placeholder="Le parole perdono valore perché… Le parole sono servite perché…"></textarea>
     <p class="dibattito"><b>Regole:</b> non si interrompe chi parla; si criticano le idee, non le persone; alla fine ognuno scrive una conclusione personale.</p>
+  </div>
+</section>
+<!-- ======================= DOPO ======================= -->
+<section class="parte" id="dopo" aria-labelledby="t-dopo">
+  <p class="etichetta">E dopo?</p>
+  <h2 id="t-dopo">Che cosa ci aspetta</h2>
+  <p class="guida">Hai finito la lezione. Ecco che cosa succede dopo: è da qui che partirà il prossimo argomento.</p>
+  <div class="pd dopo-box">
+    <h3><span>Dopo</span></h3>
+      <p>L'esempio americano incoraggia i francesi, che nel 1789 iniziano la loro rivoluzione. Nell'Ottocento gli Stati Uniti si espandono verso ovest e diventano una grande potenza.</p>
+      <p class="link-lez">Più avanti: <a href="rivoluzione-francese.html">La Rivoluzione francese</a></p>
+  </div>
+  <div class="attivita prepara">
+    <h4>Per prepararti</h4>
+    <p class="consegna">Rileggi il riquadro qui sopra. Scrivi una cosa che già sai di quello che succederà e una domanda a cui vorresti trovare risposta nella prossima lezione.</p>
+    <textarea aria-label="Che cosa so e che cosa vorrei sapere" placeholder="So già che… Vorrei sapere…"></textarea>
   </div>
 </section>
 </main>
@@ -773,5 +947,226 @@ body{padding-top:40px}
 })();
 </script>
 <!-- /zoom-ctrl -->
+<script>
+(function(){var bs=document.querySelectorAll(".dettaglio-apri");for(var i=0;i<bs.length;i++){bs[i].onclick=function(){if(window.tlLente)window.tlLente(this.getAttribute("data-src"),this.getAttribute("data-cap"));};}})();
+</script>
+<script>
+if(window.NodeList&&!NodeList.prototype.forEach){NodeList.prototype.forEach=Array.prototype.forEach;}
+
+/* Lettore: la stessa funzione serve all'anteprima e alla pagina per gli studenti */
+function mountTL(root, D, opts){
+  opts = opts || {};
+  function h(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function annoTxt(y){ y = Number(y); if (!isFinite(y) || String(y) === '') return ''; return y < 0 ? (-y) + ' a.C.' : String(y); }
+  function lab(it){ return (it.label || '').trim() || annoTxt(it.year); }
+  var items = (D.items || []).map(function(it, i){ return {evento: it.evento, dettaglio: it.dettaglio, img: it.img, year: it.year === '' || it.year == null ? NaN : Number(it.year), label: it.label, caption: it.caption, source: it.source, i: i}; })
+    .filter(function(it){ return it.img; });
+  items.sort(function(a, b){ var ya = isFinite(a.year) ? a.year : Infinity, yb = isFinite(b.year) ? b.year : Infinity; return ya - yb || a.i - b.i; });
+  var n = items.length, modi = D.modes || {esplora: true, confronta: true, ordina: true};
+  var M = ['esplora', 'confronta', 'ordina'].filter(function(m){ return modi[m]; }); if (!M.length) M = ['esplora'];
+  var NOMI = {esplora: 'Sfoglia nel tempo', confronta: 'Confronta', ordina: 'Metti in ordine'};
+  var cleanup = [];
+  function pulisci(){ cleanup.forEach(function(f){ try { f(); } catch (e) {} }); cleanup = []; }
+  if (root._tlStop) root._tlStop();
+  root._tlStop = pulisci;
+  if (!n){ root.innerHTML = '<div class="tl tl-empty">Aggiungi almeno una foto per vedere la linea del tempo.</div>'; return {stop: pulisci}; }
+  /* posizioni sulla linea */
+  var ys = items.map(function(it){ return it.year; }), tuttiAnni = ys.every(isFinite), ymin = Math.min.apply(null, ys), ymax = Math.max.apply(null, ys);
+  var pos = items.map(function(it, i){ return n === 1 ? 0.5 : (D.proporzionale !== false && tuttiAnni && ymax > ymin ? (it.year - ymin) / (ymax - ymin) : i / (n - 1)); });
+  var modo = M[0];
+  root.innerHTML = '<div class="tl' + (opts.lim ? ' lim' : '') + '"><div class="tl-head"><div><span class="tl-kind">Linea del tempo per immagini</span><h2 class="tl-title">' + h(D.title || 'Senza titolo') + '</h2>' + (D.subtitle ? '<p class="tl-sub">' + h(D.subtitle) + '</p>' : '') + '</div>' +
+    '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">' + (M.length > 1 ? '<div class="tl-modes" role="group">' + M.map(function(m){ return '<button type="button" data-modo="' + m + '">' + NOMI[m] + '</button>'; }).join('') + '</div>' : '') +
+    '<button class="btn small" type="button" data-fs title="Schermo intero (LIM)">⛶</button></div></div><div class="tl-body"></div></div>';
+  var box = root.querySelector('.tl'), body = root.querySelector('.tl-body');
+  box.querySelectorAll('[data-modo]').forEach(function(b){ b.onclick = function(){ apri(b.dataset.modo); }; });
+  box.querySelector('[data-fs]').onclick = function(){
+    if (document.fullscreenElement) document.exitFullscreen(); else if (box.requestFullscreen){ var pr = box.requestFullscreen(); if (pr && pr.then) pr.then(function(){ box.classList.add('lim'); }, function(){}); else box.classList.add('lim'); }
+  };
+  var fsH = function(){ if (!document.fullscreenElement) box.classList.toggle('lim', !!opts.lim); };
+  document.addEventListener('fullscreenchange', fsH); cleanup.push(function(){ document.removeEventListener('fullscreenchange', fsH); });
+  var locali = [];
+  function apri(m){
+    locali.forEach(function(f){ f(); }); locali = [];
+    modo = m; box.querySelectorAll('[data-modo]').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.modo === m); });
+    if (m === 'esplora') esplora(); else if (m === 'confronta') confronta(); else ordina();
+  }
+  cleanup.push(function(){ locali.forEach(function(f){ f(); }); locali = []; });
+
+  /* ---------- Sfoglia nel tempo ---------- */
+  function esplora(){
+    body.innerHTML = '<div class="tl-track"><div class="tl-in"><div class="tl-fill"></div>' + items.map(function(it, i){ return '<button type="button" class="tl-mark' + (i % 2 ? ' giu' : '') + '" style="left:' + (pos[i] * 100) + '%" data-i="' + i + '" title="' + h(lab(it)) + '"><span>' + h(lab(it)) + '</span></button>'; }).join('') + '</div>' +
+      '<input type="range" class="tl-range" min="0" max="1000" step="1" aria-label="Sposta nel tempo"></div>' +
+      '<div class="tl-scena"><div class="tl-lato"><div class="tl-cap"><b></b><span class="tl-txt"></span></div>' +
+      '<div class="tl-ctrl"><button class="btn primary" type="button" data-k="play">▶ Avvia</button><button class="btn" type="button" data-k="zoom">🔍 Ingrandisci</button><button class="btn" type="button" data-k="det" hidden>🔎 Guarda il dettaglio</button></div></div>' +
+      '<div class="tl-stage"><div class="tl-view">' + items.map(function(it){ return '<img alt="' + h(lab(it) + (it.caption ? ' – ' + it.caption : '')) + '" src="' + h(it.img) + '">'; }).join('') + '<span class="tl-badge"></span></div>' +
+      '<button class="tl-freccia sx" type="button" data-k="prev" aria-label="Immagine precedente" title="Immagine precedente">‹</button><button class="tl-freccia dx" type="button" data-k="next" aria-label="Immagine successiva" title="Immagine successiva">›</button>' +
+      '<small class="tl-fonte"></small></div></div>';
+    var imgs = body.querySelectorAll('.tl-view img'), marks = body.querySelectorAll('.tl-mark'), rng = body.querySelector('.tl-range'), fill = body.querySelector('.tl-fill');
+    var cap = body.querySelector('.tl-cap'), badge = body.querySelector('.tl-badge'), cur = -1, p = n === 1 ? .5 : 0, anim = null, playing = false;
+    function attuale(){ var best = 0; for (var i = 1; i < n; i++) if (Math.abs(pos[i] - p) < Math.abs(pos[best] - p)) best = i; return best; }
+    function upd(){
+      var i = 0; while (i < n - 2 && p > pos[i + 1]) i++;
+      var a = i, b = Math.min(i + 1, n - 1), t = (b === a || pos[b] === pos[a]) ? 0 : Math.max(0, Math.min(1, (p - pos[a]) / (pos[b] - pos[a])));
+      var fade = D.dissolvenza !== false;
+      for (var k = 0; k < n; k++){
+        var o = 0;
+        if (fade){ if (k === a) o = 1 - t; if (k === b) o = Math.max(o, t); if (a === b && k === a) o = 1; }
+        else o = k === attuale() ? 1 : 0;
+        imgs[k].style.opacity = o; imgs[k].style.zIndex = k === b ? 2 : (k === a ? 1 : 0);
+      }
+      if (fade && a !== b){ imgs[a].style.opacity = 1; imgs[b].style.opacity = t; }
+      rng.value = Math.round(p * 1000); fill.style.width = (p * 100) + '%';
+      var c = attuale();
+      if (c !== cur){ cur = c; var it = items[c];
+        cap.querySelector('b').textContent = lab(it); cap.querySelector('.tl-txt').textContent = it.caption || '';
+        body.querySelector('.tl-fonte').textContent = it.source ? 'Fonte: ' + it.source : ''; badge.textContent = lab(it); badge.hidden = !lab(it);
+        marks.forEach(function(m, j){ m.classList.toggle('on', j === c); }); body.querySelector('[data-k=det]').hidden = !it.dettaglio; }
+    }
+    function ferma(){ if (anim) cancelAnimationFrame(anim); anim = null; playing = false; var pb = body.querySelector('[data-k=play]'); if (pb) pb.textContent = '▶ Avvia'; }
+    function vai(dest, poi){
+      if (anim) cancelAnimationFrame(anim);
+      var da = p, t0 = null, dur = Math.max(350, Math.abs(dest - da) * 2600);
+      function st(ts){ if (t0 == null) t0 = ts; var k = Math.min(1, (ts - t0) / dur), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+        p = da + (dest - da) * e; upd(); if (k < 1) anim = requestAnimationFrame(st); else { anim = null; if (poi) poi(); } }
+      anim = requestAnimationFrame(st);
+    }
+    function passo(d){ ferma(); var c = attuale(), j = Math.max(0, Math.min(n - 1, c + d)); if (Math.abs(pos[c] - p) > .001 && d > 0 && pos[c] > p) j = c; if (Math.abs(pos[c] - p) > .001 && d < 0 && pos[c] < p) j = c; vai(pos[j]); }
+    rng.addEventListener('input', function(){ ferma(); p = rng.value / 1000; upd(); });
+    marks.forEach(function(m){ m.onclick = function(){ ferma(); vai(pos[+m.dataset.i]); }; });
+    body.querySelector('[data-k=zoom]').onclick = function(){ ferma(); var it = items[attuale()]; lente(it.img, lab(it) + (it.caption ? ' – ' + it.caption : '')); };
+    body.querySelector('.tl-view').onclick = body.querySelector('[data-k=zoom]').onclick;
+    body.querySelector('[data-k=det]').onclick = function(){ ferma(); var it = items[attuale()]; if (it.dettaglio) lente(it.dettaglio.img, 'Dettaglio – ' + (it.dettaglio.caption || '')); };
+    body.querySelector('[data-k=prev]').onclick = function(){ passo(-1); };
+    body.querySelector('[data-k=next]').onclick = function(){ passo(1); };
+    body.querySelector('[data-k=play]').onclick = function(){
+      if (playing) return ferma();
+      playing = true; this.textContent = '❚❚ Pausa';
+      if (p >= .999) { p = 0; upd(); }
+      (function prossimo(){ if (!playing) return; var j = 0; while (j < n && pos[j] <= p + .001) j++; if (j >= n) return ferma();
+        vai(pos[j], function(){ if (playing) setTimeout(prossimo, 1300); }); })();
+    };
+    var key = function(e){ if (!root.isConnected || modo !== 'esplora' || /INPUT|TEXTAREA|SELECT/.test((e.target || {}).tagName || '')) return; if (e.key === 'ArrowRight'){ e.preventDefault(); passo(1); } if (e.key === 'ArrowLeft'){ e.preventDefault(); passo(-1); } };
+    document.addEventListener('keydown', key);
+    locali.push(function(){ ferma(); document.removeEventListener('keydown', key); });
+    upd();
+  }
+
+  /* ---------- Confronta prima/dopo ---------- */
+  function confronta(){
+    var opz = function(sel){ return items.map(function(it, i){ return '<option value="' + i + '"' + (i === sel ? ' selected' : '') + '>' + h(lab(it) || ('Foto ' + (i + 1))) + '</option>'; }).join(''); };
+    body.innerHTML = (n < 2 ? '<p class="or-hint">Servono almeno due foto per il confronto.</p>' : '') +
+      '<div class="cf-sel"><label>Prima <select data-cf="a">' + opz(0) + '</select></label><label>Dopo <select data-cf="b">' + opz(n - 1) + '</select></label><span class="hint" style="color:var(--muted);font-size:.9rem">Trascina sulla foto per scoprire i cambiamenti</span></div>' +
+      '<div class="cf-view"><img class="cf-ib" alt=""><div class="cf-a"><img class="cf-ia" alt=""></div><div class="cf-h"><span>⇔</span></div><span class="cf-la"></span><span class="cf-lb"></span></div>' +
+      '<input type="range" class="cf-range" min="0" max="100" value="50" aria-label="Sposta la divisione tra prima e dopo"><div class="tl-cap"><span class="cf-cap"></span></div>';
+    var v = body.querySelector('.cf-view'), A = body.querySelector('.cf-a'), H = body.querySelector('.cf-h'), r = body.querySelector('.cf-range');
+    function set(x){ x = Math.max(0, Math.min(100, x)); A.style.clipPath = A.style.webkitClipPath = 'inset(0 ' + (100 - x) + '% 0 0)'; H.style.left = x + '%'; r.value = Math.round(x); }
+    function foto(){
+      var a = items[+body.querySelector('[data-cf=a]').value], b = items[+body.querySelector('[data-cf=b]').value];
+      body.querySelector('.cf-ia').src = a.img; body.querySelector('.cf-ib').src = b.img;
+      body.querySelector('.cf-la').textContent = lab(a); body.querySelector('.cf-lb').textContent = lab(b);
+      body.querySelector('.cf-cap').textContent = [a.caption && (lab(a) + ': ' + a.caption), b.caption && (lab(b) + ': ' + b.caption)].filter(Boolean).join(' · ');
+    }
+    body.querySelectorAll('[data-cf]').forEach(function(s){ s.onchange = foto; });
+    var drag = false;
+    function mv(e){ var R = v.getBoundingClientRect(); set((e.clientX - R.left) / R.width * 100); }
+    v.addEventListener('pointerdown', function(e){ drag = true; try { v.setPointerCapture(e.pointerId); } catch (x) {} mv(e); });
+    v.addEventListener('pointermove', function(e){ if (drag) mv(e); });
+    v.addEventListener('pointerup', function(){ drag = false; });
+    v.addEventListener('pointercancel', function(){ drag = false; });
+    r.addEventListener('input', function(){ set(+r.value); });
+    foto(); set(50);
+  }
+
+  /* ---------- Metti in ordine ---------- */
+  function ordina(){
+    var posto = [], sel = null, verificato = false;
+    for (var i = 0; i < n; i++) posto.push(null);
+    var mazzo = items.map(function(_, k){ return k; });
+    for (var k = 0; k < 20; k++){ for (var a = mazzo.length - 1; a > 0; a--){ var j = Math.floor(Math.random() * (a + 1)), t = mazzo[a]; mazzo[a] = mazzo[j]; mazzo[j] = t; } if (n < 2 || mazzo.some(function(x, q){ return x !== q; })) break; }
+    function giusto(s){ var k = posto[s]; return k != null && (k === s || (isFinite(items[k].year) && items[k].year === items[s].year && lab(items[k]) === lab(items[s]))); }
+    function draw(){
+      var libere = mazzo.filter(function(k){ return posto.indexOf(k) < 0; });
+      body.innerHTML = '<p class="or-hint">Trascina ogni foto nel posto giusto della linea del tempo (oppure tocca una foto e poi il posto).</p>' +
+        '<p class="or-evento" aria-live="polite">' + (sel && items[sel.k] && items[sel.k].evento ? '<b>Hai scelto:</b> ' + h(items[sel.k].evento) : 'Tocca un\'immagine per sapere che evento rappresenta.') + '</p>' + '<div class="or-dir"><span>← più antico</span><span>più recente →</span></div>' +
+        '<div class="or-slots" style="--n:' + Math.min(n, 8) + '">' + posto.map(function(k, s){
+          var cls = verificato && k != null ? (giusto(s) ? ' ok' : ' ko') : '';
+          return '<div class="or-slot' + cls + '"><div class="or-lab">' + (D.dateGioco ? h(lab(items[s])) : (s + 1) + '°') + '</div>' +
+            '<button type="button" class="or-drop' + (sel && sel.da === 's' + s ? ' sel' : '') + '" data-s="' + s + '"' + (k != null ? ' draggable="true"' : '') + '>' + (k != null ? '<img alt="" src="' + h(items[k].img) + '">' : '<span class="q">?</span>') + '</button>' +
+            '<span class="or-dot"></span>' + '<span class="or-real">' + (verificato && k != null ? h(lab(items[k])) : '&nbsp;') + '</span></div>'; }).join('') + '</div>' +
+        '<div class="or-pool">' + (libere.length ? libere.map(function(k){ return '<button type="button" class="or-th' + (sel && sel.k === k && sel.da === 'p' ? ' sel' : '') + '" data-k="' + k + '" draggable="true" title="' + h(items[k].evento || '') + '"><img alt="' + h(items[k].evento || 'immagine') + '" src="' + h(items[k].img) + '"></button>'; }).join('') : '<span class="or-hint" style="align-self:center">Tutte le foto sono sulla linea: premi «Verifica».</span>') + '</div>' +
+        '<div class="tl-ctrl"><button class="btn primary" type="button" data-o="ver">Verifica</button><button class="btn" type="button" data-o="sol">Mostra la soluzione</button><button class="btn" type="button" data-o="new">Ricomincia</button></div>' +
+        '<div class="or-res"></div>';
+      if (verificato){ var g = posto.filter(function(_, s){ return giusto(s); }).length, R = body.querySelector('.or-res');
+        var vuoti = posto.filter(function(k){ return k == null; }).length;
+        R.textContent = g === n ? 'Perfetto! Tutte le foto sono al posto giusto.' : g + ' su ' + n + ' al posto giusto' + (vuoti ? ' · ' + (vuoti === 1 ? 'manca ancora una foto' : 'mancano ancora ' + vuoti + ' foto') : ''); R.classList.toggle('ok', g === n); }
+      body.querySelectorAll('.or-th').forEach(function(b){
+        b.onclick = function(){ verificato = false; var k = +b.dataset.k; sel = sel && sel.k === k ? null : {k: k, da: 'p'}; draw(); };
+        b.ondragstart = function(e){ e.dataTransfer.setData('text/plain', 'p' + b.dataset.k); e.dataTransfer.effectAllowed = 'move'; };
+      });
+      body.querySelectorAll('.or-drop').forEach(function(d){
+        var s = +d.dataset.s;
+        d.onclick = function(){
+          verificato = false;
+          if (sel){ metti(sel, s); sel = null; }
+          else if (posto[s] != null) sel = {k: posto[s], da: 's' + s};
+          draw();
+        };
+        d.ondragstart = function(e){ if (posto[s] == null) return e.preventDefault(); e.dataTransfer.setData('text/plain', 's' + s); };
+        d.ondragover = function(e){ e.preventDefault(); d.classList.add('over'); };
+        d.ondragleave = function(){ d.classList.remove('over'); };
+        d.ondrop = function(e){ e.preventDefault(); var x = e.dataTransfer.getData('text/plain'); if (!x) return; verificato = false;
+          metti(x[0] === 'p' ? {k: +x.slice(1), da: 'p'} : {k: posto[+x.slice(1)], da: x}, s); sel = null; draw(); };
+      });
+      var pool = body.querySelector('.or-pool');
+      pool.ondragover = function(e){ e.preventDefault(); };
+      pool.ondrop = function(e){ var x = e.dataTransfer.getData('text/plain'); if (x && x[0] === 's'){ e.preventDefault(); posto[+x.slice(1)] = null; verificato = false; sel = null; draw(); } };
+      pool.onclick = function(e){ if (e.target === pool && sel && sel.da !== 'p'){ posto[+sel.da.slice(1)] = null; sel = null; draw(); } };
+      body.querySelector('[data-o=ver]').onclick = function(){ verificato = true; sel = null; draw(); };
+      body.querySelector('[data-o=sol]').onclick = function(){ for (var s = 0; s < n; s++) posto[s] = s; verificato = true; sel = null; draw(); };
+      body.querySelector('[data-o=new]').onclick = function(){ ordina(); };
+    }
+    function metti(o, s){
+      if (o.k == null) return;
+      var prima = posto[s];
+      if (o.da !== 'p') posto[+o.da.slice(1)] = null;
+      posto[s] = o.k;
+      if (prima != null && prima !== o.k && o.da !== 'p') posto[+o.da.slice(1)] = prima;
+    }
+    draw();
+  }
+  function lente(src, testo){
+    var o = document.createElement('div'); o.className = 'tl-lente'; o.setAttribute('role', 'dialog'); o.setAttribute('aria-label', 'Immagine ingrandita');
+    o.innerHTML = '<button type="button" class="tl-chiudi" aria-label="Chiudi">✕</button><div class="tl-lente-img"><img alt="" src="' + h(src) + '"></div><p>' + h(testo) + '</p><p class="tl-aiuto">Tocca l\'immagine per ingrandirla ancora · Esc o ✕ per chiudere</p>';
+    document.body.appendChild(o);
+    var img = o.querySelector('img'), z = false;
+    img.onclick = function(e){ e.stopPropagation(); z = !z; o.className = 'tl-lente' + (z ? ' zoom' : ''); };
+    function chiudi(){ if (o.parentNode) o.parentNode.removeChild(o); document.removeEventListener('keydown', esc); }
+    function esc(e){ if (e.key === 'Escape' || e.keyCode === 27) chiudi(); }
+    o.querySelector('.tl-chiudi').onclick = chiudi;
+    o.onclick = function(e){ if (e.target === o) chiudi(); };
+    document.addEventListener('keydown', esc); o.querySelector('.tl-chiudi').focus();
+  }
+  window.tlLente = lente;
+  apri(modo);
+  return {stop: pulisci};
+}
+
+(function(){var el=document.getElementById("linea-immagini");if(el)mountTL(el,{"title": "La Rivoluzione americana per immagini", "subtitle": "Sfoglia le immagini nel tempo, poi prova a rimetterle in ordine. Le date sono quelle degli eventi; la didascalia dice quando è stata fatta l'immagine.", "modes": {"esplora": true, "confronta": false, "ordina": true}, "proporzionale": true, "dissolvenza": true, "dateGioco": true, "items": [{"img": "img/rivoluzione-americana/1770.jpg", "year": 1770, "evento": "Il massacro di Boston: i soldati inglesi sparano sulla folla.", "label": "1770", "caption": "Boston, 5 marzo 1770: i soldati inglesi sparano sulla folla e uccidono cinque persone. Incisione di Paul Revere da un disegno di Henry Pelham, stampata poche settimane dopo: un'immagine di propaganda contro gli inglesi.", "source": "The Metropolitan Museum of Art, New York (10.125.103) · pubblico dominio", "url": "https://commons.wikimedia.org/wiki/File:The_Boston_Massacre_MET_DT2086.jpg"}, {"img": "img/rivoluzione-americana/1773.jpg", "year": 1773, "evento": "Il Boston Tea Party: i coloni gettano in mare il tè inglese.", "label": "1773", "caption": "Boston, 16 dicembre 1773: i coloni travestiti da nativi gettano in mare il tè della Compagnia delle Indie. Litografia di Nathaniel Currier, 1846.", "source": "Wikimedia Commons · pubblico dominio", "url": "https://commons.wikimedia.org/wiki/File:Boston_Tea_Party_Currier_colored.jpg"}, {"img": "img/rivoluzione-americana/1775.jpg", "year": 1775, "evento": "La battaglia di Lexington: il primo scontro della guerra.", "label": "1775", "caption": "Lexington, 19 aprile 1775: i miliziani americani affrontano i soldati inglesi. È il primo scontro della guerra. Quadro di William Barnes Wollen, 1910.", "source": "Wikimedia Commons · pubblico dominio", "url": "https://commons.wikimedia.org/wiki/File:The_Battle_of_Lexington.jpg"}, {"img": "img/rivoluzione-americana/1776.jpg", "year": 1776, "evento": "Il Congresso riceve la Dichiarazione d'indipendenza.", "label": "1776", "caption": "Filadelfia, 1776: Jefferson, Franklin e gli altri membri del comitato presentano al Congresso la Dichiarazione d'indipendenza. Quadro di John Trumbull, 1819, oggi nel Campidoglio di Washington.", "source": "Wikimedia Commons · pubblico dominio", "url": "https://commons.wikimedia.org/wiki/File:Declaration_of_Independence_(1819),_by_John_Trumbull.jpg"}, {"img": "img/rivoluzione-americana/1781.jpg", "year": 1781, "evento": "La resa dell'esercito inglese a Yorktown.", "label": "1781", "caption": "Yorktown, 1781: l'esercito inglese si arrende agli americani e ai francesi. Al centro, sul cavallo bianco, il generale americano Benjamin Lincoln; Cornwallis non si presentò e mandò un suo ufficiale. Quadro di John Trumbull, 1820.", "source": "Wikimedia Commons · pubblico dominio", "url": "https://commons.wikimedia.org/wiki/File:Surrender_of_Lord_Cornwallis.jpg"}, {"img": "img/rivoluzione-americana/1783.jpg", "year": 1783, "evento": "I delegati americani trattano la pace a Parigi.", "label": "1783", "caption": "Parigi, 1783: i delegati americani che trattano la pace con la Gran Bretagna; al centro Benjamin Franklin. Il quadro di Benjamin West è rimasto incompiuto: i delegati inglesi non vollero posare.", "source": "Wikimedia Commons · pubblico dominio", "url": "https://commons.wikimedia.org/wiki/File:Treaty_of_Paris_by_Benjamin_West_1783.jpg"}, {"img": "img/rivoluzione-americana/1787.jpg", "year": 1787, "evento": "La firma della Costituzione degli Stati Uniti.", "label": "1787", "caption": "Filadelfia, 17 settembre 1787: i delegati firmano la Costituzione degli Stati Uniti; in piedi a destra, George Washington presiede l'assemblea. Quadro di Howard Chandler Christy, 1940.", "source": "Wikimedia Commons · pubblico dominio", "url": "https://commons.wikimedia.org/wiki/File:Scene_at_the_Signing_of_the_Constitution_of_the_United_States.jpg"}, {"img": "img/rivoluzione-americana/1789.jpg", "year": 1789, "evento": "George Washington giura come primo presidente.", "label": "1789", "caption": "New York, 30 aprile 1789: George Washington giura come primo presidente degli Stati Uniti. Quadro di Ramón de Elorriaga, 1899 circa.", "source": "Wikimedia Commons · pubblico dominio", "url": "https://commons.wikimedia.org/wiki/File:Ramon_Elorriaga_-_Inauguration_of_George_Washington.jpg"}]});})();
+</script>
+<script>
+(function(){
+  var corpo=document.querySelector(".corpo-lezione"), nav=document.querySelector("nav.indice"), b=document.querySelector(".indice-riduci");
+  if(!corpo||!nav||!b) return;
+  function metti(r){
+    if(r) corpo.className+=" indice-ridotto"; else corpo.className=corpo.className.replace(/\s*indice-ridotto/g,"");
+    b.setAttribute("aria-pressed",r?"true":"false");
+    b.setAttribute("aria-label",r?"Mostra i nomi delle parti":"Riduci l'indice alle sole icone");
+    b.title=b.getAttribute("aria-label"); b.innerHTML=r?"&raquo;":"&laquo;";
+  }
+  var r=false; try{ r=localStorage.getItem("indice-ridotto")==="1"; }catch(e){}
+  metti(r);
+  b.onclick=function(){ r=!r; metti(r); try{ localStorage.setItem("indice-ridotto",r?"1":"0"); }catch(e){} };
+})();
+</script>
 </body>
 </html>
