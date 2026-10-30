@@ -43,6 +43,8 @@ h1{font:700 2.6rem/1.08 Georgia,"Iowan Old Style","Times New Roman",serif;font:7
 .sottotitolo{margin:0;font:italic 1.25rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.25rem/1.4 var(--serif);color:#5a6066;color:var(--tenue)}
 .corpo-lezione{display:grid;grid-template-columns:268px minmax(0,1fr);align-items:start}
 nav.indice{position:-webkit-sticky;position:sticky;top:12px;align-self:start;display:grid;grid-template-columns:minmax(0,1fr);grid-gap:10px;gap:10px;padding:30px 0 24px 28px;max-height:calc(100vh - 24px);overflow-y:auto}
+.indice-gruppo{margin:8px 0 -4px 6px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#5a6066;color:var(--tenue);display:flex;align-items:center;gap:8px}
+.indice-gruppo:after{content:"";flex:1;height:1px;background:#dfe2dd;background:var(--filo)}
 .indice-titolo{margin:0 0 2px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue)}
 a.voce{display:flex;align-items:center;min-height:54px;padding:4px 12px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;text-decoration:none;font:800 .86rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .86rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em;transition:transform .15s,box-shadow .15s}
 a.voce .tondo{margin-right:10px;flex:none;width:46px;height:46px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
@@ -75,6 +77,45 @@ p{margin:0 0 14px}
 .pd-centro{grid-column:1/-1;text-align:center;font:700 1.15rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem/1.4 var(--serif);background:#2b5f6b;background:var(--accento);color:#fff;border-radius:12px;padding:12px 18px;margin:0}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pd-centro{color:#0f1416}}
 :root[data-theme="dark"] .pd-centro{color:#0f1416}
+
+/* ti ricordi? testo da completare */
+.cloze{margin:0 0 14px}
+.cloze-consegna{font-size:.95rem;color:#5a6066;color:var(--tenue);margin:0 0 12px}
+.cloze-testo p{line-height:2.25;margin:0;max-width:78ch}
+.cloze-par{margin:0 0 14px}
+.cloze-lez{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin:6px 0 0;padding:7px 12px;border-left:4px solid #3a6ea5;border-radius:0 10px 10px 0;background:#eaf1f2;background:var(--tenue-bg)}
+.cloze-lez[hidden]{display:none}
+.cloze-lez a{color:#23262a;color:var(--ink);font-weight:700;font-size:.95rem;line-height:1.3;text-decoration:none}
+.cloze-lez a:hover{text-decoration:underline}
+.cloze-lez a:after{content:" \2197";font-size:.85em;color:#2b5f6b;color:var(--accento)}
+.cloze-lez-tipo{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+@media (min-width:1101px){
+  .cloze{display:grid;grid-template-columns:minmax(0,1fr) 180px;grid-column-gap:26px;column-gap:26px;align-items:start}
+  .cloze-consegna,.cloze .comandi{grid-column:1/-1}
+  .cloze-testo{grid-column:1;grid-row:2}
+  .cloze-banca{grid-column:2;grid-row:2;position:-webkit-sticky;position:sticky;top:70px;margin:0}
+  .cloze-parole{flex-direction:column;align-items:stretch}
+  .cloze-parole button{margin:0 0 8px;text-align:left}
+}
+.cloze input.buco-in{font:inherit;font-weight:700;color:#23262a;color:var(--ink);background:#ffffff;background:var(--carta);border:0;border-bottom:2px solid #2b5f6b;border-bottom:2px solid var(--accento);border-radius:6px 6px 0 0;padding:1px 6px;margin:0 2px;min-width:5ch;max-width:100%;text-align:center}
+.cloze input.buco-in:focus{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:1px}
+.cloze input.buco-in.no{background:#fde3e1;background:var(--no-bg);border-bottom-color:#b42318;border-bottom-color:var(--no)}
+.cloze a.buco-ok{display:inline-block;font-weight:700;color:#1f7a4d;color:var(--ok);background:#dcf2e6;background:var(--ok-bg);border-radius:6px;padding:0 7px;margin:0 2px;line-height:1.6;text-decoration:none;border-bottom:2px solid currentColor}
+.cloze a.buco-ok.svelata{color:#2b5f6b;color:var(--accento);background:#e1edef;background:var(--accento-soft)}
+.cloze a.buco-ok:hover{text-decoration:underline}
+.cloze a.buco-ok:before{content:"\1F4D6\00A0";font-size:.85em}
+.cloze a.buco-ok.personaggio:before{content:"\1F464\00A0"}
+.cloze a.buco-ok.luogo:before{content:"\1F4CD\00A0"}
+.cloze a.buco-ok:after{content:" \2197";font-size:.8em}
+.cloze-banca{margin:6px 0 4px;padding:10px 12px;border-radius:10px;background:#eaf1f2;background:var(--tenue-bg)}
+.cloze-aiuto{margin:0 0 8px;font-size:.88rem;color:#5a6066;color:var(--tenue)}
+.cloze-parole{display:flex;flex-wrap:wrap}
+.cloze-parole button{font:inherit;font-weight:700;font-size:.95rem;margin:0 8px 8px 0;padding:5px 12px;border-radius:999px;border:1px solid #dfe2dd;border:1px solid var(--filo);background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink);cursor:pointer}
+.cloze-parole button:hover{border-color:#2b5f6b;border-color:var(--accento)}
+.cloze-parole button.usata{opacity:.4;text-decoration:line-through}
+.cloze-legenda{margin:12px 0 0;padding:0;list-style:none;font-size:.92rem}
+.cloze-legenda li{margin:0 0 4px}
+@media print{.cloze .comandi,.cloze-banca{display:none}.cloze input.buco-in{border:0;border-bottom:1px solid #000;background:none}}
 
 /* idea principale */
 .mappa-box{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;margin:16px 0 8px}
@@ -211,6 +252,9 @@ footer p{margin:0 0 6px}
   nav.indice{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:90;grid-auto-flow:column;grid-auto-columns:max-content;grid-template-columns:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;max-height:none;grid-gap:8px;gap:8px;padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));background:#ffffff;background:var(--carta);border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);box-shadow:0 -4px 14px rgba(0,0,0,.12)}
   .foglio{margin-bottom:70px}
   .indice-titolo{display:none}
+  .indice-gruppo{display:none}
+  .indice-gruppo+a.voce{margin-left:10px}
+  .indice-gruppo:first-of-type+a.voce{margin-left:0}
   a.voce{flex:none;min-height:40px;padding:3px 12px 3px 3px;font-size:.74rem;white-space:nowrap}
   a.voce .tondo{width:34px;height:34px;border-width:2px}
   a.voce svg{width:18px;height:18px}
@@ -271,6 +315,8 @@ footer p{margin:0 0 6px}
   .indice-ridotto nav.indice{padding-left:16px;padding-right:0;overflow:visible;z-index:20;grid-gap:8px;gap:8px}
   .indice-ridotto .indice-testa{justify-content:center;width:52px}
   .indice-ridotto .indice-titolo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .indice-ridotto .indice-gruppo{width:52px;height:1px;margin:4px 0;font-size:0;background:#dfe2dd;background:var(--filo)}
+  .indice-ridotto .indice-gruppo:after{display:none}
   .indice-ridotto a.voce{position:relative;width:52px;min-height:52px;padding:4px;justify-content:center;border-radius:999px}
   .indice-ridotto a.voce .tondo{margin-right:0}
   .indice-ridotto a.voce:hover{transform:none}
@@ -293,40 +339,62 @@ footer p{margin:0 0 6px}
 <div class="corpo-lezione">
 <nav class="indice" aria-label="Parti della lezione">
   <div class="indice-testa"><p class="indice-titolo">In questa lezione</p><button type="button" class="indice-riduci" aria-pressed="false" aria-label="Riduci l'indice alle sole icone" title="Riduci l'indice alle sole icone">&laquo;</button></div>
-  <a class="voce" href="#prima-dopo" style="--c:#3a6ea5"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l3 3-3 3"/><path d="M4 7h13"/><path d="M10 14l-3 3 3 3"/><path d="M20 17H7"/></svg></span><span class="nome">Prima</span></a>
-  <a class="voce" href="#idea" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">Idea principale</span></a>
-  <a class="voce" href="#testi" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">Testo sintetico / essenziale</span></a>
+  <p class="indice-gruppo">Iniziare</p>
+  <a class="voce" href="#ti-ricordi" style="--c:#3a6ea5"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6"/><path d="M3 4v4.5h4.5"/><path d="M12 7.5V12l3 2"/></svg></span><span class="nome">Ti ricordi?</span></a>
+  <a class="voce" href="#idea" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">Cosa imparerai</span></a>
+  <a class="voce" href="#chi-incontrerai" style="--c:#8a6a00"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2a4.6 4.6 0 0 1 5 5.3"/></svg></span><span class="nome">Chi incontrerai?</span></a>
+  <p class="indice-gruppo">Capire</p>
+  <a class="voce" href="#testi" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">Leggiamo</span></a>
   <a class="voce" href="#perche" style="--c:#b25510"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .9-1 1.6v.6"/><circle cx="12" cy="17" r=".7" fill="currentColor"/></svg></span><span class="nome">Perché?</span></a>
-  <a class="voce" href="#concetti" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4"/><path d="M10.5 12.5L19 4M15.5 7.5l3 3M13 10l2 2"/></svg></span><span class="nome">Concetti fondamentali</span></a>
   <a class="voce" href="#come" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="4.5" rx="1"/><rect x="3" y="15" width="6" height="5" rx="1"/><rect x="15" y="15" width="6" height="5" rx="1"/><path d="M12 7v4M6 15v-4h12v4"/></svg></span><span class="nome">Come?</span></a>
-  <a class="voce" href="#parole" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">Parole chiave</span></a>
-  <a class="voce" href="#lente" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M20 20l-5.2-5.2"/></svg></span><span class="nome">Studiamo le fonti</span></a>
+  <p class="indice-gruppo">Fissare</p>
+  <a class="voce" href="#concetti" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4"/><path d="M10.5 12.5L19 4M15.5 7.5l3 3M13 10l2 2"/></svg></span><span class="nome">Quali idee?</span></a>
+  <a class="voce" href="#parole" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">Quali parole?</span></a>
+  <p class="indice-gruppo">Lavorare</p>
+  <a class="voce" href="#lente" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M20 20l-5.2-5.2"/></svg></span><span class="nome">Che cosa dicono le fonti?</span></a>
   <a class="voce" href="#compiti" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="nome">Ripassiamo</span></a>
   <a class="voce" href="#dopo" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14"/><path d="M13 6l6 6-6 6"/></svg></span><span class="nome">E dopo?</span></a>
 </nav>
 
 <main id="contenuto">
 
-<!-- ======================= PRIMA / DOPO ======================= -->
-<section class="parte" id="prima-dopo" aria-labelledby="t-pd">
-  <p class="etichetta">Per orientarsi</p>
+<!-- ======================= TI RICORDI? ======================= -->
+<section class="parte" id="ti-ricordi" aria-labelledby="t-pd">
+  <p class="etichetta">Ti ricordi?</p>
   <h2 id="t-pd">Da dove partiamo</h2>
-  <p class="guida">Questa lezione apre il percorso sui sistemi di produzione: come lavorano, producono e scambiano le persone, e come questo cambia la società.</p>
+  <p class="guida">Prima di cominciare, ripassa quello che sai già: ti servirà per capire la nuova lezione.</p>
   <div class="primadopo solo-prima">
     <div class="pd">
-      <h3><span>Prima</span></h3>
-      <p>Nell'alto Medioevo l'Europa è poco popolata. Si vive soprattutto nelle campagne, nelle <a class="pk" href="#p-curtis">curtes</a> dei signori, producendo quasi solo quello che serve per vivere. Le città sono piccole, i commerci scarsi. Tra il IX e il X secolo nuove invasioni (normanni, ungari, saraceni) rendono la vita insicura.</p>
-      <p class="link-lez">Ripassa: «Il sistema curtense» · «Le nuove invasioni e l'anno Mille»</p>
+      <h3><span>Quello che sai già</span></h3>
+      <div class="cloze" id="cloze-ricordi">
+        <p class="cloze-consegna">Completa il testo con le parole dell'elenco, poi premi «Controlla». Sotto ogni paragrafo comparirà la lezione da ripassare; ogni parola giusta diventerà un link per ripassarla: una definizione 📖, un personaggio 👤 o un luogo sulla carta 📍.</p>
+        <div class="cloze-testo">
+          <div class="cloze-par">
+            <p>Nell'alto Medioevo l'Europa è poco popolata e quasi tutti vivono in campagna. La grande proprietà del signore, la <span class="buco" data-r="curtis" data-alt="corte|curtes" data-href="#p-curtis" data-dove="La rivoluzione agricola, i commerci e la società comunale"></span>, produce quasi solo quello che serve per vivere. Il re concede un <span class="buco" data-r="feudo" data-href="#p-feudo" data-dove="La rivoluzione agricola, i commerci e la società comunale"></span> ai suoi fedeli, i <span class="buco" data-r="vassalli" data-alt="vassallo" data-href="#p-vassallo" data-dove="La rivoluzione agricola, i commerci e la società comunale"></span>, in cambio di fedeltà e aiuto militare. Tra il IX e il X secolo nuove invasioni di normanni, ungari e saraceni rendono la vita insicura.</p>
+            <div class="cloze-lez" hidden><span class="cloze-lez-tipo">L'hai studiato in prima. Le definizioni sono in «Quali parole?» di questa lezione.</span></div>
+          </div>
+        </div>
+        <div class="cloze-banca">
+          <p class="cloze-aiuto">Le parole da usare: scrivile negli spazi oppure tocca uno spazio e poi la parola giusta.</p>
+          <div class="cloze-parole"></div>
+        </div>
+        <div class="comandi">
+          <button type="button" class="bottone" data-cz="controlla">Controlla</button>
+          <button type="button" class="bottone secondario" data-cz="soluzioni" hidden>Mostra le soluzioni</button>
+          <button type="button" class="bottone secondario" data-cz="ricomincia">Ricomincia</button>
+          <span class="punteggio" aria-live="polite"></span>
+        </div>
+      </div>
     </div>
     <p class="pd-centro">dopo il Mille → la rinascita → la crisi del Trecento</p>
   </div>
 </section>
 
-<!-- ======================= IDEA PRINCIPALE ======================= -->
+<!-- ======================= COSA IMPARERAI ======================= -->
 <section class="parte" id="idea" aria-labelledby="t-idea">
-  <p class="etichetta">Idea principale</p>
-  <h2 id="t-idea">Che cosa, dove, quando, chi</h2>
-  <p class="guida">Prima di studiare i dettagli, guarda l'argomento dall'alto: che cosa succede e dove, in che anni, chi sono i protagonisti.</p>
+  <p class="etichetta">Cosa imparerai</p>
+  <h2 id="t-idea">Che cosa, dove, quando</h2>
+  <p class="guida">Questa lezione apre il percorso sui sistemi di produzione: come lavorano, producono e scambiano le persone, e come questo cambia la società. Prima di studiare i dettagli, guarda l'argomento dall'alto: che cosa succede, dove e in che anni.</p>
 
   <h3 id="dove"><span>1. Dove? Che cosa?</span></h3>
   <p class="mestiere">🧩 Comprendere · 🗺️ Collocare nello spazio</p>
@@ -370,7 +438,13 @@ footer p{margin:0 0 6px}
     <li class="estremo"><span class="anno">1300</span>L'Europa ha circa il doppio degli abitanti dell'anno Mille.</li>
   </ol>
 
-  <h3 id="chi"><span>3. Chi?</span></h3>
+</section>
+
+<!-- ======================= CHI INCONTRERAI? ======================= -->
+<section class="parte" id="chi-incontrerai" aria-labelledby="t-chi">
+  <p class="etichetta">Chi incontrerai?</p>
+  <h2 id="t-chi">I protagonisti</h2>
+  <p class="guida">Le persone che incontrerai in questa lezione. Ritrovale mentre leggi: che cosa fanno, da che parte stanno?</p>
   <p class="mestiere">🧩 Comprendere · 📖 Lessico — il link apre una voce Treccani in una nuova scheda.</p>
   <div class="persone">
     <article class="persona" id="chi-leonardo-fibonacci"><span class="sigla" aria-hidden="true">LF</span><div><h4>Leonardo Fibonacci</h4><span class="date">1170 circa–1250 circa · Pisa</span><p>Figlio di un mercante pisano, impara la matematica degli arabi nel Nord Africa. Con il <em>Liber abaci</em> insegna ai mercanti europei a fare i conti con i numeri che usiamo ancora oggi.</p></div></article>
@@ -384,7 +458,7 @@ footer p{margin:0 0 6px}
 
 <!-- ======================= TESTO ======================= -->
 <section class="parte" id="testi" aria-labelledby="t-testi">
-  <p class="etichetta">Testo sintetico / essenziale</p>
+  <p class="etichetta">Leggiamo</p>
   <h2 id="t-testi">La lezione per intero</h2>
   <p class="guida">Lo stesso testo in due versioni: il <strong>sintetico</strong> contiene tutte le informazioni, l'<strong>essenziale</strong> le riassume con frasi più brevi. Scegli quella che ti serve.</p>
   <div class="livelli" role="group" aria-label="Versione del testo">
@@ -436,18 +510,6 @@ footer p{margin:0 0 6px}
   </div>
 </section>
 
-<!-- ======================= CONCETTI ======================= -->
-<section class="parte" id="concetti" aria-labelledby="t-concetti">
-  <p class="etichetta">Concetti fondamentali</p>
-  <h2 id="t-concetti">Le idee chiave</h2>
-  <p class="guida">Le idee più importanti della lezione, spiegate una per una. Le parole sottolineate a puntini rimandano alle <a href="#parole">Parole chiave</a>.</p>
-  <article class="concetto" id="c-agricola"><h4>Una rivoluzione nei campi</h4><p>La <a class="pk" href="#p-rivoluzione-agricola">rivoluzione agricola</a> non è un evento improvviso, ma un insieme di piccole innovazioni che, sommate, cambiano tutto: gli attrezzi, il modo di dividere i campi, l'uso degli animali e dell'energia dell'acqua e del vento.</p></article>
-  <article class="concetto" id="c-rotazione"><h4>La rotazione triennale</h4><p>Prima un campo veniva coltivato un anno e lasciato a riposo l'anno dopo. Con la rotazione triennale si alternano tre coltivazioni: cereali d'inverno, legumi o avena in primavera, riposo. I legumi arricchiscono la terra e danno proteine alle persone; l'avena nutre i cavalli.</p></article>
-  <article class="concetto" id="c-mercato"><h4>Dall'autoconsumo al mercato</h4><p>Nella curtis si produceva soprattutto per consumare. Ora si produce anche per vendere: il denaro torna a circolare, e con il denaro si comprano prodotti di altre regioni. È il passaggio da un'economia chiusa a un'<a class="pk" href="#p-economia-mercato">economia di mercato</a>.</p></article>
-  <article class="concetto" id="c-borghesia"><h4>La borghesia</h4><p>Il <a class="pk" href="#p-borghesia">borghese</a> è l'abitante del borgo, della città, che vive del suo lavoro di mercante, artigiano, banchiere, notaio. Non è nobile, ma con l'abilità e il denaro può diventare ricco e potente. È un gruppo nuovo, che cambierà la storia d'Europa.</p></article>
-  <article class="concetto" id="c-citta"><h4>L'aria della città rende liberi</h4><p>Un detto tedesco del Medioevo dice che chi vive in città per un anno e un giorno diventa libero. In città il servo della gleba può sfuggire al signore e diventare artigiano. Per questo le città attirano persone dalle campagne e crescono.</p></article>
-</section>
-
 <!-- ======================= COME ======================= -->
 <section class="parte" id="come" aria-labelledby="t-come">
   <p class="etichetta">Come?</p>
@@ -463,9 +525,21 @@ footer p{margin:0 0 6px}
   </div>
 </section>
 
+<!-- ======================= CONCETTI ======================= -->
+<section class="parte" id="concetti" aria-labelledby="t-concetti">
+  <p class="etichetta">Quali idee?</p>
+  <h2 id="t-concetti">Le idee chiave</h2>
+  <p class="guida">Le idee più importanti della lezione, spiegate una per una. Le parole sottolineate a puntini rimandano a <a href="#parole">Quali parole?</a>.</p>
+  <article class="concetto" id="c-agricola"><h4>Una rivoluzione nei campi</h4><p>La <a class="pk" href="#p-rivoluzione-agricola">rivoluzione agricola</a> non è un evento improvviso, ma un insieme di piccole innovazioni che, sommate, cambiano tutto: gli attrezzi, il modo di dividere i campi, l'uso degli animali e dell'energia dell'acqua e del vento.</p></article>
+  <article class="concetto" id="c-rotazione"><h4>La rotazione triennale</h4><p>Prima un campo veniva coltivato un anno e lasciato a riposo l'anno dopo. Con la rotazione triennale si alternano tre coltivazioni: cereali d'inverno, legumi o avena in primavera, riposo. I legumi arricchiscono la terra e danno proteine alle persone; l'avena nutre i cavalli.</p></article>
+  <article class="concetto" id="c-mercato"><h4>Dall'autoconsumo al mercato</h4><p>Nella curtis si produceva soprattutto per consumare. Ora si produce anche per vendere: il denaro torna a circolare, e con il denaro si comprano prodotti di altre regioni. È il passaggio da un'economia chiusa a un'<a class="pk" href="#p-economia-mercato">economia di mercato</a>.</p></article>
+  <article class="concetto" id="c-borghesia"><h4>La borghesia</h4><p>Il <a class="pk" href="#p-borghesia">borghese</a> è l'abitante del borgo, della città, che vive del suo lavoro di mercante, artigiano, banchiere, notaio. Non è nobile, ma con l'abilità e il denaro può diventare ricco e potente. È un gruppo nuovo, che cambierà la storia d'Europa.</p></article>
+  <article class="concetto" id="c-citta"><h4>L'aria della città rende liberi</h4><p>Un detto tedesco del Medioevo dice che chi vive in città per un anno e un giorno diventa libero. In città il servo della gleba può sfuggire al signore e diventare artigiano. Per questo le città attirano persone dalle campagne e crescono.</p></article>
+</section>
+
 <!-- ======================= PAROLE CHIAVE ======================= -->
 <section class="parte" id="parole" aria-labelledby="t-parole">
-  <p class="etichetta">Parole chiave</p>
+  <p class="etichetta">Quali parole?</p>
   <h2 id="t-parole">Le parole della lezione</h2>
   <p class="guida">Il significato dei termini nuovi, in ordine alfabetico.</p>
   <dl class="parole">
@@ -474,15 +548,17 @@ footer p{margin:0 0 6px}
     <div class="parola" id="p-corporazione"><dt>Corporazione (arte)</dt><dd>Associazione di artigiani o mercanti dello stesso mestiere, che ne stabilisce le regole.</dd></div>
     <div class="parola" id="p-curtis"><dt>Curtis</dt><dd>Grande proprietà agricola dell'alto Medioevo, che produceva quasi tutto quello che serviva ai suoi abitanti.</dd></div>
     <div class="parola" id="p-economia-mercato"><dt>Economia di mercato</dt><dd>Economia in cui si produce per vendere e si usa il denaro negli scambi.</dd></div>
+    <div class="parola" id="p-feudo"><dt>Feudo</dt><dd>Terra che il re o un grande signore concede a un vassallo in cambio di fedeltà e aiuto militare.</dd></div>
     <div class="parola" id="p-fiera"><dt>Fiera</dt><dd>Grande mercato che si tiene in date fisse, dove arrivano mercanti da regioni lontane.</dd></div>
     <div class="parola" id="p-lettera-cambio"><dt>Lettera di cambio</dt><dd>Documento con cui un mercante deposita denaro in una città e lo ritira in un'altra, senza trasportare monete.</dd></div>
     <div class="parola" id="p-rivoluzione-agricola"><dt>Rivoluzione agricola</dt><dd>L'insieme delle innovazioni che, dopo il Mille, aumentano la produzione dei campi.</dd></div>
+    <div class="parola" id="p-vassallo"><dt>Vassallo</dt><dd>Chi riceve un feudo e giura fedeltà al suo signore.</dd></div>
   </dl>
 </section>
 
-<!-- ======================= STUDIAMO LE FONTI ======================= -->
+<!-- ======================= CHE COSA DICONO LE FONTI? ======================= -->
 <section class="parte" id="lente" aria-labelledby="t-lente">
-  <p class="etichetta">Studiamo le fonti</p>
+  <p class="etichetta">Che cosa dicono le fonti?</p>
   <h2 id="t-lente">Dentro la fonte</h2>
   <p class="guida">Le immagini sono fonti preziose per conoscere la vita quotidiana. Ne cerchiamo una su <em>Europeana</em>, la biblioteca digitale del patrimonio culturale europeo.</p>
   <p class="mestiere">📜 Leggere e interpretare le fonti · fonte iconografica</p>
@@ -547,7 +623,7 @@ footer p{margin:0 0 6px}
 </div>
 
 <footer>
-<p>Organizzazione della lezione ispirata a <em>Storia facile 1</em> (Modulo 3, capp. 10 e 12) e al <em>Tablet degli argomenti di Storia</em> (pp. 53, 65), Edizioni Erickson: Prima/Dopo, Idea principale, Perché?, Come?, Parole chiave, testo sintetico ed essenziale, verifiche. Testi originali della lezione.</p>
+<p>Organizzazione della lezione ispirata a <em>Storia facile 1</em> (Modulo 3, capp. 10 e 12) e al <em>Tablet degli argomenti di Storia</em> (pp. 53, 65), Edizioni Erickson: Ti ricordi?/E dopo?, Idea principale (qui «Cosa imparerai»), Perché?, Come?, Parole chiave, testo sintetico ed essenziale, verifiche. Testi originali della lezione.</p>
   <p>Carta: coste da Natural Earth (dominio pubblico). Fonte: Europeana. Voci collegate: Treccani.</p>
 </footer>
 </div>
@@ -623,7 +699,7 @@ var ESERCIZI=[
 {gruppo:"tempo", titolo:"Scegli il periodo giusto", meta:"Abbina ogni fatto al periodo in cui accadde.",
   scelte:["1088","1096–99","1202","1252","1271–95","1348"],
   righe:[["Nascita tradizionale dell'Università di Bologna","1088"],["Prima crociata","1096–99"],["Fibonacci diffonde i numeri indo-arabici","1202"],["Firenze conia il fiorino d'oro","1252"],["Viaggio di Marco Polo","1271–95"],["La peste nera","1348"]]},
- {gruppo:"spazio", titolo:"Dove si trova?", meta:"Usa la carta dell'Idea principale per trovare ogni luogo.",
+ {gruppo:"spazio", titolo:"Dove si trova?", meta:"Usa la carta di «Cosa imparerai» per trovare ogni luogo.",
   scelte:["Venezia","Firenze","Pisa","Troyes","Bruges","Lubecca"],
   righe:[["La più potente repubblica marinara","Venezia"],["La città del fiorino","Firenze"],["La città del matematico Fibonacci","Pisa"],["Le fiere della Champagne","Troyes"],["Il grande centro dei tessuti delle Fiandre","Bruges"],["La città guida della Hansa","Lubecca"]]},
  {gruppo:"fonti", titolo:"Fatto o interpretazione?", meta:"Uno storico distingue i fatti (si possono verificare) dalle interpretazioni (sono giudizi, opinioni).",
@@ -693,6 +769,75 @@ ESERCIZI.forEach(function(E,i){
   costruisci(box,E.scelte,mescola(E.righe)); zona.appendChild(box);
 });
 costruisci(document.getElementById("dieci"), mescola(DIECI.map(function(d){return d[1];})), DIECI.map(function(d){ return [d[0]+" …", d[1]]; }));
+})();
+</script>
+<script>
+/* Ti ricordi?: testo con le parole mancanti */
+(function(){
+  var box=document.getElementById("cloze-ricordi"); if(!box) return;
+  var buchi=Array.prototype.slice.call(box.querySelectorAll(".buco")), banca=box.querySelector(".cloze-banca"), parole=box.querySelector(".cloze-parole");
+  var bS=box.querySelector('[data-cz="soluzioni"]'), pt=box.querySelector(".punteggio"), ultimo=null;
+  function norm(t){ t=String(t||"").trim().toLowerCase(); try{ t=t.normalize("NFD").replace(/[̀-ͯ]/g,""); }catch(e){} return t.replace(/\s+/g," "); }
+  function giuste(b){ return [b.getAttribute("data-r")].concat((b.getAttribute("data-alt")||"").split("|")).filter(Boolean).map(norm); }
+  function link(b,svelata){
+    var a=document.createElement("a"); a.className="buco-ok"+(svelata?" svelata":""); var hr=b.getAttribute("data-href"); a.href=hr; if(hr.charAt(0)!=="#"){ a.target="_blank"; a.rel="noopener"; }
+    var tipo=b.getAttribute("data-tipo")||"parola", dove=b.getAttribute("data-dove")||"lezione precedente";
+    var cosa={parola:"Leggi la definizione in",personaggio:"Chi è? Leggi la scheda in",luogo:"Dov'è? Trovalo sulla carta in"}[tipo]||"Approfondisci in";
+    a.className+=" "+tipo; a.textContent=b.getAttribute("data-r"); a.title=cosa+": "+dove;
+    a.setAttribute("aria-label",b.getAttribute("data-r")+" – "+cosa+": "+dove+(hr.charAt(0)!=="#"?" (si apre in una nuova scheda)":""));
+    b.innerHTML=""; b.appendChild(a); b._fatto=true;
+  }
+  function campo(b,i){
+    var r=b.getAttribute("data-r"), inp=document.createElement("input");
+    inp.type="text"; inp.className="buco-in"; inp.size=Math.max(6,r.length+2); inp.autocomplete="off"; inp.spellcheck=false;
+    inp.setAttribute("autocapitalize","off"); inp.setAttribute("aria-label","Parola mancante "+(i+1));
+    inp.addEventListener("focus",function(){ ultimo=inp; });
+    inp.addEventListener("input",function(){ inp.classList.remove("no"); segna(); });
+    inp.addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); controlla(); } });
+    b.innerHTML=""; b.appendChild(inp); b._fatto=false;
+  }
+  var lez=Array.prototype.slice.call(box.querySelectorAll(".cloze-lez"));
+  function mostraLez(v){ lez.forEach(function(a){ a.hidden=!v; }); }
+  function mescola(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+  function segna(){
+    var usate=buchi.map(function(b){ var inp=b.querySelector("input"); return b._fatto? norm(b.getAttribute("data-r")) : (inp? norm(inp.value):""); });
+    Array.prototype.forEach.call(parole.children,function(c){ var k=usate.indexOf(norm(c.textContent)); c.classList.toggle("usata",k>=0); });
+  }
+  function banco(){
+    parole.innerHTML="";
+    mescola(buchi.map(function(b){ return b.getAttribute("data-r"); })).forEach(function(w){
+      var c=document.createElement("button"); c.type="button"; c.textContent=w;
+      c.addEventListener("click",function(){
+        var dest=(ultimo&&ultimo.isConnected)?ultimo:null;
+        if(!dest){ for(var i=0;i<buchi.length;i++){ var x=buchi[i].querySelector("input"); if(x&&!x.value){ dest=x; break; } } }
+        if(!dest) return;
+        dest.value=w; dest.classList.remove("no"); segna();
+        var tutti=buchi.map(function(b){ return b.querySelector("input"); }).filter(Boolean), k=tutti.indexOf(dest);
+        for(var j=1;j<=tutti.length;j++){ var n=tutti[(k+j)%tutti.length]; if(!n.value){ n.focus(); return; } }
+        dest.focus();
+      });
+      parole.appendChild(c);
+    });
+    segna();
+  }
+  function controlla(){
+    var ok=0, vuote=0; mostraLez(true);
+    buchi.forEach(function(b){
+      if(b._fatto){ ok++; return; }
+      var inp=b.querySelector("input"); if(!inp.value.trim()){ vuote++; inp.classList.remove("no"); return; }
+      if(giuste(b).indexOf(norm(inp.value))>=0){ ok++; link(b,false); } else inp.classList.add("no");
+    });
+    pt.textContent = ok===buchi.length ? "Bravo! Tutte giuste: apri le parole per ripassare." : ok+" su "+buchi.length+(vuote?" · "+vuote+" da completare":"");
+    bS.hidden = ok===buchi.length; segna();
+  }
+  function avvia(){
+    buchi.forEach(campo); mostraLez(false); ultimo=null; pt.textContent=""; bS.hidden=true;
+    banco();
+  }
+  box.querySelector('[data-cz="controlla"]').addEventListener("click",controlla);
+  bS.addEventListener("click",function(){ buchi.forEach(function(b){ if(!b._fatto) link(b,true); }); pt.textContent="Ecco le soluzioni: le parole in blu sono quelle che ti mancavano."; bS.hidden=true; segna(); });
+  box.querySelector('[data-cz="ricomincia"]').addEventListener("click",avvia);
+  avvia();
 })();
 </script>
 <!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->

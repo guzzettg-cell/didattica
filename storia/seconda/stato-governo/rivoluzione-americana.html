@@ -926,11 +926,11 @@ costruisci(document.getElementById("dieci"), mescola(DIECI.map(function(d){retur
   function norm(t){ t=String(t||"").trim().toLowerCase(); try{ t=t.normalize("NFD").replace(/[̀-ͯ]/g,""); }catch(e){} return t.replace(/\s+/g," "); }
   function giuste(b){ return [b.getAttribute("data-r")].concat((b.getAttribute("data-alt")||"").split("|")).filter(Boolean).map(norm); }
   function link(b,svelata){
-    var a=document.createElement("a"); a.className="buco-ok"+(svelata?" svelata":""); a.href=b.getAttribute("data-href"); a.target="_blank"; a.rel="noopener";
+    var a=document.createElement("a"); a.className="buco-ok"+(svelata?" svelata":""); var hr=b.getAttribute("data-href"); a.href=hr; if(hr.charAt(0)!=="#"){ a.target="_blank"; a.rel="noopener"; }
     var tipo=b.getAttribute("data-tipo")||"parola", dove=b.getAttribute("data-dove")||"lezione precedente";
     var cosa={parola:"Leggi la definizione in",personaggio:"Chi è? Leggi la scheda in",luogo:"Dov'è? Trovalo sulla carta in"}[tipo]||"Approfondisci in";
     a.className+=" "+tipo; a.textContent=b.getAttribute("data-r"); a.title=cosa+": "+dove;
-    a.setAttribute("aria-label",b.getAttribute("data-r")+" – "+cosa+": "+dove+" (si apre in una nuova scheda)");
+    a.setAttribute("aria-label",b.getAttribute("data-r")+" – "+cosa+": "+dove+(hr.charAt(0)!=="#"?" (si apre in una nuova scheda)":""));
     b.innerHTML=""; b.appendChild(a); b._fatto=true;
   }
   function campo(b,i){
