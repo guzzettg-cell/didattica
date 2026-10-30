@@ -853,10 +853,28 @@ const MODULI = [
   {
     materia: "storia",
     classe: "prima",
+    titolo: "Le officine dello storico",
+    link: "storia/prima/officine/index.html",
+    descrizione: "Prima di cominciare: brevi laboratori di metodo. Ogni officina prepara una parte delle lezioni e ne ha l'icona e il colore.",
+    lezioni: [
+      { titolo: "Officina 0 · Chi siamo", officina: 0, parte: "officina", descrizione: "Ci presentiamo con oggetti e ricordi: ognuno ha una storia.", link: "storia/prima/officine/officina-00-chi-siamo.html", data: "2026-10-30", attivita: [] },
+      { titolo: "Officina 1 · Che cos'è la storia", officina: 1, parte: "attivita", descrizione: "La storia ricostruisce il passato degli uomini con domande e prove.", attivita: [] },
+      { titolo: "Officina 2 · Storia e preistoria", officina: 2, parte: "att-tempo", descrizione: "La storia comincia con la scrittura; prima c'è la preistoria.", attivita: [] },
+      { titolo: "Officina 3 · Oralità e scrittura", officina: 3, parte: "att-fonti", descrizione: "Racconti tramandati a voce e testi scritti: che cosa si conserva, che cosa cambia.", attivita: [] },
+      { titolo: "Officina 4 · Le tracce del passato", officina: 4, parte: "att-fonti", descrizione: "Fonti scritte, materiali, iconografiche e orali: il museo di classe delle fonti.", attivita: [] },
+      { titolo: "Officina 5 · Il tempo della storia", officina: 5, parte: "cosa-quando", descrizione: "Anni, secoli, a.C. e d.C., periodi; la linea del tempo.", attivita: [] },
+      { titolo: "Officina 6 · Lo spazio della storia", officina: 6, parte: "cosa-dove", descrizione: "Carta geografica e carta storica: i confini cambiano.", attivita: [] },
+      { titolo: "Officina 7 · Le parole della storia", officina: 7, parte: "quali-parole", descrizione: "Parole nuove, parole che cambiano significato; il glossario di classe.", attivita: [] }
+    ]
+  },
+  {
+    materia: "storia",
+    classe: "prima",
     numero: "I",
     titolo: "L'Italia dai Bizantini ai Longobardi",
     descrizione: "Primo quadrimestre, in collegamento con Geografia.",
     lezioni: [
+      { titolo: "Officina 8 · Come si legge una lezione", officina: 8, parte: "leggiamo", descrizione: "Le prime parti della lezione: Cosa imparerai, Leggiamo, Quali parole?, Ripassiamo.", attivita: [] },
       {
         titolo: "Come si studia la storia",
         descrizione: "Lezione di metodo, prima di cominciare: le cinque attività del mestiere dello storico e le parti di ogni lezione (Prima/Dopo, Idea principale, Testo, Perché?, Concetti fondamentali, Come?, Parole chiave, Studiamo le fonti, Ripassiamo).",
@@ -892,6 +910,8 @@ const MODULI = [
     titolo: "Nuove invasioni e nuovi regni: l'Europa dopo l'impero carolingio",
     descrizione: "Primo quadrimestre, in collegamento con Geografia e Italiano (epica cavalleresca).",
     lezioni: [
+      { titolo: "Officina 9 · Le persone della storia", officina: 9, parte: "chi-incontrerai", descrizione: "Chi sono i protagonisti e come si presentano.", attivita: [] },
+      { titolo: "Officina 10 · Causa, evento, effetto", officina: 10, parte: "perche", descrizione: "Perché le cose succedono e che cosa provocano.", attivita: [] },
       { titolo: "La divisione dell'impero dopo Carlo Magno", dipartimento: true, indice: "Storia facile 1, M2 cap. 8 · Tablet p. 47", attivita: [] },
       { titolo: "Le nuove invasioni", dipartimento: true, indice: "Storia facile 1, M2 cap. 8 · Tablet p. 47", attivita: [] },
       { titolo: "L'epoca d'oro dell'impero romano d'Oriente", dipartimento: true, indice: "Storia facile 1, M1 cap. 5 · Tablet p. 25", attivita: [] },
@@ -919,6 +939,8 @@ const MODULI = [
     titolo: "Le crociate e la lotta alle eresie",
     descrizione: "Primo quadrimestre, in collegamento con Geografia e Scienze.",
     lezioni: [
+      { titolo: "Officina 11 · Collegare ciò che so", officina: 11, parte: "ti-ricordi", descrizione: "Partire da quello che si è già studiato.", attivita: [] },
+      { titolo: "Officina 12 · Guardare una fonte", officina: 12, parte: "fonti", descrizione: "Osservare un'immagine come uno storico.", attivita: [] },
       { titolo: "La crisi dell'impero arabo e la minaccia dei Turchi", dipartimento: true, indice: "Storia facile 1, M3 cap. 13 · Tablet p. 70", attivita: [] },
       { titolo: "Lo scisma d'Oriente", dipartimento: true, indice: "Storia facile 1, M3 cap. 11 · Tablet p. 60", attivita: [] },
       { titolo: "Le crociate per la Terra Santa", dipartimento: true, indice: "Storia facile 1, M3 cap. 13 · Tablet p. 70", attivita: [] },
@@ -945,6 +967,9 @@ const MODULI = [
     titolo: "Le monarchie nazionali in Europa. La crisi del Trecento",
     descrizione: "Secondo quadrimestre, in collegamento con Geografia, Scienze, Inglese e Francese.",
     lezioni: [
+      { titolo: "Officina 13 · Le idee chiave", officina: 13, parte: "quali-idee", descrizione: "Riconoscere le idee più importanti di una lezione.", attivita: [] },
+      { titolo: "Officina 14 · Fare uno schema", officina: 14, parte: "come", descrizione: "Mettere in ordine le informazioni in colonne o in una mappa.", attivita: [] },
+      { titolo: "Officina 15 · Fatto o interpretazione?", officina: 15, parte: "fonti", descrizione: "Distinguere ciò che si può verificare dai giudizi.", attivita: [] },
       { titolo: "La nascita delle monarchie nazionali: l'Inghilterra", dipartimento: true, indice: "Storia facile 1, M4 cap. 15 · Tablet p. 96", attivita: [] },
       { titolo: "La monarchia nazionale francese", dipartimento: true, indice: "Storia facile 1, M4 cap. 15 · Tablet p. 96", attivita: [] },
       { titolo: "La guerra dei Cent'anni", dipartimento: true, indice: "Storia facile 1, M4 cap. 15 · Tablet p. 96", attivita: [] },
@@ -971,6 +996,8 @@ const MODULI = [
     titolo: "Le esplorazioni e la scoperta dell'America. Riforma e Controriforma",
     descrizione: "Secondo quadrimestre, in collegamento con Geografia, Religione, Arte, Tecnologia e Scienze.",
     lezioni: [
+      { titolo: "Officina 16 · Prevedere e collegare", officina: 16, parte: "e-dopo", descrizione: "Che cosa verrà dopo? Collegare una lezione alla successiva.", attivita: [] },
+      { titolo: "Officina 17 · Discutere da storici", officina: 17, parte: "ripassiamo", descrizione: "Sostenere un'idea con le prove: il mini-dibattito.", attivita: [] },
       { titolo: "Le rotte per le Indie", dipartimento: true, indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112", attivita: [] },
       { titolo: "La scoperta del nuovo mondo", dipartimento: true, indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112", attivita: [] },
       { titolo: "Le civiltà precolombiane e le esplorazioni", dipartimento: true, indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112", attivita: [] },

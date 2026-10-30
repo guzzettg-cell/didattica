@@ -101,7 +101,7 @@ p{margin:0 0 14px}
 .linea .anno{font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);color:#2b5f6b;color:var(--accento);margin-right:8px}
 .linea .pista{display:inline-block;max-width:100%;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;padding:1px 8px;margin-left:6px;color:#5a6066;color:var(--tenue);white-space:nowrap}
 .persone{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-gap:14px;gap:14px}
-.persona{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:54px 1fr;grid-gap:14px;gap:14px;align-items:start}
+.persona{scroll-margin-top:60px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:54px 1fr;grid-gap:14px;gap:14px;align-items:start}
 .sigla{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#e1edef;background:var(--accento-soft);color:#2b5f6b;color:var(--accento);font:700 1.2rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem var(--serif)}
 .persona h4{margin:0;font:700 1.12rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.12rem/1.3 var(--serif)}
 .persona .date{font-size:.88rem;color:#5a6066;color:var(--tenue);display:block;margin-bottom:6px}
@@ -371,10 +371,10 @@ footer p{margin:0 0 6px}
   <h3 id="chi"><span>3. Chi?</span></h3>
   <p class="mestiere">🧩 Comprendere · 📖 Lessico — il link apre una voce Treccani in una nuova scheda.</p>
   <div class="persone">
-    <article class="persona"><span class="sigla" aria-hidden="true">KP</span><div><h4>Pakal il Grande</h4><span class="date">603–683 · Palenque</span><p>Re maya della città di Palenque per quasi settant'anni. La sua tomba, scoperta nel 1952 dentro una piramide, è una delle più famose d'America.</p></div></article>
-    <article class="persona"><span class="sigla" aria-hidden="true">NZ</span><div><h4>Nezahualcóyotl</h4><span class="date">1402–1472 · Texcoco</span><p>Re di Texcoco, alleato degli Aztechi. Ricordato come architetto, legislatore e poeta.</p></div></article>
-    <article class="persona"><span class="sigla" aria-hidden="true">PA</span><div><h4>Pachacútec</h4><span class="date">sovrano dal 1438 · Cuzco</span><p>Il sovrano che trasforma il regno di Cuzco in un impero. A lui si attribuisce anche la costruzione di Machu Picchu.</p></div></article>
-    <article class="persona"><span class="sigla" aria-hidden="true">HC</span><div><h4>Huayna Cápac</h4><span class="date">morto nel 1527 ca. · Perù e Ecuador</span><p>Ultimo grande imperatore inca prima della conquista. Muore durante un'epidemia arrivata dall'Europa prima ancora degli spagnoli.</p></div></article>
+    <article class="persona" id="chi-pakal-il-grande"><span class="sigla" aria-hidden="true">KP</span><div><h4>Pakal il Grande</h4><span class="date">603–683 · Palenque</span><p>Re maya della città di Palenque per quasi settant'anni. La sua tomba, scoperta nel 1952 dentro una piramide, è una delle più famose d'America.</p></div></article>
+    <article class="persona" id="chi-nezahualcoyotl"><span class="sigla" aria-hidden="true">NZ</span><div><h4>Nezahualcóyotl</h4><span class="date">1402–1472 · Texcoco</span><p>Re di Texcoco, alleato degli Aztechi. Ricordato come architetto, legislatore e poeta.</p></div></article>
+    <article class="persona" id="chi-pachacutec"><span class="sigla" aria-hidden="true">PA</span><div><h4>Pachacútec</h4><span class="date">sovrano dal 1438 · Cuzco</span><p>Il sovrano che trasforma il regno di Cuzco in un impero. A lui si attribuisce anche la costruzione di Machu Picchu.</p></div></article>
+    <article class="persona" id="chi-huayna-capac"><span class="sigla" aria-hidden="true">HC</span><div><h4>Huayna Cápac</h4><span class="date">morto nel 1527 ca. · Perù e Ecuador</span><p>Ultimo grande imperatore inca prima della conquista. Muore durante un'epidemia arrivata dall'Europa prima ancora degli spagnoli.</p></div></article>
   </div>
 </section>
 
@@ -580,6 +580,16 @@ LUOGHI.forEach(function(L,i){
   bt.type="button"; bt.textContent=L.n; bt.addEventListener("click",function(){ scegli(i); document.getElementById("mappa").scrollIntoView({block:"center"}); });
   li.appendChild(bt); li.appendChild(document.createTextNode(" — "+L.t)); lista.appendChild(li);
 });
+/* link diretto a un luogo della carta: lezione.html#luogo-boston seleziona Boston e mostra la carta */
+function slugLuogo(t){ t=String(t).toLowerCase(); try{ t=t.normalize("NFD").replace(/[\u0300-\u036f]/g,""); }catch(e){} return t.replace(/\(.*?\)/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,""); }
+Array.prototype.forEach.call(lista.children,function(li,i){ if(LUOGHI[i]) li.id="luogo-"+slugLuogo(LUOGHI[i].n); });
+function luogoDaLink(){
+  var h=(location.hash||"").slice(1); try{ h=decodeURIComponent(h); }catch(e){}
+  if(h.indexOf("luogo-")!==0) return;
+  for(var i=0;i<LUOGHI.length;i++){ if("luogo-"+slugLuogo(LUOGHI[i].n)===h){
+    scegli(i); var m=document.getElementById("mappa"); if(m) setTimeout(function(){ m.scrollIntoView({block:"center"}); },80); return; } }
+}
+window.addEventListener("hashchange",luogoDaLink); luogoDaLink();
 
 /* ---------- indice laterale: evidenzia la parte che si sta leggendo ---------- */
 var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");

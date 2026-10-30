@@ -101,7 +101,7 @@ p{margin:0 0 14px}
 .linea .anno{font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);color:#2b5f6b;color:var(--accento);margin-right:8px}
 .linea .pista{display:inline-block;max-width:100%;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;padding:1px 8px;margin-left:6px;color:#5a6066;color:var(--tenue);white-space:nowrap}
 .persone{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-gap:14px;gap:14px}
-.persona{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:54px 1fr;grid-gap:14px;gap:14px;align-items:start}
+.persona{scroll-margin-top:60px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:54px 1fr;grid-gap:14px;gap:14px;align-items:start}
 .sigla{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#e1edef;background:var(--accento-soft);color:#2b5f6b;color:var(--accento);font:700 1.2rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem var(--serif)}
 .persona h4{margin:0;font:700 1.12rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.12rem/1.3 var(--serif)}
 .persona .date{font-size:.88rem;color:#5a6066;color:var(--tenue);display:block;margin-bottom:6px}
@@ -371,12 +371,12 @@ footer p{margin:0 0 6px}
   <h3 id="chi"><span>3. Chi?</span></h3>
   <p class="mestiere">🧩 Comprendere · 📖 Lessico — il link apre una voce Treccani in una nuova scheda.</p>
   <div class="persone">
-    <article class="persona"><span class="sigla" aria-hidden="true">C5</span><div><h4>Carlo V d'Asburgo</h4><span class="date">1500–1558 · Spagna e Impero</span><p>Re di Spagna e imperatore, governa un impero «su cui non tramonta mai il sole», dall'Europa all'America. L'argento americano finanzia le sue guerre.</p><a href="https://www.treccani.it/enciclopedia/l-eta-moderna_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Leggi la voce Treccani «L'età moderna»</a></div></article>
-    <article class="persona"><span class="sigla" aria-hidden="true">BL</span><div><h4>Bartolomé de Las Casas</h4><span class="date">1484–1566 · Spagna e America</span><p>Frate domenicano, dopo aver visto le violenze dei conquistatori le denuncia al re di Spagna e difende i diritti degli indigeni americani.</p></div></article>
-    <article class="persona"><span class="sigla" aria-hidden="true">JC</span><div><h4>Jan Pieterszoon Coen</h4><span class="date">1587–1629 · Olanda</span><p>Governatore della Compagnia olandese delle Indie orientali, fonda Batavia e impone con la violenza il monopolio olandese sulle spezie.</p><a href="https://www.treccani.it/enciclopedia/compagnie-delle-indie_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Leggi la voce Treccani «Compagnie delle Indie»</a></div></article>
-    <article class="persona"><span class="sigla" aria-hidden="true">PO</span><div><h4>Pocahontas</h4><span class="date">1596 circa–1617 · Virginia</span><p>Figlia di un capo indigeno della Virginia, fa da mediatrice tra il suo popolo e i coloni inglesi di Jamestown. Muore in Inghilterra, dove era stata portata.</p></div></article>
-    <article class="persona"><span class="sigla" aria-hidden="true">SC</span><div><h4>Samuel de Champlain</h4><span class="date">1574 circa–1635 · Francia</span><p>Esploratore francese, fonda Québec nel 1608 e organizza il commercio delle pellicce con i popoli indigeni del Canada.</p></div></article>
-    <article class="persona"><span class="sigla" aria-hidden="true">F2</span><div><h4>Filippo II di Spagna</h4><span class="date">1527–1598 · Spagna</span><p>Figlio di Carlo V, nel 1580 diventa anche re del Portogallo e unisce i due imperi coloniali più grandi del mondo.</p></div></article>
+    <article class="persona" id="chi-carlo-v-d-asburgo"><span class="sigla" aria-hidden="true">C5</span><div><h4>Carlo V d'Asburgo</h4><span class="date">1500–1558 · Spagna e Impero</span><p>Re di Spagna e imperatore, governa un impero «su cui non tramonta mai il sole», dall'Europa all'America. L'argento americano finanzia le sue guerre.</p><a href="https://www.treccani.it/enciclopedia/l-eta-moderna_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Leggi la voce Treccani «L'età moderna»</a></div></article>
+    <article class="persona" id="chi-bartolome-de-las-casas"><span class="sigla" aria-hidden="true">BL</span><div><h4>Bartolomé de Las Casas</h4><span class="date">1484–1566 · Spagna e America</span><p>Frate domenicano, dopo aver visto le violenze dei conquistatori le denuncia al re di Spagna e difende i diritti degli indigeni americani.</p></div></article>
+    <article class="persona" id="chi-jan-pieterszoon-coen"><span class="sigla" aria-hidden="true">JC</span><div><h4>Jan Pieterszoon Coen</h4><span class="date">1587–1629 · Olanda</span><p>Governatore della Compagnia olandese delle Indie orientali, fonda Batavia e impone con la violenza il monopolio olandese sulle spezie.</p><a href="https://www.treccani.it/enciclopedia/compagnie-delle-indie_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Leggi la voce Treccani «Compagnie delle Indie»</a></div></article>
+    <article class="persona" id="chi-pocahontas"><span class="sigla" aria-hidden="true">PO</span><div><h4>Pocahontas</h4><span class="date">1596 circa–1617 · Virginia</span><p>Figlia di un capo indigeno della Virginia, fa da mediatrice tra il suo popolo e i coloni inglesi di Jamestown. Muore in Inghilterra, dove era stata portata.</p></div></article>
+    <article class="persona" id="chi-samuel-de-champlain"><span class="sigla" aria-hidden="true">SC</span><div><h4>Samuel de Champlain</h4><span class="date">1574 circa–1635 · Francia</span><p>Esploratore francese, fonda Québec nel 1608 e organizza il commercio delle pellicce con i popoli indigeni del Canada.</p></div></article>
+    <article class="persona" id="chi-filippo-ii-di-spagna"><span class="sigla" aria-hidden="true">F2</span><div><h4>Filippo II di Spagna</h4><span class="date">1527–1598 · Spagna</span><p>Figlio di Carlo V, nel 1580 diventa anche re del Portogallo e unisce i due imperi coloniali più grandi del mondo.</p></div></article>
   </div>
 </section>
 
@@ -584,6 +584,16 @@ LUOGHI.forEach(function(L,i){
   bt.type="button"; bt.textContent=L.n; bt.addEventListener("click",function(){ scegli(i); document.getElementById("mappa").scrollIntoView({block:"center"}); });
   li.appendChild(bt); li.appendChild(document.createTextNode(" — "+L.t)); lista.appendChild(li);
 });
+/* link diretto a un luogo della carta: lezione.html#luogo-boston seleziona Boston e mostra la carta */
+function slugLuogo(t){ t=String(t).toLowerCase(); try{ t=t.normalize("NFD").replace(/[\u0300-\u036f]/g,""); }catch(e){} return t.replace(/\(.*?\)/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,""); }
+Array.prototype.forEach.call(lista.children,function(li,i){ if(LUOGHI[i]) li.id="luogo-"+slugLuogo(LUOGHI[i].n); });
+function luogoDaLink(){
+  var h=(location.hash||"").slice(1); try{ h=decodeURIComponent(h); }catch(e){}
+  if(h.indexOf("luogo-")!==0) return;
+  for(var i=0;i<LUOGHI.length;i++){ if("luogo-"+slugLuogo(LUOGHI[i].n)===h){
+    scegli(i); var m=document.getElementById("mappa"); if(m) setTimeout(function(){ m.scrollIntoView({block:"center"}); },80); return; } }
+}
+window.addEventListener("hashchange",luogoDaLink); luogoDaLink();
 
 /* ---------- indice laterale: evidenzia la parte che si sta leggendo ---------- */
 var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
