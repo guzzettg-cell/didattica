@@ -68,6 +68,22 @@ aside{display:grid;gap:14px}
 .lnav a{color:var(--accent);text-decoration:none;font-weight:700}
 .lnav a:hover{text-decoration:underline}
 @media print{.lnav{display:none}}
+.desk{font:inherit;color:inherit;cursor:pointer;width:100%;padding:20px 6px 8px;min-height:80px}
+.desk:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.desk .off{display:none;font-size:.85rem;color:var(--muted)}
+.desk.free b{font-family:var(--f-body);font-weight:400;font-size:.8rem;color:var(--muted);text-decoration:line-through}
+.desk.free .off{display:block}
+.desk.start{cursor:default}
+.desk.extra::after{content:"facolt.";position:absolute;top:4px;right:6px;font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.tools .lab{font-weight:700}
+.step{display:inline-flex;align-items:center;gap:6px}
+.step button,.tools .reset{font:inherit;font-weight:700;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;min-width:38px;height:38px;padding:0 12px;cursor:pointer}
+.step button:hover,.tools .reset:hover{border-color:var(--accent);color:var(--accent)}
+.step button:disabled{opacity:.4;cursor:default}
+.step output{font-family:var(--f-display);font-weight:800;font-size:1.4rem;min-width:2ch;text-align:center;font-variant-numeric:tabular-nums}
+.tools .hint{color:var(--muted);font-size:.9rem;flex:1 1 220px}
+@media print{.tools{display:none}.desk .off{display:block}.desk.extra::after{display:none}}
 </style>
 
 </head>
@@ -77,18 +93,25 @@ aside{display:grid;gap:14px}
   <header>
     <div class="eyebrow">Il paese delle indicazioni · gioco in classe</div>
     <h1>Il paese in classe: la mappa dei banchi</h1>
-    <p>24 banchi: 6 affiancati sul lato della lavagna, 4 dalla lavagna al fondo dell'aula. Ogni banco è un luogo del paese, le corsie tra i banchi sono le strade. La lavagna è a Nord. I tre banchi tratteggiati restano liberi: sono incroci o spazi vuoti da attraversare.</p>
+    <p>24 banchi: 6 affiancati sul lato della lavagna, 4 dalla lavagna al fondo dell'aula. Ogni banco è un luogo del paese, le corsie tra i banchi sono le strade. La lavagna è a Nord. Se ci sono meno di 24 ragazzi, indica quanti sono: i banchi in più diventano liberi e fanno da incroci o spazi da attraversare.</p>
   </header>
+
+  <div class="tools" role="group" aria-label="Ragazzi presenti">
+    <span class="lab" id="lab-pres">Ragazzi presenti</span>
+    <span class="step"><button type="button" id="meno" aria-label="Un ragazzo in meno">−</button><output id="pres" aria-labelledby="lab-pres">24</output><button type="button" id="piu" aria-label="Un ragazzo in più">+</button></span>
+    <button type="button" class="reset" id="tutti">Tutti i 24 luoghi</button>
+    <span class="hint">Con meno ragazzi si liberano prima i banchi facoltativi, poi i luoghi meno usati. Puoi anche toccare un banco per toglierlo o rimetterlo. La Scuola resta sempre.</span>
+  </div>
 
   <div class="layout">
     <div class="room">
       <div class="inner">
         <div class="board">LAVAGNA · NORD<small>i luoghi più a Nord del paese sono nella prima riga</small></div>
         <div class="grid" id="grid"><div></div><div class="colh">A</div><div class="colh">B</div><div class="colh">C</div><div class="colh">D</div><div class="colh">E</div><div class="colh">F</div>
-<div class="rowh">Riga<br>1</div><div class="desk"><span class="c">A1</span><b>Stazione</b></div><div class="desk"><span class="c">B1</span><b>Ufficio postale</b></div><div class="desk"><span class="c">C1</span><b>Chiesa</b></div><div class="desk"><span class="c">D1</span><b>Ospedale</b></div><div class="desk"><span class="c">E1</span><b>Museo</b></div><div class="desk"><span class="c">F1</span><b>Biblioteca</b></div>
-<div class="rowh">Riga<br>2</div><div class="desk start"><span class="c">A2</span><b>Scuola</b></div><div class="desk"><span class="c">B2</span><b>Parco</b></div><div class="desk"><span class="c">C2</span><b>Municipio</b></div><div class="desk"><span class="c">D2</span><b>Piazza della fontana</b></div><div class="desk"><span class="c">E2</span><b>Cinema</b></div><div class="desk"><span class="c">F2</span><b>Palestra</b></div>
-<div class="rowh">Riga<br>3</div><div class="desk"><span class="c">A3</span><b>Edicola</b></div><div class="desk"><span class="c">B3</span><b>Mercato comunale</b></div><div class="desk"><span class="c">C3</span><b>Farmacia</b></div><div class="desk"><span class="c">D3</span><b>Panetteria</b></div><div class="desk"><span class="c">E3</span><b>Bar Sport</b></div><div class="desk free"><span class="c">F3</span><b>libero</b></div>
-<div class="rowh">Riga<br>4</div><div class="desk"><span class="c">A4</span><b>Teatro</b></div><div class="desk free"><span class="c">B4</span><b>libero</b></div><div class="desk"><span class="c">C4</span><b>Pizzeria</b></div><div class="desk"><span class="c">D4</span><b>Campo sportivo</b></div><div class="desk free"><span class="c">E4</span><b>libero</b></div><div class="desk"><span class="c">F4</span><b>Gelateria</b></div>
+<div class="rowh">Riga<br>1</div><button type="button" class="desk" data-k="A1" aria-pressed="true"><span class="c">A1</span><b>Stazione</b><span class="off">libero</span></button><button type="button" class="desk" data-k="B1" aria-pressed="true"><span class="c">B1</span><b>Ufficio postale</b><span class="off">libero</span></button><button type="button" class="desk" data-k="C1" aria-pressed="true"><span class="c">C1</span><b>Chiesa</b><span class="off">libero</span></button><button type="button" class="desk" data-k="D1" aria-pressed="true"><span class="c">D1</span><b>Ospedale</b><span class="off">libero</span></button><button type="button" class="desk" data-k="E1" aria-pressed="true"><span class="c">E1</span><b>Museo</b><span class="off">libero</span></button><button type="button" class="desk" data-k="F1" aria-pressed="true"><span class="c">F1</span><b>Biblioteca</b><span class="off">libero</span></button>
+<div class="rowh">Riga<br>2</div><button type="button" class="desk start" data-k="A2" aria-pressed="true"><span class="c">A2</span><b>Scuola</b><span class="off">libero</span></button><button type="button" class="desk" data-k="B2" aria-pressed="true"><span class="c">B2</span><b>Parco</b><span class="off">libero</span></button><button type="button" class="desk" data-k="C2" aria-pressed="true"><span class="c">C2</span><b>Municipio</b><span class="off">libero</span></button><button type="button" class="desk" data-k="D2" aria-pressed="true"><span class="c">D2</span><b>Piazza della fontana</b><span class="off">libero</span></button><button type="button" class="desk" data-k="E2" aria-pressed="true"><span class="c">E2</span><b>Cinema</b><span class="off">libero</span></button><button type="button" class="desk" data-k="F2" aria-pressed="true"><span class="c">F2</span><b>Palestra</b><span class="off">libero</span></button>
+<div class="rowh">Riga<br>3</div><button type="button" class="desk" data-k="A3" aria-pressed="true"><span class="c">A3</span><b>Edicola</b><span class="off">libero</span></button><button type="button" class="desk" data-k="B3" aria-pressed="true"><span class="c">B3</span><b>Mercato comunale</b><span class="off">libero</span></button><button type="button" class="desk" data-k="C3" aria-pressed="true"><span class="c">C3</span><b>Farmacia</b><span class="off">libero</span></button><button type="button" class="desk" data-k="D3" aria-pressed="true"><span class="c">D3</span><b>Panetteria</b><span class="off">libero</span></button><button type="button" class="desk" data-k="E3" aria-pressed="true"><span class="c">E3</span><b>Bar Sport</b><span class="off">libero</span></button><button type="button" class="desk extra" data-k="F3" aria-pressed="true"><span class="c">F3</span><b>Fermata dell'autobus</b><span class="off">libero</span></button>
+<div class="rowh">Riga<br>4</div><button type="button" class="desk" data-k="A4" aria-pressed="true"><span class="c">A4</span><b>Teatro</b><span class="off">libero</span></button><button type="button" class="desk extra" data-k="B4" aria-pressed="true"><span class="c">B4</span><b>Supermercato</b><span class="off">libero</span></button><button type="button" class="desk" data-k="C4" aria-pressed="true"><span class="c">C4</span><b>Pizzeria</b><span class="off">libero</span></button><button type="button" class="desk" data-k="D4" aria-pressed="true"><span class="c">D4</span><b>Campo sportivo</b><span class="off">libero</span></button><button type="button" class="desk extra" data-k="E4" aria-pressed="true"><span class="c">E4</span><b>Caserma dei pompieri</b><span class="off">libero</span></button><button type="button" class="desk" data-k="F4" aria-pressed="true"><span class="c">F4</span><b>Gelateria</b><span class="off">libero</span></button>
 </div>
         <div class="door"><span>← Ovest (finestre o parete, da adattare)</span><span>SUD · fondo dell'aula</span><span>Est →</span></div>
       </div>
@@ -113,7 +136,7 @@ aside{display:grid;gap:14px}
         <div style="display:grid;gap:6px">
           <div class="key"><span class="sw" style="background:var(--desk);border:2px solid var(--desk-edge)"></span>banco-luogo</div>
           <div class="key"><span class="sw" style="background:var(--desk);border:2px solid var(--start)"></span>Scuola: punto di partenza</div>
-          <div class="key"><span class="sw" style="background:var(--free);border:2px dashed var(--line)"></span>banco libero</div>
+          <div class="key"><span class="sw" style="background:var(--free);border:2px dashed var(--line)"></span>banco libero (nessun ragazzo)</div>
           <div class="key"><span class="sw" style="background:var(--street)"></span>corsie = strade</div>
         </div>
       </div>
@@ -128,5 +151,27 @@ aside{display:grid;gap:14px}
     </aside>
   </div>
 </div>
+<script>
+(function(){
+  var ORDER=['F3','E4','B4','C1','E1','A4','B1','F2','C3','E3','D3','B3','A3','F1'];
+  var KEY='paese-in-classe-liberi', desks=[].slice.call(document.querySelectorAll('.desk')), off={};
+  var pres=document.getElementById('pres'), meno=document.getElementById('meno'), piu=document.getElementById('piu');
+  try{ (JSON.parse(localStorage.getItem(KEY))||[]).forEach(function(k){ off[k]=1; }); }catch(e){}
+  function draw(){
+    var n=0;
+    desks.forEach(function(d){ var f=!!off[d.dataset.k]; d.classList.toggle('free',f); d.setAttribute('aria-pressed',f?'false':'true'); if(!f) n++; });
+    pres.textContent=n; meno.disabled=n<=24-ORDER.length; piu.disabled=n>=24;
+    try{ localStorage.setItem(KEY,JSON.stringify(Object.keys(off))); }catch(e){}
+  }
+  meno.addEventListener('click',function(){ for(var i=0;i<ORDER.length;i++){ if(!off[ORDER[i]]){ off[ORDER[i]]=1; break; } } draw(); });
+  piu.addEventListener('click',function(){
+    for(var i=ORDER.length-1;i>=0;i--){ if(off[ORDER[i]]){ delete off[ORDER[i]]; draw(); return; } }
+    var k=Object.keys(off)[0]; if(k){ delete off[k]; draw(); }
+  });
+  document.getElementById('tutti').addEventListener('click',function(){ off={}; draw(); });
+  desks.forEach(function(d){ d.addEventListener('click',function(){ var k=d.dataset.k; if(d.classList.contains('start')) return; if(off[k]) delete off[k]; else off[k]=1; draw(); }); });
+  draw();
+})();
+</script>
 </body>
 </html>
