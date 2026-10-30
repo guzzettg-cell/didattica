@@ -781,15 +781,33 @@ const MODULI = [
     titolo: "Educazione linguistica",
     descrizione: "Lessico, linguaggio figurato e analisi del periodo. Primo e secondo quadrimestre, in collegamento con Inglese, Francese, Spagnolo e Tedesco.",
     lezioni: [
-      { titolo: "Ripasso: analisi grammaticale e logica", attivita: [] },
-      { titolo: "L'uso corretto del lessico", attivita: [] },
-      { titolo: "Il linguaggio figurato", attivita: [] },
-      { titolo: "I connettivi testuali e le congiunzioni", attivita: [] },
-      { titolo: "La frase complessa e la proposizione principale", attivita: [] },
-      { titolo: "La coordinazione e le proposizioni coordinate", attivita: [] },
-      { titolo: "La subordinazione e le proposizioni subordinate", attivita: [] },
-      { titolo: "I gradi di subordinazione", attivita: [] },
-      { titolo: "La riflessione metalinguistica", attivita: [] }
+      { titolo: "Ripasso: analisi grammaticale e logica", descrizione: "Le parti del discorso e gli elementi della frase semplice, prima dell'analisi del periodo.", attivita: [
+          { tipo: "Esercizi", titolo: "Ripasso di analisi grammaticale e logica", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/educazione-linguistica/ripasso-analisi.html", data: "2026-10-30" }
+        ] },
+      { titolo: "L'uso corretto del lessico", descrizione: "Sinonimi, contrari, iperonimi, polisemia; il registro; gli errori più frequenti.", attivita: [
+          { tipo: "Esercizi", titolo: "Le parole giuste", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/educazione-linguistica/uso-del-lessico.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Il linguaggio figurato", descrizione: "Similitudine, metafora, personificazione e le altre figure retoriche; i modi di dire.", attivita: [
+          { tipo: "Esercizi", titolo: "Il linguaggio figurato", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/educazione-linguistica/linguaggio-figurato.html", data: "2026-10-30" }
+        ] },
+      { titolo: "I connettivi testuali e le congiunzioni", descrizione: "Le parole che collegano le idee: aggiuntivi, avversativi, causali, conclusivi, temporali e altri.", attivita: [
+          { tipo: "Esercizi", titolo: "I connettivi testuali", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/educazione-linguistica/connettivi.html", data: "2026-10-30" }
+        ] },
+      { titolo: "La frase complessa e la proposizione principale", descrizione: "Il periodo, come contare le proposizioni, i tipi di principale.", attivita: [
+          { tipo: "Esercizi", titolo: "Il periodo e la proposizione principale", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/educazione-linguistica/frase-complessa.html", data: "2026-10-30" }
+        ] },
+      { titolo: "La coordinazione e le proposizioni coordinate", descrizione: "Asindeto e polisindeto; coordinate copulative, disgiuntive, avversative, dichiarative, conclusive, correlative.", attivita: [
+          { tipo: "Esercizi", titolo: "La coordinazione", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/educazione-linguistica/coordinate.html", data: "2026-10-30" }
+        ] },
+      { titolo: "La subordinazione e le proposizioni subordinate", descrizione: "Esplicite e implicite; completive, relative e circostanziali.", attivita: [
+          { tipo: "Esercizi", titolo: "La subordinazione", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/educazione-linguistica/subordinate.html", data: "2026-10-30" }
+        ] },
+      { titolo: "I gradi di subordinazione", descrizione: "Subordinate di 1°, 2° e 3° grado e lo schema ad albero.", attivita: [
+          { tipo: "Esercizi", titolo: "I gradi di subordinazione", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/educazione-linguistica/gradi-subordinazione.html", data: "2026-10-30" }
+        ] },
+      { titolo: "La riflessione metalinguistica", descrizione: "Le varietà dell'italiano; prestiti, calchi e neologismi; lingua e dialetto.", attivita: [
+          { tipo: "Esercizi", titolo: "La lingua che parla di sé", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/educazione-linguistica/riflessione-metalinguistica.html", data: "2026-10-30" }
+        ] }
     ]
   },
   {
@@ -815,10 +833,18 @@ const MODULI = [
           { tipo: "Fase 7", titolo: "Rischiatutto foscoliano", link: "italiano/terza/foscolo/foscolo-ripasso/attivita/fase-7-rischiatutto-foscoliano.html", data: "2026-10-16" }
         ]
       },
-      { titolo: "La poesia lirica: Leopardi", attivita: [] },
-      { titolo: "La poesia patriottica", attivita: [] },
-      { titolo: "Il romanzo storico: Manzoni", attivita: [] },
-      { titolo: "La letteratura contemporanea", attivita: [] }
+      { titolo: "La poesia lirica: Leopardi", descrizione: "Recanati, il pessimismo, L'infinito letto e spiegato.", attivita: [
+          { tipo: "Lezione", titolo: "Giacomo Leopardi", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/leopardi/leopardi.html", data: "2026-10-30" }
+        ] },
+      { titolo: "La poesia patriottica", descrizione: "Il Risorgimento in versi: Mameli, Manzoni, Mercantini e il coro di Verdi.", attivita: [
+          { tipo: "Lezione", titolo: "La poesia patriottica", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/poesia-patriottica/poesia-patriottica.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Il romanzo storico: Manzoni", descrizione: "La vita, le tre versioni, la trama, i personaggi e i temi dei Promessi sposi.", attivita: [
+          { tipo: "Lezione", titolo: "Alessandro Manzoni e i Promessi sposi", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/manzoni/manzoni.html", data: "2026-10-30" }
+        ] },
+      { titolo: "La letteratura contemporanea", descrizione: "Da Pascoli e D'Annunzio a Ungaretti, Montale, Pirandello, Primo Levi e Calvino.", attivita: [
+          { tipo: "Lezione", titolo: "Il Novecento e oltre", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/letteratura-contemporanea/letteratura-contemporanea.html", data: "2026-10-30" }
+        ] }
     ]
   },
   {
@@ -828,11 +854,21 @@ const MODULI = [
     titolo: "Antologia",
     descrizione: "Lettura e comprensione: i generi della narrativa e il teatro. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica, Arte e Immagine, Musica, Geografia, Religione e Tecnologia.",
     lezioni: [
-      { titolo: "Il racconto autobiografico", attivita: [] },
-      { titolo: "Il romanzo di formazione", attivita: [] },
-      { titolo: "Il romanzo psicologico-sociale", attivita: [] },
-      { titolo: "Il romanzo di fantascienza", attivita: [] },
-      { titolo: "Il teatro", attivita: [] }
+      { titolo: "Il racconto autobiografico", descrizione: "Il patto autobiografico, le forme della scrittura di sé, opere da conoscere.", attivita: [
+          { tipo: "Lezione", titolo: "Il racconto autobiografico", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/antologia/racconto-autobiografico.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Il romanzo di formazione", descrizione: "Gli ingredienti del Bildungsroman, da Pinocchio al Giovane Holden.", attivita: [
+          { tipo: "Lezione", titolo: "Il romanzo di formazione", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/antologia/romanzo-di-formazione.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Il romanzo psicologico-sociale", descrizione: "Il romanzo sociale (Dickens, Verga) e quello psicologico (Svevo, Pirandello, Woolf).", attivita: [
+          { tipo: "Lezione", titolo: "Il romanzo psicologico e sociale", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/antologia/romanzo-psicologico-sociale.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Il romanzo di fantascienza", descrizione: "Elementi tipici, utopia e distopia, da Verne ad Asimov e Orwell.", attivita: [
+          { tipo: "Lezione", titolo: "Il romanzo di fantascienza", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/antologia/romanzo-di-fantascienza.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Il teatro", descrizione: "Battute e didascalie, tragedia e commedia, da Shakespeare a Eduardo.", attivita: [
+          { tipo: "Lezione", titolo: "Il teatro", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/antologia/teatro.html", data: "2026-10-30" }
+        ] }
     ]
   },
   {
