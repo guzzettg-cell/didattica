@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La narrazione in prosa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --bg:#f6f7f4; --paper:#ffffff; --ink:#1d2b33; --muted:#5b6a70; --line:#d9dfdc;
+  --accent:#1f6f78; --hl:#ffe46b; --hl-ink:#3a2f00;
+  --ok:#2e7d4f; --ok-bg:#e3f3e8; --ko:#b23a3a; --ko-bg:#f9e3e1;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }
+
+html{font-size:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:1.5rem 4rem}
+.wrap{max-width:46rem;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800}
+h2{font-size:1.6rem;font-weight:700}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+.mark{background:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 88%,transparent 88%);color:var(--hl-ink);padding:0 .15em;border-radius:2px}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+header{display:flex;flex-direction:column;gap:.75rem;padding-top:1rem}
+header p{color:var(--muted);max-width:38rem}
+section{display:flex;flex-direction:column;gap:1rem}
+.note{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1rem 1.15rem;display:flex;flex-direction:column;gap:.6rem}
+.tipi{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.75rem}
+.tipo{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.tipo b{font-family:var(--display);font-size:1.05rem}
+.tipo .q{font-size:.85rem;color:var(--muted)}
+.tipo .es{font-size:.95rem}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:.55rem .8rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-size:.9rem;color:var(--accent)}
+tr:last-child td{border-bottom:none}
+hr{border:none;border-top:2px dashed var(--line);margin:0}
+
+/* esercizi */
+.ex{display:flex;flex-direction:column;gap:.9rem}
+.ex .consegna{color:var(--muted)}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .8rem}
+.item .frase{flex:1 1 16rem;min-width:0}
+.item.ok{border-color:var(--ok);background:var(--ok-bg)}
+.item.ko{border-color:var(--ko);background:var(--ko-bg)}
+.fb{flex-basis:100%;font-size:.9rem;color:var(--muted)}
+.fb:empty{display:none}
+.tok{cursor:pointer;border-radius:4px;padding:0 .1em;border:none;background:none;font:inherit;color:inherit}
+.tok:hover{outline:1px dashed var(--accent)}
+.tok.sel{background:var(--hl);color:var(--hl-ink)}
+.tok.miss{outline:2px solid var(--ko)}
+.tok.wrong{text-decoration:line-through;text-decoration-color:var(--ko);text-decoration-thickness:2px}
+select,input[type=text]{font:inherit;font-size:1rem;padding:.35rem .5rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);max-width:100%}
+input[type=text]{width:11rem}
+.seg{display:flex;gap:.4rem;flex-wrap:wrap}
+.seg button,.btn{font:inherit;font-size:.95rem;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:.3rem .9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--paper)}
+.btn.main{background:var(--accent);color:var(--paper);font-weight:700}
+.azioni{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.punti{font-weight:700;font-variant-numeric:tabular-nums}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* zoom */
+.zoom{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;gap:.3rem;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:.3rem;box-shadow:0 4px 14px rgba(0,0,0,.15);z-index:20}
+.zoom button{width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:var(--display);font-weight:700;font-size:1rem;cursor:pointer}
+.zoom span{align-self:center;font-size:.8rem;min-width:2.8rem;text-align:center;font-variant-numeric:tabular-nums;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.item{transition:background .2s,border-color .2s}}
+
+.ex > div[id^="e"]{display:flex;flex-direction:column;gap:.6rem}
+.tipi.two{grid-template-columns:repeat(auto-fit,minmax(17rem,1fr))}
+.note ul,.note ol{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:.3rem}
+.cit{border-left:4px solid var(--accent);padding:.2rem 0 .2rem 1rem;font-style:italic}
+.cit small{display:block;font-style:normal;color:var(--muted);font-size:.85rem;margin-top:.3rem}
+.indice{display:flex;flex-wrap:wrap;gap:.4rem}
+.indice a{font-size:.85rem;color:var(--accent);border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:.15rem .7rem;text-decoration:none}
+.indice a:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="zoom" role="group" aria-label="Dimensione del testo">
+  <button id="zm" type="button" aria-label="Rimpicciolisci">A−</button>
+  <span id="zv">100%</span>
+  <button id="zp" type="button" aria-label="Ingrandisci">A+</button>
+</div>
+
+<main class="wrap">
+<header>
+  <span class="eyebrow">Antologia · lezione 1</span>
+  <h1>Come è fatto un <span class="mark">racconto</span></h1>
+  <p>Fiabe, gialli, romanzi d'avventura: anche se sono diversissimi, tutti i testi narrativi sono costruiti con gli stessi «attrezzi». Impariamo a riconoscerli.</p>
+</header>
+
+<section>
+  <h2>Fabula e intreccio</h2>
+  <div class="tipi two">
+    <div class="tipo"><b>fabula</b><span class="q">l'ordine in cui i fatti succedono</span><span class="es">nascita → infanzia → avventura → ritorno</span></div>
+    <div class="tipo"><b>intreccio</b><span class="q">l'ordine in cui l'autore li racconta</span><span class="es">può cominciare dalla fine o dal mezzo e tornare indietro</span></div>
+  </div>
+  <div class="note">
+    <p><b>Flashback</b> (analessi): il racconto torna indietro nel passato. <b>Flashforward</b> (prolessi): anticipa qualcosa che succederà. Quando fabula e intreccio coincidono, il racconto segue l'<b>ordine cronologico</b>.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Lo schema narrativo</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>fase</th><th>che cosa succede</th></tr></thead>
+    <tbody>
+      <tr><td><b>1. situazione iniziale</b></td><td>presenta personaggi, luogo e tempo: tutto è in equilibrio</td></tr>
+      <tr><td><b>2. esordio</b> (rottura dell'equilibrio)</td><td>succede qualcosa che cambia la situazione</td></tr>
+      <tr><td><b>3. peripezie</b></td><td>il protagonista affronta ostacoli e prove</td></tr>
+      <tr><td><b>4. spannung</b> (culmine)</td><td>il momento di massima tensione</td></tr>
+      <tr><td><b>5. scioglimento</b> (situazione finale)</td><td>si torna all'equilibrio, uguale o diverso da quello iniziale</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Le sequenze</h2>
+  <p>Il testo si divide in <b>sequenze</b>, parti con un significato compiuto.</p>
+  <div class="tipi">
+    <div class="tipo"><b>narrativa</b><span class="q">racconta azioni</span><span class="es">Aprì la porta e corse fuori.</span></div>
+    <div class="tipo"><b>descrittiva</b><span class="q">descrive persone, luoghi, oggetti</span><span class="es">La stanza era buia e odorava di muffa.</span></div>
+    <div class="tipo"><b>dialogica</b><span class="q">riporta un dialogo</span><span class="es">«Dove vai?» chiese la mamma.</span></div>
+    <div class="tipo"><b>riflessiva</b><span class="q">pensieri, emozioni, commenti</span><span class="es">Pensò che forse aveva sbagliato tutto.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>I personaggi</h2>
+  <div class="tipi">
+    <div class="tipo"><b>protagonista</b><span class="es">il personaggio principale</span></div>
+    <div class="tipo"><b>antagonista</b><span class="es">si oppone al protagonista</span></div>
+    <div class="tipo"><b>aiutante</b><span class="es">aiuta il protagonista</span></div>
+    <div class="tipo"><b>oppositore</b><span class="es">ostacola il protagonista, insieme all'antagonista</span></div>
+    <div class="tipo"><b>oggetto</b><span class="es">ciò che il protagonista desidera o cerca</span></div>
+  </div>
+  <p>I personaggi possono essere <b>statici</b> (restano uguali) o <b>dinamici</b> (cambiano durante la storia).</p>
+</section>
+
+<section>
+  <h2>Chi racconta</h2>
+  <div class="tipi two">
+    <div class="tipo"><b>narratore esterno</b><span class="q">non fa parte della storia, racconta in 3ª persona</span><span class="es">Quella mattina Luca si svegliò tardi.</span></div>
+    <div class="tipo"><b>narratore interno</b><span class="q">è un personaggio, racconta in 1ª persona</span><span class="es">Quella mattina mi svegliai tardi.</span></div>
+  </div>
+  <div class="note"><p>Attenzione: il <b>narratore</b> è la voce che racconta dentro il testo; l'<b>autore</b> è la persona reale che ha scritto il libro.</p></div>
+</section>
+
+<hr>
+<section class="ex" id="ex1">
+  <span class="eyebrow">Esercizio 1</span>
+  <h2>Che sequenza è?</h2>
+  <p class="consegna">Indica il tipo di sequenza.</p>
+  <div id="e1"></div>
+</section>
+<section class="ex" id="ex2">
+  <span class="eyebrow">Esercizio 2</span>
+  <h2>Le fasi del racconto</h2>
+  <p class="consegna">Leggi il racconto «Il gatto di Nina» diviso in parti e indica a quale fase dello schema narrativo appartiene ogni parte.</p>
+  <div id="e2"></div>
+</section>
+<section class="ex" id="ex3">
+  <span class="eyebrow">Esercizio 3</span>
+  <h2>Che ruolo ha?</h2>
+  <p class="consegna">Pensa alla fiaba di Cappuccetto Rosso e indica il ruolo di ciascun elemento.</p>
+  <div id="e3"></div>
+</section>
+<section class="ex" id="ex4">
+  <span class="eyebrow">Esercizio 4</span>
+  <h2>Narratore interno o esterno?</h2>
+  <p class="consegna">Leggi la frase e indica il tipo di narratore.</p>
+  <div id="e4"></div>
+</section>
+<section class="ex" id="ex5">
+  <span class="eyebrow">Esercizio 5</span>
+  <h2>Fabula o intreccio?</h2>
+  <p class="consegna">Come è raccontato questo brano?</p>
+  <div id="e5"></div>
+</section>
+<section class="ex">
+  <div class="note">
+    <div class="azioni">
+      <button class="btn main" id="check" type="button">Correggi tutto</button>
+      <button class="btn" id="reset" type="button">Ricomincia</button>
+      <span class="punti" id="score" aria-live="polite"></span>
+    </div>
+  </div>
+</section>
+</main>
+<script>
+(function(){
+  var KEY="narrazione", DATA=[{"type": "select", "opts": ["narrativa", "descrittiva", "dialogica", "riflessiva"], "label": "Tipo di sequenza", "items": [["Saltò giù dal letto, si vestì in fretta e uscì sbattendo la porta.", "narrativa"], ["Il bosco era fitto, gli alberi alti e scuri, e un ruscello scorreva tra i sassi coperti di muschio.", "descrittiva"], ["«Hai visto il mio cane?» «No, oggi non è passato di qui.»", "dialogica"], ["Mi chiedevo se avessi fatto bene a fidarmi di lui: forse avrei dovuto ascoltare mia sorella.", "riflessiva"], ["Il nonno aveva i capelli bianchi, gli occhiali tondi e un sorriso gentile.", "descrittiva"], ["Prese la chiave, aprì il baule e trovò una vecchia mappa.", "narrativa"]]}, {"type": "select", "opts": ["situazione iniziale", "esordio", "peripezie", "spannung", "scioglimento"], "label": "Fase", "items": [["Nina viveva con la nonna in una casa con il giardino. Ogni sera il gatto Briciola si addormentava ai piedi del suo letto.", "situazione iniziale"], ["Una sera di temporale, però, Briciola non tornò a casa.", "esordio"], ["Nina lo cercò nel parco, poi lungo il fiume, poi nel cortile della scuola. Chiese ai vicini e attaccò cartelli ovunque, ma nessuno l'aveva visto.", "peripezie"], ["Il terzo giorno sentì un miagolio debolissimo arrivare dal tombino davanti al cancello: Briciola era là sotto, bagnato e spaventato, e l'acqua saliva.", "spannung"], ["I pompieri lo tirarono fuori in pochi minuti. Da quella sera Nina chiude sempre la finestra quando arriva un temporale.", "scioglimento"]]}, {"type": "select", "opts": ["protagonista", "antagonista", "aiutante", "oggetto"], "label": "Ruolo", "items": [["Cappuccetto Rosso", "protagonista"], ["il lupo", "antagonista"], ["il cacciatore", "aiutante", "salva la bambina e la nonna."], ["arrivare sana e salva dalla nonna", "oggetto", "è lo scopo della protagonista."]]}, {"type": "scelta", "opts": ["interno", "esterno"], "items": [["Quel giorno capii che non sarei più tornato in quella casa.", "interno", "racconta in prima persona."], ["Marco guardò l'orologio: era già in ritardo.", "esterno"], ["Ci incamminammo verso il bosco senza dire una parola.", "interno"], ["La strega preparò la pozione e la versò nella brocca.", "esterno"], ["Ancora oggi, quando ci ripenso, mi viene da ridere.", "interno"]]}, {"type": "scelta", "opts": ["ordine cronologico", "flashback", "flashforward"], "items": [["Si svegliò, fece colazione, uscì e prese l'autobus.", "ordine cronologico"], ["Guardando la foto, Anna ricordò quell'estate di dieci anni prima, quando aveva imparato a nuotare.", "flashback", "il racconto torna nel passato."], ["Quella mattina non poteva saperlo, ma quel ragazzo sarebbe diventato il suo migliore amico.", "flashforward", "anticipa il futuro."], ["Ulisse, alla corte dei Feaci, racconta le avventure vissute negli anni precedenti.", "flashback"]]}];
+  var z=100, zv=document.getElementById('zv');
+  try{ z=parseInt(localStorage.getItem(KEY+'-zoom'))||100 }catch(e){}
+  function setZ(v){ z=Math.max(70,Math.min(200,v)); document.documentElement.style.fontSize=z+'%'; zv.textContent=z+'%'; try{localStorage.setItem(KEY+'-zoom',z)}catch(e){} }
+  document.getElementById('zp').onclick=function(){setZ(z+10)};
+  document.getElementById('zm').onclick=function(){setZ(z-10)};
+  setZ(z);
+  function el(t,c,h){var e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e}
+  function norm(s){return String(s).toLowerCase().replace(/[’‘`´]/g,"'").replace(/\s*-\s*/g,'-').replace(/\s+/g,' ').replace(/^[\s.]+|[\s.]+$/g,'')}
+  var W=/[A-Za-zÀ-ÿ']+/;
+
+  function tokens(container,str,idp){
+    str.match(/\*[^*]+\*|[A-Za-zÀ-ÿ']+|[^\sA-Za-zÀ-ÿ'*]+|\s+/g).forEach(function(t,j){
+      if(/^[A-Za-zÀ-ÿ']+$/.test(t)||t[0]==='*'){
+        var m=t[0]==='*', b=el('button','tok'); b.type='button'; b.id=idp+'-'+j; b.textContent=m?t.slice(1,-1):t; b.dataset.ok=m?'1':'0';
+        b.onclick=function(){b.classList.toggle('sel')}; container.appendChild(b);
+      } else container.appendChild(document.createTextNode(t));
+    });
+  }
+  function markToks(root){var ok=0,tot=0,err=0;
+    root.querySelectorAll('.tok').forEach(function(b){b.classList.remove('miss','wrong');
+      var s=b.classList.contains('sel'),a=b.dataset.ok==='1';
+      if(a){tot++; if(s)ok++; else b.classList.add('miss')} else if(s){err++;b.classList.add('wrong')} });
+    return [ok,tot,err]}
+
+  var checks=[];
+  DATA.forEach(function(ex,n){
+    var box=document.getElementById('e'+(n+1)), id='e'+(n+1);
+    if(ex.type==='tok'){
+      var its=[];
+      ex.items.forEach(function(s,i){var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); tokens(fr,s,id+'-'+i); it.append(fr,fb); box.appendChild(it); its.push(it)});
+      checks.push(function(){var ok=0; its.forEach(function(it){var r=markToks(it), g=r[0]===r[1]&&!r[2]; it.className='item '+(g?'ok':'ko'); it.querySelector('.fb').textContent=g?'Giusto!':(ex.fb||'Il bordo rosso indica una parola mancante; la parola barrata non va segnata.'); if(g)ok++}); return [ok,its.length]});
+    } else if(ex.type==='testo'){
+      var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); fr.style.lineHeight='2'; tokens(fr,ex.text,id); it.append(fr,fb); box.appendChild(it);
+      checks.push(function(){var r=markToks(it); it.className='item '+(r[0]===r[1]&&!r[2]?'ok':'ko');
+        fb.textContent=(ex.nome||'Risposte')+' trovati: '+r[0]+' su '+r[1]+(r[2]?'. Segnati per errore: '+r[2]+' (barrati).':'.')+(r[0]<r[1]?' Il bordo rosso indica quelli mancanti.':'');
+        return [Math.max(0,r[0]-r[2]),r[1]]});
+    } else if(ex.type==='select'){
+      var arr=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),sel=el('select'),fb=el('div','fb');
+        sel.id=id+'-'+i; sel.setAttribute('aria-label',ex.label||'Risposta'); sel.appendChild(new Option('scegli…',''));
+        (d[3]||ex.opts).forEach(function(o){sel.appendChild(new Option(o,o))});
+        it.append(fr,sel,fb); box.appendChild(it); arr.push([it,sel,d])});
+      checks.push(function(){var ok=0; arr.forEach(function(x){var g=x[1].value===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Risposta corretta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr.length]});
+    } else if(ex.type==='scelta'){
+      var arr2=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),seg=el('div','seg'),fb=el('div','fb');
+        (d[3]||ex.opts).forEach(function(o,k){var b=el('button'); b.type='button'; b.id=id+'-'+i+'-'+k; b.textContent=o; b.setAttribute('aria-pressed','false');
+          b.onclick=function(){seg.dataset.v=o; seg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')})}; seg.appendChild(b)});
+        it.append(fr,seg,fb); box.appendChild(it); arr2.push([it,seg,d])});
+      checks.push(function(){var ok=0; arr2.forEach(function(x){var g=x[1].dataset.v===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Risposta corretta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr2.length]});
+    } else if(ex.type==='input'){
+      var arr3=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),inp=el('input'),fb=el('div','fb');
+        inp.type='text'; inp.id=id+'-'+i; inp.autocomplete='off'; inp.spellcheck=false; inp.setAttribute('aria-label',ex.label||'Risposta');
+        it.append(fr,inp,fb); box.appendChild(it); arr3.push([it,inp,d])});
+      checks.push(function(){var ok=0; arr3.forEach(function(x){var v=norm(x[1].value), g=x[2][1].some(function(a){return norm(a)===v}); x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Soluzione: <b>'+x[2][1][0]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr3.length]});
+    }
+  });
+
+  var score=document.getElementById('score');
+  document.getElementById('check').onclick=function(){var ok=0,tot=0; checks.forEach(function(c){var r=c(); ok+=r[0]; tot+=r[1]}); score.textContent='Risposte giuste: '+ok+' su '+tot};
+  document.getElementById('reset').onclick=function(){
+    document.querySelectorAll('.item').forEach(function(i){i.className='item'; var f=i.querySelector('.fb'); if(f)f.textContent=''});
+    document.querySelectorAll('.tok').forEach(function(b){b.classList.remove('sel','miss','wrong')});
+    document.querySelectorAll('select').forEach(function(s){s.value=''});
+    document.querySelectorAll('input[type=text]').forEach(function(s){s.value=''});
+    document.querySelectorAll('.seg').forEach(function(s){delete s.dataset.v; s.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed','false')})});
+    score.textContent=''; window.scrollTo(0,0)};
+})();
+</script>
+</body>
+</html>

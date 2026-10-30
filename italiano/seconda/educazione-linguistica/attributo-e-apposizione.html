@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attributo e apposizione</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --bg:#f6f7f4; --paper:#ffffff; --ink:#1d2b33; --muted:#5b6a70; --line:#d9dfdc;
+  --accent:#1f6f78; --hl:#ffe46b; --hl-ink:#3a2f00;
+  --ok:#2e7d4f; --ok-bg:#e3f3e8; --ko:#b23a3a; --ko-bg:#f9e3e1;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }
+
+html{font-size:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:1.5rem 4rem}
+.wrap{max-width:46rem;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800}
+h2{font-size:1.6rem;font-weight:700}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+.mark{background:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 88%,transparent 88%);color:var(--hl-ink);padding:0 .15em;border-radius:2px}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+header{display:flex;flex-direction:column;gap:.75rem;padding-top:1rem}
+header p{color:var(--muted);max-width:38rem}
+section{display:flex;flex-direction:column;gap:1rem}
+.note{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1rem 1.15rem;display:flex;flex-direction:column;gap:.6rem}
+.tipi{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.75rem}
+.tipo{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.tipo b{font-family:var(--display);font-size:1.05rem}
+.tipo .q{font-size:.85rem;color:var(--muted)}
+.tipo .es{font-size:.95rem}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:.55rem .8rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-size:.9rem;color:var(--accent)}
+tr:last-child td{border-bottom:none}
+hr{border:none;border-top:2px dashed var(--line);margin:0}
+
+/* esercizi */
+.ex{display:flex;flex-direction:column;gap:.9rem}
+.ex .consegna{color:var(--muted)}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .8rem}
+.item .frase{flex:1 1 16rem;min-width:0}
+.item.ok{border-color:var(--ok);background:var(--ok-bg)}
+.item.ko{border-color:var(--ko);background:var(--ko-bg)}
+.fb{flex-basis:100%;font-size:.9rem;color:var(--muted)}
+.fb:empty{display:none}
+.tok{cursor:pointer;border-radius:4px;padding:0 .1em;border:none;background:none;font:inherit;color:inherit}
+.tok:hover{outline:1px dashed var(--accent)}
+.tok.sel{background:var(--hl);color:var(--hl-ink)}
+.tok.miss{outline:2px solid var(--ko)}
+.tok.wrong{text-decoration:line-through;text-decoration-color:var(--ko);text-decoration-thickness:2px}
+select,input[type=text]{font:inherit;font-size:1rem;padding:.35rem .5rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);max-width:100%}
+input[type=text]{width:11rem}
+.seg{display:flex;gap:.4rem;flex-wrap:wrap}
+.seg button,.btn{font:inherit;font-size:.95rem;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:.3rem .9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--paper)}
+.btn.main{background:var(--accent);color:var(--paper);font-weight:700}
+.azioni{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.punti{font-weight:700;font-variant-numeric:tabular-nums}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* zoom */
+.zoom{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;gap:.3rem;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:.3rem;box-shadow:0 4px 14px rgba(0,0,0,.15);z-index:20}
+.zoom button{width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:var(--display);font-weight:700;font-size:1rem;cursor:pointer}
+.zoom span{align-self:center;font-size:.8rem;min-width:2.8rem;text-align:center;font-variant-numeric:tabular-nums;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.item{transition:background .2s,border-color .2s}}
+
+.ex > div[id^="e"]{display:flex;flex-direction:column;gap:.6rem}
+.tipi.two{grid-template-columns:repeat(auto-fit,minmax(17rem,1fr))}
+.note ul,.note ol{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:.3rem}
+.cit{border-left:4px solid var(--accent);padding:.2rem 0 .2rem 1rem;font-style:italic}
+.cit small{display:block;font-style:normal;color:var(--muted);font-size:.85rem;margin-top:.3rem}
+.indice{display:flex;flex-wrap:wrap;gap:.4rem}
+.indice a{font-size:.85rem;color:var(--accent);border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:.15rem .7rem;text-decoration:none}
+.indice a:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="zoom" role="group" aria-label="Dimensione del testo">
+  <button id="zm" type="button" aria-label="Rimpicciolisci">A−</button>
+  <span id="zv">100%</span>
+  <button id="zp" type="button" aria-label="Ingrandisci">A+</button>
+</div>
+
+<main class="wrap">
+<header>
+  <span class="eyebrow">Educazione linguistica · seconda · lezione 3</span>
+  <h1>L'<span class="mark">attributo</span> e l'apposizione</h1>
+  <p>Sono due espansioni che non si legano al verbo ma a un <b>nome</b>: lo arricchiscono di informazioni. Possono accompagnare il soggetto, il complemento oggetto o qualsiasi altro complemento.</p>
+</header>
+
+<section>
+  <h2>L'attributo</h2>
+  <div class="note">
+    <p>È un <b>aggettivo</b> (qualificativo o determinativo) che si riferisce a un nome e si accorda con lui in genere e numero.</p>
+    <p>Il <span class="mark">mio</span> cane <span class="mark">nero</span> corre nel parco <span class="mark">vicino</span>.</p>
+  </div>
+  <div class="tipi two">
+    <div class="tipo"><b>attributo</b><span class="q">aggettivo vicino al nome, senza verbo essere</span><span class="es">Ho una casa <b>grande</b>.</span></div>
+    <div class="tipo"><b>parte nominale</b><span class="q">aggettivo collegato con il verbo essere</span><span class="es">La casa <b>è grande</b>. (predicato nominale)</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>L'apposizione</h2>
+  <div class="note">
+    <p>È un <b>nome</b> che si mette accanto a un altro nome per precisarlo. Indica spesso una professione, un titolo, una parentela, un tipo.</p>
+    <p><span class="mark">Il dottor</span> Rossi · Mia sorella, <span class="mark">studentessa</span> di medicina · <span class="mark">La città di</span> Firenze · <span class="mark">Il fiume</span> Po</p>
+  </div>
+  <div class="tipi">
+    <div class="tipo"><b>semplice</b><span class="es">solo il nome: <i>il <b>maestro</b> Luigi</i></span></div>
+    <div class="tipo"><b>composta</b><span class="q">il nome con attributi o complementi</span><span class="es"><i>Luigi, <b>maestro di musica</b>, suona il piano.</i></span></div>
+  </div>
+  <p>Trucco: se togli l'apposizione la frase resta corretta. Se è un aggettivo è un <b>attributo</b>, se è un nome è un'<b>apposizione</b>.</p>
+</section>
+
+<hr>
+<section class="ex" id="ex1">
+  <span class="eyebrow">Esercizio 1</span>
+  <h2>Caccia agli attributi</h2>
+  <p class="consegna">Nel testo ci sono 10 attributi. Toccali tutti (non toccare gli articoli).</p>
+  <div id="e1"></div>
+</section>
+<section class="ex" id="ex2">
+  <span class="eyebrow">Esercizio 2</span>
+  <h2>Attributo o parte nominale?</h2>
+  <p class="consegna">L'aggettivo evidenziato è collegato al nome direttamente o tramite il verbo essere?</p>
+  <div id="e2"></div>
+</section>
+<section class="ex" id="ex3">
+  <span class="eyebrow">Esercizio 3</span>
+  <h2>Attributo o apposizione?</h2>
+  <p class="consegna">La parola evidenziata è un aggettivo (attributo) o un nome (apposizione)?</p>
+  <div id="e3"></div>
+</section>
+<section class="ex" id="ex4">
+  <span class="eyebrow">Esercizio 4</span>
+  <h2>Trova l'apposizione</h2>
+  <p class="consegna">Tocca l'apposizione (o le parole dell'apposizione composta).</p>
+  <div id="e4"></div>
+</section>
+<section class="ex" id="ex5">
+  <span class="eyebrow">Esercizio 5</span>
+  <h2>A quale nome si riferisce?</h2>
+  <p class="consegna">L'attributo evidenziato si riferisce al soggetto, al complemento oggetto o a un altro complemento?</p>
+  <div id="e5"></div>
+</section>
+<section class="ex">
+  <div class="note">
+    <div class="azioni">
+      <button class="btn main" id="check" type="button">Correggi tutto</button>
+      <button class="btn" id="reset" type="button">Ricomincia</button>
+      <span class="punti" id="score" aria-live="polite"></span>
+    </div>
+  </div>
+</section>
+</main>
+<script>
+(function(){
+  var KEY="attapp", DATA=[{"type": "testo", "nome": "Attributi", "text": "In una *vecchia* casa viveva un gatto *grigio*. Ogni mattina saliva sul tetto *rosso* e guardava i *piccoli* passeri del giardino. Il *suo* padrone, un uomo *gentile*, gli lasciava una ciotola *piena* di latte *fresco* accanto alla porta *verde* della *nostra* cucina."}, {"type": "scelta", "opts": ["attributo", "parte nominale"], "items": [["Ho comprato una maglia <span class='mark'>rossa</span>.", "attributo"], ["La maglia è <span class='mark'>rossa</span>.", "parte nominale"], ["Il film era <span class='mark'>noioso</span>.", "parte nominale"], ["Abbiamo visto un film <span class='mark'>noioso</span>.", "attributo"], ["Il <span class='mark'>tuo</span> zaino è pesante.", "attributo"], ["Il tuo zaino è <span class='mark'>pesante</span>.", "parte nominale"]]}, {"type": "scelta", "opts": ["attributo", "apposizione"], "items": [["Il <span class='mark'>professor</span> Bianchi spiega la lezione.", "apposizione"], ["La <span class='mark'>simpatica</span> Anna ride.", "attributo"], ["Ho visitato la città di Venezia, <span class='mark'>capoluogo</span> del Veneto.", "apposizione"], ["Ho visitato la <span class='mark'>bellissima</span> Venezia.", "attributo"], ["Il <span class='mark'>cane</span> Fido abbaia.", "apposizione"], ["Il <span class='mark'>piccolo</span> Fido abbaia.", "attributo"], ["Mio zio, <span class='mark'>pilota</span> di aerei, viaggia molto.", "apposizione"]]}, {"type": "tok", "items": ["Il *poeta* Dante è nato a Firenze.", "Leonardo, *pittore* *e* *inventore*, visse a Milano.", "Il *lago* di Garda è il più grande d'Italia.", "Ho incontrato la *signora* Rossi al mercato.", "Mia cugina, *campionessa* *di* *nuoto*, si allena ogni giorno."]}, {"type": "select", "opts": ["soggetto", "complemento oggetto", "altro complemento"], "label": "Riferimento", "items": [["Il <span class='mark'>mio</span> amico legge un libro.", "soggetto"], ["Luca legge un libro <span class='mark'>giallo</span>.", "complemento oggetto"], ["Luca legge nella stanza <span class='mark'>buia</span>.", "altro complemento"], ["I bambini <span class='mark'>piccoli</span> giocano.", "soggetto"], ["Ho scritto ai <span class='mark'>vecchi</span> amici.", "altro complemento"], ["La nonna prepara una torta <span class='mark'>buonissima</span>.", "complemento oggetto"]]}];
+  var z=100, zv=document.getElementById('zv');
+  try{ z=parseInt(localStorage.getItem(KEY+'-zoom'))||100 }catch(e){}
+  function setZ(v){ z=Math.max(70,Math.min(200,v)); document.documentElement.style.fontSize=z+'%'; zv.textContent=z+'%'; try{localStorage.setItem(KEY+'-zoom',z)}catch(e){} }
+  document.getElementById('zp').onclick=function(){setZ(z+10)};
+  document.getElementById('zm').onclick=function(){setZ(z-10)};
+  setZ(z);
+  function el(t,c,h){var e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e}
+  function norm(s){return String(s).toLowerCase().replace(/[’‘`´]/g,"'").replace(/\s*-\s*/g,'-').replace(/\s+/g,' ').replace(/^[\s.]+|[\s.]+$/g,'')}
+  var W=/[A-Za-zÀ-ÿ']+/;
+
+  function tokens(container,str,idp){
+    str.match(/\*[^*]+\*|[A-Za-zÀ-ÿ']+|[^\sA-Za-zÀ-ÿ'*]+|\s+/g).forEach(function(t,j){
+      if(/^[A-Za-zÀ-ÿ']+$/.test(t)||t[0]==='*'){
+        var m=t[0]==='*', b=el('button','tok'); b.type='button'; b.id=idp+'-'+j; b.textContent=m?t.slice(1,-1):t; b.dataset.ok=m?'1':'0';
+        b.onclick=function(){b.classList.toggle('sel')}; container.appendChild(b);
+      } else container.appendChild(document.createTextNode(t));
+    });
+  }
+  function markToks(root){var ok=0,tot=0,err=0;
+    root.querySelectorAll('.tok').forEach(function(b){b.classList.remove('miss','wrong');
+      var s=b.classList.contains('sel'),a=b.dataset.ok==='1';
+      if(a){tot++; if(s)ok++; else b.classList.add('miss')} else if(s){err++;b.classList.add('wrong')} });
+    return [ok,tot,err]}
+
+  var checks=[];
+  DATA.forEach(function(ex,n){
+    var box=document.getElementById('e'+(n+1)), id='e'+(n+1);
+    if(ex.type==='tok'){
+      var its=[];
+      ex.items.forEach(function(s,i){var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); tokens(fr,s,id+'-'+i); it.append(fr,fb); box.appendChild(it); its.push(it)});
+      checks.push(function(){var ok=0; its.forEach(function(it){var r=markToks(it), g=r[0]===r[1]&&!r[2]; it.className='item '+(g?'ok':'ko'); it.querySelector('.fb').textContent=g?'Giusto!':(ex.fb||'Il bordo rosso indica una parola mancante; la parola barrata non va segnata.'); if(g)ok++}); return [ok,its.length]});
+    } else if(ex.type==='testo'){
+      var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); fr.style.lineHeight='2'; tokens(fr,ex.text,id); it.append(fr,fb); box.appendChild(it);
+      checks.push(function(){var r=markToks(it); it.className='item '+(r[0]===r[1]&&!r[2]?'ok':'ko');
+        fb.textContent=(ex.nome||'Risposte')+' trovati: '+r[0]+' su '+r[1]+(r[2]?'. Segnati per errore: '+r[2]+' (barrati).':'.')+(r[0]<r[1]?' Il bordo rosso indica quelli mancanti.':'');
+        return [Math.max(0,r[0]-r[2]),r[1]]});
+    } else if(ex.type==='select'){
+      var arr=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),sel=el('select'),fb=el('div','fb');
+        sel.id=id+'-'+i; sel.setAttribute('aria-label',ex.label||'Risposta'); sel.appendChild(new Option('scegli…',''));
+        (d[3]||ex.opts).forEach(function(o){sel.appendChild(new Option(o,o))});
+        it.append(fr,sel,fb); box.appendChild(it); arr.push([it,sel,d])});
+      checks.push(function(){var ok=0; arr.forEach(function(x){var g=x[1].value===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Risposta corretta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr.length]});
+    } else if(ex.type==='scelta'){
+      var arr2=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),seg=el('div','seg'),fb=el('div','fb');
+        (d[3]||ex.opts).forEach(function(o,k){var b=el('button'); b.type='button'; b.id=id+'-'+i+'-'+k; b.textContent=o; b.setAttribute('aria-pressed','false');
+          b.onclick=function(){seg.dataset.v=o; seg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')})}; seg.appendChild(b)});
+        it.append(fr,seg,fb); box.appendChild(it); arr2.push([it,seg,d])});
+      checks.push(function(){var ok=0; arr2.forEach(function(x){var g=x[1].dataset.v===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Risposta corretta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr2.length]});
+    } else if(ex.type==='input'){
+      var arr3=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),inp=el('input'),fb=el('div','fb');
+        inp.type='text'; inp.id=id+'-'+i; inp.autocomplete='off'; inp.spellcheck=false; inp.setAttribute('aria-label',ex.label||'Risposta');
+        it.append(fr,inp,fb); box.appendChild(it); arr3.push([it,inp,d])});
+      checks.push(function(){var ok=0; arr3.forEach(function(x){var v=norm(x[1].value), g=x[2][1].some(function(a){return norm(a)===v}); x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Soluzione: <b>'+x[2][1][0]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr3.length]});
+    }
+  });
+
+  var score=document.getElementById('score');
+  document.getElementById('check').onclick=function(){var ok=0,tot=0; checks.forEach(function(c){var r=c(); ok+=r[0]; tot+=r[1]}); score.textContent='Risposte giuste: '+ok+' su '+tot};
+  document.getElementById('reset').onclick=function(){
+    document.querySelectorAll('.item').forEach(function(i){i.className='item'; var f=i.querySelector('.fb'); if(f)f.textContent=''});
+    document.querySelectorAll('.tok').forEach(function(b){b.classList.remove('sel','miss','wrong')});
+    document.querySelectorAll('select').forEach(function(s){s.value=''});
+    document.querySelectorAll('input[type=text]').forEach(function(s){s.value=''});
+    document.querySelectorAll('.seg').forEach(function(s){delete s.dataset.v; s.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed','false')})});
+    score.textContent=''; window.scrollTo(0,0)};
+})();
+</script>
+</body>
+</html>

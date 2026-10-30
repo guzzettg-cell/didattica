@@ -569,11 +569,19 @@ const MODULI = [
     titolo: "Educazione linguistica",
     descrizione: "Fonologia, ortografia e punteggiatura, le parti del discorso. Primo e secondo quadrimestre, in collegamento con Inglese, Francese, Spagnolo e Tedesco.",
     lezioni: [
-      { titolo: "Suoni e lettere: fonologia e alfabeto", attivita: [] },
-      { titolo: "Ortografia e punteggiatura", attivita: [] },
-      { titolo: "Le parti variabili: articolo, nome e verbo", attivita: [] },
-      { titolo: "Le parti variabili: aggettivo, pronome e verbo", attivita: [] },
-      { titolo: "Le parti invariabili: preposizione, congiunzione, avverbio, interiezione", attivita: [
+      { titolo: "Suoni e lettere: fonologia e alfabeto", descrizione: "Alfabeto, vocali e consonanti, digrammi, sillaba, dittongo e iato, accento.", attivita: [
+          { tipo: "Esercizi", titolo: "Suoni e lettere", descrizione: "Scheda riassuntiva e cinque esercizi con correzione automatica: sillabe, accento, dittongo e iato, digrammi.", link: "italiano/prima/educazione-linguistica/fonologia-alfabeto.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Ortografia e punteggiatura", descrizione: "I casi difficili, accento sui monosillabi, h, apostrofo, maiuscole e segni di punteggiatura.", attivita: [
+          { tipo: "Esercizi", titolo: "Ortografia e punteggiatura", descrizione: "Scheda riassuntiva e sei esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/ortografia-punteggiatura.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Le parti variabili: articolo, nome e verbo", descrizione: "Articoli determinativi, indeterminativi e partitivi; tipi di nome e plurale; coniugazioni e tempi dell'indicativo.", attivita: [
+          { tipo: "Esercizi", titolo: "Articolo, nome e verbo", descrizione: "Scheda riassuntiva e sei esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/articolo-nome-verbo.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Le parti variabili: aggettivo, pronome e verbo", descrizione: "Aggettivi qualificativi e determinativi, gradi; pronomi personali e relativi; verbi transitivi e intransitivi, forma e modi.", attivita: [
+          { tipo: "Esercizi", titolo: "Aggettivo, pronome e verbo", descrizione: "Scheda riassuntiva e sette esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/aggettivo-pronome-verbo.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Le parti invariabili: preposizione, congiunzione, avverbio, interiezione", descrizione: "Le parti del discorso che non cambiano mai forma.", attivita: [
           { tipo: "Esercizi", titolo: "Ripasso degli avverbi", descrizione: "Scheda riassuntiva e nove esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/ripasso-avverbi.html", data: "2026-10-23" },
           { tipo: "Esercizi", titolo: "Ripasso delle preposizioni", descrizione: "Semplici, articolate e improprie: scheda riassuntiva e sei esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/ripasso-preposizioni.html", data: "2026-10-23" },
           { tipo: "Esercizi", titolo: "Ripasso delle congiunzioni", descrizione: "Coordinanti e subordinanti: scheda riassuntiva e sei esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/ripasso-congiunzioni.html", data: "2026-10-23" },
@@ -590,14 +598,23 @@ const MODULI = [
     lezioni: [
       {
         titolo: "Il mito",
+        descrizione: "Che cos'è un mito; le cosmogonie, i racconti sull'origine del mondo.",
         attivita: [
           { tipo: "Lezione", titolo: "Il cielo sopra di noi", descrizione: "La Terra vista dalla Luna, astronauti, cosmonauti e taikonauti, fino ai racconti più antichi sull'origine del mondo. Fasi 6–9 in italiano.", link: "italiano/prima/mito-ed-epica/il-cielo-sopra-di-noi.html", data: "2026-10-21" }
         ]
       },
-      { titolo: "L'epica: l'Iliade", attivita: [] },
-      { titolo: "L'epica: l'Odissea", attivita: [] },
-      { titolo: "L'epica: l'Eneide", attivita: [] },
-      { titolo: "L'epica medievale e cavalleresca", attivita: [] }
+      { titolo: "L'epica: l'Iliade", descrizione: "Omero, l'antefatto, l'ira di Achille, i personaggi, epiteti e similitudini.", attivita: [
+          { tipo: "Lezione", titolo: "L'Iliade", descrizione: "Scheda sul poema e cinque esercizi con correzione automatica.", link: "italiano/prima/mito-ed-epica/iliade.html", data: "2026-10-30" }
+        ] },
+      { titolo: "L'epica: l'Odissea", descrizione: "Il ritorno di Ulisse a Itaca: struttura, avventure, Penelope e i Proci.", attivita: [
+          { tipo: "Lezione", titolo: "L'Odissea", descrizione: "Scheda sul poema e cinque esercizi con correzione automatica.", link: "italiano/prima/mito-ed-epica/odissea.html", data: "2026-10-30" }
+        ] },
+      { titolo: "L'epica: l'Eneide", descrizione: "Virgilio e Augusto, il viaggio e la guerra di Enea, il pio eroe.", attivita: [
+          { tipo: "Lezione", titolo: "L'Eneide", descrizione: "Scheda sul poema e cinque esercizi con correzione automatica.", link: "italiano/prima/mito-ed-epica/eneide.html", data: "2026-10-30" }
+        ] },
+      { titolo: "L'epica medievale e cavalleresca", descrizione: "Ciclo carolingio e bretone, la Chanson de Roland, Boiardo, Ariosto e Tasso.", attivita: [
+          { tipo: "Lezione", titolo: "Cavalieri, paladini e re Artù", descrizione: "Scheda sull'epica medievale e cinque esercizi con correzione automatica.", link: "italiano/prima/mito-ed-epica/epica-medievale-cavalleresca.html", data: "2026-10-30" }
+        ] }
     ]
   },
   {
@@ -607,7 +624,9 @@ const MODULI = [
     titolo: "Antologia",
     descrizione: "Lettura e comprensione: la narrazione in prosa. Primo e secondo quadrimestre, in collegamento con Storia, Educazione civica e Geografia.",
     lezioni: [
-      { titolo: "La narrazione in prosa", attivita: [] }
+      { titolo: "La narrazione in prosa", descrizione: "Fabula e intreccio, schema narrativo, sequenze, personaggi e narratore.", attivita: [
+          { tipo: "Lezione", titolo: "Come è fatto un racconto", descrizione: "Scheda sul testo narrativo e cinque esercizi con correzione automatica.", link: "italiano/prima/antologia/narrazione-in-prosa.html", data: "2026-10-30" }
+        ] }
     ]
   },
   {
@@ -633,11 +652,21 @@ const MODULI = [
     titolo: "Educazione linguistica",
     descrizione: "Analisi morfologica e analisi logica della frase semplice. Primo e secondo quadrimestre, in collegamento con Inglese, Francese, Spagnolo e Tedesco.",
     lezioni: [
-      { titolo: "Le preposizioni", attivita: [] },
-      { titolo: "La frase semplice: soggetto e predicato verbale e nominale", attivita: [] },
-      { titolo: "L'attributo e l'apposizione", attivita: [] },
-      { titolo: "Il complemento oggetto e i complementi predicativi", attivita: [] },
-      { titolo: "Gli altri complementi", attivita: [] }
+      { titolo: "Le preposizioni", descrizione: "Semplici, articolate, improprie e locuzioni; la preposizione come chiave dei complementi.", attivita: [
+          { tipo: "Esercizi", titolo: "Le preposizioni, ponte verso i complementi", descrizione: "Scheda riassuntiva e cinque esercizi con correzione automatica.", link: "italiano/seconda/educazione-linguistica/preposizioni-e-complementi.html", data: "2026-10-30" }
+        ] },
+      { titolo: "La frase semplice: soggetto e predicato verbale e nominale", descrizione: "Il soggetto, anche sottinteso; predicato verbale e nominale; la frase minima.", attivita: [
+          { tipo: "Esercizi", titolo: "Soggetto e predicato", descrizione: "Scheda riassuntiva e cinque esercizi con correzione automatica.", link: "italiano/seconda/educazione-linguistica/soggetto-e-predicato.html", data: "2026-10-30" }
+        ] },
+      { titolo: "L'attributo e l'apposizione", descrizione: "Gli aggettivi e i nomi che accompagnano un altro nome; attributo o parte nominale.", attivita: [
+          { tipo: "Esercizi", titolo: "Attributo e apposizione", descrizione: "Scheda riassuntiva e cinque esercizi con correzione automatica.", link: "italiano/seconda/educazione-linguistica/attributo-e-apposizione.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Il complemento oggetto e i complementi predicativi", descrizione: "Il complemento diretto, dalla frase attiva alla passiva; predicativi del soggetto e dell'oggetto.", attivita: [
+          { tipo: "Esercizi", titolo: "Complemento oggetto e predicativi", descrizione: "Scheda riassuntiva e cinque esercizi con correzione automatica.", link: "italiano/seconda/educazione-linguistica/complemento-oggetto-e-predicativi.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Gli altri complementi", descrizione: "Specificazione, termine, agente, causa, fine, mezzo, modo, compagnia, materia, argomento, luogo e tempo.", attivita: [
+          { tipo: "Esercizi", titolo: "Gli altri complementi", descrizione: "Scheda riassuntiva e quattro esercizi con correzione automatica, con un'analisi logica completa.", link: "italiano/seconda/educazione-linguistica/altri-complementi.html", data: "2026-10-30" }
+        ] }
     ]
   },
   {
@@ -673,9 +702,15 @@ const MODULI = [
           { tipo: "Fase 8", titolo: "Rischiatutto stilnovista", link: "italiano/seconda/dante/stilnovo-ripasso/attivita/fase-8-rischiatutto-stilnovista.html", data: "2026-10-16" }
         ]
       },
-      { titolo: "Petrarca", attivita: [] },
-      { titolo: "Boccaccio", attivita: [] },
-      { titolo: "Ariosto", attivita: [] },
+      { titolo: "Petrarca", descrizione: "La vita tra Avignone e Arquà, Laura, il Canzoniere e il sonetto «Solo et pensoso».", attivita: [
+          { tipo: "Lezione", titolo: "Francesco Petrarca", descrizione: "Scheda sull'autore e cinque esercizi con correzione automatica.", link: "italiano/seconda/petrarca/petrarca.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Boccaccio", descrizione: "Il Decameron: la cornice della peste, i temi e tre novelle famose.", attivita: [
+          { tipo: "Lezione", titolo: "Giovanni Boccaccio e il Decameron", descrizione: "Scheda sull'autore e cinque esercizi con correzione automatica.", link: "italiano/seconda/boccaccio/boccaccio.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Ariosto", descrizione: "La corte di Ferrara e l'Orlando furioso: la follia di Orlando, Astolfo sulla Luna, ottave e intreccio.", attivita: [
+          { tipo: "Lezione", titolo: "Ludovico Ariosto e l'Orlando furioso", descrizione: "Scheda sull'autore e cinque esercizi con correzione automatica.", link: "italiano/seconda/ariosto/ariosto.html", data: "2026-10-30" }
+        ] },
       {
         titolo: "Approfondimento: Copernico e Colombo nelle Operette morali",
         descrizione: "Leopardi racconta il Cinquecento: il viaggio di Colombo verso l'ignoto e la Terra di Copernico che lascia il centro dell'universo, con la Storia del genere umano come cornice.",
@@ -1033,7 +1068,7 @@ const MODULI = [
       {
         titolo: "La scoperta dei nuovi mondi",
         dipartimento: true,
-        descrizione: "Portoghesi e spagnoli negli oceani: Colombo, Vasco da Gama, Magellano, lo scambio colombiano. Dentro la fonte: la lettera di Colombo del 1493 (Europeana).",
+        descrizione: "Portoghesi e spagnoli negli oceani: Colombo, Vasco da Gama, Magellano, lo scambio colombiano. Dentro la fonte: il diario di bordo di Colombo e le tre «sirene» (9 gennaio 1493).",
         indice: "Storia facile 2, M1 cap. 2 · Tablet p. 112",
         link: "storia/seconda/flussi-migratori/scoperta-nuovi-mondi.html",
         data: "2026-10-29",

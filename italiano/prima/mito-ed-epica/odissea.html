@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L&#x27;Odissea</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --bg:#f6f7f4; --paper:#ffffff; --ink:#1d2b33; --muted:#5b6a70; --line:#d9dfdc;
+  --accent:#1f6f78; --hl:#ffe46b; --hl-ink:#3a2f00;
+  --ok:#2e7d4f; --ok-bg:#e3f3e8; --ko:#b23a3a; --ko-bg:#f9e3e1;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }
+
+html{font-size:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:1.5rem 4rem}
+.wrap{max-width:46rem;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800}
+h2{font-size:1.6rem;font-weight:700}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+.mark{background:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 88%,transparent 88%);color:var(--hl-ink);padding:0 .15em;border-radius:2px}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+header{display:flex;flex-direction:column;gap:.75rem;padding-top:1rem}
+header p{color:var(--muted);max-width:38rem}
+section{display:flex;flex-direction:column;gap:1rem}
+.note{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1rem 1.15rem;display:flex;flex-direction:column;gap:.6rem}
+.tipi{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.75rem}
+.tipo{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.tipo b{font-family:var(--display);font-size:1.05rem}
+.tipo .q{font-size:.85rem;color:var(--muted)}
+.tipo .es{font-size:.95rem}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:.55rem .8rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-size:.9rem;color:var(--accent)}
+tr:last-child td{border-bottom:none}
+hr{border:none;border-top:2px dashed var(--line);margin:0}
+
+/* esercizi */
+.ex{display:flex;flex-direction:column;gap:.9rem}
+.ex .consegna{color:var(--muted)}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .8rem}
+.item .frase{flex:1 1 16rem;min-width:0}
+.item.ok{border-color:var(--ok);background:var(--ok-bg)}
+.item.ko{border-color:var(--ko);background:var(--ko-bg)}
+.fb{flex-basis:100%;font-size:.9rem;color:var(--muted)}
+.fb:empty{display:none}
+.tok{cursor:pointer;border-radius:4px;padding:0 .1em;border:none;background:none;font:inherit;color:inherit}
+.tok:hover{outline:1px dashed var(--accent)}
+.tok.sel{background:var(--hl);color:var(--hl-ink)}
+.tok.miss{outline:2px solid var(--ko)}
+.tok.wrong{text-decoration:line-through;text-decoration-color:var(--ko);text-decoration-thickness:2px}
+select,input[type=text]{font:inherit;font-size:1rem;padding:.35rem .5rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);max-width:100%}
+input[type=text]{width:11rem}
+.seg{display:flex;gap:.4rem;flex-wrap:wrap}
+.seg button,.btn{font:inherit;font-size:.95rem;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:.3rem .9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--paper)}
+.btn.main{background:var(--accent);color:var(--paper);font-weight:700}
+.azioni{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.punti{font-weight:700;font-variant-numeric:tabular-nums}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* zoom */
+.zoom{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;gap:.3rem;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:.3rem;box-shadow:0 4px 14px rgba(0,0,0,.15);z-index:20}
+.zoom button{width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:var(--display);font-weight:700;font-size:1rem;cursor:pointer}
+.zoom span{align-self:center;font-size:.8rem;min-width:2.8rem;text-align:center;font-variant-numeric:tabular-nums;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.item{transition:background .2s,border-color .2s}}
+
+.ex > div[id^="e"]{display:flex;flex-direction:column;gap:.6rem}
+.tipi.two{grid-template-columns:repeat(auto-fit,minmax(17rem,1fr))}
+.note ul,.note ol{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:.3rem}
+.cit{border-left:4px solid var(--accent);padding:.2rem 0 .2rem 1rem;font-style:italic}
+.cit small{display:block;font-style:normal;color:var(--muted);font-size:.85rem;margin-top:.3rem}
+.indice{display:flex;flex-wrap:wrap;gap:.4rem}
+.indice a{font-size:.85rem;color:var(--accent);border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:.15rem .7rem;text-decoration:none}
+.indice a:hover{border-color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="zoom" role="group" aria-label="Dimensione del testo">
+  <button id="zm" type="button" aria-label="Rimpicciolisci">A−</button>
+  <span id="zv">100%</span>
+  <button id="zp" type="button" aria-label="Ingrandisci">A+</button>
+</div>
+
+<main class="wrap">
+<header>
+  <span class="eyebrow">Mito ed epica · lezione 3</span>
+  <h1>L'<span class="mark">Odissea</span></h1>
+  <p>Finita la guerra di Troia, gli eroi tornano a casa. Il ritorno di Ulisse a Itaca dura <b>dieci anni</b>: è la storia di un uomo che si salva con l'intelligenza.</p>
+</header>
+
+<section>
+  <h2>Carta d'identità</h2>
+  <div class="tipi">
+    <div class="tipo"><b>autore</b><span class="es">attribuita a Omero, come l'Iliade; probabilmente un po' più recente</span></div>
+    <div class="tipo"><b>titolo</b><span class="es">da <i>Odisseo</i>, il nome greco di Ulisse</span></div>
+    <div class="tipo"><b>forma</b><span class="es">24 libri in esametri, circa 12.000 versi</span></div>
+    <div class="tipo"><b>argomento</b><span class="es">il <i>nóstos</i>, il viaggio di ritorno a casa</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Ulisse, l'eroe dell'astuzia</h2>
+  <div class="note">
+    <p>Achille è l'eroe della forza; Ulisse è <span class="mark">polýtropos</span>, «dal multiforme ingegno»: inventa, mente, si traveste, resiste. È lui ad aver ideato il cavallo di legno.</p>
+    <p>A Itaca lo aspettano la moglie <b>Penelope</b>, fedele, e il figlio <b>Telemaco</b>. Nella reggia, intanto, i <b>Proci</b> (i pretendenti) vogliono sposare Penelope e prendere il regno.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Come è costruito il racconto</h2>
+  <p>L'Odissea non comincia dall'inizio: parte quando Ulisse è già prigioniero da anni. Le avventure le racconta lui stesso, con un lungo <b>flashback</b>.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>libri</th><th>che cosa succede</th></tr></thead>
+    <tbody>
+      <tr><td>I–IV</td><td><b>Telemachia</b>: Telemaco parte in cerca di notizie del padre.</td></tr>
+      <tr><td>V–VIII</td><td>Ulisse lascia l'isola della ninfa <b>Calipso</b> e naufraga presso i <b>Feaci</b>, dove lo accoglie Nausicaa.</td></tr>
+      <tr><td>IX–XII</td><td>Alla corte dei Feaci, Ulisse <b>racconta le sue avventure</b> (flashback).</td></tr>
+      <tr><td>XIII–XXIV</td><td>Il <b>ritorno a Itaca</b>: travestito da mendicante, Ulisse si fa riconoscere e punisce i Proci.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Le avventure</h2>
+  <div class="tipi">
+    <div class="tipo"><b>Lotofagi</b><span class="es">chi mangia il fiore di loto dimentica la patria</span></div>
+    <div class="tipo"><b>Polifemo</b><span class="es">il Ciclope con un occhio solo; Ulisse si chiama «Nessuno», lo acceca e fugge sotto le pecore</span></div>
+    <div class="tipo"><b>Eolo</b><span class="es">il dio dei venti regala un otre pieno di venti; i compagni lo aprono</span></div>
+    <div class="tipo"><b>Circe</b><span class="es">la maga trasforma i compagni in porci</span></div>
+    <div class="tipo"><b>l'Ade</b><span class="es">Ulisse scende nel regno dei morti e interroga l'indovino Tiresia</span></div>
+    <div class="tipo"><b>le Sirene</b><span class="es">Ulisse si fa legare all'albero della nave, i compagni hanno la cera nelle orecchie</span></div>
+    <div class="tipo"><b>Scilla e Cariddi</b><span class="es">un mostro a sei teste e un vortice che inghiotte il mare</span></div>
+    <div class="tipo"><b>i buoi del Sole</b><span class="es">i compagni li mangiano e Zeus fa naufragare la nave: si salva solo Ulisse</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Il ritorno a Itaca</h2>
+  <div class="note">
+    <p>Penelope ha ingannato i Proci per anni con la <b>tela</b>: diceva che si sarebbe risposata una volta finito il sudario per il suocero Laerte, ma di notte disfaceva il lavoro del giorno.</p>
+    <p>Ulisse torna travestito da mendicante. Lo riconoscono il vecchio cane <b>Argo</b>, che muore subito dopo, e la nutrice <b>Euriclea</b> da una cicatrice.</p>
+    <p>Nella <b>gara dell'arco</b> solo lui riesce a tenderlo: poi uccide i Proci. Penelope lo riconosce davvero quando lui le rivela il segreto del loro letto, costruito su un tronco d'ulivo.</p>
+  </div>
+</section>
+
+<hr>
+<section class="ex" id="ex1">
+  <span class="eyebrow">Esercizio 1</span>
+  <h2>Chi o che cosa?</h2>
+  <p class="consegna">Leggi la descrizione e scegli il personaggio.</p>
+  <div id="e1"></div>
+</section>
+<section class="ex" id="ex2">
+  <span class="eyebrow">Esercizio 2</span>
+  <h2>Forza o astuzia?</h2>
+  <p class="consegna">Con che cosa Ulisse supera la prova? Scegli quello che conta di più.</p>
+  <div id="e2"></div>
+</section>
+<section class="ex" id="ex3">
+  <span class="eyebrow">Esercizio 3</span>
+  <h2>Vero o falso?</h2>
+  <p class="consegna">Decidi se l'affermazione è vera o falsa.</p>
+  <div id="e3"></div>
+</section>
+<section class="ex" id="ex4">
+  <span class="eyebrow">Esercizio 4</span>
+  <h2>Iliade o Odissea?</h2>
+  <p class="consegna">In quale poema si trova?</p>
+  <div id="e4"></div>
+</section>
+<section class="ex" id="ex5">
+  <span class="eyebrow">Esercizio 5</span>
+  <h2>Ordina il ritorno a Itaca</h2>
+  <p class="consegna">Metti in ordine: 1 per il primo avvenimento, 5 per l'ultimo.</p>
+  <div id="e5"></div>
+</section>
+<section class="ex">
+  <div class="note">
+    <div class="azioni">
+      <button class="btn main" id="check" type="button">Correggi tutto</button>
+      <button class="btn" id="reset" type="button">Ricomincia</button>
+      <span class="punti" id="score" aria-live="polite"></span>
+    </div>
+  </div>
+</section>
+</main>
+<script>
+(function(){
+  var KEY="odissea", DATA=[{"type": "select", "opts": ["Polifemo", "Circe", "Eolo", "le Sirene", "Calipso", "Tiresia", "Argo", "i Proci"], "label": "Personaggio", "items": [["Il Ciclope che Ulisse acceca dopo averlo fatto ubriacare.", "Polifemo"], ["La maga che trasforma i compagni in porci.", "Circe"], ["Il dio che chiude i venti in un otre.", "Eolo"], ["Con il loro canto attirano i marinai verso la morte.", "le Sirene"], ["La ninfa che trattiene Ulisse per sette anni.", "Calipso"], ["L'indovino che Ulisse incontra nel regno dei morti.", "Tiresia"], ["Il vecchio cane che riconosce il padrone.", "Argo"], ["Vogliono sposare Penelope e prendere il regno.", "i Proci"]]}, {"type": "scelta", "opts": ["astuzia", "forza"], "items": [["Dice a Polifemo di chiamarsi «Nessuno».", "astuzia", "così gli altri Ciclopi non vengono in aiuto."], ["Esce dalla grotta aggrappato sotto il ventre delle pecore.", "astuzia"], ["Si fa legare all'albero della nave per ascoltare le Sirene.", "astuzia"], ["Tende l'arco che nessun altro riesce a piegare.", "forza"], ["Si traveste da mendicante per entrare nella reggia.", "astuzia"]]}, {"type": "scelta", "opts": ["vero", "falso"], "items": [["Il viaggio di ritorno di Ulisse dura dieci anni.", "vero"], ["Il poema racconta le avventure in ordine dalla prima all'ultima.", "falso", "Ulisse le racconta ai Feaci con un flashback."], ["Telemaco è il padre di Ulisse.", "falso", "è il figlio; il padre è Laerte."], ["Penelope di notte disfaceva la tela.", "vero"], ["Tutti i compagni di Ulisse tornano a Itaca.", "falso", "si salva solo lui."], ["Euriclea riconosce Ulisse da una cicatrice.", "vero"]]}, {"type": "scelta", "opts": ["Iliade", "Odissea"], "items": [["L'ira di Achille", "Iliade"], ["Il ciclope Polifemo", "Odissea"], ["La morte di Ettore", "Iliade"], ["La tela di Penelope", "Odissea"], ["Il racconto alla corte dei Feaci", "Odissea"], ["La morte di Patroclo", "Iliade"], ["L'eroe dell'astuzia", "Odissea"], ["La guerra sotto le mura di Troia", "Iliade"]]}, {"type": "select", "opts": ["1", "2", "3", "4", "5"], "label": "Posizione", "items": [["Ulisse arriva a Itaca travestito da mendicante.", "1"], ["Il cane Argo lo riconosce.", "2"], ["Euriclea vede la cicatrice.", "3"], ["Ulisse vince la gara dell'arco e uccide i Proci.", "4"], ["Penelope lo riconosce grazie al segreto del letto.", "5"]]}];
+  var z=100, zv=document.getElementById('zv');
+  try{ z=parseInt(localStorage.getItem(KEY+'-zoom'))||100 }catch(e){}
+  function setZ(v){ z=Math.max(70,Math.min(200,v)); document.documentElement.style.fontSize=z+'%'; zv.textContent=z+'%'; try{localStorage.setItem(KEY+'-zoom',z)}catch(e){} }
+  document.getElementById('zp').onclick=function(){setZ(z+10)};
+  document.getElementById('zm').onclick=function(){setZ(z-10)};
+  setZ(z);
+  function el(t,c,h){var e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e}
+  function norm(s){return String(s).toLowerCase().replace(/[’‘`´]/g,"'").replace(/\s*-\s*/g,'-').replace(/\s+/g,' ').replace(/^[\s.]+|[\s.]+$/g,'')}
+  var W=/[A-Za-zÀ-ÿ']+/;
+
+  function tokens(container,str,idp){
+    str.match(/\*[^*]+\*|[A-Za-zÀ-ÿ']+|[^\sA-Za-zÀ-ÿ'*]+|\s+/g).forEach(function(t,j){
+      if(/^[A-Za-zÀ-ÿ']+$/.test(t)||t[0]==='*'){
+        var m=t[0]==='*', b=el('button','tok'); b.type='button'; b.id=idp+'-'+j; b.textContent=m?t.slice(1,-1):t; b.dataset.ok=m?'1':'0';
+        b.onclick=function(){b.classList.toggle('sel')}; container.appendChild(b);
+      } else container.appendChild(document.createTextNode(t));
+    });
+  }
+  function markToks(root){var ok=0,tot=0,err=0;
+    root.querySelectorAll('.tok').forEach(function(b){b.classList.remove('miss','wrong');
+      var s=b.classList.contains('sel'),a=b.dataset.ok==='1';
+      if(a){tot++; if(s)ok++; else b.classList.add('miss')} else if(s){err++;b.classList.add('wrong')} });
+    return [ok,tot,err]}
+
+  var checks=[];
+  DATA.forEach(function(ex,n){
+    var box=document.getElementById('e'+(n+1)), id='e'+(n+1);
+    if(ex.type==='tok'){
+      var its=[];
+      ex.items.forEach(function(s,i){var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); tokens(fr,s,id+'-'+i); it.append(fr,fb); box.appendChild(it); its.push(it)});
+      checks.push(function(){var ok=0; its.forEach(function(it){var r=markToks(it), g=r[0]===r[1]&&!r[2]; it.className='item '+(g?'ok':'ko'); it.querySelector('.fb').textContent=g?'Giusto!':(ex.fb||'Il bordo rosso indica una parola mancante; la parola barrata non va segnata.'); if(g)ok++}); return [ok,its.length]});
+    } else if(ex.type==='testo'){
+      var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); fr.style.lineHeight='2'; tokens(fr,ex.text,id); it.append(fr,fb); box.appendChild(it);
+      checks.push(function(){var r=markToks(it); it.className='item '+(r[0]===r[1]&&!r[2]?'ok':'ko');
+        fb.textContent=(ex.nome||'Risposte')+' trovati: '+r[0]+' su '+r[1]+(r[2]?'. Segnati per errore: '+r[2]+' (barrati).':'.')+(r[0]<r[1]?' Il bordo rosso indica quelli mancanti.':'');
+        return [Math.max(0,r[0]-r[2]),r[1]]});
+    } else if(ex.type==='select'){
+      var arr=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),sel=el('select'),fb=el('div','fb');
+        sel.id=id+'-'+i; sel.setAttribute('aria-label',ex.label||'Risposta'); sel.appendChild(new Option('scegli…',''));
+        (d[3]||ex.opts).forEach(function(o){sel.appendChild(new Option(o,o))});
+        it.append(fr,sel,fb); box.appendChild(it); arr.push([it,sel,d])});
+      checks.push(function(){var ok=0; arr.forEach(function(x){var g=x[1].value===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Risposta corretta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr.length]});
+    } else if(ex.type==='scelta'){
+      var arr2=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),seg=el('div','seg'),fb=el('div','fb');
+        (d[3]||ex.opts).forEach(function(o,k){var b=el('button'); b.type='button'; b.id=id+'-'+i+'-'+k; b.textContent=o; b.setAttribute('aria-pressed','false');
+          b.onclick=function(){seg.dataset.v=o; seg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')})}; seg.appendChild(b)});
+        it.append(fr,seg,fb); box.appendChild(it); arr2.push([it,seg,d])});
+      checks.push(function(){var ok=0; arr2.forEach(function(x){var g=x[1].dataset.v===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Risposta corretta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr2.length]});
+    } else if(ex.type==='input'){
+      var arr3=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),inp=el('input'),fb=el('div','fb');
+        inp.type='text'; inp.id=id+'-'+i; inp.autocomplete='off'; inp.spellcheck=false; inp.setAttribute('aria-label',ex.label||'Risposta');
+        it.append(fr,inp,fb); box.appendChild(it); arr3.push([it,inp,d])});
+      checks.push(function(){var ok=0; arr3.forEach(function(x){var v=norm(x[1].value), g=x[2][1].some(function(a){return norm(a)===v}); x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Soluzione: <b>'+x[2][1][0]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr3.length]});
+    }
+  });
+
+  var score=document.getElementById('score');
+  document.getElementById('check').onclick=function(){var ok=0,tot=0; checks.forEach(function(c){var r=c(); ok+=r[0]; tot+=r[1]}); score.textContent='Risposte giuste: '+ok+' su '+tot};
+  document.getElementById('reset').onclick=function(){
+    document.querySelectorAll('.item').forEach(function(i){i.className='item'; var f=i.querySelector('.fb'); if(f)f.textContent=''});
+    document.querySelectorAll('.tok').forEach(function(b){b.classList.remove('sel','miss','wrong')});
+    document.querySelectorAll('select').forEach(function(s){s.value=''});
+    document.querySelectorAll('input[type=text]').forEach(function(s){s.value=''});
+    document.querySelectorAll('.seg').forEach(function(s){delete s.dataset.v; s.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed','false')})});
+    score.textContent=''; window.scrollTo(0,0)};
+})();
+</script>
+</body>
+</html>

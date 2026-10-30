@@ -208,6 +208,11 @@ a.pk:hover{background:#e1edef;background:var(--accento-soft)}
 .lente-testa h3{margin:4px 0 0;color:inherit;font:700 1.6rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.6rem/1.2 var(--serif);text-transform:none;letter-spacing:0}
 .lente-corpo{padding:18px 22px}
 .domanda-guida{font:italic 1.2rem/1.5 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.2rem/1.5 var(--serif);border-left:4px solid #2b5f6b;border-left:4px solid var(--accento);padding:4px 0 4px 14px;margin:0 0 18px}
+.testo-fonte{display:grid;grid-template-columns:1fr 1fr;grid-gap:14px;gap:14px;margin:6px 0 18px}
+.testo-fonte figure{margin:0;padding:14px 16px;border-radius:12px;background:#eaf1f2;background:var(--tenue-bg)}
+.testo-fonte figcaption{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue);margin:0 0 6px}
+.testo-fonte blockquote{margin:0;font:1.05rem/1.6 Georgia,"Iowan Old Style","Times New Roman",serif;font:1.05rem/1.6 var(--serif)}
+@media (max-width:760px){.testo-fonte{grid-template-columns:1fr}}
 .fasi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-gap:14px;gap:14px}
 .fase{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px}
 .fase h4{margin:0 0 8px;font-size:1rem}
@@ -565,24 +570,30 @@ footer p{margin:0 0 6px}
 <section class="parte" id="lente" aria-labelledby="t-lente">
   <p class="etichetta">Che cosa dicono le fonti?</p>
   <h2 id="t-lente">Dentro la fonte</h2>
-  <p class="guida">La lettera in cui Colombo racconta il suo primo viaggio fu stampata in molte città d'Europa nel 1493. Alcune di queste edizioni si possono sfogliare su <em>Europeana</em>.</p>
+  <p class="guida">Durante il primo viaggio Colombo annota ogni giorno quello che vede. Il 9 gennaio 1493, sulla costa nord di Hispaniola, scrive di aver visto tre sirene.</p>
   <p class="mestiere">📜 Leggere e interpretare le fonti · fonte scritta</p>
   <div class="lente">
     <div class="lente-testa">
-      <p class="testata-giornale">Libro a stampa · 1493 · Europeana</p>
-      <h3>La lettera di Colombo sulle isole appena scoperte</h3>
+      <p class="testata-giornale">Diario di bordo · 9 gennaio 1493 · trascrizione di Bartolomé de Las Casas</p>
+      <h3>«Vide tre sirene»: Colombo e i mostri del mare</h3>
     </div>
     <div class="lente-corpo">
-      <p>Tornato in Spagna, Colombo scrive ai re e ai loro funzionari una lettera che descrive le isole, la natura e gli abitanti. La lettera viene tradotta in latino e stampata in molte città: in pochi mesi la notizia si diffonde in tutta Europa.</p>
-      <p>Il titolo latino dice: «Lettera di Cristoforo Colombo, al quale la nostra epoca deve molto, sulle isole dell'India al di là del Gange appena scoperte». Colombo è convinto di essere arrivato in Asia.</p>
-      <p class="domanda-guida">Domanda guida: come fanno gli europei del 1493 a sapere che cosa ha trovato Colombo? Di chi è lo sguardo con cui conoscono l'America?</p>
+      <p>Il diario originale di Colombo è andato perduto. Lo conosciamo grazie al frate Bartolomé de Las Casas, che qualche decennio dopo ne copiò e riassunse molte pagine. Per questo il testo parla di Colombo in terza persona: «l'Ammiraglio disse…».</p>
+      <div class="testo-fonte">
+        <figure lang="es"><figcaption>Il testo originale (spagnolo del Cinquecento)</figcaption>
+          <blockquote>«El día pasado, cuando el Almirante iba al Río del Oro, dijo que vido tres sirenas que salieron bien alto de la mar, pero no eran tan hermosas como las pintan, que en alguna manera tenían forma de hombre en la cara. Dijo que otras veces vido algunas en Guinea, en la costa de la Manegueta.»</blockquote></figure>
+        <figure><figcaption>In italiano</figcaption>
+          <blockquote>«Il giorno prima, mentre l'Ammiraglio andava verso il Río del Oro, disse di aver visto tre sirene che uscirono ben fuori dal mare, ma non erano così belle come le dipingono: in qualche modo avevano un volto d'uomo. Disse di averne viste altre volte in Guinea, sulla costa della Manegueta.»</blockquote></figure>
+      </div>
+      <p class="domanda-guida">Domanda guida: che cosa hanno visto davvero Colombo e i suoi marinai? E perché li chiamano sirene?</p>
       <div class="fasi">
-        <div class="fase"><h4>1. Prima di guardare</h4><ol><li>Dove crede di essere arrivato Colombo? Rileggi il <a href="#testi">testo</a>.</li><li>Ritrova il 1493 sulla <a href="#quando">linea del tempo</a>.</li></ol></div>
-        <div class="fase"><h4>2. Osservare</h4><ol><li>Apri la fonte: in che lingua è scritta? Ci sono immagini?</li><li>Se ci sono illustrazioni, che cosa mostrano? Navi, isole, abitanti?</li></ol><p style="margin:10px 0 0"><a class="bottone" href="https://www.europeana.eu/en/item/358/item_473STZOB3WZEFQ3UDZDYWUCUBDA4T7X3" target="_blank" rel="noopener">Apri la fonte su Europeana</a></p></div>
-        <div class="fase"><h4>3. Pensare da storici</h4><ol><li>Perché la lettera viene stampata e non solo copiata a mano? Collegala alla lezione sulla stampa.</li><li>Colombo voleva convincere i re a finanziare altri viaggi: come può aver descritto quelle terre?</li><li>Che cosa manca in questa fonte? Chi non ha potuto raccontare la sua versione?</li></ol></div>
+        <div class="fase"><h4>1. Prima di leggere</h4><ol><li>Che cosa sono le sirene nei racconti antichi? Pensa a Ulisse e all'epica che hai letto.</li><li>Ritrova il 1493 sulla <a href="#quando">linea del tempo</a> e Colombo in <a href="#chi-incontrerai">Chi incontrerai?</a></li></ol></div>
+        <div class="fase"><h4>2. Leggere</h4><ol><li>Dove e quando succede il fatto? Chi lo racconta?</li><li>In che cosa le «sirene» sono diverse da come Colombo se le aspettava?</li><li>Perché il testo dice «l'Ammiraglio disse» e non «io vidi»?</li></ol></div>
+        <div class="fase"><h4>3. Pensare da storici</h4><ol><li>Gli studiosi pensano che fossero lamantini: cerca un'immagine di questo animale. Ti sembra possibile scambiarlo per una sirena?</li><li>Che cosa è un fatto e che cosa è un'interpretazione in questo passo?</li><li>Colombo guarda il Nuovo Mondo con gli occhi dei libri che conosce: che cosa ci dice questo degli europei del 1493?</li><li>Possiamo fidarci di un testo che è la copia riassunta di un altro?</li></ol></div>
       </div>
       <ul class="altre-fonti">
-        <li><span class="tipo">Europeana</span><a href="https://www.europeana.eu/en/item/368/item_VFXZOHJFHAKVJJUE56QKQ5EP476XAWEH" target="_blank" rel="noopener">Un'altra edizione della lettera di Colombo</a> · <a href="https://www.europeana.eu/en/stories/did-columbus-really-see-mermaids" target="_blank" rel="noopener">Colombo vide davvero le sirene? (racconto)</a> · <a href="https://www.europeana.eu/en/collections/person/167037-amerigo-vespucci" target="_blank" rel="noopener">Amerigo Vespucci (raccolta)</a></li>
+        <li><span class="tipo">Europeana</span><a href="https://www.europeana.eu/en/stories/did-columbus-really-see-mermaids" target="_blank" rel="noopener">Colombo vide davvero le sirene? (racconto)</a> · <a href="https://www.europeana.eu/en/item/358/item_473STZOB3WZEFQ3UDZDYWUCUBDA4T7X3" target="_blank" rel="noopener">La lettera di Colombo sulle isole appena scoperte (1493)</a> · <a href="https://www.europeana.eu/en/collections/person/167037-amerigo-vespucci" target="_blank" rel="noopener">Amerigo Vespucci (raccolta)</a></li>
+        <li><span class="tipo">Wikisource</span><a href="https://es.wikisource.org/wiki/Diario_de_a_bordo_del_primer_viaje_de_Crist%C3%B3bal_Col%C3%B3n" target="_blank" rel="noopener">Il diario di bordo del primo viaggio (testo spagnolo)</a></li>
         <li><span class="tipo">Treccani</span><a href="https://www.treccani.it/enciclopedia/cristoforo-colombo_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Cristoforo Colombo</a> · <a href="https://www.treccani.it/enciclopedia/navigazione_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Navigazione</a> · <a href="https://www.treccani.it/enciclopedia/esplorazioni-geografiche_(Dizionario-di-Storia)/" target="_blank" rel="noopener">Esplorazioni geografiche</a></li>
       </ul>
     </div>
@@ -707,7 +718,7 @@ var ESERCIZI=[
   righe:[["Partenza di Colombo","Palos"],["Primo sbarco di Colombo","San Salvador"],["Arrivo di Cabral in Brasile","Porto Seguro"],["La punta meridionale dell'Africa","Capo di Buona Speranza"],["Il porto delle spezie in India","Calicut"],["Il passaggio verso il Pacifico","Stretto di Magellano"]]},
  {gruppo:"fonti", titolo:"Fatto o interpretazione?", meta:"Uno storico distingue i fatti (si possono verificare) dalle interpretazioni (sono giudizi, opinioni).",
   scelte:["Fatto","Interpretazione"],
-  righe:[["Il 12 ottobre 1492 Colombo sbarca in un'isola delle Bahamas.","Fatto","Lo racconta il suo diario di bordo."],["Colombo scoprì l'America.","Interpretazione","È il punto di vista europeo: il continente era già abitato."],["La lettera di Colombo fu stampata in molte città nel 1493.","Fatto","Esistono le edizioni a stampa."],["Le scoperte geografiche furono un progresso per l'umanità.","Interpretazione","È un giudizio: per i popoli americani furono una catastrofe."],["La spedizione di Magellano tornò con una sola nave.","Fatto","Lo racconta Pigafetta."]]},
+  righe:[["Il 12 ottobre 1492 Colombo sbarca in un'isola delle Bahamas.","Fatto","Lo racconta il suo diario di bordo."],["Colombo scoprì l'America.","Interpretazione","È il punto di vista europeo: il continente era già abitato."],["La lettera di Colombo fu stampata in molte città nel 1493.","Fatto","Esistono le edizioni a stampa."],["Il 9 gennaio 1493 Colombo vide tre sirene.","Interpretazione","Vide degli animali uscire dal mare, probabilmente lamantini: li chiama sirene perché li legge con le leggende che conosce."],["Le scoperte geografiche furono un progresso per l'umanità.","Interpretazione","È un giudizio: per i popoli americani furono una catastrofe."],["La spedizione di Magellano tornò con una sola nave.","Fatto","Lo racconta Pigafetta."]]},
  {gruppo:"processi", titolo:"Chi esplora dove?", meta:"Rileggi lo schema «Come?» e abbina ogni viaggio alla rotta giusta.",
   scelte:["Portoghesi","Spagnoli","Giro del mondo"],
   righe:[["Bartolomeo Dias","Portoghesi"],["Cristoforo Colombo","Spagnoli"],["Ferdinando Magellano","Giro del mondo"],["Vasco da Gama","Portoghesi"],["Le Antille","Spagnoli"],["Il Pacifico","Giro del mondo"]]},
