@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Parole in fabula: attività di grammatica attraverso favole e fiabe, in una versione offline modificabile." />
+    <meta name="theme-color" content="#f6edda" />
+    <title>Il testo misterioso · Parole in fabula</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="stile.css" />
+    <style>
+      /* Lascia respiro tra le etichette e i campi di risposta. */
+      .exercise-card > label + input[type="text"] {
+        margin-inline-start: clamp(1rem, 2vw, 1.5rem);
+        max-width: calc(100% - clamp(1rem, 2vw, 1.5rem));
+      }
+
+      .exercise-card > label + textarea,
+      .writing-card > label + textarea {
+        margin-block-start: 0.75rem;
+      }
+
+      @media (max-width: 42rem) {
+        .exercise-card > label + input[type="text"] {
+          display: block;
+          width: 100%;
+          max-width: 100%;
+          margin-block-start: 0.75rem;
+          margin-inline-start: 0;
+        }
+      }
+
+      /* ---------- Il gioco della storia rotta ---------- */
+      .data-source { display: none; }
+      .game { margin-top: 6px; }
+      .game-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+      .game-tabs button { border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--forest-dark); cursor: pointer; padding: 8px 14px; font-weight: 850; }
+      .game-tabs button[aria-current="true"] { border-color: var(--forest); background: var(--forest); color: white; }
+      .game-question { margin: 0; color: var(--ink); font: 700 clamp(1.6rem, 4vw, 2.6rem)/1.1 Georgia, "Times New Roman", serif; }
+      .game-counter { min-height: 1.5em; margin: 8px 0 0; color: var(--muted); font-weight: 750; }
+      .word-board { position: relative; display: grid; min-height: 190px; place-items: center; margin: 20px 0; border: 2px dashed var(--line); border-radius: 22px; background: var(--paper); padding: 28px 22px; text-align: center; }
+      .word-board p { margin: 0; font: 700 clamp(1.5rem, 4.4vw, 2.6rem)/1.3 Georgia, serif; }
+      .word-board .hint { color: var(--muted); font: italic 1.1rem/1.4 Georgia, serif; }
+      .group-letter { position: absolute; top: 14px; left: 16px; display: grid; width: 42px; height: 42px; place-items: center; border-radius: 50%; background: var(--gold); font: 700 1.2rem Georgia, serif; }
+      .vote { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; }
+      .group-letter[hidden], .vote[hidden], .game-summary[hidden], .game-union[hidden], .game-end[hidden] { display: none; }
+      .vote button, .pick-card { border: 1px solid var(--line); border-radius: 14px; background: #fffef9; color: var(--ink); cursor: pointer; padding: 12px 10px; font-weight: 850; }
+      .vote button[aria-pressed="true"] { border-color: var(--forest); background: var(--sage); box-shadow: inset 0 0 0 2px var(--forest); }
+      .game-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+      .game-actions button { min-height: 48px; border-radius: 999px; cursor: pointer; padding: 10px 19px; font-weight: 850; }
+      .game-actions .go { border: 0; background: var(--forest); color: white; }
+      .game-actions .go:hover { background: var(--forest-dark); }
+      .game-actions .soft { border: 1px solid var(--forest); background: transparent; color: var(--forest); }
+      .game-actions button[hidden] { display: none; }
+      .game-summary { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 22px; }
+      .game-summary h3, .game-union h3 { margin-bottom: 6px; }
+      .game-summary > p, .game-union > p { margin: 0 0 14px; color: var(--muted); }
+      .pick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
+      .pick-card { display: flex; flex-direction: column; gap: 6px; text-align: left; font-weight: 400; }
+      .pick-card strong { font: 700 1.05rem Georgia, serif; }
+      .pick-card .badge { width: fit-content; border-radius: 999px; background: var(--paper); color: var(--muted); padding: 2px 10px; font-size: .82rem; font-weight: 850; }
+      .pick-card[data-vote="Molto"] .badge { background: var(--forest); color: white; }
+      .pick-card[data-vote="Abbastanza"] .badge { background: var(--sage); color: var(--forest-dark); }
+      .pick-card[aria-pressed="true"] { border-color: var(--coral); box-shadow: inset 0 0 0 3px var(--coral); }
+      .game-note { margin: 16px 0 0; border-left: 4px solid var(--gold); color: var(--ink); padding-left: 14px; }
+      .game-note:empty { display: none; }
+      .game-union { margin-top: 22px; border-radius: 20px; background: var(--forest-dark); color: white; padding: clamp(20px, 3vw, 28px); }
+      .game-union > p { color: rgba(255,255,255,.82); }
+      .game-union .union-words { margin: 0; font: 700 clamp(1.25rem, 3vw, 1.8rem)/1.45 Georgia, serif; }
+      .game-union .union-words span { display: block; }
+      .game-end { margin-top: 22px; }
+
+      /* ---------- Ricostruiamo la frase ---------- */
+      .tile-builder { display: grid; gap: 14px; }
+      .tile-line { display: flex; min-height: 68px; flex-wrap: wrap; align-content: flex-start; gap: 8px; border: 2px solid var(--ink); border-radius: 16px; background: var(--paper); padding: 12px; }
+      .tile-line.empty::before { color: var(--muted); content: attr(data-empty); font-style: italic; }
+      .tile-pool { display: flex; flex-wrap: wrap; gap: 8px; }
+      .tile { border: 1px solid var(--line); border-radius: 10px; background: #fffef9; box-shadow: 0 3px 0 var(--line); cursor: pointer; padding: 8px 13px; font: 700 1.15rem Georgia, serif; }
+      .tile-line .tile { border-color: var(--forest); box-shadow: 0 3px 0 var(--forest); }
+      .tile-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+      .tile-tools button { border: 1px solid var(--forest); border-radius: 999px; background: transparent; color: var(--forest); cursor: pointer; padding: 8px 15px; font-weight: 850; }
+      .tile-status { margin: 0; color: var(--forest); font-weight: 800; }
+
+      /* ---------- Diamo un nome ai gruppi ---------- */
+      .name-list { display: grid; gap: 10px; }
+      .name-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; border: 1px solid var(--line); border-radius: 16px; background: #fffef9; padding: 13px 16px; }
+      .name-row .group-letter { position: static; flex: none; }
+      .name-row p { flex: 1 1 260px; margin: 0; font: 700 1.1rem Georgia, serif; }
+      .name-row select { min-height: 44px; border: 2px solid var(--ink); border-radius: 12px; background: var(--paper); color: var(--ink); padding: 6px 10px; font: inherit; }
+      .name-row .verdict { flex-basis: 100%; margin: 0; color: var(--muted); font-size: .92rem; }
+      .name-row .verdict:empty { display: none; }
+      .name-row.ok { border-color: var(--forest); background: var(--sage); }
+      .name-row.ko { border-color: var(--coral); background: #fbe9e4; }
+      .name-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px; }
+      .name-tools button { min-height: 46px; border-radius: 999px; cursor: pointer; padding: 9px 18px; font-weight: 850; }
+      .name-tools .go { border: 0; background: var(--forest); color: white; }
+      .name-tools .soft { border: 1px solid var(--forest); background: transparent; color: var(--forest); }
+      .concepts.six { grid-template-columns: repeat(3, 1fr); }
+      .concepts .open-box { border: 2px dashed var(--line); background: transparent; }
+
+      /* ---------- Torniamo al leone ---------- */
+      .lens { margin: 14px 0 0; font: 1.4rem/2.6 Georgia, serif; }
+      .lens .w { border-radius: 6px; padding: 2px 4px; transition: background .2s; }
+      .lens.show .w { display: inline-flex; flex-direction: column; align-items: center; vertical-align: top; line-height: 1.5; margin: 0 2px 10px; }
+      .lens.show .w::after { color: var(--muted); font: 800 .62rem/1.2 Inter, sans-serif; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+      .lens.show [data-cat="articolo"]::after { content: "art."; }
+      .lens.show [data-cat="nome"]::after { content: "nome"; }
+      .lens.show [data-cat="verbo"]::after { content: "verbo"; }
+      .lens.show [data-cat="congiunzione"]::after { content: "cong."; }
+      .lens.show [data-cat="?"]::after { content: "?"; color: var(--coral); }
+      .lens.show [data-cat="articolo"] { background: #efe3c4; }
+      .lens.show [data-cat="nome"] { background: #f4cb74; }
+      .lens.show [data-cat="verbo"] { background: #b9d6c8; }
+      .lens.show [data-cat="congiunzione"] { background: #d6e3ea; }
+      .lens.show [data-cat="?"] { background: #f6c4b8; outline: 2px solid var(--coral); }
+      .lens-tools { margin-top: 26px; }
+      .lens-tools button { border: 1px solid var(--forest); border-radius: 999px; background: transparent; color: var(--forest); cursor: pointer; padding: 9px 16px; font-weight: 850; }
+
+      @media (max-width: 820px) { .concepts.six { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 620px) {
+        .vote { grid-template-columns: 1fr 1fr; }
+        .concepts.six { grid-template-columns: 1fr; }
+        .lens { font-size: 1.15rem; line-height: 2.8; }
+      }
+      @media print {
+        .game-tabs, .vote, .game-actions, .tile-tools, .name-tools, .lens-tools { display: none !important; }
+      }
+    </style>
+  </head>
+  <body data-page="testo-misterioso">
+    <a class="skip-link" href="#contenuto">Vai al contenuto</a>
+    <header class="site-header">
+      <a class="brand" href="00_APRI_PAROLE_IN_FABULA.html" aria-label="Torna alla pagina iniziale"><span class="brand-mark" aria-hidden="true">P</span><span>Parole in fabula</span></a>
+      <div class="header-actions">
+        <a class="text-button site-link" href="../../../index.html?classe=prima">← Italiano · prima</a>
+        <div class="text-size-controls" role="group" aria-label="Dimensione del testo">
+          <button class="text-button size-button" type="button" data-text-size="smaller" aria-label="Riduci il testo">A−</button>
+          <button class="text-button size-button" type="button" data-text-size="larger" aria-label="Ingrandisci il testo">A+</button>
+          <span class="visually-hidden" data-text-size-status aria-live="polite">Dimensione testo 100%</span>
+        </div>
+        <button class="text-button" type="button" data-print>Stampa</button>
+      </div>
+    </header>
+    <main id="contenuto">
+      <!-- INIZIO TESTI DA MODIFICARE -->
+      <nav class="page-nav page-nav-top" aria-label="Navigazione tra i laboratori"><a class="secondary-link" href="04_PUNTEGGIATURA.html">← Laboratorio precedente</a><a class="primary-link" href="00_APRI_PAROLE_IN_FABULA.html">Tutti i laboratori</a></nav>
+      <section class="lesson-hero">
+        <p class="eyebrow">Seconda parte · Le parole entrano in scena</p>
+        <p class="kicker">Due favole: una intera, una rotta</p>
+        <h1>Il testo misterioso</h1>
+        <p class="lead">Prima ascoltiamo una favola intera e ci facciamo quattro domande. Poi arriva una seconda favola, ma le sue parole si sono divise in gruppi: dovremo capire la storia prima di poterla leggere.</p>
+        <article class="story-panel">
+          <div>
+            <p class="section-label">Esopo · Prima storia</p>
+            <h2>Il leone e il topo</h2>
+            <p>Un leone dormiva nel bosco quando un piccolo topo gli corse addosso. Il leone si svegliò e lo afferrò. Il topo lo pregò di lasciarlo libero e promise che un giorno avrebbe ricambiato il favore. Il leone rise, ma lo lasciò andare.</p>
+            <p>Qualche tempo dopo il leone rimase preso in una rete. Il topo accorse, rosicchiò le corde e lo liberò.</p>
+            <blockquote>Anche chi sembra piccolo e debole può aiutare chi è grande e forte.</blockquote>
+          </div>
+          <aside class="questions-to-discuss">
+            <p class="section-label">Dopo la lettura</p>
+            <p>Rispondete a voce. Non è ancora grammatica: sono domande per capire meglio una storia.</p>
+            <ol><li>Di chi o di che cosa si parla?</li><li>Che cosa succede?</li><li>Come sono i personaggi e le cose?</li><li>Come, dove e quando avvengono i fatti?</li></ol>
+            <p>Tenete a mente queste quattro domande: tra poco ci serviranno di nuovo.</p>
+          </aside>
+        </article>
+        <article class="need-card"><p class="section-label">Il problema che abbiamo incontrato</p><h2>La seconda storia si è rotta</h2><p>Adesso leggiamo un’altra favola. Questa volta, però, c’è un problema: le sue parole si sono divise in sette gruppi, che arriveranno uno alla volta e in ordine sparso. Con le stesse domande di prima proveremo a capire di che cosa parla, e quali gruppi ci aiutano di più.</p></article>
+      </section>
+
+      <section class="activity" id="gioco">
+        <div class="activity-heading"><p class="kicker">Attività 1 · La storia rotta</p><h2>Quale gruppo ci aiuta a rispondere?</h2><p class="lead">Per ogni domanda i gruppi compaiono in ordine casuale. La classe vota quanto ciascuno aiuta a rispondere; alla fine si sceglie il gruppo da salvare se se ne potesse tenere uno solo.</p></div>
+
+        <!-- I GRUPPI DI PAROLE: si possono modificare qui. data-nome serve per l’Attività 4. -->
+        <ul class="data-source" data-groups>
+          <li data-letter="A" data-nome="aggettivi">affamata – maturi – alta – acerba</li>
+          <li data-letter="B" data-nome="verbi">vide – provò – raggiungere – saltò – rinunciò – disse – è</li>
+          <li data-letter="C" data-nome="articoli">una – i – l’</li>
+          <li data-letter="D" data-nome="nomi">volpe – grappoli – uva – vite</li>
+          <li data-letter="E" data-nome="avverbi">molto – inutilmente – infine – certamente</li>
+          <li data-letter="F" data-nome="preposizioni">d’ – su – a</li>
+          <li data-letter="G" data-nome="congiunzioni">e – ma</li>
+        </ul>
+        <!-- LE DOMANDE DEL GIOCO: data-nota compare alla fine della manche. -->
+        <ol class="data-source" data-questions>
+          <li data-nota="Se avete riconosciuto la storia, non ditelo ancora! Pensate piuttosto: quale gruppo vi ha fatto venire il sospetto?">Di chi o di che cosa si parla?</li>
+          <li data-nota="Il gruppo più utile non è sempre lo stesso: dipende da quello che vogliamo sapere.">Che cosa succede?</li>
+          <li data-nota="Alcune parole aggiungono caratteristiche a quelle che indicano personaggi e cose.">Come sono i personaggi e le cose?</li>
+          <li data-nota="Qui la risposta è meno netta: aiutano alcune parole di un gruppo, ma anche preposizioni e nomi insieme («su una vite»). Una domanda non corrisponde sempre a un solo tipo di parola.">Come, dove e quando avvengono i fatti?</li>
+        </ol>
+
+        <div class="game" data-game>
+          <div class="game-tabs" role="group" aria-label="Scegli la domanda"></div>
+          <p class="game-question" data-g-question></p>
+          <p class="game-counter" data-g-counter></p>
+          <div class="word-board" aria-live="polite"><span class="group-letter" data-g-letter hidden></span><p data-g-words><span class="hint">Premi «Mostra il primo gruppo».</span></p></div>
+          <div class="vote" role="group" aria-label="Quanto ci aiuta questo gruppo a rispondere?" data-g-vote hidden>
+            <button type="button" aria-pressed="false">Per niente</button>
+            <button type="button" aria-pressed="false">Poco</button>
+            <button type="button" aria-pressed="false">Abbastanza</button>
+            <button type="button" aria-pressed="false">Molto</button>
+          </div>
+          <div class="game-actions">
+            <button class="go" type="button" data-g-next>Mostra il primo gruppo</button>
+            <button class="go" type="button" data-g-nextq hidden>Domanda successiva →</button>
+            <button class="soft" type="button" data-g-shuffle>Rimescola i gruppi</button>
+            <button class="soft" type="button" data-g-restart>Ricomincia il gioco</button>
+          </div>
+          <div class="game-summary" data-g-summary hidden>
+            <h3>Tutti i gruppi insieme</h3>
+            <p>Se poteste tenere un solo gruppo per rispondere alla domanda, quale scegliereste? Toccatelo.</p>
+            <div class="pick-grid" data-g-picks></div>
+            <p class="game-note" data-g-note></p>
+          </div>
+          <div class="game-union" data-g-union hidden>
+            <h3>Mettiamo insieme i due gruppi scelti</h3>
+            <p>Adesso riuscite a ricostruire la storia? Provate a raccontarla a voce.</p>
+            <p class="union-words" data-g-union-words></p>
+          </div>
+          <div class="game-end" data-g-end hidden>
+            <article class="need-card"><p class="section-label">Fine del gioco</p><h3>Due domande prima di andare avanti</h3>
+              <details class="answer"><summary>Quale gruppo, preso da solo, ci dice meno?</summary><p>Probabilmente quello con <em>una – i – l’</em>, oppure <em>d’ – su – a</em> o <em>e – ma</em>: isolate, queste parole non raccontano quasi niente.</p></details>
+              <details class="answer"><summary>E quale gruppo, se lo togliessimo dal testo, creerebbe più problemi?</summary><p>Qui c’è una sorpresa: le parole che da sole comunicano meno non sono quelle di cui si può fare a meno più facilmente. Senza articoli, preposizioni e congiunzioni le altre parole restano sparse e non si capisce come sono collegate. Se queste parole da sole non raccontano quasi niente, perché una lingua ne ha bisogno?</p></details>
+            </article>
+          </div>
+        </div>
+        <div class="rule-path">
+          <article class="need-card"><p class="section-label">Perché serve una regola</p><p>Per domande diverse abbiamo scelto gruppi diversi. Alcuni gruppi, da soli, sembrano dire moltissimo; altri quasi niente. Per capire perché, dobbiamo osservare che lavoro fanno le parole dentro un testo.</p></article>
+          <article class="rule-card"><p class="section-label">La scoperta che costruiamo</p><p>Le parole non fanno tutte lo stesso lavoro. Non esiste il gruppo più importante in assoluto: dipende da quello che vogliamo sapere.</p></article>
+        </div>
+      </section>
+
+      <section class="activity" id="ricostruiamo">
+        <div class="activity-heading"><p class="kicker">Attività 2 · Ricostruiamo</p><h2>Le parole bastano?</h2><p class="lead">Ecco tutte le parole della prima frase, mescolate. Toccatele nell’ordine giusto per ricostruire la frase; toccate di nuovo una parola per rimetterla al suo posto.</p></div>
+        <!-- Le parole della frase da ricostruire, separate da | -->
+        <div class="tile-builder" data-tiles="Una|volpe|affamata|vide|i|grappoli|d’|uva|maturi|su|una|vite|molto|alta"></div>
+        <details class="solution"><summary>Confronta con la frase del testo</summary><p><strong>Una volpe affamata vide i grappoli d’uva maturi su una vite molto alta.</strong> Se la vostra frase è diversa ma funziona (per esempio <em>Su una vite molto alta una volpe affamata vide i grappoli d’uva maturi</em>), va bene: le parole possono spostarsi, ma non in qualsiasi ordine.</p></details>
+        <div class="exercise-list" style="margin-top:18px">
+          <article class="exercise-card"><h3>Con quattro parole soltanto</h3><p>Usa solo <strong>volpe – vide – grappoli – uva</strong>. Riesci a costruire una frase? Quali parole hai dovuto aggiungere?</p><label for="quattro-parole">La tua frase e le parole aggiunte</label><textarea id="quattro-parole" data-saved-field></textarea><details class="solution"><summary>Una possibile risposta</summary><p><em>La volpe vide i grappoli d’uva.</em> Abbiamo aggiunto <strong>la</strong>, <strong>i</strong>, <strong>d’</strong>: parole che da sole dicono poco, ma tengono insieme le altre.</p></details><p class="save-status"></p></article>
+        </div>
+        <div class="rule-path">
+          <article class="need-card"><p class="section-label">Perché serve una regola</p><p>Conoscere il significato di ogni parola non basta per costruire una frase: bisogna sapere come le parole possono combinarsi tra loro.</p></article>
+          <article class="rule-card"><p class="section-label">La regola che costruiamo</p><p>La grammatica studia anche come parole che fanno lavori diversi si combinano per costruire significato.</p></article>
+        </div>
+      </section>
+
+      <section class="activity" id="svelamento">
+        <div class="activity-heading"><p class="kicker">Attività 3 · Sveliamo la favola</p><h2>Da quale storia arrivano queste parole?</h2><p class="lead">Prima provate a indovinare il titolo. Poi aprite il testo e leggetelo ad alta voce.</p></div>
+        <article class="story-panel" style="margin-top:0">
+          <div>
+            <details class="answer" style="margin-top:0;border-top:0;padding-top:0"><summary>Sveliamo il testo</summary>
+              <p class="section-label" style="margin-top:18px">Esopo · Seconda storia</p>
+              <h2>La volpe e l’uva</h2>
+              <p>Una volpe affamata vide i grappoli d’uva maturi su una vite molto alta. Provò a raggiungere l’uva: saltò e saltò, ma inutilmente. Infine rinunciò e disse: «L’uva è certamente acerba!»</p>
+              <p style="font-size:.92rem;color:var(--muted)">È una nostra riscrittura della favola di Esopo, costruita perché ogni parola dei sette gruppi compaia davvero nel testo. In classe si può poi leggere anche una traduzione d’autore, o la versione in versi di Fedro.</p>
+            </details>
+          </div>
+          <aside class="questions-to-discuss">
+            <p class="section-label">Ora possiamo chiederci</p>
+            <details class="answer"><summary>1. Quale gruppo vi ha permesso di riconoscere la favola?</summary><p>Di solito <em>volpe – grappoli – uva – vite</em>: bastano poche parole per far apparire un intero mondo nella mente di chi ascolta.</p></details>
+            <details class="answer"><summary>2. Che cosa hanno in comune le due storie?</summary><p>Sono brevi, hanno pochi personaggi animali, azioni nette e un insegnamento finale: sono favole, e l’autore a cui le attribuiamo è Esopo.</p></details>
+            <details class="answer"><summary>3. Perché storie così brevi sono arrivate fino a noi da più di duemilacinquecento anni?</summary><p>Perché sono facili da ricordare e da raccontare a voce: per secoli sono passate di bocca in bocca prima di essere scritte.</p></details>
+            <details class="answer"><summary>4. È soltanto la storia di una volpe?</summary><p>No. La favola usa gli animali per parlare degli esseri umani e dei loro comportamenti.</p></details>
+          </aside>
+        </article>
+        <section class="writing-card">
+          <p class="kicker">La morale</p>
+          <h2>Che cosa vuole dirci questa storia?</h2>
+          <p>Scrivi con parole tue l’insegnamento della favola. Se ti viene in mente una situazione della vita di tutti i giorni in cui qualcuno si comporta come la volpe, raccontala in una riga.</p>
+          <label for="morale">La morale con parole mie</label>
+          <textarea id="morale" data-saved-field></textarea>
+          <details class="solution"><summary>Confronta con la morale tradizionale</summary><p>Chi non riesce a ottenere qualcosa, a volte finge di non volerla: è facile disprezzare ciò che non si può avere.</p></details>
+          <p class="save-status" aria-live="polite"></p>
+        </section>
+      </section>
+
+      <section class="activity" id="nomi-dei-gruppi">
+        <div class="activity-heading"><p class="kicker">Attività 4 · Diamo un nome ai gruppi</p><h2>Questi gruppi hanno un nome. Quali conoscete già?</h2><p class="lead">Abbinate a ogni gruppo il suo nome, poi controllate.</p></div>
+        <div class="name-list" data-names></div>
+        <div class="name-tools"><button class="go" type="button" data-names-check>Controlla</button><button class="soft" type="button" data-names-reset>Ricomincia</button><p class="tile-status" data-names-score aria-live="polite"></p></div>
+        <article class="rule-card">
+          <p class="section-label">La nostra prima mappa, ancora provvisoria</p>
+          <h2>Le parole non fanno tutte lo stesso lavoro</h2>
+          <p>Questi tipi di parole si chiamano <strong>parti del discorso</strong>. Non sono nove caselle da memorizzare, ma nove modi diversi in cui le parole possono lavorare.</p>
+          <div class="concepts six">
+            <article><strong>Nomi</strong><p>Ci aiutano a individuare persone, animali, cose, idee: di chi e di che cosa si parla.</p></article>
+            <article><strong>Verbi</strong><p>Ci dicono molto di ciò che accade.</p></article>
+            <article><strong>Aggettivi</strong><p>Aggiungono caratteristiche ai nomi.</p></article>
+            <article><strong>Avverbi</strong><p>Precisano come, quando, quanto avvengono le azioni o sono le qualità.</p></article>
+            <article><strong>Articoli · preposizioni · congiunzioni</strong><p>Da soli dicono poco, ma tengono insieme le altre parole. Che lavoro fanno esattamente? Lo scopriremo.</p></article>
+            <article class="open-box"><strong>Caselle ancora aperte</strong><p>Pronomi e interiezioni: la volpe non ce li ha mostrati. Andiamo a cercarli nella prima storia.</p></article>
+          </div>
+        </article>
+      </section>
+
+      <section class="activity" id="leone">
+        <div class="activity-heading"><p class="kicker">Attività 5 · Torniamo al leone</p><h2>Anche la prima storia era fatta di questi tipi di parole</h2><p class="lead">Solo che non ce ne eravamo accorti. Leggete le due frasi, poi mostrate i tipi di parole.</p></div>
+        <p class="lens" data-lens><span class="w" data-cat="articolo">Il</span> <span class="w" data-cat="nome">leone</span> <span class="w" data-cat="verbo">rise</span>, <span class="w" data-cat="congiunzione">ma</span> <span class="w" data-cat="?">lo</span> <span class="w" data-cat="verbo">lasciò</span> <span class="w" data-cat="verbo">andare</span>.<br /><span class="w" data-cat="articolo">Il</span> <span class="w" data-cat="nome">topo</span> <span class="w" data-cat="verbo">accorse</span>, <span class="w" data-cat="verbo">rosicchiò</span> <span class="w" data-cat="articolo">le</span> <span class="w" data-cat="nome">corde</span> <span class="w" data-cat="congiunzione">e</span> <span class="w" data-cat="?">lo</span> <span class="w" data-cat="verbo">liberò</span>.</p>
+        <div class="lens-tools"><button type="button" data-lens-toggle aria-pressed="false">Mostra i tipi di parole</button></div>
+        <div class="exercise-list" style="margin-top:20px">
+          <article class="exercise-card"><h3>Una parola che la volpe non aveva</h3><p>Nelle due frasi c’è una parola che non appartiene a nessuno dei sette gruppi della volpe. Quale? E chi è, ogni volta?</p><label for="parola-nuova">La parola e chi indica</label><input id="parola-nuova" type="text" data-saved-field /><details class="solution"><summary>Controlla</summary><p><strong>LO.</strong> Nella prima frase indica il topo, nella seconda il leone: sta al posto di un nome già detto, per non ripeterlo. È un <strong>pronome</strong>, e riempie una delle caselle aperte.</p></details><p class="save-status"></p></article>
+        </div>
+      </section>
+
+      <section class="activity" id="verbo">
+        <div class="activity-heading"><p class="kicker">Attività 6 · Un ultimo passo</p><h2>Il verbo può stare da solo?</h2><p class="lead">Prendiamo un verbo della volpe: <strong>vide</strong>. Facciamogli due domande.</p></div>
+        <div class="exercise-list">
+          <article class="exercise-card"><h3>Chi vide?</h3><label for="chi-vide">Risposta</label><input id="chi-vide" type="text" data-saved-field /><details class="solution"><summary>Controlla</summary><p><strong>Una volpe affamata.</strong></p></details><p class="save-status"></p></article>
+          <article class="exercise-card"><h3>Che cosa vide?</h3><label for="cosa-vide">Risposta</label><input id="cosa-vide" type="text" data-saved-field /><details class="solution"><summary>Controlla</summary><p><strong>I grappoli d’uva maturi.</strong></p></details><p class="save-status"></p></article>
+        </div>
+        <div class="rule-path">
+          <article class="need-card"><p class="section-label">Perché ci interessa</p><p>«La volpe vide» non ci basta: viene subito da chiedere <em>che cosa</em>. «Vide i grappoli» non basta nemmeno: <em>chi</em> li vide?</p></article>
+          <article class="rule-card"><p class="section-label">La scoperta che costruiamo</p><p>Alcuni verbi sembrano aprire dei posti che altre parole devono occupare: <em>la volpe</em> → <strong>vide</strong> → <em>i grappoli d’uva</em>. Questa domanda ci accompagnerà nelle prossime lezioni.</p></article>
+        </div>
+      </section>
+
+      <section class="lesson-finale" aria-labelledby="finale-misterioso">
+        <p class="kicker">Finale di puntata · Che cosa abbiamo scoperto</p>
+        <h2 id="finale-misterioso">Le parole fanno lavori diversi</h2>
+        <div class="finale-grid">
+          <article><h3>Tiriamo le fila</h3><p>Una favola rotta in sette gruppi ci ha mostrato che non tutte le parole portano lo stesso tipo di informazione. I nomi fanno apparire il mondo della storia, i verbi le azioni, aggettivi e avverbi precisano. Articoli, preposizioni e congiunzioni, da soli, sembrano vuoti, ma senza di loro le altre parole non riescono a formare una frase. Nella prima storia è comparso anche un pronome, che riprende ciò che è già stato detto.</p><p class="connection-line"><strong>Il collegamento:</strong> abbiamo scoperto che le parole fanno lavori diversi. Adesso cercheremo di capire quali, cominciando dal verbo e dalle parole che chiama intorno a sé.</p></article>
+          <article class="knowledge-check"><h3>Controlla ciò che sai</h3><p>Rispondi a voce, poi apri il controllo.</p><details class="answer"><summary>1. Esiste un gruppo di parole più importante di tutti?</summary><p>No: dipende da quello che vogliamo sapere. Per capire di che cosa si parla aiutano i nomi, per capire che cosa succede i verbi.</p></details><details class="answer"><summary>2. Perché una lingua ha bisogno di parole come <em>la</em>, <em>di</em>, <em>e</em>?</summary><p>Perché collegano le altre parole e mostrano come stanno insieme: senza di loro avremmo solo parole sparse.</p></details><details class="answer"><summary>3. Che cosa fa il pronome <em>lo</em> nella storia del leone?</summary><p>Sta al posto di un nome già detto (il topo, il leone), così non dobbiamo ripeterlo.</p></details><details class="answer"><summary>4. Che cosa abbiamo scoperto sul verbo <em>vide</em>?</summary><p>Che da solo non basta: chiama un «chi» e un «che cosa».</p></details></article>
+        </div>
+        <aside class="practice-card"><p class="section-label">Per esercitarsi</p><p>Nella scheda <a href="../parti-del-discorso.html">Le parti del discorso e la frase</a> trovi la mappa completa delle nove parti del discorso ed esercizi con correzione automatica.</p></aside>
+        <aside class="next-hook"><p class="section-label">Nella prossima puntata</p><h3>Il teatro della frase</h3><p>Ogni verbo è come un copione: per andare in scena ha bisogno di un certo numero di attori. <em>Dormire</em> ne vuole uno, <em>vedere</em> due, <em>regalare</em> tre. Quanti attori chiama ogni verbo?</p><a class="primary-link" href="../laboratorio-valenziale.html">Entra nel laboratorio valenziale →</a></aside>
+      </section>
+      <nav class="page-nav" aria-label="Navigazione tra i laboratori"><a class="secondary-link" href="04_PUNTEGGIATURA.html">← Laboratorio precedente</a><a class="primary-link" href="00_APRI_PAROLE_IN_FABULA.html">Tutti i laboratori</a></nav>
+      <!-- FINE TESTI DA MODIFICARE -->
+    </main>
+    <script src="funzioni.js"></script>
+    <script>
+      (() => {
+        const shuffle = list => {
+          const copy = [...list];
+          for (let i = copy.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copy[i], copy[j]] = [copy[j], copy[i]];
+          }
+          return copy;
+        };
+        const make = (tag, className, text) => {
+          const node = document.createElement(tag);
+          if (className) node.className = className;
+          if (text !== undefined) node.textContent = text;
+          return node;
+        };
+
+        /* ---------- Dati letti dall'HTML ---------- */
+        const groups = [...document.querySelectorAll('[data-groups] li')].map(li => ({ letter: li.dataset.letter, name: li.dataset.nome, words: li.textContent.trim() }));
+        const questions = [...document.querySelectorAll('[data-questions] li')].map(li => ({ text: li.textContent.trim(), note: li.dataset.nota || '' }));
+
+        /* ---------- Gioco ---------- */
+        const game = document.querySelector('[data-game]');
+        const $ = selector => game.querySelector(selector);
+        const tabs = $('.game-tabs');
+        const questionEl = $('[data-g-question]');
+        const counterEl = $('[data-g-counter]');
+        const letterEl = $('[data-g-letter]');
+        const wordsEl = $('[data-g-words]');
+        const voteEl = $('[data-g-vote]');
+        const nextBtn = $('[data-g-next]');
+        const nextQBtn = $('[data-g-nextq]');
+        const summaryEl = $('[data-g-summary]');
+        const picksEl = $('[data-g-picks]');
+        const noteEl = $('[data-g-note]');
+        const unionEl = $('[data-g-union]');
+        const unionWords = $('[data-g-union-words]');
+        const endEl = $('[data-g-end]');
+
+        const state = { q: 0, order: [], index: -1, votes: questions.map(() => ({})), picks: questions.map(() => null) };
+
+        questions.forEach((question, i) => {
+          const button = make('button', '', `Domanda ${i + 1}`);
+          button.type = 'button';
+          button.addEventListener('click', () => startQuestion(i));
+          tabs.append(button);
+        });
+
+        function startQuestion(i) {
+          state.q = i;
+          state.order = shuffle(groups);
+          state.index = -1;
+          tabs.querySelectorAll('button').forEach((b, k) => b.setAttribute('aria-current', k === i ? 'true' : 'false'));
+          questionEl.textContent = questions[i].text.toUpperCase();
+          counterEl.textContent = '';
+          letterEl.hidden = true;
+          wordsEl.innerHTML = '<span class="hint">Premi «Mostra il primo gruppo».</span>';
+          voteEl.hidden = true;
+          nextBtn.hidden = false;
+          nextBtn.textContent = 'Mostra il primo gruppo';
+          nextQBtn.hidden = true;
+          summaryEl.hidden = true;
+          unionEl.hidden = true;
+          endEl.hidden = true;
+        }
+
+        function showGroup() {
+          const group = state.order[state.index];
+          letterEl.hidden = false;
+          letterEl.textContent = group.letter;
+          wordsEl.textContent = group.words;
+          counterEl.textContent = `Gruppo ${state.index + 1} di ${state.order.length}`;
+          voteEl.hidden = false;
+          const vote = state.votes[state.q][group.letter];
+          voteEl.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.textContent === vote ? 'true' : 'false'));
+          nextBtn.textContent = state.index === state.order.length - 1 ? 'Mostra tutti i gruppi' : 'Gruppo successivo';
+        }
+
+        function showSummary() {
+          voteEl.hidden = true;
+          letterEl.hidden = true;
+          counterEl.textContent = '';
+          wordsEl.innerHTML = '<span class="hint">Tutti i gruppi sono usciti.</span>';
+          nextBtn.hidden = true;
+          picksEl.innerHTML = '';
+          state.order.forEach(group => {
+            const card = make('button', 'pick-card');
+            card.type = 'button';
+            const vote = state.votes[state.q][group.letter] || 'Non votato';
+            card.dataset.vote = vote;
+            card.setAttribute('aria-pressed', state.picks[state.q] === group.letter ? 'true' : 'false');
+            card.append(make('span', 'badge', `Gruppo ${group.letter} · ${vote}`), make('strong', '', group.words));
+            card.addEventListener('click', () => {
+              state.picks[state.q] = group.letter;
+              picksEl.querySelectorAll('.pick-card').forEach(c => c.setAttribute('aria-pressed', c === card ? 'true' : 'false'));
+              updateUnion();
+            });
+            picksEl.append(card);
+          });
+          noteEl.textContent = questions[state.q].note;
+          summaryEl.hidden = false;
+          const last = state.q === questions.length - 1;
+          nextQBtn.hidden = last;
+          endEl.hidden = !last;
+          updateUnion();
+        }
+
+        function updateUnion() {
+          const [first, second] = state.picks;
+          const visible = state.q === 1 && first && second && first !== second;
+          unionEl.hidden = !visible;
+          if (!visible) return;
+          unionWords.innerHTML = '';
+          [first, second].forEach(letter => unionWords.append(make('span', '', groups.find(g => g.letter === letter).words)));
+        }
+
+        nextBtn.addEventListener('click', () => {
+          if (state.index < state.order.length - 1) {
+            state.index += 1;
+            showGroup();
+          } else {
+            showSummary();
+          }
+        });
+        voteEl.addEventListener('click', event => {
+          const button = event.target.closest('button');
+          if (!button) return;
+          state.votes[state.q][state.order[state.index].letter] = button.textContent;
+          voteEl.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b === button ? 'true' : 'false'));
+        });
+        nextQBtn.addEventListener('click', () => startQuestion(state.q + 1));
+        $('[data-g-shuffle]').addEventListener('click', () => startQuestion(state.q));
+        $('[data-g-restart]').addEventListener('click', () => {
+          state.votes = questions.map(() => ({}));
+          state.picks = questions.map(() => null);
+          startQuestion(0);
+        });
+        startQuestion(0);
+
+        /* ---------- Ricostruiamo la frase ---------- */
+        document.querySelectorAll('[data-tiles]').forEach(builder => {
+          const words = builder.dataset.tiles.split('|');
+          const line = make('div', 'tile-line empty');
+          line.dataset.empty = 'La tua frase comparirà qui…';
+          line.setAttribute('aria-label', 'La frase ricostruita');
+          const pool = make('div', 'tile-pool');
+          pool.setAttribute('aria-label', 'Parole da usare');
+          const tools = make('div', 'tile-tools');
+          const reset = make('button', '', 'Rimescola le parole');
+          reset.type = 'button';
+          const status = make('p', 'tile-status');
+          status.setAttribute('aria-live', 'polite');
+          tools.append(reset, status);
+          builder.append(line, pool, tools);
+
+          const refresh = () => {
+            line.classList.toggle('empty', !line.children.length);
+            status.textContent = pool.children.length ? '' : 'Hai usato tutte le parole. Leggi la frase ad alta voce: suona bene?';
+          };
+          const fill = () => {
+            line.innerHTML = '';
+            pool.innerHTML = '';
+            shuffle(words).forEach(word => {
+              const tile = make('button', 'tile', word);
+              tile.type = 'button';
+              tile.addEventListener('click', () => {
+                (tile.parentElement === pool ? line : pool).append(tile);
+                refresh();
+              });
+              pool.append(tile);
+            });
+            refresh();
+          };
+          reset.addEventListener('click', fill);
+          fill();
+        });
+
+        /* ---------- Diamo un nome ai gruppi ---------- */
+        const namesBox = document.querySelector('[data-names]');
+        const names = [...new Set(groups.map(g => g.name))].sort((a, b) => a.localeCompare(b, 'it'));
+        groups.forEach(group => {
+          const row = make('div', 'name-row');
+          const letter = make('span', 'group-letter', group.letter);
+          const words = make('p', '', group.words);
+          const select = make('select');
+          select.setAttribute('aria-label', `Nome del gruppo ${group.letter}`);
+          select.append(new Option('Scegli…', ''));
+          names.forEach(name => select.append(new Option(name, name)));
+          const verdict = make('p', 'verdict');
+          row.dataset.answer = group.name;
+          row.append(letter, words, select, verdict);
+          namesBox.append(row);
+        });
+        const namesScore = document.querySelector('[data-names-score]');
+        document.querySelector('[data-names-check]').addEventListener('click', () => {
+          let right = 0;
+          namesBox.querySelectorAll('.name-row').forEach(row => {
+            const ok = row.querySelector('select').value === row.dataset.answer;
+            row.classList.toggle('ok', ok);
+            row.classList.toggle('ko', !ok);
+            row.querySelector('.verdict').textContent = ok ? 'Giusto!' : `Sono ${row.dataset.answer}.`;
+            if (ok) right += 1;
+          });
+          namesScore.textContent = `Abbinamenti giusti: ${right} su ${groups.length}`;
+        });
+        document.querySelector('[data-names-reset]').addEventListener('click', () => {
+          namesBox.querySelectorAll('.name-row').forEach(row => {
+            row.classList.remove('ok', 'ko');
+            row.querySelector('select').value = '';
+            row.querySelector('.verdict').textContent = '';
+          });
+          namesScore.textContent = '';
+        });
+
+        /* ---------- Torniamo al leone ---------- */
+        const lens = document.querySelector('[data-lens]');
+        const lensButton = document.querySelector('[data-lens-toggle]');
+        lensButton.addEventListener('click', () => {
+          const on = lens.classList.toggle('show');
+          lensButton.setAttribute('aria-pressed', on ? 'true' : 'false');
+          lensButton.textContent = on ? 'Nascondi i tipi di parole' : 'Mostra i tipi di parole';
+        });
+      })();
+    </script>
+  </body>
+</html>

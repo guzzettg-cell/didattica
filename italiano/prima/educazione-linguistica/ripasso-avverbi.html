@@ -76,6 +76,17 @@ input[type=text]{width:11rem}
 .zoom button{width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:var(--display);font-weight:700;font-size:1rem;cursor:pointer}
 .zoom span{align-self:center;font-size:.8rem;min-width:2.8rem;text-align:center;font-variant-numeric:tabular-nums;color:var(--muted)}
 @media (prefers-reduced-motion:no-preference){.item{transition:background .2s,border-color .2s}}
+
+.scopri{background:var(--paper);border:2px solid var(--accent);border-radius:14px;padding:1.1rem 1.15rem;display:flex;flex-direction:column;gap:.9rem}
+.scopri .sc-testo{display:block;line-height:2.4;font-size:1.05rem}
+.sc-buco{display:inline-flex;flex-direction:column;align-items:center;vertical-align:bottom;margin:0 .1em}
+.sc-buco input{font:inherit;font-size:.95rem;padding:0 .25rem;height:1.6rem;border:none;border-bottom:2px dashed var(--accent);border-radius:0;background:transparent;color:var(--ink);text-align:center}
+.sc-buco input.sc-ok{border-bottom:2px solid var(--ok);color:var(--ok);font-weight:700}
+.sc-orig{display:none;font-size:.8rem;line-height:1.1;background:var(--hl);color:var(--hl-ink);padding:0 .3em;border-radius:3px}
+.sc-svelato .sc-orig{display:inline-block}
+.sc-svelato .sc-orig.sc-same{background:var(--ok-bg);color:var(--ok)}
+.sc-domande{display:flex;flex-direction:column;gap:.6rem}
+.scopri textarea{font:inherit;font-size:1rem;width:100%;min-height:5rem;padding:.5rem .6rem;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);box-sizing:border-box}
 </style>
 
 <div class="zoom" role="group" aria-label="Dimensione del testo">
@@ -90,6 +101,19 @@ input[type=text]{width:11rem}
   <h1>Gli <span class="mark">avverbi</span></h1>
   <p>L'avverbio è la parola che precisa il significato di un verbo, di un aggettivo, di un altro avverbio o di un'intera frase. È una parte del discorso <b>invariabile</b>: non cambia mai forma.</p>
 </header>
+<section class="scopri" id="sc-avverbio" aria-label="Che cosa manca?">
+  <span class="eyebrow">Per cominciare · l'avverbio</span>
+  <h2>Che cosa manca?</h2>
+  <p class="consegna">Da questo testo sono state tolte alcune parole, tutte dello stesso tipo. Leggilo, prova a completare gli spazi, poi mostra il testo completo e rispondi alle domande.</p>
+  <div class="note sc-testo"></div>
+  <div class="azioni"><button class="btn sc-mostra" type="button">Mostra il testo completo</button></div>
+  <h3>Rifletti</h3>
+  <div class="sc-domande"></div>
+  <div class="azioni"><button class="btn main sc-controlla" type="button">Controlla le risposte</button><span class="punti sc-punti" aria-live="polite"></span></div>
+  <label for="sc-avverbio-aperta"><b>Con parole tue:</b> che cosa aggiungono queste parole al testo? In che cosa sono diverse dagli aggettivi?</label>
+  <textarea id="sc-avverbio-aperta" placeholder="Scrivi qui…"></textarea>
+  <script type="application/json">{"testo": "[[Ieri]] ho studiato [[poco]] e [[oggi]] la verifica è andata [[male]]. Mi sono seduto [[lì]], [[in fondo]], e ho letto [[velocemente]] le domande. [[Forse]] avrei dovuto rileggere [[meglio]]. [[Domani]] studierò [[tanto]] e [[sicuramente]] andrà [[bene]].", "domande": [["Che tipo di parole manca?", "avverbi", "", ["aggettivi", "avverbi", "nomi", "preposizioni"]], ["Il testo si capisce lo stesso?", "sì, ma mancano informazioni su come, quando, dove, quanto", "", ["sì, ma mancano informazioni su come, quando, dove, quanto", "no, non si capisce niente"]], ["A che cosa si legano soprattutto le parole mancanti?", "al verbo", "il loro nome lo dice: ad-verbio.", ["al verbo", "al nome", "all'articolo"]], ["Le parole mancanti cambiano forma?", "no", "sono invariabili.", ["sì", "no"]]]}</script>
+</section>
 
 <section>
   <h2>A che cosa serve</h2>
@@ -429,5 +453,41 @@ input[type=text]{width:11rem}
     document.querySelectorAll('.seg').forEach(function(s){delete s.dataset.v; s.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed','false')})});
     score.textContent=''; window.scrollTo(0,0);
   };
+})();
+</script>
+<script>(function(){
+  function el(t,c,h){var e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e}
+  function norm(s){return String(s).toLowerCase().replace(/[’‘`´]/g,"'").replace(/\s+/g,' ').trim()}
+  document.querySelectorAll('section.scopri').forEach(function(sec,si){
+    if(sec.dataset.pronto) return; sec.dataset.pronto='1';
+    var D=JSON.parse(sec.querySelector('script[type="application/json"]').textContent);
+    var box=sec.querySelector('.sc-testo'), blanks=[];
+    D.testo.split(/(\[\[[^\]]+\]\])/).forEach(function(part){
+      var m=part.match(/^\[\[(.+)\]\]$/);
+      if(!m){ box.appendChild(document.createTextNode(part)); return; }
+      var w=el('span','sc-buco'), inp=el('input'); inp.type='text'; inp.autocomplete='off'; inp.spellcheck=false;
+      inp.setAttribute('aria-label','Parola mancante'); inp.style.width='7ch';
+      inp.id='sc'+si+'-b'+blanks.length; var o=el('span','sc-orig'); o.textContent=m[1];
+      w.append(inp,o); box.appendChild(w); blanks.push([inp,o,m[1]]);
+    });
+    var rev=sec.querySelector('.sc-mostra');
+    rev.onclick=function(){
+      var vis=!sec.classList.contains('sc-svelato'); sec.classList.toggle('sc-svelato',vis);
+      rev.textContent=vis?'Nascondi le parole':'Mostra il testo completo';
+      blanks.forEach(function(b){ var v=norm(b[0].value), ok=v&&v===norm(b[2]); b[0].classList.toggle('sc-ok',vis&&ok); b[1].classList.toggle('sc-same',ok) });
+    };
+    var qs=sec.querySelector('.sc-domande'), items=[];
+    D.domande.forEach(function(d,i){
+      var it=el('div','item'), fr=el('div','frase',d[0]), seg=el('div','seg'), fb=el('div','fb');
+      d[3].forEach(function(o,k){var b=el('button'); b.type='button'; b.id='sc'+si+'-q'+i+'-'+k; b.textContent=o; b.setAttribute('aria-pressed','false');
+        b.onclick=function(){seg.dataset.v=o; seg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')})}; seg.appendChild(b)});
+      it.append(fr,seg,fb); qs.appendChild(it); items.push([it,seg,d]);
+    });
+    var out=sec.querySelector('.sc-punti');
+    sec.querySelector('.sc-controlla').onclick=function(){var ok=0;
+      items.forEach(function(x){var g=x[1].dataset.v===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Risposta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++});
+      out.textContent=ok+' su '+items.length;
+    };
+  });
 })();
 </script>

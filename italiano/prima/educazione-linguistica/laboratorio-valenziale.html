@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laboratorio valenziale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --bg:#f6f7f4; --paper:#ffffff; --ink:#1d2b33; --muted:#5b6a70; --line:#d9dfdc;
+  --accent:#1f6f78; --hl:#ffe46b; --hl-ink:#3a2f00;
+  --ok:#2e7d4f; --ok-bg:#e3f3e8; --ko:#b23a3a; --ko-bg:#f9e3e1;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }
+
+html{font-size:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:1.5rem 4rem}
+.wrap{max-width:46rem;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800}
+h2{font-size:1.6rem;font-weight:700}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+.mark{background:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 88%,transparent 88%);color:var(--hl-ink);padding:0 .15em;border-radius:2px}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+header{display:flex;flex-direction:column;gap:.75rem;padding-top:1rem}
+header p{color:var(--muted);max-width:38rem}
+section{display:flex;flex-direction:column;gap:1rem}
+.note{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1rem 1.15rem;display:flex;flex-direction:column;gap:.6rem}
+.tipi{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.75rem}
+.tipo{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.tipo b{font-family:var(--display);font-size:1.05rem}
+.tipo .q{font-size:.85rem;color:var(--muted)}
+.tipo .es{font-size:.95rem}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:.55rem .8rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-size:.9rem;color:var(--accent)}
+tr:last-child td{border-bottom:none}
+hr{border:none;border-top:2px dashed var(--line);margin:0}
+
+/* esercizi */
+.ex{display:flex;flex-direction:column;gap:.9rem}
+.ex .consegna{color:var(--muted)}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .8rem}
+.item .frase{flex:1 1 16rem;min-width:0}
+.item.ok{border-color:var(--ok);background:var(--ok-bg)}
+.item.ko{border-color:var(--ko);background:var(--ko-bg)}
+.fb{flex-basis:100%;font-size:.9rem;color:var(--muted)}
+.fb:empty{display:none}
+.tok{cursor:pointer;border-radius:4px;padding:0 .1em;border:none;background:none;font:inherit;color:inherit}
+.tok:hover{outline:1px dashed var(--accent)}
+.tok.sel{background:var(--hl);color:var(--hl-ink)}
+.tok.miss{outline:2px solid var(--ko)}
+.tok.wrong{text-decoration:line-through;text-decoration-color:var(--ko);text-decoration-thickness:2px}
+select,input[type=text]{font:inherit;font-size:1rem;padding:.35rem .5rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);max-width:100%}
+input[type=text]{width:11rem}
+.seg{display:flex;gap:.4rem;flex-wrap:wrap}
+.seg button,.btn{font:inherit;font-size:.95rem;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:.3rem .9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--paper)}
+.btn.main{background:var(--accent);color:var(--paper);font-weight:700}
+.azioni{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.punti{font-weight:700;font-variant-numeric:tabular-nums}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* zoom */
+.zoom{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;gap:.3rem;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:.3rem;box-shadow:0 4px 14px rgba(0,0,0,.15);z-index:20}
+.zoom button{width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:var(--display);font-weight:700;font-size:1rem;cursor:pointer}
+.zoom span{align-self:center;font-size:.8rem;min-width:2.8rem;text-align:center;font-variant-numeric:tabular-nums;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.item{transition:background .2s,border-color .2s}}
+
+.ex > div[id^="e"]{display:flex;flex-direction:column;gap:.6rem}
+.tipi.two{grid-template-columns:repeat(auto-fit,minmax(17rem,1fr))}
+.note ul,.note ol{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:.3rem}
+.cit{border-left:4px solid var(--accent);padding:.2rem 0 .2rem 1rem;font-style:italic}
+.cit small{display:block;font-style:normal;color:var(--muted);font-size:.85rem;margin-top:.3rem}
+.indice{display:flex;flex-wrap:wrap;gap:.4rem}
+.indice a{font-size:.85rem;color:var(--accent);border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:.15rem .7rem;text-decoration:none}
+.indice a:hover{border-color:var(--accent)}
+
+.vl-box [hidden]{display:none!important}
+.vl-box{display:flex;flex-direction:column;gap:1rem}
+.vl-carta{font-family:var(--display);font-size:clamp(2.4rem,9vw,4.5rem);font-weight:800;text-align:center;padding:1.5rem 1rem;background:var(--paper);border:3px solid #c0392b;border-radius:16px;color:#c0392b;min-height:2.2em;display:flex;align-items:center;justify-content:center}
+.vl-sfilata-ui{display:flex;flex-direction:column;gap:.8rem}
+.vl-sfilata-ui select{margin-left:.3rem}
+.vl-val{font-size:1.15rem}
+.vl-pallino{display:inline-block;width:.9rem;height:.9rem;border-radius:50%;background:#c0392b;margin-left:.2rem;vertical-align:middle}
+.vl-sol u{text-decoration:none;border-bottom:3px solid var(--accent)}
+.vl-legenda{display:flex;flex-wrap:wrap;gap:.4rem}
+.vl-l{font-size:.85rem;padding:.15rem .6rem;border-radius:999px;color:#1d2b33}
+.vl-blu,.vl-carta-blu{background:#cfe3ff}.vl-verde,.vl-carta-verde{background:#cdeed6}.vl-giallo,.vl-carta-giallo{background:#fff1b8}.vl-rosa,.vl-carta-rosa{background:#ffd6e8}
+.vl-av,.vl-in,.vl-fermo,.vl-ancora{background:#e4e4e4}.vl-via{background:var(--paper);border-style:dashed!important}
+.vl-nomi{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:.5rem;margin:.6rem 0}
+.vl-nomi input{width:auto}
+.vl-plancia{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.35rem}
+.vl-casella{position:relative;min-height:4.4rem;border:1px solid #9aa7ab;border-radius:8px;padding:.25rem;display:flex;flex-direction:column;gap:.15rem;color:#1d2b33;font-size:.75rem;overflow:hidden}
+.vl-num{font-weight:700;font-family:var(--display)}
+.vl-spec{font-size:.68rem;line-height:1.1}
+.vl-pedine{display:flex;flex-wrap:wrap;gap:.15rem;margin-top:auto}
+.vl-pedina{width:1.3rem;height:1.3rem;border-radius:50%;color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 0 0 1px #0003}
+.vl-punti{display:flex;flex-wrap:wrap;gap:.5rem}
+.vl-sq{display:inline-flex;align-items:center;gap:.35rem;padding:.2rem .7rem;border:1px solid var(--line);border-radius:999px;background:var(--paper)}
+.vl-sq i{width:.8rem;height:.8rem;border-radius:50%;display:inline-block}
+.vl-sq.vl-attiva{outline:3px solid var(--accent)}
+.vl-faccia{font-family:var(--display);font-size:2rem;font-weight:800;width:3rem;height:3rem;border:2px solid var(--ink);border-radius:10px;display:inline-flex;align-items:center;justify-content:center;background:var(--paper)}
+.vl-cartabox{border-radius:14px;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.7rem;color:#1d2b33;border:2px solid #1d2b33}
+.vl-cartabox .eyebrow{color:#1d2b33}
+.vl-cartabox .seg button{color:#1d2b33;border-color:#1d2b33;background:#fff8}
+.vl-dom{font-size:1.15rem}
+.vl-esito.vl-ok{font-weight:700;color:#1b5e33}.vl-esito.vl-ko{font-weight:700;color:#8b1d1d}
+.vl-rp{font-style:italic}
+.vl-tab td{height:2.2rem}
+.schema-v{display:grid;gap:.6rem}
+.schema-v .sv{border-radius:12px;padding:.7rem 1rem;border:2px solid}
+.sv-esp{border-color:#9aa7ab;border-style:dashed}
+.sv-circ{border-color:#2e8b57}
+.sv-nuc{border-color:#c0392b;background:var(--paper)}
+.sv b.vb{color:#c0392b}
+@media (max-width:520px){.vl-plancia{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media print{.zoom,.vl-sfilata-ui,.vl-area,.vl-setup{display:none!important}}
+
+.rd-frase{font-size:1.2rem}
+.rd-vb{color:#c0392b}.rd-lv{background:#c0392b;color:#fff!important}.rd-ls{background:#7fb2e5}
+.rd-tessere{display:flex;flex-wrap:wrap;gap:.5rem}
+.rd-tessera{font:inherit;display:flex;flex-direction:column;align-items:center;gap:.1rem;padding:.4rem .8rem;border:2px dashed #9aa7ab;border-radius:10px;background:var(--paper);color:var(--ink);cursor:pointer}
+.rd-tessera small{font-size:.72rem;color:var(--muted)}
+.rd-tessera[data-z=a]{background:#cfe3ff;border:2px solid #2f6fb5;color:#1d2b33}
+.rd-tessera[data-z=c]{background:#cdeed6;border:2px solid #2e8b57;color:#1d2b33}
+.rd-tessera[data-z=e]{background:#fff1b8;border:2px solid #c9a92a;color:#1d2b33}
+.rd-tessera[data-z] small{color:#1d2b33}
+.rd-tessera.ok{outline:3px solid var(--ok);outline-offset:2px}
+.rd-tessera.ko{outline:3px solid var(--ko);outline-offset:2px}
+.rd-svg svg{width:100%;height:auto;background:#fffdf8;border:1px solid var(--line);border-radius:14px}
+.rd-sogg{fill:#7fb2e5;stroke:#2f6fb5;stroke-width:2}
+.rd-arg{fill:#d6e7fb;stroke:#2f6fb5;stroke-width:2}
+.rd-circ{fill:#e1f3e6;stroke:#2e8b57;stroke-width:2}
+.rd-esp{fill:#fff1b8;stroke:#c9a92a;stroke-width:2}
+.rd-verbo{fill:#c0392b;stroke:#8e2418;stroke-width:2}
+.rd-t{font:15px "Atkinson Hyperlegible",Verdana,sans-serif;fill:#1d2b33}
+.rd-tb{font-weight:bold}
+.rd-tv{font:bold 17px "Atkinson Hyperlegible",Verdana,sans-serif;fill:#fff}
+.rd-linea{stroke:#c0392b;stroke-width:2.5}
+.rd-tratt{stroke-dasharray:8 6}
+.rd-fascia{fill:#fbfdf9;stroke:#c0392b;stroke-width:2}
+.rd-etc{fill:#2e8b57}
+.rd-lcirc{stroke:#2e8b57;stroke-width:2}
+.rd-punto{fill:#1d2b33}
+.rd-prep{font:italic 14px "Atkinson Hyperlegible",Verdana,sans-serif;fill:#1d2b33}
+.rd-nucleo{fill:#fffdf8;stroke:#c0392b;stroke-width:2.5}
+.rd-et{font:13px "Atkinson Hyperlegible",Verdana,sans-serif;fill:#c0392b;letter-spacing:.08em}
+</style>
+</head>
+<body>
+<div class="zoom" role="group" aria-label="Dimensione del testo">
+  <button id="zm" type="button" aria-label="Rimpicciolisci">A−</button>
+  <span id="zv">100%</span>
+  <button id="zp" type="button" aria-label="Ingrandisci">A+</button>
+</div>
+
+<main class="wrap">
+<header>
+  <span class="eyebrow">Educazione linguistica · laboratorio</span>
+  <h1>Laboratorio <span class="mark">valenziale</span></h1>
+  <p>Il verbo è il motore della frase: decide quanti «attori» servono perché la scena stia in piedi. Il laboratorio segue le sette fasi della lezione-laboratorio di grammatica sperimentata da Indire: si parte da un problema, si esplora con il corpo, il gioco e le mani, e solo alla fine si mette in ordine con il grafico radiale.</p>
+</header>
+
+<nav class="indice" aria-label="Le fasi del laboratorio"><a href="#f1">1 · Stimolo</a><a href="#f2">2 · Che cosa sappiamo</a><a href="#teatro">3–4 · Esplorare</a><a href="#vl-gioco">5 · Gioco</a><a href="#vl-radiale-box">6 · Grafico radiale</a><a href="#scheda">7 · Sintesi</a><a href="#vl-casa">A casa</a><a href="#ex1">Esercizi</a></nav>
+
+<section id="f1">
+  <span class="eyebrow">Fase 1 · Stimolo</span>
+  <h2>Soggetto e predicato bastano?</h2>
+  <div class="note">
+    <p>Ci hanno insegnato che la frase minima è fatta di <b>soggetto + predicato</b>. Proviamo:</p>
+    <p class="vl-dom">«Il gatto dorme.» · «Il postino consegna.» · «Mia sorella mette.»</p>
+    <p>Hanno tutte un soggetto e un predicato. Sono tutte complete?</p>
+    <details><summary>Scopri</summary><p>Solo la prima. «Il postino consegna» lascia una domanda aperta: <i>che cosa? a chi?</i>. «Mia sorella mette»: <i>che cosa? dove?</i>. Non è il soggetto a decidere quanto è lunga la frase minima: è il <b>verbo</b>.</p></details>
+  </div>
+</section>
+
+<section id="f2">
+  <span class="eyebrow">Fase 2 · Che cosa sappiamo già</span>
+  <h2>Il verbo accende una scena</h2>
+  <div class="note">
+    <p>Chiudi gli occhi e pensa al verbo <b>regalare</b>. Che cosa vedi? Qualcuno che regala, un regalo, qualcuno che lo riceve. Il verbo <i>nevicare</i> invece accende una scena senza nessuno: solo la neve che cade.</p>
+    <p>Lo sapevamo già senza saperlo: è la nostra <b>grammatica implicita</b>, quella che usiamo ogni giorno per parlare. Ora la rendiamo esplicita. Ripasso: lezione <i>Le parti del discorso e la frase</i>.</p>
+  </div>
+</section>
+
+<section id="teatro">
+  <span class="eyebrow">Fasi 3 e 4 · Esploriamo</span>
+  <h2>La frase è un piccolo teatro</h2>
+  <p>Il linguista francese Lucien Tesnière, che ha inventato la grammatica delle valenze, paragonava la frase a uno spettacolo.</p>
+  <div class="tipi">
+    <div class="tipo"><b>il verbo</b><span class="q">è il copione</span><span class="es">decide che cosa succede e <b>quanti attori</b> servono</span></div>
+    <div class="tipo"><b>gli argomenti</b><span class="q">sono gli attori</span><span class="es">senza di loro lo spettacolo non può andare in scena</span></div>
+    <div class="tipo"><b>i circostanti</b><span class="q">sono i costumi e gli oggetti di scena</span><span class="es">stanno addosso a un attore o all'azione: il gatto <i>nero</i>, legge <i>silenziosamente</i></span></div>
+    <div class="tipo"><b>le espansioni</b><span class="q">sono la scenografia</span><span class="es">fanno da sfondo a tutta la scena: <i>dopo cena</i>, <i>sul divano</i></span></div>
+  </div>
+  <div class="note">
+    <p><b>Regalare</b>: il copione chiede tre attori, chi regala, che cosa, a chi. Se ne manca uno, lo spettacolo si blocca.</p>
+    <p><b>Nevica</b>: una scena senza attori, solo effetti speciali.</p>
+  </div>
+  <h3>Manipoliamo: togliere e spostare</h3>
+  <div class="note">
+    <p class="vl-dom">Dopo cena lo zio Marco legge silenziosamente un libro di fantascienza sul divano.</p>
+    <ul>
+      <li><b>Togli</b> un pezzo alla volta: quali puoi togliere senza che la scena si blocchi? Restano <i>Marco legge un libro</i>: è la frase nucleare.</li>
+      <li><b>Sposta</b> i pezzi: <i>dopo cena</i> e <i>sul divano</i> possono andare quasi ovunque (sono espansioni). <i>Di fantascienza</i> e <i>lo zio</i> devono restare vicini a <i>libro</i> e a <i>Marco</i> (sono circostanti).</li>
+    </ul>
+  </div>
+</section>
+
+<section id="vl-sfilata" class="vl-box" aria-label="La sfilata dei verbi">
+  <span class="eyebrow">Attività in classe · alla LIM</span>
+  <h2>La sfilata dei verbi</h2>
+  <div class="note">
+    <ol>
+      <li>Un alunno alla volta «sfila» davanti alla classe. Sulla LIM compare un verbo che vede solo lui (oppure lo legge l'insegnante a bassa voce).</li>
+      <li>Prima mostra con le <b>dita</b> la valenza del verbo: pugno chiuso per zero, un dito per uno, e così via.</li>
+      <li>Poi <b>mima</b> una frase nucleare con quel verbo.</li>
+      <li>La classe indovina prima la valenza, poi la frase. Alla fine si preme «Mostra la valenza».</li>
+    </ol>
+  </div>
+  <div class="note">
+    <h3>Variante: il teatro delle frasi</h3>
+    <p>Un alunno fa il <b>regista</b>: pesca un verbo e chiama sul palco tanti <b>attori</b> quanti sono gli argomenti, ognuno con un cartellino (<i>chi?</i>, <i>che cosa?</i>, <i>a chi?</i>…). Gli attori recitano la frase nucleare. Poi la classe può aggiungere un <b>oggetto di scena</b> (un circostante: «con il cappello rosso») e una <b>scenografia</b> (un'espansione: «a mezzanotte»). Se manca un attore, il regista grida «Stop!».</p>
+  </div>
+  <div class="vl-sfilata-ui">
+    <div class="vl-carta" aria-live="polite"></div>
+    <div class="azioni">
+      <button class="btn main vl-nuovo" type="button">Nuovo verbo</button>
+      <button class="btn vl-mostra" type="button">Mostra la valenza</button>
+      <label>Solo verbi <select class="vl-filtro"><option value="">di tutte le valenze</option><option value="0">zerovalenti</option><option value="1">monovalenti</option><option value="2">bivalenti</option><option value="3">trivalenti</option><option value="4">tetravalenti</option></select></label>
+    </div>
+    <div class="note vl-sol" hidden></div>
+  </div>
+  <script type="application/json" id="vl-verbi">[["piovere", 0, "Piove.", ""], ["nevicare", 0, "Nevica.", ""], ["grandinare", 0, "Grandina.", ""], ["tuonare", 0, "Tuona.", ""], ["dormire", 1, "<u>Il gatto<\/u> dorme.", "Chi?"], ["ridere", 1, "<u>Marta<\/u> ride.", "Chi?"], ["piangere", 1, "<u>Il neonato<\/u> piange.", "Chi?"], ["sbadigliare", 1, "<u>Il nonno<\/u> sbadiglia.", "Chi?"], ["tossire", 1, "<u>Mio fratello<\/u> tossisce.", "Chi?"], ["nascere", 1, "<u>Un vitellino<\/u> è nato.", "Chi?"], ["abbracciare", 2, "<u>Marco<\/u> abbraccia <u>il fratello<\/u>.", "Chi? · Chi?"], ["guardare", 2, "<u>Anna<\/u> guarda <u>il mare<\/u>.", "Chi? · Che cosa?"], ["andare", 2, "<u>Paolo<\/u> va <u>a Roma<\/u>.", "Chi? · Dove?"], ["abitare", 2, "<u>Sara<\/u> abita <u>a Napoli<\/u>.", "Chi? · Dove?"], ["telefonare", 2, "<u>Luca<\/u> telefona <u>alla nonna<\/u>.", "Chi? · A chi?"], ["somigliare", 2, "<u>Giulia<\/u> somiglia <u>al padre<\/u>.", "Chi? · A chi?"], ["costruire", 2, "<u>Il castoro<\/u> costruisce <u>una diga<\/u>.", "Chi? · Che cosa?"], ["inseguire", 2, "<u>Il cane<\/u> insegue <u>il gatto<\/u>.", "Chi? · Chi?"], ["regalare", 3, "<u>Sonia<\/u> regala <u>una collana<\/u> <u>alla sorella<\/u>.", "Chi? · Che cosa? · A chi?"], ["dare", 3, "<u>La prof<\/u> dà <u>i compiti<\/u> <u>agli alunni<\/u>.", "Chi? · Che cosa? · A chi?"], ["mettere", 3, "<u>Il papà<\/u> mette <u>le chiavi<\/u> <u>nel cassetto<\/u>.", "Chi? · Che cosa? · Dove?"], ["spedire", 3, "<u>Il nonno<\/u> spedisce <u>una cartolina<\/u> <u>a Lucia<\/u>.", "Chi? · Che cosa? · A chi?"], ["prestare", 3, "<u>Luca<\/u> presta <u>la bici<\/u> <u>a Marco<\/u>.", "Chi? · Che cosa? · A chi?"], ["dedicare", 3, "<u>Il poeta<\/u> dedica <u>una poesia<\/u> <u>alla luna<\/u>.", "Chi? · Che cosa? · A chi?"], ["insegnare", 3, "<u>La maestra<\/u> insegna <u>l'inglese<\/u> <u>ai bambini<\/u>.", "Chi? · Che cosa? · A chi?"], ["spostare", 4, "<u>Adele<\/u> sposta <u>il tavolo<\/u> <u>dal soggiorno<\/u> <u>alla cucina<\/u>.", "Chi? · Che cosa? · Da dove? · A dove?"], ["tradurre", 4, "<u>L'interprete<\/u> traduce <u>il discorso<\/u> <u>dal cinese<\/u> <u>all'italiano<\/u>.", "Chi? · Che cosa? · Da quale lingua? · In quale lingua?"], ["trasferire", 4, "<u>L'azienda<\/u> trasferisce <u>Marco<\/u> <u>da Milano<\/u> <u>a Roma<\/u>.", "Chi? · Chi? · Da dove? · A dove?"], ["portare", 4, "<u>Il camion<\/u> porta <u>la merce<\/u> <u>da Genova<\/u> <u>a Torino<\/u>.", "Chi? · Che cosa? · Da dove? · A dove?"]]</script>
+</section>
+
+<section id="vl-gioco" class="vl-box" aria-label="Il gioco delle valenze">
+  <span class="eyebrow">Gioco a squadre · alla LIM</span>
+  <h2>Il gioco delle valenze</h2>
+  <div class="note">
+    <p>Le squadre tirano il dado a turno. Chi finisce su una casella colorata pesca una carta: risposta giusta, <b>un punto</b>. Le caselle grigie riservano sorprese. Quando una squadra arriva al traguardo la partita finisce: vince chi ha più punti.</p>
+    <div class="vl-legenda"><span class="vl-l vl-blu">Che valenza ha?</span><span class="vl-l vl-verde">Nucleo o informazione in più?</span><span class="vl-l vl-giallo">Vero o falso</span><span class="vl-l vl-rosa">Sfida (decide l'insegnante)</span></div>
+  </div>
+  <div class="vl-setup note">
+    <label>Numero di squadre <select class="vl-nsq"><option>2</option><option selected>3</option><option>4</option></select></label>
+    <div class="vl-nomi"><input id="vl-nome0" type="text" placeholder="Squadra 1"><input id="vl-nome1" type="text" placeholder="Squadra 2"><input id="vl-nome2" type="text" placeholder="Squadra 3"><input id="vl-nome3" type="text" placeholder="Squadra 4"></div>
+    <div class="azioni"><button class="btn main vl-inizia" type="button">Inizia la partita</button></div>
+  </div>
+  <div class="vl-area" hidden>
+    <div class="vl-punti"></div>
+    <div class="azioni"><button class="btn main vl-dado" type="button">Tira il dado</button><span class="vl-faccia" aria-live="polite">?</span><span class="vl-stato" aria-live="polite"></span></div>
+    <div class="vl-cartabox" hidden aria-live="polite"></div>
+    <div class="vl-plancia"></div>
+    <div class="azioni"><button class="btn vl-nuova" type="button">Nuova partita</button></div>
+  </div>
+  <script type="application/json" id="vl-gioco-dati">{"caselle": [{"t": "via"}, {"t": "blu"}, {"t": "verde"}, {"t": "giallo"}, {"t": "rosa"}, {"t": "av", "n": 2, "s": "Strada libera: avanti di 2"}, {"t": "blu"}, {"t": "verde"}, {"t": "giallo"}, {"t": "fermo", "s": "Traffico: fermo un turno"}, {"t": "rosa"}, {"t": "blu"}, {"t": "verde"}, {"t": "ancora", "s": "Tira ancora"}, {"t": "giallo"}, {"t": "rosa"}, {"t": "blu"}, {"t": "in", "n": 3, "s": "Ostacolo: indietro di 3"}, {"t": "verde"}, {"t": "giallo"}, {"t": "rosa"}, {"t": "av", "n": 3, "s": "Scorciatoia: avanti di 3"}, {"t": "blu"}, {"t": "verde"}, {"t": "giallo"}, {"t": "in", "n": 4, "s": "Strada sbarrata: indietro di 4"}, {"t": "rosa"}, {"t": "blu"}, {"t": "verde"}, {"t": "via"}], "carte": {"blu": [{"d": "Che valenza ha il verbo? «Nevica da stamattina.»", "o": ["zerovalente", "monovalente", "bivalente", "trivalente", "tetravalente"], "r": "zerovalente", "e": ""}, {"d": "«Il bambino sbadiglia.»", "o": ["zerovalente", "monovalente", "bivalente", "trivalente", "tetravalente"], "r": "monovalente", "e": ""}, {"d": "«Elisa regala un braccialetto a sua sorella.»", "o": ["zerovalente", "monovalente", "bivalente", "trivalente", "tetravalente"], "r": "trivalente", "e": ""}, {"d": "«Il cane rincorre il gatto.»", "o": ["zerovalente", "monovalente", "bivalente", "trivalente", "tetravalente"], "r": "bivalente", "e": ""}, {"d": "«Il camion porta la merce da Genova a Torino.»", "o": ["zerovalente", "monovalente", "bivalente", "trivalente", "tetravalente"], "r": "tetravalente", "e": ""}, {"d": "«Mio fratello abita a Bologna.»", "o": ["zerovalente", "monovalente", "bivalente", "trivalente", "tetravalente"], "r": "bivalente", "e": "abitare vuole sempre un luogo."}, {"d": "«Il nonno presta la bici a Luca.»", "o": ["zerovalente", "monovalente", "bivalente", "trivalente", "tetravalente"], "r": "trivalente", "e": ""}, {"d": "«Il neonato piange.»", "o": ["zerovalente", "monovalente", "bivalente", "trivalente", "tetravalente"], "r": "monovalente", "e": ""}, {"d": "«Lampeggia.»", "o": ["zerovalente", "monovalente", "bivalente", "trivalente", "tetravalente"], "r": "zerovalente", "e": ""}, {"d": "«La prof spiega la regola agli alunni.»", "o": ["zerovalente", "monovalente", "bivalente", "trivalente", "tetravalente"], "r": "trivalente", "e": ""}, {"d": "«Gianni somiglia a suo padre.»", "o": ["zerovalente", "monovalente", "bivalente", "trivalente", "tetravalente"], "r": "bivalente", "e": ""}, {"d": "«L'interprete traduce il discorso dal cinese all'italiano.»", "o": ["zerovalente", "monovalente", "bivalente", "trivalente", "tetravalente"], "r": "tetravalente", "e": ""}], "verde": [{"d": "«Al mattino Giada corre»: <b>al mattino<\/b>…", "o": ["fa parte del nucleo", "è un'informazione in più"], "r": "è un'informazione in più", "e": ""}, {"d": "«Il gatto dorme sul divano»: <b>sul divano<\/b>…", "o": ["fa parte del nucleo", "è un'informazione in più"], "r": "è un'informazione in più", "e": ""}, {"d": "«Sara abita a Napoli»: <b>a Napoli<\/b>…", "o": ["fa parte del nucleo", "è un'informazione in più"], "r": "fa parte del nucleo", "e": "abitare ha bisogno di un luogo."}, {"d": "«Marco ha mangiato una pizza ieri sera»: <b>ieri sera<\/b>…", "o": ["fa parte del nucleo", "è un'informazione in più"], "r": "è un'informazione in più", "e": ""}, {"d": "«Il papà mette le chiavi nel cassetto»: <b>nel cassetto<\/b>…", "o": ["fa parte del nucleo", "è un'informazione in più"], "r": "fa parte del nucleo", "e": "mettere: chi? che cosa? dove?"}, {"d": "«La mamma bacia Sara sulla fronte»: <b>sulla fronte<\/b>…", "o": ["fa parte del nucleo", "è un'informazione in più"], "r": "è un'informazione in più", "e": ""}, {"d": "«Il nonno regala un libro a Pietro»: <b>a Pietro<\/b>…", "o": ["fa parte del nucleo", "è un'informazione in più"], "r": "fa parte del nucleo", "e": ""}, {"d": "«Ogni pomeriggio Serena cammina in collina»: <b>ogni pomeriggio<\/b>…", "o": ["fa parte del nucleo", "è un'informazione in più"], "r": "è un'informazione in più", "e": ""}, {"d": "«Luca va a scuola in bicicletta»: <b>in bicicletta<\/b>…", "o": ["fa parte del nucleo", "è un'informazione in più"], "r": "è un'informazione in più", "e": ""}, {"d": "«Luca va a scuola in bicicletta»: <b>a scuola<\/b>…", "o": ["fa parte del nucleo", "è un'informazione in più"], "r": "fa parte del nucleo", "e": "andare: chi? dove?"}], "giallo": [{"d": "«Piove» è una frase completa anche senza soggetto.", "o": ["vero", "falso"], "r": "vero", "e": ""}, {"d": "Un verbo bivalente ha bisogno di due argomenti.", "o": ["vero", "falso"], "r": "vero", "e": ""}, {"d": "In «Il cane abbaia forte», «forte» è un argomento.", "o": ["vero", "falso"], "r": "falso", "e": "è un'informazione in più: «Il cane abbaia» è già completa."}, {"d": "«Dare» è un verbo monovalente.", "o": ["vero", "falso"], "r": "falso", "e": "è trivalente: qualcuno dà qualcosa a qualcuno."}, {"d": "Le informazioni in più si possono togliere senza rendere la frase zoppa.", "o": ["vero", "falso"], "r": "vero", "e": ""}, {"d": "Il verbo «spostare» può avere quattro argomenti.", "o": ["vero", "falso"], "r": "vero", "e": ""}, {"d": "Un verbo zerovalente ha bisogno del soggetto.", "o": ["vero", "falso"], "r": "falso", "e": ""}, {"d": "In «Ieri Anna ha letto un libro», «ieri» fa parte del nucleo.", "o": ["vero", "falso"], "r": "falso", "e": ""}, {"d": "Il soggetto è un argomento del verbo.", "o": ["vero", "falso"], "r": "vero", "e": "per tutti i verbi tranne gli zerovalenti."}, {"d": "Nella frase nucleare ci possono essere solo due parole.", "o": ["vero", "falso"], "r": "falso", "e": "dipende dalla valenza del verbo."}], "rosa": [{"d": "Mima la frase «La nonna regala un fiore alla vicina»: la tua squadra deve indovinarla.", "r": "La squadra dice la frase e riconosce che regalare è trivalente."}, {"d": "Inventa una frase con un verbo zerovalente.", "r": "Grandina. · Tuona. · Lampeggia."}, {"d": "Inventa una frase nucleare trivalente e indica i tre argomenti.", "r": "Il postino consegna il pacco al vicino: chi? il postino; che cosa? il pacco; a chi? al vicino."}, {"d": "Aggiungi due informazioni in più alla frase «Luca legge un libro».", "r": "Ieri sera Luca legge un libro sul divano."}, {"d": "Togli tutte le informazioni in più: «Domenica mattina mio zio porta il cane al parco con la bicicletta».", "r": "Mio zio porta il cane al parco."}, {"d": "Sfilata! Mostra con le dita la valenza di «spedire», poi mima una frase.", "r": "Tre dita: qualcuno spedisce qualcosa a qualcuno."}, {"d": "Trova un verbo che può avere uno o due argomenti, e fai due frasi.", "r": "mangiare: «Luca mangia.» / «Luca mangia una mela.»"}, {"d": "Di' la frase «Il bambino dorme» in un'altra lingua che conosci e conta gli argomenti.", "r": "Inglese: «The baby sleeps»: un argomento, come in italiano."}, {"d": "Trasforma «Il gatto dorme» in una frase bivalente cambiando solo il verbo.", "r": "Il gatto insegue il topo."}, {"d": "In scena! Il copione è «prestare»: chiama sul palco gli attori che servono e recitate la frase.", "r": "Tre attori: chi presta, che cosa, a chi. Es.: Luca presta la penna a Sara."}, {"d": "In scena! Recitate «Il cuoco serve la torta agli ospiti», poi aggiungete un oggetto di scena e una scenografia.", "r": "Es.: A mezzanotte il cuoco con il cappello bianco serve la torta agli ospiti."}]}, "nomiColori": {"blu": "Che valenza ha?", "verde": "Nucleo o informazione in più?", "giallo": "Vero o falso", "rosa": "Sfida"}}</script>
+</section>
+
+<section id="vl-radiale-box" class="vl-box" aria-label="Il grafico radiale">
+  <span class="eyebrow">Mettiamo in ordine · alla LIM o da soli</span>
+  <h2>Il grafico radiale</h2>
+  <div class="note">
+    <p>Scegli una frase. Il <b>verbo</b> è già al centro. Tocca ogni tessera per dire che cos'è: <b>argomento</b>, <b>circostante</b> o <b>espansione</b>. Poi premi «Controlla»: comparirà il grafico radiale della frase.</p>
+    <div class="vl-legenda"><span class="vl-l rd-lv">verbo</span><span class="vl-l rd-ls">argomento soggetto</span><span class="vl-l vl-blu">altri argomenti</span><span class="vl-l vl-verde">circostante</span><span class="vl-l vl-giallo">espansione</span><span class="vl-l">● preposizione sul legame</span></div>
+    <p class="consegna">Convenzioni dei grafici radiali di Sabatini, Camodeca e De Santis (<i>Sistema e testo</i>): l'ovale rosso racchiude il nucleo; se ci sono circostanti diventa tratteggiato e intorno si apre la loro fascia; le espansioni stanno fuori, libere di spostarsi.</p>
+  </div>
+  <label>Frase <select class="rd-scegli"></select></label>
+  <p class="rd-frase"></p>
+  <div class="rd-tessere"></div>
+  <div class="azioni">
+    <button class="btn main rd-controlla" type="button">Controlla</button>
+    <button class="btn rd-mostra" type="button">Mostra subito lo schema</button>
+    <button class="btn rd-succ" type="button">Frase successiva</button>
+    <span class="punti rd-esito" aria-live="polite"></span>
+  </div>
+  <div class="rd-svg"></div>
+  <script type="application/json" id="vl-radiale">[{"f": "Nevica.", "v": "Nevica", "p": []}, {"f": "Paolo cammina.", "v": "cammina", "p": [["Paolo", "a"]]}, {"f": "Paolo accarezza il cane.", "v": "accarezza", "p": [["Paolo", "a"], ["il cane", "a"]]}, {"f": "Paolo regala un gatto a Francesca.", "v": "regala", "p": [["Paolo", "a"], ["un gatto", "a"], ["a Francesca", "a", "a"]]}, {"f": "Alessia prende i fogli dal cassetto.", "v": "prende", "p": [["Alessia", "a"], ["i fogli", "a"], ["dal cassetto", "a", "da", "il cassetto"]]}, {"f": "Franco abita a Lugano.", "v": "abita", "p": [["Franco", "a"], ["a Lugano", "a", "a"]]}, {"f": "Al mattino Giada corre nel parco.", "v": "corre", "p": [["Al mattino", "e"], ["Giada", "a"], ["nel parco", "e"]]}, {"f": "Ogni sera la nonna racconta una fiaba ai nipoti.", "v": "racconta", "p": [["Ogni sera", "e"], ["la nonna", "a"], ["una fiaba", "a"], ["ai nipoti", "a", "a", "i nipoti"]]}, {"f": "Il gatto nero dorme profondamente sul divano.", "v": "dorme", "p": [["Il gatto", "a"], ["nero", "c", 1], ["profondamente", "c", 0], ["sul divano", "e"]]}, {"f": "Lo zio Marco legge silenziosamente un libro di fantascienza.", "v": "legge", "p": [["Lo zio", "c", 1], ["Marco", "a"], ["silenziosamente", "c", 0], ["un libro", "a"], ["di fantascienza", "c", 2]]}, {"f": "Dopo cena lo zio Marco legge un libro sul divano.", "v": "legge", "p": [["Dopo cena", "e"], ["lo zio", "c", 1], ["Marco", "a"], ["un libro", "a"], ["sul divano", "e"]]}, {"f": "Gino, il gestore del bar, pulisce le vetrine del suo locale.", "v": "pulisce", "p": [["Gino", "a"], ["il gestore del bar", "c", 1], ["le vetrine", "a"], ["del suo locale", "c", 2]]}]</script>
+</section>
+
+<section id="scheda">
+  <span class="eyebrow">Fase 7 · Sintesi</span>
+  <h2>Mettiamo in ordine</h2>
+  <div class="note">
+    <p>Il <b>verbo-predicato</b> ha bisogno di un certo numero di elementi per avere senso compiuto: sono i suoi <b>argomenti</b>. Il loro numero è la <b>valenza</b>. Verbo + argomenti = <b>frase nucleare</b> (o nucleo).</p>
+    <p>Gli argomenti si trovano con le <b>domande guida</b> (<i>chi? che cosa? a chi? dove?</i>). Possono essere <b>diretti</b> (senza preposizione: <i>il cane</i>) o <b>indiretti</b> (con preposizione: <i>a Francesca</i>).</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>valenza</th><th>argomenti</th><th>frase nucleare</th></tr></thead>
+    <tbody>
+      <tr><td><b>zerovalente</b></td><td>nessuno</td><td>Nevica.</td></tr>
+      <tr><td><b>monovalente</b></td><td>chi?</td><td><u>Paolo</u> cammina.</td></tr>
+      <tr><td><b>bivalente</b></td><td>chi? + che cosa? / dove? / a chi?</td><td><u>Paolo</u> accarezza <u>il cane</u>.</td></tr>
+      <tr><td><b>trivalente</b></td><td>chi? + che cosa? + a chi? / dove?</td><td><u>Paolo</u> regala <u>un gatto</u> <u>a Francesca</u>.</td></tr>
+      <tr><td><b>tetravalente</b></td><td>chi? + che cosa? + da dove? + a dove?</td><td><u>Io</u> traduco <u>un libro</u> <u>dal tedesco</u> <u>all'italiano</u>.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tipi two">
+    <div class="tipo"><b>circostanti</b><span class="q">si legano a un elemento del nucleo e gli stanno vicino</span><span class="es">Lo zio Marco · legge <i>silenziosamente</i> · un libro <i>di fantascienza</i></span></div>
+    <div class="tipo"><b>espansioni</b><span class="q">si legano a tutta la frase e si spostano liberamente</span><span class="es"><i>Dopo cena</i> lo zio legge… · …legge <i>sul divano</i></span></div>
+  </div>
+  <div class="schema-v" aria-label="Schema della frase: Dopo cena lo zio Marco legge silenziosamente un libro">
+    <div class="sv sv-esp"><b>espansione</b> · Dopo cena
+      <div class="sv sv-circ"><b>circostanti</b> · lo zio · silenziosamente
+        <div class="sv sv-nuc"><b>frase nucleare</b> · Marco <b class="vb">legge</b> un libro</div>
+      </div>
+    </div>
+  </div>
+  <p class="consegna">Termini: usiamo quelli di Francesco Sabatini (argomenti, circostanti, espansioni). Alcuni libri chiamano i circostanti «espansioni nucleari» e le espansioni «espansioni extra-nucleari». Esempi tratti anche da <i>Dal verbo alla frase</i> (Petrini, Selvitella) e dall'unità «Grammatica valenziale» di Eurac Research.</p>
+  <details class="note vl-prof"><summary><b>Per l'insegnante: avvertenze</b></summary>
+    <p>Dalle osservazioni di Daniela Notarbartolo sui punti forti e deboli del modello valenziale:</p>
+    <ul>
+      <li><b>Scegliere i verbi in anticipo.</b> Molti verbi cambiano valenza con il significato: <i>L'automobile va</i> (funziona), <i>Giovanni va a casa</i>, <i>La linea 2 va da via Po a Sesto</i>. In classe meglio partire da verbi che non lascino dubbi.</li>
+      <li><b>Il soggetto è un argomento speciale.</b> È l'unico con cui il verbo si accorda; gli altri argomenti sono «retti» dal verbo. Conviene mostrare anche la divisione <i>soggetto | predicazione</i>: [qualcuno] [fa qualcosa].</li>
+      <li><b>Transitivi e intransitivi.</b> <i>Lo zio compra il giornale</i> e <i>La zia abita a Roma</i> hanno lo stesso schema bivalente, ma solo la prima si può volgere al passivo.</li>
+      <li><b>Capire è vedere i gruppi.</b> Le frasi ambigue lo mostrano bene: <i>Nico guarda le ragazze con gli occhiali</i> (chi ha gli occhiali?); <i>Riempio il vaso di ferro</i> (il vaso è di ferro: gruppo incluso, un circostante) e <i>Riempio il vaso di olio</i> (lo riempio con l'olio: gruppo autonomo, un argomento).</li>
+    </ul>
+  </details>
+</section>
+
+<section id="vl-casa" class="vl-box" aria-label="A casa: la frase nucleare nelle mie lingue">
+  <span class="eyebrow">Compito con la famiglia</span>
+  <h2>La frase nucleare nelle mie lingue</h2>
+  <div class="note">
+    <ol>
+      <li>Spiega a qualcuno della tua famiglia che cosa sono il <b>verbo</b>, gli <b>argomenti</b>, la <b>valenza</b> e le <b>informazioni in più</b>.</li>
+      <li>Insieme, traducete queste frasi in un'altra lingua che conoscete (il dialetto, l'inglese, la lingua di un nonno…).</li>
+      <li>Contate gli argomenti: sono gli stessi dell'italiano? Che cosa cambia?</li>
+      <li>Domani in classe, in cerchio, racconterete somiglianze e differenze.</li>
+    </ol>
+  </div>
+  <div class="tbl"><table class="vl-tab">
+    <thead><tr><th>frase in italiano</th><th>valenza</th><th>nell'altra lingua</th><th>stessi argomenti?</th></tr></thead>
+    <tbody>
+      <tr><td>Piove.</td><td>0</td><td></td><td></td></tr>
+      <tr><td>Sofia cammina.</td><td>1</td><td></td><td></td></tr>
+      <tr><td>Il nonno legge il giornale.</td><td>2</td><td></td><td></td></tr>
+      <tr><td>La mamma regala un libro a Luca.</td><td>3</td><td></td><td></td></tr>
+      <tr><td>…una frase inventata da te</td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table></div>
+  <p class="consegna">Lo sapevi? In italiano «Piove» basta da solo; in inglese serve un soggetto «finto»: <i>It rains</i>. In francese: <i>Il pleut</i>.</p>
+  <div class="azioni"><button class="btn" type="button" onclick="window.print()">Stampa la pagina</button></div>
+</section>
+
+<hr>
+<section class="ex" id="ex1">
+  <span class="eyebrow">Esercizio 1</span>
+  <h2>Che valenza ha il verbo?</h2>
+  <p class="consegna">Fai al verbo le domande guida e conta gli argomenti.</p>
+  <div id="e1"></div>
+</section>
+<section class="ex" id="ex2">
+  <span class="eyebrow">Esercizio 2</span>
+  <h2>Quale argomento manca?</h2>
+  <p class="consegna">La frase è «zoppa»: quale domanda guida resta senza risposta?</p>
+  <div id="e2"></div>
+</section>
+<section class="ex" id="ex3">
+  <span class="eyebrow">Esercizio 3</span>
+  <h2>Argomento, circostante o espansione?</h2>
+  <p class="consegna">Che cos'è la parte evidenziata? Prova a toglierla e a spostarla.</p>
+  <div id="e3"></div>
+</section>
+<section class="ex" id="ex4">
+  <span class="eyebrow">Esercizio 4</span>
+  <h2>Si può spostare?</h2>
+  <p class="consegna">Le espansioni si spostano liberamente, i circostanti no. La frase con lo spostamento va bene?</p>
+  <div id="e4"></div>
+</section>
+<section class="ex" id="ex5">
+  <span class="eyebrow">Esercizio 5</span>
+  <h2>Attore, costume o scenografia?</h2>
+  <p class="consegna">Pensa alla frase come a uno spettacolo: che ruolo ha la parte evidenziata?</p>
+  <div id="e5"></div>
+</section>
+<section class="ex" id="ex6">
+  <span class="eyebrow">Esercizio 6</span>
+  <h2>Stesso verbo, valenze diverse</h2>
+  <p class="consegna">Il significato del verbo cambia e con lui il numero degli argomenti. Che valenza ha il verbo in questa frase?</p>
+  <div id="e6"></div>
+</section>
+<section class="ex" id="ex7">
+  <span class="eyebrow">Esercizio 7</span>
+  <h2>Chi comanda l'accordo?</h2>
+  <p class="consegna">Il verbo e l'aggettivo si accordano con il nucleo del gruppo soggetto, non con la parola più vicina. Scrivi la parola completa.</p>
+  <div id="e7"></div>
+</section>
+<section class="ex" id="ex8">
+  <span class="eyebrow">Esercizio 8</span>
+  <h2>Snida i pronomi</h2>
+  <p class="consegna">Anche i pronomi sono argomenti. «Maria ha dato il quaderno a Lucia» diventa «Gliel'ha dato». Che cosa sostituisce ogni pezzo?</p>
+  <div id="e8"></div>
+</section>
+<section class="ex" id="ex9">
+  <span class="eyebrow">Esercizio 9</span>
+  <h2>Trova la frase nucleare</h2>
+  <p class="consegna">Tocca solo le parole della frase nucleare: il verbo e i suoi argomenti.</p>
+  <div id="e9"></div>
+</section>
+<section class="ex">
+  <div class="note">
+    <div class="azioni">
+      <button class="btn main" id="check" type="button">Correggi tutto</button>
+      <button class="btn" id="reset" type="button">Ricomincia</button>
+      <span class="punti" id="score" aria-live="polite"></span>
+    </div>
+  </div>
+</section>
+</main>
+<script>
+(function(){
+  var KEY="lab-val", DATA=[{"type": "select", "opts": ["zerovalente", "monovalente", "bivalente", "trivalente", "tetravalente"], "label": "Valenza", "items": [["Grandina.", "zerovalente"], ["Franco russa.", "monovalente"], ["Lucia ha mangiato gli spaghetti.", "bivalente"], ["Giulia distribuisce volantini ai passanti.", "trivalente"], ["La ditta ha trasferito la sede da Bellinzona a Locarno.", "tetravalente"], ["Mia zia abita a Torino.", "bivalente", "abitare vuole un luogo."], ["La maestra sta sgridando Marta.", "bivalente"], ["Sta tuonando.", "zerovalente"]]}, {"type": "select", "opts": ["chi?", "che cosa?", "a chi?", "dove?"], "label": "Argomento mancante", "items": [["… regala un fiore a Marta.", "chi?"], ["Il papà mette il libro …", "dove?"], ["La nonna presta … a Pietro.", "che cosa?"], ["Il treno va …", "dove?"], ["Sara spedisce una lettera …", "a chi?"], ["… telefona alla zia.", "chi?"]]}, {"type": "scelta", "opts": ["argomento", "circostante", "espansione"], "items": [["<span class='mark'>Al mattino</span> Giada corre nel parco.", "espansione", "si può spostare: «Giada corre nel parco al mattino»."], ["Al mattino Giada corre <span class='mark'>nel parco</span>.", "espansione", "è lo sfondo di tutta la scena e si può spostare."], ["Al mattino <span class='mark'>Giada</span> corre nel parco.", "argomento", "chi corre?"], ["Lo zio Marco legge <span class='mark'>silenziosamente</span> un libro.", "circostante", "dice come legge: si lega al verbo."], ["Lo zio Marco legge un libro <span class='mark'>di fantascienza</span>.", "circostante", "si lega a «libro» e deve stargli vicino."], ["<span class='mark'>Lo zio</span> Marco legge un libro.", "circostante", "si lega a «Marco»."], ["Il papà mette le chiavi <span class='mark'>nel cassetto</span>.", "argomento", "mettere: chi? che cosa? dove?"], ["Franco abita <span class='mark'>a Lugano</span>.", "argomento", "abitare: chi? dove?"]]}, {"type": "scelta", "opts": ["va bene", "non va bene"], "items": [["Lo zio Marco legge un libro <u>dopo cena</u>.", "va bene", "«dopo cena» è un'espansione."], ["<u>Sul divano</u> lo zio Marco legge un libro.", "va bene"], ["Lo zio Marco legge un libro silenziosamente <u>di fantascienza</u>.", "non va bene", "«di fantascienza» deve stare vicino a «libro»."], ["Marco legge <u>lo zio</u> un libro.", "non va bene", "«lo zio» deve stare vicino a «Marco»."], ["Marco, <u>lo zio</u>, legge un libro.", "va bene", "resta accanto a «Marco»."], ["Lo zio Marco <u>dopo cena</u> legge un libro.", "va bene"]]}, {"type": "scelta", "opts": ["attore", "costume o oggetto di scena", "scenografia"], "items": [["<span class='mark'>Il pirata</span> nasconde il tesoro sull'isola.", "attore", "è un argomento: chi nasconde?"], ["Il pirata nasconde <span class='mark'>il tesoro</span> sull'isola.", "attore", "nasconde che cosa?"], ["Il pirata nasconde il tesoro <span class='mark'>sull'isola</span>.", "scenografia", "«Il pirata nasconde il tesoro» sta già in piedi: l'isola è lo sfondo."], ["<span class='mark'>Di notte</span> il pirata nasconde il tesoro.", "scenografia", "fa da sfondo a tutta la scena."], ["Il pirata <span class='mark'>con la benda</span> nasconde il tesoro.", "costume o oggetto di scena", "sta addosso a un attore."], ["La principessa canta <span class='mark'>dolcemente</span>.", "costume o oggetto di scena", "accompagna l'azione."]]}, {"type": "select", "opts": ["zerovalente", "monovalente", "bivalente", "trivalente"], "label": "Valenza", "items": [["L'automobile non va.", "monovalente", "«va» qui significa «funziona»."], ["Giovanni va a casa.", "bivalente", "chi va? dove?"], ["La linea 2 va da via Po a Sesto.", "trivalente", "che cosa va? da dove? a dove?"], ["Ada vive.", "monovalente", "«vive» qui significa «è in vita»."], ["Ada vive a Roma.", "bivalente", "«vive» qui significa «abita»."], ["Piove.", "zerovalente"], ["Piovono sassi.", "monovalente", "in senso figurato «piovere» ha un soggetto: che cosa piove?"]]}, {"type": "input", "label": "Parola completa", "items": [["Il figlio di Rosa è simpatic…", ["simpatico"], "si accorda con «figlio», non con «Rosa»."], ["I figli di Rosa sono simpatic…", ["simpatici"]], ["La sorella dei miei amici è alt…", ["alta"]], ["Le foto del viaggio sono bellissim…", ["bellissime"]], ["Il cane dei vicini abbai… tutta la notte. (abbaiare, presente)", ["abbaia"], "il soggetto è «il cane», singolare."], ["I compagni di Luca arriv… domani. (arrivare, presente)", ["arrivano"]]]}, {"type": "select", "opts": ["Maria", "il quaderno", "a Lucia"], "label": "Che cosa sostituisce", "items": [["«glie-» sta per…", "a Lucia"], ["«l'» sta per…", "il quaderno"], ["il soggetto sottinteso è…", "Maria"], ["«Luca presta la bici a Sara» → «Gliela presta»: «la» sta per…", "la bici", "", ["Luca", "la bici", "a Sara"]], ["«Luca presta la bici a Sara» → «Gliela presta»: «glie-» sta per…", "a Sara", "", ["Luca", "la bici", "a Sara"]]]}, {"type": "tok", "items": ["Ogni pomeriggio *Serena* *cammina* in collina.", "Ieri *il* *postino* *ha* *consegnato* *un* *pacco* *al* *vicino* in fretta.", "Di notte *nevica* sulle montagne.", "Quest'estate il mio amico *Giorgio* *ha* *incontrato* *una* *persona* speciale."]}];
+  var z=100, zv=document.getElementById('zv');
+  try{ z=parseInt(localStorage.getItem(KEY+'-zoom'))||100 }catch(e){}
+  function setZ(v){ z=Math.max(70,Math.min(200,v)); document.documentElement.style.fontSize=z+'%'; zv.textContent=z+'%'; try{localStorage.setItem(KEY+'-zoom',z)}catch(e){} }
+  document.getElementById('zp').onclick=function(){setZ(z+10)};
+  document.getElementById('zm').onclick=function(){setZ(z-10)};
+  setZ(z);
+  function el(t,c,h){var e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e}
+  function norm(s){return String(s).toLowerCase().replace(/[’‘`´]/g,"'").replace(/\s*-\s*/g,'-').replace(/\s+/g,' ').replace(/^[\s.]+|[\s.]+$/g,'')}
+  var W=/[A-Za-zÀ-ÿ']+/;
+
+  function tokens(container,str,idp){
+    str.match(/\*[^*]+\*|[A-Za-zÀ-ÿ']+|[^\sA-Za-zÀ-ÿ'*]+|\s+/g).forEach(function(t,j){
+      if(/^[A-Za-zÀ-ÿ']+$/.test(t)||t[0]==='*'){
+        var m=t[0]==='*', b=el('button','tok'); b.type='button'; b.id=idp+'-'+j; b.textContent=m?t.slice(1,-1):t; b.dataset.ok=m?'1':'0';
+        b.onclick=function(){b.classList.toggle('sel')}; container.appendChild(b);
+      } else container.appendChild(document.createTextNode(t));
+    });
+  }
+  function markToks(root){var ok=0,tot=0,err=0;
+    root.querySelectorAll('.tok').forEach(function(b){b.classList.remove('miss','wrong');
+      var s=b.classList.contains('sel'),a=b.dataset.ok==='1';
+      if(a){tot++; if(s)ok++; else b.classList.add('miss')} else if(s){err++;b.classList.add('wrong')} });
+    return [ok,tot,err]}
+
+  var checks=[];
+  DATA.forEach(function(ex,n){
+    var box=document.getElementById('e'+(n+1)), id='e'+(n+1);
+    if(ex.type==='tok'){
+      var its=[];
+      ex.items.forEach(function(s,i){var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); tokens(fr,s,id+'-'+i); it.append(fr,fb); box.appendChild(it); its.push(it)});
+      checks.push(function(){var ok=0; its.forEach(function(it){var r=markToks(it), g=r[0]===r[1]&&!r[2]; it.className='item '+(g?'ok':'ko'); it.querySelector('.fb').textContent=g?'Giusto!':(ex.fb||'Il bordo rosso indica una parola mancante; la parola barrata non va segnata.'); if(g)ok++}); return [ok,its.length]});
+    } else if(ex.type==='testo'){
+      var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); fr.style.lineHeight='2'; tokens(fr,ex.text,id); it.append(fr,fb); box.appendChild(it);
+      checks.push(function(){var r=markToks(it); it.className='item '+(r[0]===r[1]&&!r[2]?'ok':'ko');
+        fb.textContent=(ex.nome||'Risposte')+' trovati: '+r[0]+' su '+r[1]+(r[2]?'. Segnati per errore: '+r[2]+' (barrati).':'.')+(r[0]<r[1]?' Il bordo rosso indica quelli mancanti.':'');
+        return [Math.max(0,r[0]-r[2]),r[1]]});
+    } else if(ex.type==='select'){
+      var arr=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),sel=el('select'),fb=el('div','fb');
+        sel.id=id+'-'+i; sel.setAttribute('aria-label',ex.label||'Risposta'); sel.appendChild(new Option('scegli…',''));
+        (d[3]||ex.opts).forEach(function(o){sel.appendChild(new Option(o,o))});
+        it.append(fr,sel,fb); box.appendChild(it); arr.push([it,sel,d])});
+      checks.push(function(){var ok=0; arr.forEach(function(x){var g=x[1].value===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Risposta corretta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr.length]});
+    } else if(ex.type==='scelta'){
+      var arr2=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),seg=el('div','seg'),fb=el('div','fb');
+        (d[3]||ex.opts).forEach(function(o,k){var b=el('button'); b.type='button'; b.id=id+'-'+i+'-'+k; b.textContent=o; b.setAttribute('aria-pressed','false');
+          b.onclick=function(){seg.dataset.v=o; seg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')})}; seg.appendChild(b)});
+        it.append(fr,seg,fb); box.appendChild(it); arr2.push([it,seg,d])});
+      checks.push(function(){var ok=0; arr2.forEach(function(x){var g=x[1].dataset.v===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Risposta corretta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr2.length]});
+    } else if(ex.type==='input'){
+      var arr3=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),inp=el('input'),fb=el('div','fb');
+        inp.type='text'; inp.id=id+'-'+i; inp.autocomplete='off'; inp.spellcheck=false; inp.setAttribute('aria-label',ex.label||'Risposta');
+        it.append(fr,inp,fb); box.appendChild(it); arr3.push([it,inp,d])});
+      checks.push(function(){var ok=0; arr3.forEach(function(x){var v=norm(x[1].value), g=x[2][1].some(function(a){return norm(a)===v}); x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Soluzione: <b>'+x[2][1][0]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr3.length]});
+    }
+  });
+
+  var score=document.getElementById('score');
+  document.getElementById('check').onclick=function(){var ok=0,tot=0; checks.forEach(function(c){var r=c(); ok+=r[0]; tot+=r[1]}); score.textContent='Risposte giuste: '+ok+' su '+tot};
+  document.getElementById('reset').onclick=function(){
+    document.querySelectorAll('.item').forEach(function(i){i.className='item'; var f=i.querySelector('.fb'); if(f)f.textContent=''});
+    document.querySelectorAll('.tok').forEach(function(b){b.classList.remove('sel','miss','wrong')});
+    document.querySelectorAll('select').forEach(function(s){s.value=''});
+    document.querySelectorAll('input[type=text]').forEach(function(s){s.value=''});
+    document.querySelectorAll('.seg').forEach(function(s){delete s.dataset.v; s.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed','false')})});
+    score.textContent=''; window.scrollTo(0,0)};
+})();
+</script>
+<script>(function(){
+  function el(t,c,h){var e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e}
+  function dati(id){var s=document.getElementById(id); return s?JSON.parse(s.textContent):null}
+  function mescola(a){a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t} return a}
+  var NOMI=['zerovalente','monovalente','bivalente','trivalente','tetravalente'];
+
+  // ---------- LA SFILATA DEI VERBI ----------
+  var V=dati('vl-verbi'), sf=document.getElementById('vl-sfilata');
+  if(V&&sf){
+    var card=sf.querySelector('.vl-carta'), sol=sf.querySelector('.vl-sol'), filtro=sf.querySelector('.vl-filtro'), mazzo=[], cur=null;
+    function nuovo(){
+      var f=filtro.value, pool=V.filter(function(v){return f===''||String(v[1])===f});
+      if(!mazzo.length) mazzo=mescola(pool);
+      cur=mazzo.pop(); card.textContent=cur[0]; sol.hidden=true; sol.innerHTML='';
+    }
+    filtro.onchange=function(){mazzo=[]; nuovo()};
+    sf.querySelector('.vl-nuovo').onclick=nuovo;
+    sf.querySelector('.vl-mostra').onclick=function(){
+      if(!cur) return;
+      var braccia=cur[1]===0?'pugno chiuso':(cur[1]+' '+(cur[1]===1?'dito':'dita'));
+      var pallini=''; for(var i=0;i<cur[1];i++) pallini+='<span class="vl-pallino"></span>';
+      sol.innerHTML='<p class="vl-val"><b>'+NOMI[cur[1]]+'</b> · '+braccia+' '+pallini+'</p>'+
+        '<p><b>Domande guida:</b> '+(cur[3]||'nessuna: il verbo basta da solo')+'</p>'+
+        '<p><b>Frase nucleare:</b> '+cur[2]+'</p>';
+      sol.hidden=false;
+    };
+    nuovo();
+  }
+
+  // ---------- IL GIOCO DELLE VALENZE ----------
+  var G=dati('vl-gioco-dati'), gb=document.getElementById('vl-gioco');
+  if(G&&gb){
+    var COL=['blu','verde','giallo','rosa'], TEAMC=['#2f6fb5','#c0392b','#2e8b57','#8e44ad'];
+    var setup=gb.querySelector('.vl-setup'), area=gb.querySelector('.vl-area'), plancia=gb.querySelector('.vl-plancia'),
+        stato=gb.querySelector('.vl-stato'), punti=gb.querySelector('.vl-punti'), dado=gb.querySelector('.vl-dado'),
+        cartaBox=gb.querySelector('.vl-cartabox'), N=G.caselle.length, sq=[], turno=0, mazzi={}, attesa=false;
+    function pescaCarta(c){ if(!mazzi[c]||!mazzi[c].length) mazzi[c]=mescola(G.carte[c]); return mazzi[c].pop() }
+    function disegna(){
+      plancia.innerHTML='';
+      G.caselle.forEach(function(c,i){
+        var d=el('div','vl-casella vl-'+(c.t)); d.id='vl-c'+i;
+        d.innerHTML='<span class="vl-num">'+(i===0?'VIA':i===N-1?'ARRIVO':i)+'</span>'+(c.s?'<span class="vl-spec">'+c.s+'</span>':'');
+        var p=el('div','vl-pedine'); sq.forEach(function(s,k){ if(s.pos===i){var b=el('span','vl-pedina'); b.style.background=TEAMC[k]; b.title=s.nome; b.textContent=k+1; p.appendChild(b)} });
+        d.appendChild(p); plancia.appendChild(d);
+      });
+      punti.innerHTML=sq.map(function(s,k){return '<span class="vl-sq'+(k===turno?' vl-attiva':'')+'"><i style="background:'+TEAMC[k]+'"></i>'+s.nome+': <b>'+s.p+'</b></span>'}).join('');
+    }
+    function fine(){
+      var max=Math.max.apply(null,sq.map(function(s){return s.p})), vinc=sq.filter(function(s){return s.p===max}).map(function(s){return s.nome});
+      stato.innerHTML='<b>Partita finita!</b> '+(vinc.length>1?'Pareggio tra '+vinc.join(' e '):'Vince '+vinc[0])+' con '+max+' punti.';
+      dado.disabled=true; attesa=true;
+    }
+    function prossimo(){
+      cartaBox.innerHTML=''; cartaBox.hidden=true;
+      if(sq.some(function(s){return s.pos>=N-1})) return fine();
+      do { turno=(turno+1)%sq.length; if(sq[turno].salta){ sq[turno].salta=false; stato.innerHTML=sq[turno].nome+' salta il turno.'; continue } break } while(true);
+      attesa=false; dado.disabled=false; disegna();
+      stato.innerHTML='Tocca a <b>'+sq[turno].nome+'</b>: tira il dado.';
+    }
+    function mostraCarta(colore){
+      var c=pescaCarta(colore), s=sq[turno]; cartaBox.hidden=false;
+      cartaBox.className='vl-cartabox vl-carta-'+colore;
+      cartaBox.innerHTML='<span class="eyebrow">'+G.nomiColori[colore]+'</span><p class="vl-dom">'+c.d+'</p>';
+      var bt=el('div','seg');
+      function chiudi(ok,txt){ if(ok) s.p++; bt.querySelectorAll('button').forEach(function(b){b.disabled=true});
+        var r=el('p','vl-esito '+(ok?'vl-ok':'vl-ko'),(ok?'Giusto! +1 punto. ':'Non è giusto. ')+(txt||'')); cartaBox.appendChild(r);
+        var av=el('button','btn main','Continua'); av.type='button'; av.onclick=prossimo; cartaBox.appendChild(av); av.focus(); disegna(); }
+      if(c.o){ c.o.forEach(function(o,k){ var b=el('button'); b.type='button'; b.textContent=o; b.id='vl-opt'+k;
+          b.onclick=function(){ chiudi(o===c.r, o===c.r?(c.e||''):'Risposta: <b>'+c.r+'</b>. '+(c.e||'')) }; bt.appendChild(b) });
+        cartaBox.appendChild(bt);
+      } else {
+        var sv=el('button','btn','Mostra una risposta possibile'); sv.type='button';
+        var rp=el('p','vl-rp',c.r); rp.hidden=true; sv.onclick=function(){rp.hidden=false};
+        cartaBox.append(sv,rp);
+        cartaBox.appendChild(el('p','consegna','L\'insegnante decide:'));
+        [['Giusto',true],['Sbagliato',false]].forEach(function(x,k){var b=el('button'); b.type='button'; b.id='vl-giud'+k; b.textContent=x[0]; b.onclick=function(){chiudi(x[1])}; bt.appendChild(b)});
+        cartaBox.appendChild(bt);
+      }
+    }
+    function arriva(){
+      var s=sq[turno], c=G.caselle[s.pos]; disegna();
+      if(s.pos>=N-1){ stato.innerHTML='<b>'+s.nome+'</b> è arrivata al traguardo!'; return fine() }
+      if(c.t==='av'){ stato.innerHTML=s.nome+': '+c.s+'!'; s.pos=Math.min(N-1,s.pos+c.n); return setTimeout(arriva,700) }
+      if(c.t==='in'){ stato.innerHTML=s.nome+': '+c.s+'!'; s.pos=Math.max(0,s.pos-c.n); return setTimeout(arriva,700) }
+      if(c.t==='fermo'){ s.salta=true; stato.innerHTML=s.nome+': '+c.s+'. Il prossimo turno lo salti.'; return setTimeout(prossimo,1200) }
+      if(c.t==='ancora'){ stato.innerHTML=s.nome+': tira ancora!'; attesa=false; dado.disabled=false; return }
+      if(COL.indexOf(c.t)>-1){ stato.innerHTML='<b>'+s.nome+'</b> pesca una carta.'; return mostraCarta(c.t) }
+      prossimo();
+    }
+    dado.onclick=function(){
+      if(attesa) return; attesa=true; dado.disabled=true;
+      var n=1+Math.floor(Math.random()*6); gb.querySelector('.vl-faccia').textContent=n;
+      var s=sq[turno]; s.pos=Math.min(N-1,s.pos+n); stato.innerHTML=s.nome+' ha tirato <b>'+n+'</b>.'; setTimeout(arriva,500);
+    };
+    gb.querySelector('.vl-inizia').onclick=function(){
+      var n=parseInt(gb.querySelector('.vl-nsq').value)||2;
+      sq=[]; for(var i=0;i<n;i++){ var v=(gb.querySelector('#vl-nome'+i)||{}).value; sq.push({nome:(v&&v.trim())||('Squadra '+(i+1)),pos:0,p:0,salta:false}) }
+      turno=0; mazzi={}; setup.hidden=true; area.hidden=false; attesa=false; dado.disabled=false; cartaBox.hidden=true;
+      gb.querySelector('.vl-faccia').textContent='?'; disegna(); stato.innerHTML='Tocca a <b>'+sq[0].nome+'</b>: tira il dado.';
+    };
+    gb.querySelector('.vl-nuova').onclick=function(){ setup.hidden=false; area.hidden=true };
+  }
+})();
+(function(){
+  // ---------- IL GRAFICO RADIALE (convenzioni Sabatini: verbo rosso, argomenti azzurri, circostanti verdi, espansioni gialle) ----------
+  var src=document.getElementById('vl-radiale'), box=document.getElementById('vl-radiale-box');
+  if(!src||!box) return;
+  var R=JSON.parse(src.textContent), NS='http://www.w3.org/2000/svg';
+  var sel=box.querySelector('.rd-scegli'), tiles=box.querySelector('.rd-tessere'), svgBox=box.querySelector('.rd-svg'), esito=box.querySelector('.rd-esito');
+  var ZN={a:'argomento',c:'circostante',e:'espansione'}, CICLO=['','a','c','e'], cur=null, scelta=[];
+  R.forEach(function(f,i){sel.add(new Option((i+1)+'. '+f.f, i))});
+  function s(tag,at,txt){var e=document.createElementNS(NS,tag); for(var k in at) e.setAttribute(k,at[k]); if(txt!=null) e.textContent=txt; return e}
+  function largh(t){return Math.max(54, t.length*8.6+22)}
+  function scatola(g,x,y,t,cls){var w=largh(t)+10; g.appendChild(s('ellipse',{cx:x,cy:y,rx:w/2,ry:20,'class':'rd-'+cls})); g.appendChild(s('text',{x:x,y:y+5,'text-anchor':'middle','class':cls==='sogg'?'rd-t rd-tb':'rd-t'},t)); return w}
+  function disegna(f){
+    var W=700,H=460,cx=W/2,cy=H/2, svg=s('svg',{viewBox:'0 0 '+W+' '+H,role:'img','aria-label':'Grafico radiale della frase: '+f.f});
+    var gL=s('g',{}), gN=s('g',{}), gB=s('g',{}); svg.append(gN,gL,gB);
+    var args=f.p.filter(function(x){return x[1]==='a'}), pos=[];
+    var ang=[]; if(args.length){ ang.push(180); var r=args.length-1; for(var i=0;i<r;i++) ang.push(r===1?0:-50+100*i/(r-1)) }
+    var maxdx=60,maxdy=30;
+    args.forEach(function(a,i){ var th=ang[i]*Math.PI/180, rad=150, x=cx+rad*Math.cos(th), y=cy+rad*Math.sin(th)*0.85; pos.push([x,y]);
+      var lab=a[3]||(a[2]?a[0].replace(new RegExp('^'+a[2]+' ','i'),''):a[0]);
+      gL.appendChild(s('line',{x1:cx,y1:cy,x2:x,y2:y,'class':'rd-linea'}));
+      if(a[2]){ var mx=(cx+x)/2,my=(cy+y)/2; gL.appendChild(s('circle',{cx:mx,cy:my,r:5,'class':'rd-punto'})); gL.appendChild(s('text',{x:mx,y:my-10,'text-anchor':'middle','class':'rd-prep'},a[2])) }
+      var w=scatola(gB,x,y,lab,i===0?'sogg':'arg'); maxdx=Math.max(maxdx,Math.abs(x-cx)+w/2); maxdy=Math.max(maxdy,Math.abs(y-cy)+20);
+    });
+    var haCirc=f.p.some(function(x){return x[1]==='c'}), nrx=maxdx+22, nry=maxdy+34;
+    gN.appendChild(s('ellipse',{cx:cx,cy:cy,rx:nrx,ry:nry,'class':haCirc?'rd-nucleo rd-tratt':'rd-nucleo'}));
+    gN.appendChild(s('text',{x:cx,y:cy-nry+16,'text-anchor':'middle','class':'rd-et'},'nucleo'));
+    var fx=0, fy=0;
+    var vw=largh(f.v)+16; gB.appendChild(s('ellipse',{cx:cx,cy:cy,rx:Math.max(vw/2,34),ry:30,'class':'rd-verbo'})); gB.appendChild(s('text',{x:cx,y:cy+6,'text-anchor':'middle','class':'rd-tv'},f.v));
+    var conta={};
+    f.p.filter(function(x){return x[1]==='c'}).forEach(function(c){
+      var t=c[2]||0, k=(conta[t]=(conta[t]||0)+1)-1, T=t===0?[cx,cy]:pos[t-1], x,y;
+      if(t===0){ var nv=f.p.filter(function(z){return z[1]==='c'&&!(z[2])}).length; x=cx+(k-(nv-1)/2)*190; y=cy+140 }
+      else { var dx=T[0]-cx, dy=T[1]-cy, L=Math.hypot(dx,dy)||1; x=T[0]+dx/L*40; y=T[1]+(Math.abs(dy)<20?(k%2?-1:1):(dy>0?1:-1))*(95+50*Math.floor(k/2)) }
+      x=Math.max(largh(c[0])/2+6,Math.min(W-largh(c[0])/2-6,x));
+      gL.appendChild(s('line',{x1:T[0],y1:T[1],x2:x,y2:y,'class':'rd-lcirc'}));
+      var cw=scatola(gB,x,y,c[0],'circ'); fx=Math.max(fx,Math.abs(x-cx)+cw/2); fy=Math.max(fy,Math.abs(y-cy)+20);
+    });
+    if(haCirc){ var frx=Math.min(W/2-2,Math.max(nrx+18,fx*1.12+14)), fry=Math.min(H/2-50,Math.max(nry+18,fy*1.12+14));
+      gN.insertBefore(s('ellipse',{cx:cx,cy:cy,rx:frx,ry:fry,'class':'rd-fascia'}),gN.firstChild);
+      gN.appendChild(s('text',{x:cx,y:cy-fry+16,'text-anchor':'middle','class':'rd-et rd-etc'},'circostanti')); }
+    var esp=f.p.filter(function(x){return x[1]==='e'}), angoli=[[0,0],[1,0],[0,1],[1,1]];
+    esp.forEach(function(e,i){ var w=largh(e[0]), q=angoli[i%4]; scatola(gB,q[0]?W-w/2-8:w/2+8,q[1]?H-24:24,e[0],'esp') });
+    svgBox.innerHTML=''; svgBox.appendChild(svg);
+  }
+  function carica(){
+    cur=R[parseInt(sel.value)||0]; scelta=[]; tiles.innerHTML=''; esito.textContent=''; svgBox.innerHTML='';
+    box.querySelector('.rd-frase').innerHTML=cur.f.replace(cur.v,'<b class="rd-vb">'+cur.v+'</b>');
+    cur.p.forEach(function(p,i){ var b=document.createElement('button'); b.type='button'; b.className='rd-tessera'; b.id='rd-t'+i;
+      b.innerHTML='<span>'+p[0]+'</span><small>tocca per scegliere</small>'; scelta.push('');
+      b.onclick=function(){ var n=(CICLO.indexOf(scelta[i])+1)%CICLO.length; if(!CICLO[n]) n=1; scelta[i]=CICLO[n]; b.dataset.z=scelta[i]; b.classList.remove('ok','ko'); b.querySelector('small').textContent=ZN[scelta[i]] };
+      tiles.appendChild(b) });
+  }
+  sel.onchange=carica;
+  box.querySelector('.rd-controlla').onclick=function(){ var ok=0;
+    cur.p.forEach(function(p,i){ var b=document.getElementById('rd-t'+i), g=scelta[i]===p[1]; b.classList.toggle('ok',g); b.classList.toggle('ko',!g); if(!g) b.querySelector('small').textContent=(scelta[i]?ZN[scelta[i]]+' → ':'')+ZN[p[1]]; if(g)ok++ });
+    esito.textContent=cur.p.length?'Pezzi giusti: '+ok+' su '+cur.p.length+'. Ecco il grafico radiale della frase.':'Nessun pezzo da classificare: il verbo basta da solo!'; disegna(cur) };
+  box.querySelector('.rd-mostra').onclick=function(){ disegna(cur); esito.textContent='' };
+  box.querySelector('.rd-succ').onclick=function(){ sel.value=String((parseInt(sel.value)+1)%R.length); carica() };
+  carica();
+})();
+</script>
+</body>
+</html>

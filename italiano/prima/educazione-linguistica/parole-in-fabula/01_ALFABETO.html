@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Parole in fabula: attività di grammatica attraverso favole e fiabe, in una versione offline modificabile." />
+    <meta name="theme-color" content="#f6edda" />
+    <title>Il topo dei fumetti e l’alfabeto · Parole in fabula</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="stile.css" />
+    <style>
+      /* Lascia respiro tra le etichette e i campi di risposta. */
+      .exercise-card > label + input[type="text"] {
+        margin-inline-start: clamp(1rem, 2vw, 1.5rem);
+        max-width: calc(100% - clamp(1rem, 2vw, 1.5rem));
+      }
+
+      .exercise-card > label + textarea,
+      .writing-card > label + textarea {
+        margin-block-start: 0.75rem;
+      }
+
+      @media (max-width: 42rem) {
+        .exercise-card > label + input[type="text"] {
+          display: block;
+          width: 100%;
+          max-width: 100%;
+          margin-block-start: 0.75rem;
+          margin-inline-start: 0;
+        }
+      }
+    </style>
+  </head>
+  <body data-page="alfabeto">
+    <a class="skip-link" href="#contenuto">Vai al contenuto</a>
+    <header class="site-header">
+      <a class="brand" href="00_APRI_PAROLE_IN_FABULA.html" aria-label="Torna alla pagina iniziale"><span class="brand-mark" aria-hidden="true">P</span><span>Parole in fabula</span></a>
+      <div class="header-actions">
+        <a class="text-button site-link" href="../../../index.html?classe=prima">← Italiano · prima</a>
+        <div class="text-size-controls" role="group" aria-label="Dimensione del testo">
+          <button class="text-button size-button" type="button" data-text-size="smaller" aria-label="Riduci il testo">A−</button>
+          <button class="text-button size-button" type="button" data-text-size="larger" aria-label="Ingrandisci il testo">A+</button>
+          <span class="visually-hidden" data-text-size-status aria-live="polite">Dimensione testo 100%</span>
+        </div>
+        <button class="text-button" type="button" data-print>Stampa</button>
+      </div>
+    </header>
+    <main id="contenuto">
+      <!-- INIZIO TESTI DA MODIFICARE -->
+      <nav class="page-nav page-nav-top" aria-label="Navigazione tra i laboratori"><a class="secondary-link" href="00_APRI_PAROLE_IN_FABULA.html">← Tutti i laboratori</a><a class="primary-link" href="02_SUONI_E_LETTERE.html">Suoni e lettere →</a></nav>
+      <section class="lesson-hero">
+        <p class="eyebrow">Laboratorio 1 · Prima ascoltiamo una storia</p><p class="kicker">Un personaggio sta per uscire dalla pagina</p><h1>Il topo dei fumetti</h1>
+        <div class="story-resources" aria-label="Risorse per Il topo dei fumetti"><a href="https://www.teche.rai.it/1920/10/favole-al-telefono-topo-dei-fumetti/" target="_blank" rel="noopener noreferrer">▶ Ascolta su Rai Teche</a><a href="https://losone.sm.edu.ti.ch/wp-content/uploads/sites/35/2020/03/ita-1e-lettura-favola-Rodari-Il-topo-dei-fumetti.pdf" target="_blank" rel="noopener noreferrer">↗ Leggi il testo</a><span>Risorse online</span></div>
+        <div class="hero-grid">
+          <div><p class="lead">Non anticipiamo che cosa accadrà. Entriamo nel racconto, ascoltiamo le parole del topo e proviamo a capire perché gli altri personaggi rimangono così sorpresi.</p><p>Si può leggere il racconto di Gianni Rodari in classe. L’ascolto disponibile in rete è una risorsa facoltativa.</p></div>
+          <figure class="hero-art"><br><img src="immagini/topo-alfabeto-hero.jpg" alt="Un piccolo topo emerge da una pagina a fumetti circondato da tessere con lettere" /></figure>
+        </div>
+        <article class="story-panel">
+          <div><p class="section-label">Dopo la lettura</p><h2>Quattro domande per entrare nella storia</h2><p>Prima parlatene insieme; soltanto dopo aprite le risposte possibili.</p></div>
+          <div class="questions-to-discuss"><details class="answer"><summary>1. Da quale mondo arriva il protagonista?</summary><p>Dal mondo dei fumetti: salta fuori da una pagina per conoscere i topi in carne e ossa.</p></details><details class="answer"><summary>2. Perché gli altri topi non lo capiscono?</summary><p>Usa le parole e i rumori convenzionali dei fumetti, che per gli altri sono un codice sconosciuto.</p></details><details class="answer"><summary>3. Le sue esclamazioni sono prive di significato?</summary><p>No. Hanno un significato nel mondo da cui proviene, ma serve conoscere quel codice per interpretarle.</p></details><details class="answer"><summary>4. Con chi riesce infine a capirsi?</summary><p>Con un gatto proveniente, come lui, dal mondo dei fumetti.</p></details></div>
+        </article>
+        <article class="need-card"><p class="section-label">Solo adesso riassumiamo</p><h2>Che cosa è successo?</h2><p>Un topo salta fuori dalla pagina. Parla con parole che gli altri topi non capiscono. Poi il fumetto si strappa e tutte le lettere cadono per terra.</p></article>
+      </section>
+      <section class="activity">
+        <div class="activity-heading"><p class="kicker">Attività 1 · Il fumetto si è strappato</p><h2>Rimetti le lettere nel balloon</h2><p class="lead">Per ogni indizio ricostruisci la parola usando tutte le lettere nell’ordine giusto.</p></div>
+        <div class="exercise-list"><article class="exercise-card"><h3>1. Un colpo secco</h3><p>Lettere: <strong>A · G · B · N</strong></p><label for="anagramma-0">La parola</label><input id="anagramma-0" type="text" data-saved-field /><details class="solution"><summary>Controlla</summary><p><strong>BANG</strong></p></details><p class="save-status"></p></article><article class="exercise-card"><h3>2. Un boccone o uno spavento</h3><p>Lettere: <strong>L · P · G · U</strong></p><label for="anagramma-1">La parola</label><input id="anagramma-1" type="text" data-saved-field /><details class="solution"><summary>Controlla</summary><p><strong>GULP</strong></p></details><p class="save-status"></p></article><article class="exercise-card"><h3>3. Qualcosa cade nell’acqua</h3><p>Lettere: <strong>H · S · P · A · L · S</strong></p><label for="anagramma-2">La parola</label><input id="anagramma-2" type="text" data-saved-field /><details class="solution"><summary>Controlla</summary><p><strong>SPLASH</strong></p></details><p class="save-status"></p></article><article class="exercise-card"><h3>4. Qualcosa si rompe con gran rumore</h3><p>Lettere: <strong>S · C · H · A · R</strong></p><label for="anagramma-3">La parola</label><input id="anagramma-3" type="text" data-saved-field /><details class="solution"><summary>Controlla</summary><p><strong>CRASH</strong></p></details><p class="save-status"></p></article></div>
+        <div class="rule-path"><article class="need-card"><p class="section-label">Perché serve una regola</p><p>Per ricostruire una parola non basta avere le tessere giuste: chi scrive e chi legge devono riconoscere gli stessi segni e disporli nello stesso ordine.</p></article><article class="rule-card"><p class="section-label">La regola che costruiamo</p><p>Le lettere sono segni. Combinandole in un ordine preciso possiamo costruire parole scritte e condividerle con gli altri.</p></article></div>
+      </section>
+      <section class="activity">
+        <div class="activity-heading"><p class="kicker">Attività 2 · Il dizionario dei rumori</p><h2>Come ritroviamo una parola?</h2><p class="lead">Metti in ordine alfabetico: SPLASH, BANG, ZOOM, GULP, BIP, SQUIT, GNAM, CRASH.</p></div>
+        <article class="exercise-card"><label for="ordine">Scrivi le parole nell’ordine scelto</label><textarea id="ordine" data-saved-field></textarea><details class="solution"><summary>Confronta l’ordine</summary><p>BANG, BIP, CRASH, GNAM, GULP, SPLASH, SQUIT, ZOOM.</p></details><p class="save-status"></p></article>
+        <div class="rule-path"><article class="need-card"><p class="section-label">Perché serve una regola</p><p>Se ognuno sistemasse le parole a modo proprio, cercare una voce nel dizionario richiederebbe ogni volta di scorrere tutto.</p></article><article class="rule-card"><p class="section-label">La regola che costruiamo</p><p>L’alfabeto è anche un criterio d’ordine. Confrontiamo le lettere da sinistra verso destra seguendo una sequenza condivisa.</p></article></div>
+      </section>
+      <section class="activity">
+        <div class="activity-heading"><p class="kicker">Attività 3 · Il magazzino delle lettere</p><h2>Come facciamo a non perdere nessuna lettera?</h2><p class="lead">Completa la sequenza: A B C D _ F G _ I _ M N O P _ R S T U V _</p></div>
+        <article class="exercise-card"><label for="lettere-mancanti">Le cinque lettere mancanti</label><input id="lettere-mancanti" type="text" data-saved-field /><details class="solution"><summary>Controlla</summary><p>E, H, L, Q, Z.</p></details><p class="save-status"></p></article>
+        <div class="rule-path"><article class="need-card"><p class="section-label">Perché serve una regola</p><p>Una sequenza stabile permette di accorgersi subito se manca una lettera e di indicare a tutti lo stesso posto per ciascun segno.</p></article><article class="rule-card"><p class="section-label">La regola che costruiamo</p><p>Un alfabeto è un insieme ordinato di lettere. Nell’italiano sono normalmente usate 21 lettere.</p></article></div>
+      </section>
+      <section class="activity">
+        <div class="activity-heading"><p class="kicker">Attività 4 · Lettere viaggiatrici</p><h2>Le ventuno caselle non bastano</h2><p class="lead">Completa: _AZZ, _OALA, _EB, _ILOFONO, _OGURT.</p></div>
+        <article class="exercise-card"><label for="viaggiatrici">Quali lettere mancano?</label><input id="viaggiatrici" type="text" data-saved-field /><details class="solution"><summary>Controlla</summary><p>JAZZ, KOALA, WEB, XILOFONO, YOGURT: le lettere sono J, K, W, X, Y.</p></details><p class="save-status"></p></article>
+        <div class="rule-path"><article class="need-card"><p class="section-label">Perché allarghiamo la regola</p><p>Le parole viaggiano da una lingua all’altra. Per scrivere nomi, prestiti e sigle che incontriamo nell’italiano, le ventuno lettere tradizionali non sempre bastano.</p></article><article class="rule-card"><p class="section-label">La precisazione che costruiamo</p><p>Con J, K, W, X e Y arriviamo a 26 lettere. Queste cinque lettere compaiono soprattutto in parole straniere, prestiti, sigle e nomi propri.</p></article></div>
+      </section>
+      <section class="writing-card"><p class="kicker">Attività finale · La tua parola a fumetti</p><h2>Inventa un rumore che ancora non esiste</h2><p>Immagina un’azione: una porta magica che si apre, un biscotto gigantesco che cade, un topo che atterra su una tastiera. Come suona?</p><label for="rumore">La tua parola</label><textarea id="rumore" data-saved-field placeholder="Per esempio: ZRUM!"></textarea><p class="save-status" aria-live="polite"></p></section>
+      <section class="lesson-finale" aria-labelledby="finale-alfabeto">
+        <p class="kicker">Finale di puntata · Fermiamoci a guardare il percorso</p>
+        <h2 id="finale-alfabeto">Pochi segni, infinite parole</h2>
+        <div class="finale-grid">
+          <article><h3>Tiriamo le fila</h3><p>Dal fumetto strappato abbiamo capito che le lettere non sono tessere da imparare isolate. Sono segni condivisi: l’ordine in cui le combiniamo costruisce parole diverse, mentre l’ordine alfabetico ci permette di ritrovarle. Le ventuno lettere dell’italiano si aprono inoltre a J, K, W, X e Y quando le parole viaggiano da altre lingue.</p><p class="connection-line"><strong>Il collegamento:</strong> riconoscere e ordinare i segni è il primo passo; ora dobbiamo capire come quei segni riescano a far tornare una voce sulla pagina.</p></article>
+          <article class="knowledge-check"><h3>Controlla ciò che sai</h3><p>Rispondi senza tornare indietro, poi apri il controllo.</p><details class="answer"><summary>1. Perché l’ordine delle lettere cambia una parola?</summary><p>Perché una parola scritta è una combinazione ordinata di segni: cambiando l’ordine può cambiare o scomparire il significato.</p></details><details class="answer"><summary>2. A che cosa serve l’ordine alfabetico?</summary><p>Offre un criterio condiviso per sistemare e ritrovare rapidamente parole e informazioni.</p></details><details class="answer"><summary>3. Quali sono le cinque lettere “viaggiatrici”?</summary><p>J, K, W, X e Y, presenti soprattutto in prestiti, sigle e nomi propri.</p></details></article>
+        </div>
+        <aside class="practice-card"><p class="section-label">Per esercitarsi</p><p>Nella scheda <a href="../fonologia-alfabeto.html">Suoni e lettere</a> trovi la sintesi sull’alfabeto e gli esercizi «Quale lettera manca?» e «Lettere straniere», con correzione automatica.</p></aside>
+        <aside class="next-hook"><p class="section-label">Nella prossima puntata</p><h3>Una lettera, una voce?</h3><p>La C di <em>cane</em> e la C di <em>cena</em> sono lo stesso segno, ma non producono lo stesso suono. E in <em>ragno</em> due lettere sembrano parlare con una voce sola. Che cosa sta succedendo?</p><a class="primary-link" href="02_SUONI_E_LETTERE.html">Entra nel coro dei musicanti →</a></aside>
+      </section>
+      <nav class="page-nav" aria-label="Navigazione tra i laboratori"><a class="secondary-link" href="00_APRI_PAROLE_IN_FABULA.html">← Tutti i laboratori</a><a class="primary-link" href="02_SUONI_E_LETTERE.html">Suoni e lettere →</a></nav>
+      <!-- FINE TESTI DA MODIFICARE -->
+    </main>
+    <script src="funzioni.js"></script>
+  </body>
+</html>

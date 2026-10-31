@@ -567,19 +567,29 @@ const MODULI = [
     classe: "prima",
     numero: "I",
     titolo: "Educazione linguistica",
-    descrizione: "Fonologia, ortografia e punteggiatura, le parti del discorso. Primo e secondo quadrimestre, in collegamento con Inglese, Francese, Spagnolo e Tedesco.",
+    link: "italiano/prima/educazione-linguistica/parole-in-fabula/00_APRI_PAROLE_IN_FABULA.html",
+    descrizione: "Fonologia, ortografia e punteggiatura, le parti del discorso. Si parte dai laboratori di Parole in fabula (storie e favole), poi schede ed esercizi. Primo e secondo quadrimestre, in collegamento con Inglese, Francese, Spagnolo e Tedesco.",
     lezioni: [
       { titolo: "Suoni e lettere: fonologia e alfabeto", descrizione: "Alfabeto, vocali e consonanti, digrammi, sillaba, dittongo e iato, accento.", attivita: [
+          { tipo: "Laboratorio 1", titolo: "Il topo e l'alfabeto", descrizione: "Parole in fabula · Il topo dei fumetti di Rodari: lettere, ordine alfabetico e lettere viaggiatrici.", link: "italiano/prima/educazione-linguistica/parole-in-fabula/01_ALFABETO.html", data: "2026-10-31" },
+          { tipo: "Laboratorio 2", titolo: "Il coro dei musicanti", descrizione: "Parole in fabula · I musicanti di Brema: fonemi e grafemi, dittongo e iato, digrammi e trigrammi, sillabe.", link: "italiano/prima/educazione-linguistica/parole-in-fabula/02_SUONI_E_LETTERE.html", data: "2026-10-31" },
           { tipo: "Esercizi", titolo: "Suoni e lettere", descrizione: "Scheda riassuntiva e cinque esercizi con correzione automatica: sillabe, accento, dittongo e iato, digrammi.", link: "italiano/prima/educazione-linguistica/fonologia-alfabeto.html", data: "2026-10-30" }
         ] },
       { titolo: "Ortografia e punteggiatura", descrizione: "I casi difficili, accento sui monosillabi, h, apostrofo, maiuscole e segni di punteggiatura.", attivita: [
+          { tipo: "Laboratorio 3", titolo: "Il sentiero delle parole", descrizione: "Parole in fabula · Hansel e Gretel: C e G, H, CU/QU/CQU, doppie, accenti e apostrofi.", link: "italiano/prima/educazione-linguistica/parole-in-fabula/03_ORTOGRAFIA.html", data: "2026-10-31" },
+          { tipo: "Laboratorio 4", titolo: "Il respiro del racconto", descrizione: "Parole in fabula · I tre porcellini: scriptio continua, pause, intonazione e discorso diretto.", link: "italiano/prima/educazione-linguistica/parole-in-fabula/04_PUNTEGGIATURA.html", data: "2026-10-31" },
           { tipo: "Esercizi", titolo: "Ortografia e punteggiatura", descrizione: "Scheda riassuntiva e sei esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/ortografia-punteggiatura.html", data: "2026-10-30" }
         ] },
-      { titolo: "Le parti variabili: articolo, nome e verbo", descrizione: "Articoli determinativi, indeterminativi e partitivi; tipi di nome e plurale; coniugazioni e tempi dell'indicativo.", attivita: [
-          { tipo: "Esercizi", titolo: "Articolo, nome e verbo", descrizione: "Scheda riassuntiva e sei esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/articolo-nome-verbo.html", data: "2026-10-30" }
+      { titolo: "Le parti del discorso: il gruppo del nome e il gruppo del verbo", descrizione: "Le nove parti del discorso; il gruppo del nome e il gruppo del verbo; il verbo e le sue valenze.", attivita: [
+          { tipo: "Laboratorio 5", titolo: "Il testo misterioso", descrizione: "Parole in fabula · Il leone e il topo e La volpe e l'uva: una favola rotta in gruppi di parole, gioco alla LIM e prima mappa delle parti del discorso.", link: "italiano/prima/educazione-linguistica/parole-in-fabula/05_TESTO_MISTERIOSO.html", data: "2026-10-31" },
+          { tipo: "Esercizi", titolo: "Le parti del discorso e la frase", descrizione: "Scheda riassuntiva e sei esercizi con correzione automatica, con un primo approccio alla grammatica valenziale.", link: "italiano/prima/educazione-linguistica/parti-del-discorso.html", data: "2026-10-30" },
+          { tipo: "Laboratorio", titolo: "Laboratorio valenziale", descrizione: "Le sette fasi della lezione-laboratorio: il teatro della frase, la sfilata dei verbi, il gioco delle valenze alla LIM, il grafico radiale interattivo e un compito con le lingue di famiglia.", link: "italiano/prima/educazione-linguistica/laboratorio-valenziale.html", data: "2026-10-31" }
         ] },
-      { titolo: "Le parti variabili: aggettivo, pronome e verbo", descrizione: "Aggettivi qualificativi e determinativi, gradi; pronomi personali e relativi; verbi transitivi e intransitivi, forma e modi.", attivita: [
-          { tipo: "Esercizi", titolo: "Aggettivo, pronome e verbo", descrizione: "Scheda riassuntiva e sette esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/aggettivo-pronome-verbo.html", data: "2026-10-30" }
+      { titolo: "Le parti variabili: articolo, nome e aggettivo", descrizione: "Le parole del gruppo del nome: articoli, tipi di nome e plurale, aggettivi qualificativi e determinativi, gradi.", attivita: [
+          { tipo: "Esercizi", titolo: "Articolo, nome e aggettivo", descrizione: "Scheda riassuntiva e otto esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/articolo-nome-aggettivo.html", data: "2026-10-30" }
+        ] },
+      { titolo: "Le parti variabili: pronome e verbo", descrizione: "Pronomi personali e relativi; coniugazioni, modi e tempi, forma del verbo; le valenze e il nucleo della frase.", attivita: [
+          { tipo: "Esercizi", titolo: "Pronome e verbo", descrizione: "Scheda riassuntiva e nove esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/pronome-verbo.html", data: "2026-10-30" }
         ] },
       { titolo: "Le parti invariabili: preposizione, congiunzione, avverbio, interiezione", descrizione: "Le parti del discorso che non cambiano mai forma.", attivita: [
           { tipo: "Esercizi", titolo: "Ripasso degli avverbi", descrizione: "Scheda riassuntiva e nove esercizi con correzione automatica.", link: "italiano/prima/educazione-linguistica/ripasso-avverbi.html", data: "2026-10-23" },

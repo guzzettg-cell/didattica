@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Parole in fabula: attività di grammatica attraverso favole e fiabe, in una versione offline modificabile." />
+    <meta name="theme-color" content="#f6edda" />
+    <title>Pagina iniziale · Parole in fabula</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="stile.css" />
+    <style>
+      /* Lascia respiro tra le etichette e i campi di risposta. */
+      .exercise-card > label + input[type="text"] {
+        margin-inline-start: clamp(1rem, 2vw, 1.5rem);
+        max-width: calc(100% - clamp(1rem, 2vw, 1.5rem));
+      }
+
+      .exercise-card > label + textarea,
+      .writing-card > label + textarea {
+        margin-block-start: 0.75rem;
+      }
+
+      @media (max-width: 42rem) {
+        .exercise-card > label + input[type="text"] {
+          display: block;
+          width: 100%;
+          max-width: 100%;
+          margin-block-start: 0.75rem;
+          margin-inline-start: 0;
+        }
+      }
+    </style>
+  </head>
+  <body data-page="home">
+    <a class="skip-link" href="#contenuto">Vai al contenuto</a>
+    <header class="site-header">
+      <a class="brand" href="00_APRI_PAROLE_IN_FABULA.html" aria-label="Torna alla pagina iniziale"><span class="brand-mark" aria-hidden="true">P</span><span>Parole in fabula</span></a>
+      <div class="header-actions">
+        <a class="text-button site-link" href="../../../index.html?classe=prima">← Italiano · prima</a>
+        <div class="text-size-controls" role="group" aria-label="Dimensione del testo">
+          <button class="text-button size-button" type="button" data-text-size="smaller" aria-label="Riduci il testo">A−</button>
+          <button class="text-button size-button" type="button" data-text-size="larger" aria-label="Ingrandisci il testo">A+</button>
+          <span class="visually-hidden" data-text-size-status aria-live="polite">Dimensione testo 100%</span>
+        </div>
+        <button class="text-button" type="button" data-print>Stampa</button>
+      </div>
+    </header>
+    <main id="contenuto">
+      <!-- INIZIO TESTI DA MODIFICARE -->
+      <section class="home-intro">
+        <p class="eyebrow">Primo anno · Dalla voce alla grammatica</p>
+        <h1>Parole in fabula</h1>
+        <div class="intro-copy">
+          <p class="opening-question">Conoscete l’espressione <em>lupus in fabula</em>? Sapete che cosa vuol dire?</p>
+          <figure class="intro-figure">
+            <img src="immagini/officina-hero.jpg" alt="Un libro aperto da cui emergono i personaggi dei quattro laboratori" />
+            <figcaption>Dalle storie ascoltate alle parole osservate: il cammino dei quattro laboratori.</figcaption>
+          </figure>
+            <p>È una frase che abbiamo ereditato dal latino: <em>lupus</em> significa «lupo» e <em>fabula</em> ci fa pensare subito alla favola, anche se il significato non è proprio lo stesso. <em>Fabula</em> è ciò che si racconta o si sta dicendo in generale: perciò il significato letterale è <strong>il lupo nel discorso o nel racconto</strong>.</p>
+            <p>Un tempo la parola <em>favola</em> poteva indicare semplicemente un racconto. Oggi, invece, per noi è un tipo preciso di storia, accanto alla fiaba, al mito e alla leggenda. Sono forme diverse, ma hanno tutte radici nell’oralità: prima di essere scritte sono state raccontate e ascoltate.</p>
+            <p>Nelle favole i protagonisti sono spesso animali. Ma perché diciamo proprio <em>lupus in fabula</em> e non «gatto in favola» o «formica in favola»? Forse perché il lupo, quando compare nelle favole, mette molta ansia e spesso fa proprio paura. Il racconto, però, ci permette di farlo entrare nella nostra mente senza farlo entrare davvero nella stanza. Quando si racconta una favola il lupo non è reale, è un lupo finto che vive solo nella nostra mente di ascoltatori. Lo immaginiamo solamente, non lo vediamo comparire. Lo stesso vale per le persone di cui parliamo. Se adesso cominciamo a parlare di un altro prof non vuol dire che lui è nella stanza, ne possiamo parlare anche se non c’è. Anche se a volte succede che parliamo di qualcuno e ce lo ritroviamo davanti senza preavviso. In quel caso si usa l’espressione <em>Lupus in fabula</em>.  Che è un po’ come dire al nuovo arrivato: <em>Stavamo proprio parlando di te</em>. Le parole avevano già fatto apparire quella persona nella nostra mente; subito dopo, eccola davanti a noi.</p>
+            <p>La stessa cosa succedeva, e succede ancora, con le favole. Basta nominare un lupo, una volpe, un leone o un topo e comincia ad apparire un mondo. Immaginiamo un carattere, una voce, un pericolo o un desiderio. Questa è una delle magie delle parole: non si limitano a indicare le cose, ma le fanno entrare nelle nostre storie e nella nostra mente.</p>
+            <p>Voi questa magia l’avete già sperimentata. Avete ascoltato storie, le avete raccontate ad altri, avete cambiato tono per far parlare i personaggi, scelto una parola invece di un’altra, avete riso e creato attese e sorprese. Tutto questo senza scrivere o leggere, solo ascoltando e parlando. L’oralità non è un gradino da abbandonare quando comincia la grammatica: è la base da cui partire.</p>
+            <p>Cominceremo quindi dalle parole vive, pronunciate, ascoltate e usate nelle storie. Le osserveremo più da vicino per capire come sono fatte, come cambiano suono, come si scrivono e come i segni aiutano la voce e il significato.</p>
+            <p class="path-conclusion">Quattro laboratori per scoprire come le parole si formano, suonano, si scrivono e prendono ritmo nei racconti. Poi comincia la seconda parte, dedicata alle parti del discorso: si apre con il testo misterioso.</p>
+        </div>
+      </section>
+      <section class="module-grid" aria-label="I laboratori">
+        <a class="module-card" href="01_ALFABETO.html"><span>1</span><h2>Il topo e l’alfabeto</h2><p><em>Il topo dei fumetti</em><br />Lettere, parole, ordine alfabetico e lettere viaggiatrici.</p><strong>Entra nel laboratorio →</strong></a>
+        <a class="module-card" href="02_SUONI_E_LETTERE.html"><span>2</span><h2>Il coro dei musicanti</h2><p><em>I musicanti di Brema</em><br />Dalla voce ai segni: fonemi e grafemi, vocali insieme, digrammi, trigrammi e sillabe.</p><strong>Entra nel laboratorio →</strong></a>
+        <a class="module-card" href="03_ORTOGRAFIA.html"><span>3</span><h2>Il sentiero delle parole</h2><p><em>Hansel e Gretel</em><br />Le grafie che fanno inciampare: C e G, H, CU/QU/CQU, doppie, accenti e apostrofi.</p><strong>Entra nel laboratorio →</strong></a>
+        <a class="module-card" href="04_PUNTEGGIATURA.html"><span>4</span><h2>Il respiro del racconto</h2><p><em>I tre porcellini</em><br />Pause, intonazione, organizzazione del testo e dialogo diretto nella scena del lupo.</p><strong>Entra nel laboratorio →</strong></a>
+        <a class="module-card module-card-wide" href="05_TESTO_MISTERIOSO.html"><span>5</span><h2>Il testo misterioso</h2><p><em>Il leone e il topo · La volpe e l’uva</em><br />Seconda parte: una favola rotta in gruppi di parole per scoprire che le parole fanno lavori diversi.</p><strong>Entra nel laboratorio →</strong></a>
+      </section>
+      <aside class="need-card"><p class="section-label">La sequenza comune</p><h2>Prima il problema, poi la regola</h2><p>Ogni laboratorio comincia con una storia, una voce o una difficoltà da interpretare. Prima osserviamo che cosa accade; poi capiamo perché nasce il bisogno di una regola; soltanto alla fine formuliamo la regola e proviamo a usarla.</p></aside>
+      <!-- FINE TESTI DA MODIFICARE -->
+    </main>
+    <script src="funzioni.js"></script>
+  </body>
+</html>

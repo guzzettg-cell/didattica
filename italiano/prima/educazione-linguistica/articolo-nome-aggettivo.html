@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Articolo, nome e aggettivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --bg:#f6f7f4; --paper:#ffffff; --ink:#1d2b33; --muted:#5b6a70; --line:#d9dfdc;
+  --accent:#1f6f78; --hl:#ffe46b; --hl-ink:#3a2f00;
+  --ok:#2e7d4f; --ok-bg:#e3f3e8; --ko:#b23a3a; --ko-bg:#f9e3e1;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }
+
+html{font-size:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:1.5rem 4rem}
+.wrap{max-width:46rem;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800}
+h2{font-size:1.6rem;font-weight:700}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+.mark{background:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 88%,transparent 88%);color:var(--hl-ink);padding:0 .15em;border-radius:2px}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+header{display:flex;flex-direction:column;gap:.75rem;padding-top:1rem}
+header p{color:var(--muted);max-width:38rem}
+section{display:flex;flex-direction:column;gap:1rem}
+.note{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1rem 1.15rem;display:flex;flex-direction:column;gap:.6rem}
+.tipi{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.75rem}
+.tipo{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.tipo b{font-family:var(--display);font-size:1.05rem}
+.tipo .q{font-size:.85rem;color:var(--muted)}
+.tipo .es{font-size:.95rem}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:.55rem .8rem;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-size:.9rem;color:var(--accent)}
+tr:last-child td{border-bottom:none}
+hr{border:none;border-top:2px dashed var(--line);margin:0}
+
+/* esercizi */
+.ex{display:flex;flex-direction:column;gap:.9rem}
+.ex .consegna{color:var(--muted)}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .8rem}
+.item .frase{flex:1 1 16rem;min-width:0}
+.item.ok{border-color:var(--ok);background:var(--ok-bg)}
+.item.ko{border-color:var(--ko);background:var(--ko-bg)}
+.fb{flex-basis:100%;font-size:.9rem;color:var(--muted)}
+.fb:empty{display:none}
+.tok{cursor:pointer;border-radius:4px;padding:0 .1em;border:none;background:none;font:inherit;color:inherit}
+.tok:hover{outline:1px dashed var(--accent)}
+.tok.sel{background:var(--hl);color:var(--hl-ink)}
+.tok.miss{outline:2px solid var(--ko)}
+.tok.wrong{text-decoration:line-through;text-decoration-color:var(--ko);text-decoration-thickness:2px}
+select,input[type=text]{font:inherit;font-size:1rem;padding:.35rem .5rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);max-width:100%}
+input[type=text]{width:11rem}
+.seg{display:flex;gap:.4rem;flex-wrap:wrap}
+.seg button,.btn{font:inherit;font-size:.95rem;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:.3rem .9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--paper)}
+.btn.main{background:var(--accent);color:var(--paper);font-weight:700}
+.azioni{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.punti{font-weight:700;font-variant-numeric:tabular-nums}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* zoom */
+.zoom{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;gap:.3rem;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:.3rem;box-shadow:0 4px 14px rgba(0,0,0,.15);z-index:20}
+.zoom button{width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:var(--display);font-weight:700;font-size:1rem;cursor:pointer}
+.zoom span{align-self:center;font-size:.8rem;min-width:2.8rem;text-align:center;font-variant-numeric:tabular-nums;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.item{transition:background .2s,border-color .2s}}
+
+.ex > div[id^="e"]{display:flex;flex-direction:column;gap:.6rem}
+.tipi.two{grid-template-columns:repeat(auto-fit,minmax(17rem,1fr))}
+.note ul,.note ol{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:.3rem}
+.cit{border-left:4px solid var(--accent);padding:.2rem 0 .2rem 1rem;font-style:italic}
+.cit small{display:block;font-style:normal;color:var(--muted);font-size:.85rem;margin-top:.3rem}
+.indice{display:flex;flex-wrap:wrap;gap:.4rem}
+.indice a{font-size:.85rem;color:var(--accent);border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:.15rem .7rem;text-decoration:none}
+.indice a:hover{border-color:var(--accent)}
+
+.scopri{background:var(--paper);border:2px solid var(--accent);border-radius:14px;padding:1.1rem 1.15rem;display:flex;flex-direction:column;gap:.9rem}
+.scopri .sc-testo{display:block;line-height:2.4;font-size:1.05rem}
+.sc-buco{display:inline-flex;flex-direction:column;align-items:center;vertical-align:bottom;margin:0 .1em}
+.sc-buco input{font:inherit;font-size:.95rem;padding:0 .25rem;height:1.6rem;border:none;border-bottom:2px dashed var(--accent);border-radius:0;background:transparent;color:var(--ink);text-align:center}
+.sc-buco input.sc-ok{border-bottom:2px solid var(--ok);color:var(--ok);font-weight:700}
+.sc-orig{display:none;font-size:.8rem;line-height:1.1;background:var(--hl);color:var(--hl-ink);padding:0 .3em;border-radius:3px}
+.sc-svelato .sc-orig{display:inline-block}
+.sc-svelato .sc-orig.sc-same{background:var(--ok-bg);color:var(--ok)}
+.sc-domande{display:flex;flex-direction:column;gap:.6rem}
+.scopri textarea{font:inherit;font-size:1rem;width:100%;min-height:5rem;padding:.5rem .6rem;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);box-sizing:border-box}
+</style>
+</head>
+<body>
+<div class="zoom" role="group" aria-label="Dimensione del testo">
+  <button id="zm" type="button" aria-label="Rimpicciolisci">A−</button>
+  <span id="zv">100%</span>
+  <button id="zp" type="button" aria-label="Ingrandisci">A+</button>
+</div>
+
+<main class="wrap">
+<header>
+  <span class="eyebrow">Educazione linguistica · lezione 4</span>
+  <h1>Articolo, <span class="mark">nome</span> e aggettivo</h1>
+  <p>Sono le parole del <b>gruppo del nome</b>: al centro c'è il nome, il nucleo; l'articolo e gli aggettivi lo accompagnano e si accordano con lui in genere e numero.</p>
+</header>
+
+<nav class="indice" aria-label="In questa pagina"><a href="#gruppo">Il gruppo del nome</a><a href="#articolo">L'articolo</a><a href="#nome">Il nome</a><a href="#aggettivo">L'aggettivo</a><a href="#ex1">Esercizi</a></nav>
+
+<section id="gruppo">
+  <h2>Il gruppo del nome</h2>
+  <div class="note">
+    <p><span class="mark">le</span> <span class="mark">mie</span> <b>scarpe</b> <span class="mark">nuove</span></p>
+    <p>Il <b>nome</b> è il nucleo. L'<b>articolo</b> e l'<b>aggettivo determinativo</b> stanno prima e lo «determinano» (quale? di chi?). L'<b>aggettivo qualificativo</b> lo descrive (com'è?). Tutti si accordano con il nome: <i>le mie scarpe nuove</i> → femminile plurale.</p>
+  </div>
+</section>
+
+<section class="scopri" id="sc-articolo" aria-label="Che cosa manca?">
+  <span class="eyebrow">Per cominciare · l'articolo</span>
+  <h2>Che cosa manca?</h2>
+  <p class="consegna">Da questo testo sono state tolte alcune parole, tutte dello stesso tipo. Leggilo, prova a completare gli spazi, poi mostra il testo completo e rispondi alle domande.</p>
+  <div class="note sc-testo"></div>
+  <div class="azioni"><button class="btn sc-mostra" type="button">Mostra il testo completo</button></div>
+  <h3>Rifletti</h3>
+  <div class="sc-domande"></div>
+  <div class="azioni"><button class="btn main sc-controlla" type="button">Controlla le risposte</button><span class="punti sc-punti" aria-live="polite"></span></div>
+  <label for="sc-articolo-aperta"><b>Con parole tue:</b> a che cosa servono queste parole? Che differenza c'è tra «il gatto» e «un gatto»?</label>
+  <textarea id="sc-articolo-aperta" placeholder="Scrivi qui…"></textarea>
+  <script type="application/json">{"testo": "[[La]] mattina, quando suona [[la]] sveglia, [[il]] mio gatto salta sul letto. Prima mi annusa [[le]] mani, poi si sdraia sopra [[il]] cuscino. Io gli do [[un]] bacio sulla testa e [[una]] carezza sulla schiena. Allora lui mi guarda con [[gli]] occhi socchiusi, come per dire «grazie». Poi prendo [[lo]] zaino e, mentre esco, [[un]] miagolio mi saluta dalla finestra.", "domande": [["Che tipo di parole manca?", "articoli", "", ["nomi", "articoli", "verbi", "aggettivi"]], ["Il testo si capisce lo stesso?", "sì, ma suona strano", "le informazioni ci sono, ma davanti ai nomi manca qualcosa.", ["sì, ma suona strano", "no, non si capisce niente"]], ["Dove si trovano sempre le parole mancanti?", "davanti a un nome", "", ["davanti a un nome", "dopo un verbo", "alla fine della frase"]], ["Che cosa ci dicono del nome?", "il genere e il numero", "e anche se è una cosa precisa (<i>il<\/i> gatto) o una qualsiasi (<i>un<\/i> gatto).", ["il genere e il numero", "dove si trova", "quando succede"]]]}</script>
+</section>
+
+<section id="articolo">
+  <h2>L'articolo</h2>
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>maschile sing.</th><th>maschile plur.</th><th>femminile sing.</th><th>femminile plur.</th></tr></thead>
+    <tbody>
+      <tr><td><b>determinativo</b><br><small>una cosa precisa</small></td><td>il, lo, l'</td><td>i, gli</td><td>la, l'</td><td>le</td></tr>
+      <tr><td><b>indeterminativo</b><br><small>una cosa qualsiasi</small></td><td>un, uno</td><td>—</td><td>una, un'</td><td>—</td></tr>
+      <tr><td><b>partitivo</b><br><small>una parte, un po'</small></td><td>del, dello, dell'</td><td>dei, degli</td><td>della, dell'</td><td>delle</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">
+    <p>Si usano <span class="mark">lo, gli, uno</span> davanti a parole che cominciano per <b>s + consonante</b>, <b>z</b>, <b>gn</b>, <b>ps</b>, <b>x</b>, <b>y</b>: lo zaino, gli gnomi, uno psicologo, lo yogurt. Davanti a vocale: <b>l'</b> albero, <b>gli</b> alberi.</p>
+  </div>
+</section>
+
+<section class="scopri" id="sc-nome" aria-label="Che cosa manca?">
+  <span class="eyebrow">Per cominciare · il nome</span>
+  <h2>Che cosa manca?</h2>
+  <p class="consegna">Da questo testo sono state tolte alcune parole, tutte dello stesso tipo. Leggilo, prova a completare gli spazi, poi mostra il testo completo e rispondi alle domande.</p>
+  <div class="note sc-testo"></div>
+  <div class="azioni"><button class="btn sc-mostra" type="button">Mostra il testo completo</button></div>
+  <h3>Rifletti</h3>
+  <div class="sc-domande"></div>
+  <div class="azioni"><button class="btn main sc-controlla" type="button">Controlla le risposte</button><span class="punti sc-punti" aria-live="polite"></span></div>
+  <label for="sc-nome-aperta"><b>Con parole tue:</b> senza queste parole che cosa non sappiamo più? Prova a dire a che cosa servono.</label>
+  <textarea id="sc-nome-aperta" placeholder="Scrivi qui…"></textarea>
+  <script type="application/json">{"testo": "Nel [[bosco]], vicino al [[fiume]], viveva una [[volpe]] molto furba. Una [[sera]] vide su un [[ramo]] un [[corvo]] con un [[formaggio]] nel [[becco]]. «Che belle [[piume]]!» disse la [[volpe]]. «Chissà che [[voce]] meravigliosa hai!» Il [[corvo]], pieno di [[orgoglio]], aprì il [[becco]] per cantare e il [[formaggio]] cadde a [[terra]].", "domande": [["Che tipo di parole manca?", "nomi", "", ["nomi", "articoli", "verbi", "aggettivi"]], ["Il testo si capisce lo stesso?", "no, non si sa di chi e di che cosa si parla", "senza nomi restano le azioni, ma non sappiamo chi le fa né dove.", ["sì, si capisce tutto", "no, non si sa di chi e di che cosa si parla"]], ["Che cosa indicano le parole mancanti?", "persone, animali, cose, luoghi, idee", "", ["persone, animali, cose, luoghi, idee", "azioni", "com'è una cosa"]], ["Quale parola mancante indica qualcosa che non si può toccare?", "orgoglio", "è un nome astratto.", ["orgoglio", "ramo", "becco"]]]}</script>
+</section>
+
+<section id="nome">
+  <h2>Il nome</h2>
+  <div class="tipi">
+    <div class="tipo"><b>comune / proprio</b><span class="q">in generale o con il suo nome</span><span class="es">città / <b>Milano</b></span></div>
+    <div class="tipo"><b>concreto / astratto</b><span class="q">si percepisce con i sensi o si pensa</span><span class="es">tavolo / <b>amicizia</b></span></div>
+    <div class="tipo"><b>individuale / collettivo</b><span class="q">al singolare indica uno o un gruppo</span><span class="es">pecora / <b>gregge</b></span></div>
+    <div class="tipo"><b>primitivo / derivato</b><span class="q">con un suffisso</span><span class="es">mare / mar<b>inaio</b></span></div>
+    <div class="tipo"><b>alterato</b><span class="q">cambia grandezza o sfumatura</span><span class="es">gatt<b>ino</b>, libr<b>one</b>, temp<b>accio</b></span></div>
+    <div class="tipo"><b>composto</b><span class="q">due parole unite</span><span class="es">capo<b>stazione</b>, porta<b>chiavi</b></span></div>
+  </div>
+  <div class="note">
+    <h3>Il plurale</h3>
+    <ul>
+      <li>-o → -i (libro, libri); -a → -e (casa, case); -e → -i (fiore, fiori).</li>
+      <li>Nomi <b>invariabili</b>: città, re, caffè, bar, crisi, foto.</li>
+      <li>Plurali <b>irregolari</b>: uomo → uomini, uovo → uova, dio → dèi, bue → buoi.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="scopri" id="sc-aggettivo" aria-label="Che cosa manca?">
+  <span class="eyebrow">Per cominciare · l'aggettivo</span>
+  <h2>Che cosa manca?</h2>
+  <p class="consegna">Da questo testo sono state tolte alcune parole, tutte dello stesso tipo. Leggilo, prova a completare gli spazi, poi mostra il testo completo e rispondi alle domande.</p>
+  <div class="note sc-testo"></div>
+  <div class="azioni"><button class="btn sc-mostra" type="button">Mostra il testo completo</button></div>
+  <h3>Rifletti</h3>
+  <div class="sc-domande"></div>
+  <div class="azioni"><button class="btn main sc-controlla" type="button">Controlla le risposte</button><span class="punti sc-punti" aria-live="polite"></span></div>
+  <label for="sc-aggettivo-aperta"><b>Con parole tue:</b> come cambia il testo senza queste parole? Che cosa ci dicono?</label>
+  <textarea id="sc-aggettivo-aperta" placeholder="Scrivi qui…"></textarea>
+  <script type="application/json">{"testo": "Era una giornata [[fredda]] e [[grigia]]. Nella [[piccola]] stazione di montagna aspettava un treno [[vecchio]], con i sedili [[rossi]] e i finestrini [[appannati]]. Sul binario c'era una signora [[elegante]] con un cappello [[enorme]] e un cagnolino [[nero]] in braccio. Il capostazione, un uomo [[alto]] e [[magro]], fischiò: il viaggio cominciava.", "domande": [["Che tipo di parole manca?", "aggettivi", "", ["nomi", "articoli", "verbi", "aggettivi"]], ["Il testo si capisce lo stesso?", "sì, ma è meno preciso e meno vivo", "chi c'è e che cosa succede si capisce ancora: queste parole arricchiscono il nome, non sono indispensabili.", ["sì, ma è meno preciso e meno vivo", "no, non si capisce niente"]], ["A che cosa si riferisce ogni parola mancante?", "a un nome", "", ["a un nome", "a un verbo", "a tutta la frase"]], ["Le parole mancanti cambiano forma?", "sì, si accordano con il nome", "fredda, freddo, fredde, freddi…", ["sì, si accordano con il nome", "no, restano sempre uguali"]]]}</script>
+</section>
+
+<section id="aggettivo">
+  <h2>L'aggettivo</h2>
+  <div class="tipi two">
+    <div class="tipo"><b>qualificativo</b><span class="q">com'è?</span><span class="es">una casa <b>grande</b>, un cane <b>fedele</b></span></div>
+    <div class="tipo"><b>determinativo</b><span class="q">quale? di chi? quanti?</span><span class="es"><b>mio</b> (possessivo), <b>questo</b> (dimostrativo), <b>alcuni</b> (indefinito), <b>due</b> (numerale), <b>quale?</b> (interrogativo)</span></div>
+  </div>
+  <h3>I gradi dell'aggettivo qualificativo</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>grado</th><th>esempio</th></tr></thead>
+    <tbody>
+      <tr><td><b>positivo</b></td><td>Luca è alto.</td></tr>
+      <tr><td><b>comparativo</b> di maggioranza, minoranza, uguaglianza</td><td>Luca è <b>più</b> alto <b>di</b> Marco · <b>meno</b> alto <b>di</b> · <b>tanto</b> alto <b>quanto</b></td></tr>
+      <tr><td><b>superlativo relativo</b></td><td>Luca è <b>il più</b> alto <b>della</b> classe.</td></tr>
+      <tr><td><b>superlativo assoluto</b></td><td>Luca è alt<span class="mark">issimo</span> / <b>molto</b> alto.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Irregolari: buono → <b>migliore</b> → <b>ottimo</b>; cattivo → <b>peggiore</b> → <b>pessimo</b>; grande → <b>maggiore</b> → <b>massimo</b>; piccolo → <b>minore</b> → <b>minimo</b>.</p>
+</section>
+
+<hr>
+<section class="ex" id="ex1">
+  <span class="eyebrow">Esercizio 1</span>
+  <h2>Caccia agli articoli</h2>
+  <p class="consegna">Nel testo ci sono 10 articoli. Toccali tutti.</p>
+  <div id="e1"></div>
+</section>
+<section class="ex" id="ex2">
+  <span class="eyebrow">Esercizio 2</span>
+  <h2>Quale articolo?</h2>
+  <p class="consegna">Scegli l'articolo determinativo giusto.</p>
+  <div id="e2"></div>
+</section>
+<section class="ex" id="ex3">
+  <span class="eyebrow">Esercizio 3</span>
+  <h2>Che nome è?</h2>
+  <p class="consegna">Scegli la caratteristica più evidente del nome evidenziato.</p>
+  <div id="e3"></div>
+</section>
+<section class="ex" id="ex4">
+  <span class="eyebrow">Esercizio 4</span>
+  <h2>Volgi al plurale</h2>
+  <p class="consegna">Scrivi il plurale del nome.</p>
+  <div id="e4"></div>
+</section>
+<section class="ex" id="ex5">
+  <span class="eyebrow">Esercizio 5</span>
+  <h2>Qualificativo o determinativo?</h2>
+  <p class="consegna">L'aggettivo evidenziato dice com'è il nome o lo precisa (quale, di chi, quanti)?</p>
+  <div id="e5"></div>
+</section>
+<section class="ex" id="ex6">
+  <span class="eyebrow">Esercizio 6</span>
+  <h2>Che aggettivo determinativo?</h2>
+  <p class="consegna">Indica il tipo dell'aggettivo evidenziato.</p>
+  <div id="e6"></div>
+</section>
+<section class="ex" id="ex7">
+  <span class="eyebrow">Esercizio 7</span>
+  <h2>I gradi dell'aggettivo</h2>
+  <p class="consegna">Completa con la forma richiesta dell'aggettivo tra parentesi.</p>
+  <div id="e7"></div>
+</section>
+<section class="ex" id="ex8">
+  <span class="eyebrow">Esercizio 8</span>
+  <h2>Accorda il gruppo del nome</h2>
+  <p class="consegna">Volgi al plurale tutto il gruppo del nome.</p>
+  <div id="e8"></div>
+</section>
+<section class="ex">
+  <div class="note">
+    <div class="azioni">
+      <button class="btn main" id="check" type="button">Correggi tutto</button>
+      <button class="btn" id="reset" type="button">Ricomincia</button>
+      <span class="punti" id="score" aria-live="polite"></span>
+    </div>
+  </div>
+</section>
+</main>
+<script>
+(function(){
+  var KEY="ana", DATA=[{"type": "testo", "nome": "Articoli", "text": "*La* mattina *il* nonno esce con *lo* zaino e *un* ombrello. Al mercato compra *delle* mele, *un'*arancia e *gli* spinaci per *la* nonna. Poi si siede su *una* panchina e legge *il* giornale."}, {"type": "scelta", "items": [["___ zaino", "lo", "s + consonante, z… ci vuole <i>lo</i>.", ["il", "lo", "l'"]], ["___ studenti", "gli", "", ["i", "gli"]], ["___ gnomo", "lo", "", ["il", "lo"]], ["___ albero", "l'", "", ["il", "lo", "l'"]], ["___ psicologi", "gli", "", ["i", "gli"]], ["___ quaderno", "il", "", ["il", "lo"]], ["___ yogurt", "lo", "", ["il", "lo"]], ["___ amiche", "le", "", ["le", "l'"]]]}, {"type": "select", "opts": ["proprio", "astratto", "collettivo", "derivato", "alterato", "composto"], "label": "Tipo di nome", "items": [["Abbiamo visitato <span class='mark'>Venezia</span>.", "proprio"], ["La <span class='mark'>paura</span> passa presto.", "astratto"], ["Lo <span class='mark'>sciame</span> di api ronzava.", "collettivo", "indica un gruppo di api."], ["Il <span class='mark'>fornaio</span> sforna il pane.", "derivato", "da <i>forno</i>."], ["Ho trovato un <span class='mark'>gattino</span>.", "alterato", "piccolo gatto."], ["Mi serve un <span class='mark'>apribottiglie</span>.", "composto", "apri + bottiglie."], ["La <span class='mark'>felicità</span> si vede negli occhi.", "astratto"], ["Il <span class='mark'>pescatore</span> torna al porto.", "derivato", "da <i>pesce</i>, <i>pescare</i>."]]}, {"type": "input", "label": "Plurale", "items": [["il libro →", ["i libri"]], ["la città →", ["le città"], "nome invariabile."], ["l'uomo →", ["gli uomini"], "plurale irregolare."], ["l'uovo →", ["le uova"], "cambia anche il genere."], ["lo zio →", ["gli zii"]], ["il caffè →", ["i caffè"]], ["la mano →", ["le mani"]], ["il bue →", ["i buoi"]]]}, {"type": "scelta", "opts": ["qualificativo", "determinativo"], "items": [["Ho un cane <span class='mark'>fedele</span>.", "qualificativo"], ["Il <span class='mark'>mio</span> cane si chiama Fido.", "determinativo"], ["<span class='mark'>Questa</span> torta è buona.", "determinativo"], ["È una torta <span class='mark'>buona</span>.", "qualificativo"], ["Ho letto <span class='mark'>tre</span> libri.", "determinativo"], ["Ho letto un libro <span class='mark'>noioso</span>.", "qualificativo"]]}, {"type": "select", "opts": ["possessivo", "dimostrativo", "indefinito", "numerale", "interrogativo"], "label": "Tipo di aggettivo", "items": [["Ho perso la <span class='mark'>mia</span> penna.", "possessivo"], ["<span class='mark'>Quella</span> casa è antica.", "dimostrativo"], ["Ho letto <span class='mark'>molti</span> libri.", "indefinito"], ["Abito al <span class='mark'>terzo</span> piano.", "numerale"], ["<span class='mark'>Quale</span> gusto preferisci?", "interrogativo"], ["<span class='mark'>Ogni</span> giorno vado a piedi.", "indefinito"], ["Ho <span class='mark'>due</span> gatti.", "numerale"], ["La <span class='mark'>loro</span> casa è al mare.", "possessivo"]]}, {"type": "input", "label": "Forma dell'aggettivo", "items": [["Questo gelato è ______! (buono, superlativo assoluto)", ["buonissimo", "ottimo"]], ["Il mio voto è ______ del tuo. (buono, comparativo)", ["migliore", "più buono"]], ["Che tempo ______! (cattivo, superlativo assoluto)", ["pessimo", "cattivissimo"]], ["Il Po è il fiume ______ d'Italia. (lungo, superlativo relativo)", ["più lungo"]], ["Mia sorella ______ si chiama Elena. (piccolo, comparativo)", ["minore", "più piccola"]], ["Il gatto è ______ (veloce, superlativo assoluto)", ["velocissimo"]]]}, {"type": "input", "label": "Gruppo del nome al plurale", "items": [["il mio quaderno nuovo →", ["i miei quaderni nuovi"]], ["la vecchia casa bianca →", ["le vecchie case bianche"]], ["questo zaino pesante →", ["questi zaini pesanti"]], ["l'amico simpatico →", ["gli amici simpatici"]]]}];
+  var z=100, zv=document.getElementById('zv');
+  try{ z=parseInt(localStorage.getItem(KEY+'-zoom'))||100 }catch(e){}
+  function setZ(v){ z=Math.max(70,Math.min(200,v)); document.documentElement.style.fontSize=z+'%'; zv.textContent=z+'%'; try{localStorage.setItem(KEY+'-zoom',z)}catch(e){} }
+  document.getElementById('zp').onclick=function(){setZ(z+10)};
+  document.getElementById('zm').onclick=function(){setZ(z-10)};
+  setZ(z);
+  function el(t,c,h){var e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e}
+  function norm(s){return String(s).toLowerCase().replace(/[’‘`´]/g,"'").replace(/\s*-\s*/g,'-').replace(/\s+/g,' ').replace(/^[\s.]+|[\s.]+$/g,'')}
+  var W=/[A-Za-zÀ-ÿ']+/;
+
+  function tokens(container,str,idp){
+    str.match(/\*[^*]+\*|[A-Za-zÀ-ÿ']+|[^\sA-Za-zÀ-ÿ'*]+|\s+/g).forEach(function(t,j){
+      if(/^[A-Za-zÀ-ÿ']+$/.test(t)||t[0]==='*'){
+        var m=t[0]==='*', b=el('button','tok'); b.type='button'; b.id=idp+'-'+j; b.textContent=m?t.slice(1,-1):t; b.dataset.ok=m?'1':'0';
+        b.onclick=function(){b.classList.toggle('sel')}; container.appendChild(b);
+      } else container.appendChild(document.createTextNode(t));
+    });
+  }
+  function markToks(root){var ok=0,tot=0,err=0;
+    root.querySelectorAll('.tok').forEach(function(b){b.classList.remove('miss','wrong');
+      var s=b.classList.contains('sel'),a=b.dataset.ok==='1';
+      if(a){tot++; if(s)ok++; else b.classList.add('miss')} else if(s){err++;b.classList.add('wrong')} });
+    return [ok,tot,err]}
+
+  var checks=[];
+  DATA.forEach(function(ex,n){
+    var box=document.getElementById('e'+(n+1)), id='e'+(n+1);
+    if(ex.type==='tok'){
+      var its=[];
+      ex.items.forEach(function(s,i){var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); tokens(fr,s,id+'-'+i); it.append(fr,fb); box.appendChild(it); its.push(it)});
+      checks.push(function(){var ok=0; its.forEach(function(it){var r=markToks(it), g=r[0]===r[1]&&!r[2]; it.className='item '+(g?'ok':'ko'); it.querySelector('.fb').textContent=g?'Giusto!':(ex.fb||'Il bordo rosso indica una parola mancante; la parola barrata non va segnata.'); if(g)ok++}); return [ok,its.length]});
+    } else if(ex.type==='testo'){
+      var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); fr.style.lineHeight='2'; tokens(fr,ex.text,id); it.append(fr,fb); box.appendChild(it);
+      checks.push(function(){var r=markToks(it); it.className='item '+(r[0]===r[1]&&!r[2]?'ok':'ko');
+        fb.textContent=(ex.nome||'Risposte')+' trovati: '+r[0]+' su '+r[1]+(r[2]?'. Segnati per errore: '+r[2]+' (barrati).':'.')+(r[0]<r[1]?' Il bordo rosso indica quelli mancanti.':'');
+        return [Math.max(0,r[0]-r[2]),r[1]]});
+    } else if(ex.type==='select'){
+      var arr=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),sel=el('select'),fb=el('div','fb');
+        sel.id=id+'-'+i; sel.setAttribute('aria-label',ex.label||'Risposta'); sel.appendChild(new Option('scegli…',''));
+        (d[3]||ex.opts).forEach(function(o){sel.appendChild(new Option(o,o))});
+        it.append(fr,sel,fb); box.appendChild(it); arr.push([it,sel,d])});
+      checks.push(function(){var ok=0; arr.forEach(function(x){var g=x[1].value===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Risposta corretta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr.length]});
+    } else if(ex.type==='scelta'){
+      var arr2=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),seg=el('div','seg'),fb=el('div','fb');
+        (d[3]||ex.opts).forEach(function(o,k){var b=el('button'); b.type='button'; b.id=id+'-'+i+'-'+k; b.textContent=o; b.setAttribute('aria-pressed','false');
+          b.onclick=function(){seg.dataset.v=o; seg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')})}; seg.appendChild(b)});
+        it.append(fr,seg,fb); box.appendChild(it); arr2.push([it,seg,d])});
+      checks.push(function(){var ok=0; arr2.forEach(function(x){var g=x[1].dataset.v===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Risposta corretta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr2.length]});
+    } else if(ex.type==='input'){
+      var arr3=[];
+      ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),inp=el('input'),fb=el('div','fb');
+        inp.type='text'; inp.id=id+'-'+i; inp.autocomplete='off'; inp.spellcheck=false; inp.setAttribute('aria-label',ex.label||'Risposta');
+        it.append(fr,inp,fb); box.appendChild(it); arr3.push([it,inp,d])});
+      checks.push(function(){var ok=0; arr3.forEach(function(x){var v=norm(x[1].value), g=x[2][1].some(function(a){return norm(a)===v}); x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Soluzione: <b>'+x[2][1][0]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr3.length]});
+    }
+  });
+
+  var score=document.getElementById('score');
+  document.getElementById('check').onclick=function(){var ok=0,tot=0; checks.forEach(function(c){var r=c(); ok+=r[0]; tot+=r[1]}); score.textContent='Risposte giuste: '+ok+' su '+tot};
+  document.getElementById('reset').onclick=function(){
+    document.querySelectorAll('.item').forEach(function(i){i.className='item'; var f=i.querySelector('.fb'); if(f)f.textContent=''});
+    document.querySelectorAll('.tok').forEach(function(b){b.classList.remove('sel','miss','wrong')});
+    document.querySelectorAll('select').forEach(function(s){s.value=''});
+    document.querySelectorAll('input[type=text]').forEach(function(s){s.value=''});
+    document.querySelectorAll('.seg').forEach(function(s){delete s.dataset.v; s.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed','false')})});
+    score.textContent=''; window.scrollTo(0,0)};
+})();
+</script>
+<script>(function(){
+  function el(t,c,h){var e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e}
+  function norm(s){return String(s).toLowerCase().replace(/[’‘`´]/g,"'").replace(/\s+/g,' ').trim()}
+  document.querySelectorAll('section.scopri').forEach(function(sec,si){
+    if(sec.dataset.pronto) return; sec.dataset.pronto='1';
+    var D=JSON.parse(sec.querySelector('script[type="application/json"]').textContent);
+    var box=sec.querySelector('.sc-testo'), blanks=[];
+    D.testo.split(/(\[\[[^\]]+\]\])/).forEach(function(part){
+      var m=part.match(/^\[\[(.+)\]\]$/);
+      if(!m){ box.appendChild(document.createTextNode(part)); return; }
+      var w=el('span','sc-buco'), inp=el('input'); inp.type='text'; inp.autocomplete='off'; inp.spellcheck=false;
+      inp.setAttribute('aria-label','Parola mancante'); inp.style.width='7ch';
+      inp.id='sc'+si+'-b'+blanks.length; var o=el('span','sc-orig'); o.textContent=m[1];
+      w.append(inp,o); box.appendChild(w); blanks.push([inp,o,m[1]]);
+    });
+    var rev=sec.querySelector('.sc-mostra');
+    rev.onclick=function(){
+      var vis=!sec.classList.contains('sc-svelato'); sec.classList.toggle('sc-svelato',vis);
+      rev.textContent=vis?'Nascondi le parole':'Mostra il testo completo';
+      blanks.forEach(function(b){ var v=norm(b[0].value), ok=v&&v===norm(b[2]); b[0].classList.toggle('sc-ok',vis&&ok); b[1].classList.toggle('sc-same',ok) });
+    };
+    var qs=sec.querySelector('.sc-domande'), items=[];
+    D.domande.forEach(function(d,i){
+      var it=el('div','item'), fr=el('div','frase',d[0]), seg=el('div','seg'), fb=el('div','fb');
+      d[3].forEach(function(o,k){var b=el('button'); b.type='button'; b.id='sc'+si+'-q'+i+'-'+k; b.textContent=o; b.setAttribute('aria-pressed','false');
+        b.onclick=function(){seg.dataset.v=o; seg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')})}; seg.appendChild(b)});
+      it.append(fr,seg,fb); qs.appendChild(it); items.push([it,seg,d]);
+    });
+    var out=sec.querySelector('.sc-punti');
+    sec.querySelector('.sc-controlla').onclick=function(){var ok=0;
+      items.forEach(function(x){var g=x[1].dataset.v===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Risposta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++});
+      out.textContent=ok+' su '+items.length;
+    };
+  });
+})();
+</script>
+</body>
+</html>
