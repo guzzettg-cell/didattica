@@ -1,6 +1,7 @@
 /* =============================================================
-   OFFICINE DELLO STORICO · codice comune a tutte le officine
-   L'elenco delle officine NON è qui: è in materiali.js.
+   LABORATORI DELLO STORICO · codice comune a tutti i laboratori
+   (nel codice si chiamano ancora «officine»: chiavi, cartella e file)
+   L'elenco dei laboratori NON è qui: è in materiali.js.
    Un'officina è una lezione di storia di prima con la riga
        officina: 3,
    (il numero dell'officina) e la riga
@@ -64,7 +65,7 @@
         if (typeof l.officina !== "number") return;
         out.push({
           n: l.officina,
-          titolo: String(l.titolo || "").replace(/^Officina\s+\d+\s*[·:–-]\s*/, ""),
+          titolo: String(l.titolo || "").replace(/^(Officina|Laboratorio)\s+\d+\s*[·:–-]\s*/, ""),
           descrizione: l.descrizione || "",
           parte: l.parte || "officina",
           link: l.link ? BASE + l.link : null,
@@ -82,10 +83,10 @@
   /* striscia in cima: un tondo per ogni officina, colorato se è aperta */
   function striscia(box, lista, cur) {
     var aperte = lista.filter(function (o) { return o.link; }).length;
-    var h = '<p class="striscia-titolo"><a href="index.html">Le officine dello storico</a> · ' +
-      aperte + (aperte === 1 ? " aperta" : " aperte") + " su " + lista.length + '</p><ol class="striscia">';
+    var h = '<p class="striscia-titolo"><a href="index.html">I laboratori dello storico</a> · ' +
+      aperte + (aperte === 1 ? " aperto" : " aperti") + " su " + lista.length + '</p><ol class="striscia">';
     lista.forEach(function (o) {
-      var c = parte(o.parte).c, t = "Officina " + o.n + " · " + o.titolo + (o.link ? "" : " (in arrivo)");
+      var c = parte(o.parte).c, t = "Laboratorio " + o.n + " · " + o.titolo + (o.link ? "" : " (in arrivo)");
       var cls = (o.n === cur ? "qui " : "") + (o.link ? "aperta" : "chiusa");
       h += '<li class="' + cls + '" style="--c:' + c + '">' + (o.link && o.n !== cur
         ? '<a href="' + esc(o.link) + '" title="' + esc(t) + '" aria-label="' + esc(t) + '">' + o.n + '</a>'
@@ -96,7 +97,7 @@
 
   /* in fondo: officina precedente e successiva */
   function scheda(o, verso) {
-    var lab = verso === "prima" ? "← Officina precedente" : "Officina successiva →";
+    var lab = verso === "prima" ? "← Laboratorio precedente" : "Laboratorio successivo →";
     if (!o) return '<div class="naviga-vuoto"></div>';
     var dentro = tondo(o) + '<span class="naviga-testo"><span class="naviga-lab">' + lab +
       (o.link ? "" : " · in arrivo") + '</span><span class="naviga-tit">' + o.n + " · " + esc(o.titolo) + "</span></span>";
@@ -106,9 +107,9 @@
   }
   function naviga(box, lista, cur) {
     var i = trova(lista, cur);
-    box.innerHTML = '<nav class="naviga-officine" aria-label="Le altre officine">' +
+    box.innerHTML = '<nav class="naviga-officine" aria-label="Gli altri laboratori">' +
       scheda(i > 0 ? lista[i - 1] : null, "prima") +
-      '<a class="naviga-tutte" href="index.html">Tutte le officine</a>' +
+      '<a class="naviga-tutte" href="index.html">Tutti i laboratori</a>' +
       scheda(i >= 0 && i < lista.length - 1 ? lista[i + 1] : null, "dopo") + "</nav>";
   }
 
@@ -116,16 +117,16 @@
   function rimando(sp, lista) {
     var i = trova(lista, Number(sp.getAttribute("data-officina-link")));
     if (i < 0) return;
-    var o = lista[i], t = "officina " + o.n + " · " + o.titolo;
+    var o = lista[i], t = "laboratorio " + o.n + " · " + o.titolo;
     sp.innerHTML = o.link ? '<a href="' + esc(o.link) + '">' + esc(t) + "</a>" : esc(t) + ' <em class="in-arrivo">(in arrivo)</em>';
   }
 
   /* l'indice di tutte le officine, raggruppate per modulo */
   function indice(box, lista) {
-    if (!lista.length) { box.innerHTML = '<p class="attesa">L\'elenco delle officine non si è caricato. Ricarica la pagina.</p>'; return; }
+    if (!lista.length) { box.innerHTML = '<p class="attesa">L\'elenco dei laboratori non si è caricato. Ricarica la pagina.</p>'; return; }
     var h = "", gruppo = null, aperte = lista.filter(function (o) { return o.link; }).length;
     var cont = document.querySelector("[data-officine-conta]");
-    if (cont) cont.textContent = aperte + (aperte === 1 ? " officina aperta" : " officine aperte") + " su " + lista.length;
+    if (cont) cont.textContent = aperte + (aperte === 1 ? " laboratorio aperto" : " laboratori aperti") + " su " + lista.length;
     lista.forEach(function (o) {
       if (o.modulo !== gruppo) {
         if (gruppo) h += "</ol></section>";
@@ -135,7 +136,7 @@
         h += '<section class="gruppo-officine"><h2>' + esc(tit) + '</h2><p class="gruppo-sotto">' + esc(sot) + '</p><ol class="officine-schede">';
       }
       var p = parte(o.parte);
-      var corpo = tondo(o) + '<span class="os-testo"><span class="os-num">Officina ' + o.n +
+      var corpo = tondo(o) + '<span class="os-testo"><span class="os-num">Laboratorio ' + o.n +
         (o.link ? "" : ' · <span class="in-arrivo">in arrivo</span>') + '</span><span class="os-tit">' + esc(o.titolo) +
         '</span><span class="os-descr">' + esc(o.descrizione) + '</span><span class="os-prepara">Prepara: <strong>' + esc(p.n) + "</strong></span></span>";
       h += '<li class="' + (o.link ? "aperta" : "chiusa") + '" style="--c:' + p.c + '">' +

@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Benvenuti nei laboratori</title>
+<style>
+:root{
+  --sfondo:#f3f3ef; --carta:#ffffff; --tenue-bg:#eaf1f2; --ink:#23262a; --tenue:#5a6066; --filo:#dfe2dd;
+  --accento:#2b5f6b; --accento-2:#1f4a54; --accento-soft:#e1edef;
+  --causa:#8a5a12; --causa-bg:#f8eedb; --evento:#2b5f6b; --evento-bg:#e1edef; --effetto:#6b3f74; --effetto-bg:#f1e6f3;
+  --ombra:#7a3b2e; --ombra-bg:#f7e7e2;
+  --ok:#1f7a4d; --ok-bg:#dcf2e6; --no:#b42318; --no-bg:#fde3e1;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --surface:var(--carta); --line:var(--filo); --soft:var(--tenue-bg); --paper:var(--tenue-bg); --accent:var(--accento); --accent-ink:#fff; --muted:var(--tenue); --card:var(--carta);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#f3f3ef;background:var(--sfondo);color:#23262a;color:var(--ink);font:1.08rem/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:1.08rem/1.65 var(--sans)}
+a{color:#2b5f6b;color:var(--accento)}
+a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.salta{position:absolute;left:1rem;top:-6rem;background:#ffffff;background:var(--carta);padding:.8rem 1rem;z-index:20}.salta:focus{top:1rem}
+.foglio{max-width:1280px;margin:32px auto;background:#ffffff;background:var(--carta);border:1px solid #dfe2dd;border:1px solid var(--filo)}
+header.testata{padding:22px 52px 26px;border-top:9px solid #2b5f6b;border-top:9px solid var(--accento);background:#eaf1f2;background:var(--tenue-bg)}
+.indietro{display:inline-block;font-size:.92rem;margin-bottom:18px;text-decoration:none;border-bottom:1px solid currentColor}
+.eyebrow{margin:0 0 6px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:#5a6066;color:var(--tenue);font-weight:700}
+.capitolo{margin:0;font-weight:700;color:#2b5f6b;color:var(--accento)}
+h1{font:700 2.6rem/1.08 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2.6rem/1.08 var(--serif);font-size:clamp(2.1rem,6vw,3.5rem);margin:6px 0 10px}
+.sottotitolo{margin:0;font:italic 1.25rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.25rem/1.4 var(--serif);color:#5a6066;color:var(--tenue)}
+.corpo-lezione{display:grid;grid-template-columns:268px minmax(0,1fr);align-items:start}
+nav.indice{position:-webkit-sticky;position:sticky;top:12px;align-self:start;display:grid;grid-template-columns:minmax(0,1fr);grid-gap:10px;gap:10px;padding:30px 0 24px 28px;max-height:calc(100vh - 24px);overflow-y:auto}
+.indice-titolo{margin:0 0 2px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue)}
+a.voce{display:flex;align-items:center;min-height:54px;padding:4px 12px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;text-decoration:none;font:800 .86rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .86rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em;transition:transform .15s,box-shadow .15s}
+a.voce .tondo{margin-right:10px;flex:none;width:46px;height:46px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+a.voce svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+a.voce:hover{transform:translateX(4px)}
+a.voce[aria-current="true"]{transform:translateX(8px);box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+a.voce:focus-visible{outline:3px solid #23262a;outline:3px solid var(--ink);outline-offset:3px}
+main{padding:10px 52px 40px 40px;min-width:0}
+.fascia{display:flex;align-items:center;margin:28px 0 12px;min-height:50px;padding:4px 16px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;font:800 .95rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .95rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.fascia .tondo{margin-right:10px;flex:none;width:42px;height:42px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+.fascia svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+section.parte{padding:34px 0 8px;border-bottom:1px solid #dfe2dd;border-bottom:1px solid var(--filo);scroll-margin-top:56px}
+section.parte:last-of-type{border-bottom:0}
+h2{font:700 2rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2rem/1.2 var(--serif);margin:0 0 6px}
+.etichetta{display:inline-block;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#2b5f6b;color:var(--accento);margin:0 0 4px}
+.guida{margin:0 0 22px;color:#5a6066;color:var(--tenue);font-size:.98rem;max-width:72ch}
+h3{font:700 1.08rem/1.3 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 1.08rem/1.3 var(--sans);text-transform:uppercase;letter-spacing:.05em;color:#2b5f6b;color:var(--accento);margin:26px 0 12px}
+h3 span{border-bottom:3px dotted #2b5f6b;border-bottom:3px dotted var(--accento);padding-bottom:4px}
+p{margin:0 0 14px}
+.lettura{max-width:74ch}
+.mestiere{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:-4px 0 16px}
+
+/* prima / dopo */
+.primadopo{display:grid;grid-template-columns:1fr auto 1fr;grid-gap:16px;gap:16px;align-items:stretch;margin:6px 0 10px}
+.pd{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:18px 20px;background:#ffffff;background:var(--carta)}
+.pd h3{margin-top:0}
+.pd.ora{background:#e1edef;background:var(--accento-soft);border-color:transparent}
+.freccia{align-self:center;font:700 1.8rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.8rem var(--serif);color:#2b5f6b;color:var(--accento)}
+.pd .link-lez{font-size:.92rem;margin:0}
+.pd-centro{grid-column:1/-1;text-align:center;font:700 1.15rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem/1.4 var(--serif);background:#2b5f6b;background:var(--accento);color:#fff;border-radius:12px;padding:12px 18px;margin:0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pd-centro{color:#0f1416}}
+:root[data-theme="dark"] .pd-centro{color:#0f1416}
+
+/* idea principale */
+.mappa-box{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;margin:16px 0 8px}
+#mappa{height:430px;background:#eaf1f2;background:var(--tenue-bg)}
+.mappa-nota{font-size:.88rem;color:#5a6066;color:var(--tenue);padding:10px 14px;margin:0;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo)}
+.luoghi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));grid-gap:10px;gap:10px;margin:12px 0 0;padding:0;list-style:none}
+.luoghi li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 12px;font-size:.95rem}
+.luoghi button{all:unset;cursor:pointer;font-weight:700;color:#2b5f6b;color:var(--accento)}
+.luoghi button:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.linea{position:relative;margin:8px 0 0;padding:0 0 0 30px;list-style:none}
+.linea::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:3px;background:#2b5f6b;background:var(--accento);border-radius:2px}
+.linea li{position:relative;margin:0 0 12px}
+.linea li::before{content:"";position:absolute;left:-26px;top:.45em;width:13px;height:13px;border-radius:50%;background:#ffffff;background:var(--carta);border:3px solid #2b5f6b;border:3px solid var(--accento)}
+.linea li.estremo::before{background:#2b5f6b;background:var(--accento)}
+.linea .anno{font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);color:#2b5f6b;color:var(--accento);margin-right:8px}
+.linea .pista{font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;padding:1px 8px;margin-left:6px;color:#5a6066;color:var(--tenue);white-space:nowrap}
+.persone{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-gap:14px;gap:14px}
+.persona{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:54px 1fr;grid-gap:14px;gap:14px;align-items:start}
+.sigla{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#e1edef;background:var(--accento-soft);color:#2b5f6b;color:var(--accento);font:700 1.2rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem var(--serif)}
+.persona h4{margin:0;font:700 1.12rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.12rem/1.3 var(--serif)}
+.persona .date{font-size:.88rem;color:#5a6066;color:var(--tenue);display:block;margin-bottom:6px}
+.persona p{margin:0 0 6px;font-size:.97rem}
+.persona a{font-size:.9rem}
+
+/* perché */
+.catena{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;grid-gap:10px;gap:10px;align-items:stretch}
+.anello{border-radius:12px;padding:16px 18px}
+.anello h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.anello p{margin:0;font-size:.98rem}
+.anello.causa{background:#f8eedb;background:var(--causa-bg)}.anello.causa h4{color:#8a5a12;color:var(--causa)}
+.anello.evento{background:#e1edef;background:var(--evento-bg)}.anello.evento h4{color:#2b5f6b;color:var(--evento)}
+.anello.effetto{background:#f1e6f3;background:var(--effetto-bg)}.anello.effetto h4{color:#6b3f74;color:var(--effetto)}
+.catena .freccia{font-size:1.5rem}
+.ombra{margin:16px 0 0;background:#f7e7e2;background:var(--ombra-bg);border-left:5px solid #7a3b2e;border-left:5px solid var(--ombra);border-radius:0 12px 12px 0;padding:14px 18px}
+.ombra h4{margin:0 0 6px;color:#7a3b2e;color:var(--ombra);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.ombra p{margin:0}
+.ricorda{margin:18px 0 0;border:2px dashed #dfe2dd;border:2px dashed var(--filo);border-radius:12px;padding:14px 18px}
+.ricorda h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+.ricorda dl{margin:0;display:grid;grid-template-columns:max-content 1fr;grid-gap:6px 14px;gap:6px 14px}
+.ricorda dt{font-weight:700}.ricorda dd{margin:0}
+
+/* concetti e come */
+.concetto{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);padding:18px 22px;margin:0 0 16px;scroll-margin-top:60px}
+.concetto h4{font:700 1.3rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.3rem/1.3 var(--serif);margin:0 0 10px}
+.concetto p:last-child{margin-bottom:0}
+.come{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-gap:12px;gap:12px;margin-top:10px}
+.colonna{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:0;overflow:hidden}
+.colonna h4{margin:0;padding:10px 14px;background:#2b5f6b;background:var(--accento);color:#fff;font-size:1rem}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .colonna h4{color:#0f1416}}
+:root[data-theme="dark"] .colonna h4{color:#0f1416}
+.colonna ul{margin:0;padding:12px 14px 12px 30px;font-size:.95rem}
+.colonna li{margin:0 0 6px}
+.radice{text-align:center;font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:999px;padding:8px 16px;max-width:520px;margin:4px auto 10px}
+
+/* parole chiave */
+.parole{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));grid-gap:12px;gap:12px;margin:0;padding:0}
+.parola{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px;scroll-margin-top:60px}
+.parola dt{font:700 1.1rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.1rem var(--serif);color:#2b5f6b;color:var(--accento);margin-bottom:4px}
+.parola dd{margin:0;font-size:.97rem}
+a.pk{color:inherit;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted #2b5f6b;text-decoration:underline dotted var(--accento);text-underline-offset:4px;text-decoration-thickness:2px}
+a.pk:hover{background:#e1edef;background:var(--accento-soft)}
+:target{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:4px}
+
+/* testi */
+.livelli{display:inline-flex;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;overflow:hidden;margin:0 0 18px}
+.livelli button{font:inherit;font-size:.95rem;border:0;background:transparent;color:#23262a;color:var(--ink);padding:7px 16px;cursor:pointer}
+.livelli button[aria-pressed="true"]{background:#2b5f6b;background:var(--accento);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .livelli button[aria-pressed="true"]{color:#0f1416}}
+:root[data-theme="dark"] .livelli button[aria-pressed="true"]{color:#0f1416}
+.paragrafo{margin:0 0 22px;max-width:74ch}
+.paragrafo h4{font:700 1.2rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem/1.3 var(--serif);margin:0 0 6px}
+.paragrafo h4 .n{color:#2b5f6b;color:var(--accento);margin-right:6px}
+.essenziale .paragrafo p{font-size:1.12rem;line-height:1.75}
+
+/* lente */
+.lente{border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:14px;overflow:hidden}
+.lente-testa{background:#2b5f6b;background:var(--accento);color:#fff;padding:16px 22px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lente-testa{color:#0f1416}}
+:root[data-theme="dark"] .lente-testa{color:#0f1416}
+.lente-testa .testata-giornale{margin:0;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.lente-testa h3{margin:4px 0 0;color:inherit;font:700 1.6rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.6rem/1.2 var(--serif);text-transform:none;letter-spacing:0}
+.lente-corpo{padding:18px 22px}
+.domanda-guida{font:italic 1.2rem/1.5 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.2rem/1.5 var(--serif);border-left:4px solid #2b5f6b;border-left:4px solid var(--accento);padding:4px 0 4px 14px;margin:0 0 18px}
+.fasi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-gap:14px;gap:14px}
+.fase{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px}
+.fase h4{margin:0 0 8px;font-size:1rem}
+.fase ol,.fase ul{margin:0;padding-left:20px;font-size:.96rem}
+.fase li{margin:0 0 6px}
+.bottone{display:inline-block;font:inherit;font-weight:700;border-radius:999px;padding:9px 18px;border:2px solid #2b5f6b;border:2px solid var(--accento);background:#2b5f6b;background:var(--accento);color:#fff;text-decoration:none;cursor:pointer}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bottone{color:#0f1416}}
+:root[data-theme="dark"] .bottone{color:#0f1416}
+.bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+:root .bottone.secondario,:root:not([data-theme="light"]) .bottone.secondario,:root[data-theme="dark"] .bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+.bottone[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.altre-fonti{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-gap:8px;gap:8px}
+.altre-fonti li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 14px;font-size:.96rem}
+.altre-fonti .tipo{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue);display:block}
+
+/* compiti */
+.attivita{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:14px;padding:18px 22px;margin:0 0 18px}
+.attivita h4{margin:0 0 4px;font:700 1.25rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.25rem/1.3 var(--serif)}
+.attivita .meta{font-size:.86rem;color:#5a6066;color:var(--tenue);margin:0 0 12px}
+.consegna{margin:0 0 12px}
+table.esercizio{width:100%;border-collapse:collapse;font-size:.97rem}
+table.esercizio td{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:8px 6px;vertical-align:middle}
+table.esercizio td:first-child{width:52%}
+table.esercizio select{font:inherit;font-size:.95rem;width:100%;max-width:100%;padding:5px 6px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:6px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+td.esito{width:34px;text-align:center;font-weight:700}
+tr.ok td.esito{color:#1f7a4d;color:var(--ok)} tr.no td.esito{color:#b42318;color:var(--no)}
+tr.ok{background:#dcf2e6;background:var(--ok-bg)} tr.no{background:#fde3e1;background:var(--no-bg)}
+.spiega{display:block;font-size:.88rem;color:#5a6066;color:var(--tenue);margin-top:4px}
+.comandi{display:flex;flex-wrap:wrap;align-items:center;margin:14px 0 0}
+.comandi>*{margin:0 10px 8px 0}
+.punteggio{font-weight:700}
+textarea{font:inherit;width:100%;min-height:84px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:8px;padding:8px 10px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+.dibattito{margin:14px 0 0;background:#eaf1f2;background:var(--tenue-bg);border-radius:10px;padding:10px 14px;font-size:.95rem}
+.dibattito b{color:#2b5f6b;color:var(--accento)}
+
+footer{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:18px 52px;font-size:.86rem;color:#5a6066;color:var(--tenue)}
+footer p{margin:0 0 6px}
+
+@media (max-width:960px){
+  html{scroll-padding-bottom:84px}
+  .corpo-lezione{display:block}
+  nav.indice{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:90;grid-auto-flow:column;grid-auto-columns:max-content;grid-template-columns:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;max-height:none;grid-gap:8px;gap:8px;padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));background:#ffffff;background:var(--carta);border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);box-shadow:0 -4px 14px rgba(0,0,0,.12)}
+  .foglio{margin-bottom:70px}
+  .indice-titolo{display:none}
+  a.voce{flex:none;min-height:40px;padding:3px 12px 3px 3px;font-size:.74rem;white-space:nowrap}
+  a.voce .tondo{width:34px;height:34px;border-width:2px}
+  a.voce svg{width:18px;height:18px}
+  a.voce:hover,a.voce[aria-current="true"]{transform:none}
+  a.voce[aria-current="true"]{box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+  main{padding:10px 40px 40px}
+}
+@media (max-width:860px){
+  .come{grid-template-columns:1fr 1fr}
+  .fasi{grid-template-columns:1fr}
+  .catena{grid-template-columns:1fr}
+  .catena .freccia{transform:rotate(90deg);justify-self:center;line-height:1}
+}
+@media (max-width:700px){
+  .foglio{margin:0;border:0}
+  header.testata{padding:16px 16px 20px}
+  main{padding:4px 16px 28px}
+  footer{padding:16px}
+  .primadopo{grid-template-columns:1fr}
+  .primadopo .freccia{transform:rotate(90deg);justify-self:center}
+  .come{grid-template-columns:1fr}
+  #mappa{height:340px}
+  .ricorda dl{grid-template-columns:1fr}
+  .ricorda dd{margin-bottom:6px}
+  table.esercizio td{display:block;width:100%!important;border-top:0;padding:4px 6px}
+  table.esercizio tr{display:block;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:6px 0}
+  td.esito{text-align:left}
+}
+@media print{
+  body{background:#fff}.foglio{border:0;margin:0}nav.indice,.indietro,.comandi,.livelli,.mappa-box{display:none}
+  .essenziale-solo{display:none}section.parte{break-inside:avoid-page}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* indice riducibile */
+.indice-riduci{display:none}
+@media (min-width:961px){
+  .indice-testa{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .indice-riduci{display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:50%;border:1px solid #dfe2dd;border:1px solid var(--filo);background:#ffffff;background:var(--carta);color:#5a6066;color:var(--tenue);font:700 1rem/1 system-ui,sans-serif;cursor:pointer;padding:0}
+  .indice-riduci:hover{color:#23262a;color:var(--ink)}
+  .corpo-lezione{transition:grid-template-columns .2s}
+  .corpo-lezione.indice-ridotto{grid-template-columns:84px minmax(0,1fr)}
+  .indice-ridotto nav.indice{padding-left:16px;padding-right:0;overflow:visible;z-index:20;grid-gap:8px;gap:8px}
+  .indice-ridotto .indice-testa{justify-content:center;width:52px}
+  .indice-ridotto .indice-titolo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .indice-ridotto a.voce{position:relative;width:52px;min-height:52px;padding:4px;justify-content:center;border-radius:999px}
+  .indice-ridotto a.voce .tondo{margin-right:0}
+  .indice-ridotto a.voce:hover{transform:none}
+  .indice-ridotto a.voce .nome{position:absolute;left:62px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);white-space:nowrap;background:#23262a;color:#fff;padding:7px 12px;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .12s;z-index:30}
+  .indice-ridotto a.voce .nome:before{content:"";position:absolute;left:-6px;top:50%;margin-top:-6px;border:6px solid transparent;border-left:0;border-right-color:#23262a}
+  .indice-ridotto a.voce:hover .nome,.indice-ridotto a.voce:focus .nome{opacity:1}
+}
+
+/* ---------- officine dello storico ---------- */
+.striscia-titolo{margin:18px 0 6px;font-size:.82rem;font-weight:700;color:var(--tenue);letter-spacing:.04em}
+.striscia-titolo a{color:inherit}
+.striscia{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.striscia li a,.striscia li span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;font:800 .8rem/1 var(--sans);text-decoration:none}
+.striscia li.aperta a,.striscia li.aperta span{background:var(--c);color:#fff}
+.striscia li.chiusa span{border:2px dashed var(--filo);color:var(--tenue);background:var(--carta)}
+.striscia li.qui span{box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+.naviga-officine{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch;padding:22px 52px 30px;border-top:1px solid var(--filo)}
+.naviga-scheda{display:flex;align-items:center;gap:12px;padding:10px 14px 10px 10px;border:1px solid var(--filo);border-radius:12px;text-decoration:none;color:var(--ink);background:var(--carta)}
+a.naviga-scheda:hover{border-color:var(--ink)}
+.naviga-scheda.dopo{flex-direction:row-reverse;text-align:right;padding:10px 10px 10px 14px}
+.naviga-scheda.chiusa{opacity:.6;border-style:dashed}
+.naviga-scheda .tondo,.officine-schede .tondo{flex:none;width:46px;height:46px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center}
+.naviga-scheda svg,.officine-schede svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.naviga-testo{display:flex;flex-direction:column}
+.naviga-lab{font-size:.8rem;color:var(--tenue);font-weight:700}
+.naviga-tit{font:700 1.08rem/1.25 var(--serif)}
+.naviga-tutte{align-self:center;font-weight:700;font-size:.92rem;white-space:nowrap}
+.in-arrivo{font-style:normal;color:var(--tenue)}
+.tre-box{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0}
+.tre-box div{border:1px solid var(--filo);border-top:5px solid var(--accento);border-radius:10px;padding:12px 16px;background:var(--carta)}
+.tre-box h3{margin:0 0 4px;font:800 .82rem/1.2 var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--accento)}
+.tre-box p{margin:0}
+.tappe{counter-reset:t;list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px;max-width:80ch}
+.tappe li{counter-increment:t;display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:center}
+.tappe li:before{content:counter(t);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--accento-soft,var(--tenue-bg));color:var(--accento);font-weight:800}
+.tappe a{font-weight:700}
+.chip-elenco{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px;padding:0}
+.chip-elenco li{padding:6px 14px;border-radius:999px;background:var(--tenue-bg);border:1px solid var(--filo);font-size:.98rem}
+.regole{max-width:80ch;padding-left:1.3em}
+.regole li{margin:4px 0}
+.riquadro{max-width:80ch;margin:18px 0;padding:14px 18px;border-left:6px solid var(--accento);background:var(--tenue-bg);border-radius:0 10px 10px 0}
+.riquadro h3{margin:0 0 6px;font:700 1.15rem/1.3 var(--serif)}
+.riquadro p{margin:0 0 6px}
+.due-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.due-col .attivita{margin:0}
+.scoperte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:16px 0 26px}
+.scoperta{border:1px solid var(--filo);border-radius:12px;padding:0 16px 14px;background:var(--carta);display:flex;flex-direction:column}
+.scoperta .fascia{margin:12px -6px 10px}
+.scoperta p{margin:0 0 8px}
+.scoperta .ritrovi{margin-top:auto;font-size:.92rem;color:var(--tenue)}
+.carta-id{max-width:900px;border:2px solid var(--ink);border-radius:16px;padding:18px 22px 20px;background:var(--carta);margin-top:14px}
+.carta-id-testa{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:14px;flex-wrap:wrap}
+.carta-id-testa h3{margin:0;font:700 1.4rem/1.2 var(--serif)}
+.carta-id-testa span{font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--tenue)}
+.carta-id-corpo{display:grid;grid-template-columns:230px minmax(0,1fr);gap:20px}
+.foto-box{display:flex;flex-direction:column;gap:8px}
+.foto-cornice{aspect-ratio:1/1;min-height:200px;border:2px dashed var(--filo);border-radius:12px;display:grid;place-items:center;text-align:center;color:var(--tenue);font-size:.92rem;padding:10px;overflow:hidden;background:var(--tenue-bg)}
+.foto-cornice img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.foto-box label.bottone{text-align:center;cursor:pointer}
+.foto-box input[type=file]{position:absolute;width:1px;height:1px;opacity:0}
+.campi{display:grid;gap:10px}
+.campo label{display:block;font-weight:800;font-size:.9rem;margin-bottom:3px}
+.campo label small{font-weight:400;color:var(--tenue)}
+.campo input,.campo textarea{width:100%;font:inherit;font-size:1rem;padding:8px 10px;border:1px solid var(--filo);border-radius:8px;background:var(--carta);color:var(--ink)}
+.campo textarea{min-height:64px;resize:vertical}
+.firma{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+.firma input{flex:1;min-width:200px}
+.nota-salva{font-size:.88rem;color:var(--tenue);margin:10px 0 0}
+details.insegnante{margin:34px 0 10px;border:1px solid var(--filo);border-radius:12px;padding:0 18px;background:var(--tenue-bg);max-width:900px}
+details.insegnante summary{cursor:pointer;padding:12px 0;font-weight:800}
+details.insegnante h4{margin:14px 0 4px}
+details.insegnante ul,details.insegnante ol{margin:0 0 10px;padding-left:1.3em}
+/* indice delle officine */
+.gruppo-officine{padding:26px 0 6px}
+.gruppo-officine h2{margin:0}
+.gruppo-sotto{margin:2px 0 14px;color:var(--tenue);font-style:italic}
+.officine-schede{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.officine-schede li>a,.officine-schede li>div{display:flex;gap:14px;align-items:flex-start;height:100%;padding:14px 16px 14px 12px;border:1px solid var(--filo);border-left:6px solid var(--c);border-radius:12px;text-decoration:none;color:var(--ink);background:var(--carta)}
+.officine-schede li>a:hover{border-color:var(--c);box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.officine-schede li.chiusa>div{opacity:.62;border-style:dashed;border-left-style:solid;background:transparent}
+.officine-schede li.chiusa .tondo{background:var(--tenue);opacity:.7}
+.os-testo{display:flex;flex-direction:column;gap:2px}
+.os-num{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--c)}
+.os-tit{font:700 1.2rem/1.25 var(--serif)}
+.os-descr{font-size:.96rem}
+.os-prepara{font-size:.88rem;color:var(--tenue)}
+.conta{display:inline-block;margin-top:14px;padding:6px 14px;border-radius:999px;background:var(--carta);border:1px solid var(--filo);font-weight:700;font-size:.92rem}
+@media (max-width:860px){
+  .tre-box,.scoperte,.due-col,.officine-schede{grid-template-columns:1fr}
+  .carta-id-corpo{grid-template-columns:1fr}
+  .foto-cornice{max-width:260px}
+  .naviga-officine{grid-template-columns:1fr;padding:18px 16px 24px}
+  .naviga-tutte{justify-self:center;order:3}
+}
+@media print{
+  body.stampa-carta .foglio>*:not(.corpo-lezione),body.stampa-carta nav.indice,body.stampa-carta main>*:not(#prodotto),body.stampa-carta #prodotto>*:not(.carta-id),body.stampa-carta .salta,body.stampa-carta .no-stampa{display:none!important}
+  body.stampa-carta .foglio{border:0;margin:0}
+  body.stampa-carta .corpo-lezione{display:block}
+  body.stampa-carta main{padding:0}
+  body.stampa-carta .campo input,body.stampa-carta .campo textarea{border:0;border-bottom:1px solid #999;border-radius:0;resize:none}
+}
+
+/* ---------- UDA di accoglienza ---------- */
+.carte4>.carta4:last-child:nth-child(odd),.giochi>.gioco:last-child:nth-child(odd),.scomparti>.scomparto:last-child:nth-child(odd){grid-column:1/-1}
+.quattro-chip{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.quattro-chip li{padding:5px 14px 5px 10px;border-radius:999px;background:var(--carta);border:1px solid var(--filo);font-size:.9rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.quattro-chip li:before{content:"";width:12px;height:12px;border-radius:50%;background:var(--c)}
+.laboratori{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0 6px}
+.laboratori article{border:1px solid var(--filo);border-top:6px solid var(--c);border-radius:12px;padding:12px 16px 14px;background:var(--carta);display:flex;flex-direction:column}
+.laboratori h3{margin:0 0 4px;color:var(--c);font:700 1.25rem/1.2 var(--serif);text-transform:none;letter-spacing:0}
+.laboratori p{margin:0 0 8px;font-size:.97rem}
+.laboratori .domanda{font:italic 1rem/1.4 var(--serif);color:var(--tenue)}
+.laboratori .porti{margin-top:auto;padding-top:8px;border-top:1px dashed var(--filo);font-size:.92rem}
+.giochi,.scomparti{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}
+.gioco,.scomparto{border:1px solid var(--filo);border-left:6px solid var(--c);border-radius:12px;padding:14px 18px;background:var(--carta)}
+.gioco h3,.scomparto h3{margin:0 0 8px;font:700 1.25rem/1.25 var(--serif);text-transform:none;letter-spacing:0;color:var(--ink)}
+.gioco p,.scomparto p{margin:0 0 8px;font-size:.98rem}
+.g-off,.sc-testa{font-size:.78rem!important;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--c);margin:0 0 2px!important}
+.g-nota{font-size:.9rem!important;color:var(--tenue)}
+.sc-chiedi{background:var(--tenue-bg);border-radius:8px;padding:8px 12px;font-size:.94rem!important}
+.esempio{display:flex;flex-direction:column;font:1.02rem/1.45 var(--serif);border-left:3px solid var(--c);padding-left:12px}
+.esempio b{color:var(--c);font-size:1.15em;margin-right:2px}
+.scoperta-unica{max-width:80ch;margin:18px 0;padding:14px 18px;border:2px solid var(--accento);border-radius:12px;background:var(--carta)}
+.scoperta-unica p{margin:0}
+.tappe[style] li:before{background:color-mix(in srgb,var(--accento) 15%,var(--carta))}
+.tappe[style] li span{display:block}
+.lista{margin:0 0 10px;padding-left:1.3em;max-width:85ch}
+.lista li{margin:0 0 6px}
+.ponti{display:grid;gap:8px;max-width:90ch}
+.ponti p{margin:0;padding:10px 14px;border:1px solid var(--filo);border-radius:10px;background:var(--carta)}
+.ponti .da,.ponti .a{display:inline-block;padding:1px 10px;border-radius:999px;background:var(--c);color:#fff;font-weight:700;font-size:.88rem}
+.ponti .a{margin-right:6px}
+.valigia-carte{border:2px solid var(--ink);border-radius:16px;padding:18px 22px 20px;background:var(--carta);margin-top:14px}
+.valigia-testa{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:12px;flex-wrap:wrap}
+.valigia-testa h3{margin:0;font:700 1.4rem/1.2 var(--serif);text-transform:none;letter-spacing:0;color:var(--ink)}
+.valigia-testa span{font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--tenue)}
+.valigia-carte>.firma{margin:0 0 14px}
+.carte4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.carta4{border:1px solid var(--filo);border-top:6px solid var(--c);border-radius:12px;padding:10px 14px 14px;display:grid;gap:8px;align-content:start;break-inside:avoid}
+.c4-testa{margin:0;font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--c)}
+.scheda-uda dl{margin:0 0 10px;display:grid;grid-template-columns:max-content 1fr;gap:8px 18px;border:1px solid var(--filo);border-radius:12px;padding:16px 20px;background:var(--tenue-bg);max-width:900px}
+.scheda-uda dt{font-weight:800}
+.scheda-uda dd{margin:0}
+.tabella-scorre{overflow-x:auto;margin:0 0 10px}
+table.uda{width:100%;border-collapse:collapse;font-size:.95rem;min-width:560px}
+table.uda th,table.uda td{border:1px solid var(--filo);padding:8px 10px;text-align:left;vertical-align:top}
+table.uda th{background:var(--tenue-bg);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em}
+table.uda td:first-child{font-weight:700;white-space:nowrap}
+table.griglia td:first-child{white-space:normal;min-width:130px}
+.pallino{display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--c);margin-right:7px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tappe[style] li:before{color:color-mix(in srgb,var(--accento) 45%,#fff)}}
+:root[data-theme="dark"] .tappe[style] li:before{color:color-mix(in srgb,var(--accento) 45%,#fff)}
+@media (max-width:860px){
+  .giochi,.scomparti,.carte4{grid-template-columns:1fr}
+  .scheda-uda dl{grid-template-columns:1fr;gap:2px}
+  .scheda-uda dd{margin-bottom:8px}
+}
+@media print{
+  body.stampa-valigia .foglio>*:not(.corpo-lezione),body.stampa-valigia nav.indice,body.stampa-valigia main>*:not(#prodotto),body.stampa-valigia #prodotto>*:not(.valigia-carte),body.stampa-valigia .salta,body.stampa-valigia .no-stampa{display:none!important}
+  body.stampa-valigia .foglio{border:0;margin:0}
+  body.stampa-valigia .corpo-lezione{display:block}
+  body.stampa-valigia main{padding:0}
+  body.stampa-valigia .campo input,body.stampa-valigia .campo textarea{border:0;border-bottom:1px solid #999;border-radius:0;resize:none}
+  body.stampa-valigia .carta4{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+.fonte-art{display:block;font-size:.85rem;color:var(--tenue);margin-top:4px}
+.parole-civ li{border-color:#2f7d3a;font-weight:700}
+table.uda td small{font-weight:400;color:var(--tenue)}
+.articoli{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:12px 0 18px}
+.articoli article{border:1px solid var(--filo);border-top:5px solid var(--c);border-radius:12px;padding:12px 16px;background:var(--carta)}
+.art-num{margin:0 0 6px;font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--c)}
+.articoli blockquote{margin:0 0 10px;font:italic 1.02rem/1.45 var(--serif)}
+.articoli p{margin:0;font-size:.95rem}
+@media (max-width:860px){.articoli{grid-template-columns:1fr}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .art-num,:root:not([data-theme="light"]) .c4-testa,:root:not([data-theme="light"]) .g-off,:root:not([data-theme="light"]) .sc-testa,:root:not([data-theme="light"]) .laboratori h3{color:color-mix(in srgb,var(--c) 55%,#fff)}}
+:root[data-theme="dark"] .art-num,:root[data-theme="dark"] .c4-testa,:root[data-theme="dark"] .g-off,:root[data-theme="dark"] .sc-testa,:root[data-theme="dark"] .laboratori h3{color:color-mix(in srgb,var(--c) 55%,#fff)}
+/* una sezione alla volta */
+section.parte{border-bottom:0}
+section.parte h2:focus{outline:none}
+.passo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:34px 0 6px;padding-top:18px;border-top:1px solid var(--filo)}
+.passo a{display:flex;flex-direction:column;gap:2px;padding:10px 16px;border:1px solid var(--filo);border-left:6px solid var(--c);border-radius:12px;text-decoration:none;color:var(--ink);background:var(--carta)}
+.passo a.passo-dopo{grid-column:2;text-align:right;border-left-width:1px;border-right:6px solid var(--c)}
+.passo a:hover{border-color:var(--c)}
+.passo-lab{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--tenue)}
+.passo-tit{font:700 1.08rem/1.25 var(--serif)}
+@media (max-width:600px){.passo{grid-template-columns:1fr}.passo a.passo-dopo{grid-column:auto}}
+@media print{
+  body:not(.stampa-valigia) section.parte[hidden]{display:block!important}
+  .passo{display:none!important}
+}
+section.parte:target{outline:none}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<div class="foglio">
+<header class="testata">
+  <a class="indietro" href="../index.html">← Torna al sito</a>
+  <p class="eyebrow">UDA interdisciplinare · Classe prima · Accoglienza</p>
+  <p class="capitolo">Storia · Geografia · Italiano · Educazione civica</p>
+  <h1>Benvenuti nei laboratori delle discipline</h1>
+  <p class="sottotitolo">Cinque mestieri per cominciare la scuola media, partendo da noi</p>
+  <ul class="quattro-chip" aria-label="I cinque laboratori">
+    <li style="--c:#2b5f6b">Laboratorio dello storico</li>
+    <li style="--c:#b25510">Laboratorio del geografo</li>
+    <li style="--c:#4757a8">Laboratorio del lettore</li>
+    <li style="--c:#6b3f8a">Laboratorio dello scrittore</li>
+    <li style="--c:#2f7d3a">Laboratorio del cittadino</li>
+  </ul>
+</header>
+<div class="corpo-lezione">
+<nav class="indice" aria-label="Parti dell'UDA">
+  <div class="indice-testa"><p class="indice-titolo">In questa UDA</p><button type="button" class="indice-riduci" aria-pressed="false" aria-label="Riduci l'indice alle sole icone" title="Riduci l'indice alle sole icone">&laquo;</button></div>
+  <a class="voce" href="#cosa" style="--c:#46525a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></svg></span><span class="nome">Che cosa faremo</span></a>
+  <a class="voce" href="#nomi" style="--c:#8a6a00"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2a4.6 4.6 0 0 1 5 5.3"/></svg></span><span class="nome">1 · I nostri nomi</span></a>
+  <a class="voce" href="#valigia" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 12.5h18M10 12.5v2h4v-2"/></svg></span><span class="nome">2 · La valigia</span></a>
+  <a class="voce" href="#storico" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6"/><path d="M3 4v4.5h4.5"/><path d="M12 7.5V12l3 2"/></svg></span><span class="nome">3 · Lo storico</span></a>
+  <a class="voce" href="#geografo" style="--c:#b25510"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z"/><path d="M9 4.5v13M15 6.5v13"/></svg></span><span class="nome">4 · Il geografo</span></a>
+  <a class="voce" href="#lettore" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">5 · Il lettore</span></a>
+  <a class="voce" href="#scrittore" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="nome">6 · Lo scrittore</span></a>
+  <a class="voce" href="#cittadino" style="--c:#2f7d3a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0zM19 7l-3 6a3 3 0 0 0 6 0z"/></svg></span><span class="nome">7 · Il cittadino</span></a>
+  <a class="voce" href="#mostra" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">8 · La mostra</span></a>
+  <a class="voce" href="#prodotto" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">9 · La mia valigia</span></a>
+  <a class="voce" href="#insegnante" style="--c:#46525a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="4.5" rx="1"/><rect x="3" y="15" width="6" height="5" rx="1"/><rect x="15" y="15" width="6" height="5" rx="1"/><path d="M12 7v4M6 15v-4h12v4"/></svg></span><span class="nome">Per l'insegnante</span></a>
+</nav>
+
+<main id="contenuto">
+
+<!-- ================= CHE COSA FAREMO ================= -->
+<section class="parte" id="cosa" aria-labelledby="t-cosa">
+  <p class="etichetta">Che cosa faremo</p>
+  <h2 id="t-cosa">Cinque laboratori, un solo materiale: noi</h2>
+  <p class="guida">Un laboratorio è un luogo dove si impara un mestiere facendolo. Alla scuola media studierai storia, geografia, italiano ed educazione civica: ognuna di queste materie è un mestiere, con i suoi attrezzi e le sue domande. Per cominciare, il materiale su cui lavoreremo sarete voi: i vostri nomi, i vostri oggetti, i vostri luoghi, le vostre storie, le vostre parole e le regole con cui vivete insieme agli altri.</p>
+  <div class="laboratori">
+    <article style="--c:#2b5f6b"><h3>Lo storico</h3><p class="domanda">Che cosa è successo, e come lo sappiamo?</p><p>Lavora sulle <strong>tracce del passato</strong>: oggetti, documenti, ricordi.</p><p class="porti">Nella valigia: <strong>un oggetto</strong></p></article>
+    <article style="--c:#b25510"><h3>Il geografo</h3><p class="domanda">Dove si trova, e com'è fatto?</p><p>Lavora sui <strong>luoghi</strong>: li osserva, li mette sulla carta, li confronta.</p><p class="porti">Nella valigia: <strong>un luogo</strong></p></article>
+    <article style="--c:#4757a8"><h3>Il lettore</h3><p class="domanda">Che cosa mi racconta questa storia?</p><p>Lavora sui <strong>testi</strong>: li ascolta, li legge, li capisce, li ricorda.</p><p class="porti">Nella valigia: <strong>una storia</strong></p></article>
+    <article style="--c:#6b3f8a"><h3>Lo scrittore</h3><p class="domanda">Con quali parole lo dico?</p><p>Lavora sulle <strong>parole</strong>: le sceglie, le mette in ordine, le fa diventare testi.</p><p class="porti">Nella valigia: <strong>la mia prima parola</strong></p></article>
+    <article style="--c:#2f7d3a"><h3>Il cittadino</h3><p class="domanda">Come viviamo bene insieme?</p><p>Lavora sulle <strong>regole</strong>, sui diritti e sui doveri di chi fa parte di una comunità.</p><p class="porti">Nella valigia: <strong>una regola</strong></p></article>
+  </div>
+  <div class="tre-box">
+    <div><h3>Alla fine avrai</h3><p><strong>La tua valigia</strong>: cinque carte, una per laboratorio, da portare alla mostra di classe.</p></div>
+    <div><h3>Ti serve</h3><p>Un oggetto, un luogo, una storia, una parola, una regola (o le loro foto) e un adulto di casa a cui fare qualche domanda.</p></div>
+    <div><h3>Tempo</h3><p>Le prime settimane di scuola: un incontro sui nomi, due ore per ogni laboratorio, la mostra.</p></div>
+  </div>
+  <ol class="tappe">
+    <li><span><a href="#nomi">Il primo incontro</a>: ci conosciamo con i nostri nomi.</span></li>
+    <li><span><a href="#valigia">A casa</a>: prepari la valigia con cinque scomparti.</span></li>
+    <li><span><a href="#storico">In classe</a>: ogni laboratorio apre il suo scomparto e lo usa come materiale di lavoro.</span></li>
+    <li><span><a href="#mostra">Insieme</a>: allestiamo la mostra «Chi siamo» e facciamo da guide.</span></li>
+  </ol>
+</section>
+
+<!-- ================= NOMI ================= -->
+<section class="parte" id="nomi" aria-labelledby="t-nomi">
+  <p class="etichetta">1 · Il primo incontro</p>
+  <h2 id="t-nomi">I nostri nomi</h2>
+  <p class="guida">Il primo giorno ci presentiamo. Ogni gioco ha già il sapore di un laboratorio: proviamo a usare gli attrezzi prima ancora di sapere come si chiamano.</p>
+  <div class="giochi">
+    <article class="gioco" style="--c:#2b5f6b">
+      <p class="g-off">Come lo storico</p><h3>La storia del mio nome</h3>
+      <p>A coppie, intervista il tuo compagno: chi ha scelto il suo nome? Perché proprio quello? C'è qualcun altro in famiglia che si chiama così? Poi presentalo alla classe: <em>«Lui è Luca, e il suo nome…»</em>.</p>
+      <p class="g-nota">Se non conosci la storia del tuo nome, va bene lo stesso: racconta come lo avresti scelto tu.</p>
+    </article>
+    <article class="gioco" style="--c:#b25510">
+      <p class="g-off">Come il geografo</p><h3>La classe sulla carta</h3>
+      <p>L'aula diventa una carta: la scuola è al centro, il nord è la parete che indica l'insegnante. Ognuno si mette nel punto dove, più o meno, si trova casa sua, e dice il suo nome. Chi abita più lontano? Chi è vicino a chi?</p>
+      <p class="g-nota">Basta la direzione e la distanza, a occhio: nessuno deve dire il proprio indirizzo.</p>
+    </article>
+    <article class="gioco" style="--c:#4757a8">
+      <p class="g-off">Come il lettore</p><h3>Indovina chi è</h3>
+      <p>Su un cartellino scrivi tre indizi su di te, senza il nome: una cosa che ti piace, una che sai fare, una che nessuno immagina. L'insegnante legge i cartellini ad alta voce e la classe prova a indovinare. Chi indovina deve dire <strong>da quale indizio</strong> l'ha capito.</p>
+    </article>
+    <article class="gioco" style="--c:#6b3f8a">
+      <p class="g-off">Come lo scrittore</p><h3>Il mio nome in parole</h3>
+      <p>Scrivi il tuo nome in verticale e trova, per ogni lettera, una parola che parla di te (è un <strong>acrostico</strong>). Il cartoncino diventa il tuo segnaposto per le prime settimane.</p>
+      <p class="esempio" aria-label="Esempio di acrostico">
+        <span><b>M</b>are d'estate</span><span><b>A</b>llegra</span><span><b>R</b>isate</span><span><b>T</b>ennis</span><span><b>A</b>mici</span>
+      </p>
+    </article>
+    <article class="gioco" style="--c:#2f7d3a">
+      <p class="g-off">Come il cittadino</p><h3>Il cerchio dei desideri</h3>
+      <p>In cerchio, ognuno dice il suo nome e completa la frase: <em>«In questa classe vorrei che…»</em>. L'insegnante scrive tutto su un cartellone, che terremo per il laboratorio del cittadino.</p>
+      <p class="g-nota">Regola del cerchio: parla solo chi ha in mano la palla (o un oggetto scelto insieme).</p>
+    </article>
+  </div>
+  <p class="nota-salva">In un incontro ne bastano due. Gli altri si possono usare all'inizio delle ore di storia, geografia e italiano.</p>
+</section>
+
+<!-- ================= VALIGIA ================= -->
+<section class="parte" id="valigia" aria-labelledby="t-valigia">
+  <p class="etichetta">2 · A casa</p>
+  <h2 id="t-valigia">La valigia dei laboratori</h2>
+  <p class="guida">Prepara una valigia (vera o immaginaria) con cinque scomparti: uno per ogni laboratorio. Dentro metti cose che vengono dal tuo passato. Per ognuna, fatti raccontare la sua storia da un adulto di casa e scrivi le risposte nella <a href="#prodotto">tua valigia</a>.</p>
+  <div class="scomparti">
+    <article class="scomparto" style="--c:#2b5f6b">
+      <p class="sc-testa">Scomparto dello storico</p>
+      <h3>Un oggetto che parla di me</h3>
+      <p>Un giocattolo di quando eri piccolo, una fotografia, una medaglia, il biglietto di un viaggio, un regalo dei nonni…</p>
+      <p class="sc-chiedi">Chiedi: <em>«Ti ricordi quando…?»</em> Da quanto tempo c'è? Chi me l'ha dato?</p>
+    </article>
+    <article class="scomparto" style="--c:#b25510">
+      <p class="sc-testa">Scomparto del geografo</p>
+      <h3>Un luogo importante per me</h3>
+      <p>La casa dei nonni, un parco, una spiaggia, il campo dove ti alleni, un paese dove sei stato in vacanza. Porta una foto, una cartolina o un disegno.</p>
+      <p class="sc-chiedi">Chiedi: dov'è? Quanto è lontano da qui? Quando ci sono andato la prima volta?</p>
+    </article>
+    <article class="scomparto" style="--c:#4757a8">
+      <p class="sc-testa">Scomparto del lettore</p>
+      <h3>Una storia che mi è rimasta dentro</h3>
+      <p>Un libro, un fumetto, una fiaba, un film, oppure una storia di famiglia che ti raccontavano prima di dormire.</p>
+      <p class="sc-chiedi">Chiedi: chi me la leggeva o me la raccontava? Quante volte l'ho voluta sentire?</p>
+    </article>
+    <article class="scomparto" style="--c:#6b3f8a">
+      <p class="sc-testa">Scomparto dello scrittore</p>
+      <h3>La mia prima parola</h3>
+      <p>Tu non te la ricordi: la ricorda qualcuno che c'era. Fattela raccontare e scrivila bene, come la dicevi tu (anche se era sbagliata!).</p>
+      <p class="sc-chiedi">Chiedi: quanti anni avevo? Chi c'era? In che lingua o dialetto l'ho detta? Che cosa volevo dire?</p>
+    </article>
+    <article class="scomparto" style="--c:#2f7d3a">
+      <p class="sc-testa">Scomparto del cittadino</p>
+      <h3>Una regola che conta per me</h3>
+      <p>Una regola di casa, della tua squadra, del gruppo scout, di un gioco che fai con gli amici, della scuola primaria.</p>
+      <p class="sc-chiedi">Chiedi: chi l'ha decisa? Perché esiste? Che cosa succede se qualcuno non la rispetta?</p>
+    </article>
+  </div>
+  <h3>Tre regole</h3>
+  <ol class="regole">
+    <li><strong>Una foto o un disegno valgono quanto l'oggetto vero</strong>: non portare a scuola cose preziose o fragili.</li>
+    <li>Scegli tu che cosa mettere nella valigia e <strong>quanto raccontare</strong>.</li>
+    <li>Se a casa nessuno ricorda una risposta, va bene una versione tua: per esempio la prima parola che <em>tu</em> ricordi di aver imparato, o una parola buffa che dicevi da piccolo.</li>
+  </ol>
+</section>
+
+<!-- ================= STORICO ================= -->
+<section class="parte" id="storico" aria-labelledby="t-storico">
+  <p class="fascia" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6"/><path d="M3 4v4.5h4.5"/><path d="M12 7.5V12l3 2"/></svg></span><span>Laboratorio dello storico · Storia</span></p>
+  <p class="etichetta">3 · In classe</p>
+  <h2 id="t-storico">Un oggetto è una traccia</h2>
+  <p class="guida">Gli oggetti di tutti vanno su un tavolo, senza nomi. A coppie, osservate un oggetto che non è vostro e provate a capire quanti anni ha e a chi appartiene. Poi il proprietario racconta la sua vera storia.</p>
+  <div class="scoperta-unica">
+    <p><strong>Che cosa scopriremo.</strong> Un oggetto dice qualcosa di chi l'ha usato, ma non dice tutto: molte cose le sappiamo solo dal racconto di chi ricorda. Gli storici chiamano queste tracce <strong>fonti</strong>, e fanno loro sempre le stesse domande: <em>che cos'è? chi? dove? quando? perché?</em></p>
+  </div>
+  <p><a class="bottone" href="../storia/prima/officine/officina-00-chi-siamo.html">Apri il Laboratorio 0 · Chi siamo</a></p>
+  <p class="nota-salva">L'attività completa, con il gioco «Indovina di chi è» e la carta d'identità del tuo oggetto-fonte, è tra i <a href="../storia/prima/officine/index.html">laboratori dello storico</a>.</p>
+</section>
+
+<!-- ================= GEOGRAFO ================= -->
+<section class="parte" id="geografo" aria-labelledby="t-geografo">
+  <p class="fascia" style="--c:#b25510"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z"/><path d="M9 4.5v13M15 6.5v13"/></svg></span><span>Laboratorio del geografo · Geografia</span></p>
+  <p class="etichetta">4 · In classe</p>
+  <h2 id="t-geografo">La carta dei nostri luoghi</h2>
+  <p class="guida">Ognuno presenta il suo luogo in trenta secondi: com'è, che cosa ci fa, perché è importante. Poi mettiamo tutti i luoghi su una carta.</p>
+  <ol class="tappe" style="--accento:#b25510;--accento-soft:#f6e6d8">
+    <li><span><strong>Dal vicino al lontano.</strong> Su un cartellone a cerchi, dal centro verso l'esterno: la scuola, il nostro paese o quartiere, la regione, l'Italia, l'Europa, il mondo. Ognuno attacca il bigliettino del suo luogo nel cerchio giusto.</span></li>
+    <li><span><strong>Naturale o costruito?</strong> Rileggete i bigliettini: quali luoghi ha fatto la natura (un bosco, un lago) e quali le persone (una piazza, uno stadio)? Quali tutte e due insieme?</span></li>
+    <li><span><strong>Come ci arrivo?</strong> A piedi, in bicicletta, in auto, in treno, in aereo? Più il luogo è lontano, più cambia il modo di arrivarci.</span></li>
+  </ol>
+  <div class="scoperta-unica" style="--accento:#b25510">
+    <p><strong>Che cosa scopriremo.</strong> Ogni luogo ha un <em>dove</em> (la sua posizione) e un <em>com'è</em> (il suo paesaggio). Il geografo guarda lo stesso mondo da vicino e da lontano: è la <strong>scala</strong>. E distingue ciò che ha fatto la natura da ciò che hanno fatto le persone.</p>
+  </div>
+  <p class="nota-salva">Si continua con <a href="../geografia/prima/perche-la-geografia/attivita/il-tuo-rapporto-con-la-geografia.html">Il tuo rapporto con la geografia</a> e con i punti di riferimento personali dell'<a href="../geografia/prima/orientamento/index.html">orientamento</a>.</p>
+</section>
+
+<!-- ================= LETTORE ================= -->
+<section class="parte" id="lettore" aria-labelledby="t-lettore">
+  <p class="fascia" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span>Laboratorio del lettore · Italiano</span></p>
+  <p class="etichetta">5 · In classe</p>
+  <h2 id="t-lettore">La biblioteca dei ricordi</h2>
+  <p class="guida">Anche chi ascolta una storia è un lettore. Oggi le storie che vi sono rimaste dentro diventano lo scaffale della classe.</p>
+  <ol class="tappe" style="--accento:#4757a8;--accento-soft:#e4e7f6">
+    <li><span><strong>Tre indizi.</strong> Su un foglietto scrivi tre indizi sulla tua storia, senza il titolo: un <em>personaggio</em>, un <em>luogo</em>, un <em>oggetto</em> importante. I compagni provano a indovinare.</span></li>
+    <li><span><strong>Lo scaffale di classe.</strong> Raggruppate le storie: fiabe, avventure, fumetti, storie vere, storie di famiglia… Che nome dareste a ogni ripiano?</span></li>
+    <li><span><strong>Perché proprio quella?</strong> Ognuno dice in una frase perché quella storia gli è rimasta dentro: per un personaggio, per la paura, per chi la raccontava?</span></li>
+  </ol>
+  <div class="scoperta-unica" style="--accento:#4757a8">
+    <p><strong>Che cosa scopriremo.</strong> Per indovinare le storie abbiamo usato gli stessi indizi: <strong>personaggi, luoghi, tempi, oggetti</strong>. Sono gli ingredienti di ogni racconto. E le storie si somigliano a gruppi: sono i <strong>generi</strong>.</p>
+  </div>
+  <p class="nota-salva">Come lettura comune si può partire dal primo capitolo di <em>Wonder</em> di R.J. Palacio, che riprende il laboratorio del cittadino. Gli ingredienti del racconto tornano in <a href="../italiano/prima/antologia/narrazione-in-prosa.html">Come è fatto un racconto</a>.</p>
+</section>
+
+<!-- ================= SCRITTORE ================= -->
+<section class="parte" id="scrittore" aria-labelledby="t-scrittore">
+  <p class="fascia" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span>Laboratorio dello scrittore · Italiano</span></p>
+  <p class="etichetta">6 · In classe</p>
+  <h2 id="t-scrittore">Il dizionario delle prime parole</h2>
+  <p class="guida">Ognuno scrive la sua prima parola in grande su un cartoncino; dietro, quanti anni aveva, chi c'era, in che lingua l'ha detta. Appendiamo tutti i cartoncini alla lavagna e li guardiamo come farebbe uno scrittore.</p>
+  <ol class="tappe" style="--accento:#6b3f8a;--accento-soft:#efe5f4">
+    <li><span><strong>Che cosa notiamo?</strong> Quante parole sono nomi di persone? Quante sono cose da mangiare o da fare? Ci sono parole uguali?</span></li>
+    <li><span><strong>Come sono fatte?</strong> Contate le sillabe. Ci sono sillabe che si ripetono, come <em>ma-ma</em>, <em>pa-pa</em>, <em>nan-na</em>? Ci sono parole «storpiate» che solo in famiglia capivano?</span></li>
+    <li><span><strong>In quante lingue?</strong> Ci sono parole in dialetto o in un'altra lingua di famiglia? Scrivete accanto come si dice in italiano.</span></li>
+    <li><span><strong>In ordine alfabetico.</strong> Mettete i cartoncini in ordine: è nato il dizionario della classe. Per ogni parola scrivi la tua <em>definizione</em>, come in un vero dizionario: che cosa voleva dire per te?</span></li>
+  </ol>
+  <div class="scoperta-unica" style="--accento:#6b3f8a">
+    <p><strong>Che cosa scopriremo.</strong> Le prime parole sono quasi sempre corte, fatte di <strong>sillabe semplici che si ripetono</strong>: in moltissime lingue la mamma e il papà si chiamano in modo simile. Le parole sono il materiale dello scrittore: si possono contare, smontare in sillabe, ordinare, spiegare.</p>
+  </div>
+  <div class="riquadro" style="--accento:#6b3f8a">
+    <h3>Scrivi: la storia della mia prima parola</h3>
+    <p>In cinque o sei righe racconta il momento in cui hai detto la tua prima parola, come te l'hanno raccontato: dov'eri, chi c'era, che cosa è successo dopo. Finisci con la parola che oggi ti piace di più, e perché.</p>
+  </div>
+  <p class="nota-salva">Sillabe e ordine alfabetico tornano nei laboratori di Parole in fabula: <a href="../italiano/prima/educazione-linguistica/parole-in-fabula/01_ALFABETO.html">Il topo e l'alfabeto</a> e <a href="../italiano/prima/educazione-linguistica/parole-in-fabula/02_SUONI_E_LETTERE.html">Il coro dei musicanti</a>.</p>
+</section>
+
+<!-- ================= CITTADINO ================= -->
+<section class="parte" id="cittadino" aria-labelledby="t-cittadino">
+  <p class="fascia" style="--c:#2f7d3a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0zM19 7l-3 6a3 3 0 0 0 6 0z"/></svg></span><span>Laboratorio del cittadino · Educazione civica</span></p>
+  <p class="etichetta">7 · In classe</p>
+  <h2 id="t-cittadino">Le regole della nostra classe</h2>
+  <p class="guida">Ognuno legge la regola che ha portato. Nessuno ci vive senza regole: a casa, nello sport, nei giochi. Proviamo a capire a che cosa servono e scriviamo insieme le nostre.</p>
+  <ol class="tappe" style="--accento:#2f7d3a">
+    <li><span><strong>Che tipo di regola è?</strong> Raggruppate le regole: regole di un gioco, regole per la sicurezza, regole per rispettare gli altri, regole per avere cura delle cose. Ci sono regole che non stanno in nessun gruppo?</span></li>
+    <li><span><strong>Chi le decide?</strong> I genitori, l'allenatore, tutti insieme, la legge? Una regola decisa insieme si rispetta più volentieri?</span></li>
+    <li><span><strong>Diritto o dovere?</strong> Riprendete il cartellone del cerchio dei desideri. Ogni desiderio è un <em>diritto</em> («vorrei essere ascoltato»): quale <em>dovere</em> serve perché valga per tutti («ascolto chi parla»)?</span></li>
+    <li><span><strong>Diversi e insieme.</strong> Guardate tutte le valigie: quante lingue, quanti luoghi, quante abitudini diverse. Che cosa abbiamo imparato gli uni dagli altri? Le differenze sono una ricchezza del gruppo, e le regole servono anche a proteggerle.</span></li>
+    <li><span><strong>La carta delle regole.</strong> Scegliete insieme poche regole, scritte in modo chiaro e in positivo («Aspettiamo il nostro turno», non «Non interrompere»). Per ogni regola scrivete il diritto che protegge e il dovere che chiede. Tutti la firmano.</span></li>
+  </ol>
+  <div class="scoperta-unica" style="--accento:#2f7d3a">
+    <p><strong>Che cosa scopriremo.</strong> Le regole servono a <strong>vivere bene insieme</strong>: proteggono i <strong>diritti</strong> di ciascuno e chiedono a ciascuno dei <strong>doveri</strong>. Anche la scuola ha le sue regole scritte (il regolamento d'istituto), e l'Italia ha la sua legge più importante: la <strong>Costituzione</strong>.</p>
+  </div>
+  <h3>Lo dice anche la Costituzione</h3>
+  <p class="guida">La Costituzione è la legge più importante della Repubblica. Tre suoi articoli parlano proprio di quello che abbiamo fatto in queste settimane.</p>
+  <div class="articoli">
+    <article style="--c:#2f7d3a">
+      <p class="art-num">Articolo 34</p>
+      <blockquote>«La scuola è aperta a tutti.»</blockquote>
+      <p>Per questo siamo qui: la scuola è di tutti, e ognuno ha il diritto di trovarci posto.</p>
+    </article>
+    <article style="--c:#2f7d3a">
+      <p class="art-num">Articolo 3</p>
+      <blockquote>«Tutti i cittadini hanno pari dignità sociale e sono eguali davanti alla legge, senza distinzione di sesso, di razza, di lingua, di religione, di opinioni politiche, di condizioni personali e sociali.»</blockquote>
+      <p>Le nostre valigie sono tutte diverse, ma valgono tutte allo stesso modo: è quello che abbiamo visto in «Diversi e insieme».</p>
+    </article>
+    <article style="--c:#2f7d3a">
+      <p class="art-num">Articolo 2</p>
+      <blockquote>«La Repubblica riconosce e garantisce i diritti inviolabili dell'uomo […] e richiede l'adempimento dei doveri inderogabili di solidarietà politica, economica e sociale.»</blockquote>
+      <p>Ognuno ha diritti che nessuno può togliergli, e ognuno ha il dovere di aiutare gli altri: è la regola che sta sotto la nostra carta.</p>
+    </article>
+  </div>
+  <div class="riquadro" style="--accento:#2f7d3a">
+    <h3>E le regole della scuola?</h3>
+    <p>Anche la nostra scuola ha le sue regole scritte: il <strong>regolamento d'istituto</strong>. Leggiamone insieme qualche riga e confrontiamola con la carta della classe: quali regole si somigliano? Ce n'è una che non avevamo pensato, per esempio come si esce dall'aula durante una prova di evacuazione?</p>
+  </div>
+  <h3>Le parole del cittadino</h3>
+  <p class="guida">Sono le parole del laboratorio. Aggiungetele al dizionario della classe, accanto alle prime parole, con una definizione scritta da voi e un esempio preso dalla vita della classe.</p>
+  <ul class="chip-elenco parole-civ">
+    <li>regola</li><li>diritto</li><li>dovere</li><li>rispetto</li><li>tolleranza</li><li>lealtà</li><li>libertà</li><li>solidarietà</li>
+  </ul>
+  <p class="nota-salva">La carta delle regole della classe resta appesa in aula tutto l'anno e si può rivedere insieme.</p>
+</section>
+
+<!-- ================= MOSTRA ================= -->
+<section class="parte" id="mostra" aria-labelledby="t-mostra">
+  <p class="etichetta">8 · Il compito di realtà</p>
+  <h2 id="t-mostra">La mostra «Chi siamo»</h2>
+  <p class="guida">Le valigie diventano una mostra, in aula o nel corridoio, da far visitare a un'altra classe o alle famiglie. La mostra ha cinque stanze, una per laboratorio, e voi fate da guide.</p>
+  <div class="due-col">
+    <div class="attivita"><h4>Come si allestisce</h4>
+      <ul class="lista">
+        <li><strong>Stanza dello storico</strong>: gli oggetti con le loro carte d'identità.</li>
+        <li><strong>Stanza del geografo</strong>: il cartellone a cerchi con i nostri luoghi.</li>
+        <li><strong>Stanza del lettore</strong>: lo scaffale di classe con i tre indizi di ogni storia.</li>
+        <li><strong>Stanza dello scrittore</strong>: il dizionario delle prime parole.</li>
+        <li><strong>Stanza del cittadino</strong>: la carta delle regole della classe, con le regole portate da casa.</li>
+      </ul>
+    </div>
+    <div class="attivita"><h4>Che cosa fa la guida</h4>
+      <ul class="lista">
+        <li>Accoglie i visitatori e spiega che cos'è un laboratorio delle discipline.</li>
+        <li>Presenta la sua stanza in un minuto: <em>che cosa c'è, che cosa abbiamo scoperto</em>.</li>
+        <li>Fa ai visitatori una domanda del suo laboratorio, per esempio: <em>«Secondo voi, quanti anni ha questo oggetto?»</em></li>
+      </ul>
+    </div>
+  </div>
+  <h3>I laboratori si parlano</h3>
+  <p class="guida">Una stessa cosa interessa a più laboratori. Prima della mostra, scegliete una cosa della vostra valigia e guardatela con gli occhi di un altro laboratorio.</p>
+  <div class="ponti">
+    <p><span class="da" style="--c:#6b3f8a">La prima parola</span> → <span class="a" style="--c:#2b5f6b">storico</span> È un ricordo raccontato da chi c'era: è una <strong>fonte orale</strong>.</p>
+    <p><span class="da" style="--c:#2b5f6b">L'oggetto</span> → <span class="a" style="--c:#b25510">geografo</span> Dove è stato fatto, comprato o trovato? Mettilo sulla carta.</p>
+    <p><span class="da" style="--c:#b25510">Il luogo</span> → <span class="a" style="--c:#6b3f8a">scrittore</span> Descrivilo con cinque parole, una per ogni senso.</p>
+    <p><span class="da" style="--c:#4757a8">La storia</span> → <span class="a" style="--c:#2b5f6b">storico</span> Quando è ambientata? Nel passato, oggi, nel futuro?</p>
+    <p><span class="da" style="--c:#2f7d3a">La regola</span> → <span class="a" style="--c:#2b5f6b">storico</span> Da quando esiste? È sempre stata così, o un tempo era diversa?</p>
+  </div>
+</section>
+
+<!-- ================= PRODOTTO ================= -->
+<section class="parte" id="prodotto" aria-labelledby="t-prodotto">
+  <p class="etichetta">9 · Il prodotto</p>
+  <h2 id="t-prodotto">La mia valigia</h2>
+  <p class="guida">Compila le cinque carte con quello che hai raccolto a casa e in classe. Quando hai finito, stampale: andranno alla mostra e poi nel quaderno.</p>
+  <div class="valigia-carte">
+    <div class="valigia-testa"><h3>La valigia di <span id="valigia-nome">…</span></h3><span>UDA di accoglienza · Classe prima</span></div>
+    <div class="campo firma"><label for="v-nome">Il mio nome</label><input id="v-nome" data-chiave="uda-accoglienza-nome" placeholder="Nome e cognome"></div>
+    <div class="carte4">
+      <div class="carta4" style="--c:#2b5f6b">
+        <p class="c4-testa">Lo storico · un oggetto</p>
+        <div class="campo"><label for="v-ogg">Il mio oggetto</label><input id="v-ogg" data-chiave="uda-accoglienza-oggetto"></div>
+        <div class="campo"><label for="v-ogg-q">Da quanto tempo c'è? <small>e chi me l'ha dato</small></label><textarea id="v-ogg-q" data-chiave="uda-accoglienza-oggetto-quando"></textarea></div>
+        <div class="campo"><label for="v-ogg-r">Il ricordo <small>che cosa mi hanno raccontato</small></label><textarea id="v-ogg-r" data-chiave="uda-accoglienza-oggetto-ricordo"></textarea></div>
+      </div>
+      <div class="carta4" style="--c:#b25510">
+        <p class="c4-testa">Il geografo · un luogo</p>
+        <div class="campo"><label for="v-luo">Il mio luogo</label><input id="v-luo" data-chiave="uda-accoglienza-luogo"></div>
+        <div class="campo"><label for="v-luo-d">Dove si trova? <small>paese o città, regione, Stato · quanto è lontano da qui</small></label><textarea id="v-luo-d" data-chiave="uda-accoglienza-luogo-dove"></textarea></div>
+        <div class="campo"><label for="v-luo-c">Com'è? <small>naturale, costruito o tutte e due · che cosa ci faccio</small></label><textarea id="v-luo-c" data-chiave="uda-accoglienza-luogo-come"></textarea></div>
+      </div>
+      <div class="carta4" style="--c:#4757a8">
+        <p class="c4-testa">Il lettore · una storia</p>
+        <div class="campo"><label for="v-sto">La mia storia <small>titolo, o «la fiaba di…»</small></label><input id="v-sto" data-chiave="uda-accoglienza-storia"></div>
+        <div class="campo"><label for="v-sto-i">Tre indizi <small>un personaggio, un luogo, un oggetto</small></label><textarea id="v-sto-i" data-chiave="uda-accoglienza-storia-indizi"></textarea></div>
+        <div class="campo"><label for="v-sto-p">Perché mi è rimasta dentro? <small>e chi me la raccontava</small></label><textarea id="v-sto-p" data-chiave="uda-accoglienza-storia-perche"></textarea></div>
+      </div>
+      <div class="carta4" style="--c:#6b3f8a">
+        <p class="c4-testa">Lo scrittore · la prima parola</p>
+        <div class="campo"><label for="v-par">La mia prima parola <small>scritta come la dicevo io</small></label><input id="v-par" data-chiave="uda-accoglienza-parola"></div>
+        <div class="campo"><label for="v-par-q">Quando, dove, chi c'era <small>e in che lingua o dialetto</small></label><textarea id="v-par-q" data-chiave="uda-accoglienza-parola-quando"></textarea></div>
+        <div class="campo"><label for="v-par-d">La mia definizione <small>che cosa voleva dire per me</small></label><textarea id="v-par-d" data-chiave="uda-accoglienza-parola-definizione"></textarea></div>
+        <div class="campo"><label for="v-par-o">La parola che oggi mi piace di più</label><input id="v-par-o" data-chiave="uda-accoglienza-parola-oggi"></div>
+      </div>
+      <div class="carta4" style="--c:#2f7d3a">
+        <p class="c4-testa">Il cittadino · una regola</p>
+        <div class="campo"><label for="v-reg">La mia regola</label><input id="v-reg" data-chiave="uda-accoglienza-regola"></div>
+        <div class="campo"><label for="v-reg-c">Chi l'ha decisa e perché esiste</label><textarea id="v-reg-c" data-chiave="uda-accoglienza-regola-perche"></textarea></div>
+        <div class="campo"><label for="v-reg-d">Un diritto e un dovere <small>che questa regola protegge o chiede</small></label><textarea id="v-reg-d" data-chiave="uda-accoglienza-regola-diritti"></textarea></div>
+      </div>
+    </div>
+  </div>
+  <div class="comandi no-stampa">
+    <button type="button" class="bottone" id="stampa">Stampa la valigia</button>
+    <button type="button" class="bottone secondario" id="cancella">Cancella tutto</button>
+    <span class="punteggio" id="cancella-msg" aria-live="polite"></span>
+  </div>
+  <p class="nota-salva">Quello che scrivi resta solo su questo dispositivo.</p>
+</section>
+
+<!-- ================= INSEGNANTE ================= -->
+<section class="parte" id="insegnante" aria-labelledby="t-insegnante">
+  <p class="etichetta">Per l'insegnante</p>
+  <h2 id="t-insegnante">La scheda dell'UDA</h2>
+  <div class="scheda-uda">
+    <dl>
+      <dt>Titolo</dt><dd>Benvenuti nei laboratori delle discipline. Cinque mestieri per cominciare la scuola media</dd>
+      <dt>Destinatari</dt><dd>Classe prima</dd>
+      <dt>Periodo</dt><dd>Accoglienza, prime settimane dell'anno (circa 14 ore)</dd>
+      <dt>Discipline</dt><dd>Storia, Geografia, Italiano (lettura e scrittura), Educazione civica</dd>
+      <dt>Compito di realtà</dt><dd>La mostra «Chi siamo», con gli alunni come guide per un'altra classe o per le famiglie</dd>
+      <dt>Prodotti</dt><dd>La valigia (cinque carte), la carta d'identità dell'oggetto-fonte, il cartellone dei luoghi, lo scaffale di classe, il dizionario delle prime parole, la carta delle regole della classe</dd>
+    </dl>
+  </div>
+
+  <h3>Competenze chiave europee</h3>
+  <ul class="lista">
+    <li><strong>Competenza alfabetica funzionale</strong>: ascoltare, raccontare, scrivere un breve testo personale e una definizione.</li>
+    <li><strong>Competenza personale, sociale e capacità di imparare a imparare</strong>: conoscersi, presentarsi, scoprire gli attrezzi di ogni disciplina.</li>
+    <li><strong>Competenza in materia di consapevolezza ed espressione culturali</strong>: riconoscere la propria storia e quella degli altri, valorizzare le lingue di famiglia.</li>
+    <li><strong>Competenza in materia di cittadinanza</strong>: ascoltare e rispettare i racconti dei compagni, lavorare in coppia e in gruppo. Riconoscere la funzione delle regole e il legame tra diritti e doveri; scrivere insieme le regole della classe.</li>
+  </ul>
+
+  <h3>Obiettivi per laboratorio</h3>
+  <div class="tabella-scorre"><table class="uda">
+    <thead><tr><th>Laboratorio</th><th>L'alunno…</th><th>Prepara</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pallino" style="--c:#2b5f6b"></span>Storico</td><td>osserva un oggetto come traccia del passato; distingue ciò che si ricava osservando da ciò che si sa dal racconto; usa le domande chi, dove, quando, perché.</td><td>Laboratori dello storico 1, 3 e 4: che cos'è la storia, oralità e scrittura, le tracce del passato</td></tr>
+      <tr><td><span class="pallino" style="--c:#b25510"></span>Geografo</td><td>colloca luoghi personali a scale diverse; distingue elementi naturali e antropici; usa punti di riferimento.</td><td>Orientamento, scala, paesaggio</td></tr>
+      <tr><td><span class="pallino" style="--c:#4757a8"></span>Lettore</td><td>riconosce personaggi, luoghi, tempi e oggetti di una storia; raggruppa storie per somiglianza; motiva una preferenza.</td><td>La narrazione in prosa, i generi</td></tr>
+      <tr><td><span class="pallino" style="--c:#6b3f8a"></span>Scrittore</td><td>osserva le parole (sillabe, ripetizioni, lingue); ordina alfabeticamente; scrive una definizione e un breve testo autobiografico.</td><td>Fonologia, ordine alfabetico, uso del dizionario</td></tr>
+      <tr><td><span class="pallino" style="--c:#2f7d3a"></span>Cittadino</td><td>conosce il significato di regola, diritto, dovere, rispetto, tolleranza, lealtà, libertà e solidarietà; individua e rispetta le differenze presenti nel gruppo; partecipa alla scrittura di un regolamento concordato della classe.</td><td>Costituzione: articoli 2, 3 e 34; regolamento d'istituto; diritti e doveri del cittadino</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Raccordo con il curricolo d'istituto di Educazione civica</h3>
+  <p class="guida">Dal Curricolo verticale di Educazione civica dell'I.C. Parco della Vittoria e dalla programmazione triennale (classe prima, nucleo Costituzione). Le Linee guida di riferimento sono quelle del D.M. 183/2024; la legge di partenza è la L. 92/2019.</p>
+  <div class="tabella-scorre"><table class="uda">
+    <thead><tr><th>Codice</th><th>Obiettivo operativo · 1° anno</th><th>Dove si lavora nell'UDA</th></tr></thead>
+    <tbody>
+      <tr><td>EC1-PARTECIPAZIONE</td><td>Rispettare regole condivise, collaborare e assumere semplici responsabilità nella vita di classe.</td><td>Cerchio dei desideri; carta delle regole; ruolo di guida alla mostra</td></tr>
+      <tr><td>EC1-COSTITUZIONE</td><td>Riconoscere diritti e doveri, regole della comunità scolastica e principali istituzioni territoriali; collegare i simboli nazionali ai concetti di cittadinanza.</td><td>Diritto o dovere?; articoli 2, 3 e 34; regolamento d'istituto; le parole del cittadino (istituzioni e simboli della Repubblica si sviluppano dopo, nell'UDA di educazione civica)</td></tr>
+      <tr><td>EC1-SICUREZZA <small>(facoltativo)</small></td><td>Conoscere percorsi di evacuazione e comportamenti di sicurezza; riconoscere pratiche di cura di sé.</td><td>«E le regole della scuola?»: se nelle stesse settimane c'è la prima prova di evacuazione, le regole di sicurezza entrano nella carta della classe</td></tr>
+    </tbody>
+  </table></div>
+  <p class="nota-salva">Conoscenze del curricolo toccate: significato dei concetti di regola, diritto, dovere, tolleranza, lealtà, rispetto, libertà e solidarietà; i diritti e i doveri del cittadino; i principi fondamentali della Costituzione. Abilità: adottare nella vita quotidiana atteggiamenti civili e democratici; individuare e rispettare le differenze presenti nel gruppo di appartenenza relativamente a provenienza, condizione, abitudini.</p>
+
+  
+  <h3>Raccordo con la programmazione del consiglio di classe</h3>
+  <p class="guida">Nella programmazione d'esempio della 1ª (Progettazione educazione civica), la prima UDA di educazione civica è <strong>«Le regole della nostra classe»</strong>, da settembre a novembre, con filo conduttore «Io, la mia classe, il mio Comune». Il laboratorio del cittadino ne è l'apertura: conoscersi e riconoscere le differenze, diritti e doveri, primo regolamento di classe. Restano per le settimane successive i simboli della Repubblica, il piano di evacuazione spiegato dagli alunni e il fair play nello sport.</p>
+  <div class="tabella-scorre"><table class="uda">
+    <thead><tr><th>Scheda</th><th>Titolo o argomento</th><th>Dove si aggancia</th></tr></thead>
+    <tbody>
+      <tr><td>31 <small>p. 41</small></td><td>Il primo capitolo di <em>Wonder</em> <small>(per le medie; indicata per l'accoglienza di settembre in prima)</small></td><td>Laboratorio del lettore, come lettura comune; poi «Diversi e insieme»</td></tr>
+      <tr><td>12 <small>p. 17</small></td><td>Le parole ponte <small>(adattabile; registro da rendere meno infantile)</small></td><td>Le parole del cittadino; dizionario della classe</td></tr>
+      <tr><td>52 <small>p. 67</small></td><td>La comunicazione dei valori in cui crediamo: il Manifesto della comunicazione non ostile <small>(per le medie)</small></td><td>Carta delle regole: le regole del parlare e dell'ascoltare</td></tr>
+      <tr><td>21 <small>p. 28</small></td><td><em>La gabbianella e il gatto</em>: accettare la diversità <small>(adattabile)</small></td><td>Laboratorio del lettore o «Diversi e insieme»</td></tr>
+      <tr><td>23 <small>p. 30</small></td><td>Conoscersi e rispettarsi in palestra <small>(adattabile, scienze motorie)</small></td><td>Giochi sui nomi, in palestra</td></tr>
+      <tr><td>38 <small>p. 48</small></td><td>Scuola di tifo: la passione non ostile <small>(per le medie, scienze motorie)</small></td><td>Dopo l'UDA: il fair play</td></tr>
+    </tbody>
+  </table></div>
+  <p class="nota-salva">Numeri e pagine si riferiscono a <em>Parole a scuola. 100 schede didattiche per insegnare con il Manifesto della comunicazione non ostile</em>, Associazione Parole O_Stili (2017), come nell'Archivio attività CIVICA. Le ore del laboratorio del cittadino (2) e della stanza del cittadino alla mostra (1) si possono registrare tra le 33 ore annue di educazione civica.</p>
+
+  <h3>Fasi e tempi</h3>
+  <div class="tabella-scorre"><table class="uda">
+    <thead><tr><th>Fase</th><th>Che cosa si fa</th><th>Chi</th><th>Tempo</th></tr></thead>
+    <tbody>
+      <tr><td>1 · I nostri nomi</td><td>Due giochi sui nomi; consegna della valigia</td><td>Italiano (o docente coordinatore)</td><td>2 ore</td></tr>
+      <tr><td>2 · La valigia</td><td>Raccolta a casa, con un adulto di famiglia</td><td>A casa</td><td>Una settimana</td></tr>
+      <tr><td>3 · Lo storico</td><td>Laboratorio 0 · Chi siamo: «Indovina di chi è» e carta d'identità</td><td>Storia</td><td>2 ore</td></tr>
+      <tr><td>4 · Il geografo</td><td>Presentazione dei luoghi, cartellone a cerchi, naturale/costruito</td><td>Geografia</td><td>2 ore</td></tr>
+      <tr><td>5 · Il lettore</td><td>Tre indizi, scaffale di classe</td><td>Italiano</td><td>2 ore</td></tr>
+      <tr><td>6 · Lo scrittore</td><td>Dizionario delle prime parole, testo «la storia della mia prima parola»</td><td>Italiano</td><td>2 ore</td></tr>
+      <tr><td>7 · Il cittadino</td><td>Le regole portate da casa, diritti e doveri, diversi e insieme, articoli 2, 3 e 34, regolamento d'istituto, la carta delle regole della classe</td><td>Coordinatore di educazione civica (in un'ora di storia o di italiano)</td><td>2 ore</td></tr>
+      <tr><td>8 · La mostra</td><td>Ponti tra i laboratori, allestimento, visita guidata</td><td>Tutti i docenti coinvolti</td><td>2 ore</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Valutazione</h3>
+  <p class="guida">Siamo all'accoglienza: la valutazione è formativa, serve a conoscere la classe e non dà voti. La griglia si usa durante i laboratori e alla mostra.</p>
+  <div class="tabella-scorre"><table class="uda griglia">
+    <thead><tr><th>Criterio</th><th>In via di prima acquisizione</th><th>Base</th><th>Intermedio</th><th>Avanzato</th></tr></thead>
+    <tbody>
+      <tr><td>Partecipazione e ascolto</td><td>Partecipa se sollecitato; fatica ad ascoltare i compagni.</td><td>Partecipa e ascolta per brevi momenti.</td><td>Partecipa con interventi pertinenti e ascolta.</td><td>Partecipa, ascolta e riprende quello che hanno detto gli altri.</td></tr>
+      <tr><td>Cura della valigia</td><td>Porta materiali incompleti, solo con aiuto.</td><td>Porta i materiali essenziali.</td><td>Porta materiali completi e raccoglie le informazioni.</td><td>Porta materiali completi, curati e ben documentati.</td></tr>
+      <tr><td>Uso degli attrezzi dei laboratori</td><td>Osserva e descrive solo se guidato.</td><td>Risponde ad alcune domande del laboratorio.</td><td>Usa le domande del laboratorio in modo autonomo.</td><td>Usa le domande del laboratorio e collega i laboratori tra loro.</td></tr>
+      <tr><td>Comunicazione alla mostra</td><td>Presenta con l'aiuto del docente.</td><td>Presenta in modo semplice.</td><td>Presenta in modo chiaro e ordinato.</td><td>Presenta in modo chiaro, coinvolge i visitatori con una domanda.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Attenzioni</h3>
+  <ul class="lista">
+    <li><strong>Storie di famiglia diverse.</strong> Non tutti hanno qualcuno che ricorda la prima parola o la storia del nome (adozioni, affidi, famiglie separate, lutti). Ogni consegna ha un'alternativa personale: va sempre bene una versione propria.</li>
+    <li><strong>Lingue di famiglia.</strong> Le prime parole in dialetto o in un'altra lingua sono una ricchezza: chiedete di scriverle e di dire come si pronunciano.</li>
+    <li><strong>Riservatezza.</strong> Nel gioco «La classe sulla carta» basta la direzione; nessuno deve dire il proprio indirizzo. Per la mostra aperta alle famiglie, chiedete il permesso per le foto.</li>
+    <li><strong>Dopo l'UDA.</strong> Conservate le carte: gli oggetti tornano nel laboratorio 4 dello storico (il museo di classe delle fonti), i luoghi nelle lezioni di orientamento, le storie e le parole nei laboratori di italiano, la carta delle regole nel lavoro di educazione civica.</li>
+  </ul>
+</section>
+</main>
+</div>
+<footer>
+  <p>UDA interdisciplinare di accoglienza · Storia, Geografia, Italiano, Educazione civica. Testi originali.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- una sezione alla volta: si sceglie dall'indice ---------- */
+var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
+var parti=Array.prototype.slice.call(document.querySelectorAll("section.parte"));
+var corpo=document.querySelector(".corpo-lezione");
+function nomeVoce(id){ var v=document.querySelector('a.voce[href="#'+id+'"] .nome'); return v?v.textContent:""; }
+function coloreVoce(id){ var v=document.querySelector('a.voce[href="#'+id+'"]'); return v?v.style.getPropertyValue("--c"):""; }
+/* in fondo a ogni sezione: sezione precedente e successiva */
+parti.forEach(function(sx,i){
+  var box=document.createElement("nav"); box.className="passo no-stampa"; box.setAttribute("aria-label","Sezione precedente e successiva");
+  function freccia(j,verso){
+    if(j<0||j>=parti.length){ var vuoto=document.createElement("span"); box.appendChild(vuoto); return; }
+    var id=parti[j].id, a=document.createElement("a");
+    a.href="#"+id; a.className="passo-"+verso; a.style.setProperty("--c",coloreVoce(id));
+    a.innerHTML='<span class="passo-lab">'+(verso==="prima"?"← Indietro":"Avanti →")+'</span><span class="passo-tit"></span>';
+    a.querySelector(".passo-tit").textContent=nomeVoce(id);
+    box.appendChild(a);
+  }
+  freccia(i-1,"prima"); freccia(i+1,"dopo");
+  sx.appendChild(box);
+});
+function attiva(id){ Array.prototype.forEach.call(voci,function(v){ var on=v.getAttribute("href")==="#"+id; if(on){ v.setAttribute("aria-current","true"); if(navI.scrollWidth>navI.clientWidth){ navI.scrollLeft=v.offsetLeft-16; } } else v.removeAttribute("aria-current"); }); }
+function mostra(id,sposta){
+  var sx=document.getElementById(id);
+  if(!sx||parti.indexOf(sx)<0){
+    /* un'ancora dentro una sezione: apre la sezione che la contiene */
+    var dentro=sx&&sx.closest?sx.closest("section.parte"):null;
+    sx=dentro||parti[0];
+  }
+  parti.forEach(function(p){ p.hidden=(p!==sx); });
+  attiva(sx.id);
+  if(sposta){
+    var cima=corpo.getBoundingClientRect().top+window.pageYOffset-8;
+    if(window.pageYOffset>cima) window.scrollTo(0,cima);
+    var h=sx.querySelector("h2"); if(h){ h.setAttribute("tabindex","-1"); try{ h.focus({preventScroll:true}); }catch(e){ h.focus(); } }
+  }
+}
+window.addEventListener("hashchange",function(){ mostra(location.hash.slice(1),true); });
+mostra(location.hash.slice(1),false);
+
+/* ---------- tutto quello che si scrive resta su questo dispositivo ---------- */
+var campi=document.querySelectorAll("[data-chiave]");
+function adatta(t){ if(t.tagName==="TEXTAREA"){ t.style.height="auto"; t.style.height=(t.scrollHeight+2)+"px"; } }
+var nome=document.getElementById("v-nome"), tit=document.getElementById("valigia-nome");
+function titolo(){ tit.textContent=nome.value.trim()||"…"; }
+Array.prototype.forEach.call(campi,function(c){
+  var k=c.getAttribute("data-chiave");
+  try{ var v=localStorage.getItem(k); if(v) c.value=v; }catch(e){}
+  adatta(c);
+  c.addEventListener("input",function(){ try{ localStorage.setItem(k,c.value); }catch(e){} adatta(c); if(c===nome) titolo(); });
+});
+titolo();
+
+/* ---------- stampa solo la valigia ---------- */
+document.getElementById("stampa").addEventListener("click",function(){
+  document.body.classList.add("stampa-valigia");
+  window.print();
+  setTimeout(function(){ document.body.classList.remove("stampa-valigia"); },500);
+});
+window.addEventListener("afterprint",function(){ document.body.classList.remove("stampa-valigia"); });
+
+/* ---------- cancella: serve un secondo clic per confermare ---------- */
+var canc=document.getElementById("cancella"), msg=document.getElementById("cancella-msg"), pronto=false, tm;
+canc.addEventListener("click",function(){
+  if(!pronto){ pronto=true; canc.textContent="Sicuro? Clicca ancora"; tm=setTimeout(function(){ pronto=false; canc.textContent="Cancella tutto"; },4000); return; }
+  clearTimeout(tm); pronto=false; canc.textContent="Cancella tutto";
+  Array.prototype.forEach.call(campi,function(c){ c.value=""; adatta(c); try{ localStorage.removeItem(c.getAttribute("data-chiave")); }catch(e){} });
+  titolo(); msg.textContent="La valigia è vuota.";
+});
+})();
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+<script>
+(function(){
+  var corpo=document.querySelector(".corpo-lezione"), nav=document.querySelector("nav.indice"), b=document.querySelector(".indice-riduci");
+  if(!corpo||!nav||!b) return;
+  function metti(r){
+    if(r) corpo.className+=" indice-ridotto"; else corpo.className=corpo.className.replace(/\s*indice-ridotto/g,"");
+    b.setAttribute("aria-pressed",r?"true":"false");
+    b.setAttribute("aria-label",r?"Mostra i nomi delle parti":"Riduci l'indice alle sole icone");
+    b.title=b.getAttribute("aria-label"); b.innerHTML=r?"&raquo;":"&laquo;";
+  }
+  var r=false; try{ r=localStorage.getItem("indice-ridotto")==="1"; }catch(e){}
+  metti(r);
+  b.onclick=function(){ r=!r; metti(r); try{ localStorage.setItem("indice-ridotto",r?"1":"0"); }catch(e){} };
+})();
+</script>
+</body>
+</html>
