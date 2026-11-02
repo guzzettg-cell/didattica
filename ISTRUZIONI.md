@@ -109,3 +109,18 @@ Classi: `prima`, `seconda`, `terza`.
 - Se sparisce tutto, l'errore è in `materiali.js`: apri il file → History e confronta con la versione precedente.
 
 Per le UDA ci sono istruzioni a parte in `uda/ISTRUZIONI.md`.
+
+## Pulsanti in alto e ingrandimento (tutte le pagine)
+
+Ogni pagina ha, prima di `</body>`, una riga che collega il file comune `assets/barra.js`:
+
+```html
+<script src="../../assets/barra.js"></script>
+```
+
+Il numero di `../` dipende da quanto è profonda la cartella (una pagina in `storia/seconda/stato-governo/`
+ne ha tre: `../../../assets/barra.js`). Il file aggiunge da solo:
+- in alto, il pulsante **⌂ Materiali didattici** (accanto al «← Torna…» se c'è già, altrimenti insieme a «← Materia: tutti i moduli»);
+- i pulsanti **A− / A+** per ingrandire, se la pagina non li ha già.
+
+Quando carichi una pagina nuova, ricordati di aggiungere questa riga.

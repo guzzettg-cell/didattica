@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gli ambienti caldi: troppa acqua o troppo poca?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="clima.css">
+<style>
+:root{
+  --paper:#eef1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
+  --accent:#c2410c; --accent-soft:#fde4d3; --ok:#1f7a4d; --ok-soft:#dcf2e6; --no:#b42318; --no-soft:#fde3e1;
+  --vivi:#1d6fa5; --vivi-soft:#dcebf6; --on-accent:#fff; --on-vivi:#fff; --ga:#7a3fa0; --on-ga:#fff;
+  --c1:#2a78b8; --c2:#e08a1e; --c3:#3f9a5a; --c4:#b5528a; --c5:#7b6fd0; --pale:#c9d3de;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717;
+  --vivi:#6db7ea; --vivi-soft:#10283a; --on-accent:#140a03; --on-vivi:#06121c; --ga:#c9a2e8; --on-ga:#1a0b26; --c1:#5aa6e6; --c2:#f2a541; --c3:#5cc47b; --c4:#e07ab2; --c5:#a79cf2; --pale:#33445a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717;
+  --vivi:#6db7ea; --vivi-soft:#10283a; --on-accent:#140a03; --on-vivi:#06121c; --ga:#c9a2e8; --on-ga:#1a0b26; --c1:#5aa6e6; --c2:#f2a541; --c3:#5cc47b; --c4:#e07ab2; --c5:#a79cf2; --pale:#33445a; color-scheme:dark}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+[hidden]{display:none!important}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:24px}
+header.top{display:grid;gap:8px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.02;margin:0}
+h2.sec{font-family:var(--display);font-weight:800;font-size:1.45rem;margin:0}
+.lead{margin:0;max-width:80ch;color:var(--muted)}
+.note{font-size:.86rem;color:var(--muted);margin:0}
+section.part{display:grid;gap:12px}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;align-items:start}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+@media (max-width:920px){.grid,.two{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:10px;min-width:0;align-content:start}
+.card h3{font-family:var(--display);font-weight:800;font-size:1.3rem;margin:0}
+.card p{margin:0}
+.kind{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.big{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1.05;font-variant-numeric:tabular-nums}
+/* etichetta del libro */
+.vivi{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;justify-self:start;font-size:.85rem}
+.vivi b{display:inline-block;background:var(--vivi);color:var(--on-vivi);font-family:var(--display);font-weight:800;letter-spacing:.06em;font-size:.82rem;padding:4px 10px;border-radius:6px}
+.vivi span{color:var(--vivi);font-weight:700}
+.vivi b.ga{background:var(--ga);color:var(--on-ga)}
+.vivi span.ga{color:var(--ga)}
+.books{display:flex;flex-wrap:wrap;gap:6px 18px}
+.book .row{display:grid;gap:4px}
+.book .row+.row{border-top:1px solid var(--line);padding-top:8px}
+.book{background:var(--vivi-soft);border:1px solid var(--vivi);border-radius:14px;padding:14px 18px;display:grid;gap:8px}
+.book p{margin:0}
+/* pulsanti */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button,.btn{font:inherit;font-size:.88rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 12px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}
+.btn.go{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:700}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.ctrl label{display:grid;gap:2px;font-size:.85rem;color:var(--muted);font-weight:700;min-width:180px;flex:1}
+.ctrl input[type=range]{width:100%;accent-color:var(--accent)}
+.ctrl output{font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}
+/* disegni con zoom */
+.fig{display:grid;gap:8px;min-width:0}
+.figbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.dz{display:inline-flex;gap:4px;align-items:center;margin-left:auto}
+.dz button{font:inherit;font-weight:800;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;min-width:34px;height:34px;cursor:pointer}
+.dz span{font-size:.8rem;color:var(--muted);font-weight:700;min-width:3.2em;text-align:center;font-variant-numeric:tabular-nums}
+.figbox{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:auto;-webkit-overflow-scrolling:touch}
+.figin{width:100%;min-width:0}
+.figin canvas{display:block;width:100%}
+/* esercizi */
+.fb{border-radius:10px;padding:9px 12px;font-size:.95rem}
+.fb.right{background:var(--ok-soft);border:1px solid var(--ok)}
+.fb.wrong{background:var(--no-soft);border:1px solid var(--no)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:8px 12px;cursor:pointer;text-align:left}
+.opts button.on{background:var(--accent-soft);border-color:var(--accent)}
+.opts button.right{border-color:var(--ok);background:var(--ok-soft)}
+.opts button.wrong{border-color:var(--no);background:var(--no-soft)}
+.vf{display:grid;gap:8px}
+.vf .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:8px}
+.vf .row.right{background:var(--ok-soft)}.vf .row.wrong{background:var(--no-soft)}
+.vf .row .why{grid-column:1/-1;font-size:.88rem;color:var(--muted)}
+.inq{display:grid;gap:8px}
+.inq .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.inq input{font:inherit;width:6.5em;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.inq input.right{border-color:var(--ok);background:var(--ok-soft)}.inq input.wrong{border-color:var(--no);background:var(--no-soft)}
+/* smistamento: tocca una carta, poi tocca il gruppo */
+.sort{display:grid;gap:10px}
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:44px}
+.pool button,.bin button{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:7px 11px;cursor:pointer;text-align:left}
+.pool button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.bin{border:2px dashed var(--line);border-radius:12px;padding:10px;display:grid;gap:6px;align-content:start;min-height:90px;cursor:pointer;background:transparent;color:inherit;font:inherit;text-align:left}
+.bin h4{margin:0;font-family:var(--display);font-size:1rem}
+.bin button.right{border-color:var(--ok);background:var(--ok-soft)}
+.bin button.wrong{border-color:var(--no);background:var(--no-soft)}
+details{border-top:1px solid var(--line);padding:9px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700}
+details p{margin:6px 0 0;color:var(--muted)}
+.words{background:var(--accent-soft);border-radius:12px;padding:10px 14px;font-size:.95rem}
+.words p{margin:0}
+/* navigazione */
+.pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pager a{display:grid;gap:2px;align-content:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;color:var(--ink);text-decoration:none}
+.pager a:hover{border-color:var(--accent)}
+.pager a:hover span{text-decoration:underline}
+.pager small{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pager span{font-family:var(--display);font-weight:800;font-size:1.05rem;line-height:1.25}
+.pager .next{text-align:right}
+.pager.pager-top a{padding:8px 14px}
+.pager.pager-top span{font-size:.95rem}
+@media (max-width:640px){.pager{grid-template-columns:1fr}.pager .next{text-align:left}}
+table.dati{border-collapse:collapse;width:100%;font-size:.92rem}
+table.dati th,table.dati td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+table.dati td.n,table.dati th.n{text-align:right;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.ctrl select{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.abb{display:grid;gap:8px}
+.abb .row{display:grid;grid-template-columns:minmax(7em,max-content) minmax(0,1fr);gap:6px 12px;align-items:center;border-top:1px solid var(--line);padding-top:8px}
+.abb .row:last-of-type{border-top:0}
+.abb select{font:inherit;font-size:.92rem;width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.abb select.right{border-color:var(--ok);background:var(--ok-soft)}.abb select.wrong{border-color:var(--no);background:var(--no-soft)}
+@media (max-width:560px){.abb .row{grid-template-columns:1fr}}
+.qz{display:grid;gap:14px}
+.qz .q{display:grid;gap:6px}
+.qz .q p{margin:0;font-weight:700}
+.qz .why{font-size:.9rem;color:var(--muted)}
+.counter{display:grid;gap:6px}
+.counter .row{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto auto;gap:8px;align-items:center;border-top:1px solid var(--line);padding-top:6px}
+.counter .row button{font:inherit;font-weight:800;width:32px;height:32px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.counter .row b{min-width:1.6em;text-align:center;font-variant-numeric:tabular-nums}
+.counter .l{font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums;text-align:right;min-width:6.5em}
+.orig{box-sizing:border-box}
+#app{display:grid;gap:24px}
+#nuovo{display:grid;gap:24px}
+.wrap>*,#app>*,#nuovo>*,.orig>*{min-width:0}
+.orig .item>*{min-width:0}.orig .item select{width:100%}
+
+</style>
+</head>
+<body data-book="both">
+<div class="wrap">
+  <nav class="pager pager-top" aria-label="Lezioni (in alto)">
+    <a class="prev" href="biomi.html"><small>Lezione precedente</small><span>← Dal clima ai biomi</span></a>
+    <a class="next" href="temperati-e-freddi.html"><small>Lezione successiva</small><span>Dalle zone temperate ai poli →</span></a>
+  </nav>
+  <header class="top">
+    <div class="eyebrow">Geografia · Modulo II · Clima e ambienti · Lezione 3 di 6</div>
+    <h1>Gli ambienti caldi: troppa acqua o troppo poca?</h1>
+    <div class="books"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>Unità 3 · Lezioni 2–5 · pp. 22–29</span></div><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">Capitolo 20 · §3 Le zone caldo-umide e §4 Le zone aride · pp. E46–E49</span></div></div>
+    <p class="lead">Tra i due tropici fa caldo tutto l'anno: è la quantità di pioggia a fare la differenza tra la foresta pluviale, la savana e il deserto.</p>
+  </header>
+
+  <div id="app"></div>
+  <div id="nuovo" hidden>
+  <h2 class="sec" style="margin-top:8px">Approfondisci con il libro</h2>
+  <section class="part">
+    <h2 class="sec">1. La foresta pluviale, piano per piano</h2>
+    <div class="books"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>Lezione 2 · pp. 22–23</span></div><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">p. E46</span></div></div>
+    <p class="lead">La vegetazione della foresta pluviale è disposta a <b>strati</b>, dagli alberi più alti, fino a 70 metri, alle felci che coprono il terreno. Tocca uno strato o premi «Avvia» per salire dal suolo alla cima.</p>
+    <div class="grid">
+      <div class="fig" id="f4">
+        <div class="figbar"><span class="chips"><button type="button" class="btn go" id="play4">▶ Avvia</button></span><span class="chips" role="group" aria-label="Strati" id="st"></span></div>
+        <div class="figbox"><div class="figin"><canvas id="cv4" role="img" aria-label="Sezione della foresta pluviale con cinque strati di vegetazione, da 0 a 70 metri"></canvas></div></div>
+      </div>
+      <div class="card" aria-live="polite">
+        <div class="kind" id="sk"></div>
+        <h3 id="sn"></h3>
+        <p id="sp"></p>
+        <p><b>Chi ci vive:</b> <span id="sa"></span></p>
+        <p class="note" id="sl"></p>
+      </div>
+    </div>
+    <div class="words"><p><b>La giungla</b> (Vivi la Geografia, p. 23) è un bioma simile, tipico del Sud-Est asiatico a <b>clima monsonico</b>: una stagione umida e una secca. È meno fitta, con radure, e molti alberi perdono le foglie nella stagione secca. Ci vivono tigri, elefanti indiani, bufali e pantere; la coltivazione del riso, con tre raccolti l'anno, sfama una popolazione numerosa.</p></div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">2. Savana: chi mangia che cosa?</h2>
+    <div class="books"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>Lezione 3 · pp. 24–25</span></div><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">p. E46</span></div></div>
+    <p class="lead">Nella savana dell'Africa orientale gli animali si dividono le erbe, alte fino a 2 metri, secondo un ordine preciso: così c'è cibo per tutti.</p>
+    <div class="card sort" id="s3">
+      <p>Tocca un animale e poi il cibo giusto.</p>
+      <div class="pool"></div><div class="bins"></div>
+      <div class="chips"><button type="button" class="btn go" data-ck>Controlla</button><button type="button" class="btn" data-rs>Ricomincia</button></div>
+      <div class="fb" hidden></div>
+    </div>
+    <div class="card"><div class="kind">Tre tipi di savana</div><div id="q3a"></div></div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">3. Le parole del deserto e dell'oasi</h2>
+    <div class="books"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>Lezioni 4 e 5 · pp. 26–29</span></div><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">pp. E48–E49</span></div></div>
+    <div class="two">
+      <div class="card"><div class="kind">Abbina ogni parola alla sua spiegazione</div><div id="ab3"></div></div>
+      <div class="card"><div class="kind">Un ambiente creato dall'uomo</div><div id="q3b"></div></div>
+    </div>
+  </section>
+
+  </div>
+
+  <section class="part">
+    <div class="book">
+      <div class="row"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>Adesso apri il libro · pp. 22–29</span></div><p>Studia le lezioni 2–5 (pp. 22–29): la foresta pluviale e la giungla, la savana, i deserti caldi, le oasi del Sahara. Completa i diorami «Leggi il paesaggio».</p></div>
+      <div class="row"><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">Adesso apri il libro · pp. E46–E49</span></div><p>Studia le pp. E46–E49: le zone caldo-umide e le zone aride.</p></div>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Lezioni (in basso)">
+    <a class="prev" href="biomi.html"><small>Lezione precedente</small><span>← Dal clima ai biomi</span></a>
+    <a class="next" href="temperati-e-freddi.html"><small>Lezione successiva</small><span>Dalle zone temperate ai poli →</span></a>
+  </nav>
+</div>
+<div class="orig"><div id="tip" role="tooltip" hidden></div></div>
+<script>window.LEZ=3;</script>
+<script src="clima.js"></script>
+<script>
+/* ===== strumenti comuni delle pagine sulla popolazione ===== */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const V=n=>getComputedStyle(document.documentElement).getPropertyValue('--'+n).trim();
+const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FD='"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif', FB='"Atkinson Hyperlegible",Verdana,system-ui,sans-serif';
+const it=(x,d=0)=>Number(x).toLocaleString('it-IT',{minimumFractionDigits:d,maximumFractionDigits:d});
+
+/* tela adattata alla larghezza del riquadro; ratio = larghezza/altezza */
+function fit(cv,ratio,minH){
+  const w=Math.max(260,cv.parentElement.clientWidth), h=Math.max(minH||0,Math.round(w/ratio)), d=window.devicePixelRatio||1;
+  if(cv.width!==Math.round(w*d)||cv.height!==Math.round(h*d)){cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';}
+  const c=cv.getContext('2d'); c.setTransform(d,0,0,d,0,0); c.clearRect(0,0,w,h); return {c,w,h};
+}
+/* zoom dei disegni: + e − sopra ogni disegno */
+const DZ=[.75,1,1.25,1.5,1.75,2,2.5];
+function setupFig(fig,redraw){
+  const inner=fig.querySelector('.figin'), lab=fig.querySelector('.dz span'); let i=1;
+  const set=()=>{inner.style.width=(DZ[i]*100)+'%'; lab.textContent=Math.round(DZ[i]*100)+'%';
+    fig.querySelector('[data-dz="-1"]').disabled=i===0; fig.querySelector('[data-dz="1"]').disabled=i===DZ.length-1; redraw();};
+  fig.querySelectorAll('[data-dz]').forEach(b=>b.addEventListener('click',()=>{i=Math.max(0,Math.min(DZ.length-1,i+ +b.dataset.dz));set();}));
+  new ResizeObserver(()=>redraw()).observe(inner);
+  set();
+}
+function dzBar(){return '<span class="dz" role="group" aria-label="Ingrandimento del disegno"><button type="button" data-dz="-1" aria-label="Rimpicciolisci il disegno">−</button><span>100%</span><button type="button" data-dz="1" aria-label="Ingrandisci il disegno">+</button></span>';}
+$$('.figbar').forEach(b=>b.insertAdjacentHTML('beforeend',dzBar()));
+
+function txt(c,s,x,y,col,size,weight,align,font){c.fillStyle=col;c.font=`${weight||400} ${size}px ${font||FB}`;c.textAlign=align||'left';c.fillText(s,x,y);}
+
+/* vero o falso */
+function vero(box,items){
+  box.innerHTML=items.map((q,k)=>`<div class="row" data-k="${k}"><span>${q[0]}</span><span class="chips"><button type="button" data-v="1">Vero</button><button type="button" data-v="0">Falso</button></span><span class="why" hidden></span></div>`).join('');
+  box.addEventListener('click',e=>{const b=e.target.closest('[data-v]'); if(!b)return; const row=b.closest('.row'), q=items[row.dataset.k], ok=(b.dataset.v==='1')===q[1];
+    row.querySelectorAll('[data-v]').forEach(x=>x.setAttribute('aria-pressed',x===b)); row.className='row '+(ok?'right':'wrong');
+    const w=row.querySelector('.why'); w.hidden=false; w.textContent=(ok?'✓ Giusto. ':'✗ Non è così. ')+q[2];});
+}
+/* smistamento: tocca una carta e poi il gruppo giusto */
+function smista(root,cards,bins){
+  const pool=root.querySelector('.pool'), wrap=root.querySelector('.bins'), fb=root.querySelector('.fb'); let sel=null;
+  const draw=()=>{pool.innerHTML=cards.map((c,k)=>c.at==null?`<button type="button" data-c="${k}" aria-pressed="${sel===k}">${c.t}</button>`:'').join('')||'<span class="note">Hai sistemato tutte le carte: premi «Controlla».</span>';
+    wrap.innerHTML=bins.map((b,j)=>`<div class="bin" data-b="${j}" role="button" tabindex="0" aria-label="Metti qui: ${b}"><h4>${b}</h4>${cards.map((c,k)=>c.at===j?`<button type="button" data-back="${k}" class="${c.st||''}" title="Tocca per rimettere la carta nel mazzo">${c.t}</button>`:'').join('')}</div>`).join('');};
+  root.addEventListener('click',e=>{const c=e.target.closest('[data-c]'),bk=e.target.closest('[data-back]'),bn=e.target.closest('[data-b]');
+    if(c){sel=+c.dataset.c;draw();return}
+    if(bk){const k=+bk.dataset.back;cards[k].at=null;cards[k].st='';sel=k;fb.hidden=true;draw();return}
+    if(bn&&sel!=null){cards[sel].at=+bn.dataset.b;cards[sel].st='';sel=null;fb.hidden=true;draw();}
+    if(e.target.closest('[data-ck]')){let ok=0,n=0;cards.forEach(c=>{if(c.at!=null){n++;c.st=c.at===c.ok?'right':'wrong';if(c.st==='right')ok++}});draw();
+      fb.hidden=false;fb.className='fb '+(ok===cards.length?'right':'wrong');
+      fb.textContent=ok===cards.length?'Tutto giusto!':`${ok} su ${cards.length} al posto giusto. Tocca le carte rosse per spostarle.`+(n<cards.length?' Mancano ancora alcune carte.':'');}
+    if(e.target.closest('[data-rs]')){cards.forEach(c=>{c.at=null;c.st=''});sel=null;fb.hidden=true;draw();}
+  });
+  root.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('.bin')){e.preventDefault();e.target.click();}});
+  draw();
+}
+/* domande con risposta numerica */
+function numeri(box,qs){
+  box.innerHTML=qs.map((q,k)=>`<div class="row"><span>${q[0]}</span><input inputmode="decimal" data-k="${k}" aria-label="${q[0].replace(/<[^>]+>/g,'')}"><span>${q[2]||''}</span></div>`).join('')+'<div class="row"><button type="button" class="btn go" data-chk>Controlla</button></div><div class="fb" hidden></div>';
+  box.querySelector('[data-chk]').addEventListener('click',()=>{let ok=0;box.querySelectorAll('input').forEach(inp=>{const q=qs[inp.dataset.k],v=parseFloat(inp.value.replace(/\./g,'').replace(',','.'));
+      const good=!isNaN(v)&&Math.abs(v-q[1])<=(q[3]||0);inp.className=good?'right':'wrong';if(good)ok++;});
+    const fb=box.querySelector('.fb');fb.hidden=false;fb.className='fb '+(ok===qs.length?'right':'wrong');fb.textContent=ok===qs.length?'Tutto giusto!':`${ok} su ${qs.length}. Ricontrolla i calcoli nelle caselle rosse.`;});
+}
+
+/* abbina: ogni parola con la sua spiegazione */
+function abbina(box,pairs){
+  const defs=pairs.map(p=>p[1]).slice().sort(()=>Math.random()-.5);
+  box.classList.add('abb');
+  box.innerHTML=pairs.map((p,k)=>`<div class="row"><b>${p[0]}</b><select data-k="${k}" aria-label="Spiegazione di ${p[0].replace(/<[^>]+>/g,'')}"><option value="">Scegli…</option>${defs.map(d=>`<option>${d}</option>`).join('')}</select></div>`).join('')+'<div class="chips"><button type="button" class="btn go" data-chk>Controlla</button></div><div class="fb" hidden></div>';
+  box.querySelector('[data-chk]').addEventListener('click',()=>{let ok=0;box.querySelectorAll('select').forEach(s=>{const g=s.value===pairs[s.dataset.k][1];s.className=g?'right':'wrong';if(g)ok++});
+    const fb=box.querySelector('.fb');fb.hidden=false;fb.className='fb '+(ok===pairs.length?'right':'wrong');fb.textContent=ok===pairs.length?'Tutto giusto!':`${ok} su ${pairs.length}. Correggi le caselle rosse.`;});
+}
+/* scelta: domande a risposta multipla, una risposta giusta (indice) */
+function scelta(box,qs){
+  box.classList.add('qz');
+  box.innerHTML=qs.map((q,k)=>`<div class="q" data-q="${k}"><p>${q[0]}</p><div class="opts">${q[1].map((o,j)=>`<button type="button" data-o="${j}">${o}</button>`).join('')}</div><div class="why" hidden></div></div>`).join('');
+  box.addEventListener('click',e=>{const b=e.target.closest('[data-o]');if(!b)return;const qd=b.closest('.q'),q=qs[qd.dataset.q],ok=+b.dataset.o===q[2];
+    qd.querySelectorAll('[data-o]').forEach(x=>x.className='');b.className=ok?'right':'wrong';const w=qd.querySelector('.why');w.hidden=false;w.textContent=(ok?'✓ Giusto. ':'✗ Non è questa. ')+(ok?q[3]||'':'Riprova.');});
+}
+/* grafico climatico (termopluviometrico) */
+const MESI=['G','F','M','A','M','G','L','A','S','O','N','D'];
+function climo(c,x,y,w,h,T,P,o){
+  o=Object.assign({tmin:-40,tmax:40,pmax:300,fs:11,title:''},o||{});
+  const l=x+30,r=x+w-34,t=y+(o.title?20:6),b=y+h-18,cw=(r-l)/12,YT=v=>b-(v-o.tmin)/(o.tmax-o.tmin)*(b-t),YP=v=>b-v/o.pmax*(b-t);
+  if(o.title)txt(c,o.title,x+w/2,y+13,V('ink'),o.fs+1,800,'center',FD);
+  c.strokeStyle=V('line');c.lineWidth=1;
+  for(let v=o.tmin;v<=o.tmax;v+=10){c.beginPath();c.moveTo(l,YT(v));c.lineTo(r,YT(v));c.stroke();txt(c,String(v),l-4,YT(v)+4,V('c2'),o.fs-1,700,'right');}
+  for(let v=0;v<=o.pmax;v+=100)txt(c,String(v),r+4,YP(v)+4,V('c1'),o.fs-1,700,'left');
+  if(o.tmin<0){c.strokeStyle=V('muted');c.setLineDash([4,3]);c.beginPath();c.moveTo(l,YT(0));c.lineTo(r,YT(0));c.stroke();c.setLineDash([]);}
+  c.fillStyle=V('c1');P.forEach((p,i)=>{const bh=Math.max(1,b-YP(Math.min(p,o.pmax)));c.fillRect(l+i*cw+cw*.15,b-bh,cw*.7,bh);});
+  c.strokeStyle=V('c2');c.lineWidth=2.5;c.beginPath();T.forEach((v,i)=>{const px=l+(i+.5)*cw,py=YT(v);i?c.lineTo(px,py):c.moveTo(px,py);});c.stroke();
+  c.fillStyle=V('c2');T.forEach((v,i)=>{c.beginPath();c.arc(l+(i+.5)*cw,YT(v),3,0,7);c.fill();});
+  MESI.forEach((m,i)=>txt(c,m,l+(i+.5)*cw,b+13,V('muted'),o.fs-1,700,'center'));
+  txt(c,'°C',l-4,t-2>y?t-4:t+8,V('c2'),o.fs-1,800,'right');txt(c,'mm',r+4,t-2>y?t-4:t+8,V('c1'),o.fs-1,800,'left');
+}
+const sum=a=>a.reduce((x,y)=>x+y,0);
+/* stazioni: valori letti dai grafici climatici di Vivi la Geografia 3, arrotondati */
+const STAZ={
+ borneo:{n:'Pulau Bunyu Barat',p:'Borneo, Indonesia',b:'Foresta pluviale',T:[26,26,27,27.5,28,27.5,27.5,27.5,27.5,27.5,27,26.5],P:[215,200,245,265,270,250,255,250,255,265,280,265]},
+ kigoma:{n:'Kigoma',p:'Tanzania',b:'Savana',T:[24,23.5,23.5,23.5,23.5,23,23,24,25,25,24,23],P:[120,105,125,180,40,5,0,5,20,45,120,140]},
+ timb:{n:'Timbouctou',p:'Mali',b:'Deserto caldo',T:[22,24,28,31,33,34,34.5,31,31,30,26,22],P:[0,0,0,1,4,20,60,85,35,5,0,0]},
+ capo:{n:'Città del Capo',p:'Sudafrica',b:'Macchia mediterranea',T:[21,21,20,18,16,14,13,14,15,17,19,20],P:[15,15,20,50,90,110,95,80,50,35,20,15]},
+ auck:{n:'Auckland',p:'Nuova Zelanda',b:'Foresta di latifoglie',T:[20,20,19,17,14,12,11,12,13,15,16,18],P:[75,80,90,100,115,135,145,120,105,95,85,90]},
+ rosa:{n:'Santa Rosa',p:'Argentina',b:'Prateria-steppa',T:[24,23,20,16,12,9,8,10,13,16,20,23],P:[80,75,95,55,30,20,20,25,40,70,80,95]},
+ ossora:{n:'Ossora',p:'Kamčatka, Russia',b:'Taiga',T:[-16,-15,-11,-4,2,8,12,13,9,1,-7,-13],P:[50,40,35,30,30,30,50,60,60,65,50,45]},
+ quin:{n:'Quinault',p:'Nunavut, Canada',b:'Tundra',T:[-33,-32,-30,-20,-8,3,10,8,1,-10,-22,-29],P:[5,5,8,10,10,15,30,35,25,20,10,8]},
+ mcm:{n:'McMurdo',p:'Antartide',b:'Ghiacci polari',T:[-3,-9,-18,-21,-22,-23,-25,-26,-24,-18,-10,-3],P:[15,25,15,10,15,20,15,10,10,10,10,15]}
+};
+
+/* ===== 1. strati ===== */
+const SL=[[0,3,'Il suolo','Coperto di foglie che marciscono in fretta. Il suolo è poco fertile: le piogge portano via le sostanze nutrienti.','tapiri, serpenti e altri rettili, insetti, funghi','Arriva circa il 2% della luce del Sole.','#6b4f2a'],
+ [3,12,'Il sottobosco','Felci e arbusti che crescono nella penombra.','rettili, rane, insetti','Pochissima luce: le piante hanno foglie larghe per catturarla.','#3f7d3a'],
+ [12,30,'Lo strato intermedio','Alberi giovani e liane lunghissime che si arrampicano sugli altri alberi per arrivare alla luce.','scimmie, bradipi, serpenti','La luce aumenta salendo.','#2f6b3a'],
+ [30,45,'La volta della foresta','Le chiome degli alberi formano un tetto verde fittissimo: qui vive la maggior parte delle specie.','pappagalli, tucani, scimmie','Qui arriva quasi tutta la luce e piove direttamente.','#4f9a3f'],
+ [45,70,'Gli alberi emergenti','I giganti della foresta, che superano la volta e arrivano fino a 70 metri.','aquile arpie, pipistrelli, farfalle','Pieno sole, vento e sbalzi di temperatura.','#86b84a']];
+let si=0,t4=null;
+$('#st').innerHTML=SL.map((s,i)=>`<button type="button" data-s="${i}" aria-pressed="${i===0}">${s[2].replace(/^(Il|Lo|La|Gli) /,'')}</button>`).join('');
+function draw4(){const {c,w,h}=fit($('#cv4'),1.3,300),gy=h-14,top=12,Y=m=>gy-m/70*(gy-top),x0=58;
+  c.fillStyle=V('paper');c.fillRect(0,0,w,h);
+  SL.forEach((s,i)=>{c.globalAlpha=i===si?.28:.1;c.fillStyle=s[6];c.fillRect(x0,Y(s[1]),w-x0-6,Y(s[0])-Y(s[1]));c.globalAlpha=1;
+    txt(c,s[0]+'–'+s[1]+' m',x0-6,(Y(s[0])+Y(s[1]))/2+4,i===si?V('accent'):V('muted'),10,700,'right');});
+  const tr=(x,hh,r,col)=>{c.fillStyle='#5a3d22';c.fillRect(x-3,Y(hh),6,Y(0)-Y(hh));c.fillStyle=col;c.beginPath();c.ellipse(x,Y(hh),r,r*.55,0,0,7);c.fill();};
+  const W=w-x0-10;[[.12,62,34,'#86b84a'],[.75,55,30,'#86b84a']].forEach(t=>tr(x0+W*t[0],t[1],t[2],t[3]));
+  [.05,.3,.45,.6,.9].forEach((p,k)=>tr(x0+W*p,36+k%3*4,40,'#4f9a3f'));
+  [.2,.38,.52,.68,.82].forEach((p,k)=>tr(x0+W*p,18+k%2*6,20,'#2f6b3a'));
+  for(let k=0;k<14;k++){const x=x0+W*(k+.5)/14;c.fillStyle='#3f7d3a';c.beginPath();c.ellipse(x,Y(5),12,7,0,0,7);c.fill();}
+  c.strokeStyle='#6a8f2a';c.lineWidth=2;[.25,.58].forEach(p=>{c.beginPath();c.moveTo(x0+W*p,Y(0));c.bezierCurveTo(x0+W*p+20,Y(12),x0+W*p-15,Y(22),x0+W*p+8,Y(34));c.stroke();});
+  c.fillStyle='#6b4f2a';c.fillRect(x0,Y(1.2),w-x0-6,Y(0)-Y(1.2));
+  const s=SL[si];c.strokeStyle=V('accent');c.lineWidth=3;c.strokeRect(x0+1,Y(s[1]),w-x0-8,Y(s[0])-Y(s[1]));
+  $('#cv4')._Y=Y;}
+function card4(){const s=SL[si];$('#sk').textContent=`Strato ${si+1} di 5 · ${s[0]}–${s[1]} m`;$('#sn').textContent=s[2];$('#sp').textContent=s[3];$('#sa').textContent=s[4];$('#sl').textContent=s[5];
+  $$('#st button').forEach((b,i)=>b.setAttribute('aria-pressed',i===si));}
+$('#st').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;si=+b.dataset.s;card4();draw4();});
+$('#cv4').addEventListener('click',e=>{const r=$('#cv4').getBoundingClientRect(),y=e.clientY-r.top,Y=$('#cv4')._Y;const k=SL.findIndex(s=>y<=Y(s[0])&&y>=Y(s[1]));if(k>=0){si=k;card4();draw4();}});
+$('#play4').addEventListener('click',()=>{if(t4){clearInterval(t4);t4=null;$('#play4').textContent='▶ Avvia';return}si=0;card4();draw4();$('#play4').textContent='⏸ Pausa';
+  t4=setInterval(()=>{if(si>=SL.length-1){clearInterval(t4);t4=null;$('#play4').textContent='▶ Avvia';return}si++;card4();draw4();},REDUCE?600:1600);});
+setupFig($('#f4'),draw4);card4();
+
+/* ===== 2. savana ===== */
+smista($('#s3'),[{t:'Zebre',ok:0},{t:'Gnu',ok:1},{t:'Gazzelle',ok:2},{t:'Struzzi',ok:2},{t:'Elefanti',ok:3},{t:'Giraffe',ok:3},{t:'Leoni',ok:4},{t:'Leopardi',ok:4}].sort(()=>Math.random()-.5),
+ ['Le parti più alte e dure delle erbe','Le erbe di media altezza','Le erbe più corte e tenere','Le foglie degli alberi','Gli altri animali (carnivori)']);
+scelta($('#q3a'),[
+ ['Distesa uniforme di erbe alte, con pochissimi alberi:',['savana erbosa','savana spinosa','savana arborata'],0,''],
+ ['Arbusti e cespugli spinosi, nelle zone più aride:',['savana erbosa','savana spinosa','savana arborata'],1,''],
+ ['Erbe e alberi come baobab e acacie, nelle zone più ricche d\'acqua:',['savana erbosa','savana spinosa','savana arborata'],2,'Il baobab trattiene l\'umidità nel grande tronco; l\'acacia ripara il suolo dal Sole con la chioma a ombrello.']]);
+
+/* ===== 3. deserto e oasi ===== */
+abbina($('#ab3'),[['Erg','deserto di sabbia con grandi dune'],['Serir (o reg)','deserto pietroso di ciottoli'],['Hammada','deserto roccioso di altipiani e montagne'],['Uadi','letti asciutti di antichi fiumi'],['Chott','depressioni di antichi laghi con depositi di sale'],['Sahel','fascia di steppa e arbusti spinosi ai margini del Sahara'],['Foggara','galleria sotterranea che porta l\'acqua all\'oasi'],['Adobe','impasto di argilla, sabbia e paglia per costruire le case']]);
+scelta($('#q3b'),[
+ ['Da dove viene l\'acqua delle oasi del Sahara?',['Dalle piogge abbondanti','Dalle falde sotterranee e dall\'umidità che si condensa di notte','Dai fiumi che attraversano il deserto'],1,'Il sottosuolo conserva enormi riserve d\'acqua di quando il Sahara era fertile; di notte il vapore si condensa in goccioline sul terreno freddo.'],
+ ['Lungo la foggara ci sono file di pozzi. A che cosa servono?',['Ad attingere l\'acqua','A rendere più fresco il clima dell\'oasi e a far circolare l\'aria','A segnare il confine dei campi'],1,'Il libro precisa che non servono per prendere l\'acqua.'],
+ ['Il palmeto ha tre livelli di coltivazione. Qual è quello più alto?',['Gli ortaggi','Gli alberi da frutta','Le palme da dattero'],2,'Le palme fanno ombra e permettono alle altre piante di crescere: sotto ci sono gli alberi da frutta, poi gli ortaggi.'],
+ ['Perché nei deserti caldi c\'è una forte escursione termica tra il giorno e la notte?',['Perché la terra, senza vegetazione, si scalda e si raffredda in fretta','Perché di notte piove','Perché soffiano i monsoni'],0,'']]);
+
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+<script src="../../../../assets/barra.js"></script>
+</body>
+</html>

@@ -10,6 +10,8 @@
    Quando la lezione ha la riga link, l'officina è «aperta»:
    compare nell'indice, nei rimandi avanti e indietro e nella
    striscia in cima a ogni officina. Senza link resta «in arrivo».
+   Nelle pagine dei laboratori si vede una sezione alla volta,
+   scelta dall'indice laterale: lo fa la funzione sezioni() qui sotto.
    ============================================================= */
 (function () {
   "use strict";
@@ -145,6 +147,70 @@
     box.innerHTML = h + "</ol></section>";
   }
 
+  /* ---------- una sezione alla volta ----------
+     Nelle pagine dei laboratori (quelle con l'indice laterale e le
+     <section class="parte">) si vede una sola sezione: quella scelta
+     dall'indice. In fondo a ogni sezione: Indietro / Avanti. */
+  var CSS_SEZIONI =
+    "section.parte{border-bottom:0}section.parte:target{outline:none}section.parte h2:focus{outline:none}" +
+    ".passo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:34px 0 6px;padding-top:18px;border-top:1px solid var(--filo)}" +
+    ".passo a{display:flex;flex-direction:column;gap:2px;padding:10px 16px;border:1px solid var(--filo);border-left:6px solid var(--c);border-radius:12px;text-decoration:none;color:var(--ink);background:var(--carta)}" +
+    ".passo a.passo-dopo{grid-column:2;text-align:right;border-left-width:1px;border-right:6px solid var(--c)}" +
+    ".passo a:hover{border-color:var(--c)}" +
+    ".passo-lab{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--tenue)}" +
+    ".passo-tit{font:700 1.08rem/1.25 var(--serif)}" +
+    "@media (max-width:600px){.passo{grid-template-columns:1fr}.passo a.passo-dopo{grid-column:auto}}" +
+    "@media print{body:not(.stampa-carta) section.parte[hidden]{display:block!important}.passo{display:none!important}}";
+  function sezioni() {
+    var voci = document.querySelectorAll("nav.indice a.voce"), navI = document.querySelector("nav.indice");
+    var parti = Array.prototype.slice.call(document.querySelectorAll("main section.parte"));
+    var corpo = document.querySelector(".corpo-lezione");
+    if (!voci.length || parti.length < 2 || !corpo) return;
+    var st = document.createElement("style"); st.textContent = CSS_SEZIONI; document.head.appendChild(st);
+    function voce(id) { return document.querySelector('nav.indice a.voce[href="#' + id + '"]'); }
+    parti.forEach(function (sx, i) {
+      var box = document.createElement("nav");
+      box.className = "passo no-stampa"; box.setAttribute("aria-label", "Sezione precedente e successiva");
+      [[i - 1, "prima"], [i + 1, "dopo"]].forEach(function (x) {
+        var j = x[0], verso = x[1];
+        if (j < 0 || j >= parti.length) { box.appendChild(document.createElement("span")); return; }
+        var id = parti[j].id, v = voce(id), a = document.createElement("a");
+        a.href = "#" + id; a.className = "passo-" + verso;
+        if (v) a.style.setProperty("--c", v.style.getPropertyValue("--c"));
+        a.innerHTML = '<span class="passo-lab">' + (verso === "prima" ? "← Indietro" : "Avanti →") + '</span><span class="passo-tit"></span>';
+        var nome = v && v.querySelector(".nome");
+        a.querySelector(".passo-tit").textContent = nome ? nome.textContent : "";
+        box.appendChild(a);
+      });
+      sx.appendChild(box);
+    });
+    function attiva(id) {
+      Array.prototype.forEach.call(voci, function (v) {
+        if (v.getAttribute("href") === "#" + id) {
+          v.setAttribute("aria-current", "true");
+          if (navI.scrollWidth > navI.clientWidth) navI.scrollLeft = v.offsetLeft - 16;
+        } else v.removeAttribute("aria-current");
+      });
+    }
+    function mostra(id, sposta) {
+      var sx = id ? document.getElementById(id) : null;
+      if (!sx || parti.indexOf(sx) < 0) {
+        var dentro = sx && sx.closest ? sx.closest("main section.parte") : null; /* un'ancora dentro una sezione */
+        sx = dentro || parti[0];
+      }
+      parti.forEach(function (p) { p.hidden = (p !== sx); });
+      attiva(sx.id);
+      if (sposta) {
+        var cima = corpo.getBoundingClientRect().top + window.pageYOffset - 8;
+        if (window.pageYOffset > cima) window.scrollTo(0, cima);
+        var h = sx.querySelector("h2");
+        if (h) { h.setAttribute("tabindex", "-1"); try { h.focus({ preventScroll: true }); } catch (e) { h.focus(); } }
+      }
+    }
+    window.addEventListener("hashchange", function () { mostra(location.hash.slice(1), true); });
+    mostra(location.hash.slice(1), false);
+  }
+
   window.Officine = { PARTI: PARTI, icona: icona, elenco: elenco };
 
   function avvia() {
@@ -157,6 +223,7 @@
       else if (tipo === "indice") indice(box, lista);
     });
     Array.prototype.forEach.call(document.querySelectorAll("[data-officina-link]"), function (sp) { rimando(sp, lista); });
+    sezioni();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", avvia); else avvia();
 })();

@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Il clima è sempre cambiato. Che cosa cambia oggi?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="clima.css">
+<style>
+:root{
+  --paper:#eef1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
+  --accent:#c2410c; --accent-soft:#fde4d3; --ok:#1f7a4d; --ok-soft:#dcf2e6; --no:#b42318; --no-soft:#fde3e1;
+  --vivi:#1d6fa5; --vivi-soft:#dcebf6; --on-accent:#fff; --on-vivi:#fff; --ga:#7a3fa0; --on-ga:#fff;
+  --c1:#2a78b8; --c2:#e08a1e; --c3:#3f9a5a; --c4:#b5528a; --c5:#7b6fd0; --pale:#c9d3de;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717;
+  --vivi:#6db7ea; --vivi-soft:#10283a; --on-accent:#140a03; --on-vivi:#06121c; --ga:#c9a2e8; --on-ga:#1a0b26; --c1:#5aa6e6; --c2:#f2a541; --c3:#5cc47b; --c4:#e07ab2; --c5:#a79cf2; --pale:#33445a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717;
+  --vivi:#6db7ea; --vivi-soft:#10283a; --on-accent:#140a03; --on-vivi:#06121c; --ga:#c9a2e8; --on-ga:#1a0b26; --c1:#5aa6e6; --c2:#f2a541; --c3:#5cc47b; --c4:#e07ab2; --c5:#a79cf2; --pale:#33445a; color-scheme:dark}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+[hidden]{display:none!important}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:24px}
+header.top{display:grid;gap:8px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.02;margin:0}
+h2.sec{font-family:var(--display);font-weight:800;font-size:1.45rem;margin:0}
+.lead{margin:0;max-width:80ch;color:var(--muted)}
+.note{font-size:.86rem;color:var(--muted);margin:0}
+section.part{display:grid;gap:12px}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;align-items:start}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+@media (max-width:920px){.grid,.two{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:10px;min-width:0;align-content:start}
+.card h3{font-family:var(--display);font-weight:800;font-size:1.3rem;margin:0}
+.card p{margin:0}
+.kind{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.big{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1.05;font-variant-numeric:tabular-nums}
+/* etichetta del libro */
+.vivi{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;justify-self:start;font-size:.85rem}
+.vivi b{display:inline-block;background:var(--vivi);color:var(--on-vivi);font-family:var(--display);font-weight:800;letter-spacing:.06em;font-size:.82rem;padding:4px 10px;border-radius:6px}
+.vivi span{color:var(--vivi);font-weight:700}
+.vivi b.ga{background:var(--ga);color:var(--on-ga)}
+.vivi span.ga{color:var(--ga)}
+.books{display:flex;flex-wrap:wrap;gap:6px 18px}
+.book .row{display:grid;gap:4px}
+.book .row+.row{border-top:1px solid var(--line);padding-top:8px}
+.book{background:var(--vivi-soft);border:1px solid var(--vivi);border-radius:14px;padding:14px 18px;display:grid;gap:8px}
+.book p{margin:0}
+/* pulsanti */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button,.btn{font:inherit;font-size:.88rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 12px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}
+.btn.go{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:700}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.ctrl label{display:grid;gap:2px;font-size:.85rem;color:var(--muted);font-weight:700;min-width:180px;flex:1}
+.ctrl input[type=range]{width:100%;accent-color:var(--accent)}
+.ctrl output{font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}
+/* disegni con zoom */
+.fig{display:grid;gap:8px;min-width:0}
+.figbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.dz{display:inline-flex;gap:4px;align-items:center;margin-left:auto}
+.dz button{font:inherit;font-weight:800;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;min-width:34px;height:34px;cursor:pointer}
+.dz span{font-size:.8rem;color:var(--muted);font-weight:700;min-width:3.2em;text-align:center;font-variant-numeric:tabular-nums}
+.figbox{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:auto;-webkit-overflow-scrolling:touch}
+.figin{width:100%;min-width:0}
+.figin canvas{display:block;width:100%}
+/* esercizi */
+.fb{border-radius:10px;padding:9px 12px;font-size:.95rem}
+.fb.right{background:var(--ok-soft);border:1px solid var(--ok)}
+.fb.wrong{background:var(--no-soft);border:1px solid var(--no)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:8px 12px;cursor:pointer;text-align:left}
+.opts button.on{background:var(--accent-soft);border-color:var(--accent)}
+.opts button.right{border-color:var(--ok);background:var(--ok-soft)}
+.opts button.wrong{border-color:var(--no);background:var(--no-soft)}
+.vf{display:grid;gap:8px}
+.vf .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:8px}
+.vf .row.right{background:var(--ok-soft)}.vf .row.wrong{background:var(--no-soft)}
+.vf .row .why{grid-column:1/-1;font-size:.88rem;color:var(--muted)}
+.inq{display:grid;gap:8px}
+.inq .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.inq input{font:inherit;width:6.5em;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.inq input.right{border-color:var(--ok);background:var(--ok-soft)}.inq input.wrong{border-color:var(--no);background:var(--no-soft)}
+/* smistamento: tocca una carta, poi tocca il gruppo */
+.sort{display:grid;gap:10px}
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:44px}
+.pool button,.bin button{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:7px 11px;cursor:pointer;text-align:left}
+.pool button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.bin{border:2px dashed var(--line);border-radius:12px;padding:10px;display:grid;gap:6px;align-content:start;min-height:90px;cursor:pointer;background:transparent;color:inherit;font:inherit;text-align:left}
+.bin h4{margin:0;font-family:var(--display);font-size:1rem}
+.bin button.right{border-color:var(--ok);background:var(--ok-soft)}
+.bin button.wrong{border-color:var(--no);background:var(--no-soft)}
+details{border-top:1px solid var(--line);padding:9px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700}
+details p{margin:6px 0 0;color:var(--muted)}
+.words{background:var(--accent-soft);border-radius:12px;padding:10px 14px;font-size:.95rem}
+.words p{margin:0}
+/* navigazione */
+.pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pager a{display:grid;gap:2px;align-content:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;color:var(--ink);text-decoration:none}
+.pager a:hover{border-color:var(--accent)}
+.pager a:hover span{text-decoration:underline}
+.pager small{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pager span{font-family:var(--display);font-weight:800;font-size:1.05rem;line-height:1.25}
+.pager .next{text-align:right}
+.pager.pager-top a{padding:8px 14px}
+.pager.pager-top span{font-size:.95rem}
+@media (max-width:640px){.pager{grid-template-columns:1fr}.pager .next{text-align:left}}
+table.dati{border-collapse:collapse;width:100%;font-size:.92rem}
+table.dati th,table.dati td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+table.dati td.n,table.dati th.n{text-align:right;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.ctrl select{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.abb{display:grid;gap:8px}
+.abb .row{display:grid;grid-template-columns:minmax(7em,max-content) minmax(0,1fr);gap:6px 12px;align-items:center;border-top:1px solid var(--line);padding-top:8px}
+.abb .row:last-of-type{border-top:0}
+.abb select{font:inherit;font-size:.92rem;width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.abb select.right{border-color:var(--ok);background:var(--ok-soft)}.abb select.wrong{border-color:var(--no);background:var(--no-soft)}
+@media (max-width:560px){.abb .row{grid-template-columns:1fr}}
+.qz{display:grid;gap:14px}
+.qz .q{display:grid;gap:6px}
+.qz .q p{margin:0;font-weight:700}
+.qz .why{font-size:.9rem;color:var(--muted)}
+.counter{display:grid;gap:6px}
+.counter .row{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto auto;gap:8px;align-items:center;border-top:1px solid var(--line);padding-top:6px}
+.counter .row button{font:inherit;font-weight:800;width:32px;height:32px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.counter .row b{min-width:1.6em;text-align:center;font-variant-numeric:tabular-nums}
+.counter .l{font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums;text-align:right;min-width:6.5em}
+.orig{box-sizing:border-box}
+#app{display:grid;gap:24px}
+#nuovo{display:grid;gap:24px}
+.wrap>*,#app>*,#nuovo>*,.orig>*{min-width:0}
+.orig .item>*{min-width:0}.orig .item select{width:100%}
+
+</style>
+</head>
+<body data-book="both">
+<div class="wrap">
+  <nav class="pager pager-top" aria-label="Lezioni (in alto)">
+    <a class="prev" href="trasformazioni.html"><small>Lezione precedente</small><span>← Come trasformiamo gli ambienti?</span></a>
+    <a class="next" href="../index.html"><small>Fine del modulo</small><span>Clima e ambienti: tutte le lezioni →</span></a>
+  </nav>
+  <header class="top">
+    <div class="eyebrow">Geografia · Modulo II · Clima e ambienti · Lezione 6 di 6</div>
+    <h1>Il clima è sempre cambiato. Che cosa cambia oggi?</h1>
+    <div class="books"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>Unità 4 · Lezioni 3 e 6 · pp. 42–43, 48–49</span></div><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">Capitolo 20 · §7 I cambiamenti climatici e §8 Il riscaldamento globale · pp. E54–E57</span></div></div>
+    <p class="lead">Glaciazioni e periodi caldi si sono sempre alternati, in migliaia di anni. Oggi la temperatura sale in pochi decenni, per i gas serra prodotti dalle attività umane.</p>
+  </header>
+
+  <div id="app"></div>
+  <div id="nuovo" hidden>
+  <h2 class="sec" style="margin-top:8px">Approfondisci con il libro</h2>
+  <section class="part">
+    <h2 class="sec">1. Come funziona l'effetto serra</h2>
+    <div class="books"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>Unità 4 · Lezione 3 · p. 42</span></div><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">§8 · pp. E56–E57</span></div></div>
+    <p class="lead">La luce del Sole (gialla) scalda la superficie; la Terra rimanda il calore verso lo spazio come raggi infrarossi (rossi). I <b>gas serra</b> ne trattengono una parte, come il vetro di una serra. Scegli quanta anidride carbonica c'è nell'aria e premi «Avvia».</p>
+    <div class="grid">
+      <div class="fig" id="f8">
+        <div class="figbar"><span class="chips"><button type="button" class="btn go" id="play8">▶ Avvia</button></span><span class="chips" role="group" aria-label="Situazioni" id="co"></span></div>
+        <div class="ctrl"><label>Anidride carbonica nell'aria <output id="cpo">420 ppm</output><input type="range" id="cpr" min="0" max="800" step="10" value="420"></label></div>
+        <div class="figbox"><div class="figin"><canvas id="cv8" role="img" aria-label="Animazione dei raggi del Sole e del calore trattenuto dai gas serra, con un termometro"></canvas></div></div>
+      </div>
+      <div class="card" aria-live="polite"><div class="kind" id="gk2"></div><div class="big" id="gt2"></div><p id="gx"></p>
+        <p class="note">Modello molto semplificato: la temperatura indicata è quella che la Terra raggiungerebbe dopo molti anni. «ppm» significa parti per milione: 420 ppm sono 420 molecole di CO₂ ogni milione di molecole d'aria.</p></div>
+    </div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">2. Chi produce i gas serra?</h2>
+    <div class="books"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>p. 43</span></div></div>
+    <div class="two">
+      <div class="fig" id="f9"><div class="figbar"><span class="kind">Emissioni di gas serra per settore</span></div><div class="figbox"><div class="figin"><canvas id="cv9" role="img" aria-label="Barre: elettricità e riscaldamento 25%, agricoltura 24%, industria 21%, trasporti 14%, altre fonti di energia 10%, edilizia 6%"></canvas></div></div></div>
+      <div class="card"><div id="q9"></div></div>
+    </div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">3. Come sappiamo com'era il clima del passato?</h2>
+    <div class="books"><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">§7 I cambiamenti climatici · pp. E54–E55</span></div></div>
+    <div class="card"><div id="ab9"></div></div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">4. Le tappe della lotta al cambiamento climatico</h2>
+    <div class="books"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>Lezione 6 · p. 48</span></div><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">p. E57</span></div></div>
+    <div class="card"><div id="ab10"></div>
+      <p class="note">Il libro scrive che l'Agenda 2030 è stata definita «a Rio de Janeiro»: in realtà è stata approvata dall'Assemblea generale dell'ONU a New York, nel settembre 2015.</p></div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">5. Che cosa possiamo fare noi?</h2>
+    <div class="books"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>p. 49 · Lavorate in classe</span></div></div>
+    <div class="card sort" id="s10">
+      <p>Tocca un comportamento e poi il gruppo giusto. Poi, in classe, scegliete un impegno per ogni ambito della vita quotidiana.</p>
+      <div class="pool"></div><div class="bins"></div>
+      <div class="chips"><button type="button" class="btn go" data-ck>Controlla</button><button type="button" class="btn" data-rs>Ricomincia</button></div>
+      <div class="fb" hidden></div>
+    </div>
+    <div class="words"><p><b>I dati di oggi.</b> Il libro dice che la temperatura media è aumentata «di quasi 1 °C». Oggi l'aumento rispetto alla fine dell'Ottocento è di circa <b>1,2–1,3 °C</b>, e il <b>2024</b> è stato il primo anno intero sopra 1,5 °C (Organizzazione meteorologica mondiale). L'anidride carbonica nell'aria è passata da circa 280 ppm prima della Rivoluzione industriale a più di <b>420 ppm</b>.</p></div>
+  </section>
+
+  </div>
+
+  <section class="part">
+    <div class="book">
+      <div class="row"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>Adesso apri il libro · pp. 42–43, 48–49</span></div><p>Studia la lezione 3 (pp. 42–43) e la lezione 6 «Salviamo il pianeta» (pp. 48–49); fate in classe l'attività di p. 49.</p></div>
+      <div class="row"><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">Adesso apri il libro · pp. E54–E57</span></div><p>Studia le pp. E54–E57: i cambiamenti climatici del passato e il riscaldamento globale.</p></div>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Lezioni (in basso)">
+    <a class="prev" href="trasformazioni.html"><small>Lezione precedente</small><span>← Come trasformiamo gli ambienti?</span></a>
+    <a class="next" href="../index.html"><small>Fine del modulo</small><span>Clima e ambienti: tutte le lezioni →</span></a>
+  </nav>
+</div>
+<div class="orig"><div id="tip" role="tooltip" hidden></div></div>
+<script>window.LEZ=6;</script>
+<script src="clima.js"></script>
+<script>
+/* ===== strumenti comuni delle pagine sulla popolazione ===== */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const V=n=>getComputedStyle(document.documentElement).getPropertyValue('--'+n).trim();
+const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FD='"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif', FB='"Atkinson Hyperlegible",Verdana,system-ui,sans-serif';
+const it=(x,d=0)=>Number(x).toLocaleString('it-IT',{minimumFractionDigits:d,maximumFractionDigits:d});
+
+/* tela adattata alla larghezza del riquadro; ratio = larghezza/altezza */
+function fit(cv,ratio,minH){
+  const w=Math.max(260,cv.parentElement.clientWidth), h=Math.max(minH||0,Math.round(w/ratio)), d=window.devicePixelRatio||1;
+  if(cv.width!==Math.round(w*d)||cv.height!==Math.round(h*d)){cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';}
+  const c=cv.getContext('2d'); c.setTransform(d,0,0,d,0,0); c.clearRect(0,0,w,h); return {c,w,h};
+}
+/* zoom dei disegni: + e − sopra ogni disegno */
+const DZ=[.75,1,1.25,1.5,1.75,2,2.5];
+function setupFig(fig,redraw){
+  const inner=fig.querySelector('.figin'), lab=fig.querySelector('.dz span'); let i=1;
+  const set=()=>{inner.style.width=(DZ[i]*100)+'%'; lab.textContent=Math.round(DZ[i]*100)+'%';
+    fig.querySelector('[data-dz="-1"]').disabled=i===0; fig.querySelector('[data-dz="1"]').disabled=i===DZ.length-1; redraw();};
+  fig.querySelectorAll('[data-dz]').forEach(b=>b.addEventListener('click',()=>{i=Math.max(0,Math.min(DZ.length-1,i+ +b.dataset.dz));set();}));
+  new ResizeObserver(()=>redraw()).observe(inner);
+  set();
+}
+function dzBar(){return '<span class="dz" role="group" aria-label="Ingrandimento del disegno"><button type="button" data-dz="-1" aria-label="Rimpicciolisci il disegno">−</button><span>100%</span><button type="button" data-dz="1" aria-label="Ingrandisci il disegno">+</button></span>';}
+$$('.figbar').forEach(b=>b.insertAdjacentHTML('beforeend',dzBar()));
+
+function txt(c,s,x,y,col,size,weight,align,font){c.fillStyle=col;c.font=`${weight||400} ${size}px ${font||FB}`;c.textAlign=align||'left';c.fillText(s,x,y);}
+
+/* vero o falso */
+function vero(box,items){
+  box.innerHTML=items.map((q,k)=>`<div class="row" data-k="${k}"><span>${q[0]}</span><span class="chips"><button type="button" data-v="1">Vero</button><button type="button" data-v="0">Falso</button></span><span class="why" hidden></span></div>`).join('');
+  box.addEventListener('click',e=>{const b=e.target.closest('[data-v]'); if(!b)return; const row=b.closest('.row'), q=items[row.dataset.k], ok=(b.dataset.v==='1')===q[1];
+    row.querySelectorAll('[data-v]').forEach(x=>x.setAttribute('aria-pressed',x===b)); row.className='row '+(ok?'right':'wrong');
+    const w=row.querySelector('.why'); w.hidden=false; w.textContent=(ok?'✓ Giusto. ':'✗ Non è così. ')+q[2];});
+}
+/* smistamento: tocca una carta e poi il gruppo giusto */
+function smista(root,cards,bins){
+  const pool=root.querySelector('.pool'), wrap=root.querySelector('.bins'), fb=root.querySelector('.fb'); let sel=null;
+  const draw=()=>{pool.innerHTML=cards.map((c,k)=>c.at==null?`<button type="button" data-c="${k}" aria-pressed="${sel===k}">${c.t}</button>`:'').join('')||'<span class="note">Hai sistemato tutte le carte: premi «Controlla».</span>';
+    wrap.innerHTML=bins.map((b,j)=>`<div class="bin" data-b="${j}" role="button" tabindex="0" aria-label="Metti qui: ${b}"><h4>${b}</h4>${cards.map((c,k)=>c.at===j?`<button type="button" data-back="${k}" class="${c.st||''}" title="Tocca per rimettere la carta nel mazzo">${c.t}</button>`:'').join('')}</div>`).join('');};
+  root.addEventListener('click',e=>{const c=e.target.closest('[data-c]'),bk=e.target.closest('[data-back]'),bn=e.target.closest('[data-b]');
+    if(c){sel=+c.dataset.c;draw();return}
+    if(bk){const k=+bk.dataset.back;cards[k].at=null;cards[k].st='';sel=k;fb.hidden=true;draw();return}
+    if(bn&&sel!=null){cards[sel].at=+bn.dataset.b;cards[sel].st='';sel=null;fb.hidden=true;draw();}
+    if(e.target.closest('[data-ck]')){let ok=0,n=0;cards.forEach(c=>{if(c.at!=null){n++;c.st=c.at===c.ok?'right':'wrong';if(c.st==='right')ok++}});draw();
+      fb.hidden=false;fb.className='fb '+(ok===cards.length?'right':'wrong');
+      fb.textContent=ok===cards.length?'Tutto giusto!':`${ok} su ${cards.length} al posto giusto. Tocca le carte rosse per spostarle.`+(n<cards.length?' Mancano ancora alcune carte.':'');}
+    if(e.target.closest('[data-rs]')){cards.forEach(c=>{c.at=null;c.st=''});sel=null;fb.hidden=true;draw();}
+  });
+  root.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('.bin')){e.preventDefault();e.target.click();}});
+  draw();
+}
+/* domande con risposta numerica */
+function numeri(box,qs){
+  box.innerHTML=qs.map((q,k)=>`<div class="row"><span>${q[0]}</span><input inputmode="decimal" data-k="${k}" aria-label="${q[0].replace(/<[^>]+>/g,'')}"><span>${q[2]||''}</span></div>`).join('')+'<div class="row"><button type="button" class="btn go" data-chk>Controlla</button></div><div class="fb" hidden></div>';
+  box.querySelector('[data-chk]').addEventListener('click',()=>{let ok=0;box.querySelectorAll('input').forEach(inp=>{const q=qs[inp.dataset.k],v=parseFloat(inp.value.replace(/\./g,'').replace(',','.'));
+      const good=!isNaN(v)&&Math.abs(v-q[1])<=(q[3]||0);inp.className=good?'right':'wrong';if(good)ok++;});
+    const fb=box.querySelector('.fb');fb.hidden=false;fb.className='fb '+(ok===qs.length?'right':'wrong');fb.textContent=ok===qs.length?'Tutto giusto!':`${ok} su ${qs.length}. Ricontrolla i calcoli nelle caselle rosse.`;});
+}
+
+/* abbina: ogni parola con la sua spiegazione */
+function abbina(box,pairs){
+  const defs=pairs.map(p=>p[1]).slice().sort(()=>Math.random()-.5);
+  box.classList.add('abb');
+  box.innerHTML=pairs.map((p,k)=>`<div class="row"><b>${p[0]}</b><select data-k="${k}" aria-label="Spiegazione di ${p[0].replace(/<[^>]+>/g,'')}"><option value="">Scegli…</option>${defs.map(d=>`<option>${d}</option>`).join('')}</select></div>`).join('')+'<div class="chips"><button type="button" class="btn go" data-chk>Controlla</button></div><div class="fb" hidden></div>';
+  box.querySelector('[data-chk]').addEventListener('click',()=>{let ok=0;box.querySelectorAll('select').forEach(s=>{const g=s.value===pairs[s.dataset.k][1];s.className=g?'right':'wrong';if(g)ok++});
+    const fb=box.querySelector('.fb');fb.hidden=false;fb.className='fb '+(ok===pairs.length?'right':'wrong');fb.textContent=ok===pairs.length?'Tutto giusto!':`${ok} su ${pairs.length}. Correggi le caselle rosse.`;});
+}
+/* scelta: domande a risposta multipla, una risposta giusta (indice) */
+function scelta(box,qs){
+  box.classList.add('qz');
+  box.innerHTML=qs.map((q,k)=>`<div class="q" data-q="${k}"><p>${q[0]}</p><div class="opts">${q[1].map((o,j)=>`<button type="button" data-o="${j}">${o}</button>`).join('')}</div><div class="why" hidden></div></div>`).join('');
+  box.addEventListener('click',e=>{const b=e.target.closest('[data-o]');if(!b)return;const qd=b.closest('.q'),q=qs[qd.dataset.q],ok=+b.dataset.o===q[2];
+    qd.querySelectorAll('[data-o]').forEach(x=>x.className='');b.className=ok?'right':'wrong';const w=qd.querySelector('.why');w.hidden=false;w.textContent=(ok?'✓ Giusto. ':'✗ Non è questa. ')+(ok?q[3]||'':'Riprova.');});
+}
+/* grafico climatico (termopluviometrico) */
+const MESI=['G','F','M','A','M','G','L','A','S','O','N','D'];
+function climo(c,x,y,w,h,T,P,o){
+  o=Object.assign({tmin:-40,tmax:40,pmax:300,fs:11,title:''},o||{});
+  const l=x+30,r=x+w-34,t=y+(o.title?20:6),b=y+h-18,cw=(r-l)/12,YT=v=>b-(v-o.tmin)/(o.tmax-o.tmin)*(b-t),YP=v=>b-v/o.pmax*(b-t);
+  if(o.title)txt(c,o.title,x+w/2,y+13,V('ink'),o.fs+1,800,'center',FD);
+  c.strokeStyle=V('line');c.lineWidth=1;
+  for(let v=o.tmin;v<=o.tmax;v+=10){c.beginPath();c.moveTo(l,YT(v));c.lineTo(r,YT(v));c.stroke();txt(c,String(v),l-4,YT(v)+4,V('c2'),o.fs-1,700,'right');}
+  for(let v=0;v<=o.pmax;v+=100)txt(c,String(v),r+4,YP(v)+4,V('c1'),o.fs-1,700,'left');
+  if(o.tmin<0){c.strokeStyle=V('muted');c.setLineDash([4,3]);c.beginPath();c.moveTo(l,YT(0));c.lineTo(r,YT(0));c.stroke();c.setLineDash([]);}
+  c.fillStyle=V('c1');P.forEach((p,i)=>{const bh=Math.max(1,b-YP(Math.min(p,o.pmax)));c.fillRect(l+i*cw+cw*.15,b-bh,cw*.7,bh);});
+  c.strokeStyle=V('c2');c.lineWidth=2.5;c.beginPath();T.forEach((v,i)=>{const px=l+(i+.5)*cw,py=YT(v);i?c.lineTo(px,py):c.moveTo(px,py);});c.stroke();
+  c.fillStyle=V('c2');T.forEach((v,i)=>{c.beginPath();c.arc(l+(i+.5)*cw,YT(v),3,0,7);c.fill();});
+  MESI.forEach((m,i)=>txt(c,m,l+(i+.5)*cw,b+13,V('muted'),o.fs-1,700,'center'));
+  txt(c,'°C',l-4,t-2>y?t-4:t+8,V('c2'),o.fs-1,800,'right');txt(c,'mm',r+4,t-2>y?t-4:t+8,V('c1'),o.fs-1,800,'left');
+}
+const sum=a=>a.reduce((x,y)=>x+y,0);
+/* stazioni: valori letti dai grafici climatici di Vivi la Geografia 3, arrotondati */
+const STAZ={
+ borneo:{n:'Pulau Bunyu Barat',p:'Borneo, Indonesia',b:'Foresta pluviale',T:[26,26,27,27.5,28,27.5,27.5,27.5,27.5,27.5,27,26.5],P:[215,200,245,265,270,250,255,250,255,265,280,265]},
+ kigoma:{n:'Kigoma',p:'Tanzania',b:'Savana',T:[24,23.5,23.5,23.5,23.5,23,23,24,25,25,24,23],P:[120,105,125,180,40,5,0,5,20,45,120,140]},
+ timb:{n:'Timbouctou',p:'Mali',b:'Deserto caldo',T:[22,24,28,31,33,34,34.5,31,31,30,26,22],P:[0,0,0,1,4,20,60,85,35,5,0,0]},
+ capo:{n:'Città del Capo',p:'Sudafrica',b:'Macchia mediterranea',T:[21,21,20,18,16,14,13,14,15,17,19,20],P:[15,15,20,50,90,110,95,80,50,35,20,15]},
+ auck:{n:'Auckland',p:'Nuova Zelanda',b:'Foresta di latifoglie',T:[20,20,19,17,14,12,11,12,13,15,16,18],P:[75,80,90,100,115,135,145,120,105,95,85,90]},
+ rosa:{n:'Santa Rosa',p:'Argentina',b:'Prateria-steppa',T:[24,23,20,16,12,9,8,10,13,16,20,23],P:[80,75,95,55,30,20,20,25,40,70,80,95]},
+ ossora:{n:'Ossora',p:'Kamčatka, Russia',b:'Taiga',T:[-16,-15,-11,-4,2,8,12,13,9,1,-7,-13],P:[50,40,35,30,30,30,50,60,60,65,50,45]},
+ quin:{n:'Quinault',p:'Nunavut, Canada',b:'Tundra',T:[-33,-32,-30,-20,-8,3,10,8,1,-10,-22,-29],P:[5,5,8,10,10,15,30,35,25,20,10,8]},
+ mcm:{n:'McMurdo',p:'Antartide',b:'Ghiacci polari',T:[-3,-9,-18,-21,-22,-23,-25,-26,-24,-18,-10,-3],P:[15,25,15,10,15,20,15,10,10,10,10,15]}
+};
+
+/* ===== 1. effetto serra ===== */
+const CO=[['Senza gas serra',0],['Prima del 1800',280],['Oggi',420],['Il doppio',560]];
+$('#co').innerHTML=CO.map((p,i)=>`<button type="button" data-c="${i}" aria-pressed="${i===2}">${p[0]}</button>`).join('');
+let ph=[],t8=null,last=0;
+const ppm=()=>+$('#cpr').value, Teq=p=>p<=0?-18:14+3*Math.log2(p/280), trap=p=>p<=0?0:Math.min(.85,.5+.12*Math.log2(p/280));
+function draw8(dt){const {c,w,h}=fit($('#cv8'),1.6,260),gy=h-34,aT=h*.22,aB=h*.48,p=ppm();
+  const sky=c.createLinearGradient(0,0,0,gy);sky.addColorStop(0,'#08142a');sky.addColorStop(1,'#2c5872');c.fillStyle=sky;c.fillRect(0,0,w,gy);
+  c.fillStyle='#ffd34d';c.beginPath();c.arc(36,30,18,0,7);c.fill();
+  c.fillStyle=`rgba(180,200,230,${.08+trap(p)*.35})`;c.fillRect(0,aT,w-60,aB-aT);
+  const nm=Math.round(p/12);c.fillStyle='#c9d6e6';for(let i=0;i<nm;i++){const x=((i*97)%(w-80))+10,y=aT+((i*53)%(aB-aT));c.beginPath();c.arc(x,y,2.2,0,7);c.fill();}
+  txt(c,'atmosfera con gas serra',8,aT-6,'#c9d6e6',11,700,'left');
+  c.fillStyle='#5a7f3a';c.fillRect(0,gy,w,h-gy);c.fillStyle='#2a78b8';c.fillRect(w*.55,gy,w*.45-60,h-gy);
+  ph.forEach(o=>{c.strokeStyle=o.k?'#ff6b4a':'#ffd34d';c.lineWidth=2.5;c.beginPath();c.moveTo(o.x,o.y);c.lineTo(o.x-o.vx*.06,o.y-o.vy*.06);c.stroke();});
+  const T=Teq(p),tx=w-30,tt=16,tb=gy-4,TY=v=>tb-(v+25)/50*(tb-tt);
+  c.fillStyle='#fff';c.fillRect(tx-6,tt,12,tb-tt);c.fillStyle=T<0?'#5aa6e6':'#e8433a';c.fillRect(tx-4,TY(T),8,tb-TY(T));c.beginPath();c.arc(tx,tb+6,9,0,7);c.fill();
+  [-20,0,20].forEach(v=>txt(c,v+'°',tx-10,TY(v)+4,'#fff',10,700,'right'));
+}
+function step8(ts){if(!t8)return;const dt=Math.min(.05,(ts-(last||ts))/1000);last=ts;const {w,h}={w:$('#cv8').clientWidth,h:$('#cv8').clientHeight},gy=h-34,aT=h*.22,aB=h*.48,p=ppm();
+  if(Math.random()<.25)ph.push({x:30+Math.random()*(w*.5),y:0,vx:60,vy:180,k:0});
+  ph.forEach(o=>{o.x+=o.vx*dt;o.y+=o.vy*dt;
+    if(!o.k&&o.y>=gy){o.k=1;o.vy=-150;o.vx=(Math.random()-.5)*60;o.y=gy;o.chk=false;}
+    else if(o.k&&o.vy<0&&!o.chk&&o.y<(aT+aB)/2){o.chk=true;if(Math.random()<trap(p)){o.vy=150;o.vx=-o.vx;o.d=1;}}
+    else if(o.k&&o.vy>0&&o.y>=gy){o.vy=-150;o.chk=false;}});
+  ph=ph.filter(o=>o.y>-10&&o.x<w+10&&o.x>-10).slice(-300);draw8();requestAnimationFrame(step8);}
+function card8(){const p=ppm(),T=Teq(p);$('#cpo').textContent=p+' ppm';$('#gk2').textContent=p===0?'Senza gas serra':p+' ppm di CO₂';$('#gt2').textContent='circa '+it(T,1).replace('-','−')+' °C';
+  $('#gx').innerHTML=p===0?'Senza l\'effetto serra naturale la temperatura media della Terra sarebbe di circa <b>−18 °C</b>: un pianeta gelato, senza vita.':p<=300?'Con l\'effetto serra naturale la temperatura media è di circa 14 °C: la vita è possibile.':`Più gas serra trattengono più calore: la temperatura media sale di <b>${it(T-14,1)} °C</b> rispetto a prima del 1800.`;
+  $$('#co button').forEach((b,i)=>b.setAttribute('aria-pressed',CO[i][1]===p));}
+$('#co').addEventListener('click',e=>{const b=e.target.closest('[data-c]');if(!b)return;$('#cpr').value=CO[+b.dataset.c][1];card8();draw8();});
+$('#cpr').addEventListener('input',()=>{card8();draw8();});
+$('#play8').addEventListener('click',()=>{if(t8){t8=null;$('#play8').textContent='▶ Avvia';return}t8=1;last=0;$('#play8').textContent='⏸ Pausa';requestAnimationFrame(step8);});
+setupFig($('#f8'),()=>draw8());card8();
+/* ===== 2. settori ===== */
+const SE=[['Elettricità e riscaldamento',25],['Agricoltura e uso delle terre',24],['Industria',21],['Trasporti',14],['Altre fonti di energia',10],['Edilizia',6]];
+function draw9(){const {c,w,h}=fit($('#cv9'),1.4,220),lw=Math.min(190,w*.45),bh=(h-10)/SE.length;
+  SE.forEach((s,i)=>{const y=6+i*bh;txt(c,s[0],lw-8,y+bh*.62,V('ink'),12,700,'right');c.fillStyle=i<3?V('accent'):V('pale');const bw=(w-lw-44)*s[1]/25;c.fillRect(lw,y+bh*.15,bw,bh*.7);txt(c,s[1]+'%',lw+bw+6,y+bh*.62,V('ink'),13,800,'left',FD);});}
+setupFig($('#f9'),draw9);
+scelta($('#q9'),[
+ ['Quali sono i primi tre settori per emissioni di gas serra?',['Trasporti, edilizia, industria','Elettricità e riscaldamento, agricoltura, industria','Agricoltura, trasporti, edilizia'],1,'Insieme fanno il 70% delle emissioni.'],
+ ['Perché anche l\'agricoltura produce molti gas serra?',['Per il metano degli allevamenti e la deforestazione','Perché le piante producono CO₂','Non ne produce'],0,'Il maggior consumo di carne fa aumentare il metano nell\'atmosfera.'],
+ ['Quale grande paese ha avuto la maggiore crescita di emissioni negli ultimi anni?',['Stati Uniti','Cina','Giappone'],1,'Oggi è il paese che emette più gas serra in totale; per abitante, però, uno statunitense ne produce di più.'],
+ ['Che cosa rischiano le isole Kiribati, nell\'Oceano Pacifico?',['Di essere sommerse dall\'innalzamento del mare','Di diventare un deserto','Di essere coperte dai ghiacci'],0,'Il mare che sale erode le coste e rende salata l\'acqua dei pozzi.']]);
+/* ===== 3. indizi ===== */
+abbina($('#ab9'),[['Carote di ghiaccio','cilindri estratti dai ghiacciai: le bolle d\'aria imprigionate mostrano com\'era l\'atmosfera migliaia di anni fa'],['Fossili','resti di piante e animali che vivevano in climi diversi da quelli di oggi'],['Anelli degli alberi','sono più larghi negli anni caldi e umidi, più stretti in quelli freddi o secchi'],['Glaciazione','lungo periodo freddo in cui i ghiacci coprono gran parte dei continenti'],['Periodo interglaciale','periodo più caldo tra due glaciazioni, come quello in cui viviamo']]);
+/* ===== 4. tappe ===== */
+abbina($('#ab10'),[['1987','l\'ONU dà una definizione chiara di sviluppo sostenibile'],['1992 · Rio de Janeiro','la Conferenza ONU sull\'ambiente approva l\'Agenda 21'],['1997 · Kyoto','i paesi avanzati si impegnano a ridurre le emissioni di gas serra'],['2015 · Parigi','accordo per contenere il riscaldamento entro 1,5 gradi (COP21)'],['2015 · ONU','l\'Agenda 2030 con 17 obiettivi per lo sviluppo sostenibile'],['2018','nasce il movimento #FridaysForFuture']]);
+/* ===== 5. comportamenti ===== */
+smista($('#s10'),[{t:'Bere l\'acqua del rubinetto con una borraccia',ok:0},{t:'Spegnere luci e apparecchi quando non servono',ok:0},{t:'Andare a scuola a piedi o in bici',ok:0},{t:'Fare la raccolta differenziata',ok:0},{t:'Comprare prodotti del commercio equosolidale',ok:0},
+ {t:'Comprare bottigliette di plastica ogni giorno',ok:1},{t:'Tenere il riscaldamento altissimo con le finestre aperte',ok:1},{t:'Farsi accompagnare in auto anche per pochi metri',ok:1},{t:'Comprare vestiti nuovi e buttarli dopo poco',ok:1}].sort(()=>Math.random()-.5),
+ ['Aiuta il pianeta','Fa male al pianeta']);
+
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+<script src="../../../../assets/barra.js"></script>
+</body>
+</html>

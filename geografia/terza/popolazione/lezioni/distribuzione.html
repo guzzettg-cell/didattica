@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Terre affollate, terre spopolate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --paper:#eef1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
+  --accent:#c2410c; --accent-soft:#fde4d3; --ok:#1f7a4d; --ok-soft:#dcf2e6; --no:#b42318; --no-soft:#fde3e1;
+  --vivi:#1d6fa5; --vivi-soft:#dcebf6; --on-accent:#fff; --on-vivi:#fff; --ga:#7a3fa0; --on-ga:#fff;
+  --c1:#2a78b8; --c2:#e08a1e; --c3:#3f9a5a; --c4:#b5528a; --c5:#7b6fd0; --pale:#c9d3de;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717;
+  --vivi:#6db7ea; --vivi-soft:#10283a; --on-accent:#140a03; --on-vivi:#06121c; --ga:#c9a2e8; --on-ga:#1a0b26; --c1:#5aa6e6; --c2:#f2a541; --c3:#5cc47b; --c4:#e07ab2; --c5:#a79cf2; --pale:#33445a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717;
+  --vivi:#6db7ea; --vivi-soft:#10283a; --on-accent:#140a03; --on-vivi:#06121c; --ga:#c9a2e8; --on-ga:#1a0b26; --c1:#5aa6e6; --c2:#f2a541; --c3:#5cc47b; --c4:#e07ab2; --c5:#a79cf2; --pale:#33445a; color-scheme:dark}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+[hidden]{display:none!important}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:24px}
+header.top{display:grid;gap:8px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.02;margin:0}
+h2.sec{font-family:var(--display);font-weight:800;font-size:1.45rem;margin:0}
+.lead{margin:0;max-width:80ch;color:var(--muted)}
+.note{font-size:.86rem;color:var(--muted);margin:0}
+section.part{display:grid;gap:12px}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;align-items:start}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+@media (max-width:920px){.grid,.two{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:10px;min-width:0;align-content:start}
+.card h3{font-family:var(--display);font-weight:800;font-size:1.3rem;margin:0}
+.card p{margin:0}
+.kind{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.big{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1.05;font-variant-numeric:tabular-nums}
+/* etichetta del libro */
+.vivi{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;justify-self:start;font-size:.85rem}
+.vivi b{display:inline-block;background:var(--vivi);color:var(--on-vivi);font-family:var(--display);font-weight:800;letter-spacing:.06em;font-size:.82rem;padding:4px 10px;border-radius:6px}
+.vivi span{color:var(--vivi);font-weight:700}
+.vivi b.ga{background:var(--ga);color:var(--on-ga)}
+.vivi span.ga{color:var(--ga)}
+.books{display:flex;flex-wrap:wrap;gap:6px 18px}
+.book .row{display:grid;gap:4px}
+.book .row+.row{border-top:1px solid var(--line);padding-top:8px}
+.book{background:var(--vivi-soft);border:1px solid var(--vivi);border-radius:14px;padding:14px 18px;display:grid;gap:8px}
+.book p{margin:0}
+/* pulsanti */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button,.btn{font:inherit;font-size:.88rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 12px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}
+.btn.go{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:700}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.ctrl label{display:grid;gap:2px;font-size:.85rem;color:var(--muted);font-weight:700;min-width:180px;flex:1}
+.ctrl input[type=range]{width:100%;accent-color:var(--accent)}
+.ctrl output{font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}
+/* disegni con zoom */
+.fig{display:grid;gap:8px;min-width:0}
+.figbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.dz{display:inline-flex;gap:4px;align-items:center;margin-left:auto}
+.dz button{font:inherit;font-weight:800;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;min-width:34px;height:34px;cursor:pointer}
+.dz span{font-size:.8rem;color:var(--muted);font-weight:700;min-width:3.2em;text-align:center;font-variant-numeric:tabular-nums}
+.figbox{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:auto;-webkit-overflow-scrolling:touch}
+.figin{width:100%;min-width:0}
+.figin canvas{display:block;width:100%}
+/* esercizi */
+.fb{border-radius:10px;padding:9px 12px;font-size:.95rem}
+.fb.right{background:var(--ok-soft);border:1px solid var(--ok)}
+.fb.wrong{background:var(--no-soft);border:1px solid var(--no)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:8px 12px;cursor:pointer;text-align:left}
+.opts button.on{background:var(--accent-soft);border-color:var(--accent)}
+.opts button.right{border-color:var(--ok);background:var(--ok-soft)}
+.opts button.wrong{border-color:var(--no);background:var(--no-soft)}
+.vf{display:grid;gap:8px}
+.vf .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:8px}
+.vf .row.right{background:var(--ok-soft)}.vf .row.wrong{background:var(--no-soft)}
+.vf .row .why{grid-column:1/-1;font-size:.88rem;color:var(--muted)}
+.inq{display:grid;gap:8px}
+.inq .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.inq input{font:inherit;width:6.5em;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.inq input.right{border-color:var(--ok);background:var(--ok-soft)}.inq input.wrong{border-color:var(--no);background:var(--no-soft)}
+/* smistamento: tocca una carta, poi tocca il gruppo */
+.sort{display:grid;gap:10px}
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:44px}
+.pool button,.bin button{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:7px 11px;cursor:pointer;text-align:left}
+.pool button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.bin{border:2px dashed var(--line);border-radius:12px;padding:10px;display:grid;gap:6px;align-content:start;min-height:90px;cursor:pointer;background:transparent;color:inherit;font:inherit;text-align:left}
+.bin h4{margin:0;font-family:var(--display);font-size:1rem}
+.bin button.right{border-color:var(--ok);background:var(--ok-soft)}
+.bin button.wrong{border-color:var(--no);background:var(--no-soft)}
+details{border-top:1px solid var(--line);padding:9px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700}
+details p{margin:6px 0 0;color:var(--muted)}
+.words{background:var(--accent-soft);border-radius:12px;padding:10px 14px;font-size:.95rem}
+.words p{margin:0}
+/* navigazione */
+.pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pager a{display:grid;gap:2px;align-content:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;color:var(--ink);text-decoration:none}
+.pager a:hover{border-color:var(--accent)}
+.pager a:hover span{text-decoration:underline}
+.pager small{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pager span{font-family:var(--display);font-weight:800;font-size:1.05rem;line-height:1.25}
+.pager .next{text-align:right}
+.pager.pager-top a{padding:8px 14px}
+.pager.pager-top span{font-size:.95rem}
+@media (max-width:640px){.pager{grid-template-columns:1fr}.pager .next{text-align:left}}
+table.dati{border-collapse:collapse;width:100%;font-size:.92rem}
+table.dati th,table.dati td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+table.dati td.n,table.dati th.n{text-align:right;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.ctrl select{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="pager pager-top" aria-label="Argomenti (in alto)">
+    <a class="prev" href="crescita.html"><small>Argomento precedente</small><span>← La crescita della popolazione</span></a>
+    <a class="next" href="squilibri.html"><small>Argomento successivo</small><span>I grandi squilibri demografici →</span></a>
+  </nav>
+  <header class="top">
+    <div class="eyebrow">Geografia · La popolazione mondiale · Parte 3 di 4</div>
+    <h1>Terre affollate, terre spopolate</h1>
+    <div class="books"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>Unità 5 · Lezione 3 · pp. 58–59</span></div><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">Capitolo 21 · §1 La popolazione mondiale · pp. E72–E73</span></div></div>
+    <p class="lead">La popolazione è distribuita in modo molto irregolare: l'80% degli abitanti vive sul 20% delle terre emerse. Dove si vive meglio e perché? Dipende da fattori naturali, storici ed economici.</p>
+  </header>
+
+  <section class="part">
+    <h2 class="sec">1. Quante persone in un chilometro quadrato?</h2>
+    <p class="lead">La <b>densità di popolazione</b> dice quanti abitanti ci sono, in media, in 1 km² (un quadrato di 1000 m di lato). Scegli un luogo e guarda il quadrato riempirsi.</p>
+    <div class="grid">
+      <div class="fig" id="f4">
+        <div class="figbar"><span class="chips" role="group" aria-label="Luoghi" id="pl"></span></div>
+        <div class="figbox"><div class="figin"><canvas id="cv4" role="img" aria-label="Un chilometro quadrato con un puntino per ogni abitante"></canvas></div></div>
+      </div>
+      <div class="card" aria-live="polite">
+        <div class="kind" id="dk">Densità</div>
+        <div class="big" id="dv"></div>
+        <h3 id="dn"></h3>
+        <p id="dt"></p>
+        <table class="dati"><tr><th>Abitanti</th><td class="n" id="da"></td></tr><tr><th>Superficie</th><td class="n" id="ds"></td></tr></table>
+        <p class="note">Densità = abitanti ÷ superficie in km². Dati arrotondati, circa 2024.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">2. Calcola tu la densità</h2>
+    <div class="two">
+      <div class="card"><div class="kind">Prova tu</div><div class="inq" id="q3"></div><p class="note">Arrotonda all'unità. Accetto anche risultati vicini.</p></div>
+      <div class="card">
+        <div class="kind">Curiosità · Piccolo e affollato</div>
+        <p>Il <b>Bangladesh</b> è grande la metà dell'Italia, ma ha circa tre volte i suoi abitanti. Il libro lo confronta con un gruppo di paesi grandi e poco abitati (Canada, Russia, Australia, Groenlandia, Sahara…): tutti insieme coprono più di 40 milioni di km², eppure hanno più o meno gli stessi abitanti del Bangladesh.</p>
+        <p class="note">La densità media del mondo è di circa 60 abitanti per km² (il libro dice 50: dipende da quante terre si contano). È un dato «teorico»: quasi nessun luogo ha davvero quella densità.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">3. Dove vivono 100 abitanti della Terra?</h2>
+    <p class="lead">Immagina che la popolazione mondiale sia di 100 persone. Scegli una domanda.</p>
+    <div class="grid">
+      <div class="fig" id="f5">
+        <div class="figbar"><span class="chips" role="group" aria-label="Domande" id="hq"></span></div>
+        <div class="figbox"><div class="figin"><canvas id="cv5" role="img" aria-label="Cento omini: quelli evidenziati rispondono alla domanda scelta"></canvas></div></div>
+      </div>
+      <div class="card" aria-live="polite"><div class="big" id="hv"></div><p id="ht"></p></div>
+    </div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">4. Perché lì e non altrove? I fattori del popolamento</h2>
+    <div class="card sort" id="s3">
+      <p>Tocca una carta e poi il gruppo giusto.</p>
+      <div class="pool"></div>
+      <div class="bins"></div>
+      <div class="chips"><button type="button" class="btn go" data-check>Controlla</button><button type="button" class="btn" data-reset>Ricomincia</button></div>
+      <div class="fb" hidden></div>
+    </div>
+    <div class="two">
+      <div class="card">
+        <div class="kind">Quando la montagna aiuta</div>
+        <p>Nelle zone tropicali l'altitudine rende il clima più mite: per questo alcune grandi città sono in alta quota.</p>
+        <table class="dati">
+          <tr><th>Città</th><th class="n">Altitudine</th></tr>
+          <tr><td>La Paz (Bolivia, sede del governo)</td><td class="n">circa 3600 m</td></tr>
+          <tr><td>Quito (Ecuador)</td><td class="n">circa 2850 m</td></tr>
+          <tr><td>Bogotá (Colombia)</td><td class="n">2640 m</td></tr>
+          <tr><td>Addis Abeba (Etiopia)</td><td class="n">circa 2350 m</td></tr>
+          <tr><td>Città del Messico</td><td class="n">circa 2240 m</td></tr>
+        </table>
+        <p class="note">Il libro cita tra le capitali «più elevate» anche Lima, che però è sulla costa del Pacifico, a circa 150 m.</p>
+      </div>
+      <div class="card" aria-live="polite">
+        <div class="kind">Le grandi regioni di popolamento</div>
+        <p>Quali sono le regioni più popolate del mondo? Selezionale tutte e poi controlla.</p>
+        <div class="opts" id="rg"></div>
+        <div><button type="button" class="btn go" id="rgc">Controlla</button></div>
+        <div class="fb" id="rgf" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">5. Sempre più in città</h2>
+    <div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">Capitolo 21 · p. E73 · Dove si trovano le città più popolose?</span></div>
+    <p class="lead">Negli ultimi due secoli le persone si sono spostate in massa dalle campagne alle città: è l'<b>urbanesimo</b>. Ogni quadretto è una persona su 100: quelli colorati vivono in città. Premi «Avvia» o scegli un anno.</p>
+    <div class="grid">
+      <div class="fig" id="f8">
+        <div class="figbar">
+          <span class="chips"><button type="button" class="btn go" id="play8">▶ Avvia</button></span>
+          <span class="chips" role="group" aria-label="Anni" id="uy"></span>
+        </div>
+        <div class="figbox"><div class="figin"><canvas id="cv8" role="img" aria-label="Cento quadretti: quelli colorati sono le persone che vivono in città nell'anno scelto"></canvas></div></div>
+      </div>
+      <div class="card" aria-live="polite">
+        <div class="kind" id="uk"></div>
+        <div class="big" id="up"></div>
+        <p id="ut"></p>
+        <p class="note">Percentuali arrotondate (ONU). Il 2050 è una previsione.</p>
+      </div>
+    </div>
+    <div class="card sort" id="s8">
+      <div class="kind">Prova tu · Grande città, metropoli o megalopoli?</div>
+      <p>Tocca una carta e poi il gruppo giusto.</p>
+      <div class="pool"></div>
+      <div class="bins"></div>
+      <div class="chips"><button type="button" class="btn go" data-check>Controlla</button><button type="button" class="btn" data-reset>Ricomincia</button></div>
+      <div class="fb" hidden></div>
+    </div>
+    <p class="note">Le megalopoli sono oggi almeno 25: 6 nei paesi più industrializzati (Tokyo, New York, Los Angeles, Parigi, Mosca, Londra), le altre nelle regioni meno sviluppate. Le città le studieremo meglio nella lezione «L'inurbamento».</p>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">Domande per ragionare</h2>
+    <div class="card"><div>
+      <details><summary>Perché l'Asia meridionale e orientale sono così popolate?</summary><p>Hanno pianure fertili lungo grandi fiumi e un clima favorevole all'agricoltura. Lì, già dal 3000 a.C., sono nate ricche civiltà agricole lungo l'Indo e il Fiume Giallo: la popolazione vi si concentra da millenni.</p></details>
+      <details><summary>Perché alcune regioni africane hanno una bassa densità anche dove l'ambiente non è ostile?</summary><p>Anche la storia conta: dal Cinquecento la tratta degli schiavi ha strappato all'Africa decine di milioni di persone, portate a lavorare nelle Americhe.</p></details>
+      <details><summary>Qual è oggi il fattore che attira di più la popolazione?</summary><p>La città: offre più lavoro nei servizi e nell'industria e una maggiore libertà culturale e sociale. Oggi più di metà dell'umanità vive in aree urbane. Ne parleremo nella lezione sull'inurbamento.</p></details>
+    </div></div>
+  </section>
+
+  <section class="part">
+    <div class="book">
+      <div class="row"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>Adesso apri il libro · pp. 58–59</span></div><p>Studia la lezione alle pp. 58–59 e fai le attività di p. 59: nell'esercizio 2 trova sulla carta l'Africa occidentale, l'Asia meridionale e il Sud-Est brasiliano.</p></div>
+      <div class="row"><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">Adesso apri il libro · pp. E72–E73</span></div><p>Studia a p. E72 la distribuzione della popolazione (grafico B e carta C) e a p. E73 «Dove si trovano le città più popolose?». Poi fai l'esercizio 1 di «Impara a imparare».</p></div>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Argomenti (in basso)">
+    <a class="prev" href="crescita.html"><small>Argomento precedente</small><span>← La crescita della popolazione</span></a>
+    <a class="next" href="squilibri.html"><small>Argomento successivo</small><span>I grandi squilibri demografici →</span></a>
+  </nav>
+</div>
+<script>
+/* ===== strumenti comuni delle pagine sulla popolazione ===== */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const V=n=>getComputedStyle(document.documentElement).getPropertyValue('--'+n).trim();
+const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FD='"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif', FB='"Atkinson Hyperlegible",Verdana,system-ui,sans-serif';
+const it=(x,d=0)=>Number(x).toLocaleString('it-IT',{minimumFractionDigits:d,maximumFractionDigits:d});
+
+/* tela adattata alla larghezza del riquadro; ratio = larghezza/altezza */
+function fit(cv,ratio,minH){
+  const w=Math.max(260,cv.parentElement.clientWidth), h=Math.max(minH||0,Math.round(w/ratio)), d=window.devicePixelRatio||1;
+  if(cv.width!==Math.round(w*d)||cv.height!==Math.round(h*d)){cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';}
+  const c=cv.getContext('2d'); c.setTransform(d,0,0,d,0,0); c.clearRect(0,0,w,h); return {c,w,h};
+}
+/* zoom dei disegni: + e − sopra ogni disegno */
+const DZ=[.75,1,1.25,1.5,1.75,2,2.5];
+function setupFig(fig,redraw){
+  const inner=fig.querySelector('.figin'), lab=fig.querySelector('.dz span'); let i=1;
+  const set=()=>{inner.style.width=(DZ[i]*100)+'%'; lab.textContent=Math.round(DZ[i]*100)+'%';
+    fig.querySelector('[data-dz="-1"]').disabled=i===0; fig.querySelector('[data-dz="1"]').disabled=i===DZ.length-1; redraw();};
+  fig.querySelectorAll('[data-dz]').forEach(b=>b.addEventListener('click',()=>{i=Math.max(0,Math.min(DZ.length-1,i+ +b.dataset.dz));set();}));
+  new ResizeObserver(()=>redraw()).observe(inner);
+  set();
+}
+function dzBar(){return '<span class="dz" role="group" aria-label="Ingrandimento del disegno"><button type="button" data-dz="-1" aria-label="Rimpicciolisci il disegno">−</button><span>100%</span><button type="button" data-dz="1" aria-label="Ingrandisci il disegno">+</button></span>';}
+$$('.figbar').forEach(b=>b.insertAdjacentHTML('beforeend',dzBar()));
+
+function txt(c,s,x,y,col,size,weight,align,font){c.fillStyle=col;c.font=`${weight||400} ${size}px ${font||FB}`;c.textAlign=align||'left';c.fillText(s,x,y);}
+
+/* vero o falso */
+function vero(box,items){
+  box.innerHTML=items.map((q,k)=>`<div class="row" data-k="${k}"><span>${q[0]}</span><span class="chips"><button type="button" data-v="1">Vero</button><button type="button" data-v="0">Falso</button></span><span class="why" hidden></span></div>`).join('');
+  box.addEventListener('click',e=>{const b=e.target.closest('[data-v]'); if(!b)return; const row=b.closest('.row'), q=items[row.dataset.k], ok=(b.dataset.v==='1')===q[1];
+    row.querySelectorAll('[data-v]').forEach(x=>x.setAttribute('aria-pressed',x===b)); row.className='row '+(ok?'right':'wrong');
+    const w=row.querySelector('.why'); w.hidden=false; w.textContent=(ok?'✓ Giusto. ':'✗ Non è così. ')+q[2];});
+}
+/* smistamento: tocca una carta e poi il gruppo giusto */
+function smista(root,cards,bins){
+  const pool=root.querySelector('.pool'), wrap=root.querySelector('.bins'), fb=root.querySelector('.fb'); let sel=null;
+  const draw=()=>{pool.innerHTML=cards.map((c,k)=>c.at==null?`<button type="button" data-c="${k}" aria-pressed="${sel===k}">${c.t}</button>`:'').join('')||'<span class="note">Hai sistemato tutte le carte: premi «Controlla».</span>';
+    wrap.innerHTML=bins.map((b,j)=>`<div class="bin" data-b="${j}" role="button" tabindex="0" aria-label="Metti qui: ${b}"><h4>${b}</h4>${cards.map((c,k)=>c.at===j?`<button type="button" data-back="${k}" class="${c.st||''}" title="Tocca per rimettere la carta nel mazzo">${c.t}</button>`:'').join('')}</div>`).join('');};
+  root.addEventListener('click',e=>{const c=e.target.closest('[data-c]'),bk=e.target.closest('[data-back]'),bn=e.target.closest('[data-b]');
+    if(c){sel=+c.dataset.c;draw();return}
+    if(bk){const k=+bk.dataset.back;cards[k].at=null;cards[k].st='';sel=k;fb.hidden=true;draw();return}
+    if(bn&&sel!=null){cards[sel].at=+bn.dataset.b;cards[sel].st='';sel=null;fb.hidden=true;draw();}
+    if(e.target.closest('[data-check]')){let ok=0,n=0;cards.forEach(c=>{if(c.at!=null){n++;c.st=c.at===c.ok?'right':'wrong';if(c.st==='right')ok++}});draw();
+      fb.hidden=false;fb.className='fb '+(ok===cards.length?'right':'wrong');
+      fb.textContent=ok===cards.length?'Tutto giusto!':`${ok} su ${cards.length} al posto giusto. Tocca le carte rosse per spostarle.`+(n<cards.length?' Mancano ancora alcune carte.':'');}
+    if(e.target.closest('[data-reset]')){cards.forEach(c=>{c.at=null;c.st=''});sel=null;fb.hidden=true;draw();}
+  });
+  root.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('.bin')){e.preventDefault();e.target.click();}});
+  draw();
+}
+/* domande con risposta numerica */
+function numeri(box,qs){
+  box.innerHTML=qs.map((q,k)=>`<div class="row"><span>${q[0]}</span><input inputmode="decimal" data-k="${k}" aria-label="${q[0].replace(/<[^>]+>/g,'')}"><span>${q[2]||''}</span></div>`).join('')+'<div class="row"><button type="button" class="btn go" data-chk>Controlla</button></div><div class="fb" hidden></div>';
+  box.querySelector('[data-chk]').addEventListener('click',()=>{let ok=0;box.querySelectorAll('input').forEach(inp=>{const q=qs[inp.dataset.k],v=parseFloat(inp.value.replace(/\./g,'').replace(',','.'));
+      const good=!isNaN(v)&&Math.abs(v-q[1])<=(q[3]||0);inp.className=good?'right':'wrong';if(good)ok++;});
+    const fb=box.querySelector('.fb');fb.hidden=false;fb.className='fb '+(ok===qs.length?'right':'wrong');fb.textContent=ok===qs.length?'Tutto giusto!':`${ok} su ${qs.length}. Ricontrolla i calcoli nelle caselle rosse.`;});
+}
+
+/* ===== 1. Densità ===== */
+const PL=[
+ ['Groenlandia',56e3,2166e3,'Quasi tutta coperta dai ghiacci: gli abitanti vivono in piccoli villaggi lungo le coste.'],
+ ['Australia',27e6,7690e3,'L\'interno è un grande deserto: la popolazione vive soprattutto nelle città della costa sud-orientale.'],
+ ['Canada',41e6,9985e3,'Il nord è freddissimo: quasi tutti vivono vicino al confine con gli Stati Uniti.'],
+ ['Russia',144e6,17100e3,'La Siberia è quasi vuota; la maggior parte dei russi vive nella parte europea del paese.'],
+ ['Mondo',8.2e9,134e6,'È la densità media delle terre emerse, senza l\'Antartide: un valore teorico, perché le persone non sono distribuite in modo uniforme.'],
+ ['Cina',1.41e9,9597e3,'L\'est, con le grandi pianure fluviali, è affollatissimo; l\'ovest, con deserti e altipiani, è quasi vuoto.'],
+ ['Italia',59e6,302e3,'Pianure e coste sono molto abitate, le zone di montagna molto meno.'],
+ ['India',1.45e9,3287e3,'È il paese più popoloso del mondo: le pianure del Gange sono tra le aree più abitate della Terra.'],
+ ['Bangladesh',173e6,148e3,'Il delta del Gange e del Brahmaputra ha terre fertilissime e acqua tutto l\'anno: è uno degli stati più densamente popolati.'],
+ ['Singapore',6e6,735,'Una città-stato su un\'isola: quasi tutto il territorio è città.'],
+ ['Monaco',38e3,2.08,'Il Principato di Monaco, sulla Costa Azzurra, è lo stato con la densità più alta: tutto il territorio è città.']];
+let pi=6;
+$('#pl').innerHTML=PL.map((p,i)=>`<button type="button" data-l="${i}" aria-pressed="${i===pi}">${p[0]}</button>`).join('');
+const fmtD=d=>d<1?it(d,2):d<10?it(d,1):it(Math.round(d));
+const fmtN=n=>n>=1e9?it(n/1e9,2).replace(/,?0+$/,'')+' miliardi':n>=1e6?it(n/1e6)+' milioni':it(n);
+const cv4=$('#cv4');
+function rnd(seed){return()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646;};}
+function draw4(){
+  const p=PL[pi], d=p[1]/p[2], {c,w,h}=fit(cv4,1.25,280), S=Math.min(w,h)-40, x0=(w-S)/2, y0=14;
+  c.fillStyle=V('paper');c.fillRect(x0,y0,S,S);c.strokeStyle=V('ink');c.lineWidth=2;c.strokeRect(x0,y0,S,S);
+  txt(c,'1 km',x0+S/2,y0+S+18,V('muted'),12,700,'center');
+  if(d<1){ const k=Math.ceil(Math.sqrt(1/d)); c.strokeStyle=V('line');c.lineWidth=1;
+    for(let i=1;i<k;i++){c.beginPath();c.moveTo(x0+i*S/k,y0);c.lineTo(x0+i*S/k,y0+S);c.stroke();c.beginPath();c.moveTo(x0,y0+i*S/k);c.lineTo(x0+S,y0+i*S/k);c.stroke();}
+    c.fillStyle=V('accent');c.beginPath();c.arc(x0+S/k/2,y0+S/k/2,Math.max(3,S/k/5),0,7);c.fill();
+    txt(c,`qui ogni quadretto è 1 km²: c'è 1 persona ogni ${Math.round(1/d)} quadretti`,x0+S/2,y0+S+34,V('accent'),12,800,'center');
+    return; }
+  const n=Math.round(d), r=rnd(pi*977+13), rad=n>3000?1:n>500?1.6:n>60?2.6:4;
+  c.fillStyle=V('accent');
+  for(let i=0;i<n;i++){c.beginPath();c.arc(x0+3+r()*(S-6),y0+3+r()*(S-6),rad,0,7);c.fill();}
+}
+function card4(){const p=PL[pi],d=p[1]/p[2];$('#dk').textContent=p[0];$('#dv').textContent=fmtD(d)+' ab./km²';
+  $('#dn').textContent=d<1?`meno di 1 abitante per km²`:`${it(Math.round(d))} ${Math.round(d)===1?'persona':'persone'} in un quadrato di 1 km di lato`;
+  $('#dt').textContent=p[3];$('#da').textContent=fmtN(p[1]);$('#ds').textContent=it(p[2]>=100?Math.round(p[2]):p[2],p[2]<100?2:0)+' km²';
+  $$('#pl button').forEach((b,i)=>b.setAttribute('aria-pressed',i===pi));}
+$('#pl').addEventListener('click',e=>{const b=e.target.closest('[data-l]');if(!b)return;pi=+b.dataset.l;card4();draw4();});
+setupFig($('#f4'),draw4);card4();
+
+/* ===== 2. Calcola ===== */
+numeri($('#q3'),[
+ ['Italia: 59.000.000 abitanti ÷ 302.000 km² =',195,'ab./km²',3],
+ ['Bangladesh: 173.000.000 abitanti ÷ 148.000 km² =',1169,'ab./km²',15],
+ ['Canada: 41.000.000 abitanti ÷ 9.985.000 km² =',4.1,'ab./km²',.2]]);
+
+/* ===== 3. Cento abitanti ===== */
+const HQ=[['Entro 200 m di altitudine',60,'60 persone su 100 vivono entro 200 metri sul livello del mare: le pianure e le coste sono le zone più abitate.'],
+ ['A meno di 500 km dal mare',75,'75 persone su 100 vivono a meno di 500 km dal mare, che ha permesso commerci e pesca.'],
+ ['In Asia',59,'Quasi 6 persone su 10 vivono in Asia, soprattutto nell\'Asia meridionale e orientale.'],
+ ['Nei paesi meno sviluppati',83,'Più di 8 persone su 10 vivono nei paesi meno sviluppati di Asia, Africa e America Latina.'],
+ ['In città',58,'Più della metà dell\'umanità vive in aree urbane, e la percentuale continua a crescere.'],
+ ['Per continente',100,'']];
+const CONT=[['Asia',60,'c4'],['Africa',17,'c2'],['Americhe',13,'c3'],['Europa',9,'c1'],['Oceania',1,'c5']];
+let hq=0;
+$('#hq').innerHTML=HQ.map((q,i)=>`<button type="button" data-h="${i}" aria-pressed="${i===0}">${q[0]}</button>`).join('');
+const cv5=$('#cv5');
+function man(c,x,y,s,col){c.fillStyle=col;c.beginPath();c.arc(x,y-s*.62,s*.2,0,7);c.fill();c.beginPath();c.moveTo(x-s*.26,y+s*.32);c.lineTo(x-s*.26,y-s*.22);c.quadraticCurveTo(x,y-s*.44,x+s*.26,y-s*.22);c.lineTo(x+s*.26,y+s*.32);c.closePath();c.fill();}
+function draw5(){const {c,w,h}=fit(cv5,3.6,120),q=HQ[hq],cols=20,rows=5,s=Math.min((w-20)/cols,(h-20)/rows);
+  const isC=q[0]==='Per continente', col=i=>{if(!isC)return i<q[1]?V('accent'):V('pale');let a=0;for(const k of CONT){a+=k[1];if(i<a)return V(k[2]);}return V('pale');};
+  for(let i=0;i<100;i++){const x=10+(i%cols+.5)*s,y=10+(Math.floor(i/cols)+.6)*s;man(c,x,y,s*.9,col(i));}
+  if(isC){$('#hv').textContent='6 su 10 in Asia';$('#ht').innerHTML=CONT.map(k=>`<span style="display:inline-flex;align-items:center;gap:6px;margin-right:12px"><i style="width:12px;height:12px;border-radius:3px;background:var(--${k[2]})"></i><b>${k[0]}</b> ${k[1]}</span>`).join('')+'<br>Su 10 abitanti della Terra, 6 sono asiatici e 4 vivono negli altri continenti; di questi, 1 solo è europeo. L\'Antartide è disabitata. <span class="note">(GeoAgenda 3, grafico B di p. E72: Asia 59,6%, Africa 17,3%, Americhe 13,2%, Europa 9,3%, Oceania 0,6%)</span>';}
+  else{$('#hv').textContent=q[1]+' su 100';$('#ht').textContent=q[2];}}
+$('#hq').addEventListener('click',e=>{const b=e.target.closest('[data-h]');if(!b)return;hq=+b.dataset.h;$$('#hq button').forEach(x=>x.setAttribute('aria-pressed',x===b));draw5();});
+setupFig($('#f5'),draw5);
+
+/* ===== 4. Fattori ===== */
+smista($('#s3'),[
+ {t:'Clima temperato',ok:0},{t:'Terre fertili',ok:0},{t:'Vicinanza del mare',ok:0},{t:'Grandi fiumi e laghi',ok:0},
+ {t:'Alta montagna fuori dai tropici',ok:1},{t:'Deserti caldi',ok:1},{t:'Ghiacci e freddo estremo',ok:1},
+ {t:'Antiche civiltà agricole lungo i fiumi',ok:2},{t:'La Rivoluzione industriale in Europa',ok:2},{t:'La tratta degli schiavi',ok:2},{t:'Il lavoro offerto dalle città',ok:2}
+].sort(()=>Math.random()-.5),['Fattori naturali favorevoli','Fattori naturali negativi','Fattori storici ed economici']);
+
+const RG=[['Asia orientale',1],['Asia meridionale',1],['Europa',1],['America del Nord-Est',1],['Sud-Est asiatico',1],['Africa occidentale',1],['Sud-Est brasiliano e Rio de la Plata',1],['Siberia',0],['Sahara',0],['Amazzonia',0],['Interno dell\'Australia',0],['Canada settentrionale',0]].sort(()=>Math.random()-.5);
+$('#rg').innerHTML=RG.map((r,i)=>`<button type="button" data-g="${i}" aria-pressed="false">${r[0]}</button>`).join('');
+$('#rg').addEventListener('click',e=>{const b=e.target.closest('[data-g]');if(!b)return;const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);b.className=on?'on':'';$('#rgf').hidden=true;});
+$('#rgc').addEventListener('click',()=>{let ok=0;$$('#rg button').forEach(b=>{const r=RG[+b.dataset.g],on=b.getAttribute('aria-pressed')==='true';b.className=on===!!r[1]?(on?'right':''):'wrong';if(on===!!r[1])ok++;});
+  const f=$('#rgf');f.hidden=false;f.className='fb '+(ok===RG.length?'right':'wrong');f.textContent=ok===RG.length?'Giusto: sono le sette grandi regioni di popolamento.':'Non ancora: le caselle rosse sono sbagliate (una regione mancante o una di troppo).';});
+
+/* ===== 5. Sempre più in città (GeoAgenda p. E73) ===== */
+const UR=[[1800,3,1],[1900,15,1.65],[1950,30,2.5],[1975,38,4.07],[2000,47,6.1],[2007,50,6.7],[2025,57,8.2],[2050,68,9.7]];
+let ui=6,t8=null;
+$('#uy').innerHTML=UR.map((u,i)=>`<button type="button" data-u="${i}" aria-pressed="${i===ui}">${u[0]}</button>`).join('');
+const cv8=$('#cv8');
+function draw8(){const u=UR[ui],{c,w,h}=fit(cv8,1.7,240),S=Math.min(h-20,w-20),cell=S/10,x0=(w-S)/2,y0=10;
+  for(let i=0;i<100;i++){const r=9-Math.floor(i/10),k=i%10;c.fillStyle=i<u[1]?V('accent'):V('pale');c.fillRect(x0+k*cell+2,y0+r*cell+2,cell-4,cell-4);
+    if(i<u[1]){c.fillStyle=V('card');const bx=x0+k*cell+cell*.3,by=y0+r*cell+cell*.25;c.fillRect(bx,by+cell*.15,cell*.15,cell*.35);c.fillRect(bx+cell*.22,by,cell*.18,cell*.5);}}
+  const n=u[1]/100*u[2];
+  $('#uk').textContent=u[0]===2050?'Previsione per il 2050':u[0]===2025?'Oggi':'Nel '+u[0];
+  $('#up').textContent=u[1]+'% in città';
+  $('#ut').innerHTML=`Circa <b>${n<1?it(Math.round(n*1000/10)*10)+' milioni':it(n,1)+' miliardi'}</b> di persone in città, su ${it(u[2],u[2]<2?2:1).replace(',00','')} miliard${u[2]<2?'o':'i'} di abitanti.`+(u[0]===2007?' È l\'anno in cui, per la prima volta, gli abitanti delle città hanno superato quelli delle campagne.':u[0]===1800?' Due secoli fa nelle città vivevano solo 30 milioni di persone.':'');
+  $$('#uy button').forEach((b,i)=>b.setAttribute('aria-pressed',i===ui));}
+$('#uy').addEventListener('click',e=>{const b=e.target.closest('[data-u]');if(!b)return;clearInterval(t8);t8=null;$('#play8').textContent='▶ Avvia';ui=+b.dataset.u;draw8();});
+$('#play8').addEventListener('click',()=>{if(t8){clearInterval(t8);t8=null;$('#play8').textContent='▶ Avvia';return}
+  ui=0;draw8();$('#play8').textContent='⏸ Pausa';t8=setInterval(()=>{ui++;draw8();if(ui>=UR.length-1){clearInterval(t8);t8=null;$('#play8').textContent='▶ Avvia';}},REDUCE?300:1100);});
+setupFig($('#f8'),draw8);
+smista($('#s8'),[
+ {t:'Una città di 1,2 milioni di abitanti',ok:0},{t:'Una città di 3 milioni di abitanti',ok:0},
+ {t:'Una città di 6 milioni di abitanti',ok:1},{t:'Una città di 9 milioni di abitanti',ok:1},
+ {t:'Una città di 14 milioni di abitanti',ok:2},{t:'Una città di più di 20 milioni di abitanti',ok:2},
+ {t:'Città vicine cresciute fino a formare un unico agglomerato',ok:3},{t:'Tokyo, Yokohama e Kawasaki',ok:3}
+].sort(()=>Math.random()-.5),['Grande città (almeno 1 milione)','Metropoli (da 5 a 10 milioni)','Megalopoli (oltre 10 milioni)','Conurbazione']);
+
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+<script src="../../../../assets/barra.js"></script>
+</body>
+</html>

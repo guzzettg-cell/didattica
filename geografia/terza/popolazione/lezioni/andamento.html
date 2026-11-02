@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quanti siamo?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --paper:#eef1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
+  --accent:#c2410c; --accent-soft:#fde4d3; --ok:#1f7a4d; --ok-soft:#dcf2e6; --no:#b42318; --no-soft:#fde3e1;
+  --vivi:#1d6fa5; --vivi-soft:#dcebf6; --on-accent:#fff; --on-vivi:#fff; --ga:#7a3fa0; --on-ga:#fff;
+  --c1:#2a78b8; --c2:#e08a1e; --c3:#3f9a5a; --c4:#b5528a; --c5:#7b6fd0; --pale:#c9d3de;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717;
+  --vivi:#6db7ea; --vivi-soft:#10283a; --on-accent:#140a03; --on-vivi:#06121c; --ga:#c9a2e8; --on-ga:#1a0b26; --c1:#5aa6e6; --c2:#f2a541; --c3:#5cc47b; --c4:#e07ab2; --c5:#a79cf2; --pale:#33445a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0b111a; --card:#121b28; --ink:#e5ecf4; --muted:#97a6b8; --line:#243244;
+  --accent:#fb923c; --accent-soft:#3b2414; --ok:#4ade80; --ok-soft:#12301f; --no:#f87171; --no-soft:#3a1717;
+  --vivi:#6db7ea; --vivi-soft:#10283a; --on-accent:#140a03; --on-vivi:#06121c; --ga:#c9a2e8; --on-ga:#1a0b26; --c1:#5aa6e6; --c2:#f2a541; --c3:#5cc47b; --c4:#e07ab2; --c5:#a79cf2; --pale:#33445a; color-scheme:dark}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+[hidden]{display:none!important}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:24px 48px;display:grid;gap:24px}
+header.top{display:grid;gap:8px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.02;margin:0}
+h2.sec{font-family:var(--display);font-weight:800;font-size:1.45rem;margin:0}
+.lead{margin:0;max-width:80ch;color:var(--muted)}
+.note{font-size:.86rem;color:var(--muted);margin:0}
+section.part{display:grid;gap:12px}
+.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;align-items:start}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+@media (max-width:920px){.grid,.two{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:10px;min-width:0;align-content:start}
+.card h3{font-family:var(--display);font-weight:800;font-size:1.3rem;margin:0}
+.card p{margin:0}
+.kind{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.big{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1.05;font-variant-numeric:tabular-nums}
+/* etichetta del libro */
+.vivi{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;justify-self:start;font-size:.85rem}
+.vivi b{display:inline-block;background:var(--vivi);color:var(--on-vivi);font-family:var(--display);font-weight:800;letter-spacing:.06em;font-size:.82rem;padding:4px 10px;border-radius:6px}
+.vivi span{color:var(--vivi);font-weight:700}
+.vivi b.ga{background:var(--ga);color:var(--on-ga)}
+.vivi span.ga{color:var(--ga)}
+.books{display:flex;flex-wrap:wrap;gap:6px 18px}
+.book .row{display:grid;gap:4px}
+.book .row+.row{border-top:1px solid var(--line);padding-top:8px}
+.book{background:var(--vivi-soft);border:1px solid var(--vivi);border-radius:14px;padding:14px 18px;display:grid;gap:8px}
+.book p{margin:0}
+/* pulsanti */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button,.btn{font:inherit;font-size:.88rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 12px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}
+.btn.go{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:700}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.ctrl label{display:grid;gap:2px;font-size:.85rem;color:var(--muted);font-weight:700;min-width:180px;flex:1}
+.ctrl input[type=range]{width:100%;accent-color:var(--accent)}
+.ctrl output{font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums}
+/* disegni con zoom */
+.fig{display:grid;gap:8px;min-width:0}
+.figbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.dz{display:inline-flex;gap:4px;align-items:center;margin-left:auto}
+.dz button{font:inherit;font-weight:800;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;min-width:34px;height:34px;cursor:pointer}
+.dz span{font-size:.8rem;color:var(--muted);font-weight:700;min-width:3.2em;text-align:center;font-variant-numeric:tabular-nums}
+.figbox{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:auto;-webkit-overflow-scrolling:touch}
+.figin{width:100%;min-width:0}
+.figin canvas{display:block;width:100%}
+/* esercizi */
+.fb{border-radius:10px;padding:9px 12px;font-size:.95rem}
+.fb.right{background:var(--ok-soft);border:1px solid var(--ok)}
+.fb.wrong{background:var(--no-soft);border:1px solid var(--no)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:8px 12px;cursor:pointer;text-align:left}
+.opts button.on{background:var(--accent-soft);border-color:var(--accent)}
+.opts button.right{border-color:var(--ok);background:var(--ok-soft)}
+.opts button.wrong{border-color:var(--no);background:var(--no-soft)}
+.vf{display:grid;gap:8px}
+.vf .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:8px}
+.vf .row.right{background:var(--ok-soft)}.vf .row.wrong{background:var(--no-soft)}
+.vf .row .why{grid-column:1/-1;font-size:.88rem;color:var(--muted)}
+.inq{display:grid;gap:8px}
+.inq .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.inq input{font:inherit;width:6.5em;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.inq input.right{border-color:var(--ok);background:var(--ok-soft)}.inq input.wrong{border-color:var(--no);background:var(--no-soft)}
+/* smistamento: tocca una carta, poi tocca il gruppo */
+.sort{display:grid;gap:10px}
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:44px}
+.pool button,.bin button{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:7px 11px;cursor:pointer;text-align:left}
+.pool button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.bin{border:2px dashed var(--line);border-radius:12px;padding:10px;display:grid;gap:6px;align-content:start;min-height:90px;cursor:pointer;background:transparent;color:inherit;font:inherit;text-align:left}
+.bin h4{margin:0;font-family:var(--display);font-size:1rem}
+.bin button.right{border-color:var(--ok);background:var(--ok-soft)}
+.bin button.wrong{border-color:var(--no);background:var(--no-soft)}
+details{border-top:1px solid var(--line);padding:9px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700}
+details p{margin:6px 0 0;color:var(--muted)}
+.words{background:var(--accent-soft);border-radius:12px;padding:10px 14px;font-size:.95rem}
+.words p{margin:0}
+/* navigazione */
+.pager{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pager a{display:grid;gap:2px;align-content:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;color:var(--ink);text-decoration:none}
+.pager a:hover{border-color:var(--accent)}
+.pager a:hover span{text-decoration:underline}
+.pager small{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pager span{font-family:var(--display);font-weight:800;font-size:1.05rem;line-height:1.25}
+.pager .next{text-align:right}
+.pager.pager-top a{padding:8px 14px}
+.pager.pager-top span{font-size:.95rem}
+@media (max-width:640px){.pager{grid-template-columns:1fr}.pager .next{text-align:left}}
+table.dati{border-collapse:collapse;width:100%;font-size:.92rem}
+table.dati th,table.dati td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+table.dati td.n,table.dati th.n{text-align:right;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.ctrl select{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="pager pager-top" aria-label="Argomenti (in alto)">
+    <a class="prev" href="../index.html"><small>Inizio della lezione</small><span>← La popolazione mondiale: tutte le parti</span></a>
+    <a class="next" href="crescita.html"><small>Argomento successivo</small><span>La crescita della popolazione →</span></a>
+  </nav>
+  <header class="top">
+    <div class="eyebrow">Geografia · La popolazione mondiale · Parte 1 di 4</div>
+    <h1>Quanti siamo?</h1>
+    <div class="books"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>Unità 5 · Lezione 1 · pp. 54–55</span></div><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">Capitolo 21 · §1 La popolazione mondiale · p. E72</span></div></div>
+    <p class="lead">Oggi sulla Terra vivono più di 8 miliardi di persone. Per migliaia di anni la popolazione è cresciuta pochissimo, poi negli ultimi due secoli è aumentata in modo impressionante. Adesso la crescita sta rallentando.</p>
+  </header>
+
+  <section class="part">
+    <h2 class="sec">1. Da 250 milioni a 8 miliardi</h2>
+    <p class="lead">Ogni colonna è una tappa della storia dell'umanità. Premi «Avvia» per vedere crescere la popolazione, oppure tocca una colonna.</p>
+    <div class="grid">
+      <div class="fig" id="f1">
+        <div class="figbar">
+          <span class="chips"><button type="button" class="btn go" id="play1">▶ Avvia</button></span>
+          <span class="chips" role="group" aria-label="Scala del tempo"><button type="button" id="sc0" aria-pressed="true">Tappe affiancate</button><button type="button" id="sc1" aria-pressed="false">Tempo in scala reale</button></span>
+        </div>
+        <div class="figbox"><div class="figin"><canvas id="cv1" role="img" aria-label="Istogramma della popolazione mondiale dall'anno 1 al 2022, con la previsione per il 2060"></canvas></div></div>
+      </div>
+      <div class="card" aria-live="polite">
+        <div class="kind" id="k1">Tappa</div>
+        <div class="big" id="y1">Anno 1</div>
+        <h3 id="v1">circa 250 milioni</h3>
+        <p id="t1"></p>
+      </div>
+    </div>
+    <p class="note" id="n1">Con le tappe affiancate le colonne sono alla stessa distanza, come nel libro. Prova «Tempo in scala reale»: ogni anno occupa lo stesso spazio, e si vede quanto è stata rapida la crescita degli ultimi due secoli.</p>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">2. Quanto tempo per un miliardo in più?</h2>
+    <div class="two">
+      <div class="card">
+        <div class="kind">Calcola con le date del grafico</div>
+        <p>Scegli una tappa di partenza e una di arrivo: il calcolo degli anni lo fai tu, poi controlli.</p>
+        <div class="ctrl">
+          <label>Da<select id="from" class="sel"></select></label>
+          <label>A<select id="to" class="sel"></select></label>
+        </div>
+        <p id="gap" aria-live="polite"></p>
+      </div>
+      <div class="card">
+        <div class="kind">Esercizio 1 del libro</div>
+        <div class="inq" id="q1"></div>
+        <p class="note">Il libro usa il 1930 per i 2 miliardi; oggi gli studiosi indicano il 1927. Per questo qui il secondo risultato è un po' diverso da quello del libro.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">3. Le cose da sapere: vero o falso?</h2>
+    <div class="card"><div class="vf" id="vf1"></div></div>
+  </section>
+
+  <section class="part">
+    <h2 class="sec">I dati di oggi</h2>
+    <div class="words">
+      <p>Il libro dice che sulla Terra vivono <b>7,8 miliardi</b> di persone: è il dato del 2020. Nel novembre 2022 abbiamo superato gli <b>8 miliardi</b> e oggi siamo circa <b>8,2 miliardi</b>. Secondo le previsioni dell'ONU la popolazione continuerà a crescere fino a circa <b>10,3 miliardi</b> verso il 2085, poi comincerà lentamente a diminuire.</p>
+    </div>
+  </section>
+
+  <section class="part">
+    <div class="book">
+      <div class="row"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>Adesso apri il libro · pp. 54–55</span></div><p>Leggi «Mi oriento» alle pp. 54–55 e fai gli esercizi di «Per cominciare»: l'esercizio 1 lo hai già fatto qui; per l'esercizio 2 osserva le foto del Bangladesh e della Groenlandia.</p></div>
+      <div class="row"><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">Adesso apri il libro · p. E72</span></div><p>Leggi il primo paragrafo di p. E72 e osserva il grafico A: ritrovi le date dei miliardi che hai usato qui (il libro indica 9,7 miliardi nel 2050).</p></div>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Argomenti (in basso)">
+    <a class="prev" href="../index.html"><small>Inizio della lezione</small><span>← La popolazione mondiale: tutte le parti</span></a>
+    <a class="next" href="crescita.html"><small>Argomento successivo</small><span>La crescita della popolazione →</span></a>
+  </nav>
+</div>
+<script>
+/* ===== strumenti comuni delle pagine sulla popolazione ===== */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const V=n=>getComputedStyle(document.documentElement).getPropertyValue('--'+n).trim();
+const REDUCE=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FD='"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif', FB='"Atkinson Hyperlegible",Verdana,system-ui,sans-serif';
+const it=(x,d=0)=>Number(x).toLocaleString('it-IT',{minimumFractionDigits:d,maximumFractionDigits:d});
+
+/* tela adattata alla larghezza del riquadro; ratio = larghezza/altezza */
+function fit(cv,ratio,minH){
+  const w=Math.max(260,cv.parentElement.clientWidth), h=Math.max(minH||0,Math.round(w/ratio)), d=window.devicePixelRatio||1;
+  if(cv.width!==Math.round(w*d)||cv.height!==Math.round(h*d)){cv.width=Math.round(w*d);cv.height=Math.round(h*d);cv.style.height=h+'px';}
+  const c=cv.getContext('2d'); c.setTransform(d,0,0,d,0,0); c.clearRect(0,0,w,h); return {c,w,h};
+}
+/* zoom dei disegni: + e − sopra ogni disegno */
+const DZ=[.75,1,1.25,1.5,1.75,2,2.5];
+function setupFig(fig,redraw){
+  const inner=fig.querySelector('.figin'), lab=fig.querySelector('.dz span'); let i=1;
+  const set=()=>{inner.style.width=(DZ[i]*100)+'%'; lab.textContent=Math.round(DZ[i]*100)+'%';
+    fig.querySelector('[data-dz="-1"]').disabled=i===0; fig.querySelector('[data-dz="1"]').disabled=i===DZ.length-1; redraw();};
+  fig.querySelectorAll('[data-dz]').forEach(b=>b.addEventListener('click',()=>{i=Math.max(0,Math.min(DZ.length-1,i+ +b.dataset.dz));set();}));
+  new ResizeObserver(()=>redraw()).observe(inner);
+  set();
+}
+function dzBar(){return '<span class="dz" role="group" aria-label="Ingrandimento del disegno"><button type="button" data-dz="-1" aria-label="Rimpicciolisci il disegno">−</button><span>100%</span><button type="button" data-dz="1" aria-label="Ingrandisci il disegno">+</button></span>';}
+$$('.figbar').forEach(b=>b.insertAdjacentHTML('beforeend',dzBar()));
+
+function txt(c,s,x,y,col,size,weight,align,font){c.fillStyle=col;c.font=`${weight||400} ${size}px ${font||FB}`;c.textAlign=align||'left';c.fillText(s,x,y);}
+
+/* vero o falso */
+function vero(box,items){
+  box.innerHTML=items.map((q,k)=>`<div class="row" data-k="${k}"><span>${q[0]}</span><span class="chips"><button type="button" data-v="1">Vero</button><button type="button" data-v="0">Falso</button></span><span class="why" hidden></span></div>`).join('');
+  box.addEventListener('click',e=>{const b=e.target.closest('[data-v]'); if(!b)return; const row=b.closest('.row'), q=items[row.dataset.k], ok=(b.dataset.v==='1')===q[1];
+    row.querySelectorAll('[data-v]').forEach(x=>x.setAttribute('aria-pressed',x===b)); row.className='row '+(ok?'right':'wrong');
+    const w=row.querySelector('.why'); w.hidden=false; w.textContent=(ok?'✓ Giusto. ':'✗ Non è così. ')+q[2];});
+}
+/* smistamento: tocca una carta e poi il gruppo giusto */
+function smista(root,cards,bins){
+  const pool=root.querySelector('.pool'), wrap=root.querySelector('.bins'), fb=root.querySelector('.fb'); let sel=null;
+  const draw=()=>{pool.innerHTML=cards.map((c,k)=>c.at==null?`<button type="button" data-c="${k}" aria-pressed="${sel===k}">${c.t}</button>`:'').join('')||'<span class="note">Hai sistemato tutte le carte: premi «Controlla».</span>';
+    wrap.innerHTML=bins.map((b,j)=>`<div class="bin" data-b="${j}" role="button" tabindex="0" aria-label="Metti qui: ${b}"><h4>${b}</h4>${cards.map((c,k)=>c.at===j?`<button type="button" data-back="${k}" class="${c.st||''}" title="Tocca per rimettere la carta nel mazzo">${c.t}</button>`:'').join('')}</div>`).join('');};
+  root.addEventListener('click',e=>{const c=e.target.closest('[data-c]'),bk=e.target.closest('[data-back]'),bn=e.target.closest('[data-b]');
+    if(c){sel=+c.dataset.c;draw();return}
+    if(bk){const k=+bk.dataset.back;cards[k].at=null;cards[k].st='';sel=k;fb.hidden=true;draw();return}
+    if(bn&&sel!=null){cards[sel].at=+bn.dataset.b;cards[sel].st='';sel=null;fb.hidden=true;draw();}
+    if(e.target.closest('[data-check]')){let ok=0,n=0;cards.forEach(c=>{if(c.at!=null){n++;c.st=c.at===c.ok?'right':'wrong';if(c.st==='right')ok++}});draw();
+      fb.hidden=false;fb.className='fb '+(ok===cards.length?'right':'wrong');
+      fb.textContent=ok===cards.length?'Tutto giusto!':`${ok} su ${cards.length} al posto giusto. Tocca le carte rosse per spostarle.`+(n<cards.length?' Mancano ancora alcune carte.':'');}
+    if(e.target.closest('[data-reset]')){cards.forEach(c=>{c.at=null;c.st=''});sel=null;fb.hidden=true;draw();}
+  });
+  root.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('.bin')){e.preventDefault();e.target.click();}});
+  draw();
+}
+/* domande con risposta numerica */
+function numeri(box,qs){
+  box.innerHTML=qs.map((q,k)=>`<div class="row"><span>${q[0]}</span><input inputmode="decimal" data-k="${k}" aria-label="${q[0].replace(/<[^>]+>/g,'')}"><span>${q[2]||''}</span></div>`).join('')+'<div class="row"><button type="button" class="btn go" data-chk>Controlla</button></div><div class="fb" hidden></div>';
+  box.querySelector('[data-chk]').addEventListener('click',()=>{let ok=0;box.querySelectorAll('input').forEach(inp=>{const q=qs[inp.dataset.k],v=parseFloat(inp.value.replace(/\./g,'').replace(',','.'));
+      const good=!isNaN(v)&&Math.abs(v-q[1])<=(q[3]||0);inp.className=good?'right':'wrong';if(good)ok++;});
+    const fb=box.querySelector('.fb');fb.hidden=false;fb.className='fb '+(ok===qs.length?'right':'wrong');fb.textContent=ok===qs.length?'Tutto giusto!':`${ok} su ${qs.length}. Ricontrolla i calcoli nelle caselle rosse.`;});
+}
+
+/* ===== 1. Istogramma delle tappe ===== */
+const T=[
+ [1,0.25,'Antichità','La stima va da 200 a 300 milioni di persone. È l\'epoca dell\'Impero romano e della dinastia Han in Cina: già allora l\'Asia era la parte più abitata del mondo.'],
+ [1000,0.275,'Medioevo','In mille anni la popolazione cresce pochissimo: le nascite sono tante, ma carestie, guerre ed epidemie fanno morire moltissime persone, soprattutto bambini.'],
+ [1500,0.45,'Età moderna','La crescita resta lenta, con fasi di calo: nel Trecento la peste nera aveva ucciso circa un terzo degli europei.'],
+ [1804,1,'Rivoluzione industriale','Primo miliardo. In Europa la Rivoluzione industriale porta più cibo, più lavoro e, poco alla volta, migliori condizioni igieniche.'],
+ [1927,2,'Civiltà industriale','Secondo miliardo: sono passati poco più di 120 anni. La medicina fa grandi progressi e la mortalità comincia a scendere anche fuori dall\'Europa.'],
+ [1960,3,'Esplosione demografica','Vaccini, antibiotici e cure mediche di base si diffondono in tutto il mondo: muoiono molti meno bambini, ma le famiglie restano numerose.'],
+ [1974,4,'Esplosione demografica','Un miliardo in più in soli 14 anni.'],
+ [1987,5,'Esplosione demografica','Tra il 1950 e il 1987 la popolazione mondiale è raddoppiata, da 2,5 a 5 miliardi.'],
+ [1999,6,'Civiltà tecnologica','La crescita continua, ma le nascite cominciano a diminuire in quasi tutto il mondo.'],
+ [2011,7,'Civiltà tecnologica','Settimo miliardo: 12 anni dopo il sesto.'],
+ [2022,8,'Oggi','Il 15 novembre 2022, secondo l\'ONU, abbiamo superato gli 8 miliardi. La crescita sta rallentando.'],
+ [2060,10,'Previsione','Secondo le previsioni dell\'ONU arriveremo a circa 10 miliardi verso il 2060. È una stima, non un dato: per questo la colonna è tratteggiata.']
+];
+let sel1=10, shown=T.length, real=false, timer=null;
+const cv1=$('#cv1');
+function xs(w,pad){ // posizione delle colonne
+  if(!real) return T.map((d,i)=>pad.l+(i+.5)*(w-pad.l-pad.r)/T.length);
+  return T.map(d=>pad.l+(d[0]-1)/(2070-1)*(w-pad.l-pad.r));
+}
+function draw1(){
+  const {c,w,h}=fit(cv1,1.7,300), pad={l:46,r:14,t:26,b:46}, H=h-pad.t-pad.b, Y=v=>pad.t+H-v/10.5*H, X=xs(w,pad);
+  const ink=V('ink'),mu=V('muted'),ln=V('line'),c1=V('c1'),c2=V('c2'),ac=V('accent');
+  c.strokeStyle=ln;c.lineWidth=1;
+  for(let v=0;v<=10;v+=2){c.beginPath();c.moveTo(pad.l,Y(v));c.lineTo(w-pad.r,Y(v));c.stroke();txt(c,v+(v?' mld':''),pad.l-6,Y(v)+4,mu,11,700,'right');}
+  const bw=real?Math.max(4,(w-pad.l-pad.r)/120):Math.min(46,(w-pad.l-pad.r)/T.length*.62);
+  T.forEach((d,i)=>{ if(i>=shown)return; const x=X[i],y=Y(d[1]),prev=i===T.length-1;
+    c.fillStyle=i===sel1?ac:(prev?'transparent':(d[0]<1800?c2:c1));
+    c.fillRect(x-bw/2,y,bw,Y(0)-y);
+    if(prev){c.setLineDash([5,4]);c.strokeStyle=i===sel1?ac:c1;c.lineWidth=2;c.strokeRect(x-bw/2,y,bw,Y(0)-y);c.setLineDash([]);}
+    const lab=d[1]<1?it(d[1]*1000)+' mln':it(d[1])+' mld';
+    if(!real||i>=3) txt(c,lab,x,y-6,i===sel1?ac:ink,real?10:11,800,'center');
+    if(!real||i===0||i>=3&&i%2===1||i===T.length-1){c.save();c.translate(x,Y(0)+8);if(real){c.rotate(-Math.PI/4);txt(c,String(d[0]),0,6,mu,10,700,'right');}else txt(c,String(d[0]),0,12,mu,11,700,'center');c.restore();}
+  });
+  if(real){txt(c,'Ogni anno occupa lo stesso spazio: 2000 anni di crescita lentissima, poi l\'impennata.',pad.l+6,pad.t-8,mu,11,700);}
+  else txt(c,'anni',w-pad.r,h-6,mu,11,700,'right');
+  c.fillStyle=c2;c.fillRect(pad.l+4,h-14,10,10);txt(c,'prima del 1800',pad.l+18,h-5,mu,11,400);
+  c.fillStyle=c1;c.fillRect(pad.l+120,h-14,10,10);txt(c,'dal 1800',pad.l+134,h-5,mu,11,400);
+  cv1._hit=X.map((x,i)=>({x,i,bw:Math.max(bw,18)}));
+}
+function card1(){const d=T[sel1];$('#k1').textContent=d[2];$('#y1').textContent=d[0]===1?'Anno 1 d.C.':(sel1===T.length-1?'Verso il ':'')+d[0];
+  $('#v1').textContent=(d[0]===1?'circa ':'')+(d[1]<1?it(d[1]*1000)+' milioni':d[1]===1?'1 miliardo':it(d[1])+' miliardi')+' di persone';$('#t1').textContent=d[3];}
+cv1.addEventListener('click',e=>{const r=cv1.getBoundingClientRect(),x=e.clientX-r.left;let best=null,bd=1e9;(cv1._hit||[]).forEach(o=>{const dd=Math.abs(o.x-x);if(dd<bd&&o.i<shown){bd=dd;best=o.i}});if(best!=null){sel1=best;card1();draw1();}});
+function stop(){clearInterval(timer);timer=null;$('#play1').textContent='▶ Avvia';}
+$('#play1').addEventListener('click',()=>{ if(timer){stop();return}
+  if(shown>=T.length) shown=0; $('#play1').textContent='⏸ Pausa';
+  const step=()=>{shown++;sel1=shown-1;card1();draw1();if(shown>=T.length)stop();};
+  step(); timer=setInterval(step,REDUCE?300:900);});
+[['#sc0',false],['#sc1',true]].forEach(([id,v])=>$(id).addEventListener('click',()=>{real=v;$('#sc0').setAttribute('aria-pressed',!v);$('#sc1').setAttribute('aria-pressed',v);draw1();}));
+setupFig($('#f1'),draw1); card1();
+
+/* ===== 2. Quanto tempo? ===== */
+const opts=T.slice(0,11).map((d,i)=>`<option value="${i}">${d[0]===1?'anno 1':d[0]} · ${d[1]<1?it(d[1]*1000)+' milioni':d[1]===1?'1 miliardo':it(d[1])+' miliardi'}</option>`).join('');
+$('#from').innerHTML=opts;$('#to').innerHTML=opts;$('#from').value=3;$('#to').value=4;
+function gap(){const a=+$('#from').value,b=+$('#to').value;const [p,q]=a<b?[a,b]:[b,a];
+  $('#gap').innerHTML=a===b?'Scegli due tappe diverse.':`Dal ${T[p][0]===1?'anno 1':T[p][0]} al ${T[q][0]}: <button type="button" class="btn" id="show">Mostra il risultato</button>`;
+  const s=$('#show'); if(s) s.addEventListener('click',()=>{const n=T[q][0]-T[p][0], k=T[q][1]/T[p][1];
+    $('#gap').innerHTML=`Dal ${T[p][0]===1?'anno 1':T[p][0]} al ${T[q][0]} sono passati <b>${it(n)} anni</b> e la popolazione è diventata <b>${it(k,k<10?1:0)} volte</b> più grande.`;});}
+$('#from').addEventListener('change',gap);$('#to').addEventListener('change',gap);gap();
+numeri($('#q1'),[
+ ['a. Quanti anni ci sono voluti per arrivare al primo miliardo (dall\'anno 1)?',1803,'anni'],
+ ['b. In quanto tempo si è passati da 1 a 2 miliardi?',123,'anni'],
+ ['c. In quanto tempo la popolazione è raddoppiata da 3 a 6 miliardi?',39,'anni']]);
+
+/* ===== 3. Vero o falso ===== */
+vero($('#vf1'),[
+ ['Oggi sulla Terra vivono più di 8 miliardi di persone.',true,'Abbiamo superato gli 8 miliardi nel 2022.'],
+ ['Negli ultimi anni la crescita della popolazione sta accelerando.',false,'Dopo due secoli di forte aumento, la crescita sta rallentando.'],
+ ['La popolazione è distribuita in modo uniforme su tutte le terre emerse.',false,'È distribuita in modo irregolare: ci sono terre affollate e terre quasi vuote.'],
+ ['La maggior parte della popolazione mondiale vive nei paesi poco sviluppati.',true,'Più di 8 persone su 10 vivono in Asia, Africa e America Latina.'],
+ ['I movimenti migratori riguardano solo l\'Europa.',false,'Interessano milioni di persone e tutte le regioni del globo.'],
+ ['Chi lascia il proprio paese a causa di guerre o persecuzioni è un migrante forzato.',true,'Non ha scelto di partire: è stato costretto da una grave crisi.']]);
+
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+<script src="../../../../assets/barra.js"></script>
+</body>
+</html>

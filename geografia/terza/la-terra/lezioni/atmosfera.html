@@ -100,6 +100,18 @@ details p{margin:6px 0 0;color:var(--muted)}
 .pager.pager-top span{font-size:.95rem}
 @media (max-width:560px){.pager{grid-template-columns:1fr}.pager .next{text-align:left}}
 </style>
+<style>/* etichette dei libri */
+.bk{--vv:#1d6fa5;--gg:#7a3fa0;--ov:#fff;--og:#fff;--bs:#eef4fa;--bl:#c9d6e3}
+@media (prefers-color-scheme:dark){.bk{--vv:#6db7ea;--gg:#c9a2e8;--ov:#06121c;--og:#1a0b26;--bs:#132030;--bl:#2a3b50}}
+.bk-tags{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 4px}
+.bk-t{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;font:700 .85rem/1.3 system-ui,sans-serif}
+.bk-t b{background:var(--vv);color:var(--ov);letter-spacing:.06em;font-size:.8rem;padding:4px 10px;border-radius:6px}
+.bk-t span{color:var(--vv)}
+.bk-t.ga b{background:var(--gg);color:var(--og)}.bk-t.ga span{color:var(--gg)}
+.bk-box{background:var(--bs);border:1px solid var(--bl);border-radius:14px;padding:14px 18px;display:grid;gap:10px;margin:24px 0}
+.bk-box .r{display:grid;gap:4px}.bk-box .r+.r{border-top:1px solid var(--bl);padding-top:10px}
+.bk-box p{margin:0;font-size:.98rem;line-height:1.5}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -111,7 +123,8 @@ details p{margin:6px 0 0;color:var(--muted)}
     <div class="eyebrow">Geografia · L'atmosfera</div>
     <h1>L'atmosfera</h1>
     <p class="lead">L'atmosfera è un involucro di gas, vapore acqueo e polveri che circonda la Terra, trattenuta dalla forza di gravità. Grazie all'atmosfera sono possibili la respirazione degli esseri viventi, la regolazione della temperatura, la combustione delle risorse energetiche e la protezione dalle radiazioni cosmiche pericolose.</p>
-  </header>
+  <div class="bk bk-tags"><div class="bk-t ga"><b>GEOAGENDA 3</b><span>Capitolo 19 · §12 L'atmosfera · pp. E26–E27</span></div></div>
+</header>
 
   <section class="part">
     <h2 class="sec">1. Di che cosa è fatta l'aria?</h2>
@@ -200,6 +213,10 @@ details p{margin:6px 0 0;color:var(--muted)}
     </div>
   </section>
 
+  <section class="bk bk-box" aria-label="Adesso apri il libro">
+  <div class="r"><div class="bk-t"><b>VIVI LA GEOGRAFIA 3</b><span>Adesso apri il libro</span></div><p>Il tuo libro dà solo la definizione di atmosfera (p. 16): studia da questa pagina.</p></div>
+  <div class="r"><div class="bk-t ga"><b>GEOAGENDA 3</b><span>Adesso apri il libro · pp. E26–E27</span></div><p>Studia le pp. E26–E27 e fai gli esercizi 1–3 di «Impara a imparare».</p></div>
+</section>
   <nav class="pager" aria-label="Argomenti (in basso)">
     <a class="prev" href="acque.html"><small>Argomento precedente</small><span>← Rilievi, oceani, fiumi e laghi</span></a>
     <a class="next" href="../index.html"><small>Fine del modulo</small><span>Il pianeta Terra: tutte le lezioni →</span></a>
@@ -520,5 +537,6 @@ body{padding-top:40px}
 })();
 </script>
 <!-- /zoom-ctrl -->
+<script src="../../../../assets/barra.js"></script>
 </body>
 </html>

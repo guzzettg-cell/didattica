@@ -332,6 +332,12 @@ function paginaMateria(id) {
   }));
   campo.addEventListener("input", disegna);
   disegna();
+  /* il #modulo-... serve solo ad aprire il modulo all'arrivo: si scorre fin lì e poi si toglie dall'indirizzo */
+  if (location.hash) {
+    const arrivo = document.getElementById(location.hash.slice(1));
+    if (arrivo) arrivo.scrollIntoView();
+    try { const u = new URL(location); u.hash = ""; history.replaceState(null, "", u.href.replace(/#$/, "")); } catch (e) { }
+  }
 
   const conUda = ELENCO_UDA.filter(u => (u.materie || []).includes(id));
   if (conUda.length) {

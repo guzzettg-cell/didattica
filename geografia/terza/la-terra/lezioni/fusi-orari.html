@@ -129,6 +129,18 @@ details p{margin:6px 0 0;color:var(--muted)}
 .ck .bt button{font:inherit;font-size:.9rem;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:4px 10px;cursor:pointer}
 .ck .dig{font-family:var(--display);font-weight:800;font-variant-numeric:tabular-nums}
 </style>
+<style>/* etichette dei libri */
+.bk{--vv:#1d6fa5;--gg:#7a3fa0;--ov:#fff;--og:#fff;--bs:#eef4fa;--bl:#c9d6e3}
+@media (prefers-color-scheme:dark){.bk{--vv:#6db7ea;--gg:#c9a2e8;--ov:#06121c;--og:#1a0b26;--bs:#132030;--bl:#2a3b50}}
+.bk-tags{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 4px}
+.bk-t{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;font:700 .85rem/1.3 system-ui,sans-serif}
+.bk-t b{background:var(--vv);color:var(--ov);letter-spacing:.06em;font-size:.8rem;padding:4px 10px;border-radius:6px}
+.bk-t span{color:var(--vv)}
+.bk-t.ga b{background:var(--gg);color:var(--og)}.bk-t.ga span{color:var(--gg)}
+.bk-box{background:var(--bs);border:1px solid var(--bl);border-radius:14px;padding:14px 18px;display:grid;gap:10px;margin:24px 0}
+.bk-box .r{display:grid;gap:4px}.bk-box .r+.r{border-top:1px solid var(--bl);padding-top:10px}
+.bk-box p{margin:0;font-size:.98rem;line-height:1.5}
+</style>
 </head>
 <body>
 
@@ -142,7 +154,8 @@ details p{margin:6px 0 0;color:var(--muted)}
     <div class="eyebrow">Geografia · I movimenti della Terra</div>
     <h1>Che ore sono nel mondo?</h1>
     <p class="lead">Mentre la Terra ruota da ovest a est, il mezzogiorno arriva prima nei luoghi a est e dopo in quelli a ovest. Per non avere un orario diverso in ogni città, la Terra è stata divisa in <b>24 fusi orari</b>: spicchi di 15° di longitudine dentro i quali tutti gli orologi segnano la stessa ora. Il primo fuso è quello del meridiano di Greenwich: la sua ora si chiama <b>UTC</b> (Tempo Coordinato Universale). L'Italia è nel fuso <b>UTC+1</b>. Ma l'ora dell'orologio non è sempre l'ora del Sole, e dall'altra parte del mondo cambia perfino il giorno.</p>
-  </header>
+  <div class="bk bk-tags"><div class="bk-t"><b>VIVI LA GEOGRAFIA 3</b><span>Unità 2 · Lezione 2 · pp. 16–17</span></div><div class="bk-t ga"><b>GEOAGENDA 3</b><span>Capitolo 19 · §5 I fusi orari · pp. E12–E13</span></div></div>
+</header>
 
   <section class="controls" aria-label="Comandi">
     <div class="row">
@@ -217,6 +230,10 @@ details p{margin:6px 0 0;color:var(--muted)}
     </section>
   </div>
 
+  <section class="bk bk-box" aria-label="Adesso apri il libro">
+  <div class="r"><div class="bk-t"><b>VIVI LA GEOGRAFIA 3</b><span>Adesso apri il libro</span></div><p>Studia «Che cosa sono i fusi orari?» a p. 17, osserva la carta dei fusi a p. 16 e fai l'esercizio «Osserva le 3 immagini».</p></div>
+  <div class="r"><div class="bk-t ga"><b>GEOAGENDA 3</b><span>Adesso apri il libro · pp. E12–E13</span></div><p>Studia le pp. E12–E13 (ora locale e ora civile, carta dei fusi) e fai gli esercizi 1–4 di «Impara a imparare».</p></div>
+</section>
   <nav class="pager" aria-label="Argomenti (in basso)">
     <a class="prev" href="rivoluzione.html"><small>Argomento precedente</small><span>← Il moto di rivoluzione</span></a>
     <a class="next" href="struttura-terra.html"><small>Argomento successivo</small><span>La struttura della Terra →</span></a>
@@ -537,5 +554,6 @@ body{padding-top:40px}
 })();
 </script>
 <!-- /zoom-ctrl -->
+<script src="../../../../assets/barra.js"></script>
 </body>
 </html>

@@ -81,6 +81,18 @@ details p{margin:8px 0 0;color:var(--muted)}
 .pager.pager-top span{font-size:.95rem}
 @media (max-width:560px){.pager{grid-template-columns:1fr}.pager .next{text-align:left}}
 </style>
+<style>/* etichette dei libri */
+.bk{--vv:#1d6fa5;--gg:#7a3fa0;--ov:#fff;--og:#fff;--bs:#eef4fa;--bl:#c9d6e3}
+@media (prefers-color-scheme:dark){.bk{--vv:#6db7ea;--gg:#c9a2e8;--ov:#06121c;--og:#1a0b26;--bs:#132030;--bl:#2a3b50}}
+.bk-tags{display:flex;flex-wrap:wrap;gap:6px 18px;margin:8px 0 4px}
+.bk-t{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;font:700 .85rem/1.3 system-ui,sans-serif}
+.bk-t b{background:var(--vv);color:var(--ov);letter-spacing:.06em;font-size:.8rem;padding:4px 10px;border-radius:6px}
+.bk-t span{color:var(--vv)}
+.bk-t.ga b{background:var(--gg);color:var(--og)}.bk-t.ga span{color:var(--gg)}
+.bk-box{background:var(--bs);border:1px solid var(--bl);border-radius:14px;padding:14px 18px;display:grid;gap:10px;margin:24px 0}
+.bk-box .r{display:grid;gap:4px}.bk-box .r+.r{border-top:1px solid var(--bl);padding-top:10px}
+.bk-box p{margin:0;font-size:.98rem;line-height:1.5}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -92,7 +104,8 @@ details p{margin:8px 0 0;color:var(--muted)}
     <div class="eyebrow">I movimenti della Terra · il crepuscolo</div>
     <h1>Il Sole è tramontato,<br>ma c'è ancora <em>luce</em></h1>
     <p class="lead">I raggi del Sole arrivano dritti e si fermano al bordo dell'atmosfera. L'atmosfera gira insieme alla Terra: segui la parte d'aria sopra l'osservatore (il settore tratteggiato). Di giorno i raggi la attraversano e arrivano dritti. Dopo il tramonto, quando quella parte d'aria passa dove arrivano i raggi radenti, i raggi vengono deviati verso l'osservatore, che li vede arrivare da una direzione più alta: la direzione apparente.</p>
-  </header>
+  <div class="bk bk-tags"><div class="bk-t"><b>VIVI LA GEOGRAFIA 3</b><span>Unità 2 · Lezione 2 · pp. 16–17</span></div><div class="bk-t ga"><b>GEOAGENDA 3</b><span>Capitolo 19 · §4 I movimenti della Terra · pp. E10–E11</span></div></div>
+</header>
 
   <figure>
     <canvas id="scene" role="img" aria-label="Sezione della Terra con le fasce dell'atmosfera, il dì a destra, la notte a sinistra, la fascia del crepuscolo e il circolo di illuminazione; i raggi del Sole arrivano da destra e uno viene deviato verso l'osservatore"></canvas>
@@ -147,6 +160,10 @@ details p{margin:8px 0 0;color:var(--muted)}
     </div>
   </section>
 
+  <section class="bk bk-box" aria-label="Adesso apri il libro">
+  <div class="r"><div class="bk-t"><b>VIVI LA GEOGRAFIA 3</b><span>Adesso apri il libro</span></div><p>Rileggi il moto di rotazione a p. 16 e la curiosità «Il Sole all'Equatore» a p. 17.</p></div>
+  <div class="r"><div class="bk-t ga"><b>GEOAGENDA 3</b><span>Adesso apri il libro · pp. E10–E11</span></div><p>Rileggi il moto di rotazione alle pp. E10–E11.</p></div>
+</section>
   <nav class="pager" aria-label="Argomenti (in basso)">
     <a class="prev" href="rotazione-terra.html"><small>Argomento precedente</small><span>← Il moto di rotazione</span></a>
     <a class="next" href="rivoluzione.html"><small>Argomento successivo</small><span>Il moto di rivoluzione →</span></a>
@@ -491,5 +508,6 @@ body{padding-top:40px}
 })();
 </script>
 <!-- /zoom-ctrl -->
+<script src="../../../../assets/barra.js"></script>
 </body>
 </html>

@@ -303,14 +303,15 @@ const MODULI = [
     materia: "geografia",
     classe: "terza",
     numero: "I",
-    titolo: "Il pianeta Terra: gli equilibri a rischio",
+    titolo: "Il pianeta Terra",
     link: "geografia/terza/la-terra/index.html",
-    descrizione: "Origini del pianeta, un pianeta irrequieto, idrografia, continenti, clima e biomi. Primo quadrimestre, in collegamento con Scienze.",
+    descrizione: "Origini del pianeta, un pianeta irrequieto, idrografia, continenti, atmosfera. Primo quadrimestre, in collegamento con Scienze.",
     lezioni: [
       {
         titolo: "Il Sistema solare",
         libri: ["paesaggi", "geoagenda", "vivi"],
-        descrizione: "Sole, pianeti, asteroidi, meteoroidi e comete: schede cliccabili e zoom.",
+        pagine: "E6–E7",
+        descrizione: "Sole, pianeti, asteroidi, meteoroidi e comete: schede cliccabili e zoom. GeoAgenda 3: E4–E5 · Vivi la Geografia 3: Unità 2, lezione 1, pp. 14–15 (Sistema solare, la Terra in cifre).",
         link: "geografia/terza/la-terra/lezioni/sistema-solare.html",
         data: "2026-10-15",
         attivita: []
@@ -318,7 +319,8 @@ const MODULI = [
       {
         titolo: "Il moto di rotazione",
         libri: ["paesaggi", "geoagenda", "vivi"],
-        descrizione: "La Terra gira da ovest a est: modello 3D con la cupola del cielo di Roma.",
+        pagine: "E8–E9",
+        descrizione: "La Terra gira da ovest a est: modello 3D con la cupola del cielo di Roma. GeoAgenda 3: E10–E11 · Vivi la Geografia 3: Unità 2, lezione 2, p. 16 (moto di rotazione).",
         link: "geografia/terza/la-terra/lezioni/rotazione-terra.html",
         data: "2026-10-15",
         attivita: []
@@ -326,7 +328,8 @@ const MODULI = [
       {
         titolo: "Il crepuscolo",
         libri: ["paesaggi", "geoagenda", "vivi"],
-        descrizione: "I raggi del Sole deviati dall'atmosfera all'alba e al tramonto.",
+        pagine: "E8–E9",
+        descrizione: "I raggi del Sole deviati dall'atmosfera all'alba e al tramonto. Approfondimento sul moto di rotazione. GeoAgenda 3: E10–E11 · Vivi la Geografia 3: p. 16 e curiosità «Il Sole all'Equatore», p. 17.",
         link: "geografia/terza/la-terra/lezioni/crepuscolo.html",
         data: "2026-10-15",
         attivita: []
@@ -334,7 +337,8 @@ const MODULI = [
       {
         titolo: "Il moto di rivoluzione",
         libri: ["paesaggi", "geoagenda", "vivi"],
-        descrizione: "Orbita, equinozi e solstizi, circolo di illuminazione e durata del dì.",
+        pagine: "E8–E9",
+        descrizione: "Orbita, equinozi e solstizi, circolo di illuminazione e durata del dì. GeoAgenda 3: E10–E11 · Vivi la Geografia 3: Unità 2, lezione 2, pp. 16–17 (rivoluzione, stagioni, equinozi e solstizi).",
         link: "geografia/terza/la-terra/lezioni/rivoluzione.html",
         data: "2026-10-15",
         attivita: []
@@ -343,7 +347,8 @@ const MODULI = [
         titolo: "I fusi orari",
         dipartimento: "prima",
         libri: ["paesaggi", "geoagenda", "vivi"],
-        descrizione: "24 fusi da 15°, ora UTC e ora legale, ora civile e ora locale, linea del cambiamento di data, i fusi dell'Europa e le lancette da spostare.",
+        pagine: "E10–E11",
+        descrizione: "24 fusi da 15°, ora UTC e ora legale, ora civile e ora locale, linea del cambiamento di data, i fusi dell'Europa e le lancette da spostare. GeoAgenda 3: E12–E13 · Vivi la Geografia 3: Unità 2, lezione 2, pp. 16–17 (carta dei fusi e «Che cosa sono i fusi orari?»).",
         link: "geografia/terza/la-terra/lezioni/fusi-orari.html",
         data: "2026-10-24",
         attivita: []
@@ -352,7 +357,8 @@ const MODULI = [
         titolo: "La struttura della Terra",
         dipartimento: true,
         libri: ["paesaggi", "geoagenda", "vivi"],
-        descrizione: "Viaggio verso il centro, placche, vulcani e terremoti, formazione della Terra.",
+        pagine: "E14–E15",
+        descrizione: "Viaggio verso il centro, placche, vulcani e terremoti, formazione della Terra. GeoAgenda 3: E14–E15 · Vivi la Geografia 3: p. 15 (la struttura della Terra) e Unità 2, lezione 3, pp. 18–19 (placche, deriva dei continenti).",
         link: "geografia/terza/la-terra/lezioni/struttura-terra.html",
         data: "2026-10-15",
         attivita: []
@@ -361,7 +367,7 @@ const MODULI = [
         titolo: "Il rischio vulcanico e il rischio sismico",
         dipartimento: true,
         libri: ["geoagenda", "vivi"],
-        descrizione: "Educazione civica: pericoli di vulcani e terremoti, tsunami, difese di Vesuvio ed Etna, previsione e prevenzione, edifici antisismici.",
+        descrizione: "Educazione civica: pericoli di vulcani e terremoti, tsunami, difese di Vesuvio ed Etna, previsione e prevenzione, edifici antisismici. GeoAgenda 3: E16–E17 · Vivi la Geografia 3: Unità 2, lezione 3, pp. 18–19 (terremoti, vulcani, tsunami) · Paesaggi 3: nessuna lezione.",
         link: "geografia/terza/la-terra/lezioni/rischio-vulcanico-sismico.html",
         data: "2026-10-27",
         attivita: []
@@ -370,7 +376,8 @@ const MODULI = [
         titolo: "I continenti",
         dipartimento: true,
         libri: ["paesaggi", "geoagenda", "vivi"],
-        descrizione: "Dati dei sei continenti, confronti e deriva dalla Pangea a oggi.",
+        pagine: "E16–E17",
+        descrizione: "Dati dei sei continenti, confronti e deriva dalla Pangea a oggi. GeoAgenda 3: E18–E19 · Vivi la Geografia 3: Unità 1, lezione 1, p. 4 (superficie e popolazione dei continenti); Pangea a p. 14, deriva dei continenti a p. 18.",
         link: "geografia/terza/la-terra/lezioni/continenti.html",
         data: "2026-10-15",
         attivita: []
@@ -379,7 +386,8 @@ const MODULI = [
         titolo: "Le proiezioni: disegnare il mondo su un foglio",
         dipartimento: "prima",
         libri: ["paesaggi", "geoagenda", "vivi"],
-        descrizione: "Carte conformi ed equivalenti, Mercatore, Peters ed Equal Earth a confronto con il globo. Spostata dalla prima, da verificare.",
+        pagine: "E4–E5",
+        descrizione: "Carte conformi ed equivalenti, Mercatore, Peters ed Equal Earth a confronto con il globo. Spostata dalla prima, da verificare. GeoAgenda 3: E8–E9 · Vivi la Geografia 3: Unità 1, lezione 2, pp. 6–7 (Mercatore, Peters, anamorfosi, cartografia digitale); approfondimento: lezione 3, pp. 8–9 (le carte e le culture).",
         link: "geografia/prima/metodo-e-strumenti/lezioni/proiezioni.html",
         data: "2026-10-23",
         attivita: [
@@ -390,44 +398,20 @@ const MODULI = [
         titolo: "Rilievi, oceani, fiumi e laghi",
         dipartimento: true,
         libri: ["paesaggi", "geoagenda", "vivi"],
-        descrizione: "Catene montuose e scudi, fondali oceanici, correnti, acqua dolce.",
+        pagine: "E18–E23",
+        descrizione: "Catene montuose e scudi, fondali oceanici, correnti, acqua dolce. GeoAgenda 3: E20–E25 · Vivi la Geografia 3: Unità 1, lezione 1, p. 5 (oceani, i maggiori fiumi e laghi, idrosfera). Sui rilievi nessuna pagina.",
         link: "geografia/terza/la-terra/lezioni/acque.html",
         data: "2026-10-15",
         attivita: []
       },
       {
         titolo: "L'atmosfera",
-        libri: ["paesaggi", "geoagenda", "vivi"],
-        descrizione: "Composizione, strati e temperatura, venti costanti e brezze.",
+        libri: ["paesaggi", "geoagenda"],
+        pagine: "E34–E35",
+        descrizione: "Composizione, strati e temperatura, venti costanti e brezze. GeoAgenda 3: E26–E27 · Paesaggi 3: nel capitolo sul clima · Vivi la Geografia 3: solo la definizione di atmosfera a p. 16.",
         link: "geografia/terza/la-terra/lezioni/atmosfera.html",
         data: "2026-10-15",
         attivita: []
-      },
-      {
-        titolo: "Fasce climatiche e biomi",
-        dipartimento: true,
-        libri: ["paesaggi", "geoagenda", "vivi"],
-        descrizione: "Clima e ambienti, lezioni 1–4: i fattori del clima, dal clima ai biomi, gli ambienti caldi, dalle zone temperate ai poli.",
-        link: "geografia/terza/clima-e-ambienti/index.html",
-        data: "2026-10-21",
-        attivita: [
-          { tipo: "Lezione 1", titolo: "Perché sulla Terra esistono climi diversi?", link: "geografia/terza/clima-e-ambienti/index.html#lezione-1", data: "2026-10-21" },
-          { tipo: "Lezione 2", titolo: "Dal clima ai biomi", link: "geografia/terza/clima-e-ambienti/index.html#lezione-2", data: "2026-10-21" },
-          { tipo: "Lezione 3", titolo: "Gli ambienti caldi: troppa acqua o troppo poca?", link: "geografia/terza/clima-e-ambienti/index.html#lezione-3", data: "2026-10-21" },
-          { tipo: "Lezione 4", titolo: "Dalle zone temperate ai poli", link: "geografia/terza/clima-e-ambienti/index.html#lezione-4", data: "2026-10-21" }
-        ]
-      },
-      {
-        titolo: "Il clima e i suoi cambiamenti",
-        dipartimento: true,
-        libri: ["paesaggi", "geoagenda", "vivi"],
-        descrizione: "Clima e ambienti, lezioni 5–6: come trasformiamo gli ambienti, il clima di ieri e di oggi.",
-        link: "geografia/terza/clima-e-ambienti/index.html#lezione-5",
-        data: "2026-10-21",
-        attivita: [
-          { tipo: "Lezione 5", titolo: "Come trasformiamo gli ambienti?", link: "geografia/terza/clima-e-ambienti/index.html#lezione-5", data: "2026-10-21" },
-          { tipo: "Lezione 6", titolo: "Il clima è sempre cambiato. Che cosa cambia oggi?", link: "geografia/terza/clima-e-ambienti/index.html#lezione-6", data: "2026-10-21" }
-        ]
       }
     ],
     attivita: [
@@ -457,54 +441,135 @@ const MODULI = [
     materia: "geografia",
     classe: "terza",
     numero: "II",
-    titolo: "Popolazione mondiale: crescita e inurbamento",
-    descrizione: "Dove siamo, quanti siamo, come ci muoviamo. Dicembre–gennaio, in collegamento con Scienze e Storia.",
+    titolo: "Clima e ambienti",
+    link: "geografia/terza/clima-e-ambienti/index.html",
+    descrizione: "Fasce climatiche e biomi, il clima e i suoi cambiamenti. Primo quadrimestre (novembre–dicembre), in collegamento con Scienze ed Educazione civica.",
     lezioni: [
       {
-        titolo: "La crescita della popolazione mondiale",
+        titolo: "Perché sulla Terra esistono climi diversi?",
         dipartimento: true,
-        attivita: [
-          { tipo: "Se c'è tempo", titolo: "Carte che cambiano forma", descrizione: "Anamorfosi: il mondo disegnato in base alla popolazione, ai giovani, ai cellulari.", link: "geografia/prima/carte-geografiche/attivita/carte-che-cambiano-forma.html", data: "2026-10-23" }
-        ]
+        libri: ["paesaggi", "geoagenda", "vivi"],
+        pagine: "E34–E35",
+        descrizione: "Le zone astronomiche e le stagioni, i fattori del clima. GeoAgenda 3: E42–E43 · Vivi la Geografia 3: Unità 2, lezione 2 e Unità 3, lezione 1, pp. 16–17, 20–21.",
+        link: "geografia/terza/clima-e-ambienti/lezioni/climi-diversi.html",
+        data: "2026-11-01",
+        attivita: []
       },
-      { titolo: "L'inurbamento", dipartimento: true, attivita: [] },
-      { titolo: "I movimenti migratori", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E94–E95", descrizione: "Perché si emigra; migrazioni internazionali e forzate, profughi. GeoAgenda 3: E78–E79 · Vivi la Geografia 3: pp. 62–65.", attivita: [] },
-      { titolo: "Salute e istruzione", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E98–E101", descrizione: "Problematiche legate allo sviluppo. GeoAgenda 3: E80–E83 · Vivi la Geografia 3: pp. 118–123.", attivita: [] },
-      { titolo: "Culture, lingue e religioni", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E102–E103, E115–E120", descrizione: "La geografia delle culture; dossier «La diversità delle culture». GeoAgenda 3: E84–E87 · Vivi la Geografia 3: pp. 164–175.", attivita: [] }
+      {
+        titolo: "Dal clima ai biomi",
+        dipartimento: true,
+        libri: ["paesaggi", "geoagenda", "vivi"],
+        pagine: "E36–E37",
+        descrizione: "Le zone climatiche e i grandi ambienti naturali. GeoAgenda 3: E44–E45 · Vivi la Geografia 3: Unità 3, lezione 1, pp. 20–21.",
+        link: "geografia/terza/clima-e-ambienti/lezioni/biomi.html",
+        data: "2026-11-01",
+        attivita: []
+      },
+      {
+        titolo: "Gli ambienti caldi: troppa acqua o troppo poca?",
+        dipartimento: true,
+        libri: ["paesaggi", "geoagenda", "vivi"],
+        pagine: "E44–E47",
+        descrizione: "Foresta pluviale, savana, deserti e oasi. GeoAgenda 3: E46–E49 · Vivi la Geografia 3: Unità 3, lezioni 2–5, pp. 22–29.",
+        link: "geografia/terza/clima-e-ambienti/lezioni/ambienti-caldi.html",
+        data: "2026-11-01",
+        attivita: []
+      },
+      {
+        titolo: "Dalle zone temperate ai poli",
+        dipartimento: true,
+        libri: ["paesaggi", "geoagenda", "vivi"],
+        pagine: "E48–E51",
+        descrizione: "Macchia mediterranea, latifoglie, praterie, taiga, tundra e ghiacci. GeoAgenda 3: E50–E53 · Vivi la Geografia 3: Unità 3, lezioni 6–7, pp. 30–35.",
+        link: "geografia/terza/clima-e-ambienti/lezioni/temperati-e-freddi.html",
+        data: "2026-11-01",
+        attivita: []
+      },
+      {
+        titolo: "Come trasformiamo gli ambienti?",
+        dipartimento: true,
+        libri: ["paesaggi", "geoagenda", "vivi"],
+        pagine: "E40–E41",
+        descrizione: "Deforestazione, desertificazione, cementificazione, inquinamento, rifiuti. GeoAgenda 3: E45 · Vivi la Geografia 3: Unità 4, lezioni 1, 2 e 4, pp. 38–41, 44–45.",
+        link: "geografia/terza/clima-e-ambienti/lezioni/trasformazioni.html",
+        data: "2026-11-01",
+        attivita: []
+      },
+      {
+        titolo: "Il clima è sempre cambiato. Che cosa cambia oggi?",
+        dipartimento: true,
+        libri: ["paesaggi", "geoagenda", "vivi"],
+        pagine: "E38–E39",
+        descrizione: "I cambiamenti climatici del passato e il riscaldamento globale. GeoAgenda 3: E54–E57 · Vivi la Geografia 3: Unità 4, lezioni 3 e 6, pp. 42–43, 48–49.",
+        link: "geografia/terza/clima-e-ambienti/lezioni/cambiamento-climatico.html",
+        data: "2026-11-01",
+        attivita: []
+      }
     ]
   },
   {
     materia: "geografia",
     classe: "terza",
     numero: "III",
-    titolo: "L'economia mondiale",
-    descrizione: "Le attività e le reti con cui trasformiamo il pianeta. Gennaio–febbraio, in collegamento con Scienze e Tecnologia.",
+    titolo: "Popolazione mondiale: crescita e inurbamento",
+    link: "geografia/terza/popolazione/index.html",
+    descrizione: "Dove siamo, quanti siamo, come ci muoviamo. Dicembre–gennaio, in collegamento con Scienze e Storia.",
     lezioni: [
-      { titolo: "L'economia mondiale", dipartimento: true, attivita: [] },
-      { titolo: "La globalizzazione", dipartimento: true, attivita: [] },
-      { titolo: "Risorse e materie prime", dipartimento: true, attivita: [] },
-      { titolo: "Le energie", dipartimento: true, attivita: [] },
-      { titolo: "Nord e Sud del mondo", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E90–E93", descrizione: "Disuguaglianze, sottosviluppo, rapporti di dipendenza economica. GeoAgenda 3: E74–E77 · Vivi la Geografia 3: pp. 10–11, 116–117, 126–127.", attivita: [] },
-      { titolo: "I conflitti per le risorse: acqua, suolo e cibo", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E124–E125", descrizione: "Le risorse e lo sviluppo sostenibile. GeoAgenda 3: E104–E105 · Vivi la Geografia 3: pp. 46–47, 118–119.", attivita: [] }
+      {
+        titolo: "La popolazione mondiale",
+        dipartimento: true,
+        libri: ["paesaggi", "geoagenda", "vivi"],
+        pagine: "E86–E87",
+        descrizione: "Quanti siamo, come è cresciuta la popolazione, dove viviamo, gli squilibri demografici. GeoAgenda 3: E72–E73 · Vivi la Geografia 3: Unità 5, lezioni 1–4, pp. 54–61.",
+        link: "geografia/terza/popolazione/index.html",
+        data: "2026-11-01",
+        attivita: [
+          { tipo: "Parte 1", titolo: "Quanti siamo?", descrizione: "Le tappe della popolazione mondiale, in scala reale; quanto tempo per ogni miliardo.", link: "geografia/terza/popolazione/lezioni/andamento.html", data: "2026-11-01" },
+          { tipo: "Parte 2", titolo: "La crescita della popolazione", descrizione: "Le tre fasi animate, nati e morti, quante volte siamo aumentati.", link: "geografia/terza/popolazione/lezioni/crescita.html", data: "2026-11-01" },
+          { tipo: "Parte 3", titolo: "Terre affollate, terre spopolate", descrizione: "La densità di popolazione, 100 abitanti della Terra, i fattori del popolamento, sempre più in città.", link: "geografia/terza/popolazione/lezioni/distribuzione.html", data: "2026-11-01" },
+          { tipo: "Parte 4", titolo: "I grandi squilibri demografici", descrizione: "Il ricambio generazionale, la piramide delle età, perché si fanno pochi o tanti figli.", link: "geografia/terza/popolazione/lezioni/squilibri.html", data: "2026-11-01" },
+          { tipo: "Se c'è tempo", titolo: "Carte che cambiano forma", descrizione: "Anamorfosi: il mondo disegnato in base alla popolazione, ai giovani, ai cellulari.", link: "geografia/prima/carte-geografiche/attivita/carte-che-cambiano-forma.html", data: "2026-10-23" }
+        ]
+      },
+      { titolo: "L'inurbamento", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E88–E89", descrizione: "La crescita delle città. GeoAgenda 3: E72–E73 (urbanesimo e megalopoli, dentro «La popolazione mondiale»; poi il modulo integrativo Città che cambiano) · Vivi la Geografia 3: Unità 6, pp. 68–85.", attivita: [] },
+      { titolo: "I movimenti migratori", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E94–E95", descrizione: "Perché si emigra; migrazioni internazionali e forzate, profughi. GeoAgenda 3: E82–E83 · Vivi la Geografia 3: Unità 5, lezioni 5–6, pp. 62–66.", attivita: [] },
+      { titolo: "Lo sviluppo", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E90–E93, E98–E101", descrizione: "Disuguaglianze e sottosviluppo, salute e istruzione. GeoAgenda 3: E78–E81, E84–E87 · Vivi la Geografia 3: Unità 9, pp. 116–128.", attivita: [] },
+      { titolo: "Culture, lingue e religioni", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E102–E103, E115–E120", descrizione: "La geografia delle culture; dossier «La diversità delle culture». GeoAgenda 3: E88–E91 · Vivi la Geografia 3: Unità 12, pp. 164–176.", attivita: [] }
     ]
   },
   {
     materia: "geografia",
     classe: "terza",
     numero: "IV",
-    titolo: "Gli Stati del mondo: la geopolitica",
-    descrizione: "Introduzione agli Stati: febbraio–marzo, in collegamento con Storia ed Educazione civica.",
+    titolo: "L'economia mondiale",
+    link: "geografia/terza/economia/index.html",
+    descrizione: "Le attività e le reti con cui trasformiamo il pianeta. Gennaio–febbraio, in collegamento con Scienze e Tecnologia.",
     lezioni: [
-      { titolo: "La crisi degli Stati nazionali", dipartimento: true, attivita: [] },
-      { titolo: "Il sistema politico mondiale", dipartimento: true, attivita: [] },
-      { titolo: "L'Organizzazione delle Nazioni Unite", dipartimento: true, attivita: [] },
-      { titolo: "I diritti umani", dipartimento: true, attivita: [] }
+      { titolo: "L'economia globale e la globalizzazione", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E122–E123", descrizione: "Lo spazio economico mondiale, le città globali, i fattori della globalizzazione, WTO, FMI e Banca Mondiale, le crisi del 2008 e del Covid-19. GeoAgenda 3: §1 Un'economia globale, E108–E109 · Vivi la Geografia 3: Unità 7, lezioni 1–3, pp. 90–95.", link: "geografia/terza/economia/lezioni/globalizzazione.html", data: "2026-11-02", attivita: [] },
+      { titolo: "Una nuova geografia dell'economia: Nord e Sud del mondo", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E122–E123", descrizione: "Nord e Sud del mondo, G20 e BRICS, le multinazionali e la delocalizzazione, la Cina «fabbrica del mondo» e le nuove Vie della seta. GeoAgenda 3: §1, E108–E109; G20 e BRICS a p. E114; Agenda 2030 «A che punto siamo con la lotta alla povertà?», E120–E121 · Vivi la Geografia 3: Unità 7, lezioni 4–6, pp. 96–101; aiuti allo sviluppo: Unità 9, lezione 6, p. 126.", link: "geografia/terza/economia/lezioni/nord-sud.html", data: "2026-11-02", attivita: [] },
+      { titolo: "Risorse, energia e conflitti", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E124–E125", descrizione: "Materie prime e fonti di energia, il petrolio, le rinnovabili; i conflitti per il petrolio, l'acqua, il suolo e il cibo. GeoAgenda 3: §2 Le risorse e l'ambiente, E110–E111 · Vivi la Geografia 3: Unità 8, lezioni 1–2, pp. 104–107; l'acqua: Unità 4, lezione 5, pp. 46–47.", link: "geografia/terza/economia/lezioni/risorse-energia.html", data: "2026-11-02", attivita: [] },
+      { titolo: "Il settore primario", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E128–E129", descrizione: "Agricoltura di autoconsumo e agricoltura avanzata, piantagioni monocolturali, land grabbing, effetti del cambiamento climatico. GeoAgenda 3: §3 L'agricoltura, E112–E113 · Vivi la Geografia 3: Unità 8, lezione 3, pp. 108–109.", link: "geografia/terza/economia/lezioni/primario.html", data: "2026-11-02", attivita: [] },
+      { titolo: "Il settore secondario", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E130–E131", descrizione: "Le trasformazioni dell'industria, la delocalizzazione, ricerca e alta tecnologia, automazione e lavoro, il divario digitale. GeoAgenda 3: §4 L'industria, E114–E115 · Vivi la Geografia 3: Unità 8, lezione 4, pp. 110–111.", link: "geografia/terza/economia/lezioni/secondario.html", data: "2026-11-02", attivita: [] },
+      { titolo: "Il settore terziario", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E132–E135", descrizione: "Commercio, trasporti e turismo internazionale; il terziario di comando, banche e borse valori, le telecomunicazioni. GeoAgenda 3: §5 Commercio, trasporti e turismo, E116–E117; §6 Finanza e telecomunicazioni, E118–E119 · Vivi la Geografia 3: Unità 8, lezione 5, pp. 112–113.", link: "geografia/terza/economia/lezioni/terziario.html", data: "2026-11-02", attivita: [] }
     ]
   },
   {
     materia: "geografia",
     classe: "terza",
     numero: "V",
+    titolo: "Gli Stati del mondo: la geopolitica",
+    descrizione: "Introduzione agli Stati: febbraio–marzo, in collegamento con Storia ed Educazione civica.",
+    lezioni: [
+      { titolo: "La crisi degli Stati nazionali", dipartimento: true, libri: ["paesaggi", "geoagenda"], pagine: "E68–E71", descrizione: "Che cos'è uno Stato (territorio, popolazione, sovranità), confini e tensioni, forme di governo, Stati democratici e autoritari. GeoAgenda 3: E74–E75.", attivita: [] },
+      { titolo: "Il sistema politico mondiale", dipartimento: true, attivita: [] },
+      { titolo: "L'Organizzazione delle Nazioni Unite", dipartimento: true, libri: ["paesaggi", "geoagenda"], pagine: "E72–E73", descrizione: "Organi e agenzie dell'ONU, le altre organizzazioni internazionali (WTO, Banca Mondiale, FMI), l'Agenda 2030. GeoAgenda 3: E76–E77.", attivita: [] },
+      { titolo: "I diritti umani", dipartimento: true, libri: ["geoagenda"], descrizione: "La Dichiarazione universale dei diritti dell'uomo: diritti civili e politici, economici, sociali e culturali. GeoAgenda 3: E77.", attivita: [] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "terza",
+    numero: "VI",
     titolo: "Gli Stati del mondo: Africa",
     descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
@@ -518,7 +583,7 @@ const MODULI = [
   {
     materia: "geografia",
     classe: "terza",
-    numero: "VI",
+    numero: "VII",
     titolo: "Gli Stati del mondo: Asia",
     descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
@@ -535,7 +600,7 @@ const MODULI = [
   {
     materia: "geografia",
     classe: "terza",
-    numero: "VII",
+    numero: "VIII",
     titolo: "Gli Stati del mondo: America anglosassone e America Latina",
     descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
@@ -550,7 +615,7 @@ const MODULI = [
   {
     materia: "geografia",
     classe: "terza",
-    numero: "VIII",
+    numero: "IX",
     titolo: "Gli Stati del mondo: Oceania",
     descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
@@ -1565,6 +1630,379 @@ const MODULI = [
         data: "2026-10-28",
         attivita: []
       }
+    ]
+  },
+  /* ---------------- EDUCAZIONE CIVICA · PRIMA ---------------- */
+  /* Dalla Progettazione di educazione civica del dipartimento (programmazione di esempio
+     per i consigli di classe): un modulo per ogni UDA. Le lezioni della seconda vengono dal
+     Generatore di lezioni di educazione civica; quelle di prima e terza sono in preparazione. */
+  {
+    materia: "educazione-civica",
+    classe: "prima",
+    numero: "I",
+    titolo: "Le regole della nostra classe",
+    descrizione: "Settembre–novembre, circa 13 ore (Italiano, Storia, Scienze motorie, Tecnologia, Musica). Accoglienza e convivenza. Fasi: conoscersi e riconoscere le differenze (Wonder, La gabbianella e il gatto); diritti e doveri nella Costituzione (artt. 2, 3, 34) e nel regolamento d'istituto; i simboli della Repubblica (bandiera, inno, 2 giugno); la sicurezza a scuola e la prova di evacuazione; il fair play nello sport. Prodotto finale: Regolamento di classe scritto insieme, illustrato e firmato da tutti; piano di evacuazione dell'aula spiegato dagli alunni. Obiettivi del dipartimento: Partecipare responsabilmente alla comunità; Conoscere Costituzione, istituzioni e diritti; Adottare comportamenti sicuri e salutari.",
+    lezioni: [
+      { titolo: "Conoscersi e riconoscere le differenze", dipartimento: true, attivita: [] },
+      { titolo: "Diritti e doveri: la Costituzione (artt. 2, 3, 34) e il regolamento d'istituto", dipartimento: true, attivita: [] },
+      { titolo: "I simboli della Repubblica: bandiera, inno, 2 giugno", dipartimento: true, attivita: [] },
+      { titolo: "La sicurezza a scuola e la prova di evacuazione", dipartimento: true, attivita: [] },
+      { titolo: "Il fair play nello sport", dipartimento: true, attivita: [] },
+      { titolo: "Il regolamento della nostra classe", dipartimento: true, attivita: [] }
+    ]
+  },
+  {
+    materia: "educazione-civica",
+    classe: "prima",
+    numero: "II",
+    titolo: "Il mio Comune: servizi, rifiuti e beni comuni",
+    descrizione: "Dicembre–febbraio, circa 10 ore (Geografia, Scienze, Italiano, Arte e immagine). Il Comune e i suoi organi (sindaco, giunta, consiglio comunale); i servizi al cittadino; la raccolta differenziata e la riduzione degli sprechi a scuola e a casa; un bene culturale o ambientale del territorio. Prodotto finale: Guida ai servizi del Comune e alla raccolta differenziata per le famiglie nuove arrivate; scheda illustrata di un bene del territorio. Obiettivi del dipartimento: Conoscere Costituzione, istituzioni e diritti; Agire per la sostenibilità; Riconoscere e tutelare il patrimonio; Partecipare responsabilmente alla comunità.",
+    lezioni: [
+      { titolo: "Il Comune e i suoi organi: sindaco, giunta, consiglio comunale", dipartimento: true, attivita: [] },
+      { titolo: "I servizi al cittadino", dipartimento: true, attivita: [] },
+      { titolo: "La raccolta differenziata e la riduzione degli sprechi", dipartimento: true, attivita: [] },
+      { titolo: "Un bene culturale o ambientale del territorio", dipartimento: true, attivita: [] },
+      { titolo: "La guida per le famiglie nuove arrivate", dipartimento: true, attivita: [] }
+    ]
+  },
+  {
+    materia: "educazione-civica",
+    classe: "prima",
+    numero: "III",
+    titolo: "Piccoli cittadini digitali",
+    descrizione: "Marzo–maggio, circa 10 ore (Tecnologia, Italiano, Inglese, Matematica). Dispositivi e piattaforme della scuola; le regole della rete; le parole che feriscono e quelle che uniscono; il cyberbullismo; confrontare semplici fonti per capire se un'informazione è vera. Prodotto finale: Decalogo illustrato per usare bene la piattaforma della classe; sondaggio della classe sull'uso di Internet con i risultati in un grafico (Matematica). Obiettivi del dipartimento: Usare consapevolmente strumenti e ambienti digitali; Ricercare e valutare informazioni digitali; Comunicare e condividere responsabilmente; Partecipare responsabilmente alla comunità.",
+    lezioni: [
+      { titolo: "Dispositivi e piattaforme della scuola", dipartimento: true, attivita: [] },
+      { titolo: "Le regole della rete", dipartimento: true, attivita: [] },
+      { titolo: "Parole che feriscono, parole che uniscono", dipartimento: true, attivita: [] },
+      { titolo: "Il cyberbullismo", dipartimento: true, attivita: [] },
+      { titolo: "Vero o falso? Confrontare semplici fonti", dipartimento: true, attivita: [] },
+      { titolo: "Il decalogo della piattaforma di classe", dipartimento: true, attivita: [] }
+    ]
+  },
+
+  /* ---------------- EDUCAZIONE CIVICA · SECONDA ---------------- */
+  {
+    materia: "educazione-civica",
+    classe: "seconda",
+    numero: "I",
+    titolo: "Parole che uniscono: comunicare in rete",
+    descrizione: "Ottobre–dicembre, circa 13 ore (Italiano, Tecnologia, Inglese, Musica). Dal Manifesto della comunicazione non ostile alle regole della classe in rete. Fasi: bufala poetica e verifica delle fonti; dati sul cyberbullismo; le parole delle canzoni; stesura del manifesto di classe. Prodotto finale: Manifesto di classe per la comunicazione in rete, con infografica pubblicata sul sito della scuola. Obiettivi del dipartimento: Comunicare e condividere responsabilmente; Ricercare e valutare informazioni digitali; Usare consapevolmente strumenti e ambienti digitali; Partecipare responsabilmente alla comunità.",
+    lezioni: [
+      {
+        titolo: "Le parole sono un ponte",
+        dipartimento: true,
+        descrizione: "Conoscere i dieci principi del Manifesto della comunicazione non ostile e collegarli a situazioni della vita di classe e online.",
+        link: "educazione-civica/seconda/parole-che-uniscono/01-le-parole-sono-un-ponte.html",
+        data: "2026-11-01",
+        attivita: []
+      },
+      {
+        titolo: "Una bufala poetica",
+        dipartimento: true,
+        descrizione: "Riconoscere che un testo commovente diffuso in rete può essere falso e individuare gli indizi che permettono di dubitare prima di condividere.",
+        link: "educazione-civica/seconda/parole-che-uniscono/02-una-bufala-poetica.html",
+        attivita: []
+      },
+      {
+        titolo: "Cercare bene in rete",
+        dipartimento: true,
+        descrizione: "Usare il motore di ricerca per documentarsi, scegliendo parole chiave efficaci e circoscrivendo la ricerca.",
+        link: "educazione-civica/seconda/parole-che-uniscono/03-cercare-bene-in-rete.html",
+        attivita: []
+      },
+      {
+        titolo: "Verificare una notizia e citare le fonti",
+        dipartimento: true,
+        descrizione: "Verificare l'attendibilità di una notizia confrontando più fonti e citare correttamente le fonti evitando il plagio.",
+        link: "educazione-civica/seconda/parole-che-uniscono/04-verificare-una-notizia-e-citare-le-fonti.html",
+        attivita: []
+      },
+      {
+        titolo: "Cyberbullismo: chi guarda può fare la differenza",
+        dipartimento: true,
+        descrizione: "Riconoscere le forme del cyberbullismo e il ruolo di chi assiste, individuando che cosa fare e a chi rivolgersi.",
+        link: "educazione-civica/seconda/parole-che-uniscono/05-cyberbullismo-chi-guarda-puo-fare-la-differenza.html",
+        attivita: []
+      },
+      {
+        titolo: "Words matter: Dumbledore and the Manifesto",
+        dipartimento: true,
+        descrizione: "Understand a short film scene and the principles of the Manifesto in English; use words for building bridges and words for hurting.",
+        link: "educazione-civica/seconda/parole-che-uniscono/06-words-matter-dumbledore-and-the-manifesto.html",
+        attivita: []
+      },
+      {
+        titolo: "Le mie parole: le metafore di una canzone",
+        dipartimento: true,
+        descrizione: "Riconoscere in una canzone le metafore usate per descrivere le parole e collegarle al loro effetto su chi le riceve.",
+        link: "educazione-civica/seconda/parole-che-uniscono/07-le-mie-parole-le-metafore-di-una-canzone.html",
+        attivita: []
+      },
+      {
+        titolo: "Famosi online: possibilità e pericoli",
+        dipartimento: true,
+        descrizione: "Riflettere sulle possibilità e sui rischi della visibilità online, distinguendo identità reale e immagine pubblicata.",
+        link: "educazione-civica/seconda/parole-che-uniscono/08-famosi-online-possibilita-e-pericoli.html",
+        attivita: []
+      },
+      {
+        titolo: "Parole che integrano: analisi di una canzone",
+        dipartimento: true,
+        descrizione: "Analizzare il testo di una canzone sul potere delle parole e ricavarne messaggi per una comunicazione che include.",
+        link: "educazione-civica/seconda/parole-che-uniscono/09-parole-che-integrano-analisi-di-una-canzone.html",
+        attivita: []
+      },
+      {
+        titolo: "Una strofa per il Manifesto",
+        dipartimento: true,
+        descrizione: "Comporre e cantare una strofa in rima ispirata ai principi del Manifesto, rispettando metrica e accenti.",
+        link: "educazione-civica/seconda/parole-che-uniscono/10-una-strofa-per-il-manifesto.html",
+        attivita: []
+      },
+      {
+        titolo: "Be kind online: netiquette",
+        dipartimento: true,
+        descrizione: "Learn and use the vocabulary of online communication and write simple rules for a respectful chat.",
+        link: "educazione-civica/seconda/parole-che-uniscono/11-be-kind-online-netiquette.html",
+        attivita: []
+      },
+      {
+        titolo: "Scriviamo il Manifesto di classe",
+        dipartimento: true,
+        descrizione: "Scrivere insieme un testo regolativo condiviso, scegliendo le regole emerse nella UDA e motivandole.",
+        link: "educazione-civica/seconda/parole-che-uniscono/12-scriviamo-il-manifesto-di-classe.html",
+        attivita: []
+      },
+      {
+        titolo: "L'infografica del Manifesto",
+        dipartimento: true,
+        descrizione: "Produrre e condividere un'infografica rispettando le regole della piattaforma e citando correttamente le fonti.",
+        link: "educazione-civica/seconda/parole-che-uniscono/13-l-infografica-del-manifesto.html",
+        attivita: []
+      }
+    ]
+  },
+  {
+    materia: "educazione-civica",
+    classe: "seconda",
+    numero: "II",
+    titolo: "Essere cittadini europei",
+    descrizione: "Gennaio–marzo, circa 12 ore (Storia, Geografia, Inglese, Musica). Tappe dell'Unione Europea, istituzioni, Carta dei diritti fondamentali, inno e bandiera; i discorsi che hanno difeso i diritti. Prodotto finale: Simulazione di una seduta del Parlamento europeo su un tema scelto dalla classe. Obiettivi del dipartimento: Conoscere Costituzione, istituzioni e diritti; Partecipare responsabilmente alla comunità.",
+    lezioni: [
+      {
+        titolo: "Dalla guerra alla pace: perché un'Europa unita",
+        dipartimento: true,
+        descrizione: "Spiegare perché, dopo la Seconda guerra mondiale, alcuni Stati europei decisero di unirsi, a partire dalla Dichiarazione Schuman.",
+        link: "educazione-civica/seconda/essere-cittadini-europei/01-dalla-guerra-alla-pace-perche-un-europa-unita.html",
+        data: "2026-11-01",
+        attivita: []
+      },
+      {
+        titolo: "Le tappe dell'Unione Europea",
+        dipartimento: true,
+        descrizione: "Ricostruire le principali tappe dalla Comunità del carbone e dell'acciaio all'Unione Europea di oggi.",
+        link: "educazione-civica/seconda/essere-cittadini-europei/02-le-tappe-dell-unione-europea.html",
+        attivita: []
+      },
+      {
+        titolo: "Gli Stati dell'Unione sulla carta",
+        dipartimento: true,
+        descrizione: "Localizzare sulla carta gli Stati membri dell'Unione Europea e distinguerli dagli altri Stati europei.",
+        link: "educazione-civica/seconda/essere-cittadini-europei/03-gli-stati-dell-unione-sulla-carta.html",
+        attivita: []
+      },
+      {
+        titolo: "Vivere senza frontiere: euro, Schengen, Erasmus",
+        dipartimento: true,
+        descrizione: "Riconoscere che cosa cambia nella vita quotidiana grazie all'Unione: libera circolazione, moneta unica, studio all'estero.",
+        link: "educazione-civica/seconda/essere-cittadini-europei/04-vivere-senza-frontiere-euro-schengen-erasmus.html",
+        attivita: []
+      },
+      {
+        titolo: "Le istituzioni europee: chi fa che cosa",
+        dipartimento: true,
+        descrizione: "Riconoscere le principali istituzioni dell'Unione Europea e le loro funzioni, collegandole ai poteri dello Stato.",
+        link: "educazione-civica/seconda/essere-cittadini-europei/05-le-istituzioni-europee-chi-fa-che-cosa.html",
+        attivita: []
+      },
+      {
+        titolo: "Speeches that changed history",
+        dipartimento: true,
+        descrizione: "Understand key words of two famous speeches on rights and connect them to rights in the European Union today.",
+        link: "educazione-civica/seconda/essere-cittadini-europei/06-speeches-that-changed-history.html",
+        attivita: []
+      },
+      {
+        titolo: "La Carta dei diritti fondamentali dell'Unione",
+        dipartimento: true,
+        descrizione: "Conoscere la struttura della Carta dei diritti fondamentali dell'Unione Europea e riconoscere alcuni diritti nella vita quotidiana.",
+        link: "educazione-civica/seconda/essere-cittadini-europei/07-la-carta-dei-diritti-fondamentali-dell-unione.html",
+        attivita: []
+      },
+      {
+        titolo: "L'Inno alla gioia, inno dell'Europa",
+        dipartimento: true,
+        descrizione: "Conoscere l'origine dell'inno europeo e riconoscerne il tema melodico, collegandolo ai simboli dell'Unione.",
+        link: "educazione-civica/seconda/essere-cittadini-europei/08-l-inno-alla-gioia-inno-dell-europa.html",
+        attivita: []
+      },
+      {
+        titolo: "United in diversity",
+        dipartimento: true,
+        descrizione: "Use EU vocabulary in English and describe one's own European identity in simple sentences.",
+        link: "educazione-civica/seconda/essere-cittadini-europei/09-united-in-diversity.html",
+        attivita: []
+      },
+      {
+        titolo: "Inni a confronto",
+        dipartimento: true,
+        descrizione: "Confrontare l'inno nazionale e l'inno europeo riconoscendo carattere, struttura e funzione.",
+        link: "educazione-civica/seconda/essere-cittadini-europei/10-inni-a-confronto.html",
+        attivita: []
+      },
+      {
+        titolo: "Prepariamo la seduta del Parlamento europeo",
+        dipartimento: true,
+        descrizione: "Prepararsi a una simulazione assumendo il punto di vista di uno Stato membro su un tema comune.",
+        link: "educazione-civica/seconda/essere-cittadini-europei/11-prepariamo-la-seduta-del-parlamento-europeo.html",
+        attivita: []
+      },
+      {
+        titolo: "La seduta del Parlamento europeo",
+        dipartimento: true,
+        descrizione: "Partecipare a una simulazione di seduta parlamentare rispettando le regole, argomentando e votando.",
+        link: "educazione-civica/seconda/essere-cittadini-europei/12-la-seduta-del-parlamento-europeo.html",
+        attivita: []
+      }
+    ]
+  },
+  {
+    materia: "educazione-civica",
+    classe: "seconda",
+    numero: "III",
+    titolo: "Il patrimonio del nostro quartiere",
+    descrizione: "Aprile–maggio, circa 10 ore (Arte e immagine, Geografia, Italiano, Scienze). Un bene del territorio da conoscere, raccontare e tutelare; i nomi delle strade e l'art. 3 della Costituzione. Prodotto finale: Visita guidata in digitale (Invasioni Digitali) di un bene del quartiere, preparata dagli alunni. Obiettivi del dipartimento: Riconoscere e tutelare il patrimonio; Agire per la sostenibilità; Conoscere Costituzione, istituzioni e diritti.",
+    lezioni: [
+      {
+        titolo: "Che cos'è un bene culturale",
+        dipartimento: true,
+        descrizione: "Riconoscere i diversi tipi di beni culturali e paesaggistici e il dovere di tutela stabilito dall'articolo 9 della Costituzione.",
+        link: "educazione-civica/seconda/il-patrimonio-del-nostro-quartiere/01-che-cos-e-un-bene-culturale.html",
+        data: "2026-11-01",
+        attivita: []
+      },
+      {
+        titolo: "Il quartiere sulla carta",
+        dipartimento: true,
+        descrizione: "Leggere la carta del quartiere, localizzare i beni individuati e scegliere quello da studiare.",
+        link: "educazione-civica/seconda/il-patrimonio-del-nostro-quartiere/02-il-quartiere-sulla-carta.html",
+        attivita: []
+      },
+      {
+        titolo: "Le strade raccontano: i nomi del quartiere",
+        dipartimento: true,
+        descrizione: "Analizzare i nomi delle strade del quartiere come patrimonio e riflettere sull'uguaglianza tra donne e uomini (art. 3).",
+        link: "educazione-civica/seconda/il-patrimonio-del-nostro-quartiere/03-le-strade-raccontano-i-nomi-del-quartiere.html",
+        attivita: []
+      },
+      {
+        titolo: "Leggere un bene: osservare e descrivere",
+        dipartimento: true,
+        descrizione: "Osservare un bene culturale e descriverlo con il lessico specifico: materiali, forme, stile, epoca.",
+        link: "educazione-civica/seconda/il-patrimonio-del-nostro-quartiere/04-leggere-un-bene-osservare-e-descrivere.html",
+        attivita: []
+      },
+      {
+        titolo: "Perché i monumenti si rovinano",
+        dipartimento: true,
+        descrizione: "Riconoscere le principali cause di degrado dei beni culturali, naturali e umane, e collegarle all'inquinamento.",
+        link: "educazione-civica/seconda/il-patrimonio-del-nostro-quartiere/05-perche-i-monumenti-si-rovinano.html",
+        attivita: []
+      },
+      {
+        titolo: "Sopralluogo: fotografare e documentare",
+        dipartimento: true,
+        descrizione: "Documentare un bene culturale con fotografie e appunti rispettando le regole del luogo e la privacy.",
+        link: "educazione-civica/seconda/il-patrimonio-del-nostro-quartiere/06-sopralluogo-fotografare-e-documentare.html",
+        attivita: []
+      },
+      {
+        titolo: "Il verde del quartiere: un patrimonio vivo",
+        dipartimento: true,
+        descrizione: "Riconoscere il valore del verde urbano per la biodiversità e la qualità della vita, e proporre comportamenti sostenibili.",
+        link: "educazione-civica/seconda/il-patrimonio-del-nostro-quartiere/07-il-verde-del-quartiere-un-patrimonio-vivo.html",
+        attivita: []
+      },
+      {
+        titolo: "Scriviamo i testi della visita guidata",
+        dipartimento: true,
+        descrizione: "Scrivere testi informativi brevi e chiari per una visita guidata digitale, citando le fonti.",
+        link: "educazione-civica/seconda/il-patrimonio-del-nostro-quartiere/08-scriviamo-i-testi-della-visita-guidata.html",
+        attivita: []
+      },
+      {
+        titolo: "Chi protegge il patrimonio",
+        dipartimento: true,
+        descrizione: "Conoscere le istituzioni e le organizzazioni che tutelano il patrimonio, dal Comune all'UNESCO, e il ruolo dei cittadini.",
+        link: "educazione-civica/seconda/il-patrimonio-del-nostro-quartiere/09-chi-protegge-il-patrimonio.html",
+        attivita: []
+      },
+      {
+        titolo: "La nostra Invasione Digitale",
+        dipartimento: true,
+        descrizione: "Realizzare e presentare una visita guidata digitale del bene, con foto, testi e fonti, rispettando privacy e diritti d'autore.",
+        link: "educazione-civica/seconda/il-patrimonio-del-nostro-quartiere/10-la-nostra-invasione-digitale.html",
+        attivita: []
+      }
+    ]
+  },
+
+  /* ---------------- EDUCAZIONE CIVICA · TERZA ---------------- */
+  {
+    materia: "educazione-civica",
+    classe: "terza",
+    numero: "I",
+    titolo: "La Costituzione e la legalità",
+    descrizione: "Ottobre–dicembre, circa 12 ore (Storia, Italiano, Geografia, Arte e immagine). Dal referendum del 2 giugno 1946 all'Assemblea costituente e al 1° gennaio 1948: come nasce la Costituzione e com'è fatta. Gli organi costituzionali. La legalità e il contrasto alle mafie: figure di riferimento e associazioni. La libertà di espressione (art. 21) nell'era di Internet. Prodotto finale: Costituzione raccontata ai ragazzi: ogni gruppo riscrive e illustra un articolo; proposta di riscrittura dell'art. 21 per l'era digitale. Obiettivi del dipartimento: Conoscere Costituzione, istituzioni e diritti; Partecipare responsabilmente alla comunità; Comunicare e condividere responsabilmente.",
+    lezioni: [
+      { titolo: "Come nasce la Costituzione: dal 2 giugno 1946 al 1° gennaio 1948", dipartimento: true, attivita: [] },
+      { titolo: "Com'è fatta la Costituzione", dipartimento: true, attivita: [] },
+      { titolo: "Gli organi costituzionali", dipartimento: true, attivita: [] },
+      { titolo: "La legalità e il contrasto alle mafie", dipartimento: true, attivita: [] },
+      { titolo: "La libertà di espressione (art. 21) nell'era di Internet", dipartimento: true, attivita: [] },
+      { titolo: "La Costituzione raccontata ai ragazzi", dipartimento: true, attivita: [] }
+    ]
+  },
+  {
+    materia: "educazione-civica",
+    classe: "terza",
+    numero: "II",
+    titolo: "Diritti umani e memoria",
+    descrizione: "Gennaio–febbraio, circa 10 ore (Storia, Italiano, Inglese, Geografia). La Dichiarazione universale dei diritti umani (1948) e l'ONU; la Convenzione sui diritti dell'infanzia (1989); la Giornata della Memoria: leggi razziali, Diario di Anna Frank, il linguaggio dell'odio dal Manifesto della razza a oggi. Prodotto finale: Debate su un articolo della Dichiarazione universale; mostra per il 27 gennaio con i lavori della classe. Obiettivi del dipartimento: Conoscere Costituzione, istituzioni e diritti; Partecipare responsabilmente alla comunità; Comunicare e condividere responsabilmente.",
+    lezioni: [
+      { titolo: "La Dichiarazione universale dei diritti umani e l'ONU", dipartimento: true, attivita: [] },
+      { titolo: "La Convenzione sui diritti dell'infanzia", dipartimento: true, attivita: [] },
+      { titolo: "Il Giorno della Memoria: le leggi razziali e il Diario di Anna Frank", dipartimento: true, attivita: [] },
+      { titolo: "Il linguaggio dell'odio dal Manifesto della razza a oggi", dipartimento: true, attivita: [] },
+      { titolo: "Debate su un articolo della Dichiarazione universale", dipartimento: true, attivita: [] }
+    ]
+  },
+  {
+    materia: "educazione-civica",
+    classe: "terza",
+    numero: "III",
+    titolo: "Clima, energia e informazione",
+    descrizione: "Marzo–maggio, circa 11 ore (Scienze, Tecnologia, Italiano, Matematica). Cambiamenti climatici e biodiversità; fonti di energia rinnovabili e non rinnovabili; sostenibilità nelle attività economiche; leggere i dati sul clima; riconoscere le notizie false sul clima; copyright e Creative Commons; identità digitale e privacy nel condividere contenuti. Prodotto finale: Campagna informativa digitale sul clima, con dati e fonti verificate e immagini con licenza libera. Obiettivi del dipartimento: Agire per la sostenibilità; Ricercare e valutare informazioni digitali; Usare consapevolmente strumenti e ambienti digitali; Comunicare e condividere responsabilmente.",
+    lezioni: [
+      { titolo: "Cambiamenti climatici e biodiversità", dipartimento: true, attivita: [] },
+      { titolo: "Fonti di energia rinnovabili e non rinnovabili", dipartimento: true, attivita: [] },
+      { titolo: "La sostenibilità nelle attività economiche", dipartimento: true, attivita: [] },
+      { titolo: "Leggere i dati sul clima", dipartimento: true, attivita: [] },
+      { titolo: "Riconoscere le notizie false sul clima", dipartimento: true, attivita: [] },
+      { titolo: "Copyright e Creative Commons", dipartimento: true, attivita: [] },
+      { titolo: "Identità digitale e privacy", dipartimento: true, attivita: [] },
+      { titolo: "La campagna informativa sul clima", dipartimento: true, attivita: [] }
     ]
   }
 ];

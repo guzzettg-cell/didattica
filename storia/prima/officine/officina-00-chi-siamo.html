@@ -523,16 +523,7 @@ details.insegnante ul,details.insegnante ol{margin:0 0 10px;padding-left:1.3em}
 <script>
 (function(){
 "use strict";
-/* ---------- indice laterale: evidenzia la parte che si sta leggendo ---------- */
-var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
-function attiva(id){ Array.prototype.forEach.call(voci,function(v){ var on=v.getAttribute("href")==="#"+id; if(on){ v.setAttribute("aria-current","true"); if(navI.scrollWidth>navI.clientWidth){ navI.scrollLeft=v.offsetLeft-16; } } else v.removeAttribute("aria-current"); }); }
-var parti=document.querySelectorAll("section.parte"), attesa=false;
-function guarda(){ attesa=false; var lim=window.innerHeight*0.3, id=parti[0].id;
-  Array.prototype.forEach.call(parti,function(sx){ if(sx.getBoundingClientRect().top<=lim) id=sx.id; });
-  if((window.innerHeight+window.pageYOffset)>=document.documentElement.scrollHeight-4) id=parti[parti.length-1].id;
-  attiva(id); }
-window.addEventListener("scroll",function(){ if(!attesa){ attesa=true; (window.requestAnimationFrame||setTimeout)(guarda); } },{passive:true});
-window.addEventListener("resize",guarda); guarda();
+/* l'indice e le sezioni (una alla volta) sono gestiti da officine.js */
 
 function el(t,attr,txt){ var e=document.createElement(t); if(attr){ for(var k in attr){ e.setAttribute(k,attr[k]); } } if(txt!=null) e.textContent=txt; return e; }
 function mescola(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
@@ -775,5 +766,6 @@ body{padding-top:40px}
   b.onclick=function(){ r=!r; metti(r); try{ localStorage.setItem("indice-ridotto",r?"1":"0"); }catch(e){} };
 })();
 </script>
+<script src="../../../assets/barra.js"></script>
 </body>
 </html>
