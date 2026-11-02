@@ -1,0 +1,41 @@
+# Aggiorna da solo l'indice della ricerca (assets/indice-ricerca.js)
+# ogni volta che si caricano pagine nuove o modificate.
+name: Indice della ricerca
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.html"
+      - "strumenti/crea-indice-ricerca.py"
+  workflow_dispatch:   # si può lanciare anche a mano: Actions → Indice della ricerca → Run workflow
+
+permissions:
+  contents: write
+
+concurrency:
+  group: indice-ricerca
+  cancel-in-progress: false
+
+jobs:
+  indice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Crea l'indice
+        run: python3 strumenti/crea-indice-ricerca.py
+      - name: Salva l'indice se è cambiato
+        run: |
+          # lo script riscrive il file solo se qualche pagina è cambiata
+          if git diff --quiet -- assets/indice-ricerca.js && [ -z "$(git ls-files --others -- assets/indice-ricerca.js)" ]; then
+            echo "Indice invariato"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add assets/indice-ricerca.js
+          git commit -m "Aggiorna l'indice della ricerca"
+          git pull --rebase
+          git push

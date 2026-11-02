@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cerca nel sito · Didattica</title>
+<meta name="description" content="Cerca lezioni, attività, argomenti e parole in tutti i materiali didattici del sito.">
+<link rel="stylesheet" href="assets/stile.css">
+<style>:root { --accento: var(--inchiostro); }</style>
+</head>
+<body data-base="">
+<div class="pagina">
+  <header class="testata">
+    <p class="briciole"><a href="./">Materiali didattici</a></p>
+    <h1>Cerca nel sito</h1>
+    <form class="cerca-sito grande" id="modulo-ricerca" role="search" action="cerca.html">
+      <label for="q">Che cosa cerchi?</label>
+      <div class="riga-cerca">
+        <input id="q" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Un argomento, un autore, una parola…">
+        <button type="submit">Cerca</button>
+      </div>
+    </form>
+    <p class="nota-indice" id="nota-indice"></p>
+  </header>
+
+  <main class="corpo">
+    <div class="filtri filtri-ricerca" id="filtri-ricerca" hidden></div>
+    <p class="stato-ricerca" id="stato" aria-live="polite"></p>
+    <ul class="elenco risultati" id="risultati"></ul>
+    <section class="suggerimenti" id="suggerimenti" hidden>
+      <h2>Come cercare</h2>
+      <p>Scrivi una o più parole: compaiono le lezioni e le attività che le contengono nel titolo, nella descrizione o nel testo della pagina. Non servono maiuscole né accenti, e <i>clima</i> trova anche <i>climi</i>.</p>
+      <p>Qualche esempio:
+        <a href="?q=Leopardi" data-esempio="Leopardi">Leopardi</a> ·
+        <a href="?q=Costituzione" data-esempio="Costituzione">Costituzione</a> ·
+        <a href="?q=fusi orari" data-esempio="fusi orari">fusi orari</a> ·
+        <a href="?q=rivoluzione americana" data-esempio="rivoluzione americana">rivoluzione americana</a> ·
+        <a href="?q=Dante" data-esempio="Dante">Dante</a> ·
+        <a href="?q=planisfero" data-esempio="planisfero">planisfero</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="piede"><a href="./">Torna a tutte le materie</a></footer>
+</div>
+
+<!-- Il catalogo e l'indice vengono scaricati aggiornati -->
+<script>
+document.write('<script src="materiali.js?v=' + Date.now() + '"><\/script>');
+document.write('<script src="assets/indice-ricerca.js?v=' + new Date().toISOString().slice(0, 13).replace(/\D/g, "") + '"><\/script>');
+</script>
+<script src="assets/cerca.js"></script>
+<script src="assets/barra.js"></script>
+</body>
+</html>

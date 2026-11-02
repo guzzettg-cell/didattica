@@ -3,11 +3,15 @@
    Si collega a ogni pagina con una riga prima di </body>, per esempio
        <script src="../../assets/barra.js"></script>
    (il percorso dipende da quanto è «profonda» la cartella).
-   Fa due cose:
-   1. In alto: il pulsante «⌂ Materiali didattici», che torna alla
-      pagina principale. Se la pagina ha già un link «← Torna…» in
-      alto, il pulsante si mette accanto; altrimenti compare una
-      striscia con «⌂ Materiali didattici» e «← Materia: tutti i moduli».
+   Fa queste cose:
+   0. Il MENU DEL SITO, in alto a sinistra su tutte le pagine (sulla
+      stessa riga dei pulsanti A− / A+): ⌂ pagina principale, le quattro
+      materie (Storia, Geografia, Italiano, Educazione civica; quella
+      della pagina è evidenziata) e, a destra subito prima di A− / A+, la
+      casella «Cerca nel sito». Il menu scorre via con la pagina.
+      Resta sempre della stessa grandezza, anche quando si ingrandisce.
+   1. Se la pagina non ha già un link «← Torna…» in alto, aggiunge
+      «← Materia: tutti i moduli».
    2. Se la pagina non ha già i pulsanti A− / A+, aggiunge quelli
       del sito (zoom-ctrl v2, gli stessi delle pagine di storia).
    ============================================================= */
@@ -19,6 +23,8 @@
   var me = document.currentScript || (function () { var s = document.getElementsByTagName("script"); return s[s.length - 1]; })();
   var ROOT = String(me.src).replace(/assets\/barra\.js(\?.*)?$/, "");
   var MATERIE = { "geografia": "Geografia", "storia": "Storia", "italiano": "Italiano", "educazione-civica": "Educazione civica" };
+  /* ordine e colori dei pulsanti del menu (gli stessi di assets/stile.css) */
+  var MENU = [["storia", "#2b5f6b"], ["geografia", "#b05e3b"], ["italiano", "#7a4a6e"], ["educazione-civica", "#56682c"]];
   var CLASSI = ["prima", "seconda", "terza"];
 
   /* dove siamo: percorso della pagina rispetto alla cartella principale del sito */
@@ -34,53 +40,167 @@
 
   /* ---------- 1. pulsanti in alto ---------- */
   var CSS_BARRA =
-    ".barra-sito{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0;padding:10px 200px 6px 16px;font:600 .92rem/1.2 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;position:relative;z-index:5}" +
+    ".barra-sito{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0;padding:0 16px 6px;font:600 .92rem/1.2 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;position:relative;z-index:5}" +
     ".barra-sito a{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid rgba(127,127,127,.45);background:rgba(255,255,255,.85);color:#1f3f46;text-decoration:none}" +
     ".barra-sito a:hover{background:#1f3f46;color:#fff;border-color:#1f3f46}" +
-    "a.bs-casa{margin-right:18px}" +
     "@media (prefers-color-scheme:dark){.barra-sito a{background:rgba(20,28,31,.85);color:#cfe3e7;border-color:rgba(200,200,200,.35)}.barra-sito a:hover{background:#cfe3e7;color:#10181b}}" +
-    "@media (max-width:520px){.barra-sito{padding:18px 16px 6px}}" +
-    "@media print{.barra-sito,.bs-casa{display:none!important}}";
+    "@media print{.barra-sito{display:none!important}}";
   function aggiungiStile(t) { var st = document.createElement("style"); st.textContent = t; document.head.appendChild(st); }
-  function linkCasa(cls) {
-    var a = document.createElement("a");
-    a.href = ROOT + "index.html"; a.className = cls; a.textContent = "⌂ Materiali didattici";
-    a.title = "Torna alla pagina principale: tutte le materie";
-    return a;
-  }
+  var paginaCerca = rel === "cerca.html";
   function barra() {
-    if (home || paginaMateria) return;
-    /* c'è già un pulsante per la pagina principale? */
+    if (home || paginaMateria || paginaCerca || !materia) return;
     var tutti = document.querySelectorAll("a[href]");
-    for (var i = 0; i < tutti.length; i++) if (/^\W*Materiali didattici$/.test(testo(tutti[i]))) return;
-    aggiungiStile(CSS_BARRA);
-    /* un link «← …» già presente in alto nella pagina */
-    var giaIndietro = null;
-    for (var j = 0; j < tutti.length && !giaIndietro; j++) {
+    /* un link «← …» già presente in alto nella pagina: basta quello */
+    for (var j = 0; j < tutti.length; j++) {
       var a = tutti[j], t = testo(a);
-      if (!/^←/.test(t)) continue;
-      if (a.closest && a.closest("nav.indice,.passo,.naviga-officine,footer")) continue;
+      if (!/^\u2190/.test(t)) continue;
+      if (a.closest && a.closest("nav.indice,.passo,.naviga-officine,footer,.menu-sito")) continue;
       var r = a.getBoundingClientRect();
-      if (r.width && r.top + window.pageYOffset < 420) giaIndietro = a;
+      if (r.width && r.top + window.pageYOffset < 420) return;
     }
-    if (giaIndietro) {
-      var c = linkCasa((giaIndietro.className ? giaIndietro.className + " " : "") + "bs-casa");
-      giaIndietro.parentNode.insertBefore(c, giaIndietro);
-      return;
-    }
+    aggiungiStile(CSS_BARRA);
     var box = document.createElement("nav");
     box.className = "barra-sito"; box.setAttribute("aria-label", "Torna indietro");
-    box.appendChild(linkCasa(""));
-    if (materia) {
-      var cl = CLASSI.indexOf(pezzi[1]) >= 0 ? "?classe=" + pezzi[1] : "";
-      var m = document.createElement("a");
-      m.href = ROOT + materia + "/index.html" + cl;
-      m.textContent = "← " + MATERIE[materia] + ": tutti i moduli";
-      box.appendChild(m);
-    }
+    var cl = CLASSI.indexOf(pezzi[1]) >= 0 ? "?classe=" + pezzi[1] : "";
+    var m = document.createElement("a");
+    m.href = ROOT + materia + "/index.html" + cl;
+    m.textContent = "\u2190 " + MATERIE[materia] + ": tutti i moduli";
+    box.appendChild(m);
+    var menu = document.querySelector(".menu-sito");
+    if (menu && menu.parentNode === document.body) document.body.insertBefore(box, menu.nextSibling);
+    else document.body.insertBefore(box, primoElemento());
+  }
+  function primoElemento() {
     var primo = document.body.firstElementChild;
-    if (primo && /salta|skip/i.test(primo.className + " " + testo(primo)) && primo.tagName === "A") primo = primo.nextElementSibling;
-    document.body.insertBefore(box, primo);
+    if (primo && primo.tagName === "A" && /salta|skip/i.test(primo.className + " " + testo(primo))) primo = primo.nextElementSibling;
+    return primo;
+  }
+
+  /* ---------- 0. menu del sito: ⌂ · materie · ricerca ---------- */
+  var CSS_MENU =
+    ".menu-sito{box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-height:66px;margin:0;padding:10px 14px;padding-left:max(14px,env(safe-area-inset-left,0px));font:600 16px/1.2 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;position:relative;z-index:6;text-align:left;width:auto;max-width:none;float:none;transform:none;background:none;border:0}" +
+    ".menu-sito.ms-zm{padding-right:210px}" +
+    ".menu-sito *{box-sizing:border-box;margin:0}" +
+    ".menu-sito .ms-materie{display:flex;flex-wrap:wrap;gap:8px}" +
+    ".menu-sito a{display:inline-flex;align-items:center;flex:none;height:40px;padding:0 17px;border-radius:999px;text-decoration:none;white-space:nowrap;color:var(--mc);background:var(--mt);border:1px solid transparent;font:inherit;letter-spacing:0;transition:background .15s,color .15s}" +
+    ".menu-sito a:hover,.menu-sito a[aria-current]{background:var(--mc);color:#fff}" +
+    ".menu-sito a.ms-casa{--mc:#23262a;--mt:#fff;border-color:#d6d3cc;padding:0;width:40px;justify-content:center;font-size:19px}" +
+    ".menu-sito a.ms-casa:hover,.menu-sito a.ms-casa[aria-current]{background:#23262a;color:#fff;border-color:#23262a}" +
+    ".menu-sito a:focus-visible,.menu-sito input:focus-visible{outline:3px solid #2b5f6b;outline-offset:2px}" +
+    ".menu-sito form{display:flex;align-items:center;flex:0 1 260px;min-width:150px;position:relative;margin-left:auto}" +
+    ".menu-sito input{-webkit-appearance:none;appearance:none;width:100%;height:40px;padding:0 14px 0 38px;border:1px solid #d6d3cc;border-radius:999px;background:#fff;color:#23262a;font:400 16px/normal system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;box-shadow:none;outline-offset:2px}" +
+    ".menu-sito input::placeholder{color:#6b6f74;opacity:1}" +
+    ".menu-sito input::-webkit-search-decoration{-webkit-appearance:none}" +
+    ".menu-sito form::before{content:'';position:absolute;left:15px;top:50%;width:11px;height:11px;margin-top:-8px;border:2px solid #6b6f74;border-radius:50%;pointer-events:none}" +
+    ".menu-sito form::after{content:'';position:absolute;left:26px;top:50%;width:2px;height:7px;margin-top:2px;background:#6b6f74;transform:rotate(-45deg);pointer-events:none}" +
+    ".menu-sito button{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);border:0}" +
+    "@media (max-width:1100px){.menu-sito a{padding:0 13px;font-size:15px}.menu-sito a.ms-casa{padding:0}.menu-sito form{flex:1 1 170px}}" +
+    /* schermi stretti: in alto ⌂ e ricerca (accanto ad A− / A+), sotto le materie in una riga */
+    ".menu-sito .ms-corto{display:none}" +
+    "@media (max-width:880px){.menu-sito,.menu-sito.ms-zm{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;padding:10px 12px 8px}" +
+    ".menu-sito.ms-zm{grid-template-columns:minmax(0,1fr) 178px}" +
+    ".menu-sito form{grid-column:1;grid-row:1;margin:0;min-width:0}" +
+    ".menu-sito .ms-materie{grid-column:1/-1;grid-row:2;flex-wrap:nowrap;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}" +
+    ".menu-sito .ms-materie::-webkit-scrollbar{display:none}" +
+    ".menu-sito a{height:36px;padding:0 12px;font-size:14px}.menu-sito a.ms-casa{width:36px;font-size:17px}}" +
+    "@media (max-width:600px){.menu-sito .ms-lungo{display:none}.menu-sito .ms-corto{display:inline}}" +
+    "@media (max-width:420px){.menu-sito a{padding:0 10px}}" +
+    "@media (max-width:360px){.menu-sito a{padding:0 8px;font-size:13px}.menu-sito input{padding-right:6px}}" +
+    "@media print{.menu-sito{display:none!important}}";
+  function menu() {
+    if (document.querySelector(".menu-sito")) return;
+    aggiungiStile(CSS_MENU);
+    var nav = document.createElement("nav");
+    nav.className = "menu-sito"; nav.setAttribute("aria-label", "Menu del sito");
+    var c = document.createElement("a");
+    c.href = ROOT + "index.html"; c.className = "ms-casa"; c.textContent = "\u2302";
+    c.title = "Materiali didattici: la pagina principale"; c.setAttribute("aria-label", "Materiali didattici: pagina principale");
+    if (home) c.setAttribute("aria-current", "page");
+    var mat = document.createElement("div"); mat.className = "ms-materie";
+    mat.appendChild(c);
+    for (var i = 0; i < MENU.length; i++) {
+      var k = MENU[i][0], col = MENU[i][1], a = document.createElement("a");
+      a.href = ROOT + k + "/index.html";
+      if (k === "educazione-civica") a.innerHTML = '<span class="ms-lungo">Educazione civica</span><span class="ms-corto">Ed. civica</span>';
+      else a.textContent = MATERIE[k];
+      a.style.setProperty("--mc", col);
+      a.style.setProperty("--mt", "color-mix(in srgb, " + col + " 12%, #fff)");
+      if (!window.CSS || !CSS.supports || !CSS.supports("color", "color-mix(in srgb, red 10%, #fff)")) a.style.setProperty("--mt", "#f1efea");
+      if (materia === k) a.setAttribute("aria-current", paginaMateria ? "page" : "true");
+      mat.appendChild(a);
+    }
+    nav.appendChild(mat);
+    if (document.querySelector(".zm")) nav.className += " ms-zm";
+    var f = document.createElement("form");
+    f.action = ROOT + "cerca.html"; f.method = "get"; f.setAttribute("role", "search");
+    var inp = document.createElement("input");
+    inp.type = "search"; inp.name = "q"; inp.placeholder = "Cerca nel sito\u2026";
+    inp.setAttribute("aria-label", "Cerca nel sito"); inp.autocomplete = "off";
+    var bt = document.createElement("button"); bt.type = "submit"; bt.textContent = "Cerca";
+    f.appendChild(inp); f.appendChild(bt);
+    f.addEventListener("submit", function (e) { if (!inp.value.trim()) { e.preventDefault(); location.href = ROOT + "cerca.html"; } });
+    /* la ricerca sta nel menu, a destra, subito prima dei pulsanti A− / A+;
+       scorre via con il menu quando si scorre la pagina */
+    var zm = document.querySelector(".zm"), altroZoom = zm ? null : zoomInAlto();
+    nav.appendChild(f);
+    if (altroZoom && !/ms-zm/.test(nav.className)) nav.className += " ms-zm";
+    document.body.insertBefore(nav, primoElemento());
+
+    /* lo spazio in alto che le pagine lasciavano per i pulsanti A− / A+ ora lo occupa il menu */
+    var bs = document.body.style;
+    if (document.querySelector(".zm") && getComputedStyle(document.body).paddingTop === "40px") bs.paddingTop = "0px";
+
+    /* il menu non si ingrandisce con la pagina (come i pulsanti A− / A+) */
+    var html = document.documentElement;
+    /* se la pagina ha margini o spazi interni, il menu va comunque fino all'angolo in alto a sinistra */
+    var cs = getComputedStyle(document.body), blocco = /^(block|flow-root)$/.test(cs.display);
+    function px(v) { return parseFloat(v) || 0; }
+    function fermo() {
+      var z = parseFloat(html.style.zoom) || 1, want = z === 1 ? "" : String(1 / z);
+      if (nav.style.zoom !== want) nav.style.zoom = want;
+      if (blocco) {
+        var t = -(px(cs.marginTop) + px(cs.paddingTop)) * z, l = -(px(cs.marginLeft) + px(cs.paddingLeft)) * z, r = -(px(cs.marginRight) + px(cs.paddingRight)) * z;
+        var mt = t ? t + "px" : "", ml = l ? l + "px" : "", mr = r ? r + "px" : "";
+        if (nav.style.marginTop !== mt) nav.style.marginTop = mt;
+        if (nav.style.marginLeft !== ml) nav.style.marginLeft = ml;
+        if (nav.style.marginRight !== mr) nav.style.marginRight = mr;
+      }
+      if (nav.style.transform) { nav.style.transform = ""; nav.style.width = ""; nav.style.marginBottom = ""; nav.style.transformOrigin = ""; }
+      accanto();
+    }
+    /* a destra il menu lascia libero lo spazio dei pulsanti A− / A+ (fissi), così la ricerca finisce subito prima */
+    function accanto() {
+      var w = document.documentElement.clientWidth, destra = 14;
+      if (zm) destra = (parseFloat(getComputedStyle(zm).right) || 10) + zm.offsetWidth + 8;
+      else if (altroZoom) {
+        var r = altroZoom.getBoundingClientRect();
+        if (getComputedStyle(altroZoom).position === "fixed") destra = w - r.left + 8;
+      }
+      var pr = w > 880 ? Math.round(destra) + "px" : "";
+      if (nav.style.paddingRight !== pr) nav.style.paddingRight = pr;
+    }
+    fermo();
+    if (window.MutationObserver) {
+      var mo = new MutationObserver(fermo);
+      mo.observe(html, { attributes: true, attributeFilter: ["style"] });
+      mo.observe(nav, { attributes: true, attributeFilter: ["style"] });
+    }
+    window.addEventListener("resize", fermo);
+  }
+
+  /* il gruppo di pulsanti A− / A+ della pagina, se è fisso in alto a destra */
+  function zoomInAlto() {
+    var b = document.querySelectorAll("button,[role=button],a");
+    for (var i = 0; i < b.length; i++) {
+      if (!/^A\s*[+\uff0b]$/.test(testo(b[i]))) continue;
+      for (var el = b[i]; el && el !== document.body; el = el.parentElement) {
+        if (getComputedStyle(el).position !== "fixed") continue;
+        var r = el.getBoundingClientRect();
+        if (r.top < 90 && r.height < 90 && r.right > document.documentElement.clientWidth - 60) return el;
+        return null;
+      }
+    }
+    return null;
   }
 
   /* ---------- 2. ingrandimento A− / A+ ---------- */
@@ -89,7 +209,7 @@
     var b = document.querySelectorAll("button,[role=button],a");
     for (var i = 0; i < b.length; i++) {
       var t = testo(b[i]), l = (b[i].getAttribute("aria-label") || "") + " " + (b[i].title || "");
-      if (/^A\s*[+＋]$/.test(t) || /ingrand|allarga|aumenta (il )?testo|dimensione del testo/i.test(l)) return true;
+      if (/^A\s*[+\uff0b]$/.test(t) || /ingrand|allarga|aumenta (il )?testo|dimensione del testo/i.test(l)) return true;
     }
     return false;
   }
@@ -108,7 +228,7 @@
   var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
   var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
   var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
-  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,.menu-sito,script,style,link,template'); }); }
   function each(list,fn){ Array.prototype.forEach.call(list,fn); }
 
   /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
@@ -208,6 +328,6 @@
 
   }
 
-  function avvia() { try { barra(); } catch (e) {} try { zoom(); } catch (e) {} }
+  function avvia() { try { zoom(); } catch (e) {} try { menu(); } catch (e) {} try { barra(); } catch (e) {} }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", avvia); else avvia();
 })();

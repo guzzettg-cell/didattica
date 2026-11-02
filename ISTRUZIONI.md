@@ -120,7 +120,35 @@ Ogni pagina ha, prima di `</body>`, una riga che collega il file comune `assets/
 
 Il numero di `../` dipende da quanto è profonda la cartella (una pagina in `storia/seconda/stato-governo/`
 ne ha tre: `../../../assets/barra.js`). Il file aggiunge da solo:
-- in alto, il pulsante **⌂ Materiali didattici** (accanto al «← Torna…» se c'è già, altrimenti insieme a «← Materia: tutti i moduli»);
+- in alto a sinistra, su **tutte** le pagine, il **menu del sito**: ⌂ (pagina principale),
+  i pulsanti **Storia · Geografia · Italiano · Educazione civica** (quello della materia della pagina è
+  colorato pieno). Non cambia grandezza quando si ingrandisce la pagina;
+- a destra, subito prima dei pulsanti A− / A+, la casella **Cerca nel sito**. Quando si scorre la
+  pagina il menu e la casella scorrono via; restano fermi solo A− / A+. Sui telefoni ricerca e
+  A− / A+ stanno sulla prima riga, le materie sotto;
+- se la pagina non ha già un «← Torna…» in alto, il pulsante **← Materia: tutti i moduli**;
 - i pulsanti **A− / A+** per ingrandire, se la pagina non li ha già.
 
+Ordine e colori dei pulsanti delle materie sono in cima a `assets/barra.js`, nella riga `MENU`.
+
 Quando carichi una pagina nuova, ricordati di aggiungere questa riga.
+
+## Ricerca nel sito
+
+La pagina `cerca.html` cerca in tutto il sito: nei titoli e nelle descrizioni del catalogo
+(`materiali.js`, sempre aggiornato) e nel **testo delle pagine**. La casella è in alto in
+ogni pagina, accanto ad A− / A+ (la aggiunge `assets/barra.js`).
+Si può anche linkare una ricerca già fatta: `cerca.html?q=Leopardi`, `cerca.html?q=clima&classe=terza`.
+
+Il testo delle pagine sta in `assets/indice-ricerca.js`, un file **generato**: non va modificato a mano.
+
+- **Su GitHub si aggiorna da solo**: a ogni caricamento di pagine `.html` l'azione
+  *Indice della ricerca* (`.github/workflows/indice-ricerca.yml`) rilegge le pagine e, se qualcosa
+  è cambiato, salva il nuovo indice con un commit «Aggiorna l'indice della ricerca».
+  Dopo quel commit, prima di caricare altre modifiche dal computer fai **Pull** (o «Fetch origin»
+  in GitHub Desktop): il repository online ha un file in più.
+- Si può lanciare a mano: su GitHub, **Actions → Indice della ricerca → Run workflow**.
+- Oppure dal computer, nella cartella del sito: `python3 strumenti/crea-indice-ricerca.py`.
+
+Una pagina nuova si trova subito per titolo e descrizione (dal catalogo); le parole del suo testo
+si trovano dopo l'aggiornamento dell'indice.

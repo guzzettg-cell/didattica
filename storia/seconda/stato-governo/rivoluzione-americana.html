@@ -451,6 +451,16 @@ footer p{margin:0 0 6px}
   .indice-ridotto a.voce .nome:before{content:"";position:absolute;left:-6px;top:50%;margin-top:-6px;border:6px solid transparent;border-left:0;border-right-color:#23262a}
   .indice-ridotto a.voce:hover .nome,.indice-ridotto a.voce:focus .nome{opacity:1}
 }
+
+/* una parte alla volta */
+section.parte[hidden]{display:none}
+.una-parte section.parte{min-height:60vh;border-bottom:0}
+.parte-nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin:34px 0 10px;padding-top:18px;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo)}
+.parte-nav a{display:inline-block;padding:10px 18px;border-radius:999px;background:#2b5f6b;background:var(--c,#2b5f6b);color:#fff;text-decoration:none;font:800 .86rem/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;text-transform:uppercase;letter-spacing:.03em}
+.parte-nav a.succ{margin-left:auto}
+.parte-nav a:hover{filter:brightness(1.1)}
+.parte-nav a:focus-visible{outline:3px solid #23262a;outline:3px solid var(--ink);outline-offset:3px}
+@media print{section.parte[hidden]{display:block!important}.parte-nav{display:none}}
 </style>
 </head>
 <body>
@@ -821,16 +831,32 @@ function luogoDaLink(){
 }
 window.addEventListener("hashchange",luogoDaLink); luogoDaLink();
 
-/* ---------- indice laterale: evidenzia la parte che si sta leggendo ---------- */
+/* ---------- indice laterale: si vede una parte alla volta ---------- */
 var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
+var parti=Array.prototype.slice.call(document.querySelectorAll("section.parte"));
+document.documentElement.className+=" una-parte";
 function attiva(id){ Array.prototype.forEach.call(voci,function(v){ var on=v.getAttribute("href")==="#"+id; if(on){ v.setAttribute("aria-current","true"); if(navI.scrollWidth>navI.clientWidth){ navI.scrollLeft=v.offsetLeft-16; } } else v.removeAttribute("aria-current"); }); }
-var parti=document.querySelectorAll("section.parte"), attesa=false;
-function guarda(){ attesa=false; var lim=window.innerHeight*0.3, id=parti[0].id;
-  Array.prototype.forEach.call(parti,function(sx){ if(sx.getBoundingClientRect().top<=lim) id=sx.id; });
-  if((window.innerHeight+window.pageYOffset)>=document.documentElement.scrollHeight-4) id=parti[parti.length-1].id;
-  attiva(id); }
-window.addEventListener("scroll",function(){ if(!attesa){ attesa=true; (window.requestAnimationFrame||setTimeout)(guarda); } },{passive:true});
-window.addEventListener("resize",guarda); guarda();
+var vocePer={}; Array.prototype.forEach.call(voci,function(v){ vocePer[v.getAttribute("href").slice(1)]=v; });
+function linkParte(sx,cls,prima,dopo){ var v=vocePer[sx.id], a=document.createElement("a"), n=v&&v.querySelector(".nome");
+  a.href="#"+sx.id; a.className=cls; if(v&&v.style.getPropertyValue("--c")) a.style.setProperty("--c",v.style.getPropertyValue("--c"));
+  a.textContent=prima+(n?n.textContent:(sx.querySelector(".etichetta")||sx).textContent)+dopo; return a; }
+parti.forEach(function(sx,i){ var n=document.createElement("nav"); n.className="parte-nav"; n.setAttribute("aria-label","Altre parti della lezione");
+  if(i>0) n.appendChild(linkParte(parti[i-1],"prec","← ",""));
+  if(i<parti.length-1) n.appendChild(linkParte(parti[i+1],"succ",""," →"));
+  sx.appendChild(n); });
+var corrente=null;
+function mostra(id){ if(id===corrente) return false; parti.forEach(function(sx){ sx.hidden=(sx.id!==id); }); corrente=id; attiva(id);
+  try{ window.dispatchEvent(new Event("resize")); }catch(e){ var ev=document.createEvent("Event"); ev.initEvent("resize",true,true); window.dispatchEvent(ev); }
+  return true; }
+function parteDi(el){ while(el&&!(el.classList&&el.classList.contains("parte"))) el=el.parentNode; return el; }
+function bersaglio(h){ try{ h=decodeURIComponent(h); }catch(e){} return h?document.getElementById(h):null; }
+/* un link interno (#p-..., #chi-..., #luogo-..., una voce dell'indice) apre prima la parte che lo contiene */
+document.addEventListener("click",function(e){ var a=e.target; while(a&&a.tagName!=="A") a=a.parentNode;
+  if(!a||!a.getAttribute) return; var h=a.getAttribute("href")||""; if(h.charAt(0)!=="#") return;
+  var el=bersaglio(h.slice(1)), sx=el&&parteDi(el); if(sx) mostra(sx.id); },true);
+function daIndirizzo(){ var el=bersaglio((location.hash||"").slice(1)), sx=el&&parteDi(el);
+  if(sx){ if(mostra(sx.id)) setTimeout(function(){ el.scrollIntoView(); },0); } else if(!corrente) mostra(parti[0].id); }
+window.addEventListener("hashchange",daIndirizzo); daIndirizzo();
 
 /* ---------- testo sintetico / essenziale ---------- */
 var bot=document.querySelectorAll(".livelli button");
