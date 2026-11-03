@@ -142,6 +142,11 @@ table.dati td.n,table.dati th.n{text-align:right;font-variant-numeric:tabular-nu
 .orig .item>*{min-width:0}.orig .item select{width:100%}
 
 .wrap>*{min-width:0}
+
+/* grafico delle potenze: un passo alla volta */
+.passo2{font-size:.85rem;font-weight:700;color:var(--muted)}
+.cap2{margin:0;padding:10px 12px;border-radius:10px;background:var(--card);border:1px solid var(--line);min-height:2.8em}
+#prev2:disabled,#next2:disabled{opacity:.45;cursor:default}
 </style>
 </head>
 <body>
@@ -160,11 +165,12 @@ table.dati td.n,table.dati th.n{text-align:right;font-variant-numeric:tabular-nu
   <section class="part">
     <h2 class="sec">1. Chi saranno le potenze economiche di domani?</h2>
     <div class="books"><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">§1 · tabella C, p. E109</span></div></div>
-    <p class="lead">A sinistra i 10 paesi con il PIL più alto nel 2021, a destra la previsione per il 2060. Premi «Avvia» e guarda chi sale e chi scende.</p>
+    <p class="lead">A sinistra i 10 paesi con il PIL più alto nel 2021, a destra la previsione per il 2060. Premi «Avanti» e guarda un passo alla volta chi sale, chi scende, chi esce e chi entra.</p>
     <div class="grid">
       <div class="fig" id="f2">
-        <div class="figbar"><span class="chips"><button type="button" class="btn go" id="play2">▶ Avvia</button></span></div>
+        <div class="figbar"><span class="chips"><button type="button" class="btn" id="prev2">◀ Indietro</button><button type="button" class="btn go" id="next2">Avanti ▶</button></span><span class="passo2" id="passo2">Passo 0 di 4</span></div>
         <div class="figbox"><div class="figin"><canvas id="cv2" role="img" aria-label="Classifica del PIL nel 2021 collegata alla classifica prevista per il 2060"></canvas></div></div>
+        <p class="cap2" id="cap2" aria-live="polite"></p>
       </div>
       <div class="card" aria-live="polite"><div class="kind">Che cosa noti?</div><div id="q2"></div></div>
     </div>
@@ -334,14 +340,30 @@ function legend(box,parts){box.innerHTML=parts.map(p=>`<span style="display:inli
 
 const R21=[["Stati Uniti",23.0],["Cina",17.5],["Giappone",4.9],["Germania",4.2],["Regno Unito",3.2],["India",3.2],["Francia",2.9],["Italia",2.1],["Canada",2.0],["Corea del Sud",1.8]];
 const R60=["Cina","India","Stati Uniti","Indonesia","Turchia","Giappone","Germania","Brasile","Messico","Russia"];
-let a2=1,t2=null;
+/* un passo alla volta: 0 = solo il 2021; 1 chi sale; 2 chi scende; 3 chi esce; 4 chi entra */
+const PASSI2=['Ecco i 10 paesi con il PIL più alto nel 2021. Premi «Avanti».',
+ 'Chi sale: la <b>Cina</b> passa dal 2° al 1° posto, l\'<b>India</b> dal 6° al 2°.',
+ 'Chi scende: gli <b>Stati Uniti</b> dal 1° al 3° posto, il <b>Giappone</b> dal 3° al 6°, la <b>Germania</b> dal 4° al 7°.',
+ 'Chi esce dai primi 10: <b>Regno Unito, Francia, Italia, Canada e Corea del Sud</b>.',
+ 'Chi entra: <b>Indonesia, Turchia, Brasile, Messico e Russia</b>, paesi emergenti molto popolosi.'];
+let s2=0,a2=1,t2=null;
+function tipo2(i){const j=R60.indexOf(R21[i][0]);return j<0?3:j<i?1:2;}
 function draw2(){const {c,w,h}=fit($('#cv2'),1.25,330),rh=(h-40)/10,xl=Math.min(150,w*.34),xr=w-Math.min(150,w*.34);
   txt(c,'2021',xl-10,18,V('muted'),13,800,'right',FD);txt(c,'2060 (previsione)',xr+10,18,V('muted'),13,800,'left',FD);
-  R21.forEach((r,i)=>{const y=34+i*rh+rh/2,j=R60.indexOf(r[0]);txt(c,(i+1)+'. '+r[0],xl-10,y+4,V('ink'),12,700,'right');
-    if(j>=0){const y2=34+j*rh+rh/2,col=j<i?V('ok'):j>i?V('no'):V('muted');c.strokeStyle=col;c.lineWidth=2.5;c.beginPath();c.moveTo(xl,y);c.lineTo(xl+(xr-xl)*a2,y+(y2-y)*a2);c.stroke();}
-    else{c.strokeStyle=V('no');c.setLineDash([4,4]);c.beginPath();c.moveTo(xl,y);c.lineTo(xl+(xr-xl)*.35*a2,y);c.stroke();c.setLineDash([]);if(a2>.9)txt(c,'esce',xl+(xr-xl)*.37,y+4,V('no'),11,800,'left');}});
-  if(a2>.95)R60.forEach((n,j)=>{const y=34+j*rh+rh/2,isNew=!R21.find(r=>r[0]===n);txt(c,(j+1)+'. '+n,xr+10,y+4,isNew?V('ok'):V('ink'),12,isNew?800:700,'left');});}
-$('#play2').addEventListener('click',()=>{if(t2)return;a2=0;draw2();t2=setInterval(()=>{a2=Math.min(1,a2+.025);draw2();if(a2>=1){clearInterval(t2);t2=null;}},30);});
+  R21.forEach((r,i)=>{const y=34+i*rh+rh/2,k=tipo2(i),vis=k<=s2,ora=k===s2,j=R60.indexOf(r[0]),f=ora?a2:1;
+    txt(c,(i+1)+'. '+r[0],xl-10,y+4,ora?V('ink'):vis?V('muted'):V('ink'),12,ora?800:700,'right');
+    if(!vis)return;
+    c.globalAlpha=ora?1:.3;
+    if(j>=0){const y2=34+j*rh+rh/2;c.strokeStyle=k===1?V('ok'):V('no');c.lineWidth=ora?3:2;c.beginPath();c.moveTo(xl,y);c.lineTo(xl+(xr-xl)*f,y+(y2-y)*f);c.stroke();
+      if(f>=1)txt(c,(j+1)+'. '+r[0],xr+10,y2+4,ora?V('ink'):V('muted'),12,ora?800:700,'left');}
+    else{c.strokeStyle=V('no');c.lineWidth=ora?3:2;c.setLineDash([4,4]);c.beginPath();c.moveTo(xl,y);c.lineTo(xl+(xr-xl)*.35*f,y);c.stroke();c.setLineDash([]);if(f>=1)txt(c,'esce',xl+(xr-xl)*.37,y+4,V('no'),11,800,'left');}
+    c.globalAlpha=1;});
+  if(s2>=4)R60.forEach((n,j)=>{if(R21.find(r=>r[0]===n))return;const y=34+j*rh+rh/2;txt(c,(j+1)+'. '+n,xr+10,y+4,V('ok'),12,800,'left');});
+  $('#cap2').innerHTML=PASSI2[s2];$('#passo2').textContent='Passo '+s2+' di 4';
+  $('#prev2').disabled=s2===0;$('#next2').disabled=s2===4;}
+function vai2(d){const n=Math.max(0,Math.min(4,s2+d));if(n===s2)return;s2=n;if(t2){clearInterval(t2);t2=null;}
+  if(d>0&&s2<4){a2=0;draw2();t2=setInterval(()=>{a2=Math.min(1,a2+.05);draw2();if(a2>=1){clearInterval(t2);t2=null;}},25);}else{a2=1;draw2();}}
+$('#next2').addEventListener('click',()=>vai2(1));$('#prev2').addEventListener('click',()=>vai2(-1));
 setupFig($('#f2'),draw2);
 scelta($('#q2'),[["Quale paese dovrebbe diventare il primo?",["Stati Uniti","Cina","India"],1,""],["Quali paesi entrano tra i primi 10?",["Indonesia, Turchia, Brasile, Messico, Russia","Italia, Francia, Canada","Regno Unito e Corea del Sud"],0,"Sono paesi emergenti, molto popolosi e con economie in rapida crescita."],["Che cosa succede all'Italia?",["Sale al 5° posto","Esce dalla classifica","Resta all'8° posto"],1,""]]);
 /* PIL pro capite */

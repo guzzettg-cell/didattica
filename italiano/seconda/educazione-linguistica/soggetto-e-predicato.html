@@ -88,6 +88,17 @@ input[type=text]{width:11rem}
 .indice{display:flex;flex-wrap:wrap;gap:.4rem}
 .indice a{font-size:.85rem;color:var(--accent);border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:.15rem .7rem;text-decoration:none}
 .indice a:hover{border-color:var(--accent)}
+
+/* modello: parti, esempi svolti, prove guidate */
+.blocco{display:flex;flex-direction:column;gap:1.4rem;padding-top:1.2rem;border-top:2px dashed var(--line)}
+.blocco > .eyebrow{font-size:.85rem}
+.esempio{background:var(--paper);border:1px solid var(--accent);border-left-width:5px;border-radius:10px;padding:.9rem 1.1rem;display:flex;flex-direction:column;gap:.5rem}
+.es-tag{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.es-frase{font-family:var(--display);font-size:1.25rem;font-weight:700}
+.passi{margin:0;padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem}
+.es-nota{color:var(--muted);font-size:.95rem}
+.guida{flex-basis:100%;margin:0;font-size:.92rem;color:var(--ink);background:var(--bg);border-radius:6px;padding:.35rem .6rem}
+.guida b{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -104,7 +115,9 @@ input[type=text]{width:11rem}
   <p>L'<b>analisi logica</b> studia la funzione delle parole nella frase. La frase semplice (o proposizione) ha un solo verbo; il suo nucleo è formato da <b>soggetto</b> e <b>predicato</b>.</p>
 </header>
 
-<section>
+<section class="blocco">
+  <span class="eyebrow">Parte 1 · Il soggetto</span>
+  <section>
   <h2>Il soggetto</h2>
   <div class="note">
     <p>È chi compie l'azione o di cui si parla. Domanda: <b>chi? che cosa?</b> riferita al verbo. Il verbo si accorda con lui.</p>
@@ -117,8 +130,35 @@ input[type=text]{width:11rem}
   </div>
   <p>Attenzione: nelle frasi passive il soggetto <b>subisce</b> l'azione: <i><span class="mark">Il ladro</span> è stato arrestato.</i></p>
 </section>
+  <div class="esempio">
+    <p class="es-tag">Guarda come si fa · il soggetto</p>
+    <p class="es-frase">Nel bosco vive <span class="mark">una volpe rossa</span>.</p>
+    <ol class="passi"><li><b>Trova il verbo:</b> <i>vive</i>.</li><li><b>Chiedi al verbo «chi?»:</b> chi vive? → <i>una volpe rossa</i>.</li><li><b>Controlla l'accordo:</b> <i>vive</i> è singolare, come <i>una volpe</i>.</li></ol>
+    <p class="es-nota">Il soggetto è <i>una volpe rossa</i>, con l'articolo e l'aggettivo, anche se viene dopo il verbo.</p>
+  </div>
+  <section class="ex" id="ex1">
+  <span class="eyebrow">Esercizio 1</span>
+  <h2>Trova il soggetto</h2>
+  <p class="consegna">Tocca tutte le parole del soggetto, con l'articolo e l'aggettivo che lo accompagnano. Attenzione: non sempre è all'inizio.</p>
+  <div id="e1"></div>
+</section>
+  <div class="esempio">
+    <p class="es-tag">Guarda come si fa · il soggetto sottinteso</p>
+    <p class="es-frase">Leggete ad alta voce.</p>
+    <ol class="passi"><li><b>Trova il verbo:</b> <i>leggete</i>.</li><li><b>Guarda la desinenza:</b> <i>-ete</i> è la seconda persona plurale.</li><li><b>Ricava il soggetto:</b> <i>voi</i>.</li></ol>
+    <p class="es-nota">Il soggetto non è scritto, ma il verbo lo dice: (voi) leggete.</p>
+  </div>
+  <section class="ex" id="ex2">
+  <span class="eyebrow">Esercizio 2</span>
+  <h2>Chi è il soggetto sottinteso?</h2>
+  <p class="consegna">Nella frase il soggetto non è scritto: ricavalo dal verbo.</p>
+  <div id="e2"></div>
+</section>
+</section>
 
-<section>
+<section class="blocco">
+  <span class="eyebrow">Parte 2 · Il predicato</span>
+  <section>
   <h2>Il predicato</h2>
   <div class="tipi two">
     <div class="tipo"><b>predicato verbale</b><span class="q">un verbo che dice che cosa fa il soggetto</span><span class="es">Luca <b>corre</b>. · La finestra <b>è stata chiusa</b>. · Marta <b>è uscita</b>.</span></div>
@@ -130,46 +170,58 @@ input[type=text]{width:11rem}
     <p>È predicato verbale anche quando fa da <b>ausiliare</b>: <i>Siamo <span class="mark">arrivati</span>.</i></p>
   </div>
 </section>
+  <div class="esempio">
+    <p class="es-tag">Guarda come si fa · predicato nominale</p>
+    <p class="es-frase">Il mare <b>è calmo</b>.</p>
+    <ol class="passi"><li><b>C'è il verbo essere?</b> Sì: <i>è</i>.</li><li><b>Dopo il verbo essere c'è un nome o un aggettivo che dice com'è o che cos'è il soggetto?</b> Sì: <i>calmo</i>.</li><li><b>Quindi:</b> predicato <b>nominale</b>.</li></ol>
+  </div>
+  <div class="esempio">
+    <p class="es-tag">Guarda come si fa · predicato verbale con essere</p>
+    <p class="es-frase">Il gatto <b>è</b> in giardino.</p>
+    <ol class="passi"><li><b>C'è il verbo essere?</b> Sì: <i>è</i>.</li><li><b>Dopo il verbo essere c'è un nome o un aggettivo che dice com'è il soggetto?</b> No: <i>in giardino</i> dice dove si trova. Qui <i>è</i> significa «si trova».</li><li><b>Quindi:</b> predicato <b>verbale</b>.</li></ol>
+  </div>
+  <section class="ex" id="ex3">
+  <span class="eyebrow">Esercizio 3</span>
+  <h2>Verbale o nominale?</h2>
+  <p class="consegna">Il predicato è verbale o nominale?</p>
+  <div id="e3"></div>
+</section>
+  <div class="esempio">
+    <p class="es-tag">Guarda come si fa · la parte nominale</p>
+    <p class="es-frase">Mio nonno è un <span class="mark">falegname</span>.</p>
+    <ol class="passi"><li><b>Trova il verbo essere:</b> <i>è</i>.</li><li><b>Guarda che cosa viene dopo:</b> <i>un falegname</i> dice che cos'è il nonno.</li><li><b>Segna il nome o l'aggettivo:</b> <i>falegname</i>.</li></ol>
+  </div>
+  <section class="ex" id="ex4">
+  <span class="eyebrow">Esercizio 4</span>
+  <h2>La parte nominale</h2>
+  <p class="consegna">Ogni frase ha un predicato nominale: tocca la <b>parte nominale</b> (il nome o l'aggettivo dopo il verbo essere).</p>
+  <div id="e4"></div>
+</section>
+</section>
 
-<section>
+<section class="blocco">
+  <span class="eyebrow">Parte 3 · La frase minima</span>
+  <section>
   <h2>Frase minima ed espansioni</h2>
   <div class="note">
     <p>Soggetto + predicato formano la <b>frase minima</b>: <i>Il nonno racconta.</i></p>
     <p>Tutto il resto sono <b>espansioni</b> (attributi, apposizioni, complementi): <i>Il nonno <u>paterno</u> racconta <u>una storia</u> <u>ai nipoti</u>.</i></p>
   </div>
 </section>
-
-<hr>
-<section class="ex" id="ex1">
-  <span class="eyebrow">Esercizio 1</span>
-  <h2>Trova il soggetto</h2>
-  <p class="consegna">Tocca tutte le parole del soggetto, con l'articolo e l'aggettivo che lo accompagnano. Attenzione: non sempre è all'inizio.</p>
-  <div id="e1"></div>
-</section>
-<section class="ex" id="ex2">
-  <span class="eyebrow">Esercizio 2</span>
-  <h2>Chi è il soggetto sottinteso?</h2>
-  <p class="consegna">Nella frase il soggetto non è scritto: ricavalo dal verbo.</p>
-  <div id="e2"></div>
-</section>
-<section class="ex" id="ex3">
-  <span class="eyebrow">Esercizio 3</span>
-  <h2>Verbale o nominale?</h2>
-  <p class="consegna">Il predicato è verbale o nominale?</p>
-  <div id="e3"></div>
-</section>
-<section class="ex" id="ex4">
-  <span class="eyebrow">Esercizio 4</span>
-  <h2>La parte nominale</h2>
-  <p class="consegna">Ogni frase ha un predicato nominale: tocca la <b>parte nominale</b> (il nome o l'aggettivo dopo il verbo essere).</p>
-  <div id="e4"></div>
-</section>
-<section class="ex" id="ex5">
+  <div class="esempio">
+    <p class="es-tag">Guarda come si fa · la frase minima</p>
+    <p class="es-frase">Il bambino gioca <u>in giardino</u>.</p>
+    <ol class="passi"><li><b>Trova il soggetto:</b> <i>il bambino</i>.</li><li><b>Trova il predicato:</b> <i>gioca</i>.</li><li><b>Resta qualcos'altro?</b> Sì: <i>in giardino</i> è un'espansione.</li></ol>
+    <p class="es-nota">Quindi non è una frase minima: la risposta è <b>no</b>.</p>
+  </div>
+  <section class="ex" id="ex5">
   <span class="eyebrow">Esercizio 5</span>
   <h2>Frase minima?</h2>
   <p class="consegna">La frase è formata solo da soggetto e predicato?</p>
   <div id="e5"></div>
 </section>
+</section>
+
 <section class="ex">
   <div class="note">
     <div class="azioni">
@@ -182,7 +234,7 @@ input[type=text]{width:11rem}
 </main>
 <script>
 (function(){
-  var KEY="sogpred", DATA=[{"type": "tok", "items": ["*Mio* *fratello* gioca a basket.", "Ieri è arrivata *la* *neve*.", "Nel cassetto c'erano *molte* *lettere*.", "*Loro* non sono ancora pronti.", "*Nuotare* fa bene alla salute.", "Dal cielo cadevano *grosse* *gocce*."]}, {"type": "select", "opts": ["io", "tu", "lui / lei", "noi", "voi", "loro"], "label": "Soggetto", "items": [["Domani partiamo per la montagna.", "noi"], ["Hai finito i compiti?", "tu"], ["Sono andati al concerto.", "loro"], ["Ho mangiato troppo.", "io"], ["Siete pronti?", "voi"], ["Ha telefonato alla nonna.", "lui / lei"]]}, {"type": "scelta", "opts": ["verbale", "nominale"], "items": [["Il cielo è sereno.", "nominale", "è + aggettivo."], ["Il cane dorme sul tappeto.", "verbale"], ["Mia zia è medico.", "nominale", "è + nome."], ["Il libro è sul tavolo.", "verbale", "<i>è</i> significa «si trova»."], ["Siamo tornati tardi.", "verbale", "<i>siamo</i> è ausiliare."], ["Questi esercizi sono facili.", "nominale"], ["C'è un gatto in giardino.", "verbale", "<i>c'è</i> significa «si trova, esiste»."], ["La torta è stata mangiata.", "verbale", "verbo passivo."]]}, {"type": "tok", "items": ["La strada è *lunga*.", "Marco è un *pittore*.", "I miei compagni sono *simpatici*.", "Roma è la *capitale* d'Italia.", "Le ciliegie erano *mature*."]}, {"type": "scelta", "opts": ["sì", "no"], "items": [["Il bambino piange.", "sì"], ["Il bambino piange forte.", "no", "<i>forte</i> è un'espansione."], ["Gli uccelli volano.", "sì"], ["Paolo legge un libro.", "no", "<i>un libro</i> è un complemento."], ["Piove.", "sì", "verbo impersonale: c'è solo il predicato."], ["Sara è alta.", "sì", "predicato nominale: «è alta»."]]}];
+  var KEY="sogpred", DATA=[{"type": "tok", "items": [["*Mio* *fratello* gioca a basket.", "Il verbo è <i>gioca</i>. Chiedi: chi gioca?"], "Ieri è arrivata *la* *neve*.", "Nel cassetto c'erano *molte* *lettere*.", "*Loro* non sono ancora pronti.", "*Nuotare* fa bene alla salute.", "Dal cielo cadevano *grosse* *gocce*."]}, {"type": "select", "opts": ["io", "tu", "lui / lei", "noi", "voi", "loro"], "label": "Soggetto", "items": [["Domani partiamo per la montagna.", "noi", "", null, "Il verbo è <i>partiamo</i>: guarda la desinenza <i>-iamo</i>. Che persona è?"], ["Hai finito i compiti?", "tu"], ["Sono andati al concerto.", "loro"], ["Ho mangiato troppo.", "io"], ["Siete pronti?", "voi"], ["Ha telefonato alla nonna.", "lui / lei"]]}, {"type": "scelta", "opts": ["verbale", "nominale"], "items": [["Il cielo è sereno.", "nominale", "è + aggettivo.", null, "C'è il verbo essere? Dopo c'è un aggettivo che dice com'è il cielo?"], ["Il cane dorme sul tappeto.", "verbale"], ["Mia zia è medico.", "nominale", "è + nome."], ["Il libro è sul tavolo.", "verbale", "<i>è</i> significa «si trova»."], ["Siamo tornati tardi.", "verbale", "<i>siamo</i> è ausiliare."], ["Questi esercizi sono facili.", "nominale"], ["C'è un gatto in giardino.", "verbale", "<i>c'è</i> significa «si trova, esiste»."], ["La torta è stata mangiata.", "verbale", "verbo passivo."]]}, {"type": "tok", "items": [["La strada è *lunga*.", "Il verbo essere è <i>è</i>. Quale parola dice com'è la strada?"], "Marco è un *pittore*.", "I miei compagni sono *simpatici*.", "Roma è la *capitale* d'Italia.", "Le ciliegie erano *mature*."]}, {"type": "scelta", "opts": ["sì", "no"], "items": [["Il bambino piange.", "sì", "", null, "Soggetto: <i>il bambino</i>. Predicato: <i>piange</i>. Resta qualcos'altro?"], ["Il bambino piange forte.", "no", "<i>forte</i> è un'espansione."], ["Gli uccelli volano.", "sì"], ["Paolo legge un libro.", "no", "<i>un libro</i> è un complemento."], ["Piove.", "sì", "verbo impersonale: c'è solo il predicato."], ["Sara è alta.", "sì", "predicato nominale: «è alta»."]]}];
   var z=100, zv=document.getElementById('zv');
   try{ z=parseInt(localStorage.getItem(KEY+'-zoom'))||100 }catch(e){}
   function setZ(v){ z=Math.max(70,Math.min(200,v)); document.documentElement.style.fontSize=z+'%'; zv.textContent=z+'%'; try{localStorage.setItem(KEY+'-zoom',z)}catch(e){} }
@@ -207,12 +259,13 @@ input[type=text]{width:11rem}
       if(a){tot++; if(s)ok++; else b.classList.add('miss')} else if(s){err++;b.classList.add('wrong')} });
     return [ok,tot,err]}
 
+  function guida(it,h){ if(!h) return; var g=el('p','guida','<b>Prova guidata.</b> '+h); it.insertBefore(g,it.firstChild); }
   var checks=[];
   DATA.forEach(function(ex,n){
     var box=document.getElementById('e'+(n+1)), id='e'+(n+1);
     if(ex.type==='tok'){
       var its=[];
-      ex.items.forEach(function(s,i){var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); tokens(fr,s,id+'-'+i); it.append(fr,fb); box.appendChild(it); its.push(it)});
+      ex.items.forEach(function(s,i){var h=null; if(Array.isArray(s)){h=s[1]; s=s[0];} var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); tokens(fr,s,id+'-'+i); it.append(fr,fb); guida(it,h); box.appendChild(it); its.push(it)});
       checks.push(function(){var ok=0; its.forEach(function(it){var r=markToks(it), g=r[0]===r[1]&&!r[2]; it.className='item '+(g?'ok':'ko'); it.querySelector('.fb').textContent=g?'Giusto!':(ex.fb||'Il bordo rosso indica una parola mancante; la parola barrata non va segnata.'); if(g)ok++}); return [ok,its.length]});
     } else if(ex.type==='testo'){
       var it=el('div','item'),fr=el('div','frase'),fb=el('div','fb'); fr.style.lineHeight='2'; tokens(fr,ex.text,id); it.append(fr,fb); box.appendChild(it);
@@ -223,13 +276,13 @@ input[type=text]{width:11rem}
       var arr=[];
       ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),sel=el('select'),fb=el('div','fb');
         sel.id=id+'-'+i; sel.setAttribute('aria-label',ex.label||'Risposta'); sel.appendChild(new Option('scegli…',''));
-        (d[3]||ex.opts).forEach(function(o){sel.appendChild(new Option(o,o))});
+        (d[3]||ex.opts).forEach(function(o){sel.appendChild(new Option(o,o))}); guida(it,d[4]);
         it.append(fr,sel,fb); box.appendChild(it); arr.push([it,sel,d])});
       checks.push(function(){var ok=0; arr.forEach(function(x){var g=x[1].value===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Risposta corretta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr.length]});
     } else if(ex.type==='scelta'){
       var arr2=[];
       ex.items.forEach(function(d,i){var it=el('div','item'),fr=el('div','frase',d[0]),seg=el('div','seg'),fb=el('div','fb');
-        (d[3]||ex.opts).forEach(function(o,k){var b=el('button'); b.type='button'; b.id=id+'-'+i+'-'+k; b.textContent=o; b.setAttribute('aria-pressed','false');
+        guida(it,d[4]); (d[3]||ex.opts).forEach(function(o,k){var b=el('button'); b.type='button'; b.id=id+'-'+i+'-'+k; b.textContent=o; b.setAttribute('aria-pressed','false');
           b.onclick=function(){seg.dataset.v=o; seg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')})}; seg.appendChild(b)});
         it.append(fr,seg,fb); box.appendChild(it); arr2.push([it,seg,d])});
       checks.push(function(){var ok=0; arr2.forEach(function(x){var g=x[1].dataset.v===x[2][1]; x[0].className='item '+(g?'ok':'ko'); x[0].querySelector('.fb').innerHTML=(g?'Giusto! ':'Risposta corretta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++}); return [ok,arr2.length]});
@@ -242,6 +295,10 @@ input[type=text]{width:11rem}
     }
   });
 
+  var parziali=[];
+  checks.forEach(function(c,n){ var box=document.getElementById('e'+(n+1)), az=el('div','azioni'), b=el('button','btn main','Controlla'), p=el('span','punti');
+    b.type='button'; p.setAttribute('aria-live','polite'); b.onclick=function(){ var r=c(); p.textContent=r[0]+' su '+r[1]; };
+    az.append(b,p); box.parentNode.appendChild(az); parziali.push(p); });
   var score=document.getElementById('score');
   document.getElementById('check').onclick=function(){var ok=0,tot=0; checks.forEach(function(c){var r=c(); ok+=r[0]; tot+=r[1]}); score.textContent='Risposte giuste: '+ok+' su '+tot};
   document.getElementById('reset').onclick=function(){
@@ -250,7 +307,7 @@ input[type=text]{width:11rem}
     document.querySelectorAll('select').forEach(function(s){s.value=''});
     document.querySelectorAll('input[type=text]').forEach(function(s){s.value=''});
     document.querySelectorAll('.seg').forEach(function(s){delete s.dataset.v; s.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed','false')})});
-    score.textContent=''; window.scrollTo(0,0)};
+    score.textContent=''; parziali.forEach(function(p){p.textContent=''}); window.scrollTo(0,0)};
 })();
 </script>
 <script src="../../../assets/barra.js"></script>

@@ -290,10 +290,11 @@ section.parte[hidden]{display:none}
 @media print{section.parte[hidden]{display:block!important}.parte-nav{display:none}}
 .persona{scroll-margin-top:60px}
 /* indice neutro: il colore pieno solo per la parte che si sta leggendo */
-a.voce{background:#eef1ef;color:#23262a;color:var(--ink)}
-a.voce .tondo{background:#ffffff;border-color:#eef1ef}
+a.voce{background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+a.voce:not([aria-current="true"]){box-shadow:inset 0 0 0 1px #cfd5d1;box-shadow:inset 0 0 0 1px var(--filo)}
+a.voce .tondo{background:#eef1ef;background:var(--tenue-bg);border-color:#ffffff;border-color:var(--carta)}
 a.voce[aria-current="true"]{background:#2b5f6b;background:var(--c);color:#fff}
-a.voce[aria-current="true"] .tondo{border-color:#fff}
+a.voce[aria-current="true"] .tondo{background:#ffffff;border-color:#fff}
 /* carta dentro l'esercizio e ripasso in due gruppi */
 .mappa-mini .mare{fill:#d7e8ee;fill:var(--mare)}
 .mappa-mini .terra{fill:#f4efe2;fill:var(--terra);stroke:#f4efe2;stroke:var(--terra);stroke-width:1.2;stroke-linejoin:round}
@@ -358,6 +359,7 @@ a.voce[aria-current="true"] .tondo{border-color:#fff}
   <p class="guida">Prima di studiare i dettagli, guarda l'argomento dall'alto: che cosa succede e dove, in che anni, chi sono i protagonisti.</p>
 
   <h3 id="dove"><span>1. Dove? Che cosa?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 🗺️ Collocare nello spazio</p>
   <div class="lettura">
     <p>Il <a class="pk" href="#p-fascismo">fascismo</a> è il movimento fondato da Benito Mussolini a <strong>Milano</strong> nel <strong>1919</strong>. Nel <strong>1922</strong> arriva al governo e in pochi anni costruisce una <a class="pk" href="#p-dittatura">dittatura</a>, che dura fino al 1943.</p>
     <p>Qui vedi la lezione dall'alto: <strong>dove</strong> succede (la carta), <strong>quando</strong> (la linea del tempo) e <strong>chi</strong> sono i protagonisti. Il racconto dei fatti, passo per passo, è nel Testo sintetico.</p>
@@ -385,6 +387,7 @@ a.voce[aria-current="true"] .tondo{border-color:#fff}
   </div>
 
   <h3 id="quando"><span>2. Quando?</span></h3>
+  <p class="mestiere">🕐 Collocare nel tempo · le etichette indicano le piste del percorso «Un mondo sempre più piccolo»</p>
   <ol class="linea">
     <li class="estremo"><span class="anno">1919</span>23 marzo: a Milano, in piazza San Sepolcro, Mussolini fonda i Fasci di combattimento.</li>
     <li><span class="anno">1920–21</span>Lo squadrismo fascista si scatena, soprattutto nelle campagne della pianura padana. Nel 1921 nasce il Partito nazionale fascista.</li>
@@ -393,12 +396,13 @@ a.voce[aria-current="true"] .tondo{border-color:#fff}
     <li><span class="anno">1925–26</span>Il 3 gennaio 1925 Mussolini si assume la responsabilità dei delitti fascisti. Le «leggi fascistissime» sciolgono i partiti, chiudono i giornali liberi, creano un tribunale speciale per gli oppositori.</li>
     <li><span class="anno">1926</span>Nasce l'Opera nazionale Balilla, che inquadra i ragazzi in divisa.</li>
     <li><span class="anno">1929</span>Patti Lateranensi tra lo Stato italiano e la Chiesa cattolica.</li>
-    <li><span class="anno">1924–30</span>Nasce la radio pubblica (URI, poi EIAR), che il regime userà per la propaganda.</li>
+    <li><span class="anno">1924–30</span>Nasce la radio pubblica (URI, poi EIAR), che il regime userà per la propaganda.<span class="pista">Comunicazione</span></li>
     <li><span class="anno">1935–36</span>Guerra d'Etiopia, combattuta anche con i gas. Mussolini proclama l'impero.</li>
     <li class="estremo"><span class="anno">1938</span>Leggi razziali: gli ebrei italiani sono cacciati dalle scuole, dagli uffici pubblici, da molte professioni.</li>
   </ol>
 
   <h3 id="chi"><span>3. Chi?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 📖 Lessico — il link apre una voce Treccani in una nuova scheda.</p>
   <div class="persone">
     <article class="persona"><span class="sigla" aria-hidden="true">BM</span><div><h4>Benito Mussolini</h4><span class="date">1883–1945 · Italia</span><p>Prima socialista, poi interventista, fonda il fascismo. Dal 1922 governa l'Italia e dal 1925 è dittatore, con il titolo di «duce», cioè capo.</p><a href="https://www.treccani.it/enciclopedia/benito-mussolini_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Leggi la voce Treccani</a></div></article>
     <article class="persona"><span class="sigla" aria-hidden="true">V3</span><div><h4>Vittorio Emanuele III</h4><span class="date">1869–1947 · Italia</span><p>Re d'Italia. Nel 1922 rifiuta di fermare la marcia su Roma e chiama Mussolini al governo; poi firma tutte le leggi del regime, comprese le leggi razziali.</p><a href="https://www.treccani.it/enciclopedia/vittorio-emanuele-iii-re-d-italia_(Enciclopedia-dei-ragazzi)/" target="_blank" rel="noopener">Leggi la voce Treccani</a></div></article>
@@ -441,6 +445,7 @@ a.voce[aria-current="true"] .tondo{border-color:#fff}
   <p class="etichetta">Perché?</p>
   <h2 id="t-perche">Causa, evento, effetto</h2>
   <p class="guida">Gli storici non si chiedono solo che cosa è successo, ma perché. Leggi la catena da sinistra a destra.</p>
+  <p class="mestiere">🧩 Comprendere fatti e processi storici</p>
   <div class="catena">
     <div class="anello causa"><h4>Causa</h4><p>Crisi economica e «vittoria mutilata». Paura del comunismo dopo il biennio rosso. Governi liberali deboli. Industriali, proprietari terrieri e re che appoggiano o tollerano i fascisti.</p></div>
     <div class="freccia" aria-hidden="true">→</div>
@@ -479,6 +484,7 @@ a.voce[aria-current="true"] .tondo{border-color:#fff}
   <p class="etichetta">Come?</p>
   <h2 id="t-come">Come il fascismo controlla l'Italia</h2>
   <p class="guida">Uno schema per vedere tutto insieme: gli strumenti con cui il regime tiene il potere.</p>
+  <p class="mestiere">🧩 Organizzare le informazioni · la terza colonna è legata alla pista Comunicazione del percorso con La Stampa</p>
   <p class="radice">Il regime fascista tiene il potere con…</p>
   <div class="come">
     <div class="colonna"><h4>… la forza</h4><ul><li>squadre fasciste</li><li>OVRA, la polizia segreta</li><li>tribunale speciale</li><li>confino e carcere</li></ul></div>
@@ -510,6 +516,7 @@ a.voce[aria-current="true"] .tondo{border-color:#fff}
   <p class="etichetta">Studiamo le fonti</p>
   <h2 id="t-lente">Dentro la notizia</h2>
   <p class="guida">Come raccontavano i giornali l'arrivo dei fascisti al potere? Lo leggiamo in <em>La Stampa</em> di Torino.</p>
+  <p class="mestiere">📜 Leggere e interpretare le fonti</p>
   <div class="lente">
     <div class="lente-testa">
       <p class="testata-giornale">La Stampa · fine ottobre 1922 · articolo da scegliere</p>
