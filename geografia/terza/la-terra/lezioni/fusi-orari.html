@@ -209,6 +209,54 @@ details p{margin:6px 0 0;color:var(--muted)}
     <p class="euinfo" id="euinfo" aria-live="polite">Tocca uno Stato sulla carta.</p>
   </section>
 
+  <section class="box calcolo" aria-labelledby="t-calcolo">
+    <h2 id="t-calcolo">Come si calcola l'ora in un'altra città</h2>
+    <p class="sub">Tre passi, sempre gli stessi. Guarda come si fanno nei due esempi, poi completa il terzo. Gli esempi sono d'inverno, con l'ora solare.</p>
+    <ol class="passi-regola">
+      <li><b>Trova i fusi</b> delle due città nella tabella «Gli orologi delle città».</li>
+      <li><b>Conta la differenza</b> e guarda la direzione: verso est l'orologio va <b>avanti</b>, verso ovest va <b>indietro</b>.</li>
+      <li><b>Aggiungi o togli le ore.</b> Se passi la mezzanotte, cambia anche il giorno.</li>
+    </ol>
+    <div class="esempi">
+      <article class="esempio">
+        <p class="es-tag">Esempio svolto 1</p>
+        <h3>A Roma sono le 15:00. Che ore sono a New York?</h3>
+        <ol class="passi">
+          <li><span class="p-n">1</span><span>Roma è nel fuso <b>UTC+1</b>, New York nel fuso <b>UTC−5</b>.</span></li>
+          <li><span class="p-n">2</span><span>Da +1 a −5 ci sono <b>6 ore</b> di differenza. New York è a <b>ovest</b>: l'orologio va <b>indietro</b>.</span></li>
+          <li><span class="p-n">3</span><span>15:00 − 6 ore = <b>9:00</b>.</span></li>
+        </ol>
+        <p class="es-esito">A New York sono le 9:00 dello stesso giorno.</p>
+      </article>
+      <article class="esempio">
+        <p class="es-tag">Esempio svolto 2</p>
+        <h3>A Roma sono le 22:00 di lunedì. Che ore sono a Tokyo?</h3>
+        <ol class="passi">
+          <li><span class="p-n">1</span><span>Roma è nel fuso <b>UTC+1</b>, Tokyo nel fuso <b>UTC+9</b>.</span></li>
+          <li><span class="p-n">2</span><span>Da +1 a +9 ci sono <b>8 ore</b> di differenza. Tokyo è a <b>est</b>: l'orologio va <b>avanti</b>.</span></li>
+          <li><span class="p-n">3</span><span>22:00 + 8 ore = 30:00. Le ore oltre la mezzanotte sono 30 − 24 = 6: sono le <b>6:00</b> del giorno dopo.</span></li>
+        </ol>
+        <p class="es-esito">A Tokyo sono le 6:00 di martedì.</p>
+      </article>
+      <article class="esempio completa" id="completa">
+        <p class="es-tag">Ora completa tu</p>
+        <h3>A Roma sono le 20:00 di lunedì. Che ore sono a Pechino?</h3>
+        <ol class="passi">
+          <li><span class="p-n">1</span><span>Roma è nel fuso <b>UTC+1</b>, Pechino nel fuso <b>UTC+8</b>.</span></li>
+          <li><span class="p-n">2</span><span>Da +1 a +8 ci sono <b>7 ore</b> di differenza. Pechino è a <b>est</b>: l'orologio va <b>avanti</b>.</span></li>
+          <li><span class="p-n">3</span><span>20:00 + 7 ore = …
+            <span class="compila">
+              <label>ora <select id="c-ora" aria-label="Ora a Pechino"><option value="">—</option></select></label>
+              <label>giorno <select id="c-giorno" aria-label="Giorno a Pechino"><option value="">—</option><option value="lun">lunedì</option><option value="mar">martedì</option></select></label>
+            </span></span></li>
+        </ol>
+        <div class="row"><button type="button" class="go" id="c-controlla">Controlla</button></div>
+        <p class="fb" id="c-fb" hidden aria-live="polite"></p>
+      </article>
+    </div>
+    <p class="sub dopo-esempi">Quando l'hai capito, prova da solo con gli orologi qui sotto: lì nessuno ti mostra i passi.</p>
+  </section>
+
   <div class="two">
     <section class="box q" aria-live="polite">
       <h2>Prova tu: sposta le lancette</h2>
@@ -442,6 +490,27 @@ newQ(); update(); requestAnimationFrame(loop);
 .zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
 body{padding-top:40px}
 @media print{.zm{display:none!important}body{padding-top:0}}
+
+/* esempi svolti: come si calcola l'ora */
+.calcolo{margin:16px 0}
+.passi-regola{margin:6px 0 14px;padding-left:22px}
+.passi-regola li{margin:3px 0}
+.esempi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.esempi{grid-template-columns:1fr}}
+.esempio{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--paper);min-width:0}
+.esempio h3{font-size:1rem;margin:2px 0 8px;line-height:1.3}
+.es-tag{margin:0;font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.esempio.completa .es-tag{color:var(--accent)}
+.passi{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.passi li{display:grid;grid-template-columns:26px 1fr;gap:8px;align-items:start;font-size:.95rem}
+.p-n{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--card);border:1px solid var(--line);font-weight:800;font-size:.8rem}
+.es-esito{margin:10px 0 0;padding-top:8px;border-top:1px solid var(--line);font-weight:700}
+.compila{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.compila select{font:inherit;padding:4px 6px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.esempio.completa .row{margin-top:10px}
+.esempio.completa .go{font:inherit;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:#fff;font-weight:700;padding:6px 14px;cursor:pointer}
+.esempio.completa .fb{margin:10px 0 0}
+.dopo-esempi{margin:12px 0 0}
 </style>
 <div class="zm" role="group" aria-label="Dimensione della pagina">
 <button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
@@ -555,5 +624,20 @@ body{padding-top:40px}
 </script>
 <!-- /zoom-ctrl -->
 <script src="../../../../assets/barra.js"></script>
+<script>
+(function(){
+  var ora=document.getElementById("c-ora"), gio=document.getElementById("c-giorno"), fb=document.getElementById("c-fb");
+  if(!ora) return;
+  for(var h=0;h<24;h++){ var o=document.createElement("option"); o.value=String(h); o.textContent=(h<10?"0":"")+h+":00"; ora.appendChild(o); }
+  document.getElementById("c-controlla").addEventListener("click",function(){
+    fb.hidden=false; fb.className="fb";
+    if(ora.value===""||gio.value===""){ fb.textContent="Scegli l'ora e il giorno."; return; }
+    var okOra=ora.value==="3", okGio=gio.value==="mar";
+    if(okOra&&okGio){ fb.className="fb right"; fb.textContent="Giusto: 20 + 7 = 27, cioè 3 ore dopo la mezzanotte. A Pechino sono le 3:00 di martedì."; }
+    else if(okOra){ fb.className="fb wrong"; fb.textContent="L'ora è giusta, ma hai passato la mezzanotte: che giorno è? Guarda il passo 3 dell'esempio 2."; }
+    else { fb.className="fb wrong"; fb.textContent="Non ancora. 20:00 + 7 ore fa 27:00: togli 24 per sapere quante ore sono passate dopo la mezzanotte."; }
+  });
+})();
+</script>
 </body>
 </html>

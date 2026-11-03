@@ -319,6 +319,27 @@ details.insegnante{margin:34px 0 10px;border:1px solid var(--filo);border-radius
 details.insegnante summary{cursor:pointer;padding:12px 0;font-weight:800}
 details.insegnante h4{margin:14px 0 4px}
 details.insegnante ul,details.insegnante ol{margin:0 0 10px;padding-left:1.3em}
+/* vi ricordate? */
+.ricordi{list-style:none;margin:8px 0 22px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ricordi li{margin:0}
+.ricordi figure{margin:0;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:var(--tenue-bg);border:1px solid var(--filo);display:grid;place-items:center;position:relative}
+.ricordi figure:nth-child(odd){transform:rotate(-1deg)}
+.ricordi li:nth-child(even) figure{transform:rotate(1.2deg)}
+.ricordi img{width:100%;height:100%;object-fit:cover;display:block}
+.ricordi figure.vuota{border:2px dashed var(--filo)}
+.ricordi figure.vuota img{display:none}
+.ricordi figure.vuota::after{content:"";width:38%;aspect-ratio:1/1;opacity:.35;background:var(--tenue);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Ccircle cx='9' cy='10' r='2'/%3E%3Cpath d='M21 16l-5-5-8 8'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Ccircle cx='9' cy='10' r='2'/%3E%3Cpath d='M21 16l-5-5-8 8'/%3E%3C/svg%3E") center/contain no-repeat}
+.ricorda-testo{font:1.25rem/1.55 var(--serif);max-width:62ch;margin:0 0 18px}
+.parola-box{border:2px solid var(--ink);border-radius:16px;padding:18px 22px 8px;margin:26px 0 10px;max-width:900px}
+.parola-box h3{margin-top:0}
+.parola-grande{font:700 2.4rem/1 var(--serif);letter-spacing:.02em;margin:0 0 6px}
+.frasi{list-style:none;margin:10px 0 16px;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.frasi li{border:1px solid var(--filo);border-radius:12px;padding:12px 14px;background:var(--tenue-bg)}
+.frasi details summary{cursor:pointer;font-weight:700;color:var(--accento);font-size:.92rem;margin-top:6px}
+.frasi details p{margin:6px 0 0;font-size:.95rem}
+.radice{background:var(--accento-soft);border-radius:12px;padding:14px 18px;margin:0 0 14px}
+.radice p{margin:0 0 8px}
+@media (max-width:700px){.ricordi{grid-template-columns:repeat(2,minmax(0,1fr))}.frasi{grid-template-columns:1fr}}
 /* indice delle officine */
 .gruppo-officine{padding:26px 0 6px}
 .gruppo-officine h2{margin:0}
@@ -460,6 +481,7 @@ section.parte:target{outline:none}
 <div class="corpo-lezione">
 <nav class="indice" aria-label="Parti dell'UDA">
   <div class="indice-testa"><p class="indice-titolo">In questa UDA</p><button type="button" class="indice-riduci" aria-pressed="false" aria-label="Riduci l'indice alle sole icone" title="Riduci l'indice alle sole icone">&laquo;</button></div>
+  <a class="voce" href="#ricordate" style="--c:#a34d3c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg></span><span class="nome">Vi ricordate?</span></a>
   <a class="voce" href="#cosa" style="--c:#46525a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></svg></span><span class="nome">Che cosa faremo</span></a>
   <a class="voce" href="#nomi" style="--c:#8a6a00"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2a4.6 4.6 0 0 1 5 5.3"/></svg></span><span class="nome">1 · I nostri nomi</span></a>
   <a class="voce" href="#valigia" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 12.5h18M10 12.5v2h4v-2"/></svg></span><span class="nome">2 · La valigia</span></a>
@@ -474,6 +496,48 @@ section.parte:target{outline:none}
 </nav>
 
 <main id="contenuto">
+
+<!-- ================= VI RICORDATE? ================= -->
+<section class="parte" id="ricordate" aria-labelledby="t-ricordate">
+  <p class="etichetta">Prima di cominciare</p>
+  <h2 id="t-ricordate">Vi ricordate?</h2>
+  <ul class="ricordi" aria-label="Laboratori fatti alla scuola primaria">
+    <li><figure><img src="benvenuti-nei-laboratori-img/primaria-01.jpg" alt="Un laboratorio alla scuola primaria" loading="lazy" onerror="this.parentNode.className='vuota'"></figure></li>
+    <li><figure><img src="benvenuti-nei-laboratori-img/primaria-02.jpg" alt="Un laboratorio alla scuola primaria" loading="lazy" onerror="this.parentNode.className='vuota'"></figure></li>
+    <li><figure><img src="benvenuti-nei-laboratori-img/primaria-03.jpg" alt="Un laboratorio alla scuola primaria" loading="lazy" onerror="this.parentNode.className='vuota'"></figure></li>
+    <li><figure><img src="benvenuti-nei-laboratori-img/primaria-04.jpg" alt="Un laboratorio alla scuola primaria" loading="lazy" onerror="this.parentNode.className='vuota'"></figure></li>
+    <li><figure><img src="benvenuti-nei-laboratori-img/primaria-05.jpg" alt="Un laboratorio alla scuola primaria" loading="lazy" onerror="this.parentNode.className='vuota'"></figure></li>
+    <li><figure><img src="benvenuti-nei-laboratori-img/primaria-06.jpg" alt="Un laboratorio alla scuola primaria" loading="lazy" onerror="this.parentNode.className='vuota'"></figure></li>
+  </ul>
+  <p class="ricorda-testo">Sapete già che cos'è un laboratorio: nella scuola primaria ne avete fatti tanti, come questi. Anche nella secondaria faremo dei laboratori, ma saranno un po' diversi da quelli a cui siete abituati. Avranno qualcosa in più.</p>
+
+  <div class="primadopo">
+    <div class="pd"><h3>Alla primaria</h3><p>Nei laboratori costruivate soprattutto <strong>oggetti</strong>.</p></div>
+    <span class="freccia" aria-hidden="true">→</span>
+    <div class="pd ora"><h3>Alla secondaria</h3><p>Nei laboratori cominceremo a costruire delle <strong>discipline</strong> vere e proprie.</p></div>
+  </div>
+
+  <div class="parola-box">
+    <h3><span>Una parola da esplorare</span></h3>
+    <p class="parola-grande">disciplina</p>
+    <p>Questa parola la sentirete spesso, ma non vuol dire sempre la stessa cosa. Leggete le frasi: che cosa significa <em>disciplina</em> in ognuna? Provate a dirlo con parole vostre, poi controllate.</p>
+    <ul class="frasi">
+      <li>«La storia e la geografia sono due <strong>discipline</strong> diverse, ma spesso lavorano insieme.»
+        <details><summary>Che cosa vuol dire qui?</summary><p>Una <strong>materia di studio</strong>: un modo di conoscere il mondo, con le sue domande e i suoi attrezzi.</p></details></li>
+      <li>«Durante la gita la classe si è comportata con grande <strong>disciplina</strong>.»
+        <details><summary>Che cosa vuol dire qui?</summary><p>Il <strong>rispetto delle regole</strong> e un comportamento ordinato.</p></details></li>
+      <li>«Per imparare a suonare il pianoforte ci vogliono passione e <strong>disciplina</strong>.»
+        <details><summary>Che cosa vuol dire qui?</summary><p>L'<strong>impegno costante</strong>: allenarsi ogni giorno, anche quando costa fatica.</p></details></li>
+      <li>«Il salto in alto è una delle <strong>discipline</strong> dell'atletica.»
+        <details><summary>Che cosa vuol dire qui?</summary><p>Una <strong>specialità</strong>: un campo preciso, con tecniche e regole sue.</p></details></li>
+    </ul>
+    <div class="radice">
+      <p><strong>Da dove viene?</strong> Dal latino <em>discere</em>, «imparare». Dalla stessa radice viene <em>discepolo</em>: chi impara da un maestro.</p>
+      <p>Allora una disciplina è prima di tutto <strong>qualcosa che si impara</strong>: con le sue regole, con l'impegno di tutti i giorni, facendo pratica come in un laboratorio.</p>
+    </div>
+    <p><strong>E voi?</strong> Quale di questi significati vi sembra più vicino alla scuola media? Ce n'è uno che vi piace di più, o uno che vi preoccupa un po'?</p>
+  </div>
+</section>
 
 <!-- ================= CHE COSA FAREMO ================= -->
 <section class="parte" id="cosa" aria-labelledby="t-cosa">

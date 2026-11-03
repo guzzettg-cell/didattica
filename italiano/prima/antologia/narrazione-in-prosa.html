@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>La narrazione in prosa</title>
+<title>Intorno al fuoco. Come nasce un racconto</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
@@ -88,6 +88,35 @@ input[type=text]{width:11rem}
 .indice{display:flex;flex-wrap:wrap;gap:.4rem}
 .indice a{font-size:.85rem;color:var(--accent);border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:.15rem .7rem;text-decoration:none}
 .indice a:hover{border-color:var(--accent)}
+
+/* layout con indice laterale */
+.layout{max-width:66rem;margin:0 auto;display:grid;grid-template-columns:13.5rem minmax(0,46rem);gap:2.5rem;justify-content:center;align-items:start}
+.layout > .wrap{margin:0;max-width:none;min-width:0}
+.side{position:sticky;top:1rem;max-height:calc(100vh - 2rem);overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.8rem .9rem;font-size:.9rem}
+.side summary{font-family:var(--display);font-weight:700;cursor:pointer;color:var(--accent);list-style:none}
+.side summary::-webkit-details-marker{display:none}
+.side summary::after{content:" \25BE"}
+.side details:not([open]) summary::after{content:" \25B8"}
+.side .gruppo{margin-top:.8rem;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.side ol{list-style:none;margin:.3rem 0 0;padding:0;display:flex;flex-direction:column;gap:.1rem}
+.side a{display:block;color:var(--ink);text-decoration:none;padding:.2rem .5rem;border-left:3px solid transparent;border-radius:0 4px 4px 0;line-height:1.3}
+.side a:hover{background:var(--bg)}
+.side a.on{border-left-color:var(--accent);color:var(--accent);font-weight:700;background:var(--bg)}
+section[id],header[id],.parte[id]{scroll-margin-top:1rem}
+@media (max-width:60rem){.layout{grid-template-columns:minmax(0,1fr);gap:1.5rem}.side{position:static;max-height:none}}
+.sottotitolo{font-family:var(--display);font-size:1.35rem;font-weight:700;color:var(--accent)}
+.parte{font-family:var(--display);font-weight:800;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);border-top:3px solid var(--accent);padding-top:.6rem}
+.linea{list-style:none;margin:0;padding:0 0 0 1.4rem;border-left:3px solid var(--accent);display:flex;flex-direction:column;gap:.9rem}
+.linea li{position:relative}
+.linea li::before{content:"";position:absolute;left:-1.4rem;top:.45rem;width:.8rem;height:.8rem;margin-left:-.55rem;border-radius:50%;background:var(--paper);border:3px solid var(--accent)}
+.linea li.top::before{background:var(--hl)}
+.linea .quando{display:block;font-size:.85rem;color:var(--muted);font-weight:700}
+.gr{font-family:var(--display);font-weight:700;white-space:nowrap}
+.gr i{font-family:var(--body);font-weight:400;color:var(--muted)}
+.lettura{border-left:4px solid var(--hl)}
+table.larga{min-width:42rem}
+td{vertical-align:top}
+.tipo.hl{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
 </style>
 </head>
 <body>
@@ -97,14 +126,140 @@ input[type=text]{width:11rem}
   <button id="zp" type="button" aria-label="Ingrandisci">A+</button>
 </div>
 
+<div class="layout">
+<nav class="side" aria-label="Indice della lezione">
+<details id="indice" open>
+<summary>Indice</summary>
+<div class="gruppo">Intorno al fuoco</div>
+<ol>
+<li><a href="#fuoco">La scoperta del fuoco</a></li>
+<li><a href="#voce">Prima la voce, poi la scrittura</a></li>
+<li><a href="#parole">Tante parole per dire «racconto»</a></li>
+<li><a href="#generi">I generi del racconto</a></li>
+<li><a href="#struttura">Generi diversi, stessa struttura</a></li>
+</ol>
+<div class="gruppo">Gli attrezzi del racconto</div>
+<ol>
+<li><a href="#fabula">Fabula e intreccio</a></li>
+<li><a href="#schema">Lo schema narrativo</a></li>
+<li><a href="#sequenze">Le sequenze</a></li>
+<li><a href="#personaggi">I personaggi</a></li>
+<li><a href="#narratore">Chi racconta</a></li>
+</ol>
+<div class="gruppo">Esercizi</div>
+<ol>
+<li><a href="#ex1">1. Che sequenza è?</a></li>
+<li><a href="#ex2">2. Le fasi del racconto</a></li>
+<li><a href="#ex3">3. Che ruolo ha?</a></li>
+<li><a href="#ex4">4. Interno o esterno?</a></li>
+<li><a href="#ex5">5. Fabula o intreccio?</a></li>
+</ol>
+</details>
+</nav>
 <main class="wrap">
-<header>
+<header id="inizio">
   <span class="eyebrow">Antologia · lezione 1</span>
-  <h1>Come è fatto un <span class="mark">racconto</span></h1>
-  <p>Fiabe, gialli, romanzi d'avventura: anche se sono diversissimi, tutti i testi narrativi sono costruiti con gli stessi «attrezzi». Impariamo a riconoscerli.</p>
+  <h1>Intorno al <span class="mark">fuoco</span></h1>
+  <p class="sottotitolo">Come nasce un racconto</p>
+  <p>Prima di finire nei libri, i racconti sono stati detti a voce, la sera, davanti a un fuoco. Partiamo da lì: da come gli esseri umani hanno cominciato a raccontare, fino ai tanti tipi di racconto che incontreremo nell'antologia.</p>
 </header>
 
-<section>
+<div class="parte">Prima parte · Intorno al fuoco</div>
+
+<section id="fuoco">
+  <h2>La scoperta del fuoco</h2>
+  <p>Per un tempo lunghissimo i nostri antenati hanno vissuto senza saper accendere né conservare il fuoco. Imparare a usarlo, centinaia di migliaia di anni fa, ha cambiato tutto.</p>
+  <div class="note lettura">
+    <span class="eyebrow">Leggiamo insieme</span>
+    <p><b>Roy Lewis</b>, <i>Il più grande uomo scimmia del Pleistocene</i> (1960). Una famiglia di ominidi vive nella savana, tra belve feroci e grotte umide. Il padre, Edward, è un inventore instancabile: un giorno riesce a portare a casa il fuoco, preso da un vulcano. Non tutti sono d'accordo: lo zio Vanja pensa che sia una pericolosa follia e che sarebbe meglio tornare a vivere sugli alberi.</p>
+    <p>Mentre ascolti alcuni passi del romanzo, prova a rispondere:</p>
+    <ul>
+      <li>Che cosa cambia nella vita della famiglia dopo l'arrivo del fuoco?</li>
+      <li>Perché lo zio Vanja è contrario? Ha qualche ragione?</li>
+      <li>Che cosa fa la famiglia la sera, quando si riunisce intorno al fuoco?</li>
+    </ul>
+  </div>
+  <h3>Che cosa ci dà il fuoco</h3>
+  <div class="tipi">
+    <div class="tipo"><b>luce</b><span class="es">la giornata non finisce più al tramonto</span></div>
+    <div class="tipo"><b>calore</b><span class="es">si sopravvive al freddo e alla notte</span></div>
+    <div class="tipo"><b>protezione</b><span class="es">tiene lontani gli animali feroci</span></div>
+    <div class="tipo"><b>cibo cotto</b><span class="es">più facile da masticare e da digerire</span></div>
+    <div class="tipo hl"><b>tempo per raccontare</b><span class="es">la sera il gruppo si riunisce: qualcuno parla, gli altri ascoltano</span></div>
+  </div>
+  <p>Intorno al fuoco si ricorda la caccia del giorno, si spiega ai più piccoli dove sono i pericoli, si immagina che cosa c'è oltre le montagne. È così, probabilmente, che sono nati i <span class="mark">racconti</span>.</p>
+</section>
+
+<section id="voce">
+  <h2>Prima la voce, poi la scrittura</h2>
+  <p>Per moltissimo tempo le storie sono passate solo <b>di bocca in bocca</b>, da una generazione all'altra: è la <b>tradizione orale</b>. Chi raccontava non aveva un libro: doveva ricordare tutto a memoria. Per questo usava formule fisse e ripetizioni, che aiutano a ricordare (pensa a «C'era una volta…» o «…e vissero felici e contenti»).</p>
+  <ol class="linea">
+    <li><span class="quando">centinaia di migliaia di anni fa</span>gli esseri umani imparano a usare il fuoco</li>
+    <li class="top"><span class="quando">da quando esiste il linguaggio</span>si raccontano storie a voce: è la tradizione orale</li>
+    <li><span class="quando">circa 5000 anni fa</span>in Mesopotamia nasce la scrittura</li>
+    <li><span class="quando">VIII–VI secolo a.C.</span>i poemi di Omero, cantati per secoli dagli aedi, vengono messi per iscritto</li>
+    <li><span class="quando">metà del Quattrocento</span>Gutenberg inventa la stampa a caratteri mobili: i libri si moltiplicano</li>
+    <li><span class="quando">Ottocento e Novecento</span>i fratelli Grimm in Germania e, più tardi, Italo Calvino in Italia raccolgono e scrivono le fiabe che la gente si raccontava a voce</li>
+  </ol>
+  <div class="note">
+    <p>La tradizione orale non è finita: le storie dei nonni, le barzellette, le leggende del paese, le storie della buonanotte passano ancora a voce.</p>
+    <p><b>Prova anche tu.</b> Chiedi a casa quale storia si racconta sempre in famiglia. Poi raccontala alla classe senza leggerla: che cosa ti aiuta a ricordarla?</p>
+  </div>
+</section>
+
+<section id="parole">
+  <h2>Tante parole per dire «racconto»</h2>
+  <p>Gli antichi Greci avevano molte parole per dire <i>racconto</i> e <i>raccontare</i>. All'inizio significavano più o meno la stessa cosa: «parola», «discorso», «storia detta a voce». A poco a poco ognuna si è <b>specializzata</b> e ha cominciato a indicare un tipo diverso di racconto.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>parola greca</th><th>all'inizio voleva dire</th><th>che cosa è diventata</th></tr></thead>
+    <tbody>
+      <tr><td><span class="gr">μῦθος <i>mýthos</i></span></td><td>parola, discorso, racconto</td><td><b>mito</b>: racconto di dèi ed eroi che spiega l'origine del mondo e delle cose</td></tr>
+      <tr><td><span class="gr">ἔπος <i>épos</i></span></td><td>parola, verso</td><td><b>epica</b>: lungo racconto in versi delle imprese degli eroi</td></tr>
+      <tr><td><span class="gr">αἶνος <i>âinos</i></span></td><td>racconto che contiene un insegnamento</td><td><b>favola</b>: breve racconto, spesso con animali, che finisce con una morale</td></tr>
+      <tr><td><span class="gr">λόγος <i>lógos</i></span></td><td>parola, discorso, ragionamento</td><td><b>racconto in prosa</b> (anche le favole di Esopo erano chiamate così)</td></tr>
+      <tr><td><span class="gr">ἱστορία <i>historía</i></span></td><td>indagine, ricerca</td><td><b>storia</b>: racconto di fatti realmente accaduti</td></tr>
+      <tr><td><span class="gr">διήγησις <i>diḗgēsis</i></span></td><td>racconto che va dall'inizio alla fine</td><td><b>narrazione</b>: la parola più generale di tutte</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note">
+    <p>Nei poemi di Omero <i>mýthos</i> vuol dire semplicemente «discorso, parole dette»: solo più tardi diventerà il nostro <i>mito</i>.</p>
+    <p><b>E in italiano?</b> <i>Favola</i> e <i>fiaba</i> vengono entrambe dal latino <i>fabula</i>, dal verbo <i>fari</i>, «parlare»: ancora una volta, un racconto detto a voce. <i>Novella</i> voleva dire «notizia nuova»; <i>romanzo</i> era un racconto scritto in lingua «romanza», cioè volgare, e non in latino.</p>
+  </div>
+</section>
+
+<section id="generi">
+  <h2>I generi del racconto</h2>
+  <p>Da queste parole sono nati i <b>generi</b>: famiglie di racconti che hanno caratteristiche in comune. Nell'antologia li conosceremo uno alla volta.</p>
+  <div class="tipi">
+    <div class="tipo"><b>mito</b><span class="q">dèi ed eroi; spiega l'origine di qualcosa</span><span class="es">Prometeo ruba il fuoco agli dèi</span></div>
+    <div class="tipo"><b>epica</b><span class="q">lunghi poemi sulle imprese degli eroi</span><span class="es">l'<i>Iliade</i>, l'<i>Odissea</i></span></div>
+    <div class="tipo"><b>favola</b><span class="q">animali che parlano e una morale</span><span class="es">Esopo, Fedro</span></div>
+    <div class="tipo"><b>fiaba</b><span class="q">magia, prove da superare, lieto fine</span><span class="es">i fratelli Grimm, Calvino</span></div>
+    <div class="tipo"><b>leggenda</b><span class="q">un luogo o un fatto reale arricchito di fantasia</span><span class="es">le leggende legate a monti, laghi, santi</span></div>
+    <div class="tipo"><b>racconto e romanzo</b><span class="q">storie inventate di ogni tipo: avventura, giallo, fantasy, umoristiche…</span><span class="es"><i>Il più grande uomo scimmia del Pleistocene</i></span></div>
+  </div>
+</section>
+
+<section id="struttura">
+  <h2>Generi diversi, stessa struttura</h2>
+  <p>I generi cambiano, ma lo «scheletro» del racconto è spesso lo stesso: un equilibrio iniziale, qualcosa che lo rompe, una serie di prove, un momento di massima tensione e una conclusione. Mettiamo a confronto una favola, un mito e una fiaba.</p>
+  <div class="tbl"><table class="larga">
+    <thead><tr><th>fase</th><th>favola · <i>Il lupo e l'agnello</i></th><th>mito · <i>Prometeo</i></th><th>fiaba · <i>Cappuccetto Rosso</i></th></tr></thead>
+    <tbody>
+      <tr><td><b>situazione iniziale</b></td><td>un agnello beve a un ruscello; più in alto beve un lupo</td><td>gli esseri umani vivono al freddo e al buio, senza fuoco</td><td>Cappuccetto Rosso vive con la mamma vicino al bosco</td></tr>
+      <tr><td><b>esordio</b></td><td>il lupo vuole mangiare l'agnello e cerca una scusa</td><td>il titano Prometeo decide di aiutarli</td><td>la mamma la manda dalla nonna malata</td></tr>
+      <tr><td><b>peripezie</b></td><td>il lupo lo accusa di sporcargli l'acqua e di averlo offeso; l'agnello si difende</td><td>Prometeo sale tra gli dèi e ruba il fuoco, nascosto in una canna</td><td>nel bosco incontra il lupo, che arriva per primo dalla nonna</td></tr>
+      <tr><td><b>spannung</b></td><td>finite le scuse, il lupo dà la colpa al padre dell'agnello</td><td>Zeus scopre il furto</td><td>«Nonna, che bocca grande hai!»</td></tr>
+      <tr><td><b>scioglimento</b></td><td>il lupo divora l'agnello. Morale: il prepotente trova sempre un pretesto</td><td>gli uomini hanno il fuoco; Prometeo viene incatenato a una rupe per punizione</td><td>il cacciatore salva la nonna e la bambina</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><p>Anche i Greci si chiedevano come gli esseri umani avessero avuto il fuoco: la loro risposta è un <b>mito</b>. Siamo tornati al punto di partenza.</p></div>
+  <p>Nella seconda parte vediamo gli «attrezzi» che servono per smontare qualsiasi racconto, di qualsiasi genere.</p>
+</section>
+
+<div class="parte" id="attrezzi">Seconda parte · Gli attrezzi del racconto</div>
+
+<section id="fabula">
   <h2>Fabula e intreccio</h2>
   <div class="tipi two">
     <div class="tipo"><b>fabula</b><span class="q">l'ordine in cui i fatti succedono</span><span class="es">nascita → infanzia → avventura → ritorno</span></div>
@@ -115,7 +270,7 @@ input[type=text]{width:11rem}
   </div>
 </section>
 
-<section>
+<section id="schema">
   <h2>Lo schema narrativo</h2>
   <div class="tbl"><table>
     <thead><tr><th>fase</th><th>che cosa succede</th></tr></thead>
@@ -129,7 +284,7 @@ input[type=text]{width:11rem}
   </table></div>
 </section>
 
-<section>
+<section id="sequenze">
   <h2>Le sequenze</h2>
   <p>Il testo si divide in <b>sequenze</b>, parti con un significato compiuto.</p>
   <div class="tipi">
@@ -140,7 +295,7 @@ input[type=text]{width:11rem}
   </div>
 </section>
 
-<section>
+<section id="personaggi">
   <h2>I personaggi</h2>
   <div class="tipi">
     <div class="tipo"><b>protagonista</b><span class="es">il personaggio principale</span></div>
@@ -152,16 +307,17 @@ input[type=text]{width:11rem}
   <p>I personaggi possono essere <b>statici</b> (restano uguali) o <b>dinamici</b> (cambiano durante la storia).</p>
 </section>
 
-<section>
+<section id="narratore">
   <h2>Chi racconta</h2>
   <div class="tipi two">
     <div class="tipo"><b>narratore esterno</b><span class="q">non fa parte della storia, racconta in 3ª persona</span><span class="es">Quella mattina Luca si svegliò tardi.</span></div>
     <div class="tipo"><b>narratore interno</b><span class="q">è un personaggio, racconta in 1ª persona</span><span class="es">Quella mattina mi svegliai tardi.</span></div>
   </div>
   <div class="note"><p>Attenzione: il <b>narratore</b> è la voce che racconta dentro il testo; l'<b>autore</b> è la persona reale che ha scritto il libro.</p></div>
+  <div class="note lettura"><p>Nel <i>Più grande uomo scimmia del Pleistocene</i> l'autore è Roy Lewis, ma chi racconta è Ernest, uno dei figli di Edward: è un <b>narratore interno</b>, perché è un personaggio della storia e parla in prima persona.</p></div>
 </section>
 
-<hr>
+<div class="parte" id="esercizi">Terza parte · Esercizi</div>
 <section class="ex" id="ex1">
   <span class="eyebrow">Esercizio 1</span>
   <h2>Che sequenza è?</h2>
@@ -202,6 +358,7 @@ input[type=text]{width:11rem}
   </div>
 </section>
 </main>
+</div>
 <script>
 (function(){
   var KEY="narrazione", DATA=[{"type": "select", "opts": ["narrativa", "descrittiva", "dialogica", "riflessiva"], "label": "Tipo di sequenza", "items": [["Saltò giù dal letto, si vestì in fretta e uscì sbattendo la porta.", "narrativa"], ["Il bosco era fitto, gli alberi alti e scuri, e un ruscello scorreva tra i sassi coperti di muschio.", "descrittiva"], ["«Hai visto il mio cane?» «No, oggi non è passato di qui.»", "dialogica"], ["Mi chiedevo se avessi fatto bene a fidarmi di lui: forse avrei dovuto ascoltare mia sorella.", "riflessiva"], ["Il nonno aveva i capelli bianchi, gli occhiali tondi e un sorriso gentile.", "descrittiva"], ["Prese la chiave, aprì il baule e trovò una vecchia mappa.", "narrativa"]]}, {"type": "select", "opts": ["situazione iniziale", "esordio", "peripezie", "spannung", "scioglimento"], "label": "Fase", "items": [["Nina viveva con la nonna in una casa con il giardino. Ogni sera il gatto Briciola si addormentava ai piedi del suo letto.", "situazione iniziale"], ["Una sera di temporale, però, Briciola non tornò a casa.", "esordio"], ["Nina lo cercò nel parco, poi lungo il fiume, poi nel cortile della scuola. Chiese ai vicini e attaccò cartelli ovunque, ma nessuno l'aveva visto.", "peripezie"], ["Il terzo giorno sentì un miagolio debolissimo arrivare dal tombino davanti al cancello: Briciola era là sotto, bagnato e spaventato, e l'acqua saliva.", "spannung"], ["I pompieri lo tirarono fuori in pochi minuti. Da quella sera Nina chiude sempre la finestra quando arriva un temporale.", "scioglimento"]]}, {"type": "select", "opts": ["protagonista", "antagonista", "aiutante", "oggetto"], "label": "Ruolo", "items": [["Cappuccetto Rosso", "protagonista"], ["il lupo", "antagonista"], ["il cacciatore", "aiutante", "salva la bambina e la nonna."], ["arrivare sana e salva dalla nonna", "oggetto", "è lo scopo della protagonista."]]}, {"type": "scelta", "opts": ["interno", "esterno"], "items": [["Quel giorno capii che non sarei più tornato in quella casa.", "interno", "racconta in prima persona."], ["Marco guardò l'orologio: era già in ritardo.", "esterno"], ["Ci incamminammo verso il bosco senza dire una parola.", "interno"], ["La strega preparò la pozione e la versò nella brocca.", "esterno"], ["Ancora oggi, quando ci ripenso, mi viene da ridere.", "interno"]]}, {"type": "scelta", "opts": ["ordine cronologico", "flashback", "flashforward"], "items": [["Si svegliò, fece colazione, uscì e prese l'autobus.", "ordine cronologico"], ["Guardando la foto, Anna ricordò quell'estate di dieci anni prima, quando aveva imparato a nuotare.", "flashback", "il racconto torna nel passato."], ["Quella mattina non poteva saperlo, ma quel ragazzo sarebbe diventato il suo migliore amico.", "flashforward", "anticipa il futuro."], ["Ulisse, alla corte dei Feaci, racconta le avventure vissute negli anni precedenti.", "flashback"]]}];
@@ -273,6 +430,21 @@ input[type=text]{width:11rem}
     document.querySelectorAll('input[type=text]').forEach(function(s){s.value=''});
     document.querySelectorAll('.seg').forEach(function(s){delete s.dataset.v; s.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed','false')})});
     score.textContent=''; window.scrollTo(0,0)};
+})();
+</script>
+<script>
+(function(){
+  var d=document.getElementById('indice'), mq=window.matchMedia('(min-width: 60.01rem)');
+  d.open=mq.matches;
+  if(mq.addEventListener) mq.addEventListener('change',function(){d.open=mq.matches});
+  var links=[].slice.call(document.querySelectorAll('.side a')), map={};
+  links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;
+    a.addEventListener('click',function(){ if(!mq.matches) d.open=false; })});
+  if(!('IntersectionObserver' in window)) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){ links.forEach(function(a){a.classList.remove('on')}); map[e.target.id].classList.add('on'); }})},
+    {rootMargin:'-10% 0px -75% 0px'});
+  Object.keys(map).forEach(function(id){var t=document.getElementById(id); if(t) io.observe(t)});
 })();
 </script>
 <script src="../../../assets/barra.js"></script>
