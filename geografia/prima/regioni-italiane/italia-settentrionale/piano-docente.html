@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Piano delle lezioni – Italia settentrionale</title>
+<meta name="description" content="Piano docente con soluzioni e griglia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1EE; --paper:#FAFBF9; --ink:#1D2A30; --muted:#5B6B70; --line:#C9D2CE;
+  --ocean:#2C5872; --warm:#B3412F; --ok:#2E7D4F; --no:#B3412F; --sel:#E8B04A;
+  --mare:#D6E6EE; --terra:#E9E4D6; --regione:#F5F1E6; --vicina:#E2DED3; --po:#3D7FB0;
+  --cond:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+    --ocean:#80B1CC; --warm:#EF8A73; --ok:#6FC08F; --no:#EF8A73; --sel:#C9913A;
+    --mare:#1C3340; --terra:#2A2E2A; --regione:#323A35; --vicina:#262B27; --po:#7FB6DE; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+  --ocean:#80B1CC; --warm:#EF8A73; --ok:#6FC08F; --no:#EF8A73; --sel:#C9913A;
+  --mare:#1C3340; --terra:#2A2E2A; --regione:#323A35; --vicina:#262B27; --po:#7FB6DE; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.6}
+h1,h2,h3,h4{font-family:var(--cond);line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0;max-width:68ch}
+a{color:var(--ocean)}
+:focus-visible{outline:3px solid var(--ocean);outline-offset:2px}
+.wrap{max-width:62rem;margin:0 auto;padding:1rem 16px 3rem}
+.lnav{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;justify-content:space-between;font:600 1.02rem var(--cond);margin-bottom:1.4rem}
+.lnav .passi{display:flex;gap:1rem;flex-wrap:wrap;color:var(--muted)}
+header.testa{display:grid;gap:.6rem;margin-bottom:1.6rem}
+.eyebrow{font:600 1.1rem var(--cond);color:var(--muted)}
+h1{font-size:clamp(2.4rem,7vw,4rem);font-weight:700}
+h1 span{color:var(--ocean)}
+.lede{font-size:1.18rem;color:var(--muted)}
+.pagine{display:inline-block;font:600 .95rem var(--cond);border:1px solid var(--line);border-radius:20px;padding:.05rem .7rem;background:var(--paper)}
+.fase{margin:2.6rem 0 1rem;display:grid;gap:.3rem;border-top:4px solid var(--ink);padding-top:.7rem}
+.fase .n{font:700 1rem var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--warm)}
+.fase h2{font-size:clamp(1.8rem,4.5vw,2.5rem)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem 1.2rem;margin:1rem 0;display:grid;gap:.75rem}
+.card > h3{font-size:1.5rem}
+.card .tipo{font:700 .95rem var(--cond);color:var(--ocean);letter-spacing:.04em;text-transform:uppercase}
+.consegna{font-weight:600}
+.chip{display:inline-block;font:600 .9rem var(--cond);border-radius:20px;padding:0 .55rem;border:1px solid var(--line);color:var(--muted);margin-left:.3rem}
+.libro{border:1px dashed var(--warm);border-radius:8px;padding:.7rem .9rem;display:grid;gap:.3rem}
+.libro b.t{font:700 .95rem var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--warm)}
+.btn{font:600 1.08rem var(--cond);background:var(--ink);color:var(--paper);border:0;border-radius:6px;padding:.45rem 1rem;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.chiaro{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.4;cursor:default}
+.comandi{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.fb{font:600 1.08rem var(--cond);min-height:1.4em}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--no)}
+.punti{font:700 1.05rem var(--cond);color:var(--muted)}
+/* scelte */
+.opz{display:flex;flex-wrap:wrap;gap:.45rem}
+.opz button{font:600 1.08rem var(--cond);background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:.4rem .85rem;cursor:pointer;text-align:left}
+.opz button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.opz button.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opz button.no{background:var(--no);color:#fff;border-color:var(--no)}
+/* righe con menu, vero/falso, classifica */
+.righe{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
+.righe li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem 1rem;align-items:center;padding:.45rem .6rem;border-radius:6px;background:var(--bg)}
+.righe li.ok{box-shadow:inset 4px 0 0 var(--ok)} .righe li.no{box-shadow:inset 4px 0 0 var(--no)}
+.righe li .nota{grid-column:1/-1;font-size:.95rem;color:var(--muted)}
+select,input[type=text],input[type=number],textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:.3rem .45rem;max-width:100%}
+select.ok,input.ok{border-color:var(--ok);box-shadow:0 0 0 2px var(--ok) inset}
+select.no,input.no{border-color:var(--no);box-shadow:0 0 0 2px var(--no) inset}
+textarea{width:100%;min-height:4.5em;resize:vertical}
+.testo-buchi{line-height:2.3}
+.righe select{max-width:min(100%,24rem)}
+.card{min-width:0}
+.vf{display:flex;gap:.3rem}
+.vf button{font:700 1.05rem var(--cond);width:2.4rem;height:2.2rem;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);cursor:pointer}
+.vf button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.cat{display:flex;flex-wrap:wrap;gap:.3rem}
+.cat button{font:600 .98rem var(--cond);border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);padding:.25rem .6rem;cursor:pointer}
+.cat button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+/* ordina */
+.ordina{list-style:none;margin:0;padding:0;display:grid;gap:.35rem;counter-reset:o}
+.ordina li{display:grid;grid-template-columns:2rem minmax(0,1fr) auto;gap:.5rem;align-items:center;background:var(--bg);border-radius:6px;padding:.35rem .5rem}
+.ordina li::before{counter-increment:o;content:counter(o);font:700 1.25rem var(--cond);color:var(--ocean);text-align:center}
+.ordina li.ok{box-shadow:inset 4px 0 0 var(--ok)} .ordina li.no{box-shadow:inset 4px 0 0 var(--no)}
+.ordina .su{display:flex;gap:.25rem}
+.ordina .su button{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:5px;width:2.1rem;height:2rem;cursor:pointer;font-weight:700}
+/* rivela */
+details.rivela{border:1px solid var(--line);border-radius:8px;padding:.45rem .8rem;background:var(--bg)}
+details.rivela summary{font:600 1.05rem var(--cond);cursor:pointer;color:var(--ocean)}
+details.rivela > div{margin-top:.4rem}
+/* carta */
+.carta-box{display:grid;grid-template-columns:minmax(0,3fr) minmax(14rem,2fr);gap:1rem;align-items:start}
+.carta{width:100%;height:auto;display:block;overflow:hidden;border-radius:8px;border:1px solid var(--line);background:var(--mare)}
+.carta .mare{fill:var(--mare)}
+.carta .estero{fill:var(--terra)}
+.carta .vicina{fill:var(--vicina);stroke:var(--paper);stroke-width:1}
+.carta .reg{fill:var(--regione);stroke:#8a8270;stroke-width:1;cursor:pointer;transition:fill .15s}
+.carta .reg:hover{fill:#efe2b8}
+.carta .reg.scelta{fill:var(--sel)}
+.carta .reg.giusta{fill:var(--ok)} .carta .reg.mancata{fill:#9ccdb0} .carta .reg.sbagliata{fill:var(--no)}
+.carta .reg.evid{fill:var(--sel)}
+.carta .lago{fill:var(--mare);stroke:var(--po);stroke-width:.8;pointer-events:none}
+.carta .po{fill:none;stroke:var(--po);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round;pointer-events:none}
+.carta.senza-po .po{display:none}
+.carta .citta circle{fill:var(--ink)} .carta text{font:600 12px var(--cond);fill:var(--ink);pointer-events:none;paint-order:stroke;stroke:var(--paper);stroke-width:3px}
+.carta .cima path{fill:var(--warm)}
+.carta .stato{font:700 15px var(--cond);letter-spacing:.25em;fill:var(--muted);stroke:none}
+.carta .nome-mare{font:italic 600 15px var(--serif);fill:var(--ocean);stroke:none}
+.carta .segni text{font:700 13px var(--cond)}
+.carta .segno{font:700 22px var(--cond)!important;fill:var(--ink)}
+.carta .punto{fill:var(--warm);stroke:#fff;stroke-width:2}
+.carta .punto-t{font:700 14px var(--cond)!important}
+.missioni{display:grid;gap:.5rem}
+.missioni .q{font-weight:600}
+.legenda-carta{font-size:.9rem;color:var(--muted)}
+/* video */
+.video{display:grid;gap:.4rem}
+.video .schermo{position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000}
+.video .schermo button{position:absolute;inset:0;width:100%;height:100%;border:0;padding:0;cursor:pointer;background:#000 center/cover no-repeat}
+.video .schermo button span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.72);color:#fff;font:700 1.2rem var(--cond);padding:.5rem 1.1rem;border-radius:999px}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video .cap{font:500 1rem var(--cond);color:var(--muted)}
+.card > .video{max-width:46rem}
+.griglia2{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr));gap:1rem}
+.fonti{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,17rem),1fr));gap:.6rem}
+.fonti a{display:grid;gap:.15rem;height:100%;padding:.7rem .9rem;border:1px solid var(--line);border-radius:8px;background:var(--bg);text-decoration:none;color:inherit}
+.fonti a:hover{border-color:var(--ocean)}
+.fonti .chi{font:700 .9rem var(--cond);color:var(--ocean);text-transform:uppercase;letter-spacing:.05em}
+.fonti b{font:700 1.15rem var(--cond)}
+.fonti span.d{font-size:.93rem;color:var(--muted)}
+/* torta */
+.torta-box{display:grid;grid-template-columns:minmax(0,1fr) 12rem;gap:1.2rem;align-items:center}
+.torta-box label{display:grid;grid-template-columns:7rem minmax(0,1fr) 3.2rem;gap:.6rem;align-items:center;font:600 1.08rem var(--cond)}
+.torta-box input[type=range]{width:100%}
+.torta svg{width:100%;max-width:220px;height:auto;display:block;margin:0 auto}
+.cifre{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));gap:.6rem}
+.cifre label{display:grid;gap:.2rem;font:600 1.02rem var(--cond)}
+.uscita{border:2px solid var(--ink)}
+.stampa{margin-top:2.5rem;display:flex;flex-wrap:wrap;gap:.6rem}
+footer.crediti{border-top:1px solid var(--line);margin-top:2.5rem;padding-top:1rem;font-size:.92rem;color:var(--muted);display:grid;gap:.35rem}
+@media (max-width:760px){.carta-box,.torta-box{grid-template-columns:1fr!important}.righe li{grid-template-columns:1fr}.righe select{width:100%;max-width:100%}.testo-buchi select{max-width:100%}}
+@media print{
+  body{background:#fff;font-size:11pt}.lnav,.comandi,.video .schermo,.stampa,.zm{display:none!important}
+  .card{break-inside:avoid;border-color:#999}details.rivela{display:none}
+}
+
+.striscia{display:flex;flex-wrap:wrap;gap:.35rem;list-style:none;margin:.2rem 0 0;padding:0}
+.striscia li{display:flex;align-items:center;gap:.35rem;font:600 .95rem var(--cond);border:1px solid var(--line);border-radius:999px;padding:.12rem .65rem .12rem .2rem;background:var(--paper);color:var(--muted)}
+.striscia li .ic{width:1.7rem;height:1.7rem;border-radius:50%;display:grid;place-items:center;background:var(--line);color:#fff}
+.striscia li.si{color:var(--ink)} .striscia li.si .ic{background:var(--c)}
+.striscia li.nuovo{border:2px solid var(--c);color:var(--ink)}
+.striscia li.nuovo::after{content:"nuovo";font:700 .75rem var(--cond);text-transform:uppercase;letter-spacing:.06em;color:var(--c)}
+.striscia li.no{opacity:.55}
+.ic svg,.tit-el svg{width:1.05rem;height:1.05rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tit-el{display:inline-flex;align-items:center;gap:.45rem;font:700 .98rem var(--cond);letter-spacing:.05em;text-transform:uppercase;color:var(--c)}
+.tit-el .ic{width:1.9rem;height:1.9rem;border-radius:50%;display:grid;place-items:center;background:var(--c);color:#fff}
+.blocco-el{border-left:6px solid var(--c);padding-left:1rem;margin-top:2.4rem;display:grid;gap:.2rem}
+.blocco-el h2{font-size:clamp(1.8rem,4.5vw,2.4rem)}
+.spiega{background:var(--paper);border:2px solid var(--c);border-radius:10px;padding:1rem 1.2rem;display:grid;gap:.6rem}
+.spiega h3{font-size:1.4rem}
+.spiega ul{margin:0;padding-left:1.2rem;display:grid;gap:.25rem}
+.parola{font-weight:700;color:var(--c)}
+.esempio{background:var(--bg);border:1px dashed var(--c);border-radius:10px;padding:.9rem 1.1rem;display:grid;gap:.5rem}
+.esempio .et{font:700 .95rem var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+.esempio ol{margin:0;padding-left:1.3rem;display:grid;gap:.35rem}
+.passo-b{font-weight:700}
+.esempio .carta .reg{pointer-events:none}
+details.facoltativo{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:.6rem 1rem;margin-top:1rem}
+details.facoltativo > summary{font:700 1.2rem var(--cond);cursor:pointer}
+details.facoltativo > *:not(summary){margin-top:.8rem}
+.ora{max-width:none;margin:2.8rem 0 .2rem;font:700 1rem var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--warm);border-top:4px solid var(--ink);padding-top:.6rem}
+
+.corpo-lezione{display:grid;grid-template-columns:268px minmax(0,1fr);align-items:start;gap:0 1.6rem;max-width:84rem;margin:0 auto;padding:0 16px}
+nav.indice{position:sticky;top:12px;align-self:start;display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:24px 12px 24px 0;max-height:calc(100vh - 24px);overflow-y:auto}
+.indice-testa{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.indice-titolo{margin:0;font:700 .95rem var(--cond);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.indice-ora{margin:.5rem 0 -2px;font:700 .9rem var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--warm)}
+a.voce{display:flex;align-items:center;min-height:54px;padding:4px 12px 4px 4px;border-radius:999px 8px 8px 999px;background:var(--c);color:#fff;text-decoration:none;font:700 1.02rem/1.1 var(--cond);text-transform:uppercase;letter-spacing:.02em;transition:transform .15s,box-shadow .15s}
+a.voce .tondo{margin-right:10px;flex:none;width:46px;height:46px;border-radius:50%;background:#e3eeee;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+a.voce svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+a.voce:hover{transform:translateX(4px)}
+a.voce[aria-current="true"]{transform:translateX(8px);box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--ink)}
+a.voce:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+main.parti{min-width:0;padding:12px 0 24px}
+section.parte > .card:first-child,section.parte > .blocco-el:first-child{margin-top:12px}
+.passo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:30px 0 6px;padding-top:18px;border-top:1px solid var(--line)}
+.passo a{display:flex;flex-direction:column;gap:2px;padding:10px 16px;border:1px solid var(--line);border-left:6px solid var(--c);border-radius:12px;text-decoration:none;color:var(--ink);background:var(--paper)}
+.passo a.passo-dopo{grid-column:2;text-align:right;border-left-width:1px;border-right:6px solid var(--c)}
+.passo a:hover{border-color:var(--c)}
+.passo-lab{font:700 .9rem var(--cond);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.passo-tit{font:700 1.15rem/1.2 var(--cond)}
+.indice-riduci{display:none}
+.wrap.testa-wrap{max-width:84rem;padding-bottom:0}
+.testa-wrap header.testa{margin-bottom:.4rem}
+.dopo-lezione{max-width:84rem;margin:0 auto;padding:0 16px 3rem}
+@media (min-width:961px){
+  .indice-riduci{display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--muted);font:700 1rem/1 system-ui,sans-serif;cursor:pointer;padding:0}
+  .corpo-lezione{transition:grid-template-columns .2s}
+  .corpo-lezione.indice-ridotto{grid-template-columns:84px minmax(0,1fr)}
+  .indice-ridotto nav.indice{overflow:visible;z-index:20;gap:8px}
+  .indice-ridotto .indice-testa{justify-content:center;width:52px}
+  .indice-ridotto .indice-titolo,.indice-ridotto .indice-ora{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .indice-ridotto a.voce{position:relative;width:52px;min-height:52px;padding:4px;justify-content:center;border-radius:999px}
+  .indice-ridotto a.voce .tondo{margin-right:0}
+  .indice-ridotto a.voce:hover{transform:none}
+  .indice-ridotto a.voce .nome{position:absolute;left:62px;top:50%;transform:translateY(-50%);white-space:nowrap;background:#23262a;color:#fff;padding:7px 12px;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .12s;z-index:30}
+  .indice-ridotto a.voce:hover .nome,.indice-ridotto a.voce:focus .nome{opacity:1}
+}
+@media (max-width:960px){
+  html{scroll-padding-bottom:84px}
+  .corpo-lezione{display:block}
+  nav.indice{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:90;grid-auto-flow:column;grid-auto-columns:max-content;grid-template-columns:none;overflow-x:auto;overflow-y:hidden;max-height:none;gap:8px;padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));background:var(--paper);border-top:1px solid var(--line);box-shadow:0 -4px 14px rgba(0,0,0,.12)}
+  .indice-testa,.indice-ora{display:none}
+  a.voce{flex:none;min-height:40px;padding:3px 12px 3px 3px;font-size:.88rem;white-space:nowrap}
+  a.voce .tondo{width:34px;height:34px;border-width:2px}
+  a.voce svg{width:18px;height:18px}
+  a.voce:hover,a.voce[aria-current="true"]{transform:none}
+  .dopo-lezione{padding-bottom:90px}
+}
+@media (max-width:600px){.passo{grid-template-columns:1fr}.passo a.passo-dopo{grid-column:auto}}
+@media print{nav.indice,.passo{display:none!important}section.parte[hidden]{display:block!important}.corpo-lezione{display:block}}
+
+table.piano{width:100%;border-collapse:collapse;margin:.5rem 0;font-size:.98rem;background:var(--paper)}
+table.piano th,table.piano td{border:1px solid var(--line);padding:.4rem .55rem;text-align:left;vertical-align:top}
+table.piano th{font:700 1.02rem var(--cond);background:var(--bg)}
+.riquadro{border:2px solid var(--ink);border-radius:8px;padding:.7rem .9rem;background:var(--paper)}
+.wrap ul,.wrap ol{padding-left:1.3rem} .wrap li{margin:.25rem 0}
+h3.p{font-size:1.45rem;margin-top:1.4rem}
+@media (max-width:700px){table.piano{display:block;overflow-x:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="lnav"><a href="index.html">← L'Italia settentrionale</a></nav>
+<header class="testa"><div class="eyebrow">Per l'insegnante</div><h1>Piano delle <span>lezioni</span></h1><p class="lede">Nove tappe, diciotto lezioni da 50 minuti. Le tappe 1 e 2 sono descritte minuto per minuto; dalla 3 in poi ogni regione segue lo stesso schema. Questa pagina contiene le soluzioni: se il repository è pubblico, valuta se tenerla fuori dal sito.</p></header>
+<div class="riquadro"><p><b>Classe:</b> prima · <b>Durata:</b> 18 × 50 minuti · <b>Materiali:</b> libro, LIM, schede stampate.</p><p><b>Riferimento:</b> nuove Indicazioni nazionali per il primo ciclo (Gazzetta Ufficiale, gennaio 2026), in vigore per le classi prime dall'a.s. 2026/27 — nucleo sulle regioni italiane come sistemi territoriali. <i>Inserire qui il testo esatto dell'obiettivo dal documento ufficiale.</i></p></div>
+<h3 class="p">Il principio del percorso</h3><p>Ogni elemento si usa solo dopo averlo spiegato, con lo stesso schema: <b>spiegazione breve → esempio svolto → «ora tocca a te» → pratica su altre regioni</b>. Così, per esempio, i settori dell'economia arrivano con la Lombardia, e solo allora si torna alle pagine B124 del Piemonte. Le scelte che riducono il carico cognitivo: una sola fonte per ogni compito (la carta sullo schermo <i>oppure</i> il libro), quattro o cinque formati di attività che si ripetono, domanda guida prima di ogni video, approfondimenti facoltativi.</p><table class="piano"><tr><th>Elemento</th><th>Tappa in cui si spiega</th></tr><tr><td>Dove si trova</td><td>Italia settentrionale</td></tr><tr><td>Il paesaggio</td><td>Italia settentrionale</td></tr><tr><td>Il territorio</td><td>Piemonte</td></tr><tr><td>Le acque</td><td>Piemonte</td></tr><tr><td>Il nome e la storia</td><td>Piemonte</td></tr><tr><td>Clima e ambiente</td><td>Valle d'Aosta</td></tr><tr><td>L'economia</td><td>Lombardia</td></tr><tr><td>Popolazione e città</td><td>Liguria</td></tr><tr><td>Vie di comunicazione</td><td>Trentino-Alto Adige</td></tr><tr><td>Beni culturali</td><td>Veneto</td></tr></table>
+<h3 class="p">Difficoltà prevedibili</h3><table class="piano"><tr><th>Che cosa fanno</th><th>Perché</th><th>Mossa del docente</th></tr><tr><td>Confondono destra e sinistra del fiume guardando la carta.</td><td>Sulla carta il Po va verso destra; «destra» e «sinistra» del fiume sembrano «sotto» e «sopra».</td><td>Far girare i ragazzi verso est (verso la foce) e alzare il braccio sinistro: è il nord, le Alpi.</td></tr><tr><td>Dicono «confina con il mare».</td><td>Mescolano la seconda e la terza domanda.</td><td>Ricordare che si confina con regioni e Stati; il mare «bagna».</td></tr><tr><td>Esitano su alpeggio e laguna (naturale o costruito?).</td><td>Sono paesaggi usati dalle persone ma con elementi naturali prevalenti.</td><td>Chiedere: «Se le persone se ne andassero, il paesaggio resterebbe com'è?»</td></tr></table>
+<h3 class="p">Lessico</h3><p><b>Tappa 1:</b> confine · Stato estero · sbocco sul mare · paesaggio · elemento naturale · elemento umano · risorgive. <b>Tappa 2:</b> fascia · montagna, collina, pianura · grafico a torta · sorgente · foce · affluente di destra e di sinistra.</p>
+<h3 class="p">Lezione 1 · Dove si trova (B116–B117)</h3><table class="piano"><tr><th>Min.</th><th>Attività</th><th>Modalità</th><th>Soluzioni</th></tr><tr><td>6'</td><td>Carta muta: trova le regioni</td><td>Alla LIM, un alunno alla volta.</td><td>Otto regioni.</td></tr><tr><td>10'</td><td>Spiegazione «Dove si trova» + esempio svolto del Veneto</td><td>Docente alla LIM; i ragazzi seguono sulla carta.</td><td>Le tre domande: parte d'Italia, confini (regioni e Stati), mare.</td></tr><tr><td>7'</td><td>Ora tocca a te: la Lombardia</td><td>Da soli.</td><td>Piemonte, Emilia-Romagna, Veneto, Trentino-Alto Adige · settentrionale · Svizzera · nessuno sbocco sul mare.</td></tr><tr><td>12'</td><td>Tre missioni su tutto il Nord</td><td>A coppie.</td><td>Stati esteri: tutte tranne l'Emilia-Romagna · senza mare: VdA, Piemonte, Lombardia, TAA · Adriatico: Veneto, FVG, Emilia-Romagna.</td></tr><tr><td>6'</td><td>Il Nord in tre righe (B116, riquadro)</td><td>Da soli.</td><td>arco alpino · Pianura Padana · Mar Ligure · Mare Adriatico.</td></tr><tr><td>9'</td><td>Biglietto d'uscita (Emilia-Romagna) e correzione</td><td>Da soli, poi due letture.</td><td>Risposta modello nella pagina.</td></tr></table>
+<h3 class="p">Lezione 2 · Il paesaggio (B118–B121)</h3><table class="piano"><tr><th>Min.</th><th>Attività</th><th>Modalità</th><th>Soluzioni</th></tr><tr><td>4'</td><td>Video «I Paesaggi» (HUB Scuola) con domanda guida</td><td>Classe.</td><td>Elementi naturali e umani.</td></tr><tr><td>8'</td><td>Spiegazione «Il paesaggio» + esempio svolto della risaia</td><td>Docente.</td><td>Le tre domande: che cosa vedo, dove, come trasformato.</td></tr><tr><td>5'</td><td>Indovina gli altri sette paesaggi</td><td>A coppie.</td><td>Nell'ordine: metropoli · colline a vite · alpeggio · monocoltura · città diffusa · altopiano carsico · laguna.</td></tr><tr><td>6'</td><td>Dove sono le foto? (carta con il punto)</td><td>A coppie.</td><td>Barbaresco: Piemonte · Alpe di Siusi: TAA · Goriuda: FVG · Torcello: Veneto.</td></tr><tr><td>9'</td><td>Naturale o costruito? (B118–B121)</td><td>A coppie.</td><td>Costruiti: risaia, metropoli, colline a vite, monocoltura, città diffusa · naturali: alpeggio, Carso, laguna.</td></tr><tr><td>8'</td><td>Spiegalo con parole tue (una domanda)</td><td>Da soli.</td><td>Risposte modello nella pagina.</td></tr><tr><td>10'</td><td>Biglietto d'uscita e correzione</td><td>Da soli.</td><td>Un paesaggio con le tre domande.</td></tr></table>
+<h3 class="p">Lezione 3 · Piemonte: ripasso e territorio (B122–B123)</h3><table class="piano"><tr><th>Min.</th><th>Attività</th><th>Modalità</th><th>Soluzioni</th></tr><tr><td>6'</td><td>Ripasso: dove si trova il Piemonte</td><td>Da soli.</td><td>Valle d'Aosta, Lombardia, Emilia-Romagna, Liguria · settentrionale · Francia e Svizzera · nessuno sbocco.</td></tr><tr><td>3'</td><td>Ripasso: due paesaggi del Piemonte</td><td>Da soli.</td><td>Risaia · colline coltivate a vite.</td></tr><tr><td>5'</td><td>Video «Piemonte» con domanda guida</td><td>Classe.</td><td>Montagne, colline e pianura.</td></tr><tr><td>8'</td><td>Spiegazione «Il territorio» + esempio svolto della torta dell'Emilia-Romagna</td><td>Docente.</td><td>La fetta più grande dice com'è soprattutto la regione.</td></tr><tr><td>7'</td><td>Torta del Piemonte: previsione e frase</td><td>Da soli.</td><td>Montagna 43 · collina 30 · pianura 27: «soprattutto montuoso».</td></tr><tr><td>9'</td><td>Le tre fasce (B123)</td><td>Da soli.</td><td>Monviso: Cozie · Gran Paradiso: Graie · Monte Rosa: Pennine · Appennino Ligure · Langhe e Monferrato · Po e affluenti.</td></tr><tr><td>12'</td><td>Biglietto d'uscita, correzione, sintesi alla lavagna</td><td>Da soli, poi classe.</td><td>Vedi criteri.</td></tr></table>
+<h3 class="p">Lezione 4 · Piemonte: acque, nome e storia (B122–B123)</h3><table class="piano"><tr><th>Min.</th><th>Attività</th><th>Modalità</th><th>Soluzioni</th></tr><tr><td>4'</td><td>Video «Paesaggi di fiume» con domanda guida</td><td>Classe.</td><td>Sorgente e foce.</td></tr><tr><td>10'</td><td>Spiegazione «Le acque» + esempio svolto (schema del Po)</td><td>Docente; far girare i ragazzi verso est.</td><td>Dora Baltea: sinistra · Tanaro: destra.</td></tr><tr><td>9'</td><td>Destra o sinistra? Laghi e coste</td><td>A coppie.</td><td>Dora Riparia, Sesia, Ticino: sinistra · Scrivia: destra · Lago d'Orta · sponda occidentale del Maggiore · nessuna costa.</td></tr><tr><td>6'</td><td>Spiegazione «Il nome e la storia» + esempio svolto</td><td>Docente.</td><td>«Ai piedi delle montagne».</td></tr><tr><td>7'</td><td>La storia del Piemonte (B122)</td><td>Da soli.</td><td>I Savoia · i valichi alpini · Cavour · il primo Parlamento del Regno d'Italia.</td></tr><tr><td>6'</td><td>Biglietto d'uscita</td><td>Da soli.</td><td>Vedi criteri.</td></tr><tr><td>8'</td><td>Scheda del Piemonte: le cinque sezioni aperte</td><td>Gruppi del cartellone.</td><td>—</td></tr></table>
+<h3 class="p">Tappe 3–9: lo schema di ogni regione</h3><p>Ogni tappa dura due lezioni da 50 minuti. <b>Prima ora:</b> video «Viaggio in…» con domanda guida (3'), un riquadro di ripasso per ogni elemento già spiegato (3–6' ciascuno, sempre con gli stessi formati: carta, menu, classifica), biglietto d'uscita (5'). <b>Seconda ora:</b> elemento nuovo — video con domanda guida (3–4'), spiegazione ed esempio svolto alla LIM (10'), «tocca a te» (10–12'), «torna indietro» alle regioni già studiate (8–10'), biglietto (5'), scheda per il cartellone (resto). Le soluzioni sono nelle attività stesse, che si correggono da sole; le risposte aperte hanno un modello sotto «Controlla la risposta».</p><table class="piano"><tr><th>Tappa</th><th>Elemento nuovo</th><th>Attività principali</th><th>Note e lessico</th></tr><tr><td>3 · Valle d'Aosta (B126–B127)</td><td>Clima e ambiente</td><td>Esempio svolto: il clima della Valle d'Aosta. Tocca a te: il Parco del Gran Paradiso. Torna indietro: il clima del Piemonte (B123).</td><td>Nel ripasso «Il nome e la storia» si introduce <i>regione a statuto speciale</i> e <i>bilinguismo</i>. Lessico: tempo/clima, precipitazioni, clima alpino e padano, escursione termica, ambiente naturale, parco nazionale.</td></tr><tr><td>4 · Lombardia (B128–B131)</td><td>L'economia</td><td>Esempio svolto: la fontina della Valle d'Aosta (dal pascolo al negozio). Tocca a te: classificare l'economia lombarda. Torna indietro: Piemonte (B124) e Valle d'Aosta (B127).</td><td>Nel ripasso delle acque: <i>emissario</i>. Lessico: settore primario, secondario, terziario, materie prime, distretto.</td></tr><tr><td>5 · Liguria (B132–B133)</td><td>Popolazione e città</td><td>Esempio svolto: la densità della Valle d'Aosta (122 714 ÷ 3261 ≈ 38). Tocca a te: densità e città della Liguria. Torna indietro: ordinare per densità VdA, Piemonte, Liguria, Lombardia.</td><td>Nel ripasso: i terrazzamenti come paesaggio nuovo; clima tirrenico, macchia mediterranea. Lessico: abitanti, superficie, densità, capoluogo.</td></tr><tr><td>6 · Trentino-Alto Adige (B134–B135)</td><td>Vie di comunicazione</td><td>Esempio svolto: le vie della Valle d'Aosta (autostrada, trafori, valichi). Tocca a te: il Brennero. Torna indietro: Piemonte, Lombardia, Liguria.</td><td>Nel ripasso dell'economia si introduce il <i>PIL pro capite</i>; nelle acque <i>immissario</i>. Lessico: infrastruttura, direttrice, nodo, valico, traforo.</td></tr><tr><td>7 · Veneto (B136–B139)</td><td>Beni culturali</td><td>Esempio svolto: i beni culturali della Liguria. Tocca a te: Venezia, Palladio, Verona, l'orto botanico di Padova. Torna indietro: di quale regione è? e quali sono UNESCO.</td><td>Nella tabella il capoluogo più popoloso è Verona, non Venezia: buona domanda da discutere. Lessico: bene culturale, centro storico, UNESCO, Patrimonio dell'Umanità.</td></tr><tr><td>8 · Friuli-Venezia Giulia (B140–B141)</td><td>Nessuno: tutti gli elementi</td><td>Un riquadro per ognuno dei dieci elementi; confronto con il Veneto.</td><td>Il Timavo (40 km sotto terra) e la bora sono buoni agganci. Statuto speciale per le lingue: italiano, friulano, tedesco, sloveno.</td></tr><tr><td>9 · Emilia-Romagna (B142–B145)</td><td>Nessuno: tutti gli elementi</td><td>Un riquadro per ognuno dei dieci elementi; grande ripasso sulla carta (statuto speciale, più popolosa, più piccola, PIL, Po, regioni senza pianura).</td><td>Il grafico a torta era già l'esempio svolto della tappa 2. San Marino: Stato indipendente dentro la regione.</td></tr></table>
+<h3 class="p">Biglietti d'uscita: criteri di riuscita</h3><ul><li>Usa le tre domande (parte d'Italia, confini, mare) con le parole giuste: «confina con», «è bagnata da».</li><li>Descrive un paesaggio distinguendo ciò che è naturale da ciò che hanno fatto le persone.</li><li>Legge una torta: indica la fascia più grande e scrive la frase «soprattutto…».</li><li>Classifica un affluente spiegando la regola (guardare verso la foce).</li></ul>
+<h3 class="p">Note</h3><ul><li><b>Liguria e confini di Stato.</b> Nell'esercizio 2 di pag. B116 la soluzione del libro non elenca la Liguria, che confina con la Francia: nella pagina è giusta. L'Emilia-Romagna confina con San Marino, Stato indipendente: se ne può parlare quando esce la domanda.</li><li><b>Pagine rimandate.</b> Le pagine di una regione che parlano di elementi non ancora spiegati si riprendono nella parte «Torna indietro» delle tappe successive: per esempio B124–B125 del Piemonte in Lombardia, Liguria, Trentino-Alto Adige e Veneto.</li><li><b>Da non togliere</b> se si accorcia: l'esempio svolto di ogni elemento e l'«ora tocca a te» subito dopo.</li></ul>
+<h3 class="p">Griglia di osservazione</h3><table class="piano"><tr><th>Alunno</th><th>Che cosa mostra il suo ragionamento</th><th>Mossa del docente</th></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></table>
+<p><b>Indicatori:</b> usa la carta per rispondere · applica le tre domande senza promemoria · trova nel libro il paragrafo giusto · spiega con parole proprie · usa il lessico dell'elemento.</p>
+</div>
+<script src="../../../../assets/barra.js"></script>
+</body>
+</html>

@@ -145,14 +145,35 @@ const MODULI = [
     classe: "prima",
     numero: "II",
     titolo: "Il paesaggio: clima, rilievi e acque",
-    descrizione: "Che cos'è il paesaggio, i fenomeni che lo modificano, il clima, i rilievi e le acque. Primo quadrimestre, in collegamento con Scienze.",
+    descrizione: "Che cos'è il paesaggio, i fenomeni che lo modificano, il clima, i rilievi e le acque. Percorso progressivo in sei lezioni: otto «lenti» per leggere un paesaggio. Primo quadrimestre, in collegamento con Scienze.",
+    link: "geografia/prima/paesaggio/index.html",
     lezioni: [
-      { titolo: "Il paesaggio e la sua evoluzione", libri: ["paesaggi"], pagine: "A34–A37", attivita: [] },
-      { titolo: "Le forze che modificano il paesaggio", libri: ["paesaggi"], pagine: "A38–A41", descrizione: "Fenomeni che hanno origine all'interno e all'esterno della Terra.", attivita: [] },
-      { titolo: "Il clima", dipartimento: true, libri: ["paesaggi"], pagine: "A44–A47", descrizione: "Il clima e gli ambienti naturali.", attivita: [] },
-      { titolo: "L'inquinamento", dipartimento: true, libri: ["paesaggi"], pagine: "A48–A49", descrizione: "I problemi dell'ambiente.", attivita: [] },
-      { titolo: "I rilievi", libri: ["paesaggi"], pagine: "A61–A71", descrizione: "Montagne, colline, pianure; gli esseri umani modificano i rilievi.", attivita: [] },
-      { titolo: "Le acque", libri: ["paesaggi"], pagine: "A81–A95", descrizione: "Ghiacciai, fiumi, laghi, mari e coste; gli esseri umani modificano i corsi d'acqua e le coste.", attivita: [] },
+      { titolo: "Il paesaggio e la sua evoluzione", libri: ["paesaggi"], pagine: "A33–A37", descrizione: "Lezione 1 del percorso a lenti: elementi naturali e antropici, le quattro sfere, l'ecosistema, i fattori che cambiano il paesaggio, l'impronta ecologica.", link: "geografia/prima/paesaggio/attivita/paesaggio.html", data: "2026-11-04", attivita: [
+        { tipo: "Attività", titolo: "Naturale o antropico? Come cambia il paesaggio", descrizione: "Due ore: lenti «Naturale o antropico» e «Come cambia il paesaggio».", link: "geografia/prima/paesaggio/attivita/paesaggio.html", data: "2026-11-04" },
+        { tipo: "Scheda", titolo: "Scheda: il paesaggio e la sua evoluzione", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-paesaggio.html", data: "2026-11-04" }
+      ] },
+      { titolo: "Le forze che modificano il paesaggio", libri: ["paesaggi"], pagine: "A38–A41", descrizione: "Fenomeni che hanno origine all'interno e all'esterno della Terra.", link: "geografia/prima/paesaggio/attivita/forze.html", data: "2026-11-04", attivita: [
+        { tipo: "Attività", titolo: "Le forze da dentro e da fuori", descrizione: "Due ore: vulcani, terremoti, orogenesi; erosione, trasporto, deposito.", link: "geografia/prima/paesaggio/attivita/forze.html", data: "2026-11-04" },
+        { tipo: "Scheda", titolo: "Scheda: le forze della Terra", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-forze.html", data: "2026-11-04" }
+      ] },
+      { titolo: "Il clima", dipartimento: true, libri: ["paesaggi"], pagine: "A44–A47", descrizione: "Il clima e gli ambienti naturali.", link: "geografia/prima/paesaggio/attivita/clima-e-ambienti.html", data: "2026-11-04", attivita: [
+        { tipo: "Attività", titolo: "Il clima e gli ambienti naturali", descrizione: "Due ore: elementi e fattori del clima, escursione termica; habitat, biodiversità, vegetazione e altitudine.", link: "geografia/prima/paesaggio/attivita/clima-e-ambienti.html", data: "2026-11-04" },
+        { tipo: "Scheda", titolo: "Scheda: clima e ambienti", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-clima-e-ambienti.html", data: "2026-11-04" }
+      ] },
+      { titolo: "L'inquinamento", dipartimento: true, libri: ["paesaggi"], pagine: "A48–A49", descrizione: "I problemi dell'ambiente.", link: "geografia/prima/paesaggio/attivita/problemi-ambiente.html", data: "2026-11-04", attivita: [
+        { tipo: "Attività", titolo: "I problemi dell'ambiente", descrizione: "Un'ora: inquinamento, riscaldamento globale, cementificazione, disboscamento; sviluppo sostenibile.", link: "geografia/prima/paesaggio/attivita/problemi-ambiente.html", data: "2026-11-04" },
+        { tipo: "Scheda", titolo: "Scheda: catene di cause e conseguenze", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-problemi-ambiente.html", data: "2026-11-04" }
+      ] },
+      { titolo: "I rilievi", libri: ["paesaggi"], pagine: "A61–A71", descrizione: "Montagne, colline, pianure; gli esseri umani modificano i rilievi.", link: "geografia/prima/paesaggio/attivita/rilievi.html", data: "2026-11-04", attivita: [
+        { tipo: "Attività", titolo: "I rilievi", descrizione: "Quattro ore: altitudine; montagne; origine di colline e pianure; le persone e i rilievi.", link: "geografia/prima/paesaggio/attivita/rilievi.html", data: "2026-11-04" },
+        { tipo: "Scheda", titolo: "Scheda: i rilievi", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-rilievi.html", data: "2026-11-04" }
+      ] },
+      { titolo: "Le acque", libri: ["paesaggi"], pagine: "A81–A95", descrizione: "Ghiacciai, fiumi, laghi, mari e coste; gli esseri umani modificano i corsi d'acqua e le coste.", link: "geografia/prima/paesaggio/attivita/acque.html", data: "2026-11-04", attivita: [
+        { tipo: "Attività", titolo: "Le acque", descrizione: "Quattro ore: ciclo dell'acqua e ghiacciai; fiumi; laghi, mari e coste; le persone e le acque.", link: "geografia/prima/paesaggio/attivita/acque.html", data: "2026-11-04" },
+        { tipo: "Missione finale", titolo: "Leggi un paesaggio con otto lenti", descrizione: "Sintesi del modulo.", link: "geografia/prima/paesaggio/attivita/acque.html#missione", data: "2026-11-04" },
+        { tipo: "Scheda", titolo: "Scheda: le acque", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-acque.html", data: "2026-11-04" },
+        { tipo: "Scheda", titolo: "Leggo un paesaggio", descrizione: "Da stampare: le otto lenti su un paesaggio scelto dagli alunni.", link: "geografia/prima/paesaggio/schede/scheda-leggo-un-paesaggio.html", data: "2026-11-04" }
+      ] },
       { titolo: "Le risorse idriche", dipartimento: true, libri: ["paesaggi"], pagine: "A105–A110", descrizione: "Dossier: l'acqua.", attivita: [] }
     ]
   },
@@ -196,7 +217,24 @@ const MODULI = [
     descrizione: "Secondo quadrimestre, in collegamento con Storia.",
     lezioni: [
       { titolo: "Come si studia una regione italiana", dipartimento: true, libri: ["paesaggi"], pagine: "B114–B115", attivita: [] },
-      { titolo: "L'Italia settentrionale", dipartimento: true, libri: ["paesaggi"], pagine: "B116–B145", attivita: [] },
+      {
+        titolo: "L'Italia settentrionale", dipartimento: true, libri: ["paesaggi"], pagine: "B116–B145",
+        descrizione: "Percorso progressivo: ogni tappa spiega uno o due elementi della regione (dove si trova, paesaggio, territorio, acque, nome e storia, clima, economia…) e da lì in poi li usa per tutte le regioni.",
+        link: "geografia/prima/regioni-italiane/italia-settentrionale/index.html",
+        data: "2026-11-03",
+        attivita: [
+          { tipo: "Tappa 1", titolo: "L'Italia settentrionale: dove si trova e i paesaggi", descrizione: "Elementi nuovi: Dove si trova e Il paesaggio (B116–B121).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/territorio-e-paesaggi.html", data: "2026-11-03" },
+          { tipo: "Tappa 2", titolo: "Il Piemonte", descrizione: "Elementi nuovi: Il territorio, Le acque, Il nome e la storia (B122–B123).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/piemonte.html", data: "2026-11-03" },
+          { tipo: "Tappa 3", titolo: "La Valle d'Aosta", descrizione: "Elemento nuovo: Clima e ambiente (B126–B127).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/valle-d-aosta.html", data: "2026-11-03" },
+          { tipo: "Tappa 4", titolo: "La Lombardia", descrizione: "Elemento nuovo: L'economia (B128–B131).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/lombardia.html", data: "2026-11-03" },
+          { tipo: "Tappa 5", titolo: "La Liguria", descrizione: "Elemento nuovo: Popolazione e città (B132–B133).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/liguria.html", data: "2026-11-03" },
+          { tipo: "Tappa 6", titolo: "Il Trentino-Alto Adige", descrizione: "Elemento nuovo: Vie di comunicazione (B134–B135).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/trentino-alto-adige.html", data: "2026-11-03" },
+          { tipo: "Tappa 7", titolo: "Il Veneto", descrizione: "Elemento nuovo: Beni culturali (B136–B139).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/veneto.html", data: "2026-11-03" },
+          { tipo: "Tappa 8", titolo: "Il Friuli-Venezia Giulia", descrizione: "Tutti gli elementi e il confronto con il Veneto (B140–B141).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/friuli-venezia-giulia.html", data: "2026-11-03" },
+          { tipo: "Tappa 9", titolo: "L'Emilia-Romagna", descrizione: "Tutti gli elementi e il confronto finale tra le regioni del Nord (B142–B145).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/emilia-romagna.html", data: "2026-11-03" },
+          { tipo: "Schede", titolo: "Schede delle regioni per il cartellone", descrizione: "Una scheda per regione: le sezioni si aprono un elemento alla volta.", link: "geografia/prima/regioni-italiane/italia-settentrionale/index.html#schede", data: "2026-11-03" }
+        ]
+      },
       { titolo: "L'Italia centrale", dipartimento: true, libri: ["paesaggi"], pagine: "B146–B161", attivita: [] },
       { titolo: "L'Italia meridionale e insulare", dipartimento: true, libri: ["paesaggi"], pagine: "B162–B189", attivita: [] }
     ]

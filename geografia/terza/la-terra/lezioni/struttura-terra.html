@@ -43,12 +43,13 @@ section.part{display:grid;gap:12px}
 @media (max-width:920px){.grid{grid-template-columns:1fr}}
 .scene{background:var(--scene);border-radius:16px;overflow:hidden;min-width:0}
 .scene canvas{width:100%;display:block}
-#cut{aspect-ratio:1/1;cursor:pointer}
+#cut{aspect-ratio:1.05/1;cursor:pointer}
 #lens{aspect-ratio:2.2/1}
 #plates{aspect-ratio:2.3/1}
 #form{aspect-ratio:1.6/1}
 .cap{color:#c9d5e3;font-size:.85rem;padding:9px 14px;background:#101c31}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.ltext{margin:0;font-size:1rem;line-height:1.6}
 .card h3{font-family:var(--display);font-weight:800;font-size:1.35rem;margin:0}
 .kind{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--accent)}
 .depth{display:grid;gap:4px}
@@ -130,26 +131,22 @@ details p{margin:6px 0 0;color:var(--muted)}
     <h2 class="sec">1. Viaggio verso il centro della Terra</h2>
     <div class="grid">
       <div class="scene">
-        <canvas id="cut" role="img" aria-label="Spaccato della Terra disegnato in scala: crosta, mantello, nucleo esterno e nucleo interno; una sonda scende verso il centro"></canvas>
-        <div class="cap">Spaccato in scala: la crosta è così sottile che qui quasi non si vede. Clicca su uno strato per raggiungerlo.</div>
+        <canvas id="cut" role="img" aria-label="Un quarto di Terra e, accanto, la colonna degli strati alla stessa scala: crosta, mantello, nucleo esterno e nucleo interno; una lente ingrandisce i primi 400 km; una sonda scende dal polo verso il centro"></canvas>
+        <div class="cap">In alto un quarto di Terra e, accanto, gli stessi strati proiettati in una colonna alla stessa scala; sotto, la lente sui primi 400 km. Clicca su uno strato o sul suo nome per leggerne la descrizione.</div>
       </div>
       <div style="display:grid;gap:12px;min-width:0">
         <div class="card">
-          <div class="depth">
+          <div><div class="kind" id="lkind"></div><h3 id="lname"></h3></div>
+          <p class="ltext" id="ltext"></p>
+          <div class="depth" style="border-top:1px solid var(--line);padding-top:12px">
             <label for="dep" class="kind">Profondità</label>
             <div class="val" id="depv">0 km</div>
             <input id="dep" type="range" min="0" max="6371" step="1" value="0">
             <div class="ticks"><span>superficie</span><span>3000 km</span><span>centro, 6371 km</span></div>
           </div>
-          <div class="chips" id="chips"></div>
-          <div><div class="kind" id="lkind"></div><h3 id="lname"></h3></div>
           <dl id="lfacts"></dl>
           <p class="note" id="lnote" style="color:var(--ink)"></p>
           <div><div class="kind" style="color:var(--muted)">Più si scende, più fa caldo</div><div class="heat"><i id="heat"></i></div></div>
-        </div>
-        <div class="scene">
-          <canvas id="lens" role="img" aria-label="Lente d'ingrandimento sui primi 400 km: crosta continentale e oceanica, litosfera e zona fluida del mantello"></canvas>
-          <div class="cap">La lente: i primi 400 km ingranditi. Sotto i continenti la crosta è spessa circa 35 km, sotto gli oceani solo 6-7 km.</div>
         </div>
       </div>
     </div>
@@ -236,28 +233,28 @@ function label(c,t,x,y,col,size,weight,align){ c.font=`${weight||700} ${size}px 
 
 /* ---------- 1. strati ---------- */
 const LAYERS=[
- {id:'crosta',from:0,to:35,col:'#8a5a33',name:'Crosta terrestre',kind:'Solida',
+ {id:'crosta',text:"Noi viviamo sulla crosta terrestre, il guscio più esterno e più sottile del pianeta, un po' come la crosta del pane. È fatta di rocce più leggere di quelle profonde e il suo spessore cambia da luogo a luogo: circa 35 km sotto i continenti, fino a 60-70 km sotto le grandi catene montuose, che è come se avessero radici affondate nel mantello, e appena 6-7 km sotto gli oceani. Nessuno è mai sceso molto più in basso: la perforazione più profonda arriva a circa 12 km.",from:0,to:35,col:'#8a5a33',name:'Crosta terrestre',kind:'Solida',
   facts:[['Spessore','in media 35 km sotto i continenti, 6-7 km sotto gli oceani'],['Stato','solido'],['Fa parte di','litosfera']],
   note:'È lo strato più esterno e più sottile: in proporzione è più sottile della buccia di una mela.'},
- {id:'lito',from:35,to:100,col:'#a0522d',name:'Mantello: parte rocciosa esterna',kind:'Solida',
+ {id:'lito',text:"Subito sotto la crosta c'è la parte più alta del mantello, rigida come la crosta. Insieme formano la litosfera, che non è un guscio intero ma è spezzata in tante tessere, come un enorme puzzle: sono le placche. Alcune comprendono interi continenti e oceani, come la placca africana o quella euroasiatica; altre sono più piccole, come la placca araba o quella di Nazca.",from:35,to:100,col:'#a0522d',name:'Mantello: parte rocciosa esterna',kind:'Solida',
   facts:[['Profondità','subito sotto la crosta'],['Stato','solido'],['Fa parte di','litosfera, insieme alla crosta']],
   note:'Crosta e parte rocciosa più esterna del mantello formano la litosfera, divisa in placche.'},
- {id:'fluido',from:100,to:350,col:'#f08c2e',name:'Mantello: zona fluida',kind:'Fluida',
+ {id:'fluido',text:"Più in basso il mantello è così caldo da potersi muovere lentamente, e le placche si spostano sopra di esso. Si muovono di pochi centimetri all'anno: l'Africa e il Sudamerica, per esempio, si allontanano di 2-5 cm all'anno, così ogni dieci anni la Nigeria e il Brasile sono più lontani di circa mezzo metro. Lungo i margini delle placche si concentrano terremoti e vulcani, e l'Italia si trova proprio su uno di questi margini, fra la placca africana e quella euroasiatica.",from:100,to:350,col:'#f08c2e',name:'Mantello: zona fluida',kind:'Fluida',
   facts:[['Profondità','più o meno tra 100 e 350 km'],['Stato','fluido (roccia allo stato fuso)'],['Ruolo','le placche «galleggiano» su questo strato']],
   note:'Da questa zona vengono i magmi che fuoriescono dai vulcani. I suoi movimenti spostano le placche.'},
- {id:'mantello',from:350,to:2900,col:'#c0461f',name:'Mantello profondo',kind:'Solido',
+ {id:'mantello',text:"Il mantello è l'involucro più grande della Terra. È formato da zone sovrapposte con temperatura e composizione diverse ed è attraversato da movimenti di materiale enormi e lentissimi, causati dalle differenze di calore. Come facciamo a saperlo, se nessuno ci è mai arrivato? Grazie alle onde sismiche dei terremoti più forti, che attraversano tutto il pianeta: funzionano come una radiografia che mostra ciò che è nascosto in profondità.",from:350,to:2900,col:'#c0461f',name:'Mantello profondo',kind:'Solido',
   facts:[['Profondità','fino a quasi 3000 km'],['Stato','di nuovo solido'],['Volume','il mantello è oltre l\'80% del volume della Terra']],
   note:'Il mantello è la parte più consistente della Terra.'},
- {id:'esterno',from:2900,to:5150,col:'#f4b13b',name:'Nucleo esterno',kind:'Fluido',
+ {id:'esterno',text:"Sotto il mantello si trova il nucleo esterno, fatto soprattutto di metallo fuso. È completamente liquido ed è percorso da forti correnti che lo rimescolano: sono proprio questi movimenti a produrre il campo magnetico terrestre, quello che fa funzionare la bussola.",from:2900,to:5150,col:'#f4b13b',name:'Nucleo esterno',kind:'Fluido',
   facts:[['Profondità','da circa 2900 a 5150 km'],['Stato','fluido'],['Composizione','soprattutto ferro']],
   note:'Il nucleo ha uno spessore pari a poco più della metà del raggio terrestre ed è caratterizzato da temperature altissime.'},
- {id:'interno',from:5150,to:6371,col:'#fde68a',name:'Nucleo interno',kind:'Solido',
+ {id:'interno',text:"Al centro c'è il nucleo interno, una sfera solida e densissima di ferro e nichel; secondo alcuni studiosi la sua parte più profonda sarebbe fatta di solo ferro. La temperatura arriva a circa 5000 °C, ma la pressione è così forte che il metallo non riesce a fondere.",from:5150,to:6371,col:'#fde68a',name:'Nucleo interno',kind:'Solido',
   facts:[['Profondità','da circa 5150 km fino al centro, a 6371 km'],['Stato','solido'],['Composizione','soprattutto ferro']],
   note:'È il punto più caldo della Terra, eppure è solido: lì la pressione è così grande che il ferro non riesce a fondere.'}
 ];
 let depth=0;
 const layerAt=d=>LAYERS.find(l=>d>=l.from&&d<=l.to)||LAYERS[LAYERS.length-1];
-const chips=$('chips');
+const chips=document.createElement('div'); // i tasti degli strati sono stati sostituiti dai nomi cliccabili nel disegno
 LAYERS.forEach(l=>{ const b=document.createElement('button'); b.type='button'; b.dataset.id=l.id; b.textContent=l.name.replace('Mantello: ','').replace('parte rocciosa esterna','mantello esterno').replace('zona fluida','zona fluida'); b.setAttribute('aria-pressed','false');
   b.addEventListener('click',()=>goTo((l.from+l.to)/2)); chips.append(b); });
 let target=null;
@@ -266,67 +263,99 @@ $('dep').addEventListener('input',e=>{ depth=+e.target.value; target=null; });
 function updCard(){
   const l=layerAt(depth); $('depv').textContent=Math.round(depth).toLocaleString('it-IT')+' km';
   if(document.activeElement!==$('dep')) $('dep').value=Math.round(depth);
-  $('lkind').textContent=l.kind; $('lname').textContent=l.name; $('lnote').textContent=l.note;
+  $('lkind').textContent=l.kind; $('lname').textContent=l.name; if($('ltext').dataset.id!==l.id){ $('ltext').textContent=l.text; $('ltext').dataset.id=l.id; } $('lnote').textContent=l.note;
   const dl=$('lfacts'); dl.innerHTML=''; l.facts.forEach(([k,v])=>{ const a=document.createElement('dt'), b=document.createElement('dd'); a.textContent=k; b.textContent=v; dl.append(a,b); });
   chips.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.id===l.id)));
   $('heat').style.left=(Math.pow(depth/RE,0.55)*100)+'%';
 }
 const cc=$('cut'), c=cc.getContext('2d'); let CG={};
+function lensIn(x0,y0,w,h,fs){
+  // lente: i primi 400 km, disegnata nel riquadro x0,y0,w,h
+  c.save(); c.beginPath(); c.rect(x0,y0,w,h); c.clip(); c.translate(x0,y0);
+  const top=fs*1.9, bot=4, D=400, Y=d=>top+(d/D)*(h-top-bot), mid=w*0.5;
+  c.fillStyle='#132036'; c.fillRect(0,0,w,h);
+  [[100,350,'#f08c2e'],[350,400,'#c0461f']].forEach(([a,b,col])=>{ c.fillStyle=col; c.fillRect(0,Y(a),w,Y(b)-Y(a)); });
+  c.fillStyle='#a0522d'; c.fillRect(0,Y(35),mid,Y(100)-Y(35)); c.fillRect(mid,Y(7),w-mid,Y(100)-Y(7));
+  c.fillStyle='#8a5a33'; c.fillRect(0,Y(0),mid,Y(35)-Y(0)); c.fillStyle='#7a6a55'; c.fillRect(mid,Y(0),w-mid,Y(7)-Y(0));
+  c.fillStyle='#3d86c6'; c.fillRect(mid,top-fs*0.6,w-mid,Y(0)-(top-fs*0.6)+1);
+  c.fillStyle='#6aa85f'; c.beginPath(); c.moveTo(0,Y(0)); for(let x=0;x<=mid;x+=6) c.lineTo(x,Y(0)-4-4*Math.abs(Math.sin(x*0.07))); c.lineTo(mid,Y(0)); c.closePath(); c.fill();
+  c.strokeStyle='#ffffff'; c.setLineDash([5,4]); c.lineWidth=1.2; c.beginPath(); c.moveTo(0,Y(100)); c.lineTo(w,Y(100)); c.stroke(); c.setLineDash([]);
+  const f=fs*0.85, sm=w<330; c.lineJoin='round';
+  label(c,sm?'crosta cont. ~35 km':'crosta continentale ~35 km',5,Y(17)+4,'#ffffff',f,700);
+  label(c,sm?'crosta oc. 6-7 km':'crosta oceanica 6-7 km',mid+5,Y(3.5)+f*1.4,'#ffffff',f,700);
+  label(c,'LITOSFERA (fino a ~100 km)',5,Y(70)+4,'#ffe7d1',f,800);
+  label(c,'zona fluida: le placche ci «galleggiano»',5,Y(225)+4,'#2a1200',f,800);
+  label(c,'mantello solido',5,Y(378)+4,'#ffffff',f*0.95,700);
+  c.font=`${f*0.9}px ${FB}`; c.fillStyle='rgba(235,240,250,.9)'; c.textAlign='right'; [100,200,300].forEach(d=>c.fillText(d+' km',w-4,Y(d)+4));
+  label(c,'LENTE: i primi 400 km (crosta e litosfera)',5,fs*1.15,'#ffffff',fs*0.9,800);
+  if(depth<=400){ const y=Y(depth); c.strokeStyle='#ffffff'; c.lineWidth=2; c.beginPath(); c.moveTo(0,y); c.lineTo(w,y); c.stroke(); c.fillStyle='#d62828'; c.beginPath(); c.arc(w*0.86,y,4,0,2*PI); c.fill(); }
+  c.restore(); c.strokeStyle='rgba(255,255,255,.55)'; c.lineWidth=1; c.strokeRect(x0+.5,y0+.5,w-1,h-1);
+}
+
 function drawCut(){
-  const {w,h}=fit(cc,c), fs=Math.max(10.5,Math.min(14,w/42)), R=Math.min(w,h)*0.38, cx=w*0.36, cy=h*0.55;
-  CG={R,cx,cy};
+  const {w,h}=fit(cc,c), fs=Math.max(10,Math.min(14,w/46)); c.lineJoin='round';
+  const mL=Math.max(12,w*0.03), topM=fs*2.3, sm=w<520, R=Math.min(w*(sm?0.38:0.46),(h-topM)*0.58);
+  const cx=mL+R, cy=topM+R, yT=topM;               // quarto di sfera: centro in basso a destra del quarto
+  const gap=Math.max(26,w*0.07), colX=cx+gap, colW=Math.max(fs*4.6,w*0.17);
+  const yD=d=>yT+(d/RE)*R;                         // profondità -> altezza, uguale nel quarto e nella colonna
+  CG={R,cx,cy,colX,colW,yT};
   c.fillStyle='#0d1626'; c.fillRect(0,0,w,h);
-  // atmosfera e superficie
-  const g=c.createRadialGradient(cx,cy,R,cx,cy,R*1.08); g.addColorStop(0,'rgba(120,180,255,.45)'); g.addColorStop(1,'rgba(120,180,255,0)'); c.fillStyle=g; c.beginPath(); c.arc(cx,cy,R*1.08,0,2*PI); c.fill();
-  const sg=c.createRadialGradient(cx-R*0.3,cy-R*0.3,R*0.1,cx,cy,R); sg.addColorStop(0,'#5aa6e0'); sg.addColorStop(1,'#1d4f8a'); c.fillStyle=sg; c.beginPath(); c.arc(cx,cy,R,0,2*PI); c.fill();
-  // qualche continente stilizzato
-  c.fillStyle='rgba(96,160,92,.85)'; [[-0.45,-0.1,0.28,0.18],[-0.15,0.45,0.22,0.16],[0.05,0.15,0.12,0.2],[-0.6,0.35,0.14,0.1]].forEach(([x,y,a,b])=>{ c.beginPath(); c.ellipse(cx+x*R,cy+y*R,a*R,b*R,0.4,0,2*PI); c.fill(); });
-  // spicchio tagliato (quadrante in alto a destra)
-  const a0=-PI/2, a1=0;
-  LAYERS.forEach(l=>{ const r=R*(1-l.from/RE); c.fillStyle=l.col; c.beginPath(); c.moveTo(cx,cy); c.arc(cx,cy,r,a0,a1); c.closePath(); c.fill(); });
-  c.strokeStyle='rgba(0,0,0,.25)'; c.lineWidth=1; LAYERS.forEach(l=>{ const r=R*(1-l.to/RE); if(r>1){ c.beginPath(); c.arc(cx,cy,r,a0,a1); c.stroke(); } });
-  // evidenzia lo strato attuale
-  const cur=layerAt(depth); c.strokeStyle='#ffffff'; c.lineWidth=2.5; c.beginPath(); c.arc(cx,cy,R*(1-cur.from/RE),a0,a1); c.arc(cx,cy,Math.max(0.1,R*(1-cur.to/RE)),a1,a0,true); c.closePath(); c.stroke();
-  // etichette a destra
-  const LB=[['crosta',0],['mantello',1500],['nucleo esterno',4000],['nucleo interno',5900]];
-  LB.forEach(([t,d],i)=>{ const r=R*(1-d/RE), ang=-PI/2+(0.12+i*0.12)*PI/2, px=cx+r*Math.cos(ang), py=cy+r*Math.sin(ang);
-    const lx=cx+R*1.1, ly=cy-R*0.85+i*R*0.28; c.strokeStyle='rgba(255,255,255,.7)'; c.lineWidth=1; c.beginPath(); c.moveTo(px,py); c.lineTo(lx-4,ly-4); c.stroke();
-    label(c,t,lx,ly,'#ffffff',fs,700); });
-  // sonda lungo la bisettrice
-  const ang=-PI/4, rS=R*1.02, rD=R*(1-depth/RE);
-  c.strokeStyle='rgba(255,255,255,.9)'; c.setLineDash([4,4]); c.lineWidth=1.5; c.beginPath(); c.moveTo(cx+rS*Math.cos(ang),cy+rS*Math.sin(ang)); c.lineTo(cx+rD*Math.cos(ang),cy+rD*Math.sin(ang)); c.stroke(); c.setLineDash([]);
-  const px=cx+rD*Math.cos(ang), py=cy+rD*Math.sin(ang);
-  c.fillStyle='#ffffff'; c.beginPath(); c.arc(px,py,6,0,2*PI); c.fill(); c.fillStyle='#d62828'; c.beginPath(); c.arc(px,py,3.5,0,2*PI); c.fill();
-  label(c,Math.round(depth).toLocaleString('it-IT')+' km',px+10,py+4,'#ffffff',fs*0.95,800);
-  label(c,'centro',cx-6,cy+fs*1.3,'#ffffff',fs*0.85,700,'right'); c.fillStyle='#fff'; c.beginPath(); c.arc(cx,cy,2.5,0,2*PI); c.fill();
-  // scala
-  label(c,'raggio: 6371 km',12,h-12,'rgba(220,230,245,.85)',fs*0.85,400);
+  // alone dell'atmosfera sul lato curvo
+  const g=c.createRadialGradient(cx,cy,R,cx,cy,R*1.06); g.addColorStop(0,'rgba(120,180,255,.45)'); g.addColorStop(1,'rgba(120,180,255,0)');
+  c.fillStyle=g; c.beginPath(); c.moveTo(cx,cy); c.arc(cx,cy,R*1.06,PI,1.5*PI); c.closePath(); c.fill();
+  // quarto di sfera: strati come archi concentrici
+  LAYERS.forEach(l=>{ const r=R*(1-l.from/RE); c.fillStyle=l.col; c.beginPath(); c.moveTo(cx,cy); c.arc(cx,cy,r,PI,1.5*PI); c.closePath(); c.fill(); });
+  c.strokeStyle='#8a5a33'; c.lineWidth=2.5; c.beginPath(); c.arc(cx,cy,R-1.2,PI,1.5*PI); c.stroke();   // crosta resa visibile
+  c.strokeStyle='rgba(0,0,0,.3)'; c.lineWidth=1; LAYERS.forEach(l=>{ const r=R*(1-l.to/RE); if(r>1){ c.beginPath(); c.arc(cx,cy,r,PI,1.5*PI); c.stroke(); } });
+  // colonna stratificata, staccata dal quarto
+  LAYERS.forEach(l=>{ c.fillStyle=l.col; c.fillRect(colX,yD(l.from),colW,yD(l.to)-yD(l.from)); });
+  c.fillStyle='#8a5a33'; c.fillRect(colX,yT,colW,2.5);
+  c.strokeStyle='rgba(0,0,0,.3)'; c.lineWidth=1; LAYERS.forEach(l=>{ const y=yD(l.to); c.beginPath(); c.moveTo(colX,y); c.lineTo(colX+colW,y); c.stroke(); });
+  // linee di proiezione nello spazio fra quarto e colonna
+  c.strokeStyle='rgba(255,255,255,.6)'; c.setLineDash([3,4]); c.lineWidth=1;
+  const PJ=[0,2900,5150].concat(yD(350)-yD(0)>10?[350]:[]);
+  PJ.forEach(d=>{ const y=yD(d); c.beginPath(); c.moveTo(cx+3,y); c.lineTo(colX-3,y); c.stroke(); });
+  c.setLineDash([]);
+  c.fillStyle='rgba(255,255,255,.7)'; PJ.forEach(d=>{ const y=yD(d); c.beginPath(); c.moveTo(colX-1,y); c.lineTo(colX-7,y-3.5); c.lineTo(colX-7,y+3.5); c.closePath(); c.fill(); });
+  // strato attuale evidenziato in entrambe
+  const cur=layerAt(depth), r1=R*(1-cur.from/RE), r2=Math.max(0.1,R*(1-cur.to/RE));
+  c.strokeStyle='#ffffff'; c.lineWidth=2.5;
+  c.beginPath(); c.arc(cx,cy,r1,PI,1.5*PI); c.lineTo(cx,cy-r2); c.arc(cx,cy,r2,1.5*PI,PI,true); c.closePath(); c.stroke();
+  c.strokeRect(colX,yD(cur.from),colW,Math.max(2.5,yD(cur.to)-yD(cur.from)));
+  // numeri della profondità dentro la colonna, sul bordo destro
+  [1000,2000,3000,4000,5000,6371].forEach(d=>{ const y=yD(d); c.fillStyle='rgba(255,255,255,.75)'; c.fillRect(colX+colW-5,y-0.5,5,1);
+    label(c,d===6371?'6371 km':d.toLocaleString('it-IT'),colX+colW-8,d===6371?y-4:y+fs*0.3,'#ffffff',fs*0.7,400,'right'); });
+  // nomi degli strati sullo sfondo scuro, cliccabili
+  const NM={crosta:'Crosta',lito:'Mantello rigido',fluido:'Mantello fluido',mantello:'Mantello profondo',esterno:'Nucleo esterno',interno:'Nucleo interno'};
+  const lx=colX+colW+Math.max(18,fs*1.8), step=fs*1.75; let yl=yT+fs*0.35; CG.labels=[];
+  LAYERS.forEach(l=>{ const yb=Math.min(yD(l.to)-1,Math.max(yD(l.from)+1,(yD(l.from)+yD(l.to))/2));
+    yl=Math.max(yl,yb+fs*0.35); const on=l.id===cur.id, f=fs*0.95;
+    c.font=`${on?800:700} ${f}px ${FB}`; const tw=c.measureText(NM[l.id]).width;
+    c.strokeStyle=on?'#ffffff':'rgba(255,255,255,.55)'; c.lineWidth=on?1.5:1;
+    c.beginPath(); c.moveTo(colX+colW,yb); c.lineTo(colX+colW+6,yb); c.lineTo(lx-5,yl-fs*0.35); c.stroke();
+    if(on){ c.fillStyle='#ffffff'; c.beginPath(); c.rect(lx-4,yl-f*1.05,tw+8,f*1.45); c.fill(); }
+    c.textAlign='left'; c.fillStyle=on?'#0d1626':'#ffffff'; c.fillText(NM[l.id],lx,yl);
+    CG.labels.push({id:l.id,x0:lx-6,x1:lx+tw+8,y0:yl-f*1.2,y1:yl+f*0.5});
+    yl+=step; });
+  // sonda: scende lungo il raggio verticale, dal polo al centro
+  const yP=yD(depth);
+  c.strokeStyle='rgba(255,255,255,.95)'; c.setLineDash([4,4]); c.lineWidth=1.5; c.beginPath(); c.moveTo(cx,yT-fs*0.9); c.lineTo(cx,yP); c.stroke(); c.setLineDash([]);
+  c.strokeStyle='#ffffff'; c.lineWidth=1.5; c.beginPath(); c.moveTo(cx,yP); c.lineTo(colX+colW,yP); c.stroke();
+  c.fillStyle='#ffffff'; c.beginPath(); c.arc(cx,yP,6,0,2*PI); c.fill(); c.fillStyle='#d62828'; c.beginPath(); c.arc(cx,yP,3.5,0,2*PI); c.fill();
+  label(c,Math.round(depth).toLocaleString('it-IT')+' km',cx-12,Math.max(yT+fs*1.2,Math.min(cy-fs,yP+fs*0.35)),'#ffffff',fs*0.95,800,'right');
+  label(c,'superficie (polo)',cx-6,yT-fs*0.6,'rgba(220,230,245,.95)',fs*0.8,700,'right');
+  label(c,'centro',cx+8,cy+fs*0.35,'#ffffff',fs*0.85,700); c.fillStyle='#fff'; c.beginPath(); c.arc(cx,cy,2.5,0,2*PI); c.fill();
+  // lente sotto, a tutta larghezza
+  const ly0=cy+fs*1.6, lx0=mL, lw=w-2*mL, lh=h-ly0-Math.max(8,h*0.015);
+  if(lh>60) lensIn(lx0,ly0,lw,lh,fs);
 }
-cc.addEventListener('click',e=>{ const r=cc.getBoundingClientRect(), x=e.clientX-r.left-CG.cx, y=e.clientY-r.top-CG.cy, d=Math.hypot(x,y);
-  if(d<=CG.R&&x>=-4&&y<=4){ const dep=(1-d/CG.R)*RE; const l=layerAt(dep); goTo((l.from+l.to)/2); } });
-const lc=$('lens'), lx=lc.getContext('2d');
-function drawLens(){
-  const {w,h}=fit(lc,lx), fs=Math.max(10,Math.min(13,w/48)), top=fs*2.2, bot=8, D=400, Y=d=>top+(d/D)*(h-top-bot);
-  lx.fillStyle='#0d1626'; lx.fillRect(0,0,w,h);
-  const mid=w*0.5;
-  // strati sotto
-  [[100,350,'#f08c2e'],[350,400,'#c0461f']].forEach(([a,b,col])=>{ lx.fillStyle=col; lx.fillRect(0,Y(a),w,Y(b)-Y(a)); });
-  lx.fillStyle='#a0522d'; lx.fillRect(0,Y(35),mid,Y(100)-Y(35)); lx.fillRect(mid,Y(7),w-mid,Y(100)-Y(7));
-  // crosta continentale e oceanica, oceano
-  lx.fillStyle='#8a5a33'; lx.fillRect(0,Y(0),mid,Y(35)-Y(0)); lx.fillStyle='#7a6a55'; lx.fillRect(mid,Y(0),w-mid,Y(7)-Y(0));
-  lx.fillStyle='#3d86c6'; lx.fillRect(mid,top-fs*0.6,w-mid,Y(0)-(top-fs*0.6)+1);
-  lx.fillStyle='#6aa85f'; lx.beginPath(); lx.moveTo(0,Y(0)); for(let x=0;x<=mid;x+=8) lx.lineTo(x,Y(0)-6-6*Math.abs(Math.sin(x*0.05))); lx.lineTo(mid,Y(0)); lx.closePath(); lx.fill();
-  // limite della litosfera
-  lx.strokeStyle='#ffffff'; lx.setLineDash([6,5]); lx.lineWidth=1.5; lx.beginPath(); lx.moveTo(0,Y(100)); lx.lineTo(w,Y(100)); lx.stroke(); lx.setLineDash([]);
-  label(lx,'continente: crosta di circa 35 km',8,Y(17)+4,'#ffffff',fs*0.9,700);
-  label(lx,'oceano: crosta di 6-7 km',mid+8,Y(3.5)+fs*1.5,'#ffffff',fs*0.9,700);
-  label(lx,'LITOSFERA (fino a circa 100 km)',8,Y(70)+4,'#ffe7d1',fs*0.9,800);
-  label(lx,'zona fluida del mantello: le placche ci «galleggiano» sopra',8,Y(220)+4,'#2a1200',fs*0.9,800); lx.fillStyle='#2a1200'; lx.fillText('zona fluida del mantello: le placche ci «galleggiano» sopra',8,Y(220)+4);
-  label(lx,'mantello solido',8,Y(378)+4,'#ffffff',fs*0.85,700);
-  // scala delle profondità
-  lx.font=`${fs*0.8}px ${FB}`; lx.fillStyle='rgba(220,230,245,.85)'; lx.textAlign='right'; [0,100,200,300,400].forEach(d=>lx.fillText(d+' km',w-6,Y(d)+(d===0?-3:4)));
-  if(depth<=400){ const y=Y(depth); lx.strokeStyle='#ffffff'; lx.lineWidth=2; lx.beginPath(); lx.moveTo(w*0.82,y); lx.lineTo(w*0.9,y); lx.stroke(); lx.fillStyle='#d62828'; lx.beginPath(); lx.arc(w*0.86,y,4,0,2*PI); lx.fill(); }
-}
+cc.addEventListener('click',e=>{ const r=cc.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+  const dx=x-CG.cx, dy=y-CG.cy, d=Math.hypot(dx,dy); let dep=null;
+  if(dx<=4&&dy<=4&&d<=CG.R) dep=(1-d/CG.R)*RE;
+  else if(x>=CG.colX&&x<=CG.colX+CG.colW&&y>=CG.yT&&y<=CG.cy) dep=(y-CG.yT)/CG.R*RE;
+  (CG.labels||[]).forEach(L=>{ if(x>=L.x0&&x<=L.x1&&y>=L.y0&&y<=L.y1){ const l=LAYERS.find(q=>q.id===L.id); dep=(l.from+l.to)/2; } });
+  if(dep!==null){ const l=layerAt(dep); goTo((l.from+l.to)/2); } });
+function drawLens(){}
 
 /* ---------- 2. placche ---------- */
 const PT={
