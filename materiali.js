@@ -219,20 +219,24 @@ const MODULI = [
       { titolo: "Come si studia una regione italiana", dipartimento: true, libri: ["paesaggi"], pagine: "B114–B115", attivita: [] },
       {
         titolo: "L'Italia settentrionale", dipartimento: true, libri: ["paesaggi"], pagine: "B116–B145",
-        descrizione: "Percorso progressivo: ogni tappa spiega uno o due elementi della regione (dove si trova, paesaggio, territorio, acque, nome e storia, clima, economia…) e da lì in poi li usa per tutte le regioni.",
+        descrizione: "Dieci elementi per studiare una regione, spiegati sul Piemonte (due lezioni: elementi fisici e umani). Poi ogni regione grande in due lezioni, abbinata a una regione piccola confinante da fare da soli con il libro.",
         link: "geografia/prima/regioni-italiane/italia-settentrionale/index.html",
         data: "2026-11-03",
         attivita: [
-          { tipo: "Tappa 1", titolo: "L'Italia settentrionale: dove si trova e i paesaggi", descrizione: "Elementi nuovi: Dove si trova e Il paesaggio (B116–B121).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/territorio-e-paesaggi.html", data: "2026-11-03" },
-          { tipo: "Tappa 2", titolo: "Il Piemonte", descrizione: "Elementi nuovi: Il territorio, Le acque, Il nome e la storia (B122–B123).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/piemonte.html", data: "2026-11-03" },
-          { tipo: "Tappa 3", titolo: "La Valle d'Aosta", descrizione: "Elemento nuovo: Clima e ambiente (B126–B127).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/valle-d-aosta.html", data: "2026-11-03" },
-          { tipo: "Tappa 4", titolo: "La Lombardia", descrizione: "Elemento nuovo: L'economia (B128–B131).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/lombardia.html", data: "2026-11-03" },
-          { tipo: "Tappa 5", titolo: "La Liguria", descrizione: "Elemento nuovo: Popolazione e città (B132–B133).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/liguria.html", data: "2026-11-03" },
-          { tipo: "Tappa 6", titolo: "Il Trentino-Alto Adige", descrizione: "Elemento nuovo: Vie di comunicazione (B134–B135).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/trentino-alto-adige.html", data: "2026-11-03" },
-          { tipo: "Tappa 7", titolo: "Il Veneto", descrizione: "Elemento nuovo: Beni culturali (B136–B139).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/veneto.html", data: "2026-11-03" },
-          { tipo: "Tappa 8", titolo: "Il Friuli-Venezia Giulia", descrizione: "Tutti gli elementi e il confronto con il Veneto (B140–B141).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/friuli-venezia-giulia.html", data: "2026-11-03" },
-          { tipo: "Tappa 9", titolo: "L'Emilia-Romagna", descrizione: "Tutti gli elementi e il confronto finale tra le regioni del Nord (B142–B145).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/emilia-romagna.html", data: "2026-11-03" },
-          { tipo: "Schede", titolo: "Schede delle regioni per il cartellone", descrizione: "Una scheda per regione: le sezioni si aprono un elemento alla volta.", link: "geografia/prima/regioni-italiane/italia-settentrionale/index.html#schede", data: "2026-11-03" }
+          { tipo: "Tappa 1", titolo: "L'Italia settentrionale: dove si trova e i paesaggi", descrizione: "Il puzzle delle regioni; elementi Dove si trova e Il paesaggio (B116–B121).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/territorio-e-paesaggi.html", data: "2026-11-03" },
+          { tipo: "Tappa 2 · Lezione 1", titolo: "Il Piemonte: com'è fatto", descrizione: "Elementi fisici: dove si trova, paesaggio, territorio, acque, clima e ambiente (B122–B123).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/piemonte.html", data: "2026-11-04" },
+          { tipo: "Tappa 2 · Lezione 2", titolo: "Il Piemonte: chi ci vive, che cosa fa", descrizione: "Elementi umani: economia, popolazione, vie di comunicazione, nome e storia, beni culturali (B122, B124–B125).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/piemonte-2.html", data: "2026-11-04" },
+          { tipo: "Tappa 2 · Da soli", titolo: "La Valle d'Aosta", descrizione: "I dieci elementi con il libro, lavoro autonomo (B126–B127).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/valle-d-aosta.html", data: "2026-11-04" },
+          { tipo: "Tappa 3 · Lezione 1", titolo: "La Lombardia: com'è fatta", descrizione: "Elementi fisici (B128–B129).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/lombardia.html", data: "2026-11-04" },
+          { tipo: "Tappa 3 · Lezione 2", titolo: "La Lombardia: chi ci vive, che cosa fa", descrizione: "Elementi umani (B128, B130–B131).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/lombardia-2.html", data: "2026-11-04" },
+          { tipo: "Tappa 3 · Da soli", titolo: "Il Trentino-Alto Adige", descrizione: "I dieci elementi con il libro (B134–B135).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/trentino-alto-adige.html", data: "2026-11-04" },
+          { tipo: "Tappa 4 · Lezione 1", titolo: "Il Veneto: com'è fatto", descrizione: "Elementi fisici (B136–B137).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/veneto.html", data: "2026-11-04" },
+          { tipo: "Tappa 4 · Lezione 2", titolo: "Il Veneto: chi ci vive, che cosa fa", descrizione: "Elementi umani (B136, B138–B139).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/veneto-2.html", data: "2026-11-04" },
+          { tipo: "Tappa 4 · Da soli", titolo: "Il Friuli-Venezia Giulia", descrizione: "I dieci elementi con il libro (B140–B141).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/friuli-venezia-giulia.html", data: "2026-11-04" },
+          { tipo: "Tappa 5 · Lezione 1", titolo: "L'Emilia-Romagna: com'è fatta", descrizione: "Elementi fisici (B142–B143).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/emilia-romagna.html", data: "2026-11-04" },
+          { tipo: "Tappa 5 · Lezione 2", titolo: "L'Emilia-Romagna: chi ci vive, che cosa fa", descrizione: "Elementi umani e confronto finale tra le regioni del Nord (B142, B144–B145).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/emilia-romagna-2.html", data: "2026-11-04" },
+          { tipo: "Tappa 5 · Da soli", titolo: "La Liguria", descrizione: "I dieci elementi con il libro (B132–B133).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/liguria.html", data: "2026-11-04" },
+          { tipo: "Schede", titolo: "Schede delle regioni per il cartellone", descrizione: "Una scheda per regione, dieci sezioni.", link: "geografia/prima/regioni-italiane/italia-settentrionale/index.html#schede", data: "2026-11-03" }
         ]
       },
       { titolo: "L'Italia centrale", dipartimento: true, libri: ["paesaggi"], pagine: "B146–B161", attivita: [] },
@@ -569,7 +573,9 @@ const MODULI = [
           { tipo: "Se c'è tempo", titolo: "Carte che cambiano forma", descrizione: "Anamorfosi: il mondo disegnato in base alla popolazione, ai giovani, ai cellulari.", link: "geografia/prima/carte-geografiche/attivita/carte-che-cambiano-forma.html", data: "2026-10-23" }
         ]
       },
-      { titolo: "L'inurbamento", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E88–E89", descrizione: "La crescita delle città. GeoAgenda 3: E72–E73 (urbanesimo e megalopoli, dentro «La popolazione mondiale»; poi il modulo integrativo Città che cambiano) · Vivi la Geografia 3: Unità 6, pp. 68–85.", attivita: [] },
+      { titolo: "L'inurbamento", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E88–E89", descrizione: "La crescita delle città. GeoAgenda 3: E72–E73 (urbanesimo e megalopoli, dentro «La popolazione mondiale»; poi il modulo integrativo Città che cambiano) · Vivi la Geografia 3: Unità 6, pp. 68–85.", attivita: [
+          { tipo: "Mappa", titolo: "Città che cambiano — Atlante d'Europa", descrizione: "Mappa interattiva delle soluzioni urbane sostenibili in Europa (acqua, calore, energia, mobilità, rifiuti, verde). Collegata al modulo integrativo Città che cambiano di GeoAgenda.", link: "educazione-civica/terza/clima-energia-e-informazione/citta-che-cambiano.html", data: "2026-11-04" }
+        ] },
       { titolo: "I movimenti migratori", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E94–E95", descrizione: "Perché si emigra; migrazioni internazionali e forzate, profughi. GeoAgenda 3: E82–E83 · Vivi la Geografia 3: Unità 5, lezioni 5–6, pp. 62–66.", attivita: [] },
       { titolo: "Lo sviluppo", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E90–E93, E98–E101", descrizione: "Disuguaglianze e sottosviluppo, salute e istruzione. GeoAgenda 3: E78–E81, E84–E87 · Vivi la Geografia 3: Unità 9, pp. 116–128.", attivita: [] },
       { titolo: "Culture, lingue e religioni", dipartimento: true, libri: ["paesaggi", "geoagenda", "vivi"], pagine: "E102–E103, E115–E120", descrizione: "La geografia delle culture; dossier «La diversità delle culture». GeoAgenda 3: E88–E91 · Vivi la Geografia 3: Unità 12, pp. 164–176.", attivita: [] }
@@ -2041,6 +2047,9 @@ const MODULI = [
       { titolo: "Copyright e Creative Commons", dipartimento: true, attivita: [] },
       { titolo: "Identità digitale e privacy", dipartimento: true, attivita: [] },
       { titolo: "La campagna informativa sul clima", dipartimento: true, attivita: [] }
+    ],
+    attivita: [
+      { tipo: "Mappa", titolo: "Città che cambiano — Atlante d'Europa", descrizione: "Mappa interattiva delle soluzioni urbane sostenibili in Europa (acqua, calore, energia, mobilità, rifiuti, verde), dalla rubrica di Pino Bruno.", link: "educazione-civica/terza/clima-energia-e-informazione/citta-che-cambiano.html", data: "2026-11-04" }
     ]
   }
 ];
