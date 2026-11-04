@@ -952,8 +952,17 @@ const MODULI = [
           { tipo: "Fase 7", titolo: "Rischiatutto foscoliano", link: "italiano/terza/foscolo/foscolo-ripasso/attivita/fase-7-rischiatutto-foscoliano.html", data: "2026-10-16" }
         ]
       },
-      { titolo: "La poesia lirica: Leopardi", descrizione: "Recanati, il pessimismo, L'infinito letto e spiegato.", attivita: [
-          { tipo: "Lezione", titolo: "Giacomo Leopardi", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/leopardi/leopardi.html", data: "2026-10-30" }
+      { titolo: "La poesia lirica: Leopardi", descrizione: "Recanati, il pessimismo, L'infinito e A Silvia; ripasso a fasi.", link: "italiano/terza/leopardi/leopardi-ripasso/index.html", data: "2026-11-04", attivita: [
+          { tipo: "Lezione", titolo: "Giacomo Leopardi", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/leopardi/leopardi.html", data: "2026-10-30" },
+          { tipo: "Guida alla lezione", titolo: "Giacomo Leopardi: tutte le attività (circa 70 minuti)", link: "italiano/terza/leopardi/leopardi-ripasso/index.html", data: "2026-11-04" },
+          { tipo: "Fase 1", titolo: "Leopardi in dodici parole", link: "italiano/terza/leopardi/leopardi-ripasso/attivita/fase-1-leopardi-in-dodici-parole.html", data: "2026-11-04" },
+          { tipo: "Fase 2", titolo: "La vita di Leopardi in ordine", link: "italiano/terza/leopardi/leopardi-ripasso/attivita/fase-2-la-vita-di-leopardi-in-ordine.html", data: "2026-11-04" },
+          { tipo: "Fase 3", titolo: "Opere, persone e luoghi", link: "italiano/terza/leopardi/leopardi-ripasso/attivita/fase-3-opere-persone-e-luoghi.html", data: "2026-11-04" },
+          { tipo: "Fase 4", titolo: "Dentro «A Silvia»", link: "italiano/terza/leopardi/leopardi-ripasso/attivita/fase-4-dentro-a-silvia.html", data: "2026-11-04" },
+          { tipo: "Fase 5", titolo: "«L'infinito» da completare", link: "italiano/terza/leopardi/leopardi-ripasso/attivita/fase-5-l-infinito.html", data: "2026-11-04" },
+          { tipo: "Fase 6", titolo: "Il cruciverba di Leopardi", link: "italiano/terza/leopardi/leopardi-ripasso/attivita/fase-6-cruciverba.html", data: "2026-11-04" },
+          { tipo: "Fase 7", titolo: "Vero o falso?", link: "italiano/terza/leopardi/leopardi-ripasso/attivita/fase-7-vero-o-falso.html", data: "2026-11-04" },
+          { tipo: "Fase 8", titolo: "Rischiatutto leopardiano", link: "italiano/terza/leopardi/leopardi-ripasso/attivita/fase-8-rischiatutto-leopardiano.html", data: "2026-11-04" }
         ] },
       { titolo: "La poesia patriottica", descrizione: "Il Risorgimento in versi: Mameli, Manzoni, Mercantini e il coro di Verdi.", attivita: [
           { tipo: "Lezione", titolo: "La poesia patriottica", descrizione: "Scheda riassuntiva ed esercizi con correzione automatica.", link: "italiano/terza/poesia-patriottica/poesia-patriottica.html", data: "2026-10-30" }
