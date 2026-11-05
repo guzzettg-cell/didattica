@@ -311,9 +311,9 @@ function updCol(){ $('hv').textContent=(h<20?h.toFixed(1).replace('.',','):Math.
 
 /* ---------- 3. venti costanti ---------- */
 const W={
- ali:{n:'Alisei',bands:[[0,30,-1,1],[-30,0,-1,-1]],col:'#ffd166',t:'Soffiano dalle alte pressioni tropicali verso la bassa pressione equatoriale. Nel nostro emisfero vengono da nord-est e vanno verso sud-ovest; nell\'emisfero australe vengono da sud-est. Un tempo le navi a vela li usavano per attraversare l\'Atlantico.'},
- occ:{n:'Venti occidentali',bands:[[30,60,1,-1],[-60,-30,1,1]],col:'#ff8fab',t:'Spirano dai tropici verso i circoli polari. Nel nostro emisfero vanno da sud-ovest verso nord-est: per questo in Italia molte perturbazioni arrivano da ovest, dall\'Atlantico.'},
- pol:{n:'Venti polari',bands:[[60,90,-1,1],[-90,-60,-1,-1]],col:'#9be7ff',t:'Spirano dalle alte pressioni polari verso le basse pressioni dei circoli polari. Nel nostro emisfero hanno un andamento da nord-est verso sud-ovest. Sono venti molto freddi.'}
+ ali:{n:'Alisei',bands:[[0,30,-1,-1],[-30,0,-1,1]],col:'#ffd166',t:'Soffiano dalle alte pressioni tropicali verso la bassa pressione equatoriale. Nel nostro emisfero vengono da nord-est e vanno verso sud-ovest; nell\'emisfero australe vengono da sud-est. Un tempo le navi a vela li usavano per attraversare l\'Atlantico.'},
+ occ:{n:'Venti occidentali',bands:[[30,60,1,1],[-60,-30,1,-1]],col:'#ff8fab',t:'Spirano dai tropici verso i circoli polari. Nel nostro emisfero vanno da sud-ovest verso nord-est: per questo in Italia molte perturbazioni arrivano da ovest, dall\'Atlantico.'},
+ pol:{n:'Venti polari',bands:[[60,90,-1,-1],[-90,-60,-1,1]],col:'#9be7ff',t:'Spirano dalle alte pressioni polari verso le basse pressioni dei circoli polari. Nel nostro emisfero hanno un andamento da nord-est verso sud-ovest. Sono venti molto freddi.'}
 };
 let wsel='all';
 const wch=$('wch');
