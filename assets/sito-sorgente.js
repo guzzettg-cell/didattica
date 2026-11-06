@@ -138,7 +138,7 @@ function home() {
                nl ? plurale(nl, "lezione", "lezioni") : null,
                n ? plurale(n, "attività", "attività") : null].filter(Boolean).join(", ");
     }
-    griglia.append(el("a", { class: "materia", href: id + "/", style: `--c: var(--${id})` },
+    griglia.append(el("a", { class: "materia", href: id + "/index.html", style: `--c: var(--${id})` },
       el("h3", null, info.nome),
       el("p", null, info.descr),
       el("p", { class: "conta" }, conta)

@@ -241,7 +241,7 @@ function home() {
                 nl ? plurale(nl, "lezione", "lezioni") : null,
                 n ? plurale(n, "attività", "attività") : null].filter(Boolean).join(", ");
         }
-        griglia.append(el("a", { class: "materia", href: id + "/", style: "--c: var(--".concat(id, ")") }, el("h3", null, info.nome), el("p", null, info.descr), el("p", { class: "conta" }, conta)));
+        griglia.append(el("a", { class: "materia", href: id + "/index.html", style: "--c: var(--".concat(id, ")") }, el("h3", null, info.nome), el("p", null, info.descr), el("p", { class: "conta" }, conta)));
     };
     try {
         for (var _b = __values(Object.entries(MATERIE)), _c = _b.next(); !_c.done; _c = _b.next()) {
