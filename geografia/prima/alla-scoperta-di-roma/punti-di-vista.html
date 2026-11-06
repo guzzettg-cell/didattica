@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Punti di vista — Alla scoperta di Roma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#efe8d8;
+    --cream-deep:#e3d9c1;
+    --ink:#171a2e;
+    --ink-soft:#54587a;
+    --line:#c7c4d6;
+    --space:#2c3566;
+    --space-deep:#1c2247;
+    --paper:#f7f6f1;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;margin:0;}
+  p{margin:0 0 1em;}
+  a{color:inherit;}
+
+  .hero{padding:8vh 8vw 6vh;border-bottom:1px solid var(--line);background:linear-gradient(180deg, var(--cream) 0%, var(--cream) 75%, var(--cream-deep) 100%);}
+  .hero .back{display:inline-block;margin-bottom:1.6rem;font-size:.85rem;color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line);}
+  .hero .kicker{display:flex;align-items:center;gap:.6em;color:var(--space);font-weight:600;font-size:.95rem;margin-bottom:1.2rem;}
+  .kicker .dot{width:.55em;height:.55em;border-radius:50%;background:var(--space);}
+  .hero h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.06;max-width:18ch;}
+  .hero .sub{max-width:60ch;font-size:clamp(1rem,1.4vw,1.15rem);color:var(--ink-soft);margin-top:1.3rem;}
+
+  .story{max-width:720px;margin:0 auto;padding:6vh 8vw 4vh;}
+
+  .entry{padding:3.2rem 0;border-top:1px solid var(--line);}
+  .entry:first-of-type{border-top:none;padding-top:1rem;}
+  .entry .year{
+    font-family:'Fraunces',serif;font-weight:600;font-size:.9rem;
+    color:var(--space);
+    letter-spacing:.02em;
+    margin-bottom:.5rem;
+  }
+  .entry h2{font-size:clamp(1.5rem,2.6vw,1.9rem);margin-bottom:.3rem;}
+  .entry .who{font-size:.88rem;color:var(--ink-soft);margin-bottom:1.2rem;}
+  .entry p{color:var(--ink-soft);font-size:1rem;max-width:60ch;}
+  .entry p strong{color:var(--ink);}
+
+  .entry-img{margin:1.4rem 0;}
+  .entry-img img{
+    width:100%;
+    display:block;
+    border-radius:4px;
+  }
+  .entry-img .caption{
+    margin-top:.5rem;
+    font-size:.78rem;
+    color:var(--ink-soft);
+    font-style:italic;
+  }
+
+  .mapbox{
+    margin:1.4rem 0 .5rem;
+    border-radius:6px;
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .mapbox iframe{display:block;}
+  .mapbox-note{font-size:.78rem;color:var(--ink-soft);margin:0;}
+
+  .stimulus{
+    background:var(--space-deep);
+    color:#e9e7f5;
+    border-radius:8px;
+    padding:2.2rem 2.2rem;
+  }
+  .stimulus-label{font-size:.78rem;font-weight:700;color:#8f97cf;text-transform:uppercase;letter-spacing:.03em;margin-bottom:.9rem;}
+  .stimulus-q{
+    font-family:'Fraunces',serif;
+    font-size:1.35rem;
+    line-height:1.4;
+    color:#fff;
+    margin-bottom:.9rem;
+  }
+  .stimulus-q strong{color:#ffe9a8;}
+  .stimulus-hint{color:#c4c2dd;font-size:.9rem;margin-bottom:0;}
+
+  .orange-divider{
+    display:flex;
+    align-items:center;
+    gap:1.2rem;
+    padding:1rem 0;
+  }
+  .orange-divider svg{flex:none;}
+  .orange-divider p{
+    margin:0;
+    font-size:.95rem;
+    color:var(--ink-soft);
+    font-style:italic;
+    max-width:46ch;
+  }
+
+  .pull{
+    margin:1.6rem 0;
+    padding:1.3rem 1.5rem;
+    background:var(--paper);
+    border-left:3px solid var(--space);
+    border-radius:3px;
+  }
+  .pull p{
+    margin:0;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:1.15rem;
+    color:var(--ink);
+    line-height:1.5;
+  }
+  .pull .attrib{
+    margin-top:.6rem;
+    font-family:'Inter',sans-serif;
+    font-style:normal;
+    font-size:.8rem;
+    color:var(--ink-soft);
+  }
+
+  .closing{
+    background:var(--space-deep);
+    color:#e9e7f5;
+    border-radius:8px;
+    padding:2rem 2.2rem;
+    margin-top:1rem;
+  }
+  .closing h3{color:#fff;font-size:1.2rem;margin-bottom:.7rem;}
+  .closing p{color:#c4c2dd;margin-bottom:0;}
+
+  .sources{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line);}
+  .sources h3{font-size:1.05rem;margin-bottom:1.2rem;color:var(--ink);}
+  .src-group{margin-bottom:1.3rem;}
+  .src-label{font-size:.8rem;font-weight:700;color:var(--space);text-transform:uppercase;letter-spacing:.02em;margin-bottom:.4rem;}
+  .sources ul{margin:0;padding-left:1.1rem;}
+  .sources li{font-size:.85rem;color:var(--ink-soft);margin-bottom:.3rem;}
+  .sources a{color:var(--ink-soft);text-decoration:underline;text-decoration-color:var(--line);}
+  .sources a:hover{color:var(--space);text-decoration-color:var(--space);}
+  .src-note{font-size:.78rem;color:var(--ink-soft);font-style:italic;margin-top:1rem;}
+
+  footer{padding:4vh 8vw 6vh;border-top:1px solid var(--line);color:var(--ink-soft);font-size:.85rem;text-align:center;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <a class="back" href="index.html">← Torna al progetto</a>
+  <div class="kicker"><span class="dot"></span>Alla scoperta di Roma</div>
+
+  <div class="hook">
+    <p class="hook-q">Di che colore è un'arancia?</p>
+    <p class="hook-a">Arancione, ovviamente.</p>
+    <p class="hook-q" style="margin-top:1.4rem;">Avete mai visto un'arancia blu?</p>
+  </div>
+
+  <h1>Punti di vista</h1>
+  <p class="sub">Eppure è proprio così che è apparsa la Terra ai primi esseri umani che l'hanno vista da lontano: tonda come un frutto, sospesa nel buio dello spazio, e azzurra. Oggi basta un telefono per vedere il pianeta dall'alto: con Google Earth possiamo passare in pochi secondi da tutto il mondo alla nostra scuola. Non è sempre stato così.</p>
+</header>
+
+<style>
+  .hook{
+    max-width:44ch;
+    margin-bottom:2rem;
+  }
+  .hook-q{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(1.3rem,2.6vw,1.7rem);
+    color:var(--ink);
+    margin:0 0 .4rem;
+    line-height:1.3;
+  }
+  .hook-a{
+    font-size:.95rem;
+    color:var(--ink-soft);
+    margin:0;
+    font-style:italic;
+  }
+</style>
+
+<main class="story">
+
+  <div class="entry" style="border-top:none;padding-top:0;padding-bottom:1.5rem;">
+    <div class="orange-divider">
+      <svg width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="36" cy="36" r="32" fill="url(#orangeGrad)"/>
+        <path d="M36 4 Q30 36 36 68" stroke="#0b2f52" stroke-width="1" fill="none" opacity="0.35"/>
+        <path d="M36 4 Q42 36 36 68" stroke="#0b2f52" stroke-width="1" fill="none" opacity="0.35"/>
+        <path d="M6 26 Q36 20 66 26" stroke="#0b2f52" stroke-width="1" fill="none" opacity="0.25"/>
+        <path d="M6 46 Q36 52 66 46" stroke="#0b2f52" stroke-width="1" fill="none" opacity="0.25"/>
+        <defs><radialGradient id="orangeGrad" cx="35%" cy="30%" r="75%">
+          <stop offset="0%" stop-color="#7fb8e0"/><stop offset="55%" stop-color="#3573a8"/><stop offset="100%" stop-color="#194a73"/>
+        </radialGradient></defs>
+      </svg>
+      <p>Un'arancia blu, tonda e sospesa nel buio: è più o meno così che i primi esseri umani nello spazio hanno descritto la Terra.</p>
+    </div>
+  </div>
+
+  <div class="entry" style="padding-top:1rem;">
+    <div class="year">Oggi</div>
+    <h2>Esplora tu: i diversi punti di vista</h2>
+    <div class="who">Una simulazione del "tuffo" di Google Earth, dallo spazio fino a Roma</div>
+    <p>Google Earth funziona così: parti da tutto il pianeta visto dallo spazio, e ti avvicini livello dopo livello fino a un singolo isolato. Usa i pulsanti per scendere, tappa per tappa, dallo spazio fino al punto in cui è cominciato il nostro viaggio.</p>
+
+    <div class="zoomsim" id="zoomsim">
+      <svg id="zoomStage" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div class="zoomsim-caption">
+        <div class="zoomsim-level" id="zoomLevel"></div>
+        <div class="zoomsim-text" id="zoomText"></div>
+      </div>
+      <div class="zoomsim-controls">
+        <button id="zoomBack" class="zbtn" type="button">← Sali</button>
+        <div class="zoomsim-dots" id="zoomDots"></div>
+        <button id="zoomFwd" class="zbtn zbtn-primary" type="button">Scendi →</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .zoomsim{margin-top:1.4rem;background:#0b0f24;border-radius:8px;padding:1.4rem;border:1px solid #262c52;}
+    .zoomsim svg{width:100%;height:auto;display:block;border-radius:6px;background:#0b0f24;}
+    .zoomsim-caption{margin-top:1rem;}
+    .zoomsim-level{font-family:'Fraunces',serif;font-weight:600;color:#fff;font-size:1.15rem;margin-bottom:.3rem;}
+    .zoomsim-text{color:#b9b6d6;font-size:.9rem;line-height:1.5;}
+    .zoomsim-controls{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1.2rem;}
+    .zbtn{background:transparent;border:1px solid #3a3f6b;color:#cfcdea;padding:.6rem 1.1rem;border-radius:6px;font-size:.85rem;font-weight:600;cursor:pointer;font-family:inherit;}
+    .zbtn:disabled{opacity:.3;cursor:default;}
+    .zbtn-primary{background:#5a63c4;border-color:#5a63c4;color:#fff;}
+    .zoomsim-dots{display:flex;gap:.4rem;}
+    .zoomsim-dots span{width:8px;height:8px;border-radius:50%;background:#3a3f6b;display:inline-block;}
+    .zoomsim-dots span.active{background:#8f97cf;}
+  </style>
+
+  <script>
+  (function(){
+    const stages = [
+      {
+        level: "1 · Lo spazio",
+        text: "Da circa 400 km di altezza — la quota della Stazione Spaziale Internazionale — si vede il pianeta intero: oceani blu, terre marroni e verdi, e la sottile striscia dell'atmosfera.",
+        build: (svg) => {
+          svg.innerHTML = `
+            <rect width="400" height="400" fill="#05061a"/>
+            ${starsSVG(60)}
+            <circle cx="200" cy="200" r="130" fill="url(#earthGrad)"/>
+            <ellipse cx="150" cy="150" rx="55" ry="35" fill="#3f7d4f" opacity="0.85"/>
+            <ellipse cx="250" cy="230" rx="45" ry="60" fill="#3f7d4f" opacity="0.85"/>
+            <ellipse cx="190" cy="270" rx="30" ry="18" fill="#3f7d4f" opacity="0.7"/>
+            <ellipse cx="200" cy="200" rx="150" ry="150" fill="none" stroke="#5a8fd6" stroke-width="4" opacity="0.4"/>
+            <defs><radialGradient id="earthGrad" cx="35%" cy="35%" r="70%">
+              <stop offset="0%" stop-color="#7fb8e0"/><stop offset="60%" stop-color="#2f6fa8"/><stop offset="100%" stop-color="#1b3f66"/>
+            </radialGradient></defs>
+          `;
+        }
+      },
+      {
+        level: "2 · Il continente",
+        text: "Scendendo, il pianeta lascia il posto a un continente: l'Europa, con le sue coste frastagliate. In basso, una lunga penisola a forma di stivale si protende nel Mediterraneo.",
+        build: (svg) => {
+          svg.innerHTML = `
+            <rect width="400" height="400" fill="#0d2038"/>
+            ${starsSVG(15)}
+            <path d="M60 60 Q150 20 250 60 Q340 90 360 160 Q330 220 300 260 Q260 320 220 360 Q180 330 170 280 Q140 260 120 220 Q80 200 60 150 Z" fill="#3f7d4f"/>
+            <path d="M195 250 Q210 270 215 310 Q220 340 205 370 Q195 340 190 310 Q185 280 195 250 Z" fill="#c8952a" stroke="#0d2038" stroke-width="2"/>
+            <circle cx="205" cy="330" r="5" fill="#fff"/>
+            <text x="215" y="334" fill="#fff" font-size="12" font-family="Inter, sans-serif">Italia</text>
+          `;
+        }
+      },
+      {
+        level: "3 · L'Italia",
+        text: "Ora si distingue chiaramente la penisola italiana, con la catena delle Alpi a nord e gli Appennini lungo tutta la sua lunghezza. Un punto segna Roma, quasi al centro.",
+        build: (svg) => {
+          svg.innerHTML = `
+            <rect width="400" height="400" fill="#123049"/>
+            <path d="M140 20 Q200 10 260 30 Q240 60 260 90 Q290 120 270 160 Q290 190 260 220 Q280 250 250 280 Q260 310 230 340 Q210 370 180 390 Q170 350 190 320 Q160 300 170 270 Q140 250 150 220 Q120 200 140 170 Q110 150 130 120 Q100 100 120 70 Q100 45 140 20 Z" fill="#3f7d4f" stroke="#0d2038" stroke-width="2"/>
+            <circle cx="185" cy="220" r="7" fill="#e0704a" stroke="#fff" stroke-width="2"/>
+            <text x="198" y="224" fill="#fff" font-size="13" font-family="Inter, sans-serif" font-weight="600">Roma</text>
+          `;
+        }
+      },
+      {
+        level: "4 · Roma",
+        text: "Avvicinandoci ancora, compare il Tevere che attraversa la città con le sue anse, e i punti di riferimento più noti: il centro storico, i colli, e il tracciato della metropolitana.",
+        build: (svg) => {
+          svg.innerHTML = `
+            <rect width="400" height="400" fill="#e9e2cf"/>
+            <path d="M40 20 Q100 60 90 110 Q80 160 140 190 Q200 220 180 270 Q160 320 220 380" fill="none" stroke="#7b9ec9" stroke-width="10" stroke-linecap="round"/>
+            <circle cx="150" cy="180" r="10" fill="#7a3b34"/>
+            <text x="165" y="185" fill="#2a2420" font-size="12" font-family="Inter, sans-serif">Centro storico</text>
+            <circle cx="230" cy="260" r="7" fill="#c1432b"/>
+            <text x="242" y="264" fill="#2a2420" font-size="12" font-family="Inter, sans-serif">San Giovanni</text>
+            <line x1="150" y1="180" x2="230" y2="260" stroke="#8a6a45" stroke-width="4" stroke-dasharray="2 6"/>
+          `;
+        }
+      },
+      {
+        level: "5 · San Giovanni",
+        text: "Sei arrivato dove è cominciato tutto il nostro viaggio: la stazione della metropolitana San Giovanni, con le sue pareti che raccontano 450.000 anni di storia di Roma.",
+        build: (svg) => {
+          svg.innerHTML = `
+            <rect width="400" height="400" fill="#efe8da"/>
+            <rect x="60" y="150" width="280" height="120" rx="4" fill="#fbf6e9" stroke="#c6bb9c" stroke-width="2"/>
+            <rect x="60" y="150" width="280" height="10" fill="#0f6b4c"/>
+            <circle cx="140" cy="210" r="26" fill="#c1432b" opacity="0.85"/>
+            <circle cx="220" cy="210" r="26" fill="#c8952a" opacity="0.85"/>
+            <circle cx="300" cy="210" r="26" fill="#5c7fa0" opacity="0.85"/>
+            <text x="200" y="300" text-anchor="middle" fill="#2a2420" font-size="16" font-family="Fraunces, serif" font-weight="600">Stazione San Giovanni</text>
+            <text x="200" y="322" text-anchor="middle" fill="#59554a" font-size="11" font-family="Inter, sans-serif">Il punto di partenza di "Alla scoperta di Roma"</text>
+          `;
+        }
+      }
+    ];
+
+    function starsSVG(n){
+      let s = '';
+      for(let i=0;i<n;i++){
+        const x = Math.random()*400, y = Math.random()*400, r = Math.random()*1.3+0.3;
+        s += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="#fff" opacity="${(Math.random()*0.6+0.3).toFixed(2)}"/>`;
+      }
+      return s;
+    }
+
+    let idx = 0;
+    const svg = document.getElementById('zoomStage');
+    const levelEl = document.getElementById('zoomLevel');
+    const textEl = document.getElementById('zoomText');
+    const dotsEl = document.getElementById('zoomDots');
+    const backBtn = document.getElementById('zoomBack');
+    const fwdBtn = document.getElementById('zoomFwd');
+
+    stages.forEach((s, i) => {
+      const dot = document.createElement('span');
+      dotsEl.appendChild(dot);
+    });
+
+    function render(){
+      const stage = stages[idx];
+      stage.build(svg);
+      levelEl.textContent = stage.level;
+      textEl.textContent = stage.text;
+      Array.from(dotsEl.children).forEach((d, i) => d.classList.toggle('active', i === idx));
+      backBtn.disabled = idx === 0;
+      fwdBtn.disabled = idx === stages.length - 1;
+      fwdBtn.textContent = idx === stages.length - 1 ? 'Arrivati ✓' : 'Scendi →';
+    }
+
+    backBtn.addEventListener('click', () => { if(idx > 0){ idx--; render(); } });
+    fwdBtn.addEventListener('click', () => { if(idx < stages.length - 1){ idx++; render(); } });
+
+    render();
+  })();
+  </script>
+
+  <div class="entry">
+    <div class="stimulus">
+      <div class="stimulus-label">Prima di continuare</div>
+      <p class="stimulus-q">Prima dei satelliti, prima di Google Earth, prima ancora degli aerei di linea... chi pensi sia stato il <strong>primo essere umano a vedere la Terra dall'alto</strong>, tutta intera, sospesa nello spazio? In che anno, secondo te?</p>
+      <p class="stimulus-hint">Confrontati con un compagno o scrivi la tua ipotesi, poi continua per scoprire la risposta.</p>
+    </div>
+  </div>
+
+  <div class="entry">
+    <div class="year">La risposta</div>
+    <h2>Le prime testimonianze dallo spazio</h2>
+    <p>Da quando gli esseri umani hanno davvero iniziato a vedere il pianeta dall'alto, ogni astronauta che l'ha vista intera, sospesa nel buio, ne ha raccontato qualcosa. Ecco alcune delle loro parole, in ordine di tempo.</p>
+  </div>
+
+  <div class="entry">
+    <div class="year">12 aprile 1961</div>
+    <h2>Jurij Gagarin, il primo sguardo</h2>
+    <div class="who">Missione Vostok 1 — Unione Sovietica, il primo essere umano nello spazio</div>
+    <p>Gagarin orbita attorno alla Terra una sola volta, in 108 minuti, senza nemmeno poter controllare da solo la propria navicella: i comandi manuali erano bloccati da un codice, per sicurezza. Eppure quei 108 minuti bastano per cambiare per sempre il modo in cui l'umanità guarda il proprio pianeta.</p>
+    <div class="entry-img">
+      <img src="https://www.nasa.gov/wp-content/uploads/2023/03/200103main_rs_image_feature_800B_1600x1200.jpg" alt="Jurij Gagarin sull'autobus verso la rampa di lancio, 12 aprile 1961">
+      <div class="caption">Gagarin sull'autobus verso la rampa di lancio, la mattina del 12 aprile 1961. Dietro di lui, German Titov, il suo sostituto. Credit: NASA</div>
+    </div>
+    <div class="pull">
+      <p>"Il cielo è molto nero, la Terra è azzurra. Tutto può essere visto molto chiaramente."</p>
+      <div class="attrib">Jurij Gagarin, in diretta radio dallo spazio, 12 aprile 1961</div>
+    </div>
+    <p>Eccola: l'arancia blu di cui parlavamo all'inizio. Gagarin è il primo essere umano a poterla descrivere con parole vere, non immaginate.</p>
+    <p>Più tardi, ricordando quei minuti, userà parole quasi identiche a quelle di una nota canzone italiana dello stesso periodo: da lassù, dirà, la Terra è bellissima, senza frontiere né confini.</p>
+  </div>
+
+  <div class="entry">
+    <div class="year">24 dicembre 1968</div>
+    <h2>L'alba della Terra</h2>
+    <div class="who">Missione Apollo 8 — Frank Borman, Jim Lovell, Bill Anders</div>
+    <p>Il primo equipaggio a lasciare l'orbita terrestre e a raggiungere un altro corpo celeste non stava fotografando la Terra: stava studiando la superficie della Luna, in vista di un futuro allunaggio. Alla quarta orbita lunare, però, il comandante Borman vede per caso la Terra sorgere sopra l'orizzonte grigio della Luna. Non era un'osservazione prevista dal piano di volo: gli astronauti smettono per un attimo il programma e si contendono la pellicola a colori per non perdere lo scatto.</p>
+    <div class="pull">
+      <p>"Che piccola sembra la Terra... non ha una cornice. È sospesa lì, l'unico colore nel buio dello spazio."</p>
+      <div class="attrib">Bill Anders, pilota del modulo lunare, Apollo 8</div>
+    </div>
+    <div class="entry-img">
+      <img src="https://www.nasa.gov/wp-content/uploads/2023/03/apollo08_earthrise.jpg" alt="Earthrise: la Terra che sorge sopra l'orizzonte lunare, fotografata da Bill Anders il 24 dicembre 1968">
+      <div class="caption">"Earthrise", fotografata da Bill Anders il 24 dicembre 1968. Credit: NASA</div>
+    </div>
+    <p>Quella foto, conosciuta come <em>Earthrise</em>, diventerà una delle immagini più riprodotte del Novecento, ed è considerata tra le scintille che accesero il movimento ambientalista degli anni Settanta: per la prima volta l'umanità vide il proprio pianeta come un oggetto piccolo e fragile, sospeso nel nulla.</p>
+    <p>Riflettendo su quella missione, Anders concluse che erano partiti per esplorare la Luna, ma che la scoperta più importante era stata la Terra stessa. Il suo compagno Jim Lovell, guardandola da 386.000 km di distanza, la descrisse come una grande oasi in mezzo all'immensità dello spazio.</p>
+  </div>
+
+  <div class="entry">
+    <div class="year">21 luglio 1969</div>
+    <h2>L'uomo più solo dell'universo</h2>
+    <div class="who">Missione Apollo 11 — Michael Collins</div>
+    <p>Mentre Neil Armstrong e Buzz Aldrin scendevano sulla Luna, un terzo astronauta restava da solo in orbita lunare, a bordo del modulo di comando: per lunghi tratti, passando dietro la Luna, perdeva ogni contatto radio sia con i compagni sia con la Terra. Era Michael Collins — nato, per una curiosa coincidenza, proprio a Roma, dove suo padre prestava servizio come militare.</p>
+    <div class="entry-img">
+      <img src="https://images-assets.nasa.gov/image/S69-31742/S69-31742~large.jpg" alt="Ritratto ufficiale dell'astronauta Michael Collins, luglio 1969">
+      <div class="caption">Ritratto ufficiale di Michael Collins, luglio 1969. Credit: NASA</div>
+    </div>
+    <div class="pull">
+      <p>"Houston, Apollo 11... ho il mondo nel mio finestrino."</p>
+      <div class="attrib">Michael Collins, 28 ore e 7 minuti dopo il decollo</div>
+    </div>
+    <p>Collins raccontò che la Terra, vista da lì, sembrava un piccolo puntino azzurro e bianco, abbastanza piccolo da poter essere coperto con un pollice: eppure quella vista aveva qualcosa di emotivamente sconvolgente, una fragilità che lui stesso trovava difficile da spiegare. Anni dopo avrebbe scritto che se tutti potessero vedere la Terra fluttuare fuori dal proprio finestrino, ogni giorno sarebbe la Giornata della Terra.</p>
+  </div>
+
+  <div class="entry">
+    <div class="year">1971</div>
+    <h2>Un cambiamento nella mente</h2>
+    <div class="who">Missione Apollo 14 — Edgar Mitchell</div>
+    <p>Tornando verso casa dopo aver camminato sulla Luna, la navicella di Mitchell ruotava lentamente su se stessa per bilanciare la temperatura: ogni due minuti, dal finestrino, si alternavano la Terra, la Luna, il Sole e le stelle. Fu in quei momenti che Mitchell provò quello che lui stesso non sapeva descrivere con il linguaggio di un pilota collaudatore.</p>
+    <div class="entry-img">
+      <img src="https://www.nasa.gov/wp-content/uploads/2023/03/s70-55388.jpg" alt="Ritratto ufficiale dell'astronauta Edgar D. Mitchell, con lo stemma della missione Apollo 14 sullo sfondo">
+      <div class="caption">Ritratto ufficiale di Edgar D. Mitchell, con lo stemma dell'Apollo 14 sullo sfondo. Credit: NASA</div>
+    </div>
+    <p>Mitchell lo chiamò "Big Picture Effect"; anni dopo, lo scrittore Frank White, intervistando decine di astronauti, gli darà il nome con cui è conosciuto ancora oggi: <strong>overview effect</strong>, l'effetto veduta d'insieme. È la sensazione, riportata da molti astronauti prima e dopo di lui, di percepire all'improvviso quanto tutto — persone, confini, pianeta — sia profondamente connesso, vista da lassù.</p>
+  </div>
+
+  <div class="closing">
+    <h3>Un effetto che continua ancora oggi</h3>
+    <p>L'overview effect non è rimasto un'esperienza isolata degli anni delle missioni lunari: gli astronauti che oggi vivono per mesi sulla Stazione Spaziale Internazionale, guardando la Terra scorrere sotto di loro sedici volte al giorno, riportano ancora la stessa sensazione di meraviglia e di fragilità del pianeta. È la stessa intuizione, in fondo, da cui è partito questo progetto: che per capire davvero un luogo — che sia la Terra intera o un quartiere di Roma — bisogna guardarlo sia dall'alto sia da vicino, camminandoci dentro.</p>
+  </div>
+
+  <div class="sources">
+    <h3>Fonti</h3>
+    <div class="src-group">
+      <div class="src-label">Jurij Gagarin, 1961</div>
+      <ul>
+        <li><a href="https://www.osservatoriorussia.com/2021/04/12/12-aprile-1961-yuri-gagarin-primo-uomo-nello-spazio/" target="_blank" rel="noopener">osservatoriorussia.com — 12 aprile 1961: Yuri Gagarin, primo uomo nello spazio</a></li>
+        <li><a href="https://st.ilsole24ore.com/art/notizie/2016-04-11/il-12-aprile-1961-gagarin-conquistava-spazio--da-quassu-terra-e-bellissima-senza-frontiere-ne-confini-133827.shtml" target="_blank" rel="noopener">Il Sole 24 Ore — «Da quassù la Terra è bellissima, senza frontiere né confini»</a></li>
+        <li><a href="https://it.wikiquote.org/wiki/Jurij_Gagarin" target="_blank" rel="noopener">Wikiquote — Jurij Gagarin</a></li>
+      </ul>
+    </div>
+    <div class="src-group">
+      <div class="src-label">Apollo 8, Earthrise, 1968</div>
+      <ul>
+        <li><a href="https://www.coelum.com/articoli/astronautica/esplorare-lo-spazio-per-scoprire-la-terra" target="_blank" rel="noopener">Coelum Astronomia — Esplorare lo spazio per scoprire la Terra</a></li>
+        <li><a href="https://www.focus.it/scienza/spazio/45-anni-fa-la-prima-foto-della-terra-che-sorge-dalla-luna" target="_blank" rel="noopener">Focus.it — 45 anni fa la prima foto della Terra che sorge dalla Luna</a></li>
+        <li><a href="https://science.nasa.gov/missions/landsat/remembering-bill-anders/" target="_blank" rel="noopener">NASA Science — Remembering Bill Anders</a></li>
+        <li><a href="https://www.pbs.org/wgbh/americanexperience/features/moon-earth-moon" target="_blank" rel="noopener">PBS American Experience — Moon: Earth, Moon</a></li>
+        <li><a href="https://it.wikipedia.org/wiki/Apollo_8" target="_blank" rel="noopener">Wikipedia — Apollo 8</a></li>
+      </ul>
+    </div>
+    <div class="src-group">
+      <div class="src-label">Michael Collins, Apollo 11, 1969</div>
+      <ul>
+        <li><a href="https://tg24.sky.it/scienze/2019/07/19/Missione-spaziale-Apollo-11-michael-collins-intervista" target="_blank" rel="noopener">Sky TG24 — Missione spaziale Apollo 11: intervista a Michael Collins</a></li>
+        <li><a href="https://www.focus.it/scienza/spazio/apollo-11-michael-collins-uomo-piu-solo-del-mondo" target="_blank" rel="noopener">Focus.it — Apollo 11: l'uomo più solo dell'Universo</a></li>
+        <li><a href="https://it.wikiquote.org/wiki/Michael_Collins_(astronauta)" target="_blank" rel="noopener">Wikiquote — Michael Collins (astronauta)</a></li>
+        <li><a href="https://www.vocidihangar.it/w/carrying-the-fire-il-mio-viaggio-verso-la-luna/" target="_blank" rel="noopener">Voci di Hangar — Carrying the Fire, il mio viaggio verso la Luna</a></li>
+      </ul>
+    </div>
+    <div class="src-group">
+      <div class="src-label">Edgar Mitchell e l'overview effect, 1971</div>
+      <ul>
+        <li><a href="https://www.fattistrani.it/post/ed-mitchell-citazione-effetto-veduta-d-insieme" target="_blank" rel="noopener">Fatti Strani — Ed Mitchell, l'effetto veduta d'insieme</a></li>
+        <li><a href="https://www.vice.com/it/article/astronauti-metafisici/" target="_blank" rel="noopener">Vice Italia — Quando gli astronauti incontrano la metafisica</a></li>
+        <li><a href="https://airandspace.si.edu/stories/editorial/most-interesting-man-moon-remembering-edgar-d-mitchell" target="_blank" rel="noopener">Smithsonian Air &amp; Space — Remembering Edgar D. Mitchell</a></li>
+      </ul>
+    </div>
+    <p class="src-note">I brani citati sono riportati in forma breve e tradotti liberamente; per il testo integrale delle interviste e degli articoli si rimanda alle fonti originali collegate.</p>
+    <div class="src-group" style="margin-top:1.4rem;">
+      <div class="src-label">Immagini</div>
+      <ul>
+        <li>Tutte le fotografie sono opera della NASA (dominio pubblico) — <a href="https://www.nasa.gov/image-article/making-history-2/" target="_blank" rel="noopener">Gagarin sull'autobus verso il lancio</a>, <a href="https://www.nasa.gov/image-article/apollo-8-earthrise/" target="_blank" rel="noopener">"Earthrise", Apollo 8</a>, <a href="https://www.nasa.gov/former-astronaut-michael-collins/" target="_blank" rel="noopener">ritratto di Michael Collins</a>, <a href="https://www.nasa.gov/image-detail/astronaut-edgar-d-mitchell-lunar-module-pilot-of-apollo-14" target="_blank" rel="noopener">ritratto di Edgar D. Mitchell</a>.</li>
+      </ul>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Progetto didattico "Alla scoperta di Roma" — <a href="index.html" style="color:var(--space);font-weight:600;">torna all'indice del progetto</a>
+</footer>
+
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

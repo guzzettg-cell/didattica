@@ -254,6 +254,39 @@ var MODULI = [
       { titolo: "L'Italia meridionale e insulare", dipartimento: true, libri: ["paesaggi"], pagine: "B162–B189", attivita: [] }
     ]
   },
+  {
+    materia: "geografia",
+    classe: "prima",
+    numero: "VI",
+    titolo: "Alla scoperta di Roma",
+    descrizione: "Lezioni extra, non presenti nel libro: storia e geografia camminando per Roma. Si parte dalle pareti della stazione San Giovanni della metro C, poi cinque passeggiate (missioni), una per epoca, e un atlante da costruire insieme. Le missioni si possono fare anche cercando le informazioni sul web.",
+    link: "geografia/prima/alla-scoperta-di-roma/index.html",
+    lezioni: [
+      { titolo: "Punti di vista: la Terra dall'alto", descrizione: "Lezione extra. Dal tuffo di Google Earth fino a San Giovanni, alle prime testimonianze degli astronauti (Gagarin, Apollo 8, Collins, Mitchell).", link: "geografia/prima/alla-scoperta-di-roma/punti-di-vista.html", data: "2026-11-06", attivita: [
+        { tipo: "Lettura", titolo: "Punti di vista", descrizione: "L'arancia blu, la simulazione dello zoom e le parole degli astronauti.", link: "geografia/prima/alla-scoperta-di-roma/punti-di-vista.html", data: "2026-11-06" }
+      ] },
+      { titolo: "Un pozzo nel tempo: la stazione San Giovanni", descrizione: "Lezione extra. Nove epoche lungo le pareti della metro C, dal Paleolitico a oggi, con le note di geografia e migrazioni.", link: "geografia/prima/alla-scoperta-di-roma/alla-scoperta-di-roma.html", data: "2026-11-06", attivita: [
+        { tipo: "Lezione", titolo: "Un pozzo nel tempo", descrizione: "I nove livelli della stazione e il quiz di 14 domande.", link: "geografia/prima/alla-scoperta-di-roma/alla-scoperta-di-roma.html", data: "2026-11-06" },
+        { tipo: "Missione · mobile", titolo: "Missione San Giovanni", descrizione: "Da seguire con il telefono dentro la stazione.", link: "geografia/prima/alla-scoperta-di-roma/missione-san-giovanni-mobile.html", data: "2026-11-06" },
+        { tipo: "Missione · da stampare", titolo: "Missione San Giovanni", link: "geografia/prima/alla-scoperta-di-roma/missione-san-giovanni.docx", data: "2026-11-06" }
+      ] },
+      { titolo: "Le missioni sul campo", descrizione: "Lezione extra. Cinque passeggiate per famiglie o gruppi: Monte Mario (preistoria), Via Appia Antica (Roma antica), Caffarella (Medioevo), Gianicolo (età moderna), EUR (età contemporanea).", link: "geografia/prima/alla-scoperta-di-roma/index.html", data: "2026-11-06", attivita: [
+        { tipo: "Missione · mobile", titolo: "Monte Mario: dove Roma era sotto il mare", link: "geografia/prima/alla-scoperta-di-roma/missione-monte-mario-mobile.html", data: "2026-11-06" },
+        { tipo: "Missione · da stampare", titolo: "Monte Mario", link: "geografia/prima/alla-scoperta-di-roma/missione-monte-mario.docx", data: "2026-11-06" },
+        { tipo: "Missione · mobile", titolo: "Via Appia Antica: la Regina delle strade", link: "geografia/prima/alla-scoperta-di-roma/missione-via-appia-mobile.html", data: "2026-11-06" },
+        { tipo: "Missione · da stampare", titolo: "Via Appia Antica", link: "geografia/prima/alla-scoperta-di-roma/missione-via-appia.docx", data: "2026-11-06" },
+        { tipo: "Missione · mobile", titolo: "Caffarella: l'acqua che ha modellato la valle", link: "geografia/prima/alla-scoperta-di-roma/missione-caffarella-mobile.html", data: "2026-11-06" },
+        { tipo: "Missione · da stampare", titolo: "Caffarella", link: "geografia/prima/alla-scoperta-di-roma/missione-caffarella.docx", data: "2026-11-06" },
+        { tipo: "Missione · mobile", titolo: "Gianicolo: il colle delle fontane", link: "geografia/prima/alla-scoperta-di-roma/missione-gianicolo-mobile.html", data: "2026-11-06" },
+        { tipo: "Missione · da stampare", titolo: "Gianicolo", link: "geografia/prima/alla-scoperta-di-roma/missione-gianicolo.docx", data: "2026-11-06" },
+        { tipo: "Missione · mobile", titolo: "EUR: una città progettata a tavolino", link: "geografia/prima/alla-scoperta-di-roma/missione-eur-mobile.html", data: "2026-11-06" },
+        { tipo: "Missione · da stampare", titolo: "EUR", link: "geografia/prima/alla-scoperta-di-roma/missione-eur.docx", data: "2026-11-06" }
+      ] },
+      { titolo: "L'atlante dei quartieri di Roma", descrizione: "Lezione extra. Dopo le passeggiate i ragazzi diventano cartografi: aggiungono nuovi luoghi sulla mappa, filtrabili per epoca.", link: "geografia/prima/alla-scoperta-di-roma/atlante-roma-quartieri.html", data: "2026-11-06", attivita: [
+        { tipo: "Attività", titolo: "Atlante dei quartieri di Roma", descrizione: "Mappa interattiva con le cinque missioni; si esporta e si riprende alla lezione successiva.", link: "geografia/prima/alla-scoperta-di-roma/atlante-roma-quartieri.html", data: "2026-11-06" }
+      ] }
+    ]
+  },
 
   /* ---------------- GEOGRAFIA · SECONDA ---------------- */
   /* Organizzata secondo Paesaggi vicini e lontani 2 (pagine C e D).

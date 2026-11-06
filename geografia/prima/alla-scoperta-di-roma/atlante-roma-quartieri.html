@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alla scoperta di Roma — Atlante dei quartieri</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#101b1e;
+    --panel:#17282c;
+    --panel-alt:#1d3237;
+    --line:#2a3e42;
+    --ink:#ede6d6;
+    --ink-dim:#9fb0ae;
+
+    --preistoria:#6fa593;
+    --antica:#c1615a;
+    --medioevo:#c49a5e;
+    --moderna:#7b9ec9;
+    --contemporanea:#e0b23c;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;margin:0;}
+  body{background:var(--bg);color:var(--ink);font-family:'Source Sans 3', sans-serif;display:flex;flex-direction:column;overflow:hidden;}
+  header{padding:16px 24px 12px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:10px 24px;flex-shrink:0;}
+  header .title-block h1{font-family:'Fraunces', serif;font-weight:600;font-size:21px;margin:0 0 2px;}
+  header .title-block p{margin:0;font-size:12.5px;color:var(--ink-dim);}
+  .legend{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+  .chip{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--panel-alt);font-size:12.5px;color:var(--ink-dim);cursor:pointer;user-select:none;transition:border-color .15s ease, color .15s ease, opacity .15s ease;}
+  .chip .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+  .chip.active{color:var(--ink);border-color:currentColor;}
+  .chip.dimmed{opacity:0.35;}
+  .hbtn{background:var(--panel-alt);border:1px solid var(--line);color:var(--ink);padding:6px 13px;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;}
+  .hbtn:hover{border-color:var(--ink-dim);}
+  .hbtn.add{background:#2c4d34;border-color:#2c4d34;}
+  #importInput{display:none;}
+
+  main{flex:1;display:grid;grid-template-columns:1fr 400px;min-height:0;}
+  #map{height:100%;width:100%;background:#e9e6da;cursor:default;}
+  #map.picking{cursor:crosshair;}
+  aside{border-left:1px solid var(--line);background:var(--panel);overflow-y:auto;padding:22px 24px 60px;}
+  aside::-webkit-scrollbar{width:8px;}
+  aside::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
+
+  .intro h2{font-family:'Fraunces', serif;font-weight:600;font-size:19px;margin:0 0 10px;}
+  .intro p{font-size:14px;line-height:1.6;color:var(--ink-dim);margin:0 0 14px;}
+  .progress{font-size:12.5px;color:var(--ink-dim);margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line);}
+  .progress b{color:var(--ink);}
+  .place-list{list-style:none;margin:0;padding:0;}
+  .place-list li{display:flex;justify-content:space-between;padding:10px 4px;border-bottom:1px solid var(--line);cursor:pointer;font-size:13.5px;}
+  .place-list li:hover{color:#fff;}
+  .place-list .count{color:var(--ink-dim);font-size:12px;}
+
+  .back-btn{background:none;border:none;color:var(--ink-dim);font-size:12.5px;cursor:pointer;padding:0;margin-bottom:14px;font-family:inherit;}
+  .back-btn:hover{color:var(--ink);}
+  .place-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px;}
+  .place-header h2{font-family:'Fraunces', serif;font-weight:700;font-size:23px;margin:0;}
+  .zone-tag{font-size:12.5px;color:var(--ink-dim);}
+
+  .ep-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px;}
+  .ep-tab{padding:6px 12px;border-radius:8px;background:var(--panel-alt);border:1px solid var(--line);font-size:12.5px;cursor:pointer;color:var(--ink-dim);}
+  .ep-tab.selected{color:var(--ink);border-color:var(--ink-dim);}
+
+  .cat-pill{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;padding:3px 10px;border-radius:999px;margin-bottom:14px;}
+  .cat-pill .dot{width:7px;height:7px;border-radius:50%;}
+
+  .brief-box{background:var(--panel-alt);border:1px solid var(--line);border-radius:8px;padding:13px 15px;margin-bottom:20px;}
+  .brief-label{font-family:'Fraunces', serif;font-weight:600;font-size:12px;color:var(--ink);margin-bottom:6px;}
+  .brief-box p{margin:0;font-size:13.3px;line-height:1.6;color:#d9d2c1;}
+  .full-label{font-family:'Fraunces', serif;font-weight:600;font-size:13px;color:var(--ink);margin-bottom:8px;}
+  article h3{font-family:'Fraunces', serif;font-weight:600;font-size:17px;line-height:1.35;margin:0 0 10px;}
+  article .source{font-size:11.5px;margin-bottom:16px;}
+  article .source a{color:var(--ink-dim);}
+  article .body p{font-size:13.8px;line-height:1.68;color:#d9d2c1;margin:0 0 13px;}
+
+  .spunti-box{margin-top:20px;padding:14px 16px;background:var(--panel-alt);border-left:3px solid var(--preistoria);border-radius:4px;}
+  .spunti-box h4{margin:0 0 6px;font-size:12.5px;color:var(--ink);font-family:'Fraunces', serif;font-weight:600;}
+  .spunti-box p{margin:0;font-size:13px;line-height:1.55;color:var(--ink-dim);}
+
+  .article-actions{display:flex;gap:10px;margin-top:22px;}
+  .article-actions button{background:none;border:1px solid var(--line);color:var(--ink-dim);font-size:12px;padding:6px 12px;border-radius:6px;cursor:pointer;font-family:inherit;}
+  .article-actions button:hover{color:var(--ink);border-color:var(--ink-dim);}
+
+  .leaflet-tooltip.city-tooltip{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.35);padding:12px 13px;width:200px;white-space:normal;font-family:'Source Sans 3', sans-serif;opacity:1;}
+  .leaflet-tooltip.city-tooltip::before{border-top-color:var(--panel);}
+  .tooltip-city{font-family:'Fraunces', serif;font-weight:600;font-size:13.5px;margin-bottom:6px;}
+  .tooltip-ep-title{font-size:11.5px;font-weight:600;color:var(--ink-dim);margin-bottom:5px;}
+  .tooltip-ep-summary{font-size:11.8px;line-height:1.45;color:var(--ink-dim);display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;}
+  .tooltip-hint{margin-top:8px;padding-top:7px;border-top:1px solid var(--line);font-size:10.5px;color:var(--ink-dim);font-style:italic;}
+  .cluster-pin{border-radius:50%;border:2.5px solid #17282c;box-shadow:0 1px 4px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;color:#101b1e;font-family:'Source Sans 3',sans-serif;font-weight:700;}
+
+  .picking-banner{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--ink-dim);color:var(--ink);padding:8px 16px;border-radius:20px;font-size:13px;z-index:900;display:none;box-shadow:0 4px 14px rgba(0,0,0,.35);}
+  .picking-banner.show{display:block;}
+
+  .overlay{position:fixed;inset:0;background:rgba(16,27,30,.6);display:none;align-items:center;justify-content:center;z-index:1000;padding:1rem;}
+  .overlay.show{display:flex;}
+  .form-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:1.5rem;width:100%;max-width:420px;max-height:90vh;overflow-y:auto;color:var(--ink);}
+  .form-card h2{font-family:'Fraunces', serif;font-size:1.15rem;margin:0 0 .9rem;}
+  .form-field{margin-bottom:1rem;}
+  .form-field label{display:block;font-size:.78rem;font-weight:600;color:var(--ink-dim);margin-bottom:.35rem;}
+  .form-field input[type=text],.form-field select,.form-field textarea{
+    width:100%;border:1.5px solid var(--line);border-radius:6px;padding:.55rem .7rem;font-size:.92rem;color:var(--ink);background:var(--bg);font-family:inherit;
+  }
+  .form-field textarea{min-height:110px;resize:vertical;}
+  .form-field input:focus,.form-field select:focus,.form-field textarea:focus{outline:none;border-color:var(--ink-dim);}
+  .form-actions{display:flex;gap:.6rem;margin-top:1.1rem;}
+  .form-actions button{flex:1;padding:.65rem 1rem;border-radius:6px;font-weight:600;font-size:.88rem;cursor:pointer;font-family:inherit;}
+  .btn-save{background:#2c4d34;color:#fbf6e9;border:none;}
+  .btn-cancel{background:none;border:1.5px solid var(--line);color:var(--ink-dim);}
+  .btn-delete{background:none;border:1.5px solid #c1615a;color:#e2a39c;flex:0 0 auto;padding:.65rem .9rem;}
+  .coord-hint{font-size:.72rem;color:var(--ink-dim);margin-bottom:.9rem;}
+
+  @media (max-width: 860px){
+    main{grid-template-columns:1fr;grid-template-rows:42vh 1fr;}
+    aside{border-left:none;border-top:1px solid var(--line);}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title-block">
+    <h1>Alla scoperta di Roma</h1>
+    <p>Atlante dei quartieri — dalla preistoria a oggi</p>
+  </div>
+  <div class="legend" id="legend"></div>
+  <div style="display:flex;gap:8px;">
+    <button class="hbtn add" id="btnAdd">+ Aggiungi un luogo</button>
+    <button class="hbtn" id="btnExport">Esporta</button>
+    <button class="hbtn" id="btnImport">Importa</button>
+    <input type="file" id="importInput" accept="application/json">
+  </div>
+</header>
+
+<main>
+  <div id="map">
+    <div class="picking-banner" id="pickingBanner">Clicca su un punto della mappa per posizionare il tuo luogo</div>
+  </div>
+  <aside id="panel"></aside>
+</main>
+
+<div class="overlay" id="overlay">
+  <div class="form-card">
+    <h2 id="formTitle">Aggiungi un luogo</h2>
+    <p class="coord-hint" id="coordHint"></p>
+    <div class="form-field">
+      <label for="fName">Nome del luogo</label>
+      <input type="text" id="fName" placeholder="Es. Ponte Milvio">
+    </div>
+    <div class="form-field">
+      <label for="fZone">Quartiere / zona (facoltativo)</label>
+      <input type="text" id="fZone" placeholder="Es. Flaminio">
+    </div>
+    <div class="form-field">
+      <label for="fEra">Epoca</label>
+      <select id="fEra"></select>
+    </div>
+    <div class="form-field">
+      <label for="fTitle">Titolo della puntata</label>
+      <input type="text" id="fTitle" placeholder="Es. Il ponte che ha visto tremila anni">
+    </div>
+    <div class="form-field">
+      <label for="fText">Racconta questo luogo</label>
+      <textarea id="fText" placeholder="Scrivi qui il tuo testo..."></textarea>
+    </div>
+    <div class="form-field">
+      <label for="fSpunti">Spunti geografici (facoltativo)</label>
+      <textarea id="fSpunti" placeholder="A quale unità del libro si collega? Che strumento del geografo hai usato?" style="min-height:60px;"></textarea>
+    </div>
+    <div class="form-actions">
+      <button class="btn-delete" id="btnDelete" style="display:none;">Elimina</button>
+      <button class="btn-cancel" id="btnCancel">Annulla</button>
+      <button class="btn-save" id="btnSave">Salva</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+<script>
+// ---------------------------------------------------------------
+// CATEGORIE: le cinque epoche del progetto "Alla scoperta di Roma"
+// ---------------------------------------------------------------
+const CATEGORIES = {
+  preistoria:     { label: 'Preistoria',        hex:'#6fa593' },
+  antica:         { label: 'Roma antica',       hex:'#c1615a' },
+  medioevo:       { label: 'Medioevo',          hex:'#c49a5e' },
+  moderna:        { label: 'Età moderna',       hex:'#7b9ec9' },
+  contemporanea:  { label: 'Età contemporanea', hex:'#e0b23c' },
+};
+
+// ---------------------------------------------------------------
+// DATI: le cinque passeggiate già fatte, come punto di partenza.
+// Nuovi luoghi aggiunti dagli studenti si accodano qui (custom:true).
+// ---------------------------------------------------------------
+let nextNum = 6;
+let EPISODES = [
+  {
+    num:1, custom:false, title:"Dove Roma era sotto il mare", place:"Monte Mario", zone:"Trionfale / Prati",
+    lat:41.9187, lon:12.4477, category:"preistoria",
+    summary:"La Riserva Naturale di Monte Mario, il punto più alto di Roma, è fatta di sabbie e conchiglie di un mare che copriva l'area milioni di anni fa: lo stesso studiato da Leonardo da Vinci nel 1500. In cima, per quasi tutto il Novecento, si è calcolata la posizione di ogni mappa italiana.",
+    text:`Salendo il sentiero che parte da via Gomenizza, tra affioramenti di roccia chiara, si cammina letteralmente su un antico fondale marino: la collina di Monte Mario è formata da depositi pliocenici, tra i terreni più antichi affioranti nel Comune di Roma.
+Non è una scoperta recente: già Leonardo da Vinci, durante un soggiorno romano nel 1513-1516, veniva qui a raccogliere conchiglie fossili insieme ai suoi allievi.
+In cima, a Villa Mellini, si trova l'ex Osservatorio Astronomico: da qui, per quasi tutto il Novecento, sono state calcolate le coordinate di ogni mappa ufficiale italiana, nel sistema geodetico noto come Roma40. Poco più in là, la Terrazza dello Zodiaco offre il panorama più alto della città, fino alla cupola di San Pietro e ai Castelli Romani.`,
+    spunti:"Unità 3, Gli strumenti del geografo: punti di riferimento, orientamento, localizzazione di un punto sulla superficie terrestre.",
+  },
+  {
+    num:2, custom:false, title:"La Regina delle strade", place:"Via Appia Antica", zone:"Appio-Latino",
+    lat:41.8637, lon:12.5083, category:"antica",
+    summary:"Costruita nel 312 a.C., la Via Appia collegava Roma a Brindisi per 124 miglia romane. Il suo basolato originale, ancora percorribile da Porta San Sebastiano, fu ricavato da una colata di lava dei Colli Albani vecchia quasi 300.000 anni.",
+    text:`Da Porta San Sebastiano, una delle porte meglio conservate delle Mura Aureliane, parte ancora oggi la Regina Viarum. I Romani segnavano ogni miglio percorso (1.478 metri) con una colonna, i miliari: gli antenati dei nostri segnali stradali.
+Sotto i piedi, per lunghi tratti, si cammina sul basolato originale: blocchi di leucitite, una roccia vulcanica che arriva da una colata di lava dei Colli Albani di quasi 300.000 anni fa, la stessa da cui è nata anche parte del paesaggio di Roma sud.
+Lungo la via si susseguono monumenti funebri, non abitazioni: il Circo di Massenzio, il Mausoleo di Cecilia Metella, la zona archeologica di Capo di Bove. Gli ingegneri romani costruivano le strade il più possibile dritte, per collegare in modo rapido ed efficiente le città dell'Impero.`,
+    spunti:"Unità 12, Le strade dell'Impero romano: misurare le distanze, la scala di riduzione, l'orientamento lungo un asse viario.",
+  },
+  {
+    num:3, custom:false, title:"L'acqua che ha modellato la valle", place:"Parco della Caffarella", zone:"Appio-Latino",
+    lat:41.8580, lon:12.5265, category:"medioevo",
+    summary:"Nella valle della Caffarella scorre ancora la Marrana dell'Acqua Mariana, scavata nel 1120 per portare acqua e forza motrice ai mulini di Roma: un piccolo corso d'acqua che per secoli ha modellato il lavoro e il paesaggio di questa zona.",
+    text:`La Caffarella è una valle attraversata da più corsi d'acqua: il fiume Almone, la Marrana della Caffarella e, soprattutto, la Marrana dell'Acqua Mariana, fatta scavare nel 1120 da papa Callisto II captando le antiche sorgenti degli acquedotti romani Tepula e Iulia.
+Quest'acqua alimentava le "valche", mulini medievali usati per lavare e lavorare la lana. Alcuni edifici romani, come un colombario del IV secolo, furono riadattati nel Medioevo proprio a questo scopo, invece di essere abbattuti.
+Vicino al Casale della Vaccareccia, tre piccoli ponti antichi scavalcano altrettanti corsi d'acqua che si incontrano in questo punto della valle: un vero e proprio nodo idrografico rimasto quasi intatto nel cuore di Roma.`,
+    spunti:"Unità 12-13, insediamenti medievali e reticolo idrografico: come un corso d'acqua nasce, scorre e viene trasformato dall'uso umano.",
+  },
+  {
+    num:4, custom:false, title:"Il colle delle fontane", place:"Gianicolo", zone:"Trastevere",
+    lat:41.8896, lon:12.4656, category:"moderna",
+    summary:"Racchiuso dentro nuove mura nel Seicento, il Gianicolo custodisce il Fontanone, una fontana barocca del 1612 che celebra il restauro dell'antico acquedotto Traiano: un esempio di come età moderna e Roma antica si intreccino nello stesso paesaggio.",
+    text:`Per secoli il Gianicolo restò fuori dalle mura della città. Solo nel Seicento papa Urbano VIII decise di racchiuderlo dentro nuove fortificazioni, le Mura Gianicolensi, il cui accesso principale è ancora oggi Porta San Pancrazio.
+Poco distante si trova il Fontanone, la Fontana dell'Acqua Paola: costruita nel 1612 per volere di papa Paolo V, non è solo un monumento decorativo ma celebra il restauro dell'antico acquedotto romano Traiano, che porta ancora oggi l'acqua dal lago di Bracciano fino a qui.
+Dal Belvedere di Piazzale Garibaldi si gode uno dei panorami più ampi su Roma: cupole, palazzi e quartieri di epoche diverse si possono riconoscere con un solo sguardo, da un unico punto panoramico.`,
+    spunti:"Unità 13-14, la città in età moderna e la trasformazione del paesaggio: riconoscere elementi di epoche diverse nello stesso panorama.",
+  },
+  {
+    num:5, custom:false, title:"Una città progettata a tavolino", place:"EUR", zone:"EUR",
+    lat:41.8434, lon:12.4707, category:"contemporanea",
+    summary:"L'EUR è l'unico quartiere di Roma nato da un unico progetto urbanistico degli anni Trenta, con una pianta geometrica ben riconoscibile dall'alto: il suo simbolo, il Palazzo della Civiltà Italiana, reinterpreta in chiave moderna le arcate del Colosseo.",
+    text:`A differenza del centro storico, cresciuto nei secoli in modo spontaneo, l'EUR nasce tutto insieme: fu progettato da una commissione di architetti guidata da Marcello Piacentini per un'Esposizione Universale prevista nel 1942, mai realizzata per lo scoppio della guerra.
+Il suo simbolo è il Palazzo della Civiltà Italiana, conosciuto come "Colosseo Quadrato": 216 arcate ripetute sui quattro lati reinterpretano, in chiave razionalista e geometrica, l'antico Colosseo.
+Osservato dall'alto, con una foto satellitare, l'EUR mostra viali larghi e dritti che si incrociano ad angolo retto: una pianta pensata a tavolino, ben diversa da quella irregolare dei quartieri cresciuti nel tempo. Anche il Laghetto al centro del quartiere è artificiale, parte dello stesso progetto.`,
+    spunti:"Unità 19, i paesaggi delle metropoli oggi: leggere una pianta urbana dall'alto, riconoscere un quartiere pianificato rispetto a uno spontaneo.",
+  },
+];
+
+function assignMarkerPositions(episodes){
+  const byPlace = new Map();
+  episodes.forEach(ep => {
+    if(!byPlace.has(ep.place)) byPlace.set(ep.place, []);
+    byPlace.get(ep.place).push(ep);
+  });
+  byPlace.forEach(group => {
+    const n = group.length;
+    const R = 0.003;
+    group.forEach((ep, i) => {
+      if(n === 1){ ep.markerLat = ep.lat; ep.markerLon = ep.lon; }
+      else {
+        const angle = (2 * Math.PI * i / n) - Math.PI / 2;
+        const latFactor = Math.cos(ep.lat * Math.PI / 180) || 1;
+        ep.markerLat = ep.lat + R * Math.sin(angle);
+        ep.markerLon = ep.lon + (R * Math.cos(angle)) / latFactor;
+      }
+    });
+  });
+}
+
+function groupByPlace(episodes){
+  const map = new Map();
+  episodes.forEach(ep => {
+    const key = ep.place;
+    if(!map.has(key)) map.set(key, { place: ep.place, zone: ep.zone, lat: ep.lat, lon: ep.lon, episodes: [] });
+    map.get(key).episodes.push(ep);
+  });
+  return Array.from(map.values());
+}
+
+// ---------------------------------------------------------------
+// Mappa Leaflet, centrata su Roma
+// ---------------------------------------------------------------
+const map = L.map('map', { zoomControl: true, minZoom: 10, maxZoom: 17 }).setView([41.8850, 12.4850], 11);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, FAO, NOAA, USGS',
+  maxZoom: 17,
+}).addTo(map);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom: 17 }).addTo(map);
+
+function makeIcon(color){
+  const size = 20;
+  return L.divIcon({ className:'', html:`<div class="cluster-pin" style="width:${size}px;height:${size}px;background:${color};"></div>`, iconSize:[size,size], iconAnchor:[size/2,size/2] });
+}
+function makeClusterIcon(cluster){
+  const childMarkers = cluster.getAllChildMarkers();
+  const color = childMarkers[0].options.catColor;
+  const count = cluster.getChildCount();
+  const size = 30;
+  return L.divIcon({ className:'', html:`<div class="cluster-pin" style="width:${size}px;height:${size}px;background:${color};font-size:12px;">${count}</div>`, iconSize:[size,size], iconAnchor:[size/2,size/2] });
+}
+
+let clusterGroup = null;
+function renderMarkers(activeCats){
+  assignMarkerPositions(EPISODES);
+  if(clusterGroup) map.removeLayer(clusterGroup);
+  clusterGroup = L.markerClusterGroup({ maxClusterRadius: 60, spiderfyOnMaxZoom: true, showCoverageOnHover: false, iconCreateFunction: makeClusterIcon });
+
+  EPISODES.filter(e => activeCats.has(e.category)).forEach(ep => {
+    const color = CATEGORIES[ep.category].hex;
+    const marker = L.marker([ep.markerLat, ep.markerLon], { icon: makeIcon(color), catColor: color });
+    const tooltipHtml = `
+      <div class="tooltip-city">${ep.place}</div>
+      <div class="tooltip-ep-title">${ep.title}</div>
+      <div class="tooltip-ep-summary">${ep.summary || ep.text.slice(0,140).trim()+'…'}</div>
+      <div class="tooltip-hint">Clicca per il testo completo &rarr;</div>`;
+    marker.bindTooltip(tooltipHtml, { className:'city-tooltip', direction:'top', offset:[0,-6], sticky:false, opacity:1 });
+    marker.on('click', () => showPlace(ep.place, ep.num));
+    clusterGroup.addLayer(marker);
+  });
+  map.addLayer(clusterGroup);
+}
+
+// ---------------------------------------------------------------
+// Legenda / filtro epoche
+// ---------------------------------------------------------------
+let activeCats = new Set(Object.keys(CATEGORIES));
+const legendEl = document.getElementById('legend');
+Object.entries(CATEGORIES).forEach(([key, cat]) => {
+  const chip = document.createElement('div');
+  chip.className = 'chip active';
+  chip.innerHTML = `<span class="dot" style="background:${cat.hex}"></span>${cat.label}`;
+  chip.style.color = cat.hex;
+  chip.addEventListener('click', () => {
+    if(activeCats.has(key)) activeCats.delete(key); else activeCats.add(key);
+    chip.classList.toggle('dimmed', !activeCats.has(key));
+    renderMarkers(activeCats);
+  });
+  legendEl.appendChild(chip);
+});
+
+const fEra = document.getElementById('fEra');
+Object.entries(CATEGORIES).forEach(([key, cat]) => {
+  const opt = document.createElement('option');
+  opt.value = key; opt.textContent = cat.label;
+  fEra.appendChild(opt);
+});
+
+// ---------------------------------------------------------------
+// Pannello laterale
+// ---------------------------------------------------------------
+const panel = document.getElementById('panel');
+
+function showIntro(){
+  const places = groupByPlace(EPISODES);
+  panel.innerHTML = `
+    <div class="intro">
+      <h2>Un atlante da costruire insieme</h2>
+      <p>Ogni pallino sulla mappa è un luogo di Roma raccontato attraverso un'epoca: clicca per leggere. Usa i filtri in alto per isolare un'epoca, oppure aggiungi tu un nuovo luogo con il pulsante "+ Aggiungi".</p>
+      <div class="progress">Luoghi inseriti finora: <b>${places.length}</b> — puntate totali: <b>${EPISODES.length}</b></div>
+      <ul class="place-list">
+        ${places.map(c => `<li data-place="${c.place}"><span class="cname">${c.place}</span><span class="count">${c.episodes.length} puntat${c.episodes.length>1?'e':'a'}</span></li>`).join('')}
+      </ul>
+    </div>`;
+  panel.querySelectorAll('.place-list li').forEach(li => li.addEventListener('click', () => showPlace(li.dataset.place)));
+}
+
+function showPlace(placeName, epNum){
+  const places = groupByPlace(EPISODES);
+  const place = places.find(c => c.place === placeName);
+  if(!place) return;
+  const ep = epNum ? place.episodes.find(e => e.num === epNum) : place.episodes[0];
+  const cat = CATEGORIES[ep.category];
+
+  panel.innerHTML = `
+    <button class="back-btn" id="backBtn">&larr; Tutti i luoghi</button>
+    <div class="place-header"><h2>${place.place}</h2><span class="zone-tag">${place.zone || ''}</span></div>
+    ${place.episodes.length > 1 ? `
+      <div class="ep-tabs">
+        ${place.episodes.map(e => `<div class="ep-tab ${e.num===ep.num?'selected':''}" data-num="${e.num}">${e.title.length>28?e.title.slice(0,28)+'…':e.title}</div>`).join('')}
+      </div>` : ''}
+    <div class="cat-pill" style="background:${cat.hex}22;color:${cat.hex};"><span class="dot" style="background:${cat.hex}"></span>${cat.label}</div>
+    <article>
+      <h3>${ep.title}</h3>
+      ${ep.summary ? `<div class="brief-box"><div class="brief-label">In breve</div><p>${ep.summary}</p></div>` : ''}
+      <div class="full-label">Testo completo</div>
+      <div class="body">${ep.text.split('\n').filter(p=>p.trim()).map(p => `<p>${p.trim()}</p>`).join('')}</div>
+      ${ep.spunti ? `<div class="spunti-box"><h4>Spunti geografici</h4><p>${ep.spunti}</p></div>` : ''}
+      ${ep.custom ? `<div class="article-actions"><button id="editBtn">Modifica</button><button id="delBtn">Elimina</button></div>` : ''}
+    </article>`;
+  document.getElementById('backBtn').addEventListener('click', showIntro);
+  panel.querySelectorAll('.ep-tab').forEach(tab => tab.addEventListener('click', () => showPlace(placeName, parseInt(tab.dataset.num,10))));
+  if(ep.custom){
+    document.getElementById('editBtn').addEventListener('click', () => openForm(ep));
+    document.getElementById('delBtn').addEventListener('click', () => {
+      if(!confirm('Eliminare questo luogo?')) return;
+      EPISODES = EPISODES.filter(e => e.num !== ep.num);
+      renderMarkers(activeCats);
+      showIntro();
+    });
+  }
+
+  map.flyTo([ep.markerLat, ep.markerLon], 13, { duration: 0.6 });
+  let targetMarker = null;
+  clusterGroup.eachLayer(m => { if(m.getLatLng().lat === ep.markerLat && m.getLatLng().lng === ep.markerLon) targetMarker = m; });
+  if(targetMarker){
+    setTimeout(() => {
+      if(typeof clusterGroup.zoomToShowLayer === 'function') clusterGroup.zoomToShowLayer(targetMarker, () => targetMarker.openTooltip());
+      else targetMarker.openTooltip();
+    }, 650);
+  }
+}
+
+// ---------------------------------------------------------------
+// Aggiungi / modifica un luogo
+// ---------------------------------------------------------------
+let picking = false;
+let editingNum = null;
+let pendingLatLng = null;
+const overlay = document.getElementById('overlay');
+const pickingBanner = document.getElementById('pickingBanner');
+const mapEl = document.getElementById('map');
+
+document.getElementById('btnAdd').addEventListener('click', () => {
+  picking = true;
+  editingNum = null;
+  mapEl.classList.add('picking');
+  pickingBanner.classList.add('show');
+});
+
+map.on('click', (e) => {
+  if(!picking) return;
+  picking = false;
+  mapEl.classList.remove('picking');
+  pickingBanner.classList.remove('show');
+  pendingLatLng = e.latlng;
+  document.getElementById('formTitle').textContent = 'Aggiungi un luogo';
+  document.getElementById('coordHint').textContent = `Posizione: ${e.latlng.lat.toFixed(4)}, ${e.latlng.lng.toFixed(4)}`;
+  document.getElementById('fName').value = '';
+  document.getElementById('fZone').value = '';
+  document.getElementById('fEra').value = 'antica';
+  document.getElementById('fTitle').value = '';
+  document.getElementById('fText').value = '';
+  document.getElementById('fSpunti').value = '';
+  document.getElementById('btnDelete').style.display = 'none';
+  overlay.classList.add('show');
+});
+
+function openForm(ep){
+  editingNum = ep.num;
+  pendingLatLng = { lat: ep.lat, lng: ep.lon };
+  document.getElementById('formTitle').textContent = 'Modifica luogo';
+  document.getElementById('coordHint').textContent = `Posizione: ${ep.lat.toFixed(4)}, ${ep.lon.toFixed(4)}`;
+  document.getElementById('fName').value = ep.place;
+  document.getElementById('fZone').value = ep.zone || '';
+  document.getElementById('fEra').value = ep.category;
+  document.getElementById('fTitle').value = ep.title;
+  document.getElementById('fText').value = ep.text;
+  document.getElementById('fSpunti').value = ep.spunti || '';
+  document.getElementById('btnDelete').style.display = '';
+  overlay.classList.add('show');
+}
+
+document.getElementById('btnCancel').addEventListener('click', () => overlay.classList.remove('show'));
+
+document.getElementById('btnSave').addEventListener('click', () => {
+  const place = document.getElementById('fName').value.trim();
+  const zone = document.getElementById('fZone').value.trim();
+  const category = document.getElementById('fEra').value;
+  const title = document.getElementById('fTitle').value.trim() || place;
+  const text = document.getElementById('fText').value.trim();
+  const spunti = document.getElementById('fSpunti').value.trim();
+  if(!place){ alert('Dai un nome al luogo prima di salvare.'); return; }
+  if(!text){ alert('Scrivi almeno qualche riga di racconto.'); return; }
+
+  if(editingNum){
+    const ep = EPISODES.find(e => e.num === editingNum);
+    Object.assign(ep, { place, zone, category, title, text, summary: text.slice(0,160).trim()+'…', spunti });
+  } else {
+    EPISODES.push({
+      num: nextNum++, custom:true, place, zone, title, text,
+      lat: pendingLatLng.lat, lon: pendingLatLng.lng, category,
+      summary: text.slice(0,160).trim()+'…', spunti,
+    });
+  }
+  overlay.classList.remove('show');
+  renderMarkers(activeCats);
+  showIntro();
+});
+
+document.getElementById('btnDelete').addEventListener('click', () => {
+  if(!editingNum) return;
+  EPISODES = EPISODES.filter(e => e.num !== editingNum);
+  overlay.classList.remove('show');
+  renderMarkers(activeCats);
+  showIntro();
+});
+
+// ---------------------------------------------------------------
+// Esporta / Importa
+// ---------------------------------------------------------------
+document.getElementById('btnExport').addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify(EPISODES, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'atlante-roma.json'; a.click();
+  URL.revokeObjectURL(url);
+});
+document.getElementById('btnImport').addEventListener('click', () => document.getElementById('importInput').click());
+document.getElementById('importInput').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try{
+      const data = JSON.parse(ev.target.result);
+      if(!Array.isArray(data)) throw new Error('formato non valido');
+      EPISODES = data;
+      nextNum = Math.max(...EPISODES.map(e=>e.num), 0) + 1;
+      renderMarkers(activeCats);
+      showIntro();
+    } catch(err){
+      alert('Il file non sembra un atlante valido esportato da questa mappa.');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+// ---------------------------------------------------------------
+// Avvio
+// ---------------------------------------------------------------
+renderMarkers(activeCats);
+showIntro();
+</script>
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

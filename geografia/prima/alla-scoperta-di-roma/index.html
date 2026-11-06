@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alla scoperta di Roma — Indice del progetto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#efe8d8;
+    --cream-deep:#e3d9c1;
+    --ink:#26241e;
+    --ink-soft:#59554a;
+    --line:#c6bb9c;
+    --metro:#0f6b4c;
+    --metro-deep:#0a4d36;
+
+    --preistoria:#4f7a6d;
+    --antica:#7a3b34;
+    --medioevo:#8a6a45;
+    --moderna:#5c7fa0;
+    --contemporanea:#c8952a;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.55;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;margin:0;}
+  p{margin:0 0 1em;}
+  a{color:inherit;}
+
+  .hero{padding:8vh 8vw 6vh;border-bottom:1px solid var(--line);}
+  .hero .kicker{display:flex;align-items:center;gap:.6em;color:var(--metro-deep);font-weight:600;font-size:.95rem;margin-bottom:1.2rem;}
+  .kicker .dot{width:.55em;height:.55em;border-radius:50%;background:var(--metro);}
+  .hero h1{font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.04;max-width:16ch;}
+  .hero .sub{max-width:60ch;font-size:clamp(1.02rem,1.5vw,1.18rem);color:var(--ink-soft);margin-top:1.4rem;}
+  .astro-quote{
+    max-width:60ch;
+    margin-top:1.8rem;
+    padding:1.1rem 1.3rem;
+    background:var(--cream-deep);
+    border-left:3px solid var(--metro);
+    border-radius:3px;
+  }
+  .astro-quote p{margin:0;font-size:.94rem;color:var(--ink-soft);line-height:1.6;}
+  .astro-quote strong{color:var(--ink);}
+
+  section{padding:6vh 8vw;max-width:1100px;margin:0 auto;}
+  section h2{font-size:clamp(1.5rem,2.8vw,2rem);margin-bottom:.6rem;}
+  section .section-lead{color:var(--ink-soft);max-width:62ch;margin-bottom:2.4rem;}
+
+  /* timeline */
+  .timeline{display:flex;flex-direction:column;gap:2px;}
+  .t-row{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:1.4rem;
+    padding:1.1rem 0;
+    border-top:1px solid var(--line);
+  }
+  .t-row:last-child{border-bottom:1px solid var(--line);}
+  .t-era{
+    font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;
+    color:#fff;
+    background:var(--era-color);
+    padding:.35rem .7rem;
+    border-radius:3px;
+    align-self:start;
+    display:inline-block;
+    max-width:fit-content;
+  }
+  .t-range{font-size:.78rem;color:var(--ink-soft);margin-top:.4rem;}
+  .t-text{font-size:.94rem;color:var(--ink-soft);}
+  .t-text strong{color:var(--ink);}
+  @media (max-width:680px){
+    .t-row{grid-template-columns:1fr;gap:.5rem;}
+  }
+
+  /* missions grid */
+  .missions{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.1rem;}
+  .m-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-left:5px solid var(--era-color, var(--metro));
+    border-radius:6px;
+    padding:1.4rem 1.5rem;
+    display:flex;
+    flex-direction:column;
+    gap:.5rem;
+  }
+  .m-card .m-era{font-size:.7rem;font-weight:700;color:var(--era-color, var(--metro-deep));text-transform:uppercase;letter-spacing:.03em;}
+  .m-card h3{font-size:1.2rem;}
+  .m-card p{color:var(--ink-soft);font-size:.92rem;margin-bottom:.3rem;}
+  .m-links{display:flex;gap:.8rem;margin-top:.4rem;flex-wrap:wrap;}
+  .m-links a{
+    font-size:.85rem;font-weight:600;
+    color:var(--metro-deep);
+    text-decoration:none;
+    border-bottom:1px solid var(--metro);
+    padding-bottom:1px;
+  }
+  .m-links a:hover{color:var(--metro);}
+
+  .tool-card{
+    background:var(--ink);
+    color:var(--cream);
+    border-radius:8px;
+    padding:2rem 2.2rem;
+    display:flex;
+    flex-direction:column;
+    gap:.8rem;
+    max-width:640px;
+  }
+  .tool-card h3{color:#fff;font-size:1.3rem;}
+  .tool-card p{color:#c9c3b0;}
+  .tool-card a.cta{
+    align-self:flex-start;
+    background:#4fd39a;
+    color:#17321f;
+    font-weight:600;
+    padding:.7rem 1.3rem;
+    border-radius:5px;
+    text-decoration:none;
+    font-size:.92rem;
+    margin-top:.4rem;
+  }
+
+  footer{padding:4vh 8vw 6vh;border-top:1px solid var(--line);color:var(--ink-soft);font-size:.85rem;text-align:center;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="kicker"><span class="dot"></span>Alla scoperta di Roma</div>
+  <h1>Esploriamo la città.</h1>
+  <p class="sub">La geografia non si impara solo sui libri ma conoscendo il territorio che ci circonda.</p>
+  <p class="sub">Oggi possiamo vedere la terra dall'alto grazie ai satelliti e alle immagini di Google Earth: i primi ad aver visto la terra dall'alto sono stati gli astronauti, per esempio quelli che sono andati sulla luna, e ne sono rimasti affascinati.</p>
+  <p class="sub">Ma dobbiamo anche vederla dal basso, camminando e interagendo con il paesaggio. Roma è ricchissima di esperienze interessanti, basta camminare un po'. Questa è una guida che può aiutarvi a conoscerla.</p>
+  <p class="sub">Si può iniziare osservando le pareti della stazione della metropolitana San Giovanni - linea C, dove ogni livello sotterraneo racconta un pezzo di storia di Roma, dalla preistoria a oggi. Da lì si può partire per una serie di passeggiate reali in città, che chiameremo missioni, collegando storia e geografia. Le missioni, per chi non avesse voglia o tempo per farle camminando, si possono completare anche cercando le informazioni sul web.</p>
+  <p class="sub" style="font-size:.9rem;">Per approfondire lo sguardo dall'alto: <a href="punti-di-vista.html" style="color:var(--metro-deep);font-weight:600;">da Google Earth alle prime testimonianze degli astronauti →</a></p>
+</header>
+
+<section>
+  <h2>La linea del tempo di San Giovanni</h2>
+  <p class="section-lead">Il punto di partenza del progetto: la stazione mostra nove epoche, dal Paleolitico a oggi, man mano che si sale o si scende tra i livelli della metropolitana.</p>
+  <div class="timeline">
+    <div class="t-row" style="--era-color:var(--preistoria)">
+      <div><span class="t-era">Età preistorica</span><div class="t-range">450.000–2.000 ca. a.C. · livello −25/−26 m</div></div>
+      <div class="t-text">Il Paleolitico: dagli strumenti su ciottolo alla comparsa dell'<strong>Homo neanderthalensis</strong> e poi dell'<strong>Homo sapiens</strong>. Al posto della città scorreva il Paleotevere, tra boschi e steppe.</div>
+    </div>
+    <div class="t-row" style="--era-color:var(--antica)">
+      <div><span class="t-era">Età protostorica-repubblicana-imperiale</span><div class="t-range">VIII sec. a.C. – II sec. d.C. · fino a −14/−15 m</div></div>
+      <div class="t-text">Dalla fondazione leggendaria di Roma (753 a.C.) alla Repubblica, fino al Colosseo e al Pantheon in <strong>prima età imperiale</strong>. In <strong>media età imperiale</strong> (III sec.): l'arco di Settimio Severo, le Terme di Caracalla, le Mura di Aureliano.</div>
+    </div>
+    <div class="t-row" style="--era-color:var(--medioevo)">
+      <div><span class="t-era">Tarda età imperiale e Medioevo</span><div class="t-range">IV–XIV sec. d.C.</div></div>
+      <div class="t-text">Roma diventa cristiana (Editto di Milano, 313; Basilica di San Giovanni in Laterano). Dal 1122 la Marrana dell'Acqua Mariana fa funzionare i mulini della città, prima di scomparire sotto terra.</div>
+    </div>
+    <div class="t-row" style="--era-color:var(--moderna)">
+      <div><span class="t-era">Età moderna</span><div class="t-range">XV–XIX sec. d.C.</div></div>
+      <div class="t-text">Rinascimento e Barocco trasformano il paesaggio della città con fontane, ville e nuove mura. Nel 1871 Roma diventa capitale d'Italia.</div>
+    </div>
+    <div class="t-row" style="--era-color:var(--contemporanea)">
+      <div><span class="t-era">Età contemporanea</span><div class="t-range">XX–XXI sec. d.C. · fino a −4/−5 m</div></div>
+      <div class="t-text">Dalle Olimpiadi del 1960 alla metropolitana (linea B nel 1955, linea A nel 1980, linea C nel 2014): le infrastrutture continuano a cambiare il territorio di Roma.</div>
+    </div>
+  </div>
+  <p style="margin-top:1.6rem;font-size:.85rem;color:var(--ink-soft);">Versione completa e interattiva, con quiz di 14 domande: <a href="alla-scoperta-di-roma.html" style="color:var(--metro-deep);font-weight:600;">alla-scoperta-di-roma.html</a></p>
+</section>
+
+<section>
+  <h2>Le missioni sul campo</h2>
+  <p class="section-lead">Cinque passeggiate reali per famiglie o gruppi, una per epoca, ciascuna agganciata a un'unità del libro di Geografia di prima media. Ogni missione esiste in due versioni: <strong>mobile</strong>, da seguire tappa per tappa col telefono durante la passeggiata, e <strong>stampabile</strong>, da compilare a penna.</p>
+  <div class="missions">
+
+    <div class="m-card" style="--era-color:var(--antica)">
+      <div class="m-era">Prima età imperiale · Roma antica</div>
+      <h3>San Giovanni</h3>
+      <p>La stazione della metropolitana che ha ispirato tutto il progetto: nove epoche lungo le pareti, dalla preistoria a oggi.</p>
+      <div class="m-links">
+        <a href="missione-san-giovanni-mobile.html">Versione mobile</a>
+        <a href="missione-san-giovanni.docx">Scheda stampabile</a>
+      </div>
+    </div>
+
+    <div class="m-card" style="--era-color:var(--preistoria)">
+      <div class="m-era">Preistoria</div>
+      <h3>Monte Mario</h3>
+      <p>Dove Roma era sotto il mare: fossili pliocenici e il punto da cui per un secolo si sono calcolate tutte le mappe d'Italia.</p>
+      <div class="m-links">
+        <a href="missione-monte-mario-mobile.html">Versione mobile</a>
+        <a href="missione-monte-mario.docx">Scheda stampabile</a>
+      </div>
+    </div>
+
+    <div class="m-card" style="--era-color:var(--antica)">
+      <div class="m-era">Roma antica</div>
+      <h3>Via Appia Antica</h3>
+      <p>La Regina Viarum: basolato originale, miliari e monumenti funebri lungo la strada più famosa dell'Impero.</p>
+      <div class="m-links">
+        <a href="missione-via-appia-mobile.html">Versione mobile</a>
+        <a href="missione-via-appia.docx">Scheda stampabile</a>
+      </div>
+    </div>
+
+    <div class="m-card" style="--era-color:var(--medioevo)">
+      <div class="m-era">Medioevo</div>
+      <h3>Parco della Caffarella</h3>
+      <p>La Marrana dell'Acqua Mariana, i mulini medievali e i tre ponti dove si incontrano altrettanti corsi d'acqua.</p>
+      <div class="m-links">
+        <a href="missione-caffarella-mobile.html">Versione mobile</a>
+        <a href="missione-caffarella.docx">Scheda stampabile</a>
+      </div>
+    </div>
+
+    <div class="m-card" style="--era-color:var(--moderna)">
+      <div class="m-era">Età moderna</div>
+      <h3>Gianicolo</h3>
+      <p>Mura secentesche, il Fontanone barocco e il panorama più ampio su Roma dal Belvedere di Piazzale Garibaldi.</p>
+      <div class="m-links">
+        <a href="missione-gianicolo-mobile.html">Versione mobile</a>
+        <a href="missione-gianicolo.docx">Scheda stampabile</a>
+      </div>
+    </div>
+
+    <div class="m-card" style="--era-color:var(--contemporanea)">
+      <div class="m-era">Età contemporanea</div>
+      <h3>EUR</h3>
+      <p>Un quartiere intero progettato a tavolino negli anni Trenta: il "Colosseo Quadrato" e la pianta geometrica vista dall'alto.</p>
+      <div class="m-links">
+        <a href="missione-eur-mobile.html">Versione mobile</a>
+        <a href="missione-eur.docx">Scheda stampabile</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>L'atlante collaborativo</h2>
+  <p class="section-lead">Dopo aver fatto le passeggiate, i ragazzi possono diventare loro stessi cartografi.</p>
+  <div class="tool-card">
+    <h3>Atlante dei quartieri di Roma</h3>
+    <p>Una mappa interattiva con le cinque missioni già inserite, filtrabili per epoca. Ogni gruppo può aggiungere nuovi luoghi scoperti per conto proprio, scrivendo il proprio testo e collegandolo a un punto preciso della mappa. Il lavoro si esporta e si può riprendere alla lezione successiva.</p>
+    <a class="cta" href="atlante-roma-quartieri.html">Apri l'atlante →</a>
+  </div>
+</section>
+
+<footer>
+  Progetto didattico "Alla scoperta di Roma" — ispirato ai pannelli storici della stazione della metropolitana San Giovanni, Roma.
+</footer>
+
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

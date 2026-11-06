@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Missione Caffarella — Alla scoperta di Roma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#e9ecdf;
+    --ink:#232821;
+    --ink-soft:#5a6154;
+    --line:#c3c9b3;
+    --water:#3d6b6e;
+    --water-deep:#2a4c4e;
+    --paper:#f6f7ee;
+    --c-ingresso:#6e8fae;
+    --c-marrana:#3d6b6e;
+    --c-mulino:#8a6a45;
+    --c-tomba:#7a3b34;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.5;display:flex;flex-direction:column;}
+  h1,h2,.display{font-family:'Fraunces',serif;font-weight:600;margin:0;}
+  p{margin:0 0 1em;}
+  button{font-family:inherit;}
+  .app{max-width:520px;margin:0 auto;width:100%;flex:1;display:flex;flex-direction:column;min-height:100vh;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--line);}
+  .topbar .brand{font-size:.8rem;font-weight:600;color:var(--water-deep);display:flex;align-items:center;gap:.5em;}
+  .brand .dot{width:.5em;height:.5em;border-radius:50%;background:var(--water);}
+  .topbar .step-count{font-size:.8rem;color:var(--ink-soft);}
+  .progress-track{height:3px;background:var(--line);}
+  .progress-fill{height:100%;background:var(--water);width:0%;transition:width .3s ease;}
+  .screen{flex:1;padding:2rem 1.4rem 1.5rem;display:none;flex-direction:column;}
+  .screen.active{display:flex;}
+  .intro h1{font-size:1.95rem;line-height:1.1;margin-bottom:1rem;}
+  .intro .lead{color:var(--ink-soft);margin-bottom:1.2rem;}
+  .rules{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.2rem;margin-bottom:1.1rem;}
+  .rules h2{font-size:.95rem;margin-bottom:.6rem;}
+  .rules ul{margin:0;padding-left:1.15rem;color:var(--ink-soft);font-size:.92rem;}
+  .rules li{margin-bottom:.35rem;}
+  .rules p{margin:0;color:var(--ink-soft);font-size:.92rem;}
+  .field{margin-bottom:1rem;}
+  .field label{display:block;font-size:.82rem;color:var(--ink-soft);margin-bottom:.35rem;}
+  .field input{width:100%;border:none;border-bottom:2px solid var(--line);background:transparent;padding:.5rem .1rem;font-size:1.05rem;font-family:inherit;color:var(--ink);}
+  .field input:focus{outline:none;border-bottom-color:var(--water);}
+  .stop-badge{align-self:flex-start;background:var(--stop-color, var(--water));color:#fbf6e9;font-size:.78rem;font-weight:600;padding:.35rem .8rem;border-radius:20px;margin-bottom:1.1rem;}
+  .screen h2.stop-title{font-size:1.55rem;line-height:1.15;margin-bottom:1rem;}
+  .clue{background:var(--paper);border-left:4px solid var(--stop-color, var(--water));padding:1rem 1.1rem;border-radius:2px;margin-bottom:1.2rem;}
+  .clue .clue-label{font-size:.72rem;font-weight:600;color:var(--ink-soft);margin-bottom:.4rem;}
+  .clue p{margin:0;font-size:1rem;}
+  .found-toggle{display:flex;align-items:center;gap:.7rem;background:transparent;border:1.5px solid var(--line);border-radius:6px;padding:.8rem 1rem;margin-bottom:1.5rem;cursor:pointer;font-size:.95rem;color:var(--ink-soft);text-align:left;}
+  .found-toggle .box{width:22px;height:22px;flex:none;border-radius:5px;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.85rem;}
+  .found-toggle.on{border-color:var(--water);color:var(--ink);background:#e3edec;}
+  .found-toggle.on .box{background:var(--water);border-color:var(--water);color:#fff;}
+  .task{margin-bottom:1.3rem;}
+  .task .q{font-weight:600;margin-bottom:.6rem;font-size:1rem;}
+  .task textarea{width:100%;min-height:64px;border:1.5px solid var(--line);border-radius:6px;padding:.7rem .8rem;font-family:inherit;font-size:.98rem;resize:vertical;background:var(--paper);color:var(--ink);}
+  .task textarea:focus{outline:none;border-color:var(--water);}
+  .task.task-geo{background:var(--paper);border:1px solid #9fb8c7;border-radius:6px;padding:.9rem .9rem .7rem;}
+  .task.task-geo textarea{background:#fff;}
+  .spacer{flex:1;}
+  .nav{display:flex;gap:.8rem;padding-top:1rem;}
+  .btn{flex:1;padding:.95rem 1rem;border-radius:6px;border:none;font-weight:600;font-size:.98rem;cursor:pointer;}
+  .btn-primary{background:var(--water);color:#fbf6e9;}
+  .btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink-soft);flex:.6;}
+  .summary h1{font-size:1.9rem;margin-bottom:.6rem;}
+  .summary .lead{color:var(--ink-soft);margin-bottom:1.4rem;}
+  .recap{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.2rem;margin-bottom:1rem;}
+  .recap .recap-title{font-size:.85rem;font-weight:600;color:var(--stop-color, var(--water));margin-bottom:.5rem;}
+  .recap .recap-a{font-size:.95rem;color:var(--ink);white-space:pre-wrap;}
+  .recap .recap-a.empty{color:var(--ink-soft);font-style:italic;}
+  .reflect{margin-top:.6rem;}
+  .footnote{margin-top:1.6rem;font-size:.78rem;color:var(--ink-soft);}
+  .footnote a{color:var(--water);}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><span class="dot"></span>Alla scoperta di Roma</div>
+    <div class="step-count" id="stepCount"></div>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div class="screen active" data-screen="intro">
+    <div class="intro">
+      <h1>Missione: l'acqua che ha modellato la valle</h1>
+      <p class="lead">Una passeggiata nel Parco della Caffarella, dove un piccolo corso d'acqua medievale — la Marrana dell'Acqua Mariana — ha dato energia a mulini per quasi mille anni.</p>
+      <div class="rules" style="margin-bottom:1.1rem;">
+        <h2>Cosa c'entra con quello che studiamo</h2>
+        <p>In <strong>Storia</strong> arriviamo al Medioevo. In <strong>Geografia</strong> osserviamo il <strong>reticolo idrografico</strong>: come un fiume nasce, scorre, viene usato dall'uomo e modella il territorio intorno a sé. Le domande di geografia sono segnate con 🧭.</p>
+      </div>
+      <div class="rules">
+        <h2>Prima di partire</h2>
+        <ul>
+          <li>Ingresso principale su via della Caffarella; il parco è ad accesso libero.</li>
+          <li>Percorso pianeggiante ma con tratti sterrati: scarpe comode consigliate.</li>
+          <li>Il Casale dell'Ex Mulino, punto informativo, è aperto sabato e domenica (tranne gennaio, luglio e agosto).</li>
+        </ul>
+      </div>
+      <div class="field">
+        <label for="nomeInput">Nome della coppia o del gruppo</label>
+        <input type="text" id="nomeInput" placeholder="Es. Marco e Giulia">
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="nav"><button class="btn btn-primary" id="startBtn">Inizia la missione →</button></div>
+  </div>
+
+  <div id="stopsContainer"></div>
+
+  <div class="screen" data-screen="summary">
+    <div class="summary">
+      <h1>Missione completata!</h1>
+      <p class="lead">Ecco un riepilogo di tutto quello che avete trovato e scritto oggi.</p>
+      <div id="recapList"></div>
+      <div class="task reflect">
+        <p class="q">Confrontatevi: qual è stata la scoperta più interessante di oggi — per la Storia o per la Geografia?</p>
+        <textarea id="reflectInput" placeholder="Scrivete qui la vostra risposta..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const stops = [
+    {
+      id:'ingresso',
+      color:'var(--c-ingresso)',
+      badge:'Tappa 1 · l\'ingresso alla valle',
+      title:"Una valle tra due corsi d'acqua",
+      clueLabel:'Dove cercare',
+      clue:"Entra nel parco da via della Caffarella e osserva la forma della valle intorno a te.",
+      tasks:[
+        {q:"🧭 Geografia — Nella Caffarella scorrono in realtà più corsi d'acqua: il fiume Almone e la Marrana della Caffarella. Guardando la vegetazione, riesci a capire dove si trova l'acqua anche senza vederla direttamente?", geo:true},
+        {q:"Perché pensi che, fin dall'antichità, le persone abbiano scelto di vivere e costruire vicino ai corsi d'acqua?"}
+      ]
+    },
+    {
+      id:'marrana',
+      color:'var(--c-marrana)',
+      badge:'Tappa 2 · il fosso medievale',
+      title:"La Marrana dell'Acqua Mariana",
+      clueLabel:'Dove cercare',
+      clue:"Cerca il fosso della Marrana dell'Acqua Mariana, che attraversa la valle.",
+      tasks:[
+        {q:"La Marrana fu costruita nel 1120 da papa Callisto II, captando le antiche sorgenti degli acquedotti romani Tepula e Iulia, per portare acqua e forza motrice ai mulini di Roma. Da quanti secoli scorre in questa valle?"},
+        {q:"🧭 Geografia — Il nome \"marrana\" è diventato, nel tempo, il nome generico di tutti i piccoli corsi d'acqua della campagna intorno a Roma. Conosci altri nomi di luoghi che derivano da un elemento geografico (un fiume, un monte, un bosco)?", geo:true}
+      ]
+    },
+    {
+      id:'mulino',
+      color:'var(--c-mulino)',
+      badge:'Tappa 3 · le valche medievali',
+      title:"I mulini che lavoravano la lana",
+      clueLabel:'Dove cercare',
+      clue:"Cerca il Casale dell'Ex Mulino, o i resti di una \"valca\" medievale nei pressi del Sepolcro di Annia Regilla.",
+      tasks:[
+        {q:"Le \"valche\" erano mulini ad acqua usati per lavare e lavorare i tessuti di lana, dal termine longobardo \"walkan\", rotolare. Perché pensi che servisse la forza dell'acqua per fare questo lavoro?"},
+        {q:"Un antico tempietto romano (il Colombario Costantiniano) fu riutilizzato nel Medioevo come mulino. Perché pensi che le persone del Medioevo riadattassero edifici romani invece di costruirne di nuovi?"}
+      ]
+    },
+    {
+      id:'ponti',
+      color:'var(--c-tomba)',
+      badge:'Tappa 4 · i tre ponti',
+      title:"Dove si incontrano tre corsi d'acqua",
+      clueLabel:'Dove cercare',
+      clue:"Vicino al Casale della Vaccareccia, cerca i tre piccoli ponti antichi che scavalcano il fiume Almone, la Marrana della Caffarella e un canale secondario.",
+      tasks:[
+        {q:"🧭 Geografia — Perché in questo punto della valle servivano ben tre ponti diversi, uno per ogni corso d'acqua? Prova a disegnare a parole come immagini la disposizione dei tre corsi d'acqua qui.", geo:true},
+        {q:"Il fosso della Marrana, oggi, arriva fino a questa valle: un tempo raggiungeva il Tevere. Perché pensi che il suo percorso sia cambiato nel Novecento?"}
+      ]
+    }
+  ];
+
+  const stopsContainer = document.getElementById('stopsContainer');
+  const answers = {};
+  const found = {};
+
+  stops.forEach((stop, idx)=>{
+    answers[stop.id] = new Array(stop.tasks.length).fill('');
+    found[stop.id] = false;
+    const screen = document.createElement('div');
+    screen.className = 'screen';
+    screen.dataset.screen = 'stop-' + idx;
+    screen.style.setProperty('--stop-color', stop.color);
+    let tasksHtml = '';
+    stop.tasks.forEach((t, ti)=>{
+      const cls = t.geo ? ' task-geo' : '';
+      tasksHtml += `<div class="task${cls}"><p class="q">${t.q}</p><textarea data-stop="${idx}" data-task="${ti}" placeholder="Scrivi qui la risposta..."></textarea></div>`;
+    });
+    screen.innerHTML = `
+      <div class="stop-badge">${stop.badge}</div>
+      <h2 class="stop-title">${stop.title}</h2>
+      <div class="clue"><div class="clue-label">${stop.clueLabel}</div><p>${stop.clue}</p></div>
+      <button class="found-toggle" data-found="${idx}" type="button"><span class="box">✓</span><span class="label">Ci siamo arrivati!</span></button>
+      ${tasksHtml}
+      <div class="spacer"></div>
+      <div class="nav">
+        <button class="btn btn-ghost" data-back>← Indietro</button>
+        <button class="btn btn-primary" data-forward>${idx === stops.length-1 ? 'Vai al riepilogo →' : 'Tappa successiva →'}</button>
+      </div>`;
+    stopsContainer.appendChild(screen);
+  });
+
+  stopsContainer.addEventListener('click', (e)=>{
+    const foundBtn = e.target.closest('[data-found]');
+    if(foundBtn){
+      const idx = foundBtn.dataset.found;
+      const stop = stops[idx];
+      found[stop.id] = !found[stop.id];
+      foundBtn.classList.toggle('on', found[stop.id]);
+    }
+  });
+  stopsContainer.addEventListener('input', (e)=>{
+    if(e.target.tagName === 'TEXTAREA'){
+      const s = e.target.dataset.stop, t = e.target.dataset.task;
+      answers[stops[s].id][t] = e.target.value;
+    }
+  });
+
+  const order = ['intro', ...stops.map((s,i)=>'stop-'+i), 'summary'];
+  let current = 0;
+
+  function showScreen(name){
+    document.querySelectorAll('.screen').forEach(s=> s.classList.toggle('active', s.dataset.screen === name));
+    const idx = order.indexOf(name);
+    current = idx;
+    const total = order.length - 1;
+    document.getElementById('progressFill').style.width = (idx/total*100) + '%';
+    if(name === 'intro'){ document.getElementById('stepCount').textContent = ''; }
+    else if(name === 'summary'){ document.getElementById('stepCount').textContent = 'Riepilogo'; renderRecap(); }
+    else { document.getElementById('stepCount').textContent = `Tappa ${idx} di ${stops.length}`; }
+    window.scrollTo(0,0);
+  }
+
+  document.getElementById('startBtn').addEventListener('click', ()=> showScreen(order[1]));
+  document.addEventListener('click', (e)=>{
+    if(e.target.matches('[data-forward]')){ const next = order[current+1]; if(next) showScreen(next); }
+    if(e.target.matches('[data-back]')){ const prev = order[current-1]; if(prev) showScreen(prev); }
+  });
+
+  function renderRecap(){
+    const list = document.getElementById('recapList');
+    list.innerHTML = '';
+    stops.forEach(stop=>{
+      const card = document.createElement('div');
+      card.className = 'recap';
+      card.style.setProperty('--stop-color', stop.color);
+      let inner = `<div class="recap-title">${stop.title}${found[stop.id] ? ' · trovato ✓' : ''}</div>`;
+      stop.tasks.forEach((t, ti)=>{
+        const a = answers[stop.id][ti];
+        inner += `<div class="recap-a ${a ? '' : 'empty'}">${a ? a : '(nessuna risposta scritta)'}</div>`;
+      });
+      card.innerHTML = inner;
+      list.appendChild(card);
+    });
+  }
+
+  showScreen('intro');
+</script>
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

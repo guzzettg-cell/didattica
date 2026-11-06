@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Missione Monte Mario — Alla scoperta di Roma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#eee8da;
+    --ink:#242a22;
+    --ink-soft:#5b6153;
+    --line:#c7c2ab;
+    --park:#3f6b4a;
+    --park-deep:#2c4d34;
+    --paper:#f8f6ee;
+
+    --c-mappa:#6e8fae;
+    --c-rocce:#8a6a45;
+    --c-punto:#b5622f;
+    --c-terrazza:#c8952a;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    display:flex;
+    flex-direction:column;
+  }
+  h1,h2,.display{font-family:'Fraunces',serif;font-weight:600;margin:0;}
+  p{margin:0 0 1em;}
+  button{font-family:inherit;}
+
+  .app{max-width:520px;margin:0 auto;width:100%;flex:1;display:flex;flex-direction:column;min-height:100vh;}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--line);}
+  .topbar .brand{font-size:.8rem;font-weight:600;color:var(--park-deep);display:flex;align-items:center;gap:.5em;}
+  .brand .dot{width:.5em;height:.5em;border-radius:50%;background:var(--park);}
+  .topbar .step-count{font-size:.8rem;color:var(--ink-soft);}
+
+  .progress-track{height:3px;background:var(--line);}
+  .progress-fill{height:100%;background:var(--park);width:0%;transition:width .3s ease;}
+
+  .screen{flex:1;padding:2rem 1.4rem 1.5rem;display:none;flex-direction:column;}
+  .screen.active{display:flex;}
+
+  .intro h1{font-size:2rem;line-height:1.1;margin-bottom:1rem;}
+  .intro .lead{color:var(--ink-soft);margin-bottom:1.2rem;}
+  .rules{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.2rem;margin-bottom:1.1rem;}
+  .rules h2{font-size:.95rem;margin-bottom:.6rem;}
+  .rules ul{margin:0;padding-left:1.15rem;color:var(--ink-soft);font-size:.92rem;}
+  .rules li{margin-bottom:.35rem;}
+  .rules p{margin:0;color:var(--ink-soft);font-size:.92rem;}
+
+  .field{margin-bottom:1rem;}
+  .field label{display:block;font-size:.82rem;color:var(--ink-soft);margin-bottom:.35rem;}
+  .field input{width:100%;border:none;border-bottom:2px solid var(--line);background:transparent;padding:.5rem .1rem;font-size:1.05rem;font-family:inherit;color:var(--ink);}
+  .field input:focus{outline:none;border-bottom-color:var(--park);}
+
+  .stop-badge{align-self:flex-start;background:var(--stop-color, var(--park));color:#fbf6e9;font-size:.78rem;font-weight:600;padding:.35rem .8rem;border-radius:20px;margin-bottom:1.1rem;}
+  .screen h2.stop-title{font-size:1.6rem;line-height:1.15;margin-bottom:1rem;}
+  .clue{background:var(--paper);border-left:4px solid var(--stop-color, var(--park));padding:1rem 1.1rem;border-radius:2px;margin-bottom:1.2rem;}
+  .clue .clue-label{font-size:.72rem;font-weight:600;color:var(--ink-soft);margin-bottom:.4rem;}
+  .clue p{margin:0;font-size:1rem;}
+
+  .found-toggle{display:flex;align-items:center;gap:.7rem;background:transparent;border:1.5px solid var(--line);border-radius:6px;padding:.8rem 1rem;margin-bottom:1.5rem;cursor:pointer;font-size:.95rem;color:var(--ink-soft);text-align:left;transition:border-color .15s ease, background .15s ease, color .15s ease;}
+  .found-toggle .box{width:22px;height:22px;flex:none;border-radius:5px;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:background .15s ease, border-color .15s ease;}
+  .found-toggle.on{border-color:var(--park);color:var(--ink);background:#e7efe8;}
+  .found-toggle.on .box{background:var(--park);border-color:var(--park);color:#fff;}
+
+  .task{margin-bottom:1.3rem;}
+  .task .q{font-weight:600;margin-bottom:.6rem;font-size:1rem;}
+  .task textarea{width:100%;min-height:64px;border:1.5px solid var(--line);border-radius:6px;padding:.7rem .8rem;font-family:inherit;font-size:.98rem;resize:vertical;background:var(--paper);color:var(--ink);}
+  .task textarea:focus{outline:none;border-color:var(--park);}
+  .task.task-geo{background:var(--paper);border:1px solid #9fb8c7;border-radius:6px;padding:.9rem .9rem .7rem;}
+  .task.task-geo textarea{background:#fff;}
+
+  .spacer{flex:1;}
+  .nav{display:flex;gap:.8rem;padding-top:1rem;}
+  .btn{flex:1;padding:.95rem 1rem;border-radius:6px;border:none;font-weight:600;font-size:.98rem;cursor:pointer;}
+  .btn-primary{background:var(--park);color:#fbf6e9;}
+  .btn-primary:active{background:var(--park-deep);}
+  .btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink-soft);flex:.6;}
+  .btn-ghost:active{background:var(--paper);}
+
+  .summary h1{font-size:1.9rem;margin-bottom:.6rem;}
+  .summary .lead{color:var(--ink-soft);margin-bottom:1.4rem;}
+  .recap{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.2rem;margin-bottom:1rem;}
+  .recap .recap-title{font-size:.85rem;font-weight:600;color:var(--stop-color, var(--park));margin-bottom:.5rem;}
+  .recap .recap-a{font-size:.95rem;color:var(--ink);white-space:pre-wrap;}
+  .recap .recap-a.empty{color:var(--ink-soft);font-style:italic;}
+  .reflect{margin-top:.6rem;}
+  .footnote{margin-top:1.6rem;font-size:.78rem;color:var(--ink-soft);}
+  .footnote a{color:var(--park);}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <div class="brand"><span class="dot"></span>Alla scoperta di Roma</div>
+    <div class="step-count" id="stepCount"></div>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+  <!-- SCREEN 0: intro -->
+  <div class="screen active" data-screen="intro">
+    <div class="intro">
+      <h1>Missione: Monte Mario, dove Roma era sotto il mare</h1>
+      <p class="lead">Una passeggiata nella Riserva Naturale di Monte Mario, il punto più alto di Roma — dove la città più antica del mondo, milioni di anni fa, non esisteva ancora: c'era solo il mare.</p>
+      <div class="rules" style="margin-bottom:1.1rem;">
+        <h2>Cosa c'entra con quello che studiamo</h2>
+        <p>In <strong>Storia</strong> andiamo ancora più indietro della preistoria umana, fino al tempo in cui si formava il paesaggio stesso. In <strong>Geografia</strong> mettiamo in pratica l'Unità 3 del libro, "Gli strumenti del geografo": punti di riferimento, carte, scala, orientamento. Le domande di geografia sono segnate con 🧭.</p>
+      </div>
+      <div class="rules">
+        <h2>Prima di partire</h2>
+        <ul>
+          <li>Percorso in salita, in parte lastricato e in parte a ciottoli: scarpe comode.</li>
+          <li>Porta una bottiglia d'acqua; lungo il sentiero non ci sono molte fontanelle.</li>
+          <li>Se ci sono passeggini o bambini piccoli, meglio entrare dall'ingresso alto su viale del Parco Mellini, vicino al Bar Zodiaco.</li>
+          <li>Se possibile, porta una mappa del sentiero (anche sul telefono) e una bussola.</li>
+        </ul>
+      </div>
+      <div class="field">
+        <label for="nomeInput">Nome della coppia o del gruppo</label>
+        <input type="text" id="nomeInput" placeholder="Es. Marco e Giulia">
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="nav">
+      <button class="btn btn-primary" id="startBtn">Inizia la missione →</button>
+    </div>
+  </div>
+
+  <!-- SCREENS: tappe (generated) -->
+  <div id="stopsContainer"></div>
+
+  <!-- SCREEN final: summary -->
+  <div class="screen" data-screen="summary">
+    <div class="summary">
+      <h1>Missione completata!</h1>
+      <p class="lead">Ecco un riepilogo di tutto quello che avete trovato e scritto oggi. Rileggetelo insieme prima di scendere.</p>
+      <div id="recapList"></div>
+      <div class="task reflect">
+        <p class="q">Confrontatevi: qual è stata la scoperta più sorprendente di oggi — per la Storia o per la Geografia?</p>
+        <textarea id="reflectInput" placeholder="Scrivete qui la vostra risposta..."></textarea>
+      </div>
+      <p class="footnote">Curiosità in più: se volete proseguire la scoperta della preistoria di Roma, il <a href="https://www.museocasaldepazzi.it/" target="_blank" rel="noopener">Museo di Casal de' Pazzi</a> conserva un vero alveo fluviale di 200.000 anni fa, con zanne di elefante antico.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const stops = [
+    {
+      id:'mappa',
+      color:'var(--c-mappa)',
+      badge:'Tappa 1 · l\'ingresso',
+      title:"Prima di partire, la mappa",
+      clueLabel:'Dove cercare',
+      clue:"Trova l'ingresso della Riserva Naturale di Monte Mario in via Gomenizza 81, dove comincia il sentiero (segnavia CAI 215).",
+      tasks:[
+        {q:"Guarda una mappa del percorso (cartacea o sul telefono) prima di partire. Quanti metri di dislivello ci sono da qui alla cima, secondo la mappa o i cartelli?"},
+        {q:"🧭 Geografia — Che tipo di carta stai usando (stradale, escursionistica, satellitare)? Come fai a capire quanto è lunga una distanza sulla mappa, usando la scala?", geo:true}
+      ]
+    },
+    {
+      id:'rocce',
+      color:'var(--c-rocce)',
+      badge:'Tappa 2 · lungo la salita',
+      title:"Le rocce di un mare scomparso",
+      clueLabel:'Dove cercare',
+      clue:"Durante la salita, osserva gli affioramenti di roccia ai lati del sentiero: sono fatti di sabbie e conchiglie.",
+      tasks:[
+        {q:"Questa collina è formata da depositi di un mare che, milioni di anni fa, copriva l'area dove oggi sorge Roma. Riesci a individuare uno strato di roccia diverso dagli altri? Di che colore è, e cosa pensi che contenga?"},
+        {q:"Anche Leonardo da Vinci veniva qui a raccogliere conchiglie fossili, quando soggiornava a Roma nel 1500. Perché pensi che uno scienziato fosse così interessato a queste rocce?"}
+      ]
+    },
+    {
+      id:'punto',
+      color:'var(--c-punto)',
+      badge:'Tappa 3 · la sommità',
+      title:"Il punto da cui si misura l'Italia",
+      clueLabel:'Dove cercare',
+      clue:"Raggiunta la sommità, cerca l'edificio dell'ex Osservatorio Astronomico, a Villa Mellini.",
+      tasks:[
+        {q:"🧭 Geografia — Per quasi tutto il Novecento, le coordinate di ogni mappa ufficiale italiana venivano calcolate a partire da questo punto esatto, chiamato \"vertice geodetico di Roma Monte Mario\". Secondo te, perché serve un \"punto zero\" per costruire le mappe di un intero Paese?", geo:true},
+        {q:"🧭 Geografia — Prova a immaginare: se tu dovessi spiegare a un compagno dove si trova la tua scuola, quale \"punto di riferimento\" useresti?", geo:true}
+      ]
+    },
+    {
+      id:'terrazza',
+      color:'var(--c-terrazza)',
+      badge:'Tappa 4 · il panorama',
+      title:"Orientarsi dall'alto",
+      clueLabel:'Dove cercare',
+      clue:"Cerca la Terrazza dello Zodiaco (Villa Mellini): il punto panoramico più alto di Roma, 139 metri sul livello del mare.",
+      tasks:[
+        {q:"🧭 Geografia — Da qui si vedono la cupola di San Pietro, lo Stadio Olimpico e, nelle giornate limpide, i Castelli Romani. Usando il sole o una bussola, indica in che direzione (nord, sud, est, ovest) si trova ciascuno di questi punti rispetto a te.", geo:true},
+        {q:"Guardando Roma dall'alto, quali elementi del paesaggio riesci a riconoscere: il fiume, le colline, i quartieri?"}
+      ]
+    }
+  ];
+
+  const stopsContainer = document.getElementById('stopsContainer');
+  const answers = {};
+  const found = {};
+
+  stops.forEach((stop, idx)=>{
+    answers[stop.id] = new Array(stop.tasks.length).fill('');
+    found[stop.id] = false;
+
+    const screen = document.createElement('div');
+    screen.className = 'screen';
+    screen.dataset.screen = 'stop-' + idx;
+    screen.style.setProperty('--stop-color', stop.color);
+
+    let tasksHtml = '';
+    stop.tasks.forEach((t, ti)=>{
+      const cls = t.geo ? ' task-geo' : '';
+      tasksHtml += `
+        <div class="task${cls}">
+          <p class="q">${t.q}</p>
+          <textarea data-stop="${idx}" data-task="${ti}" placeholder="Scrivi qui la risposta..."></textarea>
+        </div>`;
+    });
+
+    screen.innerHTML = `
+      <div class="stop-badge">${stop.badge}</div>
+      <h2 class="stop-title">${stop.title}</h2>
+      <div class="clue">
+        <div class="clue-label">${stop.clueLabel}</div>
+        <p>${stop.clue}</p>
+      </div>
+      <button class="found-toggle" data-found="${idx}" type="button">
+        <span class="box">✓</span>
+        <span class="label">Ci siamo arrivati!</span>
+      </button>
+      ${tasksHtml}
+      <div class="spacer"></div>
+      <div class="nav">
+        <button class="btn btn-ghost" data-back>← Indietro</button>
+        <button class="btn btn-primary" data-forward>${idx === stops.length-1 ? 'Vai al riepilogo →' : 'Tappa successiva →'}</button>
+      </div>
+    `;
+    stopsContainer.appendChild(screen);
+  });
+
+  stopsContainer.addEventListener('click', (e)=>{
+    const foundBtn = e.target.closest('[data-found]');
+    if(foundBtn){
+      const idx = foundBtn.dataset.found;
+      const stop = stops[idx];
+      found[stop.id] = !found[stop.id];
+      foundBtn.classList.toggle('on', found[stop.id]);
+    }
+  });
+  stopsContainer.addEventListener('input', (e)=>{
+    if(e.target.tagName === 'TEXTAREA'){
+      const s = e.target.dataset.stop, t = e.target.dataset.task;
+      answers[stops[s].id][t] = e.target.value;
+    }
+  });
+
+  const order = ['intro', ...stops.map((s,i)=>'stop-'+i), 'summary'];
+  let current = 0;
+
+  function showScreen(name){
+    document.querySelectorAll('.screen').forEach(s=>{
+      s.classList.toggle('active', s.dataset.screen === name);
+    });
+    const idx = order.indexOf(name);
+    current = idx;
+    const total = order.length - 1;
+    document.getElementById('progressFill').style.width = (idx/total*100) + '%';
+    if(name === 'intro'){
+      document.getElementById('stepCount').textContent = '';
+    } else if(name === 'summary'){
+      document.getElementById('stepCount').textContent = 'Riepilogo';
+      renderRecap();
+    } else {
+      document.getElementById('stepCount').textContent = `Tappa ${idx} di ${stops.length}`;
+    }
+    window.scrollTo(0,0);
+  }
+
+  document.getElementById('startBtn').addEventListener('click', ()=> showScreen(order[1]));
+
+  document.addEventListener('click', (e)=>{
+    if(e.target.matches('[data-forward]')){
+      const next = order[current+1];
+      if(next) showScreen(next);
+    }
+    if(e.target.matches('[data-back]')){
+      const prev = order[current-1];
+      if(prev) showScreen(prev);
+    }
+  });
+
+  function renderRecap(){
+    const list = document.getElementById('recapList');
+    list.innerHTML = '';
+    stops.forEach(stop=>{
+      const card = document.createElement('div');
+      card.className = 'recap';
+      card.style.setProperty('--stop-color', stop.color);
+      let inner = `<div class="recap-title">${stop.title}${found[stop.id] ? ' · trovato ✓' : ''}</div>`;
+      stop.tasks.forEach((t, ti)=>{
+        const a = answers[stop.id][ti];
+        inner += `<div class="recap-a ${a ? '' : 'empty'}">${a ? a : '(nessuna risposta scritta)'}</div>`;
+      });
+      card.innerHTML = inner;
+      list.appendChild(card);
+    });
+  }
+
+  showScreen('intro');
+</script>
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

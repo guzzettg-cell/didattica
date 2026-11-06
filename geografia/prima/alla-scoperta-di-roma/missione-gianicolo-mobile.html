@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Missione Gianicolo — Alla scoperta di Roma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#eee7da;
+    --ink:#262320;
+    --ink-soft:#5e594f;
+    --line:#c9c0a8;
+    --stone:#5c7fa0;
+    --stone-deep:#3f5a75;
+    --paper:#f8f5ee;
+    --c-porta:#8a6a45;
+    --c-fontanone:#5c7fa0;
+    --c-belvedere:#c8952a;
+    --c-quercia:#3d6b6e;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.5;display:flex;flex-direction:column;}
+  h1,h2,.display{font-family:'Fraunces',serif;font-weight:600;margin:0;}
+  p{margin:0 0 1em;}
+  button{font-family:inherit;}
+  .app{max-width:520px;margin:0 auto;width:100%;flex:1;display:flex;flex-direction:column;min-height:100vh;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--line);}
+  .topbar .brand{font-size:.8rem;font-weight:600;color:var(--stone-deep);display:flex;align-items:center;gap:.5em;}
+  .brand .dot{width:.5em;height:.5em;border-radius:50%;background:var(--stone);}
+  .topbar .step-count{font-size:.8rem;color:var(--ink-soft);}
+  .progress-track{height:3px;background:var(--line);}
+  .progress-fill{height:100%;background:var(--stone);width:0%;transition:width .3s ease;}
+  .screen{flex:1;padding:2rem 1.4rem 1.5rem;display:none;flex-direction:column;}
+  .screen.active{display:flex;}
+  .intro h1{font-size:1.95rem;line-height:1.1;margin-bottom:1rem;}
+  .intro .lead{color:var(--ink-soft);margin-bottom:1.2rem;}
+  .rules{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.2rem;margin-bottom:1.1rem;}
+  .rules h2{font-size:.95rem;margin-bottom:.6rem;}
+  .rules ul{margin:0;padding-left:1.15rem;color:var(--ink-soft);font-size:.92rem;}
+  .rules li{margin-bottom:.35rem;}
+  .rules p{margin:0;color:var(--ink-soft);font-size:.92rem;}
+  .field{margin-bottom:1rem;}
+  .field label{display:block;font-size:.82rem;color:var(--ink-soft);margin-bottom:.35rem;}
+  .field input{width:100%;border:none;border-bottom:2px solid var(--line);background:transparent;padding:.5rem .1rem;font-size:1.05rem;font-family:inherit;color:var(--ink);}
+  .field input:focus{outline:none;border-bottom-color:var(--stone);}
+  .stop-badge{align-self:flex-start;background:var(--stop-color, var(--stone));color:#fbf6e9;font-size:.78rem;font-weight:600;padding:.35rem .8rem;border-radius:20px;margin-bottom:1.1rem;}
+  .screen h2.stop-title{font-size:1.55rem;line-height:1.15;margin-bottom:1rem;}
+  .clue{background:var(--paper);border-left:4px solid var(--stop-color, var(--stone));padding:1rem 1.1rem;border-radius:2px;margin-bottom:1.2rem;}
+  .clue .clue-label{font-size:.72rem;font-weight:600;color:var(--ink-soft);margin-bottom:.4rem;}
+  .clue p{margin:0;font-size:1rem;}
+  .found-toggle{display:flex;align-items:center;gap:.7rem;background:transparent;border:1.5px solid var(--line);border-radius:6px;padding:.8rem 1rem;margin-bottom:1.5rem;cursor:pointer;font-size:.95rem;color:var(--ink-soft);text-align:left;}
+  .found-toggle .box{width:22px;height:22px;flex:none;border-radius:5px;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.85rem;}
+  .found-toggle.on{border-color:var(--stone);color:var(--ink);background:#e6edf2;}
+  .found-toggle.on .box{background:var(--stone);border-color:var(--stone);color:#fff;}
+  .task{margin-bottom:1.3rem;}
+  .task .q{font-weight:600;margin-bottom:.6rem;font-size:1rem;}
+  .task textarea{width:100%;min-height:64px;border:1.5px solid var(--line);border-radius:6px;padding:.7rem .8rem;font-family:inherit;font-size:.98rem;resize:vertical;background:var(--paper);color:var(--ink);}
+  .task textarea:focus{outline:none;border-color:var(--stone);}
+  .task.task-geo{background:var(--paper);border:1px solid #9fb8c7;border-radius:6px;padding:.9rem .9rem .7rem;}
+  .task.task-geo textarea{background:#fff;}
+  .spacer{flex:1;}
+  .nav{display:flex;gap:.8rem;padding-top:1rem;}
+  .btn{flex:1;padding:.95rem 1rem;border-radius:6px;border:none;font-weight:600;font-size:.98rem;cursor:pointer;}
+  .btn-primary{background:var(--stone);color:#fbf6e9;}
+  .btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink-soft);flex:.6;}
+  .summary h1{font-size:1.9rem;margin-bottom:.6rem;}
+  .summary .lead{color:var(--ink-soft);margin-bottom:1.4rem;}
+  .recap{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.2rem;margin-bottom:1rem;}
+  .recap .recap-title{font-size:.85rem;font-weight:600;color:var(--stop-color, var(--stone));margin-bottom:.5rem;}
+  .recap .recap-a{font-size:.95rem;color:var(--ink);white-space:pre-wrap;}
+  .recap .recap-a.empty{color:var(--ink-soft);font-style:italic;}
+  .reflect{margin-top:.6rem;}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><span class="dot"></span>Alla scoperta di Roma</div>
+    <div class="step-count" id="stepCount"></div>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div class="screen active" data-screen="intro">
+    <div class="intro">
+      <h1>Missione: il colle delle fontane</h1>
+      <p class="lead">Una passeggiata sul Gianicolo, tra mura, fontane barocche e uno dei panorami più belli su Roma, per scoprire come l'uomo ha trasformato questo paesaggio in età moderna.</p>
+      <div class="rules" style="margin-bottom:1.1rem;">
+        <h2>Cosa c'entra con quello che studiamo</h2>
+        <p>In <strong>Storia</strong> arriviamo all'età moderna, tra Rinascimento e Seicento. In <strong>Geografia</strong> osserviamo il <strong>paesaggio e la sua trasformazione</strong>: come un colle naturale diventa, nel tempo, un luogo fortificato, attraversato da acquedotti e trasformato in belvedere. Le domande di geografia sono segnate con 🧭.</p>
+      </div>
+      <div class="rules">
+        <h2>Prima di partire</h2>
+        <ul>
+          <li>Due ingressi possibili: Porta San Pancrazio, oppure la Fontana dell'Acqua Paola su via Garibaldi.</li>
+          <li>Percorso quasi tutto pianeggiante o in leggera salita, adatto a passeggini.</li>
+          <li>Ingresso e percorso completamente gratuiti.</li>
+        </ul>
+      </div>
+      <div class="field">
+        <label for="nomeInput">Nome della coppia o del gruppo</label>
+        <input type="text" id="nomeInput" placeholder="Es. Marco e Giulia">
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="nav"><button class="btn btn-primary" id="startBtn">Inizia la missione →</button></div>
+  </div>
+
+  <div id="stopsContainer"></div>
+
+  <div class="screen" data-screen="summary">
+    <div class="summary">
+      <h1>Missione completata!</h1>
+      <p class="lead">Ecco un riepilogo di tutto quello che avete trovato e scritto oggi.</p>
+      <div id="recapList"></div>
+      <div class="task reflect">
+        <p class="q">Confrontatevi: qual è stata la scoperta più interessante di oggi — per la Storia o per la Geografia?</p>
+        <textarea id="reflectInput" placeholder="Scrivete qui la vostra risposta..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const stops = [
+    {
+      id:'porta',
+      color:'var(--c-porta)',
+      badge:'Tappa 1 · l\'ingresso fortificato',
+      title:"Un colle diventato confine",
+      clueLabel:'Dove cercare',
+      clue:"Trova Porta San Pancrazio, parte delle Mura Gianicolensi volute da papa Urbano VIII nel Seicento.",
+      tasks:[
+        {q:"Nel Medioevo e ancora in età moderna, il Gianicolo era fuori dalle mura della città. Solo nel Seicento un papa decise di racchiuderlo dentro nuove mura. Perché pensi che un colle così alto fosse importante da difendere?"},
+        {q:"🧭 Geografia — Osserva la posizione del Gianicolo rispetto al Tevere e al centro storico. Perché pensi che sia stato scelto proprio questo colle per costruire delle mura difensive?", geo:true}
+      ]
+    },
+    {
+      id:'fontanone',
+      color:'var(--c-fontanone)',
+      badge:'Tappa 2 · l\'acqua che arriva da lontano',
+      title:"Il Fontanone",
+      clueLabel:'Dove cercare',
+      clue:"Cerca la grandiosa Fontana dell'Acqua Paola, chiamata dai romani \"il Fontanone\".",
+      tasks:[
+        {q:"Questa fontana, costruita nel 1612 da papa Paolo V, non è solo decorativa: celebra il restauro dell'antico acquedotto romano Traiano, che porta ancora oggi l'acqua dal lago di Bracciano fino a qui. Quanti chilometri di distanza pensi che percorra quell'acqua?"},
+        {q:"🧭 Geografia — Una fontana come questa racconta la trasformazione del paesaggio: un'infrastruttura romana antica, restaurata in età moderna, che ancora oggi porta l'acqua in città. Conosci altre \"infrastrutture\" della tua città che uniscono epoche diverse?", geo:true}
+      ]
+    },
+    {
+      id:'belvedere',
+      color:'var(--c-belvedere)',
+      badge:'Tappa 3 · il panorama',
+      title:"Roma da un unico sguardo",
+      clueLabel:'Dove cercare',
+      clue:"Raggiungi il Belvedere di Piazzale Garibaldi, uno dei punti panoramici più famosi di Roma.",
+      tasks:[
+        {q:"🧭 Geografia — Da qui prova a individuare almeno tre elementi del paesaggio di epoche diverse: qualcosa di antico, qualcosa di moderno, qualcosa di contemporaneo. Scrivili.", geo:true},
+        {q:"Ogni giorno a mezzogiorno, da sotto questo belvedere, un cannone spara un colpo a salve che si sente in tutta la città: è così dal 1904. A cosa serviva, secondo te, prima che tutti avessero un orologio?"}
+      ]
+    },
+    {
+      id:'quercia',
+      color:'var(--c-quercia)',
+      badge:'Tappa 4 · chiusura',
+      title:"Un paesaggio che cambia ancora",
+      clueLabel:'Dove cercare',
+      clue:"Scendendo verso Sant'Onofrio, cerca la Quercia del Tasso, un grande albero secolare.",
+      tasks:[
+        {q:"In questo luogo, nel 1849, i garibaldini combatterono per difendere la Repubblica Romana. Il colle è quindi anche un \"parco della memoria\". Secondo te, perché un luogo naturale può diventare anche un luogo di memoria storica?"}
+      ]
+    }
+  ];
+
+  const stopsContainer = document.getElementById('stopsContainer');
+  const answers = {};
+  const found = {};
+
+  stops.forEach((stop, idx)=>{
+    answers[stop.id] = new Array(stop.tasks.length).fill('');
+    found[stop.id] = false;
+    const screen = document.createElement('div');
+    screen.className = 'screen';
+    screen.dataset.screen = 'stop-' + idx;
+    screen.style.setProperty('--stop-color', stop.color);
+    let tasksHtml = '';
+    stop.tasks.forEach((t, ti)=>{
+      const cls = t.geo ? ' task-geo' : '';
+      tasksHtml += `<div class="task${cls}"><p class="q">${t.q}</p><textarea data-stop="${idx}" data-task="${ti}" placeholder="Scrivi qui la risposta..."></textarea></div>`;
+    });
+    screen.innerHTML = `
+      <div class="stop-badge">${stop.badge}</div>
+      <h2 class="stop-title">${stop.title}</h2>
+      <div class="clue"><div class="clue-label">${stop.clueLabel}</div><p>${stop.clue}</p></div>
+      <button class="found-toggle" data-found="${idx}" type="button"><span class="box">✓</span><span class="label">Ci siamo arrivati!</span></button>
+      ${tasksHtml}
+      <div class="spacer"></div>
+      <div class="nav">
+        <button class="btn btn-ghost" data-back>← Indietro</button>
+        <button class="btn btn-primary" data-forward>${idx === stops.length-1 ? 'Vai al riepilogo →' : 'Tappa successiva →'}</button>
+      </div>`;
+    stopsContainer.appendChild(screen);
+  });
+
+  stopsContainer.addEventListener('click', (e)=>{
+    const foundBtn = e.target.closest('[data-found]');
+    if(foundBtn){
+      const idx = foundBtn.dataset.found;
+      const stop = stops[idx];
+      found[stop.id] = !found[stop.id];
+      foundBtn.classList.toggle('on', found[stop.id]);
+    }
+  });
+  stopsContainer.addEventListener('input', (e)=>{
+    if(e.target.tagName === 'TEXTAREA'){
+      const s = e.target.dataset.stop, t = e.target.dataset.task;
+      answers[stops[s].id][t] = e.target.value;
+    }
+  });
+
+  const order = ['intro', ...stops.map((s,i)=>'stop-'+i), 'summary'];
+  let current = 0;
+
+  function showScreen(name){
+    document.querySelectorAll('.screen').forEach(s=> s.classList.toggle('active', s.dataset.screen === name));
+    const idx = order.indexOf(name);
+    current = idx;
+    const total = order.length - 1;
+    document.getElementById('progressFill').style.width = (idx/total*100) + '%';
+    if(name === 'intro'){ document.getElementById('stepCount').textContent = ''; }
+    else if(name === 'summary'){ document.getElementById('stepCount').textContent = 'Riepilogo'; renderRecap(); }
+    else { document.getElementById('stepCount').textContent = `Tappa ${idx} di ${stops.length}`; }
+    window.scrollTo(0,0);
+  }
+
+  document.getElementById('startBtn').addEventListener('click', ()=> showScreen(order[1]));
+  document.addEventListener('click', (e)=>{
+    if(e.target.matches('[data-forward]')){ const next = order[current+1]; if(next) showScreen(next); }
+    if(e.target.matches('[data-back]')){ const prev = order[current-1]; if(prev) showScreen(prev); }
+  });
+
+  function renderRecap(){
+    const list = document.getElementById('recapList');
+    list.innerHTML = '';
+    stops.forEach(stop=>{
+      const card = document.createElement('div');
+      card.className = 'recap';
+      card.style.setProperty('--stop-color', stop.color);
+      let inner = `<div class="recap-title">${stop.title}${found[stop.id] ? ' · trovato ✓' : ''}</div>`;
+      stop.tasks.forEach((t, ti)=>{
+        const a = answers[stop.id][ti];
+        inner += `<div class="recap-a ${a ? '' : 'empty'}">${a ? a : '(nessuna risposta scritta)'}</div>`;
+      });
+      card.innerHTML = inner;
+      list.appendChild(card);
+    });
+  }
+
+  showScreen('intro');
+</script>
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

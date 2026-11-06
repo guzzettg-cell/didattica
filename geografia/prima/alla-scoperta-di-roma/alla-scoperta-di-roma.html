@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alla scoperta di Roma — Un pozzo nel tempo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#efe8d8;
+    --cream-deep:#e3d9c1;
+    --ink:#26241e;
+    --ink-soft:#59554a;
+    --line:#c6bb9c;
+    --metro:#0f6b4c;
+    --metro-deep:#0a4d36;
+
+    --c-preistorica:#4f7a6d;
+    --c-protostorica:#5c7fa0;
+    --c-repubblicana:#5b3a5c;
+    --c-primaimp:#7a3b34;
+    --c-mediaimp:#c1432b;
+    --c-tardaimp:#c9752f;
+    --c-medioevo:#b17c34;
+    --c-moderna:#a83a2d;
+    --c-contemp:#c8952a;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    transition:background 1.2s ease;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    body{transition:none;}
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    margin:0;
+  }
+  p{margin:0 0 1em;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:92vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:8vh 8vw 6vh;
+    position:relative;
+    background:
+      linear-gradient(180deg, var(--cream) 0%, var(--cream) 78%, var(--cream-deep) 100%);
+    border-bottom:1px solid var(--line);
+  }
+  .hero .kicker{
+    display:flex;
+    align-items:center;
+    gap:.6em;
+    color:var(--metro-deep);
+    font-weight:600;
+    font-size:.95rem;
+    margin-bottom:1.4rem;
+  }
+  .kicker .dot{
+    width:.55em;height:.55em;border-radius:50%;
+    background:var(--metro);
+    flex:none;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 6vw, 4.6rem);
+    line-height:1.02;
+    max-width:14ch;
+    letter-spacing:-0.01em;
+  }
+  .hero .sub{
+    max-width:52ch;
+    font-size:clamp(1.05rem,1.6vw,1.25rem);
+    color:var(--ink-soft);
+    margin-top:1.6rem;
+  }
+  .hero .cue{
+    margin-top:4rem;
+    display:flex;
+    align-items:center;
+    gap:.7em;
+    font-size:.9rem;
+    color:var(--ink-soft);
+  }
+  .hero .cue .arrow{
+    display:inline-block;
+    animation:bob 2.2s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero .cue .arrow{animation:none;}
+  }
+  @keyframes bob{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(6px);}
+  }
+
+  /* ---------- STRATIGRAPHY SECTION ---------- */
+  .strati-wrap{
+    display:grid;
+    grid-template-columns:96px 1fr;
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 6vw;
+  }
+  .ruler{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-top:14vh;
+  }
+  .ruler .rail{
+    position:relative;
+    width:2px;
+    flex:1;
+    background:var(--line);
+    margin-top:.5rem;
+  }
+  .ruler .rail::after{
+    content:"";
+    position:absolute;
+    left:-3px; top:0; width:8px; height:8px;
+    border-radius:50%;
+    background:var(--metro);
+    transform:translateY(var(--marker-y, 0px));
+    transition:transform .12s linear;
+  }
+  .ruler .depth-readout{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.15rem;
+    color:var(--metro-deep);
+    white-space:nowrap;
+  }
+  .ruler .depth-label{
+    font-size:.65rem;
+    color:var(--ink-soft);
+    text-transform:none;
+    letter-spacing:.02em;
+    margin-top:.15rem;
+  }
+  @media (max-width:760px){
+    .strati-wrap{grid-template-columns:1fr;padding:0 5vw;}
+    .ruler{display:none;}
+  }
+
+  .strati{
+    padding:14vh 0 10vh;
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+  }
+  .strati .intro{
+    max-width:60ch;
+    margin-bottom:3.5rem;
+  }
+  .strati .intro h2{
+    font-size:clamp(1.6rem,3vw,2.1rem);
+    margin-bottom:.7rem;
+  }
+  .strati .intro p{color:var(--ink-soft);}
+
+  details.stratum{
+    border-top:1px solid var(--line);
+  }
+  details.stratum:last-of-type{border-bottom:1px solid var(--line);}
+  details.stratum summary{
+    list-style:none;
+    cursor:pointer;
+    padding:1.5rem 1.75rem;
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:1.5rem;
+    background:var(--era-color);
+    color:#fbf6e9;
+    border-radius:2px;
+  }
+  details.stratum summary::-webkit-details-marker{display:none;}
+  details.stratum summary .name-block{
+    display:flex;
+    flex-direction:column;
+    gap:.25rem;
+  }
+  details.stratum summary .era-name{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(1.15rem,2vw,1.55rem);
+  }
+  details.stratum summary .era-range{
+    font-size:.85rem;
+    opacity:.88;
+    font-weight:500;
+  }
+  details.stratum summary .chev{
+    flex:none;
+    font-size:1.3rem;
+    transform:rotate(0deg);
+    transition:transform .25s ease;
+    opacity:.9;
+  }
+  details.stratum[open] summary .chev{transform:rotate(45deg);}
+
+  .stratum-body{
+    padding:1.6rem 1.75rem 2.4rem;
+    background:var(--cream);
+    border-left:3px solid var(--era-color);
+    margin-left:1.75rem;
+  }
+  .stratum-body .lead{
+    max-width:58ch;
+    color:var(--ink-soft);
+    margin-bottom:1.3rem;
+  }
+  .events{
+    list-style:none;
+    margin:0; padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:.9rem;
+  }
+  .events li{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:.3rem 1rem;
+    align-items:baseline;
+  }
+  .events .year{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    color:var(--era-color);
+    white-space:nowrap;
+    font-size:1.05rem;
+  }
+  .events .fact{color:var(--ink);}
+
+  .geo-note{
+    margin-top:1.4rem;
+    padding:1rem 1.2rem;
+    background:var(--cream-deep);
+    border-radius:3px;
+    display:flex;
+    gap:.8rem;
+    align-items:flex-start;
+    max-width:58ch;
+  }
+  .geo-note .tag{
+    flex:none;
+    font-size:.72rem;
+    font-weight:700;
+    color:var(--metro-deep);
+    background:#fbf6e9;
+    border:1px solid var(--metro);
+    padding:.2rem .55rem;
+    border-radius:20px;
+    white-space:nowrap;
+  }
+  .geo-note p{margin:0;color:var(--ink-soft);font-size:.92rem;}
+
+  .migra-note{
+    margin-top:1rem;
+    padding:1rem 1.2rem;
+    background:var(--cream-deep);
+    border-radius:3px;
+    display:flex;
+    gap:.8rem;
+    align-items:flex-start;
+    max-width:58ch;
+  }
+  .migra-note .tag{
+    flex:none;
+    font-size:.72rem;
+    font-weight:700;
+    color:#8a4a20;
+    background:#fbf6e9;
+    border:1px solid #b5622f;
+    padding:.2rem .55rem;
+    border-radius:20px;
+    white-space:nowrap;
+  }
+  .migra-note p{margin:0;color:var(--ink-soft);font-size:.92rem;}
+  @media (max-width:760px){
+    .stratum-body{margin-left:0;}
+  }
+
+  /* ---------- QUIZ ---------- */
+  .quiz-section{
+    background:var(--ink);
+    color:var(--cream);
+    padding:9vh 8vw 12vh;
+  }
+  .quiz-inner{max-width:680px;margin:0 auto;}
+  .quiz-section .kicker{
+    color:#a9d9c3;
+    font-weight:600;
+    font-size:.95rem;
+    margin-bottom:1rem;
+    display:flex;align-items:center;gap:.6em;
+  }
+  .quiz-section .kicker .dot{width:.55em;height:.55em;border-radius:50%;background:#4fd39a;}
+  .quiz-section h2{
+    font-size:clamp(1.8rem,3.6vw,2.6rem);
+    margin-bottom:.6rem;
+  }
+  .quiz-section .lead{color:#c9c3b0;max-width:54ch;margin-bottom:2.6rem;}
+
+  .quiz-progress{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:.85rem;
+    color:#a39c86;
+    margin-bottom:.8rem;
+  }
+  .quiz-bar{
+    height:3px;
+    background:#3d392f;
+    border-radius:2px;
+    overflow:hidden;
+    margin-bottom:2.4rem;
+  }
+  .quiz-bar-fill{
+    height:100%;
+    background:#4fd39a;
+    width:0%;
+    transition:width .35s ease;
+  }
+
+  .quiz-card{
+    background:#302c22;
+    border:1px solid #46412f;
+    border-radius:4px;
+    padding:2rem;
+  }
+  .quiz-card .q-text{
+    font-family:'Fraunces',serif;
+    font-size:1.3rem;
+    font-weight:500;
+    margin-bottom:1.6rem;
+    line-height:1.3;
+  }
+  .options{
+    display:flex;
+    flex-direction:column;
+    gap:.7rem;
+    margin-bottom:0;
+  }
+  .opt{
+    text-align:left;
+    padding:.85rem 1.1rem;
+    border-radius:3px;
+    border:1px solid #4a4634;
+    background:transparent;
+    color:var(--cream);
+    font-size:.98rem;
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .opt:hover:not(:disabled){border-color:#4fd39a;}
+  .opt:focus-visible{outline:2px solid #4fd39a;outline-offset:2px;}
+  .opt.correct{background:#1e4632;border-color:#4fd39a;}
+  .opt.incorrect{background:#4a2723;border-color:#c1432b;}
+  .opt:disabled{cursor:default;}
+
+  .explain{
+    margin-top:1.3rem;
+    padding-top:1.3rem;
+    border-top:1px dashed #4a4634;
+    color:#c9c3b0;
+    font-size:.93rem;
+    display:none;
+  }
+  .explain.show{display:block;}
+  .explain strong{color:var(--cream);}
+
+  .quiz-nav{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:1.6rem;
+  }
+  .btn-next{
+    background:#4fd39a;
+    color:#17321f;
+    border:none;
+    padding:.75rem 1.6rem;
+    border-radius:3px;
+    font-weight:600;
+    font-size:.95rem;
+    cursor:pointer;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s ease;
+  }
+  .btn-next.show{opacity:1;pointer-events:auto;}
+  .btn-next:hover{background:#6bdcaa;}
+
+  .quiz-result{display:none;text-align:center;padding:1rem 0 0;}
+  .quiz-result.show{display:block;}
+  .quiz-result .score{
+    font-family:'Fraunces',serif;
+    font-size:3.2rem;
+    font-weight:600;
+    color:#4fd39a;
+    margin-bottom:.3rem;
+  }
+  .quiz-result .tier{
+    font-size:1.1rem;
+    margin-bottom:.6rem;
+  }
+  .quiz-result .tier-desc{
+    color:#c9c3b0;
+    max-width:44ch;
+    margin:0 auto 2rem;
+  }
+  .btn-restart{
+    background:transparent;
+    border:1px solid #4fd39a;
+    color:#4fd39a;
+    padding:.7rem 1.5rem;
+    border-radius:3px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .btn-restart:hover{background:#1e4632;}
+
+  footer{
+    background:var(--ink);
+    color:#a39c86;
+    text-align:center;
+    padding:2.4rem 6vw 3rem;
+    font-size:.85rem;
+    border-top:1px solid #3d392f;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="kicker"><span class="dot"></span> Alla scoperta di Roma</div>
+  <h1>Un pozzo nel tempo sotto Piazza San Giovanni</h1>
+  <p class="sub">Scendendo le scale della stazione della metropolitana San Giovanni, a Roma, si attraversano davvero 450.000 anni di storia: ogni parete racconta il livello di terra che stiamo attraversando, dal presente fino alla preistoria. Scendi con noi, livello per livello.</p>
+  <p class="sub" style="margin-top:1.1rem;font-size:.95rem;">Questo percorso si collega a ciò che studiamo in classe: in <strong>Storia</strong>, la linea del tempo che stiamo costruendo; in <strong>Geografia</strong>, il modo in cui gli eventi umani hanno cambiato, nel corso dei secoli, il paesaggio e il territorio di Roma; e, in entrambe, il tema delle <strong>migrazioni</strong>, dagli spostamenti dell'uomo preistorico fino ai popoli che hanno reso Roma antica una città multietnica.</p>
+  <div class="cue"><span class="arrow">↓</span> Inizia la discesa</div>
+</header>
+
+<div class="strati-wrap">
+  <aside class="ruler" aria-hidden="true">
+    <div class="depth-readout" id="depthReadout">-4 m</div>
+    <div class="depth-label">profondità indicativa</div>
+    <div class="rail" id="rail"></div>
+  </aside>
+
+  <main class="strati" id="strati">
+    <div class="intro">
+      <h2>Nove livelli, nove epoche</h2>
+      <p>Ogni volta che la metropolitana scava una nuova galleria a Roma, incontra i resti di chi ha vissuto qui prima di noi. Alla stazione San Giovanni, questi ritrovamenti sono diventati un percorso lungo le pareti: più si scende, più indietro nel tempo si viaggia. Apri ogni livello per scoprire cosa custodisce.</p>
+    </div>
+
+    <!-- 1 CONTEMPORANEA -->
+    <details class="stratum" style="--era-color:var(--c-contemp)">
+      <summary>
+        <div class="name-block">
+          <span class="era-name">Età contemporanea</span>
+          <span class="era-range">XX–XXI sec. d.C. · livello −4/−5 m</span>
+        </div>
+        <span class="chev">+</span>
+      </summary>
+      <div class="stratum-body">
+        <p class="lead">Il livello più vicino alla superficie: è la Roma dei nostri nonni e dei nostri giorni, quella delle metropolitane, degli aeroporti e delle Olimpiadi.</p>
+        <ul class="events">
+          <li><span class="year">1955</span><span class="fact">Inaugurazione della prima linea della metropolitana di Roma, la linea B.</span></li>
+          <li><span class="year">1960</span><span class="fact">Roma ospita le XVII Olimpiadi; viene realizzata la via Olimpica, primo tratto della Tangenziale Est.</span></li>
+          <li><span class="year">1961</span><span class="fact">Inaugurazione dell'aeroporto intercontinentale "Leonardo da Vinci".</span></li>
+          <li><span class="year">1964</span><span class="fact">Si avvia la realizzazione della linea A della metropolitana.</span></li>
+          <li><span class="year">1980</span><span class="fact">Apre la linea A, che colloca una fermata proprio a Piazzale Appio, sopra questa stazione.</span></li>
+          <li><span class="year">1990</span><span class="fact">Apre il prolungamento della linea B da Termini a Rebibbia.</span></li>
+          <li><span class="year">1999</span><span class="fact">Apre il prolungamento della linea A da Ottaviano a Battistini.</span></li>
+          <li><span class="year">2011</span><span class="fact">Inaugurazione della nuova stazione Tiburtina, intitolata a Cavour.</span></li>
+          <li><span class="year">2012</span><span class="fact">Inaugurazione della diramazione della linea B1.</span></li>
+          <li><span class="year">2014</span><span class="fact">Apertura della linea C.</span></li>
+        </ul>
+        <div class="geo-note">
+          <span class="tag">Geografia</span>
+          <p>Metropolitana, aeroporto e nuove strade come la via Olimpica e la Tangenziale Est hanno cambiato profondamente il modo in cui ci si muove a Roma: anche le infrastrutture sono un modo in cui l'uomo trasforma il territorio.</p>
+        </div>
+      </div>
+    </details>
+
+    <!-- 2 MODERNA -->
+    <details class="stratum" style="--era-color:var(--c-moderna)">
+      <summary>
+        <div class="name-block">
+          <span class="era-name">Età moderna</span>
+          <span class="era-range">XV–XIX sec. d.C.</span>
+        </div>
+        <span class="chev">+</span>
+      </summary>
+      <div class="stratum-body">
+        <p class="lead">I secoli del Rinascimento e del Barocco, in cui Roma si riempie di chiese, palazzi e fontane monumentali. Nel 1871 Roma diventa capitale del nuovo Regno d'Italia, dopo l'Unità nazionale del 1861.</p>
+        <ul class="events">
+          <li><span class="year">1861</span><span class="fact">Proclamazione del Regno d'Italia.</span></li>
+          <li><span class="year">1871</span><span class="fact">Roma diventa capitale d'Italia.</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- 3 MEDIOEVO -->
+    <details class="stratum" style="--era-color:var(--c-medioevo)">
+      <summary>
+        <div class="name-block">
+          <span class="era-name">Medioevo</span>
+          <span class="era-range">VII–XIV sec. d.C.</span>
+        </div>
+        <span class="chev">+</span>
+      </summary>
+      <div class="stratum-body">
+        <p class="lead">La Roma medievale è attraversata da piccoli corsi d'acqua che fanno funzionare i mulini della città, prima di scomparire lentamente sotto terra.</p>
+        <ul class="events">
+          <li><span class="year">dal 1122</span><span class="fact">La Marrana dell'Acqua Mariana fa funzionare i mulini per scopi agricoli e industriali della zona, prima di scomparire sotto terra.</span></li>
+          <li><span class="year">—</span><span class="fact">Scompaiono la Mola della Porta, davanti a porta Asinaria, e la Mola di San Giovanni, tra porta Metronia e porta Asinaria.</span></li>
+        </ul>
+        <div class="geo-note">
+          <span class="tag">Geografia</span>
+          <p>Un piccolo corso d'acqua che per secoli aveva fatto funzionare i mulini finisce per scomparire sotto terra: anche i corsi d'acqua di una città possono essere trasformati o nascosti dalla crescita degli insediamenti umani.</p>
+        </div>
+      </div>
+    </details>
+
+    <!-- 4 TARDA IMPERIALE -->
+    <details class="stratum" style="--era-color:var(--c-tardaimp)">
+      <summary>
+        <div class="name-block">
+          <span class="era-name">Tarda età imperiale</span>
+          <span class="era-range">IV–VI sec. d.C.</span>
+        </div>
+        <span class="chev">+</span>
+      </summary>
+      <div class="stratum-body">
+        <p class="lead">Roma diventa cristiana. È in questi secoli che nasce, proprio in questa zona, l'edificio da cui la stazione prende il nome.</p>
+        <ul class="events">
+          <li><span class="year">313</span><span class="fact">L'editto di Milano concede libertà di culto ai cristiani.</span></li>
+          <li><span class="year">IV sec.</span><span class="fact">Viene costruita la Basilica di San Giovanni in Laterano, cattedrale di Roma: da qui il nome della stazione.</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- 5 MEDIA IMPERIALE -->
+    <details class="stratum" style="--era-color:var(--c-mediaimp)">
+      <summary>
+        <div class="name-block">
+          <span class="era-name">Media età imperiale</span>
+          <span class="era-range">III sec. d.C. · livello −14/−15 m</span>
+        </div>
+        <span class="chev">+</span>
+      </summary>
+      <div class="stratum-body">
+        <p class="lead">Un livello ricco di ritrovamenti: qui gli imperatori lasciano il segno con archi, terme e persino nuove mura per proteggere la città.</p>
+        <ul class="events">
+          <li><span class="year">203</span><span class="fact">Dedica dell'arco a Settimio Severo, per celebrare il trionfo sui Parti in Persia.</span></li>
+          <li><span class="year">216</span><span class="fact">Caracalla inaugura le Thermae Antoninianae (le Terme di Caracalla).</span></li>
+          <li><span class="year">271–275</span><span class="fact">L'imperatore Aureliano costruisce le nuove Mura di Roma, lunghe oltre 18 km.</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- 6 PRIMA IMPERIALE -->
+    <details class="stratum" style="--era-color:var(--c-primaimp)">
+      <summary>
+        <div class="name-block">
+          <span class="era-name">Prima età imperiale</span>
+          <span class="era-range">I–II sec. d.C.</span>
+        </div>
+        <span class="chev">+</span>
+      </summary>
+      <div class="stratum-body">
+        <p class="lead">È l'epoca in cui Roma raggiunge la sua massima espansione territoriale, e la città si riempie di monumenti diventati simboli eterni.</p>
+        <ul class="events">
+          <li><span class="year">80</span><span class="fact">Viene inaugurato il Colosseo (Anfiteatro Flavio).</span></li>
+          <li><span class="year">II sec.</span><span class="fact">Viene costruito il Pantheon, nella forma che conosciamo oggi.</span></li>
+        </ul>
+        <div class="migra-note">
+          <span class="tag">Migrazioni</span>
+          <p>Roma è da sempre una città multietnica: fin dalle origini accoglie popoli diversi da tutto il Mediterraneo. Le iscrizioni conservate nei musei romani raccontano di persone comuni arrivate da altre terre, che parlavano lingue diverse e pregavano divinità straniere; la cittadinanza romana diventa uno degli strumenti principali per integrarle nella città.</p>
+        </div>
+      </div>
+    </details>
+
+    <!-- 7 REPUBBLICANA -->
+    <details class="stratum" style="--era-color:var(--c-repubblicana)">
+      <summary>
+        <div class="name-block">
+          <span class="era-name">Età repubblicana</span>
+          <span class="era-range">V–I sec. a.C.</span>
+        </div>
+        <span class="chev">+</span>
+      </summary>
+      <div class="stratum-body">
+        <p class="lead">Roma non è più governata da un re, ma da consoli eletti e dal Senato. Sono i secoli delle guerre puniche e delle grandi conquiste nel Mediterraneo, fino alla fine della Repubblica con Giulio Cesare.</p>
+      </div>
+    </details>
+
+    <!-- 8 PROTOSTORICA -->
+    <details class="stratum" style="--era-color:var(--c-protostorica)">
+      <summary>
+        <div class="name-block">
+          <span class="era-name">Età protostorica-arcaica</span>
+          <span class="era-range">VIII–VI sec. a.C.</span>
+        </div>
+        <span class="chev">+</span>
+      </summary>
+      <div class="stratum-body">
+        <p class="lead">È l'epoca leggendaria della fondazione di Roma, tradizionalmente fissata nel 753 a.C., e dei primi re che governano la città delle origini.</p>
+        <ul class="events">
+          <li><span class="year">753 a.C.</span><span class="fact">Data tradizionale della fondazione di Roma.</span></li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- 9 PREISTORICA -->
+    <details class="stratum" style="--era-color:var(--c-preistorica)">
+      <summary>
+        <div class="name-block">
+          <span class="era-name">Età preistorica</span>
+          <span class="era-range">450.000–2.000 ca. a.C. · livello −25/−26 m</span>
+        </div>
+        <span class="chev">+</span>
+      </summary>
+      <div class="stratum-body">
+        <p class="lead">Il livello più profondo del percorso, e il più antico: qui la storia lascia il posto alla preistoria, quando al posto della città scorreva il Paleotevere, tra boschi, steppe e praterie che si alternavano con il clima.</p>
+        <ul class="events">
+          <li><span class="year">450.000–200.000 anni fa</span><span class="fact">Paleolitico inferiore: strumenti su ciottolo e, più tardi, i cosiddetti bifacciali.</span></li>
+          <li><span class="year">200.000–38.000 anni fa</span><span class="fact">Paleolitico medio: si perfeziona la scheggiatura della selce; in Italia e in Europa compare l'Homo neanderthalensis; il Paleotevere attraversa l'area.</span></li>
+          <li><span class="year">38.000–10.000 anni fa</span><span class="fact">Paleolitico superiore: nascono le lame e le lamelle di selce; nasce l'arte e si diffonde in Europa l'uomo moderno, l'Homo sapiens.</span></li>
+        </ul>
+        <div class="geo-note">
+          <span class="tag">Geografia</span>
+          <p>Al posto della città scorreva il Paleotevere, un fiume che oggi non esiste più, circondato da boschi, steppe e praterie che cambiavano con il clima: il territorio che conosciamo era ancora tutto da modellare.</p>
+        </div>
+        <div class="migra-note">
+          <span class="tag">Migrazioni</span>
+          <p>L'Homo sapiens non nasce in Europa: arriva da lontano, dopo un lunghissimo cammino iniziato in Africa milioni di anni prima. In questi millenni incontra le popolazioni di Neanderthal già diffuse nel continente: uno dei primi grandi "incontri tra popoli" della storia umana.</p>
+        </div>
+      </div>
+    </details>
+
+  </main>
+</div>
+
+<section class="quiz-section" id="quiz">
+  <div class="quiz-inner">
+    <div class="kicker"><span class="dot"></span> Mettiti alla prova</div>
+    <h2>Sei arrivato in fondo allo scavo.</h2>
+    <p class="lead">Ora tocca a te: rispondi alle 14 domande — un po' di Storia, un po' di Geografia, un po' di migrazioni — e scopri che tipo di archeologo sei.</p>
+
+    <div class="quiz-progress">
+      <span id="qCounter">Domanda 1 di 14</span>
+      <span id="qScoreLive">Punteggio: 0</span>
+    </div>
+    <div class="quiz-bar"><div class="quiz-bar-fill" id="quizBarFill"></div></div>
+
+    <div class="quiz-card" id="quizCard">
+      <p class="q-text" id="qText"></p>
+      <div class="options" id="qOptions"></div>
+      <p class="explain" id="qExplain"></p>
+      <div class="quiz-nav"><button class="btn-next" id="btnNext">Prossima domanda →</button></div>
+    </div>
+
+    <div class="quiz-result" id="quizResult">
+      <div class="score" id="resultScore">0/10</div>
+      <div class="tier" id="resultTier"></div>
+      <p class="tier-desc" id="resultDesc"></p>
+      <button class="btn-restart" id="btnRestart">Rifai il quiz</button>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--ink);padding:0 8vw 7vh;">
+  <div style="max-width:680px;margin:0 auto;border-top:1px solid #3d392f;padding-top:2.2rem;">
+    <p style="color:#a9d9c3;font-weight:600;font-size:.85rem;margin-bottom:.6rem;">Per approfondire in classe</p>
+    <p style="color:#c9c3b0;font-size:.95rem;max-width:56ch;margin-bottom:.9rem;">I Musei in Comune Roma propongono un percorso didattico dedicato proprio al tema delle migrazioni, dalla preistoria a Roma antica: <em>"Viaggi, scambi, flussi: le migrazioni"</em>, pensato per la scuola secondaria.</p>
+    <a href="https://scuole.museiincomuneroma.it/schedadidattica/viaggi-scambi-flussi-le-migrazioni/" style="color:#4fd39a;font-size:.9rem;">scuole.museiincomuneroma.it → Viaggi, scambi, flussi: le migrazioni</a>
+  </div>
+</section>
+
+<footer>
+  Percorso didattico ispirato ai pannelli storici della stazione della metropolitana San Giovanni, Roma — progetto "Alla scoperta di Roma".
+</footer>
+
+<script>
+  // ---- Ruler scroll sync ----
+  const strati = document.getElementById('strati');
+  const rail = document.getElementById('rail');
+  const readout = document.getElementById('depthReadout');
+
+  function updateRuler(){
+    const rect = strati.getBoundingClientRect();
+    const total = strati.offsetHeight - window.innerHeight * 0.6;
+    const scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total,1));
+    const progress = total > 0 ? scrolled/total : 0;
+    const depth = -4 + progress * (-26 - -4);
+    if(rail) rail.style.setProperty('--marker-y', (progress * rail.offsetHeight) + 'px');
+    if(readout) readout.textContent = depth.toFixed(0) + ' m';
+  }
+  window.addEventListener('scroll', updateRuler, {passive:true});
+  window.addEventListener('resize', updateRuler);
+  updateRuler();
+
+  // ---- Quiz ----
+  const questions = [
+    {
+      q:"A quale profondità si trova il livello dedicato all'Età preistorica nella stazione San Giovanni?",
+      options:["−25/−26 m","−4/−5 m","−14/−15 m","−10 m"],
+      correct:0,
+      explain:"È il livello più profondo del percorso: qui la stazione racconta il Paleolitico, fino a 450.000 anni fa."
+    },
+    {
+      q:"Quale specie umana compare in Europa durante il Paleolitico medio?",
+      options:["Homo habilis","Homo neanderthalensis","Homo erectus","Homo sapiens"],
+      correct:1,
+      explain:"Nel Paleolitico medio (200.000–38.000 anni fa) compare l'Homo neanderthalensis, mentre l'Homo sapiens arriverà solo nel Paleolitico superiore."
+    },
+    {
+      q:"In quale periodo nasce l'arte e si diffonde l'Homo sapiens in Europa?",
+      options:["Neolitico","Paleolitico inferiore","Paleolitico medio","Paleolitico superiore"],
+      correct:3,
+      explain:"Nel Paleolitico superiore (38.000–10.000 anni fa) si perfeziona la lavorazione della selce e nasce l'arte, insieme alla diffusione dell'uomo moderno."
+    },
+    {
+      q:"A quale anno si fa risalire tradizionalmente la fondazione di Roma?",
+      options:["509 a.C.","216 d.C.","753 a.C.","27 a.C."],
+      correct:2,
+      explain:"Il 753 a.C. è la data tradizionale della fondazione di Roma, nell'epoca protostorica-arcaica."
+    },
+    {
+      q:"Chi fece dedicare l'arco per il trionfo sui Parti in Persia, nel 203 d.C.?",
+      options:["Caracalla","Aureliano","Settimio Severo","Traiano"],
+      correct:2,
+      explain:"L'arco fu dedicato a Settimio Severo nel 203 d.C."
+    },
+    {
+      q:"Le Thermae Antoninianae (Terme di Caracalla) furono inaugurate nel...",
+      options:["80 d.C.","216 d.C.","313 d.C.","1122 d.C."],
+      correct:1,
+      explain:"Caracalla le inaugurò nel 216 d.C."
+    },
+    {
+      q:"Chi fece costruire le nuove Mura di Roma, lunghe oltre 18 km, tra il 271 e il 275 d.C.?",
+      options:["Romolo","Aureliano","Costantino","Giulio Cesare"],
+      correct:1,
+      explain:"Furono volute dall'imperatore Aureliano, per proteggere la città allargata."
+    },
+    {
+      q:"Dal 1122, a cosa serviva la Marrana dell'Acqua Mariana?",
+      options:[
+        "A far funzionare i mulini agricoli e industriali",
+        "A rifornire le Terme di Caracalla",
+        "A collegare due porte delle mura",
+        "A irrigare i giardini imperiali"
+      ],
+      correct:0,
+      explain:"Faceva funzionare i mulini della zona, prima di scomparire sotto terra."
+    },
+    {
+      q:"Da quale edificio prende il nome la stazione San Giovanni?",
+      options:[
+        "Da un imperatore romano",
+        "Dalla Basilica di San Giovanni in Laterano",
+        "Da una porta delle mura Aureliane",
+        "Da un fiume scomparso"
+      ],
+      correct:1,
+      explain:"La basilica, cattedrale di Roma, fu costruita nel IV secolo d.C. e ha dato il nome al quartiere e alla stazione."
+    },
+    {
+      q:"In quale anno fu inaugurata la prima linea della metropolitana di Roma?",
+      options:["1980","1955","1964","2014"],
+      correct:1,
+      explain:"Nel 1955 apre la linea B, la prima linea della metropolitana romana."
+    },
+    {
+      q:"[Geografia] Quale fiume, oggi scomparso, attraversava l'area nel Paleolitico medio?",
+      options:["Il Paleotevere","L'Aniene","La Marrana dell'Acqua Mariana","Il Rio Almone"],
+      correct:0,
+      explain:"Il Paleotevere scorreva in quest'area: un esempio di come il paesaggio possa cambiare completamente nel corso di migliaia di anni."
+    },
+    {
+      q:"[Geografia] Cosa succede nel Medioevo alla Marrana dell'Acqua Mariana, che faceva funzionare i mulini della zona?",
+      options:[
+        "Scompare sotto terra",
+        "Viene deviata verso il Tevere",
+        "Si trasforma in una strada",
+        "Diventa un canale navigabile"
+      ],
+      correct:0,
+      explain:"La Marrana finisce per scomparire sotto terra: anche i corsi d'acqua di una città vengono trasformati dalla crescita degli insediamenti umani."
+    },
+    {
+      q:"[Migrazioni] Da quale continente proviene originariamente l'Homo sapiens, prima di diffondersi in Europa?",
+      options:["Africa","Asia","America","Oceania"],
+      correct:0,
+      explain:"L'Homo sapiens ha origine in Africa: la sua diffusione in Europa, nel Paleolitico superiore, è una delle prime grandi migrazioni della storia umana."
+    },
+    {
+      q:"[Migrazioni] Quale strumento usavano i Romani per integrare nella città i popoli conquistati o immigrati?",
+      options:[
+        "La concessione della cittadinanza",
+        "L'obbligo di lasciare Roma dopo un anno",
+        "Il divieto di parlare la propria lingua",
+        "Un'imposta speciale sugli stranieri"
+      ],
+      correct:0,
+      explain:"La concessione della cittadinanza fu uno degli strumenti principali con cui Roma integrò, nel tempo, popoli diversi provenienti da tutto il Mediterraneo."
+    }
+  ];
+
+  let current = 0;
+  let score = 0;
+  let answered = false;
+
+  const qText = document.getElementById('qText');
+  const qOptions = document.getElementById('qOptions');
+  const qExplain = document.getElementById('qExplain');
+  const btnNext = document.getElementById('btnNext');
+  const qCounter = document.getElementById('qCounter');
+  const qScoreLive = document.getElementById('qScoreLive');
+  const quizBarFill = document.getElementById('quizBarFill');
+  const quizCard = document.getElementById('quizCard');
+  const quizResult = document.getElementById('quizResult');
+
+  function renderQuestion(){
+    answered = false;
+    const item = questions[current];
+    qText.textContent = item.q;
+    qOptions.innerHTML = '';
+    qExplain.classList.remove('show');
+    btnNext.classList.remove('show');
+
+    item.options.forEach((opt, i)=>{
+      const b = document.createElement('button');
+      b.className = 'opt';
+      b.type = 'button';
+      b.textContent = opt;
+      b.addEventListener('click', ()=> selectOption(i, b));
+      qOptions.appendChild(b);
+    });
+
+    qCounter.textContent = `Domanda ${current+1} di ${questions.length}`;
+    qScoreLive.textContent = `Punteggio: ${score}`;
+    quizBarFill.style.width = (current/questions.length*100) + '%';
+  }
+
+  function selectOption(i, btn){
+    if(answered) return;
+    answered = true;
+    const item = questions[current];
+    const allOpts = qOptions.querySelectorAll('.opt');
+    allOpts.forEach((o, idx)=>{
+      o.disabled = true;
+      if(idx === item.correct) o.classList.add('correct');
+      else if(idx === i) o.classList.add('incorrect');
+    });
+    if(i === item.correct) score++;
+    qScoreLive.textContent = `Punteggio: ${score}`;
+    qExplain.innerHTML = `<strong>${i===item.correct ? 'Esatto.' : 'Non proprio.'}</strong> ${item.explain}`;
+    qExplain.classList.add('show');
+    btnNext.classList.add('show');
+    btnNext.textContent = current === questions.length-1 ? 'Vedi il risultato →' : 'Prossima domanda →';
+  }
+
+  btnNext.addEventListener('click', ()=>{
+    current++;
+    if(current < questions.length){
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult(){
+    quizCard.style.display = 'none';
+    document.querySelector('.quiz-progress').style.display = 'none';
+    document.querySelector('.quiz-bar').style.display = 'none';
+    quizResult.classList.add('show');
+    document.getElementById('resultScore').textContent = `${score}/${questions.length}`;
+
+    let tier, desc;
+    if(score <= 4){
+      tier = "Matricola dello scavo";
+      desc = "Hai appena iniziato a scendere nei livelli di Roma: torna a rivedere il percorso e prova di nuovo.";
+    } else if(score <= 7){
+      tier = "Esploratore attento";
+      desc = "Conosci già bene diversi livelli della storia di Roma: con un altro giro riuscirai a scendere fino in fondo.";
+    } else {
+      tier = "Archeologo esperto";
+      desc = "Hai attraversato tutti e nove i livelli senza perderti nulla: complimenti, giovane archeologo!";
+    }
+    document.getElementById('resultTier').textContent = tier;
+    document.getElementById('resultDesc').textContent = desc;
+  }
+
+  document.getElementById('btnRestart').addEventListener('click', ()=>{
+    current = 0; score = 0;
+    quizCard.style.display = '';
+    document.querySelector('.quiz-progress').style.display = '';
+    document.querySelector('.quiz-bar').style.display = '';
+    quizResult.classList.remove('show');
+    renderQuestion();
+  });
+
+  renderQuestion();
+</script>
+
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

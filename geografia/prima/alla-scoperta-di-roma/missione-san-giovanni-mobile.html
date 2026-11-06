@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Missione San Giovanni — Alla scoperta di Roma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#efe8d8;
+    --ink:#26241e;
+    --ink-soft:#59554a;
+    --line:#cabf9f;
+    --metro:#0f6b4c;
+    --paper:#faf7ee;
+
+    --c-preistorica:#4f7a6d;
+    --c-protostorica:#5c7fa0;
+    --c-mediaimp:#c1432b;
+    --c-contemp:#c8952a;
+    --c-legenda:#5b3a5c;
+    --c-reperti:#a83a2d;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    display:flex;
+    flex-direction:column;
+  }
+  h1,h2,.display{font-family:'Fraunces',serif;font-weight:600;margin:0;}
+  p{margin:0 0 1em;}
+  button{font-family:inherit;}
+
+  .app{
+    max-width:520px;
+    margin:0 auto;
+    width:100%;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+  }
+
+  /* top bar */
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:1rem 1.25rem;
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .brand{
+    font-size:.8rem;
+    font-weight:600;
+    color:var(--metro);
+    display:flex;align-items:center;gap:.5em;
+  }
+  .brand .dot{width:.5em;height:.5em;border-radius:50%;background:var(--metro);}
+  .topbar .step-count{font-size:.8rem;color:var(--ink-soft);}
+
+  .progress-track{
+    height:3px;
+    background:var(--line);
+  }
+  .progress-fill{
+    height:100%;
+    background:var(--metro);
+    width:0%;
+    transition:width .3s ease;
+  }
+
+  .screen{
+    flex:1;
+    padding:2rem 1.4rem 1.5rem;
+    display:none;
+    flex-direction:column;
+  }
+  .screen.active{display:flex;}
+
+  /* intro */
+  .intro h1{font-size:2.1rem;line-height:1.08;margin-bottom:1rem;}
+  .intro .lead{color:var(--ink-soft);margin-bottom:1.6rem;}
+  .rules{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:1.1rem 1.2rem;
+    margin-bottom:1.6rem;
+  }
+  .rules h2{font-size:.95rem;margin-bottom:.6rem;}
+  .rules ul{margin:0;padding-left:1.15rem;color:var(--ink-soft);font-size:.92rem;}
+  .rules li{margin-bottom:.35rem;}
+
+  .field{margin-bottom:1rem;}
+  .field label{display:block;font-size:.82rem;color:var(--ink-soft);margin-bottom:.35rem;}
+  .field input{
+    width:100%;
+    border:none;
+    border-bottom:2px solid var(--line);
+    background:transparent;
+    padding:.5rem .1rem;
+    font-size:1.05rem;
+    font-family:inherit;
+    color:var(--ink);
+  }
+  .field input:focus{outline:none;border-bottom-color:var(--metro);}
+
+  /* tappa */
+  .stop-badge{
+    align-self:flex-start;
+    background:var(--stop-color, var(--metro));
+    color:#fbf6e9;
+    font-size:.78rem;
+    font-weight:600;
+    padding:.35rem .8rem;
+    border-radius:20px;
+    margin-bottom:1.1rem;
+  }
+  .screen h2.stop-title{
+    font-size:1.65rem;
+    line-height:1.15;
+    margin-bottom:1rem;
+  }
+  .clue{
+    background:var(--paper);
+    border-left:4px solid var(--stop-color, var(--metro));
+    padding:1rem 1.1rem;
+    border-radius:2px;
+    margin-bottom:1.4rem;
+  }
+  .clue .clue-label{
+    font-size:.72rem;
+    font-weight:600;
+    color:var(--ink-soft);
+    margin-bottom:.4rem;
+  }
+  .clue p{margin:0;font-size:1rem;}
+
+  .found-toggle{
+    display:flex;
+    align-items:center;
+    gap:.7rem;
+    background:transparent;
+    border:1.5px solid var(--line);
+    border-radius:6px;
+    padding:.8rem 1rem;
+    margin-bottom:1.6rem;
+    cursor:pointer;
+    font-size:.95rem;
+    color:var(--ink-soft);
+    text-align:left;
+    transition:border-color .15s ease, background .15s ease, color .15s ease;
+  }
+  .found-toggle .box{
+    width:22px;height:22px;flex:none;
+    border-radius:5px;
+    border:1.5px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-size:.85rem;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .found-toggle.on{border-color:var(--metro);color:var(--ink);background:#e7f2ec;}
+  .found-toggle.on .box{background:var(--metro);border-color:var(--metro);color:#fff;}
+
+  .task{margin-bottom:1.3rem;}
+  .task .q{font-weight:600;margin-bottom:.6rem;font-size:1rem;}
+  .task textarea{
+    width:100%;
+    min-height:64px;
+    border:1.5px solid var(--line);
+    border-radius:6px;
+    padding:.7rem .8rem;
+    font-family:inherit;
+    font-size:.98rem;
+    resize:vertical;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .task textarea:focus{outline:none;border-color:var(--metro);}
+  .task .hint{font-size:.78rem;color:var(--ink-soft);margin-top:.35rem;}
+  .task.task-geo{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:.9rem .9rem .7rem;
+  }
+  .task.task-geo textarea{background:#fff;}
+  .task.task-migra{
+    background:var(--paper);
+    border:1px solid #d8b28e;
+    border-radius:6px;
+    padding:.9rem .9rem .7rem;
+  }
+  .task.task-migra textarea{background:#fff;}
+
+  .spacer{flex:1;}
+
+  .nav{
+    display:flex;
+    gap:.8rem;
+    padding-top:1rem;
+  }
+  .btn{
+    flex:1;
+    padding:.95rem 1rem;
+    border-radius:6px;
+    border:none;
+    font-weight:600;
+    font-size:.98rem;
+    cursor:pointer;
+  }
+  .btn-primary{background:var(--metro);color:#fbf6e9;}
+  .btn-primary:active{background:#0a4d36;}
+  .btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink-soft);flex:.6;}
+  .btn-ghost:active{background:var(--paper);}
+
+  /* summary */
+  .summary h1{font-size:2rem;margin-bottom:.6rem;}
+  .summary .lead{color:var(--ink-soft);margin-bottom:1.6rem;}
+  .recap{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:1.1rem 1.2rem;
+    margin-bottom:1rem;
+  }
+  .recap .recap-title{
+    font-size:.85rem;
+    font-weight:600;
+    color:var(--stop-color, var(--metro));
+    margin-bottom:.5rem;
+  }
+  .recap .recap-a{font-size:.95rem;color:var(--ink);white-space:pre-wrap;}
+  .recap .recap-a.empty{color:var(--ink-soft);font-style:italic;}
+  .reflect{margin-top:.6rem;}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <div class="brand"><span class="dot"></span>Alla scoperta di Roma</div>
+    <div class="step-count" id="stepCount"></div>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+  <!-- SCREEN 0: intro -->
+  <div class="screen active" data-screen="intro">
+    <div class="intro">
+      <h1>Missione: un viaggio nel tempo a San Giovanni</h1>
+      <p class="lead">Sei pronto a scendere sottoterra e attraversare 450.000 anni di storia? Segui le tappe, cerca i pannelli e rispondi alle domande man mano che li trovi.</p>
+      <div class="rules" style="margin-bottom:1.1rem;">
+        <h2>Cosa c'entra con quello che studiamo</h2>
+        <p style="margin:0;color:var(--ink-soft);font-size:.92rem;">In <strong>Storia</strong> metterai alla prova la linea del tempo che stiamo costruendo in classe. In <strong>Geografia</strong> osserverai come gli eventi umani, nel corso dei secoli, abbiano cambiato il paesaggio e il territorio di Roma. In entrambe, incontrerai anche il tema delle <strong>migrazioni</strong>: alcune domande sono segnate con 🌍 (Geografia) o 🧭 (Migrazioni).</p>
+      </div>
+      <div class="rules">
+        <h2>Prima di partire</h2>
+        <ul>
+          <li>Resta sempre vicino al tuo gruppo e all'insegnante.</li>
+          <li>Non superare mai la linea gialla sulla banchina.</li>
+          <li>Lavorate in coppia: uno legge i pannelli, l'altro scrive.</li>
+          <li>Se un pannello non si trova, va bene lo stesso: passa alla domanda successiva.</li>
+        </ul>
+      </div>
+      <div class="field">
+        <label for="nomeInput">Nome della coppia o del gruppo</label>
+        <input type="text" id="nomeInput" placeholder="Es. Marco e Giulia">
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="nav">
+      <button class="btn btn-primary" id="startBtn">Inizia la missione →</button>
+    </div>
+  </div>
+
+  <!-- SCREENS: tappe (generated) -->
+  <div id="stopsContainer"></div>
+
+  <!-- SCREEN final: summary -->
+  <div class="screen" data-screen="summary">
+    <div class="summary">
+      <h1>Missione completata!</h1>
+      <p class="lead">Ecco un riepilogo di tutto quello che avete trovato e scritto oggi. Rileggetelo insieme prima di uscire dalla stazione.</p>
+      <div id="recapList"></div>
+      <div class="task reflect">
+        <p class="q">Confrontatevi: qual è stata la scoperta più interessante di oggi — per la Storia, la Geografia o le migrazioni?</p>
+        <textarea id="reflectInput" placeholder="Scrivete qui la vostra risposta..."></textarea>
+      </div>
+      <p style="margin-top:2rem;font-size:.78rem;color:var(--ink-soft);">Per approfondire il tema delle migrazioni, dalla preistoria a Roma antica: <a href="https://scuole.museiincomuneroma.it/schedadidattica/viaggi-scambi-flussi-le-migrazioni/" style="color:var(--metro);">"Viaggi, scambi, flussi: le migrazioni"</a>, Musei in Comune Roma.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const stops = [
+    {
+      id:'preistoria',
+      color:'var(--c-preistorica)',
+      badge:'Tappa 1 · livello più profondo',
+      title:"Il fondo dello scavo",
+      clueLabel:'Dove cercare',
+      clue:"Sulla banchina più in basso della stazione, cerca sulla parete la scritta grande «Età preistorica».",
+      tasks:[
+        {q:"Tra quali anni si colloca l'Età preistorica, secondo il pannello?"},
+        {q:"Cerca anche i pannelli del Paleolitico inferiore, medio e superiore. In quale dei tre compare per la prima volta l'Homo sapiens?"},
+        {q:"🌍 Geografia — Secondo i pannelli, quale fiume attraversava quest'area e oggi non esiste più? Come immagini il paesaggio intorno: boschi, steppe, praterie?", geo:true},
+        {q:"🧭 Migrazioni — L'Homo sapiens non è nato in Europa: arriva da un altro continente, dopo un lunghissimo cammino. Da dove viene, secondo te, e chi incontra già presente in Europa quando arriva?", migra:true}
+      ]
+    },
+    {
+      id:'colori',
+      color:'var(--c-protostorica)',
+      badge:'Tappa 2 · risalendo',
+      title:"I colori cambiano",
+      clueLabel:'Dove cercare',
+      clue:"Continua a camminare lungo la banchina: man mano che le epoche cambiano, cambia anche il colore dei pannelli.",
+      tasks:[
+        {q:"Scrivi il nome di due epoche che trovi tra la Preistoria e l'epoca degli imperatori romani."},
+        {q:"🌍 Geografia — Se trovi il pannello del Medioevo: dal 1122 un piccolo corso d'acqua, la Marrana dell'Acqua Mariana, faceva funzionare i mulini della zona, poi è scomparso sotto terra. Perché pensi che un corso d'acqua possa 'scomparire' quando una città cresce?", geo:true}
+      ]
+    },
+    {
+      id:'imperiale',
+      color:'var(--c-mediaimp)',
+      badge:'Tappa 3 · livello intermedio',
+      title:"Il cuore dell'Impero",
+      clueLabel:'Dove cercare',
+      clue:"Cerca il pannello rosso «Media età imperiale», vicino alla grande sagoma di una testa di statua.",
+      tasks:[
+        {q:"Chi fece costruire le nuove Mura di Roma, tra il 271 e il 275 d.C.?"},
+        {q:"Cosa inaugura Caracalla nel 216 d.C.?"},
+        {q:"🌍 Geografia — Le nuove Mura segnavano il confine della città di allora. Secondo te, la Roma di oggi è più grande o più piccola dell'area racchiusa dalle Mura?", geo:true},
+        {q:"🧭 Migrazioni — Roma antica era una città multietnica, dove arrivavano persone da tutto il Mediterraneo. Secondo te, cosa serviva a uno straniero per sentirsi parte della città?", migra:true}
+      ]
+    },
+    {
+      id:'contemporanea',
+      color:'var(--c-contemp)',
+      badge:'Tappa 4 · quasi in superficie',
+      title:"Il presente",
+      clueLabel:'Dove cercare',
+      clue:"Vicino all'uscita o alle scale mobili, cerca la scritta gialla/dorata «Età contemporanea».",
+      tasks:[
+        {q:"Trova un anno legato alla metropolitana di Roma scritto su questo pannello. Cosa è successo quell'anno?"},
+        {q:"🌍 Geografia — Metropolitana, aeroporto, nuove strade: in che modo pensi che queste infrastrutture abbiano cambiato il territorio e il modo di spostarsi delle persone a Roma?", geo:true}
+      ]
+    },
+    {
+      id:'legenda',
+      color:'var(--c-legenda)',
+      badge:'Tappa 5 · la mappa completa',
+      title:"Tutte le epoche insieme",
+      clueLabel:'Dove cercare',
+      clue:"Cerca un pannello scuro con l'elenco di tutte le epoche, una sotto l'altra, ciascuna con un colore diverso.",
+      tasks:[
+        {q:"Conta quante epoche sono elencate in totale, dal Paleolitico a oggi. Scrivi il numero."},
+        {q:"🌍 Geografia — Guardando tutta la fila di epoche: secondo te, in quale periodo il territorio di Roma è cambiato di più? Perché?", geo:true}
+      ]
+    },
+    {
+      id:'reperti',
+      color:'var(--c-reperti)',
+      badge:'Tappa 6 · gli oggetti ritrovati',
+      title:"I reperti",
+      clueLabel:'Dove cercare',
+      clue:"Cerca una vetrina con oggetti antichi esposti, vicino alla scritta «Viaggiare nella storia».",
+      tasks:[
+        {q:"Descrivi con parole tue uno degli oggetti esposti nella vetrina: che forma ha? Che colore?"}
+      ]
+    }
+  ];
+
+  const stopsContainer = document.getElementById('stopsContainer');
+  const answers = {}; // id -> [answer strings]
+  const found = {};   // id -> bool
+
+  stops.forEach((stop, idx)=>{
+    answers[stop.id] = new Array(stop.tasks.length).fill('');
+    found[stop.id] = false;
+
+    const screen = document.createElement('div');
+    screen.className = 'screen';
+    screen.dataset.screen = 'stop-' + idx;
+    screen.style.setProperty('--stop-color', stop.color);
+
+    let tasksHtml = '';
+    stop.tasks.forEach((t, ti)=>{
+      const cls = t.geo ? ' task-geo' : (t.migra ? ' task-migra' : '');
+      tasksHtml += `
+        <div class="task${cls}">
+          <p class="q">${t.q}</p>
+          <textarea data-stop="${idx}" data-task="${ti}" placeholder="Scrivi qui la risposta..."></textarea>
+        </div>`;
+    });
+
+    screen.innerHTML = `
+      <div class="stop-badge">${stop.badge}</div>
+      <h2 class="stop-title">${stop.title}</h2>
+      <div class="clue">
+        <div class="clue-label">${stop.clueLabel}</div>
+        <p>${stop.clue}</p>
+      </div>
+      <button class="found-toggle" data-found="${idx}" type="button">
+        <span class="box">✓</span>
+        <span class="label">Ho trovato il pannello!</span>
+      </button>
+      ${tasksHtml}
+      <div class="spacer"></div>
+      <div class="nav">
+        <button class="btn btn-ghost" data-back>← Indietro</button>
+        <button class="btn btn-primary" data-forward>${idx === stops.length-1 ? 'Vai al riepilogo →' : 'Tappa successiva →'}</button>
+      </div>
+    `;
+    stopsContainer.appendChild(screen);
+  });
+
+  // event delegation
+  stopsContainer.addEventListener('click', (e)=>{
+    const foundBtn = e.target.closest('[data-found]');
+    if(foundBtn){
+      const idx = foundBtn.dataset.found;
+      const stop = stops[idx];
+      found[stop.id] = !found[stop.id];
+      foundBtn.classList.toggle('on', found[stop.id]);
+    }
+  });
+  stopsContainer.addEventListener('input', (e)=>{
+    if(e.target.tagName === 'TEXTAREA'){
+      const s = e.target.dataset.stop, t = e.target.dataset.task;
+      answers[stops[s].id][t] = e.target.value;
+    }
+  });
+
+  // navigation
+  const order = ['intro', ...stops.map((s,i)=>'stop-'+i), 'summary'];
+  let current = 0;
+
+  function showScreen(name){
+    document.querySelectorAll('.screen').forEach(s=>{
+      s.classList.toggle('active', s.dataset.screen === name);
+    });
+    const idx = order.indexOf(name);
+    current = idx;
+    const total = order.length - 1; // excluding intro from count baseline
+    document.getElementById('progressFill').style.width = (idx/total*100) + '%';
+    if(name === 'intro'){
+      document.getElementById('stepCount').textContent = '';
+    } else if(name === 'summary'){
+      document.getElementById('stepCount').textContent = 'Riepilogo';
+      renderRecap();
+    } else {
+      document.getElementById('stepCount').textContent = `Tappa ${idx} di ${stops.length}`;
+    }
+    window.scrollTo(0,0);
+  }
+
+  document.getElementById('startBtn').addEventListener('click', ()=> showScreen(order[1]));
+
+  document.addEventListener('click', (e)=>{
+    if(e.target.matches('[data-forward]')){
+      const next = order[current+1];
+      if(next) showScreen(next);
+    }
+    if(e.target.matches('[data-back]')){
+      const prev = order[current-1];
+      if(prev) showScreen(prev);
+    }
+  });
+
+  function renderRecap(){
+    const list = document.getElementById('recapList');
+    list.innerHTML = '';
+    stops.forEach(stop=>{
+      const card = document.createElement('div');
+      card.className = 'recap';
+      card.style.setProperty('--stop-color', stop.color);
+      let inner = `<div class="recap-title">${stop.title}${found[stop.id] ? ' · trovato ✓' : ''}</div>`;
+      stop.tasks.forEach((t, ti)=>{
+        const a = answers[stop.id][ti];
+        inner += `<div class="recap-a ${a ? '' : 'empty'}">${a ? a : '(nessuna risposta scritta)'}</div>`;
+      });
+      card.innerHTML = inner;
+      list.appendChild(card);
+    });
+  }
+
+  showScreen('intro');
+</script>
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

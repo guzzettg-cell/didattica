@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Missione EUR — Alla scoperta di Roma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#ede6d6;
+    --ink:#262420;
+    --ink-soft:#5e594d;
+    --line:#cabf9f;
+    --gold:#c8952a;
+    --gold-deep:#916b1e;
+    --paper:#f8f4ea;
+    --c-palazzo:#7a3b34;
+    --c-pianta:#c8952a;
+    --c-lago:#3d6b6e;
+    --c-oggi:#5c7fa0;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.5;display:flex;flex-direction:column;}
+  h1,h2,.display{font-family:'Fraunces',serif;font-weight:600;margin:0;}
+  p{margin:0 0 1em;}
+  button{font-family:inherit;}
+  .app{max-width:520px;margin:0 auto;width:100%;flex:1;display:flex;flex-direction:column;min-height:100vh;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--line);}
+  .topbar .brand{font-size:.8rem;font-weight:600;color:var(--gold-deep);display:flex;align-items:center;gap:.5em;}
+  .brand .dot{width:.5em;height:.5em;border-radius:50%;background:var(--gold);}
+  .topbar .step-count{font-size:.8rem;color:var(--ink-soft);}
+  .progress-track{height:3px;background:var(--line);}
+  .progress-fill{height:100%;background:var(--gold);width:0%;transition:width .3s ease;}
+  .screen{flex:1;padding:2rem 1.4rem 1.5rem;display:none;flex-direction:column;}
+  .screen.active{display:flex;}
+  .intro h1{font-size:1.95rem;line-height:1.1;margin-bottom:1rem;}
+  .intro .lead{color:var(--ink-soft);margin-bottom:1.2rem;}
+  .rules{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.2rem;margin-bottom:1.1rem;}
+  .rules h2{font-size:.95rem;margin-bottom:.6rem;}
+  .rules ul{margin:0;padding-left:1.15rem;color:var(--ink-soft);font-size:.92rem;}
+  .rules li{margin-bottom:.35rem;}
+  .rules p{margin:0;color:var(--ink-soft);font-size:.92rem;}
+  .field{margin-bottom:1rem;}
+  .field label{display:block;font-size:.82rem;color:var(--ink-soft);margin-bottom:.35rem;}
+  .field input{width:100%;border:none;border-bottom:2px solid var(--line);background:transparent;padding:.5rem .1rem;font-size:1.05rem;font-family:inherit;color:var(--ink);}
+  .field input:focus{outline:none;border-bottom-color:var(--gold);}
+  .stop-badge{align-self:flex-start;background:var(--stop-color, var(--gold));color:#fbf6e9;font-size:.78rem;font-weight:600;padding:.35rem .8rem;border-radius:20px;margin-bottom:1.1rem;}
+  .screen h2.stop-title{font-size:1.55rem;line-height:1.15;margin-bottom:1rem;}
+  .clue{background:var(--paper);border-left:4px solid var(--stop-color, var(--gold));padding:1rem 1.1rem;border-radius:2px;margin-bottom:1.2rem;}
+  .clue .clue-label{font-size:.72rem;font-weight:600;color:var(--ink-soft);margin-bottom:.4rem;}
+  .clue p{margin:0;font-size:1rem;}
+  .found-toggle{display:flex;align-items:center;gap:.7rem;background:transparent;border:1.5px solid var(--line);border-radius:6px;padding:.8rem 1rem;margin-bottom:1.5rem;cursor:pointer;font-size:.95rem;color:var(--ink-soft);text-align:left;}
+  .found-toggle .box{width:22px;height:22px;flex:none;border-radius:5px;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.85rem;}
+  .found-toggle.on{border-color:var(--gold);color:var(--ink);background:#f3e9d4;}
+  .found-toggle.on .box{background:var(--gold);border-color:var(--gold);color:#fff;}
+  .task{margin-bottom:1.3rem;}
+  .task .q{font-weight:600;margin-bottom:.6rem;font-size:1rem;}
+  .task textarea{width:100%;min-height:64px;border:1.5px solid var(--line);border-radius:6px;padding:.7rem .8rem;font-family:inherit;font-size:.98rem;resize:vertical;background:var(--paper);color:var(--ink);}
+  .task textarea:focus{outline:none;border-color:var(--gold);}
+  .task.task-geo{background:var(--paper);border:1px solid #9fb8c7;border-radius:6px;padding:.9rem .9rem .7rem;}
+  .task.task-geo textarea{background:#fff;}
+  .spacer{flex:1;}
+  .nav{display:flex;gap:.8rem;padding-top:1rem;}
+  .btn{flex:1;padding:.95rem 1rem;border-radius:6px;border:none;font-weight:600;font-size:.98rem;cursor:pointer;}
+  .btn-primary{background:var(--gold);color:#2b2109;}
+  .btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink-soft);flex:.6;}
+  .summary h1{font-size:1.9rem;margin-bottom:.6rem;}
+  .summary .lead{color:var(--ink-soft);margin-bottom:1.4rem;}
+  .recap{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.2rem;margin-bottom:1rem;}
+  .recap .recap-title{font-size:.85rem;font-weight:600;color:var(--stop-color, var(--gold-deep));margin-bottom:.5rem;}
+  .recap .recap-a{font-size:.95rem;color:var(--ink);white-space:pre-wrap;}
+  .recap .recap-a.empty{color:var(--ink-soft);font-style:italic;}
+  .reflect{margin-top:.6rem;}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><span class="dot"></span>Alla scoperta di Roma</div>
+    <div class="step-count" id="stepCount"></div>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div class="screen active" data-screen="intro">
+    <div class="intro">
+      <h1>Missione: una città progettata a tavolino</h1>
+      <p class="lead">Una passeggiata nel quartiere EUR, l'unico pezzo di Roma nato tutto insieme, da un unico progetto degli anni Trenta, invece che crescere lentamente nei secoli.</p>
+      <div class="rules" style="margin-bottom:1.1rem;">
+        <h2>Cosa c'entra con quello che studiamo</h2>
+        <p>In <strong>Storia</strong> arriviamo all'età contemporanea, il Novecento. In <strong>Geografia</strong> usiamo <strong>fotografie e immagini dall'alto</strong> per riconoscere un quartiere progettato tutto insieme, con una pianta geometrica, rispetto a uno cresciuto nel tempo come i centri storici. Le domande di geografia sono segnate con 🧭.</p>
+      </div>
+      <div class="rules">
+        <h2>Prima di partire</h2>
+        <ul>
+          <li>Raggiungibile con la metro B, fermate EUR Magliana, EUR Fermi o EUR Palasport.</li>
+          <li>Percorso pianeggiante, su ampi viali: adatto a passeggini e biciclette.</li>
+          <li>Se possibile, guarda una mappa satellitare del quartiere sul telefono prima di partire.</li>
+        </ul>
+      </div>
+      <div class="field">
+        <label for="nomeInput">Nome della coppia o del gruppo</label>
+        <input type="text" id="nomeInput" placeholder="Es. Marco e Giulia">
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="nav"><button class="btn btn-primary" id="startBtn">Inizia la missione →</button></div>
+  </div>
+
+  <div id="stopsContainer"></div>
+
+  <div class="screen" data-screen="summary">
+    <div class="summary">
+      <h1>Missione completata!</h1>
+      <p class="lead">Ecco un riepilogo di tutto quello che avete trovato e scritto oggi. Con questa passeggiata si chiude il viaggio nel tempo di "Alla scoperta di Roma": dalla preistoria di Monte Mario fino a qui.</p>
+      <div id="recapList"></div>
+      <div class="task reflect">
+        <p class="q">Pensando a tutte le passeggiate fatte finora: qual è il luogo di Roma che ti ha sorpreso di più?</p>
+        <textarea id="reflectInput" placeholder="Scrivete qui la vostra risposta..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const stops = [
+    {
+      id:'palazzo',
+      color:'var(--c-palazzo)',
+      badge:'Tappa 1 · il \'Colosseo Quadrato\'',
+      title:"Un antico monumento, reinventato",
+      clueLabel:'Dove cercare',
+      clue:"Trova il Palazzo della Civiltà Italiana, conosciuto come il \"Colosseo Quadrato\": 216 arcate ripetute sui quattro lati.",
+      tasks:[
+        {q:"Il palazzo, costruito tra il 1938 e il 1943, richiama volutamente le arcate del Colosseo antico, ma in forma geometrica e squadrata. Quali somiglianze e quali differenze noti tra questo edificio e il Colosseo che conosci?"},
+        {q:"Perché pensi che chi ha progettato questo quartiere volesse ricordare l'antica Roma in un edificio nuovo?"}
+      ]
+    },
+    {
+      id:'pianta',
+      color:'var(--c-pianta)',
+      badge:'Tappa 2 · la pianta del quartiere',
+      title:"Un quartiere disegnato prima di essere costruito",
+      clueLabel:'Dove cercare',
+      clue:"Osserva i larghi viali dritti che si incrociano ad angolo retto intorno a te.",
+      tasks:[
+        {q:"🧭 Geografia — Se hai una mappa o una vista satellitare sul telefono, confronta la pianta dell'EUR con quella del centro storico di Roma. Cosa noti di diverso nella forma delle strade e degli isolati?", geo:true},
+        {q:"L'EUR fu progettato per un'Esposizione Universale che doveva tenersi nel 1942, e non si tenne mai per la guerra. Come pensi sia cambiato l'uso di questi edifici da allora a oggi?"}
+      ]
+    },
+    {
+      id:'lago',
+      color:'var(--c-lago)',
+      badge:'Tappa 3 · una pausa nel verde',
+      title:"Il lago costruito dall'uomo",
+      clueLabel:'Dove cercare',
+      clue:"Raggiungi il Laghetto dell'EUR, un bacino artificiale al centro di un grande parco urbano.",
+      tasks:[
+        {q:"🧭 Geografia — Questo lago non è naturale: è stato costruito insieme al resto del quartiere. Che differenza c'è tra un paesaggio naturale e uno progettato interamente dall'uomo, come questo?", geo:true}
+      ]
+    },
+    {
+      id:'oggi',
+      color:'var(--c-oggi)',
+      badge:'Tappa 4 · chiusura del viaggio',
+      title:"Dall'antica Roma a oggi",
+      clueLabel:'Dove cercare',
+      clue:"Fermati in un punto qualsiasi da cui riesci a vedere più di un edificio del quartiere.",
+      tasks:[
+        {q:"Abbiamo attraversato la preistoria a Monte Mario, l'epoca romana sull'Appia, il Medioevo alla Caffarella, l'età moderna al Gianicolo e ora il Novecento qui all'EUR. Qual è, secondo te, il collegamento più forte tra due di questi luoghi così diversi?"}
+      ]
+    }
+  ];
+
+  const stopsContainer = document.getElementById('stopsContainer');
+  const answers = {};
+  const found = {};
+
+  stops.forEach((stop, idx)=>{
+    answers[stop.id] = new Array(stop.tasks.length).fill('');
+    found[stop.id] = false;
+    const screen = document.createElement('div');
+    screen.className = 'screen';
+    screen.dataset.screen = 'stop-' + idx;
+    screen.style.setProperty('--stop-color', stop.color);
+    let tasksHtml = '';
+    stop.tasks.forEach((t, ti)=>{
+      const cls = t.geo ? ' task-geo' : '';
+      tasksHtml += `<div class="task${cls}"><p class="q">${t.q}</p><textarea data-stop="${idx}" data-task="${ti}" placeholder="Scrivi qui la risposta..."></textarea></div>`;
+    });
+    screen.innerHTML = `
+      <div class="stop-badge">${stop.badge}</div>
+      <h2 class="stop-title">${stop.title}</h2>
+      <div class="clue"><div class="clue-label">${stop.clueLabel}</div><p>${stop.clue}</p></div>
+      <button class="found-toggle" data-found="${idx}" type="button"><span class="box">✓</span><span class="label">Ci siamo arrivati!</span></button>
+      ${tasksHtml}
+      <div class="spacer"></div>
+      <div class="nav">
+        <button class="btn btn-ghost" data-back>← Indietro</button>
+        <button class="btn btn-primary" data-forward>${idx === stops.length-1 ? 'Vai al riepilogo →' : 'Tappa successiva →'}</button>
+      </div>`;
+    stopsContainer.appendChild(screen);
+  });
+
+  stopsContainer.addEventListener('click', (e)=>{
+    const foundBtn = e.target.closest('[data-found]');
+    if(foundBtn){
+      const idx = foundBtn.dataset.found;
+      const stop = stops[idx];
+      found[stop.id] = !found[stop.id];
+      foundBtn.classList.toggle('on', found[stop.id]);
+    }
+  });
+  stopsContainer.addEventListener('input', (e)=>{
+    if(e.target.tagName === 'TEXTAREA'){
+      const s = e.target.dataset.stop, t = e.target.dataset.task;
+      answers[stops[s].id][t] = e.target.value;
+    }
+  });
+
+  const order = ['intro', ...stops.map((s,i)=>'stop-'+i), 'summary'];
+  let current = 0;
+
+  function showScreen(name){
+    document.querySelectorAll('.screen').forEach(s=> s.classList.toggle('active', s.dataset.screen === name));
+    const idx = order.indexOf(name);
+    current = idx;
+    const total = order.length - 1;
+    document.getElementById('progressFill').style.width = (idx/total*100) + '%';
+    if(name === 'intro'){ document.getElementById('stepCount').textContent = ''; }
+    else if(name === 'summary'){ document.getElementById('stepCount').textContent = 'Riepilogo'; renderRecap(); }
+    else { document.getElementById('stepCount').textContent = `Tappa ${idx} di ${stops.length}`; }
+    window.scrollTo(0,0);
+  }
+
+  document.getElementById('startBtn').addEventListener('click', ()=> showScreen(order[1]));
+  document.addEventListener('click', (e)=>{
+    if(e.target.matches('[data-forward]')){ const next = order[current+1]; if(next) showScreen(next); }
+    if(e.target.matches('[data-back]')){ const prev = order[current-1]; if(prev) showScreen(prev); }
+  });
+
+  function renderRecap(){
+    const list = document.getElementById('recapList');
+    list.innerHTML = '';
+    stops.forEach(stop=>{
+      const card = document.createElement('div');
+      card.className = 'recap';
+      card.style.setProperty('--stop-color', stop.color);
+      let inner = `<div class="recap-title">${stop.title}${found[stop.id] ? ' · trovato ✓' : ''}</div>`;
+      stop.tasks.forEach((t, ti)=>{
+        const a = answers[stop.id][ti];
+        inner += `<div class="recap-a ${a ? '' : 'empty'}">${a ? a : '(nessuna risposta scritta)'}</div>`;
+      });
+      card.innerHTML = inner;
+      list.appendChild(card);
+    });
+  }
+
+  showScreen('intro');
+</script>
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

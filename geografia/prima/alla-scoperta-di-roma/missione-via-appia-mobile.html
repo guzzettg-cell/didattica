@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Missione Via Appia Antica — Alla scoperta di Roma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#efe6d8;
+    --ink:#2a2420;
+    --ink-soft:#615a4f;
+    --line:#cbbfa4;
+    --road:#7a3b34;
+    --road-deep:#5a2b26;
+    --paper:#f8f3ea;
+
+    --c-porta:#5c7fa0;
+    --c-miliario:#8a6a45;
+    --c-basolato:#b5622f;
+    --c-tomba:#7a3b34;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.5;display:flex;flex-direction:column;}
+  h1,h2,.display{font-family:'Fraunces',serif;font-weight:600;margin:0;}
+  p{margin:0 0 1em;}
+  button{font-family:inherit;}
+  .app{max-width:520px;margin:0 auto;width:100%;flex:1;display:flex;flex-direction:column;min-height:100vh;}
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--line);}
+  .topbar .brand{font-size:.8rem;font-weight:600;color:var(--road-deep);display:flex;align-items:center;gap:.5em;}
+  .brand .dot{width:.5em;height:.5em;border-radius:50%;background:var(--road);}
+  .topbar .step-count{font-size:.8rem;color:var(--ink-soft);}
+  .progress-track{height:3px;background:var(--line);}
+  .progress-fill{height:100%;background:var(--road);width:0%;transition:width .3s ease;}
+  .screen{flex:1;padding:2rem 1.4rem 1.5rem;display:none;flex-direction:column;}
+  .screen.active{display:flex;}
+  .intro h1{font-size:1.95rem;line-height:1.1;margin-bottom:1rem;}
+  .intro .lead{color:var(--ink-soft);margin-bottom:1.2rem;}
+  .rules{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.2rem;margin-bottom:1.1rem;}
+  .rules h2{font-size:.95rem;margin-bottom:.6rem;}
+  .rules ul{margin:0;padding-left:1.15rem;color:var(--ink-soft);font-size:.92rem;}
+  .rules li{margin-bottom:.35rem;}
+  .rules p{margin:0;color:var(--ink-soft);font-size:.92rem;}
+  .field{margin-bottom:1rem;}
+  .field label{display:block;font-size:.82rem;color:var(--ink-soft);margin-bottom:.35rem;}
+  .field input{width:100%;border:none;border-bottom:2px solid var(--line);background:transparent;padding:.5rem .1rem;font-size:1.05rem;font-family:inherit;color:var(--ink);}
+  .field input:focus{outline:none;border-bottom-color:var(--road);}
+  .stop-badge{align-self:flex-start;background:var(--stop-color, var(--road));color:#fbf6e9;font-size:.78rem;font-weight:600;padding:.35rem .8rem;border-radius:20px;margin-bottom:1.1rem;}
+  .screen h2.stop-title{font-size:1.55rem;line-height:1.15;margin-bottom:1rem;}
+  .clue{background:var(--paper);border-left:4px solid var(--stop-color, var(--road));padding:1rem 1.1rem;border-radius:2px;margin-bottom:1.2rem;}
+  .clue .clue-label{font-size:.72rem;font-weight:600;color:var(--ink-soft);margin-bottom:.4rem;}
+  .clue p{margin:0;font-size:1rem;}
+  .found-toggle{display:flex;align-items:center;gap:.7rem;background:transparent;border:1.5px solid var(--line);border-radius:6px;padding:.8rem 1rem;margin-bottom:1.5rem;cursor:pointer;font-size:.95rem;color:var(--ink-soft);text-align:left;}
+  .found-toggle .box{width:22px;height:22px;flex:none;border-radius:5px;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.85rem;}
+  .found-toggle.on{border-color:var(--road);color:var(--ink);background:#f2e6e0;}
+  .found-toggle.on .box{background:var(--road);border-color:var(--road);color:#fff;}
+  .task{margin-bottom:1.3rem;}
+  .task .q{font-weight:600;margin-bottom:.6rem;font-size:1rem;}
+  .task textarea{width:100%;min-height:64px;border:1.5px solid var(--line);border-radius:6px;padding:.7rem .8rem;font-family:inherit;font-size:.98rem;resize:vertical;background:var(--paper);color:var(--ink);}
+  .task textarea:focus{outline:none;border-color:var(--road);}
+  .task.task-geo{background:var(--paper);border:1px solid #9fb8c7;border-radius:6px;padding:.9rem .9rem .7rem;}
+  .task.task-geo textarea{background:#fff;}
+  .spacer{flex:1;}
+  .nav{display:flex;gap:.8rem;padding-top:1rem;}
+  .btn{flex:1;padding:.95rem 1rem;border-radius:6px;border:none;font-weight:600;font-size:.98rem;cursor:pointer;}
+  .btn-primary{background:var(--road);color:#fbf6e9;}
+  .btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink-soft);flex:.6;}
+  .summary h1{font-size:1.9rem;margin-bottom:.6rem;}
+  .summary .lead{color:var(--ink-soft);margin-bottom:1.4rem;}
+  .recap{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.2rem;margin-bottom:1rem;}
+  .recap .recap-title{font-size:.85rem;font-weight:600;color:var(--stop-color, var(--road));margin-bottom:.5rem;}
+  .recap .recap-a{font-size:.95rem;color:var(--ink);white-space:pre-wrap;}
+  .recap .recap-a.empty{color:var(--ink-soft);font-style:italic;}
+  .reflect{margin-top:.6rem;}
+  .footnote{margin-top:1.6rem;font-size:.78rem;color:var(--ink-soft);}
+  .footnote a{color:var(--road);}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><span class="dot"></span>Alla scoperta di Roma</div>
+    <div class="step-count" id="stepCount"></div>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div class="screen active" data-screen="intro">
+    <div class="intro">
+      <h1>Missione: la Regina delle strade</h1>
+      <p class="lead">Una passeggiata sulla Via Appia Antica, la strada più famosa dell'antica Roma, costruita nel 312 a.C. e ancora oggi percorribile sul suo basolato originale.</p>
+      <div class="rules" style="margin-bottom:1.1rem;">
+        <h2>Cosa c'entra con quello che studiamo</h2>
+        <p>In <strong>Storia</strong> entriamo nella Roma degli imperatori. In <strong>Geografia</strong> mettiamo in pratica l'Unità 12, "Le strade dell'Impero romano": come una strada dritta e ben progettata collega luoghi lontani, e come si misurano le distanze con una scala. Le domande di geografia sono segnate con 🧭.</p>
+      </div>
+      <div class="rules">
+        <h2>Prima di partire</h2>
+        <ul>
+          <li>Il tratto da Porta San Sebastiano a Cecilia Metella è di circa 3 km: scarpe comode, il basolato è sconnesso.</li>
+          <li>Il parco non ha biglietto d'ingresso.</li>
+          <li>Porta acqua: nella bella stagione ci sono pochi punti d'ombra nel tratto più aperto.</li>
+        </ul>
+      </div>
+      <div class="field">
+        <label for="nomeInput">Nome della coppia o del gruppo</label>
+        <input type="text" id="nomeInput" placeholder="Es. Marco e Giulia">
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="nav"><button class="btn btn-primary" id="startBtn">Inizia la missione →</button></div>
+  </div>
+
+  <div id="stopsContainer"></div>
+
+  <div class="screen" data-screen="summary">
+    <div class="summary">
+      <h1>Missione completata!</h1>
+      <p class="lead">Ecco un riepilogo di tutto quello che avete trovato e scritto oggi.</p>
+      <div id="recapList"></div>
+      <div class="task reflect">
+        <p class="q">Confrontatevi: qual è stata la scoperta più interessante di oggi — per la Storia o per la Geografia?</p>
+        <textarea id="reflectInput" placeholder="Scrivete qui la vostra risposta..."></textarea>
+      </div>
+      <p class="footnote">Curiosità in più: proseguendo verso la Valle della Caffarella si incontra la Marrana dell'Acqua Mariana — la prossima tappa del nostro viaggio nel tempo, dedicata al Medioevo.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const stops = [
+    {
+      id:'porta',
+      color:'var(--c-porta)',
+      badge:'Tappa 1 · l\'inizio della strada',
+      title:"La porta della Regina Viarum",
+      clueLabel:'Dove cercare',
+      clue:"Trova Porta San Sebastiano, una delle porte meglio conservate delle Mura Aureliane: da qui iniziava, ed inizia ancora oggi, la Via Appia Antica.",
+      tasks:[
+        {q:"La Via Appia fu costruita nel 312 a.C. e collegava Roma a Brindisi per 124 miglia romane (circa 190 km). Quanti secoli fa è stata costruita, rispetto a oggi?"},
+        {q:"🧭 Geografia — Se hai una mappa del parco, prova a misurare con un righello la distanza fino a Cecilia Metella sulla carta. Usando la scala della mappa, a quanti metri reali corrisponde?", geo:true}
+      ]
+    },
+    {
+      id:'miliario',
+      color:'var(--c-miliario)',
+      badge:'Tappa 2 · lungo il primo tratto',
+      title:"La pietra che misura la strada",
+      clueLabel:'Dove cercare',
+      clue:"Cerca lungo il percorso una colonna in pietra che segna il primo miglio della via: un miliario.",
+      tasks:[
+        {q:"🧭 Geografia — I Romani misuravano le distanze in miglia (1 miglio romano = 1.478 metri) e segnavano ogni miglio con una colonna. Perché pensi che fosse utile avere questi \"segnaposto\" lungo una strada così lunga?", geo:true},
+        {q:"Oggi, quando devi percorrere una strada che non conosci, cosa usi al posto delle colonne miliari?"}
+      ]
+    },
+    {
+      id:'basolato',
+      color:'var(--c-basolato)',
+      badge:'Tappa 3 · verso Capo di Bove',
+      title:"Una strada nata da un vulcano",
+      clueLabel:'Dove cercare',
+      clue:"Osserva il basolato originale sotto i tuoi piedi: i grandi blocchi di pietra scura levigati da secoli di passaggio.",
+      tasks:[
+        {q:"Queste pietre sono leucitite, una roccia vulcanica. Una colata di lava dei Colli Albani, avvenuta quasi 300.000 anni fa, arrivò fino a questa zona: i Romani la usarono per pavimentare la strada. Cosa hanno in comune questa scoperta e quella delle rocce fossili di Monte Mario?"},
+        {q:"Prova a camminare qualche passo sul basolato: perché pensi che i Romani costruissero le strade con blocchi di pietra così spessi e incastrati, invece che con la terra battuta?"}
+      ]
+    },
+    {
+      id:'tomba',
+      color:'var(--c-tomba)',
+      badge:'Tappa 4 · tra i monumenti',
+      title:"Una strada dritta come una riga",
+      clueLabel:'Dove cercare',
+      clue:"Raggiungi il Mausoleo di Cecilia Metella o il Circo di Massenzio, tra i monumenti meglio conservati della via.",
+      tasks:[
+        {q:"🧭 Geografia — Guardando avanti e indietro lungo la via, osserva quanto è dritto il suo tracciato. Gli ingegneri romani costruivano le strade il più possibile in linea retta. Secondo te, quali vantaggi dava una strada dritta rispetto a una tortuosa?", geo:true},
+        {q:"Lungo l'Appia si trovano decine di tombe e monumenti funebri, non case. Perché pensi che i Romani costruissero le tombe fuori dalla città, lungo le strade principali?"}
+      ]
+    }
+  ];
+
+  const stopsContainer = document.getElementById('stopsContainer');
+  const answers = {};
+  const found = {};
+
+  stops.forEach((stop, idx)=>{
+    answers[stop.id] = new Array(stop.tasks.length).fill('');
+    found[stop.id] = false;
+    const screen = document.createElement('div');
+    screen.className = 'screen';
+    screen.dataset.screen = 'stop-' + idx;
+    screen.style.setProperty('--stop-color', stop.color);
+    let tasksHtml = '';
+    stop.tasks.forEach((t, ti)=>{
+      const cls = t.geo ? ' task-geo' : '';
+      tasksHtml += `<div class="task${cls}"><p class="q">${t.q}</p><textarea data-stop="${idx}" data-task="${ti}" placeholder="Scrivi qui la risposta..."></textarea></div>`;
+    });
+    screen.innerHTML = `
+      <div class="stop-badge">${stop.badge}</div>
+      <h2 class="stop-title">${stop.title}</h2>
+      <div class="clue"><div class="clue-label">${stop.clueLabel}</div><p>${stop.clue}</p></div>
+      <button class="found-toggle" data-found="${idx}" type="button"><span class="box">✓</span><span class="label">Ci siamo arrivati!</span></button>
+      ${tasksHtml}
+      <div class="spacer"></div>
+      <div class="nav">
+        <button class="btn btn-ghost" data-back>← Indietro</button>
+        <button class="btn btn-primary" data-forward>${idx === stops.length-1 ? 'Vai al riepilogo →' : 'Tappa successiva →'}</button>
+      </div>`;
+    stopsContainer.appendChild(screen);
+  });
+
+  stopsContainer.addEventListener('click', (e)=>{
+    const foundBtn = e.target.closest('[data-found]');
+    if(foundBtn){
+      const idx = foundBtn.dataset.found;
+      const stop = stops[idx];
+      found[stop.id] = !found[stop.id];
+      foundBtn.classList.toggle('on', found[stop.id]);
+    }
+  });
+  stopsContainer.addEventListener('input', (e)=>{
+    if(e.target.tagName === 'TEXTAREA'){
+      const s = e.target.dataset.stop, t = e.target.dataset.task;
+      answers[stops[s].id][t] = e.target.value;
+    }
+  });
+
+  const order = ['intro', ...stops.map((s,i)=>'stop-'+i), 'summary'];
+  let current = 0;
+
+  function showScreen(name){
+    document.querySelectorAll('.screen').forEach(s=> s.classList.toggle('active', s.dataset.screen === name));
+    const idx = order.indexOf(name);
+    current = idx;
+    const total = order.length - 1;
+    document.getElementById('progressFill').style.width = (idx/total*100) + '%';
+    if(name === 'intro'){ document.getElementById('stepCount').textContent = ''; }
+    else if(name === 'summary'){ document.getElementById('stepCount').textContent = 'Riepilogo'; renderRecap(); }
+    else { document.getElementById('stepCount').textContent = `Tappa ${idx} di ${stops.length}`; }
+    window.scrollTo(0,0);
+  }
+
+  document.getElementById('startBtn').addEventListener('click', ()=> showScreen(order[1]));
+  document.addEventListener('click', (e)=>{
+    if(e.target.matches('[data-forward]')){ const next = order[current+1]; if(next) showScreen(next); }
+    if(e.target.matches('[data-back]')){ const prev = order[current-1]; if(prev) showScreen(prev); }
+  });
+
+  function renderRecap(){
+    const list = document.getElementById('recapList');
+    list.innerHTML = '';
+    stops.forEach(stop=>{
+      const card = document.createElement('div');
+      card.className = 'recap';
+      card.style.setProperty('--stop-color', stop.color);
+      let inner = `<div class="recap-title">${stop.title}${found[stop.id] ? ' · trovato ✓' : ''}</div>`;
+      stop.tasks.forEach((t, ti)=>{
+        const a = answers[stop.id][ti];
+        inner += `<div class="recap-a ${a ? '' : 'empty'}">${a ? a : '(nessuna risposta scritta)'}</div>`;
+      });
+      card.innerHTML = inner;
+      list.appendChild(card);
+    });
+  }
+
+  showScreen('intro');
+</script>
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>
