@@ -103,7 +103,10 @@ function schedaUda(u) {
     el("span", { class: "tipo", style: `--c: var(--${id})` }, MATERIE[id].nome)));
   const extra = [u.classe ? "Classe " + u.classe : null, u.periodo].filter(Boolean).join(", ");
   if (extra) etichette.append(extra);
-  return el("li", { class: "voce uda" },
+  if (u.standby) etichette.append(el("span", { class: "segno-standby" }, "In revisione"));
+  return el("li", u.standby
+      ? { class: "voce uda in-standby", title: "UDA in revisione: per ora non è disponibile" }
+      : { class: "voce uda" },
     el("span", { class: "striscia", style: `background: linear-gradient(to bottom, ${striscia})`, "aria-hidden": "true" }),
     el("a", { href: BASE + u.link },
       el("h3", null, u.titolo),
@@ -264,10 +267,13 @@ function paginaMateria(id) {
         const titolo = lez.link
           ? el("a", { href: BASE + lez.link }, lez.titolo)
           : lez.titolo;
-        const li = el("li", { class: "lezione" },
+        const li = el("li", lez.standby
+            ? { class: "lezione in-standby", title: "Lezione in revisione: per ora non è disponibile" }
+            : { class: "lezione" },
           el("p", { class: "numero-lezione" },
             "Lezione " + (lez._posizione || i + 1) + (lez.pagine ? ", " + (/[–-]/.test(lez.pagine) ? "pp. " : "p. ") + lez.pagine : ""),
-            segnoDipartimento(lez)),
+            segnoDipartimento(lez),
+            lez.standby ? el("span", { class: "segno-standby" }, "In revisione") : null),
           el("h4", null, titolo),
           etichetteLibri(libriDi(lez)),
           lez.descrizione ? el("p", { class: "descr-lezione" }, lez.descrizione) : null);

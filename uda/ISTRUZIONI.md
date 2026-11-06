@@ -22,7 +22,7 @@ La barra `/` crea la cartella.
 3. Scorri fino in fondo e trova queste righe:
 
 ```js
-const UDA = [
+var UDA = [
 
 ];
 ```
@@ -57,12 +57,18 @@ Le materie si scrivono **esattamente** così (minuscolo, con il trattino):
 `geografia`, `storia`, `italiano`, `educazione-civica`.
 L'ordine in cui le scrivi è l'ordine dei colori nella striscia laterale.
 
+## Mettere una UDA in standby
+
+Per una UDA da rivedere, aggiungi nel suo blocco la riga `standby: true,`.
+Nella home e nelle pagine delle materie l'UDA appare **in grigio**, con la scritta «In revisione»,
+e non si può cliccare. Per rimetterla attiva, cancella la riga.
+
 ## Più UDA
 
 Ogni UDA è un blocco tra parentesi graffe `{ }`. Tra un blocco e l'altro serve una **virgola**:
 
 ```js
-const UDA = [
+var UDA = [
   {
     titolo: "Prima UDA",
     materie: ["geografia", "storia"],

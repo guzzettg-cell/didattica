@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Document>
+  <name>Vicino, lontano: dalla scuola alla Terra</name>
+  <open>1</open>
+  <Style id="scuola"><IconStyle><scale>1.3</scale><Icon><href>http://maps.google.com/mapfiles/kml/paddle/red-stars.png</href></Icon></IconStyle><LabelStyle><scale>1.2</scale></LabelStyle></Style>
+  <Placemark><name>La nostra scuola</name><styleUrl>#scuola</styleUrl><Point><coordinates>12.4642,41.9174,0</coordinates></Point></Placemark>
+  <Folder><name>Tappe (doppio clic per andarci)</name>
+    <Placemark><name>Il quartiere della scuola (scala locale)</name><LookAt><longitude>12.4642</longitude><latitude>41.9174</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>700</range><altitudeMode>relativeToGround</altitudeMode></LookAt></Placemark>
+    <Placemark><name>Roma (scala locale)</name><LookAt><longitude>12.48</longitude><latitude>41.895</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>30000</range><altitudeMode>relativeToGround</altitudeMode></LookAt></Placemark>
+    <Placemark><name>Il Lazio (scala regionale)</name><LookAt><longitude>12.75</longitude><latitude>41.95</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>330000</range><altitudeMode>relativeToGround</altitudeMode></LookAt></Placemark>
+    <Placemark><name>L'Italia (scala nazionale)</name><LookAt><longitude>12.6</longitude><latitude>42.0</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>1700000</range><altitudeMode>relativeToGround</altitudeMode></LookAt></Placemark>
+    <Placemark><name>Il Mediterraneo e l'Europa (scala continentale)</name><LookAt><longitude>15.0</longitude><latitude>41.0</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>5500000</range><altitudeMode>relativeToGround</altitudeMode></LookAt></Placemark>
+    <Placemark><name>La Terra (scala planetaria)</name><LookAt><longitude>12.5</longitude><latitude>32.0</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>20000000</range><altitudeMode>relativeToGround</altitudeMode></LookAt></Placemark>
+  </Folder>
+  <gx:Tour><name>Tour: dalla scuola alla Terra e ritorno</name>
+    <gx:Playlist>
+            <gx:FlyTo><gx:duration>0.1</gx:duration><gx:flyToMode>bounce</gx:flyToMode><LookAt><longitude>12.4642</longitude><latitude>41.9174</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>700</range><altitudeMode>relativeToGround</altitudeMode></LookAt></gx:FlyTo>
+      <gx:Wait><gx:duration>3</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>smooth</gx:flyToMode><LookAt><longitude>12.48</longitude><latitude>41.895</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>30000</range><altitudeMode>relativeToGround</altitudeMode></LookAt></gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>smooth</gx:flyToMode><LookAt><longitude>12.75</longitude><latitude>41.95</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>330000</range><altitudeMode>relativeToGround</altitudeMode></LookAt></gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>smooth</gx:flyToMode><LookAt><longitude>12.6</longitude><latitude>42.0</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>1700000</range><altitudeMode>relativeToGround</altitudeMode></LookAt></gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>smooth</gx:flyToMode><LookAt><longitude>15.0</longitude><latitude>41.0</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>5500000</range><altitudeMode>relativeToGround</altitudeMode></LookAt></gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>smooth</gx:flyToMode><LookAt><longitude>12.5</longitude><latitude>32.0</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>20000000</range><altitudeMode>relativeToGround</altitudeMode></LookAt></gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>smooth</gx:flyToMode><LookAt><longitude>15.0</longitude><latitude>41.0</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>5500000</range><altitudeMode>relativeToGround</altitudeMode></LookAt></gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>smooth</gx:flyToMode><LookAt><longitude>12.6</longitude><latitude>42.0</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>1700000</range><altitudeMode>relativeToGround</altitudeMode></LookAt></gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>smooth</gx:flyToMode><LookAt><longitude>12.75</longitude><latitude>41.95</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>330000</range><altitudeMode>relativeToGround</altitudeMode></LookAt></gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>smooth</gx:flyToMode><LookAt><longitude>12.48</longitude><latitude>41.895</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>30000</range><altitudeMode>relativeToGround</altitudeMode></LookAt></gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+      <gx:FlyTo><gx:duration>4.5</gx:duration><gx:flyToMode>smooth</gx:flyToMode><LookAt><longitude>12.4642</longitude><latitude>41.9174</latitude><altitude>0</altitude><heading>0</heading><tilt>0</tilt><range>700</range><altitudeMode>relativeToGround</altitudeMode></LookAt></gx:FlyTo>
+      <gx:Wait><gx:duration>2.5</gx:duration></gx:Wait>
+    </gx:Playlist>
+  </gx:Tour>
+</Document>
+</kml>

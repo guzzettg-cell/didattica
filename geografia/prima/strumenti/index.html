@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gli strumenti della geografia</title>
+<meta name="description" content="Modulo I di geografia, classe prima: le mappe del capitolo, da cui si raggiungono tutte le lezioni e le attività.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1EE; --paper:#FAFBF9; --ink:#1D2A30; --muted:#5B6B70; --line:#C9D2CE;
+  --ocean:#2C5872; --warm:#B3412F;
+  --cond:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --m-linea:#8FA3A6; --m-forte:#DCE8EE; --m-hover:#F6E6BE;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+    --ocean:#80B1CC; --warm:#EF8A73; color-scheme:dark;
+    --m-linea:#5E7276; --m-forte:#20384A; --m-hover:#4A3F22;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+  --ocean:#80B1CC; --warm:#EF8A73; color-scheme:dark;
+  --m-linea:#5E7276; --m-forte:#20384A; --m-hover:#4A3F22;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.6}
+h1,h2,h3{font-family:var(--cond);line-height:1.08;margin:0;text-wrap:balance}
+p{margin:0;max-width:68ch}
+a{color:var(--ocean)}
+:focus-visible{outline:3px solid var(--ocean);outline-offset:2px}
+.wrap{max-width:64rem;margin:0 auto;padding:1rem 16px 3rem}
+.nav-su{font:600 1.05rem var(--cond);margin-bottom:1.4rem}
+header.testa{display:grid;gap:.6rem;margin-bottom:1.8rem}
+.eyebrow{font:600 1.1rem var(--cond);color:var(--muted)}
+h1{font-size:clamp(2.4rem,7vw,4rem);font-weight:700}
+.lede{font-size:1.18rem;color:var(--muted)}
+.passi{list-style:none;margin:.4rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:.7rem;counter-reset:p}
+.passi li{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem .9rem 3.2rem;position:relative}
+.passi li::before{counter-increment:p;content:counter(p);position:absolute;left:.9rem;top:.55rem;font:700 1.8rem var(--cond);color:var(--warm)}
+.per-cominciare{display:grid;gap:.2rem;padding:.8rem 1rem;border:2px solid var(--ocean);border-radius:10px;background:var(--paper);text-decoration:none;color:inherit;margin-top:.3rem}
+.per-cominciare:hover{background:var(--bg)}
+.per-cominciare b{font:700 1.3rem var(--cond)}
+.per-cominciare .d{color:var(--muted)}
+.passi b{font-family:var(--cond);font-size:1.2rem;display:block}
+.blocco-mappa{margin:2.6rem 0 0;display:grid;gap:.8rem;border-top:4px solid var(--ink);padding-top:.8rem}
+.blocco-mappa .n{font:700 1rem var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--warm)}
+.blocco-mappa h2{font-size:clamp(1.8rem,4.5vw,2.5rem)}
+.comandi{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center}
+.btn{font:600 1.05rem var(--cond);background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:.35rem .9rem;cursor:pointer}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.legenda{font:500 1rem var(--cond);color:var(--muted);display:flex;flex-wrap:wrap;gap:.3rem 1rem}
+.legenda i{display:inline-block;width:1.5rem;height:.95rem;vertical-align:-2px;margin-right:.3rem;border:2px solid var(--ocean);background:var(--bg);border-radius:4px}
+.legenda i.p{border-style:dashed;border-color:var(--muted);background:transparent}
+.scorri{overflow-x:auto;border-radius:12px;-webkit-overflow-scrolling:touch;border:1px solid var(--line);background:var(--paper)}
+.mappa{display:block;width:100%;min-width:720px;height:auto;font-family:var(--cond)}
+.mappa .ln{fill:none;stroke:var(--m-linea);stroke-width:2.2}
+.mappa .pallino{fill:var(--m-linea)}
+.mappa .legame rect{fill:var(--paper);stroke:var(--m-linea);stroke-width:1.2}
+.mappa .legame text{font:italic 500 13.5px var(--serif);fill:var(--muted);text-anchor:middle;dominant-baseline:central}
+.mappa .nodo text{text-anchor:middle;dominant-baseline:central;fill:var(--ink)}
+.mappa .nodo rect{fill:var(--bg);stroke:var(--line);stroke-width:1.5}
+.mappa .nodo.foglia text{font-size:15px;font-weight:500}
+.mappa .nodo.forte rect{fill:var(--m-forte);stroke:var(--ocean);stroke-width:2}
+.mappa .nodo.forte text{font-size:17px;font-weight:700}
+.mappa .nodo.radice rect{fill:var(--ink);stroke:none}
+.mappa .nodo.radice text{font-size:19px;font-weight:700;fill:var(--paper);letter-spacing:.01em}
+.mappa a.vai{cursor:pointer}
+.mappa a.vai.foglia rect{stroke:var(--ocean)}
+.mappa a.vai.foglia text{fill:var(--ocean);font-weight:600}
+.mappa a.vai rect{transition:fill .15s,stroke-width .15s}
+.mappa a.vai:hover rect,.mappa a.vai:focus rect,.mappa .evid rect{fill:var(--m-hover);stroke-width:3}
+.mappa a.vai.radice:hover rect,.mappa a.vai.radice:focus rect,.mappa .radice.evid rect{fill:var(--ocean)}
+.mappa a.vai:focus{outline:none}
+.mappa a.vai:focus rect{stroke:var(--warm)}
+.mappa .nodo.prep rect{fill:transparent;stroke:var(--muted);stroke-dasharray:4 4;stroke-width:1.5}
+.mappa .nodo.prep text{fill:var(--muted)}
+.mappa .prep{cursor:help}
+.mappa .pagine{display:none}
+.mostra-pagine .mappa .pagine{display:inline}
+.mappa .pp rect{fill:var(--warm)}
+.mappa .pp text{font:700 11.5px var(--cond);fill:#fff;text-anchor:middle;dominant-baseline:central;letter-spacing:.03em}
+.stato{font:600 1.08rem var(--cond);min-height:1.5em;color:var(--muted)}
+.stato b{color:var(--ink)}
+.indice{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr));gap:.6rem}
+.indice a,.indice .cella{display:grid;gap:.15rem;height:100%;padding:.7rem .9rem;border:1px solid var(--line);border-radius:8px;background:var(--paper);text-decoration:none;color:inherit}
+.indice a:hover{border-color:var(--ocean)}
+.indice b{font:700 1.15rem var(--cond)}
+.indice .d{font-size:.95rem;color:var(--muted)}
+.indice .prep .cella{border-style:dashed;opacity:.7}
+.pp-chip{justify-self:start;font:700 .85rem var(--cond);letter-spacing:.04em;border-radius:20px;padding:0 .55rem;background:var(--ink);color:var(--paper)}
+details.altre{margin-top:2.6rem;border-top:4px solid var(--ink);padding-top:.8rem}
+details.altre summary{font:700 clamp(1.5rem,3.5vw,2rem) var(--cond);cursor:pointer}
+details.altre > p{margin:.5rem 0 .9rem;color:var(--muted)}
+@media print{ .nav-su,.comandi{display:none} .mappa{min-width:0} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="nav-su"><a href="../../index.html?classe=prima#modulo-prima-i">← Geografia, classe prima</a></p>
+
+  <header class="testa">
+    <p class="eyebrow">Modulo I · Paesaggi vicini e lontani, capitolo 1</p>
+    <h1>Gli strumenti della geografia</h1>
+    <p class="lede">Le due mappe del video, con gli stessi concetti e le stesse parole-legame, fanno da indice del modulo: ogni riquadro porta alla parte del sito che ne parla.</p>
+    <ol class="passi">
+      <li><b>Guarda il video</b>Il video iniziale del capitolo, con il libro aperto.</li>
+      <li><b>Copia le mappe</b>Sul quaderno, le due mappe concettuali che compaiono alla fine del video.</li>
+      <li><b>Confronta e scegli</b>Qui le mappe sono disegnate in un altro modo: controlla che la tua copia abbia gli stessi concetti, poi clicca un riquadro per andare alla lezione.</li>
+    </ol>
+    <a class="per-cominciare" href="vicino-lontano.html">
+      <span class="pp-chip">p. A1</span>
+      <b>Per cominciare: Vicino, lontano</b>
+      <span class="d">Che cosa vuol dire «scala»: un volo dalla nostra scuola fino alla Terra intera.</span>
+    </a>
+  </header>
+
+  <div class="comandi">
+    <button class="btn" type="button" id="btn-pagine" aria-pressed="false">Mostra le pagine del libro</button>
+    <span class="legenda"><span><i></i>apre una pagina del sito</span><span><i class="p"></i>in preparazione</span></span>
+  </div>
+
+  <section class="blocco-mappa" aria-labelledby="t-m1">
+    <p class="n">Mappa 1</p>
+    <h2 id="t-m1">L'orientamento</h2>
+    <div class="scorri"><svg class="mappa" id="mappa1" viewBox="0 0 1000 430" role="group" aria-label="Mappa: L&#x27;orientamento"><defs><marker id="pallino-mappa1" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5"><circle cx="5" cy="5" r="4" class="pallino"/></marker></defs><path class="ln" d="M161.5,215.0 H194.1"/><path class="ln" d="M194.1,215.0 C210.4,215.0 210.4,215.0 220.8,215.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M343.2,215.0 H400.8"/><path class="ln" d="M400.8,215.0 C429.6,215.0 429.6,115.0 452.4,115.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M400.8,215.0 C429.6,215.0 429.6,320.0 452.4,320.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M571.6,115.0 H620.2"/><path class="ln" d="M620.2,115.0 C644.5,115.0 644.5,115.0 662.8,115.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M571.6,320.0 H613.3"/><path class="ln" d="M613.3,320.0 C634.1,320.0 634.1,320.0 648.9,320.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M761.2,115.0 H821.6"/><path class="ln" d="M821.6,115.0 C851.8,115.0 851.8,40.0 876.0,40.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M821.6,115.0 C851.8,115.0 851.8,90.0 876.0,90.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M821.6,115.0 C851.8,115.0 851.8,140.0 876.0,140.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M821.6,115.0 C851.8,115.0 851.8,190.0 876.0,190.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M775.1,320.0 H824.0"/><path class="ln" d="M824.0,320.0 C848.5,320.0 848.5,290.0 867.0,290.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M824.0,320.0 C848.5,320.0 848.5,350.0 867.0,350.0" marker-end="url(#pallino-mappa1)"/><g class="legame"><rect x="174.8" y="203.5" width="38.7" height="23.0" rx="11.5"/><text x="194.1" y="215.0">usa</text></g><g class="legame"><rect x="353.9" y="196.0" width="93.9" height="38.0" rx="19.0"/><text x="400.8" y="207.5">che aiutano</text><text x="400.8" y="222.5">a trovare</text></g><g class="legame"><rect x="600.9" y="103.5" width="38.7" height="23.0" rx="11.5"/><text x="620.2" y="115.0">con</text></g><g class="legame"><rect x="593.9" y="308.5" width="38.7" height="23.0" rx="11.5"/><text x="613.3" y="320.0">con</text></g><g class="legame"><rect x="798.8" y="103.5" width="45.6" height="23.0" rx="11.5"/><text x="821.6" y="115.0">cioè</text></g><g class="legame"><rect x="801.2" y="308.5" width="45.6" height="23.0" rx="11.5"/><text x="824.0" y="320.0">cioè</text></g><a class="nodo radice vai" href="../orientamento/index.html" data-dove="L&#x27;orientamento e i suoi strumenti" data-pp="A4–A5"><title>L&#x27;orientamento: L&#x27;orientamento e i suoi strumenti (libro pp. A4–A5)</title><rect x="8.5" y="193.8" width="153.0" height="42.4" rx="21.2"/><text x="85" y="215.0">L&#x27;orientamento</text></a><a class="nodo forte vai" href="../orientamento/attivita/il-paese-delle-indicazioni.html" data-dove="Attività: Il paese delle indicazioni" data-pp="A4"><title>i punti di riferimento: Attività: Il paese delle indicazioni (libro pp. A4)</title><rect x="226.8" y="184.9" width="116.5" height="60.1" rx="9.0"/><text x="285" y="205.0">i punti di</text><text x="285" y="225.0">riferimento</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>la direzione: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="458.4" y="99.2" width="113.3" height="31.7" rx="9.0"/><text x="515" y="115.0">la direzione</text></a><a class="nodo foglia vai" href="../metodo-e-strumenti/lezioni/reticolato.html" data-dove="Il reticolato geografico" data-pp="A6–A7"><title>la posizione: Il reticolato geografico (libro pp. A6–A7)</title><rect x="458.4" y="304.1" width="113.3" height="31.7" rx="9.0"/><text x="515" y="320.0">la posizione</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>i punti cardinali: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="668.8" y="90.3" width="92.4" height="49.4" rx="9.0"/><text x="715" y="106.2">i punti</text><text x="715" y="123.9">cardinali</text></a><a class="nodo foglia vai" href="../metodo-e-strumenti/lezioni/reticolato.html" data-dove="Il reticolato geografico" data-pp="A6–A7"><title>le coordinate geografiche: Il reticolato geografico (libro pp. A6–A7)</title><rect x="654.9" y="295.3" width="120.2" height="49.4" rx="9.0"/><text x="715" y="311.1">le coordinate</text><text x="715" y="328.8">geografiche</text></a><a class="nodo foglia vai" href="../orientamento/attivita/orientarsi-con-le-stelle.html" data-dove="Attività: Orientarsi con le stelle" data-pp="A5"><title>Nord: Attività: Orientarsi con le stelle (libro pp. A5)</title><rect x="882.0" y="24.1" width="86.0" height="31.7" rx="9.0"/><text x="925" y="40.0">Nord</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>Sud: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="882.0" y="74.2" width="86.0" height="31.7" rx="9.0"/><text x="925" y="90.0">Sud</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>Est: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="882.0" y="124.2" width="86.0" height="31.7" rx="9.0"/><text x="925" y="140.0">Est</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>Ovest: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="882.0" y="174.2" width="86.0" height="31.7" rx="9.0"/><text x="925" y="190.0">Ovest</text></a><a class="nodo foglia vai" href="../metodo-e-strumenti/attivita/scheda-1-2-reticolato.html" data-dove="Scheda 1.2 · Meridiani e paralleli" data-pp="A6–A7"><title>latitudine: Scheda 1.2 · Meridiani e paralleli (libro pp. A6–A7)</title><rect x="873.0" y="274.1" width="104.0" height="31.7" rx="9.0"/><text x="925" y="290.0">latitudine</text></a><a class="nodo foglia vai" href="../metodo-e-strumenti/attivita/scheda-1-2-reticolato.html" data-dove="Scheda 1.2 · Meridiani e paralleli" data-pp="A6–A7"><title>longitudine: Scheda 1.2 · Meridiani e paralleli (libro pp. A6–A7)</title><rect x="873.0" y="334.1" width="104.0" height="31.7" rx="9.0"/><text x="925" y="350.0">longitudine</text></a><g class="pagine"><g class="pp"><rect x="120.5" y="182.8" width="47.0" height="18" rx="9"/><text x="144.0" y="191.8">A4–A5</text></g><g class="pp"><rect x="322.0" y="173.9" width="27.2" height="18" rx="9"/><text x="335.6" y="182.9">A4</text></g><g class="pp"><rect x="720.2" y="79.3" width="47.0" height="18" rx="9"/><text x="743.7" y="88.3">A4–A5</text></g><g class="pp"><rect x="734.1" y="284.3" width="47.0" height="18" rx="9"/><text x="757.6" y="293.3">A6–A7</text></g></g></svg></div>
+    <p class="stato" id="stato-mappa1" aria-live="polite">Passa sopra un riquadro (o toccalo) per vedere dove porta.</p>
+    <ul class="indice"><li><a href="../orientamento/index.html"><span class="pp-chip">pp. A4–A5</span><b>L&#x27;orientamento e i suoi strumenti</b><span class="d">La pagina della lezione: le quattro attività in ordine.</span></a></li><li><a href="../orientamento/attivita/il-paese-delle-indicazioni.html"><span class="pp-chip">pp. A4</span><b>Attività: Il paese delle indicazioni</b><span class="d">«i punti di riferimento»: personali e universali.</span></a></li><li><a href="../orientamento/attivita/il-cammino-del-sole.html"><span class="pp-chip">pp. A4–A5</span><b>Attività: Il cammino del Sole</b><span class="d">«la direzione», «i punti cardinali»: Est, Sud, Ovest con il Sole.</span></a></li><li><a href="../orientamento/attivita/orientarsi-con-le-stelle.html"><span class="pp-chip">pp. A5</span><b>Attività: Orientarsi con le stelle</b><span class="d">«Nord»: la Stella polare (e la Croce del Sud).</span></a></li><li><a href="../metodo-e-strumenti/lezioni/reticolato.html"><span class="pp-chip">pp. A6–A7</span><b>Il reticolato geografico</b><span class="d">«la posizione», «le coordinate geografiche».</span></a></li><li><a href="../metodo-e-strumenti/attivita/scheda-1-2-reticolato.html"><span class="pp-chip">pp. A6–A7</span><b>Scheda 1.2 · Meridiani e paralleli</b><span class="d">«latitudine» e «longitudine».</span></a></li></ul>
+  </section>
+
+  <section class="blocco-mappa" aria-labelledby="t-m2">
+    <p class="n">Mappa 2</p>
+    <h2 id="t-m2">Gli strumenti della geografia</h2>
+    <div class="scorri"><svg class="mappa" id="mappa2" viewBox="0 0 1150 520" role="group" aria-label="Mappa: Gli strumenti della geografia"><defs><marker id="pallino-mappa2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5"><circle cx="5" cy="5" r="4" class="pallino"/></marker></defs><path class="ln" d="M165.9,260.0 H250.0"/><path class="ln" d="M250.0,260.0 C296.9,260.0 296.9,125.0 337.9,125.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M250.0,260.0 C310.7,260.0 310.7,400.0 365.4,400.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M476.1,125.0 H539.0"/><path class="ln" d="M539.0,125.0 C570.4,125.0 570.4,125.0 595.8,125.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M708.2,125.0 H773.6"/><path class="ln" d="M773.6,125.0 C806.3,125.0 806.3,60.0 833.0,60.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M773.6,125.0 C806.3,125.0 806.3,125.0 833.0,125.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M773.6,125.0 C806.3,125.0 806.3,190.0 833.0,190.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M448.6,400.0 H499.7"/><path class="ln" d="M499.7,400.0 C525.2,400.0 525.2,400.0 544.7,400.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M629.3,400.0 H710.0"/><path class="ln" d="M710.0,400.0 C750.4,400.0 750.4,400.0 784.7,400.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M869.3,400.0 H929.6"/><path class="ln" d="M929.6,400.0 C959.8,400.0 959.8,306.0 984.0,306.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M929.6,400.0 C959.8,400.0 959.8,353.0 984.0,353.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M929.6,400.0 C959.8,400.0 959.8,400.0 984.0,400.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M929.6,400.0 C959.8,400.0 959.8,447.0 984.0,447.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M929.6,400.0 C959.8,400.0 959.8,494.0 984.0,494.0" marker-end="url(#pallino-mappa2)"/><g class="legame"><rect x="178.9" y="241.0" width="142.2" height="38.0" rx="19.0"/><text x="250.0" y="252.5">utili per studiare</text><text x="250.0" y="267.5">il territorio sono</text></g><g class="legame"><rect x="492.0" y="106.0" width="93.9" height="38.0" rx="19.0"/><text x="539.0" y="117.5">servono per</text><text x="539.0" y="132.5">disegnare</text></g><g class="legame"><rect x="740.4" y="106.0" width="66.3" height="38.0" rx="19.0"/><text x="773.6" y="117.5">possono</text><text x="773.6" y="132.5">essere</text></g><g class="legame"><rect x="456.2" y="381.0" width="87.0" height="38.0" rx="19.0"/><text x="499.7" y="392.5">che si</text><text x="499.7" y="407.5">raccolgono</text></g><g class="legame"><rect x="638.9" y="381.0" width="142.2" height="38.0" rx="19.0"/><text x="710.0" y="392.5">e si rappresentano</text><text x="710.0" y="407.5">nei</text></g><g class="legame"><rect x="889.6" y="388.5" width="80.1" height="23.0" rx="11.5"/><text x="929.6" y="400.0">di 5 tipi</text></g><g class="nodo radice"><rect x="4.1" y="227.6" width="161.8" height="64.8" rx="32.4"/><text x="85" y="248.8">Gli strumenti</text><text x="85" y="271.2">della geografia</text></g><g class="nodo forte prep" tabindex="0" data-dove="Tanti tipi di fotografie — in preparazione" data-pp="A16–A17"><title>le fotografie e le immagini satellitari: Tanti tipi di fotografie — in preparazione (libro pp. A16–A17)</title><rect x="343.9" y="84.9" width="132.2" height="80.2" rx="9.0"/><text x="410" y="104.9">le fotografie</text><text x="410" y="125.0">e le immagini</text><text x="410" y="145.1">satellitari</text></g><g class="nodo forte prep" tabindex="0" data-dove="I dati: raccoglierli, ordinarli, rappresentarli — in preparazione" data-pp="A18–A21"><title>i dati: I dati: raccoglierli, ordinarli, rappresentarli — in preparazione (libro pp. A18–A21)</title><rect x="371.4" y="380.0" width="77.2" height="40.1" rx="9.0"/><text x="410" y="400.0">i dati</text></g><a class="nodo foglia vai" href="../carte-geografiche/attivita/tre-modi-di-disegnare-il-mondo.html" data-dove="Le carte geografiche: Tre modi di disegnare il mondo" data-pp="A8–A9"><title>le carte geografiche: Le carte geografiche: Tre modi di disegnare il mondo (libro pp. A8–A9)</title><rect x="601.8" y="100.3" width="106.3" height="49.4" rx="9.0"/><text x="655" y="116.2">le carte</text><text x="655" y="133.8">geografiche</text></a><a class="nodo foglia vai" href="../carte-geografiche/attivita/fisica-politica-o-tematica.html" data-dove="Tanti tipi di carte: Fisica, politica o tematica?" data-pp="A12–A13"><title>carte fisiche: Tanti tipi di carte: Fisica, politica o tematica? (libro pp. A12–A13)</title><rect x="839.0" y="44.1" width="132.0" height="31.7" rx="9.0"/><text x="905" y="60.0">carte fisiche</text></a><a class="nodo foglia vai" href="../carte-geografiche/attivita/fisica-politica-o-tematica.html" data-dove="Tanti tipi di carte: Fisica, politica o tematica?" data-pp="A12–A13"><title>carte politiche: Tanti tipi di carte: Fisica, politica o tematica? (libro pp. A12–A13)</title><rect x="839.0" y="109.2" width="132.0" height="31.7" rx="9.0"/><text x="905" y="125.0">carte politiche</text></a><a class="nodo foglia vai" href="../carte-geografiche/attivita/fisica-politica-o-tematica.html" data-dove="Tanti tipi di carte: Fisica, politica o tematica?" data-pp="A12–A13"><title>carte tematiche: Tanti tipi di carte: Fisica, politica o tematica? (libro pp. A12–A13)</title><rect x="839.0" y="174.2" width="132.0" height="31.7" rx="9.0"/><text x="905" y="190.0">carte tematiche</text></a><g class="nodo foglia prep" tabindex="0" data-dove="I dati: raccoglierli, ordinarli, rappresentarli — in preparazione" data-pp="A18–A21"><title>tabelle: I dati: raccoglierli, ordinarli, rappresentarli — in preparazione (libro pp. A18–A21)</title><rect x="550.7" y="384.1" width="78.6" height="31.7" rx="9.0"/><text x="590" y="400.0">tabelle</text></g><g class="nodo foglia prep" tabindex="0" data-dove="I dati: raccoglierli, ordinarli, rappresentarli — in preparazione" data-pp="A18–A21"><title>grafici: I dati: raccoglierli, ordinarli, rappresentarli — in preparazione (libro pp. A18–A21)</title><rect x="790.7" y="384.1" width="78.6" height="31.7" rx="9.0"/><text x="830" y="400.0">grafici</text></g><g class="nodo foglia prep" tabindex="0" data-dove="I dati: raccoglierli, ordinarli, rappresentarli — in preparazione" data-pp="A18–A21"><title>diagrammi a barre: I dati: raccoglierli, ordinarli, rappresentarli — in preparazione (libro pp. A18–A21)</title><rect x="990.0" y="290.1" width="150.0" height="31.7" rx="9.0"/><text x="1065" y="306.0">diagrammi a barre</text></g><g class="nodo foglia prep" tabindex="0" data-dove="I dati: raccoglierli, ordinarli, rappresentarli — in preparazione" data-pp="A18–A21"><title>areogrammi: I dati: raccoglierli, ordinarli, rappresentarli — in preparazione (libro pp. A18–A21)</title><rect x="990.0" y="337.1" width="150.0" height="31.7" rx="9.0"/><text x="1065" y="353.0">areogrammi</text></g><g class="nodo foglia prep" tabindex="0" data-dove="I dati: raccoglierli, ordinarli, rappresentarli — in preparazione" data-pp="A18–A21"><title>ideogrammi: I dati: raccoglierli, ordinarli, rappresentarli — in preparazione (libro pp. A18–A21)</title><rect x="990.0" y="384.1" width="150.0" height="31.7" rx="9.0"/><text x="1065" y="400.0">ideogrammi</text></g><g class="nodo foglia prep" tabindex="0" data-dove="I dati: raccoglierli, ordinarli, rappresentarli — in preparazione" data-pp="A18–A21"><title>diagrammi cartesiani: I dati: raccoglierli, ordinarli, rappresentarli — in preparazione (libro pp. A18–A21)</title><rect x="990.0" y="431.1" width="150.0" height="31.7" rx="9.0"/><text x="1065" y="447.0">diagrammi cartesiani</text></g><g class="nodo foglia prep" tabindex="0" data-dove="I dati: raccoglierli, ordinarli, rappresentarli — in preparazione" data-pp="A18–A21"><title>cartogrammi: I dati: raccoglierli, ordinarli, rappresentarli — in preparazione (libro pp. A18–A21)</title><rect x="990.0" y="478.1" width="150.0" height="31.7" rx="9.0"/><text x="1065" y="494.0">cartogrammi</text></g><g class="pagine"><g class="pp"><rect x="421.9" y="73.9" width="60.2" height="18" rx="9"/><text x="452.0" y="82.9">A16–A17</text></g><g class="pp"><rect x="394.4" y="369.0" width="60.2" height="18" rx="9"/><text x="424.5" y="378.0">A18–A21</text></g><g class="pp"><rect x="667.2" y="89.3" width="47.0" height="18" rx="9"/><text x="690.7" y="98.3">A8–A9</text></g><g class="pp"><rect x="916.8" y="163.2" width="60.2" height="18" rx="9"/><text x="946.9" y="172.2">A12–A13</text></g></g></svg></div>
+    <p class="stato" id="stato-mappa2" aria-live="polite">Passa sopra un riquadro (o toccalo) per vedere dove porta.</p>
+    <ul class="indice"><li class="prep"><span class="cella"><span class="pp-chip">pp. A16–A17</span><b>Tanti tipi di fotografie</b><span class="d">In preparazione</span></span></li><li><a href="../carte-geografiche/attivita/tre-modi-di-disegnare-il-mondo.html"><span class="pp-chip">pp. A8–A9</span><b>Le carte geografiche: Tre modi di disegnare il mondo</b><span class="d">«le carte geografiche»: come si disegna il mondo su un foglio.</span></a></li><li><a href="../carte-geografiche/attivita/fisica-politica-o-tematica.html"><span class="pp-chip">pp. A12–A13</span><b>Tanti tipi di carte: Fisica, politica o tematica?</b><span class="d">«carte fisiche, politiche, tematiche».</span></a></li><li class="prep"><span class="cella"><span class="pp-chip">pp. A18–A21</span><b>I dati: raccoglierli, ordinarli, rappresentarli</b><span class="d">In preparazione</span></span></li></ul>
+  </section>
+
+  <details class="altre">
+    <summary>Nel modulo ci sono anche…</summary>
+    <p>Pagine che non hanno un riquadro nelle mappe del video, ma sono nel capitolo del libro.</p>
+    <ul class="indice"><li><a href="../carte-geografiche/attivita/leggere-una-carta.html"><span class="pp-chip">pp. A8–A9</span><b>Leggere una carta</b><span class="d">Simboli, colori e legenda.</span></a></li><li><a href="../metodo-e-strumenti/lezioni/la-riduzione-in-scala.html"><span class="pp-chip">pp. A10–A11</span><b>La riduzione in scala</b><span class="d">Quanto è stato rimpicciolito il territorio.</span></a></li><li><a href="../carte-geografiche/attivita/le-curve-di-livello.html"><span class="pp-chip">pp. A12–A13</span><b>Le curve di livello</b><span class="d">Come si disegnano monti e valli sulla carta.</span></a></li><li><a href="../carte-geografiche/attivita/guardiamo-il-planisfero.html"><span class="pp-chip">pp. A6–A7</span><b>Guardiamo il planisfero</b><span class="d">Meridiani e paralleli sulla carta del mondo.</span></a></li><li><a href="../carte-geografiche/attivita/storia-della-cartografia.html"><span class="pp-chip">Approfondimento</span><b>La storia della cartografia</b><span class="d">Come sono cambiate le carte nei secoli.</span></a></li><li class="prep"><span class="cella"><span class="pp-chip">p. A141</span><b>Il GIS: che cos'è un Sistema Informativo Geografico?</b><span class="d">In preparazione</span></span></li></ul>
+  </details>
+</div>
+
+<script>
+(function(){
+  var btn = document.getElementById('btn-pagine');
+  btn.addEventListener('click', function(){
+    var on = btn.getAttribute('aria-pressed') !== 'true';
+    btn.setAttribute('aria-pressed', on);
+    btn.textContent = on ? 'Nascondi le pagine del libro' : 'Mostra le pagine del libro';
+    document.body.classList.toggle('mostra-pagine', on);
+  });
+  /* riga sotto la mappa: dice dove porta il riquadro */
+  var tocco = false;
+  document.addEventListener('touchstart', function(){ tocco = true; }, {passive:true, once:true});
+  ['mappa1','mappa2'].forEach(function(id){
+    var svg = document.getElementById(id), stato = document.getElementById('stato-' + id);
+    var base = stato.innerHTML, ultimo = null;
+    function mostra(n){
+      if (!n) { stato.innerHTML = base; return; }
+      var t = n.getAttribute('data-dove'), p = n.getAttribute('data-pp');
+      stato.innerHTML = '→ <b>' + t.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</b> · libro pp. ' + p;
+    }
+    var nodi = svg.querySelectorAll('[data-dove]');
+    Array.prototype.forEach.call(nodi, function(n){
+      n.addEventListener('mouseenter', function(){ mostra(n); });
+      n.addEventListener('mouseleave', function(){ mostra(null); });
+      n.addEventListener('focus', function(){ mostra(n); });
+      n.addEventListener('blur', function(){ mostra(null); });
+      /* sui touch (LIM, tablet): il primo tocco mostra la destinazione, il secondo apre la pagina */
+      n.addEventListener('click', function(e){
+        if (n.classList.contains('prep')) { mostra(n); return; }
+        if (tocco && ultimo !== n) {
+          e.preventDefault();
+          if (ultimo) ultimo.classList.remove('evid');
+          ultimo = n; n.classList.add('evid'); mostra(n);
+          stato.innerHTML += ' — <span>tocca di nuovo per aprire</span>';
+        }
+      });
+    });
+  });
+})();
+</script>
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

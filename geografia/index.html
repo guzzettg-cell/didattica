@@ -31,6 +31,26 @@
   <footer class="piede"><a href="../">Torna a tutte le materie</a></footer>
 </div>
 
+<!-- Se le lezioni non compaiono (browser troppo vecchio o errore), mostra un avviso con il nome del browser -->
+<script>
+(function () {
+  var errori = [];
+  window.onerror = function (msg, file, riga) { errori.push(msg + (file ? " (" + String(file).split("/").pop().split("?")[0] + ", riga " + riga + ")" : "")); };
+  function controlla() {
+    var box = document.getElementById("materiali");
+    if (!box) return;
+    var caricato = (typeof MODULI !== "undefined");
+    if (caricato && box.innerHTML.replace(/\s/g, "") !== "") return;
+    var catalogo = caricato ? "caricato" : "NON caricato";
+    box.innerHTML = '<div style="border:2px solid #B3412F;border-radius:8px;padding:12px 16px;background:#fff;color:#222;font-family:Arial,sans-serif">' +
+      '<p style="margin:0 0 6px;font-weight:bold">Le lezioni non si sono caricate.</p>' +
+      '<p style="margin:0 0 6px">Prova a ricaricare la pagina (Ctrl+F5). Se il problema resta, il browser di questo computer potrebbe essere troppo vecchio: usa Chrome, Edge o Firefox aggiornati.</p>' +
+      '<p style="margin:0;font-size:13px;color:#555">Per chi gestisce il sito: catalogo ' + catalogo + '; browser: ' + navigator.userAgent + (errori.length ? '; errore: ' + errori.join(" | ") : '') + '</p></div>';
+  }
+  if (window.addEventListener) window.addEventListener("load", function () { setTimeout(controlla, 300); });
+  else if (window.attachEvent) window.attachEvent("onload", function () { setTimeout(controlla, 300); });
+})();
+</script>
 <!-- Il catalogo viene sempre scaricato aggiornato (niente copie vecchie nel browser) -->
 <script>document.write('<script src="../materiali.js?v=' + Date.now() + '"><\/script>');</script>
 <script src="../assets/sito.js"></script>

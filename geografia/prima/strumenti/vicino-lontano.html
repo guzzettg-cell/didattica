@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vicino, lontano</title>
+<meta name="description" content="Geografia, classe prima, p. A1: la scala come estensione del territorio. Dalla nostra scuola alla Terra intera.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1EE; --paper:#FAFBF9; --ink:#1D2A30; --muted:#5B6B70; --line:#C9D2CE;
+  --ocean:#2C5872; --warm:#B3412F; --ok:#2E7D4F; --no:#B3412F; --sel:#F6E6BE;
+  --cond:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  /* un colore per ogni scala, dal vicino al lontano */
+  --s1:#C8693A; --s2:#B98A2E; --s3:#5E8F4E; --s4:#2F7C8C; --s5:#3D5F9E; --s6:#5B4A8E;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+    --ocean:#80B1CC; --warm:#EF8A73; --ok:#6FC08F; --no:#EF8A73; --sel:#4A3F22; color-scheme:dark;
+    --s1:#E39066; --s2:#D8AE57; --s3:#86B874; --s4:#62AFBE; --s5:#7E9DD6; --s6:#9C8BD0;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+  --ocean:#80B1CC; --warm:#EF8A73; --ok:#6FC08F; --no:#EF8A73; --sel:#4A3F22; color-scheme:dark;
+  --s1:#E39066; --s2:#D8AE57; --s3:#86B874; --s4:#62AFBE; --s5:#7E9DD6; --s6:#9C8BD0;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.6}
+h1,h2,h3{font-family:var(--cond);line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0;max-width:68ch}
+a{color:var(--ocean)}
+:focus-visible{outline:3px solid var(--ocean);outline-offset:2px}
+.wrap{max-width:62rem;margin:0 auto;padding:1rem 16px 3rem}
+.nav-su{font:600 1.05rem var(--cond);margin-bottom:1.4rem}
+header.testa{display:grid;gap:.6rem;margin-bottom:1.4rem}
+.eyebrow{font:600 1.1rem var(--cond);color:var(--muted)}
+h1{font-size:clamp(2.6rem,8vw,4.4rem);font-weight:700}
+h1 .v{color:var(--s1)} h1 .l{color:var(--s6)}
+.lede{font-size:1.18rem;color:var(--muted)}
+.pagine{justify-self:start;font:600 .95rem var(--cond);border:1px solid var(--line);border-radius:20px;padding:.05rem .7rem;background:var(--paper)}
+.fase{margin:2.6rem 0 1rem;display:grid;gap:.3rem;border-top:4px solid var(--ink);padding-top:.7rem}
+.fase .n{font:700 1rem var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--warm)}
+.fase h2{font-size:clamp(1.8rem,4.5vw,2.5rem)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem 1.2rem;margin:1rem 0;display:grid;gap:.75rem;min-width:0}
+.card > h3{font-size:1.45rem}
+.card .tipo{font:700 .95rem var(--cond);color:var(--ocean);letter-spacing:.04em;text-transform:uppercase}
+.consegna{font-weight:600}
+.libro{border:1px dashed var(--warm);border-radius:8px;padding:.7rem .9rem;display:grid;gap:.3rem}
+.libro b.t{font:700 .95rem var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--warm)}
+.btn{font:600 1.05rem var(--cond);background:var(--ink);color:var(--paper);border:0;border-radius:6px;padding:.42rem 1rem;cursor:pointer}
+.btn.chiaro{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.comandi{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.fb{font:600 1.08rem var(--cond);min-height:1.4em}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--no)}
+
+/* due significati */
+.due{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1rem}
+.due .card{margin:0}
+.due .num{font:700 2.4rem var(--cond);line-height:1;color:var(--warm)}
+.due .card.oggi{border:2px solid var(--ocean)}
+.badge{justify-self:start;font:700 .85rem var(--cond);letter-spacing:.05em;text-transform:uppercase;border-radius:20px;padding:.05rem .6rem;background:var(--ocean);color:var(--paper)}
+.badge.dopo{background:transparent;color:var(--muted);border:1px solid var(--line)}
+
+/* video con la scala che si accende */
+.video-box{display:grid;grid-template-columns:minmax(0,1fr) 15rem;gap:1rem;align-items:start}
+@media (max-width:760px){.video-box{grid-template-columns:1fr}}
+.schermo{position:relative;border-radius:10px;overflow:hidden;background:#000;aspect-ratio:16/9}
+.schermo video{position:absolute;inset:0;width:100%;height:100%;display:block}
+.cartello{position:absolute;left:12px;top:12px;font:700 clamp(1rem,2.6vw,1.45rem) var(--cond);color:#fff;background:rgba(0,0,0,.62);border-left:6px solid var(--c,#fff);padding:.25rem .7rem .3rem;border-radius:4px;pointer-events:none;transition:opacity .25s}
+.cartello small{display:block;font:500 .78em var(--cond);opacity:.85;letter-spacing:.03em}
+.cartello.nascosto{opacity:0}
+.crediti{font:500 .95rem var(--cond);color:var(--muted);margin-top:.35rem}
+.scala{list-style:none;margin:0;padding:0;display:grid;gap:.35rem}
+.scala li{margin:0}
+.scala button{width:100%;display:grid;grid-template-columns:.55rem minmax(0,1fr);gap:.6rem;align-items:center;text-align:left;font:600 1.05rem var(--cond);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:.4rem .6rem;cursor:pointer;transition:background .2s,border-color .2s}
+.scala button i{display:block;width:.55rem;height:100%;min-height:1.6rem;border-radius:3px;background:var(--c)}
+.scala button span small{display:block;font:500 .9rem var(--cond);color:var(--muted)}
+.scala button.attiva{background:var(--sel);border-color:var(--c)}
+.scala-nota{font:500 .95rem var(--cond);color:var(--muted)}
+
+/* esercizi */
+.righe{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
+.righe li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem 1rem;align-items:center;padding:.5rem .65rem;border-radius:6px;background:var(--bg)}
+@media (max-width:640px){.righe li{grid-template-columns:1fr}}
+.righe li.ok{box-shadow:inset 4px 0 0 var(--ok)} .righe li.no{box-shadow:inset 4px 0 0 var(--no)}
+.righe .nota{grid-column:1/-1;font-size:.95rem;color:var(--muted)}
+.cat{display:flex;flex-wrap:wrap;gap:.3rem}
+.cat button{font:600 .98rem var(--cond);border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);padding:.25rem .6rem;cursor:pointer}
+.cat button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.ordina{list-style:none;margin:0;padding:0;display:grid;gap:.35rem;counter-reset:o}
+.ordina li{display:grid;grid-template-columns:2rem minmax(0,1fr) auto;gap:.5rem;align-items:center;background:var(--bg);border-radius:6px;padding:.35rem .5rem}
+.ordina li::before{counter-increment:o;content:counter(o);font:700 1.25rem var(--cond);color:var(--ocean);text-align:center}
+.ordina li.ok{box-shadow:inset 4px 0 0 var(--ok)} .ordina li.no{box-shadow:inset 4px 0 0 var(--no)}
+.ordina .su{display:flex;gap:.25rem}
+.ordina .su button{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:5px;width:2.2rem;height:2.1rem;cursor:pointer;font-weight:700}
+textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:.4rem .5rem;width:100%;min-height:4.5em;resize:vertical}
+.frase{font-size:1.15rem;line-height:2.2}
+.frase select{font:inherit;font-size:1rem;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:.15rem .3rem}
+.frase select.ok{box-shadow:0 0 0 2px var(--ok) inset;border-color:var(--ok)}
+.frase select.no{box-shadow:0 0 0 2px var(--no) inset;border-color:var(--no)}
+details.rivela{border:1px solid var(--line);border-radius:8px;padding:.45rem .8rem;background:var(--bg)}
+details.rivela summary{font:600 1.05rem var(--cond);cursor:pointer;color:var(--ocean)}
+details.rivela > *:not(summary){margin-top:.4rem}
+.avanti{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem;margin-top:2.4rem;font:600 1.1rem var(--cond)}
+@media print{ .nav-su,.comandi,.schermo,.scala{display:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="nav-su"><a href="index.html">← Gli strumenti della geografia: le mappe del modulo</a></p>
+
+  <header class="testa">
+    <p class="eyebrow">Modulo I · Per cominciare</p>
+    <h1><span class="v">Vicino</span>, <span class="l">lontano</span></h1>
+    <p class="lede">Possiamo guardare un territorio da molto vicino, la strada della nostra scuola, oppure da molto lontano, la Terra intera. Quanto territorio guardiamo cambia quello che riusciamo a vedere.</p>
+    <span class="pagine">Libro: p. A1</span>
+  </header>
+
+  <!-- ===================== 1. LA PAROLA SCALA ===================== -->
+  <section class="fase" aria-labelledby="t1">
+    <p class="n">Fase 1</p>
+    <h2 id="t1">Una parola, due significati</h2>
+  </section>
+  <p>In geografia la parola <b>scala</b> ha due significati. Li troverai tutti e due nel libro: oggi lavoriamo sul secondo.</p>
+  <div class="due" style="margin-top:1rem">
+    <div class="card">
+      <span class="badge dopo">Lo vedremo più avanti</span>
+      <span class="num">1</span>
+      <h3>Quanto è stata rimpicciolita la realtà</h3>
+      <p>Il rapporto fra una distanza misurata sulla carta e la stessa distanza misurata sul terreno.</p>
+      <p><a href="../metodo-e-strumenti/lezioni/la-riduzione-in-scala.html">La riduzione in scala, pp. A10–A11 →</a></p>
+    </div>
+    <div class="card oggi">
+      <span class="badge">Oggi</span>
+      <span class="num">2</span>
+      <h3>Quanto territorio guardiamo</h3>
+      <p>L'<b>estensione</b> del territorio che studiamo: possiamo studiarlo su scala <b>locale</b>, <b>regionale</b>, <b>nazionale</b> o <b>planetaria</b>. Cioè da vicino oppure da lontano.</p>
+    </div>
+  </div>
+
+  <!-- ===================== 2. IL VIDEO ===================== -->
+  <section class="fase" aria-labelledby="t2">
+    <p class="n">Fase 2</p>
+    <h2 id="t2">Dalla nostra scuola alla Terra</h2>
+  </section>
+  <p>Partiamo da via Col di Lana, a Roma, dove si trova la nostra scuola, e allontaniamoci fino a vedere tutta la Terra. Poi torniamo indietro. A destra si accende la scala a cui stiamo guardando: puoi anche cliccare una tappa per saltare lì.</p>
+
+  <div class="card">
+    <div class="video-box">
+      <div>
+        <div class="schermo">
+          <video id="video" controls preload="metadata" playsinline poster="video/poster-vicino-lontano.jpg" aria-describedby="crediti-video">
+            <source src="video/vicino-lontano.mp4" type="video/mp4">
+            Il tuo browser non riesce a mostrare il video.
+          </video>
+          <p class="cartello nascosto" id="cartello" aria-hidden="true"></p>
+        </div>
+        <p class="crediti" id="crediti-video">Video realizzato con Google Earth Pro. Immagini: Google Earth, Landsat / Copernicus, Data SIO, NOAA, U.S. Navy, NGA, GEBCO.</p>
+      </div>
+      <div>
+        <ol class="scala" id="scala" aria-label="Le tappe del video, dal vicino al lontano"></ol>
+        <p class="scala-nota" id="stato-scala" aria-live="polite" style="margin-top:.5rem">Premi ▶ per partire.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="tipo">Mentre guardi</p>
+    <p class="consegna">Ferma il video su tre tappe a tua scelta. Per ognuna scrivi sul quaderno: <i>che cosa si vede bene?</i> e <i>che cosa non si vede più?</i></p>
+    <details class="rivela">
+      <summary>Qualche esempio, per controllare</summary>
+      <ul>
+        <li><b>Il quartiere:</b> si vedono i tetti, le strade, gli alberi, la piazza Mazzini. Non si vede dove finisce la città.</li>
+        <li><b>Roma:</b> si vedono il Tevere che attraversa la città e il raccordo anulare. Non si distinguono più le singole case.</li>
+        <li><b>L'Italia:</b> si vedono la forma a stivale, le isole, i mari, le Alpi. Roma è solo un puntino.</li>
+        <li><b>La Terra:</b> si vedono i continenti, gli oceani, le nuvole. L'Italia è piccolissima.</li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- ===================== 3. CON IL LIBRO ===================== -->
+  <section class="fase" aria-labelledby="t3">
+    <p class="n">Fase 3</p>
+    <h2 id="t3">Le tre fotografie del libro</h2>
+  </section>
+  <div class="card">
+    <div class="libro">
+      <b class="t">Apri il libro a p. A1</b>
+      <p>Ci sono tre fotografie scattate dai satelliti: il Mar Mediterraneo, l'Italia e la Sicilia.</p>
+    </div>
+    <p class="consegna">Mettile in ordine, dal territorio più vicino al più lontano. Usa le frecce.</p>
+    <ol class="ordina" id="ordina-foto"></ol>
+    <div class="comandi"><button class="btn" type="button" id="ctrl-foto">Controlla</button><span class="fb" id="fb-foto" aria-live="polite"></span></div>
+    <details class="rivela">
+      <summary>Leggi le didascalie del libro: che cosa riconosciamo nella foto della Sicilia?</summary>
+      <p>Si vedono meglio la forma delle coste e la macchia bianca della cima dell'Etna, coperta di neve. Più ci avviciniamo, più dettagli vediamo.</p>
+    </details>
+  </div>
+
+  <!-- ===================== 4. ESERCIZI ===================== -->
+  <section class="fase" aria-labelledby="t4">
+    <p class="n">Fase 4</p>
+    <h2 id="t4">A quale scala?</h2>
+  </section>
+  <div class="card">
+    <p class="tipo">Esercizio 1</p>
+    <p class="consegna">Per studiare questi argomenti, a quale scala dobbiamo guardare il territorio?</p>
+    <ul class="righe" id="classifica"></ul>
+    <div class="comandi"><button class="btn" type="button" id="ctrl-scala">Controlla</button><button class="btn chiaro" type="button" id="reset-scala">Ricomincia</button><span class="fb" id="fb-scala" aria-live="polite"></span></div>
+  </div>
+
+  <div class="card">
+    <p class="tipo">Esercizio 2</p>
+    <p class="consegna">Completa la frase.</p>
+    <p class="frase">
+      Se guardo il territorio da <b>vicino</b> vedo
+      <select id="s1" aria-label="da vicino vedo"><option value="">…</option><option value="tanti">tanti dettagli</option><option value="pochi">pochi dettagli</option></select>
+      ma un territorio
+      <select id="s2" aria-label="ma un territorio"><option value="">…</option><option value="piccolo">piccolo</option><option value="grande">grande</option></select>.
+      Se lo guardo da <b>lontano</b> vedo un territorio
+      <select id="s3" aria-label="da lontano vedo un territorio"><option value="">…</option><option value="piccolo">piccolo</option><option value="grande">grande</option></select>
+      ma
+      <select id="s4" aria-label="ma vedo"><option value="">…</option><option value="tanti">tanti dettagli</option><option value="pochi">pochi dettagli</option></select>.
+    </p>
+    <div class="comandi"><button class="btn" type="button" id="ctrl-frase">Controlla</button><span class="fb" id="fb-frase" aria-live="polite"></span></div>
+  </div>
+
+  <div class="card">
+    <p class="tipo">Per finire</p>
+    <p class="consegna">Il libro dice che per studiare l'acqua dolce possiamo guardare da vicino oppure da lontano. Scegli una scala e scrivi una domanda che ti faresti a quella scala.</p>
+    <p style="color:var(--muted)">Esempio: <i>scala locale</i>: «Quante fontanelle ci sono intorno alla scuola?»</p>
+    <label for="uscita" class="consegna" style="font-family:var(--cond)">La mia domanda</label>
+    <textarea id="uscita"></textarea>
+  </div>
+
+  <div class="card">
+    <p class="tipo">Per esplorare a casa</p>
+    <p>Come suggerisce il libro, sul sito della NASA <a href="https://visibleearth.nasa.gov/" target="_blank" rel="noopener">Visible Earth</a> trovi moltissime immagini da satellite, gratuite: scrivi nel campo di ricerca il nome del territorio che vuoi osservare, per esempio <i>Italy</i> o <i>Sicily</i>.</p>
+  </div>
+
+  <nav class="avanti" aria-label="Continua">
+    <a href="index.html">← Le mappe del modulo</a>
+    <a href="../orientamento/index.html">L'orientamento e i suoi strumenti →</a>
+  </nav>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  function el(tag, attrs, testo){
+    var n = document.createElement(tag);
+    if (attrs) for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (testo != null) n.textContent = testo;
+    return n;
+  }
+  function mescola(a){ a = a.slice(); for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  /* ---------- tappe del video (secondi in cui la vista arriva su ogni tappa) ---------- */
+  var TAPPE = [
+    { id:'q', nome:'Il quartiere della scuola', scala:'scala locale',       c:'--s1', andata:0,    ritorno:70.6 },
+    { id:'r', nome:'Roma',                      scala:'scala locale',       c:'--s2', andata:7.6,  ritorno:63.6 },
+    { id:'l', nome:'Il Lazio',                  scala:'scala regionale',    c:'--s3', andata:14.6, ritorno:56.6 },
+    { id:'i', nome:'L’Italia',             scala:'scala nazionale',    c:'--s4', andata:21.6, ritorno:49.6 },
+    { id:'m', nome:'Il Mediterraneo e l’Europa', scala:'scala continentale', c:'--s5', andata:28.6, ritorno:42.6 },
+    { id:'t', nome:'La Terra',                  scala:'scala planetaria',   c:'--s6', andata:35.6, ritorno:35.6 }
+  ];
+  /* sequenza degli arrivi nel tempo */
+  var ARRIVI = [];
+  TAPPE.forEach(function(t){ ARRIVI.push({ t:t.andata, tappa:t, dir:'andata' }); if (t.id !== 't') ARRIVI.push({ t:t.ritorno, tappa:t, dir:'ritorno' }); });
+  ARRIVI.sort(function(a, b){ return a.t - b.t; });
+
+  var video = document.getElementById('video'), cartello = document.getElementById('cartello');
+  var lista = document.getElementById('scala'), stato = document.getElementById('stato-scala');
+  var bottoni = {};
+  TAPPE.slice().forEach(function(t){
+    var b = el('button', { type:'button', style:'--c:var(' + t.c + ')' });
+    b.appendChild(el('i'));
+    var s = el('span'); s.appendChild(document.createTextNode(t.nome)); s.appendChild(el('small', null, t.scala));
+    b.appendChild(s);
+    b.addEventListener('click', function(){
+      /* in andata, un attimo dopo l'arrivo */
+      try { video.currentTime = Math.min(t.andata + 0.3, (video.duration || 99) - 0.1); } catch(e){}
+      aggiorna();
+    });
+    var li = el('li'); li.appendChild(b); lista.appendChild(li); bottoni[t.id] = b;
+  });
+
+  var ultima = null;
+  function aggiorna(){
+    var now = video.currentTime || 0, cur = ARRIVI[0];
+    for (var i = 0; i < ARRIVI.length; i++) if (ARRIVI[i].t <= now + 0.05) cur = ARRIVI[i];
+    var t = cur.tappa;
+    if (ultima === t.id) return;
+    ultima = t.id;
+    for (var k in bottoni) bottoni[k].classList.toggle('attiva', k === t.id);
+    cartello.style.setProperty('--c', 'var(' + t.c + ')');
+    cartello.innerHTML = '';
+    cartello.appendChild(document.createTextNode(t.nome));
+    cartello.appendChild(el('small', null, t.scala));
+    cartello.classList.remove('nascosto');
+    stato.textContent = 'Ora: ' + t.nome + ' — ' + t.scala + '.';
+  }
+  video.addEventListener('timeupdate', aggiorna);
+  video.addEventListener('seeked', function(){ ultima = null; aggiorna(); });
+  video.addEventListener('play', function(){ ultima = null; aggiorna(); });
+
+  /* ---------- ordina le foto del libro ---------- */
+  var FOTO = ['La Sicilia', 'L’Italia', 'Il Mar Mediterraneo'];
+  var ord = document.getElementById('ordina-foto');
+  function disegnaOrdine(voci){
+    ord.innerHTML = '';
+    voci.forEach(function(v, i){
+      var li = el('li'); li.dataset.v = v;
+      li.appendChild(el('span', null, v));
+      var su = el('span', { class:'su' });
+      var b1 = el('button', { type:'button', 'aria-label':'Sposta su: ' + v }, '↑');
+      var b2 = el('button', { type:'button', 'aria-label':'Sposta giù: ' + v }, '↓');
+      b1.disabled = i === 0; b2.disabled = i === voci.length - 1;
+      b1.addEventListener('click', function(){ sposta(i, -1); });
+      b2.addEventListener('click', function(){ sposta(i, 1); });
+      su.appendChild(b1); su.appendChild(b2); li.appendChild(su); ord.appendChild(li);
+    });
+  }
+  function attuale(){ return Array.prototype.map.call(ord.children, function(li){ return li.dataset.v; }); }
+  function sposta(i, d){ var v = attuale(); var t = v[i]; v[i] = v[i + d]; v[i + d] = t; disegnaOrdine(v); document.getElementById('fb-foto').textContent = ''; }
+  var iniz = mescola(FOTO); if (iniz.join() === FOTO.join()) iniz.reverse();
+  disegnaOrdine(iniz);
+  document.getElementById('ctrl-foto').addEventListener('click', function(){
+    var v = attuale(), giusti = 0;
+    Array.prototype.forEach.call(ord.children, function(li, i){ var ok = v[i] === FOTO[i]; li.classList.toggle('ok', ok); li.classList.toggle('no', !ok); if (ok) giusti++; });
+    var fb = document.getElementById('fb-foto');
+    fb.className = 'fb ' + (giusti === FOTO.length ? 'ok' : 'no');
+    fb.textContent = giusti === FOTO.length ? 'Giusto: Sicilia (scala regionale), Italia (scala nazionale), Mediterraneo (più lontano ancora).' : 'Non ancora: quale foto mostra il territorio più piccolo?';
+  });
+
+  /* ---------- a quale scala? ---------- */
+  var SCALE = ['locale', 'regionale', 'nazionale', 'planetaria'];
+  var VOCI = [
+    ['Il traffico davanti alla nostra scuola', 'locale', 'Una strada, un quartiere: scala locale.'],
+    ['Le spiagge del Lazio', 'regionale', 'Tutta la costa di una regione: scala regionale.'],
+    ['Le catene montuose dell’Italia: Alpi e Appennini', 'nazionale', 'Attraversano tutto il Paese: scala nazionale.'],
+    ['I grandi deserti del mondo', 'planetaria', 'Sono in continenti diversi: scala planetaria.'],
+    ['I parchi e i giardini di Roma', 'locale', 'Una città: scala locale.'],
+    ['Le province del Lazio', 'regionale', 'Sono le parti di una regione: scala regionale.'],
+    ['Le venti regioni italiane', 'nazionale', 'Tutta l’Italia: scala nazionale.'],
+    ['Gli oceani e i continenti', 'planetaria', 'Tutta la Terra: scala planetaria.']
+  ];
+  var ul = document.getElementById('classifica'), scelte = {};
+  function disegnaClassifica(){
+    ul.innerHTML = ''; scelte = {};
+    mescola(VOCI).forEach(function(v){
+      var li = el('li'); li.dataset.k = v[0];
+      li.appendChild(el('span', null, v[0]));
+      var g = el('div', { class:'cat', role:'group', 'aria-label':'Scala per: ' + v[0] });
+      SCALE.forEach(function(s){
+        var b = el('button', { type:'button', 'aria-pressed':'false' }, s);
+        b.addEventListener('click', function(){
+          scelte[v[0]] = s;
+          Array.prototype.forEach.call(g.children, function(x){ x.setAttribute('aria-pressed', x === b); });
+          li.classList.remove('ok', 'no'); var n = li.querySelector('.nota'); if (n) n.remove();
+        });
+        g.appendChild(b);
+      });
+      li.appendChild(g); ul.appendChild(li);
+    });
+    var fb = document.getElementById('fb-scala'); fb.textContent = ''; fb.className = 'fb';
+  }
+  disegnaClassifica();
+  document.getElementById('reset-scala').addEventListener('click', disegnaClassifica);
+  document.getElementById('ctrl-scala').addEventListener('click', function(){
+    var giusti = 0, fatte = 0;
+    Array.prototype.forEach.call(ul.children, function(li){
+      var v = VOCI.filter(function(x){ return x[0] === li.dataset.k; })[0];
+      var vecchia = li.querySelector('.nota'); if (vecchia) vecchia.remove();
+      li.classList.remove('ok', 'no');
+      if (!scelte[v[0]]) return;
+      fatte++;
+      var ok = scelte[v[0]] === v[1]; if (ok) giusti++;
+      li.classList.add(ok ? 'ok' : 'no');
+      if (ok) li.appendChild(el('span', { class:'nota' }, v[2]));
+    });
+    var fb = document.getElementById('fb-scala');
+    if (!fatte){ fb.className = 'fb no'; fb.textContent = 'Scegli prima una scala per ogni argomento.'; return; }
+    fb.className = 'fb ' + (giusti === VOCI.length ? 'ok' : 'no');
+    fb.textContent = giusti + ' su ' + VOCI.length + (giusti === VOCI.length ? ': tutto giusto!' : (fatte < VOCI.length ? ' (ne mancano ' + (VOCI.length - fatte) + ')' : ': correggi le righe rosse.'));
+  });
+
+  /* ---------- completa la frase ---------- */
+  var GIUSTE = { s1:'tanti', s2:'piccolo', s3:'grande', s4:'pochi' };
+  document.getElementById('ctrl-frase').addEventListener('click', function(){
+    var giusti = 0;
+    for (var id in GIUSTE){ var s = document.getElementById(id); var ok = s.value === GIUSTE[id]; s.classList.toggle('ok', ok); s.classList.toggle('no', !ok); if (ok) giusti++; }
+    var fb = document.getElementById('fb-frase');
+    fb.className = 'fb ' + (giusti === 4 ? 'ok' : 'no');
+    fb.textContent = giusti === 4 ? 'Giusto! È quello che succede nel video e nelle foto del libro.' : 'Ripensa al video: dal quartiere si vedevano i tetti, dallo spazio i continenti.';
+  });
+  ['s1', 's2', 's3', 's4'].forEach(function(id){ document.getElementById(id).addEventListener('change', function(){ this.classList.remove('ok', 'no'); }); });
+})();
+</script>
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

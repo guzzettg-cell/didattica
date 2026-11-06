@@ -52,6 +52,10 @@ button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:v
 .lbl{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;margin-right:2px}
 label.chk{display:inline-flex;gap:6px;align-items:center;font-size:.92rem;cursor:pointer}
 
+/* Parte sull'ombra del bastone oscurata: per rimetterla, togli la classe «oscura» dagli elementi
+   (e «senza-ombra» dalla griglia) */
+.oscura{display:none!important}
+.grid.senza-ombra{grid-template-columns:1fr}
 .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:18px;align-items:start}
 @media (max-width:760px){.grid{grid-template-columns:1fr}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
@@ -84,7 +88,7 @@ details ol{margin-top:10px}
   <header>
     <div class="eyebrow">Geografia · L'orientamento e i punti cardinali</div>
     <h1>Il cammino del <span>Sole</span></h1>
-    <p class="lede">Scegli una città, muovi l'ora e guarda dove si trova il Sole nel cielo. Più sotto, vista dall'alto, c'è l'ombra di un bastone piantato in cortile.</p>
+    <p class="lede">Scegli una città, muovi l'ora e guarda dove si trova il Sole nel cielo.<span class="oscura"> Più sotto, vista dall'alto, c'è l'ombra di un bastone piantato in cortile.</span></p>
   </header>
 
   <figure>
@@ -123,8 +127,8 @@ details ol{margin-top:10px}
     </div>
   </section>
 
-  <div class="grid">
-    <div class="card">
+  <div class="grid senza-ombra">
+    <div class="card oscura">
       <h2>L'ombra di un bastone</h2>
       <p class="how">Pianta un bastone dritto nel cortile, in una giornata di sole. L'ombra si forma sempre <b>dalla parte opposta al Sole</b>: mentre il Sole si sposta nel cielo, l'ombra gira e cambia lunghezza.</p>
       <p class="sub">Visto di lato</p>
@@ -141,21 +145,21 @@ details ol{margin-top:10px}
       <h2>Prova a rispondere</h2>
       <ol>
         <li>A che ora il Sole è più alto? In quale direzione si trova?</li>
-        <li>Porta l'ora alle 9: da che parte è il Sole? E verso dove punta l'ombra?</li>
+        <li>Porta l'ora alle 9: da che parte è il Sole?<span class="oscura"> E verso dove punta l'ombra?</span></li>
         <li>Confronta il 21 giugno e il 21 dicembre: dove sorge il Sole? Quante ore di luce ci sono?</li>
-        <li>Guarda la vista dall'alto: quando l'ombra è più corta, verso quale punto cardinale punta?</li>
-        <li>Scegli Sydney e vai a mezzogiorno: dove si trova il Sole? Verso dove punta l'ombra? Potresti trovare il Sud come a Roma?</li>
-        <li>Scegli Nairobi e vai a mezzogiorno del 21 marzo: cosa succede all'ombra? Perché?</li>
+        <li class="oscura">Guarda la vista dall'alto: quando l'ombra è più corta, verso quale punto cardinale punta?</li>
+        <li>Scegli Sydney e vai a mezzogiorno: dove si trova il Sole?<span class="oscura"> Verso dove punta l'ombra? Potresti trovare il Sud come a Roma?</span></li>
+        <li class="oscura">Scegli Nairobi e vai a mezzogiorno del 21 marzo: cosa succede all'ombra? Perché?</li>
       </ol>
       <details>
         <summary>Risposte per l'insegnante</summary>
         <ol>
           <li>A Roma alle 12 (ora del Sole). Il Sole è a Sud.</li>
-          <li>Il Sole è a Sud-Est; l'ombra punta a Nord-Ovest, sempre dalla parte opposta al Sole.</li>
+          <li>Il Sole è a Sud-Est<span class="oscura">; l'ombra punta a Nord-Ovest, sempre dalla parte opposta al Sole</span>.</li>
           <li>A Roma: a giugno sorge a Nord-Est e ci sono circa 15 ore di luce; a dicembre sorge a Sud-Est e le ore di luce sono circa 9. Solo a marzo e settembre sorge esattamente a Est.</li>
-          <li>Verso Nord: l'ombra più corta è quella di mezzogiorno, quando il Sole è a Sud.</li>
-          <li>A Sydney (emisfero Sud) il Sole a mezzogiorno è a Nord e l'ombra punta a Sud. Il metodo del libro va rovesciato: lì il Sole di mezzogiorno indica il Nord.</li>
-          <li>Il Sole è quasi sopra la testa e l'ombra quasi scompare. Vicino all'equatore il Sole di mezzogiorno può stare a Nord o a Sud a seconda del periodo dell'anno.</li>
+          <li class="oscura">Verso Nord: l'ombra più corta è quella di mezzogiorno, quando il Sole è a Sud.</li>
+          <li>A Sydney (emisfero Sud) il Sole a mezzogiorno è a Nord<span class="oscura"> e l'ombra punta a Sud. Il metodo del libro va rovesciato: lì il Sole di mezzogiorno indica il Nord</span>.</li>
+          <li class="oscura">Il Sole è quasi sopra la testa e l'ombra quasi scompare. Vicino all'equatore il Sole di mezzogiorno può stare a Nord o a Sud a seconda del periodo dell'anno.</li>
         </ol>
       </details>
     </div>
@@ -389,7 +393,7 @@ details ol{margin-top:10px}
     if (s.alt >= 0){
       out.innerHTML =
         '<dt>Sole</dt><dd>verso <b>' + dirName(s.az) + '</b>, alto ' + Math.round(s.alt) + '° sull\'orizzonte</dd>' +
-        '<dt>Ombra</dt><dd>' + (s.alt > 87 ? 'quasi <b>scomparsa</b>: il Sole è sopra il bastone'
+        '<dt class="oscura">Ombra</dt><dd class="oscura">' + (s.alt > 87 ? 'quasi <b>scomparsa</b>: il Sole è sopra il bastone'
           : 'punta verso <b>' + dirName(s.az+180) + '</b>, lunga ' + num(1/Math.tan(Math.max(s.alt,0.5)*D2R)) + ' volte il bastone') + '</dd>' +
         '<dt>A mezzogiorno</dt><dd>il Sole è ' + mezzo + '</dd>' +
         '<dt>Giornata</dt><dd>' + giorno + '</dd>';

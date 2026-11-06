@@ -40,13 +40,13 @@
    Libro di riferimento: Paesaggi vicini e lontani (prima e seconda solo Paesaggi;
    in terza si parte da Paesaggi e si indicano anche GeoAgenda e Vivi la Geografia,
    adottati nelle classi terze attuali). */
-const LIBRI = {
+var LIBRI = {
   "paesaggi":  { nome: "Paesaggi vicini e lontani", colore: "#2e7d4f" },
   "geoagenda": { nome: "GeoAgenda",                 colore: "#7a3fa0" },
   "vivi":      { nome: "Vivi la Geografia",         colore: "#1d6fa5" }
 };
 
-const MODULI = [
+var MODULI = [
 
   /* ---------------- GEOGRAFIA · PRIMA ---------------- */
   /* Organizzata secondo Paesaggi vicini e lontani 1 (pagine A e B).
@@ -56,10 +56,21 @@ const MODULI = [
     classe: "prima",
     numero: "I",
     titolo: "Gli strumenti della geografia",
-    descrizione: "Orientarsi, leggere le carte, usare dati e grafici. Primo quadrimestre, in collegamento con Scienze.",
+    descrizione: "Orientarsi, leggere le carte, usare dati e grafici. Primo quadrimestre, in collegamento con Scienze. Si comincia dalla pagina del modulo: le mappe del video, che portano a tutte le lezioni.",
+    link: "geografia/prima/strumenti/index.html",
     lezioni: [
       {
+        titolo: "Vicino, lontano",
+        libri: ["paesaggi"],
+        pagine: "A1",
+        descrizione: "Che cosa vuol dire «scala»: il volo dalla nostra scuola, in via Col di Lana, fino alla Terra intera. Scala locale, regionale, nazionale, planetaria.",
+        link: "geografia/prima/strumenti/vicino-lontano.html",
+        data: "2026-11-06",
+        attivita: []
+      },
+      {
         titolo: "Perché la geografia",
+        standby: true,
         libri: ["paesaggi"],
         pagine: "XI, A2–A3",
         descrizione: "La Terra vista da fuori: le foto più famose, astronauti, cosmonauti e taikonauti, e che cosa studieremo in geografia.",
@@ -82,7 +93,7 @@ const MODULI = [
         data: "2026-10-23",
         attivita: [
           { tipo: "Attività 1", titolo: "Il paese delle indicazioni", descrizione: "Missioni su una piantina: punti di riferimento personali, punti cardinali e percorsi inventati dai gruppi.", link: "geografia/prima/orientamento/attivita/il-paese-delle-indicazioni.html", data: "2026-10-23" },
-          { tipo: "Attività 2", titolo: "Il cammino del Sole", descrizione: "Dove si trova il Sole durante il giorno, l'ombra del bastone e il confronto tra città.", link: "geografia/prima/orientamento/attivita/il-cammino-del-sole.html", data: "2026-10-23" },
+          { tipo: "Attività 2", titolo: "Il cammino del Sole", descrizione: "Dove si trova il Sole durante il giorno e il confronto tra città.", link: "geografia/prima/orientamento/attivita/il-cammino-del-sole.html", data: "2026-10-23" },
           { tipo: "Attività 3", titolo: "Orientarsi con le stelle", descrizione: "Trovare la Stella polare con il Grande Carro e il Sud con la Croce del Sud.", link: "geografia/prima/orientamento/attivita/orientarsi-con-le-stelle.html", data: "2026-10-23" },
           { tipo: "Attività 4", titolo: "La Terra che gira", descrizione: "La rotazione terrestre vista dallo spazio e il moto apparente del Sole visto da Roma.", link: "geografia/prima/orientamento/attivita/la-terra-che-gira.html", data: "2026-10-23" }
         ]
@@ -2078,9 +2089,10 @@ const MODULI = [
    }
    ============================================================= */
 
-const UDA = [
+var UDA = [
   {
     titolo: "Benvenuti nei laboratori delle discipline",
+    standby: true,
     descrizione: "Accoglienza: i laboratori dello storico, del geografo, del lettore, dello scrittore e del cittadino. La valigia con un oggetto, un luogo, una storia, la prima parola e una regola; la mostra «Chi siamo».",
     classe: "prima",
     periodo: "Accoglienza, prime settimane",

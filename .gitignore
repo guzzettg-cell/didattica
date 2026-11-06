@@ -1,2 +1,5 @@
 # File creati dal Mac nel Finder: restano sul computer, non vanno sul sito
 .DS_Store
+
+# video originale di Google Earth (troppo pesante per GitHub): si pubblica solo la versione .mp4 compressa
+geografia/prima/strumenti/video/*.m4v

@@ -57,6 +57,18 @@ ci sono i pulsanti «Libro:» per vedere solo le lezioni di un libro
 (si può anche condividere il link: per esempio `geografia/?libro=geoagenda`).
 Per un nuovo libro, aggiungi una riga in `LIBRI` con sigla, nome e colore.
 
+## Mettere una lezione in standby
+
+Per una lezione da rivedere, aggiungi nella lezione la riga:
+
+```js
+        standby: true,
+```
+
+Nella pagina della materia la lezione resta al suo posto (con il suo numero) ma appare **in grigio**,
+con la scritta «In revisione», e i suoi link non si possono cliccare. Per rimetterla attiva,
+cancella la riga. La pagina della lezione resta comunque nel sito: chi ha il link diretto la apre.
+
 ## Programma di dipartimento
 
 Le lezioni che corrispondono a un argomento della programmazione di dipartimento hanno la riga

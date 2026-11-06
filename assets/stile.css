@@ -384,3 +384,11 @@ a.titolo-modulo:hover { color: var(--accento); }
   .riga-cerca button { padding: 0 14px; }
   .risultati .ris a { padding: 14px 16px; }
 }
+
+/* Lezione o UDA in standby (riga `standby: true,` in materiali.js): grigia e non cliccabile */
+.lezione.in-standby, .voce.uda.in-standby { filter: grayscale(1); opacity: .45; }
+.lezione.in-standby a, .voce.uda.in-standby a { pointer-events: none; cursor: default; text-decoration: none; color: inherit; }
+.segno-standby {
+  display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px;
+  border: 1px solid currentColor; font-size: 12px; font-style: normal; letter-spacing: .02em;
+}

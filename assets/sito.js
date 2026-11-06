@@ -209,7 +209,11 @@ function schedaUda(u) {
     var extra = [u.classe ? "Classe " + u.classe : null, u.periodo].filter(Boolean).join(", ");
     if (extra)
         etichette.append(extra);
-    return el("li", { class: "voce uda" }, el("span", { class: "striscia", style: "background: linear-gradient(to bottom, ".concat(striscia, ")"), "aria-hidden": "true" }), el("a", { href: BASE + u.link }, el("h3", null, u.titolo), u.descrizione ? el("p", null, u.descrizione) : null, etichette));
+    if (u.standby)
+        etichette.append(el("span", { class: "segno-standby" }, "In revisione"));
+    return el("li", u.standby
+        ? { class: "voce uda in-standby", title: "UDA in revisione: per ora non è disponibile" }
+        : { class: "voce uda" }, el("span", { class: "striscia", style: "background: linear-gradient(to bottom, ".concat(striscia, ")"), "aria-hidden": "true" }), el("a", { href: BASE + u.link }, el("h3", null, u.titolo), u.descrizione ? el("p", null, u.descrizione) : null, etichette));
 }
 function elencoUda(contenitore, filtro, vuoto) {
     if (!contenitore)
@@ -375,7 +379,9 @@ function paginaMateria(id) {
                 var titolo = lez.link
                     ? el("a", { href: BASE + lez.link }, lez.titolo)
                     : lez.titolo;
-                var li = el("li", { class: "lezione" }, el("p", { class: "numero-lezione" }, "Lezione " + (lez._posizione || i + 1) + (lez.pagine ? ", " + (/[–-]/.test(lez.pagine) ? "pp. " : "p. ") + lez.pagine : ""), segnoDipartimento(lez)), el("h4", null, titolo), etichetteLibri(libriDi(lez)), lez.descrizione ? el("p", { class: "descr-lezione" }, lez.descrizione) : null);
+                var li = el("li", lez.standby
+                    ? { class: "lezione in-standby", title: "Lezione in revisione: per ora non è disponibile" }
+                    : { class: "lezione" }, el("p", { class: "numero-lezione" }, "Lezione " + (lez._posizione || i + 1) + (lez.pagine ? ", " + (/[–-]/.test(lez.pagine) ? "pp. " : "p. ") + lez.pagine : ""), segnoDipartimento(lez), lez.standby ? el("span", { class: "segno-standby" }, "In revisione") : null), el("h4", null, titolo), etichetteLibri(libriDi(lez)), lez.descrizione ? el("p", { class: "descr-lezione" }, lez.descrizione) : null);
                 var att = lez.attivita || [];
                 if (att.length) {
                     var ul_1 = el("ul", { class: "attivita-elenco" });
