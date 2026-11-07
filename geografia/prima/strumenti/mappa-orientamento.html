@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mappa 1 · L’orientamento</title>
+<meta name="description" content="Modulo I di geografia, classe prima: le mappe del capitolo, da cui si raggiungono tutte le lezioni e le attività.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1EE; --paper:#FAFBF9; --ink:#1D2A30; --muted:#5B6B70; --line:#C9D2CE;
+  --ocean:#2C5872; --warm:#B3412F;
+  --cond:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --m-linea:#8FA3A6; --m-forte:#DCE8EE; --m-hover:#F6E6BE;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+    --ocean:#80B1CC; --warm:#EF8A73; color-scheme:dark;
+    --m-linea:#5E7276; --m-forte:#20384A; --m-hover:#4A3F22;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+  --ocean:#80B1CC; --warm:#EF8A73; color-scheme:dark;
+  --m-linea:#5E7276; --m-forte:#20384A; --m-hover:#4A3F22;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.6}
+h1,h2,h3{font-family:var(--cond);line-height:1.08;margin:0;text-wrap:balance}
+p{margin:0;max-width:68ch}
+a{color:var(--ocean)}
+:focus-visible{outline:3px solid var(--ocean);outline-offset:2px}
+.wrap{max-width:64rem;margin:0 auto;padding:1rem 16px 3rem}
+.nav-su{font:600 1.05rem var(--cond);margin-bottom:1.4rem}
+header.testa{display:grid;gap:.6rem;margin-bottom:1.8rem}
+.eyebrow{font:600 1.1rem var(--cond);color:var(--muted)}
+h1{font-size:clamp(2.7rem,8vw,4.5rem);font-weight:700;color:var(--ink);margin:.3rem 0 .6rem}
+.lede{font-size:1.18rem;color:var(--muted)}
+.passi{list-style:none;margin:.4rem 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:.7rem;counter-reset:p}
+.passi-confronto{counter-reset:p 2;margin-bottom:1rem}
+.passi > li{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem .9rem 3.2rem;position:relative}
+.passi > li::before{counter-increment:p;content:counter(p);position:absolute;left:.9rem;top:.55rem;font:700 1.8rem var(--cond);color:var(--warm)}
+.per-cominciare{display:grid;gap:.2rem;padding:.8rem 1rem;border:2px solid var(--ocean);border-radius:10px;background:var(--paper);text-decoration:none;color:inherit;margin-top:.3rem}
+.per-cominciare:hover{background:var(--bg)}
+.per-cominciare > b{font:700 clamp(1.7rem,4vw,2.2rem)/1.15 var(--cond);color:var(--ocean);margin:.35rem 0 .6rem}
+.per-cominciare .d{color:var(--muted)}
+.passi > li > b{font:700 clamp(1.65rem,4vw,2rem)/1.15 var(--cond);display:block;color:var(--ocean);margin:0 0 .8rem}
+
+.passo-video > p{margin-top:.5rem}
+.domanda-guida{margin:1rem 0;padding:.7rem 1rem;border-left:4px solid var(--ocean);background:var(--m-forte);border-radius:0 6px 6px 0}
+.domanda-guida .invito{font:600 1.05rem/1.4 var(--cond);color:var(--ocean)}
+.domanda-guida .domanda{font:700 clamp(1.4rem,3vw,1.8rem)/1.2 var(--cond);color:var(--ocean);margin:.3rem 0 .6rem}
+.esempi-titolo{font-weight:600}
+.domande-video{padding-left:1.4rem;margin:.4rem 0 1rem;display:grid;gap:.4rem}
+.domande-video li::marker{color:var(--ocean)}
+.domande-video strong{color:var(--ocean)}
+.passo-video .promemoria-video{border-top:1px solid var(--line);padding-top:.7rem;margin-top:.8rem}
+.promemoria-video strong{color:var(--warm)}
+
+.blocco-mappa{margin:2.6rem 0 0;display:grid;gap:.8rem;border-top:4px solid var(--ink);padding-top:.8rem}
+.blocco-mappa .n{font:700 1rem var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--warm)}
+.blocco-mappa h2{font-size:clamp(2.2rem,5.5vw,3.2rem);font-weight:700;color:var(--ocean);margin:.2rem 0 .7rem}
+.comandi{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center}
+.btn{font:600 1.05rem var(--cond);background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:.35rem .9rem;cursor:pointer}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.legenda{font:500 1rem var(--cond);color:var(--muted);display:flex;flex-wrap:wrap;gap:.3rem 1rem}
+.legenda i{display:inline-block;width:1.5rem;height:.95rem;vertical-align:-2px;margin-right:.3rem;border:2px solid var(--ocean);background:var(--bg);border-radius:4px}
+.legenda i.p{border-style:dashed;border-color:var(--muted);background:transparent}
+.scorri{overflow-x:auto;border-radius:12px;-webkit-overflow-scrolling:touch;border:1px solid var(--line);background:var(--paper)}
+.mappa{display:block;width:100%;min-width:720px;height:auto;font-family:var(--cond)}
+.mappa .ln{fill:none;stroke:var(--m-linea);stroke-width:2.2}
+.mappa .pallino{fill:var(--m-linea)}
+.mappa .legame rect{fill:var(--paper);stroke:var(--m-linea);stroke-width:1.2}
+.mappa .legame text{font:italic 500 13.5px var(--serif);fill:var(--muted);text-anchor:middle;dominant-baseline:central}
+.mappa .nodo text{text-anchor:middle;dominant-baseline:central;fill:var(--ink)}
+.mappa .nodo rect{fill:var(--bg);stroke:var(--line);stroke-width:1.5}
+.mappa .nodo.foglia text{font-size:15px;font-weight:500}
+.mappa .nodo.forte rect{fill:var(--m-forte);stroke:var(--ocean);stroke-width:2}
+.mappa .nodo.forte text{font-size:17px;font-weight:700}
+.mappa .nodo.radice rect{fill:var(--ink);stroke:none}
+.mappa .nodo.radice text{font-size:19px;font-weight:700;fill:var(--paper);letter-spacing:.01em}
+.mappa a.vai{cursor:pointer}
+.mappa a.vai.foglia rect{stroke:var(--ocean)}
+.mappa a.vai.foglia text{fill:var(--ocean);font-weight:600}
+.mappa a.vai rect{transition:fill .15s,stroke-width .15s}
+.mappa a.vai:hover rect,.mappa a.vai:focus rect,.mappa .evid rect{fill:var(--m-hover);stroke-width:3}
+.mappa a.vai.radice:hover rect,.mappa a.vai.radice:focus rect,.mappa .radice.evid rect{fill:var(--ocean)}
+.mappa a.vai:focus{outline:none}
+.mappa a.vai:focus rect{stroke:var(--warm)}
+.mappa .nodo.prep rect{fill:transparent;stroke:var(--muted);stroke-dasharray:4 4;stroke-width:1.5}
+.mappa .nodo.prep text{fill:var(--muted)}
+.mappa .prep{cursor:help}
+.mappa .pagine{display:none}
+.mostra-pagine .mappa .pagine{display:inline}
+.mappa .pp rect{fill:var(--warm)}
+.mappa .pp text{font:700 11.5px var(--cond);fill:#fff;text-anchor:middle;dominant-baseline:central;letter-spacing:.03em}
+.stato{font:600 1.08rem var(--cond);min-height:1.5em;color:var(--muted)}
+.stato b{color:var(--ink)}
+.indice{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr));gap:.6rem}
+.indice a,.indice .cella{display:grid;gap:.15rem;height:100%;padding:.7rem .9rem;border:1px solid var(--line);border-radius:8px;background:var(--paper);text-decoration:none;color:inherit}
+.indice a:hover{border-color:var(--ocean)}
+.indice b{font:700 clamp(1.35rem,3vw,1.65rem)/1.2 var(--cond);color:var(--ocean);margin:.2rem 0 .4rem}
+.indice .d{font-size:.95rem;color:var(--muted)}
+.indice .prep .cella{border-style:dashed;opacity:.7}
+.pp-chip{justify-self:start;font:700 .85rem var(--cond);letter-spacing:.04em;border-radius:20px;padding:0 .55rem;background:var(--ink);color:var(--paper)}
+details.altre{margin-top:2.6rem;border-top:4px solid var(--ink);padding-top:.8rem}
+details.altre summary{font:700 clamp(1.5rem,3.5vw,2rem) var(--cond);cursor:pointer}
+details.altre > p{margin:.5rem 0 .9rem;color:var(--muted)}
+@media print{ .nav-su,.comandi{display:none} .mappa{min-width:0} }
+</style>
+<link rel="stylesheet" href="../../../assets/testi-lezioni.css">
+<style>
+[hidden]{display:none!important}
+.scelta-mappe{display:flex;flex-wrap:wrap;gap:.8rem;margin:1rem 0}
+.scelta-mappe .btn{min-height:48px;padding:.6rem 1.4rem;font-size:1.3rem}
+.scelta-mappe .btn[aria-expanded="true"]{background:var(--ocean);color:var(--paper)}
+</style>
+</head>
+<body class="mostra-pagine">
+<div class="wrap">
+  <p class="nav-su"><a href="../orientamento/index.html">← Torna alla lezione sull’orientamento</a></p>
+  <section class="blocco-mappa" id="pannello-mappa1" aria-labelledby="t-m1">
+    <p class="n">Mappa 1</p>
+    <h1 id="t-m1">L'orientamento</h1>
+    <ol class="passi passi-confronto" start="3">
+      <li><b>Confronta le mappe</b><p>Qui le mappe sono disegnate in un altro modo.</p><ul class="web-elenco"><li><strong>Controlla</strong> che la tua copia sul quaderno contenga gli stessi concetti.</li><li><strong>Clicca sui riquadri</strong> per approfondire i vari argomenti.</li></ul></li>
+    </ol>
+    <div class="scorri"><svg class="mappa" id="mappa1" viewBox="0 0 1000 430" role="group" aria-label="Mappa: L&#x27;orientamento"><defs><marker id="pallino-mappa1" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5"><circle cx="5" cy="5" r="4" class="pallino"/></marker></defs><path class="ln" d="M161.5,215.0 H194.1"/><path class="ln" d="M194.1,215.0 C210.4,215.0 210.4,215.0 220.8,215.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M343.2,215.0 H400.8"/><path class="ln" d="M400.8,215.0 C429.6,215.0 429.6,115.0 452.4,115.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M400.8,215.0 C429.6,215.0 429.6,320.0 452.4,320.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M571.6,115.0 H620.2"/><path class="ln" d="M620.2,115.0 C644.5,115.0 644.5,115.0 662.8,115.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M571.6,320.0 H613.3"/><path class="ln" d="M613.3,320.0 C634.1,320.0 634.1,320.0 648.9,320.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M761.2,115.0 H821.6"/><path class="ln" d="M821.6,115.0 C851.8,115.0 851.8,40.0 876.0,40.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M821.6,115.0 C851.8,115.0 851.8,90.0 876.0,90.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M821.6,115.0 C851.8,115.0 851.8,140.0 876.0,140.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M821.6,115.0 C851.8,115.0 851.8,190.0 876.0,190.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M775.1,320.0 H824.0"/><path class="ln" d="M824.0,320.0 C848.5,320.0 848.5,290.0 867.0,290.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M824.0,320.0 C848.5,320.0 848.5,350.0 867.0,350.0" marker-end="url(#pallino-mappa1)"/><g class="legame"><rect x="174.8" y="203.5" width="38.7" height="23.0" rx="11.5"/><text x="194.1" y="215.0">usa</text></g><g class="legame"><rect x="353.9" y="196.0" width="93.9" height="38.0" rx="19.0"/><text x="400.8" y="207.5">che aiutano</text><text x="400.8" y="222.5">a trovare</text></g><g class="legame"><rect x="600.9" y="103.5" width="38.7" height="23.0" rx="11.5"/><text x="620.2" y="115.0">con</text></g><g class="legame"><rect x="593.9" y="308.5" width="38.7" height="23.0" rx="11.5"/><text x="613.3" y="320.0">con</text></g><g class="legame"><rect x="798.8" y="103.5" width="45.6" height="23.0" rx="11.5"/><text x="821.6" y="115.0">cioè</text></g><g class="legame"><rect x="801.2" y="308.5" width="45.6" height="23.0" rx="11.5"/><text x="824.0" y="320.0">cioè</text></g><a class="nodo radice vai" href="../orientamento/index.html" data-dove="L&#x27;orientamento e i suoi strumenti" data-pp="A4–A5"><title>L&#x27;orientamento: L&#x27;orientamento e i suoi strumenti (libro pp. A4–A5)</title><rect x="8.5" y="193.8" width="153.0" height="42.4" rx="21.2"/><text x="85" y="215.0">L&#x27;orientamento</text></a><a class="nodo forte vai" href="../orientamento/attivita/il-paese-delle-indicazioni.html" data-dove="Attività: Il paese delle indicazioni" data-pp="A4"><title>i punti di riferimento: Attività: Il paese delle indicazioni (libro pp. A4)</title><rect x="226.8" y="184.9" width="116.5" height="60.1" rx="9.0"/><text x="285" y="205.0">i punti di</text><text x="285" y="225.0">riferimento</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>la direzione: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="458.4" y="99.2" width="113.3" height="31.7" rx="9.0"/><text x="515" y="115.0">la direzione</text></a><a class="nodo foglia vai" href="../metodo-e-strumenti/lezioni/reticolato.html" data-dove="Il reticolato geografico" data-pp="A6–A7"><title>la posizione: Il reticolato geografico (libro pp. A6–A7)</title><rect x="458.4" y="304.1" width="113.3" height="31.7" rx="9.0"/><text x="515" y="320.0">la posizione</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>i punti cardinali: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="668.8" y="90.3" width="92.4" height="49.4" rx="9.0"/><text x="715" y="106.2">i punti</text><text x="715" y="123.9">cardinali</text></a><a class="nodo foglia vai" href="../metodo-e-strumenti/lezioni/reticolato.html" data-dove="Il reticolato geografico" data-pp="A6–A7"><title>le coordinate geografiche: Il reticolato geografico (libro pp. A6–A7)</title><rect x="654.9" y="295.3" width="120.2" height="49.4" rx="9.0"/><text x="715" y="311.1">le coordinate</text><text x="715" y="328.8">geografiche</text></a><a class="nodo foglia vai" href="../orientamento/attivita/orientarsi-con-le-stelle.html" data-dove="Attività: Orientarsi con le stelle" data-pp="A5"><title>Nord: Attività: Orientarsi con le stelle (libro pp. A5)</title><rect x="882.0" y="24.1" width="86.0" height="31.7" rx="9.0"/><text x="925" y="40.0">Nord</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>Sud: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="882.0" y="74.2" width="86.0" height="31.7" rx="9.0"/><text x="925" y="90.0">Sud</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>Est: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="882.0" y="124.2" width="86.0" height="31.7" rx="9.0"/><text x="925" y="140.0">Est</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>Ovest: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="882.0" y="174.2" width="86.0" height="31.7" rx="9.0"/><text x="925" y="190.0">Ovest</text></a><a class="nodo foglia vai" href="../metodo-e-strumenti/attivita/scheda-1-2-reticolato.html" data-dove="Scheda 1.2 · Meridiani e paralleli" data-pp="A6–A7"><title>latitudine: Scheda 1.2 · Meridiani e paralleli (libro pp. A6–A7)</title><rect x="873.0" y="274.1" width="104.0" height="31.7" rx="9.0"/><text x="925" y="290.0">latitudine</text></a><a class="nodo foglia vai" href="../metodo-e-strumenti/attivita/scheda-1-2-reticolato.html" data-dove="Scheda 1.2 · Meridiani e paralleli" data-pp="A6–A7"><title>longitudine: Scheda 1.2 · Meridiani e paralleli (libro pp. A6–A7)</title><rect x="873.0" y="334.1" width="104.0" height="31.7" rx="9.0"/><text x="925" y="350.0">longitudine</text></a><g class="pagine"><g class="pp"><rect x="120.5" y="182.8" width="47.0" height="18" rx="9"/><text x="144.0" y="191.8">A4–A5</text></g><g class="pp"><rect x="322.0" y="173.9" width="27.2" height="18" rx="9"/><text x="335.6" y="182.9">A4</text></g><g class="pp"><rect x="720.2" y="79.3" width="47.0" height="18" rx="9"/><text x="743.7" y="88.3">A4–A5</text></g><g class="pp"><rect x="734.1" y="284.3" width="47.0" height="18" rx="9"/><text x="757.6" y="293.3">A6–A7</text></g></g></svg></div>
+    <p class="stato" id="stato-mappa1" aria-live="polite">Passa sopra un riquadro (o toccalo) per vedere dove porta.</p>
+    <ul class="indice"><li><a href="../orientamento/index.html"><span class="pp-chip">pp. A4–A5</span><b>L&#x27;orientamento e i suoi strumenti</b><span class="d">La pagina della lezione: le quattro attività in ordine.</span></a></li><li><a href="../orientamento/attivita/il-paese-delle-indicazioni.html"><span class="pp-chip">pp. A4</span><b>Attività: Il paese delle indicazioni</b><span class="d">«i punti di riferimento»: personali e universali.</span></a></li><li><a href="../orientamento/attivita/il-cammino-del-sole.html"><span class="pp-chip">pp. A4–A5</span><b>Attività: Il cammino del Sole</b><span class="d">«la direzione», «i punti cardinali»: Est, Sud, Ovest con il Sole.</span></a></li><li><a href="../orientamento/attivita/orientarsi-con-le-stelle.html"><span class="pp-chip">pp. A5</span><b>Attività: Orientarsi con le stelle</b><span class="d">«Nord»: la Stella polare (e la Croce del Sud).</span></a></li><li><a href="../metodo-e-strumenti/lezioni/reticolato.html"><span class="pp-chip">pp. A6–A7</span><b>Il reticolato geografico</b><span class="d">«la posizione», «le coordinate geografiche».</span></a></li><li><a href="../metodo-e-strumenti/attivita/scheda-1-2-reticolato.html"><span class="pp-chip">pp. A6–A7</span><b>Scheda 1.2 · Meridiani e paralleli</b><span class="d">«latitudine» e «longitudine».</span></a></li></ul>
+  </section>
+</div>
+<script>
+(function(){
+  /* riga sotto la mappa: dice dove porta il riquadro */
+  var tocco = false;
+  document.addEventListener('touchstart', function(){ tocco = true; }, {passive:true, once:true});
+  ['mappa1'].forEach(function(id){
+    var svg = document.getElementById(id), stato = document.getElementById('stato-' + id);
+    var base = stato.innerHTML, ultimo = null;
+    function mostra(n){
+      if (!n) { stato.innerHTML = base; return; }
+      var t = n.getAttribute('data-dove'), p = n.getAttribute('data-pp');
+      stato.innerHTML = '→ <b>' + t.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</b> · libro pp. ' + p;
+    }
+    var nodi = svg.querySelectorAll('[data-dove]');
+    Array.prototype.forEach.call(nodi, function(n){
+      n.addEventListener('mouseenter', function(){ mostra(n); });
+      n.addEventListener('mouseleave', function(){ mostra(null); });
+      n.addEventListener('focus', function(){ mostra(n); });
+      n.addEventListener('blur', function(){ mostra(null); });
+      /* sui touch (LIM, tablet): il primo tocco mostra la destinazione, il secondo apre la pagina */
+      n.addEventListener('click', function(e){
+        if (n.classList.contains('prep')) { mostra(n); return; }
+        if (tocco && ultimo !== n) {
+          e.preventDefault();
+          if (ultimo) ultimo.classList.remove('evid');
+          ultimo = n; n.classList.add('evid'); mostra(n);
+          stato.innerHTML += ' — <span>tocca di nuovo per aprire</span>';
+        }
+      });
+    });
+  });
+})();
+</script>
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

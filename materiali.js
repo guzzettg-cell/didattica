@@ -7,6 +7,7 @@
      materia:      geografia | storia | italiano | educazione-civica
      classe:       prima | seconda | terza
      numero:       "I", "II", "III"... (o "1", "2"...)
+     percorso:     per geografia: come | cosa | roma
      titolo:       l'argomento generale
      link:         facoltativo: la pagina iniziale del modulo (cliccando sul titolo)
      descrizione:  facoltativa
@@ -55,6 +56,7 @@ var MODULI = [
     materia: "geografia",
     classe: "prima",
     numero: "I",
+    percorso: "come",
     titolo: "Gli strumenti della geografia",
     descrizione: "Orientarsi, leggere le carte, usare dati e grafici. Primo quadrimestre, in collegamento con Scienze. Si comincia dalla pagina del modulo: le mappe del video, che portano a tutte le lezioni.",
     link: "geografia/prima/strumenti/index.html",
@@ -146,8 +148,19 @@ var MODULI = [
           { tipo: "Attività 2", titolo: "Le curve di livello", descrizione: "Una montagna tagliata a fette, il profilo e la carta da colorare con le tinte altimetriche.", link: "geografia/prima/carte-geografiche/attivita/le-curve-di-livello.html", data: "2026-10-23" }
         ]
       },
-      { titolo: "Tanti tipi di fotografie", libri: ["paesaggi"], pagine: "A16–A17", attivita: [] },
-      { titolo: "I dati: raccoglierli, ordinarli, rappresentarli", dipartimento: true, libri: ["paesaggi"], pagine: "A18–A21", descrizione: "I dati e i grafici.", attivita: [] },
+      { titolo: "Tanti tipi di fotografie", libri: ["paesaggi"], pagine: "A16–A17", attivita: [
+        { tipo: "Gioco", titolo: "Dove siamo? La Terra vista dallo spazio", descrizione: "Osserva le immagini satellitari, cerca gli indizi e prova a riconoscere il luogo.", link: "geografia/prima/paesaggio/attivita/dove-siamo.html", data: "2026-11-06" }
+      ] },
+      {
+        titolo: "I dati: raccoglierli, ordinarli, rappresentarli",
+        dipartimento: true,
+        libri: ["paesaggi"],
+        pagine: "A18–A21",
+        descrizione: "I dati e i grafici.",
+        attivita: [
+          { tipo: "Laboratorio", titolo: "Dalle risposte ai grafici", descrizione: "Il tempo libero e gli spazi del quartiere: tabelle modificabili, cinque tipi di grafico ed esportazione dei risultati.", link: "geografia/prima/strumenti/attivita/dalle-risposte-ai-grafici.html", data: "2026-11-07" }
+        ]
+      },
       { titolo: "Il GIS: che cos'è un Sistema Informativo Geografico?", libri: ["paesaggi"], pagine: "A141", descrizione: "Esplorare, mappare, condividere.", attivita: [] }
     ]
   },
@@ -155,6 +168,7 @@ var MODULI = [
     materia: "geografia",
     classe: "prima",
     numero: "II",
+    percorso: "come",
     titolo: "Il paesaggio: clima, rilievi e acque",
     descrizione: "Che cos'è il paesaggio, i fenomeni che lo modificano, il clima, i rilievi e le acque. Percorso progressivo in sei lezioni: otto «lenti» per leggere un paesaggio. Primo quadrimestre, in collegamento con Scienze.",
     link: "geografia/prima/paesaggio/index.html",
@@ -195,6 +209,7 @@ var MODULI = [
     materia: "geografia",
     classe: "prima",
     numero: "III",
+    percorso: "come",
     titolo: "Il paesaggio italiano",
     descrizione: "Il quadro fisico dell'Italia. Secondo quadrimestre, in collegamento con Scienze e Storia.",
     lezioni: [
@@ -210,6 +225,7 @@ var MODULI = [
     materia: "geografia",
     classe: "prima",
     numero: "IV",
+    percorso: "come",
     titolo: "Le attività umane in Italia",
     descrizione: "Popolazione, organizzazione politica ed economia dell'Italia. Secondo quadrimestre, in collegamento con Storia.",
     lezioni: [
@@ -227,6 +243,7 @@ var MODULI = [
     materia: "geografia",
     classe: "prima",
     numero: "V",
+    percorso: "cosa",
     titolo: "Le regioni italiane",
     descrizione: "Secondo quadrimestre, in collegamento con Storia.",
     lezioni: [
@@ -261,6 +278,8 @@ var MODULI = [
     materia: "geografia",
     classe: "prima",
     numero: "VI",
+    percorso: "roma",
+    standby: true, // Percorso visibile, ma temporaneamente non disponibile.
     titolo: "Alla scoperta di Roma",
     descrizione: "Lezioni extra, non presenti nel libro: storia e geografia camminando per Roma. Si parte dalle pareti della stazione San Giovanni della metro C, poi cinque passeggiate (missioni), una per epoca, e un atlante da costruire insieme. Le missioni si possono fare anche cercando le informazioni sul web.",
     link: "geografia/prima/alla-scoperta-di-roma/index.html",
@@ -298,6 +317,7 @@ var MODULI = [
     materia: "geografia",
     classe: "seconda",
     numero: "I",
+    percorso: "cosa",
     titolo: "Il continente europeo",
     descrizione: "Territorio, clima e paesaggi dell'Europa. Primo quadrimestre, in collegamento con Scienze.",
     lezioni: [
@@ -311,6 +331,7 @@ var MODULI = [
     materia: "geografia",
     classe: "seconda",
     numero: "II",
+    percorso: "come",
     titolo: "L'organizzazione politica in Europa",
     descrizione: "Gli Stati europei e l'Unione Europea. Primo e secondo quadrimestre, in collegamento con Storia e Italiano.",
     lezioni: [
@@ -327,6 +348,7 @@ var MODULI = [
     materia: "geografia",
     classe: "seconda",
     numero: "III",
+    percorso: "come",
     titolo: "La popolazione europea",
     descrizione: "Chi sono e come vivono gli europei. Tra primo e secondo quadrimestre, in collegamento con Storia.",
     lezioni: [
@@ -341,6 +363,7 @@ var MODULI = [
     materia: "geografia",
     classe: "seconda",
     numero: "IV",
+    percorso: "come",
     titolo: "L'economia europea",
     descrizione: "Risorse, lavoro, settori dell'economia e sviluppo sostenibile. In collegamento con Storia e Italiano.",
     lezioni: [
@@ -362,6 +385,7 @@ var MODULI = [
     materia: "geografia",
     classe: "seconda",
     numero: "V",
+    percorso: "cosa",
     titolo: "Gli Stati europei",
     descrizione: "Gli Stati per grandi regioni, con i cinque grandi Stati: Regno Unito, Francia, Spagna, Germania, Russia. Primo e secondo quadrimestre, in collegamento con Storia e Italiano.",
     lezioni: [
@@ -377,6 +401,7 @@ var MODULI = [
     materia: "geografia",
     classe: "seconda",
     numero: "VI",
+    percorso: "cosa",
     titolo: "Geostoria dell'Europa",
     descrizione: "Lezioni extra, non presenti nel libro: l'identità europea attraverso la storia. Durante l'anno, in collegamento con Storia e Italiano.",
     lezioni: [
@@ -392,6 +417,7 @@ var MODULI = [
     materia: "geografia",
     classe: "terza",
     numero: "I",
+    percorso: "come",
     titolo: "Il pianeta Terra",
     link: "geografia/terza/la-terra/index.html",
     descrizione: "Origini del pianeta, un pianeta irrequieto, idrografia, continenti, atmosfera. Primo quadrimestre, in collegamento con Scienze.",
@@ -530,6 +556,7 @@ var MODULI = [
     materia: "geografia",
     classe: "terza",
     numero: "II",
+    percorso: "come",
     titolo: "Clima e ambienti",
     link: "geografia/terza/clima-e-ambienti/index.html",
     descrizione: "Fasce climatiche e biomi, il clima e i suoi cambiamenti. Primo quadrimestre (novembre–dicembre), in collegamento con Scienze ed Educazione civica.",
@@ -600,6 +627,7 @@ var MODULI = [
     materia: "geografia",
     classe: "terza",
     numero: "III",
+    percorso: "come",
     titolo: "Popolazione mondiale: crescita e inurbamento",
     link: "geografia/terza/popolazione/index.html",
     descrizione: "Dove siamo, quanti siamo, come ci muoviamo. Dicembre–gennaio, in collegamento con Scienze e Storia.",
@@ -632,6 +660,7 @@ var MODULI = [
     materia: "geografia",
     classe: "terza",
     numero: "IV",
+    percorso: "come",
     titolo: "L'economia mondiale",
     link: "geografia/terza/economia/index.html",
     descrizione: "Le attività e le reti con cui trasformiamo il pianeta. Gennaio–febbraio, in collegamento con Scienze e Tecnologia.",
@@ -648,6 +677,7 @@ var MODULI = [
     materia: "geografia",
     classe: "terza",
     numero: "V",
+    percorso: "come",
     titolo: "Gli Stati del mondo: la geopolitica",
     descrizione: "Introduzione agli Stati: febbraio–marzo, in collegamento con Storia ed Educazione civica.",
     lezioni: [
@@ -661,6 +691,7 @@ var MODULI = [
     materia: "geografia",
     classe: "terza",
     numero: "VI",
+    percorso: "cosa",
     titolo: "Gli Stati del mondo: Africa",
     descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
@@ -675,6 +706,7 @@ var MODULI = [
     materia: "geografia",
     classe: "terza",
     numero: "VII",
+    percorso: "cosa",
     titolo: "Gli Stati del mondo: Asia",
     descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
@@ -692,6 +724,7 @@ var MODULI = [
     materia: "geografia",
     classe: "terza",
     numero: "VIII",
+    percorso: "cosa",
     titolo: "Gli Stati del mondo: America anglosassone e America Latina",
     descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [
@@ -707,6 +740,7 @@ var MODULI = [
     materia: "geografia",
     classe: "terza",
     numero: "IX",
+    percorso: "cosa",
     titolo: "Gli Stati del mondo: Oceania",
     descrizione: "Presentazioni degli Stati per continente, marzo–maggio. Profilo fisico, politico e antropico, in collegamento con Storia ed Educazione civica.",
     lezioni: [

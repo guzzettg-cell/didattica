@@ -150,17 +150,88 @@ details ol,details ul{padding-left:1.3rem;display:grid;gap:.3rem;margin-bottom:.
 .libro{background:var(--paper);border:1px dashed var(--line);border-radius:8px;padding:1rem 1.2rem;display:grid;gap:.5rem}
 .libro b.t{font:700 1.05rem var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--warm)}
 </style>
-</head>
+<link rel="stylesheet" href="../../../assets/testi-lezioni.css">
+<style>
+.copertina .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr);max-width:72rem;gap:2.5rem;padding-bottom:2rem}
+@media(max-width:800px){.copertina .wrap{grid-template-columns:1fr}}
+.copertina h1{font-size:clamp(2.6rem,7vw,4.2rem)}
+main .wrap{max-width:58rem}
+section.blocco{padding-block:2rem}
+section.riprendi{padding-top:0}
+.frase-esempio{margin:0;padding:.8rem 1rem;border-left:4px solid var(--line);font-size:1.2rem;font-style:italic;max-width:60ch}
+.nota-percorso{color:var(--muted)}
+.inizia{padding:.85rem 1.2rem;font-size:1.25rem;white-space:normal}
+.ripasso-link{padding-left:1.5rem;display:grid;gap:1rem}
+.ripasso-link a{font-weight:700}
+.ripasso-link span{display:block;color:var(--muted);font-size:.95rem}
+details figure{max-width:24rem;margin:1rem auto}details figcaption{font-size:.95rem}
+summary:focus-visible{outline:3px solid var(--ocean);outline-offset:4px}
+</style>
+<style>
+.attivita{grid-template-columns:repeat(2,minmax(0,1fr))}
+.attivita a{grid-template-rows:auto auto 1fr auto}
+.ritorno-libro{display:block;border-top:1px solid var(--line);padding-top:.7rem;margin-top:.5rem;font-size:.95rem}
+.ritorno-libro strong{display:block;color:var(--ocean);font-family:var(--cond);font-size:1.1rem;margin-bottom:.3rem}
+@media(max-width:600px){.attivita{grid-template-columns:1fr}}
+</style>
+<style>
+.testo-bucato{display:grid;gap:1rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line)}
+.frase-da-completare{line-height:2.7}
+.frase-da-completare input{font:inherit;color:var(--ink);background:var(--bg);width:11ch;max-width:100%;min-height:44px;border:1px solid var(--line);border-bottom:3px solid var(--ocean);border-radius:4px;padding:.2rem .4rem}
+.frase-da-completare input:focus-visible{outline:3px solid var(--ocean);outline-offset:3px}
+.frase-da-completare input[aria-invalid="true"]{border-bottom-style:dashed;border-bottom-color:var(--warm)}
+#esito-definizione:empty{display:none}
+#esito-definizione{font-weight:600}
+</style>
+<style>
+.scorri{overflow-x:auto;border-radius:12px;-webkit-overflow-scrolling:touch;border:1px solid var(--line);background:var(--paper)}
+.mappa{display:block;width:100%;min-width:720px;height:auto;font-family:var(--cond)}
+.mappa .ln{fill:none;stroke:var(--muted);stroke-width:2.2}
+.mappa .pallino{fill:var(--muted)}
+.mappa .legame rect{fill:var(--paper);stroke:var(--muted);stroke-width:1.2}
+.mappa .legame text{font:italic 500 13.5px var(--serif);fill:var(--muted);text-anchor:middle;dominant-baseline:central}
+.mappa .nodo text{text-anchor:middle;dominant-baseline:central;fill:var(--ink)}
+.mappa .nodo rect{fill:var(--bg);stroke:var(--line);stroke-width:1.5}
+.mappa .nodo.foglia text{font-size:15px;font-weight:500}
+.mappa .nodo.forte rect{fill:var(--paper);stroke:var(--ocean);stroke-width:2}
+.mappa .nodo.forte text{font-size:17px;font-weight:700}
+.mappa .nodo.radice rect{fill:var(--ink);stroke:none}
+.mappa .nodo.radice text{font-size:19px;font-weight:700;fill:var(--paper);letter-spacing:.01em}
+.mappa a.vai{cursor:pointer}
+.mappa a.vai.foglia rect{stroke:var(--ocean)}
+.mappa a.vai.foglia text{fill:var(--ocean);font-weight:600}
+.mappa a.vai rect{transition:fill .15s,stroke-width .15s}
+.mappa a.vai:hover rect,.mappa a.vai:focus rect,.mappa .evid rect{fill:var(--paper);stroke-width:3}
+.mappa a.vai.radice:hover rect,.mappa a.vai.radice:focus rect,.mappa .radice.evid rect{fill:var(--ocean)}
+.mappa a.vai:focus{outline:none}
+.mappa a.vai:focus rect{stroke:var(--warm)}
+.mappa .nodo.prep rect{fill:transparent;stroke:var(--muted);stroke-dasharray:4 4;stroke-width:1.5}
+.mappa .nodo.prep text{fill:var(--muted)}
+.mappa .prep{cursor:help}
+.mappa .pagine{display:none}
+.mostra-pagine .mappa .pagine{display:inline}
+.mappa .pp rect{fill:var(--warm)}
+.mappa .pp text{font:700 11.5px var(--cond);fill:#fff;text-anchor:middle;dominant-baseline:central;letter-spacing:.03em}
+.stato{font:600 1.08rem var(--cond);min-height:1.5em;color:var(--muted)}
+.stato b{color:var(--ink)}
+
+.mappa-introduttiva .wrap{max-width:72rem}
+.scorri:focus-visible{outline:3px solid var(--ocean);outline-offset:3px}
+</style>
+<style id="stile-ripasso">
+.ripasso-griglia{display:grid;gap:1rem}.ripasso-esercizio{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:1.2rem;display:grid;gap:1rem}.ripasso-esercizio fieldset{border:0;padding:0;margin:0;min-width:0}.ripasso-esercizio legend{font-weight:600;margin-bottom:.5rem}.ripasso-esercizio label{display:block;margin:.5rem 0}.ripasso-esercizio select,.ripasso-esercizio textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:.5rem;max-width:100%;min-height:44px}.ripasso-esercizio select{display:block;width:100%;margin-top:.3rem}.ripasso-esercizio textarea{width:100%;min-height:110px}.ripasso-esercizio [aria-invalid=true]{border:2px dashed var(--warm)}.ripasso-esercizio :focus-visible{outline:3px solid var(--ocean);outline-offset:3px}.ripasso-esito:empty,.ripasso-aiuto:empty{display:none}.ripasso-esito{font-weight:600}.ripasso-aiuto{color:var(--warm);margin:.3rem 0 .7rem}.ripasso-numero{font:700 1.1rem var(--cond);color:var(--warm)}.ripasso-carta{width:100%;max-width:36rem;height:auto;display:block;margin:auto;background:var(--bg);border-radius:6px}.ripasso-ritorno{border-left:4px solid var(--ocean);padding-left:1rem}.ripasso-esercizio .comandi{margin-top:.3rem}.ripasso-nota{font-size:.95rem;color:var(--muted)}@media print{.ripasso-esercizio .comandi{display:none}.ripasso-esercizio{break-inside:avoid}}
+</style></head>
 <body>
 
 <header class="copertina">
   <div class="wrap">
     <p class="nav-su"><a href="../../index.html?classe=prima#modulo-prima-i">← Geografia, classe prima</a></p>
     <div>
-      <p class="sopra">L'orientamento e i suoi strumenti</p>
+      <p class="sopra">Paesaggi vicini e lontani · pagine A4–A5</p>
       <h1>Dove sono? Dove devo andare?</h1>
-      <p class="lead">Per orientarci usiamo punti di riferimento: quelli personali, che conosce chi abita in un posto, e quelli universali, che valgono per tutti e ovunque, i punti cardinali. Il Sole di giorno e le stelle di notte ci aiutano a trovarli. Ma il Sole si muove davvero?</p>
+      <p class="lead">In un posto che conosci trovi la strada quasi senza pensarci. Ma come fai quando arrivi in un luogo nuovo?</p>
     </div>
+
     <figure>
       <div class="rosa"><svg viewBox="-200 -200 400 400" role="img" aria-label="Rosa dei venti con i quattro punti cardinali e i punti intermedi"><circle r="122" fill="none" stroke="#3f5262" stroke-width="2"/><circle r="128" fill="none" stroke="#3f5262" stroke-width="1" stroke-dasharray="2 6"/><path d="M0,0 L16.0,-0.0 L0.0,-150.0 Z" fill="#E9EEF2"/><path d="M0,0 L-16.0,0.0 L0.0,-150.0 Z" fill="#5d7385"/><path d="M0,0 L6.5,2.7 L19.9,-48.0 Z" fill="#9FB0BD"/><path d="M0,0 L-6.5,-2.7 L19.9,-48.0 Z" fill="#3f5262"/><path d="M0,0 L7.8,7.8 L67.2,-67.2 Z" fill="#E9EEF2"/><path d="M0,0 L-7.8,-7.8 L67.2,-67.2 Z" fill="#5d7385"/><path d="M0,0 L2.7,6.5 L48.0,-19.9 Z" fill="#9FB0BD"/><path d="M0,0 L-2.7,-6.5 L48.0,-19.9 Z" fill="#3f5262"/><path d="M0,0 L0.0,16.0 L150.0,-0.0 Z" fill="#E9EEF2"/><path d="M0,0 L-0.0,-16.0 L150.0,-0.0 Z" fill="#5d7385"/><path d="M0,0 L-2.7,6.5 L48.0,19.9 Z" fill="#9FB0BD"/><path d="M0,0 L2.7,-6.5 L48.0,19.9 Z" fill="#3f5262"/><path d="M0,0 L-7.8,7.8 L67.2,67.2 Z" fill="#E9EEF2"/><path d="M0,0 L7.8,-7.8 L67.2,67.2 Z" fill="#5d7385"/><path d="M0,0 L-6.5,2.7 L19.9,48.0 Z" fill="#9FB0BD"/><path d="M0,0 L6.5,-2.7 L19.9,48.0 Z" fill="#3f5262"/><path d="M0,0 L-16.0,0.0 L0.0,150.0 Z" fill="#E9EEF2"/><path d="M0,0 L16.0,-0.0 L0.0,150.0 Z" fill="#5d7385"/><path d="M0,0 L-6.5,-2.7 L-19.9,48.0 Z" fill="#9FB0BD"/><path d="M0,0 L6.5,2.7 L-19.9,48.0 Z" fill="#3f5262"/><path d="M0,0 L-7.8,-7.8 L-67.2,67.2 Z" fill="#E9EEF2"/><path d="M0,0 L7.8,7.8 L-67.2,67.2 Z" fill="#5d7385"/><path d="M0,0 L-2.7,-6.5 L-48.0,19.9 Z" fill="#9FB0BD"/><path d="M0,0 L2.7,6.5 L-48.0,19.9 Z" fill="#3f5262"/><path d="M0,0 L-0.0,-16.0 L-150.0,0.0 Z" fill="#E9EEF2"/><path d="M0,0 L0.0,16.0 L-150.0,0.0 Z" fill="#5d7385"/><path d="M0,0 L2.7,-6.5 L-48.0,-19.9 Z" fill="#9FB0BD"/><path d="M0,0 L-2.7,6.5 L-48.0,-19.9 Z" fill="#3f5262"/><path d="M0,0 L7.8,-7.8 L-67.2,-67.2 Z" fill="#E9EEF2"/><path d="M0,0 L-7.8,7.8 L-67.2,-67.2 Z" fill="#5d7385"/><path d="M0,0 L6.5,-2.7 L-19.9,-48.0 Z" fill="#9FB0BD"/><path d="M0,0 L-6.5,2.7 L-19.9,-48.0 Z" fill="#3f5262"/><circle r="7" fill="#EF8A73"/><text x="0" y="-172" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="700" font-size="30" fill="#EF8A73">N</text><text x="0" y="174" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="700" font-size="30" fill="#E9EEF2">S</text><text x="174" y="0" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="700" font-size="30" fill="#E9EEF2">E</text><text x="-174" y="0" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="700" font-size="30" fill="#E9EEF2">O</text><text x="86" y="-86" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="700" font-size="17" fill="#9FB0BD">NE</text><text x="86" y="88" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="700" font-size="17" fill="#9FB0BD">SE</text><text x="-86" y="88" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="700" font-size="17" fill="#9FB0BD">SO</text><text x="-86" y="-86" text-anchor="middle" dominant-baseline="middle" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-weight="700" font-size="17" fill="#9FB0BD">NO</text></svg></div>
       <figcaption>La rosa dei venti: i quattro punti cardinali e i quattro punti intermedi.</figcaption>
@@ -169,42 +240,63 @@ details ol,details ul{padding-left:1.3rem;display:grid;gap:.3rem;margin-bottom:.
 </header>
 
 <main>
-
-<section class="blocco" aria-labelledby="t-lezione">
+<section class="blocco mappa-introduttiva" aria-labelledby="titolo-mappa">
   <div class="wrap">
-    <h2 id="t-lezione">La lezione</h2>
-    <p class="lead">Quattro attività da proiettare alla LIM, nell'ordine delle pagine A4–A5 del libro. Si possono fare anche sui dispositivi, a coppie o a gruppi.</p>
-    <ol class="percorso">
-      <li><span><b>Punti di riferimento personali e universali.</b> Seguire le indicazioni in un paese che non si conosce, poi inventarne di nuove e metterle alla prova.</span></li>
-      <li><span><b>Il Sole e i punti cardinali.</b> Alba a Est, mezzogiorno a Sud, tramonto a Ovest.</span></li>
-      <li><span><b>Di notte: le stelle.</b> La Stella polare indica il Nord; nell'altro emisfero si usa la Croce del Sud.</span></li>
-      <li><span><b>Perché vediamo il Sole muoversi?</b> La rotazione della Terra, il dì e la notte, il moto apparente del Sole.</span></li>
-    </ol>
-    <p><a class="btn" href="attivita/il-paese-delle-indicazioni.html">Comincia dalla prima attività</a></p>
+    <h2 id="titolo-mappa">Mappa 1 · L’orientamento</h2>
+    <p>Confronta questa mappa con quella che hai copiato sul quaderno. Clicca sui riquadri per aprire gli argomenti.</p>
+    <div class="scorri" tabindex="0" role="region" aria-label="Mappa dell’orientamento: sui piccoli schermi scorri per vedere tutti i riquadri"><svg class="mappa" id="mappa1" viewBox="0 0 1000 430" role="group" aria-label="Mappa: L&#x27;orientamento"><defs><marker id="pallino-mappa1" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5"><circle cx="5" cy="5" r="4" class="pallino"/></marker></defs><path class="ln" d="M161.5,215.0 H194.1"/><path class="ln" d="M194.1,215.0 C210.4,215.0 210.4,215.0 220.8,215.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M343.2,215.0 H400.8"/><path class="ln" d="M400.8,215.0 C429.6,215.0 429.6,115.0 452.4,115.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M400.8,215.0 C429.6,215.0 429.6,320.0 452.4,320.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M571.6,115.0 H620.2"/><path class="ln" d="M620.2,115.0 C644.5,115.0 644.5,115.0 662.8,115.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M571.6,320.0 H613.3"/><path class="ln" d="M613.3,320.0 C634.1,320.0 634.1,320.0 648.9,320.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M761.2,115.0 H821.6"/><path class="ln" d="M821.6,115.0 C851.8,115.0 851.8,40.0 876.0,40.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M821.6,115.0 C851.8,115.0 851.8,90.0 876.0,90.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M821.6,115.0 C851.8,115.0 851.8,140.0 876.0,140.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M821.6,115.0 C851.8,115.0 851.8,190.0 876.0,190.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M775.1,320.0 H824.0"/><path class="ln" d="M824.0,320.0 C848.5,320.0 848.5,290.0 867.0,290.0" marker-end="url(#pallino-mappa1)"/><path class="ln" d="M824.0,320.0 C848.5,320.0 848.5,350.0 867.0,350.0" marker-end="url(#pallino-mappa1)"/><g class="legame"><rect x="174.8" y="203.5" width="38.7" height="23.0" rx="11.5"/><text x="194.1" y="215.0">usa</text></g><g class="legame"><rect x="353.9" y="196.0" width="93.9" height="38.0" rx="19.0"/><text x="400.8" y="207.5">che aiutano</text><text x="400.8" y="222.5">a trovare</text></g><g class="legame"><rect x="600.9" y="103.5" width="38.7" height="23.0" rx="11.5"/><text x="620.2" y="115.0">con</text></g><g class="legame"><rect x="593.9" y="308.5" width="38.7" height="23.0" rx="11.5"/><text x="613.3" y="320.0">con</text></g><g class="legame"><rect x="798.8" y="103.5" width="45.6" height="23.0" rx="11.5"/><text x="821.6" y="115.0">cioè</text></g><g class="legame"><rect x="801.2" y="308.5" width="45.6" height="23.0" rx="11.5"/><text x="824.0" y="320.0">cioè</text></g><a class="nodo radice vai" href="../orientamento/index.html" data-dove="L&#x27;orientamento e i suoi strumenti" data-pp="A4–A5"><title>L&#x27;orientamento: L&#x27;orientamento e i suoi strumenti (libro pp. A4–A5)</title><rect x="8.5" y="193.8" width="153.0" height="42.4" rx="21.2"/><text x="85" y="215.0">L&#x27;orientamento</text></a><a class="nodo forte vai" href="../orientamento/attivita/il-paese-delle-indicazioni.html" data-dove="Attività: Il paese delle indicazioni" data-pp="A4"><title>i punti di riferimento: Attività: Il paese delle indicazioni (libro pp. A4)</title><rect x="226.8" y="184.9" width="116.5" height="60.1" rx="9.0"/><text x="285" y="205.0">i punti di</text><text x="285" y="225.0">riferimento</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>la direzione: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="458.4" y="99.2" width="113.3" height="31.7" rx="9.0"/><text x="515" y="115.0">la direzione</text></a><a class="nodo foglia vai" href="../metodo-e-strumenti/lezioni/reticolato.html" data-dove="Il reticolato geografico" data-pp="A6–A7"><title>la posizione: Il reticolato geografico (libro pp. A6–A7)</title><rect x="458.4" y="304.1" width="113.3" height="31.7" rx="9.0"/><text x="515" y="320.0">la posizione</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>i punti cardinali: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="668.8" y="90.3" width="92.4" height="49.4" rx="9.0"/><text x="715" y="106.2">i punti</text><text x="715" y="123.9">cardinali</text></a><a class="nodo foglia vai" href="../metodo-e-strumenti/lezioni/reticolato.html" data-dove="Il reticolato geografico" data-pp="A6–A7"><title>le coordinate geografiche: Il reticolato geografico (libro pp. A6–A7)</title><rect x="654.9" y="295.3" width="120.2" height="49.4" rx="9.0"/><text x="715" y="311.1">le coordinate</text><text x="715" y="328.8">geografiche</text></a><a class="nodo foglia vai" href="../orientamento/attivita/orientarsi-con-le-stelle.html" data-dove="Attività: Orientarsi con le stelle" data-pp="A5"><title>Nord: Attività: Orientarsi con le stelle (libro pp. A5)</title><rect x="882.0" y="24.1" width="86.0" height="31.7" rx="9.0"/><text x="925" y="40.0">Nord</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>Sud: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="882.0" y="74.2" width="86.0" height="31.7" rx="9.0"/><text x="925" y="90.0">Sud</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>Est: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="882.0" y="124.2" width="86.0" height="31.7" rx="9.0"/><text x="925" y="140.0">Est</text></a><a class="nodo foglia vai" href="../orientamento/attivita/il-cammino-del-sole.html" data-dove="Attività: Il cammino del Sole" data-pp="A4–A5"><title>Ovest: Attività: Il cammino del Sole (libro pp. A4–A5)</title><rect x="882.0" y="174.2" width="86.0" height="31.7" rx="9.0"/><text x="925" y="190.0">Ovest</text></a><a class="nodo foglia vai" href="../metodo-e-strumenti/attivita/scheda-1-2-reticolato.html" data-dove="Scheda 1.2 · Meridiani e paralleli" data-pp="A6–A7"><title>latitudine: Scheda 1.2 · Meridiani e paralleli (libro pp. A6–A7)</title><rect x="873.0" y="274.1" width="104.0" height="31.7" rx="9.0"/><text x="925" y="290.0">latitudine</text></a><a class="nodo foglia vai" href="../metodo-e-strumenti/attivita/scheda-1-2-reticolato.html" data-dove="Scheda 1.2 · Meridiani e paralleli" data-pp="A6–A7"><title>longitudine: Scheda 1.2 · Meridiani e paralleli (libro pp. A6–A7)</title><rect x="873.0" y="334.1" width="104.0" height="31.7" rx="9.0"/><text x="925" y="350.0">longitudine</text></a><g class="pagine"><g class="pp"><rect x="120.5" y="182.8" width="47.0" height="18" rx="9"/><text x="144.0" y="191.8">A4–A5</text></g><g class="pp"><rect x="322.0" y="173.9" width="27.2" height="18" rx="9"/><text x="335.6" y="182.9">A4</text></g><g class="pp"><rect x="720.2" y="79.3" width="47.0" height="18" rx="9"/><text x="743.7" y="88.3">A4–A5</text></g><g class="pp"><rect x="734.1" y="284.3" width="47.0" height="18" rx="9"/><text x="757.6" y="293.3">A6–A7</text></g></g></svg></div>
   </div>
 </section>
 
-<section class="blocco" id="attivita" aria-labelledby="t-att">
+<section class="blocco" aria-labelledby="apri-libro">
   <div class="wrap">
-    <h2 id="t-att">Le attività</h2>
-    <p class="lead">Da fare in ordine. In ogni attività, in alto, ci sono i collegamenti alla precedente e alla successiva.</p>
-    <ul class="attivita">
-      <li><a href="attivita/il-paese-delle-indicazioni.html"><span class="n">Attività 1</span><b>Il paese delle indicazioni</b><span class="d">Missioni su una piantina: punti di riferimento personali, punti cardinali e percorsi inventati dai gruppi da mettere alla prova alla LIM.</span></a></li>
-      <li><a href="attivita/il-cammino-del-sole.html"><span class="n">Attività 2</span><b>Il cammino del Sole</b><span class="d">Dove si trova il Sole durante il giorno e il confronto tra Roma, Oslo, Nairobi e Sydney.</span></a></li>
-      <li><a href="attivita/orientarsi-con-le-stelle.html"><span class="n">Attività 3</span><b>Orientarsi con le stelle</b><span class="d">Trovare la Stella polare con il Grande Carro e il Sud con la Croce del Sud, nel cielo che ruota.</span></a></li>
-      <li><a href="attivita/la-terra-che-gira.html"><span class="n">Attività 4</span><b>La Terra che gira</b><span class="d">La rotazione terrestre vista dallo spazio e, nello stesso momento, il moto apparente del Sole visto da Roma.</span></a></li>
-    </ul>
-    <p>In aula, dopo l'attività 1: <a href="attivita/il-paese-in-classe.html"><b>Il paese in classe</b></a>, la mappa dei 24 banchi (6 sul lato della lavagna) con i luoghi del paese, da adattare al numero di ragazzi presenti, per giocare con le indicazioni muovendosi tra i banchi.</p>
     <div class="libro">
-      <b class="t">Sul libro</b>
-      <p><b>Studio attivo</b> (pag. A4): ripeti con parole tue il percorso che fai da casa a scuola, scegliendo i punti di riferimento utili per orientarti.</p>
-      <p><b>Prima di girare pagina</b> (pag. A5): esercizi 1–3, con la carta della Sicilia da completare con N, S, E e W.</p>
+      <h2 id="apri-libro">Cerca la definizione di Orientamento a pagina 4 del libro</h2>
+      <form id="definizione-orientamento" class="testo-bucato" novalidate>
+        <h3>Completa la definizione</h3>
+        <p id="istruzioni-definizione">Leggi la definizione sul libro, poi scrivi le <strong>quattro parole mancanti</strong>. Sono parole importanti per capire che cosa significa orientarsi.</p>
+        <p class="frase-da-completare">L'orientamento è il procedimento che serve per individuare la
+          <input name="posizione" aria-label="Parola 1: individuare la…" aria-describedby="istruzioni-definizione" autocomplete="off" autocapitalize="none" spellcheck="false">
+          in cui ci troviamo e la
+          <input name="direzione" aria-label="Parola 2: e la… che dobbiamo prendere" aria-describedby="istruzioni-definizione" autocomplete="off" autocapitalize="none" spellcheck="false">
+          che dobbiamo prendere per
+          <input name="raggiungere" aria-label="Parola 3: per… la nostra destinazione" aria-describedby="istruzioni-definizione" autocomplete="off" autocapitalize="none" spellcheck="false">
+          la nostra
+          <input name="destinazione" aria-label="Parola 4: la nostra…" aria-describedby="istruzioni-definizione" autocomplete="off" autocapitalize="none" spellcheck="false">.
+        </p>
+        <div class="comandi"><button class="btn" type="submit">Controlla</button><button class="btn chiaro" type="reset">Riprova</button></div>
+        <p id="esito-definizione" role="status" aria-live="polite" aria-atomic="true"></p>
+      </form>
+      <p>Queste pagine ti aiuteranno a capire <strong>come trovare una direzione</strong> e <strong>come spiegare un percorso</strong>.</p>
     </div>
-    <p>Si continua con <a href="../metodo-e-strumenti/lezioni/reticolato.html"><b>Il reticolato geografico</b></a>: paralleli, meridiani e coordinate.</p>
+    <p>Svolgi le seguenti attività:</p><p><a class="btn chiaro" href="#consolidamento">Hai già studiato? Vai al consolidamento e ripasso →</a></p>
   </div>
 </section>
+<section class="blocco riprendi" id="attivita" aria-label="Attività sull’orientamento">
+  <div class="wrap">
+    <ul class="attivita">
+      <li><a href="attivita/il-paese-delle-indicazioni.html"><span class="n">Attività 1</span><b>Il paese delle indicazioni</b><span class="d">Come possiamo indicare una strada?</span><span class="ritorno-libro"><strong>Dopo l’attività · pp. A4–A5</strong>Cerca nel libro la parte che spiega i punti di riferimento.</span></a></li>
+      <li><a href="attivita/il-cammino-del-sole.html"><span class="n">Attività 2</span><b>Il cammino del Sole</b><span class="d">Il Sole può aiutarci a trovare la strada?</span><span class="ritorno-libro"><strong>Dopo l’attività · pp. A4–A5</strong>Cerca nel libro la parte che spiega il Sole e i punti cardinali.</span></a></li>
+      <li><a href="attivita/orientarsi-con-le-stelle.html"><span class="n">Attività 3</span><b>Orientarsi con le stelle</b><span class="d">Come possiamo orientarci di notte?</span><span class="ritorno-libro"><strong>Dopo l’attività · pp. A4–A5</strong>Cerca nel libro la parte che spiega come orientarsi con le stelle.</span></a></li>
+      <li><a href="attivita/la-terra-che-gira.html"><span class="n">Attività 4</span><b>La Terra che gira</b><span class="d">Perché vediamo il Sole muoversi?</span><span class="ritorno-libro"><strong>Dopo l’attività · pp. A4–A5</strong>Cerca nel libro la parte che spiega il movimento della Terra e il moto apparente del Sole.</span></a></li>
+    </ul>
+    <details>
+      <summary>Torna al libro e controlla che cosa hai capito</summary>
+      <ul class="web-elenco">
+        <li><strong>Pagina A4 — Studio attivo:</strong> descrivi con parole tue il percorso da casa a scuola. Scegli punti di riferimento utili anche a chi non lo conosce.</li>
+        <li><strong>Pagina A5 — Prima di girare pagina:</strong> svolgi gli esercizi 1–3. Se hai un dubbio, torna all’attività sull’argomento.</li>
+      </ul>
 
-</main>
+      <p><a href="../metodo-e-strumenti/lezioni/reticolato.html">Il passo successivo: come indichiamo un punto preciso sulla Terra? →</a></p>
+    </details>
+    <details>
+      <summary>Un’attività da fare insieme in classe</summary>
+      <p>Con l’insegnante e i compagni, trasformate i banchi in un paese e provate a orientarvi tra i suoi luoghi.</p>
+      <p><a href="attivita/il-paese-in-classe.html">Apri Il paese in classe →</a></p>
+    </details>
+  </div>
+</section>
+<section class="blocco" id="consolidamento" aria-labelledby="titolo-consolidamento"><div class="wrap"><p class="ripasso-numero">Consolidamento e ripasso · pp. A4–A5</p><h2 id="titolo-consolidamento">Sai orientarti anche da solo?</h2><p>Prova prima senza guardare il libro. Premi <strong>Controlla</strong>: se una risposta non è corretta, usa l’indizio per ripensarci. Poi riapri il libro e cerca la spiegazione.</p><p class="ripasso-nota">Puoi ripetere ogni attività. Le risposte non vengono conservate quando chiudi o ricarichi la pagina.</p><div class="ripasso-griglia"><form class="ripasso-esercizio" id="ripasso-parole" novalidate><h3>1 · Le parole per orientarsi</h3><p>Scegli la parola adatta a ogni situazione.</p><div><label>«Sono davanti alla biblioteca.» Sto indicando…<select name="r0" aria-describedby="ripasso-parole-r0-aiuto"><option value="">Scegli una risposta…</option><option value="0">la mia posizione</option><option value="1">la direzione da seguire</option><option value="2">la mia destinazione</option></select></label><p class="ripasso-aiuto" id="ripasso-parole-r0-aiuto"></p></div><div><label>«Devo raggiungere la palestra.» La palestra è…<select name="r1" aria-describedby="ripasso-parole-r1-aiuto"><option value="">Scegli una risposta…</option><option value="0">un punto cardinale</option><option value="1">la mia destinazione</option><option value="2">la mia posizione attuale</option></select></label><p class="ripasso-aiuto" id="ripasso-parole-r1-aiuto"></p></div><div><label>«Procedi verso nord.» Sto indicando…<select name="r2" aria-describedby="ripasso-parole-r2-aiuto"><option value="">Scegli una risposta…</option><option value="0">una distanza</option><option value="1">una posizione</option><option value="2">una direzione</option></select></label><p class="ripasso-aiuto" id="ripasso-parole-r2-aiuto"></p></div><div><label>Quale riferimento aiuta di più uno sconosciuto a trovare una strada?<select name="r3" aria-describedby="ripasso-parole-r3-aiuto"><option value="">Scegli una risposta…</option><option value="0">L’albero che piace a me</option><option value="1">L’ingresso della biblioteca con la sua insegna</option><option value="2">Un’automobile parcheggiata oggi</option></select></label><p class="ripasso-aiuto" id="ripasso-parole-r3-aiuto"></p></div><div class="comandi"><button class="btn" type="submit">Controlla</button><button class="btn chiaro" type="reset">Riprova</button></div><p class="ripasso-esito" role="status" aria-live="polite" aria-atomic="true"></p><p class="ripasso-ritorno"><strong>Se hai un dubbio:</strong> rileggi la definizione di orientamento e la parte sui punti di riferimento; riprendi <a href="attivita/il-paese-delle-indicazioni.html">Il paese delle indicazioni</a>.</p></form><form class="ripasso-esercizio" id="ripasso-cardinali" novalidate><h3>2 · Completa la bussola</h3><p>Immagina di guardare verso nord. Le domande si riferiscono sempre a questa posizione.</p><div><label>Alla tua destra trovi…<select name="r0" aria-describedby="ripasso-cardinali-r0-aiuto"><option value="">Scegli una risposta…</option><option value="0">ovest</option><option value="1">est</option><option value="2">sud</option></select></label><p class="ripasso-aiuto" id="ripasso-cardinali-r0-aiuto"></p></div><div><label>Alle tue spalle trovi…<select name="r1" aria-describedby="ripasso-cardinali-r1-aiuto"><option value="">Scegli una risposta…</option><option value="0">sud</option><option value="1">est</option><option value="2">ovest</option></select></label><p class="ripasso-aiuto" id="ripasso-cardinali-r1-aiuto"></p></div><div><label>Alla tua sinistra trovi…<select name="r2" aria-describedby="ripasso-cardinali-r2-aiuto"><option value="">Scegli una risposta…</option><option value="0">sud</option><option value="1">est</option><option value="2">ovest</option></select></label><p class="ripasso-aiuto" id="ripasso-cardinali-r2-aiuto"></p></div><div><label>La direzione compresa tra nord ed est si chiama…<select name="r3" aria-describedby="ripasso-cardinali-r3-aiuto"><option value="">Scegli una risposta…</option><option value="0">sud-est</option><option value="1">nord-est</option><option value="2">nord-ovest</option></select></label><p class="ripasso-aiuto" id="ripasso-cardinali-r3-aiuto"></p></div><div class="comandi"><button class="btn" type="submit">Controlla</button><button class="btn chiaro" type="reset">Riprova</button></div><p class="ripasso-esito" role="status" aria-live="polite" aria-atomic="true"></p><p class="ripasso-ritorno"><strong>Se hai un dubbio:</strong> osserva la rosa dei venti in cima alla pagina e ritrova i punti cardinali nel libro.</p></form><div class="ripasso-esercizio"><h3>3 · Un percorso sulla carta</h3><p>Nel paese immaginario il nord è in alto. Ogni luogo si trova su un incrocio; le linee sono le strade. Leggi la carta prima di rispondere.</p><svg class="ripasso-carta" viewBox="0 0 600 350" role="img" aria-labelledby="ripasso-mappa-t ripasso-mappa-d"><title id="ripasso-mappa-t">La carta di un piccolo paese</title><desc id="ripasso-mappa-d">Nord in alto. Nella riga in alto, da ovest a est: scuola, parco, biblioteca. Nella riga in basso: palestra, piazza, stazione. Le strade collegano i luoghi lungo le righe e le colonne.</desc><g stroke="#8FA3A6" stroke-width="12" fill="none"><path d="M100 110H500M100 250H500M100 110V250M300 110V250M500 110V250"/></g><g fill="var(--ocean)"><circle cx="100" cy="110" r="10"/><circle cx="300" cy="110" r="10"/><circle cx="500" cy="110" r="10"/><circle cx="100" cy="250" r="10"/><circle cx="300" cy="250" r="10"/><circle cx="500" cy="250" r="10"/></g><g fill="var(--ink)" font-family="Barlow Condensed,Arial,sans-serif" font-size="24" text-anchor="middle"><text x="100" y="85">Scuola</text><text x="300" y="85">Parco</text><text x="500" y="85">Biblioteca</text><text x="100" y="290">Palestra</text><text x="300" y="290">Piazza</text><text x="500" y="290">Stazione</text><text x="560" y="32">N</text></g><path d="M560 72V43M552 54L560 43L568 54" stroke="var(--warm)" stroke-width="3" fill="none"/></svg><details><summary>Leggi la carta in parole</summary><p>Il nord è in alto. In alto, da ovest a est: scuola, parco, biblioteca. In basso: palestra, piazza, stazione. Le strade collegano i luoghi lungo le righe e le colonne.</p></details></div><form class="ripasso-esercizio" id="ripasso-percorso" novalidate><h3>Leggi, immagina, scegli</h3><p>Usa i punti cardinali della carta, indipendentemente dalla direzione in cui immagini di essere girato.</p><div><label>Dalla piazza al parco ti muovi verso…<select name="r0" aria-describedby="ripasso-percorso-r0-aiuto"><option value="">Scegli una risposta…</option><option value="0">sud</option><option value="1">nord</option><option value="2">est</option></select></label><p class="ripasso-aiuto" id="ripasso-percorso-r0-aiuto"></p></div><div><label>Dalla scuola alla biblioteca ti muovi verso…<select name="r1" aria-describedby="ripasso-percorso-r1-aiuto"><option value="">Scegli una risposta…</option><option value="0">ovest</option><option value="1">sud</option><option value="2">est</option></select></label><p class="ripasso-aiuto" id="ripasso-percorso-r1-aiuto"></p></div><div><label>Dalla biblioteca vai a sud fino alla prima strada orizzontale, poi a ovest fino alla piazza. Dove sei passato?<select name="r2" aria-describedby="ripasso-percorso-r2-aiuto"><option value="">Scegli una risposta…</option><option value="0">Alla stazione</option><option value="1">Al parco</option><option value="2">Alla scuola</option></select></label><p class="ripasso-aiuto" id="ripasso-percorso-r2-aiuto"></p></div><div><label>Dalla palestra vai a nord fino alla scuola, poi a est per due tratti. Arrivi…<select name="r3" aria-describedby="ripasso-percorso-r3-aiuto"><option value="">Scegli una risposta…</option><option value="0">al parco</option><option value="1">alla biblioteca</option><option value="2">alla stazione</option></select></label><p class="ripasso-aiuto" id="ripasso-percorso-r3-aiuto"></p></div><div class="comandi"><button class="btn" type="submit">Controlla</button><button class="btn chiaro" type="reset">Riprova</button></div><p class="ripasso-esito" role="status" aria-live="polite" aria-atomic="true"></p><p class="ripasso-ritorno"><strong>Se hai un dubbio:</strong> ripercorri la strada con il dito e rileggi nel libro come si usano punti di riferimento e direzioni.</p></form><form class="ripasso-esercizio" id="ripasso-cielo" novalidate><h3>4 · Orientarsi con il cielo</h3><p>Ragioniamo su osservazioni fatte in Italia.</p><div><label>Al mattino il Sole si trova, in generale, dalla parte…<select name="r0" aria-describedby="ripasso-cielo-r0-aiuto"><option value="">Scegli una risposta…</option><option value="0">dell’ovest</option><option value="1">dell’est</option><option value="2">del nord</option></select></label><p class="ripasso-aiuto" id="ripasso-cielo-r0-aiuto"></p></div><div><label>Al mezzogiorno solare, in Italia, il Sole indica la direzione…<select name="r1" aria-describedby="ripasso-cielo-r1-aiuto"><option value="">Scegli una risposta…</option><option value="0">sud</option><option value="1">nord</option><option value="2">ovest</option></select></label><p class="ripasso-aiuto" id="ripasso-cielo-r1-aiuto"></p></div><div><label>La Stella Polare ci aiuta a individuare…<select name="r2" aria-describedby="ripasso-cielo-r2-aiuto"><option value="">Scegli una risposta…</option><option value="0">il sud</option><option value="1">l’est</option><option value="2">il nord</option></select></label><p class="ripasso-aiuto" id="ripasso-cielo-r2-aiuto"></p></div><div><label>Vediamo il Sole spostarsi nel cielo soprattutto perché…<select name="r3" aria-describedby="ripasso-cielo-r3-aiuto"><option value="">Scegli una risposta…</option><option value="0">la Terra ruota su se stessa</option><option value="1">la Stella Polare si muove</option><option value="2">la Terra smette di ruotare di notte</option></select></label><p class="ripasso-aiuto" id="ripasso-cielo-r3-aiuto"></p></div><div class="comandi"><button class="btn" type="submit">Controlla</button><button class="btn chiaro" type="reset">Riprova</button></div><p class="ripasso-esito" role="status" aria-live="polite" aria-atomic="true"></p><p class="ripasso-ritorno"><strong>Se hai un dubbio:</strong> riprendi <a href="attivita/il-cammino-del-sole.html">Il cammino del Sole</a>, <a href="attivita/orientarsi-con-le-stelle.html">Orientarsi con le stelle</a> o <a href="attivita/la-terra-che-gira.html">La Terra che gira</a>.</p></form><div class="ripasso-esercizio"><h3>5 · Spiega a un compagno</h3><p>Usa la carta del paese: un compagno è alla stazione e deve raggiungere la scuola. Scrivi un percorso usando almeno due punti cardinali e un luogo intermedio. Poi spiega perché «vai a destra» può essere meno chiaro di «vai a ovest».</p><label for="ripasso-spiegazione">La tua spiegazione (oppure scrivi sul quaderno)</label><textarea id="ripasso-spiegazione"></textarea><details><summary>Dopo aver scritto: controlla il tuo percorso</summary><p>Un percorso possibile è: «Dalla stazione vai a ovest fino alla palestra, passando per la piazza. Poi vai a nord fino alla scuola». Un altro passa dalla biblioteca e dal parco. Destra e sinistra dipendono da dove è girata la persona; i punti cardinali indicano direzioni fisse.</p><p>Controlla: hai indicato la partenza? I luoghi intermedi sono nell’ordine giusto? Le direzioni portano davvero alla scuola?</p></details></div></div><div class="libro"><b class="t">Torna al libro · pp. A4–A5</b><h3>Il mio ripasso</h3><p>Scegli una risposta che hai corretto. Cerca nel libro la spiegazione e riscrivila con parole tue sul quaderno. Poi svolgi gli esercizi assegnati dall’insegnante.</p><p>Completa: «Ora so…» e «Ho ancora bisogno di ripassare…». Per il secondo punto, riapri l’attività corrispondente.</p></div></div></section></main>
 
 <footer class="crediti">
   <div class="wrap">
@@ -335,5 +427,55 @@ body{padding-top:40px}
 </script>
 <!-- /zoom-ctrl -->
 <script src="../../../assets/barra.js"></script>
-</body>
+<script>
+(function(){
+  var form=document.getElementById('definizione-orientamento');
+  var esito=document.getElementById('esito-definizione');
+  var parole=['posizione','direzione','raggiungere','destinazione'];
+  form.addEventListener('submit',function(event){
+    event.preventDefault();
+    var mancanti=[],daRivedere=[],corrette=0;
+    parole.forEach(function(parola,i){
+      var campo=form.elements.namedItem(parola);
+      var risposta=campo.value.trim().toLowerCase();
+      var giusta=risposta===parola;
+      campo.setAttribute('aria-invalid',giusta?'false':'true');
+      if(giusta) corrette++;
+      else if(!risposta) mancanti.push(i+1);
+      else daRivedere.push(i+1);
+    });
+    if(corrette===parole.length){
+      esito.textContent='Tutto corretto! La posizione indica dove siamo; la direzione ci aiuta a raggiungere la destinazione, cioè il luogo in cui vogliamo arrivare.';
+    }else{
+      var messaggio=corrette+' parole corrette su 4. ';
+      if(mancanti.length) messaggio+='Completa gli spazi '+mancanti.join(', ')+'. ';
+      if(daRivedere.length) messaggio+='Rileggi sul libro le parole per gli spazi '+daRivedere.join(', ')+'. ';
+      esito.textContent=messaggio+'Poi premi di nuovo Controlla.';
+    }
+  });
+  form.addEventListener('input',function(event){
+    event.target.removeAttribute('aria-invalid');
+    esito.textContent='';
+  });
+  form.addEventListener('reset',function(){
+    parole.forEach(function(parola){form.elements.namedItem(parola).removeAttribute('aria-invalid');});
+    esito.textContent='';
+    form.elements.namedItem(parole[0]).focus();
+  });
+})();
+</script>
+<script id="script-ripasso">
+(function(){
+const esercizi={"ripasso-parole": {"r0": ["0", "La frase dice dove ti trovi in questo momento."], "r1": ["1", "La destinazione è il luogo che vuoi raggiungere."], "r2": ["2", "Pensa a dove devi dirigerti, non al punto in cui sei."], "r3": ["1", "Un riferimento utile è riconoscibile, abbastanza stabile e comprensibile anche agli altri."]}, "ripasso-cardinali": {"r0": ["1", "Ricostruisci la rosa dei venti: nord in alto, est a destra."], "r1": ["0", "Cerca il punto cardinale opposto al nord."], "r2": ["2", "Est e ovest sono opposti."], "r3": ["1", "Unisci i nomi dei due punti cardinali tra cui si trova."]}, "ripasso-percorso": {"r0": ["1", "Sulla carta il parco è sopra la piazza e la freccia indica il nord."], "r1": ["2", "La biblioteca è a destra della scuola; usa il nord indicato sulla carta."], "r2": ["0", "Segui prima la strada verticale sotto la biblioteca."], "r3": ["1", "Dalla scuola il primo tratto porta al parco, il secondo al luogo successivo."]}, "ripasso-cielo": {"r0": ["1", "Ripensa alla direzione in cui vediamo sorgere il Sole: il punto preciso cambia durante l’anno."], "r1": ["0", "È la parte del cielo in cui il Sole raggiunge la maggiore altezza quotidiana. Il mezzogiorno solare non coincide sempre con le 12 dell’orologio."], "r2": ["2", "Rileggi la parte del libro sull’orientamento notturno nell’emisfero nord."], "r3": ["0", "Distingui il movimento che osserviamo nel cielo dalla rotazione del nostro pianeta."]}};
+Object.entries(esercizi).forEach(function([id,risposte]){
+ const form=document.getElementById(id),esito=form.querySelector('.ripasso-esito');
+ form.addEventListener('submit',function(event){event.preventDefault();let corrette=0,mancanti=0;
+ Object.entries(risposte).forEach(function([name,[attesa,indizio]]){const campo=form.elements.namedItem(name),v=campo.value,ok=v===attesa;campo.setAttribute('aria-invalid',String(!ok));document.getElementById(id+'-'+name+'-aiuto').textContent=ok?'Corretto.':v?indizio:'Scegli una risposta prima di controllare.';if(ok)corrette++;if(!v)mancanti++;});
+ const totale=Object.keys(risposte).length;esito.textContent=corrette===totale?'Tutte le risposte sono corrette. Prova ora a spiegare a voce il tuo ragionamento.':corrette+' risposte corrette su '+totale+'. '+(mancanti?'Completa le risposte mancanti. ':'')+'Leggi gli indizi sotto le domande da rivedere e riprova.';
+ });
+ form.addEventListener('change',function(event){const campo=event.target;if(!campo.name)return;campo.removeAttribute('aria-invalid');document.getElementById(id+'-'+campo.name+'-aiuto').textContent='';esito.textContent='';});
+ form.addEventListener('reset',function(){Object.keys(risposte).forEach(function(name){form.elements.namedItem(name).removeAttribute('aria-invalid');document.getElementById(id+'-'+name+'-aiuto').textContent='';});esito.textContent='';});
+});
+})();
+</script></body>
 </html>

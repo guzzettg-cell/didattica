@@ -278,13 +278,6 @@ footer p{margin:0 0 6px}
   .indice-ridotto a.voce .nome:before{content:"";position:absolute;left:-6px;top:50%;margin-top:-6px;border:6px solid transparent;border-left:0;border-right-color:#23262a}
   .indice-ridotto a.voce:hover .nome,.indice-ridotto a.voce:focus .nome{opacity:1}
 }
-
-/* indice neutro: il colore pieno solo per la parte che si sta leggendo */
-a.voce{background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
-a.voce:not([aria-current="true"]){box-shadow:inset 0 0 0 1px #cfd5d1;box-shadow:inset 0 0 0 1px var(--filo)}
-a.voce .tondo{background:#eef1ef;background:var(--tenue-bg);border-color:#ffffff;border-color:var(--carta)}
-a.voce[aria-current="true"]{background:#2b5f6b;background:var(--c);color:#fff}
-a.voce[aria-current="true"] .tondo{background:#ffffff;border-color:#fff}
 </style>
 </head>
 <body>
@@ -861,6 +854,5 @@ body{padding-top:40px}
   b.onclick=function(){ r=!r; metti(r); try{ localStorage.setItem("indice-ridotto",r?"1":"0"); }catch(e){} };
 })();
 </script>
-<script src="../../../assets/barra.js"></script>
 </body>
 </html>

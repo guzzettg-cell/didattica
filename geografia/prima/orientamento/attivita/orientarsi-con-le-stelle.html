@@ -80,15 +80,16 @@ details ol{margin-top:10px}
   <nav class="lnav" aria-label="Lezione"><a href="../index.html">← L'orientamento e i suoi strumenti</a><span class="passi"><a href="il-cammino-del-sole.html">← Il cammino del Sole</a><span>Attività 3 di 4</span><a href="la-terra-che-gira.html">La Terra che gira →</a></span></nav>
   <header>
     <div class="eyebrow">Geografia · L'orientamento e i punti cardinali</div>
-    <h1>Orientarsi con le <span>stelle</span></h1>
-    <p class="lede">Di notte il Sole non c'è, ma il cielo ci aiuta lo stesso. Scegli l'emisfero, fai scorrere la notte e prova a trovare il Nord o il Sud guardando le stelle.</p>
+    <h1>Come possiamo orientarci di notte?</h1>
+    <p class="eyebrow">Paesaggi vicini e lontani · pagina A5</p>
+    <p class="web-domanda">Quando il Sole è tramontato, i punti cardinali non scompaiono. Ma come possiamo riconoscerli?</p>
+    <p>Se il cielo è sereno, possiamo cercare un riferimento tra le stelle.</p>
   </header>
-
-  <div class="hemi" role="group" aria-label="Emisfero">
-    <button type="button" id="hN" aria-pressed="true">Emisfero Nord · Roma</button>
-    <button type="button" id="hS" aria-pressed="false">Emisfero Sud · Sydney</button>
-  </div>
-
+  <section class="percorso-lettura" aria-labelledby="osserva-cielo">
+    <h2 id="osserva-cielo">FASE 1: Osserviamo il cielo</h2>
+    <p>Guardiamo questa simulazione del cielo visto da Roma. Facciamo passare alcune ore.</p>
+    <ul class="web-elenco"><li>Le stelle <strong>rimangono nella stessa posizione?</strong></li><li>C’è una zona del cielo attorno alla quale <strong>sembrano girare?</strong></li></ul>
+  </section>
   <figure>
     <canvas id="sky" role="img" aria-label="Cielo notturno con le stelle e l'orizzonte"></canvas>
     <figcaption id="cap"></figcaption>
@@ -100,6 +101,15 @@ details ol{margin-top:10px}
       <input id="hour" type="range" min="18" max="30" step="0.1" value="21" aria-label="Ora della notte">
       <div class="clock" id="clock">21:00</div>
     </div>
+  </section>
+
+  <section class="percorso-lettura" aria-labelledby="riferimento">
+    <h2 id="riferimento">Un riferimento nel cielo</h2>
+    <p>Vicino al centro di questo movimento apparente si trova una stella che cambia pochissimo posizione: la <strong>Stella polare</strong>.</p>
+    <p>Se la individuiamo e scendiamo con lo sguardo verso l’orizzonte, troviamo il <strong>Nord</strong>.</p>
+    <p class="web-ricorda"><strong>Attenzione:</strong> non è la stella più luminosa del cielo. Per riconoscerla dobbiamo imparare a cercarla.</p>
+    <h2>FASE 2: Troviamo la Stella polare</h2>
+    <ol class="web-passi"><li><strong>Attiva</strong> le linee delle costellazioni.</li><li><strong>Cerca il Grande Carro</strong>, un gruppo di stelle che fa parte dell’Orsa maggiore.</li><li><strong>Torna alla simulazione</strong> e prova a trovare la Polare. Se serve, chiedi un indizio.</li></ol>
     <div class="row" role="group" aria-label="Mese">
       <span class="lbl">Mese</span>
       <button type="button" class="mon" data-m="gen">Gennaio</button>
@@ -112,33 +122,27 @@ details ol{margin-top:10px}
       <label class="chk"><input type="checkbox" id="optMethod"> Mostra il metodo</label>
       <label class="chk"><input type="checkbox" id="optTrails"> Foto a lunga esposizione</label>
     </div>
-  </section>
-
-  <div class="grid">
     <div class="card" id="challenge" aria-live="polite"></div>
-    <div class="card">
-      <h2>Cosa notare</h2>
-      <ul id="facts"></ul>
-      <h2>Prova a rispondere</h2>
-      <ol>
-        <li>Fai partire la notte: quale stella resta quasi ferma? Perché è utile per orientarsi?</li>
-        <li>Cambia mese: l'Orsa maggiore è sempre nello stesso punto del cielo? E la Stella polare?</li>
-        <li>Accendi la «Foto a lunga esposizione»: che forma disegnano le stelle? Intorno a quale punto?</li>
-        <li>Passa all'emisfero Sud: si vede la Stella polare? Come si trova il Sud?</li>
-        <li>Guardando a Nord le stelle girano in senso antiorario; guardando a Sud, in senso orario. Perché?</li>
-      </ol>
-      <details>
-        <summary>Risposte per l'insegnante</summary>
-        <ol>
-          <li>La Stella polare: si trova quasi esattamente nella direzione dell'asse terrestre, quindi resta ferma mentre il cielo le gira intorno. Indica sempre il Nord.</li>
-          <li>L'Orsa maggiore cambia posizione (bassa a Nord in autunno, alta sopra la testa in primavera), ma le sue due stelle puntatrici indicano sempre la Polare, che resta ferma.</li>
-          <li>Archi di cerchio, tutti centrati sulla Stella polare (a Sud, sul Polo Sud celeste).</li>
-          <li>No, è sotto l'orizzonte. Si usa la Croce del Sud: si prolunga il braccio lungo circa quattro volte e mezzo fino al Polo Sud celeste, poi si scende in verticale fino all'orizzonte.</li>
-          <li>Il movimento è lo stesso (dovuto alla rotazione della Terra), ma lo guardiamo da due lati opposti: come una ruota vista da davanti o da dietro.</li>
-        </ol>
-      </details>
-    </div>
+    <p>Ora prova a nascondere gli aiuti e a ritrovarla.</p>
+    <h2>Torniamo al libro — pagina A5</h2>
+    <p>Rileggi il passaggio sull’orientamento con le stelle. Poi prova a spiegare a un compagno come trovare il Nord. Usa il disegno del libro per accompagnare la spiegazione.</p>
+    <h2>Usiamo quello che abbiamo scoperto</h2>
+    <p>Hai trovato la Stella polare e stai guardando verso <strong>Nord</strong>. Quale punto cardinale hai…</p><ul class="web-elenco"><li><strong>alle spalle?</strong></li><li><strong>alla tua destra?</strong></li><li><strong>alla tua sinistra?</strong></li></ul>
+    <details><summary>Controlla dopo aver provato</summary><p>Alle spalle hai il Sud, a destra l’Est e a sinistra l’Ovest.</p></details>
+    <details class="approfondimento"><summary>Succede così in tutta la Terra?</summary>
+    <p>Passa a Sydney e torna alla simulazione: dall’emisfero Sud la Stella polare non si vede. Prova l’attività guidata per trovare il Sud con la Croce del Sud.</p>
+  <div class="hemi" role="group" aria-label="Emisfero">
+    <button type="button" id="hN" aria-pressed="true">Emisfero Nord · Roma</button>
+    <button type="button" id="hS" aria-pressed="false">Emisfero Sud · Sydney</button>
   </div>
+
+    <p>Per riprendere il percorso principale, seleziona Roma.</p>
+    <ul id="facts"></ul>
+    </details>
+    <h2>Una domanda per continuare</h2>
+    <p>Nelle due simulazioni abbiamo visto il Sole e le stelle cambiare posizione nel cielo.</p><p class="web-domanda">Come si spiega questo movimento?</p>
+    <a class="continua" href="la-terra-che-gira.html">Continua: La Terra che gira →</a>
+  </section>
 </div>
 
 <script>

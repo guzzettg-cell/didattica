@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mappa 2 · Gli strumenti della geografia</title>
+<meta name="description" content="Modulo I di geografia, classe prima: le mappe del capitolo, da cui si raggiungono tutte le lezioni e le attività.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1EE; --paper:#FAFBF9; --ink:#1D2A30; --muted:#5B6B70; --line:#C9D2CE;
+  --ocean:#2C5872; --warm:#B3412F;
+  --cond:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --m-linea:#8FA3A6; --m-forte:#DCE8EE; --m-hover:#F6E6BE;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+    --ocean:#80B1CC; --warm:#EF8A73; color-scheme:dark;
+    --m-linea:#5E7276; --m-forte:#20384A; --m-hover:#4A3F22;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+  --ocean:#80B1CC; --warm:#EF8A73; color-scheme:dark;
+  --m-linea:#5E7276; --m-forte:#20384A; --m-hover:#4A3F22;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.6}
+h1,h2,h3{font-family:var(--cond);line-height:1.08;margin:0;text-wrap:balance}
+p{margin:0;max-width:68ch}
+a{color:var(--ocean)}
+:focus-visible{outline:3px solid var(--ocean);outline-offset:2px}
+.wrap{max-width:64rem;margin:0 auto;padding:1rem 16px 3rem}
+.nav-su{font:600 1.05rem var(--cond);margin-bottom:1.4rem}
+header.testa{display:grid;gap:.6rem;margin-bottom:1.8rem}
+.eyebrow{font:600 1.1rem var(--cond);color:var(--muted)}
+h1{font-size:clamp(2.7rem,8vw,4.5rem);font-weight:700;color:var(--ink);margin:.3rem 0 .6rem}
+.lede{font-size:1.18rem;color:var(--muted)}
+.passi{list-style:none;margin:.4rem 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:.7rem;counter-reset:p}
+.passi-confronto{counter-reset:p 2;margin-bottom:1rem}
+.passi > li{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem .9rem 3.2rem;position:relative}
+.passi > li::before{counter-increment:p;content:counter(p);position:absolute;left:.9rem;top:.55rem;font:700 1.8rem var(--cond);color:var(--warm)}
+.per-cominciare{display:grid;gap:.2rem;padding:.8rem 1rem;border:2px solid var(--ocean);border-radius:10px;background:var(--paper);text-decoration:none;color:inherit;margin-top:.3rem}
+.per-cominciare:hover{background:var(--bg)}
+.per-cominciare > b{font:700 clamp(1.7rem,4vw,2.2rem)/1.15 var(--cond);color:var(--ocean);margin:.35rem 0 .6rem}
+.per-cominciare .d{color:var(--muted)}
+.passi > li > b{font:700 clamp(1.65rem,4vw,2rem)/1.15 var(--cond);display:block;color:var(--ocean);margin:0 0 .8rem}
+
+.passo-video > p{margin-top:.5rem}
+.domanda-guida{margin:1rem 0;padding:.7rem 1rem;border-left:4px solid var(--ocean);background:var(--m-forte);border-radius:0 6px 6px 0}
+.domanda-guida .invito{font:600 1.05rem/1.4 var(--cond);color:var(--ocean)}
+.domanda-guida .domanda{font:700 clamp(1.4rem,3vw,1.8rem)/1.2 var(--cond);color:var(--ocean);margin:.3rem 0 .6rem}
+.esempi-titolo{font-weight:600}
+.domande-video{padding-left:1.4rem;margin:.4rem 0 1rem;display:grid;gap:.4rem}
+.domande-video li::marker{color:var(--ocean)}
+.domande-video strong{color:var(--ocean)}
+.passo-video .promemoria-video{border-top:1px solid var(--line);padding-top:.7rem;margin-top:.8rem}
+.promemoria-video strong{color:var(--warm)}
+
+.blocco-mappa{margin:2.6rem 0 0;display:grid;gap:.8rem;border-top:4px solid var(--ink);padding-top:.8rem}
+.blocco-mappa .n{font:700 1rem var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--warm)}
+.blocco-mappa h2{font-size:clamp(2.2rem,5.5vw,3.2rem);font-weight:700;color:var(--ocean);margin:.2rem 0 .7rem}
+.comandi{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center}
+.btn{font:600 1.05rem var(--cond);background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:.35rem .9rem;cursor:pointer}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.legenda{font:500 1rem var(--cond);color:var(--muted);display:flex;flex-wrap:wrap;gap:.3rem 1rem}
+.legenda i{display:inline-block;width:1.5rem;height:.95rem;vertical-align:-2px;margin-right:.3rem;border:2px solid var(--ocean);background:var(--bg);border-radius:4px}
+.legenda i.p{border-style:dashed;border-color:var(--muted);background:transparent}
+.scorri{overflow-x:auto;border-radius:12px;-webkit-overflow-scrolling:touch;border:1px solid var(--line);background:var(--paper)}
+.mappa{display:block;width:100%;min-width:720px;height:auto;font-family:var(--cond)}
+.mappa .ln{fill:none;stroke:var(--m-linea);stroke-width:2.2}
+.mappa .pallino{fill:var(--m-linea)}
+.mappa .legame rect{fill:var(--paper);stroke:var(--m-linea);stroke-width:1.2}
+.mappa .legame text{font:italic 500 13.5px var(--serif);fill:var(--muted);text-anchor:middle;dominant-baseline:central}
+.mappa .nodo text{text-anchor:middle;dominant-baseline:central;fill:var(--ink)}
+.mappa .nodo rect{fill:var(--bg);stroke:var(--line);stroke-width:1.5}
+.mappa .nodo.foglia text{font-size:15px;font-weight:500}
+.mappa .nodo.forte rect{fill:var(--m-forte);stroke:var(--ocean);stroke-width:2}
+.mappa .nodo.forte text{font-size:17px;font-weight:700}
+.mappa .nodo.radice rect{fill:var(--ink);stroke:none}
+.mappa .nodo.radice text{font-size:19px;font-weight:700;fill:var(--paper);letter-spacing:.01em}
+.mappa a.vai{cursor:pointer}
+.mappa a.vai.foglia rect{stroke:var(--ocean)}
+.mappa a.vai.foglia text{fill:var(--ocean);font-weight:600}
+.mappa a.vai rect{transition:fill .15s,stroke-width .15s}
+.mappa a.vai:hover rect,.mappa a.vai:focus rect,.mappa .evid rect{fill:var(--m-hover);stroke-width:3}
+.mappa a.vai.radice:hover rect,.mappa a.vai.radice:focus rect,.mappa .radice.evid rect{fill:var(--ocean)}
+.mappa a.vai:focus{outline:none}
+.mappa a.vai:focus rect{stroke:var(--warm)}
+.mappa .nodo.prep rect{fill:transparent;stroke:var(--muted);stroke-dasharray:4 4;stroke-width:1.5}
+.mappa .nodo.prep text{fill:var(--muted)}
+.mappa .prep{cursor:help}
+.mappa .pagine{display:none}
+.mostra-pagine .mappa .pagine{display:inline}
+.mappa .pp rect{fill:var(--warm)}
+.mappa .pp text{font:700 11.5px var(--cond);fill:#fff;text-anchor:middle;dominant-baseline:central;letter-spacing:.03em}
+.stato{font:600 1.08rem var(--cond);min-height:1.5em;color:var(--muted)}
+.stato b{color:var(--ink)}
+.indice{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr));gap:.6rem}
+.indice a,.indice .cella{display:grid;gap:.15rem;height:100%;padding:.7rem .9rem;border:1px solid var(--line);border-radius:8px;background:var(--paper);text-decoration:none;color:inherit}
+.indice a:hover{border-color:var(--ocean)}
+.indice b{font:700 clamp(1.35rem,3vw,1.65rem)/1.2 var(--cond);color:var(--ocean);margin:.2rem 0 .4rem}
+.indice .d{font-size:.95rem;color:var(--muted)}
+.indice .prep .cella{border-style:dashed;opacity:.7}
+.pp-chip{justify-self:start;font:700 .85rem var(--cond);letter-spacing:.04em;border-radius:20px;padding:0 .55rem;background:var(--ink);color:var(--paper)}
+details.altre{margin-top:2.6rem;border-top:4px solid var(--ink);padding-top:.8rem}
+details.altre summary{font:700 clamp(1.5rem,3.5vw,2rem) var(--cond);cursor:pointer}
+details.altre > p{margin:.5rem 0 .9rem;color:var(--muted)}
+@media print{ .nav-su,.comandi{display:none} .mappa{min-width:0} }
+</style>
+<link rel="stylesheet" href="../../../assets/testi-lezioni.css">
+<style>
+[hidden]{display:none!important}
+.scelta-mappe{display:flex;flex-wrap:wrap;gap:.8rem;margin:1rem 0}
+.scelta-mappe .btn{display:inline-flex;align-items:center;text-decoration:none;min-height:48px;padding:.6rem 1.4rem;font-size:1.3rem}
+.scelta-mappe .btn[aria-expanded="true"]{background:var(--ocean);color:var(--paper)}
+</style>
+</head>
+<body class="mostra-pagine">
+<div class="wrap">
+  <p class="nav-su"><a href="index.html">← Gli strumenti della geografia</a></p>
+  <section class="blocco-mappa" id="pannello-mappa2" aria-labelledby="t-m2">
+    <p class="n">Mappa 2</p>
+    <h1 id="t-m2">Gli strumenti della geografia</h1>
+    <div class="scorri"><svg class="mappa" id="mappa2" viewBox="0 0 1150 520" role="group" aria-label="Mappa: Gli strumenti della geografia"><defs><marker id="pallino-mappa2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5"><circle cx="5" cy="5" r="4" class="pallino"/></marker></defs><path class="ln" d="M165.9,260.0 H250.0"/><path class="ln" d="M250.0,260.0 C296.9,260.0 296.9,125.0 337.9,125.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M250.0,260.0 C310.7,260.0 310.7,400.0 365.4,400.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M476.1,125.0 H539.0"/><path class="ln" d="M539.0,125.0 C570.4,125.0 570.4,125.0 595.8,125.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M708.2,125.0 H773.6"/><path class="ln" d="M773.6,125.0 C806.3,125.0 806.3,60.0 833.0,60.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M773.6,125.0 C806.3,125.0 806.3,125.0 833.0,125.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M773.6,125.0 C806.3,125.0 806.3,190.0 833.0,190.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M448.6,400.0 H499.7"/><path class="ln" d="M499.7,400.0 C525.2,400.0 525.2,400.0 544.7,400.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M629.3,400.0 H710.0"/><path class="ln" d="M710.0,400.0 C750.4,400.0 750.4,400.0 784.7,400.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M869.3,400.0 H929.6"/><path class="ln" d="M929.6,400.0 C959.8,400.0 959.8,306.0 984.0,306.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M929.6,400.0 C959.8,400.0 959.8,353.0 984.0,353.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M929.6,400.0 C959.8,400.0 959.8,400.0 984.0,400.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M929.6,400.0 C959.8,400.0 959.8,447.0 984.0,447.0" marker-end="url(#pallino-mappa2)"/><path class="ln" d="M929.6,400.0 C959.8,400.0 959.8,494.0 984.0,494.0" marker-end="url(#pallino-mappa2)"/><g class="legame"><rect x="178.9" y="241.0" width="142.2" height="38.0" rx="19.0"/><text x="250.0" y="252.5">utili per studiare</text><text x="250.0" y="267.5">il territorio sono</text></g><g class="legame"><rect x="492.0" y="106.0" width="93.9" height="38.0" rx="19.0"/><text x="539.0" y="117.5">servono per</text><text x="539.0" y="132.5">disegnare</text></g><g class="legame"><rect x="740.4" y="106.0" width="66.3" height="38.0" rx="19.0"/><text x="773.6" y="117.5">possono</text><text x="773.6" y="132.5">essere</text></g><g class="legame"><rect x="456.2" y="381.0" width="87.0" height="38.0" rx="19.0"/><text x="499.7" y="392.5">che si</text><text x="499.7" y="407.5">raccolgono</text></g><g class="legame"><rect x="638.9" y="381.0" width="142.2" height="38.0" rx="19.0"/><text x="710.0" y="392.5">e si rappresentano</text><text x="710.0" y="407.5">nei</text></g><g class="legame"><rect x="889.6" y="388.5" width="80.1" height="23.0" rx="11.5"/><text x="929.6" y="400.0">di 5 tipi</text></g><g class="nodo radice"><rect x="4.1" y="227.6" width="161.8" height="64.8" rx="32.4"/><text x="85" y="248.8">Gli strumenti</text><text x="85" y="271.2">della geografia</text></g><a class="nodo forte vai" href="../paesaggio/attivita/dove-siamo.html" data-dove="Dove siamo? La Terra vista dallo spazio" data-pp="A16–A17"><title>le fotografie e le immagini satellitari: Dove siamo? La Terra vista dallo spazio (libro pp. A16–A17)</title><rect x="343.9" y="84.9" width="132.2" height="80.2" rx="9.0"/><text x="410" y="104.9">le fotografie</text><text x="410" y="125.0">e le immagini</text><text x="410" y="145.1">satellitari</text></a><a class="nodo forte vai" href="attivita/dalle-risposte-ai-grafici.html" data-dove="Dalle risposte ai grafici" data-pp="A18–A21"><title>i dati: I dati: raccoglierli, ordinarli, rappresentarli (libro pp. A18–A21)</title><rect x="371.4" y="380.0" width="77.2" height="40.1" rx="9.0"/><text x="410" y="400.0">i dati</text></a><a class="nodo foglia vai" href="../carte-geografiche/attivita/tre-modi-di-disegnare-il-mondo.html" data-dove="Le carte geografiche: Tre modi di disegnare il mondo" data-pp="A8–A9"><title>le carte geografiche: Le carte geografiche: Tre modi di disegnare il mondo (libro pp. A8–A9)</title><rect x="601.8" y="100.3" width="106.3" height="49.4" rx="9.0"/><text x="655" y="116.2">le carte</text><text x="655" y="133.8">geografiche</text></a><a class="nodo foglia vai" href="../carte-geografiche/attivita/fisica-politica-o-tematica.html" data-dove="Tanti tipi di carte: Fisica, politica o tematica?" data-pp="A12–A13"><title>carte fisiche: Tanti tipi di carte: Fisica, politica o tematica? (libro pp. A12–A13)</title><rect x="839.0" y="44.1" width="132.0" height="31.7" rx="9.0"/><text x="905" y="60.0">carte fisiche</text></a><a class="nodo foglia vai" href="../carte-geografiche/attivita/fisica-politica-o-tematica.html" data-dove="Tanti tipi di carte: Fisica, politica o tematica?" data-pp="A12–A13"><title>carte politiche: Tanti tipi di carte: Fisica, politica o tematica? (libro pp. A12–A13)</title><rect x="839.0" y="109.2" width="132.0" height="31.7" rx="9.0"/><text x="905" y="125.0">carte politiche</text></a><a class="nodo foglia vai" href="../carte-geografiche/attivita/fisica-politica-o-tematica.html" data-dove="Tanti tipi di carte: Fisica, politica o tematica?" data-pp="A12–A13"><title>carte tematiche: Tanti tipi di carte: Fisica, politica o tematica? (libro pp. A12–A13)</title><rect x="839.0" y="174.2" width="132.0" height="31.7" rx="9.0"/><text x="905" y="190.0">carte tematiche</text></a><a class="nodo foglia vai" href="attivita/dalle-risposte-ai-grafici.html" data-dove="Dalle risposte ai grafici" data-pp="A18–A21"><title>tabelle: I dati: raccoglierli, ordinarli, rappresentarli (libro pp. A18–A21)</title><rect x="550.7" y="384.1" width="78.6" height="31.7" rx="9.0"/><text x="590" y="400.0">tabelle</text></a><a class="nodo foglia vai" href="attivita/dalle-risposte-ai-grafici.html" data-dove="Dalle risposte ai grafici" data-pp="A18–A21"><title>grafici: I dati: raccoglierli, ordinarli, rappresentarli (libro pp. A18–A21)</title><rect x="790.7" y="384.1" width="78.6" height="31.7" rx="9.0"/><text x="830" y="400.0">grafici</text></a><a class="nodo foglia vai" href="attivita/dalle-risposte-ai-grafici.html" data-dove="Dalle risposte ai grafici" data-pp="A18–A21"><title>diagrammi a barre: I dati: raccoglierli, ordinarli, rappresentarli (libro pp. A18–A21)</title><rect x="990.0" y="290.1" width="150.0" height="31.7" rx="9.0"/><text x="1065" y="306.0">diagrammi a barre</text></a><a class="nodo foglia vai" href="attivita/dalle-risposte-ai-grafici.html" data-dove="Dalle risposte ai grafici" data-pp="A18–A21"><title>areogrammi: I dati: raccoglierli, ordinarli, rappresentarli (libro pp. A18–A21)</title><rect x="990.0" y="337.1" width="150.0" height="31.7" rx="9.0"/><text x="1065" y="353.0">areogrammi</text></a><a class="nodo foglia vai" href="attivita/dalle-risposte-ai-grafici.html" data-dove="Dalle risposte ai grafici" data-pp="A18–A21"><title>ideogrammi: I dati: raccoglierli, ordinarli, rappresentarli (libro pp. A18–A21)</title><rect x="990.0" y="384.1" width="150.0" height="31.7" rx="9.0"/><text x="1065" y="400.0">ideogrammi</text></a><a class="nodo foglia vai" href="attivita/dalle-risposte-ai-grafici.html" data-dove="Dalle risposte ai grafici" data-pp="A18–A21"><title>diagrammi cartesiani: I dati: raccoglierli, ordinarli, rappresentarli (libro pp. A18–A21)</title><rect x="990.0" y="431.1" width="150.0" height="31.7" rx="9.0"/><text x="1065" y="447.0">diagrammi cartesiani</text></a><a class="nodo foglia vai" href="attivita/dalle-risposte-ai-grafici.html" data-dove="Dalle risposte ai grafici" data-pp="A18–A21"><title>cartogrammi: I dati: raccoglierli, ordinarli, rappresentarli (libro pp. A18–A21)</title><rect x="990.0" y="478.1" width="150.0" height="31.7" rx="9.0"/><text x="1065" y="494.0">cartogrammi</text></a><g class="pagine"><g class="pp"><rect x="421.9" y="73.9" width="60.2" height="18" rx="9"/><text x="452.0" y="82.9">A16–A17</text></g><g class="pp"><rect x="394.4" y="369.0" width="60.2" height="18" rx="9"/><text x="424.5" y="378.0">A18–A21</text></g><g class="pp"><rect x="667.2" y="89.3" width="47.0" height="18" rx="9"/><text x="690.7" y="98.3">A8–A9</text></g><g class="pp"><rect x="916.8" y="163.2" width="60.2" height="18" rx="9"/><text x="946.9" y="172.2">A12–A13</text></g></g></svg></div>
+    <p class="stato" id="stato-mappa2" aria-live="polite">Passa sopra un riquadro (o toccalo) per vedere dove porta.</p>
+    <ul class="indice"><li><a href="../paesaggio/attivita/dove-siamo.html"><span class="pp-chip">pp. A16–A17</span><b>Tanti tipi di fotografie: Dove siamo?</b><span class="d">Osserva le immagini satellitari e usa gli indizi per riconoscere il luogo.</span></a></li><li><a href="../carte-geografiche/attivita/tre-modi-di-disegnare-il-mondo.html"><span class="pp-chip">pp. A8–A9</span><b>Le carte geografiche: Tre modi di disegnare il mondo</b><span class="d">«le carte geografiche»: come si disegna il mondo su un foglio.</span></a></li><li><a href="../carte-geografiche/attivita/fisica-politica-o-tematica.html"><span class="pp-chip">pp. A12–A13</span><b>Tanti tipi di carte: Fisica, politica o tematica?</b><span class="d">«carte fisiche, politiche, tematiche».</span></a></li><li><a href="attivita/dalle-risposte-ai-grafici.html"><span class="pp-chip">pp. A18–A21</span><b>I dati: raccoglierli, ordinarli, rappresentarli</b><span class="d">Dalle risposte ai grafici: tabelle e laboratorio sul tempo libero.</span></a></li></ul>
+  </section>
+</div>
+<script>
+(function(){
+  /* riga sotto la mappa: dice dove porta il riquadro */
+  var tocco = false;
+  document.addEventListener('touchstart', function(){ tocco = true; }, {passive:true, once:true});
+  ['mappa2'].forEach(function(id){
+    var svg = document.getElementById(id), stato = document.getElementById('stato-' + id);
+    var base = stato.innerHTML, ultimo = null;
+    function mostra(n){
+      if (!n) { stato.innerHTML = base; return; }
+      var t = n.getAttribute('data-dove'), p = n.getAttribute('data-pp');
+      stato.innerHTML = '→ <b>' + t.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</b> · libro pp. ' + p;
+    }
+    var nodi = svg.querySelectorAll('[data-dove]');
+    Array.prototype.forEach.call(nodi, function(n){
+      n.addEventListener('mouseenter', function(){ mostra(n); });
+      n.addEventListener('mouseleave', function(){ mostra(null); });
+      n.addEventListener('focus', function(){ mostra(n); });
+      n.addEventListener('blur', function(){ mostra(null); });
+      /* sui touch (LIM, tablet): il primo tocco mostra la destinazione, il secondo apre la pagina */
+      n.addEventListener('click', function(e){
+        if (n.classList.contains('prep')) { mostra(n); return; }
+        if (tocco && ultimo !== n) {
+          e.preventDefault();
+          if (ultimo) ultimo.classList.remove('evid');
+          ultimo = n; n.classList.add('evid'); mostra(n);
+          stato.innerHTML += ' — <span>tocca di nuovo per aprire</span>';
+        }
+      });
+    });
+  });
+})();
+</script>
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

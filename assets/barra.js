@@ -120,7 +120,7 @@
     mat.appendChild(c);
     for (var i = 0; i < MENU.length; i++) {
       var k = MENU[i][0], col = MENU[i][1], a = document.createElement("a");
-      a.href = ROOT + k + "/index.html";
+      a.href = ROOT + k + "/index.html" + (k === "geografia" ? "?classe=prima" : "");
       if (k === "educazione-civica") a.innerHTML = '<span class="ms-lungo">Educazione civica</span><span class="ms-corto">Ed. civica</span>';
       else a.textContent = MATERIE[k];
       a.style.setProperty("--mc", col);

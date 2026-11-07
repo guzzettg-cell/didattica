@@ -87,23 +87,22 @@ details ol{margin-top:10px}
   <nav class="lnav" aria-label="Lezione"><a href="../index.html">← L'orientamento e i suoi strumenti</a><span class="passi"><a href="il-paese-delle-indicazioni.html">← Il paese delle indicazioni</a><span>Attività 2 di 4</span><a href="orientarsi-con-le-stelle.html">Orientarsi con le stelle →</a></span></nav>
   <header>
     <div class="eyebrow">Geografia · L'orientamento e i punti cardinali</div>
-    <h1>Il cammino del <span>Sole</span></h1>
-    <p class="lede">Scegli una città, muovi l'ora e guarda dove si trova il Sole nel cielo.<span class="oscura"> Più sotto, vista dall'alto, c'è l'ombra di un bastone piantato in cortile.</span></p>
+    <h1>Il Sole può aiutarci a trovare la strada?</h1>
+    <p class="eyebrow">Paesaggi vicini e lontani · pagine A4–A5</p>
+    <p class="web-domanda">La mattina, quando vai a scuola, il Sole si trova dalla stessa parte di quando torni a casa?</p>
+    <p>Forse non ci hai mai fatto caso. Eppure, la sua posizione può aiutarci a capire in quale direzione stiamo guardando.</p>
   </header>
-
+  <section class="percorso-lettura" aria-labelledby="osserviamo">
+    <h2 id="osserviamo">FASE 1: Osserviamo una giornata</h2>
+    <p>Vediamo che cosa succede con questa simulazione del cielo di Roma.</p>
+    <p><strong>Fai scorrere il tempo</strong> dalla mattina alla sera. Osserva:</p><ul class="web-elenco"><li>da quale parte <strong>compare</strong> il Sole;</li><li>dove si trova quando raggiunge il <strong>punto più alto</strong>;</li><li>da quale parte <strong>scompare</strong>.</li></ul>
+  </section>
   <figure>
     <canvas id="pano" role="img" aria-label="Panorama del cielo con la posizione del Sole"></canvas>
     <figcaption id="panoCap"></figcaption>
   </figure>
 
   <section class="controls" aria-label="Comandi">
-    <div class="row" role="group" aria-label="Città">
-      <span class="lbl">Città</span>
-      <button type="button" class="city" data-c="oslo" aria-pressed="false">Oslo (Norvegia)</button>
-      <button type="button" class="city" data-c="roma" aria-pressed="true">Roma</button>
-      <button type="button" class="city" data-c="nairobi" aria-pressed="false">Nairobi (Kenya)</button>
-      <button type="button" class="city" data-c="sydney" aria-pressed="false">Sydney (Australia)</button>
-    </div>
     <div class="timeRow">
       <button id="play" type="button">▶ Avvia</button>
       <input id="hour" type="range" min="0" max="24" step="0.25" value="9" aria-label="Ora del giorno">
@@ -114,16 +113,6 @@ details ol{margin-top:10px}
       <button type="button" id="goRise">Alba</button>
       <button type="button" id="goNoon">Mezzogiorno</button>
       <button type="button" id="goSet">Tramonto</button>
-    </div>
-    <div class="row" role="group" aria-label="Giorno dell'anno">
-      <span class="lbl">Giorno</span>
-      <button type="button" class="day" data-k="equi" aria-pressed="true">21 marzo / 23 settembre</button>
-      <button type="button" class="day" data-k="giu" aria-pressed="false">21 giugno</button>
-      <button type="button" class="day" data-k="dic" aria-pressed="false">21 dicembre</button>
-      <button type="button" class="day" data-k="oggi" aria-pressed="false">Oggi</button>
-    </div>
-    <div class="row">
-      <label class="chk"><input type="checkbox" id="compare"> Confronta le stagioni (mostra i tre percorsi)</label>
     </div>
   </section>
 
@@ -139,31 +128,48 @@ details ol{margin-top:10px}
       <p class="note" id="topNote"></p>
     </div>
     <div class="card">
-      <h2>Cosa vedi</h2>
+      <details class="approfondimento"><summary>Leggi i dati della simulazione</summary>
       <dl id="out" aria-live="polite"></dl>
-      <p class="note">L'ora è quella del Sole: a mezzogiorno il Sole è nel punto più alto del cielo. Gli orologi segnano un po' di più (con l'ora legale, circa un'ora in più).</p>
-      <h2>Prova a rispondere</h2>
-      <ol>
-        <li>A che ora il Sole è più alto? In quale direzione si trova?</li>
-        <li>Porta l'ora alle 9: da che parte è il Sole?<span class="oscura"> E verso dove punta l'ombra?</span></li>
-        <li>Confronta il 21 giugno e il 21 dicembre: dove sorge il Sole? Quante ore di luce ci sono?</li>
-        <li class="oscura">Guarda la vista dall'alto: quando l'ombra è più corta, verso quale punto cardinale punta?</li>
-        <li>Scegli Sydney e vai a mezzogiorno: dove si trova il Sole?<span class="oscura"> Verso dove punta l'ombra? Potresti trovare il Sud come a Roma?</span></li>
-        <li class="oscura">Scegli Nairobi e vai a mezzogiorno del 21 marzo: cosa succede all'ombra? Perché?</li>
-      </ol>
-      <details>
-        <summary>Risposte per l'insegnante</summary>
-        <ol>
-          <li>A Roma alle 12 (ora del Sole). Il Sole è a Sud.</li>
-          <li>Il Sole è a Sud-Est<span class="oscura">; l'ombra punta a Nord-Ovest, sempre dalla parte opposta al Sole</span>.</li>
-          <li>A Roma: a giugno sorge a Nord-Est e ci sono circa 15 ore di luce; a dicembre sorge a Sud-Est e le ore di luce sono circa 9. Solo a marzo e settembre sorge esattamente a Est.</li>
-          <li class="oscura">Verso Nord: l'ombra più corta è quella di mezzogiorno, quando il Sole è a Sud.</li>
-          <li>A Sydney (emisfero Sud) il Sole a mezzogiorno è a Nord<span class="oscura"> e l'ombra punta a Sud. Il metodo del libro va rovesciato: lì il Sole di mezzogiorno indica il Nord</span>.</li>
-          <li class="oscura">Il Sole è quasi sopra la testa e l'ombra quasi scompare. Vicino all'equatore il Sole di mezzogiorno può stare a Nord o a Sud a seconda del periodo dell'anno.</li>
-        </ol>
-      </details>
+      <p>L’ora indicata è quella del Sole: il mezzogiorno solare non coincide necessariamente con le 12 dell’orologio.</p></details>
     </div>
   </div>
+  <section class="percorso-lettura" aria-labelledby="osservato">
+    <h2 id="osservato">Che cosa abbiamo osservato?</h2>
+    <p>Il Sole ci appare in posizioni diverse durante la giornata.</p>
+    <p class="web-etichetta">A Roma</p><ul class="web-elenco"><li><strong>Alba:</strong> il Sole sorge dalla parte dell’Est.</li><li><strong>Mezzogiorno solare:</strong> raggiunge il punto più alto del percorso giornaliero e si trova verso Sud.</li><li><strong>Tramonto:</strong> scompare dalla parte dell’Ovest.</li></ul>
+    <p>Queste direzioni possono diventare punti di riferimento anche in un luogo che non conosciamo.</p>
+    <h2>FASE 2: Diamo un nome alle direzioni</h2>
+    <p>Apri il libro alle pagine A4–A5 e cerca i quattro <strong>punti cardinali</strong>: Nord, Sud, Est e Ovest.</p>
+    <p>Immagina di essere a Roma e di guardare verso il Sole al mezzogiorno solare: davanti a te c’è il Sud. Dove si trovano gli altri tre punti cardinali?</p>
+    <ol class="web-passi"><li><strong>Disegna</strong> sul quaderno una persona rivolta a Sud.</li><li><strong>Scrivi</strong> gli altri punti cardinali dietro e ai lati.</li><li><strong>Controlla</strong> la tua risposta aprendo il riquadro qui sotto.</li></ol>
+    <details><summary>Controlla dopo aver provato</summary><p>Alle spalle c’è il Nord, alla tua sinistra l’Est e alla tua destra l’Ovest.</p></details>
+    <h2>Torniamo alla simulazione</h2>
+    <p>Cambia il periodo dell’anno e osserva il punto in cui sorge il Sole. È sempre nello stesso posto?</p>
+    <div class="row" role="group" aria-label="Giorno dell'anno">
+      <span class="lbl">Giorno</span>
+      <button type="button" class="day" data-k="equi" aria-pressed="true">21 marzo / 23 settembre</button>
+      <button type="button" class="day" data-k="giu" aria-pressed="false">21 giugno</button>
+      <button type="button" class="day" data-k="dic" aria-pressed="false">21 dicembre</button>
+      <button type="button" class="day" data-k="oggi" aria-pressed="false">Oggi</button>
+    </div>
+    <div class="row">
+      <label class="chk"><input type="checkbox" id="compare"> Confronta le stagioni (mostra i tre percorsi)</label>
+    </div>
+    <p>Dire che sorge “dalla parte dell’Est” ci dà un’indicazione generale. Il punto preciso cambia durante l’anno: il Sole sorge esattamente a Est agli equinozi.</p>
+    <details class="approfondimento"><summary>Succede così in tutta la Terra?</summary>
+    <p>Scegli Sydney, poi torna alla simulazione e premi “Mezzogiorno”. Il Sole si trova dalla stessa parte che a Roma? Puoi confrontare anche Oslo e Nairobi.</p>
+    <div class="row" role="group" aria-label="Città">
+      <span class="lbl">Città</span>
+      <button type="button" class="city" data-c="oslo" aria-pressed="false">Oslo (Norvegia)</button>
+      <button type="button" class="city" data-c="roma" aria-pressed="true">Roma</button>
+      <button type="button" class="city" data-c="nairobi" aria-pressed="false">Nairobi (Kenya)</button>
+      <button type="button" class="city" data-c="sydney" aria-pressed="false">Sydney (Australia)</button>
+    </div>
+    <p>Per riprendere il percorso principale, seleziona Roma.</p></details>
+    <h2>Una domanda per continuare</h2>
+    <p class="web-domanda">Il Sole ci aiuta durante il giorno. Ma come possiamo orientarci quando è notte?</p>
+    <a class="continua" href="orientarsi-con-le-stelle.html">Continua: Orientarsi con le stelle →</a>
+  </section>
 </div>
 
 <script>
@@ -320,6 +326,7 @@ details ol{margin-top:10px}
   }
 
   function drawTop(){
+    if (top.clientWidth <= 60) return;
     const { ctx, W } = setup(top);
     const body = tok('--f-body'), surf = tok('--surface'), line = tok('--line'), ink = tok('--ink'),
           chalk = tok('--chalk'), shade = tok('--shade'), sunC = tok('--sun'), muted = tok('--muted');
@@ -414,7 +421,9 @@ details ol{margin-top:10px}
   }
 
   function drawSide(){
-    const side = $('side'); const { ctx, W, H } = setup(side);
+    const side = $('side');
+    if (!side.clientWidth) return;
+    const { ctx, W, H } = setup(side);
     const body = tok('--f-body'), ink = tok('--ink'), shade = tok('--shade'), sunC = tok('--sun'), muted = tok('--muted'), bg = tok('--bg'), sunInk = tok('--sun-ink');
     const s = sunPos(state.t, declFor(state.k));
     ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);

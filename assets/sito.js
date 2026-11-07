@@ -92,10 +92,10 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 /* Costruisce le pagine a partire dal catalogo in materiali.js.
    Di solito non c'è bisogno di modificare questo file. */
 var MATERIE = {
-    "geografia": { nome: "Geografia", descr: "La Terra, i climi, la popolazione, l'economia e gli Stati del mondo." },
-    "storia": { nome: "Storia", descr: "Fonti, periodi, linee del tempo e grandi trasformazioni." },
-    "italiano": { nome: "Italiano", descr: "Lettura, scrittura, grammatica e laboratori di scrittura creativa." },
-    "educazione-civica": { nome: "Educazione civica", descr: "Costituzione, cittadinanza, ambiente e vita in comunità." }
+    "geografia": { nome: "Geografia", descr: "Come sono fatti i luoghi in cui viviamo? Come li trasformiamo e come ci influenzano?" },
+    "storia": { nome: "Storia", descr: "Come vivevano le persone nel passato? Come è cambiato il mondo e perché?" },
+    "italiano": { nome: "Italiano", descr: "Come possiamo capire e raccontare storie, idee ed emozioni? Come scegliamo le parole per farci capire?" },
+    "educazione-civica": { nome: "Educazione civica", descr: "Come possiamo vivere bene insieme? Quali diritti e responsabilità abbiamo?" }
 };
 var CLASSI = ["prima", "seconda", "terza"];
 var corpo = document.body;
@@ -132,7 +132,7 @@ function el(tag, attrs) {
     return n;
 }
 var maiuscola = function (s) { return s.charAt(0).toUpperCase() + s.slice(1); };
-var ELENCO_MODULI = typeof MODULI !== "undefined" ? MODULI : [];
+var ELENCO_MODULI = typeof MODULI !== "undefined" ? MODULI.filter(function (m) { return m.attivo !== false; }) : [];
 var nomeModulo = function (mod) { return (mod.numero ? "Modulo " + mod.numero + " – " : "") + mod.titolo; };
 /* ---------- segno delle lezioni nella programmazione di dipartimento ---------- */
 function segnoDipartimento(lez) {
@@ -230,38 +230,24 @@ function home() {
     var e_3, _a;
     var griglia = document.getElementById("materie");
     griglia.innerHTML = "";
-    var _loop_2 = function (id, info) {
-        var moduli = ELENCO_MODULI.filter(function (m) { return m.materia === id; });
-        var n = tutteLeAttivita(moduli).length;
-        var nl = moduli.reduce(function (t, m) { return t + (m.lezioni || []).length; }, 0);
-        var plurale = function (x, uno, tanti) { return x === 1 ? "1 " + uno : x + " " + tanti; };
-        var conta = "Materiali in arrivo";
-        if (moduli.length) {
-            conta = [plurale(moduli.length, "modulo", "moduli"),
-                nl ? plurale(nl, "lezione", "lezioni") : null,
-                n ? plurale(n, "attività", "attività") : null].filter(Boolean).join(", ");
-        }
-        griglia.append(el("a", { class: "materia", href: id + "/index.html", style: "--c: var(--".concat(id, ")") }, el("h3", null, info.nome), el("p", null, info.descr), el("p", { class: "conta" }, conta)));
-    };
-    try {
-        for (var _b = __values(Object.entries(MATERIE)), _c = _b.next(); !_c.done; _c = _b.next()) {
-            var _d = __read(_c.value, 2), id = _d[0], info = _d[1];
-            _loop_2(id, info);
-        }
-    }
-    catch (e_3_1) { e_3 = { error: e_3_1 }; }
-    finally {
-        try {
-            if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-        }
-        finally { if (e_3) throw e_3.error; }
-    }
+    Object.entries(MATERIE).forEach(function (entry) {
+        var id = entry[0], info = entry[1];
+        var anni = el("nav", { class: "materia-classi", "aria-label": "Anni di " + info.nome });
+        CLASSI.forEach(function (classe) {
+            anni.append(el("a", {
+                href: id + "/index.html?classe=" + classe,
+                "aria-label": info.nome + ": classe " + classe
+            }, maiuscola(classe)));
+        });
+        griglia.append(el("article", { class: "materia", style: "--c: var(--" + id + ")" },
+            el("h3", null, info.nome), el("p", null, info.descr), anni));
+    });
     elencoUda(document.getElementById("uda"), function () { return true; }, "Le UDA interdisciplinari arriveranno presto.");
     var recenti = document.getElementById("recenti");
-    var lezioniConPagina = ELENCO_MODULI.flatMap(function (mod) {
+    var lezioniConPagina = ELENCO_MODULI.filter(function (m) { return !m.standby; }).flatMap(function (mod) {
         return (mod.lezioni || []).filter(function (l) { return l.link; }).map(function (l) { return (__assign(__assign({}, l), { tipo: "Lezione", mod: mod, lez: null })); });
     });
-    var ordinati = __spreadArray(__spreadArray([], __read(lezioniConPagina), false), __read(tutteLeAttivita(ELENCO_MODULI)), false).filter(function (a) { return a.data; })
+    var ordinati = __spreadArray(__spreadArray([], __read(lezioniConPagina), false), __read(tutteLeAttivita(ELENCO_MODULI.filter(function (m) { return !m.standby; }))), false).filter(function (a) { return a.data; })
         .sort(function (a, b) { return b.data.localeCompare(a.data); })
         .slice(0, 6);
     if (!ordinati.length)
@@ -305,27 +291,27 @@ function paginaMateria(id) {
             disegna();
         }); });
     }
-    /* pulsante per vedere solo gli argomenti della programmazione di dipartimento */
-    var soloDip = new URLSearchParams(location.search).get("dipartimento") === "1";
-    var pulsanteDip = null;
-    if (tutti.some(function (m) { return (m.lezioni || []).some(function (l) { return l.dipartimento; }); })) {
-        pulsanteDip = el("button", { type: "button", class: "pulsante-dip" }, "◆ Solo programma di dipartimento");
-        campo.before(el("div", { class: "classi", role: "group", "aria-label": "Programma di dipartimento" }, pulsanteDip));
-        pulsanteDip.addEventListener("click", function () {
-            soloDip = !soloDip;
-            var url = new URL(location);
-            soloDip ? url.searchParams.set("dipartimento", "1") : url.searchParams.delete("dipartimento");
-            history.replaceState(null, "", url);
-            disegna();
-        });
+    /* Il programma di dipartimento resta un'indicazione delle singole lezioni. */
+  function aggiornaFiltri() {
+    var libroUnico = id === "geografia" && (classe === "prima" || classe === "seconda");
+    var gruppoLibri = document.querySelector(".libri-filtro");
+    if (gruppoLibri) gruppoLibri.style.display = libroUnico ? "none" : "";
+    var url = new URL(location);
+    var daAggiornare = url.searchParams.has("dipartimento");
+    url.searchParams.delete("dipartimento");
+    if (libroUnico) {
+      libro = "tutti";
+      daAggiornare = daAggiornare || url.searchParams.has("libro");
+      url.searchParams.delete("libro");
     }
-    /* tiene solo le lezioni del libro scelto e, se richiesto, quelle del programma di dipartimento
-       (il modulo resta solo se ne rimane qualcuna) */
+    if (daAggiornare) history.replaceState(null, "", url);
+  }
+  /* Tiene solo le lezioni del libro scelto. */
     function perLibro(mod) {
-        if (libro === "tutti" && !soloDip)
+        if (libro === "tutti")
             return mod;
         var lezioni = (mod.lezioni || []).filter(function (l) {
-            return (libro === "tutti" || libriDi(l).includes(libro)) && (!soloDip || l.dipartimento);
+            return (libro === "tutti" || libriDi(l).includes(libro));
         });
         return lezioni.length ? __assign(__assign({}, mod), { lezioni: lezioni }) : null;
     }
@@ -352,13 +338,18 @@ function paginaMateria(id) {
         return lezioni.length || attivita.length ? __assign(__assign({}, mod), { lezioni: lezioni, attivita: attivita }) : null;
     }
     function disegnaModulo(mod, cercando) {
+    if (mod.standby) {
+      return el("div", { class: "modulo modulo-in-standby", "aria-disabled": "true" },
+        el("div", { class: "modulo-sospeso" },
+          el("span", { class: "numero-modulo" }, mod.numero ? "Modulo " + mod.numero : "Modulo"),
+          el("span", { class: "titolo-modulo" }, mod.titolo),
+          el("span", { class: "segno-standby" }, "In revisione")));
+    }
+
         var lezioni = mod.lezioni || [];
-        var nAtt = tutteLeAttivita([mod]).length;
+
         var chiave = idModulo(mod);
-        var riepilogo = lezioni.length || nAtt
-            ? [lezioni.length ? (lezioni.length === 1 ? "1 lezione" : lezioni.length + " lezioni") : null,
-                nAtt ? (nAtt === 1 ? "1 attività" : nAtt + " attività") : null].filter(Boolean).join(", ")
-            : "In preparazione";
+
         var box = el("details", { class: "modulo", id: chiave });
         if (cercando || aperti.has(chiave))
             box.open = true;
@@ -369,7 +360,7 @@ function paginaMateria(id) {
         });
         box.append(el("summary", null, el("span", { class: "numero-modulo" }, mod.numero ? "Modulo " + mod.numero : "Modulo"), mod.link
             ? el("a", { class: "titolo-modulo", href: BASE + mod.link, title: "Apri la pagina del modulo" }, mod.titolo)
-            : el("span", { class: "titolo-modulo" }, mod.titolo), el("span", { class: "riepilogo" }, riepilogo)));
+            : el("span", { class: "titolo-modulo" }, mod.titolo)));
         var dentro = el("div", { class: "contenuto-modulo" });
         if (mod.descrizione)
             dentro.append(el("p", { class: "descr-modulo" }, mod.descrizione));
@@ -406,12 +397,40 @@ function paginaMateria(id) {
         box.append(dentro);
         return box;
     }
+  function aggiungiPercorsi(gruppo, moduli, cercando) {
+    if (id !== "geografia") {
+      moduli.forEach(function (m) { gruppo.append(disegnaModulo(m, cercando)); });
+      return;
+    }
+    var anno = moduli[0].classe;
+    var territori = {
+      prima: "L’Italia e le sue regioni",
+      seconda: "L’Europa e i suoi Stati",
+      terza: "I continenti e gli Stati del mondo"
+    };
+    var percorsi = [
+      { id: "come", titolo: "Come", sottotitolo: "Gli strumenti per capire", descrizione: "Strumenti e concetti per leggere paesaggi e territori." },
+      { id: "cosa", titolo: "Cosa", sottotitolo: territori[anno], descrizione: "Mettiamo in pratica quello che abbiamo imparato per conoscere i territori." },
+      { id: "roma", titolo: "Alla scoperta di Roma", sottotitolo: "La geografia sul campo", descrizione: "Osserviamo la città, raccogliamo informazioni e costruiamo un atlante dei quartieri." }
+    ];
+    percorsi.forEach(function (percorso) {
+      var scelti = moduli.filter(function (m) { return (m.percorso || "come") === percorso.id; });
+      if (!scelti.length) return;
+      var titoloId = "percorso-" + anno + "-" + percorso.id;
+      var sezione = el("section", { class: "percorso-geografia" + (scelti.every(function (m) { return m.standby; }) ? " percorso-in-standby" : ""), "aria-labelledby": titoloId },
+        el("h3", { id: titoloId }, percorso.titolo),
+        el("p", { class: "percorso-sottotitolo" }, percorso.sottotitolo),
+        el("p", { class: "percorso-descrizione" }, percorso.descrizione));
+      scelti.forEach(function (m) { sezione.append(disegnaModulo(m, cercando)); });
+      gruppo.append(sezione);
+    });
+  }
+
     function disegna() {
+    aggiornaFiltri();
         var e_4, _a;
         pulsanti.forEach(function (b) { return b.setAttribute("aria-pressed", b.dataset.classe === classe); });
         pulsantiLibro.forEach(function (b) { return b.setAttribute("aria-pressed", b.dataset.libro === libro); });
-        if (pulsanteDip)
-            pulsanteDip.setAttribute("aria-pressed", soloDip);
         var q = campo.value.trim().toLowerCase();
         var scelti = tutti
             .filter(function (m) { return classe === "tutte" || m.classe === classe; })
@@ -429,7 +448,7 @@ function paginaMateria(id) {
             if (!diClasse.length)
                 return "continue";
             var gruppo = el("section", { class: "gruppo" }, el("h2", null, "Classe " + c));
-            diClasse.forEach(function (m) { return gruppo.append(disegnaModulo(m, !!q || libro !== "tutti" || soloDip)); });
+            aggiungiPercorsi(gruppo, diClasse, !!q || libro !== "tutti");
             area.append(gruppo);
         };
         try {

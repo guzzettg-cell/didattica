@@ -67,7 +67,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   gap: 16px;
 }
 .materia {
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   padding: 26px 28px;
   border: 1px solid var(--filo);
@@ -82,7 +83,15 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   color: var(--c);
 }
 .materia p { margin: 0; color: var(--tenue); font-size: 16px; }
-.materia .conta { margin-top: 12px; font-size: 15px; color: var(--inchiostro); }
+.materia-classi { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 20px; }
+.materia-classi a {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; padding: 8px 14px; box-sizing: border-box;
+  border: 1px solid currentColor; border-radius: 5px;
+  color: var(--inchiostro); background: #fff; font-weight: 700; text-decoration: none;
+}
+.materia-classi a:hover { background: #f0ede7; text-decoration: underline; }
+.materia-classi a:focus { outline: 3px solid var(--inchiostro); outline-offset: 3px; }
 
 /* elenchi di materiali */
 .elenco { list-style: none; margin: 0; padding: 0; }
@@ -392,3 +401,29 @@ a.titolo-modulo:hover { color: var(--accento); }
   display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px;
   border: 1px solid currentColor; font-size: 12px; font-style: normal; letter-spacing: .02em;
 }
+
+/* Home: materiali per i docenti consultabili su richiesta. */
+.home-pannello > summary {
+  display: list-item; width: fit-content; max-width: 100%;
+  box-sizing: border-box; min-height: 44px; padding: 10px 16px;
+  border: 1px solid var(--filo); border-radius: 6px;
+  background: #fff; color: var(--inchiostro);
+  font-weight: 700; cursor: pointer;
+}
+.home-pannello > summary:hover { background: #faf8f5; }
+.home-pannello > summary:focus-visible {
+  outline: 3px solid var(--inchiostro); outline-offset: 3px;
+}
+.home-pannello > .elenco, .home-pannello > .vuoto { margin-top: 16px; }
+
+.home-pannello > .sottotitolo { margin-top: 16px; }
+
+/* Indice di geografia: strumenti, territori e percorso sul campo. */
+.percorso-geografia { margin-top: 30px; padding-top: 18px; border-top: 3px solid var(--accento); }
+.percorso-geografia > h3 { font: 700 30px/1.2 var(--serif); color: var(--accento); margin: 0 0 6px; }
+.percorso-sottotitolo { font-weight: 700; margin: 0 0 4px; }
+.percorso-descrizione { color: var(--tenue); margin: 0 0 18px; max-width: 65ch; }
+
+/* Percorsi sospesi: visibili come le UDA in revisione, senza collegamenti. */
+.percorso-in-standby { filter: grayscale(1); opacity: .45; }
+.modulo-sospeso { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px; padding: 20px 24px; border-left: 6px solid var(--accento); border-radius: 6px; }

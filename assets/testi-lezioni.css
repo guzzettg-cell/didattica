@@ -1,0 +1,9 @@
+/* Gerarchia di lettura: domande, consegne, parole chiave. */
+.web-domanda{font-family:var(--cond,var(--f-display,sans-serif));font-size:clamp(1.25rem,3vw,1.6rem);font-weight:700;line-height:1.35;color:var(--ocean,var(--accent));border-left:4px solid currentColor;padding:.7rem 1rem;background:var(--paper,var(--surface));margin:1rem 0;max-width:65ch}
+.web-passi,.web-elenco{padding-left:1.5rem;margin:.7rem 0 1rem;display:grid;gap:.65rem;max-width:68ch}
+.web-passi>li,.web-elenco>li{padding-left:.2rem;line-height:1.6}
+.web-passi>li::marker,.web-elenco>li::marker{color:var(--ocean,var(--accent));font-weight:700}
+.web-passi strong,.web-elenco strong{color:var(--ocean,var(--accent))}
+.web-ricorda{margin:1rem 0;padding:.8rem 1rem;border-left:4px solid var(--warm,var(--sun-ink));background:var(--paper,var(--surface));max-width:68ch}
+.web-ricorda strong{color:var(--warm,var(--sun-ink))}
+.web-etichetta{display:block;font-family:var(--cond,var(--f-display,sans-serif));font-weight:700;color:var(--ocean,var(--accent));margin:.5rem 0}
