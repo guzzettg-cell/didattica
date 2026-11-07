@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dove siamo? La Terra vista dallo spazio</title>
+<meta name="description" content="Quiz: otto paesaggi fotografati dallo spazio (immagini NASA). Leggi gli indizi e indovina dove siamo: laghi, lagune, vulcani, montagne, fiumi e deserti.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+/* Layout: una «pagina di rivista» per volta: foto grande a sinistra, indovinello a destra, soluzione sotto. */
+:root{
+  --bg:#EEF1EE; --paper:#FAFBF9; --ink:#1D2A30; --muted:#5B6B70; --line:#C9D2CE;
+  --ocean:#2C5872; --warm:#B3412F; --ok:#2E7D4F; --no:#B3412F; --sel:#E8B04A;
+  --cond:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+    --ocean:#80B1CC; --warm:#EF8A73; --ok:#6FC08F; --no:#EF8A73; --sel:#C9913A; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+  --ocean:#80B1CC; --warm:#EF8A73; --ok:#6FC08F; --no:#EF8A73; --sel:#C9913A; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.6}
+h1,h2,h3{font-family:var(--cond);line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:var(--ocean)}
+:focus-visible{outline:3px solid var(--ocean);outline-offset:2px}
+.wrap{max-width:72rem;margin:0 auto;padding:1rem 16px 3rem}
+.lnav{font:600 1.02rem var(--cond);margin-bottom:1.4rem}
+header.testa{display:grid;gap:.6rem;margin-bottom:1.4rem}
+.eyebrow{font:600 1.1rem var(--cond);color:var(--muted)}
+h1{font-size:clamp(2.4rem,7vw,4rem);font-weight:700}
+h1 span{color:var(--ocean)}
+.lede{font-size:1.18rem;color:var(--muted);max-width:68ch}
+.pagine{display:inline-block;font:600 .95rem var(--cond);border:1px solid var(--line);border-radius:20px;padding:.05rem .7rem;background:var(--paper)}
+details.docente{border:1px dashed var(--warm);border-radius:8px;padding:.6rem .9rem;background:var(--paper);max-width:68ch}
+details.docente summary{font:700 1rem var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--warm);cursor:pointer}
+details.docente ol{margin:.5rem 0 0;padding-left:1.3rem;display:grid;gap:.3rem}
+
+/* barra dei quiz */
+.barra{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem 1rem;margin:1.2rem 0 .8rem;border-top:4px solid var(--ink);padding-top:.7rem}
+.pallini{display:flex;flex-wrap:wrap;gap:.35rem;list-style:none;margin:0;padding:0}
+.pallini button{font:700 1.05rem var(--cond);width:2.3rem;height:2.3rem;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.pallini button[aria-current="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pallini button.fatto{box-shadow:inset 0 0 0 3px var(--ok)}
+.pallini button.mancato{box-shadow:inset 0 0 0 3px var(--warm)}
+.punti{font:700 1.1rem var(--cond);color:var(--muted)}
+
+/* la pagina del quiz */
+.quiz{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1.2rem 1.25rem 1.4rem;display:grid;gap:1.2rem}
+.q-testa{display:grid;gap:.2rem}
+.q-testa .n{font:700 1rem var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--warm)}
+.q-testa h2{font-size:clamp(1.9rem,4.5vw,2.7rem)}
+.q-testa h2 span{color:var(--ocean)}
+.pagina{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:1.4rem;align-items:start}
+.foto{display:grid;gap:.5rem;min-width:0}
+.foto .coppia{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.foto figure{margin:0;display:grid;gap:.25rem;min-width:0}
+.foto img{display:block;width:100%;height:auto;border-radius:6px;background:#0d1418;min-height:12rem;object-fit:cover}
+.foto .coppia img{aspect-ratio:1/1}
+.foto figcaption{font:600 1rem var(--cond);color:var(--muted)}
+.foto .apri{font:600 1rem var(--cond)}
+.testo{display:grid;gap:1rem;min-width:0}
+.indovinello{font-size:1.14rem;line-height:1.6}
+.indovinello b{font-weight:600}
+.domanda{font:700 1.4rem var(--cond)}
+.fonte{border-left:4px solid var(--ocean);padding:.3rem 0 .3rem .8rem;display:grid;gap:.15rem}
+.fonte b{font:700 1.05rem var(--cond);color:var(--ocean)}
+.fonte p{font-size:.95rem;color:var(--muted)}
+.opz{display:flex;flex-wrap:wrap;gap:.45rem}
+.opz button{font:600 1.12rem var(--cond);background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:.45rem .9rem;cursor:pointer;text-align:left}
+.opz button:disabled{cursor:default}
+.opz button.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opz button.no{background:var(--no);color:#fff;border-color:var(--no);opacity:.85}
+.fb{font:600 1.12rem var(--cond);min-height:1.4em}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--no)}
+details.rivela{border:1px solid var(--line);border-radius:8px;padding:.5rem .85rem;background:var(--bg)}
+details.rivela summary{font:600 1.08rem var(--cond);cursor:pointer;color:var(--ocean)}
+details.rivela > div{margin-top:.5rem;display:grid;gap:.5rem}
+details.soluzione{border-color:var(--ok)}
+details.soluzione summary{color:var(--ok)}
+.lente{display:inline-block;font:700 .95rem var(--cond);letter-spacing:.05em;text-transform:uppercase;border-radius:20px;padding:.05rem .65rem;color:#fff;background:var(--c,var(--ocean))}
+.link-carta{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font:600 1.02rem var(--cond)}
+.comandi{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:space-between;align-items:center}
+.btn{font:600 1.1rem var(--cond);background:var(--ink);color:var(--paper);border:0;border-radius:6px;padding:.5rem 1.1rem;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.chiaro{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.35;cursor:default}
+
+/* tocca a voi */
+.tocca{margin-top:2.6rem;display:grid;gap:.8rem;border-top:4px solid var(--ink);padding-top:.7rem}
+.tocca .n{font:700 1rem var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--warm)}
+.tocca h2{font-size:clamp(1.8rem,4.5vw,2.5rem)}
+.tocca ol{margin:0;padding-left:1.3rem;display:grid;gap:.45rem;max-width:68ch}
+.crediti{margin-top:2rem;font-size:.92rem;color:var(--muted);max-width:68ch}
+
+@media (max-width:760px){
+  .pagina{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:no-preference){
+  .quiz{animation:entra .25s ease-out}
+  @keyframes entra{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="lnav" aria-label="Modulo"><a href="../index.html">← Il paesaggio: clima, rilievi e acque</a></nav>
+<header class="testa">
+  <div class="eyebrow">Geografia · Modulo II · Gioco</div>
+  <h1>Dove siamo? <span>La Terra vista dallo spazio</span></h1>
+  <p class="lede">Otto paesaggi fotografati dall'alto, dai satelliti e dalla Stazione spaziale. Guarda bene la foto, leggi gli indizi e prova a indovinare dove siamo. Poi controlla con la soluzione e cerca il posto sulla carta.</p>
+  <p><span class="pagine">Ispirato alla rubrica «Dove siamo?» di Internazionale Kids</span> <span class="pagine">Immagini: NASA Earth Observatory</span></p>
+  <details class="docente">
+    <summary>Come si usa in classe</summary>
+    <ol>
+      <li>Proietta la foto (il link «Apri la foto grande» la apre a tutto schermo). Prima di leggere: che cosa vedete? Acqua, montagne, città, deserto?</li>
+      <li>Leggete l'indovinello ad alta voce. Ognuno scrive sul quaderno la sua ipotesi e la parola che lo ha convinto.</li>
+      <li>Si può chiedere «Un indizio in più» e cercare sull'atlante prima di scegliere la risposta.</li>
+      <li>Aprite la soluzione, guardate il posto sulla carta e dite quale lente del paesaggio serve per spiegarlo.</li>
+    </ol>
+  </details>
+</header>
+
+<div class="barra">
+  <ul class="pallini" id="pallini" aria-label="I quiz"></ul>
+  <p class="punti" id="punti" aria-live="polite">Indovinati al primo colpo: 0 su 8</p>
+</div>
+
+<main id="quiz"></main>
+
+<section class="tocca" id="tocca-a-voi">
+  <span class="n">Tocca a voi</span>
+  <h2>Inventate un quiz per un'altra classe</h2>
+  <ol>
+    <li>Sul sito <a href="https://science.nasa.gov/earth/earth-observatory/" target="_blank" rel="noopener">NASA Earth Observatory</a> (dove ora si trova Visible Earth) scegliete una foto in cui si vede bene un elemento del paesaggio: un lago, un fiume, un vulcano, una costa, un deserto.</li>
+    <li>Leggete la didascalia (potete farvi aiutare dal traduttore) e cercate il posto sull'atlante.</li>
+    <li>Scrivete l'indovinello con tre indizi: uno sulla <b>forma</b> che si vede nella foto, uno con un <b>numero</b> (altezza, lunghezza, superficie), uno sulla <b>storia</b> o sulle <b>persone</b> che ci vivono. Non scrivete il nome del posto!</li>
+    <li>Aggiungete il riquadro «Da dove viene questa immagine?»: chi ha scattato la foto e quando.</li>
+    <li>Preparate quattro risposte possibili: una giusta e tre sbagliate ma credibili.</li>
+  </ol>
+</section>
+
+<p class="crediti">Foto e informazioni: NASA Earth Observatory (immagini di pubblico dominio). Le foto della Stazione spaziale internazionale sono state scattate dagli astronauti; quelle dei satelliti Terra e Landsat sono state elaborate dalla NASA. Ogni quiz ha il link alla pagina originale.</p>
+</div>
+
+<script>
+(function(){
+var DYN='https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/';
+var DAM='https://assets.science.nasa.gov/content/dam/science/esd/eo/';
+var LENTI={
+  acque:['Le acque','#2F7FB5'], forze:['Le forze della Terra','#B5523B'], rilievi:['I rilievi','#6B3F74'],
+  clima:['Il clima','#B07A12'], umano:["L'impatto umano",'#8A3D62'], cambia:['Come cambia il paesaggio','#8A5A3C']
+};
+/* Ogni immagine ha una lista di indirizzi: se il primo non si carica, si prova il successivo. */
+var QUIZ=[
+{
+  titolo:'Un lago tra le montagne',
+  foto:[{src:[DYN+'images/imagerecords/91000/91803/ISS053-E-136542_lrg.jpg?w=1600&fit=clip', DAM+'images/imagerecords/91000/91803/ISS053-E-136542.jpg', DAM+'images/imagerecords/91000/91803/ISS053-E-136542_lrg.jpg'], grande:DAM+'images/imagerecords/91000/91803/ISS053-E-136542_lrg.jpg', alt:'Un lungo lago tra le montagne, che si allarga verso la pianura'}],
+  fonte:'Foto scattata da un astronauta della <b>Stazione spaziale internazionale</b> il 27 ottobre 2017.',
+  testo:"È lungo 54 chilometri e si trova proprio dove le <b>Alpi</b> incontrano la <b>Pianura Padana</b>, a metà strada tra Milano e Venezia. A nord è stretto e allungato tra le montagne: a scavare la sua conca, migliaia di anni fa, è stato un <b>ghiacciaio</b>. A sud si allarga verso la pianura. Grazie al suo clima mite, sulle rive crescono perfino <b>olivi e limoni</b>, e il vento lo rende amatissimo da chi fa vela e windsurf.",
+  domanda:'Qual è il lago più grande d’Italia?',
+  opz:['Il Lago Maggiore','Il Lago di Como','Il Lago di Garda','Il Lago Trasimeno'], ok:2,
+  indizio:'Le sue rive sono divise fra tre regioni: Lombardia, Veneto e Trentino-Alto Adige.',
+  soluzione:"È il <b>Lago di Garda</b>, il lago più grande d'Italia. È un lago di origine <b>glaciale</b>, come gli altri grandi laghi prealpini. Un grande lago <b>mitiga il clima</b>: d'inverno l'acqua cede il calore accumulato d'estate.",
+  lenti:['acque','clima'], carta:[45.65,10.68,10], pagina:'https://science.nasa.gov/earth/earth-observatory/lake-garda-91803/'
+},
+{
+  titolo:'Una città sull’acqua',
+  foto:[{src:[DYN+'images/imagerecords/83000/83793/ISS039-E-019482_lrg.jpg?w=1440&h=960&fit=clip&crop=faces%2Cfocalpoint', DAM+'images/imagerecords/83000/83793/ISS039-E-019482_lrg.jpg'], grande:DAM+'images/imagerecords/83000/83793/ISS039-E-019482_lrg.jpg', alt:'Una distesa di acqua bassa separata dal mare da una sottile striscia di terra, con una città al centro'}],
+  fonte:'Foto scattata da un astronauta della <b>Stazione spaziale internazionale</b> il 9 maggio 2014.',
+  testo:"Una sottile <b>striscia di sabbia</b> protegge questa distesa di acqua bassa dalle onde del mare Adriatico. Al centro c'è una città dai <b>tetti rossi</b>, costruita su migliaia di pali di legno piantati nel fango: è collegata alla terraferma da un lungo ponte. Vicino all'aeroporto si vede una linea dritta che sembra un secondo ponte. Invece è fatta solo dalle <b>scie</b> lasciate da barche e taxi d'acqua!",
+  domanda:'Dove siamo?',
+  opz:['Nel delta del Po','Nella laguna di Venezia','Sul Lago di Garda','Nel golfo di Napoli'], ok:1,
+  indizio:'In questa città non ci sono automobili: ci si muove a piedi o in barca, anche in gondola.',
+  soluzione:"È la <b>laguna di Venezia</b>. Una laguna è uno specchio d'acqua salata chiuso da un cordone di sabbia (qui si chiama <i>lido</i>) ma che comunica con il mare attraverso dei passaggi, le <i>bocche di porto</i>. Accanto a Venezia si vede Mestre, con i tetti grigi.",
+  lenti:['acque','umano'], carta:[45.43,12.33,11], pagina:'https://science.nasa.gov/earth/earth-observatory/venice-lagoon-83793'
+},
+{
+  titolo:'La montagna che fuma',
+  foto:[{src:[DYN+'images/imagerecords/154000/154573/ISS072-E-64054_lrg.jpg?w=1600&fit=clip', DAM+'images/imagerecords/154000/154573/ISS072-E-64054.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg'], grande:DAM+'images/imagerecords/154000/154573/ISS072-E-64054.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg', alt:'Una grande montagna isolata vicino al mare, con un pennacchio di fumo'}],
+  fonte:'Foto scattata da un astronauta della <b>Stazione spaziale internazionale</b> il 14 ottobre 2024.',
+  testo:"È uno dei <b>vulcani più attivi del mondo</b> ed è alto circa <b>3.400 metri</b>: per fare il giro della sua base bisogna percorrere 140 chilometri. Dalla cima escono spesso nuvole di gas e cenere che il vento porta sopra una città di mare. Nel <b>1669</b> una colata di lava arrivò fino a quella città. Eppure quasi un terzo degli abitanti dell'isola vive sui suoi fianchi, perché la terra vulcanica è <b>fertilissima</b>.",
+  domanda:'Qual è questo vulcano?',
+  opz:['Il Vesuvio','Lo Stromboli','L’Etna','Il Monte Bianco'], ok:2,
+  indizio:'Si trova sull’isola più grande del Mediterraneo. Chi ci vive lo chiama semplicemente «’a Muntagna».',
+  soluzione:"È l'<b>Etna</b>, in Sicilia: il vulcano attivo più alto d'Europa. La città colpita nel 1669 è <b>Catania</b>. L'Etna è un <b>vulcano a strato</b>: è cresciuto eruzione dopo eruzione, colata sopra colata.",
+  lenti:['forze','umano'], carta:[37.75,14.99,10], pagina:'https://science.nasa.gov/earth/earth-observatory/italys-majestic-mount-etna-154573/'
+},
+{
+  titolo:'Il tetto del mondo',
+  foto:[{src:[DYN+'images/imagerecords/147000/147980/ISS031-E-67020_720.jpg?w=1440&fit=clip', DAM+'images/imagerecords/147000/147980/ISS031-E-67020_720.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg', DAM+'images/imagerecords/147000/147980/ISS031-E-67020_720.jpg'], grande:DAM+'images/imagerecords/147000/147980/ISS031-E-67020.jpeg', alt:'Una lunghissima catena di montagne innevate vista di sbieco, con una pianura davanti e un altopiano dietro'}],
+  fonte:'Foto scattata dall’astronauta <b>Don Pettit</b> dalla Stazione spaziale internazionale il 23 maggio 2012.',
+  testo:"In questa foto vedi circa <b>1.000 chilometri</b> di montagne innevate: è la catena più alta della Terra. Davanti c'è la pianura di un grande fiume, sacro per milioni di persone. Dietro le montagne c'è un altopiano così alto da essere chiamato il <b>«tetto del mondo»</b>, pieno di laghi e ghiacciai. Da qualche parte, qui in mezzo, c'è anche la montagna più alta di tutte, <b>8.849 metri</b>: ma da così lontano non si riesce a distinguerla!",
+  domanda:'Quale catena di montagne è questa?',
+  opz:['Le Alpi','Le Ande','L’Himalaya','Le Montagne Rocciose'], ok:2,
+  indizio:'Il suo nome in una lingua antica dell’India vuol dire «dimora delle nevi».',
+  soluzione:"È l'<b>Himalaya</b>, in Asia. La montagna più alta è l'<b>Everest</b> (8.849 m), al confine tra Nepal e Cina. Davanti c'è la pianura del <b>Gange</b>, dietro l'<b>altopiano del Tibet</b>. L'Himalaya è una catena giovane: è nata dallo scontro tra la placca indiana e quella asiatica, e cresce ancora.",
+  lenti:['rilievi','forze'], carta:[27.99,86.93,6], pagina:'https://science.nasa.gov/earth/earth-observatory/himalayas-near-and-far-147980/'
+},
+{
+  titolo:'Un fiore di luce',
+  foto:[{src:[DAM+'images/imagerecords/46000/46820/ISS025-E-09858_lrg.jpg', DAM+'images/imagerecords/46000/46820/ISS025-E-09858.jpg'], grande:DAM+'images/imagerecords/46000/46820/ISS025-E-09858.jpg', alt:'Foto notturna: le luci delle città disegnano una lunga linea che si apre a ventaglio vicino al mare'}],
+  fonte:'Foto scattata <b>di notte</b> da un astronauta della Stazione spaziale internazionale il 28 ottobre 2010.',
+  testo:"Questa foto è stata scattata di notte. Le luci delle città disegnano un <b>fiore dal lungo stelo</b>. Lo stelo è un fiume, il <b>più lungo dell'Africa</b>, che attraversa il deserto. Il fiore è la sua foce, divisa in tanti rami, dove il fiume si getta nel <b>mar Mediterraneo</b>. Alla base del fiore brilla la capitale del Paese, una delle città più grandi del continente. Intorno, dove non c'è acqua, è tutto buio.",
+  domanda:'Qual è il fiume?',
+  opz:['Il Niger','Il Nilo','Il Congo','Il Danubio'], ok:1,
+  indizio:'Nell’antichità, sulle sue rive, si costruivano le piramidi.',
+  soluzione:"È il <b>Nilo</b>, in Egitto, e il «fiore» è il suo <b>delta</b>. La capitale è <b>Il Cairo</b>. Le luci mostrano dove vivono le persone: quasi tutti gli egiziani abitano lungo il fiume, perché intorno c'è il deserto del Sahara.",
+  lenti:['acque','umano'], carta:[30.6,31.2,7], pagina:'https://science.nasa.gov/earth/earth-observatory/nile-river-delta-at-night-46820/'
+},
+{
+  titolo:'Un occhio nella sabbia',
+  foto:[{src:[DYN+'images/imagerecords/92000/92071/ISS030-E-12516.jpg?w=1440&fit=clip', DAM+'images/imagerecords/92000/92071/ISS030-E-12516.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg'], grande:DAM+'images/imagerecords/92000/92071/ISS030-E-12516_lrg.jpg', alt:'Una grande forma rotonda ad anelli in mezzo al deserto'}],
+  fonte:'Foto scattata da un astronauta della <b>Stazione spaziale internazionale</b> il 17 dicembre 2011.',
+  testo:"In mezzo al <b>deserto caldo più grande del mondo</b> c'è un gigantesco «occhio» largo circa <b>45 chilometri</b>. Per molto tempo si è pensato che fosse il cratere lasciato da un meteorite. Invece era una <b>cupola</b> di rocce, spinta in alto da sotto. Il vento e l'acqua l'hanno consumata strato dopo strato, e sono rimasti questi anelli. Le rocce del centro sono le più antiche. Gli astronauti lo usano come punto di riferimento, perché lassù si vede benissimo.",
+  domanda:'In quale deserto siamo?',
+  opz:['Nel Gobi, in Mongolia','Nel Sahara, in Mauritania','Nell’Atacama, in Cile','Nel Kalahari, in Botswana'], ok:1,
+  indizio:'Lo Stato in cui si trova si affaccia sull’oceano Atlantico, ma questo «occhio» è a circa 500 km dalla costa.',
+  soluzione:"È la <b>struttura di Richat</b>, detta l'«<b>occhio del Sahara</b>», in <b>Mauritania</b>. È un esempio di <b>erosione</b>: le rocce più tenere sono state consumate prima, quelle più dure sono rimaste in rilievo e formano gli anelli.",
+  lenti:['forze','clima'], carta:[21.12,-11.40,10], pagina:'https://science.nasa.gov/earth/earth-observatory/richat-structure-92071/'
+},
+{
+  titolo:'Il lago che sparisce',
+  foto:[
+    {src:[DYN+'woc/images/aral/aralsea_tmo_2000238_lrg.jpg?w=900&fit=clip', DAM+'woc/images/aral/aralsea_tmo_2000238.jpg'], grande:DAM+'woc/images/aral/aralsea_tmo_2000238_lrg.jpg', alt:'Un grande lago in una zona arida, nell’anno 2000', cap:'Agosto 2000'},
+    {src:[DYN+'woc/images/aral/aralsea_tmo_2018233_lrg.jpg?w=900&fit=clip', DAM+'woc/images/aral/aralsea_tmo_2018233.jpg'], grande:DAM+'woc/images/aral/aralsea_tmo_2018233_lrg.jpg', alt:'Lo stesso lago nel 2018: molto più piccolo e diviso in pezzi', cap:'Agosto 2018'}
+  ],
+  fonte:'Immagini del satellite <b>Terra</b> della NASA, agosto 2000 e agosto 2018.',
+  testo:"Queste due foto mostrano lo stesso posto a 18 anni di distanza. Questo lago era il <b>quarto più grande del mondo</b>. Dagli anni Sessanta l'acqua dei due fiumi che lo alimentavano, nati dalle nevi delle montagne, è stata deviata per irrigare enormi campi di <b>cotone</b>. Il lago si è ristretto e diviso in pezzi; nel 2014 la parte orientale è sparita del tutto. Dove c'era l'acqua ora c'è un deserto di sale e polvere, e le <b>navi dei pescatori</b> sono rimaste arenate nella sabbia.",
+  domanda:'Qual è questo lago?',
+  opz:['Il Mar Morto','Il Lago Ciad','Il Lago d’Aral','Il Mar Caspio'], ok:2,
+  indizio:'Si trova in Asia centrale, al confine tra Kazakistan e Uzbekistan.',
+  soluzione:"È il <b>Lago d'Aral</b>. È uno dei più grandi disastri ambientali causati dalle persone: senza il lago gli inverni sono diventati più freddi e le estati più calde e secche, e la polvere salata fa ammalare chi ci vive. Nel 2005 una diga ha salvato la parte nord, dove i pesci sono tornati.",
+  lenti:['umano','cambia'], carta:[45.0,59.5,7], pagina:'https://science.nasa.gov/earth/earth-observatory/world-of-change/aral-sea/'
+},
+{
+  titolo:'Il fiume che si muove',
+  foto:[
+    {src:[DYN+'images/imagerecords/84000/84833/meanders_tm5_1985162_lrg.jpg?w=900&fit=clip', DAM+'images/imagerecords/84000/84833/meanders_tm5_1985162.jpg'], grande:DAM+'images/imagerecords/84000/84833/meanders_tm5_1985162_lrg.jpg', alt:'Un fiume pieno di curve in mezzo alla foresta, nel 1985', cap:'Giugno 1985'},
+    {src:[DYN+'images/imagerecords/84000/84833/meanders_oli_2014194_lrg.jpg?w=900&fit=clip', DAM+'images/imagerecords/84000/84833/meanders_oli_2014194.jpg'], grande:DAM+'images/imagerecords/84000/84833/meanders_oli_2014194_lrg.jpg', alt:'Lo stesso fiume nel 2014, con le curve in posizioni diverse', cap:'Luglio 2014'}
+  ],
+  fonte:'Immagini dei satelliti <b>Landsat 5</b> (1985) e <b>Landsat 8</b> (2014).',
+  testo:"Questo fiume scorre in una pianura quasi piatta, nella grande <b>foresta pluviale</b> dell'America del Sud, e va verso nord fino a unirsi a un fiume ancora più grande. Guarda bene: è pieno di <b>curve a S</b>. Ora confronta le due foto, scattate a 29 anni di distanza: le curve <b>si sono spostate</b>! Alcune sono state «tagliate» e sono rimasti dei laghetti a forma di ferro di cavallo.",
+  domanda:'Come si chiamano queste curve del fiume?',
+  opz:['Cascate','Meandri','Estuari','Delta'], ok:1,
+  indizio:'Nella parte esterna della curva il fiume erode la riva, in quella interna deposita sabbia. Così la curva, piano piano, cammina.',
+  soluzione:"Sono <b>meandri</b>, tipici del <b>corso mediano</b> e <b>inferiore</b> dei fiumi di pianura. Il fiume è il <b>Rio Mamoré</b>, in <b>Bolivia</b>, nel bacino del Rio delle Amazzoni. I laghetti a ferro di cavallo sono i meandri abbandonati (in italiano si chiamano anche <i>lanche</i>).",
+  lenti:['acque','cambia'], carta:[-14.8,-64.9,8], pagina:'https://science.nasa.gov/earth/earth-observatory/meandering-in-the-amazon-84833'
+}
+];
+
+var main=document.getElementById('quiz'), pall=document.getElementById('pallini'), punti=document.getElementById('punti');
+var stato=QUIZ.map(function(){return {scelta:null, primo:null}});
+var ora=0;
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function img(f,eager){
+  return '<figure><img src="'+esc(f.src[0])+'" data-src="'+esc(JSON.stringify(f.src))+'" data-i="0" alt="'+esc(f.alt)+'"'+(eager?'':' loading="lazy"')+' decoding="async">'+(f.cap?'<figcaption>'+f.cap+'</figcaption>':'')+'</figure>';
+}
+function aggiornaPunti(){
+  var n=stato.filter(function(s){return s.primo===true}).length;
+  punti.textContent='Indovinati al primo colpo: '+n+' su '+QUIZ.length;
+  [].forEach.call(pall.querySelectorAll('button'),function(b,i){
+    b.setAttribute('aria-current',i===ora?'true':'false');
+    b.classList.toggle('fatto',stato[i].primo===true);
+    b.classList.toggle('mancato',stato[i].primo===false);
+  });
+}
+function mostra(i,focus){
+  ora=i; var q=QUIZ[i], s=stato[i];
+  var foto=q.foto.length>1?'<div class="coppia">'+q.foto.map(function(f){return img(f,true)}).join('')+'</div>':img(q.foto[0],true);
+  var apri=q.foto.map(function(f,k){return '<a class="apri" href="'+esc(f.grande)+'" target="_blank" rel="noopener">Apri la foto grande'+(q.foto.length>1?' ('+f.cap+')':'')+' ↗</a>'}).join(' · ');
+  var c=q.carta, osm='https://www.openstreetmap.org/?mlat='+c[0]+'&mlon='+c[1]+'#map='+c[2]+'/'+c[0]+'/'+c[1];
+  var lenti=q.lenti.map(function(l){return '<span class="lente" style="--c:'+LENTI[l][1]+'">'+LENTI[l][0]+'</span>'}).join(' ');
+  main.innerHTML='<article class="quiz" aria-labelledby="qt">'+
+    '<div class="q-testa"><span class="n">Quiz '+(i+1)+' di '+QUIZ.length+'</span><h2 id="qt" tabindex="-1">Dove siamo? <span>'+q.titolo+'</span></h2></div>'+
+    '<div class="pagina"><div class="foto">'+foto+'<p>'+apri+'</p></div>'+
+    '<div class="testo"><p class="indovinello">'+q.testo+'</p>'+
+    '<div class="fonte"><b>Da dove viene questa immagine?</b><p>'+q.fonte+'</p></div>'+
+    '<p class="domanda">'+q.domanda+'</p>'+
+    '<div class="opz">'+q.opz.map(function(o,k){return '<button type="button" data-k="'+k+'">'+o+'</button>'}).join('')+'</div>'+
+    '<p class="fb" aria-live="polite"></p>'+
+    '<details class="rivela"><summary>Un indizio in più</summary><div><p>'+q.indizio+'</p></div></details>'+
+    '<details class="rivela soluzione"><summary>La soluzione</summary><div><p>'+q.soluzione+'</p><p>Le lenti per spiegarlo: '+lenti+'</p>'+
+    '<p class="link-carta"><a href="'+osm+'" target="_blank" rel="noopener">Guardalo sulla carta ↗</a><a href="'+esc(q.pagina)+'" target="_blank" rel="noopener">La pagina della NASA (in inglese) ↗</a></p></div></details>'+
+    '</div></div>'+
+    '<div class="comandi"><button type="button" class="btn chiaro" id="prec"'+(i===0?' disabled':'')+'>← Quiz precedente</button>'+
+    (i<QUIZ.length-1?'<button type="button" class="btn" id="succ">Quiz successivo →</button>':'<a class="btn" href="#tocca-a-voi">Ora tocca a voi →</a>')+'</div>'+
+    '</article>';
+  // immagini con riserva
+  [].forEach.call(main.querySelectorAll('img[data-src]'),function(im){
+    im.addEventListener('error',function(){var l=JSON.parse(im.getAttribute('data-src')),k=+im.getAttribute('data-i')+1; if(k<l.length){im.setAttribute('data-i',k); im.src=l[k];}});
+  });
+  var bott=main.querySelectorAll('.opz button'), fb=main.querySelector('.fb');
+  function segna(k){
+    [].forEach.call(bott,function(b,j){ if(j===q.ok){b.classList.add('ok')} else if(j===k){b.classList.add('no')} b.disabled=true; });
+    if(k===q.ok){fb.className='fb ok'; fb.textContent=s.primo?'Giusto, al primo colpo!':'Giusto!';}
+  }
+  [].forEach.call(bott,function(b){
+    b.addEventListener('click',function(){
+      var k=+b.getAttribute('data-k');
+      if(k===q.ok){ if(s.primo===null) s.primo=true; s.scelta=k; segna(k); }
+      else { if(s.primo===null) s.primo=false; b.classList.add('no'); b.disabled=true; fb.className='fb no'; fb.textContent='No: rileggi gli indizi e riprova.'; }
+      aggiornaPunti();
+    });
+  });
+  if(s.scelta!==null) segna(s.scelta);
+  var p=document.getElementById('prec'), n=document.getElementById('succ');
+  if(p) p.onclick=function(){vai(i-1)};
+  if(n) n.onclick=function(){vai(i+1)};
+  aggiornaPunti();
+  if(focus){var h=document.getElementById('qt'); try{h.focus({preventScroll:true})}catch(e){h.focus()} var t=document.querySelector('.barra').getBoundingClientRect().top+window.pageYOffset-8; if(window.pageYOffset>t) window.scrollTo(0,t);}
+}
+function vai(i){ if(i<0||i>=QUIZ.length) return; history.replaceState(null,'','#quiz-'+(i+1)); mostra(i,true); }
+pall.innerHTML=QUIZ.map(function(q,i){return '<li><button type="button" aria-label="Quiz '+(i+1)+': '+esc(q.titolo)+'">'+(i+1)+'</button></li>'}).join('');
+[].forEach.call(pall.querySelectorAll('button'),function(b,i){b.onclick=function(){vai(i)}});
+document.addEventListener('keydown',function(e){
+  if(e.target.closest&&e.target.closest('input,textarea,select')) return;
+  if(e.key==='ArrowRight') vai(ora+1); if(e.key==='ArrowLeft') vai(ora-1);
+});
+var m=/^#quiz-(\d+)$/.exec(location.hash), start=m?Math.min(QUIZ.length,Math.max(1,+m[1]))-1:0;
+mostra(start,false);
+})();
+</script>
+<script src="../../../../assets/barra.js"></script>
+</body>
+</html>

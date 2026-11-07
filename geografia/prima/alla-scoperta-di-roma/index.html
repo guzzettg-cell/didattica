@@ -125,6 +125,33 @@
     margin-top:.4rem;
   }
 
+  /* uscite con guida */
+  .guide-list{display:flex;flex-direction:column;}
+  .g-row{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:1.4rem;
+    padding:1.2rem 0;
+    border-top:1px solid var(--line);
+  }
+  .g-row:last-child{border-bottom:1px solid var(--line);}
+  .g-mission{
+    font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;
+    border-left:5px solid var(--era-color, var(--metro));
+    padding-left:.7rem;
+    align-self:start;
+  }
+  .g-mission small{display:block;font-family:'Inter',sans-serif;font-weight:500;font-size:.75rem;color:var(--ink-soft);margin-top:.2rem;}
+  .g-items{display:flex;flex-direction:column;gap:.7rem;}
+  .g-item{font-size:.92rem;color:var(--ink-soft);}
+  .g-item a{font-weight:600;color:var(--metro-deep);text-decoration:none;border-bottom:1px solid var(--metro);}
+  .g-item a:hover{color:var(--metro);}
+  .g-tag{display:inline-block;font-size:.7rem;font-weight:600;background:var(--cream-deep);color:var(--ink-soft);padding:.1rem .45rem;border-radius:3px;margin-left:.3rem;white-space:nowrap;}
+  .g-note{margin-top:1.6rem;font-size:.85rem;color:var(--ink-soft);max-width:68ch;}
+  @media (max-width:680px){
+    .g-row{grid-template-columns:1fr;gap:.6rem;}
+  }
+
   footer{padding:4vh 8vw 6vh;border-top:1px solid var(--line);color:var(--ink-soft);font-size:.85rem;text-align:center;}
 </style>
 </head>
@@ -234,6 +261,78 @@
     </div>
 
   </div>
+</section>
+
+<section>
+  <h2>Uscite con guida</h2>
+  <p class="section-lead">Alcune missioni si possono fare anche con la classe, accompagnati da una guida. Qui sotto trovate i percorsi dell'associazione <strong>APPasseggio</strong> che si collegano a ciascuna missione, più alcune idee per allargare lo sguardo. I nomi rimandano alla scheda del loro catalogo per le scuole medie.</p>
+  <div class="guide-list">
+
+    <div class="g-row" style="--era-color:var(--antica)">
+      <div class="g-mission">San Giovanni<small>Laterano e Celio</small></div>
+      <div class="g-items">
+        <div class="g-item"><a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/#roma-costantino" target="_blank" rel="noopener">La Roma di Costantino</a><span class="g-tag">classi prime</span><br>Battistero e Basilica di San Giovanni in Laterano, Santa Croce in Gerusalemme: la Roma che diventa cristiana, proprio il livello della linea del tempo dedicato al Medioevo.</div>
+        <div class="g-item"><a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/#forma-urbis" target="_blank" rel="noopener">Parco del Celio e Museo della Forma Urbis</a><span class="g-tag">tutte le classi</span><br>La grande pianta di Roma incisa nel marmo nel III secolo, messa a confronto con la pianta del Nolli del 1748: com'era vista la città dall'alto, prima dei satelliti.</div>
+      </div>
+    </div>
+
+    <div class="g-row" style="--era-color:var(--preistoria)">
+      <div class="g-mission">Monte Mario<small>preistoria</small></div>
+      <div class="g-items">
+        <div class="g-item">Nessun percorso guidato in catalogo: questa missione si fa in autonomia. Per un confronto interessante, vedi il <strong>Monte Testaccio</strong> più sotto: una collina fatta dall'uomo.</div>
+      </div>
+    </div>
+
+    <div class="g-row" style="--era-color:var(--antica)">
+      <div class="g-mission">Via Appia Antica<small>Roma antica</small></div>
+      <div class="g-items">
+        <div class="g-item"><a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/#appia-regina-viarum" target="_blank" rel="noopener">Appia: regina viarum, diagonale d'Oriente</a><span class="g-tag">tutte le classi</span><br>Il terzo miglio dell'Appia, da San Sebastiano a Capo di Bove: strade, sepolcri e paesaggio della campagna romana.</div>
+        <div class="g-item"><a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/#escape-game-scorpo-archeologa" target="_blank" rel="noopener">Escape game "Il tesoro di Scorpo e l'archeologa rapita"</a><span class="g-tag">classi prime</span><br>Un gioco a squadre nel Circo di Massenzio, tra indizi, enigmi e corse delle bighe.</div>
+      </div>
+    </div>
+
+    <div class="g-row" style="--era-color:var(--medioevo)">
+      <div class="g-mission">Parco della Caffarella<small>le acque</small></div>
+      <div class="g-items">
+        <div class="g-item"><a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/#parco-acquedotti" target="_blank" rel="noopener">Minitrekking nel Parco degli Acquedotti</a><span class="g-tag">tutte le classi</span><br>Un anello pianeggiante di circa 5 km tra gli acquedotti romani: alla Caffarella l'acqua dei fiumi e della marrana, qui l'acqua portata in città dall'uomo.</div>
+        <div class="g-item"><a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/#escape-game-tor-fiscale" target="_blank" rel="noopener">Escape game "Intrigo a Tor Fiscale"</a><span class="g-tag">classi prime</span><br>Nello stesso parco: per risolvere il mistero bisogna capire come funzionavano gli acquedotti.</div>
+      </div>
+    </div>
+
+    <div class="g-row" style="--era-color:var(--moderna)">
+      <div class="g-mission">Gianicolo<small>età moderna</small></div>
+      <div class="g-items">
+        <div class="g-item"><a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/#orienteering-fotografico-villa-pamphili" target="_blank" rel="noopener">Orienteering fotografico a Villa Pamphili</a><span class="g-tag">tutte le classi</span><br>A pochi passi dal Gianicolo: ci si orienta nel parco con mappe e dettagli fotografici.</div>
+        <div class="g-item"><a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/#repubblica-romana-garibaldi" target="_blank" rel="noopener">In difesa della Repubblica romana</a><span class="g-tag">classi terze</span><br>Porta San Pancrazio, Villa Sciarra e il Gianicolo nel 1849: da ricordare per il terzo anno.</div>
+      </div>
+    </div>
+
+    <div class="g-row" style="--era-color:var(--contemporanea)">
+      <div class="g-mission">EUR<small>età contemporanea</small></div>
+      <div class="g-items">
+        <div class="g-item"><a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/#architetture-fascismo-eur" target="_blank" rel="noopener">Le architetture del fascismo: l'EUR</a><span class="g-tag">classi terze</span><br>Il quartiere progettato per l'Esposizione del 1942 e il suo uso di oggi. Pensato per le terze, ma con le prime si può chiedere un taglio sulla pianta del quartiere.</div>
+      </div>
+    </div>
+
+    <div class="g-row" style="--era-color:var(--metro)">
+      <div class="g-mission">Per tutte le missioni<small>carte e orientamento</small></div>
+      <div class="g-items">
+        <div class="g-item"><a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/#elementi-cartografia" target="_blank" rel="noopener">Elementi di cartografia: orientarsi nello spazio e nel tempo</a><span class="g-tag">tutte le classi</span><br>Leggere le mappe e orientarsi sul campo, confrontando carte di epoche diverse. Il luogo si sceglie con l'insegnante: una buona preparazione all'atlante collaborativo.</div>
+        <div class="g-item"><a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/#orienteering-fotografico-pincio" target="_blank" rel="noopener">Orienteering fotografico al Pincio</a><span class="g-tag">tutte le classi</span><br>Una sfida a squadre con mappe e foto tra i busti del Pincio.</div>
+      </div>
+    </div>
+
+    <div class="g-row" style="--era-color:var(--ink-soft)">
+      <div class="g-mission">Nuove piste<small>per allargare lo sguardo</small></div>
+      <div class="g-items">
+        <div class="g-item"><a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/#monte-testaccio" target="_blank" rel="noopener">Monte Testaccio: da discarica ad archivio</a><span class="g-tag">classi prime</span><br>Un colle fatto di cocci di anfore: il paesaggio costruito dall'uomo, da confrontare con Monte Mario.</div>
+        <div class="g-item"><a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/#ostia-antica-scalo-commerciale-urbs" target="_blank" rel="noopener">Ostia antica: lo scalo commerciale dell'Urbs</a><span class="g-tag">intera giornata</span><br>Il Tevere, la foce e il porto di Roma.</div>
+        <div class="g-item"><a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/#castelli-romani-secoli" target="_blank" rel="noopener">I Castelli Romani attraverso i secoli</a><span class="g-tag">intera giornata</span><br>Il lago vulcanico di Nemi e le sue navi romane: il paesaggio del Lazio fuori città.</div>
+      </div>
+    </div>
+
+  </div>
+  <p class="g-note">I percorsi sono a pagamento e vanno prenotati con l'associazione: classi, durata e costi aggiornati sono nel <a href="https://www.appasseggioblog.it/scuole-didattica/catalogo-offerte-didattiche-per-le-scuole-secondarie-di-i-grado-a-s-2026-2027/" target="_blank" rel="noopener" style="color:var(--metro-deep);font-weight:600;">catalogo APPasseggio 2026-2027</a>.</p>
 </section>
 
 <section>

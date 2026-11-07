@@ -186,6 +186,9 @@ var MODULI = [
         { tipo: "Scheda", titolo: "Leggo un paesaggio", descrizione: "Da stampare: le otto lenti su un paesaggio scelto dagli alunni.", link: "geografia/prima/paesaggio/schede/scheda-leggo-un-paesaggio.html", data: "2026-11-04" }
       ] },
       { titolo: "Le risorse idriche", dipartimento: true, libri: ["paesaggi"], pagine: "A105–A110", descrizione: "Dossier: l'acqua.", attivita: [] }
+    ],
+    attivita: [
+      { tipo: "Gioco", titolo: "Dove siamo? La Terra vista dallo spazio", descrizione: "Otto paesaggi fotografati dallo spazio (immagini NASA): leggi gli indizi e indovina dove siamo. Laghi, lagune, vulcani, montagne, fiumi e deserti.", link: "geografia/prima/paesaggio/attivita/dove-siamo.html", data: "2026-11-06" }
     ]
   },
   {
