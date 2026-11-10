@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quale regione? Il Nord visto dallo spazio</title>
+<meta name="description" content="Quiz di ripasso: quattro regioni dell'Italia settentrionale fotografate dal satellite Envisat dell'ESA. Riconosci la regione dalla forma e dagli indizi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+/* Layout: una «pagina di rivista» per volta: foto grande a sinistra, indovinello a destra, soluzione sotto. */
+:root{
+  --bg:#EEF1EE; --paper:#FAFBF9; --ink:#1D2A30; --muted:#5B6B70; --line:#C9D2CE;
+  --ocean:#2C5872; --warm:#B3412F; --ok:#2E7D4F; --no:#B3412F; --sel:#E8B04A;
+  --cond:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+    --ocean:#80B1CC; --warm:#EF8A73; --ok:#6FC08F; --no:#EF8A73; --sel:#C9913A; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141C1F; --paper:#1B2529; --ink:#E4EAE7; --muted:#9AAAA9; --line:#2F3C40;
+  --ocean:#80B1CC; --warm:#EF8A73; --ok:#6FC08F; --no:#EF8A73; --sel:#C9913A; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.6}
+h1,h2,h3{font-family:var(--cond);line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:var(--ocean)}
+:focus-visible{outline:3px solid var(--ocean);outline-offset:2px}
+.wrap{max-width:72rem;margin:0 auto;padding:1rem 16px 3rem}
+.lnav{font:600 1.02rem var(--cond);margin-bottom:1.4rem}
+header.testa{display:grid;gap:.6rem;margin-bottom:1.4rem}
+.eyebrow{font:600 1.1rem var(--cond);color:var(--muted)}
+h1{font-size:clamp(2.4rem,7vw,4rem);font-weight:700}
+h1 span{color:var(--ocean)}
+.lede{font-size:1.18rem;color:var(--muted);max-width:68ch}
+.pagine{display:inline-block;font:600 .95rem var(--cond);border:1px solid var(--line);border-radius:20px;padding:.05rem .7rem;background:var(--paper)}
+details.docente{border:1px dashed var(--warm);border-radius:8px;padding:.6rem .9rem;background:var(--paper);max-width:68ch}
+details.docente summary{font:700 1rem var(--cond);letter-spacing:.06em;text-transform:uppercase;color:var(--warm);cursor:pointer}
+details.docente ol{margin:.5rem 0 0;padding-left:1.3rem;display:grid;gap:.3rem}
+
+/* barra dei quiz */
+.barra{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem 1rem;margin:1.2rem 0 .8rem;border-top:4px solid var(--ink);padding-top:.7rem}
+.pallini{display:flex;flex-wrap:wrap;gap:.35rem;list-style:none;margin:0;padding:0}
+.pallini button{font:700 1.05rem var(--cond);width:2.3rem;height:2.3rem;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.pallini button[aria-current="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pallini button.fatto{box-shadow:inset 0 0 0 3px var(--ok)}
+.pallini button.mancato{box-shadow:inset 0 0 0 3px var(--warm)}
+.punti{font:700 1.1rem var(--cond);color:var(--muted)}
+
+/* la pagina del quiz */
+.quiz{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1.2rem 1.25rem 1.4rem;display:grid;gap:1.2rem}
+.q-testa{display:grid;gap:.2rem}
+.q-testa .n{font:700 1rem var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--warm)}
+.q-testa h2{font-size:clamp(1.9rem,4.5vw,2.7rem)}
+.q-testa h2 span{color:var(--ocean)}
+.pagina{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:1.4rem;align-items:start}
+.foto{display:grid;gap:.5rem;min-width:0}
+.foto .coppia{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.foto figure{margin:0;display:grid;gap:.25rem;min-width:0}
+.foto img{display:block;width:100%;height:auto;border-radius:6px;background:#0d1418;min-height:12rem}
+.foto .coppia img{aspect-ratio:1/1}
+.foto figcaption{font:600 1rem var(--cond);color:var(--muted)}
+.foto .apri{font:600 1rem var(--cond)}
+.testo{display:grid;gap:1rem;min-width:0}
+.indovinello{font-size:1.14rem;line-height:1.6}
+.indovinello b{font-weight:600}
+.domanda{font:700 1.4rem var(--cond)}
+.fonte{border-left:4px solid var(--ocean);padding:.3rem 0 .3rem .8rem;display:grid;gap:.15rem}
+.fonte > b{font:700 1.05rem var(--cond);color:var(--ocean)}
+.fonte p{font-size:.95rem;color:var(--muted)}
+.opz{display:flex;flex-wrap:wrap;gap:.45rem}
+.opz button{font:600 1.12rem var(--cond);background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:.45rem .9rem;cursor:pointer;text-align:left}
+.opz button:disabled{cursor:default}
+.opz button.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opz button.no{background:var(--no);color:#fff;border-color:var(--no);opacity:.85}
+.fb{font:600 1.12rem var(--cond);min-height:1.4em}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--no)}
+.dopo{font:600 1.12rem var(--cond);border:1px solid var(--ocean);border-radius:8px;padding:.5rem .85rem;background:var(--bg)}
+details.rivela{border:1px solid var(--line);border-radius:8px;padding:.5rem .85rem;background:var(--bg)}
+details.rivela summary{font:600 1.08rem var(--cond);cursor:pointer;color:var(--ocean)}
+details.rivela > div{margin-top:.5rem;display:grid;gap:.5rem}
+details.soluzione{border-color:var(--ok)}
+details.soluzione summary{color:var(--ok)}
+.lente{display:inline-block;font:700 .95rem var(--cond);letter-spacing:.05em;text-transform:uppercase;border-radius:20px;padding:.05rem .65rem;color:#fff;background:var(--c,var(--ocean))}
+.cerca{margin:0;padding-left:1.3rem;display:grid;gap:.2rem}
+.link-carta{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font:600 1.02rem var(--cond)}
+.comandi{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:space-between;align-items:center}
+.btn{font:600 1.1rem var(--cond);background:var(--ink);color:var(--paper);border:0;border-radius:6px;padding:.5rem 1.1rem;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.chiaro{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.35;cursor:default}
+
+/* tocca a voi */
+.tocca{margin-top:2.6rem;display:grid;gap:.8rem;border-top:4px solid var(--ink);padding-top:.7rem}
+.tocca .n{font:700 1rem var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--warm)}
+.tocca h2{font-size:clamp(1.8rem,4.5vw,2.5rem)}
+.tocca ol{margin:0;padding-left:1.3rem;display:grid;gap:.45rem;max-width:68ch}
+.crediti{margin-top:2rem;font-size:.92rem;color:var(--muted);max-width:68ch}
+
+@media (max-width:760px){
+  .pagina{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:no-preference){
+  .quiz{animation:entra .25s ease-out}
+  @keyframes entra{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="lnav" aria-label="Percorso"><a href="../index.html">← L'Italia settentrionale</a></nav>
+<header class="testa">
+  <div class="eyebrow">Modulo V · Le regioni italiane · Ripasso</div>
+  <h1>Quale regione? <span>Il Nord visto dallo spazio</span></h1>
+  <p class="lede">Il satellite Envisat dell'Agenzia Spaziale Europea ha fotografato le regioni italiane una per una: in ogni foto la regione è illuminata e tutto intorno è più scuro. Riconosci la regione dalla forma, dai colori e dagli indizi.</p>
+  <p><span class="pagine">Libro: pagine B116–B145</span> <span class="pagine">Immagini: ESA, «Le regioni italiane viste dallo spazio»</span></p>
+  <details class="docente">
+    <summary>Come si usa in classe</summary>
+    <ol>
+      <li>Ogni regione si può fare alla fine della sua tappa (Lombardia e Trentino-Alto Adige: tappa 3; Veneto: tappa 4; Emilia-Romagna: tappa 5), oppure tutte insieme come ripasso finale.</li>
+      <li>Prima di leggere: proiettate la foto e chiedete che cosa si vede. Montagne, pianura, laghi, mare? Che forma ha la regione? Assomiglia a un pezzo del puzzle della tappa 1?</li>
+      <li>Leggete gli indizi; ognuno scrive la sua risposta e l'indizio decisivo. Si può usare l'atlante o la carta del libro.</li>
+      <li>Dopo la risposta compare il link all'articolo dell'ESA. La soluzione propone tre cose da cercare nella foto: chi le trova viene alla LIM a indicarle.</li>
+    </ol>
+  </details>
+</header>
+
+<div class="barra">
+  <ul class="pallini" id="pallini" aria-label="Le regioni"></ul>
+  <p class="punti" id="punti" aria-live="polite">Indovinate al primo colpo: 0 su 4</p>
+</div>
+
+<main id="quiz"></main>
+
+<section class="tocca" id="tocca-a-voi">
+  <span class="n">Tocca a voi</span>
+  <h2>Le altre regioni dallo spazio</h2>
+  <ol>
+    <li>Sulla pagina dell'ESA <a href="https://www.esa.int/it/articoli/about-us/who-we-are/member-states/italy/le-regioni-italiane-viste-dallo-spazio" target="_blank" rel="noopener">Le regioni italiane viste dallo spazio</a> ci sono altre regioni fotografate da Envisat. Quali avete già studiato? Quali studierete nell'Italia centrale?</li>
+    <li>Le regioni che non ci sono (Piemonte, Valle d'Aosta, Friuli-Venezia Giulia, Liguria): prendete la carta fisica del libro e descrivete che cosa si vedrebbe dallo spazio. Dove sono le montagne? C'è il mare? Ci sono laghi?</li>
+    <li>Scrivete l'indovinello per un compagno, con tre indizi e senza il nome della regione.</li>
+  </ol>
+</section>
+
+<p class="crediti">Immagini e informazioni: ESA, serie «Le regioni italiane viste dallo spazio» (satellite Envisat, strumento MERIS), licenza standard ESA. Ogni regione ha il link all'articolo originale.</p>
+</div>
+
+<script>
+(function(){
+var MEDIA='https://media.esa.int/legacy/web/images/esa_multimedia/images/';
+var ESA='https://www.esa.int/it/articoli/about-us/who-we-are/member-states/italy/';
+var QUIZ=[
+{
+  titolo:'Cinque laghi in fila',
+  foto:[{src:[MEDIA+'2011/06/la_lombardia_vista_dallo_spazio/9672027-3-eng-GB/57119/image-thumb__57119__fit_large/La_Lombardia_vista_dallo_spazio.7c3b4d33.webp', MEDIA+'2011/06/la_lombardia_vista_dallo_spazio/9672027-3-eng-GB/57119/image-thumb__57119__frame_card/La_Lombardia_vista_dallo_spazio.0196a57a.webp'], alt:'Una regione evidenziata: montagne a nord, una fila di laghi allungati, pianura a sud'}],
+  fonte:'Immagine del satellite <b>Envisat</b> dell’ESA (strumento MERIS), 18 aprile 2011. Intorno alla regione la foto è stata scurita.',
+  testo:"Ha una forma che ricorda un <b>quadrilatero</b> e si divide in tre fasce: a nord le montagne, poi le colline, a sud la pianura. Ai piedi delle montagne c'è una <b>fila di laghi</b> allungati: uno ha la forma di una <b>Y rovesciata</b>, uno di una S. Il più grande, a est, è il lago più grande d'Italia. In mezzo alla pianura c'è una grande <b>macchia marrone</b>: è il capoluogo, una città il cui antico nome celtico vuol dire «in mezzo alla pianura». È la regione con più abitanti d'Italia.",
+  domanda:'Quale regione è?',
+  opz:['Il Piemonte','La Lombardia','Il Veneto','L’Emilia-Romagna'], ok:1,
+  indizio:'Il capoluogo è la città della Borsa e della moda; a sud il confine segue in parte il fiume Po.',
+  soluzione:"È la <b>Lombardia</b>. Il capoluogo è <b>Milano</b> (il nome antico era <i>Mediolanum</i>). I laghi, da ovest a est: <b>Maggiore</b> (condiviso con Piemonte e Svizzera), <b>Lugano</b> (con la Svizzera), <b>Como</b> (la Y rovesciata), <b>Iseo</b> (la S) e <b>Garda</b> (con Veneto e Trentino). Sono laghi glaciali.",
+  cerca:['il Lago di Como, a forma di Y rovesciata','la macchia marrone di Milano, a sud del Lago di Como','il Lago di Garda, al confine est'],
+  dopo:['Leggi l’articolo dell’ESA sulla Lombardia', ESA+'la-lombardia-dallo-spazio-vista-da-envisat'],
+  ripassa:['La Lombardia: com’è fatta','lombardia.html']
+},
+{
+  titolo:'Tutta montagne',
+  foto:[{src:['https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2013/04/il_trentino_alto-adige_visto_dallo_spazio/12642989-1-eng-GB/Il_Trentino_Alto-Adige_visto_dallo_spazio_pillars.jpg', MEDIA+'2013/04/il_trentino_alto-adige_visto_dallo_spazio/12642989-1-eng-GB/149732/image-thumb__149732__fill_square/Il_Trentino_Alto-Adige_visto_dallo_spazio.aa9ea19c.webp'], alt:'Una regione evidenziata, quasi tutta montuosa, con valli strette'}],
+  fonte:'Immagine del satellite <b>Envisat</b> dell’ESA (strumento MERIS), 14 giugno 2009, in estate.',
+  testo:"Qui non c'è pianura: la regione è coperta quasi tutta da <b>montagne</b>, e circa metà del territorio è bosco. A nord confina con l'<b>Austria</b>, a nord-ovest con la <b>Svizzera</b>. Nelle valli si vedono due macchie bianche: sono le due città principali. Una è a sud, lungo un grande fiume che scende verso il Veneto; l'altra è a nord, dove due valli si incontrano. A sud-ovest spunta la punta di un grande lago. Qui si parlano italiano, tedesco e ladino.",
+  domanda:'Quale regione è?',
+  opz:['La Valle d’Aosta','La Lombardia','Il Trentino-Alto Adige','Il Friuli-Venezia Giulia'], ok:2,
+  indizio:'È divisa in due Province autonome, che hanno lo stesso nome dei loro capoluoghi.',
+  soluzione:"È il <b>Trentino-Alto Adige</b>. La città a sud è <b>Trento</b>, nella valle dell'<b>Adige</b>; quella a nord è <b>Bolzano</b>, dove la valle dell'Adige incontra quella dell'<b>Isarco</b>. Il lago a sud-ovest è il <b>Garda</b>. Le montagne sono le Alpi e le <b>Dolomiti</b>.",
+  cerca:['la macchia bianca di Trento, a sud','la macchia bianca di Bolzano, a nord','la punta del Lago di Garda, a sud-ovest'],
+  dopo:['Leggi l’articolo dell’ESA sul Trentino-Alto Adige','https://www.esa.int/Space_in_Member_States/Italy/Il_Trentino-Alto_Adige'],
+  ripassa:['Il Trentino-Alto Adige','trentino-alto-adige.html']
+},
+{
+  titolo:'Dalle Dolomiti alla laguna',
+  foto:[{src:[MEDIA+'2010/09/i_paesaggi_del_veneto/9876492-3-eng-GB/81871/image-thumb__81871__fit_large/I_paesaggi_del_Veneto.579b92ce.webp'], alt:'Una regione evidenziata tra montagne a nord e il mare a sud-est, con una laguna sulla costa'}],
+  fonte:'Immagine del satellite <b>Envisat</b> dell’ESA (strumento MERIS), 1 luglio 2010.',
+  testo:"Si trova nella parte nord-orientale della Pianura Padana, tra le <b>Alpi</b> e il <b>mare Adriatico</b>. A nord ci sono montagne di roccia chiara diventate <b>patrimonio dell'UNESCO</b> nel 2009. A ovest, per un lungo tratto, il confine passa in mezzo al lago più grande d'Italia. Sulla costa c'è una <b>laguna</b>, tra il delta di un grande fiume e la foce del Piave. Al centro della laguna, su tante isolette divise da canali, c'è il capoluogo.",
+  domanda:'Quale regione è?',
+  opz:['Il Friuli-Venezia Giulia','L’Emilia-Romagna','Il Veneto','La Lombardia'], ok:2,
+  indizio:'Il suo capoluogo è stato per secoli una Repubblica marinara.',
+  soluzione:"È il <b>Veneto</b>. Le montagne a nord sono le <b>Dolomiti</b>, il lago a ovest è il <b>Garda</b>, la laguna è quella di <b>Venezia</b>, tra il <b>delta del Po</b> e la foce del <b>Piave</b>. Vuoi vedere la laguna da vicino? Guarda il <a href=\"../../../paesaggio/attivita/dove-siamo.html#quiz-2\">quiz 2 di «Dove siamo?»</a>, con una foto dei satelliti italiani IRIDE.",
+  cerca:['il Lago di Garda, al confine ovest','la laguna di Venezia, sulla costa','il delta del Po, all’estremo sud della costa'],
+  dopo:['Leggi l’articolo dell’ESA sul Veneto', ESA+'i-paesaggi-del-veneto'],
+  ripassa:['Il Veneto: com’è fatto','veneto.html']
+},
+{
+  titolo:'Tra il Po e l’Appennino',
+  foto:[{src:[MEDIA+'2012/06/l_emilia_romagna_vista_dallo_spazio/11626575-5-eng-GB/140624/image-thumb__140624__fit_large/L_Emilia_Romagna_vista_dallo_spazio.e94474bb.webp', MEDIA+'2012/06/l_emilia_romagna_vista_dallo_spazio/11626575-5-eng-GB/140624/image-thumb__140624__frame_card/L_Emilia_Romagna_vista_dallo_spazio.3bd54a3a.webp'], alt:'Una regione evidenziata, lunga e stretta, con pianura a nord e montagne a sud'}],
+  fonte:'Immagine del satellite <b>Envisat</b> dell’ESA (strumento MERIS), 17 luglio 2011. Intorno alla regione la foto è stata scurita.',
+  testo:"Occupa la parte sud-orientale della <b>Pianura Padana</b>. I suoi confini sono facili da ricordare: a nord il <b>fiume più lungo d'Italia</b>, a sud una lunga catena di montagne coperta di boschi, a est il <b>mare Adriatico</b>. La pianura, a quadretti di campi, è coltivatissima; ma più di metà della regione è collina o montagna. Vicino al mare c'è una macchia <b>blu scuro</b>: è una delle zone umide più grandi d'Italia, dove vivono più di 300 specie di uccelli.",
+  domanda:'Quale regione è?',
+  opz:['La Liguria','L’Emilia-Romagna','Il Piemonte','Il Veneto'], ok:1,
+  indizio:'Il suo nome è fatto di due nomi: uno viene da una strada romana, l’altro dall’Impero romano d’Oriente.',
+  soluzione:"È l'<b>Emilia-Romagna</b>: a nord il <b>Po</b>, a sud l'<b>Appennino</b> (la vetta più alta è il <b>Monte Cimone</b>), a est l'Adriatico. La macchia blu scuro sono le <b>Valli di Comacchio</b>, una laguna di acqua salmastra. Lungo la costa ci sono le pinete di Classe e di San Vitale, vicino a Ravenna.",
+  cerca:['il Po, lungo il confine nord','le Valli di Comacchio, la macchia blu scuro vicino al mare','i boschi dell’Appennino, a sud'],
+  dopo:['Leggi l’articolo dell’ESA sull’Emilia-Romagna', ESA+'l-emilia-romagna'],
+  ripassa:['L’Emilia-Romagna: com’è fatta','emilia-romagna.html']
+}
+];
+
+var main=document.getElementById('quiz'), pall=document.getElementById('pallini'), punti=document.getElementById('punti');
+var stato=QUIZ.map(function(){return {scelta:null, primo:null}});
+var ora=0;
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+function img(f,eager){
+  return '<figure><img src="'+esc(f.src[0])+'" data-src="'+esc(JSON.stringify(f.src))+'" data-i="0" alt="'+esc(f.alt)+'"'+(eager?'':' loading="lazy"')+' decoding="async">'+(f.cap?'<figcaption>'+f.cap+'</figcaption>':'')+'</figure>';
+}
+function aggiornaPunti(){
+  var n=stato.filter(function(s){return s.primo===true}).length;
+  punti.textContent='Indovinate al primo colpo: '+n+' su '+QUIZ.length;
+  [].forEach.call(pall.querySelectorAll('button'),function(b,i){
+    b.setAttribute('aria-current',i===ora?'true':'false');
+    b.classList.toggle('fatto',stato[i].primo===true);
+    b.classList.toggle('mancato',stato[i].primo===false);
+  });
+}
+function mostra(i,focus){
+  ora=i; var q=QUIZ[i], s=stato[i];
+  var foto=q.foto.length>1?'<div class="coppia">'+q.foto.map(function(f){return img(f,true)}).join('')+'</div>':img(q.foto[0],true);
+  var apri='<a class="apri" href="'+esc(q.foto[0].src[0])+'" target="_blank" rel="noopener">Apri la foto grande ↗</a>';
+  var cerca='<ul class="cerca">'+q.cerca.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>';
+  main.innerHTML='<article class="quiz" aria-labelledby="qt">'+
+    '<div class="q-testa"><span class="n">Quiz '+(i+1)+' di '+QUIZ.length+'</span><h2 id="qt" tabindex="-1">Dove siamo? <span>'+q.titolo+'</span></h2></div>'+
+    '<div class="pagina"><div class="foto">'+foto+'<p>'+apri+'</p></div>'+
+    '<div class="testo"><p class="indovinello">'+q.testo+'</p>'+
+    '<div class="fonte"><b>Da dove viene questa immagine?</b><p>'+q.fonte+'</p></div>'+
+    '<p class="domanda">'+q.domanda+'</p>'+
+    '<div class="opz">'+q.opz.map(function(o,k){return '<button type="button" data-k="'+k+'">'+o+'</button>'}).join('')+'</div>'+
+    '<p class="fb" aria-live="polite"></p>'+
+    (q.dopo?'<p class="dopo" hidden><a href="'+esc(q.dopo[1])+'" target="_blank" rel="noopener">'+q.dopo[0]+' ↗</a></p>':'')+
+    '<details class="rivela"><summary>Un indizio in più</summary><div><p>'+q.indizio+'</p></div></details>'+
+    '<details class="rivela soluzione"><summary>La soluzione</summary><div><p>'+q.soluzione+'</p><p class="consegna">Ora cerca nella foto:</p>'+cerca+
+    '<p class="link-carta"><a href="'+esc(q.ripassa[1])+'">Ripassa: '+q.ripassa[0]+' →</a></p></div></details>'+
+    '</div></div>'+
+    '<div class="comandi"><button type="button" class="btn chiaro" id="prec"'+(i===0?' disabled':'')+'>← Regione precedente</button>'+
+    (i<QUIZ.length-1?'<button type="button" class="btn" id="succ">Regione successiva →</button>':'<a class="btn" href="#tocca-a-voi">Ora tocca a voi →</a>')+'</div>'+
+    '</article>';
+  // immagini con riserva
+  [].forEach.call(main.querySelectorAll('img[data-src]'),function(im){
+    im.addEventListener('error',function(){var l=JSON.parse(im.getAttribute('data-src')),k=+im.getAttribute('data-i')+1; if(k<l.length){im.setAttribute('data-i',k); im.src=l[k];}});
+  });
+  var bott=main.querySelectorAll('.opz button'), fb=main.querySelector('.fb'), dopo=main.querySelector('.dopo');
+  function apriDopo(){ if(dopo) dopo.hidden=false; }
+  function segna(k){
+    apriDopo();
+    [].forEach.call(bott,function(b,j){ if(j===q.ok){b.classList.add('ok')} else if(j===k){b.classList.add('no')} b.disabled=true; });
+    if(k===q.ok){fb.className='fb ok'; fb.textContent=s.primo?'Giusto, al primo colpo!':'Giusto!';}
+  }
+  [].forEach.call(bott,function(b){
+    b.addEventListener('click',function(){
+      var k=+b.getAttribute('data-k');
+      if(k===q.ok){ if(s.primo===null) s.primo=true; s.scelta=k; segna(k); }
+      else { if(s.primo===null) s.primo=false; apriDopo(); b.classList.add('no'); b.disabled=true; fb.className='fb no'; fb.textContent='No: rileggi gli indizi e riprova.'; }
+      aggiornaPunti();
+    });
+  });
+  if(s.scelta!==null) segna(s.scelta); else if(s.primo===false) apriDopo();
+  var p=document.getElementById('prec'), n=document.getElementById('succ');
+  if(p) p.onclick=function(){vai(i-1)};
+  if(n) n.onclick=function(){vai(i+1)};
+  aggiornaPunti();
+  if(focus){var h=document.getElementById('qt'); try{h.focus({preventScroll:true})}catch(e){h.focus()} var t=document.querySelector('.barra').getBoundingClientRect().top+window.pageYOffset-8; if(window.pageYOffset>t) window.scrollTo(0,t);}
+}
+function vai(i){ if(i<0||i>=QUIZ.length) return; history.replaceState(null,'','#regione-'+(i+1)); mostra(i,true); }
+pall.innerHTML=QUIZ.map(function(q,i){return '<li><button type="button" aria-label="Quiz '+(i+1)+': '+esc(q.titolo)+'">'+(i+1)+'</button></li>'}).join('');
+[].forEach.call(pall.querySelectorAll('button'),function(b,i){b.onclick=function(){vai(i)}});
+document.addEventListener('keydown',function(e){
+  if(e.target.closest&&e.target.closest('input,textarea,select')) return;
+  if(e.key==='ArrowRight') vai(ora+1); if(e.key==='ArrowLeft') vai(ora-1);
+});
+var m=/^#regione-(\d+)$/.exec(location.hash), start=m?Math.min(QUIZ.length,Math.max(1,+m[1]))-1:0;
+mostra(start,false);
+})();
+</script>
+<script src="../../../../../assets/barra.js"></script>
+</body>
+</html>

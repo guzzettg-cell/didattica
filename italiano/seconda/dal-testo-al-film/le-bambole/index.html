@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le bambole – i verbi del racconto: guida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --bg:#f6f7f4; --paper:#ffffff; --ink:#1d2b33; --muted:#5b6a70; --line:#d9dfdc;
+  --accent:#1f6f78; --hl:#ffe46b; --hl-ink:#3a2f00;
+  --fin:#1f6f78; --ind:#a35d1d; --pr:#7a3f9b;
+  --ok:#2e7d4f; --ok-bg:#e3f3e8; --ko:#b23a3a; --ko-bg:#f9e3e1;
+  --display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500; --fin:#6cc3cc; --ind:#e3a066; --pr:#c79be0;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#141c20; --paper:#1c262b; --ink:#e7eeee; --muted:#9fb0b4; --line:#2f3d43;
+  --accent:#6cc3cc; --hl:#c9a92a; --hl-ink:#1a1500; --fin:#6cc3cc; --ind:#e3a066; --pr:#c79be0;
+  --ok:#7fd3a0; --ok-bg:#1c3527; --ko:#f19a92; --ko-bg:#3d2221; color-scheme:dark }
+
+html{font-size:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:1.5rem 5rem}
+.wrap{max-width:48rem;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800}
+h2{font-size:1.6rem;font-weight:700}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+.mark{background:linear-gradient(transparent 12%,var(--hl) 12%,var(--hl) 88%,transparent 88%);color:var(--hl-ink);padding:0 .15em;border-radius:2px}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+header{display:flex;flex-direction:column;gap:.75rem;padding-top:1rem}
+header p{color:var(--muted);max-width:40rem}
+section{display:flex;flex-direction:column;gap:1rem}
+.note{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1rem 1.15rem;display:flex;flex-direction:column;gap:.6rem}
+.note ul,.note ol{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:.3rem}
+.tipi{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:.75rem}
+.tipo{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.tipo b{font-family:var(--display);font-size:1.05rem}
+.tipo .q{font-size:.85rem;color:var(--muted)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:.5rem .75rem;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-family:var(--display);font-size:.9rem;color:var(--accent)}
+tr:last-child td{border-bottom:none}
+hr{border:none;border-top:2px dashed var(--line);margin:0}
+details.doc{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.7rem 1rem}
+details.doc summary{cursor:pointer;font-weight:700;color:var(--accent)}
+details.doc[open] summary{margin-bottom:.5rem}
+.fonte{font-size:.85rem;color:var(--muted)}
+
+/* bottoni */
+.seg{display:flex;gap:.35rem;flex-wrap:wrap}
+.seg button,.btn{font:inherit;font-size:.95rem;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:.3rem .85rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--paper)}
+.btn.main{background:var(--accent);color:var(--paper);font-weight:700}
+.btn:disabled{opacity:.4;cursor:default}
+.azioni{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+select,textarea{font:inherit;font-size:1rem;padding:.35rem .5rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);max-width:100%}
+textarea{width:100%;min-height:5rem;box-sizing:border-box}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* esercizi semplici */
+.item{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.75rem 1rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .8rem}
+.item .frase{flex:1 1 16rem;min-width:0}
+.item.ok{border-color:var(--ok);background:var(--ok-bg)}
+.item.ko{border-color:var(--ko);background:var(--ko-bg)}
+.fb{flex-basis:100%;font-size:.92rem;color:var(--muted)}
+.fb:empty{display:none}
+.lista{display:flex;flex-direction:column;gap:.6rem}
+
+/* frase per frase */
+.stepper{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:1rem 1.15rem 1.2rem;display:flex;flex-direction:column;gap:1rem}
+.nav{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.nav .pos{font-family:var(--display);font-weight:700;margin-right:auto}
+.dots{display:flex;gap:.3rem;flex-wrap:wrap}
+.dots button{width:1.9rem;height:1.9rem;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:.8rem;cursor:pointer;padding:0}
+.dots button.cur{border-color:var(--accent);border-width:2px;font-weight:700}
+.dots button.done{background:var(--ok-bg);border-color:var(--ok)}
+.sent{font-size:1.3rem;line-height:2.05;padding:.6rem .2rem;border-bottom:1px solid var(--line)}
+.tok{cursor:pointer;border-radius:4px;padding:0 .08em;border:none;background:none;font:inherit;color:inherit;line-height:inherit}
+.tok:hover{outline:1px dashed var(--accent)}
+.tok.sel{background:var(--hl);color:var(--hl-ink)}
+.tok.miss{outline:2px solid var(--ko)}
+.tok.wrong{text-decoration:line-through;text-decoration-color:var(--ko);text-decoration-thickness:2px}
+.locked .tok{cursor:default}
+.locked .tok:hover{outline:none}
+.tok.fin{background:none;color:var(--fin);font-weight:700;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:5px}
+.tok.ind{background:none;color:var(--ind);font-weight:700;text-decoration:underline dotted;text-decoration-thickness:3px;text-underline-offset:5px}
+.step{display:flex;flex-direction:column;gap:.6rem}
+.step[hidden]{display:none}
+.step h3 .n{display:inline-grid;place-items:center;width:1.6rem;height:1.6rem;border-radius:50%;background:var(--accent);color:var(--paper);font-size:.9rem;margin-right:.4rem}
+.step .q{color:var(--muted)}
+.rows{display:flex;flex-direction:column;gap:.5rem}
+.row{border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem;display:flex;flex-wrap:wrap;gap:.45rem .9rem;align-items:center;background:var(--bg)}
+.row .vb{font-weight:700;min-width:8.5rem;font-family:var(--display);font-size:1.1rem}
+.row .camp{display:flex;flex-direction:column;gap:.15rem}
+.row .camp small{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.row.ok{border-color:var(--ok);background:var(--ok-bg)}
+.row.ko{border-color:var(--ko);background:var(--ko-bg)}
+.row .fb{font-size:.9rem}
+.esito{font-size:.95rem;color:var(--muted)}
+.esito.ok{color:var(--ok);font-weight:700}
+.notes{display:flex;flex-direction:column;gap:.4rem}
+.nota{border-left:4px solid var(--accent);padding:.2rem 0 .2rem .8rem;font-size:.97rem}
+.nota.alt{border-color:var(--ind)}
+.legenda{display:flex;gap:1rem;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
+.legenda span b.f{color:var(--fin);text-decoration:underline;text-decoration-thickness:3px}
+.legenda span b.i{color:var(--ind);text-decoration:underline dotted;text-decoration-thickness:3px}
+
+/* bilancio */
+.bil{display:flex;flex-direction:column;gap:.35rem}
+.bar{display:grid;grid-template-columns:minmax(9rem,14rem) 1fr 2rem;gap:.6rem;align-items:center;font-size:.95rem}
+.bar > span:nth-child(2){display:block}
+.bar .b{display:block;height:.9rem;border-radius:999px;background:var(--accent)}
+.bar .b.pr{background:var(--pr)}
+.bar .b.al{background:var(--muted)}
+.bar span:last-child{font-variant-numeric:tabular-nums;font-weight:700}
+
+/* testo continuo da cliccare */
+.passo{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:.9rem 1.1rem;line-height:2}
+.passo.ok{border-color:var(--ok);background:var(--ok-bg)}
+.passo.ko{border-color:var(--ko);background:var(--ko-bg)}
+
+/* zoom */
+.zoom{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;gap:.3rem;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:.3rem;box-shadow:0 4px 14px rgba(0,0,0,.15);z-index:20}
+.zoom button{width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:var(--display);font-weight:700;font-size:1rem;cursor:pointer}
+.zoom span{align-self:center;font-size:.8rem;min-width:2.8rem;text-align:center;font-variant-numeric:tabular-nums;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.item,.row{transition:background .2s,border-color .2s}}
+@media (max-width:560px){.sent{font-size:1.15rem}.row .vb{min-width:100%}}
+
+
+.nav-fasi{max-width:48rem;margin:3rem auto 0;display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:stretch}
+.nav-fasi a{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);text-decoration:none;font-weight:700;line-height:1.25}
+.nav-fasi a small{font-weight:400;color:var(--muted);font-size:.82rem}
+.nav-fasi a:hover,.nav-fasi a:focus-visible{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent);outline:none}
+.nav-fasi .prec{grid-column:1;text-align:left}.nav-fasi .tutte{grid-column:2;text-align:center}.nav-fasi .succ{grid-column:3;text-align:right}
+@media (max-width:640px){.nav-fasi{grid-template-columns:1fr 1fr}.nav-fasi .tutte{grid-column:1/3;grid-row:2}.nav-fasi .prec{grid-column:1}.nav-fasi .succ{grid-column:2}}
+@media print{.nav-fasi,.zoom{display:none}}
+
+ol.carte{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:12px}
+ol.carte li a{display:grid;gap:4px;align-content:start;height:100%;box-sizing:border-box;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;color:inherit;text-decoration:none}
+ol.carte li a:hover,ol.carte li a:focus-visible{border-color:var(--accent);outline:none;box-shadow:0 0 0 2px var(--accent)}
+ol.carte b{font-family:var(--display);font-size:1.15rem;line-height:1.2}
+ol.carte .n{font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+ol.carte .d{font-size:.9rem;color:var(--muted)}
+.wrap.largo{max-width:68rem}
+.domande li{margin-bottom:.2rem}
+</style>
+</head>
+<body>
+<div class="zoom" role="group" aria-label="Dimensione del testo">
+  <button id="zm" type="button" aria-label="Rimpicciolisci">A−</button>
+  <span id="zv">100%</span>
+  <button id="zp" type="button" aria-label="Ingrandisci">A+</button>
+</div>
+<main class="wrap largo">
+<header>
+  <span class="eyebrow">Italiano · seconda · L'inventore di sogni · guida per l'insegnante</span>
+  <h1>«Le bambole»: i <span class="mark">verbi</span> del racconto</h1>
+  <p>Circa 90 minuti: due lezioni. Ogni attività è una pagina a sé, da aprire alla LIM o sui dispositivi; in fondo a ogni attività ci sono i pulsanti per passare alla precedente o alla successiva.</p>
+</header>
+
+<section>
+  <h2>Le attività</h2>
+  <ol class="carte">
+<li><a href="attivita/fase-01-ripasso-verbi.html"><span class="n">Fase 1 · 10 min</span><b>Ripasso: i verbi</b><span class="d">Carte di studio con sei parole-chiave (tempo, modo, finito, indefinito, semplice, composto): la classe prova a definirle, poi si gira la carta. Riscaldamento: finito o indefinito?</span></a></li>
+<li><a href="attivita/fase-02-verbi-nel-racconto.html"><span class="n">Fase 2 · 10 min</span><b>I verbi nel racconto</b><span class="d">Eventi (che cosa succede) e tempo (quando succede). Quanti tipi di passato conosciamo? Esercizio: passato, presente o futuro?</span></a></li>
+<li><a href="attivita/fase-03-tappa-1-inizio.html"><span class="n">Fase 3 · 15 min</span><b>Tappa 1: l’inizio del racconto (pp. 23-24)</b><span class="d">Sette frasi, «Fin da quando riusciva a ricordare…». Quasi tutto all’imperfetto; un trapassato prossimo («aveva diviso»).</span></a></li>
+<li><a href="attivita/fase-04-tappa-2-bambole.html"><span class="n">Fase 4 · 10 min</span><b>Tappa 2: le bambole e la Cattiva (p. 26)</b><span class="d">Cinque frasi: l’imperfetto continua, ma compaiono il congiuntivo, il condizionale passato e un presente («non guardano»).</span></a></li>
+<li><a href="attivita/fase-05-imperfetto.html"><span class="n">Fase 5 · 5 min</span><b>L’imperfetto: a che cosa serve?</b><span class="d">Descrivere e raccontare abitudini. Esercizio: descrizione o abitudine?</span></a></li>
+<li><a href="attivita/fase-06-tappa-3-lite.html"><span class="n">Fase 6 · 15 min</span><b>Tappa 3: la lite (p. 27)</b><span class="d">Undici frasi: da «Tutto andò bene» compare il passato remoto (andò, scoppiò, ebbe, bastò, afferrò, scaraventò, passò, gettò). «Sarebbe finita»: futuro nel passato.</span></a></li>
+<li><a href="attivita/fase-07-cambio.html"><span class="n">Fase 7 · 10 min</span><b>Dove si abbandona l’imperfetto?</b><span class="d">Il punto della lezione: trovare il primo passato remoto, dire a favore di che cosa e perché; sfondo e primo piano; il futuro nel passato.</span></a></li>
+<li><a href="attivita/fase-08-tappa-4-accadde.html"><span class="n">Fase 8 · 5 min</span><b>Tappa 4: «Accadde» (p. 30)</b><span class="d">Quattro frasi: i mesi passavano, i giorni arrivavano e finivano… poi «Accadde».</span></a></li>
+<li><a href="attivita/fase-09-suspense.html"><span class="n">Fase 9 · 5 min</span><b>Accadde… che cosa?</b><span class="d">La suspense: un passato remoto che annuncia un fatto unico senza dire quale. Che cosa ti aspetti?</span></a></li>
+<li><a href="attivita/fase-10-per-ricordare.html"><span class="n">Fase 10 · 5 min</span><b>Per ricordare: i tempi del racconto</b><span class="d">Tabella di sintesi: imperfetto, passato remoto, trapassato prossimo, condizionale passato, presente.</span></a></li>
+  </ol>
+  <p class="q">Divisione possibile: prima lezione fasi 1–5 (ripasso, inizio del racconto, l'imperfetto); seconda lezione fasi 6–10 (la lite, il cambio di tempo, «Accadde»).</p>
+</section>
+
+<section>
+  <h2>Come funzionano le tappe frase per frase</h2>
+  <div class="note">
+    <p>Nelle fasi 3, 4, 6 e 8 il testo è diviso frase per frase. Per ogni frase:</p>
+    <ol>
+      <li><b>Quali sono i verbi?</b> Si cliccano nel testo.</li>
+      <li><b>Finito o indefinito? In che modo?</b> Dopo il controllo i verbi finiti si colorano (sottolineatura piena), gli indefiniti con la sottolineatura a puntini.</li>
+      <li><b>Per i verbi finiti:</b> passato, presente o futuro (solo indicativo), il tempo verbale e, per i tempi composti, il tempo dell'ausiliare.</li>
+    </ol>
+    <p>Ogni passaggio ha «Controlla» e «Mostra la soluzione». A frase completata compaiono le note sui verbi notevoli. In fondo alle tappe 1–3 il «bilancio» conta i tempi dei verbi finiti: utile per far notare che nella tappa 3 l'imperfetto cede il posto.</p>
+    <p>I participi usati come aggettivi (<i>coperte</i>, <i>scrutato</i>, <i>rimasto</i>) valgono sia segnati sia non segnati. Dopo il primo passaggio un avviso segnala i tranelli (<i>risveglio</i>, <i>tirate</i>: nomi).</p>
+  </div>
+</section>
+
+<section>
+  <h2>Le domande da fare alla classe</h2>
+  <div class="note">
+    <p>Sulla prima frase («Fin da quando riusciva a ricordare, Peter aveva diviso con Kate la camera da letto»), a voce, prima di usare la pagina:</p>
+    <ul class="domande">
+      <li>Quali sono i verbi? Quali sono i verbi finiti? Che modo?</li>
+      <li><i>riusciva</i>, <i>aveva diviso</i>: passato, presente o futuro?</li>
+      <li>Che tempo verbale? Quanti tipi di passato conoscete? (imperfetto, passato remoto…)</li>
+      <li><i>aveva diviso</i>: con quale tempo dell'ausiliare (avere) si forma?</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Note sulle fasi</h2>
+  <div class="note">
+    <p><b>Fase 4 (p. 26).</b> Da far notare: <i>avrebbero dovuto</i> (una cosa che doveva essere e non è), <i>non guardano</i> (presente: il narratore dice una cosa vera sempre), <i>si mettessero</i> e <i>fosse tornata</i> (congiuntivo: sospetto, paura), <i>avrebbe riconosciuta</i> (ipotesi).</p>
+    <p><b>Fase 6 (p. 27).</b> I passati remoti: <i>andò, scoppiò, ebbe bisogno, bastò, afferrò, scaraventò, toccò, passò, gettò</i>. In mezzo, imperfetti di sfondo (<i>faceva male, sanguinava, voleva, si precipitava</i>). <i>Sarebbe finita</i>: futuro nel passato.</p>
+    <p><b>Fase 7, una possibile risposta a «perché?».</b> Con l'imperfetto il narratore racconta com'erano le cose di solito: la linea immaginaria, i permessi, le regole che valevano ogni giorno. Con il passato remoto racconta un fatto preciso, successo <i>una volta sola</i> («un piovoso pomeriggio di domenica»): la lite. Da qui la storia comincia a muoversi.</p>
+    <p><b>Fasi 8–9 (p. 30).</b> <i>Accadde</i> — che cosa? Qualcosa di sicuramente importante, che dà senso a tutto il racconto, ma non sappiamo cosa: suspense. Far scrivere le previsioni prima di leggere il seguito.</p>
+  </div>
+</section>
+
+<p class="fonte">Le frasi sono tratte da Ian McEwan, <i>L'inventore di sogni</i>, «Le bambole» (Einaudi). I numeri di pagina si riferiscono al libro in uso in classe.</p>
+</main>
+<script>
+(function(){
+  var KEY='bambole-verbi';
+  var z=100, zv=document.getElementById('zv');
+  try{ z=parseInt(localStorage.getItem(KEY+'-zoom'))||100 }catch(e){}
+  function setZ(v){ z=Math.max(70,Math.min(200,v)); document.documentElement.style.fontSize=z+'%'; zv.textContent=z+'%'; try{localStorage.setItem(KEY+'-zoom',z)}catch(e){} }
+  document.getElementById('zp').onclick=function(){setZ(z+10)};
+  document.getElementById('zm').onclick=function(){setZ(z-10)};
+  setZ(z);
+
+  function el(t,c,h){var e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e}
+
+  /* ---------- dati ----------
+     [verbo] = forma verbale; ~parola = parte facoltativa (es. il «si»); [verbo?] = forma facoltativa (participio-aggettivo)
+     codici: F|modo|tempo|quando|ausiliare  oppure  I|modo  */
+  var MODI={ind:'indicativo',cong:'congiuntivo',cond:'condizionale',imp:'imperativo',inf:'infinito',part:'participio',ger:'gerundio'};
+  var MODI_F=['indicativo','congiuntivo','condizionale','imperativo','infinito','participio','gerundio'];
+  var TEMPI={indicativo:['presente','imperfetto','passato remoto','passato prossimo','trapassato prossimo','trapassato remoto','futuro semplice','futuro anteriore'],
+    congiuntivo:['presente','imperfetto','passato','trapassato'],condizionale:['presente','passato'],imperativo:['presente']};
+  var AUX=['indicativo presente','indicativo imperfetto','indicativo passato remoto','indicativo futuro','congiuntivo presente','congiuntivo imperfetto','condizionale presente'];
+  var IMP='F|ind|imperfetto|passato', PR='F|ind|passato remoto|passato';
+
+  var PARTS={
+    p1:[
+      {t:"Fin da quando [riusciva] a [ricordare], Peter [aveva diviso] con Kate la camera da letto.",
+       v:[IMP,'I|inf','F|ind|trapassato prossimo|passato|indicativo imperfetto'],
+       n:{0:"«Riusciva»: l'imperfetto racconta una situazione che è durata a lungo, senza un inizio e una fine precisi.",2:"Il trapassato prossimo racconta un fatto avvenuto prima di un altro fatto passato: Peter divideva la camera con Kate da sempre, già prima del momento in cui comincia la storia."}},
+      {t:"Per lo più la cosa non gli [dava] fastidio.", v:[IMP]},
+      {t:"Anzi, certe notti [risvegliandosi] da un incubo, [era stato] persino contento di [avere] qualcuno nella stanza, anche se [~si trattava] solo di una sorellina di sette anni che di sicuro non [sarebbe stata] di grande aiuto contro quelle creature [coperte?] di sangue e di bava che gli [davano] la caccia nei sogni.",
+       v:['I|ger','F|ind|trapassato prossimo|passato|indicativo imperfetto','I|inf',IMP,'F|cond|passato||condizionale presente','I|part',IMP],
+       n:{4:"Il condizionale passato dice una cosa che non sarebbe successa: Kate non avrebbe aiutato Peter contro i mostri.",5:"«Coperte» è un participio passato usato come aggettivo (creature coperte di sangue): va bene anche se non l'hai segnato."}},
+      {t:"Al suo risveglio, i mostri [andavano] a [nascondersi] dietro le tende, oppure [~si infilavano] nell’armadio.",
+       v:[IMP,'I|inf',IMP], s:"Attenzione: «risveglio» è un nome, non un verbo.",
+       n:{0:"«Al suo risveglio» vuol dire «ogni volta che si svegliava»: un'abitudine, per questo l'imperfetto."}},
+      {t:"Grazie alla presenza di Kate, comunque, [era] un tantino più facile [uscire] dal letto e [sfrecciare] di corsa fino alla camera di mamma e papà.", v:[IMP,'I|inf','I|inf']},
+      {t:"Altre volte invece gli [dispiaceva] eccome di [dover] [dividere] la stanza.", v:[IMP,'I|inf','I|inf'],
+       n:{1:"«Dover dividere»: «dovere» è un verbo servile; insieme a «dividere» forma un solo predicato."}},
+      {t:"[~Si incominciava] con un dispetto che [diventava] un bisticcio che [diventava] una rissa, a suon di pugni, graffi, tirate di capelli eccetera.",
+       v:[IMP,IMP,IMP], s:"Attenzione: «tirate» (di capelli) qui è un nome. Tre imperfetti di fila: succedeva sempre così, una volta dopo l'altra."}
+    ],
+    p2:[
+      {t:"In teoria [avrebbero dovuto] [essere] dei neonati, ma gli occhi le [tradivano].",
+       v:['F|cond|passato||condizionale presente','I|inf',IMP],
+       n:{0:"Il condizionale passato dice una cosa che doveva essere e invece non è: le bambole dovevano sembrare neonati, ma gli occhi dicono altro."}},
+      {t:"I neonati non [guardano] in quel modo nessuno.", v:['F|ind|presente|presente'],
+       n:{0:"Un presente in mezzo al passato! Qui il narratore esce dalla storia e dice una cosa che è vera sempre, ieri come oggi."}},
+      {t:"[Passando] accanto alle bambole, Peter [~si sentiva] [scrutato?] e, [uscendo] dalla stanza, [sospettava] sempre che [~si mettessero] a [parlare] di lui, tutte e sessanta.",
+       v:['I|ger',IMP,'I|part','I|ger',IMP,'F|cong|imperfetto','I|inf'],
+       n:{2:"«Scrutato» è un participio passato usato quasi come aggettivo: va bene anche se non l'hai segnato.",5:"Il congiuntivo esprime ciò che Peter sospetta, non una cosa certa."}},
+      {t:"Le [metteva] paura, talmente tanta che non [aveva] il coraggio di [buttarla], caso mai quella [fosse tornata] nel cuore della notte a [vendicarsi].",
+       v:[IMP,IMP,'I|inf','F|cong|trapassato||congiuntivo imperfetto','I|inf'],
+       n:{3:"Il congiuntivo trapassato esprime una possibilità che fa paura a Kate: e se la Cattiva tornasse a vendicarsi?"}},
+      {t:"La Cattiva chiunque l’[avrebbe riconosciuta] al primo sguardo.", v:['F|cond|passato||condizionale presente'],
+       n:{0:"Chiunque, se l'avesse vista, l'avrebbe riconosciuta: il condizionale passato descrive la Cattiva con un'ipotesi."}}
+    ],
+    p3:[
+      {t:"La linea invisibile [funzionava] benissimo, finché [~si ricordavano] che [c’era].", v:[IMP,IMP,IMP]},
+      {t:"[Dovevano] [chiedere] permesso per [passare] dall’altra parte.", v:[IMP,'I|inf','I|inf'], s:"Le regole di ogni giorno: ancora imperfetto."},
+      {t:"Tutto [andò] bene finché un piovoso pomeriggio di domenica non [scoppiò] una lite delle peggiori su dove esattamente [~si trovasse] la linea immaginaria.",
+       v:[PR,PR,'F|cong|imperfetto'],
+       n:{0:"Ecco il primo passato remoto! Fino a qui era tutto all'imperfetto.",1:"«Un piovoso pomeriggio di domenica»: un giorno preciso, una volta sola."}},
+      {t:"Peter [era] sicuro che [fosse] più lontana rispetto al suo letto.", v:[IMP,'F|cong|imperfetto'],
+       n:{0:"Che cosa pensava Peter: lo sfondo della lite, all'imperfetto."}},
+      {t:"Quella volta Kate non [ebbe] bisogno di [diventare] viola, né di [far] finta di [morire], o di [strillare].",
+       v:[PR,'I|inf','I|inf','I|inf','I|inf'], n:{0:"«Quella volta»: una volta sola, diversa dal solito. Per questo il passato remoto."}},
+      {t:"Le [bastò] [dare] un bel colpo sul naso a Peter con la Cattiva.", v:[PR,'I|inf']},
+      {t:"L’[afferrò] per la sua unica gamba cicciona e gliela [scaraventò] sulla faccia.", v:[PR,PR], s:"Azioni una dopo l'altra, veloci: passato remoto."},
+      {t:"Perciò, [toccò] a Peter [correre] al piano di sotto [piangendo].", v:[PR,'I|inf','I|ger']},
+      {t:"Il naso non gli [faceva] poi tanto male, ma [sanguinava] e non [voleva] [perdersi] un’occasione del genere.",
+       v:[IMP,IMP,IMP,'I|inf'], s:"Di nuovo l'imperfetto: la storia si ferma un attimo per descrivere come stava Peter e che cosa voleva."},
+      {t:"Mentre [~si precipitava] di sotto, [~si passò] il dorso della mano su tutta la faccia e [arrivato] in cucina, [~si gettò] a terra di fronte a sua madre [gemendo] e [ululando] e [contorcendosi] tutto.",
+       v:[IMP,PR,'I|part',PR,'I|ger','I|ger','I|ger'],
+       n:{0:"«Mentre si precipitava»: un'azione in corso, sullo sfondo. Intanto succedono le azioni in primo piano, al passato remoto."}},
+      {t:"Kate [sarebbe finita] in un bel guaio davvero, [era] certo.", v:['F|cond|passato||condizionale presente',IMP],
+       n:{0:"Il condizionale passato qui indica un fatto futuro rispetto al momento del racconto (futuro nel passato): Peter pensa a che cosa succederà dopo a Kate."}}
+    ],
+    p4:[
+      {t:"E così i mesi [passavano], e Peter e Kate [~si abituarono] all’idea di [avere] camere separate e non ci [pensarono] più granché.",
+       v:[IMP,PR,'I|inf',PR]},
+      {t:"I giorni importanti [arrivavano] e [finivano]: il compleanno di Peter, la sera dei fuochi d’artificio, Natale, il compleanno di Kate, e infine la Pasqua.",
+       v:[IMP,IMP], s:"Il tempo scorre, le feste arrivano e finiscono tutte uguali: imperfetto."},
+      {t:"[Accadde] due giorni dopo la consueta caccia all’uovo di Pasqua.", v:[PR],
+       n:{0:"Accadde… che cosa? Il narratore non lo dice."}},
+      {t:"Peter [era] sul letto in camera sua, pronto a [mangiarsi] l’ultimo uovo [rimasto?].", v:[IMP,'I|inf','I|part'],
+       n:{2:"«Rimasto» è un participio passato usato come aggettivo: va bene anche se non l'hai segnato."}}
+    ]
+  };
+
+  function info(code){var p=code.split('|'); if(p[0]==='I')return {fin:false,modo:MODI[p[1]]};
+    return {fin:true,modo:MODI[p[1]],tempo:p[2],quando:p[3]||'',aux:p[4]||''}}
+
+  /* ---------- parsing ---------- */
+  var RE=/\[([^\]]+)\]|[A-Za-zÀ-ÿ]+['’]|[A-Za-zÀ-ÿ]+|\s+|[^\sA-Za-zÀ-ÿ\[]+/g;
+  function parse(t){
+    var out=[], vi=0, m; RE.lastIndex=0;
+    while((m=RE.exec(t))){
+      if(m[1]){
+        var c=m[1], opt=false; if(c.slice(-1)==='?'){opt=true;c=c.slice(0,-1)}
+        c.split(' ').forEach(function(w,k){
+          if(k)out.push({sp:' '});
+          var o=w[0]==='~'; out.push({w:o?w.slice(1):w,v:vi,optw:o,optv:opt});
+        });
+        vi++;
+      } else if(/^\s+$/.test(m[0])) out.push({sp:m[0]});
+      else if(/^[A-Za-zÀ-ÿ]/.test(m[0])) out.push({w:m[0],v:-1});
+      else out.push({sp:m[0]});
+    }
+    return out;
+  }
+  function plain(t){return t.replace(/\[|\]|~|\?\]/g,'').replace(/\?/g,'')}
+
+  /* ---------- stepper frase per frase ---------- */
+  function seg(opts,onpick){var s=el('div','seg'); opts.forEach(function(o){var b=el('button'); b.type='button'; b.textContent=o; b.setAttribute('aria-pressed','false');
+      b.onclick=function(){s.dataset.v=o; s.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')}); if(onpick)onpick(o)}; s.appendChild(b)}); return s}
+  function setSeg(s,v){s.dataset.v=v; s.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x.textContent===v?'true':'false')})}
+  function sel(opts,label){var s=el('select'); s.setAttribute('aria-label',label); s.appendChild(new Option('scegli…','')); opts.forEach(function(o){s.appendChild(new Option(o,o))}); return s}
+  function camp(lab,ctrl){var c=el('div','camp'); c.append(el('small','',lab),ctrl); return c}
+
+  function buildSentence(S,idx,onDone){
+    var box=el('div','frasebox'), toks=parse(S.t), nV=S.v.length, verbs=[];
+    for(var i=0;i<nV;i++)verbs.push({info:info(S.v[i]),words:[],opt:false,nota:(S.n||{})[i]});
+    var sent=el('div','sent'); sent.setAttribute('aria-label','Frase da analizzare');
+    toks.forEach(function(t){
+      if(t.sp!=null){sent.appendChild(document.createTextNode(t.sp));return}
+      var b=el('button','tok'); b.type='button'; b.textContent=t.w; t.btn=b;
+      if(t.v>=0){verbs[t.v].words.push(t); verbs[t.v].opt=t.optv}
+      b.onclick=function(){ if(sent.classList.contains('locked'))return; b.classList.toggle('sel'); b.classList.remove('miss','wrong')};
+      sent.appendChild(b);
+    });
+    verbs.forEach(function(v){v.label=v.words.map(function(t){return t.w}).join(' ')});
+    box.appendChild(sent);
+
+    /* passo 1 */
+    var s1=el('div','step'); s1.appendChild(el('h3','','<span class="n">1</span>Quali sono i verbi?'));
+    s1.appendChild(el('p','q','Clicca su tutte le parole che sono verbi (anche i verbi all’infinito, al gerundio, al participio).'));
+    var a1=el('div','azioni'), c1=el('button','btn main','Controlla'), m1=el('button','btn','Mostra i verbi'), f1=el('span','esito');
+    c1.type=m1.type='button'; a1.append(c1,m1,f1); s1.appendChild(a1); box.appendChild(s1);
+
+    /* passo 2 */
+    var s2=el('div','step'); s2.hidden=true;
+    s2.appendChild(el('h3','','<span class="n">2</span>Finito o indefinito? In che modo?'));
+    var r2=el('div','rows'); s2.appendChild(r2);
+    var a2=el('div','azioni'), c2=el('button','btn main','Controlla'), m2=el('button','btn','Mostra la soluzione'), f2=el('span','esito');
+    c2.type=m2.type='button'; a2.append(c2,m2,f2); s2.appendChild(a2); box.appendChild(s2);
+
+    /* passo 3 */
+    var s3=el('div','step'); s3.hidden=true;
+    s3.appendChild(el('h3','','<span class="n">3</span>I verbi finiti: quando? che tempo?'));
+    s3.appendChild(el('p','q','Per l’indicativo: passato, presente o futuro? Poi il tempo verbale. Per i tempi composti: in che tempo è l’ausiliare?'));
+    var r3=el('div','rows'); s3.appendChild(r3);
+    var a3=el('div','azioni'), c3=el('button','btn main','Controlla'), m3=el('button','btn','Mostra la soluzione'), f3=el('span','esito');
+    c3.type=m3.type='button'; a3.append(c3,m3,f3); s3.appendChild(a3); box.appendChild(s3);
+
+    var notes=el('div','notes'); notes.hidden=true; box.appendChild(notes);
+
+    function show1(){
+      verbs.forEach(function(v){v.words.forEach(function(t){t.btn.classList.add('sel')})});
+      toks.forEach(function(t){if(t.btn){t.btn.classList.remove('miss','wrong'); if(t.v<0)t.btn.classList.remove('sel')}});
+      sent.classList.add('locked'); c1.disabled=m1.disabled=true; f1.className='esito ok'; f1.textContent='Verbi trovati: '+verbs.length+'.';
+      openStep2();
+    }
+    c1.onclick=function(){
+      var miss=0,wrong=0,found=0,req=0;
+      toks.forEach(function(t){if(!t.btn)return; t.btn.classList.remove('miss','wrong'); if(t.v<0&&t.btn.classList.contains('sel')){wrong++;t.btn.classList.add('wrong')}});
+      verbs.forEach(function(v){ if(v.opt)return; req++;
+        var ok=v.words.every(function(t){return t.optw||t.btn.classList.contains('sel')});
+        if(ok)found++; else {miss++; v.words.forEach(function(t){if(!t.optw)t.btn.classList.add('miss')})}});
+      if(!miss&&!wrong){show1(); return}
+      f1.className='esito'; f1.textContent='Verbi trovati: '+found+' su '+req+'.'+(wrong?' Parole che non sono verbi: '+wrong+' (barrate).':'')+(miss?' Il bordo rosso indica i verbi che mancano.':'');
+    };
+    m1.onclick=show1;
+
+    var rows2=[], rows3=[];
+    function openStep2(){
+      if(!s2.hidden)return; s2.hidden=false;
+      verbs.forEach(function(v){
+        var r=el('div','row'), fi=seg(['finito','indefinito']), mo=sel(MODI_F,'Modo di «'+v.label+'»'), fb=el('div','fb');
+        r.append(el('span','vb',v.label),camp('tipo',fi),camp('modo',mo),fb); r2.appendChild(r); rows2.push({r:r,fi:fi,mo:mo,fb:fb,v:v});
+      });
+      if(S.s){var ns=el('p','nota alt',S.s); notes.appendChild(ns); notes.hidden=false}
+    }
+    function mark2(x,force){
+      if(force){setSeg(x.fi,x.v.info.fin?'finito':'indefinito'); x.mo.value=x.v.info.modo}
+      var g=(x.fi.dataset.v===(x.v.info.fin?'finito':'indefinito'))&&x.mo.value===x.v.info.modo;
+      x.r.className='row '+(g?'ok':'ko');
+      x.fb.innerHTML=g?'':'Soluzione: <b>'+(x.v.info.fin?'modo finito':'modo indefinito')+', '+x.v.info.modo+'</b>.';
+      return g;
+    }
+    function done2(){
+      c2.disabled=m2.disabled=true; f2.className='esito ok'; f2.textContent='Fatto!';
+      rows2.forEach(function(x){x.fi.querySelectorAll('button').forEach(function(b){b.disabled=true}); x.mo.disabled=true});
+      verbs.forEach(function(v){v.words.forEach(function(t){t.btn.classList.remove('sel'); t.btn.classList.add(v.info.fin?'fin':'ind')})});
+      openStep3();
+    }
+    c2.onclick=function(){var ok=0; rows2.forEach(function(x){if(mark2(x))ok++}); if(ok===rows2.length)done2(); else {f2.className='esito'; f2.textContent='Giuste: '+ok+' su '+rows2.length+'.'}};
+    m2.onclick=function(){rows2.forEach(function(x){mark2(x,true)}); done2()};
+
+    function openStep3(){
+      s3.hidden=false;
+      var fin=verbs.filter(function(v){return v.info.fin});
+      fin.forEach(function(v){
+        var r=el('div','row'), fb=el('div','fb'), x={r:r,fb:fb,v:v};
+        r.appendChild(el('span','vb',v.label+' <small style="font-weight:400;color:var(--muted);font-family:var(--body);font-size:.85rem">('+v.info.modo+')</small>'));
+        if(v.info.quando){x.q=seg(['passato','presente','futuro']); r.appendChild(camp('quando?',x.q))}
+        x.t=sel(TEMPI[v.info.modo],'Tempo di «'+v.label+'»'); r.appendChild(camp('tempo verbale',x.t));
+        if(v.info.aux){x.a=sel(AUX,'Tempo dell’ausiliare di «'+v.label+'»'); r.appendChild(camp('ausiliare: «'+v.words[0].w+'» è al…',x.a))}
+        r.appendChild(fb); r3.appendChild(r); rows3.push(x);
+      });
+    }
+    function mark3(x,force){
+      var I=x.v.info;
+      if(force){ if(x.q)setSeg(x.q,I.quando); x.t.value=I.tempo; if(x.a)x.a.value=I.aux }
+      var g=(!x.q||x.q.dataset.v===I.quando)&&x.t.value===I.tempo&&(!x.a||x.a.value===I.aux);
+      x.r.className='row '+(g?'ok':'ko');
+      x.fb.innerHTML=g?'':'Soluzione: <b>'+(I.quando?I.quando+', ':'')+I.modo+' '+I.tempo+'</b>'+(I.aux?' (ausiliare al '+I.aux+')':'')+'.';
+      return g;
+    }
+    function done3(){
+      c3.disabled=m3.disabled=true; f3.className='esito ok'; f3.textContent='Frase completata!';
+      rows3.forEach(function(x){ if(x.q)x.q.querySelectorAll('button').forEach(function(b){b.disabled=true}); x.t.disabled=true; if(x.a)x.a.disabled=true});
+      verbs.forEach(function(v){ if(v.nota){notes.appendChild(el('p','nota','<b>'+v.label+'</b>: '+v.nota))} });
+      notes.hidden=!notes.children.length;
+      onDone();
+    }
+    c3.onclick=function(){var ok=0; rows3.forEach(function(x){if(mark3(x))ok++}); if(ok===rows3.length)done3(); else {f3.className='esito'; f3.textContent='Giuste: '+ok+' su '+rows3.length+'.'}};
+    m3.onclick=function(){rows3.forEach(function(x){mark3(x,true)}); done3()};
+
+    return box;
+  }
+
+  function buildPart(host,key){
+    var list=PARTS[key], st=el('div','stepper'), nav=el('div','nav'), pos=el('span','pos'), dots=el('div','dots');
+    var prev=el('button','btn','← Frase precedente'), next=el('button','btn main','Frase successiva →'); prev.type=next.type='button';
+    nav.append(pos,prev,next); st.append(nav,dots);
+    st.appendChild(el('div','legenda','<span><b class="f">verbo</b> modo finito</span><span><b class="i">verbo</b> modo indefinito</span>'));
+    var boxes=[], cur=0;
+    list.forEach(function(S,i){
+      var d=el('button','',String(i+1)); d.type='button'; d.setAttribute('aria-label','Frase '+(i+1)); d.onclick=function(){go(i)}; dots.appendChild(d);
+      var b=buildSentence(S,i,function(){d.classList.add('done')}); b.hidden=true; st.appendChild(b); boxes.push(b);
+    });
+    function go(i){cur=i; boxes.forEach(function(b,k){b.hidden=k!==i}); dots.querySelectorAll('button').forEach(function(d,k){d.classList.toggle('cur',k===i)});
+      pos.textContent='Frase '+(i+1)+' di '+list.length; prev.disabled=i===0; next.disabled=i===list.length-1}
+    prev.onclick=function(){if(cur>0){go(cur-1); st.scrollIntoView({block:'start',behavior:'smooth'})}};
+    next.onclick=function(){if(cur<list.length-1){go(cur+1); st.scrollIntoView({block:'start',behavior:'smooth'})}};
+    go(0); host.appendChild(st);
+  }
+  document.querySelectorAll('[data-part]').forEach(function(h){buildPart(h,h.dataset.part)});
+
+  /* bilancio dei verbi finiti */
+  document.querySelectorAll('[data-bil]').forEach(function(d){
+    var cnt={},order=[];
+    PARTS[d.dataset.bil].forEach(function(S){S.v.forEach(function(c){var I=info(c); if(!I.fin)return;
+      var k=(I.modo==='indicativo'?'':I.modo+' ')+I.tempo; if(!(k in cnt)){cnt[k]=0;order.push(k)} cnt[k]++})});
+    order.sort(function(a,b){return cnt[b]-cnt[a]});
+    var max=Math.max.apply(null,order.map(function(k){return cnt[k]}));
+    var b=el('div','bil'); b.appendChild(el('p','q','Verbi finiti, tempo per tempo (indicativo, se non è scritto altro):'));
+    order.forEach(function(k){var r=el('div','bar'), bar=el('span','b'+(k==='imperfetto'?'':k==='passato remoto'?' pr':' al')); bar.style.width=(cnt[k]/max*100)+'%';
+      r.append(el('span','',k),el('span','',''),el('span','',cnt[k])); r.children[1].appendChild(bar); b.appendChild(r)});
+    var tot=order.reduce(function(s,k){return s+cnt[k]},0);
+    var imp=cnt['imperfetto']||0, pr=cnt['passato remoto']||0;
+    b.appendChild(el('p','',imp>pr?'Su '+tot+' verbi finiti, <b>'+imp+'</b> sono all’imperfetto'+(pr?' e '+pr+' al passato remoto':'')+'.':'Su '+tot+' verbi finiti, <b>'+pr+'</b> sono al passato remoto e '+imp+' all’imperfetto. Che cosa è cambiato?'));
+    d.appendChild(b);
+  });
+
+  /* ---------- domande a scelta ---------- */
+  function quiz(id,opts,items){
+    var box=document.getElementById(id), arr=[]; if(!box)return;
+    items.forEach(function(d){var it=el('div','item'),fr=el('div','frase',d[0]),s=seg(d[3]||opts),fb=el('div','fb'); it.append(fr,s,fb); box.appendChild(it); arr.push([it,s,d,fb])});
+    var a=el('div','azioni'), c=el('button','btn main','Controlla'), m=el('button','btn','Mostra la soluzione'), f=el('span','esito'); c.type=m.type='button'; a.append(c,m,f); box.appendChild(a);
+    function mark(force){var ok=0; arr.forEach(function(x){ if(force)setSeg(x[1],x[2][1]); var g=x[1].dataset.v===x[2][1]; x[0].className='item '+(g?'ok':'ko');
+        x[3].innerHTML=(g?'Giusto! ':'Risposta: <b>'+x[2][1]+'</b>. ')+(x[2][2]||''); if(g)ok++}); f.textContent=force?'':'Giuste: '+ok+' su '+arr.length+'.'}
+    c.onclick=function(){mark(false)}; m.onclick=function(){mark(true)};
+  }
+
+  quiz('q-riscaldamento',['finito','indefinito'],[
+    ['<i>cantavamo</i>','finito','Si capisce chi canta: noi.'],
+    ['<i>cantando</i>','indefinito','Gerundio: chi canta? Non si sa.'],
+    ['<i>cantassero</i>','finito','Congiuntivo: loro.'],
+    ['<i>cantato</i>','indefinito','Participio passato.'],
+    ['<i>canterebbero</i>','finito','Condizionale: loro.'],
+    ['<i>cantare</i>','indefinito','Infinito.'],
+    ['<i>avevano cantato</i>','finito','Trapassato prossimo: loro.'],
+    ['<i>avere cantato</i>','indefinito','Infinito passato: chi? Non si sa.']
+  ]);
+
+  quiz('q-quando',['passato','presente','futuro'],[
+    ['Peter <b>divideva</b> la camera con Kate.','passato','Imperfetto.'],
+    ['Kate <b>strilla</b> più forte di tutti.','presente',''],
+    ['Domani Peter <b>dormirà</b> nella stanza nuova.','futuro','Futuro semplice.'],
+    ['Peter <b>aveva</b> sempre <b>diviso</b> la camera con Kate.','passato','Trapassato prossimo: un passato ancora più lontano.'],
+    ['Le bambole lo <b>guardano</b> con gli occhi di vetro.','presente',''],
+    ['Quel giorno Kate <b>tornò</b> tardi.','passato','Passato remoto.']
+  ]);
+
+  quiz('q-funzioni',['descrizione','abitudine'],[
+    ['«Al suo risveglio, i mostri <b>andavano</b> a nascondersi dietro le tende»','abitudine','Ogni volta che si svegliava.'],
+    ['«In teoria avrebbero dovuto essere dei neonati, ma gli occhi le <b>tradivano</b>»','descrizione','Com’erano le bambole.'],
+    ['«<b>Si incominciava</b> con un dispetto che <b>diventava</b> un bisticcio»','abitudine','Le liti andavano sempre così.'],
+    ['«Le <b>metteva</b> paura»','descrizione','Un sentimento di Kate.'],
+    ['«<b>sospettava</b> sempre che si mettessero a parlare di lui»','abitudine','«Sempre»: ogni volta che usciva dalla stanza.'],
+    ['«non <b>aveva</b> il coraggio di buttarla»','descrizione','Com’era Kate, che cosa provava.']
+  ]);
+
+  quiz('q-cambio',null,[
+    ['L’imperfetto lascia il posto a quale tempo?','passato remoto','',['passato prossimo','passato remoto','presente','trapassato prossimo']],
+    ['Quale espressione annuncia che sta per succedere un fatto preciso, una volta sola?','un piovoso pomeriggio di domenica','Un giorno preciso: non «di solito», ma «quella domenica».',['benissimo','finché si ricordavano','un piovoso pomeriggio di domenica','dall’altra parte']],
+    ['Perché il narratore cambia tempo?','per raccontare un fatto preciso che fa andare avanti la storia','L’imperfetto descriveva le abitudini; il passato remoto racconta l’evento: la lite.',['perché il fatto è successo più di recente','per raccontare un fatto preciso che fa andare avanti la storia','per non ripetere sempre lo stesso tempo']]
+  ]);
+
+  quiz('q-sfondo',['sfondo','primo piano'],[
+    ['«Perciò, <b>toccò</b> a Peter correre al piano di sotto»','primo piano','Un’azione: passato remoto.'],
+    ['«Il naso non gli <b>faceva</b> poi tanto male»','sfondo','Come stava Peter: imperfetto.'],
+    ['«ma <b>sanguinava</b>»','sfondo','Una situazione che dura: imperfetto.'],
+    ['«<b>Mentre si precipitava</b> di sotto»','sfondo','Un’azione in corso mentre ne succede un’altra: imperfetto.'],
+    ['«<b>si passò</b> il dorso della mano su tutta la faccia»','primo piano','Passato remoto.'],
+    ['«<b>si gettò</b> a terra di fronte a sua madre»','primo piano','Passato remoto.']
+  ]);
+
+  quiz('q-accadde',null,[
+    ['«Accadde due giorni dopo la consueta caccia all’uovo di Pasqua.» Che cosa accadde?','non lo sappiamo ancora','Il narratore annuncia un fatto importante, ma non dice quale: ci fa aspettare.',['Peter mangiò l’ultimo uovo','Kate tornò a casa','non lo sappiamo ancora']],
+    ['In che tempo è «accadde»?','passato remoto','',['imperfetto','passato remoto','passato prossimo']],
+    ['Perché «accadde» colpisce il lettore?','arriva dopo tante frasi all’imperfetto e annuncia un fatto unico','I mesi «passavano», i giorni «arrivavano e finivano»: tutto uguale. Poi, d’improvviso, un passato remoto.',['è un verbo difficile','arriva dopo tante frasi all’imperfetto e annuncia un fatto unico','racconta un’abitudine di Peter']]
+  ]);
+
+  /* ---------- trova il punto del cambio ---------- */
+  (function(){
+    var host=document.getElementById('passo-cambio'); if(!host)return; var txt=PARTS.p3.slice(0,3).map(function(S){return S.t}).join(' ');
+    var target=null, chosen=null, fb=document.getElementById('cambio-fb');
+    parse(txt).forEach(function(t){
+      if(t.sp!=null){host.appendChild(document.createTextNode(t.sp));return}
+      var b=el('button','tok'); b.type='button'; b.textContent=t.w; if(t.w==='andò')target=b;
+      b.onclick=function(){if(host.classList.contains('locked'))return; host.querySelectorAll('.tok').forEach(function(x){x.classList.remove('sel','wrong')}); b.classList.add('sel'); chosen=b};
+      host.appendChild(b);
+    });
+    function ok(){host.className='passo ok locked'; target.classList.add('sel'); fb.className='esito ok'; fb.textContent='Sì: «andò», passato remoto. Subito dopo arriva «scoppiò».'}
+    document.getElementById('cambio-check').onclick=function(){
+      if(!chosen){fb.className='esito'; fb.textContent='Clicca prima su un verbo.';return}
+      if(chosen===target)ok(); else {host.className='passo ko'; chosen.classList.add('wrong'); fb.className='esito'; fb.textContent='Non ancora: «'+chosen.textContent+'» non è il primo verbo finito che cambia tempo. Riprova.'}
+    };
+    document.getElementById('cambio-sol').onclick=function(){host.querySelectorAll('.tok').forEach(function(x){x.classList.remove('sel','wrong')}); ok()};
+  })();
+})();
+</script>
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

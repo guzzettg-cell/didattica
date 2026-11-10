@@ -254,6 +254,7 @@ var MODULI = [
         link: "geografia/prima/regioni-italiane/italia-settentrionale/index.html",
         data: "2026-11-03",
         attivita: [
+          { tipo: "Dopo il modulo I", titolo: "La carta d'identità della regione", descrizione: "Foto da satellite da mettere al loro posto; poi ognuno usa sulla sua regione orientamento, coordinate, carte, scala, fotografie e dati.", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/carta-d-identita.html", data: "2026-11-09" },
           { tipo: "Tappa 1", titolo: "L'Italia settentrionale: dove si trova e i paesaggi", descrizione: "Il puzzle delle regioni; elementi Dove si trova e Il paesaggio (B116–B121).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/territorio-e-paesaggi.html", data: "2026-11-03" },
           { tipo: "Tappa 2 · Lezione 1", titolo: "Il Piemonte: com'è fatto", descrizione: "Elementi fisici: dove si trova, paesaggio, territorio, acque, clima e ambiente (B122–B123).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/piemonte.html", data: "2026-11-04" },
           { tipo: "Tappa 2 · Lezione 2", titolo: "Il Piemonte: chi ci vive, che cosa fa", descrizione: "Elementi umani: economia, popolazione, vie di comunicazione, nome e storia, beni culturali (B122, B124–B125).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/piemonte-2.html", data: "2026-11-04" },
@@ -267,6 +268,7 @@ var MODULI = [
           { tipo: "Tappa 5 · Lezione 1", titolo: "L'Emilia-Romagna: com'è fatta", descrizione: "Elementi fisici (B142–B143).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/emilia-romagna.html", data: "2026-11-04" },
           { tipo: "Tappa 5 · Lezione 2", titolo: "L'Emilia-Romagna: chi ci vive, che cosa fa", descrizione: "Elementi umani e confronto finale tra le regioni del Nord (B142, B144–B145).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/emilia-romagna-2.html", data: "2026-11-04" },
           { tipo: "Tappa 5 · Da soli", titolo: "La Liguria", descrizione: "I dieci elementi con il libro (B132–B133).", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/liguria.html", data: "2026-11-04" },
+          { tipo: "Gioco", titolo: "Quale regione? Il Nord visto dallo spazio", descrizione: "Ripasso: Lombardia, Trentino-Alto Adige, Veneto ed Emilia-Romagna nelle foto del satellite Envisat (ESA). Con i link alle pagine dell'ESA.", link: "geografia/prima/regioni-italiane/italia-settentrionale/attivita/regioni-dallo-spazio.html", data: "2026-11-09" },
           { tipo: "Schede", titolo: "Schede delle regioni per il cartellone", descrizione: "Una scheda per regione, dieci sezioni.", link: "geografia/prima/regioni-italiane/italia-settentrionale/index.html#schede", data: "2026-11-03" }
         ]
       },
@@ -936,7 +938,18 @@ var MODULI = [
         data: "2026-10-20",
         attivita: [
           { tipo: "Lezione", titolo: "Inquadrature: campi e piani", descrizione: "Video su campi e piani, la scala delle inquadrature con esempi, quiz su spezzoni del cinema in bianco e nero e collegamento con il fumetto.", link: "italiano/seconda/dal-testo-al-film/inquadrature/index.html", data: "2026-10-27" },
-          { tipo: "Sceneggiatura", titolo: "Peter e le decorazioni di Natale: dal racconto al découpage", link: "italiano/seconda/dal-testo-al-film/peter-decorazioni-di-natale.html", data: "2026-10-20" }
+          { tipo: "Sceneggiatura", titolo: "Peter e le decorazioni di Natale: dal racconto al découpage", link: "italiano/seconda/dal-testo-al-film/peter-decorazioni-di-natale.html", data: "2026-10-20" },
+          { tipo: "Guida alla lezione", titolo: "«Le bambole»: i verbi del racconto – tutte le attività (circa 90 minuti)", descrizione: "Ripasso dei verbi, poi il racconto frase per frase: l'imperfetto, il passaggio al passato remoto e la suspense di «Accadde».", link: "italiano/seconda/dal-testo-al-film/le-bambole/index.html", data: "2026-11-10" },
+          { tipo: "Fase 1", titolo: "Ripasso: i verbi", link: "italiano/seconda/dal-testo-al-film/le-bambole/attivita/fase-01-ripasso-verbi.html", data: "2026-11-10" },
+          { tipo: "Fase 2", titolo: "I verbi nel racconto", link: "italiano/seconda/dal-testo-al-film/le-bambole/attivita/fase-02-verbi-nel-racconto.html", data: "2026-11-10" },
+          { tipo: "Fase 3", titolo: "Tappa 1: l'inizio del racconto (pp. 23-24)", link: "italiano/seconda/dal-testo-al-film/le-bambole/attivita/fase-03-tappa-1-inizio.html", data: "2026-11-10" },
+          { tipo: "Fase 4", titolo: "Tappa 2: le bambole e la Cattiva (p. 26)", link: "italiano/seconda/dal-testo-al-film/le-bambole/attivita/fase-04-tappa-2-bambole.html", data: "2026-11-10" },
+          { tipo: "Fase 5", titolo: "L'imperfetto: a che cosa serve?", link: "italiano/seconda/dal-testo-al-film/le-bambole/attivita/fase-05-imperfetto.html", data: "2026-11-10" },
+          { tipo: "Fase 6", titolo: "Tappa 3: la lite (p. 27)", link: "italiano/seconda/dal-testo-al-film/le-bambole/attivita/fase-06-tappa-3-lite.html", data: "2026-11-10" },
+          { tipo: "Fase 7", titolo: "Dove si abbandona l'imperfetto?", link: "italiano/seconda/dal-testo-al-film/le-bambole/attivita/fase-07-cambio.html", data: "2026-11-10" },
+          { tipo: "Fase 8", titolo: "Tappa 4: «Accadde» (p. 30)", link: "italiano/seconda/dal-testo-al-film/le-bambole/attivita/fase-08-tappa-4-accadde.html", data: "2026-11-10" },
+          { tipo: "Fase 9", titolo: "Accadde… che cosa?", link: "italiano/seconda/dal-testo-al-film/le-bambole/attivita/fase-09-suspense.html", data: "2026-11-10" },
+          { tipo: "Fase 10", titolo: "Per ricordare: i tempi del racconto", link: "italiano/seconda/dal-testo-al-film/le-bambole/attivita/fase-10-per-ricordare.html", data: "2026-11-10" }
         ]
       }
     ]
