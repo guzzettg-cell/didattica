@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Parole in fabula: lezione d'apertura. Con Alice e il Bruco scopriamo che le parole servono a capire e a far capire chi siamo." />
+    <meta name="theme-color" content="#f6edda" />
+    <title>Chi sei tu? · Parole in fabula</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="stile.css" />
+    <style>
+      /* Lascia respiro tra le etichette e i campi di risposta. */
+      .exercise-card > label + input[type="text"] {
+        margin-inline-start: clamp(1rem, 2vw, 1.5rem);
+        max-width: calc(100% - clamp(1rem, 2vw, 1.5rem));
+      }
+
+      .exercise-card > label + textarea,
+      .writing-card > label + textarea {
+        margin-block-start: 0.75rem;
+      }
+
+      @media (max-width: 42rem) {
+        .exercise-card > label + input[type="text"] {
+          display: block;
+          width: 100%;
+          max-width: 100%;
+          margin-block-start: 0.75rem;
+          margin-inline-start: 0;
+        }
+      }
+
+      /* La frase di Alice in apertura. */
+      .alice-quote {
+        margin: 36px 0 0;
+        border: 1px solid var(--line);
+        border-left: 7px solid var(--gold);
+        border-radius: 25px;
+        background: var(--card);
+        box-shadow: var(--shadow);
+        padding: clamp(25px, 5vw, 48px);
+      }
+      .alice-quote p {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(1.45rem, 3.4vw, 2.4rem);
+        font-style: italic;
+        line-height: 1.25;
+      }
+      .alice-quote footer { margin-top: 18px; color: var(--muted); font-weight: 750; }
+      .opening-question { margin-top: 30px; }
+
+      /* Il dialogo tra Alice e il Bruco. */
+      .dialogue p { margin: 0 0 12px; }
+      .dialogue strong { color: var(--forest); }
+      .story-context { color: var(--muted); }
+
+      /* Le parole da mettere in scala. */
+      .word-ladder { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 4px; }
+      .word-ladder span { border: 1px solid var(--line); border-radius: 999px; background: var(--paper); padding: 5px 13px; font-weight: 800; }
+    </style>
+  </head>
+  <body data-page="chi-sei-tu">
+    <a class="skip-link" href="#contenuto">Vai al contenuto</a>
+    <header class="site-header">
+      <a class="brand" href="00_APRI_PAROLE_IN_FABULA.html" aria-label="Torna alla pagina iniziale"><span class="brand-mark" aria-hidden="true">P</span><span>Parole in fabula</span></a>
+      <div class="header-actions">
+        <a class="text-button site-link" href="../../../index.html?classe=prima">← Italiano · prima</a>
+        <div class="text-size-controls" role="group" aria-label="Dimensione del testo">
+          <button class="text-button size-button" type="button" data-text-size="smaller" aria-label="Riduci il testo">A−</button>
+          <button class="text-button size-button" type="button" data-text-size="larger" aria-label="Ingrandisci il testo">A+</button>
+          <span class="visually-hidden" data-text-size-status aria-live="polite">Dimensione testo 100%</span>
+        </div>
+        <button class="text-button" type="button" data-print>Stampa</button>
+      </div>
+    </header>
+    <main id="contenuto">
+      <!-- INIZIO TESTI DA MODIFICARE -->
+      <nav class="page-nav page-nav-top" aria-label="Navigazione tra i laboratori"><a class="secondary-link" href="00_APRI_PAROLE_IN_FABULA.html">← Tutti i laboratori</a><a class="primary-link" href="01_ALFABETO.html">Il topo e l’alfabeto →</a></nav>
+      <section class="lesson-hero">
+        <p class="eyebrow">Lezione d’apertura · Prima di tutto, noi</p><p class="kicker">Una domanda semplice solo in apparenza</p><h1>Chi sei tu?</h1>
+        <blockquote class="alice-quote">
+          <p>«So chi ero quando mi sono alzata stamattina, ma da allora devo essere cambiata molte volte.»</p>
+          <footer>Alice, in <cite>Alice nel Paese delle Meraviglie</cite> di Lewis Carroll (1865)</footer>
+        </blockquote>
+        <p class="opening-question lead">Vi sembra che questa frase descriva bene il vostro stato d’animo?</p>
+        <p>Prima di rispondere, pensate a oggi: a come vi siete svegliati, al tragitto fino a scuola, al momento in cui siete entrati in classe, a quello che provate adesso. Siete sempre stati la stessa persona, con lo stesso umore?</p>
+        <article class="story-panel">
+          <div>
+            <p class="section-label">La scena</p>
+            <h2>Alice incontra il Bruco</h2>
+            <p class="story-context">Alice è caduta nella tana del Coniglio Bianco. Da quel momento ha bevuto e mangiato cose strane: è diventata piccolissima, poi altissima, poi di nuovo minuscola. Nel bosco incontra un Bruco seduto su un fungo, che la guarda a lungo e alla fine le fa una sola domanda.</p>
+            <div class="dialogue">
+              <p><strong>Bruco:</strong> «Chi sei tu?»</p>
+              <p><strong>Alice:</strong> «Io… io non lo so proprio, signore, in questo momento… o almeno, so chi ero quando mi sono alzata stamattina, ma da allora devo essere cambiata molte volte.»</p>
+              <p><strong>Bruco:</strong> «Che cosa vuoi dire? Spiegati!»</p>
+              <p><strong>Alice:</strong> «Temo di non potermi spiegare, signore, perché non sono me stessa, vede.»</p>
+              <p><strong>Bruco:</strong> «Non vedo.»</p>
+              <p><strong>Alice:</strong> «Temo di non riuscire a dirlo più chiaramente: prima di tutto non lo capisco nemmeno io, e poi cambiare tante volte di statura in un giorno confonde parecchio.»</p>
+            </div>
+          </div>
+          <div class="questions-to-discuss">
+            <p class="section-label">Parliamone</p>
+            <p>Prima discutete insieme; soltanto dopo aprite gli spunti.</p>
+            <details class="answer"><summary>1. La frase di Alice descrive anche voi?</summary><p>Non c’è una risposta giusta. In una sola mattina di scuola possiamo sentirci assonnati, curiosi, agitati prima di una verifica, allegri all’intervallo, stanchi all’ultima ora. Anche noi, come Alice, «cambiamo molte volte».</p></details>
+            <details class="answer"><summary>2. Perché Alice non sa rispondere a una domanda così semplice?</summary><p>Perché le stanno succedendo troppe cose, una dopo l’altra. Si sente confusa e non trova le parole per mettere in ordine quello che prova.</p></details>
+            <details class="answer"><summary>3. Il Bruco riesce a capirla?</summary><p>No: «Non vedo», risponde. Se non riusciamo a capire noi stessi, è difficile farci capire dagli altri. E viceversa: provare a spiegarci ci aiuta anche a chiarirci le idee.</p></details>
+            <details class="answer"><summary>4. Alice cambia davvero. E noi?</summary><p>Alice cambia statura per magia. Noi non diventiamo giganti o minuscoli, eppure a volte diciamo proprio così: «mi sono sentito piccolo piccolo», «mi sentivo un gigante». Usiamo le parole per far vedere agli altri un cambiamento che si svolge dentro di noi.</p></details>
+          </div>
+        </article>
+        <article class="need-card"><p class="section-label">Che cosa abbiamo scoperto</p><h2>Le parole ci servono per capirci</h2><p>Per rispondere alla domanda «Chi sei tu?» non basta essere qualcuno: servono le parole per dirlo. Quando le parole mancano, restiamo confusi noi e lasciamo confusi gli altri.</p></article>
+      </section>
+
+      <section class="activity">
+        <div class="activity-heading"><p class="kicker">Attività 1 · Da stamattina a adesso</p><h2>Quante volte sei cambiato oggi?</h2><p class="lead">Per ogni momento della giornata scrivi una parola, o una frase breve, che dica come ti sentivi. Cerca di non usare soltanto «bene» o «male».</p></div>
+        <div class="exercise-list">
+          <article class="exercise-card"><h3>1. Quando mi sono alzato o alzata</h3><label for="momento-0">Mi sentivo</label><input id="momento-0" type="text" data-saved-field /><p class="save-status"></p></article>
+          <article class="exercise-card"><h3>2. Mentre venivo a scuola</h3><label for="momento-1">Mi sentivo</label><input id="momento-1" type="text" data-saved-field /><p class="save-status"></p></article>
+          <article class="exercise-card"><h3>3. Entrando in classe</h3><label for="momento-2">Mi sentivo</label><input id="momento-2" type="text" data-saved-field /><p class="save-status"></p></article>
+          <article class="exercise-card"><h3>4. Adesso, mentre leggo questa pagina</h3><label for="momento-3">Mi sento</label><input id="momento-3" type="text" data-saved-field /><p class="save-status"></p></article>
+        </div>
+        <div class="rule-path"><article class="need-card"><p class="section-label">Perché ci serve</p><p>Se scrivo «bene, bene, male, bene», chi legge sa soltanto che qualcosa è cambiato, ma non sa che cosa. E forse non lo so con chiarezza nemmeno io.</p></article><article class="rule-card"><p class="section-label">Che cosa scopriamo</p><p>Una parola precisa è come una fotografia: ferma un momento di noi e lo rende visibile, prima a noi stessi e poi agli altri.</p></article></div>
+      </section>
+
+      <section class="activity">
+        <div class="activity-heading"><p class="kicker">Attività 2 · La scala delle parole</p><h2>Arrabbiato o furioso?</h2><p class="lead">In ogni gruppo le parole parlano della stessa emozione, ma non con la stessa forza. Mettile in ordine, dalla più leggera alla più forte.</p></div>
+        <div class="exercise-list">
+          <article class="exercise-card"><h3>1. Quando qualcosa non va come vorrei</h3><div class="word-ladder"><span>furioso</span><span>infastidito</span><span>arrabbiato</span></div><label for="scala-0">Il mio ordine</label><input id="scala-0" type="text" data-saved-field /><details class="solution"><summary>Confronta</summary><p>infastidito → arrabbiato → furioso</p></details><p class="save-status"></p></article>
+          <article class="exercise-card"><h3>2. Quando qualcosa mi fa paura</h3><div class="word-ladder"><span>terrorizzato</span><span>preoccupato</span><span>spaventato</span></div><label for="scala-1">Il mio ordine</label><input id="scala-1" type="text" data-saved-field /><details class="solution"><summary>Confronta</summary><p>preoccupato → spaventato → terrorizzato</p></details><p class="save-status"></p></article>
+          <article class="exercise-card"><h3>3. Quando qualcosa mi rende allegro</h3><div class="word-ladder"><span>felice</span><span>euforico</span><span>contento</span></div><label for="scala-2">Il mio ordine</label><input id="scala-2" type="text" data-saved-field /><details class="solution"><summary>Confronta</summary><p>contento → felice → euforico</p></details><p class="save-status"></p></article>
+          <article class="exercise-card"><h3>4. Quando qualcosa mi pesa</h3><div class="word-ladder"><span>disperato</span><span>giù di morale</span><span>triste</span></div><label for="scala-3">Il mio ordine</label><input id="scala-3" type="text" data-saved-field /><details class="solution"><summary>Confronta</summary><p>giù di morale → triste → disperato</p></details><p class="save-status"></p></article>
+        </div>
+        <p>Siete tutti d’accordo sull’ordine? Se qualcuno ha scelto diversamente, chiedetegli perché: le sfumature delle parole si scoprono anche discutendo.</p>
+        <div class="rule-path"><article class="need-card"><p class="section-label">Perché ci serve</p><p>Dire «sono arrabbiato» quando siamo appena infastiditi, o «sono un po’ giù» quando siamo davvero disperati, fa capire agli altri una cosa diversa da quella che proviamo.</p></article><article class="rule-card"><p class="section-label">Che cosa scopriamo</p><p>Parole simili non dicono la stessa cosa: ognuna ha la sua sfumatura. Più parole conosciamo, più precisamente possiamo dire chi siamo e come stiamo.</p></article></div>
+      </section>
+
+      <section class="activity">
+        <div class="activity-heading"><p class="kicker">Attività 3 · «Com’è andata?» «Boh.»</p><h2>Farsi capire da un Bruco</h2><p class="lead">A casa qualcuno vi chiede: «Com’è andata oggi a scuola?». Le risposte più frequenti sono «bene», «normale», «boh». Chi ha fatto la domanda, a quel punto, sa qualcosa di voi?</p></div>
+        <article class="exercise-card"><label for="com-e-andata">Riscrivi la risposta in modo che chi ascolta capisca davvero com’è andata la tua giornata (tre o quattro frasi).</label><textarea id="com-e-andata" data-saved-field></textarea><details class="solution"><summary>Un esempio possibile</summary><p>«All’inizio ero agitato, perché c’era la verifica di matematica. Poi all’intervallo ho riso tantissimo con i miei compagni e mi è passata. Adesso sono stanco, ma anche curioso di sapere che voto prenderò.»</p></details><p class="save-status"></p></article>
+        <div class="rule-path"><article class="need-card"><p class="section-label">Perché ci serve</p><p>Nell’esempio non ci sono solo parole sulle emozioni: ci sono anche parole che le mettono in ordine nel tempo e ne spiegano le cause (<em>all’inizio</em>, <em>perché</em>, <em>poi</em>, <em>adesso</em>).</p></article><article class="rule-card"><p class="section-label">Che cosa scopriamo</p><p>Per farci capire servono parole precise e servono parole che le colleghino tra loro. Studiare la lingua vuol dire proprio imparare a scegliere e a collegare le parole.</p></article></div>
+      </section>
+
+      <section class="activity">
+        <div class="activity-heading"><p class="kicker">Attività 4 · La mia lingua sono io</p><h2>Le parole che scegli raccontano chi sei</h2><p class="lead">Chi studia la comunicazione dice spesso che <strong>siamo ciò che comunichiamo</strong>: le parole che scegliamo raccontano agli altri qualcosa di noi, anche quando non ce ne accorgiamo.</p></div>
+        <div class="exercise-list">
+          <article class="exercise-card"><h3>1. Le parole di tutti</h3><p>Quali parole o espressioni usi di più in questo periodo? Le usi perché ti piacciono o perché le usano tutti?</p><label for="lingua-0">La mia risposta</label><textarea id="lingua-0" data-saved-field></textarea><p class="save-status"></p></article>
+          <article class="exercise-card"><h3>2. Le parole solo mie</h3><p>C’è un’espressione che usi soltanto tu, o soltanto nella tua famiglia o con i tuoi amici? Che cosa racconta di te?</p><label for="lingua-1">La mia risposta</label><textarea id="lingua-1" data-saved-field></textarea><p class="save-status"></p></article>
+          <article class="exercise-card"><h3>3. Una lingua che mi somiglia</h3><p>Il modo in cui parli e scrivi ti assomiglia? C’è qualcosa che vorresti riuscire a dire meglio?</p><label for="lingua-2">La mia risposta</label><textarea id="lingua-2" data-saved-field></textarea><p class="save-status"></p></article>
+        </div>
+        <div class="rule-path"><article class="need-card"><p class="section-label">Perché ci serve</p><p>Due persone possono provare la stessa cosa e dirla in modi diversissimi. Ascoltando come parla qualcuno, cominciamo a conoscerlo.</p></article><article class="rule-card"><p class="section-label">Che cosa scopriamo</p><p>La lingua non è solo uno strumento per dire le cose: è anche un modo di essere. Imparare nuove parole significa avere più modi per essere sé stessi.</p></article></div>
+      </section>
+
+      <section class="activity">
+        <div class="activity-heading"><p class="kicker">Ancora Alice · Il bivio</p><h2>Dove vuoi andare?</h2><p class="lead">Più avanti nel suo viaggio Alice arriva a un bivio. Su un albero c’è lo Stregatto, il gatto che sorride sempre e ogni tanto scompare.</p></div>
+        <div class="story-panel">
+          <div class="dialogue">
+            <p><strong>Alice:</strong> «Mi diresti, per favore, che strada devo prendere per andarmene da qui?»</p>
+            <p><strong>Stregatto:</strong> «Dipende molto da dove vuoi arrivare.»</p>
+            <p><strong>Alice:</strong> «Non m’importa molto dove…»</p>
+            <p><strong>Stregatto:</strong> «Allora non importa che strada prendi.»</p>
+          </div>
+          <div class="questions-to-discuss">
+            <p class="section-label">Parliamone</p>
+            <details class="answer"><summary>1. Perché lo Stregatto non può aiutare Alice?</summary><p>Perché Alice non sa dove vuole andare. Per scegliere una strada bisogna avere almeno un’idea della meta.</p></details>
+            <details class="answer"><summary>2. Che cosa c’entra con la domanda del Bruco?</summary><p>Per sapere dove andare bisogna prima capire un po’ chi siamo: che cosa ci piace, che cosa ci riesce bene, che cosa ci incuriosisce.</p></details>
+            <details class="answer"><summary>3. E voi? Siete anche voi a un bivio?</summary><p>Avete appena cominciato una scuola nuova, e alla fine di questi tre anni dovrete scegliere che strada prendere. È normale non saperlo ancora: queste pagine servono anche a raccogliere, un po’ alla volta, le parole per capirlo.</p></details>
+          </div>
+        </div>
+      </section>
+
+      <section class="writing-card"><p class="kicker">Attività finale · Rispondi al Bruco</p><h2>Chi eri stamattina, chi sei adesso</h2><p>Il Bruco ti fa la stessa domanda che ha fatto ad Alice: «Chi sei tu?». Rispondi in cinque o sei righe, cominciando con le parole di Alice: <em>«So chi ero quando mi sono alzato/a stamattina…»</em>. Racconta come sei cambiato durante la giornata e prova a usare almeno una parola che hai scoperto oggi. Poi aggiungi una frase per lo Stregatto: dove ti piacerebbe arrivare quest’anno?</p><label for="risposta-bruco">La mia risposta</label><textarea id="risposta-bruco" data-saved-field placeholder="So chi ero quando mi sono alzato stamattina: ero…"></textarea><p class="save-status" aria-live="polite"></p></section>
+
+      <section class="lesson-finale" aria-labelledby="finale-chi-sei-tu">
+        <p class="kicker">Finale di puntata · Fermiamoci a guardare il percorso</p>
+        <h2 id="finale-chi-sei-tu">Le parole sono strumenti per conoscersi</h2>
+        <div class="finale-grid">
+          <article><h3>Tiriamo le fila</h3><p>Alice non sa dire chi è perché è cambiata troppe volte, e il Bruco non la capisce. Anche a noi capita di cambiare molte volte in un giorno. Le parole servono a capire che cosa ci succede e a farlo capire agli altri: più sono precise e ben collegate, più ci assomigliano. E lo Stregatto ci ricorda che sapere chi siamo ci aiuta anche a scegliere dove andare. Per questo vale la pena osservarle da vicino, ed è quello che faremo in questi laboratori.</p><p class="connection-line"><strong>Il collegamento:</strong> per capirci, però, chi parla e chi ascolta devono condividere le stesse parole e gli stessi segni. Che cosa succede quando non è così?</p></article>
+          <article class="knowledge-check"><h3>Controlla ciò che sai</h3><p>Rispondi senza tornare indietro, poi apri il controllo.</p><details class="answer"><summary>1. Perché Alice non riesce a rispondere al Bruco?</summary><p>Perché è cambiata molte volte in poco tempo, è confusa e non trova le parole per spiegare che cosa prova.</p></details><details class="answer"><summary>2. Che differenza c’è tra «infastidito» e «furioso»?</summary><p>Indicano la stessa emozione con una forza diversa: scegliere la parola giusta fa capire agli altri quanto ci sentiamo in un certo modo.</p></details><details class="answer"><summary>3. Perché «boh» non è una buona risposta a «Com’è andata?»</summary><p>Perché non dice nulla di noi: chi ascolta non può capire che cosa è successo né come ci sentiamo.</p></details></article>
+        </div>
+        <aside class="practice-card"><p class="section-label">Appunti per me</p><p>Alla fine della lezione completa queste tre frasi sul quaderno e conservale: le riprenderemo durante l’anno.</p><ul><li>Oggi ho scoperto di me che…</li><li>Una parola che mi descrive bene è… perché…</li><li>Una cosa che vorrei imparare a dire meglio è…</li></ul></aside>
+        <aside class="next-hook"><p class="section-label">Nella prossima puntata</p><h3>Parole che nessuno capisce</h3><p>Un topo salta fuori da un fumetto e comincia a parlare. Le sue parole per lui hanno un senso preciso, ma gli altri topi lo guardano senza capire. Di chi è la colpa: delle parole o di chi ascolta?</p><a class="primary-link" href="01_ALFABETO.html">Incontra il topo dei fumetti →</a></aside>
+      </section>
+      <nav class="page-nav" aria-label="Navigazione tra i laboratori"><a class="secondary-link" href="00_APRI_PAROLE_IN_FABULA.html">← Tutti i laboratori</a><a class="primary-link" href="01_ALFABETO.html">Il topo e l’alfabeto →</a></nav>
+      <!-- FINE TESTI DA MODIFICARE -->
+    </main>
+    <script src="funzioni.js"></script>
+  <script src="../../../../assets/barra.js"></script>
+</body>
+</html>

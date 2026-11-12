@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Che cos'è una carta geografica?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+:root{
+  --bg:#edf1f5; --surface:#ffffff; --ink:#15233a; --muted:#56657a; --line:#d2dae4;
+  --accent:#2c5c9c; --hot:#c4511f; --ok:#2e7d4f; --no:#b3261e; --soft:#f4f6f9;
+  --f-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1622; --surface:#172131; --ink:#e6ecf3; --muted:#9aa8ba; --line:#2b384c;
+  --accent:#86aee6; --hot:#ff8a52; --ok:#6fcf97; --no:#ff8a80; --soft:#1d2a3d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1622; --surface:#172131; --ink:#e6ecf3; --muted:#9aa8ba; --line:#2b384c;
+  --accent:#86aee6; --hot:#ff8a52; --ok:#6fcf97; --no:#ff8a80; --soft:#1d2a3d; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1500px;margin:0 auto;padding-block:20px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(1.9rem,4.5vw,2.8rem);line-height:1.05;margin:0;text-wrap:balance}
+h1 span{color:var(--hot)}
+.lede{margin:4px 0 0;max-width:72ch;color:var(--muted)}
+h2{font-family:var(--f-display);font-weight:600;font-size:1.3rem;margin:0;text-wrap:balance}
+h3{font-family:var(--f-display);font-weight:600;font-size:1.08rem;margin:0}
+p{margin:0}
+.lnav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;font-size:.9rem;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.lnav a{color:var(--accent);text-decoration:none;font-weight:700}
+.lnav a:hover{text-decoration:underline}
+.lnav .passi{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;color:var(--muted)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button{font:inherit;font-size:.95rem;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:8px;padding:8px 12px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button.go{background:var(--hot);border-color:var(--hot);color:#fff;font-weight:700}
+button:disabled{opacity:.55;cursor:default}
+label.chk{display:inline-flex;gap:6px;align-items:center;font-size:.95rem;cursor:pointer}
+.fb{padding:10px 12px;border-radius:8px;border:1px solid var(--line)}
+.fb.ok{border-color:var(--ok)}.fb.ok b{color:var(--ok)}
+.fb.no{border-color:var(--no)}.fb.no b{color:var(--no)}
+.learn{padding:12px 14px;background:var(--soft);border-radius:8px}
+.learn strong{display:block;font-family:var(--f-display);font-weight:600;margin-bottom:2px}
+.book{border:2px dashed var(--line);border-radius:8px;padding:10px 14px;font-size:.95rem}
+.book b:first-child{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--hot);margin-right:6px}
+.small{font-size:.86rem;color:var(--muted)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.opts button{text-align:left}
+.opts button.right{border-color:var(--ok);color:var(--ok);font-weight:700}
+.opts button.wrong{border-color:var(--no);color:var(--no)}
+input[type=text],input[type=number]{font:inherit;font-size:1rem;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);min-width:0}
+input.ok{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)}
+input.no{border-color:var(--no);box-shadow:0 0 0 1px var(--no)}
+textarea{font:inherit;width:100%;min-height:5em;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);resize:vertical}
+details{border-top:1px solid var(--line);padding-top:10px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}
+details > :not(summary){margin-top:8px}
+.score{font-family:var(--f-display);font-weight:800;font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+
+
+/* Layout: una colonna di schede, una per fase della lezione (aggancio, tre proprietà, a che cosa servono, carte digitali, sintesi, prima di uscire) */
+.wrap{max-width:980px}
+.pagine{align-self:flex-start;font-size:.85rem;font-weight:700;border:1px solid var(--line);border-radius:999px;padding:2px 10px;background:var(--surface)}
+.fase{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--hot);font-weight:700}
+.items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.items li{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border-radius:8px;background:var(--soft);border-left:4px solid transparent}
+.items li.ok{border-left-color:var(--ok)} .items li.no{border-left-color:var(--no)}
+.items .scelte{display:flex;flex-wrap:wrap;gap:6px}
+.items .scelte button{font-size:.9rem;padding:5px 10px;background:var(--surface)}
+.items .scelte button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.items .nota{font-size:.9rem;color:var(--muted)}
+.def{font-size:1.1rem;line-height:2.3}
+.def input{width:9.5em}
+.def select,.schema select{font:inherit;font-size:1rem;padding:4px 6px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink)}
+select.ok{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)} select.no{border-color:var(--no);box-shadow:0 0 0 1px var(--no)}
+.schema{display:grid;gap:10px;font-size:1.05rem;line-height:2}
+.schema .blocco{background:var(--soft);border-radius:8px;padding:8px 12px}
+.schema b.t{display:block;font-family:var(--f-display);font-weight:600;line-height:1.4}
+.mat{display:flex;flex-wrap:wrap;gap:8px}
+.mat button.right{border-color:var(--ok);color:var(--ok);font-weight:700}
+.mat button.wrong{border-color:var(--no);color:var(--no)}
+.domanda{display:flex;flex-direction:column;gap:6px}
+.domanda p{font-weight:700}
+/* carte girevoli */
+.girevoli{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}
+.girevoli.quattro{grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+.girevoli.quattro .parola{font-size:1.35rem}
+.girevoli.quattro .gira,.girevoli.quattro .gira .dentro{min-height:390px}
+.girevoli.quattro .retro{font-size:.9rem}
+.gira,.gira[aria-pressed="true"]{display:block;width:100%;perspective:1000px;background:none;border:0;padding:0;text-align:left;cursor:pointer;min-height:330px;font:inherit;color:var(--ink);border-radius:12px}
+.gira span{display:block}
+.gira .dentro{display:block;position:relative;width:100%;height:100%;min-height:330px;transition:transform .6s;transform-style:preserve-3d}
+.gira[aria-pressed="true"] .dentro{transform:rotateY(180deg)}
+@media (prefers-reduced-motion:reduce){.gira .dentro{transition:none}}
+.gira .faccia{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;border:2px solid var(--line)}
+.gira .fronte{background:var(--surface);align-items:center;justify-content:center;text-align:center}
+.gira .fronte svg{width:100%;max-width:260px;height:auto;border-radius:6px}
+.gira .fronte .parola{font-family:var(--f-display);font-weight:800;font-size:1.6rem;line-height:1.1;color:var(--hot)}
+.gira .fronte .dom{font-size:1rem}
+.gira .fronte .gira-t{font-size:.8rem;color:var(--muted)}
+.gira .retro{background:var(--soft);transform:rotateY(180deg);border-color:var(--hot);font-size:.95rem;overflow:auto}
+.gira .retro b.p{font-family:var(--f-display);font-size:1.2rem;color:var(--hot)}
+.gira .retro .es{border-top:1px solid var(--line);padding-top:6px;font-size:.9rem}
+.gira:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:12px}
+/* simboli */
+.simboli{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.simboli li{display:grid;grid-template-columns:78px minmax(0,1fr);gap:12px;align-items:center;padding:8px 10px;border-radius:8px;background:var(--soft);border-left:4px solid transparent}
+.simboli li.ok{border-left-color:var(--ok)} .simboli li.no{border-left-color:var(--no)}
+.simboli svg{width:78px;height:48px;background:#fbfaf6;border:1px solid var(--line);border-radius:6px}
+.simboli .scelte{display:flex;flex-wrap:wrap;gap:6px}
+.simboli .scelte button{font-size:.88rem;padding:4px 9px;background:var(--surface)}
+.simboli .scelte button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.simboli .nota{grid-column:2;font-size:.88rem;color:var(--muted)}
+/* lettura: Borges */
+.lettura{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:16px;align-items:start}
+@media (max-width:760px){.lettura{grid-template-columns:1fr}}
+.autore{background:var(--soft);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-size:.95rem}
+.autore .tit{font-family:var(--f-display);font-weight:800;font-size:1.25rem;line-height:1.15}
+.autore .tit i{color:var(--hot);font-style:normal}
+.ascolta{display:flex;flex-direction:column;gap:6px}
+.ascolta ol{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:4px}
+.discuti{display:flex;flex-direction:column;gap:10px}
+.discuti .d{display:flex;flex-direction:column;gap:6px}
+.discuti .d p{font-weight:700}
+.discuti textarea{min-height:3.6em}
+.carroll{border-left:4px solid var(--hot);padding:8px 12px;background:var(--soft);border-radius:0 8px 8px 0;font-size:.95rem}
+.carroll q{font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="lnav" aria-label="Lezione"><a href="../../../index.html?classe=prima#modulo-prima-i">← Geografia · Le carte geografiche</a><span class="passi"><span>Attività 1 di 2</span><a href="leggere-una-carta.html">Leggere una carta →</a></span></nav>
+  <header>
+    <div class="eyebrow">Geografia · Le carte geografiche</div>
+    <h1>Che cos'è una <span>carta</span>?</h1>
+    <p class="lede">Una carta geografica è un disegno speciale di un territorio. Parti da un racconto di Borges, scopri perché è ridotta, approssimata e simbolica, prova a disegnarne una, scopri a che cosa sono servite le carte nella storia e che cosa cambia con le carte digitali. Tieni aperto il libro.</p>
+    <span class="pagine">Libro: pp. A8–A9</span>
+  </header>
+
+  <!-- ===================== 0. LETTURA: BORGES ===================== -->
+  <section class="card" aria-labelledby="t-b">
+    <p class="fase">Per cominciare: una lettura</p>
+    <h2 id="t-b">Una carta grande come l'Impero</h2>
+    <div class="lettura">
+      <div class="autore">
+        <span class="tit">Jorge Luis Borges, <i>Del rigore della scienza</i></span>
+        <span>Borges era uno scrittore argentino (1899–1986). Questo è un racconto brevissimo: un solo paragrafo. È stato pubblicato nel 1946 e si trova nella raccolta <em>L'artefice</em>.</span>
+        <span>Borges finge di copiarlo da un vecchio libro di viaggi del Seicento: in realtà il libro e il suo autore non sono mai esistiti.</span>
+      </div>
+      <div class="ascolta">
+        <p><strong>Ascolta la lettura dell'insegnante.</strong> Mentre ascolti, cerca di capire:</p>
+        <ol>
+          <li>che cosa volevano costruire i cartografi dell'Impero;</li>
+          <li>quanto era grande la loro carta;</li>
+          <li>che cosa ne pensarono le generazioni successive, e che fine fece la carta.</li>
+        </ol>
+      </div>
+    </div>
+
+    <h3>Parliamone</h3>
+    <div class="discuti">
+      <div class="d"><p>1. I cartografi volevano una carta perfetta, senza errori. Che cosa hanno fatto per riuscirci?</p><textarea aria-label="Risposta 1"></textarea></div>
+      <div class="d"><p>2. Perché alla fine quella carta non serviva a niente? Prova a immaginare di doverla usare.</p><textarea aria-label="Risposta 2"></textarea></div>
+      <div class="d"><p>3. Allora come deve essere una carta, per essere utile? Scrivi almeno due caratteristiche.</p><textarea aria-label="Risposta 3"></textarea></div>
+    </div>
+    <details><summary>Risposte possibili, per l'insegnante</summary>
+      <p>1. Hanno disegnato una carta grande quanto l'Impero, che coincideva con il territorio punto per punto: ogni cosa vera aveva il suo posto, alla sua grandezza.</p>
+      <p>2. Una carta così non si può aprire, portare con sé, guardare tutta insieme: per vederla bisognerebbe percorrerla, come il territorio stesso. Non aiuta a orientarsi né a capire. Infatti fu abbandonata e ne rimasero solo brandelli nel deserto.</p>
+      <p>3. Deve essere <strong>più piccola</strong> del territorio (ridotta), deve <strong>scegliere</strong> che cosa mostrare (approssimata), deve usare <strong>segni</strong> facili da leggere (simbolica). Il paradosso del racconto: la carta «perfetta» è la più inutile. Le tre parole si scoprono nelle carte girevoli qui sotto.</p>
+    </details>
+    <p class="carroll"><strong>Lo sapevi?</strong> Mezzo secolo prima, nel 1893, lo scrittore inglese Lewis Carroll (quello di <em>Alice nel paese delle meraviglie</em>) aveva immaginato la stessa idea in un romanzo, <em>Sylvie e Bruno</em>. Un personaggio racconta che nel suo Paese hanno fatto una carta «in scala di un miglio per un miglio», ma non l'hanno mai aperta: i contadini protestavano perché avrebbe coperto tutti i campi e tolto la luce del sole. <q>Così adesso usiamo il Paese stesso come carta di sé stesso, e vi assicuro che funziona quasi altrettanto bene.</q></p>
+  </section>
+
+  <!-- ===================== 1. TRE PAROLE ===================== -->
+  <section class="card" aria-labelledby="t0">
+    <p class="fase">Tre parole</p>
+    <h2 id="t0">Tre parole per capire le carte</h2>
+    <p>Ogni carta geografica ha tre caratteristiche. Leggi la domanda su ogni carta e prova a rispondere a voce. Poi <strong>tocca la carta</strong> per girarla e controllare.</p>
+    <div class="girevoli">
+      <button type="button" class="gira" aria-pressed="false"><span class="dentro">
+        <span class="faccia fronte"><svg viewBox="0 0 220 130" role="img" aria-label="Un quartiere vero, grande, rimpicciolito in una piccola carta con la scala">
+<g opacity=".55"><rect x="4" y="6" width="112" height="112" rx="3" fill="#e9eee4" stroke="#9aa3ad" stroke-dasharray="5 4"/>
+<rect x="14" y="16" width="40" height="30" fill="#d9d2c6"/><rect x="62" y="16" width="44" height="30" fill="#d9d2c6"/><rect x="14" y="54" width="40" height="54" fill="#bcd9a8"/><rect x="62" y="54" width="44" height="22" fill="#d9d2c6"/><rect x="62" y="84" width="44" height="24" fill="#e2b9a6"/>
+<path d="M4 50 H116 M58 6 V118" stroke="#fff" stroke-width="6"/></g>
+<text x="60" y="126" text-anchor="middle" font-size="9" fill="#56657a" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif">il quartiere vero</text>
+<path d="M122 62 L146 62" stroke="#c4511f" stroke-width="3"/><path d="M140 55 L148 62 L140 69" fill="none" stroke="#c4511f" stroke-width="3"/>
+<rect x="152" y="34" width="60" height="60" rx="2" fill="#fbfaf6" stroke="#15233a" stroke-width="1.5"/>
+<rect x="157" y="39" width="21" height="16" fill="#e9b9a3"/><rect x="183" y="39" width="24" height="16" fill="#e9b9a3"/><rect x="157" y="59" width="21" height="30" fill="#9ac27a"/><rect x="183" y="59" width="24" height="12" fill="#e9b9a3"/><rect x="183" y="75" width="24" height="14" fill="#c0282d"/>
+<path d="M152 57 H212 M180.5 34 V94" stroke="#e08a2c" stroke-width="2"/>
+<path d="M156 104 H186" stroke="#15233a" stroke-width="2"/><path d="M156 101 V107 M186 101 V107" stroke="#15233a" stroke-width="1.5"/><text x="171" y="117" text-anchor="middle" font-size="9" fill="#15233a" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif">0 — 100 m</text>
+<text x="182" y="27" text-anchor="middle" font-size="9" fill="#56657a" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif">sulla carta</text></svg><span class="parola">Ridotta</span><span class="dom">Si può disegnare la tua città grande come è davvero?</span><span class="gira-t">Tocca per girare ↻</span></span>
+        <span class="faccia retro"><b class="p">Ridotta</b><span>Un territorio non si può disegnare nelle sue dimensioni vere: sulla carta è <strong>rimpicciolito</strong>. Più il territorio è grande, più va rimpicciolito; un'area piccola si rimpicciolisce meno, e la carta è più dettagliata.</span><span class="es"><strong>Esempio:</strong> una città intera sta su una pagina dell'atlante.</span></span>
+      </span></button>
+      <button type="button" class="gira" aria-pressed="false"><span class="dentro">
+        <span class="faccia fronte"><svg viewBox="0 0 220 130" role="img" aria-label="A sinistra un fiume vero con tante curve, alberi e case; a destra lo stesso fiume sulla carta, una linea quasi liscia">
+<rect x="4" y="8" width="100" height="106" rx="4" fill="#cfe3c0"/>
+<path d="M10 14 C30 20 20 34 36 38 S30 58 48 60 S40 82 60 84 S70 100 96 108" fill="none" stroke="#3f86c8" stroke-width="6" stroke-linecap="round"/>
+<g fill="#3f7d3a"><circle cx="66" cy="22" r="5"/><circle cx="76" cy="30" r="4"/><circle cx="18" cy="70" r="5"/><circle cx="26" cy="96" r="4"/><circle cx="84" cy="62" r="5"/><circle cx="70" cy="48" r="3.5"/><circle cx="14" cy="44" r="3.5"/></g>
+<g fill="#c9a27a" stroke="#7a5a3a" stroke-width=".8"><rect x="78" y="40" width="9" height="7"/><rect x="90" y="46" width="8" height="7"/><rect x="40" y="96" width="8" height="7"/></g>
+<text x="54" y="126" text-anchor="middle" font-size="9" fill="#56657a" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif">la realtà</text>
+<rect x="116" y="8" width="100" height="106" rx="4" fill="#fbfaf6" stroke="#15233a" stroke-width="1.2"/>
+<rect x="117" y="9" width="98" height="104" fill="#9ac27a" fill-opacity=".35"/>
+<path d="M122 14 C140 34 146 52 160 70 S190 98 208 108" fill="none" stroke="#3f86c8" stroke-width="3" stroke-linecap="round"/>
+<circle cx="196" cy="50" r="4" fill="#fff" stroke="#1d1d1d" stroke-width="1.5"/>
+<text x="166" y="126" text-anchor="middle" font-size="9" fill="#56657a" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif">sulla carta</text></svg><span class="parola">Approssimata</span><span class="dom">Sulla carta ci sono proprio tutti gli alberi e tutte le curve di un fiume?</span><span class="gira-t">Tocca per girare ↻</span></span>
+        <span class="faccia retro"><b class="p">Approssimata</b><span>Una carta <strong>non può contenere tutto</strong>: sceglie gli elementi più importanti. Un fiume non ha tutte le sue curve, ma solo il suo andamento generale. E poi la Terra è curva e il foglio è piatto: per disegnarla ci sono sempre delle <strong>deformazioni</strong>.</span><span class="es"><strong>Esempio:</strong> sull'atlante il Tevere è una linea azzurra quasi liscia.</span></span>
+      </span></button>
+      <button type="button" class="gira" aria-pressed="false"><span class="dentro">
+        <span class="faccia fronte"><svg viewBox="0 0 220 130" role="img" aria-label="Il particolare di una carta: mare azzurro, pianura verde, colline marroni, una città, una strada e una ferrovia">
+<rect x="2" y="4" width="216" height="118" rx="4" fill="#9ac27a"/>
+<path d="M2 4 H70 C60 30 76 50 58 72 C44 90 50 108 40 122 H2 Z" fill="#8cc0e9"/>
+<path d="M150 4 H218 V122 H176 C168 96 186 80 170 58 C160 42 168 22 150 4 Z" fill="#c79a5e"/>
+<path d="M176 4 H218 V70 C204 60 196 40 190 4 Z" fill="#a0703f"/>
+<path d="M150 36 L160 26 L170 36 M180 70 L190 58 L200 70" fill="none" stroke="#6b4423" stroke-width="1.5"/>
+<path d="M66 64 C96 70 120 56 160 76 S200 100 218 98" fill="none" stroke="#e08a2c" stroke-width="4" stroke-linecap="round"/>
+<path d="M60 96 C100 96 140 104 218 116" stroke="#222" stroke-width="4" fill="none"/><path d="M60 96 C100 96 140 104 218 116" stroke="#fff" stroke-width="2" stroke-dasharray="6 6" fill="none"/>
+<path d="M86 10 C96 30 92 50 100 66" fill="none" stroke="#3f86c8" stroke-width="2.5"/>
+<circle cx="78" cy="62" r="7" fill="#fff" stroke="#1d1d1d" stroke-width="2"/><circle cx="78" cy="62" r="2.8" fill="#1d1d1d"/>
+<text x="90" y="54" font-size="11" font-weight="700" fill="#151515" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif;paint-order:stroke;stroke:#fbfaf6;stroke-width:3px">Portovento</text>
+<text x="22" y="40" font-size="10" font-style="italic" fill="#1f5f9c" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif">mare</text></svg><span class="parola">Simbolica</span><span class="dom">Come disegni una città intera con un segno solo?</span><span class="gira-t">Tocca per girare ↻</span></span>
+        <span class="faccia retro"><b class="p">Simbolica</b><span>Al posto delle cose vere ci sono <strong>simboli</strong>: cerchi o quadrati per le città, rettangoli per gli edifici, linee per strade e ferrovie. Anche i <strong>colori</strong> sono simboli: marrone e giallo per i rilievi, verde per le pianure, azzurro per mari e fiumi.</span><span class="es">Il significato dei simboli è spiegato nella <strong>legenda</strong>.</span></span>
+      </span></button>
+    </div>
+
+    <h3>Che cosa vuol dire questo simbolo?</h3>
+    <p>Ecco alcuni simboli come quelli dell'atlante. Per ciascuno scegli che cosa rappresenta.</p>
+    <ul class="simboli" id="simboli"></ul>
+    <div class="row"><span class="score" id="sc-simboli" aria-live="polite"></span></div>
+    <div class="book"><b>Sul libro</b>Controlla le tue risposte a <strong>p. A8</strong>, nel punto <strong>3</strong>: quali forme e quali colori cita il libro?</div>
+  </section>
+
+  <!-- ===================== 2. PROVA TU ===================== -->
+  <section class="card" aria-labelledby="t1">
+    <p class="fase">Ora prova tu</p>
+    <h2 id="t1">Disegna la strada per la scuola</h2>
+    <p><strong>Prendi il quaderno.</strong> In cinque minuti disegna la strada da casa tua a scuola. Segna la casa, la scuola e almeno due cose che incontri lungo la strada.</p>
+    <p>Hai finito? Senza accorgertene hai fatto delle scelte. Per ogni scelta, decidi che cosa rende il tuo disegno.</p>
+    <ul class="items" id="scelte"></ul>
+    <div class="row"><span class="score" id="sc-scelte" aria-live="polite"></span></div>
+    <div class="learn" id="learn-scelte" hidden><strong>Hai fatto una carta!</strong>Il tuo disegno è <b>ridotto</b> (molto più piccolo della realtà), <b>approssimato</b> (non contiene tutto, e le forme sono semplificate) e <b>simbolico</b> (usa segni e colori al posto delle cose vere). Sono le tre proprietà di ogni carta geografica.</div>
+  </section>
+
+  <!-- ===================== 2. LE TRE PROPRIETÀ ===================== -->
+  <section class="card" aria-labelledby="t2">
+    <p class="fase">Ridotta, approssimata, simbolica</p>
+    <h2 id="t2">La definizione del libro</h2>
+    <div class="book"><b>Sul libro</b>Apri il libro a <strong>p. A8</strong> e cerca il riquadro <strong>«Fatti un'idea»</strong>. Completa la definizione.</div>
+    <p class="def">La carta geografica è una rappresentazione «<input type="text" id="d1" aria-label="prima parola" autocomplete="off"> in scala», <input type="text" id="d2" aria-label="seconda parola" autocomplete="off"> e <input type="text" id="d3" aria-label="terza parola" autocomplete="off"> di un territorio.</p>
+    <div class="row"><button type="button" class="go" id="ctrl-def">Controlla</button><span id="fb-def" aria-live="polite"></span></div>
+
+    <div class="book"><b>Sul libro</b>Rileggi a <strong>p. A8</strong> il punto <strong>2</strong>. Le carte sono approssimate per due motivi: il primo riguarda gli elementi che contengono, il secondo riguarda la <strong>forma della Terra</strong>. Qual è il secondo motivo? Scrivilo con parole tue.</div>
+    <textarea aria-label="Il secondo motivo"></textarea>
+    <details><summary>Risposta per controllare</summary><p>La superficie della Terra è <strong>curva</strong>, mentre il foglio della carta è <strong>piatto</strong>: per disegnarla su un piano bisogna per forza deformarla un po'. (p. A8, punto 2)</p></details>
+    <p class="small">Le tre proprietà le ritrovi nell'attività 2, «Leggere una carta», sulla carta di una regione inventata.</p>
+  </section>
+
+  <!-- ===================== 3. A CHE COSA SERVONO ===================== -->
+  <section class="card" aria-labelledby="t3">
+    <p class="fase">A che cosa servono le carte</p>
+    <h2 id="t3">Una carta per ogni bisogno</h2>
+    <p>Fin dall'antichità le persone hanno avuto bisogno di carte, per scopi diversi. Con il tempo sono nati tipi di carte diversi.</p>
+    <div class="book"><b>Sul libro</b>Leggi a <strong>p. A9</strong> il primo punto dell'elenco. Su quali materiali venivano incise le carte nell'antichità? Scegli i tre materiali giusti.</div>
+    <div class="mat" id="mat"></div>
+    <p id="fb-mat" aria-live="polite"></p>
+
+    <h3>Quattro tipi di carte</h3>
+    <p>Leggi la domanda su ogni carta e prova a rispondere. Poi <strong>tocca la carta</strong> per girarla.</p>
+    <div class="girevoli quattro">
+      <button type="button" class="gira" aria-pressed="false"><span class="dentro">
+        <span class="faccia fronte"><svg viewBox="0 0 220 130" role="img" aria-label="Una carta antica disegnata su pergamena con un bosco, un valico tra le montagne, una sorgente con il suo fiume e un villaggio"><rect x="4" y="4" width="212" height="122" rx="10" fill="#ead9b0" stroke="#a7884f" stroke-width="2"/>
+<path d="M20 100 L44 62 L62 90 L84 52 L106 96" fill="none" stroke="#8a6d4b" stroke-width="2.5"/><path d="M76 62 L84 52 L92 62" fill="none" stroke="#8a6d4b" stroke-width="2.5"/>
+<path d="M84 52 m-6 -4 h12" stroke="#b3412f" stroke-width="2"/><text x="84" y="40" text-anchor="middle" font-size="9" fill="#5a3b1a" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif">valico</text>
+<path d="M120 20 C130 50 150 60 160 90 S190 112 208 116" fill="none" stroke="#5b8fb0" stroke-width="3"/><circle cx="120" cy="20" r="4" fill="#5b8fb0"/><text x="128" y="18" font-size="9" fill="#5a3b1a" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif">sorgente</text>
+<g fill="#6b7d3a"><circle cx="30" cy="30" r="5"/><circle cx="40" cy="24" r="5"/><circle cx="50" cy="32" r="5"/><circle cx="38" cy="38" r="5"/></g><text x="40" y="54" text-anchor="middle" font-size="9" fill="#5a3b1a" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif">bosco</text>
+<g fill="#8a4b2a"><path d="M168 54 l6 -6 l6 6 v7 h-12 z"/><path d="M182 62 l5 -5 l5 5 v6 h-10 z"/></g><text x="180" y="80" text-anchor="middle" font-size="9" fill="#5a3b1a" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif">villaggio</text></svg><span class="parola">Carta geografica</span><span class="dom">Dove sono i villaggi, le sorgenti, i passaggi tra i monti?</span><span class="gira-t">Tocca per girare ↻</span></span>
+        <span class="faccia retro"><b class="p">Carta geografica</b><span>Rappresenta un <strong>territorio</strong> con i suoi elementi: villaggi, sorgenti, valichi, boschi ricchi di legname e di animali da cacciare. Le prime carte, nell'antichità, venivano incise su argilla, pergamena o papiro.</span><span class="es"><strong>Esempio:</strong> le carte dell'atlante.</span></span>
+      </span></button>
+      <button type="button" class="gira" aria-pressed="false"><span class="dentro">
+        <span class="faccia fronte"><svg viewBox="0 0 220 130" role="img" aria-label="La costa vista dal mare, con un porto e tanti numeri scritti sull'acqua"><rect x="4" y="4" width="212" height="122" rx="6" fill="#dceaf3"/>
+<path d="M4 4 H216 V40 C190 46 170 36 150 52 C132 66 118 50 100 58 C80 68 62 54 40 62 C24 68 12 60 4 66 Z" fill="#e8dcc0" stroke="#7a6a4a" stroke-width="1.5"/>
+<path d="M150 52 C150 62 140 70 132 66" fill="none" stroke="#7a6a4a" stroke-width="1.5"/>
+<g font-size="10" fill="#2c5872" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif"><text x="40" y="86">8</text><text x="78" y="80">5</text><text x="110" y="90">12</text><text x="150" y="80">18</text><text x="186" y="74">25</text><text x="30" y="112">30</text><text x="90" y="116">45</text><text x="150" y="112">60</text><text x="196" y="106">80</text></g>
+<path d="M128 70 l4 -10 l4 10 z" fill="#b3412f"/><text x="140" y="68" font-size="9" fill="#5a3b1a" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif">porto</text>
+<path d="M30 96 Q60 90 100 100 T200 92" fill="none" stroke="#7fa7c4" stroke-dasharray="3 3"/></svg><span class="parola">Carta nautica</span><span class="dom">Che cosa vuol dire «nautica»? Chi la usa?</span><span class="gira-t">Tocca per girare ↻</span></span>
+        <span class="faccia retro"><b class="p">Carta nautica</b><span>Mostra la <strong>forma delle coste</strong> e gli <strong>approdi</strong> (i porti e i punti dove una nave può fermarsi), come si vedono dal mare. I numeri sul mare indicano la <strong>profondità</strong> dei fondali.</span><span class="es"><strong>Esempio:</strong> la carta dello Stretto di Messina, nella figura B di p. A9.</span></span>
+      </span></button>
+      <button type="button" class="gira" aria-pressed="false"><span class="dentro">
+        <span class="faccia fronte"><svg viewBox="0 0 220 130" role="img" aria-label="Un cielo notturno con le stelle dell'Orsa Maggiore e la Stella Polare"><rect x="4" y="4" width="212" height="122" rx="6" fill="#16264a"/>
+<circle cx="110" cy="65" r="56" fill="none" stroke="#3d5a8a" stroke-width="1"/><circle cx="110" cy="65" r="30" fill="none" stroke="#3d5a8a" stroke-width="1"/>
+<g fill="#fff"><circle cx="40" cy="30" r="1.5"/><circle cx="190" cy="24" r="1.5"/><circle cx="196" cy="100" r="1.2"/><circle cx="24" cy="104" r="1.2"/><circle cx="160" cy="112" r="1.4"/><circle cx="70" cy="114" r="1.2"/></g>
+<g fill="#ffe9a8"><circle cx="58" cy="54" r="2.6"/><circle cx="72" cy="48" r="2.6"/><circle cx="86" cy="50" r="2.6"/><circle cx="98" cy="58" r="2.6"/><circle cx="96" cy="76" r="2.6"/><circle cx="120" cy="78" r="2.6"/><circle cx="124" cy="62" r="2.6"/></g>
+<path d="M58 54 L72 48 L86 50 L98 58 L124 62 L120 78 L96 76 L98 58" fill="none" stroke="#ffe9a8" stroke-width="1" opacity=".7"/>
+<circle cx="150" cy="34" r="4" fill="#fff"/><text x="158" y="30" font-size="10" fill="#fff" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif">Stella Polare</text>
+<text x="88" y="98" text-anchor="middle" font-size="9" fill="#cdd8ee" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif">Orsa Maggiore</text></svg><span class="parola">Carta celeste</span><span class="dom">Si può fare una carta di qualcosa che non si tocca?</span><span class="gira-t">Tocca per girare ↻</span></span>
+        <span class="faccia retro"><b class="p">Carta celeste</b><span>Rappresenta le <strong>stelle</strong> che si vedono da un certo luogo, in un certo periodo dell'anno. In passato era utile soprattutto per <strong>orientarsi in mare</strong>, di notte.</span><span class="es"><strong>Esempio:</strong> con la Stella Polare i marinai trovavano il nord.</span></span>
+      </span></button>
+      <button type="button" class="gira" aria-pressed="false"><span class="dentro">
+        <span class="faccia fronte"><svg viewBox="0 0 220 130" role="img" aria-label="Tanti campi divisi da confini, ognuno con un numero; un campo è evidenziato"><rect x="4" y="4" width="212" height="122" rx="4" fill="#fbfaf6" stroke="#15233a" stroke-width="1"/>
+<path d="M4 76 C60 70 140 82 216 72" fill="none" stroke="#c9c2b4" stroke-width="10"/>
+<g fill="none" stroke="#15233a" stroke-width="1.4"><path d="M4 4 L70 4 L64 72"/><path d="M70 4 L130 4 L136 74"/><path d="M130 4 L216 4"/><path d="M180 4 L176 72"/><path d="M64 36 L4 40"/><path d="M136 40 L176 38"/>
+<path d="M10 82 L80 84 L84 126"/><path d="M80 84 L150 82 L156 126"/><path d="M150 82 L216 80"/></g>
+<path d="M70 4 L130 4 L136 74 L64 72 Z" fill="#f6e6be" stroke="#c4511f" stroke-width="2.5"/>
+<g font-size="10" fill="#15233a" style="font-family:Atkinson Hyperlegible,Verdana,sans-serif" text-anchor="middle"><text x="34" y="24">112</text><text x="30" y="60">113</text><text x="100" y="40">114</text><text x="156" y="24">115</text><text x="156" y="60">116</text><text x="198" y="40">117</text><text x="44" y="108">208</text><text x="118" y="108">209</text><text x="186" y="106">210</text></g></svg><span class="parola">Mappa catastale</span><span class="dom">Di chi è quel campo? E dove finisce?</span><span class="gira-t">Tocca per girare ↻</span></span>
+        <span class="faccia retro"><b class="p">Mappa catastale</b><span>Serve a registrare le <strong>proprietà dei terreni</strong> e i loro <strong>confini</strong>. Ogni terreno ha un numero, e un ufficio tiene l'elenco dei proprietari.</span><span class="es"><strong>Esempio:</strong> chi compra una casa o un campo lo trova sulla mappa catastale.</span></span>
+      </span></button>
+    </div>
+
+    <h3>Chi ha bisogno di quale carta?</h3>
+    <p>Ora mettiti alla prova: leggi le situazioni e scegli la carta che serve.</p>
+    <ul class="items" id="bisogni"></ul>
+    <div class="row"><span class="score" id="sc-bisogni" aria-live="polite"></span></div>
+
+    <div class="book"><b>Sul libro</b>Guarda la <strong>figura B a p. A9</strong> e leggi la didascalia. Che cosa indicano i numeri scritti sul mare? Perché sono importanti per chi naviga?</div>
+    <textarea aria-label="I numeri sul mare"></textarea>
+    <details><summary>Risposta per controllare</summary><p>Indicano la <strong>profondità dei fondali</strong> nei vari punti (didascalia della figura B). A chi naviga serve sapere dove il mare è poco profondo, per non toccare il fondo con la nave ed entrare nei porti in sicurezza.</p></details>
+  </section>
+
+  <!-- ===================== 4. CARTE DIGITALI ===================== -->
+  <section class="card" aria-labelledby="t4">
+    <p class="fase">Le carte digitali</p>
+    <h2 id="t4">Carte che cambiano ogni giorno</h2>
+    <p>Oggi molte carte non sono più di carta: le consultiamo su uno schermo. Leggi il paragrafo «Che cosa sono le carte digitali?» a p. A9, poi decidi: vero o falso?</p>
+    <ul class="items" id="vf"></ul>
+    <div class="row"><span class="score" id="sc-vf" aria-live="polite"></span></div>
+
+    <div class="book"><b>Sul libro</b>Rileggi il paragrafo a <strong>p. A9</strong>. Spiega con parole tue perché una carta digitale può essere più utile di una carta stampata. Fai un esempio preso dalla tua vita.</div>
+    <textarea aria-label="Perché una carta digitale può essere più utile"></textarea>
+    <details><summary>Risposta per controllare</summary><p>Una carta digitale contiene <strong>moltissime informazioni</strong> (strade, negozi, mezzi pubblici, traffico) e viene <strong>aggiornata continuamente</strong>, mentre una carta stampata resta com'è. Esempio: con Google Maps vedo se c'è traffico e quale autobus prendere per arrivare a una festa.</p></details>
+    <p class="small"><strong>A casa:</strong> fai l'esercizio 3 di «Prima di girare pagina» a p. A9, usando Google Maps con un adulto.</p>
+  </section>
+
+  <!-- ===================== 5. SINTESI ===================== -->
+  <section class="card" aria-labelledby="t5">
+    <p class="fase">Sintesi</p>
+    <h2 id="t5">Lo schema da studiare</h2>
+    <p>Completa lo schema scegliendo le parole giuste. Poi ricopialo sul quaderno.</p>
+    <div class="schema" id="schema">
+      <div class="blocco"><b class="t">Che cos'è</b>Una carta geografica è una rappresentazione di un territorio. È
+        <select data-ok="ridotta"><option value="">…</option><option>ridotta</option><option>ingrandita</option></select>, perché è molto più piccola della realtà;
+        <select data-ok="approssimata"><option value="">…</option><option>completa</option><option>approssimata</option></select>, perché non contiene tutto e la Terra curva viene disegnata su un foglio piatto;
+        <select data-ok="simbolica"><option value="">…</option><option>fotografica</option><option>simbolica</option></select>, perché usa simboli e colori spiegati nella
+        <select data-ok="legenda"><option value="">…</option><option>legenda</option><option>didascalia</option><option>scala</option></select>.</div>
+      <div class="blocco"><b class="t">A che cosa servono</b>Le carte <select data-ok="nautiche"><option value="">…</option><option>nautiche</option><option>catastali</option><option>celesti</option></select> mostrano le coste e i porti visti dal mare; le carte <select data-ok="celesti"><option value="">…</option><option>nautiche</option><option>catastali</option><option>celesti</option></select> mostrano le stelle; le mappe <select data-ok="catastali"><option value="">…</option><option>nautiche</option><option>catastali</option><option>celesti</option></select> registrano le proprietà dei terreni e i confini.</div>
+      <div class="blocco"><b class="t">Oggi</b>Le carte <select data-ok="digitali"><option value="">…</option><option>digitali</option><option>antiche</option></select> contengono moltissime informazioni e vengono <select data-ok="aggiornate"><option value="">…</option><option>aggiornate</option><option>stampate</option></select> continuamente. Molte informazioni vengono dalle foto scattate dai <select data-ok="satelliti"><option value="">…</option><option>satelliti</option><option>aerei</option></select>.</div>
+    </div>
+    <div class="row"><button type="button" class="go" id="ctrl-schema">Controlla</button><span id="fb-schema" aria-live="polite"></span></div>
+  </section>
+
+  <!-- ===================== 6. PRIMA DI USCIRE ===================== -->
+  <section class="card" aria-labelledby="t6">
+    <p class="fase">Prima di uscire</p>
+    <h2 id="t6">Tre domande</h2>
+    <div class="domanda"><p>1. Scrivi le tre proprietà di una carta geografica e, per ciascuna, un esempio.</p><textarea aria-label="Domanda 1"></textarea></div>
+    <div class="domanda"><p>2. Un compagno dice: «Sulla carta il fiume è quasi dritto, ma io l'ho visto: fa tantissime curve. La carta è sbagliata!» Che cosa gli rispondi?</p><textarea aria-label="Domanda 2"></textarea></div>
+    <div class="domanda"><p>3. Devi andare a una festa in un quartiere che non conosci. Useresti una carta stampata o una carta digitale? Perché?</p><textarea aria-label="Domanda 3"></textarea></div>
+    <details><summary>Risposte per l'insegnante</summary>
+      <p>1. Ridotta (un intero quartiere sta in un foglio), approssimata (non ci sono tutti gli alberi), simbolica (le città sono cerchi, il mare è azzurro).</p>
+      <p>2. La carta non è sbagliata: è <strong>approssimata</strong>. Disegna l'andamento generale del fiume, non tutte le sue curve (p. A8, punto 2). Criterio: usa la parola «approssimata» e la spiega.</p>
+      <p>3. Di solito la carta digitale: è aggiornata, mostra le strade, i mezzi pubblici e il traffico, e si consulta sullo smartphone. Criterio: almeno un motivo preso da p. A9.</p>
+    </details>
+  </section>
+
+  <nav class="lnav" aria-label="Lezione" style="border-bottom:0;border-top:1px solid var(--line);padding-top:12px"><a href="../../../index.html?classe=prima#modulo-prima-i">← Geografia · Le carte geografiche</a><span class="passi"><a href="leggere-una-carta.html">Attività 2: Leggere una carta →</a></span></nav>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  function mescola(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  /* esercizio a scelta: ogni riga ha un testo, la risposta giusta e una spiegazione */
+  function scelta(ulId,scId,righe,etichette,fine){
+    const ul=$(ulId), stato={};
+    mescola(righe).forEach((r,k)=>{
+      const li=document.createElement('li'), p=document.createElement('p'), g=document.createElement('div'), n=document.createElement('p');
+      p.textContent=r[0]; g.className='scelte'; n.className='nota'; n.hidden=true;
+      etichette.forEach(e=>{ const b=document.createElement('button'); b.type='button'; b.textContent=e;
+        b.addEventListener('click',()=>{ const ok=e===r[1]; stato[k]=ok;
+          g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+          li.className=ok?'ok':'no'; n.hidden=false; n.textContent=(ok?'Giusto. ':'Non proprio. ')+(ok?r[2]:(r[3]||'Rileggi la frase e prova un\'altra risposta.'));
+          const giusti=Object.values(stato).filter(Boolean).length, fatte=Object.keys(stato).length;
+          $(scId).textContent=`${giusti} su ${righe.length}`;
+          if(giusti===righe.length&&fine) fine(); });
+        g.append(b); });
+      li.append(p,g,n); ul.append(li); });
+  }
+
+
+  /* carte girevoli */
+  document.querySelectorAll('.gira').forEach(g=>g.addEventListener('click',()=>g.setAttribute('aria-pressed',g.getAttribute('aria-pressed')!=='true')));
+
+  /* simboli */
+  const SIMB=[
+    ['<circle cx="39" cy="24" r="11" fill="#fff" stroke="#1d1d1d" stroke-width="3"/><circle cx="39" cy="24" r="4.5" fill="#1d1d1d"/>','Città','Cerchi e quadrati indicano le città: più il simbolo è grande o complicato, più la città è grande.'],
+    ['<rect x="26" y="13" width="26" height="22" fill="#e9b9a3" stroke="#1d1d1d" stroke-width="2"/>','Edificio','I rettangoli indicano gli edifici, sulle carte molto dettagliate.'],
+    ['<path d="M4 34 C24 30 50 18 74 12" fill="none" stroke="#e08a2c" stroke-width="5" stroke-linecap="round"/>','Strada','Le strade sono linee colorate.'],
+    ['<path d="M4 30 L74 16" stroke="#222" stroke-width="6"/><path d="M4 30 L74 16" stroke="#fff" stroke-width="3" stroke-dasharray="7 7"/>','Ferrovia','La ferrovia è spesso una linea a tratti bianchi e neri.'],
+    ['<rect x="0" y="0" width="78" height="48" fill="#9ac27a"/>','Pianura','Il verde indica le pianure.'],
+    ['<rect x="0" y="0" width="78" height="48" fill="#b07a45"/><path d="M10 40 L28 12 L44 36 L56 20 L72 40" fill="none" stroke="#6b4423" stroke-width="2"/>','Montagne','Il marrone (e il giallo) indicano i rilievi: più è scuro, più sono alti.'],
+    ['<rect x="0" y="0" width="78" height="48" fill="#8cc0e9"/><path d="M8 28 C18 22 28 34 38 28 S58 22 70 28" fill="none" stroke="#3f86c8" stroke-width="2"/>','Mare','L\'azzurro indica i mari, i laghi e i fiumi.']
+  ];
+  const ETI=['Città','Edificio','Strada','Ferrovia','Pianura','Montagne','Mare'], ulS=$('simboli'), stS={};
+  mescola(SIMB).forEach((r,k)=>{ const li=document.createElement('li'), g=document.createElement('div'), n=document.createElement('p');
+    li.innerHTML='<svg viewBox="0 0 78 48" role="img" aria-label="Simbolo '+(k+1)+'">'+r[0]+'</svg>'; g.className='scelte'; n.className='nota'; n.hidden=true;
+    ETI.forEach(e=>{ const b=document.createElement('button'); b.type='button'; b.textContent=e;
+      b.addEventListener('click',()=>{ const ok=e===r[1]; stS[k]=ok; g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+        li.className=ok?'ok':'no'; n.hidden=false; n.textContent=ok?'Giusto. '+r[2]:'Non proprio: guarda bene la forma e il colore.';
+        $('sc-simboli').textContent=Object.values(stS).filter(Boolean).length+' su '+SIMB.length; });
+      g.append(b); });
+    li.append(g,n); ulS.append(li); });
+
+  /* 2. il disegno della strada */
+  scelta('scelte','sc-scelte',[
+    ['Il disegno sta in una pagina, ma la strada vera è lunga centinaia di metri.','Ridotta','Il territorio è stato rimpicciolito.'],
+    ['Non hai disegnato ogni albero, ogni auto e ogni lampione.','Approssimata','Una carta non può contenere tutto.'],
+    ['Hai fatto la strada con una linea e la scuola con un quadratino.','Simbolica','Al posto delle cose vere ci sono dei segni.'],
+    ['La curva della strada l\'hai fatta più semplice di com\'è davvero.','Approssimata','La forma è semplificata: si disegna l\'andamento generale.'],
+    ['Hai colorato di verde il parco e di azzurro la fontana.','Simbolica','Anche i colori sono simboli.'],
+    ['Casa e scuola, sul foglio, sono a pochi centimetri.','Ridotta','Le distanze vere sono molto più grandi.']
+  ],['Ridotta','Approssimata','Simbolica'],()=>{ $('learn-scelte').hidden=false; });
+
+  /* 2. la definizione */
+  const DEF={d1:'ridotta',d2:'approssimata',d3:'simbolica'};
+  $('ctrl-def').addEventListener('click',()=>{ let g=0;
+    for(const id in DEF){ const i=$(id), v=i.value.trim().toLowerCase(), ok=v===DEF[id]; i.classList.toggle('ok',ok); i.classList.toggle('no',!ok); if(ok) g++; }
+    $('fb-def').textContent = g===3 ? 'Giusto! È la definizione del libro.' : `${g} su 3. Controlla l'ordine delle parole nel riquadro di p. A8.`; });
+  Object.keys(DEF).forEach(id=>$(id).addEventListener('input',function(){ this.classList.remove('ok','no'); }));
+
+  /* 3a. i materiali */
+  const MAT=[['argilla',1],['pergamena',1],['papiro',1],['plastica',0],['vetro',0],['carta da fotocopie',0]], mat=$('mat'); let trovati=0;
+  mescola(MAT).forEach(([t,ok])=>{ const b=document.createElement('button'); b.type='button'; b.textContent=t;
+    b.addEventListener('click',()=>{ if(b.classList.contains('right')) return; b.classList.add(ok?'right':'wrong');
+      if(ok) trovati++;
+      $('fb-mat').textContent = ok ? (trovati===3?'Bravo! Argilla, pergamena e papiro: li trovi a p. A9.':`Giusto (${trovati} su 3).`) : `No: ${t} non c'era ancora, o non si usava per le carte.`; });
+    mat.append(b); });
+
+  /* 3b. chi ha bisogno di quale carta */
+  scelta('bisogni','sc-bisogni',[
+    ['Il capitano di una nave deve entrare in un porto senza toccare il fondo con lo scafo.','Carta nautica','Le carte nautiche mostrano le coste, gli approdi e la profondità del mare.','Pensa a chi va per mare e ha bisogno di vedere le coste e i porti.'],
+    ['Un marinaio di tanti secoli fa vuole capire dove andare di notte, guardando il cielo.','Carta celeste','Le carte celesti mostrano le stelle visibili in un certo periodo dell\'anno e da un certo luogo.','Che cosa guarda il marinaio? Il cielo…'],
+    ['Un ufficio del Comune deve sapere di chi è un campo e dove finisce.','Mappa catastale','Le mappe catastali registrano le proprietà dei terreni e i confini.','Qui contano i confini delle proprietà.'],
+    ['Un popolo antico vuole ricordare dove sono i villaggi, le sorgenti e i valichi tra le montagne.','Carta geografica','Le carte geografiche rappresentano il territorio: villaggi, sorgenti, valichi, boschi.','Qui serve il territorio con i suoi elementi.']
+  ],['Carta geografica','Carta nautica','Carta celeste','Mappa catastale']);
+
+  /* 4. vero o falso */
+  scelta('vf','sc-vf',[
+    ['Le carte digitali contengono poche informazioni, come quelle stampate.','Falso','','Le carte digitali contengono moltissime informazioni e vengono aggiornate continuamente.'],
+    ['Le carte digitali si possono consultare sullo smartphone o sul computer.','Vero','Lo dice il libro a p. A9.'],
+    ['Google Maps può mostrare i trasporti pubblici e il traffico in tempo reale.','Vero','Lo vedi anche nella figura C di p. A9: un percorso a piedi a Genova.'],
+    ['Molte informazioni delle carte digitali vengono dalle foto scattate dai satelliti.','Vero','Google Earth, per esempio, usa le immagini dei satelliti.'],
+    ['I GIS sono grandi carte stampate, appese nelle aule.','Falso','','I GIS sono sistemi informatici che collegano informazioni (per esempio meteo o traffico) alle coordinate geografiche, per fare carte utili.']
+  ].map(r=>r[1]==='Falso'?[r[0],'Falso','La frase è falsa: '+r[3].charAt(0).toLowerCase()+r[3].slice(1),r[3]]:r),['Vero','Falso']);
+
+  /* 5. schema */
+  $('ctrl-schema').addEventListener('click',()=>{ const ss=$('schema').querySelectorAll('select'); let g=0;
+    ss.forEach(s=>{ const ok=s.value===s.dataset.ok; s.classList.toggle('ok',ok); s.classList.toggle('no',!ok); if(ok) g++; });
+    $('fb-schema').textContent = g===ss.length ? 'Schema completo! Ricopialo sul quaderno.' : `${g} su ${ss.length}: correggi le parole in rosso.`; });
+  $('schema').querySelectorAll('select').forEach(s=>s.addEventListener('change',()=>s.classList.remove('ok','no')));
+})();
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+<script src="../../../../assets/barra.js"></script>
+</body>
+</html>

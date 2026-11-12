@@ -109,6 +109,33 @@ details.rivela summary{font:600 1.05rem var(--cond);cursor:pointer;color:var(--o
 details.rivela > *:not(summary){margin-top:.4rem}
 .avanti{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem;margin-top:2.4rem;font:600 1.1rem var(--cond)}
 @media print{ .nav-su,.comandi,.schermo,.scala{display:none} }
+
+/* digressione: la Terra vista dalla Luna (pannello "spazio", uguale in chiaro e in scuro) */
+.digressione{--sp:#0E1620; --sp-ink:#E4EAE7; --sp-muted:#A9B8BC; --sp-acc:#8FC1DE;
+  margin:2.6rem 0 1rem;background:var(--sp);color:var(--sp-ink);border-radius:14px;padding:1.3rem 1.25rem 1.4rem;display:grid;gap:1rem}
+.digressione a{color:var(--sp-acc)}
+.digressione .n{font:700 1rem var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--sp-acc)}
+.digressione > h2{font-size:clamp(1.8rem,4.5vw,2.5rem)}
+.digressione .intro{font-size:1.12rem;color:var(--sp-muted)}
+.dg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.4rem;align-items:start}
+@media (max-width:760px){.dg{grid-template-columns:1fr}}
+.dg-foto{margin:0;background:#000;border-radius:10px;overflow:hidden;aspect-ratio:1/1;display:grid;place-items:center}
+.dg-foto img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.dg-panel{display:grid;gap:.6rem;align-content:start;min-width:0}
+.dg-anni{display:flex;flex-wrap:wrap;gap:.4rem}
+.dg-anni button{font:700 1.15rem var(--cond);background:transparent;color:var(--sp-muted);border:2px solid #3A4A52;border-radius:20px;padding:.1rem .8rem;cursor:pointer;font-variant-numeric:tabular-nums}
+.dg-anni button[aria-current="true"]{background:var(--sp-acc);border-color:var(--sp-acc);color:var(--sp)}
+.dg-y{font:700 2.8rem/1 var(--cond);color:var(--sp-acc)}
+.dg-panel h3{font-size:1.6rem}
+.dg-m{font:500 1.02rem var(--cond);color:var(--sp-muted)}
+.dg-q{font-style:italic;border-left:4px solid var(--sp-acc);padding-left:.8rem}
+.dg-fatti{align-items:start;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem}
+.dg-fatti div{border-top:1px solid #3A4A52;padding-top:.6rem;display:grid;gap:.2rem;align-content:start}
+.dg-fatti b{font:700 1.9rem/1 var(--cond);color:var(--sp-acc)}
+.dg-fatti p{font-size:.98rem;color:var(--sp-muted)}
+.digressione .card{color:var(--ink);margin:0}
+.dg-crediti{font:500 .92rem var(--cond);color:var(--sp-muted)}
+@media print{.dg-anni{display:none}.digressione{background:none;color:var(--ink)}}
 </style>
 <link rel="stylesheet" href="../../../assets/testi-lezioni.css">
 </head>
@@ -173,6 +200,41 @@ details.rivela > *:not(summary){margin-top:.4rem}
       </ul>
     </details>
   </div>
+
+  <!-- ===================== DIGRESSIONE: LA TERRA VISTA DALLA LUNA ===================== -->
+  <section class="digressione" aria-labelledby="td">
+    <p class="n">Una digressione</p>
+    <h2 id="td">La Terra vista dalla Luna</h2>
+    <p class="intro">Il nostro video si ferma alla Terra intera. Ma è fatto al computer, con Google Earth: nessuno di noi è salito davvero fin lassù. Qualcuno, però, si è allontanato tanto da vedere la Terra tutta insieme, con i propri occhi o con una macchina fotografica.</p>
+    <div class="dg">
+      <figure class="dg-foto"><img id="dg-img" alt="" loading="lazy"></figure>
+      <div class="dg-panel">
+        <div class="dg-anni" id="dg-anni" role="group" aria-label="Scegli la foto"></div>
+        <div aria-live="polite" style="display:grid;gap:.5rem">
+          <p class="dg-y" id="dg-y"></p>
+          <h3 id="dg-t"></h3>
+          <p class="dg-m" id="dg-m"></p>
+          <p id="dg-x"></p>
+          <p class="dg-q" id="dg-q"></p>
+        </div>
+      </div>
+    </div>
+    <div class="dg-fatti">
+      <div><b>28</b><p>Sono le persone che in tutta la storia hanno visto la Terra intera come un disco: i 24 astronauti delle missioni Apollo dirette verso la Luna (1968–1972) e i 4 di Artemis II (aprile 2026).</p></div>
+      <div><b>384.000&nbsp;km</b><p>È la distanza media tra la Terra e la Luna: circa trenta volte il diametro della Terra.</p></div>
+      <div><b>½</b><p>Anche da lontanissimo si vede al massimo metà della Terra: l'altra metà resta sempre nascosta dietro.</p></div>
+    </div>
+    <div class="card">
+      <p class="tipo">Anche questa è una scala</p>
+      <p class="consegna">È la scala più lontana di tutte. Rispondi sul quaderno, come hai fatto con il video:</p>
+      <ul class="web-elenco"><li><strong>Che cosa si vede bene?</strong></li><li><strong>Che cosa non si vede più?</strong></li></ul>
+      <details class="rivela">
+        <summary>Qualche esempio, per controllare</summary>
+        <p>Si vedono gli oceani, i continenti, le nuvole, i ghiacci dei poli, il giorno e la notte. Non si vedono le città, le strade e nemmeno i confini tra gli Stati: i confini non sono disegnati sulla Terra, li disegniamo noi sulle carte.</p>
+      </details>
+    </div>
+    <p class="dg-crediti">Foto: NASA, in pubblico dominio (Apollo 8, 1968; Apollo 17, 1972; Lunar Reconnaissance Orbiter, 2015).</p>
+  </section>
 
   <!-- ===================== 3. CON IL LIBRO ===================== -->
   <section class="fase" aria-labelledby="t3">
@@ -391,6 +453,23 @@ details.rivela > *:not(summary){margin-top:.4rem}
     fb.textContent = giusti === 4 ? 'Giusto! È quello che succede nel video e nelle foto del libro.' : 'Ripensa al video: dal quartiere si vedevano i tetti, dallo spazio i continenti.';
   });
   ['s1', 's2', 's3', 's4'].forEach(function(id){ document.getElementById(id).addEventListener('change', function(){ this.classList.remove('ok', 'no'); }); });
+})();
+</script>
+<script>
+/* digressione: la Terra vista dalla Luna */
+(function(){
+  var F=[
+    {y:"1968",img:"img/terra-1968.jpg",alt:"Foto in bianco e nero: la Terra, illuminata a metà, sorge sopra l'orizzonte grigio della Luna",t:"Earthrise, la Terra che sorge",m:"24 dicembre 1968 · missione Apollo 8 · dall'orbita della Luna",x:"Per la prima volta tre astronauti girano intorno alla Luna. Dal finestrino vedono la Terra «sorgere» sopra l'orizzonte lunare. Questa è la prima foto, in bianco e nero; pochi istanti dopo ne scattarono una a colori, diventata una delle immagini più famose del Novecento.",q:"Perché si vede illuminata solo una parte della Terra?"},
+    {y:"1972",img:"img/terra-1972.jpg",alt:"La Terra intera e tutta illuminata: Africa, penisola arabica, Madagascar e i ghiacci dell'Antartide",t:"Blue Marble, la biglia blu",m:"7 dicembre 1972 · missione Apollo 17 · in viaggio verso la Luna, a circa 29.000 km dalla Terra",x:"Gli astronauti avevano il Sole alle spalle: per questo la Terra appare tutta illuminata, come un disco intero. Dopo Apollo 17 nessuno è più sceso sulla Luna.",q:"Quali continenti e quali mari riconosci?"},
+    {y:"2015",img:"img/terra-2015.jpg",alt:"La Terra sopra l'orizzonte della Luna: si riconoscono l'Africa con il Sahara e l'Oceano Atlantico",t:"La Terra vista dalla Luna, oggi",m:"2015 · sonda Lunar Reconnaissance Orbiter (NASA) · in orbita intorno alla Luna",x:"Una sonda senza equipaggio, che studia la Luna dal 2009, fotografa la Terra sopra l'orizzonte lunare. Oggi quasi tutte le foto della Terra intera sono scattate da macchine, non da persone.",q:"Che cosa cambia rispetto alla foto del 1968?"}
+  ];
+  var $=function(i){return document.getElementById(i)}, box=$("dg-anni"), k=0;
+  if(!box) return;
+  F.forEach(function(f,i){var b=document.createElement("button");b.type="button";b.textContent=f.y;b.setAttribute("aria-label","Foto del "+f.y);b.onclick=function(){vai(i)};box.appendChild(b)});
+  function vai(i){k=i;var f=F[k],img=$("dg-img");img.src=f.img;img.alt=f.alt;
+    $("dg-y").textContent=f.y;$("dg-t").textContent=f.t;$("dg-m").textContent=f.m;$("dg-x").textContent=f.x;$("dg-q").textContent=f.q;
+    Array.prototype.forEach.call(box.children,function(b,j){b.setAttribute("aria-current",j===k?"true":"false")});}
+  vai(0);
 })();
 </script>
 <script src="../../../assets/barra.js"></script>

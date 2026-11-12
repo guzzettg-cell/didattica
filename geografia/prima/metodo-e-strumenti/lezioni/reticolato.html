@@ -14,11 +14,12 @@
 .map.nomap .dot.dim{opacity:.25!important}
 .map.nomap [aria-pressed="true"]{outline:3px solid #111!important;outline-offset:2px}
 </style>
-<title>Dove si trova il punto P?</title>
+<title>Trovate il Titanic! Il reticolato geografico</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
-/* Layout: a sinistra il globo da girare, a destra la tappa con la domanda "che cosa manca?"; sotto, le misure della Terra */
+/* Missione «Trovate il Titanic»: a sinistra la foto dal satellite o il globo, a destra la tappa.
+   Ogni tappa parte da un problema del soccorso; il concetto arriva dopo la risposta giusta, insieme alla risposta via radio del Titanic. */
 :root{
   --paper:#eef1f5; --card:#ffffff; --ink:#152131; --muted:#566476; --line:#d3dbe4;
   --accent:#c2410c; --accent-soft:#fde4d3; --ok:#1f7a4d; --ok-soft:#dcf2e6; --no:#b42318; --no-soft:#fde3e1;
@@ -40,22 +41,37 @@ header.top{display:grid;gap:6px}
 h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.02;margin:0}
 h1 em{font-style:normal;color:var(--accent)}
 .lead{margin:0;max-width:72ch;color:var(--muted)}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;gap:12px}
+.box h2{font-family:var(--display);font-weight:800;font-size:1.45rem;margin:0;line-height:1.1}
+.box p{margin:0;max-width:75ch}
+.kicker{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
 .steps{display:flex;gap:6px;flex-wrap:wrap;list-style:none;margin:0;padding:0}
 .steps button{font:inherit;font-size:.8rem;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:5px 11px;cursor:pointer}
 .steps button[aria-current="step"]{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}
 .steps button.done{border-color:var(--ok);color:var(--ok)}
-.main{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:18px;align-items:start}
+.main{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:start}
 @media (max-width:900px){.main{grid-template-columns:1fr}}
+.vis{display:grid;gap:8px;min-width:0;position:sticky;top:56px}
+@media (max-width:900px){.vis{position:static}}
+.tabs{display:flex;gap:6px}
+.tabs button{font:inherit;font-size:.9rem;font-weight:700;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:6px 14px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.foto{position:relative;border-radius:16px;overflow:hidden;background:#000a2a;touch-action:manipulation}
+.foto.cerca{cursor:crosshair}
+.foto img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+.foto svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.foto .lab{font:700 34px "Atkinson Hyperlegible",Verdana,sans-serif;fill:#fff;paint-order:stroke;stroke:rgba(0,8,30,.9);stroke-width:8px}
 .globe{background:var(--globe-bg);border-radius:16px;overflow:hidden;position:relative;min-width:0}
 .globe canvas{width:100%;aspect-ratio:1/1;display:block;touch-action:none;cursor:grab}
 .globe .hint{position:absolute;left:12px;top:10px;color:#a9b8cc;font-size:.8rem}
 .globe .read{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:rgba(10,18,32,.85);color:#ffe2a6;border:1px solid #33445f;
   border-radius:999px;padding:5px 14px;font-weight:700;font-size:.9rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cred{font-size:.8rem;color:var(--muted);margin:0}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;gap:14px;min-width:0}
 .panel .num{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
 .panel h2{font-family:var(--display);font-weight:800;font-size:1.6rem;margin:0;line-height:1.1;text-wrap:balance}
 .panel p{margin:0}
-.see{font-size:.92rem;color:var(--muted);border-left:3px solid var(--accent);padding-left:10px}
+.txt{display:grid;gap:8px}
 .q{background:var(--accent-soft);border-radius:12px;padding:14px;display:grid;gap:10px}
 .q h3{margin:0;font-size:1.02rem}
 .opts{display:grid;gap:8px}
@@ -66,58 +82,97 @@ h1 em{font-style:normal;color:var(--accent)}
 .fb{font-size:.92rem;border-radius:10px;padding:9px 12px}
 .fb.right{background:var(--ok-soft);color:var(--ink);border:1px solid var(--ok)}
 .fb.wrong{background:var(--no-soft);color:var(--ink);border:1px solid var(--no)}
-.nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.nav button,.game button{font:inherit;font-size:.95rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:8px 16px;cursor:pointer}
-.nav .next{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}
-.nav .next.ready{background:var(--ok);border-color:var(--ok);color:#fff}
-button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.esito{font-weight:700;min-height:1.4em}
+.radio{display:grid;gap:6px}
+.msg{font-family:"Courier New",Courier,monospace;font-weight:700;font-size:1rem;line-height:1.45;border-radius:6px;padding:9px 12px;letter-spacing:.02em}
+.msg small{display:block;font:700 .72rem var(--body);letter-spacing:.1em;text-transform:uppercase;opacity:.75;margin-bottom:2px}
+.msg.out{background:var(--paper);color:var(--ink);border:1px dashed var(--line)}
+.msg.in{background:#f7efd9;color:#2a2215;border:1px solid #d9c9a0}
+.dopo{display:grid;gap:8px;border-left:3px solid var(--ok);padding-left:12px}
+.sapevi{font-size:.92rem;background:var(--paper);border-radius:10px;padding:9px 12px}
+.sapevi b{color:var(--accent)}
+.dove{display:grid;gap:6px;border-top:1px solid var(--line);padding-top:12px}
+.dove .t{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.dove .v{font-weight:700}
+.barra{height:10px;border-radius:999px;background:var(--paper);overflow:hidden;border:1px solid var(--line)}
+.barra i{display:block;height:100%;background:var(--accent);border-radius:999px;transition:width .8s ease}
 .coord{font-family:var(--display);font-weight:800;font-size:1.5rem;background:var(--paper);border-radius:10px;padding:8px 12px;text-align:center;font-variant-numeric:tabular-nums}
+.nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.nav button,.game button,.btn{font:inherit;font-size:.95rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:8px 16px;cursor:pointer}
+.nav .next{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700}
+.nav .next:disabled{opacity:.35;cursor:default}
+.nav .next.ready{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.forte{background:var(--ink);color:var(--paper);border-color:var(--ink);font-weight:700;justify-self:start}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .game{display:grid;gap:10px;border-top:1px solid var(--line);padding-top:14px}
 .game h3{margin:0;font-family:var(--display);font-size:1.15rem}
 .target{font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums}
-.facts{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 20px}
-.facts h2{font-family:var(--display);font-weight:800;font-size:1.15rem;margin:0 0 10px}
-.facts dl{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
-.facts div{border:1px solid var(--line);border-radius:10px;padding:8px 12px}
-.facts dt{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
-.facts dd{margin:0;font-family:var(--display);font-weight:600;font-size:1.1rem;font-variant-numeric:tabular-nums}
+.vero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:18px;align-items:start}
+@media (max-width:900px){.vero-grid{grid-template-columns:1fr}}
+.video{position:relative;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 </style>
 </head>
 <body>
 <a class="backlink" href="../../../index.html#modulo-prima-i">← Geografia, classe prima</a>
 
-
 <div class="wrap">
   <header class="top">
-    <div class="eyebrow">Geografia · La forma della Terra e il reticolato geografico</div>
-    <h1>Dove si trova il <em>punto P</em>?</h1>
-    <p class="lead">Su una sfera non ci sono un inizio, una fine, un sopra o un sotto. Come facciamo allora a indicare un punto preciso sulla Terra, senza possibilità di errore? Costruiamo i riferimenti una tappa alla volta. A ogni tappa chiediti: che cosa manca ancora?</p>
+    <div class="eyebrow">Geografia · Il reticolato geografico</div>
+    <h1>Trovate il <em>Titanic</em>!</h1>
+    <p class="lead">In mezzo all'oceano non ci sono strade, montagne o cartelli. Come si fa a trovare una nave che chiede aiuto? Costruiamo i riferimenti una tappa alla volta: a ogni tappa chiedetevi che cosa manca ancora.</p>
   </header>
 
-  <ol class="steps" id="steps" aria-label="Tappe"></ol>
+  <section class="box" aria-labelledby="notte">
+    <div class="kicker">La notte del 14 aprile 1912</div>
+    <h2 id="notte">Una chiamata nel buio</h2>
+    <p>Il Titanic, la nave più grande del mondo, sta attraversando l'Oceano Atlantico dall'Inghilterra a New York. Poco prima di mezzanotte urta un iceberg e comincia ad affondare.</p>
+    <p>Voi siete sulla <strong>Carpathia</strong>, una nave partita da New York e diretta a Fiume, sul mare Adriatico. Siete i marconisti: il vostro lavoro è ricevere e trasmettere i messaggi radio, in codice Morse. All'improvviso la radio si accende.</p>
+  </section>
+
+  <ol class="steps" id="steps" aria-label="Tappe della missione"></ol>
 
   <div class="main">
-    <div class="globe">
-      <canvas id="globe" role="img" aria-label="Globo che si può girare trascinandolo, con il punto P e i riferimenti della tappa"></canvas>
-      <div class="hint">Trascina per girare il globo</div>
-      <div class="read" id="read" hidden></div>
+    <div class="vis">
+      <div class="tabs" role="group" aria-label="Che cosa guardare">
+        <button type="button" id="v-foto" aria-pressed="true">Foto dal satellite</button>
+        <button type="button" id="v-globo" aria-pressed="false">Globo</button>
+      </div>
+      <div class="foto" id="foto">
+        <img src="img/atlantico-titanic.jpg" width="1600" height="960" alt="Foto satellitare dell'Oceano Atlantico a sud-est di Terranova: quasi tutta l'immagine è mare blu scuro, senza nessun segno riconoscibile" draggable="false">
+        <svg viewBox="0 0 1600 960" id="fsvg" aria-hidden="true"></svg>
+      </div>
+      <div class="globe" id="globo" hidden>
+        <canvas id="globe" role="img" aria-label="Globo che si può girare trascinandolo, con i riferimenti costruiti fin qui"></canvas>
+        <div class="hint">Trascina per girare il globo</div>
+        <div class="read" id="read" hidden></div>
+      </div>
+      <p class="cred" id="cred-foto">Foto: NASA, Blue Marble Next Generation, dal servizio GIBS. Da ovest a est la foto copre circa 1650 km.</p>
     </div>
+
     <section class="panel" aria-live="polite">
       <div class="num" id="num"></div>
       <h2 id="title"></h2>
-      <div id="text" style="display:grid;gap:8px"></div>
-      <p class="see" id="see"></p>
+      <div class="txt" id="text"></div>
+      <p class="esito" id="esito" hidden></p>
       <div class="q" id="qbox">
         <h3 id="q"></h3>
         <div class="opts" id="opts"></div>
         <div class="fb" id="fb" hidden></div>
       </div>
+      <div class="dopo" id="dopo" hidden></div>
       <div class="game" id="game" hidden>
-        <h3>Prova tu: trova il punto</h3>
-        <p style="margin:0">Clicca sul globo nel punto con queste coordinate. Mentre muovi il mouse, in basso leggi latitudine e longitudine.</p>
+        <h3>Ora tocca a voi: trovate le città</h3>
+        <p style="margin:0">Il computer vi dà le coordinate di una città. Trovatela sul globo: giratelo trascinandolo, muovete il mouse sopra e leggete in basso latitudine e longitudine. Quando i numeri coincidono, cliccate.</p>
         <div class="target" id="tgt"></div>
+        <div><button type="button" class="btn forte" id="apri-globo">Apri il globo per giocare</button></div>
         <div class="fb" id="gfb" hidden></div>
-        <div><button type="button" id="gnext">Un altro punto</button></div>
+        <div><button type="button" id="gnext">Un'altra città</button></div>
+      </div>
+      <div class="dove" id="dove">
+        <span class="t">Dove può essere il Titanic?</span>
+        <span class="v" id="dove-v"></span>
+        <div class="barra"><i id="dove-b"></i></div>
       </div>
       <div class="nav">
         <button type="button" id="prev">← Indietro</button>
@@ -126,159 +181,189 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     </section>
   </div>
 
+  <section class="box" id="vero" hidden aria-labelledby="vero-t">
+    <div class="kicker">Il vero SOS</div>
+    <h2 id="vero-t">Che cosa trasmise davvero il Titanic</h2>
+    <div class="vero-grid">
+      <div style="display:grid;gap:12px">
+        <p>Nel gioco avete fatto le domande una alla volta. Quella notte il marconista del Titanic mise tutto in un solo messaggio, poco dopo mezzanotte:</p>
+        <p class="msg in"><small>Titanic → tutte le navi</small>CQD CQD SOS TITANIC POSITION 41.44 N 50.24 W. REQUIRE IMMEDIATE ASSISTANCE.</p>
+        <p>Pochi minuti dopo un ufficiale ricontrollò i calcoli, e la posizione fu corretta:</p>
+        <p class="msg in"><small>Titanic → Carpathia</small>COME AT ONCE. WE HAVE STRUCK A BERG. POSITION 41.46 N 50.14 W.</p>
+        <p>CQD e SOS sono i segnali di soccorso. Nel 1985 il relitto è stato trovato sul fondo dell'oceano, a quasi 4000 metri: a circa 20 km a est della posizione trasmessa (sulla foto, il punto verde). Un piccolo errore nella misura della longitudine: sul mare, anche pochi chilometri contano.</p>
+      </div>
+      <div style="display:grid;gap:8px">
+        <div class="video"><iframe id="v-iframe" title="Le trasmissioni radio del Titanic, in codice Morse, la notte del naufragio" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+        <p class="cred">Se il video non parte, <a id="v-yt" target="_blank" rel="noopener">aprilo su YouTube</a>. È la ricostruzione dei messaggi in codice Morse di quella notte: il testo scorre sullo schermo, in inglese.</p>
+      </div>
+    </div>
+  </section>
 </div>
 
 <script>
 (function(){
 const D2R=Math.PI/180, R2D=180/Math.PI;
 const $=id=>document.getElementById(id);
-const cv=$('globe'), c=cv.getContext('2d');
-const FD='"Bricolage Grotesque","Trebuchet MS",sans-serif', FB='"Atkinson Hyperlegible",Verdana,sans-serif';
-const P={lat:41.9,lon:12.5};
+const FB='"Atkinson Hyperlegible",Verdana,sans-serif';
+const T={lat:41+46/60, lon:-(50+14/60)};          // posizione trasmessa dal Titanic
+const RELITTO={lat:41+43/60, lon:-(49+56/60)};     // relitto, trovato nel 1985
+const CARP={lat:41+10/60, lon:-(49+13/60)};        // Carpathia, circa 58 miglia a sud-est
+const VIDEO='FxRN2nP_9dA', INIZIO=5;               // video: secondo da cui parte
 
-/* ---------- le tappe ---------- */
+/* ---------- le tappe ----------
+   prima: il problema (testo); q/opts: la scelta; radio: domanda e risposta via radio; dopo: il concetto; sapevi: approfondimento
+   vista: foto o globo all'inizio della tappa; dove: [testo, larghezza della barra] dopo la risposta giusta */
 const STEPS=[
- {short:'Il punto P',title:'Un punto su una sfera',cam:[20,-5],
-  text:['La Terra ha la forma di una sfera quasi perfetta: è solo un po\' «schiacciata» ai poli e rigonfia all\'Equatore.','Sul globo c\'è un punto P. Prova a spiegare a un compagno dove si trova.'],
-  see:'Gira il globo: P si sposta in alto, in basso, a destra, a sinistra. Parole come «in alto a destra» non funzionano.',
-  q:'Che cosa ci serve per dire dove si trova P?',
-  opts:[['Basta dire «in alto a destra».',0,'Dipende da come tieni il globo: se lo giri, «in alto a destra» diventa un altro punto.'],
-        ['Servono dei riferimenti fissi sulla Terra, uguali per tutti.',1,'Esatto. Cerchiamo dei punti e delle linee che non cambiano, comunque giriamo il globo.'],
-        ['È impossibile: una sfera è tutta uguale.',0,'Non è impossibile: dobbiamo solo inventare dei riferimenti. Ma da dove partiamo?']]},
- {short:'Asse e poli',title:'L\'asse e i poli',cam:[20,-5],
-  text:['La Terra ruota attorno a un asse immaginario. I due punti dove l\'asse «esce» dalla superficie sono il Polo nord e il Polo sud.','Sono i primi due riferimenti fissi: non cambiano mai.'],
-  see:'Ora il globo ha un «sopra» (il Polo nord) e un «sotto» (il Polo sud).',
-  q:'Con i due poli possiamo già dire esattamente dove si trova P?',
-  opts:[['Sì: P è vicino al Polo nord.',0,'Vicino quanto? E da che parte? Ci sono infiniti punti «vicino al Polo nord».'],
-        ['No: serve una linea che divida la Terra a metà tra i due poli.',1,'Giusto. Una linea a metà strada tra i due poli ci dirà se P è nella metà nord o nella metà sud.'],
-        ['Sì: basta misurare la distanza da P al Polo sud.',0,'Quella distanza ci dice solo che P sta su un cerchio attorno al polo: i punti possibili sono ancora infiniti.']]},
- {short:'Equatore',title:'L\'Equatore e i due emisferi',cam:[18,-5],tint:'ns',
-  text:['L\'Equatore è la circonferenza che si trova alla stessa distanza dai due poli. Divide la superficie terrestre in due metà uguali.','A nord c\'è l\'emisfero boreale, a sud l\'emisfero australe.'],
-  see:'P si trova nell\'emisfero boreale. Ma l\'emisfero boreale è metà della Terra intera!',
-  q:'Sapere che P è nell\'emisfero boreale basta per trovarlo?',
-  opts:[['Sì, perché l\'emisfero boreale è una zona precisa.',0,'È precisa, ma è grandissima: è metà del pianeta.'],
-        ['No: dobbiamo sapere quanto P è lontano dall\'Equatore.',1,'Esatto. Ci serve una misura della distanza dall\'Equatore, verso nord o verso sud.'],
-        ['No: dobbiamo sapere quanto P è lontano dal Polo sud.',0,'Potrebbe funzionare, ma si usa l\'Equatore come riferimento, perché divide la Terra a metà.']]},
- {short:'Paralleli',title:'I paralleli e la latitudine',cam:[12,-50],
-  text:['I paralleli sono circonferenze parallele all\'Equatore: si ottengono tagliando la Terra con piani perpendicolari all\'asse. L\'Equatore è il parallelo più lungo.','La latitudine è l\'angolo che misura la distanza di un punto dall\'Equatore, lungo il suo meridiano. Va da 0° (Equatore) a 90° (poli) e può essere nord (N) o sud (S).'],
-  see:'P ha latitudine di circa 42° N: si trova sul parallelo arancione. I punti grigi hanno tutti la stessa latitudine di P.',
-  q:'Sapere che P sta sul parallelo di 42° N basta?',
-  opts:[['Sì: ora sappiamo esattamente dov\'è P.',0,'Guarda i punti grigi: hanno tutti latitudine 42° N, ma sono in posti diversi.'],
-        ['No: il parallelo è una circonferenza intera. Ci serve una seconda misura, da est a ovest.',1,'Esatto. Ora ci servono delle linee che vadano da un polo all\'altro.'],
-        ['No: serve un parallelo più lungo.',0,'La lunghezza del parallelo non cambia il problema: P potrebbe comunque essere in qualunque suo punto.']]},
- {short:'Meridiani',title:'I meridiani',cam:[22,-5],
-  text:['I meridiani sono semicirconferenze che vanno da un polo all\'altro. Incrociano i paralleli ad angolo retto.','Tutti i meridiani hanno la stessa lunghezza: circa 20 000 km.'],
-  see:'Il reticolato è formato da meridiani e paralleli. Ma i meridiani sono tutti uguali: nessuno è più importante degli altri.',
-  q:'Da quale meridiano conviene partire per misurare?',
-  opts:[['Da quello più lungo.',0,'I meridiani sono tutti lunghi uguali.'],
-        ['Da uno qualunque, purché tutti nel mondo usino lo stesso.',1,'Esatto: serve un accordo, una convenzione. E l\'accordo c\'è stato.'],
-        ['Da quello che passa per il punto da trovare.',0,'Così ogni punto avrebbe il suo riferimento e non potremmo confrontarli.']]},
- {short:'Greenwich',title:'Il meridiano di Greenwich',cam:[20,-20],tint:'ew',
-  text:['Nel 1884 i Paesi del mondo si sono messi d\'accordo: il meridiano di partenza è quello che passa per l\'osservatorio astronomico di Greenwich, a Londra. È il meridiano 0°.','Il meridiano opposto è il suo antimeridiano, a 180°. Insieme dividono la Terra in emisfero orientale (est) ed emisfero occidentale (ovest).'],
-  see:'P si trova nell\'emisfero orientale, a est di Greenwich.',
-  q:'Conosciamo il parallelo di P e abbiamo un meridiano di partenza. Che cosa manca?',
-  opts:[['Niente, abbiamo finito.',0,'Sappiamo che P è a est di Greenwich, ma non quanto.'],
-        ['Quanto P è lontano dal meridiano di Greenwich, verso est o verso ovest.',1,'Giusto: questa misura si chiama longitudine.'],
-        ['Quanto P è lontano dall\'antimeridiano.',0,'Si potrebbe fare, ma per convenzione si misura dal meridiano di Greenwich.']]},
- {short:'Longitudine',title:'La longitudine',cam:[48,6],
-  text:['La longitudine è l\'angolo che misura la distanza di un punto dal meridiano di Greenwich, lungo il parallelo del punto. Va da 0° a 180° e può essere est (E) oppure ovest (W, dall\'inglese West).','Tutti i punti di uno stesso meridiano hanno la stessa longitudine.'],
-  see:'P ha longitudine di circa 12° E: si trova sul meridiano arancione.',
-  q:'Ora P è identificato senza possibilità di errore?',
-  opts:[['Sì: c\'è un solo punto dove il parallelo 42° N incrocia il meridiano 12° E.',1,'Esatto! Meridiano e parallelo si incrociano in un solo punto.'],
-        ['No: serve anche un terzo numero.',0,'Per un punto sulla superficie della Terra bastano due numeri: latitudine e longitudine.'],
-        ['No: il meridiano incrocia il parallelo in due punti.',0,'Il meridiano è una semicirconferenza: va da un polo all\'altro solo da un lato, quindi incrocia il parallelo una volta sola.']]},
- {short:'Coordinate',title:'Le coordinate geografiche',cam:[30,12.5],final:true,
-  text:['Latitudine e longitudine sono le coordinate geografiche: una coppia di valori che indica il punto d\'incrocio fra un parallelo e un meridiano.','Le coordinate di P sono:'],
-  see:'Il punto P è Roma!'}
+ {short:'SOS!',title:'«Venite subito!»',vista:'foto',cam:[25,-40],cerca:true,
+  prima:['La radio gracchia. È il Titanic: «Abbiamo urtato un iceberg. Venite subito!»','Il Titanic è da qualche parte in questo pezzo di oceano. Cercatelo sulla foto: cliccate dove pensate che sia.'],
+  q:'Non riuscite a trovarlo. Che cosa vi servirebbe?',
+  opts:[['Una foto dal satellite più dettagliata.',0,'Anche con la foto migliore il mare è uguale dappertutto. E di notte non si vede niente.'],
+        ['Sapere vicino a quale iceberg si trova.',0,'Gli iceberg si spostano con le correnti, e quella notte ce n\'erano tantissimi.'],
+        ['Dei riferimenti fissi, uguali per tutte le navi, e delle misure.',1,'Esatto.'],
+        ['Sapere quanto è lontano dalla costa di Terranova.',0,'Aiuterebbe un po\', ma tutti i punti alla stessa distanza dalla costa formano una lunga linea: e di notte la costa non si vede.']],
+  dopo:['In mezzo all\'oceano non ci sono strade né montagne: i riferimenti bisogna inventarli. Sono punti e linee immaginari, uguali per tutti.','Li costruirete uno alla volta. E ogni volta potrete fare una domanda via radio al Titanic: sceglietela bene.'],
+  dove:['Ovunque. Non sappiamo niente.',100]},
+ {short:'Il nord',title:'Una direzione sicura',vista:'globo',cam:[30,-40],
+  prima:['Prima di tutto vi serve una direzione che non cambia mai. Ma in mezzo al mare, di notte, tutto sembra uguale in ogni direzione.'],
+  q:'Che cosa può indicare ai marinai, ogni notte, sempre la stessa direzione?',
+  opts:[['La Stella Polare.',1,'Esatto. La Stella Polare si trova quasi esattamente sopra il Polo nord: guardandola, si sa sempre dov\'è il nord. L\'avete visto in «Orientarsi con le stelle».'],
+        ['La direzione delle onde.',0,'Le onde cambiano direzione con il vento: non sono un riferimento fisso.'],
+        ['La Luna.',0,'La Luna sorge e tramonta in punti diversi e ogni sera cambia forma: non indica sempre la stessa direzione.'],
+        ['Il punto in cui è tramontato il Sole.',0,'Il Sole tramonta a ovest, ma in punti un po\' diversi a seconda della stagione. E di notte non c\'è.']],
+  dopo:['La Terra gira intorno a un asse immaginario. I due punti in cui l\'asse esce dalla superficie sono il <b>Polo nord</b> e il <b>Polo sud</b>: sono i primi riferimenti fissi.'],
+  dove:['Ovunque. Però ora sapete dov\'è il nord.',100]},
+ {short:'Nord o sud?',title:'La prima domanda via radio',vista:'globo',cam:[18,-40],
+  prima:['Ora la Terra ha un «sopra» e un «sotto». Potete fare la prima domanda al Titanic. Sceglietela bene: ogni messaggio fa perdere tempo.'],
+  q:'Quale domanda trasmettete?',
+  opts:[['«Siete più vicini al Polo nord o al Polo sud?»',1,'Buona domanda: la risposta divide la Terra in due metà.'],
+        ['«Siete vicini a un\'isola?»',0,'Intorno al Titanic c\'è solo mare: la risposta sarebbe «no», e non sapreste niente di più.'],
+        ['«Che tempo fa da voi?»',0,'Il tempo è uguale su migliaia di chilometri di mare: non vi aiuta.'],
+        ['«Quanto è profondo il mare?»',0,'In quella zona l\'oceano è profondo migliaia di metri quasi dappertutto: la risposta non vi direbbe dove sono.']],
+  radio:['Siete più vicini al Polo nord o al Polo sud?','PIÙ VICINI AL POLO NORD.'],
+  dopo:['La linea che sta esattamente a metà strada tra i due poli si chiama <b>Equatore</b>. Divide la Terra in due metà: l\'<b>emisfero boreale</b> (nord) e l\'<b>emisfero australe</b> (sud).','Il Titanic è nell\'emisfero boreale. Ma è metà della Terra!'],
+  dove:['In metà della Terra: l\'emisfero boreale.',50]},
+ {short:'Quanto a nord?',title:'Un numero, non una zona',vista:'globo',cam:[14,-70],
+  prima:['Metà della Terra è ancora troppo. Vi serve un numero: una misura precisa, uguale per tutti.'],
+  q:'Quale domanda trasmettete adesso?',
+  opts:[['«Quanto siete lontani dall\'Equatore?»',1,'Giusto: questa misura dice quanto il Titanic è a nord.'],
+        ['«Siete ancora nell\'emisfero nord?»',0,'Lo sapete già: la risposta sarebbe di nuovo «sì».'],
+        ['«Quanti chilometri avete fatto dalla partenza?»',0,'Senza sapere in che direzione ha navigato, quel numero non dice dove si trova.'],
+        ['«Di che colore è il mare intorno a voi?»',0,'Il mare è dello stesso colore per migliaia di chilometri.']],
+  radio:['Quanto siete lontani dall\'Equatore?','41 GRADI E 46 PRIMI A NORD.'],
+  dopo:['La distanza dall\'Equatore si chiama <b>latitudine</b> e si misura in gradi: 0° all\'Equatore, 90° ai poli, verso nord (N) o verso sud (S).','Tutti i punti con la stessa latitudine stanno su un cerchio parallelo all\'Equatore: un <b>parallelo</b>. Il Titanic è sul parallelo 41°46′ N, la linea arancione.'],
+  sapevi:'I marinai misuravano la latitudine guardando quanto è alta nel cielo la Stella Polare, o il Sole a mezzogiorno, con uno strumento chiamato <i>sestante</i>.',
+  dove:['Su una linea che fa il giro della Terra: il parallelo 41°46′ N.',10]},
+ {short:'Est o ovest?',title:'Da che parte andare?',vista:'foto',cam:[22,-40],
+  prima:['La Carpathia sa che il Titanic è sulla linea arancione. Ma quella linea fa il giro della Terra: è lunga quasi 30.000 km.'],
+  q:'Che cosa vi manca ancora?',
+  opts:[['Una seconda misura, da est a ovest, lungo la linea.',1,'Esatto: sapete quanto è a nord, ma non quanto è a est o a ovest.'],
+        ['Un parallelo più preciso.',0,'Il parallelo è già preciso. Il problema è che è lunghissimo, e il Titanic può essere in qualunque suo punto.'],
+        ['Niente: basta seguire la linea finché si trova la nave.',0,'La Carpathia va a circa 30 km all\'ora: per percorrere tutto il parallelo ci vorrebbe più di un mese.'],
+        ['Sapere quanto è lontano dal Polo nord.',0,'È la stessa informazione che avete già: se sapete quanto dista dall\'Equatore, sapete anche quanto dista dal polo.']],
+  dopo:['Servono altre linee, che vadano da un polo all\'altro: i <b>meridiani</b>. Incrociano i paralleli ad angolo retto.','Ogni meridiano incrocia il parallelo del Titanic in un punto solo. Ma quale meridiano è quello giusto? E come si chiamano?'],
+  dove:['Ancora sul parallelo 41°46′ N: ma ora avete le linee per dividerlo.',10]},
+ {short:'Il meridiano zero',title:'Da dove si comincia a contare?',vista:'globo',cam:[28,-22],
+  prima:['I meridiani sono tutti uguali, lunghi circa 20.000 km da un polo all\'altro. Per dare un numero a ogni meridiano bisogna scegliere da quale cominciare a contare.'],
+  q:'Quale meridiano scegliereste come meridiano zero?',
+  opts:[['Uno qualsiasi, purché tutte le navi del mondo usino lo stesso.',1,'Esatto: serve un accordo tra tutti. E l\'accordo c\'è stato.'],
+        ['Quello che passa per la nave che fa la domanda.',0,'Allora ogni nave conterebbe da un punto diverso, e i numeri del Titanic non vorrebbero dire niente per la Carpathia.'],
+        ['Il meridiano più lungo.',0,'I meridiani sono tutti lunghi uguali.'],
+        ['Quello di New York, perché le due navi vengono da lì.',0,'Andrebbe bene per queste due navi, ma una nave francese o giapponese conterebbe da un altro punto. Serve un riferimento uguale per tutti.']],
+  dopo:['Nel 1884 i Paesi del mondo si sono messi d\'accordo: il meridiano zero è quello che passa per l\'osservatorio di <b>Greenwich</b>, vicino a Londra.','Da Greenwich si conta verso est (E) e verso ovest (W, dall\'inglese <i>West</i>), fino a 180°. Il meridiano a 180° si chiama antimeridiano.'],
+  sapevi:'Per misurare quanto erano lontani da Greenwich, i marinai confrontavano l\'ora del luogo, presa dal Sole, con l\'ora di Greenwich, segnata da un orologio molto preciso tenuto a bordo.',
+  dove:['Ancora sul parallelo 41°46′ N: ora i meridiani hanno un numero.',10]},
+ {short:'Seconda domanda',title:'La seconda domanda via radio',vista:'foto',cam:[38,-32],
+  prima:['Avete il meridiano zero. Ora potete fare l\'ultima domanda al Titanic.'],
+  q:'Quale domanda trasmettete?',
+  opts:[['«Quanto siete lontani dal meridiano di Greenwich, verso est o verso ovest?»',1,'Perfetto: è la misura che mancava.'],
+        ['«Quanto siete lontani da Londra?»',0,'Tutti i punti alla stessa distanza da Londra formano un cerchio, che incrocia la linea arancione in due punti diversi.'],
+        ['«Siete a ovest di Greenwich?»',0,'Utile, ma la risposta è solo «sì» o «no»: vi servono i gradi.'],
+        ['«Quanto siete lontani dall\'Equatore?»',0,'Lo sapete già: 41°46′ N.']],
+  radio:['Quanto siete lontani dal meridiano di Greenwich?','50 GRADI E 14 PRIMI A OVEST.'],
+  dopo:['Questa misura si chiama <b>longitudine</b>: 0° a Greenwich, fino a 180° verso est (E) o verso ovest (W).','Il meridiano 50°14′ W incrocia il parallelo 41°46′ N in un punto solo. <b>Lì c\'è il Titanic!</b> La Carpathia è a circa 107 km: il capitano fa rotta verso nord-ovest, a tutta velocità.'],
+  dove:['In un punto solo!',1]},
+ {short:'Coordinate',title:'Le coordinate geografiche',vista:'foto',cam:[34,-45],final:true,
+  prima:['Latitudine e longitudine insieme sono le <b>coordinate geografiche</b>: due numeri che indicano un punto preciso sulla Terra, dove un parallelo incrocia un meridiano.','Paralleli e meridiani insieme formano il <b>reticolato geografico</b>: è la «rete» che avete costruito tappa dopo tappa.','La Carpathia arrivò dopo circa tre ore e mezza, prima dell\'alba. Il Titanic era già affondato alle 2:20, ma dalle scialuppe furono salvate 705 persone.'],
+  coord:'Titanic: 41°46′ N, 50°14′ W',
+  dove:['41°46′ N, 50°14′ W',1]}
 ];
+const N=STEPS.length;
+/* ordine delle risposte mescolato una volta per tappa */
+STEPS.forEach(S=>{ if(S.opts){ for(let i=S.opts.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [S.opts[i],S.opts[j]]=[S.opts[j],S.opts[i]]; } } });
 
-/* ---------- stato ---------- */
-let step=0, answered=new Set(), camLat=20, camLon=-5, tgtLat=20, tgtLon=-5, anim=true, hover=null, click=null;
-let game=null;
-const CITIES=[['Londra',51.5,-0.1],['New York',40.7,-74],['Rio de Janeiro',-22.9,-43.2],['Sydney',-33.9,151.2],['Tokyo',35.7,139.7],['Il Cairo',30,31.2],['Città del Capo',-33.9,18.4],['Città del Messico',19.4,-99.1],['Mosca',55.8,37.6],['Nairobi',-1.3,36.8]];
+let step=0, answered=new Set(), vista='foto', clicks=[], vero=false;
+/* livello di quello che si vede: la tappa corrente compare solo dopo la risposta giusta */
+const lev=()=> answered.has(step)||!STEPS[step].q ? step : step-1;
 
-function fmtLat(v){ const a=Math.round(Math.abs(v)); return a===0?'0°':a+'° '+(v>0?'N':'S'); }
-function fmtLon(v){ const a=Math.round(Math.abs(v)); return a===0||a===180?a+'°':a+'° '+(v>0?'E':'W'); }
+/* ---------- foto dal satellite (1600x960, da 38° a 50° N, da 60° a 40° W: 80 px per grado) ---------- */
+const NS='http://www.w3.org/2000/svg', fsvg=$('fsvg'), foto=$('foto');
+const X=lon=>(lon+60)*80, Y=lat=>(50-lat)*80;
+function sv(t,a,txt){ const e=document.createElementNS(NS,t); for(const k in a) e.setAttribute(k,a[k]); if(txt!=null) e.textContent=txt; return e; }
+function drawFoto(){
+  const L=lev(), g=fsvg; g.innerHTML='';
+  const thin={stroke:'rgba(255,255,255,.5)','stroke-width':1.5};
+  if(L>=3) for(let la=40;la<=48;la+=2){ g.append(sv('line',{x1:0,x2:1600,y1:Y(la),y2:Y(la),...thin})); g.append(sv('text',{x:8,y:Y(la)-8,'class':'lab'},la+'° N')); }
+  if(L>=4) for(let lo=-58;lo<=-42;lo+=2){ g.append(sv('line',{y1:0,y2:960,x1:X(lo),x2:X(lo),...thin})); if(L>=5) g.append(sv('text',{x:X(lo)+6,y:946,'class':'lab'},(-lo)+'° W')); }
+  if(L>=5){ g.append(sv('text',{x:1590,y:44,'class':'lab','text-anchor':'end'},'Greenwich (0°) è lontano, a est →')); }
+  if(L>=1){ g.append(sv('path',{d:'M1540 190 L1540 100 M1520 126 L1540 96 L1560 126',stroke:'#fff','stroke-width':5,fill:'none','stroke-linecap':'round'})); g.append(sv('text',{x:1540,y:232,'class':'lab','text-anchor':'middle'},'N')); }
+  if(L===2) g.append(sv('text',{x:800,y:480,'class':'lab','text-anchor':'middle',style:"font-size:44px"},'Tutta questa foto è nell\'emisfero boreale'));
+  if(L>=3){ g.append(sv('line',{x1:0,x2:1600,y1:Y(T.lat),y2:Y(T.lat),stroke:'#ff9f40','stroke-width':5})); g.append(sv('text',{x:20,y:Y(T.lat)+32,'class':'lab',fill:'#ffd1a0'},'41°46′ N')); }
+  if(L>=6){ const px=X(T.lon), py=Y(T.lat), cx=X(CARP.lon), cy=Y(CARP.lat);
+    g.append(sv('line',{y1:0,y2:960,x1:px,x2:px,stroke:'#ff9f40','stroke-width':5}));
+    g.append(sv('text',{x:px+12,y:42,'class':'lab'},'50°14′ W'));
+    g.append(sv('line',{x1:cx,y1:cy,x2:px,y2:py,stroke:'#7fe0ff','stroke-width':4,'stroke-dasharray':'12 9'}));
+    g.append(sv('circle',{cx:cx,cy:cy,r:10,fill:'#7fe0ff',stroke:'#fff','stroke-width':3}));
+    g.append(sv('text',{x:cx+16,y:cy+30,'class':'lab',fill:'#c9f3ff'},'Carpathia'));
+    if(vero){ const rx=X(RELITTO.lon), ry=Y(RELITTO.lat); g.append(sv('circle',{cx:rx,cy:ry,r:9,fill:'#3ee08f',stroke:'#fff','stroke-width':3})); g.append(sv('text',{x:rx+14,y:ry-40,'class':'lab',fill:'#b9ffd9'},'relitto (1985)')); }
+    g.append(sv('circle',{cx:px,cy:py,r:14,fill:'#ff3b3b',stroke:'#fff','stroke-width':4}));
+    g.append(sv('text',{x:px-20,y:py-22,'class':'lab','text-anchor':'end'},'Titanic')); }
+  if(STEPS[step].cerca) clicks.forEach(([x,y])=>g.append(sv('circle',{cx:x,cy:y,r:10,fill:'none',stroke:'#ffd166','stroke-width':3})));
+  foto.classList.toggle('cerca',!!STEPS[step].cerca);
+}
+foto.addEventListener('click',ev=>{
+  if(!STEPS[step].cerca) return;
+  const r=foto.getBoundingClientRect(), x=(ev.clientX-r.left)/r.width*1600, y=(ev.clientY-r.top)/r.height*960; clicks.push([x,y]);
+  const n=clicks.length, d=Math.hypot(x-X(T.lon),y-Y(T.lat)), e=$('esito'); e.hidden=false;
+  e.textContent = d<20 ? 'Acqua… eppure eravate vicinissimi! Ma come facevate a saperlo?'
+    : n<3 ? `Acqua! (tentativo ${n})`
+    : `Acqua! Tentativo ${n}. Il Titanic è lungo 269 metri: in questa foto ogni puntino è grande circa un chilometro, quindi la nave sarebbe più piccola di un puntino.`;
+  if(n>=2) $('qbox').hidden=false;
+  drawFoto();
+});
 
-/* ---------- proiezione ---------- */
+/* ---------- globo ---------- */
+const cv=$('globe'), c=cv.getContext('2d');
+let camLat=25, camLon=-40, tgtLat=25, tgtLon=-40, anim=true, click=null, game=null;
 let B, cx, cy, R;
 function basis(){ const la=camLat*D2R, lo=camLon*D2R;
   B={F:[Math.cos(la)*Math.cos(lo),Math.cos(la)*Math.sin(lo),Math.sin(la)],Rt:[-Math.sin(lo),Math.cos(lo),0],U:[-Math.sin(la)*Math.cos(lo),-Math.sin(la)*Math.sin(lo),Math.cos(la)]}; }
 const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
 const ll=(lat,lon)=>{ lat*=D2R; lon*=D2R; return [Math.cos(lat)*Math.cos(lon),Math.cos(lat)*Math.sin(lon),Math.sin(lat)]; };
 const pr=v=>[cx+R*dot(v,B.Rt), cy-R*dot(v,B.U), dot(v,B.F)];
-function line(pts,front,back){ // pts: vettori; disegna davanti e (tenue) dietro
+function line(pts,front,back){
   for(const pass of [0,1]){ const st=pass?front:back; if(!st) continue; c.save(); Object.assign(c,st.o); if(st.dash) c.setLineDash(st.dash);
     c.beginPath(); let open=false;
     for(const v of pts){ const p=pr(v), vis=p[2]>=-0.002; if(vis!==!!pass){open=false;continue} open?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]); open=true; }
     c.stroke(); c.restore(); } }
 const parallel=(lat,l0=-180,l1=180)=>{const a=[]; for(let l=l0;l<=l1+1e-9;l+=2) a.push(ll(lat,l)); return a;};
 const meridian=(lon,a0=-90,a1=90)=>{const a=[]; for(let l=a0;l<=a1+1e-9;l+=2) a.push(ll(l,lon)); return a;};
-
-/* ---------- globo ---------- */
-const off=document.createElement('canvas'), oc=off.getContext('2d'); let img=null, imgKey='';
+const off=document.createElement('canvas'), oc=off.getContext('2d'); let imgKey='';
 function shade(N,tint){
   const key=N+'|'+camLat.toFixed(2)+'|'+camLon.toFixed(2)+'|'+tint; if(key===imgKey) return; imgKey=key;
-  off.width=off.height=N; img=oc.createImageData(N,N); const d=img.data;
+  off.width=off.height=N; const img=oc.createImageData(N,N), d=img.data;
   for(let j=0;j<N;j++){ const v=1-2*(j+0.5)/N; for(let i=0;i<N;i++){ const u=2*(i+0.5)/N-1, r2=u*u+v*v, o=(j*N+i)*4;
     if(r2>1){d[o+3]=0;continue} const w=Math.sqrt(1-r2);
-    const X=u*B.Rt[0]+v*B.U[0]+w*B.F[0], Y=u*B.Rt[1]+v*B.U[1]+w*B.F[1], Z=u*B.Rt[2]+v*B.U[2]+w*B.F[2];
+    const Z=u*B.Rt[2]+v*B.U[2]+w*B.F[2];
     let r=62,g=127,b=194;
-    if(tint==='ns'){ if(Z>=0){r=r*0.62+240*0.38; g=g*0.62+178*0.38; b=b*0.62+92*0.38;} else {r=r*0.62+80*0.38; g=g*0.62+196*0.38; b=b*0.62+170*0.38;} }
-    if(tint==='ew'){ const lon=Math.atan2(Y,X); if(lon>=0){r=r*0.62+240*0.38; g=g*0.62+178*0.38; b=b*0.62+92*0.38;} else {r=r*0.62+150*0.38; g=g*0.62+132*0.38; b=b*0.62+235*0.38;} }
+    if(tint==='nord'){ if(Z>=0){r=r*0.6+240*0.4; g=g*0.6+178*0.4; b=b*0.6+92*0.4;} else {r*=0.45; g*=0.45; b*=0.5;} }
     const sh=0.5+0.5*(0.75*w+0.25*(-u*0.5+v*0.6)); d[o]=r*sh; d[o+1]=g*sh; d[o+2]=b*sh;
     d[o+3]=Math.min(1,(1-Math.sqrt(r2))*N*0.5)*255; }}
   oc.putImageData(img,0,0);
 }
 function fit(){ const r=cv.getBoundingClientRect(), dpr=window.devicePixelRatio||1;
-  const W=Math.round(r.width*dpr), H=Math.round(r.height*dpr); if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}
+  const W=Math.round(r.width*dpr), H=Math.round(r.height*dpr); if(W&&H&&(cv.width!==W||cv.height!==H)){cv.width=W;cv.height=H}
   c.setTransform(dpr,0,0,dpr,0,0); return {w:r.width,h:r.height,dpr}; }
 function text(t,x,y,col,size,weight,align){ c.font=`${weight||700} ${size}px ${FB}`; c.textAlign=align||'center'; c.lineWidth=3.5; c.strokeStyle='rgba(8,14,26,.85)'; c.strokeText(t,x,y); c.fillStyle=col; c.fillText(t,x,y); }
-
-function draw(){
-  const {w,h,dpr}=fit(), fs=Math.max(11,Math.min(15,w/40)), S=STEPS[step];
-  if(anim){ camLat+=(tgtLat-camLat)*0.12; let dl=((tgtLon-camLon+540)%360)-180; camLon+=dl*0.12; if(Math.abs(tgtLat-camLat)<0.05&&Math.abs(dl)<0.05) anim=false; }
-  basis(); cx=w/2; cy=h/2+fs*0.4; R=Math.min(w,h)*0.36;
-  c.clearRect(0,0,w,h);
-  // asse (dietro)
-  if(step>=1){ c.strokeStyle='rgba(255,255,255,.5)'; c.lineWidth=2; const a=pr([0,0,1.28]), b=pr([0,0,-1.28]); c.beginPath(); c.moveTo(a[0],a[1]); c.lineTo(b[0],b[1]); c.stroke(); }
-  shade(Math.min(520,Math.round(2*R*dpr)),S.tint||(step===2?'ns':step===5?'ew':''));
-  c.drawImage(off,cx-R,cy-R,2*R,2*R);
-  // asse (davanti) e poli
-  if(step>=1){ [[1,'Polo nord'],[-1,'Polo sud']].forEach(([z,lab])=>{ const p0=pr([0,0,z]), p1=pr([0,0,1.28*z]);
-      if(p0[2]>0){ c.strokeStyle='#fff'; c.lineWidth=2.5; c.beginPath(); c.moveTo(p0[0],p0[1]); c.lineTo(p1[0],p1[1]); c.stroke(); c.fillStyle='#fff'; c.beginPath(); c.arc(p0[0],p0[1],4,0,Math.PI*2); c.fill(); }
-      const out=Math.hypot(p1[0]-cx,p1[1]-cy)>R+4; if(p0[2]>0||out) text(lab,p1[0],p1[1]+(z>0?-8:fs+4),'#ffffff',fs,700); }); }
-  const back={o:{strokeStyle:'rgba(255,255,255,.14)',lineWidth:1}};
-  // meridiani e paralleli
-  if(step>=4){ for(let lo=-165;lo<=180;lo+=15) line(meridian(lo),{o:{strokeStyle:'rgba(255,255,255,.45)',lineWidth:1}},back); }
-  if(step>=3){ for(let la=-75;la<=75;la+=15) if(la!==0) line(parallel(la),{o:{strokeStyle:'rgba(255,255,255,.45)',lineWidth:1}},back); }
-  // Equatore
-  if(step>=2){ line(parallel(0),{o:{strokeStyle:'#ff4d4d',lineWidth:3}},{o:{strokeStyle:'rgba(255,90,90,.3)',lineWidth:1.5}});
-    const e=[0,90,180,270].map(l=>ll(0,l+camLon-30)).map(pr).filter(p=>p[2]>0.2)[0]; if(e) text('Equatore',e[0],e[1]-8,'#ffb0b0',fs,700); }
-  if(step===2){ const n=pr(ll(45,camLon)), s=pr(ll(-45,camLon)); text('emisfero boreale',n[0],n[1],'#fff2d6',fs*1.05,700); text('emisfero australe',s[0],s[1],'#d6fff6',fs*1.05,700); }
-  // Greenwich e antimeridiano
-  if(step>=5){ line(meridian(0),{o:{strokeStyle:'#3ee08f',lineWidth:3}},{o:{strokeStyle:'rgba(62,224,143,.3)',lineWidth:1.5}});
-    line(meridian(180),{o:{strokeStyle:'#3ee08f',lineWidth:2},dash:[6,5]},{o:{strokeStyle:'rgba(62,224,143,.25)',lineWidth:1.2},dash:[6,5]});
-    const g=pr(ll(51.5,0)); if(g[2]>0){ c.fillStyle='#3ee08f'; c.beginPath(); c.arc(g[0],g[1],4,0,Math.PI*2); c.fill(); text('Greenwich (Londra)',g[0],g[1]-9,'#b9ffd9',fs*0.9,700); }
-    const m=pr(ll(-20,0)); if(m[2]>0) text('meridiano di Greenwich 0°',m[0]+6,m[1],'#b9ffd9',fs*0.9,700,'left');
-    const am=pr(ll(-20,180)); if(am[2]>0) text('antimeridiano 180°',am[0]+6,am[1],'#b9ffd9',fs*0.9,700,'left');
-    if(step===5){ const e=pr(ll(15,Math.max(25,camLon+50))), o=pr(ll(15,Math.min(-25,camLon-50))); if(e[2]>0) text('emisfero orientale',e[0],e[1],'#fff2d6',fs,700); if(o[2]>0) text('emisfero occidentale',o[0],o[1],'#e6e0ff',fs,700); } }
-  // latitudine di P
-  if(step>=3){ line(parallel(P.lat),{o:{strokeStyle:'#ffa733',lineWidth:3}},{o:{strokeStyle:'rgba(255,167,51,.3)',lineWidth:1.5}});
-    if(step===3){ for(let k=1;k<12;k++){ const g=pr(ll(P.lat,P.lon+k*30)); if(g[2]>0){ c.fillStyle='rgba(215,222,232,.9)'; c.beginPath(); c.arc(g[0],g[1],4.5,0,Math.PI*2); c.fill(); } }
-      angle([0,0,0],ll(0,P.lon),ll(P.lat,P.lon),meridian(P.lon,0,P.lat),'42°'); } }
-  // longitudine di P
-  if(step>=6){ line(meridian(P.lon),{o:{strokeStyle:'#ffa733',lineWidth:3}},{o:{strokeStyle:'rgba(255,167,51,.3)',lineWidth:1.5}});
-    if(step===6) angle([0,0,Math.sin(P.lat*D2R)],ll(P.lat,0),ll(P.lat,P.lon),parallel(P.lat,0,P.lon),'12°'); }
-  // altri punti del gioco
-  if(S.final&&game){ if(game.show){ const t=pr(ll(game.c[1],game.c[2])); if(t[2]>0){ c.fillStyle='#3ee08f'; c.beginPath(); c.arc(t[0],t[1],6,0,Math.PI*2); c.fill(); text(game.c[0],t[0],t[1]-10,'#b9ffd9',fs,700);} }
-    if(click){ const k=pr(ll(click[0],click[1])); if(k[2]>0){ c.strokeStyle='#ffe2a6'; c.lineWidth=2.5; c.beginPath(); c.moveTo(k[0]-7,k[1]-7); c.lineTo(k[0]+7,k[1]+7); c.moveTo(k[0]+7,k[1]-7); c.lineTo(k[0]-7,k[1]+7); c.stroke(); } } }
-  // il punto P
-  const p=pr(ll(P.lat,P.lon));
-  if(p[2]>0){ c.fillStyle='rgba(255,60,60,.35)'; c.beginPath(); c.arc(p[0],p[1],12,0,Math.PI*2); c.fill();
-    c.fillStyle='#ff3b3b'; c.strokeStyle='#fff'; c.lineWidth=2; c.beginPath(); c.arc(p[0],p[1],6.5,0,Math.PI*2); c.fill(); c.stroke();
-    text(S.final?'P = Roma':'P',p[0]+12,p[1]-10,'#ffffff',fs*1.15,800,'left'); }
-}
 function angle(O,A,Bv,arc,lab){
   const o=pr(O), a=pr(A), b=pr(Bv);
   c.save(); c.setLineDash([5,4]); c.strokeStyle='#ffe2a6'; c.lineWidth=1.8; c.beginPath(); c.moveTo(o[0],o[1]); c.lineTo(a[0],a[1]); c.moveTo(o[0],o[1]); c.lineTo(b[0],b[1]); c.stroke(); c.restore();
@@ -286,61 +371,130 @@ function angle(O,A,Bv,arc,lab){
   const mid=arc[Math.floor(arc.length/2)], m=[O[0]+(mid[0]-O[0])*0.55,O[1]+(mid[1]-O[1])*0.55,O[2]+(mid[2]-O[2])*0.55], q=pr(m);
   text(lab,q[0],q[1]+5,'#ffe2a6',Math.max(14,R*0.08),800);
 }
+function draw(){
+  requestAnimationFrame(draw);
+  if(vista!=='globo') return;
+  const {w,h,dpr}=fit(); if(!w) return;
+  const fs=Math.max(11,Math.min(15,w/40)), L=lev();
+  if(anim){ camLat+=(tgtLat-camLat)*0.12; let dl=((tgtLon-camLon+540)%360)-180; camLon+=dl*0.12; if(Math.abs(tgtLat-camLat)<0.05&&Math.abs(dl)<0.05) anim=false; }
+  basis(); cx=w/2; cy=h/2+fs*0.4; R=Math.min(w,h)*0.36;
+  c.clearRect(0,0,w,h);
+  if(L>=1){ c.strokeStyle='rgba(255,255,255,.5)'; c.lineWidth=2; const a=pr([0,0,1.28]), b=pr([0,0,-1.28]); c.beginPath(); c.moveTo(a[0],a[1]); c.lineTo(b[0],b[1]); c.stroke(); }
+  shade(Math.min(520,Math.round(2*R*dpr)), L>=2&&L<=3?'nord':'');
+  c.drawImage(off,cx-R,cy-R,2*R,2*R);
+  if(L>=1){ [[1,'Polo nord'],[-1,'Polo sud']].forEach(([z,lab])=>{ const p0=pr([0,0,z]), p1=pr([0,0,1.28*z]);
+      if(p0[2]>0){ c.strokeStyle='#fff'; c.lineWidth=2.5; c.beginPath(); c.moveTo(p0[0],p0[1]); c.lineTo(p1[0],p1[1]); c.stroke(); c.fillStyle='#fff'; c.beginPath(); c.arc(p0[0],p0[1],4,0,Math.PI*2); c.fill(); }
+      const out=Math.hypot(p1[0]-cx,p1[1]-cy)>R+4; if(p0[2]>0||out) text(lab,p1[0],p1[1]+(z>0?-8:fs+4),'#ffffff',fs,700); });
+    if(step===1){ const s=pr([0,0,1.55]); text('★ Stella Polare',s[0],s[1],'#ffe9a8',fs*1.05,700); } }
+  const back={o:{strokeStyle:'rgba(255,255,255,.14)',lineWidth:1}}, grid={o:{strokeStyle:'rgba(255,255,255,.45)',lineWidth:1}};
+  if(L>=4){ for(let lo=-165;lo<=180;lo+=15) line(meridian(lo),grid,back); }
+  if(L>=3){ for(let la=-75;la<=75;la+=15) if(la!==0) line(parallel(la),grid,back); }
+  if(L>=2){ line(parallel(0),{o:{strokeStyle:'#ff4d4d',lineWidth:3}},{o:{strokeStyle:'rgba(255,90,90,.3)',lineWidth:1.5}});
+    const e=[0,90,180,270].map(l=>ll(0,l+camLon-30)).map(pr).filter(p=>p[2]>0.2)[0]; if(e) text('Equatore',e[0],e[1]-8,'#ffb0b0',fs,700); }
+  if(L===2){ const n=pr(ll(45,camLon)), s=pr(ll(-45,camLon)); text('emisfero boreale',n[0],n[1],'#fff2d6',fs*1.05,700); text('emisfero australe',s[0],s[1],'#cfd8e6',fs*1.05,700); }
+  if(L>=5){ line(meridian(0),{o:{strokeStyle:'#3ee08f',lineWidth:3}},{o:{strokeStyle:'rgba(62,224,143,.3)',lineWidth:1.5}});
+    line(meridian(180),{o:{strokeStyle:'#3ee08f',lineWidth:2},dash:[6,5]},{o:{strokeStyle:'rgba(62,224,143,.25)',lineWidth:1.2},dash:[6,5]});
+    const g=pr(ll(51.5,0)); if(g[2]>0){ c.fillStyle='#3ee08f'; c.beginPath(); c.arc(g[0],g[1],4,0,Math.PI*2); c.fill(); text('Greenwich (Londra)',g[0],g[1]-9,'#b9ffd9',fs*0.9,700); }
+    const m=pr(ll(-20,0)); if(m[2]>0) text('meridiano di Greenwich 0°',m[0]+6,m[1],'#b9ffd9',fs*0.9,700,'left');
+    const am=pr(ll(-20,180)); if(am[2]>0) text('antimeridiano 180°',am[0]+6,am[1],'#b9ffd9',fs*0.9,700,'left'); }
+  if(L>=3){ line(parallel(T.lat),{o:{strokeStyle:'#ffa733',lineWidth:3}},{o:{strokeStyle:'rgba(255,167,51,.3)',lineWidth:1.5}});
+    if(L===3){ const lo=camLon; angle([0,0,0],ll(0,lo),ll(T.lat,lo),meridian(lo,0,T.lat),'41°46′'); } }
+  if(L>=6){ line(meridian(T.lon),{o:{strokeStyle:'#ffa733',lineWidth:3}},{o:{strokeStyle:'rgba(255,167,51,.3)',lineWidth:1.5}});
+    if(L===6) angle([0,0,Math.sin(T.lat*D2R)],ll(T.lat,0),ll(T.lat,T.lon),parallel(T.lat,T.lon,0),'50°14′');
+    const p=pr(ll(T.lat,T.lon));
+    if(p[2]>0){ c.fillStyle='rgba(255,60,60,.35)'; c.beginPath(); c.arc(p[0],p[1],12,0,Math.PI*2); c.fill();
+      c.fillStyle='#ff3b3b'; c.strokeStyle='#fff'; c.lineWidth=2; c.beginPath(); c.arc(p[0],p[1],6.5,0,Math.PI*2); c.fill(); c.stroke();
+      text('Titanic',p[0]-12,p[1]-10,'#ffffff',fs*1.15,800,'right'); } }
+  if(STEPS[step].final&&game){ if(game.show){ const t=pr(ll(game.c[1],game.c[2])); if(t[2]>0){ c.fillStyle='#3ee08f'; c.beginPath(); c.arc(t[0],t[1],6,0,Math.PI*2); c.fill(); text(game.c[0],t[0],t[1]-10,'#b9ffd9',fs,700);} }
+    if(click){ const k=pr(ll(click[0],click[1])); if(k[2]>0){ c.strokeStyle='#ffe2a6'; c.lineWidth=2.5; c.beginPath(); c.moveTo(k[0]-7,k[1]-7); c.lineTo(k[0]+7,k[1]+7); c.moveTo(k[0]+7,k[1]-7); c.lineTo(k[0]-7,k[1]+7); c.stroke(); } } }
+}
+
+/* ---------- vista: foto o globo ---------- */
+function setVista(v){ vista=v; $('foto').hidden=v!=='foto'; $('cred-foto').hidden=v!=='foto'; $('globo').hidden=v!=='globo';
+  $('v-foto').setAttribute('aria-pressed',v==='foto'); $('v-globo').setAttribute('aria-pressed',v==='globo'); imgKey=''; }
+$('v-foto').addEventListener('click',()=>setVista('foto'));
+$('v-globo').addEventListener('click',()=>setVista('globo'));
 
 /* ---------- pannello ---------- */
+function paras(box,arr){ arr.forEach(t=>{ const p=document.createElement('p'); p.innerHTML=t; box.append(p); }); }
+function renderDopo(){
+  const S=STEPS[step], d=$('dopo'), ok=answered.has(step)||!S.q; d.innerHTML=''; d.hidden=!ok||(!S.dopo&&!S.radio);
+  if(ok){ if(S.radio){ const r=document.createElement('div'); r.className='radio';
+      r.innerHTML='<p class="msg out"><small>Carpathia → Titanic</small></p><p class="msg in"><small>Titanic → Carpathia</small></p>';
+      r.children[0].append(S.radio[0].toUpperCase()); r.children[1].append(S.radio[1]); d.append(r); }
+    if(S.dopo) paras(d,S.dopo);
+    if(S.sapevi){ const s=document.createElement('p'); s.className='sapevi'; s.innerHTML='<b>Lo sapevi?</b> '+S.sapevi; d.append(s); } }
+  const dv=ok?S.dove:(step>0?STEPS[step-1].dove:['Ovunque. Non sappiamo niente.',100]);
+  $('dove-v').textContent=dv[0]; $('dove-b').style.width=dv[1]+'%';
+  $('next').disabled=!ok; $('next').classList.toggle('ready',ok);
+  drawFoto();
+}
 function render(){
   const S=STEPS[step];
-  $('num').textContent=`Tappa ${step+1} di ${STEPS.length}`; $('title').textContent=S.title;
-  const tx=$('text'); tx.innerHTML=''; S.text.forEach(t=>{const p=document.createElement('p'); p.textContent=t; tx.append(p);});
-  if(S.final){ const cd=document.createElement('div'); cd.className='coord'; cd.textContent='P (42° N, 12° E)'; tx.append(cd); }
-  $('see').textContent=S.see;
-  $('qbox').hidden=!S.q; $('game').hidden=!S.final; $('read').hidden=step<6;
+  $('num').textContent=`Tappa ${step+1} di ${N}`; $('title').textContent=S.title;
+  const tx=$('text'); tx.innerHTML=''; paras(tx,S.prima);
+  if(S.coord){ const cd=document.createElement('div'); cd.className='coord'; cd.textContent=S.coord; tx.append(cd);
+    const b=document.createElement('button'); b.type='button'; b.className='btn forte'; b.textContent=vero?'Il vero messaggio è qui sotto ↓':'Scopri il vero messaggio del Titanic';
+    b.addEventListener('click',mostraVero); tx.append(b); }
+  $('esito').hidden=!S.cerca||!clicks.length;
+  $('qbox').hidden=!S.q||(S.cerca&&clicks.length<2&&!answered.has(step));
   if(S.q){ $('q').textContent=S.q; const box=$('opts'); box.innerHTML=''; $('fb').hidden=true;
     S.opts.forEach(([t,ok,fb])=>{ const b=document.createElement('button'); b.type='button'; b.textContent=t;
+      if(answered.has(step)&&ok) b.classList.add('right');
       b.addEventListener('click',()=>{ box.querySelectorAll('button').forEach(x=>x.classList.remove('right','wrong')); b.classList.add(ok?'right':'wrong');
-        const f=$('fb'); f.hidden=false; f.className='fb '+(ok?'right':'wrong'); f.textContent=fb; if(ok){answered.add(step); $('next').classList.add('ready'); steps();} });
+        const f=$('fb'); f.hidden=false; f.className='fb '+(ok?'right':'wrong'); f.textContent=fb;
+        if(ok){ answered.add(step); steps(); renderDopo(); } });
       box.append(b); }); }
-  $('prev').disabled=step===0; $('next').hidden=step===STEPS.length-1; $('next').classList.toggle('ready',answered.has(step));
-  tgtLat=S.cam[0]; tgtLon=S.cam[1]; anim=true;
+  $('game').hidden=!S.final; $('read').hidden=!S.final;
+  $('prev').disabled=step===0; $('next').hidden=step===N-1;
+  tgtLat=S.cam[0]; tgtLon=S.cam[1]; anim=true; click=null;
   if(S.final&&!game) newGame();
-  steps();
+  setVista(S.vista); steps(); renderDopo();
 }
 function steps(){ const ol=$('steps'); ol.innerHTML='';
   STEPS.forEach((s,i)=>{ const li=document.createElement('li'), b=document.createElement('button'); b.type='button'; b.textContent=(i+1)+'. '+s.short;
-    if(i===step) b.setAttribute('aria-current','step'); if(answered.has(i)) b.classList.add('done');
+    if(i===step) b.setAttribute('aria-current','step'); if(answered.has(i)||(s.final&&i<=step)) b.classList.add('done');
     b.addEventListener('click',()=>{step=i; render();}); li.append(b); ol.append(li); }); }
 $('prev').addEventListener('click',()=>{ if(step>0){step--; render();} });
-$('next').addEventListener('click',()=>{ if(step<STEPS.length-1){step++; render();} });
+$('next').addEventListener('click',()=>{ if(step<N-1){step++; render(); window.scrollTo({top:$('steps').getBoundingClientRect().top+scrollY-60,behavior:'smooth'});} });
 
-/* ---------- gioco ---------- */
+/* ---------- il vero SOS ---------- */
+function mostraVero(){ if(!vero){ vero=true; $('v-iframe').src='https://www.youtube-nocookie.com/embed/'+VIDEO+'?start='+INIZIO+'&rel=0'; }
+  $('v-yt').href='https://www.youtube.com/watch?v='+VIDEO+'&t='+INIZIO+'s';
+  $('vero').hidden=false; setVista('foto'); render(); $('vero').scrollIntoView({behavior:'smooth',block:'start'}); }
+
+/* ---------- gioco finale: le città ---------- */
+const CITIES=[['Londra',51.5,-0.1],['New York',40.7,-74],['Rio de Janeiro',-22.9,-43.2],['Sydney',-33.9,151.2],['Tokyo',35.7,139.7],['Il Cairo',30,31.2],['Città del Capo',-33.9,18.4],['Città del Messico',19.4,-99.1],['Mosca',55.8,37.6],['Nairobi',-1.3,36.8],['Roma',41.9,12.5],['Fiume (Rijeka)',45.3,14.4]];
+function fmtLat(v){ const a=Math.round(Math.abs(v)); return a===0?'0°':a+'° '+(v>0?'N':'S'); }
+function fmtLon(v){ const a=Math.round(Math.abs(v)); return a===0||a===180?a+'°':a+'° '+(v>0?'E':'W'); }
 let order=[...CITIES].sort(()=>Math.random()-0.5), gi=0;
 function newGame(){ const ct=order[gi++%order.length]; game={c:ct,show:false}; click=null;
   $('tgt').textContent=`${fmtLat(ct[1])}, ${fmtLon(ct[2])}`; $('gfb').hidden=true; }
 $('gnext').addEventListener('click',newGame);
+$('apri-globo').addEventListener('click',()=>{ setVista('globo'); tgtLat=20; tgtLon=0; anim=true; $('read').textContent='Muovi il mouse sul globo'; $('globo').scrollIntoView({behavior:'smooth',block:'center'}); });
 function check(lat,lon){ if(!game) return; click=[lat,lon]; game.show=true;
   const a=ll(lat,lon), b=ll(game.c[1],game.c[2]), ang=Math.acos(Math.max(-1,Math.min(1,dot(a,b))))*R2D, km=Math.round(ang*111.2/10)*10;
   const f=$('gfb'); f.hidden=false; const good=ang<10; f.className='fb '+(good?'right':'wrong');
-  f.textContent=good?`Ottimo! Era ${game.c[0]}: sei a circa ${km} km dal punto giusto.`:`Era ${game.c[0]} (il punto verde): sei a circa ${km.toLocaleString('it-IT')} km. Controlla prima la latitudine (nord o sud?), poi la longitudine (est o ovest?).`;
+  f.textContent=good?`Ottimo! Era ${game.c[0]}: siete a circa ${km} km dal punto giusto.`:`Era ${game.c[0]} (il punto verde): siete a circa ${km.toLocaleString('it-IT')} km. Controllate prima la latitudine (nord o sud?), poi la longitudine (est o ovest?).`;
 }
 
-/* ---------- trascinare e leggere le coordinate ---------- */
+/* ---------- trascinare il globo e leggere le coordinate ---------- */
 function inv(x,y){ const u=(x-cx)/R, v=-(y-cy)/R, r2=u*u+v*v; if(r2>1) return null; const w=Math.sqrt(1-r2);
-  const X=u*B.Rt[0]+v*B.U[0]+w*B.F[0], Y=u*B.Rt[1]+v*B.U[1]+w*B.F[1], Z=u*B.Rt[2]+v*B.U[2]+w*B.F[2];
-  return [Math.asin(Z)*R2D, Math.atan2(Y,X)*R2D]; }
+  const X3=u*B.Rt[0]+v*B.U[0]+w*B.F[0], Y3=u*B.Rt[1]+v*B.U[1]+w*B.F[1], Z3=u*B.Rt[2]+v*B.U[2]+w*B.F[2];
+  return [Math.asin(Z3)*R2D, Math.atan2(Y3,X3)*R2D]; }
 let drag=null;
 cv.addEventListener('pointerdown',e=>{ drag={x:e.clientX,y:e.clientY,la:camLat,lo:camLon,moved:false}; cv.setPointerCapture(e.pointerId); cv.style.cursor='grabbing'; });
 cv.addEventListener('pointermove',e=>{ const r=cv.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
   if(drag){ const dx=e.clientX-drag.x, dy=e.clientY-drag.y; if(Math.hypot(dx,dy)>4) drag.moved=true;
     if(drag.moved){ anim=false; camLon=drag.lo-dx*0.35; camLat=Math.max(-85,Math.min(85,drag.la+dy*0.35)); } }
-  hover=inv(x,y); if(step>=6) $('read').textContent=hover?`${fmtLat(hover[0])}, ${fmtLon(hover[1])}`:'Muovi il mouse sul globo'; });
+  if(STEPS[step].final){ const h=inv(x,y); $('read').textContent=h?`${fmtLat(h[0])}, ${fmtLon(h[1])}`:'Muovi il mouse sul globo'; } });
 cv.addEventListener('pointerup',e=>{ const r=cv.getBoundingClientRect();
   if(drag&&!drag.moved&&STEPS[step].final){ const q=inv(e.clientX-r.left,e.clientY-r.top); if(q) check(q[0],q[1]); }
   drag=null; cv.style.cursor=''; });
 cv.addEventListener('pointercancel',()=>{drag=null; cv.style.cursor='';});
-cv.addEventListener('pointerleave',()=>{ if(step>=6) $('read').textContent='Muovi il mouse sul globo'; });
+cv.addEventListener('pointerleave',()=>{ if(STEPS[step].final) $('read').textContent='Muovi il mouse sul globo'; });
 
-function loop(){ draw(); requestAnimationFrame(loop); }
-render(); $('read').textContent='Muovi il mouse sul globo'; requestAnimationFrame(loop);
+render(); draw();
 })();
 </script>
 

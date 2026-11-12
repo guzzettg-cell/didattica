@@ -1,0 +1,10 @@
+Foto per il cruciverba delle città (lezione 01_ALFABETO.html)
+
+Salva qui una foto per ogni città, con questi nomi esatti (minuscolo, .jpg):
+
+  atene.jpg       berlino.jpg     istanbul.jpg    lisbona.jpg     londra.jpg
+  parigi.jpg      pordenone.jpg   praga.jpg       trieste.jpg     venezia.jpg
+
+Meglio foto in orizzontale (circa 4:3), larghe 800-1200 pixel.
+Fonte consigliata: Wikimedia Commons (foto libere; indicate l'autore se richiesto).
+Se una foto manca, al suo posto compare l'indizio scritto: il gioco funziona lo stesso.

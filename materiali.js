@@ -121,7 +121,7 @@ var MODULI = [
         descrizione: "Ridotte, approssimate e simboliche: leggere una carta con la legenda.",
         data: "2026-10-23",
         attivita: [
-          { tipo: "Attività 1", titolo: "Tre modi di disegnare il mondo", link: "geografia/prima/carte-geografiche/attivita/tre-modi-di-disegnare-il-mondo.html", data: "2026-10-21" },
+          { tipo: "Attività 1", titolo: "Che cos'è una carta?", descrizione: "Ridotta, approssimata e simbolica; carte nautiche, celesti e catastali; le carte digitali.", link: "geografia/prima/carte-geografiche/attivita/che-cos-e-una-carta.html", data: "2026-11-10" },
           { tipo: "Attività 2", titolo: "Leggere una carta", descrizione: "La legenda, i simboli e le tre proprietà di una carta, su una regione inventata.", link: "geografia/prima/carte-geografiche/attivita/leggere-una-carta.html", data: "2026-10-23" },
           { tipo: "Approfondimento", titolo: "La storia della cartografia", link: "geografia/prima/carte-geografiche/attivita/storia-della-cartografia.html", data: "2026-10-21" }
         ]
@@ -508,6 +508,7 @@ var MODULI = [
         link: "geografia/prima/metodo-e-strumenti/lezioni/proiezioni.html",
         data: "2026-10-23",
         attivita: [
+          { tipo: "Attività", titolo: "Tre modi di disegnare il mondo", descrizione: "Spostata dalla prima.", link: "geografia/prima/carte-geografiche/attivita/tre-modi-di-disegnare-il-mondo.html", data: "2026-10-21" },
           { tipo: "Attività", titolo: "Carte sovrapposte ed emisferi", link: "geografia/prima/carte-geografiche/attivita/carte-sovrapposte-ed-emisferi.html", data: "2026-10-21" }
         ]
       },

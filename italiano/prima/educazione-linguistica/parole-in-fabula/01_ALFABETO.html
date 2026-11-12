@@ -29,6 +29,67 @@
           margin-inline-start: 0;
         }
       }
+      /* Gioco della fila alfabetica */
+      .game-controls { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 14px; margin-top: 24px; }
+      .game-controls label { display: grid; gap: 6px; font-weight: 800; font-size: .92rem; }
+      .game-controls select { min-height: 44px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); padding: 6px 10px; font: inherit; font-weight: 600; }
+      .game-start { border: 0; cursor: pointer; font: inherit; }
+      .custom-list { margin-top: 16px; }
+      .custom-list label { display: block; font-weight: 800; }
+      .game-turn { margin: 22px 0 0; font-family: Georgia, "Times New Roman", serif; font-size: 1.35rem; color: var(--forest); }
+      .game-board { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; margin-top: 16px; }
+      .game-board h3 { margin-bottom: 12px; }
+      .game-pool { display: flex; flex-wrap: wrap; gap: 9px; align-content: flex-start; min-height: 120px; border: 1px dashed var(--line); border-radius: 18px; padding: 14px; }
+      .game-pool button { border: 1px solid var(--ink); border-radius: 999px; background: var(--card); cursor: pointer; padding: 8px 14px; font: inherit; font-weight: 800; }
+      .game-pool button:hover, .game-pool button:focus-visible { background: var(--sage, #dce7d9); }
+      .game-pool button.wrong { animation: shake .35s; border-color: var(--coral, #c8553d); }
+      @keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+      .game-row { margin: 0; padding: 0; list-style: none; counter-reset: fila; }
+      .game-row li { counter-increment: fila; display: flex; align-items: center; gap: 10px; min-height: 40px; margin-bottom: 6px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); padding: 6px 12px; font-weight: 800; }
+      .game-row li::before { content: counter(fila); display: grid; place-items: center; width: 26px; height: 26px; flex: none; border-radius: 50%; background: var(--paper); font-size: .8rem; color: var(--muted); }
+      .game-row li.empty { border-style: dashed; background: transparent; color: var(--muted); font-weight: 500; }
+      .game-row li.placed { border-color: var(--forest); background: rgba(220,231,217,.7); }
+      .game-row li.next { border: 2px solid var(--gold); }
+      .game-message { min-height: 1.6em; margin: 16px 0 0; font-weight: 700; }
+      .game-message.ko { color: #9b3b26; }
+      .game-message.ok { color: var(--forest); }
+      .game-score { margin: 4px 0 0; color: var(--muted); }
+      @media (max-width: 42rem) { .game-board { grid-template-columns: 1fr; } }
+      @media print { .game-controls, .custom-list { display: none; } }
+      /* Cruciverba delle città */
+      .cw-help { margin-top: 18px; border-left: 4px solid var(--gold); padding-left: 16px; }
+      .cw-help p { margin: 0; }
+      .cw-layout { margin-top: 22px; }
+      .cw-grid { --cols: 13; display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); gap: clamp(1px, .5vw, 3px); width: 100%; max-width: calc(var(--cols) * 46px); margin: 0 auto; }
+      .cw-cell { position: relative; aspect-ratio: 1; }
+      .cw-cell.block { background: transparent; }
+      .cw-cell input { min-width: 0; width: 100%; height: 100%; border: 1.5px solid var(--ink); border-radius: 6px; background: var(--card); padding: 0; text-align: center; text-transform: uppercase; font: 800 clamp(.8rem, 2.6vw, 1.3rem) Georgia, serif; caret-color: transparent; }
+      .cw-cell input:focus { outline: 3px solid var(--gold); outline-offset: 0; }
+      .cw-cell.active input { background: #fbefc9; }
+      .cw-cell.ok input { background: rgba(220,231,217,.95); border-color: var(--forest); }
+      .cw-cell.ko input { background: #f9ddd6; border-color: #9b3b26; }
+      .cw-num { position: absolute; top: 1px; left: 3px; z-index: 1; font-size: clamp(.5rem, 1.4vw, .68rem); font-weight: 800; pointer-events: none; }
+      .cw-current { min-height: 1.5em; margin: 14px 0 0; text-align: center; font-weight: 750; color: var(--forest); }
+      .cw-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px; }
+      .cw-actions button { cursor: pointer; font: inherit; }
+      .cw-status { min-height: 1.5em; margin: 10px 0 0; text-align: center; font-weight: 700; }
+      .cw-clues { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-top: 26px; }
+      .cw-clue { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 18px; background: var(--card); overflow: hidden; }
+      .cw-clue.solved { border: 2px solid var(--forest); }
+      .cw-clue.current { border: 2px solid var(--gold); }
+      .cw-photo { position: relative; aspect-ratio: 4 / 3; background: var(--paper); }
+      .cw-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+      .cw-photo .cw-nophoto { display: grid; place-items: center; height: 100%; padding: 16px; text-align: center; font-family: Georgia, serif; font-size: 1.05rem; color: var(--ink); }
+      .cw-tag { position: absolute; top: 10px; left: 10px; border: 0; border-radius: 999px; background: var(--ink); color: var(--paper); cursor: pointer; padding: 6px 12px; font: 800 .9rem/1.2 inherit; }
+      .cw-body { padding: 12px 16px 16px; }
+      .cw-body details { margin-top: 8px; }
+      .cw-body summary { cursor: pointer; color: var(--forest); font-weight: 800; }
+      .cw-words { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+      .cw-words button { border: 1px solid var(--line); border-radius: 999px; background: var(--paper); cursor: pointer; padding: 4px 10px; font: inherit; font-size: .92rem; }
+      .cw-words button[aria-pressed="true"] { border-color: var(--coral); background: #f9ddd6; font-weight: 800; }
+      .cw-initials { margin: 10px 0 0; font-family: Georgia, serif; font-size: 1.2rem; letter-spacing: .2em; }
+      .cw-initials-msg { margin: 4px 0 0; font-size: .92rem; font-weight: 700; }
+      @media print { .cw-actions, .cw-tag { display: none; } }
     </style>
   </head>
   <body data-page="alfabeto">
@@ -71,6 +132,60 @@
         <article class="exercise-card"><label for="ordine">Scrivi le parole nell’ordine scelto</label><textarea id="ordine" data-saved-field></textarea><details class="solution"><summary>Confronta l’ordine</summary><p>BANG, BIP, CRASH, GNAM, GULP, SPLASH, SQUIT, ZOOM.</p></details><p class="save-status"></p></article>
         <div class="rule-path"><article class="need-card"><p class="section-label">Perché serve una regola</p><p>Se ognuno sistemasse le parole a modo proprio, cercare una voce nel dizionario richiederebbe ogni volta di scorrere tutto.</p></article><article class="rule-card"><p class="section-label">La regola che costruiamo</p><p>L’alfabeto è anche un criterio d’ordine. Confrontiamo le lettere da sinistra verso destra seguendo una sequenza condivisa.</p></article></div>
       </section>
+      <section class="activity alpha-game" id="gioco-alfabetico" aria-labelledby="gioco-titolo">
+        <div class="activity-heading"><p class="kicker">Gioco · Chi viene adesso?</p><h2 id="gioco-titolo">La fila alfabetica</h2><p class="lead">A turno, ogni studente sceglie il prossimo nome da mettere in fila. Si può partire dall’alto (dalla A), dal basso (dalla Z) oppure alternare: una volta il primo, una volta l’ultimo, finché le due metà della fila si incontrano.</p></div>
+        <div class="game-controls">
+          <label>Elenco
+            <select data-game-list>
+              <option value="sanremo">Cantanti di Sanremo 2026</option>
+              <option value="fiabe">Personaggi di fiabe e favole</option>
+              <option value="rumori">Rumori dei fumetti</option>
+              <option value="mio">Il nostro elenco</option>
+            </select>
+          </label>
+          <label>Come si gioca
+            <select data-game-mode>
+              <option value="alto">Dall’alto: dalla A alla Z</option>
+              <option value="basso">Dal basso: dalla Z alla A</option>
+              <option value="alterna">Alternato: una volta dall’alto, una dal basso</option>
+            </select>
+          </label>
+          <label>Quanti nomi
+            <select data-game-count>
+              <option value="8">8</option>
+              <option value="12" selected>12</option>
+              <option value="all">Tutti</option>
+            </select>
+          </label>
+          <button class="primary-link game-start" type="button" data-game-start>Nuova partita</button>
+        </div>
+        <div class="custom-list" data-custom-wrap hidden>
+          <label for="elenco-personale">Scrivi un nome per riga (per esempio i nomi della classe)</label>
+          <textarea id="elenco-personale" data-saved-field placeholder="Giulia&#10;Matteo&#10;Aisha&#10;…"></textarea>
+        </div>
+        <p class="game-turn" data-game-turn aria-live="polite"></p>
+        <div class="game-board">
+          <div class="game-pool-wrap"><h3>Da mettere in fila</h3><div class="game-pool" data-game-pool></div></div>
+          <div class="game-row-wrap"><h3>La fila</h3><ol class="game-row" data-game-row></ol></div>
+        </div>
+        <p class="game-message" data-game-message aria-live="polite"></p>
+        <p class="game-score" data-game-score></p>
+        <div class="rule-path"><article class="need-card"><p class="section-label">Attenzione ai nomi difficili</p><p>Se due nomi cominciano con la stessa lettera, decide la seconda; se anche la seconda è uguale, la terza, e così via. Nel gioco non contano spazi, trattini, apostrofi e accenti: <em>J-Ax</em> si legge JAX, <em>Dargen D’Amico</em> si legge DARGENDAMICO.</p></article><article class="rule-card"><p class="section-label">Una domanda per discutere</p><p>Qui mettiamo i cantanti in ordine per il nome con cui si presentano. Nel registro di classe, invece, si ordina per cognome. Perché? Provate a rimettere in fila con i cognomi i compagni della classe.</p></article></div>
+      </section>
+      <section class="activity city-game" id="cruciverba-citta" aria-labelledby="cruciverba-titolo">
+        <div class="activity-heading"><p class="kicker">Gioco · Il cruciverba delle città</p><h2 id="cruciverba-titolo">Che città è?</h2><p class="lead">Guardate le foto e scrivete il nome di ogni città nel cruciverba. Toccate una casella o il numero di una foto per scegliere la parola, poi scrivete: il cursore avanza da solo.</p></div>
+        <div class="cw-help"><p><strong>Non la riconoscete?</strong> Prima leggete l’indizio. Se ancora non basta, aprite il gioco delle parole intruse: sono in ordine alfabetico, ma alcune non rispettano l’ordine. Trovatele: le loro iniziali, lette una dopo l’altra, formano il nome della città.</p></div>
+        <div class="cw-layout">
+          <div class="cw-grid-wrap">
+            <div class="cw-grid" data-cw-grid role="grid" aria-label="Cruciverba delle città"></div>
+            <p class="cw-current" data-cw-current aria-live="polite"></p>
+            <div class="cw-actions"><button class="primary-link" type="button" data-cw-check>Controlla</button><button class="secondary-link" type="button" data-cw-reset>Ricomincia</button></div>
+            <p class="cw-status" data-cw-status aria-live="polite"></p>
+          </div>
+        </div>
+        <div class="cw-clues" data-cw-clues></div>
+        <div class="rule-path"><article class="need-card"><p class="section-label">Perché funziona il trucco</p><p>Riconosciamo subito una parola fuori posto perché conosciamo tutti la stessa sequenza di lettere. Senza un ordine condiviso, nessuno potrebbe dire che una parola è «fuori posto».</p></article><article class="rule-card"><p class="section-label">Che cosa usiamo</p><p>Per trovare le intruse confrontiamo ogni parola con quella che la precede e con quella che la segue: è lo stesso controllo che facciamo quando cerchiamo una voce nel dizionario.</p></article></div>
+      </section>
       <section class="activity">
         <div class="activity-heading"><p class="kicker">Attività 3 · Il magazzino delle lettere</p><h2>Come facciamo a non perdere nessuna lettera?</h2><p class="lead">Completa la sequenza: A B C D _ F G _ I _ M N O P _ R S T U V _</p></div>
         <article class="exercise-card"><label for="lettere-mancanti">Le cinque lettere mancanti</label><input id="lettere-mancanti" type="text" data-saved-field /><details class="solution"><summary>Controlla</summary><p>E, H, L, Q, Z.</p></details><p class="save-status"></p></article>
@@ -97,5 +212,265 @@
     </main>
     <script src="funzioni.js"></script>
   <script src="../../../../assets/barra.js"></script>
+  <script>
+    (() => {
+      const game = document.querySelector('#gioco-alfabetico');
+      if (!game) return;
+      const lists = {
+        sanremo: ['Arisa', 'Bambole di Pezza', 'Chiello', 'Dargen D’Amico', 'Ditonellapiaga', 'Eddie Brock', 'Elettra Lamborghini', 'Enrico Nigiotti', 'Ermal Meta', 'Fedez e Masini', 'Francesco Renga', 'Fulminacci', 'J-Ax', 'LDA e Aka 7even', 'Leo Gassmann', 'Levante', 'Luchè', 'Malika Ayane', 'Mara Sattei', 'Maria Antonietta e Colombre', 'Michele Bravi', 'Nayt', 'Patty Pravo', 'Raf', 'Sal Da Vinci', 'Samurai Jay', 'Sayf', 'Serena Brancale', 'Tommaso Paradiso', 'Tredici Pietro'],
+        fiabe: ['Biancaneve', 'Barbablù', 'Cappuccetto Rosso', 'Cenerentola', 'Cicala', 'Formica', 'Gatto con gli stivali', 'Gretel', 'Hansel', 'Lupo', 'Pinocchio', 'Pollicino', 'Pifferaio di Hamelin', 'Principe ranocchio', 'Raperonzolo', 'Rosaspina', 'Topo di campagna', 'Topo di città', 'Volpe', 'Brutto anatroccolo'],
+        rumori: ['BANG', 'BIP', 'BOOM', 'CIAF', 'CLICK', 'CRASH', 'DRIIN', 'GNAM', 'GULP', 'SBAM', 'SDENG', 'SIGH', 'SOB', 'SPLASH', 'SQUIT', 'TOC TOC', 'ZOOM', 'ZZZ']
+      };
+      const $ = s => game.querySelector(s);
+      const pool = $('[data-game-pool]'), row = $('[data-game-row]'), msg = $('[data-game-message]');
+      const turn = $('[data-game-turn]'), score = $('[data-game-score]');
+      const listSel = $('[data-game-list]'), modeSel = $('[data-game-mode]'), countSel = $('[data-game-count]');
+      const customWrap = $('[data-custom-wrap]'), customText = $('#elenco-personale');
+      const key = n => n.normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+      const cmp = (a, b) => key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0;
+      let sorted = [], slots = [], top = 0, bottom = 0, step = 0, errors = 0, done = 0;
+
+      function explain(chosen, right, dir) {
+        const a = key(chosen), b = key(right);
+        let i = 0;
+        while (i < a.length && i < b.length && a[i] === b[i]) i++;
+        const verso = dir === 'alto' ? 'prima' : 'dopo';
+        if (i === 0) return `Controlla la prima lettera: c’è ancora un nome che comincia con una lettera che viene ${dir === 'alto' ? 'prima della' : 'dopo la'} ${a[0]}.`;
+        if (i >= a.length || i >= b.length) return `Ci sei quasi: un altro nome comincia proprio come «${chosen}». Ricordate che, a parità di lettere, il nome più corto viene prima.`;
+        return `Ci sei quasi: un altro nome comincia anche lui con ${a.slice(0, i)}, ma alla ${i + 1}ª lettera viene ${verso}.`;
+      }
+
+      function direction() {
+        if (modeSel.value === 'alto') return 'alto';
+        if (modeSel.value === 'basso') return 'basso';
+        return step % 2 === 0 ? 'alto' : 'basso';
+      }
+
+      function render() {
+        row.innerHTML = '';
+        const nextIndex = done === sorted.length ? -1 : (direction() === 'alto' ? top : bottom);
+        slots.forEach((name, i) => {
+          const li = document.createElement('li');
+          li.textContent = name || '…';
+          li.className = name ? 'placed' : 'empty' + (i === nextIndex ? ' next' : '');
+          row.append(li);
+        });
+        if (done === sorted.length) {
+          turn.textContent = 'Fila completata!';
+          msg.className = 'game-message ok';
+          msg.textContent = errors ? `Bravi! Errori lungo la strada: ${errors}. Provate un’altra modalità.` : 'Perfetto: nessun errore!';
+        } else {
+          turn.textContent = direction() === 'alto'
+            ? `Turno ${step + 1} · Dall’alto: chi viene al posto ${top + 1}?`
+            : `Turno ${step + 1} · Dal basso: chi viene al posto ${bottom + 1}?`;
+        }
+        score.textContent = `Nomi in fila: ${done} su ${sorted.length} · Errori: ${errors}`;
+      }
+
+      function start() {
+        let names = listSel.value === 'mio'
+          ? customText.value.split('\n').map(s => s.trim()).filter(Boolean)
+          : [...lists[listSel.value]];
+        names = [...new Map(names.map(n => [key(n), n])).values()].filter(n => key(n));
+        if (names.length < 2) {
+          pool.innerHTML = ''; row.innerHTML = ''; score.textContent = ''; turn.textContent = '';
+          msg.className = 'game-message ko';
+          msg.textContent = 'Scrivete almeno due nomi nel vostro elenco, poi premete «Nuova partita».';
+          return;
+        }
+        names.sort(() => Math.random() - 0.5);
+        if (countSel.value !== 'all') names = names.slice(0, Number(countSel.value));
+        sorted = [...names].sort(cmp);
+        slots = sorted.map(() => '');
+        top = 0; bottom = sorted.length - 1; step = 0; errors = 0; done = 0;
+        msg.textContent = ''; msg.className = 'game-message';
+        pool.innerHTML = '';
+        names.forEach(n => {
+          const b = document.createElement('button');
+          b.type = 'button'; b.textContent = n;
+          b.addEventListener('click', () => pick(b, n));
+          pool.append(b);
+        });
+        render();
+      }
+
+      function pick(button, name) {
+        if (done === sorted.length) return;
+        const dir = direction();
+        const index = dir === 'alto' ? top : bottom;
+        const right = sorted[index];
+        if (key(name) === key(right)) {
+          slots[index] = name;
+          button.remove();
+          if (dir === 'alto') top++; else bottom--;
+          done++; step++;
+          msg.className = 'game-message ok';
+          msg.textContent = `Giusto: «${name}» va al posto ${index + 1}.`;
+        } else {
+          errors++;
+          button.classList.remove('wrong'); void button.offsetWidth; button.classList.add('wrong');
+          msg.className = 'game-message ko';
+          msg.textContent = `Non ancora. ${explain(name, right, dir)}`;
+        }
+        render();
+      }
+
+      listSel.addEventListener('change', () => { customWrap.hidden = listSel.value !== 'mio'; if (listSel.value !== 'mio') start(); });
+      modeSel.addEventListener('change', start);
+      countSel.addEventListener('change', start);
+      $('[data-game-start]').addEventListener('click', start);
+      start();
+    })();
+  </script>
+  <script>
+    (() => {
+      const root = document.querySelector('#cruciverba-citta');
+      if (!root) return;
+      const words = [{"answer": "PORDENONE", "row": 4, "col": 0, "dir": "A", "photo": "immagini/citta/pordenone.jpg", "clue": "In Friuli, sulle rive del fiume Noncello. Ogni settembre le sue piazze si riempiono di scrittori e di lettori per una grande festa del libro.", "words": ["anello", "pane", "ape", "barca", "orso", "cane", "dado", "rana", "eco", "gatto", "dente", "inverno", "iris", "erba", "lago", "luna", "mela", "muro", "noce", "pioggia", "nave", "re", "ruota", "onda", "sedia", "tetto", "nastro", "uva", "zio", "estate", "zucca"], "intruders": ["pane", "orso", "rana", "dente", "erba", "nave", "onda", "nastro", "estate"]}, {"answer": "ISTANBUL", "row": 0, "col": 7, "dir": "D", "photo": "immagini/citta/istanbul.jpg", "clue": "Sta su due continenti, Europa e Asia, divisi dallo stretto del Bosforo. Un tempo si chiamava Costantinopoli.", "words": ["autunno", "inverno", "bosco", "cielo", "sale", "dente", "festa", "torre", "giardino", "insetto", "ape", "iris", "lepre", "neve", "limone", "monte", "biscotto", "noce", "oca", "ufficio", "orso", "pioggia", "libro", "porta", "riccio", "ruota", "stella", "uccello", "viola", "zio"], "intruders": ["inverno", "sale", "torre", "ape", "neve", "biscotto", "ufficio", "libro"]}, {"answer": "BERLINO", "row": 2, "col": 2, "dir": "D", "photo": "immagini/citta/berlino.jpg", "clue": "Capitale della Germania: per quasi trent’anni un muro l’ha divisa in due parti.", "words": ["albero", "bosco", "coniglio", "cuscino", "duna", "buio", "farfalla", "grillo", "eco", "gufo", "insetto", "rana", "inverno", "libro", "miele", "neve", "luna", "nuvola", "orso", "isola", "quaderno", "sasso", "noce", "stella", "tigre", "oliva", "uccello", "volpe", "zio"], "intruders": ["buio", "eco", "rana", "luna", "isola", "noce", "oliva"]}, {"answer": "VENEZIA", "row": 1, "col": 4, "dir": "D", "photo": "immagini/citta/venezia.jpg", "clue": "Al posto delle strade ci sono i canali; al posto degli autobus, vaporetti e gondole.", "words": ["autunno", "vaso", "bottone", "cane", "divano", "elefante", "fata", "giardino", "estate", "gufo", "insetto", "neve", "luna", "monte", "eco", "orso", "pane", "zebra", "porta", "radio", "iris", "sale", "sedia", "arancia", "uovo", "vino", "viola", "zaino", "zio"], "intruders": ["vaso", "estate", "neve", "eco", "zebra", "iris", "arancia"]}, {"answer": "LONDRA", "row": 7, "col": 7, "dir": "A", "photo": "immagini/citta/londra.jpg", "clue": "Capitale del Regno Unito, sul Tamigi: autobus rossi a due piani e un famoso orologio chiamato Big Ben.", "words": ["ape", "lepre", "biscotto", "dono", "ombrello", "duna", "estate", "neve", "farfalla", "inverno", "dado", "isola", "limone", "rosa", "muro", "nido", "autunno", "nuvola", "oca", "onda", "pesce", "sedia", "torre", "uovo", "vela", "volpe", "zolla", "zucca"], "intruders": ["lepre", "ombrello", "neve", "dado", "rosa", "autunno"]}, {"answer": "TRIESTE", "row": 0, "col": 5, "dir": "A", "photo": "immagini/citta/trieste.jpg", "clue": "Città di mare e di bora in Friuli Venezia Giulia, con una grandissima piazza aperta sul golfo.", "words": ["anello", "treno", "bottone", "cielo", "rosa", "cuscino", "delfino", "iris", "estate", "festa", "gatto", "elefante", "luna", "lupo", "sedia", "matita", "neve", "torre", "ombrello", "quaderno", "erba", "sasso", "stella", "tulipano", "uccello", "ufficio", "volpe", "zaino", "zebra"], "intruders": ["treno", "rosa", "iris", "elefante", "sedia", "torre", "erba"]}, {"answer": "PRAGA", "row": 5, "col": 12, "dir": "D", "photo": "immagini/citta/praga.jpg", "clue": "Capitale della Repubblica Ceca, sulla Moldava: famosa per il Ponte Carlo e l’orologio astronomico.", "words": ["autunno", "porta", "biscotto", "bosco", "riccio", "casa", "delfino", "albero", "erba", "fiume", "gomma", "gufo", "inverno", "gelato", "luna", "matita", "ape", "monte", "nido", "orso", "pera", "quadro", "re", "sale", "treno", "ufficio", "vela"], "intruders": ["porta", "riccio", "albero", "gelato", "ape"]}, {"answer": "LISBONA", "row": 9, "col": 6, "dir": "A", "photo": "immagini/citta/lisbona.jpg", "clue": "Capitale del Portogallo, affacciata sull’oceano Atlantico: famosa per i tram gialli che si arrampicano sulle colline.", "words": ["albero", "lago", "anello", "barca", "idea", "bosco", "cuscino", "sugo", "dono", "eco", "biscotto", "edera", "farfalla", "ombrello", "giardino", "insetto", "noce", "libro", "luna", "autunno", "neve", "orso", "pesce", "quadro", "riccio", "sedia", "tulipano", "uccello", "uva"], "intruders": ["lago", "idea", "sugo", "biscotto", "ombrello", "noce", "autunno"]}, {"answer": "PARIGI", "row": 4, "col": 0, "dir": "D", "photo": "immagini/citta/parigi.jpg", "clue": "Capitale della Francia, attraversata dalla Senna: la sua torre di ferro è alta più di 300 metri.", "words": ["autunno", "prato", "buio", "casa", "anello", "cielo", "divano", "re", "erba", "festa", "idea", "fumo", "gelato", "gomma", "insetto", "gatto", "isola", "libro", "iris", "luna", "mela", "nave", "orologio", "ruota", "sugo", "uccello", "zolla", "zucca"], "intruders": ["prato", "anello", "re", "idea", "gatto", "iris"]}, {"answer": "ATENE", "row": 2, "col": 6, "dir": "A", "photo": "immagini/citta/atene.jpg", "clue": "Capitale della Grecia: sulla collina dell’Acropoli si alza il Partenone.", "words": ["ape", "arancia", "biscotto", "candela", "autunno", "casa", "dado", "tetto", "delfino", "edera", "foglia", "gomma", "elefante", "lepre", "miele", "nastro", "oliva", "pioggia", "nave", "ponte", "riccio", "erba", "stella", "tigre", "uccello", "viola", "zio"], "intruders": ["autunno", "tetto", "elefante", "nave", "erba"]}];
+      const gridEl = root.querySelector('[data-cw-grid]'), cluesEl = root.querySelector('[data-cw-clues]');
+      const currentEl = root.querySelector('[data-cw-current]'), statusEl = root.querySelector('[data-cw-status]');
+      const rows = Math.max(...words.map(w => w.row + (w.dir === 'D' ? w.answer.length : 1)));
+      const cols = Math.max(...words.map(w => w.col + (w.dir === 'A' ? w.answer.length : 1)));
+      gridEl.style.setProperty('--cols', cols);
+      const cells = {};
+      const cellsOf = w => [...w.answer].map((_, i) => `${w.row + (w.dir === 'D' ? i : 0)},${w.col + (w.dir === 'A' ? i : 0)}`);
+      words.forEach(w => cellsOf(w).forEach((k, i) => { cells[k] = cells[k] || { letter: w.answer[i], words: [] }; cells[k].words.push(w); }));
+      const starts = [...new Set(words.map(w => `${w.row},${w.col}`))].sort((a, b) => {
+        const [ar, ac] = a.split(',').map(Number), [br, bc] = b.split(',').map(Number);
+        return ar - br || ac - bc;
+      });
+      words.forEach(w => {
+        w.num = starts.indexOf(`${w.row},${w.col}`) + 1;
+        w.label = `${w.num} ${w.dir === 'A' ? 'orizzontale' : 'verticale'}`;
+      });
+      let current = null;
+
+      for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+        const k = `${r},${c}`, div = document.createElement('div');
+        div.className = 'cw-cell';
+        if (!cells[k]) { div.classList.add('block'); gridEl.append(div); continue; }
+        const n = starts.indexOf(k);
+        if (n >= 0) { const s = document.createElement('span'); s.className = 'cw-num'; s.textContent = n + 1; div.append(s); }
+        const input = document.createElement('input');
+        input.maxLength = 2; input.autocomplete = 'off'; input.setAttribute('autocapitalize', 'characters');
+        input.setAttribute('aria-label', `Casella riga ${r + 1}, colonna ${c + 1}`);
+        cells[k].input = input; cells[k].div = div;
+        input.addEventListener('focus', () => { if (!current || !cells[k].words.includes(current)) select(cells[k].words[0], false); });
+        input.addEventListener('click', () => {
+          const ws = cells[k].words;
+          if (ws.length > 1 && ws.includes(current) && input.dataset.clicked === '1') select(ws.find(w => w !== current), false);
+          input.dataset.clicked = '1';
+        });
+        input.addEventListener('blur', () => { input.dataset.clicked = ''; });
+        input.addEventListener('input', () => {
+          input.value = input.value.slice(-1).normalize('NFD').toUpperCase().replace(/[^A-Z]/g, '');
+          div.classList.remove('ok', 'ko'); statusEl.textContent = '';
+          if (input.value) move(k, 1);
+          markSolved();
+        });
+        input.addEventListener('keydown', e => {
+          if (e.key === 'Backspace' && !input.value) { e.preventDefault(); const p = move(k, -1); if (p) p.value = ''; }
+          const arrows = { ArrowRight: [0, 1], ArrowLeft: [0, -1], ArrowUp: [-1, 0], ArrowDown: [1, 0] };
+          if (arrows[e.key]) {
+            e.preventDefault();
+            const [dr, dc] = arrows[e.key];
+            const nk = `${r + dr},${c + dc}`;
+            if (cells[nk]) {
+              const w = cells[nk].words.find(x => x.dir === (dr ? 'D' : 'A')) || cells[nk].words[0];
+              select(w, false); cells[nk].input.focus();
+            }
+          }
+        });
+        div.append(input); gridEl.append(div);
+      }
+
+      function move(k, step) {
+        if (!current) return null;
+        const list = cellsOf(current), i = list.indexOf(k) + step;
+        if (i < 0 || i >= list.length) return null;
+        const next = cells[list[i]].input; next.focus(); return next;
+      }
+
+      function select(w, focusFirst = true) {
+        current = w;
+        Object.values(cells).forEach(c => c.div.classList.remove('active'));
+        cellsOf(w).forEach(k => cells[k].div.classList.add('active'));
+        root.querySelectorAll('.cw-clue').forEach(card => card.classList.toggle('current', card.dataset.answer === w.answer));
+        currentEl.textContent = `${w.label} · ${w.answer.length} lettere`;
+        if (focusFirst) {
+          const empty = cellsOf(w).find(k => !cells[k].input.value);
+          cells[empty || cellsOf(w)[0]].input.focus();
+          gridEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+      }
+
+      function markSolved() {
+        let all = true;
+        words.forEach(w => {
+          const ok = cellsOf(w).every(k => cells[k].input.value === cells[k].letter);
+          w.card.classList.toggle('solved', ok);
+          w.tag.textContent = ok ? `${w.label} ✓` : w.label;
+          if (!ok) all = false;
+        });
+        if (all) { statusEl.textContent = 'Cruciverba completato: avete riconosciuto tutte le città!'; statusEl.style.color = 'var(--forest)'; }
+      }
+
+      [...words].sort((a, b) => a.num - b.num || (a.dir === 'A' ? -1 : 1)).forEach(w => {
+        const card = document.createElement('article');
+        card.className = 'cw-clue'; card.dataset.answer = w.answer; w.card = card;
+        const photo = document.createElement('div'); photo.className = 'cw-photo';
+        const img = document.createElement('img');
+        img.alt = `Foto della città del ${w.label}`;
+        img.addEventListener('error', () => {
+          img.remove();
+          const p = document.createElement('p'); p.className = 'cw-nophoto'; p.textContent = w.clue;
+          p.title = `Per mostrare una foto, salva un’immagine come ${w.photo}`;
+          photo.prepend(p);
+          card.querySelector('.cw-hint')?.remove();
+        });
+        img.src = w.photo;
+        const tag = document.createElement('button'); tag.type = 'button'; tag.className = 'cw-tag'; tag.textContent = w.label; w.tag = tag;
+        tag.addEventListener('click', () => select(w));
+        photo.append(img, tag);
+        const body = document.createElement('div'); body.className = 'cw-body';
+        body.innerHTML = `<p><strong>${w.answer.length} lettere</strong></p>
+          <details class="cw-hint"><summary>Leggi l’indizio</summary><p>${w.clue}</p></details>
+          <details><summary>Gioca con le parole intruse</summary><p>Toccate le parole che non rispettano l’ordine alfabetico.</p><div class="cw-words"></div><p class="cw-initials" aria-live="polite">&nbsp;</p><p class="cw-initials-msg" aria-live="polite"></p></details>`;
+        const box = body.querySelector('.cw-words'), ini = body.querySelector('.cw-initials'), msg = body.querySelector('.cw-initials-msg');
+        w.words.forEach(word => {
+          const b = document.createElement('button'); b.type = 'button'; b.textContent = word; b.setAttribute('aria-pressed', 'false');
+          b.addEventListener('click', () => {
+            b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+            const chosen = [...box.querySelectorAll('[aria-pressed="true"]')].map(x => x.textContent);
+            ini.textContent = chosen.map(x => x[0].toUpperCase()).join(' ') || ' ';
+            const right = chosen.length === w.intruders.length && chosen.every((x, i) => x === w.intruders[i]);
+            if (right) { msg.textContent = 'Trovate tutte! Ora scrivete la città nel cruciverba.'; msg.style.color = 'var(--forest)'; }
+            else if (chosen.length >= w.intruders.length) { msg.textContent = 'Qualcosa non torna: confrontate ogni parola con quella prima e con quella dopo.'; msg.style.color = '#9b3b26'; }
+            else { msg.textContent = chosen.length ? `Parole scelte: ${chosen.length}. Continuate.` : ''; msg.style.color = ''; }
+          });
+          box.append(b);
+        });
+        card.append(photo, body); cluesEl.append(card);
+      });
+
+      root.querySelector('[data-cw-check]').addEventListener('click', () => {
+        let empty = 0, wrong = 0;
+        Object.values(cells).forEach(c => {
+          c.div.classList.remove('ok', 'ko');
+          if (!c.input.value) { empty++; return; }
+          const good = c.input.value === c.letter;
+          if (!good) wrong++;
+          c.div.classList.add(good ? 'ok' : 'ko');
+        });
+        statusEl.style.color = wrong ? '#9b3b26' : 'var(--forest)';
+        statusEl.textContent = wrong ? `Ci sono lettere da correggere: sono segnate in rosso (${wrong}).` : empty ? `Finora tutto giusto! Mancano ancora ${empty} caselle.` : 'Tutto giusto!';
+      });
+      root.querySelector('[data-cw-reset]').addEventListener('click', () => {
+        Object.values(cells).forEach(c => { c.input.value = ''; c.div.classList.remove('ok', 'ko'); });
+        statusEl.textContent = ''; markSolved();
+      });
+      markSolved();
+    })();
+  </script>
 </body>
 </html>
