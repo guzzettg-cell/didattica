@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Astronauti, cosmonauti, taikonauti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+:root{
+  --bg:#edf1f5; --surface:#ffffff; --ink:#15233a; --muted:#56657a; --line:#d2dae4;
+  --accent:#2c5c9c; --hot:#c4511f; --ok:#2e7d4f; --no:#b3261e; --soft:#f4f6f9;
+  --f-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1622; --surface:#172131; --ink:#e6ecf3; --muted:#9aa8ba; --line:#2b384c;
+  --accent:#86aee6; --hot:#ff8a52; --ok:#6fcf97; --no:#ff8a80; --soft:#1d2a3d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1622; --surface:#172131; --ink:#e6ecf3; --muted:#9aa8ba; --line:#2b384c;
+  --accent:#86aee6; --hot:#ff8a52; --ok:#6fcf97; --no:#ff8a80; --soft:#1d2a3d; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1500px;margin:0 auto;padding-block:20px 48px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(1.9rem,4.5vw,2.8rem);line-height:1.05;margin:0;text-wrap:balance}
+h1 span{color:var(--hot)}
+.lede{margin:4px 0 0;max-width:72ch;color:var(--muted)}
+h2{font-family:var(--f-display);font-weight:600;font-size:1.3rem;margin:0;text-wrap:balance}
+h3{font-family:var(--f-display);font-weight:600;font-size:1.08rem;margin:0}
+p{margin:0}
+.lnav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;font-size:.9rem;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.lnav a{color:var(--accent);text-decoration:none;font-weight:700}
+.lnav a:hover{text-decoration:underline}
+.lnav .passi{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;color:var(--muted)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button{font:inherit;font-size:.95rem;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:8px;padding:8px 12px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button.go{background:var(--hot);border-color:var(--hot);color:#fff;font-weight:700}
+button:disabled{opacity:.55;cursor:default}
+label.chk{display:inline-flex;gap:6px;align-items:center;font-size:.95rem;cursor:pointer}
+.fb{padding:10px 12px;border-radius:8px;border:1px solid var(--line)}
+.fb.ok{border-color:var(--ok)}.fb.ok b{color:var(--ok)}
+.fb.no{border-color:var(--no)}.fb.no b{color:var(--no)}
+.learn{padding:12px 14px;background:var(--soft);border-radius:8px}
+.learn strong{display:block;font-family:var(--f-display);font-weight:600;margin-bottom:2px}
+.book{border:2px dashed var(--line);border-radius:8px;padding:10px 14px;font-size:.95rem}
+.book b:first-child{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--hot);margin-right:6px}
+.small{font-size:.86rem;color:var(--muted)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.opts button{text-align:left}
+.opts button.right{border-color:var(--ok);color:var(--ok);font-weight:700}
+.opts button.wrong{border-color:var(--no);color:var(--no)}
+input[type=text],input[type=number]{font:inherit;font-size:1rem;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);min-width:0}
+input.ok{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)}
+input.no{border-color:var(--no);box-shadow:0 0 0 1px var(--no)}
+textarea{font:inherit;width:100%;min-height:5em;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);resize:vertical}
+details{border-top:1px solid var(--line);padding-top:10px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}
+details > :not(summary){margin-top:8px}
+.score{font-family:var(--f-display);font-weight:800;font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+
+
+/* Layout: una colonna di schede: i nomi (carte girevoli), smontare le parole, confronto, la famiglia di «nave», tocca a te */
+.wrap{max-width:980px}
+.fase{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--hot);font-weight:700}
+.items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.items li{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border-radius:8px;background:var(--soft);border-left:4px solid transparent}
+.items li.ok{border-left-color:var(--ok)} .items li.no{border-left-color:var(--no)}
+.items .parola-g{font-family:var(--f-display);font-weight:800;font-size:1.15rem}
+.items .parola-g i{font-style:normal;color:var(--hot)}
+.items .scelte{display:flex;flex-wrap:wrap;gap:6px}
+.items .scelte button{font-size:.9rem;padding:5px 10px;background:var(--surface)}
+.items .scelte button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.items .nota{font-size:.9rem;color:var(--muted)}
+.girevoli{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,165px),1fr));gap:12px}
+.gira,.gira[aria-pressed="true"]{display:block;width:100%;perspective:1000px;background:none;border:0;padding:0;text-align:left;cursor:pointer;min-height:400px;font:inherit;color:var(--ink);border-radius:12px}
+.gira span{display:block}
+.gira .dentro{display:block;position:relative;width:100%;height:100%;min-height:400px;transition:transform .6s;transform-style:preserve-3d}
+.gira[aria-pressed="true"] .dentro{transform:rotateY(180deg)}
+@media (prefers-reduced-motion:reduce){.gira .dentro{transition:none}}
+.gira .faccia{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;border:2px solid var(--line)}
+.gira .fronte{background:var(--surface);align-items:center;justify-content:center;text-align:center}
+.gira .fronte .simbolo{font-size:2.4rem;line-height:1}
+.gira .fronte .parola{font-family:var(--f-display);font-weight:800;font-size:1.45rem;line-height:1.1;color:var(--hot)}
+.gira .fronte .lingua{font-size:.95rem}
+.gira .fronte .gira-t{font-size:.8rem;color:var(--muted)}
+.gira .retro{background:var(--soft);transform:rotateY(180deg);border-color:var(--hot);font-size:.88rem;overflow:auto}
+.gira .retro b.p{font-family:var(--f-display);font-size:1.15rem;color:var(--hot)}
+.gira .retro .es{border-top:1px solid var(--line);padding-top:6px;font-size:.88rem}
+.gira:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.smonta{font-family:var(--f-display);font-weight:800;font-size:1.25rem;text-align:center;padding:8px;border-radius:8px;background:var(--soft)}
+.smonta .a{color:var(--accent)} .smonta .b{color:var(--hot)}
+.famiglia{display:flex;flex-wrap:wrap;gap:8px}
+.famiglia button{font-size:1rem}
+.famiglia button.right{border-color:var(--ok);color:var(--ok);font-weight:700}
+.famiglia button.wrong{border-color:var(--no);color:var(--no)}
+.mito{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;align-items:center}
+@media (max-width:560px){.mito{grid-template-columns:1fr}}
+.mito svg{width:120px;height:auto}
+.domanda{display:flex;flex-direction:column;gap:6px}
+.domanda p{font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="lnav" aria-label="Lezione"><a href="../index.html#attivita">← Perché la geografia?</a><span class="passi"><span>Attività 4</span></span></nav>
+  <header>
+    <div class="eyebrow">Geografia · Perché la geografia?</div>
+    <h1>Astronauti, cosmonauti, <span>taikonauti</span></h1>
+    <p class="lede">Chi viaggia nello spazio ha nomi diversi, a seconda della lingua e del Paese da cui parte. Che cosa hanno in comune queste parole? Che cosa hanno di diverso? E che cosa ci raccontano dello spazio, e della Terra vista da lassù?</p>
+  </header>
+
+  <!-- ===================== 1. I NOMI ===================== -->
+  <section class="card" aria-labelledby="t1">
+    <p class="fase">Tanti nomi</p>
+    <h2 id="t1">Come si chiama chi va nello spazio?</h2>
+    <p>Ogni carta ha una parola. Prova a indovinare in quale Paese si usa, poi <strong>tocca la carta</strong> per girarla.</p>
+    <div class="girevoli">
+      <button type="button" class="gira" aria-pressed="false"><span class="dentro">
+        <span class="faccia fronte"><span class="simbolo" aria-hidden="true">★</span><span class="parola">Astronauta</span><span class="lingua">Chi lo usa?</span><span class="gira-t">Tocca per girare ↻</span></span>
+        <span class="faccia retro"><b class="p">Astronauta</b><span>Si usa negli <strong>Stati Uniti</strong>, in Europa e anche in Italia. <strong>Astro-</strong> vuol dire «stella»: l'astronauta è chi naviga verso le stelle.</span><span class="es">Samantha Cristoforetti, per noi, è un'astronauta: «AstroSamantha».</span></span>
+      </span></button>
+      <button type="button" class="gira" aria-pressed="false"><span class="dentro">
+        <span class="faccia fronte"><span class="simbolo" aria-hidden="true">✺</span><span class="parola">Cosmonauta</span><span class="lingua">Chi lo usa?</span><span class="gira-t">Tocca per girare ↻</span></span>
+        <span class="faccia retro"><b class="p">Cosmonauta</b><span>Si usa in <strong>Russia</strong>, e prima nell'Unione Sovietica. <strong>Cosmo-</strong> viene dal greco <i>kósmos</i>: l'universo, ma anche «ordine», il contrario del caos.</span><span class="es">Jurij Gagarin, il primo uomo nello spazio (12 aprile 1961), era un cosmonauta.</span></span>
+      </span></button>
+      <button type="button" class="gira" aria-pressed="false"><span class="dentro">
+        <span class="faccia fronte"><span class="simbolo" aria-hidden="true">○</span><span class="parola">Taikonauta</span><span class="lingua">Chi lo usa?</span><span class="gira-t">Tocca per girare ↻</span></span>
+        <span class="faccia retro"><b class="p">Taikonauta</b><span>Si usa per gli astronauti della <strong>Cina</strong>. È una parola nuova, nata nel 1998 da <i>tàikōng</i> (太空), che in cinese vuol dire «grande vuoto», cioè lo spazio.</span><span class="es">In cinese, però, la parola ufficiale è un'altra: <i>hángtiānyuán</i>.</span></span>
+      </span></button>
+      <button type="button" class="gira" aria-pressed="false"><span class="dentro">
+        <span class="faccia fronte"><span class="simbolo" aria-hidden="true">◌</span><span class="parola">Spationauta</span><span class="lingua">Chi lo usa?</span><span class="gira-t">Tocca per girare ↻</span></span>
+        <span class="faccia retro"><b class="p">Spationauta</b><span>Si usa a volte in <strong>Francia</strong> (<i>spationaute</i>). Viene dal latino <i>spatium</i>, «spazio».</span><span class="es">È la parola più vicina all'italiano: «chi naviga nello spazio».</span></span>
+      </span></button>
+      <button type="button" class="gira" aria-pressed="false"><span class="dentro">
+        <span class="faccia fronte"><span class="simbolo" aria-hidden="true">☁</span><span class="parola">Gaganyatri</span><span class="lingua">Chi lo usa?</span><span class="gira-t">Tocca per girare ↻</span></span>
+        <span class="faccia retro"><b class="p">Gaganyatri</b><span>Si usa in <strong>India</strong>, per gli astronauti della missione Gaganyaan. In hindi <i>gagan</i> vuol dire «cielo» e <i>yatri</i> «viaggiatore».</span><span class="es">È l'unica delle cinque parole che non finisce in «-nauta».</span></span>
+      </span></button>
+    </div>
+  </section>
+
+  <!-- ===================== 2. SMONTA LE PAROLE ===================== -->
+  <section class="card" aria-labelledby="t2">
+    <p class="fase">Smonta le parole</p>
+    <h2 id="t2">Che cosa vuol dire la prima parte?</h2>
+    <p class="smonta"><span class="a">astro</span> + <span class="b">nauta</span> · <span class="a">cosmo</span> + <span class="b">nauta</span> · <span class="a">taiko</span> + <span class="b">nauta</span></p>
+    <p>Quasi tutte le parole sono fatte di due pezzi. Per ogni parola scegli il significato della <strong>prima parte</strong>. Se non ricordi, rigira le carte.</p>
+    <ul class="items" id="prime"></ul>
+    <p class="score" id="sc-prime" aria-live="polite"></p>
+
+    <h3>E la seconda parte, <i>-nauta</i>?</h3>
+    <p>È uguale in quasi tutte le parole. Che cosa vuol dire, secondo te?</p>
+    <ul class="items" id="nauta"></ul>
+    <div class="learn" id="learn-nauta" hidden><strong>-nauta vuol dire «navigante»</strong>Viene dal greco <i>nautes</i>, il marinaio, e da <i>naus</i>, la nave. Chi ha inventato queste parole ha immaginato lo spazio come un <b>mare</b> da attraversare, e chi ci va come un marinaio.</div>
+  </section>
+
+  <!-- ===================== 3. IN COMUNE E DIVERSO ===================== -->
+  <section class="card" aria-labelledby="t3">
+    <p class="fase">Confronta</p>
+    <h2 id="t3">Che cosa hanno in comune? Che cosa hanno di diverso?</h2>
+    <div class="domanda"><p>1. Che cosa hanno in comune queste parole?</p><textarea aria-label="In comune"></textarea></div>
+    <div class="domanda"><p>2. Che cosa hanno di diverso? Pensa alla lingua, al Paese e a come ognuna immagina lo spazio: stelle, universo, vuoto, cielo.</p><textarea aria-label="Diverso"></textarea></div>
+    <div class="domanda"><p>3. Perché, secondo te, Stati Uniti e Unione Sovietica non hanno usato la stessa parola?</p><textarea aria-label="Perché parole diverse"></textarea></div>
+    <details><summary>Risposte possibili, per l'insegnante</summary>
+      <p>1. Indicano tutte una persona che viaggia nello spazio. Quasi tutte finiscono in <i>-nauta</i>: lo spazio è immaginato come un mare da navigare.</p>
+      <p>2. Cambiano la lingua e il Paese, e soprattutto l'idea di spazio: le <strong>stelle</strong> (astro-), un <strong>universo ordinato</strong> (cosmo-), un <strong>grande vuoto</strong> (taikong), lo <strong>spazio</strong> (spatio-), il <strong>cielo</strong> (gagan).</p>
+      <p>3. Negli anni Cinquanta e Sessanta Stati Uniti e Unione Sovietica erano rivali e facevano a gara per arrivare per primi nello spazio. Ognuno voleva le sue parole, così come i suoi razzi e i suoi eroi. La parola diversa diceva da che parte stavi.</p>
+    </details>
+  </section>
+
+  <!-- ===================== 4. STORIA DELLE PAROLE ===================== -->
+  <section class="card" aria-labelledby="t4">
+    <p class="fase">Storia delle parole</p>
+    <h2 id="t4">Dagli Argonauti agli internauti</h2>
+    <div class="mito">
+      <svg viewBox="0 0 120 90" role="img" aria-label="Una nave antica con la vela e i remi sulle onde"><path d="M6 70 C20 64 30 76 44 70 S70 64 84 70 S106 76 116 70" fill="none" stroke="#3f86c8" stroke-width="3"/><path d="M18 58 H102 L92 70 H28 Z" fill="#a0703f"/><path d="M60 16 V58" stroke="#5a3b1a" stroke-width="3"/><path d="M60 18 L88 40 L60 44 Z" fill="#f2e3c0" stroke="#a0703f" stroke-width="1.5"/><g stroke="#5a3b1a" stroke-width="2"><path d="M34 62 L26 78"/><path d="M48 62 L40 78"/><path d="M76 62 L72 78"/><path d="M90 62 L86 78"/></g></svg>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <p>I primi «nauti» famosi vengono dal mito greco: sono gli <strong>Argonauti</strong>, gli eroi che con Giasone partirono sulla nave <strong>Argo</strong> per conquistare il vello d'oro. Il loro nome vuol dire proprio «i naviganti della nave Argo».</p>
+        <p>Molto tempo dopo, quando gli uomini cominciarono a volare con i palloni aerostatici, nacque la parola <strong>aeronauta</strong>, chi naviga nell'aria. Poi arrivò l'astronauta. Oggi c'è perfino l'<strong>internauta</strong>, chi «naviga» in internet.</p>
+      </div>
+    </div>
+
+    <h3>La famiglia della nave</h3>
+    <p>Tutte queste parole vengono dall'antica parola greca <i>naus</i>, o dalla sua «cugina» latina <i>navis</i>: la nave. Tocca solo quelle della famiglia. Attenzione: ci sono tre intrusi.</p>
+    <div class="famiglia" id="famiglia"></div>
+    <p id="fb-fam" aria-live="polite"></p>
+  </section>
+
+  <!-- ===================== 5. TOCCA A TE ===================== -->
+  <section class="card" aria-labelledby="t5">
+    <p class="fase">Tocca a te</p>
+    <h2 id="t5">Inventa una parola</h2>
+    <div class="domanda"><p>1. Come chiameresti chi esplora il fondo degli oceani? E chi esplora i vulcani? Usa «-nauta» e spiega la tua parola.</p><textarea aria-label="Inventa una parola"></textarea></div>
+    <div class="domanda"><p>2. Gli astronauti sono tra le poche persone che hanno visto la Terra intera, da fuori. Che cosa vorresti chiedere a uno di loro sulla Terra vista da lassù?</p><textarea aria-label="Una domanda a un astronauta"></textarea></div>
+    <details><summary>Qualche idea, per l'insegnante</summary>
+      <p>1. Per gli oceani esiste già: <strong>acquanauta</strong> (o «oceanauta»). Per i vulcani si possono accettare parole inventate, purché spiegate: «vulcanauta», «pironauta» (dal greco <i>pyr</i>, fuoco).</p>
+      <p>2. Ottimo aggancio a «Perché la geografia?»: dallo spazio non si vedono i confini, si vedono i continenti, gli oceani, le nuvole, le luci delle città di notte.</p>
+    </details>
+  </section>
+
+  <nav class="lnav" aria-label="Lezione" style="border-bottom:0;border-top:1px solid var(--line);padding-top:12px"><a href="../index.html#attivita">← Torna a «Perché la geografia?»</a></nav>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  function mescola(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  document.querySelectorAll('.gira').forEach(g=>g.addEventListener('click',()=>g.setAttribute('aria-pressed',g.getAttribute('aria-pressed')!=='true')));
+
+  /* esercizio a scelta: [parola (html), risposta giusta, spiegazione] */
+  function scelta(ulId,scId,righe,etichette,fine){
+    const ul=$(ulId), stato={};
+    mescola(righe).forEach((r,k)=>{
+      const li=document.createElement('li'), p=document.createElement('p'), g=document.createElement('div'), n=document.createElement('p');
+      p.className='parola-g'; p.innerHTML=r[0]; g.className='scelte'; n.className='nota'; n.hidden=true;
+      mescola(etichette).forEach(e=>{ const b=document.createElement('button'); b.type='button'; b.textContent=e;
+        b.addEventListener('click',()=>{ const ok=e===r[1]; stato[k]=ok;
+          g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+          li.className=ok?'ok':'no'; n.hidden=false; n.textContent=ok?'Giusto. '+r[2]:'Non proprio: riprova, o rigira la carta.';
+          const giusti=Object.values(stato).filter(Boolean).length;
+          if(scId) $(scId).textContent=`${giusti} su ${righe.length}`;
+          if(giusti===righe.length&&fine) fine(); });
+        g.append(b); });
+      li.append(p,g,n); ul.append(li); });
+  }
+  scelta('prime','sc-prime',[
+    ['<i>astro</i>nauta','stella','Dal greco ástron: l\'astronomia studia le stelle.'],
+    ['<i>cosmo</i>nauta','universo ordinato','Dal greco kósmos: l\'universo come un tutto ordinato.'],
+    ['<i>taiko</i>nauta','grande vuoto','Dal cinese tàikōng: lo spazio come un enorme vuoto.'],
+    ['<i>spatio</i>nauta','spazio','Dal latino spatium: da qui anche l\'italiano «spazio».'],
+    ['<i>gagan</i>yatri','cielo','In hindi gagan è il cielo; yatri è il viaggiatore.']
+  ],['stella','universo ordinato','grande vuoto','spazio','cielo']);
+  scelta('nauta',null,[
+    ['-<i>nauta</i>','navigante','Viene dal greco nautes, il marinaio.']
+  ],['navigante','pilota','scienziato','abitante'],()=>{ $('learn-nauta').hidden=false; });
+
+  /* la famiglia della nave */
+  const FAM=[
+    ['argonauta',1,'I naviganti della nave Argo.'],['nautico',1,'Che riguarda la navigazione: la carta nautica!'],
+    ['naufragio',1,'Dal latino navis + frangere: la nave che si rompe, come il Titanic.'],['nausea',1,'In greco era il «mal di mare»: la nausea di chi va in nave.'],
+    ['navigare',1,'Andare con la nave: oggi anche in internet.'],['aeronauta',1,'Chi naviga nell\'aria, con i palloni aerostatici.'],
+    ['internauta',1,'Chi «naviga» in internet.'],
+    ['notte',0,'Intruso! Notte viene dal latino nox: un\'altra famiglia.'],['nota',0,'Intruso! Nota viene dal latino notare, «segnare».'],['nato',0,'Intruso! Nato viene da nascere.']
+  ];
+  const box=$('famiglia'); let giusti=0, tot=FAM.filter(f=>f[1]).length;
+  mescola(FAM).forEach(([w,ok,sp])=>{ const b=document.createElement('button'); b.type='button'; b.textContent=w;
+    b.addEventListener('click',()=>{ if(b.classList.contains('right')||b.classList.contains('wrong')) { $('fb-fam').textContent=w+': '+sp; return; }
+      b.classList.add(ok?'right':'wrong'); if(ok) giusti++;
+      $('fb-fam').textContent=(ok?`Sì (${giusti} su ${tot}). `:'')+sp+(ok&&giusti===tot?' Hai trovato tutta la famiglia!':''); });
+    box.append(b); });
+})();
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+<script src="../../../../assets/barra.js"></script>
+</body>
+</html>

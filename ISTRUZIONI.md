@@ -110,6 +110,13 @@ In fondo all'elenco `MODULI`, prima della `];`, con una virgola dopo il modulo p
   }
 ```
 
+Un modulo di **introduzione** (senza numero) si scrive con `etichetta: "Introduzione"` al posto di `numero`.
+In geografia, con `percorso: "intro"` compare per primo, nella sezione «Per cominciare», prima dei moduli del percorso «Come»
+(esempio: «Perché la geografia?» in prima).
+Un modulo può anche non avere lezioni ma solo attività (`lezioni: []` e `attivita: [ … ]`): compaiono direttamente sotto
+il titolo «Attività». Con `revisione: true` il modulo si apre ma le attività restano grigie e non cliccabili, con la scritta
+«In revisione»; per renderle disponibili basta cancellare quella riga.
+
 Materie: `geografia`, `storia`, `italiano`, `educazione-civica`.
 Classi: `prima`, `seconda`, `terza`.
 
@@ -164,3 +171,32 @@ Il testo delle pagine sta in `assets/indice-ricerca.js`, un file **generato**: n
 
 Una pagina nuova si trova subito per titolo e descrizione (dal catalogo); le parole del suo testo
 si trovano dopo l'aggiornamento dell'indice.
+
+## Testi protetti dal diritto d'autore (solo in classe)
+
+Alcuni brani (per esempio un racconto di Borges) non si possono pubblicare online, ma si possono proiettare in classe.
+Per questo stanno nella cartella `privati/`, che GitHub ignora (è scritta nel file `.gitignore`): resta solo sul computer
+e non compare mai tra le modifiche di GitHub Desktop.
+
+- **Dove si incolla il testo:** nel file `privati/testi.js`. Ogni testo ha un nome (per esempio `borges-rigore-della-scienza`);
+  il testo va tra i due accenti gravi `` ` ``, al posto di «INCOLLA QUI IL TESTO». Una riga vuota separa i paragrafi.
+- **Nella pagina** il posto del testo è `<div data-testo-privato="nome-del-testo"></div>`, e in fondo alla pagina c'è
+  `<script src="…/assets/testi-privati.js"></script>` (con i `../` giusti, come per `barra.js`).
+- **Che cosa si vede:** sul computer, con il testo incollato, compare il brano con la scritta «Solo in classe · non pubblicato online».
+  Online il file non esiste e compare un riquadro: «Il testo lo legge l'insegnante in classe».
+- **Chiavetta per la LIM:** copiare tutta la cartella del sito, compresa `privati/`.
+
+Testi già previsti: `borges-rigore-della-scienza` (geografia, prima, «Che cos'è una carta?»).
+
+## Pulsante «Salva in Word»
+
+Accanto a «Stampa la scheda» si può mettere un pulsante che scarica la pagina come documento Word (.doc), da modificare:
+
+```html
+<button class="btn" type="button" data-salva-word>Salva in Word</button>
+```
+
+e in fondo alla pagina `<script src="…/assets/salva-word.js"></script>` (con i `../` giusti, come per `barra.js`).
+Si salva il contenuto di `<main>`, senza pulsanti e parti con classe `no-stampa`; le caselle da spuntare diventano ☐ / ☑
+e le risposte scritte nei campi restano. Per salvare solo una parte: `data-salva-word="#id-della-parte"`.
+Già presente in: geografia, prima, «Come si studia la geografia».

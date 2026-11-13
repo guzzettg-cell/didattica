@@ -3,3 +3,7 @@
 
 # video originale di Google Earth (troppo pesante per GitHub): si pubblica solo la versione .mp4 compressa
 geografia/prima/strumenti/video/*.m4v
+
+# Testi protetti dal diritto d'autore: restano solo sul computer (e sulla chiavetta per la LIM), non vanno mai online.
+# Le pagine li mostrano se il file c'è; online compare un riquadro «testo letto in classe». Vedi ISTRUZIONI.md.
+privati/

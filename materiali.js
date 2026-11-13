@@ -55,6 +55,24 @@ var MODULI = [
   {
     materia: "geografia",
     classe: "prima",
+    percorso: "intro",
+    etichetta: "Introduzione",
+    titolo: "Perché la geografia?",
+    /* revisione: true,*/
+    libri: ["paesaggi"],
+    descrizione: "Prima di cominciare: che cosa studia la geografia, perché è utile e come si studia. La Terra vista da fuori, le foto più famose, astronauti, cosmonauti e taikonauti. Libro: pp. XI, A2–A3.",
+    link: "geografia/prima/perche-la-geografia/index.html",
+    lezioni: [],
+    attivita: [
+      { tipo: "Questionario", titolo: "Il tuo rapporto con la geografia", link: "geografia/prima/perche-la-geografia/attivita/il-tuo-rapporto-con-la-geografia.html", data: "2026-10-16" },
+      { tipo: "Scheda", titolo: "Che cosa studia la geografia", link: "geografia/prima/perche-la-geografia/attivita/che-cosa-studia-la-geografia.html", data: "2026-10-16" },
+      { tipo: "Metodo di studio", titolo: "Come si studia la geografia", link: "geografia/prima/perche-la-geografia/attivita/come-si-studia-la-geografia.html", data: "2026-10-16" },
+      { tipo: "Le parole", titolo: "Astronauti, cosmonauti, taikonauti", descrizione: "I nomi di chi viaggia nello spazio nelle diverse lingue: che cosa hanno in comune e di diverso. Storia delle parole, dagli Argonauti agli internauti.", link: "geografia/prima/perche-la-geografia/attivita/astronauti-cosmonauti-taikonauti.html", data: "2026-11-12" }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "prima",
     numero: "I",
     percorso: "come",
     titolo: "Gli strumenti della geografia",
@@ -69,21 +87,6 @@ var MODULI = [
         link: "geografia/prima/strumenti/vicino-lontano.html",
         data: "2026-11-06",
         attivita: []
-      },
-      {
-        titolo: "Perché la geografia",
-        standby: true,
-        libri: ["paesaggi"],
-        pagine: "XI, A2–A3",
-        descrizione: "La Terra vista da fuori: le foto più famose, astronauti, cosmonauti e taikonauti, e che cosa studieremo in geografia.",
-        link: "geografia/prima/perche-la-geografia/index.html",
-        data: "2026-10-15",
-        attivita: [
-          { tipo: "Questionario", titolo: "Il tuo rapporto con la geografia", link: "geografia/prima/perche-la-geografia/attivita/il-tuo-rapporto-con-la-geografia.html", data: "2026-10-16" },
-          { tipo: "Scheda", titolo: "Che cosa studia la geografia", link: "geografia/prima/perche-la-geografia/attivita/che-cosa-studia-la-geografia.html", data: "2026-10-16" },
-          { tipo: "Metodo di studio", titolo: "Come si studia la geografia", link: "geografia/prima/perche-la-geografia/attivita/come-si-studia-la-geografia.html", data: "2026-10-16" },
-          { tipo: "Lezione", titolo: "Il cielo sopra di noi", descrizione: "Le foto della Terra dal 1960 a oggi, le voci degli astronauti, la salita da Roma. Fasi 1–5 in geografia; giornali, parole e mito in italiano.", link: "italiano/prima/mito-ed-epica/il-cielo-sopra-di-noi.html", data: "2026-10-21" }
-        ]
       },
       {
         titolo: "L'orientamento e i suoi strumenti",

@@ -133,7 +133,7 @@ function el(tag, attrs) {
 }
 var maiuscola = function (s) { return s.charAt(0).toUpperCase() + s.slice(1); };
 var ELENCO_MODULI = typeof MODULI !== "undefined" ? MODULI.filter(function (m) { return m.attivo !== false; }) : [];
-var nomeModulo = function (mod) { return (mod.numero ? "Modulo " + mod.numero + " – " : "") + mod.titolo; };
+var nomeModulo = function (mod) { return (mod.etichetta ? mod.etichetta + " – " : mod.numero ? "Modulo " + mod.numero + " – " : "") + mod.titolo; };
 /* ---------- segno delle lezioni nella programmazione di dipartimento ---------- */
 function segnoDipartimento(lez) {
     if (!lez.dipartimento)
@@ -313,6 +313,9 @@ function paginaMateria(id) {
         var lezioni = (mod.lezioni || []).filter(function (l) {
             return (libro === "tutti" || libriDi(l).includes(libro));
         });
+        /* un modulo senza lezioni (solo attività, come l'introduzione) resta se il libro è del modulo */
+        if (!(mod.lezioni || []).length)
+            return libriDi(mod).includes(libro) ? mod : null;
         return lezioni.length ? __assign(__assign({}, mod), { lezioni: lezioni }) : null;
     }
     var aperti = new Set(); // moduli aperti dall'utente
@@ -341,7 +344,7 @@ function paginaMateria(id) {
     if (mod.standby) {
       return el("div", { class: "modulo modulo-in-standby", "aria-disabled": "true" },
         el("div", { class: "modulo-sospeso" },
-          el("span", { class: "numero-modulo" }, mod.numero ? "Modulo " + mod.numero : "Modulo"),
+          el("span", { class: "numero-modulo" }, mod.etichetta || (mod.numero ? "Modulo " + mod.numero : "Modulo")),
           el("span", { class: "titolo-modulo" }, mod.titolo),
           el("span", { class: "segno-standby" }, "In revisione")));
     }
@@ -358,9 +361,9 @@ function paginaMateria(id) {
                 return;
             box.open ? aperti.add(chiave) : aperti.delete(chiave);
         });
-        box.append(el("summary", null, el("span", { class: "numero-modulo" }, mod.numero ? "Modulo " + mod.numero : "Modulo"), mod.link
+        box.append(el("summary", null, el("span", { class: "numero-modulo" }, mod.etichetta || (mod.numero ? "Modulo " + mod.numero : "Modulo")), mod.link && !mod.revisione
             ? el("a", { class: "titolo-modulo", href: BASE + mod.link, title: "Apri la pagina del modulo" }, mod.titolo)
-            : el("span", { class: "titolo-modulo" }, mod.titolo)));
+            : el("span", { class: "titolo-modulo" }, mod.titolo), mod.revisione ? el("span", { class: "segno-standby" }, "In revisione") : null));
         var dentro = el("div", { class: "contenuto-modulo" });
         if (mod.descrizione)
             dentro.append(el("p", { class: "descr-modulo" }, mod.descrizione));
@@ -392,7 +395,7 @@ function paginaMateria(id) {
         if ((mod.attivita || []).length) {
             var ul_2 = el("ul", { class: "attivita-elenco" });
             mod.attivita.forEach(function (a) { return ul_2.append(rigaAttivita(a)); });
-            dentro.append(el("div", { class: "fine-modulo" }, el("h4", null, "Per tutto il modulo"), ul_2));
+            dentro.append(el("div", { class: "fine-modulo" + (mod.revisione ? " in-standby" : "") }, el("h4", null, (mod.lezioni || []).length ? "Per tutto il modulo" : "Attività"), ul_2));
         }
         box.append(dentro);
         return box;
@@ -413,6 +416,8 @@ function paginaMateria(id) {
       { id: "cosa", titolo: "Cosa", sottotitolo: territori[anno], descrizione: "Mettiamo in pratica quello che abbiamo imparato per conoscere i territori." },
       { id: "roma", titolo: "Alla scoperta di Roma", sottotitolo: "La geografia sul campo", descrizione: "Osserviamo la città, raccogliamo informazioni e costruiamo un atlante dei quartieri." }
     ];
+    /* i moduli di introduzione (percorso: "intro") stanno in cima, da soli, senza titolo di sezione */
+    moduli.filter(function (m) { return m.percorso === "intro"; }).forEach(function (m) { gruppo.append(disegnaModulo(m, cercando)); });
     percorsi.forEach(function (percorso) {
       var scelti = moduli.filter(function (m) { return (m.percorso || "come") === percorso.id; });
       if (!scelti.length) return;

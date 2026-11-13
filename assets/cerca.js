@@ -53,7 +53,7 @@
   /* ---------- i documenti ---------- */
   var DOC = [];
   var perLink = {};
-  var nomeModulo = function (m) { return (m.numero ? "Modulo " + m.numero + " – " : "") + m.titolo; };
+  var nomeModulo = function (m) { return (m.etichetta ? m.etichetta + " – " : m.numero ? "Modulo " + m.numero + " – " : "") + m.titolo; };
   var idModulo = function (m) { return ["modulo", m.classe, m.numero || m.titolo].join("-").toLowerCase().replace(/[^a-z0-9-]+/g, "-"); };
   function pulisciLink(l) { return String(l || "").split("#")[0].split("?")[0]; }
   function esterno(l) { return /^(https?:)?\/\//i.test(l || ""); }
