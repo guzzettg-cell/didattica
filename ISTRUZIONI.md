@@ -200,3 +200,16 @@ e in fondo alla pagina `<script src="…/assets/salva-word.js"></script>` (con i
 Si salva il contenuto di `<main>`, senza pulsanti e parti con classe `no-stampa`; le caselle da spuntare diventano ☐ / ☑
 e le risposte scritte nei campi restano. Per salvare solo una parte: `data-salva-word="#id-della-parte"`.
 Già presente in: geografia, prima, «Come si studia la geografia».
+
+## Giochi da valutare (solo sul computer dell'insegnante)
+
+Le proposte di giochi (dal documento «Didattica ludica Geografia», da *101 idee per la didattica ludica*, Erickson)
+stanno in `privati/giochi.js`, che come i testi privati **non va su GitHub**. Si vedono:
+- nella pagina di Geografia, sotto le lezioni a cui sono collegate (riquadro giallo «🎲 Giochi da valutare») e in fondo ai moduli;
+- nella pagina di «Alla scoperta di Roma» (il modulo nel catalogo è in standby);
+- tutte insieme in `privati/giochi-da-valutare.html`.
+
+In `privati/giochi.js`, per ogni proposta: `stato` («da valutare», «sì», «forse», «no»), `nota` (appunti),
+`idea` (come si collega alla lezione), `modulo` e `lezione` scritti come in `materiali.js` (`lezione: null` = tutto il modulo).
+Lo script è `assets/giochi-da-valutare.js`: online non trova il file e non mostra nulla.
+Per mostrarle in un'altra pagina: `<div data-giochi="Titolo del modulo"></div>` e lo script in fondo alla pagina.

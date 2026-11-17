@@ -1,0 +1,1032 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gli spazi terrestri · Geografia facile</title>
+<style>
+:root{
+  --sfondo:#f3f3ef; --carta:#ffffff; --tenue-bg:#eaf1f2; --ink:#23262a; --tenue:#5a6066; --filo:#dfe2dd;
+  --accento:#2b5f6b; --accento-2:#1f4a54; --accento-soft:#e1edef;
+  --causa:#8a5a12; --causa-bg:#f8eedb; --evento:#2b5f6b; --evento-bg:#e1edef; --effetto:#6b3f74; --effetto-bg:#f1e6f3;
+  --ombra:#7a3b2e; --ombra-bg:#f7e7e2;
+  --mare:#d7e8ee; --terra:#f4efe2; --ok:#1f7a4d; --ok-bg:#dcf2e6; --no:#b42318; --no-bg:#fde3e1;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --surface:var(--carta); --line:var(--filo); --soft:var(--tenue-bg); --paper:var(--tenue-bg); --accent:var(--accento); --accent-ink:#fff; --muted:var(--tenue); --card:var(--carta);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#f3f3ef;background:var(--sfondo);color:#23262a;color:var(--ink);font:1.08rem/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:1.08rem/1.65 var(--sans)}
+a{color:#2b5f6b;color:var(--accento)}
+a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.salta{position:absolute;left:1rem;top:-6rem;background:#ffffff;background:var(--carta);padding:.8rem 1rem;z-index:20}.salta:focus{top:1rem}
+.foglio{max-width:1280px;margin:32px auto;background:#ffffff;background:var(--carta);border:1px solid #dfe2dd;border:1px solid var(--filo)}
+header.testata{padding:22px 52px 26px;border-top:9px solid #2b5f6b;border-top:9px solid var(--accento);background:#eaf1f2;background:var(--tenue-bg)}
+.indietro{display:inline-block;font-size:.92rem;margin-bottom:18px;text-decoration:none;border-bottom:1px solid currentColor}
+.eyebrow{margin:0 0 6px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:#5a6066;color:var(--tenue);font-weight:700}
+.capitolo{margin:0;font-weight:700;color:#2b5f6b;color:var(--accento)}
+h1{font:700 2.6rem/1.08 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2.6rem/1.08 var(--serif);font-size:clamp(2.1rem,6vw,3.5rem);margin:6px 0 10px}
+.sottotitolo{margin:0;font:italic 1.25rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.25rem/1.4 var(--serif);color:#5a6066;color:var(--tenue)}
+.corpo-lezione{display:grid;grid-template-columns:268px minmax(0,1fr);align-items:start}
+nav.indice{position:-webkit-sticky;position:sticky;top:12px;align-self:start;display:grid;grid-template-columns:minmax(0,1fr);grid-gap:10px;gap:10px;padding:30px 0 24px 28px;max-height:calc(100vh - 24px);overflow-y:auto}
+.indice-titolo{margin:0 0 2px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue)}
+a.voce{display:flex;align-items:center;min-height:54px;padding:4px 12px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;text-decoration:none;font:800 .86rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .86rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em;transition:transform .15s,box-shadow .15s}
+a.voce .tondo{margin-right:10px;flex:none;width:46px;height:46px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+a.voce svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+a.voce:hover{transform:translateX(4px)}
+a.voce[aria-current="true"]{transform:translateX(8px);box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+a.voce:focus-visible{outline:3px solid #23262a;outline:3px solid var(--ink);outline-offset:3px}
+main{padding:10px 52px 40px 40px;min-width:0}
+.fascia{display:flex;align-items:center;margin:28px 0 12px;min-height:50px;padding:4px 16px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;font:800 .95rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .95rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.fascia .tondo{margin-right:10px;flex:none;width:42px;height:42px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+.fascia svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+section.parte{padding:34px 0 8px;border-bottom:1px solid #dfe2dd;border-bottom:1px solid var(--filo);scroll-margin-top:56px}
+section.parte:last-of-type{border-bottom:0}
+h2{font:700 2rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2rem/1.2 var(--serif);margin:0 0 6px}
+.etichetta{display:inline-block;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#2b5f6b;color:var(--accento);margin:0 0 4px}
+.guida{margin:0 0 22px;color:#5a6066;color:var(--tenue);font-size:.98rem;max-width:72ch}
+h3{font:700 1.08rem/1.3 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 1.08rem/1.3 var(--sans);text-transform:uppercase;letter-spacing:.05em;color:#2b5f6b;color:var(--accento);margin:26px 0 12px}
+h3 span{border-bottom:3px dotted #2b5f6b;border-bottom:3px dotted var(--accento);padding-bottom:4px}
+p{margin:0 0 14px}
+.lettura{max-width:74ch}
+.mestiere{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:-4px 0 16px}
+
+/* prima / dopo */
+.primadopo{display:grid;grid-template-columns:1fr auto 1fr;grid-gap:16px;gap:16px;align-items:stretch;margin:6px 0 10px}
+.pd{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:18px 20px;background:#ffffff;background:var(--carta)}
+.pd h3{margin-top:0}
+.pd.ora{background:#e1edef;background:var(--accento-soft);border-color:transparent}
+.freccia{align-self:center;font:700 1.8rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.8rem var(--serif);color:#2b5f6b;color:var(--accento)}
+.pd .link-lez{font-size:.92rem;margin:0}
+.pd-centro{grid-column:1/-1;text-align:center;font:700 1.15rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem/1.4 var(--serif);background:#2b5f6b;background:var(--accento);color:#fff;border-radius:12px;padding:12px 18px;margin:0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pd-centro{color:#0f1416}}
+:root[data-theme="dark"] .pd-centro{color:#0f1416}
+
+/* idea principale */
+.mappa-box{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;margin:16px 0 8px}
+#mappa{display:block;width:100%;height:auto;background:#d7e8ee;background:var(--mare)}
+#mappa .mare{fill:#d7e8ee;fill:var(--mare)}
+#mappa .terra{fill:#f4efe2;fill:var(--terra);stroke:#f4efe2;stroke:var(--terra);stroke-width:1.2;stroke-linejoin:round}
+#mappa .segno{cursor:pointer}
+#mappa .segno circle{fill:#2b5f6b;fill:var(--accento);stroke:#ffffff;stroke:var(--carta);stroke-width:3}
+#mappa .segno text{font:700 17px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 17px var(--sans);fill:#23262a;fill:var(--ink);paint-order:stroke;stroke:#f4efe2;stroke:var(--terra);stroke-width:5px;stroke-linejoin:round}
+#mappa .segno.scelto circle{fill:#d9822b}
+#mappa .segno:focus{outline:none}#mappa .segno:focus-visible circle{stroke:#23262a;stroke:var(--ink);stroke-width:4}
+.mappa-info{margin:0;padding:12px 14px;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);font-size:.98rem;min-height:3.2em}
+.mappa-info strong{color:#2b5f6b;color:var(--accento)}
+.mappa-nota{font-size:.88rem;color:#5a6066;color:var(--tenue);padding:10px 14px;margin:0;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo)}
+.luoghi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));grid-gap:10px;gap:10px;margin:12px 0 0;padding:0;list-style:none}
+.luoghi li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 12px;font-size:.95rem}
+.luoghi button{all:unset;cursor:pointer;font-weight:700;color:#2b5f6b;color:var(--accento)}
+.luoghi button:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.linea{position:relative;margin:8px 0 0;padding:0 0 0 30px;list-style:none}
+.linea::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:3px;background:#2b5f6b;background:var(--accento);border-radius:2px}
+.linea li{position:relative;margin:0 0 12px}
+.linea li::before{content:"";position:absolute;left:-26px;top:.45em;width:13px;height:13px;border-radius:50%;background:#ffffff;background:var(--carta);border:3px solid #2b5f6b;border:3px solid var(--accento)}
+.linea li.estremo::before{background:#2b5f6b;background:var(--accento)}
+.linea .anno{font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);color:#2b5f6b;color:var(--accento);margin-right:8px}
+.linea .pista{display:inline-block;max-width:100%;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;padding:1px 8px;margin-left:6px;color:#5a6066;color:var(--tenue);white-space:nowrap}
+.persone{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-gap:14px;gap:14px}
+.persona{scroll-margin-top:60px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:54px 1fr;grid-gap:14px;gap:14px;align-items:start}
+.sigla{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#e1edef;background:var(--accento-soft);color:#2b5f6b;color:var(--accento);font:700 1.2rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem var(--serif)}
+.persona h4{margin:0;font:700 1.12rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.12rem/1.3 var(--serif)}
+.persona .date{font-size:.88rem;color:#5a6066;color:var(--tenue);display:block;margin-bottom:6px}
+.persona p{margin:0 0 6px;font-size:.97rem}
+.persona a{font-size:.9rem}
+
+/* perché */
+.catena{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;grid-gap:10px;gap:10px;align-items:stretch}
+.anello{border-radius:12px;padding:16px 18px}
+.anello h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.anello p{margin:0;font-size:.98rem}
+.anello.causa{background:#f8eedb;background:var(--causa-bg)}.anello.causa h4{color:#8a5a12;color:var(--causa)}
+.anello.evento{background:#e1edef;background:var(--evento-bg)}.anello.evento h4{color:#2b5f6b;color:var(--evento)}
+.anello.effetto{background:#f1e6f3;background:var(--effetto-bg)}.anello.effetto h4{color:#6b3f74;color:var(--effetto)}
+.catena .freccia{font-size:1.5rem}
+.ombra{margin:16px 0 0;background:#f7e7e2;background:var(--ombra-bg);border-left:5px solid #7a3b2e;border-left:5px solid var(--ombra);border-radius:0 12px 12px 0;padding:14px 18px}
+.ombra h4{margin:0 0 6px;color:#7a3b2e;color:var(--ombra);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.ombra p{margin:0}
+.ricorda{margin:18px 0 0;border:2px dashed #dfe2dd;border:2px dashed var(--filo);border-radius:12px;padding:14px 18px}
+.ricorda h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+.ricorda dl{margin:0;display:grid;grid-template-columns:max-content 1fr;grid-gap:6px 14px;gap:6px 14px}
+.ricorda dt{font-weight:700}.ricorda dd{margin:0}
+
+/* concetti e come */
+.concetto{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);padding:18px 22px;margin:0 0 16px;scroll-margin-top:60px}
+.concetto h4{font:700 1.3rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.3rem/1.3 var(--serif);margin:0 0 10px}
+.concetto p:last-child{margin-bottom:0}
+.come{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-gap:12px;gap:12px;margin-top:10px}
+.colonna{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:0;overflow:hidden}
+.colonna h4{margin:0;padding:10px 14px;background:#2b5f6b;background:var(--accento);color:#fff;font-size:1rem}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .colonna h4{color:#0f1416}}
+:root[data-theme="dark"] .colonna h4{color:#0f1416}
+.colonna ul{margin:0;padding:12px 14px 12px 30px;font-size:.95rem}
+.colonna li{margin:0 0 6px}
+.radice{text-align:center;font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:999px;padding:8px 16px;max-width:520px;margin:4px auto 10px}
+
+/* parole chiave */
+.parole{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));grid-gap:12px;gap:12px;margin:0;padding:0}
+.parola{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px;scroll-margin-top:60px}
+.parola dt{font:700 1.1rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.1rem var(--serif);color:#2b5f6b;color:var(--accento);margin-bottom:4px}
+.parola dd{margin:0;font-size:.97rem}
+a.pk{color:inherit;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted #2b5f6b;text-decoration:underline dotted var(--accento);text-underline-offset:4px;text-decoration-thickness:2px}
+a.pk:hover{background:#e1edef;background:var(--accento-soft)}
+:target{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:4px}
+
+/* testi */
+.livelli{display:inline-flex;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;overflow:hidden;margin:0 0 18px}
+.livelli button{font:inherit;font-size:.95rem;border:0;background:transparent;color:#23262a;color:var(--ink);padding:7px 16px;cursor:pointer}
+.livelli button[aria-pressed="true"]{background:#2b5f6b;background:var(--accento);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .livelli button[aria-pressed="true"]{color:#0f1416}}
+:root[data-theme="dark"] .livelli button[aria-pressed="true"]{color:#0f1416}
+.paragrafo{margin:0 0 22px;max-width:74ch}
+.paragrafo h4{font:700 1.2rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem/1.3 var(--serif);margin:0 0 6px}
+.paragrafo h4 .n{color:#2b5f6b;color:var(--accento);margin-right:6px}
+.essenziale .paragrafo p{font-size:1.12rem;line-height:1.75}
+
+/* lente */
+.lente{border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:14px;overflow:hidden}
+.lente-testa{background:#2b5f6b;background:var(--accento);color:#fff;padding:16px 22px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lente-testa{color:#0f1416}}
+:root[data-theme="dark"] .lente-testa{color:#0f1416}
+.lente-testa .testata-giornale{margin:0;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.lente-testa h3{margin:4px 0 0;color:inherit;font:700 1.6rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.6rem/1.2 var(--serif);text-transform:none;letter-spacing:0}
+.lente-corpo{padding:18px 22px}
+.domanda-guida{font:italic 1.2rem/1.5 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.2rem/1.5 var(--serif);border-left:4px solid #2b5f6b;border-left:4px solid var(--accento);padding:4px 0 4px 14px;margin:0 0 18px}
+.fasi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-gap:14px;gap:14px}
+.fase{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px}
+.fase h4{margin:0 0 8px;font-size:1rem}
+.fase ol,.fase ul{margin:0;padding-left:20px;font-size:.96rem}
+.fase li{margin:0 0 6px}
+.bottone{display:inline-block;font:inherit;font-weight:700;border-radius:999px;padding:9px 18px;border:2px solid #2b5f6b;border:2px solid var(--accento);background:#2b5f6b;background:var(--accento);color:#fff;text-decoration:none;cursor:pointer}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bottone{color:#0f1416}}
+:root[data-theme="dark"] .bottone{color:#0f1416}
+.bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+:root .bottone.secondario,:root:not([data-theme="light"]) .bottone.secondario,:root[data-theme="dark"] .bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+.bottone[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.altre-fonti{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-gap:8px;gap:8px}
+.altre-fonti li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 14px;font-size:.96rem}
+.altre-fonti .tipo{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue);display:block}
+
+/* compiti */
+.attivita{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:14px;padding:18px 22px;margin:0 0 18px}
+.attivita h4{margin:0 0 4px;font:700 1.25rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.25rem/1.3 var(--serif)}
+.attivita .meta{font-size:.86rem;color:#5a6066;color:var(--tenue);margin:0 0 12px}
+.consegna{margin:0 0 12px}
+table.esercizio{width:100%;border-collapse:collapse;font-size:.97rem}
+table.esercizio td{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:8px 6px;vertical-align:middle}
+table.esercizio td:first-child{width:52%}
+table.esercizio select{font:inherit;font-size:.95rem;width:100%;max-width:100%;padding:5px 6px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:6px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+td.esito{width:34px;text-align:center;font-weight:700}
+tr.ok td.esito{color:#1f7a4d;color:var(--ok)} tr.no td.esito{color:#b42318;color:var(--no)}
+tr.ok{background:#dcf2e6;background:var(--ok-bg)} tr.no{background:#fde3e1;background:var(--no-bg)}
+.spiega{display:block;font-size:.88rem;color:#5a6066;color:var(--tenue);margin-top:4px}
+.comandi{display:flex;flex-wrap:wrap;align-items:center;margin:14px 0 0}
+.comandi>*{margin:0 10px 8px 0}
+.punteggio{font-weight:700}
+textarea{font:inherit;width:100%;min-height:84px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:8px;padding:8px 10px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+.dibattito{margin:14px 0 0;background:#eaf1f2;background:var(--tenue-bg);border-radius:10px;padding:10px 14px;font-size:.95rem}
+.dibattito b{color:#2b5f6b;color:var(--accento)}
+
+footer{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:18px 52px;font-size:.86rem;color:#5a6066;color:var(--tenue)}
+footer p{margin:0 0 6px}
+
+@media (max-width:960px){
+  html{scroll-padding-bottom:84px}
+  .corpo-lezione{display:block}
+  nav.indice{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:90;grid-auto-flow:column;grid-auto-columns:max-content;grid-template-columns:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;max-height:none;grid-gap:8px;gap:8px;padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));background:#ffffff;background:var(--carta);border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);box-shadow:0 -4px 14px rgba(0,0,0,.12)}
+  .foglio{margin-bottom:70px}
+  .indice-titolo{display:none}
+  a.voce{flex:none;min-height:40px;padding:3px 12px 3px 3px;font-size:.74rem;white-space:nowrap}
+  a.voce .tondo{width:34px;height:34px;border-width:2px}
+  a.voce svg{width:18px;height:18px}
+  a.voce:hover,a.voce[aria-current="true"]{transform:none}
+  a.voce[aria-current="true"]{box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+  main{padding:10px 40px 40px}
+}
+@media (max-width:860px){
+  .come{grid-template-columns:1fr 1fr}
+  .fasi{grid-template-columns:1fr}
+  .catena{grid-template-columns:1fr}
+  .catena .freccia{transform:rotate(90deg);justify-self:center;line-height:1}
+}
+@media (max-width:700px){
+  .foglio{margin:0;border:0}
+  header.testata{padding:16px 16px 20px}
+  main{padding:4px 16px 28px}
+  footer{padding:16px}
+  .primadopo{grid-template-columns:1fr}
+  .primadopo .freccia{transform:rotate(90deg);justify-self:center}
+  .come{grid-template-columns:1fr}
+  #mappa .segno text{font-size:30px}
+  .ricorda dl{grid-template-columns:1fr}
+  .ricorda dd{margin-bottom:6px}
+  table.esercizio td{display:block;width:100%!important;border-top:0;padding:4px 6px}
+  table.esercizio tr{display:block;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:6px 0}
+  td.esito{text-align:left}
+}
+@media print{
+  body{background:#fff}.foglio{border:0;margin:0}nav.indice,.indietro,.comandi,.livelli,.mappa-box{display:none}
+  .essenziale-solo{display:none}section.parte{break-inside:avoid-page}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#mappa.mondo .segno text{font-size:14px;stroke-width:4px}
+@media (max-width:700px){#mappa.mondo .segno text{font-size:26px;stroke-width:5px}}
+
+.animata{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);border-radius:12px;padding:14px 16px;margin:16px 0 0;background:#ffffff;background:var(--carta)}
+.animata h4{margin:0 0 6px;font-size:1.02rem}
+.animata p{margin:0 0 8px}
+.animata ul{margin:8px 0 0;padding:0;list-style:none}
+.animata li{margin:0 0 8px;padding-left:24px;position:relative}
+.animata li:before{content:"\25B6";position:absolute;left:2px;top:0;color:#2b5f6b;color:var(--accento);font-size:.85em}
+.animata .nota-video{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:6px 0 0}
+@media print{.animata{display:none}}
+
+.primadopo.solo-prima{grid-template-columns:1fr}
+.dopo-box{border-left:5px solid #2b5f6b;border-left:5px solid var(--accento)}
+.prepara{margin:16px 0 0}
+
+/* indice riducibile */
+.indice-riduci{display:none}
+@media (min-width:961px){
+  .indice-testa{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .indice-riduci{display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:50%;border:1px solid #dfe2dd;border:1px solid var(--filo);background:#ffffff;background:var(--carta);color:#5a6066;color:var(--tenue);font:700 1rem/1 system-ui,sans-serif;cursor:pointer;padding:0}
+  .indice-riduci:hover{color:#23262a;color:var(--ink)}
+  .corpo-lezione{transition:grid-template-columns .2s}
+  .corpo-lezione.indice-ridotto{grid-template-columns:84px minmax(0,1fr)}
+  .indice-ridotto nav.indice{padding-left:16px;padding-right:0;overflow:visible;z-index:20;grid-gap:8px;gap:8px}
+  .indice-ridotto .indice-testa{justify-content:center;width:52px}
+  .indice-ridotto .indice-titolo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .indice-ridotto a.voce{position:relative;width:52px;min-height:52px;padding:4px;justify-content:center;border-radius:999px}
+  .indice-ridotto a.voce .tondo{margin-right:0}
+  .indice-ridotto a.voce:hover{transform:none}
+  .indice-ridotto a.voce .nome{position:absolute;left:62px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);white-space:nowrap;background:#23262a;color:#fff;padding:7px 12px;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .12s;z-index:30}
+  .indice-ridotto a.voce .nome:before{content:"";position:absolute;left:-6px;top:50%;margin-top:-6px;border:6px solid transparent;border-left:0;border-right-color:#23262a}
+  .indice-ridotto a.voce:hover .nome,.indice-ridotto a.voce:focus .nome{opacity:1}
+}
+
+/* una parte alla volta */
+section.parte[hidden]{display:none}
+.una-parte section.parte{min-height:60vh;border-bottom:0}
+.parte-nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin:34px 0 10px;padding-top:18px;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo)}
+.parte-nav a{display:inline-block;padding:10px 18px;border-radius:999px;background:#2b5f6b;background:var(--c,#2b5f6b);color:#fff;text-decoration:none;font:800 .86rem/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;text-transform:uppercase;letter-spacing:.03em}
+.parte-nav a.succ{margin-left:auto}
+.parte-nav a:hover{filter:brightness(1.1)}
+.parte-nav a:focus-visible{outline:3px solid #23262a;outline:3px solid var(--ink);outline-offset:3px}
+@media print{section.parte[hidden]{display:block!important}.parte-nav{display:none}}
+
+/* indice neutro: il colore pieno solo per la parte che si sta leggendo */
+a.voce{background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+a.voce:not([aria-current="true"]){box-shadow:inset 0 0 0 1px #cfd5d1;box-shadow:inset 0 0 0 1px var(--filo)}
+a.voce .tondo{background:#eef1ef;background:var(--tenue-bg);border-color:#ffffff;border-color:var(--carta)}
+a.voce[aria-current="true"]{background:#2b5f6b;background:var(--c);color:#fff}
+a.voce[aria-current="true"] .tondo{background:#ffffff;border-color:#fff}
+
+/* ===== geografia facile: aggiunte ===== */
+:root{--monte:#8a5a12;--monte-bg:#f6ecdc;--colle:#55800f;--colle-bg:#eaf3dc;--piano:#2b6fa5;--piano-bg:#e2eef8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--monte:#e7b766;--monte-bg:#2e2412;--colle:#a9d46a;--colle-bg:#1f2a12;--piano:#8cc0ec;--piano-bg:#132433}}
+:root[data-theme="dark"]{--monte:#e7b766;--monte-bg:#2e2412;--colle:#a9d46a;--colle-bg:#1f2a12;--piano:#8cc0ec;--piano-bg:#132433}
+
+/* carte delle parole */
+.carte{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin:8px 0 6px}
+.carta{all:unset;box-sizing:border-box;cursor:pointer;display:block;min-height:250px;border-radius:16px;border:2px solid var(--filo);background:var(--carta);perspective:900px;position:relative}
+.carta:focus-visible{outline:3px solid var(--accento);outline-offset:3px}
+.carta .giro{position:relative;display:block;width:100%;height:100%;min-height:246px;transition:transform .45s;transform-style:preserve-3d}
+.carta.girata .giro{transform:rotateY(180deg)}
+.carta .faccia{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px 18px;border-radius:14px;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.carta .retro{transform:rotateY(180deg);background:var(--accento-soft)}
+.carta .disegno{width:118px;height:118px;border-radius:50%;background:var(--tenue-bg);display:grid;place-items:center;margin-bottom:12px;color:var(--accento)}
+.carta .disegno svg{width:96px;height:96px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.carta .disegno svg .pieno{fill:currentColor;stroke:none;opacity:.18}
+.carta .disegno svg .neve{fill:var(--carta);stroke:currentColor}
+.carta .nome{font:700 1.35rem/1.2 var(--serif)}
+.carta .retro .nome{font-size:1.05rem;color:var(--accento);margin-bottom:8px}
+.carta .def{font-size:1.08rem;line-height:1.45}
+.carta .gira{position:absolute;right:12px;bottom:8px;font-size:.78rem;color:var(--tenue)}
+@media (prefers-reduced-motion:reduce){.carta .giro{transition:none}}
+.comandi-carte{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:4px 0 16px}
+.comandi-carte .bottone{font-size:.92rem;padding:7px 16px}
+
+/* idea principale: il profilo dell'altitudine */
+.profilo-box{border:1px solid var(--filo);border-radius:12px;overflow:hidden;margin:16px 0 8px}
+#profilo{display:block;width:100%;height:auto;background:var(--carta)}
+#profilo .banda-m{fill:var(--monte-bg)} #profilo .banda-c{fill:var(--colle-bg)} #profilo .banda-p{fill:var(--piano-bg)}
+#profilo .suolo{fill:#c9b48a;stroke:#7d6a45;stroke-width:2}
+#profilo .mare{fill:#9cc7e0}
+#profilo .quota{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:6 5;opacity:.55}
+#profilo .eq{font:700 15px var(--sans);fill:var(--ink)}
+#profilo .nomi{font:800 17px var(--sans);letter-spacing:.06em}
+#profilo .nm{fill:var(--monte)} #profilo .nc{fill:var(--colle)} #profilo .np{fill:var(--piano)}
+#profilo .cursore line{stroke:#d9822b;stroke-width:3}
+#profilo .cursore circle{fill:#d9822b;stroke:var(--carta);stroke-width:3}
+#profilo .cursore text{font:800 16px var(--sans);fill:#d9822b;paint-order:stroke;stroke:var(--carta);stroke-width:5px}
+#profilo .neve{fill:#fff;stroke:#7d6a45;stroke-width:1.5}
+.altimetro{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:center;padding:14px 16px;border-top:1px solid var(--filo)}
+.altimetro label{font-weight:700}
+.altimetro input[type=range]{width:100%;accent-color:#d9822b}
+.altimetro output{grid-column:1/-1;font-size:1.05rem;min-height:1.6em}
+.altimetro output b.m{color:var(--monte)} .altimetro output b.c{color:var(--colle)} .altimetro output b.p{color:var(--piano)}
+
+.tre{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 4px}
+.tre .uno{border-radius:12px;padding:14px 16px}
+.tre .uno h4{margin:0 0 6px;font:700 1.15rem/1.3 var(--serif)}
+.tre .uno p{margin:0;font-size:.98rem}
+.uno.m{background:var(--monte-bg)} .uno.m h4{color:var(--monte)}
+.uno.c{background:var(--colle-bg)} .uno.c h4{color:var(--colle)}
+.uno.p{background:var(--piano-bg)} .uno.p h4{color:var(--piano)}
+
+.barre{margin:14px 0 0;border:1px solid var(--filo);border-radius:12px;padding:14px 16px}
+.barre h4{margin:0 0 10px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tenue)}
+.barra-riga{display:grid;grid-template-columns:72px 1fr;gap:10px;align-items:center;margin:0 0 10px}
+.barra-riga .chi{font-weight:700}
+.barra{display:flex;height:34px;border-radius:8px;overflow:hidden;font:700 .86rem/34px var(--sans);color:#fff}
+.barra span{display:block;text-align:center;white-space:nowrap;overflow:hidden}
+.barra .m{background:#9a6a1f} .barra .c{background:#5f8d1c} .barra .p{background:#2b6fa5} .barra .x{background:#8a9196}
+.barre .nota{font-size:.86rem;color:var(--tenue);margin:4px 0 0}
+.indovina{margin:14px 0 0}
+
+/* mappa delle informazioni */
+.mi-radice{text-align:center;margin:6px auto 0;max-width:420px;font:700 1.25rem var(--serif);background:var(--accento);color:#fff;border-radius:999px;padding:10px 18px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .mi-radice{color:#0f1416}}
+:root[data-theme="dark"] .mi-radice{color:#0f1416}
+.mi-rami{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px;position:relative}
+.mi-rami:before{content:"";position:absolute;left:16.6%;right:16.6%;top:-12px;border-top:3px solid var(--filo)}
+.mi-ramo{position:relative;border-radius:14px;padding:0 0 10px;background:var(--tenue-bg)}
+.mi-ramo:before{content:"";position:absolute;left:50%;top:-12px;height:12px;border-left:3px solid var(--filo)}
+.mi-ramo>h3{margin:0;padding:10px 14px;border-radius:14px 14px 0 0;color:#fff;text-align:center;letter-spacing:.08em}
+.mi-ramo.m>h3{background:#9a6a1f} .mi-ramo.c>h3{background:#5f8d1c} .mi-ramo.p>h3{background:#2b6fa5}
+.mi-nodo{margin:10px 10px 0;border:1px solid var(--filo);border-radius:10px;background:var(--carta);overflow:hidden}
+.mi-nodo h4{margin:0;padding:7px 12px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tenue);border-bottom:1px solid var(--filo)}
+.mi-nodo .cont{padding:8px 12px;font-size:.95rem}
+.mi-nodo .cont p{margin:0 0 4px}
+.mi-nodo ul{margin:2px 0 0;padding-left:18px}
+.mi-nodo .cont .fr{color:var(--tenue)}
+.mi-nodo button.scopri{all:unset;box-sizing:border-box;cursor:pointer;display:block;width:100%;padding:12px;text-align:center;font-weight:700;color:var(--accento);background:repeating-linear-gradient(135deg,var(--carta) 0 10px,var(--tenue-bg) 10px 20px)}
+.mi-nodo button.scopri:focus-visible{outline:3px solid var(--accento);outline-offset:-3px}
+.prova .mi-nodo:not(.visto) .cont{display:none}
+.mi-nodo .scopri{display:none!important}
+.prova .mi-nodo:not(.visto) .scopri{display:block!important}
+
+/* testo: il disegno della montagna */
+.montagna-box{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:start;margin:4px 0 22px}
+.montagna-box svg{width:100%;height:auto;border:1px solid var(--filo);border-radius:12px;background:#e6f1f7}
+.montagna-box .sm{fill:#b9a37a;stroke:#6d5b39;stroke-width:2;stroke-linejoin:round}
+.montagna-box .sm2{fill:#a58f66;stroke:#6d5b39;stroke-width:2;stroke-linejoin:round}
+.montagna-box .sf{fill:#d6c9a8;stroke:#8b7a57;stroke-width:1.5}
+.montagna-box .neve{fill:#fff;stroke:#6d5b39;stroke-width:1.5}
+.montagna-box .prato{fill:#9cc46a;stroke:#5f8d1c;stroke-width:1.5}
+.montagna-box .fiume{fill:none;stroke:#3d8fd1;stroke-width:6;stroke-linecap:round}
+.montagna-box .etq text{font:800 15px var(--sans);fill:#23262a;paint-order:stroke;stroke:#fff;stroke-width:5px}
+.montagna-box .etq line{stroke:#23262a;stroke-width:1.5}
+.montagna-box .evid{fill:none;stroke:#d9822b;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .2s}
+.montagna-box .evid.on{opacity:1}
+.parti-mont{display:flex;flex-direction:column;gap:8px}
+.parti-mont button{all:unset;box-sizing:border-box;cursor:pointer;border:1px solid var(--filo);border-radius:10px;padding:10px 12px;font-size:.97rem;background:var(--carta)}
+.parti-mont button b{color:var(--accento)}
+.parti-mont button[aria-pressed="true"]{border-color:#d9822b;box-shadow:inset 4px 0 0 #d9822b}
+.parti-mont button:focus-visible{outline:3px solid var(--accento);outline-offset:2px}
+.blocco{margin:6px 0 26px;border-top:4px solid var(--c);padding-top:12px}
+.blocco>h3{color:var(--c);margin-top:4px}
+.blocco>h3 span{border-color:var(--c)}
+.sub{display:inline-block;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:var(--tenue);margin-right:6px}
+
+@media (max-width:860px){
+  .tre,.mi-rami{grid-template-columns:1fr}
+  .mi-rami:before,.mi-ramo:before{display:none}
+  .montagna-box{grid-template-columns:1fr}
+}
+@media print{.comandi-carte,.altimetro,.indovina{display:none}.carta .giro{transform:none!important}.carta .retro{position:static;transform:none}.carta{min-height:0}.carta .faccia{position:static}}
+
+section.parte:target{outline:none}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<div class="foglio">
+<header class="testata">
+  <a class="indietro" href="../../../index.html">← Torna a Geografia: tutti i moduli</a>
+  <p class="eyebrow">Geografia · Il paesaggio: clima, rilievi e acque</p>
+  <p class="capitolo">Lezione facile</p>
+  <h1>Gli spazi terrestri</h1>
+  <p class="sottotitolo">Montagne, colline e pianure: in Europa e in Italia</p>
+</header>
+<div class="corpo-lezione">
+<nav class="indice" aria-label="Parti della lezione">
+  <div class="indice-testa"><p class="indice-titolo">In questa lezione</p><button type="button" class="indice-riduci" aria-pressed="false" aria-label="Riduci l'indice alle sole icone" title="Riduci l'indice alle sole icone">&laquo;</button></div>
+  <a class="voce" href="#concetti" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="11" height="14" rx="2"/><path d="M8 4h11a2 2 0 0 1 2 2v12"/><path d="M5.5 16l3-5 2 3 1-1.5 1.5 3.5"/></svg></span><span class="nome">Concetti chiave</span></a>
+  <a class="voce" href="#idea" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">Idea principale</span></a>
+  <a class="voce" href="#mappa-informazioni" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="4.5" rx="1"/><rect x="2.5" y="15" width="5.5" height="5" rx="1"/><rect x="9.25" y="15" width="5.5" height="5" rx="1"/><rect x="16" y="15" width="5.5" height="5" rx="1"/><path d="M12 7v4M5.25 15v-4h13.5v4M12 11v4"/></svg></span><span class="nome">Mappa delle informazioni</span></a>
+  <a class="voce" href="#testi" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">Testo sintetico / essenziale</span></a>
+  <a class="voce" href="#parole" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">Glossario</span></a>
+  <a class="voce" href="#compiti" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="nome">Dieci cose da sapere</span></a>
+  <a class="voce" href="#dopo" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14"/><path d="M13 6l6 6-6 6"/></svg></span><span class="nome">E dopo?</span></a>
+</nav>
+
+<main id="contenuto">
+
+<!-- ======================= CONCETTI CHIAVE ======================= -->
+<section class="parte" id="concetti" aria-labelledby="t-concetti">
+  <p class="etichetta">Concetti chiave</p>
+  <h2 id="t-concetti">Le carte delle parole</h2>
+  <p class="guida">Sei parole servono per tutta la lezione. Guarda il disegno, leggi la parola e prova a dire che cosa significa. Poi tocca la carta per girarla e controlla.</p>
+  <div class="comandi-carte">
+    <button type="button" class="bottone secondario" id="carte-gioco" aria-pressed="false">Gioca al contrario: prima la definizione</button>
+    <button type="button" class="bottone secondario" id="carte-reset">Rigira tutte le carte</button>
+  </div>
+  <div class="carte" id="carte"></div>
+  <div class="ricorda">
+    <h4>Ricorda</h4>
+    <dl>
+      <dt>Rilievi</dt><dd>montagne e colline</dd>
+      <dt>Spazi terrestri</dt><dd>montagne, colline e pianure</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ======================= IDEA PRINCIPALE ======================= -->
+<section class="parte" id="idea" aria-labelledby="t-idea">
+  <p class="etichetta">Idea principale</p>
+  <h2 id="t-idea">Tre spazi, tre altezze</h2>
+  <p class="guida">Prima di studiare i dettagli, guarda l'argomento dall'alto: quali sono gli spazi terrestri e come si distinguono.</p>
+  <div class="lettura">
+    <p>Sulla terraferma ci sono tre grandi spazi: le <a class="pk" href="#p-montagna">montagne</a>, le <a class="pk" href="#p-collina">colline</a> e le <a class="pk" href="#p-pianura">pianure</a>. Montagne e colline insieme si chiamano <a class="pk" href="#p-rilievo">rilievi</a>.</p>
+    <p>Per distinguerli guardiamo soprattutto l'<a class="pk" href="#p-altitudine">altitudine</a>, cioè quanto un luogo è più alto del livello del mare: <strong>sopra i 600 metri</strong> c'è la montagna, <strong>tra 200 e 600 metri</strong> la collina, <strong>sotto i 200 metri</strong>, di solito, la pianura.</p>
+    <p>In <strong>Europa</strong> le pianure sono la parte più grande: occupano circa <strong>due terzi</strong> del continente. In <strong>Italia</strong> invece sono le più piccole: prevalgono le colline, poi vengono le montagne e solo alla fine le pianure.</p>
+  </div>
+
+  <h3><span>Sali e scendi con l'altimetro</span></h3>
+  <div class="profilo-box">
+    <svg id="profilo" viewBox="0 0 900 360" role="img" aria-labelledby="profilo-t"><title id="profilo-t">Profilo di un territorio dal mare alle montagne, con le quote di 200 e 600 metri</title></svg>
+    <div class="altimetro">
+      <label for="quota">Altitudine</label>
+      <input type="range" id="quota" min="0" max="1500" step="10" value="350">
+      <output id="quota-out" for="quota" aria-live="polite"></output>
+    </div>
+  </div>
+
+  <div class="tre">
+    <div class="uno m"><h4>Montagna</h4><p>più di 600 m · vetta, versanti e valli · fa più freddo</p></div>
+    <div class="uno c"><h4>Collina</h4><p>tra 200 e 600 m · forme dolci e arrotondate</p></div>
+    <div class="uno p"><h4>Pianura</h4><p>di solito sotto i 200 m · terreno piatto · tante persone</p></div>
+  </div>
+
+  <div class="barre">
+    <h4>Quanto spazio occupano?</h4>
+    <div class="barra-riga"><span class="chi">Italia</span><div class="barra" role="img" aria-label="Italia: collina 42 per cento, montagna 35 per cento, pianura 23 per cento"><span class="c" style="width:42%">collina 42%</span><span class="m" style="width:35%">montagna 35%</span><span class="p" style="width:23%">pianura 23%</span></div></div>
+    <div class="barra-riga"><span class="chi">Europa</span><div class="barra" role="img" aria-label="Europa: pianure circa due terzi, rilievi circa un terzo"><span class="p" style="width:66.7%">pianure ⅔</span><span class="x" style="width:33.3%">rilievi ⅓</span></div></div>
+    <p class="nota">Dati sul territorio italiano: ISTAT. Per l'Europa il valore è arrotondato.</p>
+  </div>
+  <div class="attivita indovina">
+    <h4>Prima di andare avanti</h4>
+    <p class="meta">Guarda le due barre e scegli.</p>
+    <div id="idea-prova"></div>
+  </div>
+</section>
+
+<!-- ======================= MAPPA DELLE INFORMAZIONI ======================= -->
+<section class="parte" id="mappa-informazioni" aria-labelledby="t-mi">
+  <p class="etichetta">Mappa delle informazioni</p>
+  <h2 id="t-mi">Tutto in una mappa</h2>
+  <p class="guida">Ogni spazio terrestre ha quattro caselle: che cos'è, com'è in Europa, com'è in Italia, che cosa fanno le persone. Leggi la mappa dall'alto verso il basso. Quando la conosci, nascondi le caselle e prova a ricordarle.</p>
+  <div class="comandi-carte">
+    <button type="button" class="bottone secondario" id="mi-prova" aria-pressed="false">Mettiti alla prova: nascondi le caselle</button>
+  </div>
+  <div id="mi">
+    <p class="mi-radice">Gli spazi terrestri</p>
+    <div class="mi-rami">
+      <div class="mi-ramo m">
+        <h3>Montagne</h3>
+        <div class="mi-nodo"><h4>Che cosa sono</h4><div class="cont"><p>rilievi alti <b>più di 600 m</b></p><ul><li>vetta e versanti</li><li>tra i versanti: le valli</li><li>tante montagne vicine: una catena montuosa</li></ul></div></div>
+        <div class="mi-nodo"><h4>In Europa</h4><div class="cont"><p><b>Centro-Nord</b>: rilievi antichi e bassi</p><p><b>Sud</b>: rilievi giovani e alti</p><ul><li>Sierra Nevada, Pirenei, Alpi</li><li>Caucaso → <b>Elbrus</b>, la vetta più alta (5642 m)</li></ul></div></div>
+        <div class="mi-nodo"><h4>In Italia</h4><div class="cont"><ul><li><b>Alpi</b>, a Nord, da Ovest a Est → <b>Monte Bianco</b>, la vetta più alta</li><li><b>Appennini</b>, da Nord a Sud: più bassi e meno abitati</li></ul></div></div>
+        <div class="mi-nodo"><h4>Le persone</h4><div class="cont"><p>più si sale, più fa freddo</p><p>abitanti in aumento grazie a</p><ul><li>nuove strade e gallerie</li><li>turismo</li></ul></div></div>
+      </div>
+      <div class="mi-ramo c">
+        <h3>Colline</h3>
+        <div class="mi-nodo"><h4>Che cosa sono</h4><div class="cont"><p>rilievi <b>tra 200 e 600 m</b>, arrotondati</p><p>per origine sono</p><ul><li><b>tettoniche</b>: spinta delle placche</li><li><b>moreniche</b>: detriti dei ghiacciai</li><li><b>vulcaniche</b>: materiali dei vulcani</li></ul></div></div>
+        <div class="mi-nodo"><h4>In Europa</h4><div class="cont"><p>in tutto il continente, spesso vicino alle catene montuose</p><ul><li>a Est, molto antiche: Rialto centrale, Valdaj, Alture del Volga</li><li>al Centro: Ardenne</li></ul></div></div>
+        <div class="mi-nodo"><h4>In Italia</h4><div class="cont"><p>quasi <b>metà</b> del territorio</p><ul><li>tettoniche: Langhe, Monferrato, Chianti</li><li>moreniche: intorno al Lago di Garda</li><li>vulcaniche: Colli Albani, Colli Euganei</li></ul></div></div>
+        <div class="mi-nodo"><h4>Le persone</h4><div class="cont"><p>ambienti naturali e antropizzati</p><ul><li>coltivazioni: viti e ulivi</li><li>pascoli e allevamento</li></ul><p class="fr">molti però si spostano nelle città di pianura</p></div></div>
+      </div>
+      <div class="mi-ramo p">
+        <h3>Pianure</h3>
+        <div class="mi-nodo"><h4>Che cosa sono</h4><div class="cont"><p>terreni piatti, di solito <b>sotto i 200 m</b></p><p>molte sono <b>alluvionali</b>: formate dai detriti portati dai fiumi</p></div></div>
+        <div class="mi-nodo"><h4>In Europa</h4><div class="cont"><p>circa <b>⅔</b> del territorio</p><ul><li><b>Bassopiano Sarmatico</b>: il più grande</li><li>Bassopiano polacco, germanico, francese; Pianura olandese</li></ul></div></div>
+        <div class="mi-nodo"><h4>In Italia</h4><div class="cont"><p>poche, quasi tutte alluvionali</p><ul><li><b>Pianura Padana</b>: la più grande</li><li>Valdarno, Maremma, Agro Romano, Agro Pontino, Pianura Campana, Tavoliere delle Puglie, Pianura Salentina, Piana di Catania, Campidano</li></ul></div></div>
+        <div class="mi-nodo"><h4>Le persone</h4><div class="cont"><p>lo spazio più trasformato:</p><ul><li>campi e allevamenti</li><li>città e industrie</li><li>strade e ferrovie</li></ul><p class="fr">→ gli ambienti più popolati</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= TESTO ======================= -->
+<section class="parte" id="testi" aria-labelledby="t-testi">
+  <p class="etichetta">Testo sintetico / essenziale</p>
+  <h2 id="t-testi">La lezione per intero</h2>
+  <p class="guida">Lo stesso testo in due versioni: il <strong>sintetico</strong> contiene tutte le informazioni, l'<strong>essenziale</strong> le dice con frasi più brevi. Scegli quella che ti serve.</p>
+  <div class="livelli" role="group" aria-label="Versione del testo">
+    <button type="button" data-livello="sintetico" aria-pressed="true">Sintetico</button>
+    <button type="button" data-livello="essenziale" aria-pressed="false">Essenziale</button>
+  </div>
+
+  <div class="montagna-box">
+    <svg id="disegno-montagna" viewBox="0 0 480 320" role="img" aria-labelledby="dm-t"><title id="dm-t">Disegno di due montagne con la vetta, il versante, la valle e una catena montuosa sullo sfondo</title>
+      <path class="sf" d="M0 170L50 110L90 140L140 80L190 130L240 95L300 140L350 85L410 135L480 100L480 320L0 320Z"/>
+      <path class="sm" d="M-10 320L-10 250L130 60L200 170L245 290L245 320Z"/>
+      <path class="sm2" d="M225 320L225 290L270 230L360 110L490 210L490 320Z"/>
+      <path class="neve" d="M108 90L130 60L152 92L140 86L130 98L120 86Z"/>
+      <path class="neve" d="M343 133L360 110L380 140L368 134L360 144L352 134Z"/>
+      <path class="prato" d="M-10 320L-10 292Q120 268 232 296Q262 302 300 290Q400 270 490 290L490 320Z"/>
+      <path class="fiume" d="M238 262Q228 282 242 296Q254 308 240 322"/>
+      <circle class="evid" data-parte="vetta" cx="130" cy="64" r="20"/>
+      <path class="evid" data-parte="versante" d="M134 66L200 170L243 286"/>
+      <path class="evid" data-parte="valle" d="M196 168L238 290L272 228"/>
+      <path class="evid" data-parte="catena" d="M0 170L50 110L90 140L140 80L190 130L240 95L300 140L350 85L410 135L480 100"/>
+      <g class="etq">
+        <line x1="146" y1="58" x2="172" y2="44"/><text x="176" y="46">VETTA</text>
+        <line x1="182" y1="140" x2="214" y2="166"/><text x="218" y="174">VERSANTE</text>
+        <line x1="232" y1="282" x2="190" y2="262"/><text x="122" y="262">VALLE</text>
+        <line x1="350" y1="88" x2="372" y2="66"/><text x="300" y="58">CATENA MONTUOSA</text>
+      </g>
+    </svg>
+    <div class="parti-mont" role="group" aria-label="Le parti della montagna">
+      <button type="button" data-parte="vetta" aria-pressed="false"><b>Vetta</b>: il punto più alto</button>
+      <button type="button" data-parte="versante" aria-pressed="false"><b>Versante</b>: il fianco della montagna</button>
+      <button type="button" data-parte="valle" aria-pressed="false"><b>Valle</b>: lo spazio tra i versanti di due rilievi</button>
+      <button type="button" data-parte="catena" aria-pressed="false"><b>Catena montuosa</b>: tante montagne una vicina all'altra</button>
+    </div>
+  </div>
+
+  <div id="testo-sintetico">
+    <div class="blocco" style="--c:#9a6a1f">
+      <h3><span>1. Le montagne</span></h3>
+      <div class="paragrafo"><h4><span class="n">1</span>Che cosa sono</h4><p>Le montagne sono i <a class="pk" href="#p-rilievo">rilievi</a> più alti: superano i <strong>600 metri</strong> sopra il livello del mare. Il punto più alto di una montagna è la <a class="pk" href="#p-vetta">vetta</a>; i suoi fianchi sono i <a class="pk" href="#p-versante">versanti</a>. Tra i versanti di due montagne si apre una <a class="pk" href="#p-valle">valle</a>, spesso percorsa da un fiume. Molte montagne vicine formano una <a class="pk" href="#p-catena">catena montuosa</a>. Più si sale, più fa freddo: la neve dura più a lungo e le piante diventano sempre meno. Oggi in montagna vivono più persone di un tempo, grazie a nuove strade e gallerie e al turismo.</p></div>
+      <div class="paragrafo"><h4><span class="n">2</span>Le montagne europee</h4><p>Nell'Europa del Centro-Nord i rilievi sono <strong>molto antichi</strong>: il vento, l'acqua e il ghiaccio li hanno consumati per milioni di anni e oggi sono <strong>bassi</strong> e arrotondati. Nell'Europa del Sud i rilievi sono <strong>più giovani e più alti</strong>, e qui si trovano le catene principali: la Sierra Nevada e i Pirenei, tra Spagna e Francia; le Alpi, che arrivano anche in Italia; a Sud-Est il Caucaso, una catena lunga più di 1200 km al confine tra Europa e Asia. Nel Caucaso c'è l'<strong>Elbrus</strong> (5642 m), la montagna più alta del continente.</p></div>
+      <div class="paragrafo"><h4><span class="n">3</span>Le montagne italiane</h4><p>Le catene più importanti d'Italia sono due. Le <strong>Alpi</strong> chiudono l'Italia a Nord e si allungano da Ovest a Est, come un arco. Qui si trova il <strong>Monte Bianco</strong>, la vetta più alta d'Italia (oltre 4800 m). Gli <strong>Appennini</strong> attraversano la penisola da Nord a Sud: sono più bassi delle Alpi e meno abitati, quindi il loro paesaggio è più selvaggio. Le Alpi invece attirano ogni anno milioni di turisti: in molte valli sono nati alberghi, impianti e piste da sci.</p></div>
+    </div>
+    <div class="blocco" style="--c:#5f8d1c">
+      <h3><span>2. Le colline</span></h3>
+      <div class="paragrafo"><h4><span class="n">1</span>Che cosa sono</h4><p>Le colline sono rilievi alti <strong>tra 200 e 600 metri</strong>. Hanno forme più dolci e arrotondate delle montagne. Secondo il modo in cui sono nate, si dividono in tre tipi: le colline <a class="pk" href="#p-tettoniche">tettoniche</a>, spinte verso l'alto dal movimento delle <a class="pk" href="#p-placche">placche</a> della crosta terrestre; le colline <a class="pk" href="#p-moreniche">moreniche</a>, formate dai detriti che i ghiacciai hanno trascinato e lasciato; le colline <a class="pk" href="#p-vulcaniche">vulcaniche</a>, formate dai materiali usciti dalle eruzioni dei vulcani. In collina si alternano ambienti naturali e ambienti <a class="pk" href="#p-antropizzato">antropizzati</a>, cioè trasformati dalle persone.</p></div>
+      <div class="paragrafo"><h4><span class="n">2</span>Le colline europee</h4><p>Le colline si trovano <strong>in tutta l'Europa</strong>, di solito vicino alle catene montuose; in alcune regioni sono loro a disegnare il paesaggio. Nell'Europa dell'Est ci sono colline molto antiche, come il Rialto centrale russo, il Valdaj e le Alture del Volga. Anche l'Europa centrale e le Isole Britanniche hanno molte colline: tra Francia e Belgio si estendono le <strong>Ardenne</strong>. L'Europa del Sud, dalla Penisola iberica ai Balcani, è ricchissima di colline.</p></div>
+      <div class="paragrafo"><h4><span class="n">3</span>Le colline italiane</h4><p>Le colline occupano <strong>quasi metà</strong> del territorio italiano. Nelle Langhe, nel Monferrato e nel Chianti le colline sono tettoniche; intorno al Lago di Garda sono moreniche; i <strong>Colli Albani</strong>, vicino a Roma, e i Colli Euganei, in Veneto, sono vulcanici. In Italia le colline sono molto abitate e coltivate: ci sono pascoli e soprattutto vigneti e uliveti. Negli ultimi decenni, però, molte persone le hanno lasciate per andare a vivere nelle grandi città di pianura.</p></div>
+    </div>
+    <div class="blocco" style="--c:#2b6fa5">
+      <h3><span>3. Le pianure</span></h3>
+      <div class="paragrafo"><h4><span class="n">1</span>Che cosa sono</h4><p>Le pianure sono terreni piatti, di solito <strong>sotto i 200 metri</strong> sopra il livello del mare. Si formano in modi diversi: in Italia molte sono <a class="pk" href="#p-alluvionale">alluvionali</a>, cioè sono nate dai detriti (sabbia, ghiaia, argilla) che i fiumi hanno portato e depositato. La pianura è lo spazio <strong>più trasformato</strong> dalle persone: qui si coltiva, si allevano animali, si costruiscono città e industrie. Siccome ci vivono molte persone, ci sono anche molte strade e ferrovie.</p></div>
+      <div class="paragrafo"><h4><span class="n">2</span>Le pianure europee</h4><p>Circa <strong>due terzi</strong> dell'Europa sono pianure. Quelle del Nord-Est sono le più antiche, quelle del Centro e del Sud le più giovani. La pianura più grande d'Europa è il <a class="pk" href="#p-bassopiano">Bassopiano</a> <strong>Sarmatico</strong>, che si trova soprattutto in Russia. Nel Centro-Nord ci sono altre grandi pianure: il Bassopiano polacco, il Bassopiano germanico, il Bassopiano francese e la Pianura olandese. Un tempo erano coperte di foreste; oggi le persone le hanno trasformate e sono le <strong>zone più abitate</strong> del continente.</p></div>
+      <div class="paragrafo"><h4><span class="n">3</span>Le pianure italiane</h4><p>In Italia le pianure sono <strong>poco estese</strong> e quasi tutte alluvionali. La più grande è la <strong>Pianura Padana</strong>, formata dal Po e dai suoi affluenti, tra Piemonte, Lombardia, Emilia-Romagna e Veneto: ha molta acqua e un terreno adatto all'agricoltura. Altre pianure importanti sono il Valdarno, la Maremma, l'<strong>Agro Romano</strong> (dove sorge Roma) e l'Agro Pontino, la Pianura Campana, il Tavoliere delle Puglie, la Pianura Salentina, la Piana di Catania e il Campidano in Sardegna.</p></div>
+    </div>
+  </div>
+
+  <div id="testo-essenziale" class="essenziale" hidden>
+    <div class="blocco" style="--c:#9a6a1f">
+      <h3><span>1. Le montagne</span></h3>
+      <div class="paragrafo"><h4><span class="n">1</span>Che cosa sono</h4><p>Le montagne sono rilievi alti <strong>più di 600 metri</strong>. Hanno una <strong>vetta</strong> (il punto più alto) e i <strong>versanti</strong> (i fianchi). Tra i versanti ci sono le <strong>valli</strong>. Tante montagne vicine formano una <strong>catena montuosa</strong>.</p></div>
+      <div class="paragrafo"><h4><span class="n">2</span>Le montagne europee</h4><p>Al Centro-Nord le montagne sono <strong>antiche e basse</strong>. Al Sud sono <strong>giovani e alte</strong>. La montagna più alta d'Europa è l'<strong>Elbrus</strong>, nel Caucaso. Un'altra catena importante sono le Alpi.</p></div>
+      <div class="paragrafo"><h4><span class="n">3</span>Le montagne italiane</h4><p>Le catene italiane sono le <strong>Alpi</strong>, a Nord, e gli <strong>Appennini</strong>, da Nord a Sud. Nelle Alpi c'è il <strong>Monte Bianco</strong>, la montagna più alta d'Italia. Gli Appennini sono più bassi e meno abitati.</p></div>
+    </div>
+    <div class="blocco" style="--c:#5f8d1c">
+      <h3><span>2. Le colline</span></h3>
+      <div class="paragrafo"><h4><span class="n">1</span>Che cosa sono</h4><p>Le colline sono rilievi alti <strong>tra 200 e 600 metri</strong>. Hanno forme dolci e arrotondate. Ci sono ambienti naturali e ambienti trasformati dalle persone.</p></div>
+      <div class="paragrafo"><h4><span class="n">2</span>Le colline europee</h4><p>Le colline ci sono <strong>in tutta l'Europa</strong>. A Est ci sono colline molto antiche. Al Centro ci sono le Ardenne. Al Sud le colline sono tantissime.</p></div>
+      <div class="paragrafo"><h4><span class="n">3</span>Le colline italiane</h4><p>Le colline sono <strong>quasi metà</strong> dell'Italia. Sono molto abitate. Ci sono pascoli, viti e ulivi. Oggi però molte persone vanno a vivere in città.</p></div>
+    </div>
+    <div class="blocco" style="--c:#2b6fa5">
+      <h3><span>3. Le pianure</span></h3>
+      <div class="paragrafo"><h4><span class="n">1</span>Che cosa sono</h4><p>Le pianure sono terreni piatti, di solito <strong>sotto i 200 metri</strong>. Le persone le hanno trasformate più di tutti gli altri spazi: ci sono campi, allevamenti, città, industrie, strade e ferrovie.</p></div>
+      <div class="paragrafo"><h4><span class="n">2</span>Le pianure europee</h4><p>Le pianure sono <strong>due terzi</strong> dell'Europa. La più grande è il <strong>Bassopiano Sarmatico</strong>, in Russia. Oggi le pianure sono le zone più abitate d'Europa.</p></div>
+      <div class="paragrafo"><h4><span class="n">3</span>Le pianure italiane</h4><p>In Italia le pianure sono <strong>poche</strong> e quasi tutte nate dai detriti dei fiumi. La più grande è la <strong>Pianura Padana</strong>. Roma si trova nell'Agro Romano.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= GLOSSARIO ======================= -->
+<section class="parte" id="parole" aria-labelledby="t-parole">
+  <p class="etichetta">Glossario</p>
+  <h2 id="t-parole">Le parole della lezione</h2>
+  <p class="guida">Il significato dei termini nuovi, nell'ordine in cui li incontri. Le parole sottolineate a puntini nel testo portano qui.</p>
+  <dl class="parole">
+    <div class="parola" id="p-altitudine"><dt>Altitudine</dt><dd>Quanto un luogo è più alto del livello del mare. Si misura in metri.</dd></div>
+    <div class="parola" id="p-rilievo"><dt>Rilievi</dt><dd>Le parti della crosta terrestre più alte di ciò che hanno intorno: montagne e colline.</dd></div>
+    <div class="parola" id="p-montagna"><dt>Montagna</dt><dd>Rilievo che supera i 600 metri sopra il livello del mare.</dd></div>
+    <div class="parola" id="p-vetta"><dt>Vetta</dt><dd>Il punto più alto di una montagna.</dd></div>
+    <div class="parola" id="p-versante"><dt>Versante</dt><dd>Il fianco di una montagna.</dd></div>
+    <div class="parola" id="p-valle"><dt>Valle</dt><dd>Lo spazio più basso tra i versanti di due rilievi, spesso percorso da un fiume.</dd></div>
+    <div class="parola" id="p-catena"><dt>Catena montuosa</dt><dd>Tante montagne una vicina all'altra, in fila.</dd></div>
+    <div class="parola" id="p-collina"><dt>Collina</dt><dd>Rilievo alto tra i 200 e i 600 metri sopra il livello del mare.</dd></div>
+    <div class="parola" id="p-placche"><dt>Placche</dt><dd>I grandi pezzi in cui è divisa la crosta terrestre. Si muovono molto lentamente.</dd></div>
+    <div class="parola" id="p-tettoniche"><dt>Colline tettoniche</dt><dd>Colline nate dal movimento delle placche della crosta terrestre.</dd></div>
+    <div class="parola" id="p-moreniche"><dt>Colline moreniche</dt><dd>Colline formate dai detriti (sassi, ghiaia) trasportati e lasciati dai ghiacciai.</dd></div>
+    <div class="parola" id="p-vulcaniche"><dt>Colline vulcaniche</dt><dd>Colline formate dai materiali usciti dalle eruzioni dei vulcani.</dd></div>
+    <div class="parola" id="p-antropizzato"><dt>Antropizzato</dt><dd>Un ambiente trasformato dagli esseri umani per viverci: con case, campi, strade.</dd></div>
+    <div class="parola" id="p-pianura"><dt>Pianura</dt><dd>Terreno piatto, di solito più basso di 200 metri sopra il livello del mare.</dd></div>
+    <div class="parola" id="p-alluvionale"><dt>Pianura alluvionale</dt><dd>Pianura formata dai detriti portati e lasciati dai fiumi.</dd></div>
+    <div class="parola" id="p-bassopiano"><dt>Bassopiano</dt><dd>Pianura molto vasta e poco più alta del livello del mare.</dd></div>
+  </dl>
+</section>
+
+<!-- ======================= DIECI COSE DA SAPERE ======================= -->
+<section class="parte" id="compiti" aria-labelledby="t-compiti">
+  <p class="etichetta">Dieci cose da sapere</p>
+  <h2 id="t-compiti">Ripassiamo</h2>
+  <p class="guida">Rispondi prima da solo, poi premi «Controlla». Se sbagli, riprova: la soluzione compare con il pulsante «Mostra le soluzioni».</p>
+
+  <p class="fascia" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8"/></svg></span><span>Dieci cose da sapere</span></p>
+  <div class="attivita">
+    <h4>Completa le dieci informazioni</h4>
+    <p class="meta">Per ogni frase scegli la parola che manca. Ogni parola si usa una volta sola.</p>
+    <div id="dieci"></div>
+  </div>
+
+  <div id="esercizi"></div>
+
+  <p class="fascia" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span>Pensiamo insieme</span></p>
+  <div class="attivita">
+    <h4>Dove ti piacerebbe vivere?</h4>
+    <p class="consegna">Montagna, collina o pianura? Scegli uno dei tre spazi e scrivi <strong>due vantaggi</strong> e <strong>uno svantaggio</strong> di viverci. Usa almeno due parole del glossario.</p>
+    <textarea aria-label="La tua risposta" placeholder="Mi piacerebbe vivere in… perché… Però…"></textarea>
+  </div>
+</section>
+
+<!-- ======================= DOPO ======================= -->
+<section class="parte" id="dopo" aria-labelledby="t-dopo">
+  <p class="etichetta">E dopo?</p>
+  <h2 id="t-dopo">Che cosa ci aspetta</h2>
+  <p class="guida">Hai finito la lezione. Ecco dove si va adesso.</p>
+  <div class="pd dopo-box">
+    <h3><span>Dopo</span></h3>
+    <p>Nelle valli scorrono i fiumi, che con i loro detriti hanno costruito le pianure; i ghiacciai hanno formato le colline moreniche. Il prossimo argomento sono proprio le acque: ghiacciai, fiumi, laghi e mari.</p>
+    <p class="link-lez">Più avanti: <a href="acque.html">Le acque</a> · Per approfondire: <a href="rilievi.html">I rilievi (lezione completa)</a></p>
+  </div>
+  <div class="attivita prepara">
+    <h4>Per prepararti</h4>
+    <p class="consegna">Pensa a un fiume che conosci (per esempio il Tevere). Da dove scende? Attraversa montagne, colline o pianure? Scrivi una cosa che sai e una domanda.</p>
+    <textarea aria-label="Che cosa so e che cosa vorrei sapere" placeholder="So già che… Vorrei sapere…"></textarea>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer>
+<p>Organizzazione della lezione ispirata a <em>Geografia facile per la scuola secondaria di primo grado – Classe prima</em> (Modulo 2, cap. 3 «Gli spazi terrestri»), Edizioni Erickson: Concetti chiave, Idea principale, Mappa delle informazioni, Testo sintetico/essenziale, Glossario, Dieci cose da sapere. Testi, disegni ed esercizi di questa pagina sono originali.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var NS="http://www.w3.org/2000/svg";
+function el(t,attr,txt){ var e=document.createElement(t); if(attr){ for(var k in attr){ e.setAttribute(k,attr[k]); } } if(txt!=null) e.textContent=txt; return e; }
+function sv(t,attr){ var e=document.createElementNS(NS,t); for(var k in attr){ e.setAttribute(k,attr[k]); } return e; }
+function mescola(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+
+/* ---------- indice laterale: si vede una parte alla volta ---------- */
+var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
+var parti=Array.prototype.slice.call(document.querySelectorAll("section.parte"));
+document.documentElement.className+=" una-parte";
+function attiva(id){ Array.prototype.forEach.call(voci,function(v){ var on=v.getAttribute("href")==="#"+id; if(on){ v.setAttribute("aria-current","true"); if(navI.scrollWidth>navI.clientWidth){ navI.scrollLeft=v.offsetLeft-16; } } else v.removeAttribute("aria-current"); }); }
+var vocePer={}; Array.prototype.forEach.call(voci,function(v){ vocePer[v.getAttribute("href").slice(1)]=v; });
+function linkParte(sx,cls,prima,dopo){ var v=vocePer[sx.id], a=document.createElement("a"), n=v&&v.querySelector(".nome");
+  a.href="#"+sx.id; a.className=cls; if(v&&v.style.getPropertyValue("--c")) a.style.setProperty("--c",v.style.getPropertyValue("--c"));
+  a.textContent=prima+(n?n.textContent:(sx.querySelector(".etichetta")||sx).textContent)+dopo; return a; }
+parti.forEach(function(sx,i){ var n=document.createElement("nav"); n.className="parte-nav"; n.setAttribute("aria-label","Altre parti della lezione");
+  if(i>0) n.appendChild(linkParte(parti[i-1],"prec","← ",""));
+  if(i<parti.length-1) n.appendChild(linkParte(parti[i+1],"succ",""," →"));
+  sx.appendChild(n); });
+var corrente=null;
+function mostra(id){ if(id===corrente) return false; parti.forEach(function(sx){ sx.hidden=(sx.id!==id); }); corrente=id; attiva(id);
+  try{ window.dispatchEvent(new Event("resize")); }catch(e){ var ev=document.createEvent("Event"); ev.initEvent("resize",true,true); window.dispatchEvent(ev); }
+  return true; }
+function parteDi(el){ while(el&&!(el.classList&&el.classList.contains("parte"))) el=el.parentNode; return el; }
+function bersaglio(h){ try{ h=decodeURIComponent(h); }catch(e){} return h?document.getElementById(h):null; }
+document.addEventListener("click",function(e){ var a=e.target; while(a&&a.tagName!=="A") a=a.parentNode;
+  if(!a||!a.getAttribute) return; var h=a.getAttribute("href")||""; if(h.charAt(0)!=="#") return;
+  var el=bersaglio(h.slice(1)), sx=el&&parteDi(el); if(sx) mostra(sx.id); },true);
+function daIndirizzo(){ var el=bersaglio((location.hash||"").slice(1)), sx=el&&parteDi(el);
+  if(sx){ if(mostra(sx.id)) setTimeout(function(){ el.scrollIntoView(); },0); } else if(!corrente) mostra(parti[0].id); }
+window.addEventListener("hashchange",daIndirizzo); daIndirizzo();
+
+/* ---------- carte delle parole ---------- */
+var CARTE=[
+ {n:"Rilievo", d:"montagne e colline: le parti più alte della terraferma",
+  s:'<path class="pieno" d="M4 52L22 18L33 34L38 30L44 40C50 36 56 38 60 44V52Z"/><path d="M4 52L22 18L33 34"/><path class="neve" d="M17 27L22 18L27 27L24 25L22 28L20 25Z"/><path d="M30 52C36 38 48 34 60 44"/><path d="M2 52h60"/>'},
+ {n:"Montagna", d:"rilievo alto più di 600 metri",
+  s:'<path class="pieno" d="M8 52L32 10L56 52Z"/><path d="M8 52L32 10L56 52"/><path class="neve" d="M24 24L32 10L40 24L36 21L32 26L28 21Z"/><path d="M2 52h60"/><path d="M14 52v-5M14 47l-3 3M14 47l3 3M50 52v-5M50 47l-3 3M50 47l3 3"/>'},
+ {n:"Collina", d:"rilievo alto tra 200 e 600 metri, con forme arrotondate",
+  s:'<path class="pieno" d="M2 50C12 32 26 30 36 42C42 34 54 32 62 44V52H2Z"/><path d="M2 50C12 32 26 30 36 42C42 34 54 32 62 44"/><path d="M19 33v-7M19 26l-3 3M19 26l3 3M24 32v-8M24 24l-3 3M24 24l3 3"/><path d="M2 52h60"/><path d="M42 46l4-4 4 4v4h-8z"/>'},
+ {n:"Pianura", d:"terreno piatto, di solito sotto i 200 metri",
+  s:'<path class="pieno" d="M2 38h60v16H2z"/><path d="M2 38h60M6 44h52M10 49h44"/><circle cx="12" cy="31" r="4.5"/><path d="M12 35.5V38"/><circle cx="21" cy="32" r="3.5"/><path d="M21 35.5V38"/><path d="M38 38v-7l6-5 6 5v7"/><path d="M52 38v-4h6v4"/>'},
+ {n:"Catena montuosa", d:"tante montagne una vicina all'altra",
+  s:'<path class="pieno" d="M2 52L14 26L22 38L32 12L42 34L50 22L62 52Z"/><path d="M2 52L14 26L22 38L32 12L42 34L50 22L62 52"/><path class="neve" d="M27 21L32 12L37 21L34 19L32 22L30 19Z"/><path d="M2 52h60"/>'},
+ {n:"Valle", d:"lo spazio tra i versanti di due rilievi",
+  s:'<path class="pieno" d="M2 52V16L26 46H38L62 14V52Z"/><path d="M2 16L26 46M38 46L62 14"/><path d="M26 46C29 50 33 44 36 48C38 50 34 52 36 54" stroke-width="3"/><path d="M2 54h60"/>'}
+];
+var carte=document.getElementById("carte"), alContrario=false, bottoniCarte=[];
+CARTE.forEach(function(C){
+  var b=el("button",{type:"button","class":"carta","aria-pressed":"false"});
+  b.innerHTML='<span class="giro"><span class="faccia fronte"><span class="disegno"><svg viewBox="0 0 64 64" aria-hidden="true">'+C.s+'</svg></span><span class="nome"></span><span class="gira">tocca per girare ↻</span></span><span class="faccia retro"><span class="nome"></span><span class="def"></span><span class="gira">tocca per girare ↻</span></span></span>';
+  var nomi=b.querySelectorAll(".nome"); nomi[0].textContent=C.n; nomi[1].textContent=C.n; b.querySelector(".def").textContent=C.d;
+  function etichetta(){ var girata=b.classList.contains("girata"), mostraDef=(girata!==alContrario);
+    b.setAttribute("aria-label", mostraDef ? (alContrario? "Definizione: "+C.d+". Tocca per vedere la parola" : C.n+": "+C.d) : (alContrario? "Parola: "+C.n : "Parola: "+C.n+". Tocca per vedere che cosa significa")); }
+  b.addEventListener("click",function(){ b.classList.toggle("girata"); b.setAttribute("aria-pressed",b.classList.contains("girata")?"true":"false"); etichetta(); });
+  b._et=etichetta; etichetta(); carte.appendChild(b); bottoniCarte.push(b);
+});
+function rigira(){ bottoniCarte.forEach(function(b){ b.classList.toggle("girata",alContrario); b.setAttribute("aria-pressed","false"); b._et(); }); }
+var bGioco=document.getElementById("carte-gioco");
+bGioco.addEventListener("click",function(){ alContrario=!alContrario; bGioco.setAttribute("aria-pressed",alContrario?"true":"false");
+  bGioco.textContent=alContrario?"Torna al gioco normale: prima la parola":"Gioca al contrario: prima la definizione";
+  if(alContrario){ var ordine=mescola(bottoniCarte); ordine.forEach(function(b){ carte.appendChild(b); }); }
+  rigira(); });
+document.getElementById("carte-reset").addEventListener("click",rigira);
+
+/* ---------- profilo e altimetro ---------- */
+var P=document.getElementById("profilo"), Y=function(h){ return 320-h*0.18; };
+[["banda-m",0,Y(600)],["banda-c",Y(600),Y(200)],["banda-p",Y(200),Y(0)]].forEach(function(b){ P.appendChild(sv("rect",{"class":b[0],x:0,y:b[1],width:900,height:b[2]-b[1]})); });
+/* profilo del terreno: montagne a sinistra, colline al centro, pianura e mare a destra */
+var pts=[[0,700],[60,1100],[120,1450],[175,1000],[230,1180],[290,760],[335,600],[375,430],[420,520],[465,340],[510,440],[555,260],[600,170],[660,130],[720,80],[780,40],[822,0]];
+function liscio(p){ var d="M"+p[0][0]+" "+Y(p[0][1]).toFixed(1);
+  for(var i=0;i<p.length-1;i++){ var a=p[Math.max(i-1,0)], b=p[i], c=p[i+1], e=p[Math.min(i+2,p.length-1)], t=b[0]<300?0:0.18;
+    var c1=[b[0]+(c[0]-a[0])*t, Y(b[1]+(c[1]-a[1])*t)], c2=[c[0]-(e[0]-b[0])*t, Y(c[1]-(e[1]-b[1])*t)];
+    d+=" C"+c1[0].toFixed(1)+" "+c1[1].toFixed(1)+" "+c2[0].toFixed(1)+" "+c2[1].toFixed(1)+" "+c[0]+" "+Y(c[1]).toFixed(1); }
+  return d; }
+P.appendChild(sv("rect",{"class":"mare",x:822,y:Y(0),width:78,height:40}));
+P.appendChild(sv("path",{"class":"suolo",d:liscio(pts)+" L822 360 L0 360Z"}));
+P.appendChild(sv("path",{"class":"neve",d:"M104 "+Y(1250)+" L120 "+Y(1450)+" L136 "+Y(1250)+" L128 "+Y(1290)+" L120 "+Y(1230)+" L112 "+Y(1290)+"Z"}));
+[[600,"600 m"],[200,"200 m"],[0,"0 m"]].forEach(function(q){ P.appendChild(sv("line",{"class":"quota",x1:0,x2:900,y1:Y(q[0]),y2:Y(q[0])}));
+  var t=sv("text",{"class":"eq",x:861,y:Y(q[0])-6,"text-anchor":"middle"}); t.textContent=q[1]; P.appendChild(t); });
+var tm=sv("text",{"class":"eq",x:861,y:346,"text-anchor":"middle",fill:"#fff",style:"fill:#fff"}); tm.textContent="mare"; P.appendChild(tm);
+[["nm","MONTAGNA",300,Y(1380)],["nc","COLLINA",450,Y(560)+2],["np","PIANURA",700,Y(200)+13]].forEach(function(n){ var t=sv("text",{"class":"nomi "+n[0],x:n[2],y:n[3],"text-anchor":"middle"}); t.textContent=n[1]; P.appendChild(t); });
+var cur=sv("g",{"class":"cursore"}), cl=sv("line",{x1:20,x2:880}), cc=sv("circle",{cx:20,r:8}), ct=sv("text",{x:30});
+cur.appendChild(cl); cur.appendChild(cc); cur.appendChild(ct); P.appendChild(cur);
+var q=document.getElementById("quota"), qo=document.getElementById("quota-out");
+function aggiorna(){ var h=+q.value, y=Y(h); cl.setAttribute("y1",y); cl.setAttribute("y2",y); cc.setAttribute("cy",y); ct.setAttribute("y",y-8); ct.textContent=h+" m";
+  var cosa = h>600 ? '<b class="m">in montagna</b>: sei sopra i 600 m.' : h>=200 ? '<b class="c">in collina</b>: sei tra 200 e 600 m.' : '<b class="p">in pianura</b>: sei sotto i 200 m.';
+  if(h===0) cosa='<b class="p">al livello del mare</b>: è da qui che si misura l\'altitudine.';
+  if(h===200||h===600) cosa+=' Sei proprio sul confine!';
+  qo.innerHTML="A "+h+" metri sei "+cosa; }
+q.addEventListener("input",aggiorna); aggiorna();
+
+/* ---------- mappa delle informazioni: nascondi e scopri ---------- */
+var mi=document.getElementById("mi"), bProva=document.getElementById("mi-prova");
+Array.prototype.forEach.call(mi.querySelectorAll(".mi-nodo"),function(n){
+  var b=el("button",{type:"button","class":"scopri"},"Che cosa ricordi? Tocca per scoprire");
+  n.appendChild(b); b.addEventListener("click",function(){ n.classList.add("visto"); });
+});
+bProva.addEventListener("click",function(){ var on=!mi.classList.contains("prova"); mi.classList.toggle("prova",on);
+  Array.prototype.forEach.call(mi.querySelectorAll(".mi-nodo"),function(n){ n.classList.remove("visto"); });
+  bProva.setAttribute("aria-pressed",on?"true":"false"); bProva.textContent=on?"Mostra di nuovo tutta la mappa":"Mettiti alla prova: nascondi le caselle"; });
+
+/* ---------- testo sintetico / essenziale ---------- */
+var bot=document.querySelectorAll(".livelli button");
+Array.prototype.forEach.call(bot,function(b){ b.addEventListener("click",function(){
+  var ess=b.getAttribute("data-livello")==="essenziale";
+  document.getElementById("testo-sintetico").hidden=ess; document.getElementById("testo-essenziale").hidden=!ess;
+  Array.prototype.forEach.call(bot,function(x){ x.setAttribute("aria-pressed", x===b ? "true":"false"); });
+});});
+
+/* ---------- le parti della montagna ---------- */
+var bm=document.querySelectorAll(".parti-mont button"), ev=document.querySelectorAll("#disegno-montagna .evid");
+Array.prototype.forEach.call(bm,function(b){ b.addEventListener("click",function(){
+  var p=b.getAttribute("data-parte"), on=b.getAttribute("aria-pressed")!=="true";
+  Array.prototype.forEach.call(bm,function(x){ x.setAttribute("aria-pressed", (on&&x===b)?"true":"false"); });
+  Array.prototype.forEach.call(ev,function(x){ x.classList.toggle("on", on&&x.getAttribute("data-parte")===p); });
+});});
+
+/* ---------- esercizi ---------- */
+function costruisci(cont, scelte, righe){
+  var tab=el("table",{"class":"esercizio"}), tb=el("tbody"); tab.appendChild(tb);
+  var stati=[];
+  righe.forEach(function(r){
+    var tr=el("tr"), td1=el("td"), td2=el("td"), td3=el("td",{"class":"esito","aria-live":"polite"});
+    td1.appendChild(document.createTextNode(r[0]));
+    var sp=el("span",{"class":"spiega"}); sp.hidden=true; if(r[2]) sp.textContent=r[2]; td1.appendChild(sp);
+    var s=el("select",{"aria-label":"Risposta: "+r[0]}); s.appendChild(el("option",{value:""},"— scegli —"));
+    scelte.forEach(function(c){ s.appendChild(el("option",{value:c},c)); });
+    td2.appendChild(s); tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tb.appendChild(tr);
+    stati.push({tr:tr,s:s,esito:td3,sp:sp,giusta:r[1]});
+  });
+  cont.appendChild(tab);
+  var com=el("div",{"class":"comandi"}), b1=el("button",{type:"button","class":"bottone"},"Controlla"), b2=el("button",{type:"button","class":"bottone secondario"},"Mostra le soluzioni"), pt=el("span",{"class":"punteggio","aria-live":"polite"});
+  b2.hidden=true; com.appendChild(b1); com.appendChild(b2); com.appendChild(pt); cont.appendChild(com);
+  b1.addEventListener("click",function(){
+    var ok=0, vuote=0;
+    stati.forEach(function(x){
+      x.tr.classList.remove("ok"); x.tr.classList.remove("no");
+      if(!x.s.value){ vuote++; x.esito.textContent=""; return; }
+      var g=x.s.value===x.giusta; if(g) ok++;
+      x.tr.classList.add(g?"ok":"no"); x.esito.textContent=g?"✓":"✗"; x.esito.setAttribute("aria-label",g?"giusto":"sbagliato");
+      if(x.sp.textContent) x.sp.hidden=false;
+    });
+    pt.textContent=ok+" su "+stati.length+(vuote? " · "+vuote+" senza risposta":"");
+    b2.hidden=false;
+  });
+  b2.addEventListener("click",function(){
+    stati.forEach(function(x){ x.s.value=x.giusta; x.tr.classList.remove("no"); x.tr.classList.add("ok"); x.esito.textContent="✓"; if(x.sp.textContent) x.sp.hidden=false; });
+    pt.textContent="Ecco le soluzioni.";
+  });
+}
+/* idea principale: due domande veloci */
+costruisci(document.getElementById("idea-prova"), ["le pianure","le colline","le montagne"], [
+  ["In Italia lo spazio più grande è occupato da…","le colline","Il 42% del territorio: quasi metà."],
+  ["In Italia lo spazio più piccolo è occupato da…","le pianure","Solo il 23%: meno di un quarto."],
+  ["In Europa lo spazio più grande è occupato da…","le pianure","Circa due terzi del continente."]
+]);
+
+var ESERCIZI=[
+{gruppo:"spazio", titolo:"Montagna, collina o pianura?", meta:"Guarda l'altitudine e scegli.",
+  scelte:["montagna","collina","pianura"],
+  righe:[["Un campo coltivato a 80 m","pianura"],["Un borgo a 450 m","collina"],["Un rifugio a 2300 m","montagna"],["Un vigneto a 280 m","collina"],["Una città a 150 m","pianura"],["La vetta del Gran Sasso, 2912 m","montagna"]]},
+{gruppo:"spazio", titolo:"Il primato", meta:"Chi è il più alto o il più grande? Usa la Mappa delle informazioni.",
+  scelte:["Elbrus","Monte Bianco","Bassopiano Sarmatico","Pianura Padana","Pirenei","Ardenne"],
+  righe:[["La montagna più alta d'Europa","Elbrus"],["La montagna più alta d'Italia","Monte Bianco"],["La pianura più grande d'Europa","Bassopiano Sarmatico"],["La pianura più grande d'Italia","Pianura Padana"],["Le montagne tra Spagna e Francia","Pirenei"],["Le colline tra Francia e Belgio","Ardenne"]]},
+{gruppo:"processi", titolo:"Come sono nate queste colline?", meta:"Tettoniche, moreniche o vulcaniche?",
+  scelte:["tettoniche","moreniche","vulcaniche"],
+  righe:[["I Colli Albani, vicino a Roma","vulcaniche","Lì c'era un grande vulcano: i laghi di Albano e di Nemi sono nei suoi crateri."],["Le colline intorno al Lago di Garda","moreniche"],["Le Langhe e il Monferrato","tettoniche"],["Colline formate dai detriti dei ghiacciai","moreniche"],["Colline spinte in alto dal movimento delle placche","tettoniche"],["I Colli Euganei, in Veneto","vulcaniche"]]},
+{gruppo:"processi", titolo:"Vero o falso?", meta:"Dopo il controllo leggi la spiegazione: serve a correggere le frasi false.",
+  scelte:["Vero","Falso"],
+  righe:[["Le pianure sono rilievi.","Falso","I rilievi sono le montagne e le colline."],["Le montagne del Sud Europa sono più giovani e più alte di quelle del Nord.","Vero"],["Gli Appennini sono più alti delle Alpi.","Falso","Sono più bassi, e anche meno abitati."],["Le pianure alluvionali sono nate dai detriti dei fiumi.","Vero"],["In Italia le pianure occupano più spazio delle colline.","Falso","Le colline sono quasi metà del territorio, le pianure meno di un quarto."],["La pianura è lo spazio più trasformato dalle persone.","Vero"]]},
+{gruppo:"lessico", titolo:"Parole e significati", meta:"Abbina ogni definizione alla parola giusta.",
+  scelte:["vetta","versante","valle","catena montuosa","bassopiano","antropizzato"],
+  righe:[["Il punto più alto di una montagna","vetta"],["Il fianco di una montagna","versante"],["Lo spazio tra i versanti di due rilievi","valle"],["Tante montagne una vicina all'altra","catena montuosa"],["Una pianura molto vasta e bassa","bassopiano"],["Trasformato dagli esseri umani","antropizzato"]]}
+];
+var DIECI=[
+["Il punto più alto di una montagna è la vetta; i suoi fianchi si chiamano …","versanti"],
+["Tante montagne una vicina all'altra formano una …","catena montuosa"],
+["Le montagne più giovani e più alte d'Europa si trovano al …","Sud"],
+["La vetta più alta d'Italia, nelle Alpi, è il …","Monte Bianco"],
+["Secondo come sono nate, le colline sono tettoniche, moreniche o …","vulcaniche"],
+["Le colline dell'Europa dell'Est, come le Alture del Volga, sono molto …","antiche"],
+["In Italia le colline servono per coltivare viti e ulivi e per i …","pascoli"],
+["In pianura le persone coltivano, costruiscono città e …","industrie"],
+["Le pianure sono due terzi dell'Europa; la più grande è il Bassopiano …","Sarmatico"],
+["La pianura più grande d'Italia, nata dai detriti del Po, è la Pianura …","Padana"]
+];
+var GRUPPI={
+ "spazio":{c:"#b25510",n:"Leggere il territorio",i:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z"/><path d="M9 4.5v13M15 6.5v13"/></svg>'},
+ "processi":{c:"#4757a8",n:"Capire come si formano e cambiano",i:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5l6 3.5-6 3.5zM10 4.5l6 3.5-6 3.5z"/><path d="M20 12.5l-6 3.5 6 3.5zM14 12.5l-6 3.5 6 3.5z"/></svg>'},
+ "lessico":{c:"#6b3f8a",n:"Usare le parole della geografia",i:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18.5L8.5 6l4.5 12.5M5.6 14h5.8"/><path d="M15 12.5a2.5 2.5 0 1 1 0 4.5M20 10v8.5"/></svg>'}
+};
+var zona=document.getElementById("esercizi"), ultimo="";
+ESERCIZI.forEach(function(E,i){
+  if(E.gruppo!==ultimo){ var g=GRUPPI[E.gruppo], f=el("p",{"class":"fascia",style:"--c:"+g.c}), t=el("span",{"class":"tondo"}); t.innerHTML=g.i; f.appendChild(t); f.appendChild(el("span",null,g.n)); zona.appendChild(f); ultimo=E.gruppo; }
+  var box=el("div",{"class":"attivita"}); box.appendChild(el("h4",null,(i+1)+". "+E.titolo)); box.appendChild(el("p",{"class":"meta"},E.meta));
+  costruisci(box,E.scelte,mescola(E.righe)); zona.appendChild(box);
+});
+costruisci(document.getElementById("dieci"), mescola(DIECI.map(function(d){return d[1];})), DIECI);
+})();
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+<script>
+(function(){
+  var corpo=document.querySelector(".corpo-lezione"), nav=document.querySelector("nav.indice"), b=document.querySelector(".indice-riduci");
+  if(!corpo||!nav||!b) return;
+  function metti(r){
+    if(r) corpo.className+=" indice-ridotto"; else corpo.className=corpo.className.replace(/\s*indice-ridotto/g,"");
+    b.setAttribute("aria-pressed",r?"true":"false");
+    b.setAttribute("aria-label",r?"Mostra i nomi delle parti":"Riduci l'indice alle sole icone");
+    b.title=b.getAttribute("aria-label"); b.innerHTML=r?"&raquo;":"&laquo;";
+  }
+  var r=false; try{ r=localStorage.getItem("indice-ridotto")==="1"; }catch(e){}
+  metti(r);
+  b.onclick=function(){ r=!r; metti(r); try{ localStorage.setItem("indice-ridotto",r?"1":"0"); }catch(e){} };
+})();
+</script>
+<script src="../../../../assets/barra.js"></script>
+</body>
+</html>

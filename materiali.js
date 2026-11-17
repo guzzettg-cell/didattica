@@ -194,7 +194,8 @@ var MODULI = [
       ] },
       { titolo: "I rilievi", libri: ["paesaggi"], pagine: "A61–A71", descrizione: "Montagne, colline, pianure; gli esseri umani modificano i rilievi.", link: "geografia/prima/paesaggio/attivita/rilievi.html", data: "2026-11-04", attivita: [
         { tipo: "Attività", titolo: "I rilievi", descrizione: "Quattro ore: altitudine; montagne; origine di colline e pianure; le persone e i rilievi.", link: "geografia/prima/paesaggio/attivita/rilievi.html", data: "2026-11-04" },
-        { tipo: "Scheda", titolo: "Scheda: i rilievi", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-rilievi.html", data: "2026-11-04" }
+        { tipo: "Scheda", titolo: "Scheda: i rilievi", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-rilievi.html", data: "2026-11-04" },
+        { tipo: "Lezione facile", titolo: "Gli spazi terrestri", descrizione: "Versione facile, organizzata come Geografia facile (Erickson): carte delle parole, idea principale con l'altimetro, mappa delle informazioni, testo sintetico/essenziale, glossario, dieci cose da sapere.", link: "geografia/prima/paesaggio/attivita/spazi-terrestri-facile.html", data: "2026-11-17" }
       ] },
       { titolo: "Le acque", libri: ["paesaggi"], pagine: "A81–A95", descrizione: "Ghiacciai, fiumi, laghi, mari e coste; gli esseri umani modificano i corsi d'acqua e le coste.", link: "geografia/prima/paesaggio/attivita/acque.html", data: "2026-11-04", attivita: [
         { tipo: "Attività", titolo: "Le acque", descrizione: "Quattro ore: ciclo dell'acqua e ghiacciai; fiumi; laghi, mari e coste; le persone e le acque.", link: "geografia/prima/paesaggio/attivita/acque.html", data: "2026-11-04" },
