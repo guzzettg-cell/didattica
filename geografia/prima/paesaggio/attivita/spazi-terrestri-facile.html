@@ -297,9 +297,9 @@ a.voce[aria-current="true"]{background:#2b5f6b;background:var(--c);color:#fff}
 a.voce[aria-current="true"] .tondo{background:#ffffff;border-color:#fff}
 
 /* ===== geografia facile: aggiunte ===== */
-:root{--monte:#8a5a12;--monte-bg:#f6ecdc;--colle:#55800f;--colle-bg:#eaf3dc;--piano:#2b6fa5;--piano-bg:#e2eef8}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--monte:#e7b766;--monte-bg:#2e2412;--colle:#a9d46a;--colle-bg:#1f2a12;--piano:#8cc0ec;--piano-bg:#132433}}
-:root[data-theme="dark"]{--monte:#e7b766;--monte-bg:#2e2412;--colle:#a9d46a;--colle-bg:#1f2a12;--piano:#8cc0ec;--piano-bg:#132433}
+:root{--monte:#7a4b1c;--monte-bg:#f1e3d3;--colle:#9a7612;--colle-bg:#fbf2cf;--piano:#3d7f34;--piano-bg:#e2f0da}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--monte:#e0a873;--monte-bg:#2e2116;--colle:#e8c95c;--colle-bg:#2b2610;--piano:#93d07c;--piano-bg:#16261a}}
+:root[data-theme="dark"]{--monte:#e0a873;--monte-bg:#2e2116;--colle:#e8c95c;--colle-bg:#2b2610;--piano:#93d07c;--piano-bg:#16261a}
 
 /* carte delle parole */
 .carte{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin:8px 0 6px}
@@ -319,6 +319,15 @@ a.voce[aria-current="true"] .tondo{background:#ffffff;border-color:#fff}
 .carta .gira{position:absolute;right:12px;bottom:8px;font-size:.78rem;color:var(--tenue)}
 @media (prefers-reduced-motion:reduce){.carta .giro{transition:none}}
 .comandi-carte{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:4px 0 16px}
+.modo-attuale{font-weight:700;margin-right:6px}
+.scelta-gioco{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:720px;margin:6px 0 18px}
+.sg-domanda{grid-column:1/-1;margin:0;font:700 1.15rem var(--serif)}
+.sg-btn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:150px;padding:18px;border-radius:16px;border:2px solid var(--accento);background:var(--accento-soft);text-align:center;transition:transform .15s}
+.sg-btn:hover{transform:translateY(-3px)}
+.sg-btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.sg-t{font:800 1.6rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--accento)}
+.sg-s{font-size:.95rem;color:var(--tenue)}
+@media (max-width:560px){.scelta-gioco{grid-template-columns:1fr}.sg-btn{min-height:110px}}
 .comandi-carte .bottone{font-size:.92rem;padding:7px 16px}
 
 /* idea principale: il profilo dell'altitudine */
@@ -355,7 +364,7 @@ a.voce[aria-current="true"] .tondo{background:#ffffff;border-color:#fff}
 .barra-riga .chi{font-weight:700}
 .barra{display:flex;height:34px;border-radius:8px;overflow:hidden;font:700 .86rem/34px var(--sans);color:#fff}
 .barra span{display:block;text-align:center;white-space:nowrap;overflow:hidden}
-.barra .m{background:#9a6a1f} .barra .c{background:#5f8d1c} .barra .p{background:#2b6fa5} .barra .x{background:#8a9196}
+.barra .m{background:#8a5530} .barra .c{background:#b8901c} .barra .p{background:#4f8f3f} .barra .x{background:#8a9196}
 .barre .nota{font-size:.86rem;color:var(--tenue);margin:4px 0 0}
 .indovina{margin:14px 0 0}
 
@@ -368,7 +377,7 @@ a.voce[aria-current="true"] .tondo{background:#ffffff;border-color:#fff}
 .mi-ramo{position:relative;border-radius:14px;padding:0 0 10px;background:var(--tenue-bg)}
 .mi-ramo:before{content:"";position:absolute;left:50%;top:-12px;height:12px;border-left:3px solid var(--filo)}
 .mi-ramo>h3{margin:0;padding:10px 14px;border-radius:14px 14px 0 0;color:#fff;text-align:center;letter-spacing:.08em}
-.mi-ramo.m>h3{background:#9a6a1f} .mi-ramo.c>h3{background:#5f8d1c} .mi-ramo.p>h3{background:#2b6fa5}
+.mi-ramo.m>h3{background:#8a5530} .mi-ramo.c>h3{background:#b8901c} .mi-ramo.p>h3{background:#4f8f3f}
 .mi-nodo{margin:10px 10px 0;border:1px solid var(--filo);border-radius:10px;background:var(--carta);overflow:hidden}
 .mi-nodo h4{margin:0;padding:7px 12px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tenue);border-bottom:1px solid var(--filo)}
 .mi-nodo .cont{padding:8px 12px;font-size:.95rem}
@@ -388,7 +397,7 @@ a.voce[aria-current="true"] .tondo{background:#ffffff;border-color:#fff}
 .montagna-box .sm2{fill:#a58f66;stroke:#6d5b39;stroke-width:2;stroke-linejoin:round}
 .montagna-box .sf{fill:#d6c9a8;stroke:#8b7a57;stroke-width:1.5}
 .montagna-box .neve{fill:#fff;stroke:#6d5b39;stroke-width:1.5}
-.montagna-box .prato{fill:#9cc46a;stroke:#5f8d1c;stroke-width:1.5}
+.montagna-box .prato{fill:#9cc46a;stroke:#b8901c;stroke-width:1.5}
 .montagna-box .fiume{fill:none;stroke:#3d8fd1;stroke-width:6;stroke-linecap:round}
 .montagna-box .etq text{font:800 15px var(--sans);fill:#23262a;paint-order:stroke;stroke:#fff;stroke-width:5px}
 .montagna-box .etq line{stroke:#23262a;stroke-width:1.5}
@@ -412,6 +421,87 @@ a.voce[aria-current="true"] .tondo{background:#ffffff;border-color:#fff}
 @media print{.comandi-carte,.altimetro,.indovina{display:none}.carta .giro{transform:none!important}.carta .retro{position:static;transform:none}.carta{min-height:0}.carta .faccia{position:static}}
 
 section.parte:target{outline:none}
+.giochi{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin:0 0 18px}
+.gioco{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border:1px solid var(--filo);border-left:5px solid #2a7f6f;border-radius:12px;text-decoration:none;color:var(--ink);background:var(--carta);transition:transform .15s}
+.gioco:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.gioco b{font:700 1.08rem var(--serif);color:#2a7f6f}
+.gioco span{font-size:.93rem}
+.gioco i{font-style:normal;font-size:.8rem;color:var(--tenue);text-transform:uppercase;letter-spacing:.05em}
+/* glossario: definizioni nascoste e definizioni scritte dai ragazzi */
+.parola .mia{display:block;width:100%;min-height:58px;margin:6px 0 8px;font:inherit;font-size:.95rem;padding:6px 9px;border:1px dashed var(--filo);border-radius:8px;background:var(--carta);color:var(--ink);resize:vertical}
+.parola .mia:focus{border-style:solid;border-color:#6b3f8a;outline:none}
+.parola .apri-def{all:unset;cursor:pointer;font-size:.88rem;font-weight:700;color:#6b3f8a;text-decoration:underline;text-underline-offset:3px}
+.parola .apri-def:focus-visible{outline:3px solid #6b3f8a;outline-offset:2px}
+.parola dd{margin-top:6px;padding:8px 10px;background:#fff8dc;border-left:3px solid #6b3f8a;border-radius:0 8px 8px 0}
+@media print{.parola dd[hidden]{display:block!important}.parola .apri-def,#glo-comandi{display:none}.parola .mia{border:0;padding:0;min-height:0}}
+
+/* tooltip delle parole del glossario: sta dentro la parola, così resta sempre attaccato a lei */
+a.pk{position:relative;cursor:help}
+.tip{position:absolute;z-index:120;left:50%;bottom:calc(100% + 11px);transform:translateX(calc(-50% + var(--sp,0px)));width:max-content;max-width:min(290px,80vw);background:#fff8dc;color:#23262a;border:2px solid #6b3f8a;border-radius:10px;padding:9px 13px;font:400 .93rem/1.4 var(--sans);text-align:left;text-decoration:none;white-space:normal;box-shadow:0 6px 18px rgba(0,0,0,.18);pointer-events:auto}
+.tip b{display:block;font:700 1.02rem var(--serif);margin-bottom:2px;color:#6b3f8a}
+.tip .vai{display:inline-block;margin-top:5px;font-size:.8rem;text-decoration:underline;color:#6b3f8a;cursor:pointer}
+.tip:after{content:"";position:absolute;left:calc(50% - var(--sp,0px) - 7px);top:calc(100% - 6px);width:12px;height:12px;background:#fff8dc;border:2px solid #6b3f8a;border-top:0;border-left:0;transform:rotate(45deg)}
+.tip.sotto{bottom:auto;top:calc(100% + 11px)}
+.tip.sotto:after{top:-8px;border:2px solid #6b3f8a;border-bottom:0;border-right:0}
+@media print{.tip{display:none!important}}
+
+/* idea principale a poco a poco */
+.passi .passo{margin:0 0 12px}
+.js-passi .passi .passo.dopo,.js-passi .passo-extra.dopo{display:none}
+.passi .passo.nuovo{animation:compare .6s ease-out;background:var(--accento-soft);border-radius:8px;box-shadow:0 0 0 6px var(--accento-soft)}
+@keyframes compare{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.passi-comandi{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:6px 0 18px}
+.passo-conta{font-size:.9rem;color:var(--tenue)}
+.js-passi .passi-comandi.finito #passo-tutto{display:none}
+.lettura.passi{max-width:none}
+.passi p.passo{max-width:74ch}
+.passo-carta{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:22px;align-items:start;margin:8px 0 22px;padding-top:14px;border-top:1px solid var(--filo)}
+.carta-testo p{margin:0 0 10px}
+.carta-guida{font-size:.95rem;color:var(--tenue)}
+.domanda-carta{font:1.12rem/1.45 var(--serif)}
+.opz-carta{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 8px}
+.opz-carta .bottone{font-size:.95rem;padding:7px 16px}
+.opz-carta .bottone.si{background:var(--ok)!important;border-color:var(--ok)!important;color:#fff!important}
+.opz-carta .bottone.no{border-color:var(--no);color:var(--no);opacity:.7}
+.fb-carta{min-height:1.4em;font-weight:700;margin:0 0 8px}
+.fb-carta.si{color:var(--ok)} .fb-carta.no{color:var(--no)}
+.risposta-carta{border-left:4px solid var(--piano);padding:8px 0 2px 14px;background:var(--piano-bg);border-radius:0 10px 10px 0;animation:compare .5s ease-out}
+.carta-guida b.verde{color:#3f8a3a}.carta-guida b.giallo{color:#a8841a}.carta-guida b.marrone{color:#7a4b1c}
+.carta-fig{margin:0}
+.carta-fig img,.carta-fig canvas{display:block;width:100%;height:auto;border:1px solid var(--filo);border-radius:10px}
+.carta-italia img,.carta-italia canvas{max-width:430px}
+.carta-fig figcaption{font-size:.78rem;color:var(--tenue);margin-top:6px;line-height:1.4}
+.carta-scelta{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.carta-scelta .bottone{font-size:.86rem;padding:6px 14px}
+.carta-scelta .bottone[aria-pressed="true"]{background:var(--accento);color:#fff}
+.legenda-fasce{display:flex;flex-wrap:wrap;gap:6px 14px;margin:8px 0 0;font-size:.85rem}
+.legenda-fasce i{display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:5px;vertical-align:-2px}
+@media (max-width:760px){.passo-carta{grid-template-columns:1fr}}
+.figura-quote{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);border:1px solid var(--filo);border-radius:12px;overflow:hidden;margin:6px 0 18px}
+.passi .figura-quote.nuovo{box-shadow:0 0 0 4px var(--accento-soft);border-radius:12px}
+.quote-testo{display:grid;grid-template-rows:170fr 100fr 90fr 60fr}
+.qt span{flex:1}
+.qt{display:flex;align-items:center;padding:4px 16px;font-size:1.06rem;line-height:1.3;border-top:2px dashed rgba(35,38,42,.4)}
+.qt.m{background:var(--monte-bg);border-top:0}.qt.m b{color:var(--monte)}
+.qt.c{background:var(--colle-bg)}.qt.c b{color:var(--colle)}
+.qt.p{background:var(--piano-bg)}.qt.p b{color:var(--piano)}
+.qt.x{background:#9cc7e0;color:#173a52;font-size:.86rem}
+.quote-disegno svg{display:block;width:100%;height:auto}
+.figura-quote .altimetro{grid-column:1/-1}
+.nota-scala{grid-column:1/-1;margin:0;font-size:.82rem;color:var(--tenue)}
+@media (max-width:700px){.figura-quote{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}.qt{font-size:.86rem;padding:2px 8px}.qt.x{font-size:.74rem}.qt .passo-giu{width:28px;height:28px}}
+.passo-giu{width:34px;height:34px;margin:-6px 0 -6px 8px;vertical-align:middle;border-radius:50%;border:2px solid var(--accento);background:var(--accento);color:#fff;display:inline-grid;place-items:center;cursor:pointer;padding:0;animation:invita 1.6s ease-in-out 1s 3}
+.passo-giu svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.passo-giu:hover{filter:brightness(1.12)}
+.passo-giu:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .passo-giu{color:#0f1416}}
+:root[data-theme="dark"] .passo-giu{color:#0f1416}
+@keyframes invita{0%,100%{transform:none}50%{transform:translateY(4px)}}
+@media (prefers-reduced-motion:reduce){.passo-giu{animation:none}}
+.passi-comandi .bottone{font-size:.88rem;padding:6px 14px}
+@media (prefers-reduced-motion:reduce){.passi .passo.nuovo{animation:none}}
+@media print{.passi-comandi{display:none}.js-passi .passi .passo.dopo,.js-passi .passo-extra.dopo{display:block!important}}
+
 </style>
 </head>
 <body>
@@ -427,64 +517,88 @@ section.parte:target{outline:none}
 <div class="corpo-lezione">
 <nav class="indice" aria-label="Parti della lezione">
   <div class="indice-testa"><p class="indice-titolo">In questa lezione</p><button type="button" class="indice-riduci" aria-pressed="false" aria-label="Riduci l'indice alle sole icone" title="Riduci l'indice alle sole icone">&laquo;</button></div>
-  <a class="voce" href="#concetti" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="11" height="14" rx="2"/><path d="M8 4h11a2 2 0 0 1 2 2v12"/><path d="M5.5 16l3-5 2 3 1-1.5 1.5 3.5"/></svg></span><span class="nome">Concetti chiave</span></a>
   <a class="voce" href="#idea" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">Idea principale</span></a>
-  <a class="voce" href="#mappa-informazioni" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="4.5" rx="1"/><rect x="2.5" y="15" width="5.5" height="5" rx="1"/><rect x="9.25" y="15" width="5.5" height="5" rx="1"/><rect x="16" y="15" width="5.5" height="5" rx="1"/><path d="M12 7v4M5.25 15v-4h13.5v4M12 11v4"/></svg></span><span class="nome">Mappa delle informazioni</span></a>
+  <a class="voce" href="#concetti" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="11" height="14" rx="2"/><path d="M8 4h11a2 2 0 0 1 2 2v12"/><path d="M5.5 16l3-5 2 3 1-1.5 1.5 3.5"/></svg></span><span class="nome">Concetti chiave</span></a>
   <a class="voce" href="#testi" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">Testo sintetico / essenziale</span></a>
   <a class="voce" href="#parole" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">Glossario</span></a>
+  <a class="voce" href="#mappa-informazioni" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="4.5" rx="1"/><rect x="2.5" y="15" width="5.5" height="5" rx="1"/><rect x="9.25" y="15" width="5.5" height="5" rx="1"/><rect x="16" y="15" width="5.5" height="5" rx="1"/><path d="M12 7v4M5.25 15v-4h13.5v4M12 11v4"/></svg></span><span class="nome">Mappa delle informazioni</span></a>
   <a class="voce" href="#compiti" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="nome">Dieci cose da sapere</span></a>
   <a class="voce" href="#dopo" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14"/><path d="M13 6l6 6-6 6"/></svg></span><span class="nome">E dopo?</span></a>
 </nav>
 
 <main id="contenuto">
 
-<!-- ======================= CONCETTI CHIAVE ======================= -->
-<section class="parte" id="concetti" aria-labelledby="t-concetti">
-  <p class="etichetta">Concetti chiave</p>
-  <h2 id="t-concetti">Le carte delle parole</h2>
-  <p class="guida">Sei parole servono per tutta la lezione. Guarda il disegno, leggi la parola e prova a dire che cosa significa. Poi tocca la carta per girarla e controlla.</p>
-  <div class="comandi-carte">
-    <button type="button" class="bottone secondario" id="carte-gioco" aria-pressed="false">Gioca al contrario: prima la definizione</button>
-    <button type="button" class="bottone secondario" id="carte-reset">Rigira tutte le carte</button>
-  </div>
-  <div class="carte" id="carte"></div>
-  <div class="ricorda">
-    <h4>Ricorda</h4>
-    <dl>
-      <dt>Rilievi</dt><dd>montagne e colline</dd>
-      <dt>Spazi terrestri</dt><dd>montagne, colline e pianure</dd>
-    </dl>
-  </div>
-</section>
-
 <!-- ======================= IDEA PRINCIPALE ======================= -->
 <section class="parte" id="idea" aria-labelledby="t-idea">
-  <p class="etichetta">Idea principale</p>
-  <h2 id="t-idea">Gli spazi terrestri</h2>
+  <h2 id="t-idea">Idea principale</h2>
   <p class="guida">Prima di studiare i dettagli, guarda l'argomento dall'alto: quali sono gli spazi terrestri e come si distinguono.</p>
-  <div class="lettura">
-    <p>I principali spazi terrestri sono: le <a class="pk" href="#p-montagna">montagne</a>, le <a class="pk" href="#p-collina">colline</a> e le <a class="pk" href="#p-pianura">pianure</a>.</p>
-    <p> Montagne e colline insieme si chiamano <a class="pk" href="#p-rilievo">rilievi</a>.</p>
-    <p>Per distinguerli guardiamo soprattutto l'<a class="pk" href="#p-altitudine">altitudine</a>, cioè quanto un luogo è più alto del livello del mare: <strong>sopra i 600 metri</strong> c'è la montagna, <strong>tra 200 e 600 metri</strong> la collina, <strong>sotto i 200 metri</strong>, di solito, la pianura.</p>
-    <p>In <strong>Europa</strong> le pianure sono la parte più grande: occupano circa <strong>due terzi</strong> del continente. In <strong>Italia</strong> invece sono le più piccole: prevalgono le colline, poi vengono le montagne e solo alla fine le pianure.</p>
-  </div>
-
-  <h3><span>Sali e scendi con l'altimetro</span></h3>
-  <div class="profilo-box">
-    <svg id="profilo" viewBox="0 0 900 360" role="img" aria-labelledby="profilo-t"><title id="profilo-t">Profilo di un territorio dal mare alle montagne, con le quote di 200 e 600 metri</title></svg>
-    <div class="altimetro">
-      <label for="quota">Altitudine</label>
-      <input type="range" id="quota" min="0" max="1500" step="10" value="350">
-      <output id="quota-out" for="quota" aria-live="polite"></output>
+  <button type="button" class="passo-giu" id="passo-avanti" aria-label="Continua: mostra la frase successiva" title="Continua"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+  <div class="lettura passi" id="idea-passi">
+    <p class="passo">I principali spazi terrestri sono: le <a class="pk" href="#p-montagna">montagne</a>, le <a class="pk" href="#p-collina">colline</a> e le <a class="pk" href="#p-pianura">pianure</a>.</p>
+    <p class="passo">Montagne e colline insieme si chiamano <a class="pk" href="#p-rilievo">rilievi</a>.</p>
+    <p class="passo">Per distinguerli guardiamo soprattutto l'<a class="pk" href="#p-altitudine">altitudine</a>, cioè quanto un luogo è più alto del livello del mare.</p>
+    <div class="passo figura-quote">
+      <div class="quote-testo">
+        <div class="qt m"><span><b>La montagna</b>: sopra i 600 metri</span></div>
+        <div class="qt c"><span><b>La collina</b>: tra 200 e 600 metri</span></div>
+        <div class="qt p"><span><b>La pianura</b>: di solito sotto i 200 metri</span></div>
+        <div class="qt x"><span>livello del mare: 0 metri</span></div>
+      </div>
+      <div class="quote-disegno"><svg id="profilo" viewBox="0 0 600 420" role="img" aria-labelledby="profilo-t"><title id="profilo-t">Profilo di un territorio dal mare alle montagne: pianura sotto i 200 metri, collina tra 200 e 600, montagna sopra i 600</title></svg></div>
+      <div class="altimetro">
+        <label for="quota">Sali e scendi</label>
+        <input type="range" id="quota" min="0" max="1500" step="10" value="350">
+        <output id="quota-out" for="quota" aria-live="polite"></output>
+        <p class="nota-scala"><span class="qui-freccia">Il disegno non è in scala: le montagne sono più basse del vero, per farle entrare nella figura.</span></p>
+      </div>
+    </div>
+    <div class="passo passo-carta" data-attesa="1">
+      <div class="carta-testo">
+        <p class="domanda-carta"><b>Guarda la carta.</b> In Europa quale spazio terrestre occupa la parte più grande?</p>
+        <p class="carta-guida">Aiutati con i colori: il <b class="verde">verde</b> indica le terre basse, il <b class="giallo">giallo</b> e il <b class="marrone">marrone</b> i rilievi.</p>
+        <div class="opz-carta" role="group" aria-label="Scegli la risposta">
+          <button type="button" class="bottone secondario" data-ok="0">le montagne</button>
+          <button type="button" class="bottone secondario" data-ok="0">le colline</button>
+          <button type="button" class="bottone secondario" data-ok="1">le pianure</button>
+        </div>
+        <p class="fb-carta" aria-live="polite"></p>
+        <div class="risposta-carta" hidden>
+          <p><span class="qui-freccia">In <strong>Europa</strong> le pianure sono la parte più grande: occupano circa <strong>due terzi</strong> del continente.</span></p>
+          <p class="carta-guida">Il verde copre quasi tutto il Centro e l'Est del continente. Le montagne sono soprattutto al Sud e in Scandinavia.</p>
+        </div>
+      </div>
+      <figure class="carta-fig">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Europe_topography_map.png/960px-Europe_topography_map.png" width="960" height="781" loading="lazy" alt="Carta fisica dell'Europa: il verde delle pianure occupa la maggior parte del continente">
+        <figcaption>Carta fisica dell'Europa. Carta di San Jose, <a href="https://commons.wikimedia.org/wiki/File:Europe_topography_map.png">Wikimedia Commons</a>, licenza <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.it">CC BY-SA 3.0</a>.</figcaption>
+      </figure>
+    </div>
+    <div class="passo passo-carta" data-attesa="1">
+      <div class="carta-testo">
+        <p class="domanda-carta"><b>Ora guarda la carta dell'Italia.</b> Ci sono più pianure o più rilievi?</p>
+        <p class="carta-guida">Aiutati con i colori: il <b class="verde">verde</b> indica le pianure, il <b class="giallo">giallo</b> le colline, il <b class="marrone">marrone</b> le montagne.</p>
+        <div class="carta-scelta" role="group" aria-label="Colori della carta d'Italia" hidden>
+          <button type="button" class="bottone secondario" data-vista="fasce" aria-pressed="true">Tre colori</button>
+          <button type="button" class="bottone secondario" data-vista="originale" aria-pressed="false">Carta fisica originale</button>
+        </div>
+        <div class="opz-carta" role="group" aria-label="Scegli la risposta">
+          <button type="button" class="bottone secondario" data-ok="0">più pianure</button>
+          <button type="button" class="bottone secondario" data-ok="1">più rilievi</button>
+        </div>
+        <p class="fb-carta" aria-live="polite"></p>
+        <div class="risposta-carta" hidden>
+          <p><span class="qui-freccia">In <strong>Italia</strong> invece le pianure sono le più piccole: prevalgono le colline, poi vengono le montagne e solo alla fine le pianure.</span></p>
+          <p class="carta-guida">Il verde è poco: soprattutto la Pianura Padana e qualche striscia lungo le coste. Quasi tutto il resto è collina o montagna.</p>
+        </div>
+      </div>
+      <figure class="carta-fig carta-italia">
+        <img id="carta-italia" crossorigin="anonymous" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Italy_topographic_map-blank.svg/960px-Italy_topographic_map-blank.svg.png" width="960" height="1183" loading="lazy" alt="Carta fisica dell'Italia: le pianure sono poche, prevalgono colline e montagne">
+        <canvas id="carta-italia-fasce" hidden aria-hidden="true"></canvas>
+        <p class="legenda-fasce" hidden><span><i style="background:#6eaa5a"></i>pianura (sotto i 250 m circa)</span><span><i style="background:#e6c85a"></i>collina (250–750 m circa)</span><span><i style="background:#965f37"></i>montagna (sopra i 750 m circa)</span></p>
+        <figcaption>Carta fisica dell'Italia. Carta di Eric Gaba (Sting), <a href="https://commons.wikimedia.org/wiki/File:Italy_topographic_map-blank.svg">Wikimedia Commons</a>, licenza <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.it">CC BY-SA 3.0</a>. Nella versione «tre colori» le fasce della carta sono state riunite in tre: la carta originale non ha le soglie di 200 e 600 metri, quindi i confini sono approssimati. Sono colorati anche i Paesi vicini.</figcaption>
+      </figure>
     </div>
   </div>
-
-  <div class="tre">
-    <div class="uno m"><h4>Montagna</h4><p>più di 600 m · vetta, versanti e valli · fa più freddo</p></div>
-    <div class="uno c"><h4>Collina</h4><p>tra 200 e 600 m · forme dolci e arrotondate</p></div>
-    <div class="uno p"><h4>Pianura</h4><p>di solito sotto i 200 m · terreno piatto · tante persone</p></div>
-  </div>
-
+<div class="passo-extra" data-dopo="6">
   <div class="barre">
     <h4>Quanto spazio occupano?</h4>
     <div class="barra-riga"><span class="chi">Italia</span><div class="barra" role="img" aria-label="Italia: collina 42 per cento, montagna 35 per cento, pianura 23 per cento"><span class="c" style="width:42%">collina 42%</span><span class="m" style="width:35%">montagna 35%</span><span class="p" style="width:23%">pianura 23%</span></div></div>
@@ -496,41 +610,31 @@ section.parte:target{outline:none}
     <p class="meta">Guarda le due barre e scegli.</p>
     <div id="idea-prova"></div>
   </div>
+</div>
 </section>
 
-<!-- ======================= MAPPA DELLE INFORMAZIONI ======================= -->
-<section class="parte" id="mappa-informazioni" aria-labelledby="t-mi">
-  <p class="etichetta">Mappa delle informazioni</p>
-  <h2 id="t-mi">Tutto in una mappa</h2>
-  <p class="guida">Ogni spazio terrestre ha quattro caselle: che cos'è, com'è in Europa, com'è in Italia, che cosa fanno le persone. Leggi la mappa dall'alto verso il basso. Quando la conosci, nascondi le caselle e prova a ricordarle.</p>
-  <div class="comandi-carte">
-    <button type="button" class="bottone secondario" id="mi-prova" aria-pressed="false">Mettiti alla prova: nascondi le caselle</button>
+<!-- ======================= CONCETTI CHIAVE ======================= -->
+<section class="parte" id="concetti" aria-labelledby="t-concetti">
+  <p class="etichetta">Concetti chiave</p>
+  <h2 id="t-concetti">Le carte delle parole</h2>
+  <p class="guida">Sei parole servono per tutta la lezione. Scegli come giocare: puoi partire dalla parola e dire che cosa significa, oppure partire dalla definizione e indovinare la parola. Poi tocca una carta per girarla e controllare.</p>
+  <div class="scelta-gioco" id="scelta-gioco" role="group" aria-label="Da che cosa vuoi partire?">
+    <p class="sg-domanda">Da che cosa vuoi partire?</p>
+    <button type="button" class="sg-btn" data-modo="parola"><span class="sg-t">Parola</span><span class="sg-s">Vedi il disegno e la parola: che cosa significa?</span></button>
+    <button type="button" class="sg-btn" data-modo="definizione"><span class="sg-t">Definizione</span><span class="sg-s">Leggi la definizione: qual è la parola?</span></button>
   </div>
-  <div id="mi">
-    <p class="mi-radice">Gli spazi terrestri</p>
-    <div class="mi-rami">
-      <div class="mi-ramo m">
-        <h3>Montagne</h3>
-        <div class="mi-nodo"><h4>Che cosa sono</h4><div class="cont"><p>rilievi alti <b>più di 600 m</b></p><ul><li>vetta e versanti</li><li>tra i versanti: le valli</li><li>tante montagne vicine: una catena montuosa</li></ul></div></div>
-        <div class="mi-nodo"><h4>In Europa</h4><div class="cont"><p><b>Centro-Nord</b>: rilievi antichi e bassi</p><p><b>Sud</b>: rilievi giovani e alti</p><ul><li>Sierra Nevada, Pirenei, Alpi</li><li>Caucaso → <b>Elbrus</b>, la vetta più alta (5642 m)</li></ul></div></div>
-        <div class="mi-nodo"><h4>In Italia</h4><div class="cont"><ul><li><b>Alpi</b>, a Nord, da Ovest a Est → <b>Monte Bianco</b>, la vetta più alta</li><li><b>Appennini</b>, da Nord a Sud: più bassi e meno abitati</li></ul></div></div>
-        <div class="mi-nodo"><h4>Le persone</h4><div class="cont"><p>più si sale, più fa freddo</p><p>abitanti in aumento grazie a</p><ul><li>nuove strade e gallerie</li><li>turismo</li></ul></div></div>
-      </div>
-      <div class="mi-ramo c">
-        <h3>Colline</h3>
-        <div class="mi-nodo"><h4>Che cosa sono</h4><div class="cont"><p>rilievi <b>tra 200 e 600 m</b>, arrotondati</p><p>per origine sono</p><ul><li><b>tettoniche</b>: spinta delle placche</li><li><b>moreniche</b>: detriti dei ghiacciai</li><li><b>vulcaniche</b>: materiali dei vulcani</li></ul></div></div>
-        <div class="mi-nodo"><h4>In Europa</h4><div class="cont"><p>in tutto il continente, spesso vicino alle catene montuose</p><ul><li>a Est, molto antiche: Rialto centrale, Valdaj, Alture del Volga</li><li>al Centro: Ardenne</li></ul></div></div>
-        <div class="mi-nodo"><h4>In Italia</h4><div class="cont"><p>quasi <b>metà</b> del territorio</p><ul><li>tettoniche: Langhe, Monferrato, Chianti</li><li>moreniche: intorno al Lago di Garda</li><li>vulcaniche: Colli Albani, Colli Euganei</li></ul></div></div>
-        <div class="mi-nodo"><h4>Le persone</h4><div class="cont"><p>ambienti naturali e antropizzati</p><ul><li>coltivazioni: viti e ulivi</li><li>pascoli e allevamento</li></ul><p class="fr">molti però si spostano nelle città di pianura</p></div></div>
-      </div>
-      <div class="mi-ramo p">
-        <h3>Pianure</h3>
-        <div class="mi-nodo"><h4>Che cosa sono</h4><div class="cont"><p>terreni piatti, di solito <b>sotto i 200 m</b></p><p>molte sono <b>alluvionali</b>: formate dai detriti portati dai fiumi</p></div></div>
-        <div class="mi-nodo"><h4>In Europa</h4><div class="cont"><p>circa <b>⅔</b> del territorio</p><ul><li><b>Bassopiano Sarmatico</b>: il più grande</li><li>Bassopiano polacco, germanico, francese; Pianura olandese</li></ul></div></div>
-        <div class="mi-nodo"><h4>In Italia</h4><div class="cont"><p>poche, quasi tutte alluvionali</p><ul><li><b>Pianura Padana</b>: la più grande</li><li>Valdarno, Maremma, Agro Romano, Agro Pontino, Pianura Campana, Tavoliere delle Puglie, Pianura Salentina, Piana di Catania, Campidano</li></ul></div></div>
-        <div class="mi-nodo"><h4>Le persone</h4><div class="cont"><p>lo spazio più trasformato:</p><ul><li>campi e allevamenti</li><li>città e industrie</li><li>strade e ferrovie</li></ul><p class="fr">→ gli ambienti più popolati</p></div></div>
-      </div>
-    </div>
+  <div class="comandi-carte" id="carte-comandi" hidden>
+    <span class="modo-attuale"></span>
+    <button type="button" class="bottone secondario" id="carte-reset">Rigira tutte le carte</button>
+    <button type="button" class="bottone secondario" id="carte-cambia">Cambia gioco</button>
+  </div>
+  <div class="carte" id="carte" hidden></div>
+  <div class="ricorda" id="carte-ricorda" hidden>
+    <h4>Ricorda</h4>
+    <dl>
+      <dt>Rilievi</dt><dd>montagne e colline</dd>
+      <dt>Spazi terrestri</dt><dd>montagne, colline e pianure</dd>
+    </dl>
   </div>
 </section>
 
@@ -573,19 +677,19 @@ section.parte:target{outline:none}
   </div>
 
   <div id="testo-sintetico">
-    <div class="blocco" style="--c:#9a6a1f">
+    <div class="blocco" style="--c:#8a5530">
       <h3><span>1. Le montagne</span></h3>
       <div class="paragrafo"><h4><span class="n">1</span>Che cosa sono</h4><p>Le montagne sono i <a class="pk" href="#p-rilievo">rilievi</a> più alti: superano i <strong>600 metri</strong> sopra il livello del mare. Il punto più alto di una montagna è la <a class="pk" href="#p-vetta">vetta</a>; i suoi fianchi sono i <a class="pk" href="#p-versante">versanti</a>. Tra i versanti di due montagne si apre una <a class="pk" href="#p-valle">valle</a>, spesso percorsa da un fiume. Molte montagne vicine formano una <a class="pk" href="#p-catena">catena montuosa</a>. Più si sale, più fa freddo: la neve dura più a lungo e le piante diventano sempre meno. Oggi in montagna vivono più persone di un tempo, grazie a nuove strade e gallerie e al turismo.</p></div>
       <div class="paragrafo"><h4><span class="n">2</span>Le montagne europee</h4><p>Nell'Europa del Centro-Nord i rilievi sono <strong>molto antichi</strong>: il vento, l'acqua e il ghiaccio li hanno consumati per milioni di anni e oggi sono <strong>bassi</strong> e arrotondati. Nell'Europa del Sud i rilievi sono <strong>più giovani e più alti</strong>, e qui si trovano le catene principali: la Sierra Nevada e i Pirenei, tra Spagna e Francia; le Alpi, che arrivano anche in Italia; a Sud-Est il Caucaso, una catena lunga più di 1200 km al confine tra Europa e Asia. Nel Caucaso c'è l'<strong>Elbrus</strong> (5642 m), la montagna più alta del continente.</p></div>
       <div class="paragrafo"><h4><span class="n">3</span>Le montagne italiane</h4><p>Le catene più importanti d'Italia sono due. Le <strong>Alpi</strong> chiudono l'Italia a Nord e si allungano da Ovest a Est, come un arco. Qui si trova il <strong>Monte Bianco</strong>, la vetta più alta d'Italia (oltre 4800 m). Gli <strong>Appennini</strong> attraversano la penisola da Nord a Sud: sono più bassi delle Alpi e meno abitati, quindi il loro paesaggio è più selvaggio. Le Alpi invece attirano ogni anno milioni di turisti: in molte valli sono nati alberghi, impianti e piste da sci.</p></div>
     </div>
-    <div class="blocco" style="--c:#5f8d1c">
+    <div class="blocco" style="--c:#b8901c">
       <h3><span>2. Le colline</span></h3>
       <div class="paragrafo"><h4><span class="n">1</span>Che cosa sono</h4><p>Le colline sono rilievi alti <strong>tra 200 e 600 metri</strong>. Hanno forme più dolci e arrotondate delle montagne. Secondo il modo in cui sono nate, si dividono in tre tipi: le colline <a class="pk" href="#p-tettoniche">tettoniche</a>, spinte verso l'alto dal movimento delle <a class="pk" href="#p-placche">placche</a> della crosta terrestre; le colline <a class="pk" href="#p-moreniche">moreniche</a>, formate dai detriti che i ghiacciai hanno trascinato e lasciato; le colline <a class="pk" href="#p-vulcaniche">vulcaniche</a>, formate dai materiali usciti dalle eruzioni dei vulcani. In collina si alternano ambienti naturali e ambienti <a class="pk" href="#p-antropizzato">antropizzati</a>, cioè trasformati dalle persone.</p></div>
       <div class="paragrafo"><h4><span class="n">2</span>Le colline europee</h4><p>Le colline si trovano <strong>in tutta l'Europa</strong>, di solito vicino alle catene montuose; in alcune regioni sono loro a disegnare il paesaggio. Nell'Europa dell'Est ci sono colline molto antiche, come il Rialto centrale russo, il Valdaj e le Alture del Volga. Anche l'Europa centrale e le Isole Britanniche hanno molte colline: tra Francia e Belgio si estendono le <strong>Ardenne</strong>. L'Europa del Sud, dalla Penisola iberica ai Balcani, è ricchissima di colline.</p></div>
       <div class="paragrafo"><h4><span class="n">3</span>Le colline italiane</h4><p>Le colline occupano <strong>quasi metà</strong> del territorio italiano. Nelle Langhe, nel Monferrato e nel Chianti le colline sono tettoniche; intorno al Lago di Garda sono moreniche; i <strong>Colli Albani</strong>, vicino a Roma, e i Colli Euganei, in Veneto, sono vulcanici. In Italia le colline sono molto abitate e coltivate: ci sono pascoli e soprattutto vigneti e uliveti. Negli ultimi decenni, però, molte persone le hanno lasciate per andare a vivere nelle grandi città di pianura.</p></div>
     </div>
-    <div class="blocco" style="--c:#2b6fa5">
+    <div class="blocco" style="--c:#4f8f3f">
       <h3><span>3. Le pianure</span></h3>
       <div class="paragrafo"><h4><span class="n">1</span>Che cosa sono</h4><p>Le pianure sono terreni piatti, di solito <strong>sotto i 200 metri</strong> sopra il livello del mare. Si formano in modi diversi: in Italia molte sono <a class="pk" href="#p-alluvionale">alluvionali</a>, cioè sono nate dai detriti (sabbia, ghiaia, argilla) che i fiumi hanno portato e depositato. La pianura è lo spazio <strong>più trasformato</strong> dalle persone: qui si coltiva, si allevano animali, si costruiscono città e industrie. Siccome ci vivono molte persone, ci sono anche molte strade e ferrovie.</p></div>
       <div class="paragrafo"><h4><span class="n">2</span>Le pianure europee</h4><p>Circa <strong>due terzi</strong> dell'Europa sono pianure. Quelle del Nord-Est sono le più antiche, quelle del Centro e del Sud le più giovani. La pianura più grande d'Europa è il <a class="pk" href="#p-bassopiano">Bassopiano</a> <strong>Sarmatico</strong>, che si trova soprattutto in Russia. Nel Centro-Nord ci sono altre grandi pianure: il Bassopiano polacco, il Bassopiano germanico, il Bassopiano francese e la Pianura olandese. Un tempo erano coperte di foreste; oggi le persone le hanno trasformate e sono le <strong>zone più abitate</strong> del continente.</p></div>
@@ -594,22 +698,22 @@ section.parte:target{outline:none}
   </div>
 
   <div id="testo-essenziale" class="essenziale" hidden>
-    <div class="blocco" style="--c:#9a6a1f">
+    <div class="blocco" style="--c:#8a5530">
       <h3><span>1. Le montagne</span></h3>
-      <div class="paragrafo"><h4><span class="n">1</span>Che cosa sono</h4><p>Le montagne sono rilievi alti <strong>più di 600 metri</strong>. Hanno una <strong>vetta</strong> (il punto più alto) e i <strong>versanti</strong> (i fianchi). Tra i versanti ci sono le <strong>valli</strong>. Tante montagne vicine formano una <strong>catena montuosa</strong>.</p></div>
+      <div class="paragrafo"><h4><span class="n">1</span>Che cosa sono</h4><p>Le montagne sono rilievi alti <strong>più di 600 metri</strong>. Hanno una <a class="pk" href="#p-vetta"><strong>vetta</strong></a> (il punto più alto) e i <a class="pk" href="#p-versante"><strong>versanti</strong></a> (i fianchi). Tra i versanti ci sono le <a class="pk" href="#p-valle"><strong>valli</strong></a>. Tante montagne vicine formano una <a class="pk" href="#p-catena"><strong>catena montuosa</strong></a>.</p></div>
       <div class="paragrafo"><h4><span class="n">2</span>Le montagne europee</h4><p>Al Centro-Nord le montagne sono <strong>antiche e basse</strong>. Al Sud sono <strong>giovani e alte</strong>. La montagna più alta d'Europa è l'<strong>Elbrus</strong>, nel Caucaso. Un'altra catena importante sono le Alpi.</p></div>
       <div class="paragrafo"><h4><span class="n">3</span>Le montagne italiane</h4><p>Le catene italiane sono le <strong>Alpi</strong>, a Nord, e gli <strong>Appennini</strong>, da Nord a Sud. Nelle Alpi c'è il <strong>Monte Bianco</strong>, la montagna più alta d'Italia. Gli Appennini sono più bassi e meno abitati.</p></div>
     </div>
-    <div class="blocco" style="--c:#5f8d1c">
+    <div class="blocco" style="--c:#b8901c">
       <h3><span>2. Le colline</span></h3>
       <div class="paragrafo"><h4><span class="n">1</span>Che cosa sono</h4><p>Le colline sono rilievi alti <strong>tra 200 e 600 metri</strong>. Hanno forme dolci e arrotondate. Ci sono ambienti naturali e ambienti trasformati dalle persone.</p></div>
       <div class="paragrafo"><h4><span class="n">2</span>Le colline europee</h4><p>Le colline ci sono <strong>in tutta l'Europa</strong>. A Est ci sono colline molto antiche. Al Centro ci sono le Ardenne. Al Sud le colline sono tantissime.</p></div>
       <div class="paragrafo"><h4><span class="n">3</span>Le colline italiane</h4><p>Le colline sono <strong>quasi metà</strong> dell'Italia. Sono molto abitate. Ci sono pascoli, viti e ulivi. Oggi però molte persone vanno a vivere in città.</p></div>
     </div>
-    <div class="blocco" style="--c:#2b6fa5">
+    <div class="blocco" style="--c:#4f8f3f">
       <h3><span>3. Le pianure</span></h3>
       <div class="paragrafo"><h4><span class="n">1</span>Che cosa sono</h4><p>Le pianure sono terreni piatti, di solito <strong>sotto i 200 metri</strong>. Le persone le hanno trasformate più di tutti gli altri spazi: ci sono campi, allevamenti, città, industrie, strade e ferrovie.</p></div>
-      <div class="paragrafo"><h4><span class="n">2</span>Le pianure europee</h4><p>Le pianure sono <strong>due terzi</strong> dell'Europa. La più grande è il <strong>Bassopiano Sarmatico</strong>, in Russia. Oggi le pianure sono le zone più abitate d'Europa.</p></div>
+      <div class="paragrafo"><h4><span class="n">2</span>Le pianure europee</h4><p>Le pianure sono <strong>due terzi</strong> dell'Europa. La più grande è il <a class="pk" href="#p-bassopiano"><strong>Bassopiano Sarmatico</strong></a>, in Russia. Oggi le pianure sono le zone più abitate d'Europa.</p></div>
       <div class="paragrafo"><h4><span class="n">3</span>Le pianure italiane</h4><p>In Italia le pianure sono <strong>poche</strong> e quasi tutte nate dai detriti dei fiumi. La più grande è la <strong>Pianura Padana</strong>. Roma si trova nell'Agro Romano.</p></div>
     </div>
   </div>
@@ -619,7 +723,11 @@ section.parte:target{outline:none}
 <section class="parte" id="parole" aria-labelledby="t-parole">
   <p class="etichetta">Glossario</p>
   <h2 id="t-parole">Le parole della lezione</h2>
-  <p class="guida">Il significato dei termini nuovi, nell'ordine in cui li incontri. Le parole sottolineate a puntini nel testo portano qui.</p>
+  <p class="guida">I termini nuovi, nell'ordine in cui li incontri. Prima prova a scrivere con parole tue che cosa significa ogni termine; poi apri la definizione e confrontala con la tua.</p>
+  <div class="comandi-carte" id="glo-comandi">
+    <button type="button" class="bottone secondario" id="glo-tutte" aria-pressed="false">Mostra tutte le definizioni</button>
+    <button type="button" class="bottone secondario" id="glo-cancella">Cancella le mie definizioni</button>
+  </div>
   <dl class="parole">
     <div class="parola" id="p-altitudine"><dt>Altitudine</dt><dd>Quanto un luogo è più alto del livello del mare. Si misura in metri.</dd></div>
     <div class="parola" id="p-rilievo"><dt>Rilievi</dt><dd>Le parti della crosta terrestre più alte di ciò che hanno intorno: montagne e colline.</dd></div>
@@ -640,6 +748,42 @@ section.parte:target{outline:none}
   </dl>
 </section>
 
+<!-- ======================= MAPPA DELLE INFORMAZIONI ======================= -->
+<section class="parte" id="mappa-informazioni" aria-labelledby="t-mi">
+  <p class="etichetta">Mappa delle informazioni</p>
+  <h2 id="t-mi">Tutto in una mappa</h2>
+  <p class="guida">Ogni spazio terrestre ha quattro caselle: che cos'è, com'è in Europa, com'è in Italia, che cosa fanno le persone. Leggi la mappa dall'alto verso il basso. Quando la conosci, nascondi le caselle e prova a ricordarle.</p>
+  <div class="comandi-carte">
+    <button type="button" class="bottone secondario" id="mi-prova" aria-pressed="false">Mettiti alla prova: nascondi le caselle</button>
+  </div>
+  <div id="mi">
+    <p class="mi-radice">Gli spazi terrestri</p>
+    <div class="mi-rami">
+      <div class="mi-ramo m">
+        <h3>Montagne</h3>
+        <div class="mi-nodo"><h4>Che cosa sono</h4><div class="cont"><p>rilievi alti <b>più di 600 m</b></p><ul><li>vetta e versanti</li><li>tra i versanti: le valli</li><li>tante montagne vicine: una catena montuosa</li></ul></div></div>
+        <div class="mi-nodo"><h4>In Europa</h4><div class="cont"><p><b>Centro-Nord</b>: rilievi antichi e bassi</p><p><b>Sud</b>: rilievi giovani e alti</p><ul><li>Sierra Nevada, Pirenei, Alpi</li><li>Caucaso → <b>Elbrus</b>, la vetta più alta (5642 m)</li></ul></div></div>
+        <div class="mi-nodo"><h4>In Italia</h4><div class="cont"><ul><li><b>Alpi</b>, a Nord, da Ovest a Est → <b>Monte Bianco</b>, la vetta più alta</li><li><b>Appennini</b>, da Nord a Sud: più bassi e meno abitati</li></ul></div></div>
+        <div class="mi-nodo"><h4>Le persone</h4><div class="cont"><p>più si sale, più fa freddo</p><p>abitanti in aumento grazie a</p><ul><li>nuove strade e gallerie</li><li>turismo</li></ul></div></div>
+      </div>
+      <div class="mi-ramo c">
+        <h3>Colline</h3>
+        <div class="mi-nodo"><h4>Che cosa sono</h4><div class="cont"><p>rilievi <b>tra 200 e 600 m</b>, arrotondati</p><p>per origine sono</p><ul><li><b>tettoniche</b>: spinta delle placche</li><li><b>moreniche</b>: detriti dei ghiacciai</li><li><b>vulcaniche</b>: materiali dei vulcani</li></ul></div></div>
+        <div class="mi-nodo"><h4>In Europa</h4><div class="cont"><p>in tutto il continente, spesso vicino alle catene montuose</p><ul><li>a Est, molto antiche: Rialto centrale, Valdaj, Alture del Volga</li><li>al Centro: Ardenne</li></ul></div></div>
+        <div class="mi-nodo"><h4>In Italia</h4><div class="cont"><p>quasi <b>metà</b> del territorio</p><ul><li>tettoniche: Langhe, Monferrato, Chianti</li><li>moreniche: intorno al Lago di Garda</li><li>vulcaniche: Colli Albani, Colli Euganei</li></ul></div></div>
+        <div class="mi-nodo"><h4>Le persone</h4><div class="cont"><p>ambienti naturali e antropizzati</p><ul><li>coltivazioni: viti e ulivi</li><li>pascoli e allevamento</li></ul><p class="fr">molti però si spostano nelle città di pianura</p></div></div>
+      </div>
+      <div class="mi-ramo p">
+        <h3>Pianure</h3>
+        <div class="mi-nodo"><h4>Che cosa sono</h4><div class="cont"><p>terreni piatti, di solito <b>sotto i 200 m</b></p><p>molte sono <b>alluvionali</b>: formate dai detriti portati dai fiumi</p></div></div>
+        <div class="mi-nodo"><h4>In Europa</h4><div class="cont"><p>circa <b>⅔</b> del territorio</p><ul><li><b>Bassopiano Sarmatico</b>: il più grande</li><li>Bassopiano polacco, germanico, francese; Pianura olandese</li></ul></div></div>
+        <div class="mi-nodo"><h4>In Italia</h4><div class="cont"><p>poche, quasi tutte alluvionali</p><ul><li><b>Pianura Padana</b>: la più grande</li><li>Valdarno, Maremma, Agro Romano, Agro Pontino, Pianura Campana, Tavoliere delle Puglie, Pianura Salentina, Piana di Catania, Campidano</li></ul></div></div>
+        <div class="mi-nodo"><h4>Le persone</h4><div class="cont"><p>lo spazio più trasformato:</p><ul><li>campi e allevamenti</li><li>città e industrie</li><li>strade e ferrovie</li></ul><p class="fr">→ gli ambienti più popolati</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ======================= DIECI COSE DA SAPERE ======================= -->
 <section class="parte" id="compiti" aria-labelledby="t-compiti">
   <p class="etichetta">Dieci cose da sapere</p>
@@ -655,6 +799,8 @@ section.parte:target{outline:none}
 
   <div id="esercizi"></div>
 
+  <p class="fascia" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="11" rx="5"/><path d="M8 10.5v4M6 12.5h4"/><circle cx="15.5" cy="11.5" r="1"/><circle cx="17.5" cy="13.5" r="1"/></svg></span><span>Giochi per ripassare</span></p>
+  <div class="giochi"><a class="gioco" href="../giochi/spazi-terrestri-cruciverba.html" target="_blank" rel="noopener"><b>Cruciverba</b><span>Dodici parole della lezione da incrociare.</span><i>da soli o alla LIM</i></a><a class="gioco" href="../giochi/spazi-terrestri-memory.html" target="_blank" rel="noopener"><b>Memory</b><span>Abbina ogni parola alla sua definizione.</span><i>da soli o alla LIM</i></a><a class="gioco" href="../giochi/spazi-terrestri-raggruppa.html" target="_blank" rel="noopener"><b>Montagna, collina o pianura?</b><span>Metti ogni luogo nel gruppo giusto.</span><i>da soli o alla LIM</i></a><a class="gioco" href="../giochi/spazi-terrestri-indovina-il-luogo.html" target="_blank" rel="noopener"><b>Indovina il luogo</b><span>Un indizio alla volta: di quale luogo si parla?</span><i>a coppie o in classe</i></a><a class="gioco" href="../giochi/spazi-terrestri-rischiatutto.html" target="_blank" rel="noopener"><b>Rischiatutto</b><span>Domande a punti su montagne, colline, pianure ed Europa.</span><i>a squadre, alla LIM</i></a></div>
   <p class="fascia" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span>Pensiamo insieme</span></p>
   <div class="attivita">
     <h4>Dove ti piacerebbe vivere?</h4>
@@ -684,7 +830,7 @@ section.parte:target{outline:none}
 </div>
 
 <footer>
-<p>Organizzazione della lezione ispirata a <em>Geografia facile per la scuola secondaria di primo grado – Classe prima</em> (Modulo 2, cap. 3 «Gli spazi terrestri»), Edizioni Erickson: Concetti chiave, Idea principale, Mappa delle informazioni, Testo sintetico/essenziale, Glossario, Dieci cose da sapere. Testi, disegni ed esercizi di questa pagina sono originali.</p>
+<p>Organizzazione della lezione ispirata a <em>Geografia facile per la scuola secondaria di primo grado – Classe prima</em> (Modulo 2, cap. 3 «Gli spazi terrestri»), Edizioni Erickson: Idea principale, Concetti chiave, Testo sintetico/essenziale, Glossario, Mappa delle informazioni, Dieci cose da sapere. Testi, disegni ed esercizi di questa pagina sono originali.</p>
 </footer>
 </div>
 
@@ -724,63 +870,76 @@ window.addEventListener("hashchange",daIndirizzo); daIndirizzo();
 
 /* ---------- carte delle parole ---------- */
 var CARTE=[
- {n:"Rilievo", d:"montagne e colline: le parti più alte della terraferma",
+ {n:"Rilievo", d:"la terra che si alza più di quella che ha intorno: monti e colli",
   s:'<path class="pieno" d="M4 52L22 18L33 34L38 30L44 40C50 36 56 38 60 44V52Z"/><path d="M4 52L22 18L33 34"/><path class="neve" d="M17 27L22 18L27 27L24 25L22 28L20 25Z"/><path d="M30 52C36 38 48 34 60 44"/><path d="M2 52h60"/>'},
- {n:"Montagna", d:"rilievo alto più di 600 metri",
+ {n:"Montagna", d:"si sale a lungo, l'aria è fredda e spesso c'è la neve: siamo oltre i 600 m",
   s:'<path class="pieno" d="M8 52L32 10L56 52Z"/><path d="M8 52L32 10L56 52"/><path class="neve" d="M24 24L32 10L40 24L36 21L32 26L28 21Z"/><path d="M2 52h60"/><path d="M14 52v-5M14 47l-3 3M14 47l3 3M50 52v-5M50 47l-3 3M50 47l3 3"/>'},
- {n:"Collina", d:"rilievo alto tra 200 e 600 metri, con forme arrotondate",
+ {n:"Collina", d:"dolci saliscendi, né troppo alti né troppo bassi: dai 200 ai 600 m",
   s:'<path class="pieno" d="M2 50C12 32 26 30 36 42C42 34 54 32 62 44V52H2Z"/><path d="M2 50C12 32 26 30 36 42C42 34 54 32 62 44"/><path d="M19 33v-7M19 26l-3 3M19 26l3 3M24 32v-8M24 24l-3 3M24 24l3 3"/><path d="M2 52h60"/><path d="M42 46l4-4 4 4v4h-8z"/>'},
- {n:"Pianura", d:"terreno piatto, di solito sotto i 200 metri",
+ {n:"Pianura", d:"si cammina senza salite: terra bassa e piana, quasi sempre sotto i 200 m",
   s:'<path class="pieno" d="M2 38h60v16H2z"/><path d="M2 38h60M6 44h52M10 49h44"/><circle cx="12" cy="31" r="4.5"/><path d="M12 35.5V38"/><circle cx="21" cy="32" r="3.5"/><path d="M21 35.5V38"/><path d="M38 38v-7l6-5 6 5v7"/><path d="M52 38v-4h6v4"/>'},
- {n:"Catena montuosa", d:"tante montagne una vicina all'altra",
+ {n:"Catena montuosa", d:"una lunga fila di monti, cima dopo cima",
   s:'<path class="pieno" d="M2 52L14 26L22 38L32 12L42 34L50 22L62 52Z"/><path d="M2 52L14 26L22 38L32 12L42 34L50 22L62 52"/><path class="neve" d="M27 21L32 12L37 21L34 19L32 22L30 19Z"/><path d="M2 52h60"/>'},
- {n:"Valle", d:"lo spazio tra i versanti di due rilievi",
+ {n:"Valle", d:"il solco basso fra due monti, dove spesso scorre un fiume",
   s:'<path class="pieno" d="M2 52V16L26 46H38L62 14V52Z"/><path d="M2 16L26 46M38 46L62 14"/><path d="M26 46C29 50 33 44 36 48C38 50 34 52 36 54" stroke-width="3"/><path d="M2 54h60"/>'}
 ];
 var carte=document.getElementById("carte"), alContrario=false, bottoniCarte=[];
 CARTE.forEach(function(C){
   var b=el("button",{type:"button","class":"carta","aria-pressed":"false"});
-  b.innerHTML='<span class="giro"><span class="faccia fronte"><span class="disegno"><svg viewBox="0 0 64 64" aria-hidden="true">'+C.s+'</svg></span><span class="nome"></span><span class="gira">tocca per girare ↻</span></span><span class="faccia retro"><span class="nome"></span><span class="def"></span><span class="gira">tocca per girare ↻</span></span></span>';
-  var nomi=b.querySelectorAll(".nome"); nomi[0].textContent=C.n; nomi[1].textContent=C.n; b.querySelector(".def").textContent=C.d;
+  b.innerHTML='<span class="giro"><span class="faccia fronte"><span class="disegno"><svg viewBox="0 0 64 64" aria-hidden="true">'+C.s+'</svg></span><span class="nome"></span><span class="gira">tocca per girare ↻</span></span><span class="faccia retro"><span class="def"></span><span class="gira">tocca per girare ↻</span></span></span>';
+  b.querySelector(".nome").textContent=C.n; b.querySelector(".def").textContent=C.d;
   function etichetta(){ var girata=b.classList.contains("girata"), mostraDef=(girata!==alContrario);
     b.setAttribute("aria-label", mostraDef ? (alContrario? "Definizione: "+C.d+". Tocca per vedere la parola" : C.n+": "+C.d) : (alContrario? "Parola: "+C.n : "Parola: "+C.n+". Tocca per vedere che cosa significa")); }
-  b.addEventListener("click",function(){ b.classList.toggle("girata"); b.setAttribute("aria-pressed",b.classList.contains("girata")?"true":"false"); etichetta(); });
+  b.addEventListener("click",function(){ b._vista=true; if(bottoniCarte.every(function(x){ return x._vista; })) document.getElementById("carte-ricorda").hidden=false; b.classList.toggle("girata"); b.setAttribute("aria-pressed",b.classList.contains("girata")?"true":"false"); etichetta(); });
   b._et=etichetta; etichetta(); carte.appendChild(b); bottoniCarte.push(b);
 });
 function rigira(){ bottoniCarte.forEach(function(b){ b.classList.toggle("girata",alContrario); b.setAttribute("aria-pressed","false"); b._et(); }); }
-var bGioco=document.getElementById("carte-gioco");
-bGioco.addEventListener("click",function(){ alContrario=!alContrario; bGioco.setAttribute("aria-pressed",alContrario?"true":"false");
-  bGioco.textContent=alContrario?"Torna al gioco normale: prima la parola":"Gioca al contrario: prima la definizione";
-  if(alContrario){ var ordine=mescola(bottoniCarte); ordine.forEach(function(b){ carte.appendChild(b); }); }
-  rigira(); });
+var sceltaG=document.getElementById("scelta-gioco"), comCarte=document.getElementById("carte-comandi"), modoTxt=comCarte.querySelector(".modo-attuale");
+Array.prototype.forEach.call(sceltaG.querySelectorAll(".sg-btn"),function(b){ b.addEventListener("click",function(){
+  alContrario=b.getAttribute("data-modo")==="definizione";
+  mescola(bottoniCarte).forEach(function(c){ carte.appendChild(c); });
+  rigira(); bottoniCarte.forEach(function(c){ c._vista=false; }); document.getElementById("carte-ricorda").hidden=true; sceltaG.hidden=true; carte.hidden=false; comCarte.hidden=false;
+  modoTxt.textContent=alContrario?"Gioco: dalla definizione alla parola":"Gioco: dalla parola alla definizione";
+  bottoniCarte[0].parentNode.firstChild.focus();
+}); });
 document.getElementById("carte-reset").addEventListener("click",rigira);
+document.getElementById("carte-cambia").addEventListener("click",function(){ carte.hidden=true; comCarte.hidden=true; sceltaG.hidden=false; sceltaG.querySelector(".sg-btn").focus(); });
 
 /* ---------- profilo e altimetro ---------- */
-var P=document.getElementById("profilo"), Y=function(h){ return 320-h*0.18; };
-[["banda-m",0,Y(600)],["banda-c",Y(600),Y(200)],["banda-p",Y(200),Y(0)]].forEach(function(b){ P.appendChild(sv("rect",{"class":b[0],x:0,y:b[1],width:900,height:b[2]-b[1]})); });
-/* profilo del terreno: montagne a sinistra, colline al centro, pianura e mare a destra */
-var pts=[[0,700],[60,1100],[120,1450],[175,1000],[230,1180],[290,760],[335,600],[375,430],[420,520],[465,340],[510,440],[555,260],[600,170],[660,130],[720,80],[780,40],[822,0]];
+/* scala non lineare: pianura e collina hanno più spazio, le montagne sono schiacciate.
+   L'altezza del disegno si adatta allo schermo, così le tre fasce restano accanto alle tre frasi. */
+var P=document.getElementById("profilo"), H=420, Y=function(h){ var y=h<=200 ? 360-h*0.45 : h<=600 ? 270-(h-200)*0.25 : 170-(h-600)*0.14; return y*H/420; };
+var pts=[[50,0],[80,30],[120,60],[160,95],[200,140],[235,185],[262,440],[292,340],[322,520],[352,430],[380,600],[408,760],[445,1180],[480,1000],[518,1450],[562,1100],[600,700]];
 function liscio(p){ var d="M"+p[0][0]+" "+Y(p[0][1]).toFixed(1);
-  for(var i=0;i<p.length-1;i++){ var a=p[Math.max(i-1,0)], b=p[i], c=p[i+1], e=p[Math.min(i+2,p.length-1)], t=b[0]<300?0:0.18;
+  for(var i=0;i<p.length-1;i++){ var a=p[Math.max(i-1,0)], b=p[i], c=p[i+1], e=p[Math.min(i+2,p.length-1)], t=b[0]>=380?0:0.18;
     var c1=[b[0]+(c[0]-a[0])*t, Y(b[1]+(c[1]-a[1])*t)], c2=[c[0]-(e[0]-b[0])*t, Y(c[1]-(e[1]-b[1])*t)];
     d+=" C"+c1[0].toFixed(1)+" "+c1[1].toFixed(1)+" "+c2[0].toFixed(1)+" "+c2[1].toFixed(1)+" "+c[0]+" "+Y(c[1]).toFixed(1); }
   return d; }
-P.appendChild(sv("rect",{"class":"mare",x:822,y:Y(0),width:78,height:40}));
-P.appendChild(sv("path",{"class":"suolo",d:liscio(pts)+" L822 360 L0 360Z"}));
-P.appendChild(sv("path",{"class":"neve",d:"M104 "+Y(1250)+" L120 "+Y(1450)+" L136 "+Y(1250)+" L128 "+Y(1290)+" L120 "+Y(1230)+" L112 "+Y(1290)+"Z"}));
-[[600,"600 m"],[200,"200 m"],[0,"0 m"]].forEach(function(q){ P.appendChild(sv("line",{"class":"quota",x1:0,x2:900,y1:Y(q[0]),y2:Y(q[0])}));
-  var t=sv("text",{"class":"eq",x:861,y:Y(q[0])-6,"text-anchor":"middle"}); t.textContent=q[1]; P.appendChild(t); });
-var tm=sv("text",{"class":"eq",x:861,y:346,"text-anchor":"middle",fill:"#fff",style:"fill:#fff"}); tm.textContent="mare"; P.appendChild(tm);
-[["nm","MONTAGNA",300,Y(1380)],["nc","COLLINA",450,Y(560)+2],["np","PIANURA",700,Y(200)+13]].forEach(function(n){ var t=sv("text",{"class":"nomi "+n[0],x:n[2],y:n[3],"text-anchor":"middle"}); t.textContent=n[1]; P.appendChild(t); });
-var cur=sv("g",{"class":"cursore"}), cl=sv("line",{x1:20,x2:880}), cc=sv("circle",{cx:20,r:8}), ct=sv("text",{x:30});
-cur.appendChild(cl); cur.appendChild(cc); cur.appendChild(ct); P.appendChild(cur);
+var cl, cc, ct, K=1, ultimaL=0;
+function disegna(){
+  var L=P.parentNode.clientWidth; if(!L) return; if(L===ultimaL) return; ultimaL=L;
+  K=600/L;                                   /* unità del disegno per un pixel */
+  H=Math.round(600*Math.max(420/600, 360/L)); /* almeno 360 px di altezza */
+  while(P.lastChild&&P.lastChild.nodeName!=="title") P.removeChild(P.lastChild);
+  P.setAttribute("viewBox","0 0 600 "+H);
+  [["banda-m",0,Y(600)],["banda-c",Y(600),Y(200)],["banda-p",Y(200),Y(0)]].forEach(function(b){ P.appendChild(sv("rect",{"class":b[0],x:0,y:b[1],width:600,height:b[2]-b[1]})); });
+  P.appendChild(sv("rect",{"class":"mare",x:0,y:Y(0),width:52,height:H-Y(0)}));
+  P.appendChild(sv("path",{"class":"suolo",d:liscio(pts)+" L600 "+H+" L50 "+H+"Z","vector-effect":"non-scaling-stroke"}));
+  P.appendChild(sv("path",{"class":"neve",d:"M504 "+Y(1300)+" L518 "+Y(1450)+" L532 "+Y(1300)+" L525 "+Y(1330)+" L518 "+Y(1285)+" L511 "+Y(1330)+"Z","vector-effect":"non-scaling-stroke"}));
+  [[600,"600 m"],[200,"200 m"],[0,"0 m"]].forEach(function(q){ P.appendChild(sv("line",{"class":"quota",x1:0,x2:600,y1:Y(q[0]),y2:Y(q[0]),"vector-effect":"non-scaling-stroke"}));
+    var t=sv("text",{"class":"eq",x:6*K,y:Y(q[0])-5*K,style:"font-size:"+(13*K)+"px"}); t.textContent=q[1]; P.appendChild(t); });
+  var cur=sv("g",{"class":"cursore"}); cl=sv("line",{x1:60*K,x2:600-10*K,"vector-effect":"non-scaling-stroke"}); cc=sv("circle",{cx:600-10*K,r:7*K,"stroke-width":3*K}); ct=sv("text",{x:600-22*K,"text-anchor":"end",style:"font-size:"+(14*K)+"px;stroke-width:"+(4*K)+"px"});
+  cur.appendChild(cl); cur.appendChild(cc); cur.appendChild(ct); P.appendChild(cur);
+  aggiorna();
+}
 var q=document.getElementById("quota"), qo=document.getElementById("quota-out");
-function aggiorna(){ var h=+q.value, y=Y(h); cl.setAttribute("y1",y); cl.setAttribute("y2",y); cc.setAttribute("cy",y); ct.setAttribute("y",y-8); ct.textContent=h+" m";
+function aggiorna(){ if(!cl) return; var h=+q.value, y=Y(h); cl.setAttribute("y1",y); cl.setAttribute("y2",y); cc.setAttribute("cy",y); ct.setAttribute("y",y-6*K); ct.textContent=h+" m";
   var cosa = h>600 ? '<b class="m">in montagna</b>: sei sopra i 600 m.' : h>=200 ? '<b class="c">in collina</b>: sei tra 200 e 600 m.' : '<b class="p">in pianura</b>: sei sotto i 200 m.';
   if(h===0) cosa='<b class="p">al livello del mare</b>: è da qui che si misura l\'altitudine.';
   if(h===200||h===600) cosa+=' Sei proprio sul confine!';
   qo.innerHTML="A "+h+" metri sei "+cosa; }
-q.addEventListener("input",aggiorna); aggiorna();
+q.addEventListener("input",aggiorna);
+window.addEventListener("resize",disegna); disegna();
 
 /* ---------- mappa delle informazioni: nascondi e scopri ---------- */
 var mi=document.getElementById("mi"), bProva=document.getElementById("mi-prova");
@@ -808,6 +967,115 @@ Array.prototype.forEach.call(bm,function(b){ b.addEventListener("click",function
   Array.prototype.forEach.call(ev,function(x){ x.classList.toggle("on", on&&x.getAttribute("data-parte")===p); });
 });});
 
+/* ---------- idea principale: una frase alla volta ---------- */
+(function(){
+  var box=document.getElementById("idea-passi"); if(!box) return;
+  var passi=box.querySelectorAll(".passo"), extra=document.querySelectorAll(".passo-extra"), av=document.getElementById("passo-avanti");
+  document.documentElement.className+=" js-passi";
+  var n=1;
+  function mostraFino(k,anima){
+    n=Math.max(1,Math.min(k,passi.length));
+    Array.prototype.forEach.call(passi,function(p,i){ p.classList.toggle("dopo",i>=n); p.classList.toggle("nuovo",anima&&i===n-1); });
+    Array.prototype.forEach.call(extra,function(e){ var k=+e.getAttribute("data-dopo"); e.classList.toggle("dopo",n<k||(n===k&&passi[n-1].getAttribute("data-attesa")==="1")); });
+    try{ window.dispatchEvent(new Event("resize")); }catch(e){}
+    var fine=n>=passi.length, attesa=passi[n-1].getAttribute("data-attesa")==="1"; av.hidden=fine||attesa; if(!fine) (passi[n-1].querySelector(".qui-freccia")||passi[n-1]).appendChild(av);
+  }
+  av.addEventListener("click",function(){ mostraFino(n+1,true); if(!av.hidden) av.focus(); });
+  /* domande sulla carta: la risposta e la freccia compaiono solo dopo la scelta giusta */
+  Array.prototype.forEach.call(box.querySelectorAll(".passo[data-attesa]"),function(ps){
+    var fb=ps.querySelector(".fb-carta"), ris=ps.querySelector(".risposta-carta");
+    Array.prototype.forEach.call(ps.querySelectorAll(".opz-carta button"),function(b){ b.addEventListener("click",function(){
+      if(ps.getAttribute("data-attesa")!=="1") return;
+      if(b.getAttribute("data-ok")==="1"){ b.classList.add("si"); fb.className="fb-carta si"; fb.textContent="Giusto!";
+        ps.setAttribute("data-attesa","0"); ris.hidden=false; mostraFino(n,false); }
+      else { b.classList.add("no"); fb.className="fb-carta no"; fb.textContent="Non proprio: guarda quanto spazio occupa il verde e quanto il giallo e il marrone insieme."; }
+    }); });
+  });
+  mostraFino(1,false);
+})();
+/* ---------- carta d'Italia in tre colori ---------- */
+(function(){
+  var img=document.getElementById("carta-italia"), cv=document.getElementById("carta-italia-fasce"); if(!img||!cv) return;
+  var fig=img.parentNode, leg=fig.querySelector(".legenda-fasce"), scelta=document.querySelector(".carta-scelta");
+  /* i colori della legenda della carta di Gaba, dal basso verso l'alto, con la fascia a cui li assegniamo */
+  var L=[[172,208,165,0],[148,191,139,0],[189,204,150,1],[225,228,181,1],[239,235,192,2],[222,214,163,2],[202,185,130,2],[172,154,124,2],[186,174,154,2],[202,195,184,2],[224,222,216,2],[245,244,242,2]];
+  var COL=[[110,170,90],[230,200,90],[150,95,55]];
+  function colora(){
+    try{
+      var W=img.naturalWidth,H=img.naturalHeight; cv.width=W; cv.height=H; var x=cv.getContext("2d"); x.drawImage(img,0,0);
+      var im=x.getImageData(0,0,W,H), d=im.data;
+      for(var i=0;i<d.length;i+=4){ var r=d[i],g=d[i+1],b=d[i+2],t=r+g+b,best=-1,bd=1e9;
+        for(var k=0;k<L.length;k++){ var tk=L[k][0]+L[k][1]+L[k][2], s=t/tk, dr=r/s-L[k][0], dg=g/s-L[k][1], db=b/s-L[k][2], dd=dr*dr+dg*dg+db*db; if(dd<bd){ bd=dd; best=k; } }
+        if(bd<120 && Math.abs(t-(L[best][0]+L[best][1]+L[best][2]))<160){ var c=COL[L[best][3]]; d[i]=c[0]; d[i+1]=c[1]; d[i+2]=c[2]; }
+        else { d[i]=Math.round(r+(255-r)*.55); d[i+1]=Math.round(g+(255-g)*.55); d[i+2]=Math.round(b+(255-b)*.55); } }
+      x.putImageData(im,0,0);
+    }catch(e){ return; }               /* se il browser non lo permette, resta la carta originale */
+    scelta.hidden=false; vista("fasce");
+  }
+  function vista(v){ var f=v==="fasce"; cv.hidden=!f; img.hidden=f; leg.hidden=!f;
+    Array.prototype.forEach.call(scelta.querySelectorAll("button"),function(b){ b.setAttribute("aria-pressed",b.getAttribute("data-vista")===v?"true":"false"); }); }
+  Array.prototype.forEach.call(scelta.querySelectorAll("button"),function(b){ b.addEventListener("click",function(){ vista(b.getAttribute("data-vista")); }); });
+  cv.setAttribute("role","img"); cv.setAttribute("aria-label","Carta dell'Italia in tre colori: verde pianura, giallo collina, marrone montagna"); cv.removeAttribute("aria-hidden");
+  if(img.complete&&img.naturalWidth) colora(); else img.addEventListener("load",colora);
+})();
+/* ---------- glossario: definizioni nascoste, la mia definizione ---------- */
+(function(){
+  var voci=document.querySelectorAll("#parole .parola"), tutte=document.getElementById("glo-tutte"), K="spazi-terrestri-def-";
+  function leggi(k){ try{ return localStorage.getItem(k)||""; }catch(e){ return ""; } }
+  function scrivi(k,v){ try{ if(v) localStorage.setItem(k,v); else localStorage.removeItem(k); }catch(e){} }
+  Array.prototype.forEach.call(voci,function(v){
+    var dt=v.querySelector("dt"), dd=v.querySelector("dd"), id=v.id;
+    var ta=document.createElement("textarea"); ta.className="mia"; ta.placeholder="Scrivi qui la tua definizione…"; ta.setAttribute("aria-label","La mia definizione di "+dt.textContent); ta.value=leggi(K+id);
+    ta.addEventListener("input",function(){ scrivi(K+id,ta.value); });
+    var b=document.createElement("button"); b.type="button"; b.className="apri-def"; b.setAttribute("aria-expanded","false");
+    dd.id="def-"+id; b.setAttribute("aria-controls",dd.id);
+    function mostra(on){ dd.hidden=!on; b.setAttribute("aria-expanded",on?"true":"false"); b.textContent=on?"Nascondi la definizione":"Mostra la definizione"; }
+    b.addEventListener("click",function(){ mostra(dd.hidden); });
+    v._mostra=mostra; v.insertBefore(ta,dd); v.insertBefore(b,dd); mostra(false);
+  });
+  tutte.addEventListener("click",function(){ var on=tutte.getAttribute("aria-pressed")!=="true";
+    Array.prototype.forEach.call(voci,function(v){ v._mostra(on); });
+    tutte.setAttribute("aria-pressed",on?"true":"false"); tutte.textContent=on?"Nascondi tutte le definizioni":"Mostra tutte le definizioni"; });
+  document.getElementById("glo-cancella").addEventListener("click",function(){
+    if(!window.confirm("Vuoi cancellare tutte le definizioni che hai scritto?")) return;
+    Array.prototype.forEach.call(voci,function(v){ v.querySelector(".mia").value=""; scrivi(K+v.id,""); }); });
+})();
+/* ---------- tooltip: la definizione del glossario sulle parole sottolineate ---------- */
+(function(){
+  var tip=document.createElement("span"); tip.className="tip"; tip.id="tip-glossario"; tip.setAttribute("role","tooltip"); tip.hidden=true;
+  var aperto=null, timer=null;
+  function definizione(a){ var id=(a.getAttribute("href")||"").slice(1), d=document.getElementById(id); if(!d) return null;
+    return {t:d.querySelector("dt").textContent, d:d.querySelector("dd").textContent, id:id}; }
+  function apri(a){ var g=definizione(a); if(!g) return; clearTimeout(timer);
+    tip.innerHTML=""; var b=document.createElement("b"); b.textContent=g.t; tip.appendChild(b); tip.appendChild(document.createTextNode(g.d));
+    var l=document.createElement("span"); l.className="vai"; l.setAttribute("data-vai",g.id); l.textContent="→ nel glossario"; tip.appendChild(document.createElement("br")); tip.appendChild(l);
+    a.appendChild(tip); tip.hidden=false; tip.classList.remove("sotto"); tip.style.setProperty("--sp","0px"); aperto=a;
+    /* sopra la parola; sotto se in alto non c'è posto. Poi lo si sposta di lato se esce dalla pagina */
+    var r=tip.getBoundingClientRect(), z=r.width/(tip.offsetWidth||r.width)||1;
+    if(r.top<8) { tip.classList.add("sotto"); r=tip.getBoundingClientRect(); }
+    var m=(a.closest("main")||document.documentElement).getBoundingClientRect(), sx=Math.max(8,m.left+4), dx=Math.min(document.documentElement.clientWidth,m.right)-8, sp=0;
+    if(r.left<sx) sp=(sx-r.left)/z; else if(r.right>dx) sp=(dx-r.right)/z;
+    tip.style.setProperty("--sp",sp+"px"); }
+  function chiudi(){ if(aperto) aperto._clic=false; tip.hidden=true; aperto=null; }
+  function chiudiPresto(){ clearTimeout(timer); timer=setTimeout(chiudi,200); }
+  Array.prototype.forEach.call(document.querySelectorAll("a.pk"),function(a){
+    a.setAttribute("aria-describedby","tip-glossario");
+    a.addEventListener("pointerenter",function(e){ if(e.pointerType==="mouse") apri(a); });
+    a.addEventListener("pointerleave",function(e){ if(e.pointerType==="mouse") chiudiPresto(); });
+    a.addEventListener("focus",function(){ apri(a); });
+    a.addEventListener("blur",function(){ chiudiPresto(); });
+  });
+  /* il clic sulla parola apre la definizione invece di saltare al glossario */
+  window.addEventListener("click",function(e){ var t=e.target, a=t.closest&&t.closest("a.pk");
+    if(!a){ chiudi(); return; }
+    e.preventDefault(); e.stopPropagation();
+    var vai=t.closest(".vai"); if(vai){ chiudi(); location.hash="#"+vai.getAttribute("data-vai"); return; }
+    if(t.closest(".tip")) return;
+    if(aperto===a&&a._clic){ chiudi(); } else { apri(a); a._clic=true; } },true);
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape") chiudi(); });
+  window.addEventListener("resize",function(){ if(aperto) apri(aperto); });
+  window.addEventListener("scroll",function(){ if(aperto&&!aperto._clic) chiudi(); },{passive:true});
+})();
 /* ---------- esercizi ---------- */
 function costruisci(cont, scelte, righe){
   var tab=el("table",{"class":"esercizio"}), tb=el("tbody"); tab.appendChild(tb);
@@ -852,30 +1120,30 @@ var ESERCIZI=[
 {gruppo:"spazio", titolo:"Montagna, collina o pianura?", meta:"Guarda l'altitudine e scegli.",
   scelte:["montagna","collina","pianura"],
   righe:[["Un campo coltivato a 80 m","pianura"],["Un borgo a 450 m","collina"],["Un rifugio a 2300 m","montagna"],["Un vigneto a 280 m","collina"],["Una città a 150 m","pianura"],["La vetta del Gran Sasso, 2912 m","montagna"]]},
-{gruppo:"spazio", titolo:"Il primato", meta:"Chi è il più alto o il più grande? Usa la Mappa delle informazioni.",
+{gruppo:"spazio", titolo:"Chi è?", meta:"Leggi l'indizio e trova il luogo. Ti può aiutare la Mappa delle informazioni.",
   scelte:["Elbrus","Monte Bianco","Bassopiano Sarmatico","Pianura Padana","Pirenei","Ardenne"],
-  righe:[["La montagna più alta d'Europa","Elbrus"],["La montagna più alta d'Italia","Monte Bianco"],["La pianura più grande d'Europa","Bassopiano Sarmatico"],["La pianura più grande d'Italia","Pianura Padana"],["Le montagne tra Spagna e Francia","Pirenei"],["Le colline tra Francia e Belgio","Ardenne"]]},
+  righe:[["Sfiora i 5650 metri, all'estremo Sud-Est del continente","Elbrus"],["Sta al confine con la Francia e supera i 4800 metri","Monte Bianco"],["Una distesa piatta immensa, quasi tutta in Russia","Bassopiano Sarmatico"],["Qui scorre il Po, il fiume più lungo d'Italia","Pianura Padana"],["Dividono la Spagna dalla Francia","Pirenei"],["Colli coperti di boschi tra il Belgio e la Francia","Ardenne"]]},
 {gruppo:"processi", titolo:"Come sono nate queste colline?", meta:"Tettoniche, moreniche o vulcaniche?",
   scelte:["tettoniche","moreniche","vulcaniche"],
-  righe:[["I Colli Albani, vicino a Roma","vulcaniche","Lì c'era un grande vulcano: i laghi di Albano e di Nemi sono nei suoi crateri."],["Le colline intorno al Lago di Garda","moreniche"],["Le Langhe e il Monferrato","tettoniche"],["Colline formate dai detriti dei ghiacciai","moreniche"],["Colline spinte in alto dal movimento delle placche","tettoniche"],["I Colli Euganei, in Veneto","vulcaniche"]]},
+  righe:[["I Colli Albani, con i laghi di Albano e di Nemi","vulcaniche","I due laghi riempiono i crateri di un antico vulcano."],["Le colline che fanno da cornice al Garda","moreniche"],["Le Langhe e il Monferrato, in Piemonte","tettoniche"],["Un ghiacciaio si ritira e lascia grandi cumuli di sassi","moreniche"],["Due pezzi della crosta terrestre si scontrano e il terreno si solleva","tettoniche"],["I Colli Euganei, vicino a Padova","vulcaniche"]]},
 {gruppo:"processi", titolo:"Vero o falso?", meta:"Dopo il controllo leggi la spiegazione: serve a correggere le frasi false.",
   scelte:["Vero","Falso"],
-  righe:[["Le pianure sono rilievi.","Falso","I rilievi sono le montagne e le colline."],["Le montagne del Sud Europa sono più giovani e più alte di quelle del Nord.","Vero"],["Gli Appennini sono più alti delle Alpi.","Falso","Sono più bassi, e anche meno abitati."],["Le pianure alluvionali sono nate dai detriti dei fiumi.","Vero"],["In Italia le pianure occupano più spazio delle colline.","Falso","Le colline sono quasi metà del territorio, le pianure meno di un quarto."],["La pianura è lo spazio più trasformato dalle persone.","Vero"]]},
-{gruppo:"lessico", titolo:"Parole e significati", meta:"Abbina ogni definizione alla parola giusta.",
+  righe:[["Una pianura è un tipo di rilievo.","Falso","Sono rilievi solo le montagne e le colline."],["I monti della Scandinavia sono più alti del Caucaso.","Falso","Al Nord i monti sono antichi e consumati; il Caucaso è giovane e altissimo."],["Sulle Alpi ci sono cime più alte che sugli Appennini.","Vero"],["Sabbia e ghiaia portate dal Po hanno costruito la pianura dove scorre.","Vero"],["Se dividi l'Italia in quattro parti uguali, le pianure ne riempiono più di due.","Falso","Le pianure sono meno di un quarto: meno di una parte su quattro."],["Autostrade, fabbriche e grandi città si trovano soprattutto in pianura.","Vero"]]},
+{gruppo:"lessico", titolo:"Parole al lavoro", meta:"In ogni frase manca una parola della lezione: scegli quella giusta.",
   scelte:["vetta","versante","valle","catena montuosa","bassopiano","antropizzato"],
-  righe:[["Il punto più alto di una montagna","vetta"],["Il fianco di una montagna","versante"],["Lo spazio tra i versanti di due rilievi","valle"],["Tante montagne una vicina all'altra","catena montuosa"],["Una pianura molto vasta e bassa","bassopiano"],["Trasformato dagli esseri umani","antropizzato"]]}
+  righe:[["Gli alpinisti festeggiano quando la raggiungono","vetta"],["Una montagna ne ha almeno due: uno al sole e uno all'ombra","versante"],["Scendi dal passo e arrivi in fondo, dove scorre il torrente","valle"],["Alpi, Pirenei e Caucaso ne sono esempi","catena montuosa"],["Una distesa piatta enorme, poco sopra il livello del mare","bassopiano"],["Così è un luogo pieno di case, campi coltivati e strade","antropizzato"]]}
 ];
 var DIECI=[
-["Il punto più alto di una montagna è la vetta; i suoi fianchi si chiamano …","versanti"],
-["Tante montagne una vicina all'altra formano una …","catena montuosa"],
-["Le montagne più giovani e più alte d'Europa si trovano al …","Sud"],
-["La vetta più alta d'Italia, nelle Alpi, è il …","Monte Bianco"],
-["Secondo come sono nate, le colline sono tettoniche, moreniche o …","vulcaniche"],
-["Le colline dell'Europa dell'Est, come le Alture del Volga, sono molto …","antiche"],
-["In Italia le colline servono per coltivare viti e ulivi e per i …","pascoli"],
-["In pianura le persone coltivano, costruiscono città e …","industrie"],
-["Le pianure sono due terzi dell'Europa; la più grande è il Bassopiano …","Sarmatico"],
-["La pianura più grande d'Italia, nata dai detriti del Po, è la Pianura …","Padana"]
+["Per arrivare in cima, gli alpinisti salgono lungo i …","versanti"],
+["Le Alpi formano una lunga … a nord dell'Italia.","catena montuosa"],
+["I rilievi più alti e giovani d'Europa stanno al …","Sud"],
+["Dalla Valle d'Aosta si vede la cima più alta del nostro Paese: il …","Monte Bianco"],
+["Ai Castelli Romani i laghi riempiono antichi crateri: quelle colline sono …","vulcaniche"],
+["Le Alture del Volga esistono da tantissimo tempo: sono colline molto …","antiche"],
+["Sui colli italiani pascolano pecore e mucche: ci sono molti …","pascoli"],
+["Accanto alle città di pianura sorgono fabbriche e …","industrie"],
+["In Russia si stende il Bassopiano …, la distesa piatta più vasta d'Europa.","Sarmatico"],
+["Il Po attraversa da ovest a est la Pianura …","Padana"]
 ];
 var GRUPPI={
  "spazio":{c:"#b25510",n:"Leggere il territorio",i:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z"/><path d="M9 4.5v13M15 6.5v13"/></svg>'},

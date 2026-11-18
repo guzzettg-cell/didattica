@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Indovina il luogo: spazi terrestri d&#39;Italia e d&#39;Europa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Atkinson+Hyperlegible:wght@400;700&family=Alegreya:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Stili condivisi con la pagina per gli studenti */
+:root{
+  --bg:#f4f2ee; --surface:#ffffff; --ink:#221d1a; --muted:#655d55; --line:#ddd6ca; --soft:#ece7de;
+  --accent:#1f6f78; --accent-ink:#ffffff; --ok:#2f7a4f; --ko:#b3261e; --gold:#b8892b; --tint:#eef1f8;
+  --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Alegreya",Georgia,serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#16151a; --surface:#1f1e25; --ink:#ece7df; --muted:#aaa196; --line:#36343d; --soft:#2a2831;
+  --accent:#6cc6cf; --accent-ink:#121016; --ok:#6fc492; --ko:#ff7b70; --gold:#d9ae55; --tint:#22263a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#16151a; --surface:#1f1e25; --ink:#ece7df; --muted:#aaa196; --line:#36343d; --soft:#2a2831;
+  --accent:#6cc6cf; --accent-ink:#121016; --ok:#6fc492; --ko:#ff7b70; --gold:#d9ae55; --tint:#22263a; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 15px;font-weight:700;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.small{padding:5px 10px;font-size:.88rem;border-radius:8px}
+.btn[disabled]{opacity:.45;cursor:default}
+.k-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:10px}
+.k-kind{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.k-title{font-family:var(--display);font-weight:800;font-size:clamp(1.3rem,3vw,1.9rem);line-height:1.1;margin:0}
+.k-intro{color:var(--muted);margin:.3rem 0 0;max-width:60rem}
+
+
+.ix{max-width:900px;margin:0 auto;display:grid;gap:14px}
+.ix-tools{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.ix-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:14px;box-shadow:0 6px 20px rgb(0 0 0 / .05)}
+.ix-n{font-size:.85rem;font-weight:700;color:var(--muted);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.ix-punti{color:var(--accent)}
+.ix-stimolo{border-left:4px solid var(--gold);background:var(--tint);padding:14px 16px;border-radius:0 10px 10px 0;font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,2.3vw,1.45rem);white-space:pre-wrap;margin:0}
+.ix-q{font-family:var(--display);font-weight:800;font-size:clamp(1.3rem,3vw,1.9rem);line-height:1.15;margin:0;text-wrap:balance}
+.ix-ind{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:ind}
+.ix-ind li{counter-increment:ind;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:1.08rem}
+.ix-ind li.nuovo{animation:ixin .35s ease-out}
+.ix-ind li::before{content:counter(ind);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:800;font-family:var(--display)}
+@keyframes ixin{from{opacity:0;transform:translateY(6px)}}
+.ix-sol{border:2px solid var(--ok);border-radius:14px;padding:14px 16px;display:grid;gap:6px;animation:ixin .35s ease-out}
+.ix-sol b{font-family:var(--display);font-size:clamp(1.4rem,3.2vw,2rem);color:var(--ok);line-height:1.1}
+.ix-sol p{margin:0;white-space:pre-wrap}
+.ix-foot{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}
+.ix.lim .ix-ind li{font-size:1.4rem}.ix.lim .ix-q{font-size:clamp(1.8rem,4vw,2.6rem)}
+.ix:fullscreen{max-width:none;padding:18px;background:var(--bg);overflow:auto}
+@media (prefers-reduced-motion:reduce){.ix-ind li.nuovo,.ix-sol{animation:none}}
+@media print{.ix-tools,.ix-foot{display:none!important}}
+
+
+body{margin:0}.wrap-pag{max-width:1400px;margin:0 auto;padding:24px 16px 48px}</style>
+</head>
+<body>
+<div class="wrap-pag"><div id="att"></div></div>
+<script>
+
+/* Indizio dopo indizio: la stessa funzione serve all'anteprima e alla pagina per la LIM */
+function mountIX(root, D, opts){
+  opts = opts || {};
+  function h(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  var E = (D.enigmi || []).filter(function(x){ return String(x.domanda || x.stimolo || '').trim(); });
+  if (!E.length){ root.innerHTML = '<div class="ix"><p style="text-align:center;color:var(--muted)">Scrivi almeno un enigma.</p></div>'; return; }
+  var i = 0, nuovo = false, ST = E.map(function(){ return {n: 0, sol: false}; });
+  root.innerHTML = '<div class="ix' + (opts.lim ? ' lim' : '') + '"><div class="k-head"><div><span class="k-kind">Indizio dopo indizio</span><h2 class="k-title">' + h(D.title || '') + '</h2>' +
+    (D.intro ? '<p class="k-intro">' + h(D.intro) + '</p>' : '') + '</div><div class="ix-tools"><button class="btn small" type="button" data-fs title="Schermo intero (LIM)">⛶</button></div></div><div class="ix-body"></div></div>';
+  var box = root.querySelector('.ix'), body = root.querySelector('.ix-body');
+  function draw(){
+    var e = E[i], s = ST[i], ind = (e.indizi || []).filter(function(x){ return String(x).trim(); }), max = ind.length + 1, pt = Math.max(1, max - s.n);
+    body.innerHTML = '<div class="ix-card"><div class="ix-n"><span>' + (E.length > 1 ? 'Enigma ' + (i + 1) + ' di ' + E.length : '') + '</span>' +
+      (D.punti ? '<span class="ix-punti">' + (s.sol ? 'Soluzione' : 'Punti in palio: ' + pt) + '</span>' : '') + '</div>' +
+      (e.stimolo ? '<p class="ix-stimolo">' + h(e.stimolo) + '</p>' : '') + (e.domanda ? '<h3 class="ix-q">' + h(e.domanda) + '</h3>' : '') +
+      (s.n ? '<ol class="ix-ind">' + ind.slice(0, s.n).map(function(x, k){ return '<li' + (nuovo && k === s.n - 1 ? ' class="nuovo"' : '') + '><span>' + h(x) + '</span></li>'; }).join('') + '</ol>' : '') +
+      (s.sol ? '<div class="ix-sol"><b>' + h(e.soluzione || '') + '</b>' + (e.spiegazione ? '<p>' + h(e.spiegazione) + '</p>' : '') + '</div>' : '') +
+      '<div class="ix-foot"><span>' + (E.length > 1 ? '<button class="btn" type="button" data-prev ' + (i === 0 ? 'disabled' : '') + '>◀</button> ' : '') + '<button class="btn" type="button" data-reset>Ricomincia</button></span>' +
+      '<span>' + (s.n < ind.length && !s.sol ? '<button class="btn primary" type="button" data-ind>' + (s.n ? 'Prossimo indizio ›' : 'Primo indizio ›') + '</button> ' : '') +
+      (!s.sol ? '<button class="btn" type="button" data-sol>Mostra la soluzione</button>' : '') +
+      (E.length > 1 && i < E.length - 1 ? ' <button class="btn" type="button" data-next>Enigma successivo ▶</button>' : '') + '</span></div></div>';
+  }
+  root.addEventListener('click', function(ev){
+    var t = ev.target;
+    if (t.closest('[data-ind]')){ ST[i].n++; nuovo = true; draw(); nuovo = false; var l = body.querySelector('.ix-ind li:last-child'); if (l && l.scrollIntoView) l.scrollIntoView({block: 'nearest', behavior: 'smooth'}); }
+    if (t.closest('[data-sol]')){ ST[i].sol = true; draw(); }
+    if (t.closest('[data-reset]')){ ST[i] = {n: 0, sol: false}; draw(); }
+    if (t.closest('[data-prev]') && i > 0){ i--; draw(); }
+    if (t.closest('[data-next]') && i < E.length - 1){ i++; draw(); }
+    if (t.closest('[data-fs]')){ if (document.fullscreenElement) document.exitFullscreen(); else if (box.requestFullscreen) box.requestFullscreen().then(function(){ box.classList.add('lim'); }, function(){}); }
+  });
+  document.addEventListener('fullscreenchange', function(){ if (!document.fullscreenElement) box.classList.toggle('lim', !!opts.lim); });
+  draw();
+}
+
+</script>
+<script>mountIX(document.getElementById('att'), {"kind":"indizi","title":"Indovina il luogo: spazi terrestri d'Italia e d'Europa","intro":"Leggete un indizio alla volta e provate a rispondere prima di aprire il successivo. Meno indizi usate, più punti fate.","punti":true,"enigmi":[{"id":"5bugog2","stimolo":"È lo spazio terrestre più grande d'Italia tra quelli del suo tipo.","domanda":"Di quale luogo si tratta?","indizi":["È piatto e basso: quasi tutto sotto i 200 metri.","Lo hanno costruito, poco a poco, i detriti portati da un grande fiume e dai suoi affluenti.","Si trova al Nord, tra Piemonte, Lombardia, Emilia-Romagna e Veneto. Il fiume è il Po."],"soluzione":"La Pianura Padana","spiegazione":"È la pianura più grande d'Italia, ed è una pianura alluvionale: è nata dai detriti del Po e dei suoi affluenti."},{"id":"cx3ebfj","stimolo":"Sono rilievi vicinissimi alla nostra scuola: nelle giornate limpide si vedono da Roma.","domanda":"Come si chiamano?","indizi":["Sono più bassi di 1000 metri: in gran parte sono colline.","Hanno due laghi rotondi, quello di Albano e quello di Nemi.","Quei laghi sono dentro antichi crateri: qui c'era un grande vulcano. Ci sono anche i Castelli Romani."],"soluzione":"I Colli Albani","spiegazione":"Sono colline vulcaniche: si sono formate con i materiali usciti dalle eruzioni di un antico vulcano."},{"id":"pt27h60","stimolo":"È la vetta più alta di tutto il continente europeo.","domanda":"Qual è questa montagna?","indizi":["Non è nelle Alpi, e quindi non è il Monte Bianco.","La sua catena separa il Mar Nero dal Mar Caspio.","La catena è il Caucaso; la vetta supera i 5600 metri."],"soluzione":"L'Elbrus","spiegazione":"L'Elbrus (5642 m) è nel Caucaso, nell'Europa del Sud-Est, dove i rilievi sono giovani e alti."},{"id":"rro3cuw","stimolo":"È una catena montuosa che conosci bene.","domanda":"Di quale catena si tratta?","indizi":["Non segna il confine dell'Italia: è tutta dentro la penisola.","Va da Nord a Sud, come una spina dorsale.","È più bassa delle Alpi e meno abitata."],"soluzione":"Gli Appennini","spiegazione":"Gli Appennini corrono lungo tutta la penisola, dalla Liguria alla Calabria, e continuano in Sicilia. Sono meno alti e meno popolati delle Alpi."},{"id":"jcd1k2k","stimolo":"Ci starebbe dentro l'Italia molte volte, ed è quasi tutta piatta.","domanda":"Di quale luogo si tratta?","indizi":["È un bassopiano: molto vasto e poco più alto del livello del mare.","Si trova soprattutto in un grande Stato dell'Europa dell'Est.","Lo Stato è la Russia; il nome comincia per S."],"soluzione":"Il Bassopiano Sarmatico","spiegazione":"Il Bassopiano Sarmatico è la distesa piatta più vasta del continente: si stende soprattutto in Russia, fino ai monti Urali."}]});</script>
+</body>
+</html>
