@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Il clima e gli ambienti · Geografia facile</title>
+<style>
+:root{
+--sfondo:#f3f3ef; --carta:#ffffff; --tenue-bg:#eaf1f2; --ink:#23262a; --tenue:#5a6066; --filo:#dfe2dd;
+--accento:#2b5f6b; --accento-2:#1f4a54; --accento-soft:#e1edef;
+--mare:#d7e8ee; --terra:#f4efe2; --ok:#1f7a4d; --ok-bg:#dcf2e6; --no:#b42318; --no-bg:#fde3e1;
+--serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+--sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+--surface:var(--carta); --line:var(--filo); --soft:var(--tenue-bg); --paper:var(--tenue-bg); --accent:var(--accento); --accent-ink:#fff; --muted:var(--tenue); --card:var(--carta);
+/* i quattro blocchi della lezione */
+--kl:#2f6f9f; --kl-bg:#e0edf7; --am:#3d7f34; --am-bg:#e2f0da; --fo:#8a5530; --fo-bg:#f1e3d3; --um:#7a4a6e; --um-bg:#f1e6ef;
+color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+--sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+--accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+--accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717;
+--kl:#8cc3ea; --kl-bg:#15242f; --am:#93d07c; --am-bg:#16261a; --fo:#e0a873; --fo-bg:#2e2116; --um:#d9a6cc; --um-bg:#2a1c27; color-scheme:dark}}
+:root[data-theme="dark"]{
+--sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+--accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+--accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717;
+--kl:#8cc3ea; --kl-bg:#15242f; --am:#93d07c; --am-bg:#16261a; --fo:#e0a873; --fo-bg:#2e2116; --um:#d9a6cc; --um-bg:#2a1c27; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--sfondo);color:var(--ink);font:1.08rem/1.65 var(--sans)}
+a{color:var(--accento)}
+a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--accento);outline-offset:2px}
+.salta{position:absolute;left:1rem;top:-6rem;background:var(--carta);padding:.8rem 1rem;z-index:20}.salta:focus{top:1rem}
+.foglio{max-width:1280px;margin:32px auto;background:var(--carta);border:1px solid var(--filo)}
+header.testata{padding:22px 52px 26px;border-top:9px solid var(--accento);background:var(--tenue-bg)}
+.indietro{display:inline-block;font-size:.92rem;margin-bottom:18px;text-decoration:none;border-bottom:1px solid currentColor}
+.eyebrow{margin:0 0 6px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tenue);font-weight:700}
+.capitolo{margin:0;font-weight:700;color:var(--accento)}
+h1{font:700 2.6rem/1.08 var(--serif);font-size:clamp(2.1rem,6vw,3.5rem);margin:6px 0 10px}
+.sottotitolo{margin:0;font:italic 1.25rem/1.4 var(--serif);color:var(--tenue)}
+.corpo-lezione{display:grid;grid-template-columns:268px minmax(0,1fr);align-items:start}
+nav.indice{position:sticky;top:12px;align-self:start;display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:30px 0 24px 28px;max-height:calc(100vh - 24px);overflow-y:auto}
+.indice-titolo{margin:0 0 2px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--tenue)}
+a.voce{display:flex;align-items:center;min-height:54px;padding:4px 12px 4px 4px;border-radius:999px 8px 8px 999px;background:var(--c);color:#fff;text-decoration:none;font:800 .86rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em;transition:transform .15s,box-shadow .15s}
+a.voce .tondo{margin-right:10px;flex:none;width:46px;height:46px;border-radius:50%;background:#e3eeee;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+a.voce svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+a.voce:hover{transform:translateX(4px)}
+a.voce[aria-current="true"]{transform:translateX(8px);box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+a.voce:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+main{padding:10px 52px 40px 40px;min-width:0}
+.fascia{display:flex;align-items:center;margin:28px 0 12px;min-height:50px;padding:4px 16px 4px 4px;border-radius:999px 8px 8px 999px;background:var(--c);color:#fff;font:800 .95rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.fascia .tondo{margin-right:10px;flex:none;width:42px;height:42px;border-radius:50%;background:#e3eeee;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+.fascia svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+section.parte{padding:34px 0 8px;border-bottom:1px solid var(--filo);scroll-margin-top:56px}
+section.parte:last-of-type{border-bottom:0}
+h2{font:700 2rem/1.2 var(--serif);margin:0 0 6px}
+.etichetta{display:inline-block;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--accento);margin:0 0 4px}
+.guida{margin:0 0 22px;color:var(--tenue);font-size:.98rem;max-width:72ch}
+h3{font:700 1.08rem/1.3 var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--accento);margin:26px 0 12px}
+h3 span{border-bottom:3px dotted var(--accento);padding-bottom:4px}
+p{margin:0 0 14px}
+.lettura{max-width:74ch}
+.pd{border:1px solid var(--filo);border-radius:12px;padding:18px 20px;background:var(--carta)}
+.pd h3{margin-top:0}
+.pd .link-lez{font-size:.92rem;margin:0}
+.ricorda{margin:18px 0 0;border:2px dashed var(--filo);border-radius:12px;padding:14px 18px}
+.ricorda h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tenue)}
+.ricorda dl{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:6px 14px}
+.ricorda dt{font-weight:700}.ricorda dd{margin:0}
+/* parole chiave */
+.parole{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin:0;padding:0}
+.parola{border:1px solid var(--filo);border-radius:12px;padding:14px 16px;scroll-margin-top:60px}
+.parola dt{font:700 1.1rem var(--serif);color:var(--accento);margin-bottom:4px}
+.parola dd{margin:0;font-size:.97rem}
+a.pk{color:inherit;text-decoration:underline dotted var(--accento);text-underline-offset:4px;text-decoration-thickness:2px}
+a.pk:hover{background:var(--accento-soft)}
+:target{outline:3px solid var(--accento);outline-offset:4px}
+/* testi */
+.livelli{display:inline-flex;border:1px solid var(--filo);border-radius:999px;overflow:hidden;margin:0 0 18px}
+.livelli button{font:inherit;font-size:.95rem;border:0;background:transparent;color:var(--ink);padding:7px 16px;cursor:pointer}
+.livelli button[aria-pressed="true"]{background:var(--accento);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .livelli button[aria-pressed="true"]{color:#0f1416}}
+:root[data-theme="dark"] .livelli button[aria-pressed="true"]{color:#0f1416}
+.paragrafo{margin:0 0 22px;max-width:74ch}
+.paragrafo h4{font:700 1.2rem/1.3 var(--serif);margin:0 0 6px}
+.paragrafo h4 .n{color:var(--c,var(--accento));margin-right:6px}
+.essenziale .paragrafo p{font-size:1.12rem;line-height:1.75}
+.bottone{display:inline-block;font:inherit;font-weight:700;border-radius:999px;padding:9px 18px;border:2px solid var(--accento);background:var(--accento);color:#fff;text-decoration:none;cursor:pointer}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bottone{color:#0f1416}}
+:root[data-theme="dark"] .bottone{color:#0f1416}
+.bottone.secondario,:root:not([data-theme="light"]) .bottone.secondario,:root[data-theme="dark"] .bottone.secondario{background:transparent;color:var(--accento)}
+/* compiti */
+.attivita{border:1px solid var(--filo);border-radius:14px;padding:18px 22px;margin:0 0 18px}
+.attivita h4{margin:0 0 4px;font:700 1.25rem/1.3 var(--serif)}
+.attivita .meta{font-size:.86rem;color:var(--tenue);margin:0 0 12px}
+.consegna{margin:0 0 12px}
+table.esercizio{width:100%;border-collapse:collapse;font-size:.97rem}
+table.esercizio td{border-top:1px solid var(--filo);padding:8px 6px;vertical-align:middle}
+table.esercizio td:first-child{width:52%}
+table.esercizio select{font:inherit;font-size:.95rem;width:100%;max-width:100%;padding:5px 6px;border:1px solid var(--filo);border-radius:6px;background:var(--carta);color:var(--ink)}
+td.esito{width:34px;text-align:center;font-weight:700}
+tr.ok td.esito{color:var(--ok)} tr.no td.esito{color:var(--no)}
+tr.ok{background:var(--ok-bg)} tr.no{background:var(--no-bg)}
+.spiega{display:block;font-size:.88rem;color:var(--tenue);margin-top:4px}
+.comandi{display:flex;flex-wrap:wrap;align-items:center;margin:14px 0 0}
+.comandi>*{margin:0 10px 8px 0}
+.punteggio{font-weight:700}
+textarea{font:inherit;width:100%;min-height:84px;border:1px solid var(--filo);border-radius:8px;padding:8px 10px;background:var(--carta);color:var(--ink)}
+footer{border-top:1px solid var(--filo);padding:18px 52px;font-size:.86rem;color:var(--tenue)}
+footer p{margin:0 0 6px}
+.prepara{margin:16px 0 0}
+@media (max-width:960px){
+html{scroll-padding-bottom:84px}
+.corpo-lezione{display:block}
+nav.indice{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:90;grid-auto-flow:column;grid-auto-columns:max-content;grid-template-columns:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;max-height:none;gap:8px;padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));background:var(--carta);border-top:1px solid var(--filo);box-shadow:0 -4px 14px rgba(0,0,0,.12)}
+.foglio{margin-bottom:70px}
+.indice-titolo{display:none}
+a.voce{flex:none;min-height:40px;padding:3px 12px 3px 3px;font-size:.74rem;white-space:nowrap}
+a.voce .tondo{width:34px;height:34px;border-width:2px}
+a.voce svg{width:18px;height:18px}
+a.voce:hover,a.voce[aria-current="true"]{transform:none}
+main{padding:10px 40px 40px}
+}
+@media (max-width:700px){
+.foglio{margin:0;border:0}
+header.testata{padding:16px 16px 20px}
+main{padding:4px 16px 28px}
+footer{padding:16px}
+.ricorda dl{grid-template-columns:1fr}
+.ricorda dd{margin-bottom:6px}
+table.esercizio td{display:block;width:100%!important;border-top:0;padding:4px 6px}
+table.esercizio tr{display:block;border-top:1px solid var(--filo);padding:6px 0}
+td.esito{text-align:left}
+}
+@media print{
+body{background:#fff}.foglio{border:0;margin:0}nav.indice,.indietro,.comandi,.livelli{display:none}
+section.parte{break-inside:avoid-page}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* indice riducibile */
+.indice-riduci{display:none}
+@media (min-width:961px){
+.indice-testa{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.indice-riduci{display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:50%;border:1px solid var(--filo);background:var(--carta);color:var(--tenue);font:700 1rem/1 system-ui,sans-serif;cursor:pointer;padding:0}
+.indice-riduci:hover{color:var(--ink)}
+.corpo-lezione{transition:grid-template-columns .2s}
+.corpo-lezione.indice-ridotto{grid-template-columns:84px minmax(0,1fr)}
+.indice-ridotto nav.indice{padding-left:16px;padding-right:0;overflow:visible;z-index:20;gap:8px}
+.indice-ridotto .indice-testa{justify-content:center;width:52px}
+.indice-ridotto .indice-titolo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.indice-ridotto a.voce{position:relative;width:52px;min-height:52px;padding:4px;justify-content:center;border-radius:999px}
+.indice-ridotto a.voce .tondo{margin-right:0}
+.indice-ridotto a.voce:hover{transform:none}
+.indice-ridotto a.voce .nome{position:absolute;left:62px;top:50%;transform:translateY(-50%);white-space:nowrap;background:#23262a;color:#fff;padding:7px 12px;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .12s;z-index:30}
+.indice-ridotto a.voce .nome:before{content:"";position:absolute;left:-6px;top:50%;margin-top:-6px;border:6px solid transparent;border-left:0;border-right-color:#23262a}
+.indice-ridotto a.voce:hover .nome,.indice-ridotto a.voce:focus .nome{opacity:1}
+}
+/* una parte alla volta */
+section.parte[hidden]{display:none}
+.una-parte section.parte{min-height:60vh;border-bottom:0}
+.parte-nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin:34px 0 10px;padding-top:18px;border-top:1px solid var(--filo)}
+.parte-nav a{display:inline-block;padding:10px 18px;border-radius:999px;background:var(--c,#2b5f6b);color:#fff;text-decoration:none;font:800 .86rem/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;text-transform:uppercase;letter-spacing:.03em}
+.parte-nav a.succ{margin-left:auto}
+.parte-nav a:hover{filter:brightness(1.1)}
+.parte-nav a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+@media print{section.parte[hidden]{display:block!important}.parte-nav{display:none}}
+/* indice neutro: il colore pieno solo per la parte che si sta leggendo */
+a.voce{background:var(--carta);color:var(--ink)}
+a.voce:not([aria-current="true"]){box-shadow:inset 0 0 0 1px var(--filo)}
+a.voce .tondo{background:var(--tenue-bg);border-color:var(--carta)}
+a.voce[aria-current="true"]{background:var(--c);color:#fff}
+a.voce[aria-current="true"] .tondo{background:#ffffff;border-color:#fff}
+/* ===== geografia facile ===== */
+/* carte delle parole */
+.carte{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin:8px 0 6px}
+.carta{all:unset;box-sizing:border-box;cursor:pointer;display:block;min-height:250px;border-radius:16px;border:2px solid var(--filo);background:var(--carta);perspective:900px;position:relative}
+.carta:focus-visible{outline:3px solid var(--accento);outline-offset:3px}
+.carta .giro{position:relative;display:block;width:100%;height:100%;min-height:246px;transition:transform .45s;transform-style:preserve-3d}
+.carta.girata .giro{transform:rotateY(180deg)}
+.carta .faccia{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px 18px;border-radius:14px;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.carta .retro{transform:rotateY(180deg);background:var(--accento-soft)}
+.carta .disegno{width:118px;height:118px;border-radius:50%;background:var(--tenue-bg);display:grid;place-items:center;margin-bottom:12px;color:var(--accento)}
+.carta .disegno svg{width:96px;height:96px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.carta .disegno svg .pieno{fill:currentColor;stroke:none;opacity:.18}
+.carta .disegno svg .neve{fill:var(--carta);stroke:currentColor}
+.carta .nome{font:700 1.35rem/1.2 var(--serif)}
+.carta .def{font-size:1.08rem;line-height:1.45}
+.carta .gira{position:absolute;right:12px;bottom:8px;font-size:.78rem;color:var(--tenue)}
+@media (prefers-reduced-motion:reduce){.carta .giro{transition:none}}
+.comandi-carte{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:4px 0 16px}
+.modo-attuale{font-weight:700;margin-right:6px}
+.scelta-gioco{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:720px;margin:6px 0 18px}
+.sg-domanda{grid-column:1/-1;margin:0;font:700 1.15rem var(--serif)}
+.sg-btn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:150px;padding:18px;border-radius:16px;border:2px solid var(--accento);background:var(--accento-soft);text-align:center;transition:transform .15s}
+.sg-btn:hover{transform:translateY(-3px)}
+.sg-btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.sg-t{font:800 1.6rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--accento)}
+.sg-s{font-size:.95rem;color:var(--tenue)}
+@media (max-width:560px){.scelta-gioco{grid-template-columns:1fr}.sg-btn{min-height:110px}}
+.comandi-carte .bottone{font-size:.92rem;padding:7px 16px}
+/* idea principale: il termometro sulla montagna */
+.salita{border:1px solid var(--filo);border-radius:12px;overflow:hidden;margin:6px 0 18px}
+.salita-comandi{display:grid;grid-template-columns:auto 1fr auto;gap:6px 16px;align-items:center;padding:14px 16px;border-bottom:1px solid var(--filo);background:var(--tenue-bg)}
+.salita-comandi label{font-weight:700}
+.salita-comandi input[type=range]{width:100%;accent-color:#d9822b}
+.salita-comandi output{grid-column:1/-1;font-size:1.05rem;min-height:3.2em}
+.salita-comandi output b{color:#c25a12}
+.zoom-dis{display:flex;gap:4px;align-items:center}
+.zoom-dis button{border:1px solid var(--filo);background:var(--carta);color:var(--ink);border-radius:999px;min-width:34px;height:34px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px}
+.zoom-dis button:hover{background:var(--accento);color:#fff}
+.zoom-dis button:disabled{opacity:.35;cursor:default}
+.zoom-dis span{min-width:42px;text-align:center;font-size:.82rem;font-weight:700;color:var(--tenue)}
+.dis-scorri{overflow:auto;background:#dcecf6}
+.dis-scorri svg{display:block;width:100%;height:auto}
+#monte .cielo{fill:#dcecf6}
+#monte .suolo{fill:#c9b48a;stroke:#7d6a45;stroke-width:2;stroke-linejoin:round}
+#monte .neve{fill:#fff}
+#monte .mare{fill:#7fb7dc}
+#monte .quota{stroke:#23262a;stroke-width:1;stroke-dasharray:5 5;opacity:.45}
+#monte .eq{font:700 13px var(--sans);fill:#23262a}
+#monte .tubo{fill:#fff;stroke:#23262a;stroke-width:2}
+#monte .mercurio{fill:#d1352b}
+#monte .tacca{stroke:#23262a;stroke-width:1.5}
+#monte .gradi{font:700 12px var(--sans);fill:#23262a}
+#monte .cursore line{stroke:#d9822b;stroke-width:3}
+#monte .cursore circle{fill:#d9822b;stroke:#fff;stroke-width:3}
+#monte .cursore text{font:800 16px var(--sans);fill:#c25a12;paint-order:stroke;stroke:#fff;stroke-width:5px}
+.nota-scala{margin:0;padding:8px 16px;font-size:.82rem;color:var(--tenue);border-top:1px solid var(--filo)}
+@media (max-width:560px){.salita-comandi{grid-template-columns:1fr}.zoom-dis{justify-self:end}}
+/* idea principale a poco a poco */
+.passi .passo{margin:0 0 12px}
+.js-passi .passi .passo.dopo,.js-passi .passo-extra.dopo{display:none}
+.passi .passo.nuovo{animation:compare .6s ease-out;background:var(--accento-soft);border-radius:8px;box-shadow:0 0 0 6px var(--accento-soft)}
+@keyframes compare{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.lettura.passi{max-width:none}
+.passi p.passo{max-width:74ch}
+.passo-carta{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:start;margin:8px 0 22px;padding-top:14px;border-top:1px solid var(--filo)}
+.carta-testo p{margin:0 0 10px}
+.carta-guida{font-size:.95rem;color:var(--tenue)}
+.domanda-carta{font:1.12rem/1.45 var(--serif)}
+.opz-carta{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 8px}
+.opz-carta .bottone{font-size:.95rem;padding:7px 16px}
+.opz-carta .bottone.si{background:var(--ok)!important;border-color:var(--ok)!important;color:#fff!important}
+.opz-carta .bottone.no{border-color:var(--no);color:var(--no);opacity:.7}
+.fb-carta{min-height:1.4em;font-weight:700;margin:0 0 8px}
+.fb-carta.si{color:var(--ok)} .fb-carta.no{color:var(--no)}
+.risposta-carta{border-left:4px solid var(--am);padding:8px 0 2px 14px;background:var(--am-bg);border-radius:0 10px 10px 0;animation:compare .5s ease-out}
+.carta-fig{margin:0}
+.carta-fig svg{display:block;width:100%;height:auto;border:1px solid var(--filo);border-radius:10px;background:#0f2a44}
+.carta-fig.chiaro svg{background:#dcecf6}
+.carta-fig figcaption{font-size:.78rem;color:var(--tenue);margin-top:6px;line-height:1.4}
+@media (max-width:760px){.passo-carta{grid-template-columns:1fr}}
+.passo-giu{width:34px;height:34px;margin:-6px 0 -6px 8px;vertical-align:middle;border-radius:50%;border:2px solid var(--accento);background:var(--accento);color:#fff;display:inline-grid;place-items:center;cursor:pointer;padding:0;animation:invita 1.6s ease-in-out 1s 3}
+.passo-giu svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.passo-giu:hover{filter:brightness(1.12)}
+.passo-giu:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .passo-giu{color:#0f1416}}
+:root[data-theme="dark"] .passo-giu{color:#0f1416}
+@keyframes invita{0%,100%{transform:none}50%{transform:translateY(4px)}}
+@media (prefers-reduced-motion:reduce){.passo-giu{animation:none}.passi .passo.nuovo{animation:none}}
+@media print{.js-passi .passi .passo.dopo,.js-passi .passo-extra.dopo{display:block!important}.salita-comandi{display:none}}
+.quattro{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:6px 0 14px}
+.quattro .uno{border-radius:12px;padding:12px 14px}
+.quattro .uno h4{margin:0 0 4px;font:700 1.08rem/1.3 var(--serif)}
+.quattro .uno p{margin:0;font-size:.95rem}
+.uno.kl{background:var(--kl-bg)} .uno.kl h4{color:var(--kl)}
+.uno.am{background:var(--am-bg)} .uno.am h4{color:var(--am)}
+.uno.fo{background:var(--fo-bg)} .uno.fo h4{color:var(--fo)}
+.uno.um{background:var(--um-bg)} .uno.um h4{color:var(--um)}
+.indovina{margin:14px 0 0}
+/* testo: gli elementi del clima e gli strumenti */
+.strumenti-box{border:1px solid var(--filo);border-radius:12px;padding:14px 16px;margin:0 0 22px}
+.strumenti-box h4{margin:0 0 4px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--kl)}
+.strumenti-box .meta{font-size:.9rem;color:var(--tenue);margin:0 0 10px}
+.strumenti{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.strumenti button{all:unset;box-sizing:border-box;cursor:pointer;border:1px solid var(--filo);border-radius:10px;padding:10px 12px;font-size:.97rem;background:var(--carta);display:flex;flex-direction:column;gap:2px;min-height:64px}
+.strumenti button b{color:var(--kl)}
+.strumenti button .st-q{font-size:.85rem;color:var(--tenue)}
+.strumenti button .st-r{font-weight:700}
+.strumenti button[aria-pressed="true"]{border-color:var(--kl);box-shadow:inset 4px 0 0 var(--kl);background:var(--kl-bg)}
+.strumenti button:focus-visible{outline:3px solid var(--accento);outline-offset:2px}
+.blocco{margin:6px 0 26px;border-top:4px solid var(--c);padding-top:12px}
+.blocco>h3{color:var(--c);margin-top:4px}
+.blocco>h3 span{border-color:var(--c)}
+.impara{margin:4px 0 22px;max-width:74ch;border:2px solid var(--um);border-radius:12px;padding:12px 16px;background:var(--um-bg)}
+.impara h4{margin:0 0 6px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--um)}
+.impara p{margin:0 0 4px;font-size:.97rem}
+/* mappa delle informazioni */
+.mi-radice{text-align:center;margin:6px auto 0;max-width:420px;font:700 1.25rem var(--serif);background:var(--accento);color:#fff;border-radius:999px;padding:10px 18px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .mi-radice{color:#0f1416}}
+:root[data-theme="dark"] .mi-radice{color:#0f1416}
+.mi-rami{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px;position:relative}
+.mi-rami:before{content:"";position:absolute;left:12.5%;right:12.5%;top:-12px;border-top:3px solid var(--filo)}
+.mi-ramo{position:relative;border-radius:14px;padding:0 0 10px;background:var(--tenue-bg)}
+.mi-ramo:before{content:"";position:absolute;left:50%;top:-12px;height:12px;border-left:3px solid var(--filo)}
+.mi-ramo>h3{margin:0;padding:10px 12px;border-radius:14px 14px 0 0;color:#fff;text-align:center;letter-spacing:.06em;font-size:.98rem}
+.mi-ramo.kl>h3{background:#2f6f9f} .mi-ramo.am>h3{background:#4f8f3f} .mi-ramo.fo>h3{background:#8a5530} .mi-ramo.um>h3{background:#7a4a6e}
+.mi-nodo{margin:10px 10px 0;border:1px solid var(--filo);border-radius:10px;background:var(--carta);overflow:hidden}
+.mi-nodo h4{margin:0;padding:7px 12px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tenue);border-bottom:1px solid var(--filo)}
+.mi-nodo .cont{padding:8px 12px;font-size:.93rem}
+.mi-nodo .cont p{margin:0 0 4px}
+.mi-nodo ul{margin:2px 0 0;padding-left:18px}
+.mi-nodo button.scopri{all:unset;box-sizing:border-box;cursor:pointer;display:block;width:100%;padding:12px;text-align:center;font-weight:700;color:var(--accento);background:repeating-linear-gradient(135deg,var(--carta) 0 10px,var(--tenue-bg) 10px 20px)}
+.mi-nodo button.scopri:focus-visible{outline:3px solid var(--accento);outline-offset:-3px}
+.prova .mi-nodo:not(.visto) .cont{display:none}
+.mi-nodo .scopri{display:none!important}
+.prova .mi-nodo:not(.visto) .scopri{display:block!important}
+@media (max-width:1100px){.mi-rami{grid-template-columns:repeat(2,minmax(0,1fr))}.mi-rami:before,.mi-ramo:before{display:none}.quattro{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){.mi-rami,.quattro{grid-template-columns:1fr}}
+@media print{.comandi-carte,.indovina{display:none}.carta .giro{transform:none!important}.carta .retro{position:static;transform:none}.carta{min-height:0}.carta .faccia{position:static}}
+section.parte:target{outline:none}
+/* glossario: definizioni nascoste e definizioni scritte dai ragazzi */
+.parola .mia{display:block;width:100%;min-height:58px;margin:6px 0 8px;font:inherit;font-size:.95rem;padding:6px 9px;border:1px dashed var(--filo);border-radius:8px;background:var(--carta);color:var(--ink);resize:vertical}
+.parola .mia:focus{border-style:solid;border-color:#6b3f8a;outline:none}
+.parola .apri-def{all:unset;cursor:pointer;font-size:.88rem;font-weight:700;color:#6b3f8a;text-decoration:underline;text-underline-offset:3px}
+.parola .apri-def:focus-visible{outline:3px solid #6b3f8a;outline-offset:2px}
+.parola dd{margin-top:6px;padding:8px 10px;background:#fff8dc;color:#23262a;border-left:3px solid #6b3f8a;border-radius:0 8px 8px 0}
+@media print{.parola dd[hidden]{display:block!important}.parola .apri-def,#glo-comandi{display:none}.parola .mia{border:0;padding:0;min-height:0}}
+/* tooltip delle parole del glossario */
+a.pk{position:relative;cursor:help}
+.tip{position:absolute;z-index:120;left:50%;bottom:calc(100% + 11px);transform:translateX(calc(-50% + var(--sp,0px)));width:max-content;max-width:min(290px,80vw);background:#fff8dc;color:#23262a;border:2px solid #6b3f8a;border-radius:10px;padding:9px 13px;font:400 .93rem/1.4 var(--sans);text-align:left;text-decoration:none;white-space:normal;box-shadow:0 6px 18px rgba(0,0,0,.18);pointer-events:auto}
+.tip b{display:block;font:700 1.02rem var(--serif);margin-bottom:2px;color:#6b3f8a}
+.tip .vai{display:inline-block;margin-top:5px;font-size:.8rem;text-decoration:underline;color:#6b3f8a;cursor:pointer}
+.tip:after{content:"";position:absolute;left:calc(50% - var(--sp,0px) - 7px);top:calc(100% - 6px);width:12px;height:12px;background:#fff8dc;border:2px solid #6b3f8a;border-top:0;border-left:0;transform:rotate(45deg)}
+.tip.sotto{bottom:auto;top:calc(100% + 11px)}
+.tip.sotto:after{top:-8px;border:2px solid #6b3f8a;border-bottom:0;border-right:0}
+@media print{.tip{display:none!important}}
+</style>
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<div class="foglio">
+<header class="testata">
+<a class="indietro" href="../index.html">← Torna a Clima e ambienti: tutte le lezioni</a>
+<p class="eyebrow">Geografia · Modulo II · Clima e ambienti</p>
+<p class="capitolo">Lezione facile</p>
+<h1>Il clima e gli ambienti</h1>
+<p class="sottotitolo">Perché i climi sono diversi, quali ambienti nascono e chi trasforma il paesaggio</p>
+</header>
+<div class="corpo-lezione">
+<nav class="indice" aria-label="Parti della lezione">
+<div class="indice-testa"><p class="indice-titolo">In questa lezione</p><button type="button" class="indice-riduci" aria-pressed="false" aria-label="Riduci l'indice alle sole icone" title="Riduci l'indice alle sole icone">«</button></div>
+<a class="voce" href="#idea" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">Idea principale</span></a>
+<a class="voce" href="#concetti" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="11" height="14" rx="2"/><path d="M8 4h11a2 2 0 0 1 2 2v12"/><path d="M5.5 16l3-5 2 3 1-1.5 1.5 3.5"/></svg></span><span class="nome">Concetti chiave</span></a>
+<a class="voce" href="#testi" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">Testo sintetico / essenziale</span></a>
+<a class="voce" href="#parole" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">Glossario</span></a>
+<a class="voce" href="#mappa-informazioni" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="4.5" rx="1"/><rect x="2.5" y="15" width="5.5" height="5" rx="1"/><rect x="9.25" y="15" width="5.5" height="5" rx="1"/><rect x="16" y="15" width="5.5" height="5" rx="1"/><path d="M12 7v4M5.25 15v-4h13.5v4M12 11v4"/></svg></span><span class="nome">Mappa delle informazioni</span></a>
+<a class="voce" href="#compiti" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="nome">Dieci cose da sapere</span></a>
+<a class="voce" href="#dopo" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14"/><path d="M13 6l6 6-6 6"/></svg></span><span class="nome">E dopo?</span></a>
+</nav>
+<main id="contenuto">
+
+<!-- ======================= IDEA PRINCIPALE ======================= -->
+<section class="parte" id="idea" aria-labelledby="t-idea">
+<h2 id="t-idea">Idea principale</h2>
+<p class="guida">Prima di studiare i dettagli, guarda l'argomento dall'alto: che cos'è il clima, perché non è uguale dappertutto e che cosa cambia il paesaggio.</p>
+<div class="lettura passi" id="idea-passi">
+<p class="passo"><span class="qui-freccia">Il <a class="pk" href="#p-tempo">tempo atmosferico</a> è com'è l'aria oggi: sole, pioggia, vento. Il <a class="pk" href="#p-clima">clima</a> invece è il tempo che fa <strong>di solito</strong> in un luogo, osservato per <strong>molti anni</strong>.</span><button type="button" class="passo-giu" id="passo-avanti" aria-label="Continua: mostra la frase successiva" title="Continua"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></p>
+<p class="passo dopo"><span class="qui-freccia">Per conoscere il clima si misurano i suoi <a class="pk" href="#p-elementi">elementi</a>: la <strong>temperatura</strong>, la <strong>pressione</strong>, i <strong>venti</strong>, l'<strong>umidità</strong> e le <strong>precipitazioni</strong>.</span></p>
+<p class="passo dopo"><span class="qui-freccia">Il clima cambia da un luogo all'altro per alcune cause, i <a class="pk" href="#p-fattori">fattori</a>: la <strong>latitudine</strong>, l'<strong>altitudine</strong>, la <strong>posizione dei rilievi</strong> e la <strong>distanza dal mare</strong>.</span></p>
+<div class="passo dopo">
+<div class="salita">
+<div class="salita-comandi">
+<label for="quota">Sali con il termometro</label>
+<input type="range" id="quota" min="0" max="4800" step="100" value="1500">
+<div class="zoom-dis" role="group" aria-label="Ingrandisci il disegno"><button type="button" data-zd="-1" aria-label="Rimpicciolisci il disegno" title="Rimpicciolisci il disegno">−</button><span aria-live="polite">100%</span><button type="button" data-zd="1" aria-label="Ingrandisci il disegno" title="Ingrandisci il disegno">+</button></div>
+<output id="quota-out" for="quota" aria-live="polite"></output>
+</div>
+<div class="dis-scorri"><svg id="monte" viewBox="0 0 600 380" role="img" aria-labelledby="monte-t"><title id="monte-t">Una montagna alta 4800 metri con un termometro: salendo, la temperatura scende</title></svg></div>
+<p class="nota-scala"><span class="qui-freccia">Al livello del mare ci sono 20 °C. Ogni 100 metri di salita la temperatura scende di circa mezzo grado (0,6 °C). Il disegno non è in scala.</span></p>
+</div>
+</div>
+<div class="passo passo-carta dopo" data-attesa="1">
+<div class="carta-testo">
+<p class="domanda-carta"><b>Guarda il disegno.</b> I raggi del Sole sono uguali. Dove scaldano di più la Terra?</p>
+<p class="carta-guida">Guarda le strisce arancioni: è il pezzo di terra che ogni fascio di raggi deve scaldare.</p>
+<div class="opz-carta" role="group" aria-label="Scegli la risposta">
+<button type="button" class="bottone secondario" data-ok="1">all'Equatore</button>
+<button type="button" class="bottone secondario" data-ok="0">vicino al Polo nord</button>
+</div>
+<p class="fb-carta" aria-live="polite" data-aiuto="Non proprio: vicino al polo lo stesso fascio di raggi si allarga su una striscia più lunga."></p>
+<div class="risposta-carta" hidden>
+<p><span class="qui-freccia">All'<strong>Equatore</strong> i raggi arrivano dritti e scaldano un pezzo piccolo di terra: fa caldo. Verso i poli arrivano inclinati, si allargano e scaldano meno. È la <strong>latitudine</strong>.</span></p>
+</div>
+</div>
+<figure class="carta-fig">
+<svg viewBox="0 0 320 260" role="img" aria-labelledby="globo-t">
+<title id="globo-t">La Terra colpita da due fasci di raggi uguali: all'Equatore i raggi arrivano dritti, vicino al polo arrivano inclinati e si allargano</title>
+<circle cx="130" cy="130" r="100" fill="#2f78b5"/>
+<path d="M60 70c20-18 52-22 70-8 10 8 2 22 16 26 16 4 26-10 40 2 10 9 4 24-6 30-14 8-30 0-40 14-10 14 6 34-8 46-14 12-40 2-50-14-12-18 2-34-10-48-10-12-26-2-30-16-4-14 6-24 18-32z" fill="#5d9a52"/>
+<line x1="30" y1="130" x2="230" y2="130" stroke="#fff" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="40" y="146" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#fff">Equatore</text>
+<circle cx="130" cy="30" r="3.5" fill="#fff"/>
+<text x="92" y="20" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#fff">Polo nord</text>
+<path d="M320 120H229.5V140H320Z" fill="#ffd54a" opacity=".85"/>
+<path d="M320 40H173.6L201.4 60H320Z" fill="#ffd54a" opacity=".85"/>
+<path d="M229.5 120A100 100 0 0 1 229.5 140" fill="none" stroke="#ff7a1a" stroke-width="7" stroke-linecap="round"/>
+<path d="M173.6 40A100 100 0 0 1 201.4 60" fill="none" stroke="#ff7a1a" stroke-width="7" stroke-linecap="round"/>
+<text x="226" y="110" font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#ffd54a">raggi del Sole</text>
+</svg>
+<figcaption>Disegno schematico, non in scala.</figcaption>
+</figure>
+</div>
+<div class="passo passo-carta dopo" data-attesa="1">
+<div class="carta-testo">
+<p class="domanda-carta"><b>È una giornata d'estate.</b> Dove fa più fresco: nel paese A, vicino al mare, o nel paese B, lontano dal mare?</p>
+<p class="carta-guida">Ricorda: l'acqua si scalda e si raffredda più lentamente della terra.</p>
+<div class="opz-carta" role="group" aria-label="Scegli la risposta">
+<button type="button" class="bottone secondario" data-ok="1">nel paese A</button>
+<button type="button" class="bottone secondario" data-ok="0">nel paese B</button>
+</div>
+<p class="fb-carta" aria-live="polite" data-aiuto="Non proprio: d'estate il mare resta più fresco della terra e rinfresca l'aria della costa."></p>
+<div class="risposta-carta" hidden>
+<p><span class="qui-freccia">Il <strong>mare</strong> d'estate rinfresca e d'inverno riscalda le località sulla costa: evita le temperature troppo alte e troppo basse. È la <strong>distanza dal mare</strong>.</span></p>
+</div>
+</div>
+<figure class="carta-fig chiaro">
+<svg viewBox="0 0 320 200" role="img" aria-labelledby="mare-t">
+<title id="mare-t">Un paese A sulla costa vicino al mare e un paese B nell'interno, lontano dal mare, sotto il sole d'estate</title>
+<circle cx="40" cy="38" r="20" fill="#ffd54a" stroke="#f0a020" stroke-width="3"/>
+<path d="M0 120C60 112 140 116 210 122V200H0Z" fill="#d9c79a"/>
+<path d="M210 122C250 124 290 124 320 122V200H210Z" fill="#7fb7dc"/>
+<path d="M222 150c10-6 20 6 30 0s20 6 30 0 20 6 30 0" fill="none" stroke="#fff" stroke-width="2"/>
+<g fill="#fff" stroke="#6b5a3c" stroke-width="1.5"><path d="M168 118v-16l10-8 10 8v16z"/><path d="M190 118v-12l7-6 7 6v12z"/><path d="M30 116v-16l10-8 10 8v16z"/><path d="M52 116v-12l7-6 7 6v12z"/></g>
+<g font-family="system-ui,sans-serif" font-weight="800" font-size="20" fill="#23262a" paint-order="stroke" stroke="#fff" stroke-width="4"><text x="180" y="86">A</text><text x="42" y="84">B</text></g>
+<g font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#23262a"><text x="250" y="190">mare</text><text x="20" y="150">lontano dal mare</text><text x="128" y="150">sulla costa</text></g>
+</svg>
+<figcaption>Disegno schematico, non in scala.</figcaption>
+</figure>
+</div>
+<p class="passo dopo"><span class="qui-freccia">Il clima decide quali piante e quali animali possono vivere in un luogo. Per questo ogni <a class="pk" href="#p-zona">zona climatica</a> ha i suoi ambienti, i <a class="pk" href="#p-bioma">biomi</a>: la foresta pluviale, la savana, il deserto, la taiga…</span></p>
+<p class="passo dopo"><span class="qui-freccia">Il paesaggio cambia sempre. Lo modificano gli <a class="pk" href="#p-agenti">agenti atmosferici</a> e l'acqua in movimento, che consumano le rocce. E lo modificano gli <strong>esseri umani</strong>, con campi, città, fabbriche e strade.</span></p>
+</div>
+<div class="passo-extra dopo" data-dopo="8">
+<div class="quattro">
+<div class="uno kl"><h4>Il clima</h4><p>elementi e fattori</p></div>
+<div class="uno am"><h4>Gli ambienti</h4><p>un bioma per ogni clima</p></div>
+<div class="uno fo"><h4>Le forze della natura</h4><p>consumano e spostano le rocce</p></div>
+<div class="uno um"><h4>Gli esseri umani</h4><p>trasformano il paesaggio</p></div>
+</div>
+<div class="attivita indovina">
+<h4>Prima di andare avanti</h4>
+<p class="meta">Fa più caldo o più freddo? Scegli.</p>
+<div id="idea-prova"></div>
+</div>
+</div>
+</section>
+
+<!-- ======================= CONCETTI CHIAVE ======================= -->
+<section class="parte" id="concetti" aria-labelledby="t-concetti">
+<p class="etichetta">Concetti chiave</p>
+<h2 id="t-concetti">Le carte delle parole</h2>
+<p class="guida">Sei parole servono per tutta la lezione. Scegli come giocare: puoi partire dalla parola e dire che cosa significa, oppure partire dalla definizione e indovinare la parola. Poi tocca una carta per girarla e controllare.</p>
+<div class="scelta-gioco" id="scelta-gioco" role="group" aria-label="Da che cosa vuoi partire?">
+<p class="sg-domanda">Da che cosa vuoi partire?</p>
+<button type="button" class="sg-btn" data-modo="parola"><span class="sg-t">Parola</span><span class="sg-s">Vedi il disegno e la parola: che cosa significa?</span></button>
+<button type="button" class="sg-btn" data-modo="definizione"><span class="sg-t">Definizione</span><span class="sg-s">Leggi la definizione: qual è la parola?</span></button>
+</div>
+<div class="comandi-carte" id="carte-comandi" hidden>
+<span class="modo-attuale"></span>
+<button type="button" class="bottone secondario" id="carte-reset">Rigira tutte le carte</button>
+<button type="button" class="bottone secondario" id="carte-cambia">Cambia gioco</button>
+</div>
+<div class="carte" id="carte" hidden></div>
+<div class="ricorda" id="carte-ricorda" hidden>
+<h4>Ricorda</h4>
+<dl>
+<dt>Elementi del clima</dt><dd>temperatura, pressione, venti, umidità, precipitazioni: che cosa si misura</dd>
+<dt>Fattori del clima</dt><dd>latitudine, altitudine, posizione dei rilievi, distanza dal mare: perché il clima cambia</dd>
+</dl>
+</div>
+</section>
+
+<!-- ======================= TESTO ======================= -->
+<section class="parte" id="testi" aria-labelledby="t-testi">
+<p class="etichetta">Testo sintetico / essenziale</p>
+<h2 id="t-testi">La lezione per intero</h2>
+<p class="guida">Lo stesso testo in due versioni: il <strong>sintetico</strong> contiene tutte le informazioni, l'<strong>essenziale</strong> le dice con frasi più brevi. Scegli quella che ti serve.</p>
+<div class="livelli" role="group" aria-label="Versione del testo">
+<button type="button" data-livello="sintetico" aria-pressed="true">Sintetico</button>
+<button type="button" data-livello="essenziale" aria-pressed="false">Essenziale</button>
+</div>
+<div class="strumenti-box">
+<h4>Gli elementi del clima</h4>
+<p class="meta">Con che cosa si misura ogni elemento? Pensa alla risposta, poi tocca la casella.</p>
+<div class="strumenti" role="group" aria-label="Elementi del clima e strumenti">
+<button type="button" aria-pressed="false"><b>Temperatura</b><span class="st-q">quanto è calda l'aria</span><span class="st-r" hidden>→ termometro</span></button>
+<button type="button" aria-pressed="false"><b>Pressione</b><span class="st-q">il peso dell'aria</span><span class="st-r" hidden>→ barometro</span></button>
+<button type="button" aria-pressed="false"><b>Venti</b><span class="st-q">forza e direzione dell'aria che si muove</span><span class="st-r" hidden>→ anemometro</span></button>
+<button type="button" aria-pressed="false"><b>Umidità</b><span class="st-q">il vapore acqueo nell'aria</span><span class="st-r" hidden>→ igrometro</span></button>
+<button type="button" aria-pressed="false"><b>Precipitazioni</b><span class="st-q">pioggia, neve, grandine</span><span class="st-r" hidden>→ pluviometro</span></button>
+</div>
+</div>
+
+<div id="testo-sintetico">
+<div class="blocco" style="--c:#2f6f9f">
+<h3><span>1. Il clima</span></h3>
+<div class="paragrafo"><h4><span class="n">1</span>Tempo e clima</h4><p>Il <a class="pk" href="#p-tempo">tempo atmosferico</a> è lo stato dell'aria in un certo momento: oggi piove, domani c'è il sole. Il <a class="pk" href="#p-clima">clima</a> invece è l'insieme delle condizioni dell'aria che si verificano <strong>abitualmente</strong> in un luogo durante l'anno, misurate per un periodo di <strong>molti anni</strong>. Il clima cambia il paesaggio: i paesaggi dei climi freddi si somigliano fra loro, ma sono molto diversi da quelli dei climi desertici.</p></div>
+<div class="paragrafo"><h4><span class="n">2</span>Gli elementi del clima</h4><p>Per stabilire il clima di una zona si studiano i suoi <a class="pk" href="#p-elementi">elementi</a>: la <a class="pk" href="#p-temperatura">temperatura</a>, cioè quanto è calda l'aria (si misura con il <strong>termometro</strong>); la <strong>pressione</strong>, cioè il peso che l'aria esercita sulla Terra (barometro); la forza e la direzione dei <strong>venti</strong> (anemometro); l'<a class="pk" href="#p-umidita">umidità</a>, cioè quanto vapore acqueo c'è nell'aria (igrometro); le <a class="pk" href="#p-precipitazioni">precipitazioni</a>, cioè pioggia, neve e grandine (pluviometro).</p></div>
+<div class="paragrafo"><h4><span class="n">3</span>I fattori del clima</h4><p>Il clima cambia da una zona all'altra per alcune cause, i <a class="pk" href="#p-fattori">fattori</a>. La <a class="pk" href="#p-latitudine">latitudine</a>: all'Equatore i raggi del Sole arrivano dritti e scaldano molto; verso i poli arrivano inclinati, si allargano e scaldano meno. L'<a class="pk" href="#p-altitudine">altitudine</a>: il Sole scalda il suolo, e il suolo scalda l'aria dal basso; per questo salendo fa più freddo, circa mezzo grado in meno ogni 100 metri. La <strong>posizione dei rilievi</strong>: le catene montuose, come le Alpi, fermano le nuvole e i venti e separano zone con climi diversi; inoltre una montagna ha un <a class="pk" href="#p-versante">versante</a> più soleggiato (da noi quello a sud) e uno più in ombra. La <strong>distanza dal mare</strong>: l'acqua si scalda e si raffredda più lentamente della terra, quindi il mare d'estate rinfresca e d'inverno riscalda le coste. Sulla costa l'<a class="pk" href="#p-escursione">escursione termica</a> è più piccola: il mare ha un'<a class="pk" href="#p-mitigatrice">azione mitigatrice</a>. Contano anche le <strong>correnti marine</strong>, la vegetazione e le attività umane.</p></div>
+</div>
+<div class="blocco" style="--c:#4f8f3f">
+<h3><span>2. I climi e gli ambienti della Terra</span></h3>
+<div class="paragrafo"><h4><span class="n">1</span>Le zone climatiche</h4><p>Andando dall'Equatore verso i poli si incontrano <a class="pk" href="#p-zona">zone climatiche</a> sempre più fredde: la <strong>zona calda</strong>, a cavallo dell'Equatore; le due <strong>zone temperate</strong>, dove ci sono quattro stagioni (anche l'Italia); le due <strong>zone fredde</strong>, intorno ai poli. Il clima decide quali piante e quali animali possono vivere in un luogo: ogni clima ha il suo grande ambiente, il <a class="pk" href="#p-bioma">bioma</a>.</p></div>
+<div class="paragrafo"><h4><span class="n">2</span>Gli ambienti caldi</h4><p>Vicino all'Equatore fa caldo e piove tutto l'anno: qui cresce la <strong>foresta pluviale</strong>, con alberi altissimi e moltissime specie di piante e animali (per esempio in Amazzonia). Un po' più lontano dall'Equatore c'è una stagione secca e una stagione delle piogge: è la <strong>savana</strong>, una distesa di erba alta con pochi alberi, dove vivono grandi erbivori come zebre ed elefanti. Dove piove pochissimo c'è il <strong>deserto</strong>, come il Sahara: di giorno fa molto caldo e di notte fa freddo.</p></div>
+<div class="paragrafo"><h4><span class="n">3</span>Gli ambienti temperati e freddi</h4><p>Nelle zone temperate ci sono la <strong>macchia mediterranea</strong> (estati calde e secche, inverni miti; ulivi, lecci e arbusti profumati), i <strong>boschi di latifoglie</strong> come querce e faggi, e le <strong>praterie</strong> e <strong>steppe</strong>, lontano dal mare, dove piove poco. Più a nord, con inverni lunghi e gelidi, si estende la <strong>taiga</strong>, una foresta di conifere. Vicino ai poli c'è la <strong>tundra</strong>, con il terreno gelato quasi tutto l'anno, muschi e licheni; intorno ai poli ci sono i <strong>ghiacci</strong>.</p></div>
+</div>
+<div class="blocco" style="--c:#8a5530">
+<h3><span>3. Le forze della natura modellano il paesaggio</span></h3>
+<div class="paragrafo"><h4><span class="n">1</span>Erosione, trasporto, deposito</h4><p>I <a class="pk" href="#p-esogeni">fenomeni esogeni</a> agiscono dall'esterno sulla superficie della Terra. Sono tre: l'<a class="pk" href="#p-erosione">erosione</a> delle rocce, che produce i <a class="pk" href="#p-detriti">detriti</a>; il <strong>trasporto</strong> dei detriti, fatto dall'acqua, dal ghiaccio o dal vento; il <strong>deposito</strong> dei detriti, che forma nuove forme del rilievo, come le pianure. Li causano gli <a class="pk" href="#p-agenti">agenti atmosferici</a> e l'acqua in movimento. Hanno un'azione soprattutto «distruttiva»: in tempi molto lunghi consumano anche le rocce più dure.</p></div>
+<div class="paragrafo"><h4><span class="n">2</span>Gli agenti atmosferici</h4><p>Gli <strong>sbalzi di temperatura</strong> rompono le rocce: il caldo le dilata, il freddo le restringe, e a poco a poco la superficie si sbriciola. Quando l'acqua nelle fessure gela, aumenta di volume e spacca la roccia. Il <strong>vento</strong> solleva sabbia e detriti e consuma le rocce come una lima; dove abbandona la sabbia nascono le dune. Le <strong>precipitazioni</strong> attaccano le rocce: quelle di calcare si sciolgono facilmente con l'acqua piovana.</p></div>
+<div class="paragrafo"><h4><span class="n">3</span>L'acqua in movimento</h4><p>I <strong>ghiacciai</strong> scendendo verso valle scavano le montagne, trascinano i detriti e li lasciano ai loro lati o dove si sciolgono. I <strong>fiumi</strong> in montagna scavano solchi che diventano valli; in pianura trasportano i detriti e li depositano piano piano, soprattutto vicino alla foce. Il <strong>mare</strong>, con le onde, consuma le coste e deposita sui fondali e sulle spiagge sabbia e ciottoli.</p></div>
+</div>
+<div class="blocco" style="--c:#7a4a6e">
+<h3><span>4. Gli esseri umani modificano il paesaggio</span></h3>
+<div class="paragrafo"><h4><span class="n">1</span>Il paesaggio rurale</h4><p>Gli esseri umani modificano il paesaggio da quando hanno cominciato a coltivare la terra, a costruire case e a tracciare sentieri; oggi lo fanno sempre più in fretta. Il <a class="pk" href="#p-rurale">paesaggio rurale</a>, o agrario, nasce dall'agricoltura e dall'allevamento: campi, canali per irrigare, strade, case e stalle e fienili sparsi. Cambia secondo il clima e la forma del terreno: le pianure sono adatte a grano e riso, le colline a vigneti e frutteti, i monti a pascoli e boschi.</p></div>
+<div class="paragrafo"><h4><span class="n">2</span>Il paesaggio urbano e industriale</h4><p>Il <a class="pk" href="#p-urbano">paesaggio urbano</a> è quello delle città: è <strong>completamente artificiale</strong>, fatto di edifici (case, scuole, uffici, negozi) e strade. Accanto ai monumenti antichi si costruiscono edifici moderni di cemento, vetro e metallo, che crescono in altezza per sfruttare lo spazio. Il <a class="pk" href="#p-industriale">paesaggio industriale</a> è fatto di fabbriche, depositi, silos e magazzini, circondati da grandi spazi per muovere le merci; l'edificio tipico è il <strong>capannone</strong>, grande e basso.</p></div>
+<div class="paragrafo"><h4><span class="n">3</span>Le vie di comunicazione</h4><p>Le <a class="pk" href="#p-vie">vie di comunicazione</a> collegano i centri abitati: possono essere terrestri (strade, autostrade, ferrovie), fluviali, marittime e aeree. Per superare fiumi, valli e montagne si costruiscono ponti, viadotti e trafori. Vicino alle grandi vie nascono centri commerciali, aree industriali e impianti sportivi.</p></div>
+<div class="paragrafo"><h4><span class="n">4</span>Anche il clima cambia</h4><p>Le attività umane cambiano perfino il clima. Bruciando carbone, petrolio e gas e tagliando le foreste, aumentano nell'aria i gas che trattengono il calore: è l'<a class="pk" href="#p-serra">effetto serra</a>. La Terra si scalda, i ghiacciai si ritirano e gli ambienti cambiano.</p></div>
+</div>
+</div>
+
+<div id="testo-essenziale" class="essenziale" hidden>
+<div class="blocco" style="--c:#2f6f9f">
+<h3><span>1. Il clima</span></h3>
+<div class="paragrafo"><h4><span class="n">1</span>Tempo e clima</h4><p>Il <a class="pk" href="#p-tempo"><strong>tempo</strong></a> è com'è l'aria oggi. Il <a class="pk" href="#p-clima"><strong>clima</strong></a> è il tempo che fa di solito in un luogo, misurato per <strong>molti anni</strong>.</p></div>
+<div class="paragrafo"><h4><span class="n">2</span>Gli elementi del clima</h4><p>Gli <a class="pk" href="#p-elementi"><strong>elementi</strong></a> del clima sono: temperatura, pressione, venti, umidità e precipitazioni. Ognuno si misura con uno strumento: per esempio la temperatura con il <strong>termometro</strong>.</p></div>
+<div class="paragrafo"><h4><span class="n">3</span>I fattori del clima</h4><p>I <a class="pk" href="#p-fattori"><strong>fattori</strong></a> sono le cause che cambiano il clima. Più ci si allontana dall'Equatore, più fa freddo (<strong>latitudine</strong>). Più si sale, più fa freddo (<strong>altitudine</strong>). Le montagne fermano le nuvole (<strong>rilievi</strong>). Il mare rinfresca d'estate e riscalda d'inverno (<strong>distanza dal mare</strong>).</p></div>
+</div>
+<div class="blocco" style="--c:#4f8f3f">
+<h3><span>2. I climi e gli ambienti della Terra</span></h3>
+<div class="paragrafo"><h4><span class="n">1</span>Le zone climatiche</h4><p>Le zone climatiche sono: la <strong>zona calda</strong>, le <strong>zone temperate</strong> e le <strong>zone fredde</strong>. Ogni clima ha il suo ambiente: il <a class="pk" href="#p-bioma"><strong>bioma</strong></a>.</p></div>
+<div class="paragrafo"><h4><span class="n">2</span>Gli ambienti caldi</h4><p>Dove fa caldo e piove sempre c'è la <strong>foresta pluviale</strong>. Dove c'è una stagione secca c'è la <strong>savana</strong>. Dove piove pochissimo c'è il <strong>deserto</strong>.</p></div>
+<div class="paragrafo"><h4><span class="n">3</span>Gli ambienti temperati e freddi</h4><p>Nelle zone temperate ci sono la <strong>macchia mediterranea</strong>, i <strong>boschi</strong> e le <strong>praterie</strong>. Nelle zone fredde ci sono la <strong>taiga</strong>, la <strong>tundra</strong> e i <strong>ghiacci</strong>.</p></div>
+</div>
+<div class="blocco" style="--c:#8a5530">
+<h3><span>3. Le forze della natura modellano il paesaggio</span></h3>
+<div class="paragrafo"><h4><span class="n">1</span>Erosione, trasporto, deposito</h4><p>La natura consuma le rocce (<a class="pk" href="#p-erosione"><strong>erosione</strong></a>), porta via i pezzi (<strong>trasporto</strong>) e li lascia in un altro posto (<strong>deposito</strong>).</p></div>
+<div class="paragrafo"><h4><span class="n">2</span>Gli agenti atmosferici</h4><p>Il caldo e il freddo, il gelo, il vento e la pioggia rompono e consumano le rocce.</p></div>
+<div class="paragrafo"><h4><span class="n">3</span>L'acqua in movimento</h4><p>I <strong>ghiacciai</strong>, i <strong>fiumi</strong> e il <strong>mare</strong> scavano le rocce, trasportano i detriti e li depositano.</p></div>
+</div>
+<div class="blocco" style="--c:#7a4a6e">
+<h3><span>4. Gli esseri umani modificano il paesaggio</span></h3>
+<div class="paragrafo"><h4><span class="n">1</span>Il paesaggio rurale</h4><p>Il <a class="pk" href="#p-rurale"><strong>paesaggio rurale</strong></a> è fatto di campi, canali, stalle e fienili. Serve per l'agricoltura e l'allevamento.</p></div>
+<div class="paragrafo"><h4><span class="n">2</span>Il paesaggio urbano e industriale</h4><p>Il <strong>paesaggio urbano</strong> è la città: case, scuole, uffici, negozi e strade. Il <strong>paesaggio industriale</strong> è fatto di fabbriche, magazzini e capannoni.</p></div>
+<div class="paragrafo"><h4><span class="n">3</span>Le vie di comunicazione</h4><p>Strade, autostrade e ferrovie collegano i centri abitati. Ponti, viadotti e trafori superano fiumi, valli e montagne.</p></div>
+<div class="paragrafo"><h4><span class="n">4</span>Anche il clima cambia</h4><p>Le persone bruciano petrolio e tagliano le foreste. Così aumenta l'<a class="pk" href="#p-serra"><strong>effetto serra</strong></a> e la Terra si scalda.</p></div>
+</div>
+</div>
+<div class="impara">
+<h4>Impara le parole</h4>
+<p><strong>Rurale</strong> viene dal latino <em>rus</em> (= campagna), come <strong>rustico</strong> (= campagnolo).</p>
+<p><strong>Urbano</strong> viene dal latino <em>urbs</em> (= città), come <strong>urbanistica</strong> (la scienza che studia le città) e <strong>urbanesimo</strong> (l'aumento delle persone che vanno a vivere in città).</p>
+</div>
+</section>
+
+<!-- ======================= GLOSSARIO ======================= -->
+<section class="parte" id="parole" aria-labelledby="t-parole">
+<p class="etichetta">Glossario</p>
+<h2 id="t-parole">Le parole della lezione</h2>
+<p class="guida">I termini nuovi, nell'ordine in cui li incontri. Prima prova a scrivere con parole tue che cosa significa ogni termine; poi apri la definizione e confrontala con la tua.</p>
+<div class="comandi-carte" id="glo-comandi">
+<button type="button" class="bottone secondario" id="glo-tutte" aria-pressed="false">Mostra tutte le definizioni</button>
+<button type="button" class="bottone secondario" id="glo-cancella">Cancella le mie definizioni</button>
+</div>
+<dl class="parole">
+<div class="parola" id="p-tempo"><dt>Tempo atmosferico</dt><dd>Com'è l'aria in un certo momento: sole, pioggia, vento, caldo o freddo. Cambia da un giorno all'altro.</dd></div>
+<div class="parola" id="p-clima"><dt>Clima</dt><dd>Il tempo che fa di solito in un luogo durante l'anno, osservato e misurato per molti anni.</dd></div>
+<div class="parola" id="p-elementi"><dt>Elementi del clima</dt><dd>Le cose che si misurano per conoscere il clima: temperatura, pressione, venti, umidità e precipitazioni.</dd></div>
+<div class="parola" id="p-temperatura"><dt>Temperatura</dt><dd>Quanto è calda o fredda l'aria. Si misura in gradi (°C) con il termometro.</dd></div>
+<div class="parola" id="p-umidita"><dt>Umidità</dt><dd>La quantità di vapore acqueo che c'è nell'aria. Si misura con l'igrometro.</dd></div>
+<div class="parola" id="p-precipitazioni"><dt>Precipitazioni</dt><dd>L'acqua che cade dal cielo: pioggia, neve e grandine. Si misurano con il pluviometro.</dd></div>
+<div class="parola" id="p-fattori"><dt>Fattori del clima</dt><dd>Le cause che rendono il clima diverso da un luogo all'altro: latitudine, altitudine, posizione dei rilievi, distanza dal mare.</dd></div>
+<div class="parola" id="p-latitudine"><dt>Latitudine</dt><dd>La distanza di un luogo dall'Equatore, verso nord o verso sud. Più è alta, più fa freddo.</dd></div>
+<div class="parola" id="p-altitudine"><dt>Altitudine</dt><dd>Quanto un luogo è più alto del livello del mare. Si misura in metri. Più è alta, più fa freddo.</dd></div>
+<div class="parola" id="p-versante"><dt>Versante</dt><dd>Il fianco di una montagna. Da noi il versante a sud è più soleggiato e più caldo, quello a nord è più in ombra.</dd></div>
+<div class="parola" id="p-escursione"><dt>Escursione termica annua</dt><dd>La differenza fra la temperatura più alta dell'estate e la più bassa dell'inverno.</dd></div>
+<div class="parola" id="p-mitigatrice"><dt>Azione mitigatrice</dt><dd>L'azione del mare che rende il clima più dolce: evita le temperature troppo alte e troppo basse.</dd></div>
+<div class="parola" id="p-zona"><dt>Zona climatica</dt><dd>Una grande fascia della Terra con un clima simile: zona calda, zone temperate, zone fredde.</dd></div>
+<div class="parola" id="p-bioma"><dt>Bioma</dt><dd>Un grande ambiente naturale con il suo clima, le sue piante e i suoi animali: per esempio la savana o la taiga.</dd></div>
+<div class="parola" id="p-esogeni"><dt>Fenomeni esogeni</dt><dd>I fenomeni che agiscono dall'esterno sulla superficie della Terra: erosione, trasporto e deposito dei detriti.</dd></div>
+<div class="parola" id="p-erosione"><dt>Erosione</dt><dd>Il lento lavoro della natura che consuma e rompe le rocce.</dd></div>
+<div class="parola" id="p-detriti"><dt>Detriti</dt><dd>I pezzi staccati dalle rocce: sassi, ghiaia, sabbia, fango.</dd></div>
+<div class="parola" id="p-agenti"><dt>Agenti atmosferici</dt><dd>Le forze dell'aria che consumano le rocce: gli sbalzi di temperatura, il vento, le precipitazioni.</dd></div>
+<div class="parola" id="p-rurale"><dt>Paesaggio rurale</dt><dd>Il paesaggio della campagna, nato dall'agricoltura e dall'allevamento: campi, canali, stalle, fienili. Si dice anche agrario.</dd></div>
+<div class="parola" id="p-urbano"><dt>Paesaggio urbano</dt><dd>Il paesaggio delle città, completamente costruito dalle persone: edifici e strade.</dd></div>
+<div class="parola" id="p-industriale"><dt>Paesaggio industriale</dt><dd>Il paesaggio delle fabbriche: capannoni, depositi, silos, magazzini e spazi per muovere le merci.</dd></div>
+<div class="parola" id="p-vie"><dt>Vie di comunicazione</dt><dd>Le strade, ferrovie, rotte e linee che collegano i luoghi: terrestri, fluviali, marittime e aeree.</dd></div>
+<div class="parola" id="p-serra"><dt>Effetto serra</dt><dd>Alcuni gas dell'aria trattengono il calore del Sole come il vetro di una serra. Se questi gas aumentano, la Terra si scalda.</dd></div>
+</dl>
+</section>
+
+<!-- ======================= MAPPA DELLE INFORMAZIONI ======================= -->
+<section class="parte" id="mappa-informazioni" aria-labelledby="t-mi">
+<p class="etichetta">Mappa delle informazioni</p>
+<h2 id="t-mi">Tutto in una mappa</h2>
+<p class="guida">Quattro rami: il clima, gli ambienti, le forze della natura, gli esseri umani. Leggi la mappa dall'alto verso il basso. Quando la conosci, nascondi le caselle e prova a ricordarle.</p>
+<div class="comandi-carte">
+<button type="button" class="bottone secondario" id="mi-prova" aria-pressed="false">Mettiti alla prova: nascondi le caselle</button>
+</div>
+<div id="mi">
+<p class="mi-radice">Il clima e gli ambienti</p>
+<div class="mi-rami">
+<div class="mi-ramo kl">
+<h3>Il clima</h3>
+<div class="mi-nodo"><h4>Che cos'è</h4><div class="cont"><p>il tempo che fa <b>di solito</b> in un luogo</p><p>misurato per <b>molti anni</b></p></div></div>
+<div class="mi-nodo"><h4>Gli elementi</h4><div class="cont"><ul><li>temperatura → termometro</li><li>pressione → barometro</li><li>venti → anemometro</li><li>umidità → igrometro</li><li>precipitazioni → pluviometro</li></ul></div></div>
+<div class="mi-nodo"><h4>I fattori</h4><div class="cont"><ul><li><b>latitudine</b>: verso i poli fa più freddo</li><li><b>altitudine</b>: salendo fa più freddo</li><li><b>rilievi</b>: fermano le nuvole</li><li><b>mare</b>: rende il clima più dolce</li></ul></div></div>
+</div>
+<div class="mi-ramo am">
+<h3>Gli ambienti</h3>
+<div class="mi-nodo"><h4>Zona calda</h4><div class="cont"><ul><li>foresta pluviale</li><li>savana</li><li>deserto</li></ul></div></div>
+<div class="mi-nodo"><h4>Zone temperate</h4><div class="cont"><ul><li>macchia mediterranea</li><li>boschi di latifoglie</li><li>praterie e steppe</li></ul></div></div>
+<div class="mi-nodo"><h4>Zone fredde</h4><div class="cont"><ul><li>taiga</li><li>tundra</li><li>ghiacci polari</li></ul></div></div>
+</div>
+<div class="mi-ramo fo">
+<h3>Le forze della natura</h3>
+<div class="mi-nodo"><h4>Che cosa fanno</h4><div class="cont"><ul><li><b>erosione</b> delle rocce</li><li><b>trasporto</b> dei detriti</li><li><b>deposito</b> dei detriti</li></ul></div></div>
+<div class="mi-nodo"><h4>Agenti atmosferici</h4><div class="cont"><ul><li>sbalzi di temperatura e gelo</li><li>vento → dune</li><li>pioggia → scioglie il calcare</li></ul></div></div>
+<div class="mi-nodo"><h4>Acqua in movimento</h4><div class="cont"><ul><li>ghiacciai</li><li>fiumi → valli e pianure</li><li>mare → coste</li></ul></div></div>
+</div>
+<div class="mi-ramo um">
+<h3>Gli esseri umani</h3>
+<div class="mi-nodo"><h4>Paesaggio rurale</h4><div class="cont"><p>per l'agricoltura e l'allevamento</p><p>campi, canali, stalle, fienili</p></div></div>
+<div class="mi-nodo"><h4>Urbano e industriale</h4><div class="cont"><p><b>urbano</b>: per vivere in comunità</p><p><b>industriale</b>: per produrre</p></div></div>
+<div class="mi-nodo"><h4>Vie di comunicazione</h4><div class="cont"><p>per collegare i centri abitati</p><p>strade, ferrovie, ponti, trafori</p></div></div>
+<div class="mi-nodo"><h4>Il clima che cambia</h4><div class="cont"><p>più gas serra → la Terra si scalda</p></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ======================= DIECI COSE DA SAPERE ======================= -->
+<section class="parte" id="compiti" aria-labelledby="t-compiti">
+<p class="etichetta">Dieci cose da sapere</p>
+<h2 id="t-compiti">Ripassiamo</h2>
+<p class="guida">Rispondi prima da solo, poi premi «Controlla». Se sbagli, riprova: la soluzione compare con il pulsante «Mostra le soluzioni».</p>
+<p class="fascia" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8"/></svg></span><span>Dieci cose da sapere</span></p>
+<div class="attivita">
+<h4>Completa le dieci informazioni</h4>
+<p class="meta">Per ogni frase scegli la parola che manca. Ogni parola si usa una volta sola.</p>
+<div id="dieci"></div>
+</div>
+<div id="esercizi"></div>
+<p class="fascia" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span>Pensiamo insieme</span></p>
+<div class="attivita">
+<h4>Il clima del posto dove vivi</h4>
+<p class="consegna">Com'è l'estate dove vivi? E l'inverno? Quale fattore spiega meglio il tuo clima: il mare, le montagne, l'altitudine? Scrivi tre frasi e usa almeno due parole del glossario.</p>
+<textarea aria-label="La tua risposta" placeholder="Dove vivo io d'estate… d'inverno… Secondo me dipende da…"></textarea>
+</div>
+</section>
+
+<!-- ======================= DOPO ======================= -->
+<section class="parte" id="dopo" aria-labelledby="t-dopo">
+<p class="etichetta">E dopo?</p>
+<h2 id="t-dopo">Che cosa ci aspetta</h2>
+<p class="guida">Hai finito la lezione. Ecco dove si va adesso.</p>
+<div class="pd dopo-box">
+<h3><span>Dopo</span></h3>
+<p>Adesso sai perché sulla Terra esistono climi diversi. Nelle prossime lezioni guardiamo da vicino i biomi: impariamo a riconoscerli dai grafici del clima e scopriamo come vivono piante, animali e persone negli ambienti caldi, temperati e freddi.</p>
+<p class="link-lez">Più avanti: <a href="biomi.html">Dal clima ai biomi</a> · Per approfondire: <a href="climi-diversi.html">Perché sulla Terra esistono climi diversi? (lezione completa)</a></p>
+</div>
+<div class="attivita prepara">
+<h4>Per prepararti</h4>
+<p class="consegna">Scegli un ambiente della lezione che ti incuriosisce (la foresta pluviale, il deserto, la taiga…). Scrivi una cosa che sai già e una domanda che vorresti fare.</p>
+<textarea aria-label="Che cosa so e che cosa vorrei sapere" placeholder="So già che… Vorrei sapere…"></textarea>
+</div>
+</section>
+</main>
+</div>
+<footer>
+<p>Organizzazione della lezione ispirata a <em>Geografia facile per la scuola secondaria di primo grado</em>, Edizioni Erickson: Idea principale, Concetti chiave, Testo sintetico/essenziale, Glossario, Mappa delle informazioni, Dieci cose da sapere. Testi, disegni ed esercizi di questa pagina sono originali.</p>
+</footer>
+</div>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<!-- /zoom-ctrl -->
+<script>
+(function(){
+"use strict";
+var NS="http://www.w3.org/2000/svg";
+function el(t,attr,txt){ var e=document.createElement(t); if(attr){ for(var k in attr){ e.setAttribute(k,attr[k]); } } if(txt!=null) e.textContent=txt; return e; }
+function sv(t,attr){ var e=document.createElementNS(NS,t); for(var k in attr){ e.setAttribute(k,attr[k]); } return e; }
+function mescola(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+function ogni(l,f){ Array.prototype.forEach.call(l,f); }
+function ridimensiona(){ try{ window.dispatchEvent(new Event("resize")); }catch(e){ var ev=document.createEvent("Event"); ev.initEvent("resize",true,true); window.dispatchEvent(ev); } }
+
+/* ---------- indice laterale: si vede una parte alla volta ---------- */
+var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
+var parti=Array.prototype.slice.call(document.querySelectorAll("section.parte"));
+document.documentElement.className+=" una-parte";
+function attiva(id){ ogni(voci,function(v){ var on=v.getAttribute("href")==="#"+id; if(on){ v.setAttribute("aria-current","true"); if(navI.scrollWidth>navI.clientWidth){ navI.scrollLeft=v.offsetLeft-16; } } else v.removeAttribute("aria-current"); }); }
+var vocePer={}; ogni(voci,function(v){ vocePer[v.getAttribute("href").slice(1)]=v; });
+function linkParte(sx,cls,prima,dopo){ var v=vocePer[sx.id], a=document.createElement("a"), n=v&&v.querySelector(".nome");
+  a.href="#"+sx.id; a.className=cls; if(v&&v.style.getPropertyValue("--c")) a.style.setProperty("--c",v.style.getPropertyValue("--c"));
+  a.textContent=prima+(n?n.textContent:(sx.querySelector(".etichetta")||sx).textContent)+dopo; return a; }
+parti.forEach(function(sx,i){ var n=document.createElement("nav"); n.className="parte-nav"; n.setAttribute("aria-label","Altre parti della lezione");
+  if(i>0) n.appendChild(linkParte(parti[i-1],"prec","← ",""));
+  if(i<parti.length-1) n.appendChild(linkParte(parti[i+1],"succ",""," →"));
+  sx.appendChild(n); });
+var corrente=null;
+function mostra(id){ if(id===corrente) return false; parti.forEach(function(sx){ sx.hidden=(sx.id!==id); }); corrente=id; attiva(id); ridimensiona(); return true; }
+function parteDi(el){ while(el&&!(el.classList&&el.classList.contains("parte"))) el=el.parentNode; return el; }
+function bersaglio(h){ try{ h=decodeURIComponent(h); }catch(e){} return h?document.getElementById(h):null; }
+document.addEventListener("click",function(e){ var a=e.target; while(a&&a.tagName!=="A") a=a.parentNode;
+  if(!a||!a.getAttribute) return; var h=a.getAttribute("href")||""; if(h.charAt(0)!=="#") return;
+  var el=bersaglio(h.slice(1)), sx=el&&parteDi(el); if(sx) mostra(sx.id); },true);
+function daIndirizzo(){ var el=bersaglio((location.hash||"").slice(1)), sx=el&&parteDi(el);
+  if(sx){ if(mostra(sx.id)) setTimeout(function(){ el.scrollIntoView(); },0); } else if(!corrente) mostra(parti[0].id); }
+window.addEventListener("hashchange",daIndirizzo); daIndirizzo();
+
+/* ---------- carte delle parole ---------- */
+var CARTE=[
+{n:"Clima", d:"il tempo che fa di solito in un luogo, osservato per tanti anni",
+ s:'<circle class="pieno" cx="22" cy="22" r="11"/><circle cx="22" cy="22" r="11"/><path d="M22 5v4M22 35v4M5 22h4M8 8l3 3M36 8l-3 3M8 36l3-3"/><path class="neve" d="M24 44a10 10 0 0 1 4-19 13 13 0 0 1 24 4 8 8 0 0 1 2 15z"/><path d="M30 50l-2 6M40 50l-2 6M50 50l-2 6"/>'},
+{n:"Latitudine", d:"quanto un luogo è lontano dall'Equatore, verso nord o verso sud",
+ s:'<circle class="pieno" cx="32" cy="32" r="24"/><circle cx="32" cy="32" r="24"/><path d="M8 32h48" stroke-width="3"/><path d="M12 20h40M12 44h40M20 11h24M20 53h24" stroke-dasharray="3 3"/><path d="M58 32V12M54 16l4-4 4 4" stroke-width="2.5"/>'},
+{n:"Altitudine", d:"quanto un luogo è più alto del livello del mare",
+ s:'<path class="pieno" d="M6 52L28 14L50 52Z"/><path d="M6 52L28 14L50 52"/><path class="neve" d="M21 26L28 14L35 26L31 23L28 27L25 23Z"/><path d="M2 52h60"/><path d="M56 50V16M52 20l4-4 4 4M52 46l4 4 4-4" stroke-width="2.5"/>'},
+{n:"Bioma", d:"un grande ambiente con il suo clima, le sue piante e i suoi animali",
+ s:'<path class="pieno" d="M2 50h60v6H2z"/><path d="M2 50h60"/><path d="M20 50V24"/><path d="M20 24c-6-6-14-4-16 0 6-2 12 0 16 0zM20 24c6-6 14-4 16 0-6-2-12 0-16 0zM20 24c-2-8 2-14 8-14-4 4-6 8-8 14zM20 24c0-8-6-12-12-10 4 2 8 6 12 10z"/><path d="M38 50v-8h14v8M38 42l7-5 7 5"/><path d="M42 50v-4h6v4"/><path d="M6 50l2-6 2 6M54 50l2-6 2 6"/>'},
+{n:"Erosione", d:"il lento lavoro della natura che consuma e rompe le rocce",
+ s:'<path class="pieno" d="M8 52L14 26L30 18L48 24L56 52Z"/><path d="M8 52L14 26L30 18L48 24L56 52Z"/><path d="M28 18l-4 12 6 6-3 10M44 24l-6 8 4 8"/><path d="M14 8v6M20 6v6M26 8v6"/><circle cx="58" cy="56" r="2"/><circle cx="52" cy="58" r="1.5"/>'},
+{n:"Paesaggio antropizzato", d:"un paesaggio trasformato dalle persone: campi, case, fabbriche, strade",
+ s:'<path class="pieno" d="M4 34h22v18H4zM36 26h10v-12h6v12h8v26H36z"/><path d="M4 52V34l11-9 11 9v18M36 52V26h10V14h6v12h8v26"/><path d="M11 52v-8h8v8M41 34h4M50 34h4M41 42h4M50 42h4"/><path d="M2 56h60" stroke-width="3"/><path d="M8 59h6M22 59h6M36 59h6M50 59h6"/>'}
+];
+var carte=document.getElementById("carte"), alContrario=false, bottoniCarte=[];
+CARTE.forEach(function(C){
+  var b=el("button",{type:"button","class":"carta","aria-pressed":"false"});
+  b.innerHTML='<span class="giro"><span class="faccia fronte"><span class="disegno"><svg viewBox="0 0 64 64" aria-hidden="true">'+C.s+'</svg></span><span class="nome"></span><span class="gira">tocca per girare ↻</span></span><span class="faccia retro"><span class="def"></span><span class="gira">tocca per girare ↻</span></span></span>';
+  b.querySelector(".nome").textContent=C.n; b.querySelector(".def").textContent=C.d;
+  function etichetta(){ var girata=b.classList.contains("girata"), mostraDef=(girata!==alContrario);
+    b.setAttribute("aria-label", mostraDef ? (alContrario? "Definizione: "+C.d+". Tocca per vedere la parola" : C.n+": "+C.d) : (alContrario? "Parola: "+C.n : "Parola: "+C.n+". Tocca per vedere che cosa significa")); }
+  b.addEventListener("click",function(){ b._vista=true; if(bottoniCarte.every(function(x){ return x._vista; })) document.getElementById("carte-ricorda").hidden=false; b.classList.toggle("girata"); b.setAttribute("aria-pressed",b.classList.contains("girata")?"true":"false"); etichetta(); });
+  b._et=etichetta; etichetta(); carte.appendChild(b); bottoniCarte.push(b);
+});
+function rigira(){ bottoniCarte.forEach(function(b){ b.classList.toggle("girata",alContrario); b.setAttribute("aria-pressed","false"); b._et(); }); }
+var sceltaG=document.getElementById("scelta-gioco"), comCarte=document.getElementById("carte-comandi"), modoTxt=comCarte.querySelector(".modo-attuale");
+ogni(sceltaG.querySelectorAll(".sg-btn"),function(b){ b.addEventListener("click",function(){
+  alContrario=b.getAttribute("data-modo")==="definizione";
+  mescola(bottoniCarte).forEach(function(c){ carte.appendChild(c); });
+  rigira(); bottoniCarte.forEach(function(c){ c._vista=false; }); document.getElementById("carte-ricorda").hidden=true; sceltaG.hidden=true; carte.hidden=false; comCarte.hidden=false;
+  modoTxt.textContent=alContrario?"Gioco: dalla definizione alla parola":"Gioco: dalla parola alla definizione";
+  carte.firstChild.focus();
+}); });
+document.getElementById("carte-reset").addEventListener("click",rigira);
+document.getElementById("carte-cambia").addEventListener("click",function(){ carte.hidden=true; comCarte.hidden=true; sceltaG.hidden=false; sceltaG.querySelector(".sg-btn").focus(); });
+
+/* ---------- la montagna e il termometro ---------- */
+(function(){
+  var P=document.getElementById("monte"), q=document.getElementById("quota"), qo=document.getElementById("quota-out");
+  var Y=function(h){ return 352-h*0.066; };
+  var T=function(h){ return Math.round(20-0.006*h); };
+  var pts=[[60,0],[120,150],[180,420],[230,800],[280,1400],[330,2200],[370,3000],[410,3900],[440,4800],[470,4300],[510,3400],[550,2600],[600,2000]];
+  var d="M"+pts.map(function(p){ return p[0]+" "+Y(p[1]).toFixed(1); }).join(" L")+" L600 380 L60 380Z";
+  P.appendChild(sv("rect",{"class":"cielo",x:0,y:0,width:600,height:380}));
+  var defs=sv("defs",{}), cp=sv("clipPath",{id:"sopra-neve"}); cp.appendChild(sv("rect",{x:0,y:0,width:600,height:Y(3300)})); defs.appendChild(cp); P.appendChild(defs);
+  [1000,2000,3000,4000].forEach(function(h){ P.appendChild(sv("line",{"class":"quota",x1:70,x2:600,y1:Y(h),y2:Y(h)}));
+    var t=sv("text",{"class":"eq",x:76,y:Y(h)-5}); t.textContent=h+" m"; P.appendChild(t); });
+  P.appendChild(sv("path",{"class":"suolo",d:d}));
+  P.appendChild(sv("path",{"class":"neve",d:d,"clip-path":"url(#sopra-neve)"}));
+  P.appendChild(sv("rect",{"class":"mare",x:0,y:Y(0),width:62,height:380-Y(0)}));
+  /* termometro: da -10 a 30 gradi */
+  var TY=function(t){ return 290-(t+10)*6.25; };
+  P.appendChild(sv("rect",{"class":"tubo",x:22,y:28,width:16,height:270,rx:8}));
+  P.appendChild(sv("circle",{"class":"tubo",cx:30,cy:306,r:15}));
+  var merc=sv("rect",{"class":"mercurio",x:26,width:8,rx:4}); P.appendChild(merc);
+  P.appendChild(sv("circle",{"class":"mercurio",cx:30,cy:306,r:11}));
+  [30,20,10,0,-10].forEach(function(t){ P.appendChild(sv("line",{"class":"tacca",x1:38,x2:44,y1:TY(t),y2:TY(t)}));
+    var tx=sv("text",{"class":"gradi",x:46,y:TY(t)+4}); tx.textContent=t+"°"; P.appendChild(tx); });
+  var cur=sv("g",{"class":"cursore"}), cl=sv("line",{x1:70,x2:590}), cc=sv("circle",{r:7}), ct=sv("text",{x:588,"text-anchor":"end"});
+  cur.appendChild(cl); cur.appendChild(cc); cur.appendChild(ct); P.appendChild(cur);
+  function xSuMonte(h){ for(var i=0;i<8;i++){ var a=pts[i], b=pts[i+1]; if(h>=a[1]&&h<=b[1]) return a[0]+(b[0]-a[0])*(h-a[1])/((b[1]-a[1])||1); } return 440; }
+  function aggiorna(){ var h=+q.value, y=Y(h), t=T(h);
+    cl.setAttribute("y1",y); cl.setAttribute("y2",y); cc.setAttribute("cx",xSuMonte(h)); cc.setAttribute("cy",y); ct.setAttribute("y",y-8); ct.textContent=h+" m · "+t+" °C";
+    merc.setAttribute("y",TY(t)); merc.setAttribute("height",306-TY(t));
+    var msg="A <b>"+h+" metri</b> la temperatura è di circa <b>"+t+" °C</b>";
+    if(h===0) msg="Sei <b>al livello del mare</b>: qui ci sono 20 °C. Ora sali!";
+    else msg+=": fa "+(20-t)+" gradi più freddo che al livello del mare."+(t<=0?" Siamo sotto zero: qui la neve resta tutto l'anno.":"");
+    qo.innerHTML=msg; q.setAttribute("aria-valuetext",h+" metri, circa "+t+" gradi"); }
+  q.addEventListener("input",aggiorna); aggiorna();
+  /* zoom del disegno */
+  var Z=[1,1.25,1.5,2], zi=0, box=P.parentNode, zb=document.querySelectorAll(".zoom-dis button"), zs=document.querySelector(".zoom-dis span");
+  function zoom(){ P.style.width=(Z[zi]*100)+"%"; zs.textContent=Math.round(Z[zi]*100)+"%"; zb[0].disabled=zi===0; zb[1].disabled=zi===Z.length-1;
+    var y=Y(+q.value)*(box.scrollWidth/600); box.scrollTop=Math.max(0,y-box.clientHeight/2); box.scrollLeft=Math.max(0,box.scrollWidth-box.clientWidth)/2; }
+  box.style.maxHeight="70vh";
+  ogni(zb,function(b){ b.addEventListener("click",function(){ zi=Math.max(0,Math.min(Z.length-1,zi+(+b.getAttribute("data-zd")))); zoom(); }); });
+  zoom();
+})();
+
+/* ---------- mappa delle informazioni: nascondi e scopri ---------- */
+var mi=document.getElementById("mi"), bProva=document.getElementById("mi-prova");
+ogni(mi.querySelectorAll(".mi-nodo"),function(n){
+  var b=el("button",{type:"button","class":"scopri"},"Che cosa ricordi? Tocca per scoprire");
+  n.appendChild(b); b.addEventListener("click",function(){ n.classList.add("visto"); });
+});
+bProva.addEventListener("click",function(){ var on=!mi.classList.contains("prova"); mi.classList.toggle("prova",on);
+  ogni(mi.querySelectorAll(".mi-nodo"),function(n){ n.classList.remove("visto"); });
+  bProva.setAttribute("aria-pressed",on?"true":"false"); bProva.textContent=on?"Mostra di nuovo tutta la mappa":"Mettiti alla prova: nascondi le caselle"; });
+
+/* ---------- testo sintetico / essenziale ---------- */
+var bot=document.querySelectorAll(".livelli button");
+ogni(bot,function(b){ b.addEventListener("click",function(){
+  var ess=b.getAttribute("data-livello")==="essenziale";
+  document.getElementById("testo-sintetico").hidden=ess; document.getElementById("testo-essenziale").hidden=!ess;
+  ogni(bot,function(x){ x.setAttribute("aria-pressed", x===b ? "true":"false"); });
+});});
+
+/* ---------- elementi del clima e strumenti ---------- */
+ogni(document.querySelectorAll(".strumenti button"),function(b){ b.addEventListener("click",function(){
+  var on=b.getAttribute("aria-pressed")!=="true"; b.setAttribute("aria-pressed",on?"true":"false"); b.querySelector(".st-r").hidden=!on; }); });
+
+/* ---------- idea principale: una frase alla volta ---------- */
+(function(){
+  var box=document.getElementById("idea-passi"); if(!box) return;
+  var passi=box.querySelectorAll(".passo"), extra=document.querySelectorAll(".passo-extra"), av=document.getElementById("passo-avanti");
+  document.documentElement.className+=" js-passi";
+  var n=1;
+  function mostraFino(k,anima){
+    n=Math.max(1,Math.min(k,passi.length));
+    ogni(passi,function(p,i){ p.classList.toggle("dopo",i>=n); p.classList.toggle("nuovo",!!anima&&i===n-1); });
+    ogni(extra,function(e){ var k=+e.getAttribute("data-dopo"); e.classList.toggle("dopo",n<k||(n===k&&passi[n-1].getAttribute("data-attesa")==="1")); });
+    ridimensiona();
+    var fine=n>=passi.length, attesa=passi[n-1].getAttribute("data-attesa")==="1"; av.hidden=fine||attesa; if(!fine) (passi[n-1].querySelector(".qui-freccia")||passi[n-1]).appendChild(av);
+  }
+  av.addEventListener("click",function(){ mostraFino(n+1,true); if(!av.hidden) av.focus(); });
+  /* domande sui disegni: la risposta e la freccia compaiono solo dopo la scelta giusta */
+  ogni(box.querySelectorAll(".passo[data-attesa]"),function(ps){
+    var fb=ps.querySelector(".fb-carta"), ris=ps.querySelector(".risposta-carta");
+    ogni(ps.querySelectorAll(".opz-carta button"),function(b){ b.addEventListener("click",function(){
+      if(ps.getAttribute("data-attesa")!=="1") return;
+      if(b.getAttribute("data-ok")==="1"){ b.classList.add("si"); fb.className="fb-carta si"; fb.textContent="Giusto!";
+        ps.setAttribute("data-attesa","0"); ris.hidden=false; mostraFino(n,false); }
+      else { b.classList.add("no"); fb.className="fb-carta no"; fb.textContent=fb.getAttribute("data-aiuto"); }
+    }); });
+  });
+  mostraFino(1,false);
+})();
+
+/* ---------- glossario: definizioni nascoste, la mia definizione ---------- */
+(function(){
+  var voci=document.querySelectorAll("#parole .parola"), tutte=document.getElementById("glo-tutte"), K="clima-ambienti-facile-def-";
+  function leggi(k){ try{ return localStorage.getItem(k)||""; }catch(e){ return ""; } }
+  function scrivi(k,v){ try{ if(v) localStorage.setItem(k,v); else localStorage.removeItem(k); }catch(e){} }
+  ogni(voci,function(v){
+    var dt=v.querySelector("dt"), dd=v.querySelector("dd"), id=v.id;
+    var ta=document.createElement("textarea"); ta.className="mia"; ta.placeholder="Scrivi qui la tua definizione…"; ta.setAttribute("aria-label","La mia definizione di "+dt.textContent); ta.value=leggi(K+id);
+    ta.addEventListener("input",function(){ scrivi(K+id,ta.value); });
+    var b=document.createElement("button"); b.type="button"; b.className="apri-def"; b.setAttribute("aria-expanded","false");
+    dd.id="def-"+id; b.setAttribute("aria-controls",dd.id);
+    function mostra(on){ dd.hidden=!on; b.setAttribute("aria-expanded",on?"true":"false"); b.textContent=on?"Nascondi la definizione":"Mostra la definizione"; }
+    b.addEventListener("click",function(){ mostra(dd.hidden); });
+    v._mostra=mostra; v.insertBefore(ta,dd); v.insertBefore(b,dd); mostra(false);
+  });
+  tutte.addEventListener("click",function(){ var on=tutte.getAttribute("aria-pressed")!=="true";
+    ogni(voci,function(v){ v._mostra(on); });
+    tutte.setAttribute("aria-pressed",on?"true":"false"); tutte.textContent=on?"Nascondi tutte le definizioni":"Mostra tutte le definizioni"; });
+  document.getElementById("glo-cancella").addEventListener("click",function(){
+    if(!window.confirm("Vuoi cancellare tutte le definizioni che hai scritto?")) return;
+    ogni(voci,function(v){ v.querySelector(".mia").value=""; scrivi(K+v.id,""); }); });
+})();
+
+/* ---------- tooltip: la definizione del glossario sulle parole sottolineate ---------- */
+(function(){
+  var tip=document.createElement("span"); tip.className="tip"; tip.id="tip-glossario"; tip.setAttribute("role","tooltip"); tip.hidden=true;
+  var aperto=null, timer=null;
+  function definizione(a){ var id=(a.getAttribute("href")||"").slice(1), d=document.getElementById(id); if(!d) return null;
+    return {t:d.querySelector("dt").textContent, d:d.querySelector("dd").textContent, id:id}; }
+  function apri(a){ var g=definizione(a); if(!g) return; clearTimeout(timer);
+    tip.innerHTML=""; var b=document.createElement("b"); b.textContent=g.t; tip.appendChild(b); tip.appendChild(document.createTextNode(g.d));
+    var l=document.createElement("span"); l.className="vai"; l.setAttribute("data-vai",g.id); l.textContent="→ nel glossario"; tip.appendChild(document.createElement("br")); tip.appendChild(l);
+    a.appendChild(tip); tip.hidden=false; tip.classList.remove("sotto"); tip.style.setProperty("--sp","0px"); aperto=a;
+    var r=tip.getBoundingClientRect(), z=r.width/(tip.offsetWidth||r.width)||1;
+    if(r.top<8) { tip.classList.add("sotto"); r=tip.getBoundingClientRect(); }
+    var m=(a.closest("main")||document.documentElement).getBoundingClientRect(), sx=Math.max(8,m.left+4), dx=Math.min(document.documentElement.clientWidth,m.right)-8, sp=0;
+    if(r.left<sx) sp=(sx-r.left)/z; else if(r.right>dx) sp=(dx-r.right)/z;
+    tip.style.setProperty("--sp",sp+"px"); }
+  function chiudi(){ if(aperto) aperto._clic=false; tip.hidden=true; aperto=null; }
+  function chiudiPresto(){ clearTimeout(timer); timer=setTimeout(chiudi,200); }
+  ogni(document.querySelectorAll("a.pk"),function(a){
+    a.setAttribute("aria-describedby","tip-glossario");
+    a.addEventListener("pointerenter",function(e){ if(e.pointerType==="mouse") apri(a); });
+    a.addEventListener("pointerleave",function(e){ if(e.pointerType==="mouse") chiudiPresto(); });
+    a.addEventListener("focus",function(){ apri(a); });
+    a.addEventListener("blur",function(){ chiudiPresto(); });
+  });
+  window.addEventListener("click",function(e){ var t=e.target, a=t.closest&&t.closest("a.pk");
+    if(!a){ chiudi(); return; }
+    e.preventDefault(); e.stopPropagation();
+    var vai=t.closest(".vai"); if(vai){ chiudi(); location.hash="#"+vai.getAttribute("data-vai"); return; }
+    if(t.closest(".tip")) return;
+    if(aperto===a&&a._clic){ chiudi(); } else { apri(a); a._clic=true; } },true);
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape") chiudi(); });
+  window.addEventListener("resize",function(){ if(aperto) apri(aperto); });
+  window.addEventListener("scroll",function(){ if(aperto&&!aperto._clic) chiudi(); },{passive:true});
+})();
+
+/* ---------- esercizi ---------- */
+function costruisci(cont, scelte, righe){
+  var tab=el("table",{"class":"esercizio"}), tb=el("tbody"); tab.appendChild(tb);
+  var stati=[];
+  righe.forEach(function(r){
+    var tr=el("tr"), td1=el("td"), td2=el("td"), td3=el("td",{"class":"esito","aria-live":"polite"});
+    td1.appendChild(document.createTextNode(r[0]));
+    var sp=el("span",{"class":"spiega"}); sp.hidden=true; if(r[2]) sp.textContent=r[2]; td1.appendChild(sp);
+    var s=el("select",{"aria-label":"Risposta: "+r[0]}); s.appendChild(el("option",{value:""},"— scegli —"));
+    scelte.forEach(function(c){ s.appendChild(el("option",{value:c},c)); });
+    td2.appendChild(s); tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tb.appendChild(tr);
+    stati.push({tr:tr,s:s,esito:td3,sp:sp,giusta:r[1]});
+  });
+  cont.appendChild(tab);
+  var com=el("div",{"class":"comandi"}), b1=el("button",{type:"button","class":"bottone"},"Controlla"), b2=el("button",{type:"button","class":"bottone secondario"},"Mostra le soluzioni"), pt=el("span",{"class":"punteggio","aria-live":"polite"});
+  b2.hidden=true; com.appendChild(b1); com.appendChild(b2); com.appendChild(pt); cont.appendChild(com);
+  b1.addEventListener("click",function(){
+    var ok=0, vuote=0;
+    stati.forEach(function(x){
+      x.tr.classList.remove("ok"); x.tr.classList.remove("no");
+      if(!x.s.value){ vuote++; x.esito.textContent=""; return; }
+      var g=x.s.value===x.giusta; if(g) ok++;
+      x.tr.classList.add(g?"ok":"no"); x.esito.textContent=g?"✓":"✗"; x.esito.setAttribute("aria-label",g?"giusto":"sbagliato");
+      if(x.sp.textContent) x.sp.hidden=false;
+    });
+    pt.textContent=ok+" su "+stati.length+(vuote? " · "+vuote+" senza risposta":"");
+    b2.hidden=false;
+  });
+  b2.addEventListener("click",function(){
+    stati.forEach(function(x){ x.s.value=x.giusta; x.tr.classList.remove("no"); x.tr.classList.add("ok"); x.esito.textContent="✓"; if(x.sp.textContent) x.sp.hidden=false; });
+    pt.textContent="Ecco le soluzioni.";
+  });
+}
+/* idea principale: domande veloci */
+costruisci(document.getElementById("idea-prova"), ["più caldo","più freddo"], [
+  ["All'Equatore, rispetto ai poli, fa…","più caldo","I raggi del Sole arrivano dritti: è la latitudine."],
+  ["In cima a una montagna, rispetto alla pianura, fa…","più freddo","Salendo la temperatura scende: è l'altitudine."],
+  ["D'inverno, sulla costa, rispetto all'interno, fa…","più caldo","Il mare si raffredda lentamente e riscalda la costa."],
+  ["Sul versante in ombra, rispetto a quello al sole, fa…","più freddo","Riceve meno raggi del Sole: è la posizione dei rilievi."]
+]);
+var ESERCIZI=[
+{gruppo:"spazio", titolo:"Quale fattore?", meta:"Perché il clima è diverso? Scegli il fattore che lo spiega.",
+ scelte:["latitudine","altitudine","rilievi","distanza dal mare"],
+ righe:[["In Norvegia fa più freddo che in Sicilia","latitudine"],["A Cortina, a 1200 metri, fa più freddo che a Venezia","altitudine"],["Le Alpi riparano la Pianura Padana dai venti freddi del Nord","rilievi"],["Sulle coste gli inverni sono miti e le estati meno afose","distanza dal mare"],["Sul Kilimangiaro c'è la neve, anche se è vicino all'Equatore","altitudine","La vetta supera i 5800 metri: lassù fa freddo anche ai Tropici."],["Ai poli il Sole scalda poco perché i raggi arrivano molto inclinati","latitudine"]]},
+{gruppo:"spazio", titolo:"Quale ambiente?", meta:"Leggi l'indizio e trova il bioma. Ti può aiutare la Mappa delle informazioni.",
+ scelte:["foresta pluviale","savana","deserto","macchia mediterranea","taiga","tundra"],
+ righe:[["Caldo e piogge tutto l'anno, alberi altissimi","foresta pluviale"],["Erba alta, pochi alberi, zebre ed elefanti; una stagione secca e una delle piogge","savana"],["Piove pochissimo; di giorno fa caldissimo, di notte fa freddo","deserto"],["Estati calde e secche, inverni miti; ulivi, lecci e arbusti profumati","macchia mediterranea"],["Immense foreste di conifere, inverni lunghi e gelidi","taiga"],["Terreno gelato quasi tutto l'anno, muschi e licheni","tundra"]]},
+{gruppo:"processi", titolo:"Erosione, trasporto o deposito?", meta:"Che cosa sta succedendo alle rocce e ai detriti?",
+ scelte:["erosione","trasporto","deposito"],
+ righe:[["Il gelo spacca una roccia","erosione","L'acqua nelle fessure gela, aumenta di volume e rompe la roccia."],["Un fiume porta a valle sabbia e ciottoli","trasporto"],["Vicino alla foce il fiume lascia la sabbia","deposito"],["Le onde consumano una scogliera","erosione"],["Il vento solleva la sabbia e la porta lontano","trasporto"],["Un ghiacciaio si scioglie e lascia i sassi ai suoi lati","deposito"]]},
+{gruppo:"processi", titolo:"Vero o falso?", meta:"Dopo il controllo leggi la spiegazione: serve a correggere le frasi false.",
+ scelte:["Vero","Falso"],
+ righe:[["Il tempo atmosferico e il clima sono la stessa cosa.","Falso","Il tempo è quello di oggi; il clima è quello di molti anni."],["Il mare si scalda più in fretta della terra.","Falso","Il mare si scalda e si raffredda più lentamente."],["Da noi il versante a sud di una montagna è il più soleggiato.","Vero"],["Le rocce di calcare si sciolgono facilmente con l'acqua piovana.","Vero"],["Il paesaggio urbano è un paesaggio naturale.","Falso","È completamente artificiale: lo hanno costruito le persone."],["Ponti, viadotti e trafori servono a superare fiumi, valli e montagne.","Vero"]]},
+{gruppo:"lessico", titolo:"Parole al lavoro", meta:"Ogni frase descrive una parola della lezione: scegli quella giusta.",
+ scelte:["pluviometro","escursione termica","bioma","detriti","capannone","urbanesimo"],
+
+ righe:[["Lo strumento che misura quanta pioggia cade","pluviometro"],["La differenza tra la temperatura più alta d'estate e la più bassa d'inverno","escursione termica"],["Un grande ambiente con il suo clima, le sue piante e i suoi animali","bioma"],["Sassi, ghiaia e sabbia staccati dalle rocce","detriti"],["Il grande edificio basso del paesaggio industriale","capannone"],["L'aumento delle persone che vanno a vivere in città","urbanesimo"]]}
+];
+var DIECI=[
+["Il … è il tempo che fa di solito in un luogo, osservato per molti anni.","clima"],
+["La temperatura dell'aria si misura con il …","termometro"],
+["Più un luogo è lontano dall'Equatore, più è alta la sua …","latitudine"],
+["Salendo in montagna, ogni 100 metri la temperatura scende di circa mezzo …","grado"],
+["Le Alpi fermano le nuvole: fanno da … tra zone con climi diversi.","barriera"],
+["Il mare d'estate rinfresca e d'inverno … le località sulla costa.","riscalda"],
+["Nella foresta pluviale fa caldo e cade tanta …","pioggia"],
+["I detriti sono i pezzi di roccia prodotti dall'…","erosione"],
+["Il paesaggio … è fatto di campi, canali, stalle e fienili.","rurale"],
+["Strade, ferrovie, porti e aeroporti sono vie di …","comunicazione"]
+];
+var GRUPPI={
+"spazio":{c:"#b25510",n:"Leggere il territorio",i:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z"/><path d="M9 4.5v13M15 6.5v13"/></svg>'},
+"processi":{c:"#4757a8",n:"Capire come si formano e cambiano",i:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5l6 3.5-6 3.5zM10 4.5l6 3.5-6 3.5z"/><path d="M20 12.5l-6 3.5 6 3.5zM14 12.5l-6 3.5 6 3.5z"/></svg>'},
+"lessico":{c:"#6b3f8a",n:"Usare le parole della geografia",i:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18.5L8.5 6l4.5 12.5M5.6 14h5.8"/><path d="M15 12.5a2.5 2.5 0 1 1 0 4.5M20 10v8.5"/></svg>'}
+};
+var zona=document.getElementById("esercizi"), ultimo="";
+ESERCIZI.forEach(function(E,i){
+  if(E.gruppo!==ultimo){ var g=GRUPPI[E.gruppo], f=el("p",{"class":"fascia",style:"--c:"+g.c}), t=el("span",{"class":"tondo"}); t.innerHTML=g.i; f.appendChild(t); f.appendChild(el("span",null,g.n)); zona.appendChild(f); ultimo=E.gruppo; }
+  var box=el("div",{"class":"attivita"}); box.appendChild(el("h4",null,(i+1)+". "+E.titolo)); box.appendChild(el("p",{"class":"meta"},E.meta));
+  costruisci(box,E.scelte,mescola(E.righe)); zona.appendChild(box);
+});
+costruisci(document.getElementById("dieci"), mescola(DIECI.map(function(d){return d[1];})), DIECI);
+})();
+</script>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<script>
+(function(){
+  var corpo=document.querySelector(".corpo-lezione"), nav=document.querySelector("nav.indice"), b=document.querySelector(".indice-riduci");
+  if(!corpo||!nav||!b) return;
+  function metti(r){
+    if(r) corpo.className+=" indice-ridotto"; else corpo.className=corpo.className.replace(/\s*indice-ridotto/g,"");
+    b.setAttribute("aria-pressed",r?"true":"false");
+    b.setAttribute("aria-label",r?"Mostra i nomi delle parti":"Riduci l'indice alle sole icone");
+    b.title=b.getAttribute("aria-label"); b.innerHTML=r?"&raquo;":"&laquo;";
+  }
+  var r=false; try{ r=localStorage.getItem("indice-ridotto")==="1"; }catch(e){}
+  metti(r);
+  b.onclick=function(){ r=!r; metti(r); try{ localStorage.setItem("indice-ridotto",r?"1":"0"); }catch(e){} };
+})();
+</script>
+<script src="../../../../assets/barra.js"></script>
+</body>
+</html>

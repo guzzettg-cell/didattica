@@ -52,6 +52,8 @@ var MODULI = [
   /* ---------------- GEOGRAFIA · PRIMA ---------------- */
   /* Organizzata secondo Paesaggi vicini e lontani 1 (pagine A e B).
      Le lezioni senza etichetta e con «Lezione extra» non sono nel libro. */
+  /* Introduzione = Geografia facile, cap. 1 «Cosa studia la geografia»;
+     Modulo I = cap. 2 «Gli strumenti della geografia» (Modulo 1 «La professione del geografo»). */
   {
     materia: "geografia",
     classe: "prima",
@@ -167,13 +169,16 @@ var MODULI = [
       { titolo: "Il GIS: che cos'è un Sistema Informativo Geografico?", libri: ["paesaggi"], pagine: "A141", descrizione: "Esplorare, mappare, condividere.", attivita: [] }
     ]
   },
+  /* Moduli II–VI: i capitoli 3–7 di Geografia facile (Erickson), Modulo 2 «Geografia d'Europa e d'Italia».
+     Le lezioni vengono da Paesaggi vicini e lontani 1. Le prime sei lezioni del percorso «otto lenti»
+     (paesaggio/index.html) sono divise fra i moduli II (spazi terrestri), III (acque) e IV (clima). */
   {
     materia: "geografia",
     classe: "prima",
     numero: "II",
     percorso: "come",
-    titolo: "Il paesaggio: clima, rilievi e acque",
-    descrizione: "Che cos'è il paesaggio, i fenomeni che lo modificano, il clima, i rilievi e le acque. Percorso progressivo in sei lezioni: otto «lenti» per leggere un paesaggio. Primo quadrimestre, in collegamento con Scienze.",
+    titolo: "Gli spazi terrestri",
+    descrizione: "Il paesaggio e le forze che lo modificano; montagne, colline e pianure, in Europa e in Italia. Qui comincia il percorso «otto lenti per leggere un paesaggio», che continua nei moduli delle acque e del clima. Primo quadrimestre, in collegamento con Scienze.",
     link: "geografia/prima/paesaggio/index.html",
     lezioni: [
       { titolo: "Il paesaggio e la sua evoluzione", libri: ["paesaggi"], pagine: "A33–A37", descrizione: "Lezione 1 del percorso a lenti: elementi naturali e antropici, le quattro sfere, l'ecosistema, i fattori che cambiano il paesaggio, l'impronta ecologica.", link: "geografia/prima/paesaggio/attivita/paesaggio.html", data: "2026-11-04", attivita: [
@@ -183,14 +188,6 @@ var MODULI = [
       { titolo: "Le forze che modificano il paesaggio", libri: ["paesaggi"], pagine: "A38–A41", descrizione: "Fenomeni che hanno origine all'interno e all'esterno della Terra.", link: "geografia/prima/paesaggio/attivita/forze.html", data: "2026-11-04", attivita: [
         { tipo: "Attività", titolo: "Le forze da dentro e da fuori", descrizione: "Due ore: vulcani, terremoti, orogenesi; erosione, trasporto, deposito.", link: "geografia/prima/paesaggio/attivita/forze.html", data: "2026-11-04" },
         { tipo: "Scheda", titolo: "Scheda: le forze della Terra", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-forze.html", data: "2026-11-04" }
-      ] },
-      { titolo: "Il clima", dipartimento: true, libri: ["paesaggi"], pagine: "A44–A47", descrizione: "Il clima e gli ambienti naturali.", link: "geografia/prima/paesaggio/attivita/clima-e-ambienti.html", data: "2026-11-04", attivita: [
-        { tipo: "Attività", titolo: "Il clima e gli ambienti naturali", descrizione: "Due ore: elementi e fattori del clima, escursione termica; habitat, biodiversità, vegetazione e altitudine.", link: "geografia/prima/paesaggio/attivita/clima-e-ambienti.html", data: "2026-11-04" },
-        { tipo: "Scheda", titolo: "Scheda: clima e ambienti", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-clima-e-ambienti.html", data: "2026-11-04" }
-      ] },
-      { titolo: "L'inquinamento", dipartimento: true, libri: ["paesaggi"], pagine: "A48–A49", descrizione: "I problemi dell'ambiente.", link: "geografia/prima/paesaggio/attivita/problemi-ambiente.html", data: "2026-11-04", attivita: [
-        { tipo: "Attività", titolo: "I problemi dell'ambiente", descrizione: "Un'ora: inquinamento, riscaldamento globale, cementificazione, disboscamento; sviluppo sostenibile.", link: "geografia/prima/paesaggio/attivita/problemi-ambiente.html", data: "2026-11-04" },
-        { tipo: "Scheda", titolo: "Scheda: catene di cause e conseguenze", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-problemi-ambiente.html", data: "2026-11-04" }
       ] },
       { titolo: "I rilievi", libri: ["paesaggi"], pagine: "A61–A71", descrizione: "Montagne, colline, pianure; gli esseri umani modificano i rilievi.", link: "geografia/prima/paesaggio/attivita/rilievi.html", data: "2026-11-04", attivita: [
         { tipo: "Attività", titolo: "I rilievi", descrizione: "Quattro ore: altitudine; montagne; origine di colline e pianure; le persone e i rilievi.", link: "geografia/prima/paesaggio/attivita/rilievi.html", data: "2026-11-04" },
@@ -202,13 +199,9 @@ var MODULI = [
         { tipo: "Gioco", titolo: "Spazi terrestri: Indovina il luogo", descrizione: "Un indizio alla volta: di quale luogo si parla?", link: "geografia/prima/paesaggio/giochi/spazi-terrestri-indovina-il-luogo.html", data: "2026-11-17" },
         { tipo: "Gioco", titolo: "Spazi terrestri: Rischiatutto", descrizione: "Domande a punti su montagne, colline, pianure ed Europa.", link: "geografia/prima/paesaggio/giochi/spazi-terrestri-rischiatutto.html", data: "2026-11-17" }
       ] },
-      { titolo: "Le acque", libri: ["paesaggi"], pagine: "A81–A95", descrizione: "Ghiacciai, fiumi, laghi, mari e coste; gli esseri umani modificano i corsi d'acqua e le coste.", link: "geografia/prima/paesaggio/attivita/acque.html", data: "2026-11-04", attivita: [
-        { tipo: "Attività", titolo: "Le acque", descrizione: "Quattro ore: ciclo dell'acqua e ghiacciai; fiumi; laghi, mari e coste; le persone e le acque.", link: "geografia/prima/paesaggio/attivita/acque.html", data: "2026-11-04" },
-        { tipo: "Missione finale", titolo: "Leggi un paesaggio con otto lenti", descrizione: "Sintesi del modulo.", link: "geografia/prima/paesaggio/attivita/acque.html#missione", data: "2026-11-04" },
-        { tipo: "Scheda", titolo: "Scheda: le acque", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-acque.html", data: "2026-11-04" },
-        { tipo: "Scheda", titolo: "Leggo un paesaggio", descrizione: "Da stampare: le otto lenti su un paesaggio scelto dagli alunni.", link: "geografia/prima/paesaggio/schede/scheda-leggo-un-paesaggio.html", data: "2026-11-04" }
-      ] },
-      { titolo: "Le risorse idriche", dipartimento: true, libri: ["paesaggi"], pagine: "A105–A110", descrizione: "Dossier: l'acqua.", attivita: [] }
+      { titolo: "Il quadro fisico dell'Italia", dipartimento: true, libri: ["paesaggi"], pagine: "A112–A113", descrizione: "Com'è fatta l'Italia.", attivita: [] },
+      { titolo: "Montagne, colline e pianure italiane", dipartimento: true, libri: ["paesaggi"], pagine: "A116–A119", attivita: [] },
+      { titolo: "I rischi ambientali in Italia", libri: ["paesaggi"], pagine: "A128–A129", descrizione: "In terza si riprende con la lezione sul rischio vulcanico e sismico.", attivita: [] }
     ],
     attivita: [
       { tipo: "Gioco", titolo: "Dove siamo? La Terra vista dallo spazio", descrizione: "Otto paesaggi fotografati dallo spazio (immagini NASA): leggi gli indizi e indovina dove siamo. Laghi, lagune, vulcani, montagne, fiumi e deserti.", link: "geografia/prima/paesaggio/attivita/dove-siamo.html", data: "2026-11-06" }
@@ -219,15 +212,18 @@ var MODULI = [
     classe: "prima",
     numero: "III",
     percorso: "come",
-    titolo: "Il paesaggio italiano",
-    descrizione: "Il quadro fisico dell'Italia. Secondo quadrimestre, in collegamento con Scienze e Storia.",
+    titolo: "Gli spazi acquatici",
+    descrizione: "Ghiacciai, fiumi, laghi, mari e coste, in Europa e in Italia; l'acqua come risorsa. In collegamento con Scienze.",
     lezioni: [
-      { titolo: "Il quadro fisico dell'Italia", dipartimento: true, libri: ["paesaggi"], pagine: "A112–A113", descrizione: "Com'è fatta l'Italia.", attivita: [] },
-      { titolo: "I climi italiani", dipartimento: true, libri: ["paesaggi"], pagine: "A114–A115", attivita: [] },
-      { titolo: "Montagne, colline e pianure italiane", dipartimento: true, libri: ["paesaggi"], pagine: "A116–A119", attivita: [] },
+      { titolo: "Le acque", libri: ["paesaggi"], pagine: "A81–A95", descrizione: "Ghiacciai, fiumi, laghi, mari e coste; gli esseri umani modificano i corsi d'acqua e le coste.", link: "geografia/prima/paesaggio/attivita/acque.html", data: "2026-11-04", attivita: [
+        { tipo: "Attività", titolo: "Le acque", descrizione: "Quattro ore: ciclo dell'acqua e ghiacciai; fiumi; laghi, mari e coste; le persone e le acque.", link: "geografia/prima/paesaggio/attivita/acque.html", data: "2026-11-04" },
+        { tipo: "Missione finale", titolo: "Leggi un paesaggio con otto lenti", descrizione: "Sintesi del modulo.", link: "geografia/prima/paesaggio/attivita/acque.html#missione", data: "2026-11-04" },
+        { tipo: "Scheda", titolo: "Scheda: le acque", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-acque.html", data: "2026-11-04" },
+        { tipo: "Scheda", titolo: "Leggo un paesaggio", descrizione: "Da stampare: le otto lenti su un paesaggio scelto dagli alunni.", link: "geografia/prima/paesaggio/schede/scheda-leggo-un-paesaggio.html", data: "2026-11-04" }
+      ] },
       { titolo: "Fiumi, laghi e fenomeni carsici", dipartimento: true, libri: ["paesaggi"], pagine: "A122–A125", attivita: [] },
       { titolo: "I mari e le coste italiane", dipartimento: true, libri: ["paesaggi"], pagine: "A126–A127", attivita: [] },
-      { titolo: "I rischi ambientali in Italia", libri: ["paesaggi"], pagine: "A128–A129", descrizione: "In terza si riprende con la lezione sul rischio vulcanico e sismico.", attivita: [] }
+      { titolo: "Le risorse idriche", dipartimento: true, libri: ["paesaggi"], pagine: "A105–A110", descrizione: "Dossier: l'acqua.", attivita: [] }
     ]
   },
   {
@@ -235,15 +231,42 @@ var MODULI = [
     classe: "prima",
     numero: "IV",
     percorso: "come",
-    titolo: "Le attività umane in Italia",
-    descrizione: "Popolazione, organizzazione politica ed economia dell'Italia. Secondo quadrimestre, in collegamento con Storia.",
+    titolo: "Il clima",
+    descrizione: "Elementi e fattori del clima, gli ambienti naturali, i climi italiani e i problemi dell'ambiente. In collegamento con Scienze.",
+    lezioni: [
+      { titolo: "Il clima", dipartimento: true, libri: ["paesaggi"], pagine: "A44–A47", descrizione: "Il clima e gli ambienti naturali.", link: "geografia/prima/paesaggio/attivita/clima-e-ambienti.html", data: "2026-11-04", attivita: [
+        { tipo: "Attività", titolo: "Il clima e gli ambienti naturali", descrizione: "Due ore: elementi e fattori del clima, escursione termica; habitat, biodiversità, vegetazione e altitudine.", link: "geografia/prima/paesaggio/attivita/clima-e-ambienti.html", data: "2026-11-04" },
+        { tipo: "Scheda", titolo: "Scheda: clima e ambienti", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-clima-e-ambienti.html", data: "2026-11-04" }
+      ] },
+      { titolo: "I climi italiani", dipartimento: true, libri: ["paesaggi"], pagine: "A114–A115", attivita: [] },
+      { titolo: "L'inquinamento", dipartimento: true, libri: ["paesaggi"], pagine: "A48–A49", descrizione: "I problemi dell'ambiente.", link: "geografia/prima/paesaggio/attivita/problemi-ambiente.html", data: "2026-11-04", attivita: [
+        { tipo: "Attività", titolo: "I problemi dell'ambiente", descrizione: "Un'ora: inquinamento, riscaldamento globale, cementificazione, disboscamento; sviluppo sostenibile.", link: "geografia/prima/paesaggio/attivita/problemi-ambiente.html", data: "2026-11-04" },
+        { tipo: "Scheda", titolo: "Scheda: catene di cause e conseguenze", descrizione: "Da stampare: la mappa da completare.", link: "geografia/prima/paesaggio/schede/scheda-problemi-ambiente.html", data: "2026-11-04" }
+      ] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "prima",
+    numero: "V",
+    percorso: "come",
+    titolo: "Popolazioni e città",
+    descrizione: "Quanti siamo, dove viviamo, come cambia la popolazione; le città, le culture e il paesaggio. Secondo quadrimestre, in collegamento con Storia.",
     lezioni: [
       { titolo: "La popolazione, le città e la società", libri: ["paesaggi"], pagine: "B2–B7", attivita: [] },
-      { titolo: "Le risorse terrestri", dipartimento: true, libri: ["paesaggi"], pagine: "B10–B13", descrizione: "L'economia e le risorse.", attivita: [] },
-      { titolo: "Il quadro politico dell'Italia", dipartimento: true, libri: ["paesaggi"], pagine: "B26–B31", descrizione: "Che cos'è uno Stato, la Repubblica Italiana, un paese di venti regioni.", attivita: [] },
-      { titolo: "L'Italia nel contesto europeo", dipartimento: true, libri: ["paesaggi"], pagine: "B32–B35", descrizione: "L'Italia in Europa e nel Mediterraneo.", attivita: [] },
       { titolo: "La popolazione italiana", dipartimento: true, libri: ["paesaggi"], pagine: "B45–B61", descrizione: "Quanti sono gli italiani, dove vivono, come cambia la popolazione; più culture, lingue e religioni.", attivita: [] },
-      { titolo: "Cultura e paesaggio", libri: ["paesaggi"], pagine: "B71–B76", descrizione: "Dossier.", attivita: [] },
+      { titolo: "Cultura e paesaggio", libri: ["paesaggi"], pagine: "B71–B76", descrizione: "Dossier.", attivita: [] }
+    ]
+  },
+  {
+    materia: "geografia",
+    classe: "prima",
+    numero: "VI",
+    percorso: "come",
+    titolo: "L'economia",
+    descrizione: "Le risorse, il lavoro e i settori dell'economia, in Italia e in Europa. Secondo quadrimestre.",
+    lezioni: [
+      { titolo: "Le risorse terrestri", dipartimento: true, libri: ["paesaggi"], pagine: "B10–B13", descrizione: "L'economia e le risorse.", attivita: [] },
       { titolo: "L'economia italiana", dipartimento: true, libri: ["paesaggi"], pagine: "B77–B87", descrizione: "Regioni a confronto: economia e lavoro, sviluppo, ambiente e salute; il Terzo settore e il volontariato.", attivita: [] },
       { titolo: "I settori dell'economia italiana", dipartimento: true, libri: ["paesaggi"], pagine: "B90–B97", descrizione: "Primario, secondario, terziario e infrastrutture.", attivita: [] }
     ]
@@ -251,11 +274,13 @@ var MODULI = [
   {
     materia: "geografia",
     classe: "prima",
-    numero: "V",
+    numero: "VII",
     percorso: "cosa",
     titolo: "Le regioni italiane",
-    descrizione: "Secondo quadrimestre, in collegamento con Storia.",
+    descrizione: "L'Italia, uno Stato di venti regioni, in Europa; poi le regioni una per una. Secondo quadrimestre, in collegamento con Storia.",
     lezioni: [
+      { titolo: "Il quadro politico dell'Italia", dipartimento: true, libri: ["paesaggi"], pagine: "B26–B31", descrizione: "Che cos'è uno Stato, la Repubblica Italiana, un paese di venti regioni.", attivita: [] },
+      { titolo: "L'Italia nel contesto europeo", dipartimento: true, libri: ["paesaggi"], pagine: "B32–B35", descrizione: "L'Italia in Europa e nel Mediterraneo.", attivita: [] },
       { titolo: "Come si studia una regione italiana", dipartimento: true, libri: ["paesaggi"], pagine: "B114–B115", attivita: [] },
       {
         titolo: "L'Italia settentrionale", dipartimento: true, libri: ["paesaggi"], pagine: "B116–B145",
@@ -288,7 +313,7 @@ var MODULI = [
   {
     materia: "geografia",
     classe: "prima",
-    numero: "VI",
+    numero: "VIII",
     percorso: "roma",
     standby: true, // Percorso visibile, ma temporaneamente non disponibile.
     titolo: "Alla scoperta di Roma",
@@ -633,6 +658,9 @@ var MODULI = [
         data: "2026-11-01",
         attivita: []
       }
+    ],
+    attivita: [
+      { tipo: "Lezione facile", titolo: "Il clima e gli ambienti", descrizione: "Versione facile di tutto il modulo, organizzata come Geografia facile (Erickson): idea principale con il termometro sulla montagna, carte delle parole, testo sintetico/essenziale, glossario, mappa delle informazioni, dieci cose da sapere.", link: "geografia/terza/clima-e-ambienti/lezioni/clima-e-ambienti-facile.html", data: "2026-11-18" }
     ]
   },
   {
