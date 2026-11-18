@@ -268,7 +268,8 @@ var MODULI = [
     lezioni: [
       { titolo: "Le risorse terrestri", dipartimento: true, libri: ["paesaggi"], pagine: "B10–B13", descrizione: "L'economia e le risorse.", attivita: [] },
       { titolo: "L'economia italiana", dipartimento: true, libri: ["paesaggi"], pagine: "B77–B87", descrizione: "Regioni a confronto: economia e lavoro, sviluppo, ambiente e salute; il Terzo settore e il volontariato.", attivita: [] },
-      { titolo: "I settori dell'economia italiana", dipartimento: true, libri: ["paesaggi"], pagine: "B90–B97", descrizione: "Primario, secondario, terziario e infrastrutture.", attivita: [] }
+      { titolo: "Da dove vengono i lavori? Le origini delle attività economiche", descrizione: "Lezione extra, in collegamento con Storia, prima dei settori di oggi. Quando e dove sono nate le attività: agricoltura e allevamento nel Neolitico (intorno al 9000 a.C., nella Mezzaluna fertile), con i primi villaggi; artigianato e lavorazione dei metalli; commercio, scrittura dei conti e moneta (Lidia, VII secolo a.C.); nel Medioevo l'economia curtense, il rinnovamento dell'agricoltura dopo l'anno Mille, le botteghe, i mercanti e le banche dei Comuni; la rivoluzione industriale (Inghilterra, seconda metà del Settecento); la crescita dei servizi e il lavoro digitale. Una linea del tempo per ogni settore. In Storia (prima): «Storia e preistoria», «Signori e castelli: l'economia curtense», «Il rinnovamento dell'agricoltura e la crescita demografica», «Lo sviluppo delle città e del commercio», «L'ascesa della borghesia».", attivita: [] },
+      { titolo: "I settori dell'economia italiana", dipartimento: true, libri: ["paesaggi"], pagine: "B90–B97", descrizione: "Primario, secondario, terziario e infrastrutture: per ogni settore, da dove viene (la lezione precedente) e com'è oggi in Italia.", attivita: [] }
     ]
   },
   {
