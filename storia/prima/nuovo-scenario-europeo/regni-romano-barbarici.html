@@ -1,0 +1,1359 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>I regni romano-barbarici</title>
+<style>
+:root{
+  --sfondo:#f3f3ef; --carta:#ffffff; --tenue-bg:#eaf1f2; --ink:#23262a; --tenue:#5a6066; --filo:#dfe2dd;
+  --accento:#2b5f6b; --accento-2:#1f4a54; --accento-soft:#e1edef;
+  --causa:#8a5a12; --causa-bg:#f8eedb; --evento:#2b5f6b; --evento-bg:#e1edef; --effetto:#6b3f74; --effetto-bg:#f1e6f3;
+  --ombra:#7a3b2e; --ombra-bg:#f7e7e2;
+  --mare:#d7e8ee; --terra:#f4efe2; --ok:#1f7a4d; --ok-bg:#dcf2e6; --no:#b42318; --no-bg:#fde3e1;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --surface:var(--carta); --line:var(--filo); --soft:var(--tenue-bg); --paper:var(--tenue-bg); --accent:var(--accento); --accent-ink:#fff; --muted:var(--tenue); --card:var(--carta);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+  --accento:#7cc0cc; --mare:#12262c; --terra:#2a3236; --accento-2:#a6d6de; --accento-soft:#1d3237;
+  --causa:#e7b766; --causa-bg:#2e2412; --evento:#7cc0cc; --evento-bg:#1d3237; --effetto:#d4a3dd; --effetto-bg:#2b1f2e;
+  --ombra:#ec9a86; --ombra-bg:#2f1d18; --accent-ink:#0f1416; --ok:#5fd394; --ok-bg:#12301f; --no:#f58a80; --no-bg:#3a1717; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#f3f3ef;background:var(--sfondo);color:#23262a;color:var(--ink);font:1.08rem/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:1.08rem/1.65 var(--sans)}
+a{color:#2b5f6b;color:var(--accento)}
+a:focus-visible,button:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.salta{position:absolute;left:1rem;top:-6rem;background:#ffffff;background:var(--carta);padding:.8rem 1rem;z-index:20}.salta:focus{top:1rem}
+.foglio{max-width:1280px;margin:32px auto;background:#ffffff;background:var(--carta);border:1px solid #dfe2dd;border:1px solid var(--filo)}
+header.testata{padding:22px 52px 26px;border-top:9px solid #2b5f6b;border-top:9px solid var(--accento);background:#eaf1f2;background:var(--tenue-bg)}
+.indietro{display:inline-block;font-size:.92rem;margin-bottom:18px;text-decoration:none;border-bottom:1px solid currentColor}
+.eyebrow{margin:0 0 6px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:#5a6066;color:var(--tenue);font-weight:700}
+.capitolo{margin:0;font-weight:700;color:#2b5f6b;color:var(--accento)}
+h1{font:700 2.6rem/1.08 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2.6rem/1.08 var(--serif);font-size:clamp(2.1rem,6vw,3.5rem);margin:6px 0 10px}
+.sottotitolo{margin:0;font:italic 1.25rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.25rem/1.4 var(--serif);color:#5a6066;color:var(--tenue)}
+.corpo-lezione{display:grid;grid-template-columns:268px minmax(0,1fr);align-items:start}
+nav.indice{position:-webkit-sticky;position:sticky;top:12px;align-self:start;display:grid;grid-template-columns:minmax(0,1fr);grid-gap:10px;gap:10px;padding:30px 0 24px 28px;max-height:calc(100vh - 24px);overflow-y:auto}
+.indice-gruppo{margin:8px 0 -4px 6px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#5a6066;color:var(--tenue);display:flex;align-items:center;gap:8px}
+.indice-gruppo:after{content:"";flex:1;height:1px;background:#dfe2dd;background:var(--filo)}
+.indice-titolo{margin:0 0 2px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue)}
+a.voce{display:flex;align-items:center;min-height:54px;padding:4px 12px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;text-decoration:none;font:800 .86rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .86rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em;transition:transform .15s,box-shadow .15s}
+a.voce .tondo{margin-right:10px;flex:none;width:46px;height:46px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+a.voce svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+a.voce:hover{transform:translateX(4px)}
+a.voce[aria-current="true"]{transform:translateX(8px);box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+a.voce:focus-visible{outline:3px solid #23262a;outline:3px solid var(--ink);outline-offset:3px}
+main{padding:10px 52px 40px 40px;min-width:0}
+.fascia{display:flex;align-items:center;margin:28px 0 12px;min-height:50px;padding:4px 16px 4px 4px;border-radius:999px 8px 8px 999px;background:#2b5f6b;background:var(--c);color:#fff;font:800 .95rem/1.15 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:800 .95rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.fascia .tondo{margin-right:10px;flex:none;width:42px;height:42px;border-radius:50%;background:#e3eeee;color:#2b5f6b;color:var(--c);border:3px solid #fff;display:grid;place-items:center}
+.fascia svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+section.parte{padding:34px 0 8px;border-bottom:1px solid #dfe2dd;border-bottom:1px solid var(--filo);scroll-margin-top:56px}
+section.parte:last-of-type{border-bottom:0}
+h2{font:700 2rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 2rem/1.2 var(--serif);margin:0 0 6px}
+.etichetta{display:inline-block;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:#2b5f6b;color:var(--accento);margin:0 0 4px}
+.guida{margin:0 0 22px;color:#5a6066;color:var(--tenue);font-size:.98rem;max-width:72ch}
+h3{font:700 1.08rem/1.3 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 1.08rem/1.3 var(--sans);text-transform:uppercase;letter-spacing:.05em;color:#2b5f6b;color:var(--accento);margin:26px 0 12px}
+h3 span{border-bottom:3px dotted #2b5f6b;border-bottom:3px dotted var(--accento);padding-bottom:4px}
+p{margin:0 0 14px}
+.lettura{max-width:74ch}
+.mestiere{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:-4px 0 16px}
+
+/* prima / dopo */
+.primadopo{display:grid;grid-template-columns:1fr auto 1fr;grid-gap:16px;gap:16px;align-items:stretch;margin:6px 0 10px}
+.pd{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:18px 20px;background:#ffffff;background:var(--carta)}
+.pd h3{margin-top:0}
+.pd.ora{background:#e1edef;background:var(--accento-soft);border-color:transparent}
+.freccia{align-self:center;font:700 1.8rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.8rem var(--serif);color:#2b5f6b;color:var(--accento)}
+.pd .link-lez{font-size:.92rem;margin:0}
+.pd-centro{grid-column:1/-1;text-align:center;font:700 1.15rem/1.4 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem/1.4 var(--serif);background:#2b5f6b;background:var(--accento);color:#fff;border-radius:12px;padding:12px 18px;margin:0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pd-centro{color:#0f1416}}
+:root[data-theme="dark"] .pd-centro{color:#0f1416}
+
+/* ti ricordi? testo da completare */
+.cloze{margin:0 0 14px}
+.cloze-consegna{font-size:.95rem;color:#5a6066;color:var(--tenue);margin:0 0 12px}
+.cloze-testo p{line-height:2.25;margin:0;max-width:78ch}
+.cloze-par{margin:0 0 14px}
+.cloze-lez{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin:6px 0 0;padding:7px 12px;border-left:4px solid #3a6ea5;border-radius:0 10px 10px 0;background:#eaf1f2;background:var(--tenue-bg)}
+.cloze-lez[hidden]{display:none}
+.cloze-lez a{color:#23262a;color:var(--ink);font-weight:700;font-size:.95rem;line-height:1.3;text-decoration:none}
+.cloze-lez a:hover{text-decoration:underline}
+.cloze-lez a:after{content:" \2197";font-size:.85em;color:#2b5f6b;color:var(--accento)}
+.cloze-lez-tipo{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+@media (min-width:1101px){
+  .cloze{display:grid;grid-template-columns:minmax(0,1fr) 180px;grid-column-gap:26px;column-gap:26px;align-items:start}
+  .cloze-consegna,.cloze .comandi{grid-column:1/-1}
+  .cloze-testo{grid-column:1;grid-row:2}
+  .cloze-banca{grid-column:2;grid-row:2;position:-webkit-sticky;position:sticky;top:70px;margin:0}
+  .cloze-parole{flex-direction:column;align-items:stretch}
+  .cloze-parole button{margin:0 0 8px;text-align:left}
+}
+.cloze input.buco-in{font:inherit;font-weight:700;color:#23262a;color:var(--ink);background:#ffffff;background:var(--carta);border:0;border-bottom:2px solid #2b5f6b;border-bottom:2px solid var(--accento);border-radius:6px 6px 0 0;padding:1px 6px;margin:0 2px;min-width:5ch;max-width:100%;text-align:center}
+.cloze input.buco-in:focus{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:1px}
+.cloze input.buco-in.no{background:#fde3e1;background:var(--no-bg);border-bottom-color:#b42318;border-bottom-color:var(--no)}
+.cloze a.buco-ok{display:inline-block;font-weight:700;color:#1f7a4d;color:var(--ok);background:#dcf2e6;background:var(--ok-bg);border-radius:6px;padding:0 7px;margin:0 2px;line-height:1.6;text-decoration:none;border-bottom:2px solid currentColor}
+.cloze a.buco-ok.svelata{color:#2b5f6b;color:var(--accento);background:#e1edef;background:var(--accento-soft)}
+.cloze a.buco-ok:hover{text-decoration:underline}
+.cloze a.buco-ok:before{content:"\1F4D6\00A0";font-size:.85em}
+.cloze a.buco-ok.personaggio:before{content:"\1F464\00A0"}
+.cloze a.buco-ok.luogo:before{content:"\1F4CD\00A0"}
+.cloze a.buco-ok:after{content:" \2197";font-size:.8em}
+.cloze-banca{margin:6px 0 4px;padding:10px 12px;border-radius:10px;background:#eaf1f2;background:var(--tenue-bg)}
+.cloze-aiuto{margin:0 0 8px;font-size:.88rem;color:#5a6066;color:var(--tenue)}
+.cloze-parole{display:flex;flex-wrap:wrap}
+.cloze-parole button{font:inherit;font-weight:700;font-size:.95rem;margin:0 8px 8px 0;padding:5px 12px;border-radius:999px;border:1px solid #dfe2dd;border:1px solid var(--filo);background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink);cursor:pointer}
+.cloze-parole button:hover{border-color:#2b5f6b;border-color:var(--accento)}
+.cloze-parole button.usata{opacity:.4;text-decoration:line-through}
+.cloze-legenda{margin:12px 0 0;padding:0;list-style:none;font-size:.92rem}
+.cloze-legenda li{margin:0 0 4px}
+@media print{.cloze .comandi,.cloze-banca{display:none}.cloze input.buco-in{border:0;border-bottom:1px solid #000;background:none}}
+
+/* idea principale */
+.mappa-box{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;margin:16px 0 8px}
+#mappa{display:block;width:100%;height:auto;background:#d7e8ee;background:var(--mare)}
+#mappa .mare{fill:#d7e8ee;fill:var(--mare)}
+#mappa .terra{fill:#f4efe2;fill:var(--terra);stroke:#f4efe2;stroke:var(--terra);stroke-width:1.2;stroke-linejoin:round}
+#mappa .segno{cursor:pointer}
+#mappa .segno circle{fill:#2b5f6b;fill:var(--accento);stroke:#ffffff;stroke:var(--carta);stroke-width:3}
+#mappa .segno text{font:700 17px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font:700 17px var(--sans);fill:#23262a;fill:var(--ink);paint-order:stroke;stroke:#f4efe2;stroke:var(--terra);stroke-width:5px;stroke-linejoin:round}
+#mappa .segno.scelto circle{fill:#d9822b}
+#mappa .segno:focus{outline:none}#mappa .segno:focus-visible circle{stroke:#23262a;stroke:var(--ink);stroke-width:4}
+.mappa-info{margin:0;padding:12px 14px;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);font-size:.98rem;min-height:3.2em}
+.mappa-info strong{color:#2b5f6b;color:var(--accento)}
+.mappa-nota{font-size:.88rem;color:#5a6066;color:var(--tenue);padding:10px 14px;margin:0;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo)}
+.luoghi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));grid-gap:10px;gap:10px;margin:12px 0 0;padding:0;list-style:none}
+.luoghi li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 12px;font-size:.95rem}
+.luoghi button{all:unset;cursor:pointer;font-weight:700;color:#2b5f6b;color:var(--accento)}
+.luoghi button:focus-visible{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:2px}
+.linea{position:relative;margin:8px 0 0;padding:0 0 0 30px;list-style:none}
+.linea::before{content:"";position:absolute;left:10px;top:6px;bottom:6px;width:3px;background:#2b5f6b;background:var(--accento);border-radius:2px}
+.linea li{position:relative;margin:0 0 12px}
+.linea li::before{content:"";position:absolute;left:-26px;top:.45em;width:13px;height:13px;border-radius:50%;background:#ffffff;background:var(--carta);border:3px solid #2b5f6b;border:3px solid var(--accento)}
+.linea li.estremo::before{background:#2b5f6b;background:var(--accento)}
+.linea .anno{font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);color:#2b5f6b;color:var(--accento);margin-right:8px}
+.linea .pista{display:inline-block;max-width:100%;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;padding:1px 8px;margin-left:6px;color:#5a6066;color:var(--tenue);white-space:nowrap}
+.persone{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));grid-gap:14px;gap:14px}
+.persona{scroll-margin-top:60px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:54px 1fr;grid-gap:14px;gap:14px;align-items:start}
+.sigla{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#e1edef;background:var(--accento-soft);color:#2b5f6b;color:var(--accento);font:700 1.2rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem var(--serif)}
+.persona h4{margin:0;font:700 1.12rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.12rem/1.3 var(--serif)}
+.persona .date{font-size:.88rem;color:#5a6066;color:var(--tenue);display:block;margin-bottom:6px}
+.persona p{margin:0 0 6px;font-size:.97rem}
+.persona a{font-size:.9rem}
+
+/* perché */
+.catena{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;grid-gap:10px;gap:10px;align-items:stretch}
+.anello{border-radius:12px;padding:16px 18px}
+.anello h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.anello p{margin:0;font-size:.98rem}
+.anello.causa{background:#f8eedb;background:var(--causa-bg)}.anello.causa h4{color:#8a5a12;color:var(--causa)}
+.anello.evento{background:#e1edef;background:var(--evento-bg)}.anello.evento h4{color:#2b5f6b;color:var(--evento)}
+.anello.effetto{background:#f1e6f3;background:var(--effetto-bg)}.anello.effetto h4{color:#6b3f74;color:var(--effetto)}
+.catena .freccia{font-size:1.5rem}
+.ombra{margin:16px 0 0;background:#f7e7e2;background:var(--ombra-bg);border-left:5px solid #7a3b2e;border-left:5px solid var(--ombra);border-radius:0 12px 12px 0;padding:14px 18px}
+.ombra h4{margin:0 0 6px;color:#7a3b2e;color:var(--ombra);font-size:.82rem;letter-spacing:.1em;text-transform:uppercase}
+.ombra p{margin:0}
+.ricorda{margin:18px 0 0;border:2px dashed #dfe2dd;border:2px dashed var(--filo);border-radius:12px;padding:14px 18px}
+.ricorda h4{margin:0 0 8px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:#5a6066;color:var(--tenue)}
+.ricorda dl{margin:0;display:grid;grid-template-columns:max-content 1fr;grid-gap:6px 14px;gap:6px 14px}
+.ricorda dt{font-weight:700}.ricorda dd{margin:0}
+
+/* concetti e come */
+.concetto{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);padding:18px 22px;margin:0 0 16px;scroll-margin-top:60px}
+.concetto h4{font:700 1.3rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.3rem/1.3 var(--serif);margin:0 0 10px}
+.concetto p:last-child{margin-bottom:0}
+.come{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-gap:12px;gap:12px;margin-top:10px}
+.colonna{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:0;overflow:hidden}
+.colonna h4{margin:0;padding:10px 14px;background:#2b5f6b;background:var(--accento);color:#fff;font-size:1rem}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .colonna h4{color:#0f1416}}
+:root[data-theme="dark"] .colonna h4{color:#0f1416}
+.colonna ul{margin:0;padding:12px 14px 12px 30px;font-size:.95rem}
+.colonna li{margin:0 0 6px}
+.radice{text-align:center;font:700 1.15rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.15rem var(--serif);border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:999px;padding:8px 16px;max-width:520px;margin:4px auto 10px}
+
+/* parole chiave */
+.parole{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));grid-gap:12px;gap:12px;margin:0;padding:0}
+.parola{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px;scroll-margin-top:60px}
+.parola dt{font:700 1.1rem Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.1rem var(--serif);color:#2b5f6b;color:var(--accento);margin-bottom:4px}
+.parola dd{margin:0;font-size:.97rem}
+a.pk{color:inherit;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted #2b5f6b;text-decoration:underline dotted var(--accento);text-underline-offset:4px;text-decoration-thickness:2px}
+a.pk:hover{background:#e1edef;background:var(--accento-soft)}
+:target{outline:3px solid #2b5f6b;outline:3px solid var(--accento);outline-offset:4px}
+
+/* testi */
+.livelli{display:inline-flex;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:999px;overflow:hidden;margin:0 0 18px}
+.livelli button{font:inherit;font-size:.95rem;border:0;background:transparent;color:#23262a;color:var(--ink);padding:7px 16px;cursor:pointer}
+.livelli button[aria-pressed="true"]{background:#2b5f6b;background:var(--accento);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .livelli button[aria-pressed="true"]{color:#0f1416}}
+:root[data-theme="dark"] .livelli button[aria-pressed="true"]{color:#0f1416}
+.paragrafo{margin:0 0 22px;max-width:74ch}
+.paragrafo h4{font:700 1.2rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.2rem/1.3 var(--serif);margin:0 0 6px}
+.paragrafo h4 .n{color:#2b5f6b;color:var(--accento);margin-right:6px}
+.essenziale .paragrafo p{font-size:1.12rem;line-height:1.75}
+
+/* lente */
+.lente{border:2px solid #2b5f6b;border:2px solid var(--accento);border-radius:14px;overflow:hidden}
+.lente-testa{background:#2b5f6b;background:var(--accento);color:#fff;padding:16px 22px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lente-testa{color:#0f1416}}
+:root[data-theme="dark"] .lente-testa{color:#0f1416}
+.lente-testa .testata-giornale{margin:0;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.lente-testa h3{margin:4px 0 0;color:inherit;font:700 1.6rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.6rem/1.2 var(--serif);text-transform:none;letter-spacing:0}
+.lente-corpo{padding:18px 22px}
+.domanda-guida{font:italic 1.2rem/1.5 Georgia,"Iowan Old Style","Times New Roman",serif;font:italic 1.2rem/1.5 var(--serif);border-left:4px solid #2b5f6b;border-left:4px solid var(--accento);padding:4px 0 4px 14px;margin:0 0 18px}
+.fasi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-gap:14px;gap:14px}
+.fase{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;padding:14px 16px}
+.fase h4{margin:0 0 8px;font-size:1rem}
+.fase ol,.fase ul{margin:0;padding-left:20px;font-size:.96rem}
+.fase li{margin:0 0 6px}
+.bottone{display:inline-block;font:inherit;font-weight:700;border-radius:999px;padding:9px 18px;border:2px solid #2b5f6b;border:2px solid var(--accento);background:#2b5f6b;background:var(--accento);color:#fff;text-decoration:none;cursor:pointer}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bottone{color:#0f1416}}
+:root[data-theme="dark"] .bottone{color:#0f1416}
+.bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+:root .bottone.secondario,:root:not([data-theme="light"]) .bottone.secondario,:root[data-theme="dark"] .bottone.secondario{background:transparent;color:#2b5f6b;color:var(--accento)}
+.bottone[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.altre-fonti{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-gap:8px;gap:8px}
+.altre-fonti li{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:10px;padding:10px 14px;font-size:.96rem}
+.altre-fonti .tipo{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#5a6066;color:var(--tenue);display:block}
+
+/* compiti */
+.attivita{border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:14px;padding:18px 22px;margin:0 0 18px}
+.attivita h4{margin:0 0 4px;font:700 1.25rem/1.3 Georgia,"Iowan Old Style","Times New Roman",serif;font:700 1.25rem/1.3 var(--serif)}
+.attivita .meta{font-size:.86rem;color:#5a6066;color:var(--tenue);margin:0 0 12px}
+.consegna{margin:0 0 12px}
+table.esercizio{width:100%;border-collapse:collapse;font-size:.97rem}
+table.esercizio td{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:8px 6px;vertical-align:middle}
+table.esercizio td:first-child{width:52%}
+table.esercizio select{font:inherit;font-size:.95rem;width:100%;max-width:100%;padding:5px 6px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:6px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+td.esito{width:34px;text-align:center;font-weight:700}
+tr.ok td.esito{color:#1f7a4d;color:var(--ok)} tr.no td.esito{color:#b42318;color:var(--no)}
+tr.ok{background:#dcf2e6;background:var(--ok-bg)} tr.no{background:#fde3e1;background:var(--no-bg)}
+.spiega{display:block;font-size:.88rem;color:#5a6066;color:var(--tenue);margin-top:4px}
+.comandi{display:flex;flex-wrap:wrap;align-items:center;margin:14px 0 0}
+.comandi>*{margin:0 10px 8px 0}
+.punteggio{font-weight:700}
+textarea{font:inherit;width:100%;min-height:84px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:8px;padding:8px 10px;background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+.dibattito{margin:14px 0 0;background:#eaf1f2;background:var(--tenue-bg);border-radius:10px;padding:10px 14px;font-size:.95rem}
+.dibattito b{color:#2b5f6b;color:var(--accento)}
+
+footer{border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:18px 52px;font-size:.86rem;color:#5a6066;color:var(--tenue)}
+footer p{margin:0 0 6px}
+
+@media (max-width:960px){
+  html{scroll-padding-bottom:84px}
+  .corpo-lezione{display:block}
+  nav.indice{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:90;grid-auto-flow:column;grid-auto-columns:max-content;grid-template-columns:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;max-height:none;grid-gap:8px;gap:8px;padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));background:#ffffff;background:var(--carta);border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);box-shadow:0 -4px 14px rgba(0,0,0,.12)}
+  .foglio{margin-bottom:70px}
+  .indice-titolo{display:none}
+  .indice-gruppo{display:none}
+  .indice-gruppo+a.voce{margin-left:10px}
+  .indice-gruppo:first-of-type+a.voce{margin-left:0}
+  a.voce{flex:none;min-height:40px;padding:3px 12px 3px 3px;font-size:.74rem;white-space:nowrap}
+  a.voce .tondo{width:34px;height:34px;border-width:2px}
+  a.voce svg{width:18px;height:18px}
+  a.voce:hover,a.voce[aria-current="true"]{transform:none}
+  a.voce[aria-current="true"]{box-shadow:0 0 0 3px #ffffff,0 0 0 5px #23262a;box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+  main{padding:10px 40px 40px}
+}
+@media (max-width:860px){
+  .come{grid-template-columns:1fr 1fr}
+  .fasi{grid-template-columns:1fr}
+  .catena{grid-template-columns:1fr}
+  .catena .freccia{transform:rotate(90deg);justify-self:center;line-height:1}
+}
+@media (max-width:700px){
+  .foglio{margin:0;border:0}
+  header.testata{padding:16px 16px 20px}
+  main{padding:4px 16px 28px}
+  footer{padding:16px}
+  .primadopo{grid-template-columns:1fr}
+  .primadopo .freccia{transform:rotate(90deg);justify-self:center}
+  .come{grid-template-columns:1fr}
+  #mappa .segno text{font-size:30px}
+  .ricorda dl{grid-template-columns:1fr}
+  .ricorda dd{margin-bottom:6px}
+  table.esercizio td{display:block;width:100%!important;border-top:0;padding:4px 6px}
+  table.esercizio tr{display:block;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo);padding:6px 0}
+  td.esito{text-align:left}
+}
+@media print{
+  body{background:#fff}.foglio{border:0;margin:0}nav.indice,.indietro,.comandi,.livelli,.mappa-box{display:none}
+  .essenziale-solo{display:none}section.parte{break-inside:avoid-page}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#mappa.mondo .segno text{font-size:14px;stroke-width:4px}
+@media (max-width:700px){#mappa.mondo .segno text{font-size:26px;stroke-width:5px}}
+
+.animata{border:1px solid #dfe2dd;border:1px solid var(--filo);border-left:5px solid #2b5f6b;border-left:5px solid var(--accento);border-radius:12px;padding:14px 16px;margin:16px 0 0;background:#ffffff;background:var(--carta)}
+.animata h4{margin:0 0 6px;font-size:1.02rem}
+.animata p{margin:0 0 8px}
+.animata ul{margin:8px 0 0;padding:0;list-style:none}
+.animata li{margin:0 0 8px;padding-left:24px;position:relative}
+.animata li:before{content:"\25B6";position:absolute;left:2px;top:0;color:#2b5f6b;color:var(--accento);font-size:.85em}
+.animata .nota-video{font-size:.85rem;color:#5a6066;color:var(--tenue);margin:6px 0 0}
+@media print{.animata{display:none}}
+
+.primadopo.solo-prima{grid-template-columns:1fr}
+.dopo-box{border-left:5px solid #2b5f6b;border-left:5px solid var(--accento)}
+.prepara{margin:16px 0 0}
+
+.tlwrap{--bg:#f6f7f5;--surface:#ffffff;--ink:#23262a;--muted:#5a6066;--line:#dfe2dd;--soft:#e1edef;--accent:#2b5f6b;--accent-ink:#ffffff;--ok:#1d8a52;--ko:#cf2f28;--stage:#1b2233;--display:Georgia,"Iowan Old Style","Times New Roman",serif;--body:inherit;margin:14px 0 6px;padding:16px;border:1px solid #dfe2dd;border-radius:14px;background:#ffffff;color:#23262a}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tlwrap{--bg:#0f1416;--surface:#161d20;--ink:#e7ecee;--muted:#9fb0b6;--line:#2b373b;--soft:#1f2b2f;--accent:#7cc0cc;--accent-ink:#0f1416;--ok:#45c983;--ko:#ff6b62;--stage:#0a0e10;background:#161d20;color:#e7ecee;border-color:#2b373b}}
+:root[data-theme="dark"] .tlwrap{--bg:#0f1416;--surface:#161d20;--ink:#e7ecee;--muted:#9fb0b6;--line:#2b373b;--soft:#1f2b2f;--accent:#7cc0cc;--accent-ink:#0f1416;--ok:#45c983;--ko:#ff6b62;--stage:#0a0e10;background:#161d20;color:#e7ecee;border-color:#2b373b}
+.tlwrap *{box-sizing:border-box}
+.tlwrap [hidden]{display:none!important}
+.tlwrap button,.tlwrap select{font:inherit;color:inherit}
+.tlwrap :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.tlwrap .tl-title{font-size:1.4rem}
+/* vecchi browser senza aspect-ratio */
+@supports not (aspect-ratio:1/1){.tlwrap .tl-view,.tlwrap .cf-view{height:0;padding-top:62.5%}.tlwrap .or-drop{height:0;padding-top:75%;position:relative}.tlwrap .or-drop img,.tlwrap .or-drop .q{position:absolute;top:0;left:0}.tlwrap .or-th{height:99px}}
+.tlwrap .cf-a{-webkit-clip-path:inset(0 50% 0 0)}
+.linea-elenco{margin:8px 0 0}
+.linea-elenco summary{cursor:pointer;font-weight:700;color:#2b5f6b;color:var(--accento)}
+.fonti-immagini{font-size:.86rem;color:#5a6066;color:var(--tenue);margin:6px 0 0}
+@media print{.tlwrap{display:none}.linea-elenco > *{display:block}}
+
+/* Stili condivisi con la pagina per gli studenti */
+.tlwrap .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 15px;font-weight:700;cursor:pointer;text-decoration:none}
+.tlwrap .btn:hover{border-color:var(--accent)}
+.tlwrap .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.tlwrap .btn.small{padding:5px 10px;font-size:.88rem;border-radius:8px}
+.tlwrap .btn[disabled]{opacity:.45;cursor:default}
+
+.tl{max-width:1000px;margin:0 auto;display:grid;gap:14px}
+.tl-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:10px}
+.tl-kind{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.tl-title{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,4vw,2.5rem);line-height:1.05;margin:0;text-wrap:balance}
+.tl-sub{margin:2px 0 0;color:var(--muted)}
+.tl-modes{display:flex;gap:4px;background:var(--soft);padding:4px;border-radius:999px;flex-wrap:wrap}
+.tl-modes button{border:0;background:none;padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:700;color:var(--muted)}
+.tl-modes button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgb(0 0 0 / .14)}
+.tl-empty{text-align:center;color:var(--muted);padding:40px 16px;border:2px dashed var(--line);border-radius:14px}
+
+/* Esplora */
+.tl-view,.cf-view{position:relative;width:100%;aspect-ratio:16/10;background:var(--stage);border-radius:14px;overflow:hidden}
+.tl-view img,.cf-view img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.tl-view img{opacity:0;transition:opacity .12s linear}
+.tl-badge{z-index:5;position:absolute;left:14px;top:12px;background:rgb(0 0 0 / .6);color:#fff;font-family:var(--display);font-weight:800;font-size:clamp(1.2rem,3vw,2rem);padding:2px 14px;border-radius:10px;line-height:1.3}
+.tl-cap{min-height:3.2em;display:grid;gap:2px}
+.tl-cap b{font-family:var(--display);font-size:1.25rem;color:var(--accent)}
+.tl-cap small{color:var(--muted)}
+.tl-track{position:relative;padding:34px 13px 34px}
+.tl-in{position:relative;height:6px;background:var(--soft);border-radius:99px}
+.tl-fill{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:99px}
+.tl-mark{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;border:3px solid var(--accent);background:var(--surface);padding:0;cursor:pointer;z-index:2}
+.tl-mark.on{background:var(--accent)}
+.tl-mark span{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.85rem;font-weight:700;color:var(--muted);bottom:20px}
+.tl-mark.giu span{bottom:auto;top:20px}
+.tl-mark.on span{color:var(--ink)}
+.tl-range{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);width:100%;margin:0;background:none;-webkit-appearance:none;appearance:none;height:30px;z-index:3;pointer-events:none}
+.tl-range::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--ink);border:4px solid var(--surface);box-shadow:0 1px 4px rgb(0 0 0 / .4);cursor:grab;pointer-events:auto}
+.tl-range::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--ink);border:4px solid var(--surface);box-shadow:0 1px 4px rgb(0 0 0 / .4);cursor:grab;pointer-events:auto}
+.tl-range::-moz-range-track{background:none}
+.tl-ctrl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+
+/* Confronta */
+.cf-sel{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.cf-sel label{display:flex;gap:6px;align-items:center;font-weight:700}
+.cf-sel select{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+.cf-view{touch-action:none;cursor:ew-resize}
+.cf-a{position:absolute;inset:0}
+.cf-h{position:absolute;top:0;bottom:0;width:4px;margin-left:-2px;background:#fff;box-shadow:0 0 6px rgb(0 0 0 / .5);pointer-events:none}
+.cf-h span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;background:#fff;color:#172036;display:grid;place-items:center;font-weight:800;box-shadow:0 1px 6px rgb(0 0 0 / .4)}
+.cf-la,.cf-lb{position:absolute;top:12px;background:rgb(0 0 0 / .6);color:#fff;font-family:var(--display);font-weight:800;font-size:1.3rem;padding:0 12px;border-radius:9px;pointer-events:none}
+.cf-la{left:12px}.cf-lb{right:12px}
+.cf-range{width:100%;accent-color:var(--accent)}
+
+/* Metti in ordine */
+.or-hint{margin:0;font-weight:700;color:var(--muted)}
+.or-dir{display:flex;justify-content:space-between;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.or-slots{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:10px;position:relative}
+.or-slots::before{content:"";position:absolute;left:0;right:0;bottom:calc(1.3em + 11px);height:4px;background:var(--line);border-radius:99px}
+.or-slot{display:grid;gap:6px;justify-items:center;position:relative}
+.or-drop{width:100%;aspect-ratio:4/3;border:2px dashed var(--line);border-radius:10px;background:var(--surface);display:grid;place-items:center;overflow:hidden;cursor:pointer;padding:0}
+.or-drop.over{border-color:var(--accent);background:var(--soft)}
+.or-drop img{width:100%;height:100%;object-fit:cover;display:block}
+.or-drop .q{color:var(--muted);font-family:var(--display);font-size:1.4rem}
+.or-lab{font-weight:700;font-size:.9rem;min-height:1.4em;text-align:center}
+.or-dot{width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--muted);z-index:1}
+.or-slot.ok .or-drop{border:3px solid var(--ok)}.or-slot.ok .or-dot{background:var(--ok);border-color:var(--ok)}
+.or-slot.ko .or-drop{border:3px solid var(--ko)}.or-slot.ko .or-dot{background:var(--ko);border-color:var(--ko)}
+.or-real{font-size:.8rem;color:var(--muted);line-height:1.3em;min-height:1.3em}
+.or-pool{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;min-height:90px;padding:10px;border-radius:12px;background:var(--soft)}
+.or-th{width:132px;aspect-ratio:4/3;border:3px solid transparent;border-radius:10px;overflow:hidden;padding:0;background:var(--surface);cursor:grab;box-shadow:0 2px 5px rgb(0 0 0 / .18)}
+.or-th img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.or-th.sel,.or-drop.sel{outline:4px solid var(--ink);outline-offset:2px}
+.or-res{font-family:var(--display);font-size:1.4rem;font-weight:800;text-align:center;min-height:1.5em}
+.or-res.ok{color:var(--ok)}
+.tl.lim .tl-mark span{font-size:1.1rem}.tl.lim .tl-cap{font-size:1.25rem}.tl.lim .or-th{width:170px}
+.tl:fullscreen{max-width:none;padding:18px;background:var(--bg);overflow:auto}
+@media (max-width:600px){.or-slots{grid-template-columns:repeat(2,minmax(0,1fr))}.or-slots::before{display:none}.or-th{width:100px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.tlwrap .or-evento{margin:0;min-height:2.9em;padding:8px 12px;border-radius:10px;background:var(--soft);font-size:1rem}
+.tlwrap .or-evento b{color:var(--accent)}
+.tlwrap .tl-scena{display:grid;grid-template-columns:minmax(200px,30%) minmax(0,1fr);grid-gap:18px;gap:18px;align-items:start}
+.tlwrap .tl-lato{display:flex;flex-direction:column;gap:12px;padding-top:2px}
+.tlwrap .tl-lato .tl-cap b{font-size:2rem;line-height:1.1}
+.tlwrap .tl-lato .tl-cap{min-height:0;gap:8px}
+.tlwrap .tl-lato .tl-ctrl{justify-content:flex-start}
+.tlwrap .tl-stage{position:relative}
+.tlwrap .tl-badge{display:none}
+.tlwrap .tl-fonte{display:block;margin-top:6px;font-size:.82rem;color:var(--muted)}
+.tlwrap .tl-track{padding:30px 13px 30px}
+.tlwrap .tl-freccia{position:absolute;top:50%;margin-top:-26px;width:52px;height:52px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:#172036;font:700 2.2rem/1 Georgia,serif;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.35);z-index:6;display:flex;align-items:center;justify-content:center;padding:0 0 5px}
+.tlwrap .tl-freccia:hover{background:#fff}
+.tlwrap .tl-freccia.sx{left:10px}.tlwrap .tl-freccia.dx{right:10px}
+@media (max-width:760px){.tlwrap .tl-mark span{display:none}.tlwrap .tl-mark.on span{display:block;bottom:20px;top:auto}.tlwrap .tl-track{padding:30px 13px 14px}.tlwrap .tl-scena{grid-template-columns:1fr}.tlwrap .tl-stage{order:-1}.tlwrap .tl-lato .tl-cap b{font-size:1.5rem}.tlwrap .tl-freccia{width:42px;height:42px;margin-top:-21px;font-size:1.8rem}}
+.tlwrap .tl-view{cursor:zoom-in}
+.tl-lente{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;background:rgba(10,14,18,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:52px 16px 16px;color:#fff}
+.tl-lente-img{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center;overflow:auto;-webkit-overflow-scrolling:touch}
+.tl-lente img{max-width:100%;max-height:100%;cursor:zoom-in;display:block;margin:auto}
+.tl-lente.zoom .tl-lente-img{display:block}
+.tl-lente.zoom img{max-width:none;max-height:none;width:220%;cursor:zoom-out}
+.tl-lente p{max-width:900px;margin:12px auto 0;font-size:1rem;line-height:1.45;text-align:center}
+.tl-lente .tl-aiuto{font-size:.82rem;opacity:.7;margin-top:4px}
+.tl-chiudi{position:absolute;top:8px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:#fff;color:#172036;font:700 1.1rem/1 system-ui,sans-serif;cursor:pointer}
+.dettaglio-fonte{margin:14px 0 0}
+.fonte-intera .dettaglio-apri{max-width:none}
+.dettaglio-apri{display:block;position:relative;width:100%;max-width:520px;padding:0;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;background:none;cursor:zoom-in}
+.dettaglio-apri img{display:block;width:100%;height:auto}
+.dettaglio-apri span{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.65);color:#fff;font-weight:700;font-size:.9rem;padding:5px 12px;border-radius:999px}
+.dettaglio-fonte figcaption{font-size:.86rem;color:#5a6066;color:var(--tenue);margin-top:6px}
+.embed-fonte{position:relative;width:100%;padding-top:75%;margin:12px 0 4px;border:1px solid #dfe2dd;border:1px solid var(--filo);border-radius:12px;overflow:hidden;background:#f6f7f5}
+.embed-fonte iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+@media print{.embed-fonte{display:none}}
+
+/* indice riducibile */
+.indice-riduci{display:none}
+@media (min-width:961px){
+  .indice-testa{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .indice-riduci{display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:50%;border:1px solid #dfe2dd;border:1px solid var(--filo);background:#ffffff;background:var(--carta);color:#5a6066;color:var(--tenue);font:700 1rem/1 system-ui,sans-serif;cursor:pointer;padding:0}
+  .indice-riduci:hover{color:#23262a;color:var(--ink)}
+  .corpo-lezione{transition:grid-template-columns .2s}
+  .corpo-lezione.indice-ridotto{grid-template-columns:84px minmax(0,1fr)}
+  .indice-ridotto nav.indice{padding-left:16px;padding-right:0;overflow:visible;z-index:20;grid-gap:8px;gap:8px}
+  .indice-ridotto .indice-testa{justify-content:center;width:52px}
+  .indice-ridotto .indice-titolo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .indice-ridotto .indice-gruppo{width:52px;height:1px;margin:4px 0;font-size:0;background:#dfe2dd;background:var(--filo)}
+  .indice-ridotto .indice-gruppo:after{display:none}
+  .indice-ridotto a.voce{position:relative;width:52px;min-height:52px;padding:4px;justify-content:center;border-radius:999px}
+  .indice-ridotto a.voce .tondo{margin-right:0}
+  .indice-ridotto a.voce:hover{transform:none}
+  .indice-ridotto a.voce .nome{position:absolute;left:62px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);white-space:nowrap;background:#23262a;color:#fff;padding:7px 12px;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .12s;z-index:30}
+  .indice-ridotto a.voce .nome:before{content:"";position:absolute;left:-6px;top:50%;margin-top:-6px;border:6px solid transparent;border-left:0;border-right-color:#23262a}
+  .indice-ridotto a.voce:hover .nome,.indice-ridotto a.voce:focus .nome{opacity:1}
+}
+
+/* una parte alla volta */
+section.parte[hidden]{display:none}
+.una-parte section.parte{min-height:60vh;border-bottom:0}
+.parte-nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin:34px 0 10px;padding-top:18px;border-top:1px solid #dfe2dd;border-top:1px solid var(--filo)}
+.parte-nav a{display:inline-block;padding:10px 18px;border-radius:999px;background:#2b5f6b;background:var(--c,#2b5f6b);color:#fff;text-decoration:none;font:800 .86rem/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;text-transform:uppercase;letter-spacing:.03em}
+.parte-nav a.succ{margin-left:auto}
+.parte-nav a:hover{filter:brightness(1.1)}
+.parte-nav a:focus-visible{outline:3px solid #23262a;outline:3px solid var(--ink);outline-offset:3px}
+@media print{section.parte[hidden]{display:block!important}.parte-nav{display:none}}
+
+/* indice neutro: il colore pieno solo per la parte che si sta leggendo */
+a.voce{background:#ffffff;background:var(--carta);color:#23262a;color:var(--ink)}
+a.voce:not([aria-current="true"]){box-shadow:inset 0 0 0 1px #cfd5d1;box-shadow:inset 0 0 0 1px var(--filo)}
+a.voce .tondo{background:#eef1ef;background:var(--tenue-bg);border-color:#ffffff;border-color:var(--carta)}
+a.voce[aria-current="true"]{background:#2b5f6b;background:var(--c);color:#fff}
+a.voce[aria-current="true"] .tondo{background:#ffffff;border-color:#fff}
+
+/* schema a tre colonne (Come?) */
+.come.tre{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width: 900px){.come.tre{grid-template-columns:1fr 1fr}}
+@media (max-width: 560px){.come.tre{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<div class="foglio">
+<header class="testata">
+  <a class="indietro" href="../../index.html">← Torna a Storia: tutti i moduli</a>
+  <p class="eyebrow">Storia · Classe prima · Il nuovo scenario europeo</p>
+  <p class="capitolo">Lezione 1</p>
+  <h1>I regni romano-barbarici</h1>
+  <p class="sottotitolo">476–526: sulle terre dell'Impero d'Occidente Germani e Romani costruiscono un'Europa nuova</p>
+</header>
+<div class="corpo-lezione">
+<nav class="indice" aria-label="Parti della lezione">
+  <div class="indice-testa"><p class="indice-titolo">In questa lezione</p><button type="button" class="indice-riduci" aria-pressed="false" aria-label="Riduci l'indice alle sole icone" title="Riduci l'indice alle sole icone">&laquo;</button></div>
+  <p class="indice-gruppo">Iniziare</p>
+  <a class="voce" href="#ti-ricordi" style="--c:#3a6ea5"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6"/><path d="M3 4v4.5h4.5"/><path d="M12 7.5V12l3 2"/></svg></span><span class="nome">Ti ricordi?</span></a>
+  <a class="voce" href="#idea" style="--c:#2a7f6f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="nome">Cosa imparerai</span></a>
+  <a class="voce" href="#chi-incontrerai" style="--c:#8a6a00"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2a4.6 4.6 0 0 1 5 5.3"/></svg></span><span class="nome">Chi incontrerai?</span></a>
+  <p class="indice-gruppo">Capire</p>
+  <a class="voce" href="#testi" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="nome">Leggiamo</span></a>
+  <a class="voce" href="#perche" style="--c:#b25510"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .9-1 1.6v.6"/><circle cx="12" cy="17" r=".7" fill="currentColor"/></svg></span><span class="nome">Perché?</span></a>
+  <a class="voce" href="#come" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="4.5" rx="1"/><rect x="3" y="15" width="6" height="5" rx="1"/><rect x="15" y="15" width="6" height="5" rx="1"/><path d="M12 7v4M6 15v-4h12v4"/></svg></span><span class="nome">Come?</span></a>
+  <p class="indice-gruppo">Fissare</p>
+  <a class="voce" href="#concetti" style="--c:#55800f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4"/><path d="M10.5 12.5L19 4M15.5 7.5l3 3M13 10l2 2"/></svg></span><span class="nome">Quali idee?</span></a>
+  <a class="voce" href="#parole" style="--c:#6b3f8a"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3"/><path d="M9 7h6M9 10.5h6"/></svg></span><span class="nome">Quali parole?</span></a>
+  <p class="indice-gruppo">Lavorare</p>
+  <a class="voce" href="#lente" style="--c:#b0215f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M20 20l-5.2-5.2"/></svg></span><span class="nome">Che cosa dicono le fonti?</span></a>
+  <a class="voce" href="#compiti" style="--c:#7a4b1c"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="nome">Ripassiamo</span></a>
+  <a class="voce" href="#dopo" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14"/><path d="M13 6l6 6-6 6"/></svg></span><span class="nome">E dopo?</span></a>
+</nav>
+
+<main id="contenuto">
+
+<!-- ======================= TI RICORDI? ======================= -->
+<section class="parte" id="ti-ricordi" aria-labelledby="t-pd">
+  <p class="etichetta">Ti ricordi?</p>
+  <h2 id="t-pd">Da dove partiamo</h2>
+  <p class="guida">Prima di cominciare, ripassa quello che sai già sulla fine dell'Impero romano: ti servirà per capire la nuova lezione.</p>
+  <div class="primadopo solo-prima">
+    <div class="pd">
+      <h3><span>Quello che sai già</span></h3>
+      <div class="cloze" id="cloze-ricordi">
+        <p class="cloze-consegna">Completa il testo con le parole dell'elenco, poi premi «Controlla». Ogni parola giusta diventerà un link per ripassarla: una definizione 📖, un personaggio 👤 o un luogo sulla carta 📍.</p>
+        <div class="cloze-testo">
+          <div class="cloze-par">
+            <p>Nel 395 l'Impero romano viene diviso in due parti: l'Impero d'Occidente e l'Impero d'<span class="buco" data-r="Oriente" data-tipo="luogo" data-href="#luogo-costantinopoli" data-dove="questa lezione"></span>, che ha come capitale <span class="buco" data-r="Costantinopoli" data-tipo="luogo" data-href="#luogo-costantinopoli" data-dove="questa lezione"></span>. Negli ultimi anni gli imperatori d'Occidente vivono a <span class="buco" data-r="Ravenna" data-tipo="luogo" data-href="#luogo-ravenna" data-dove="questa lezione"></span>, una città protetta dalle paludi e vicina al mare.</p>
+          </div>
+          <div class="cloze-par">
+            <p>Per i Romani i popoli che vivono oltre i confini sono <span class="buco" data-r="barbari" data-alt="barbaro" data-href="#p-barbari" data-dove="questa lezione"></span>: parlano lingue diverse e non conoscono le leggi di Roma. Molti di loro sono popoli <span class="buco" data-r="germanici" data-alt="germani" data-href="#p-germani" data-dove="questa lezione"></span>, che nel V secolo entrano in massa nelle terre dell'Impero.</p>
+          </div>
+          <div class="cloze-par">
+            <p>Nel 476 il capo germanico <span class="buco" data-r="Odoacre" data-tipo="personaggio" data-href="#chi-odoacre" data-dove="questa lezione"></span> <span class="buco" data-r="depone" data-alt="depose" data-href="#p-deporre" data-dove="questa lezione"></span> l'ultimo imperatore d'Occidente, il giovane <span class="buco" data-r="Romolo Augustolo" data-alt="romolo|augustolo" data-tipo="personaggio" data-href="#chi-romolo-augustolo" data-dove="questa lezione"></span>. È la fine dell'Impero romano d'Occidente; l'Impero d'Oriente invece continua a esistere.</p>
+            <div class="cloze-lez" hidden><span class="cloze-lez-tipo">Ripassa il Modulo 0:</span><a href="../officine/index.html" target="_blank" rel="noopener">I laboratori dello storico</a></div>
+          </div>
+        </div>
+        <div class="cloze-banca">
+          <p class="cloze-aiuto">Le parole da usare: scrivile negli spazi oppure tocca uno spazio e poi la parola giusta.</p>
+          <div class="cloze-parole"></div>
+        </div>
+        <div class="comandi">
+          <button type="button" class="bottone" data-cz="controlla">Controlla</button>
+          <button type="button" class="bottone secondario" data-cz="soluzioni" hidden>Mostra le soluzioni</button>
+          <button type="button" class="bottone secondario" data-cz="ricomincia">Ricomincia</button>
+          <span class="punteggio" aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+    <p class="pd-centro">476 → i regni romano-barbarici → 526</p>
+  </div>
+</section>
+
+<!-- ======================= COSA IMPARERAI ======================= -->
+<section class="parte" id="idea" aria-labelledby="t-idea">
+  <p class="etichetta">Cosa imparerai</p>
+  <h2 id="t-idea">Che cosa, dove, quando</h2>
+  <p class="guida">Dopo la caduta di Roma l'Europa occidentale non ha più un imperatore: al suo posto nascono tanti regni, dove vivono insieme Germani e Romani. Prima di studiare i dettagli, guarda l'argomento dall'alto: che cosa succede, dove e in che anni.</p>
+
+  <h3 id="dove"><span>1. Dove? Che cosa?</span></h3>
+  <p class="mestiere">🧩 Comprendere · 🗺️ Collocare nello spazio</p>
+  <div class="lettura">
+    <p>Con la caduta dell'Impero romano d'Occidente, nel 476, comincia il <a class="pk" href="#p-medioevo">Medioevo</a>, l'«età di mezzo» che arriva fino alla scoperta dell'America, nel 1492.</p>
+    <p>Sulle terre dell'Impero i popoli <a class="pk" href="#p-germani">germanici</a> fondano nuovi regni: i Franchi in <strong>Gallia</strong>, i Visigoti in <strong>Spagna</strong>, i Vandali in <strong>Nord Africa</strong>, gli Angli e i Sassoni in <strong>Britannia</strong>, gli Ostrogoti in <strong>Italia</strong>. Si chiamano <a class="pk" href="#p-regni">regni romano-germanici</a> (o romano-barbarici) perché mescolano il mondo dei Romani e quello dei Germani.</p>
+    <p>In Italia, dopo il breve regno di Odoacre, governa il re degli Ostrogoti <strong>Teodorico</strong>, che sceglie come capitale <strong>Ravenna</strong> e si fa aiutare da Romani colti come Cassiodoro e Boezio. Alla sua morte, nel 526, gli Ostrogoti non riescono a restare al potere.</p>
+  </div>
+  <div class="mappa-box">
+    <svg id="mappa" class="mondo" viewBox="0 0 900 479" role="img" aria-labelledby="mappa-titolo"><title id="mappa-titolo">Carta dell'Europa e del Mediterraneo con i luoghi dei regni romano-barbarici</title><rect x="0" y="0" width="900" height="479" class="mare"/><path class="terra" d="M743.3,967.9L736.6,985.8L737.4,994.0L746.7,999.3L747.1,1003.1L743.2,1011.8L744.0,1016.3L743.1,1023.2L748.1,1032.3L754.1,1046.6L759.4,1049.8L761.8,1056.3L761.2,1070.7L763.0,1083.5L763.5,1106.2L766.1,1113.3L761.8,1123.6L756.1,1133.7L746.9,1142.7L733.6,1148.2L717.2,1155.3L700.9,1170.9L695.3,1173.5L685.2,1183.8L679.1,1187.2L677.9,1197.5L684.8,1208.5L687.7,1217.0L687.9,1221.4L690.4,1220.7L690.0,1234.9L687.7,1241.7L691.1,1244.1L688.9,1250.2L682.9,1255.3L670.9,1260.2L653.4,1268.1L647.1,1273.5L648.3,1279.6L652.0,1280.5L650.8,1288.2L647.1,1298.8L645.4,1310.8L641.7,1317.4L631.7,1324.7L628.9,1326.8L622.8,1334.2L618.7,1341.6L610.5,1352.0L594.1,1367.0L583.8,1375.7L572.8,1382.3L557.7,1388.0L550.3,1388.7L548.4,1392.8L539.6,1390.6L532.4,1393.4L516.7,1390.6L507.9,1392.3L501.9,1391.6L486.9,1397.3L474.5,1399.6L465.6,1405.1L458.9,1405.4L452.8,1400.3L447.9,1400.0L441.6,1393.5L440.9,1395.5L439.0,1391.6L439.1,1383.1L434.4,1373.4L439.1,1370.7L438.7,1359.6L429.2,1346.0L421.9,1333.7L421.9,1333.7L411.5,1314.8L400.7,1303.9L395.0,1293.2L391.8,1279.1L388.2,1268.6L383.4,1246.2L383.0,1228.9L381.2,1221.0L375.5,1215.0L368.0,1203.0L360.4,1185.6L357.2,1176.5L345.4,1162.3L344.5,1151.2L343.2,1142.0L345.2,1129.3L350.2,1116.0L351.0,1109.7L355.7,1096.7L359.1,1090.7L367.4,1081.2L372.1,1074.8L373.6,1064.0L372.9,1055.8L368.5,1050.6L364.6,1041.8L361.1,1033.1L361.9,1030.1L366.3,1024.3L361.9,1010.3L359.0,1000.6L351.7,991.4L353.0,988.5L351.0,984.0L347.1,973.1L335.2,957.8L320.3,943.1L310.7,931.1L301.9,916.1L302.4,911.3L305.5,906.7L309.0,896.1L312.0,885.3L309.3,883.1L314.3,866.8L316.4,855.4L310.7,845.8L304.1,843.3L301.2,836.8L297.4,834.7L297.6,830.7L282.5,836.0L277.0,835.2L271.4,838.4L259.8,838.1L252.0,829.0L247.3,818.5L237.0,809.0L226.1,809.2L213.3,809.1L201.3,810.8L189.6,813.9L166.8,822.4L158.8,827.4L145.7,831.6L132.7,827.5L126.1,827.7L116.0,824.8L106.7,825.0L89.5,827.5L79.4,831.7L65.1,837.0L62.2,836.7L58.4,836.8L43.5,829.8L30.3,818.8L17.9,810.9L8.1,801.5L4.2,800.4L-6.2,794.6L-13.8,786.8L-16.3,781.5L-18.1,770.8L-24.5,762.2L-30.1,756.5L-33.8,754.6L-37.4,751.7L-39.1,745.3L-41.2,742.1L-45.4,739.7L-53.2,733.7L-59.3,732.7L-62.6,728.6L-62.6,726.4L-67.0,723.3L-67.9,720.2L-70.3,709.1L-68.4,702.7L-74.4,691.3L-81.6,686.2L-75.3,683.4L-68.3,673.2L-64.8,665.8L-66.1,658.0L-62.0,650.8L-60.2,637.1L-61.8,622.8L-63.6,615.6L-62.1,608.3L-65.9,601.4L-73.5,595.2L-72.9,589.0L-72.2,582.3L-66.6,578.4L-61.9,570.8L-62.8,565.9L-57.8,555.6L-49.7,546.4L-44.8,544.1L-41.0,535.6L-40.7,527.9L-35.4,518.9L-25.8,513.6L-16.5,498.8L-16.3,498.6L-9.0,493.0L4.5,491.4L15.9,481.5L23.2,477.6L35.4,465.5L31.7,447.4L37.2,434.9L39.2,427.3L48.5,417.5L63.1,410.8L73.8,404.8L83.6,389.8L88.1,380.9L98.8,381.0L107.5,387.1L121.3,386.1L136.4,389.3L142.7,389.5L156.7,381.6L172.3,379.0L181.5,373.1L195.5,368.6L220.1,366.0L244.1,364.9L251.4,367.0L265.1,361.3L280.6,361.2L286.5,364.6L296.5,363.7L312.2,357.8L322.4,359.6L322.0,366.9L334.3,361.6L335.3,364.4L328.1,371.5L328.0,378.2L333.0,381.8L331.1,394.4L321.5,401.7L324.3,409.6L331.8,409.8L335.4,416.7L341.0,419.0L358.0,424.0L364.1,422.7L376.3,425.1L395.5,431.6L402.3,444.5L415.3,447.3L435.8,453.4L451.2,460.6L458.3,456.9L465.3,450.2L461.9,439.1L466.4,432.0L476.9,425.2L486.9,423.2L506.5,426.2L511.5,432.7L516.9,432.8L521.5,435.2L536.0,437.0L539.5,441.7L558.8,441.5L572.8,445.3L587.2,449.6L593.9,451.9L605.1,447.3L611.0,443.1L623.9,441.9L634.2,443.8L638.1,451.0L641.5,446.2L653.1,449.7L664.5,450.5L671.6,446.8L675.8,442.0L674.8,441.2L678.7,434.4L681.6,423.5L683.7,419.8L684.1,419.7L689.3,407.8L696.5,397.6L696.8,397.1L695.4,386.0L698.9,380.0L693.6,373.4L699.1,368.0L690.3,369.2L678.1,365.9L668.1,374.2L646.1,375.9L634.4,368.1L618.7,367.6L615.3,373.6L605.3,375.3L591.3,367.6L575.5,367.9L566.8,353.4L556.2,345.4L563.3,334.1L554.1,327.1L570.2,313.2L592.5,312.7L598.7,301.7L626.3,303.6L643.8,294.2L660.7,290.1L684.7,289.7L710.0,300.0L730.9,305.6L747.8,303.3L760.2,304.7L777.4,297.1L779.6,290.9L775.9,281.0L767.6,275.6L759.5,273.9L754.2,269.5L735.7,257.2L719.1,251.8L706.6,243.2L717.1,240.9L729.2,228.8L721.1,223.0L742.5,217.1L742.1,213.9L729.0,216.2L717.4,217.4L707.8,222.1L694.2,222.9L681.7,228.3L682.4,236.1L682.5,237.3L689.6,240.8L704.5,240.0L701.6,245.1L685.7,247.6L666.0,256.1L658.0,253.1L661.2,246.3L645.3,242.0L647.9,239.2L661.7,234.4L659.5,232.7L657.6,231.1L635.0,227.4L634.0,222.0L620.6,223.8L615.2,231.8L603.9,242.5L604.3,246.2L597.2,249.4L592.8,248.0L588.7,265.5L581.2,271.6L575.9,281.9L580.6,290.2L582.3,295.8L595.0,300.5L592.3,304.0L575.1,304.8L568.9,309.3L556.8,317.2L552.3,310.4L552.4,307.4L543.6,307.0L536.0,305.6L518.4,309.4L528.5,317.5L521.1,319.9L513.1,319.9L505.4,312.4L502.7,315.6L505.9,324.3L513.2,331.1L507.7,334.3L515.8,341.0L522.9,345.2L523.2,353.4L509.7,349.5L514.0,357.0L504.8,358.5L510.3,371.3L500.7,371.5L488.8,365.2L483.3,353.5L480.8,343.9L475.1,337.2L467.7,328.9L466.7,324.8L464.2,323.8L463.9,320.6L455.9,315.7L454.6,308.8L455.8,298.9L457.8,294.4L455.4,292.1L452.3,291.0L448.3,286.2L442.0,283.3L428.4,278.0L419.9,272.8L406.7,268.4L394.5,257.8L397.4,256.7L390.8,250.6L390.5,245.7L381.2,243.4L376.7,249.6L372.4,244.8L372.8,239.7L373.3,239.5L376.5,238.2L365.0,236.1L353.2,241.2L353.9,248.4L352.2,252.6L356.9,260.0L370.6,267.3L377.9,279.3L394.0,291.0L405.4,290.9L408.9,294.1L404.8,297.0L417.8,302.2L428.5,306.6L440.9,314.2L442.5,316.9L439.7,322.1L431.7,315.3L419.1,312.9L413.0,322.3L423.4,327.7L421.7,335.3L415.7,336.1L407.9,348.6L401.9,349.7L401.9,345.3L404.9,337.5L408.0,334.4L402.4,326.0L397.9,318.7L391.9,316.8L387.6,310.6L378.3,307.9L372.0,302.1L361.3,301.2L349.9,294.6L336.6,285.2L326.8,276.8L322.3,262.4L315.1,260.8L303.2,256.0L296.6,257.9L288.1,264.7L282.1,265.7L269.0,273.9L240.3,270.0L219.2,274.7L217.5,283.4L218.3,291.9L204.6,301.6L186.0,304.6L184.7,309.5L175.7,317.5L170.1,329.4L175.8,337.7L167.4,344.1L164.3,353.6L153.3,356.5L143.0,367.6L124.6,367.8L110.8,367.6L101.7,372.7L96.1,378.2L89.0,377.0L83.7,372.1L79.5,363.7L66.0,361.5L60.1,365.2L52.5,363.2L45.0,364.8L47.2,353.4L45.9,344.5L39.4,343.2L35.9,337.7L37.0,328.2L42.8,322.9L43.9,317.0L46.9,308.3L46.6,302.2L43.7,297.0L43.1,292.0L43.8,281.7L37.8,275.4L58.4,264.9L76.1,267.6L95.6,267.5L111.1,270.0L123.1,269.2L146.6,269.7L154.1,261.0L156.9,232.0L141.9,216.8L131.2,209.5L109.0,203.9L107.5,193.3L126.4,190.1L150.7,193.9L146.1,177.4L159.8,183.7L193.6,172.3L198.0,160.5L210.7,157.5L222.3,154.7L229.8,150.7L242.5,129.3L262.4,123.2L274.5,123.6L277.3,120.6L289.4,119.8L292.1,123.0L301.9,115.8L298.6,110.4L298.0,102.1L292.1,94.1L291.6,79.3L294.0,75.3L298.2,71.0L311.0,70.1L316.1,66.1L327.8,62.0L327.3,69.4L323.0,74.2L324.7,78.2L332.6,80.4L329.1,85.9L324.7,84.3L314.3,94.8L318.2,101.9L318.5,107.5L333.1,110.8L333.0,116.0L347.8,113.3L355.9,109.3L372.3,115.0L379.2,119.7L389.1,115.4L411.7,108.7L430.0,103.8L444.5,106.2L445.6,109.8L459.6,109.9L462.9,103.5L482.9,98.9L479.8,86.6L480.4,75.7L487.5,66.6L501.1,61.6L512.7,72.5L524.4,72.2L527.1,61.1L528.8,52.5L523.5,54.3L514.3,49.2L513.0,40.8L531.4,36.8L549.6,34.7L565.4,37.1L580.4,36.6L596.9,28.6L581.7,21.7L555.3,22.9L529.8,28.2L506.2,31.3L497.8,23.3L483.7,18.6L486.9,4.3L479.9,-8.8L486.8,-17.3L500.0,-26.4L533.2,-42.1L542.9,-45.2L541.4,-51.3L521.2,-58.2L496.2,-54.1L482.1,-43.9L484.4,-35.0L461.3,-23.4L433.3,-10.9L422.7,9.6L433.1,19.8L446.9,27.9L433.6,44.2L418.5,47.6L412.9,72.0L404.7,85.6L387.1,84.2L378.9,95.7L362.1,96.4L357.4,82.6L345.3,66.2L334.3,45.6L324.5,36.7L295.9,53.5L276.5,56.9L256.4,49.5L251.2,33.9L246.7,0.4L260.0,-8.9L298.3,-21.1L327.0,-36.1L353.6,-56.3L388.5,-84.4L412.8,-95.3L452.7,-113.5L484.5,-119.8L508.4,-119.1L530.5,-131.1L557.0,-130.4L583.0,-133.3L628.5,-122.7L609.7,-118.8L625.7,-109.7L640.6,-114.8L664.5,-106.0L704.2,-102.5L759.1,-86.1L770.2,-79.2L771.2,-69.6L755.1,-61.9L731.3,-58.1L666.5,-69.1L655.9,-67.3L679.6,-56.6L680.5,-49.9L681.4,-35.0L700.2,-30.6L711.5,-26.9L713.4,-33.9L704.6,-40.1L713.8,-45.6L749.0,-36.6L761.1,-40.1L751.4,-50.8L785.2,-65.0L798.6,-64.1L812.2,-59.1L820.6,-69.1L808.5,-77.7L815.6,-86.4L805.0,-95.4L845.6,-90.7L853.8,-82.6L835.5,-80.8L835.6,-72.7L847.0,-67.7L869.4,-70.9L873.0,-80.2L903.3,-87.1L954.0,-99.5L964.9,-98.8L950.6,-90.0L968.6,-88.5L979.0,-93.5L1006.2,-93.9L1027.8,-99.9L1044.3,-91.1L1060.8,-100.7L1045.6,-109.2L1053.2,-114.0L1096.0,-109.6L1116.1,-105.0L1168.7,-88.4L1178.4,-96.0L1163.7,-103.7L1163.3,-106.8L1145.8,-108.2L1150.6,-115.1L1142.8,-126.4L1142.4,-131.1L1169.1,-144.2L1178.7,-157.4L1189.4,-160.3L1227.9,-156.4L1230.9,-148.4L1217.1,-136.6L1226.2,-131.9L1230.8,-121.8L1227.5,-101.9L1243.6,-93.0L1237.3,-83.3L1208.9,-62.7L1225.5,-60.6L1231.3,-65.8L1247.2,-69.5L1251.1,-76.7L1263.7,-83.6L1255.2,-91.9L1262.0,-101.5L1246.1,-102.7L1242.6,-110.7L1254.2,-125.3L1235.3,-137.1L1261.3,-146.9L1258.0,-157.3L1265.2,-157.6L1272.8,-149.5L1267.1,-135.5L1282.6,-132.9L1276.0,-143.3L1300.3,-149.0L1330.4,-149.8L1357.2,-141.5L1344.3,-153.6L1342.9,-169.1L1368.1,-172.0L1403.1,-171.4L1434.5,-173.3L1422.7,-180.9L1439.5,-190.4L1456.2,-190.8L1484.4,-198.0L1522.8,-199.9L1527.6,-203.9L1565.7,-205.3L1577.6,-202.0L1610.2,-209.7L1636.8,-209.5L1640.9,-215.7L1654.7,-221.9L1689.0,-227.9L1713.9,-223.2L1694.1,-219.6L1727.0,-217.4L1730.9,-210.2L1744.2,-213.7L1786.6,-213.5L1819.3,-206.4L1831.0,-201.0L1827.4,-193.5L1811.3,-189.2L1773.2,-181.1L1762.3,-176.8L1780.3,-174.8L1801.7,-171.1L1814.8,-173.9L1822.2,-164.6L1828.6,-168.3L1851.8,-170.6L1898.4,-168.2L1901.9,-161.4L1962.6,-159.3L1963.4,-170.3L1994.2,-167.8L2017.4,-167.9L2040.8,-160.2L2047.5,-150.9L2038.9,-144.9L2057.1,-133.4L2080.0,-127.5L2094.0,-142.8L2117.3,-136.2L2142.0,-140.2L2170.1,-135.7L2180.8,-139.8L2204.6,-137.7L2194.1,-151.2L2213.2,-157.5L2344.4,-148.1L2356.7,-139.4L2394.7,-128.4L2453.3,-131.1L2482.2,-128.7L2494.3,-122.7L2492.6,-112.1L2510.4,-108.0L2529.9,-110.9L2555.6,-111.3L2583.0,-108.5L2610.5,-110.1L2635.8,-97.2L2653.8,-101.8L2642.1,-111.1L2648.5,-117.5L2694.8,-113.5L2725.0,-114.4L2766.8,-107.4L-2438.7,-101.1L-2403.1,-90.0L-2365.1,-75.6L-2366.3,-66.5L-2356.6,-62.9L-2359.9,-73.5L-2320.5,-71.3L-2292.1,-57.7L-2306.5,-51.4L-2330.3,-49.9L-2330.6,-35.7L-2336.4,-32.7L-2350.0,-33.1L-2361.1,-38.2L-2380.4,-42.4L-2383.6,-48.7L-2398.4,-51.1L-2414.9,-49.2L-2422.8,-54.3L-2419.6,-59.7L-2437.0,-56.2L-2430.5,-49.4L-2438.7,-43.3L2787.0,-43.2L2768.3,-36.8L2749.5,-37.9L2762.6,-30.1L2771.3,-18.2L2778.0,-14.3L2779.6,-8.3L2775.9,-4.4L2748.8,-7.6L2708.2,3.4L2695.3,5.1L2673.1,15.2L2652.1,24.1L2646.7,30.8L2626.0,20.7L2588.1,32.1L2581.6,26.7L2567.6,32.9L2548.2,30.9L2543.5,40.5L2526.1,54.5L2526.6,60.4L2543.1,63.6L2541.2,84.8L2527.7,85.3L2521.5,97.5L2527.5,103.7L2502.1,111.1L2497.1,127.7L2475.4,131.2L2471.1,146.0L2450.2,159.5L2444.8,149.5L2438.6,128.3L2430.5,96.1L2437.5,76.0L2449.7,67.3L2450.4,60.5L2473.0,57.3L2498.9,39.0L2524.0,24.0L2550.1,12.5L2561.7,-8.0L2544.1,-6.8L2535.4,5.2L2498.5,21.1L2486.7,3.3L2449.2,8.2L2412.8,32.5L2424.8,41.4L2392.4,45.2L2370.0,46.7L2371.0,36.2L2348.5,34.0L2330.5,41.2L2286.1,38.7L2238.3,43.0L2191.3,71.3L2135.7,105.5L2158.6,107.4L2165.7,116.4L2179.8,119.7L2189.1,112.4L2205.0,113.4L2226.0,129.3L2226.5,141.7L2215.1,156.2L2213.9,173.5L2207.3,196.7L2185.5,217.7L2180.6,227.8L2160.9,244.7L2141.3,261.5L2132.0,270.0L2112.6,278.5L2103.5,278.7L2094.4,271.7L2074.9,282.3L2072.6,287.1L2067.1,286.2L2060.8,291.2L2056.5,296.1L2057.0,306.5L2049.5,309.7L2046.9,312.3L2041.5,316.6L2031.8,319.0L2025.5,322.9L2025.0,329.2L2023.3,330.8L2029.1,333.1L2037.3,339.5L2049.9,356.6L2053.4,366.0L2053.6,382.8L2048.1,390.7L2034.9,393.5L2023.3,399.5L2010.3,400.8L2008.7,392.9L2011.3,382.0L2004.9,366.9L2015.7,364.5L2005.8,352.0L1998.7,349.3L1996.9,352.0L1992.7,353.2L1992.2,350.4L1988.4,349.1L1984.5,346.8L1988.5,340.4L1991.9,338.7L1990.6,336.1L1994.3,328.2L1993.4,325.9L1984.9,324.3L1978.0,320.4L1957.8,324.6L1947.1,331.4L1931.4,335.4L1939.1,328.6L1936.1,323.0L1947.6,313.2L1939.9,305.6L1927.3,310.7L1910.9,320.8L1901.9,330.2L1887.7,330.9L1880.3,337.7L1888.0,347.5L1899.9,349.9L1900.3,356.4L1911.8,360.6L1928.1,350.3L1941.0,355.9L1950.3,356.3L1952.7,363.9L1932.1,368.0L1925.4,375.8L1911.2,383.1L1903.8,393.2L1919.4,401.2L1925.1,415.5L1934.0,428.8L1943.9,440.0L1943.6,450.7L1934.5,454.7L1937.9,462.4L1946.5,467.0L1944.3,478.8L1940.6,490.3L1932.5,491.6L1921.9,507.3L1910.1,526.3L1896.6,543.7L1876.6,557.1L1856.5,569.3L1840.1,571.0L1831.2,577.4L1826.2,572.7L1818.0,579.9L1797.7,587.2L1782.4,589.4L1777.4,604.7L1769.4,605.6L1765.5,595.0L1769.0,589.4L1749.5,584.8L1742.7,587.1L1723.3,599.6L1711.2,613.3L1708.0,623.3L1719.1,638.6L1732.7,657.6L1745.8,666.6L1754.7,678.3L1761.3,705.1L1759.4,730.6L1747.3,740.2L1730.6,749.6L1718.8,761.6L1700.7,775.2L1695.4,765.9L1699.5,756.0L1688.7,747.8L1676.5,745.6L1670.7,738.1L1663.3,723.1L1650.3,716.4L1637.9,716.7L1640.0,705.3L1627.2,705.4L1626.1,721.3L1618.2,742.6L1613.5,755.4L1614.5,765.9L1624.0,766.3L1629.9,779.6L1632.5,792.2L1640.6,800.5L1649.4,802.2L1656.9,809.7L1660.2,811.1L1668.8,819.8L1674.9,829.5L1675.7,839.3L1674.2,845.9L1675.6,850.9L1676.7,859.5L1681.8,863.5L1687.5,876.3L1687.2,881.2L1676.9,882.2L1663.2,871.4L1646.0,859.9L1644.3,852.5L1635.9,842.8L1633.9,830.8L1628.7,822.9L1630.2,812.3L1627.1,806.2L1621.3,800.6L1618.9,793.4L1611.1,785.2L1604.1,778.3L1601.7,786.8L1598.9,778.8L1600.5,769.7L1604.8,755.8L1603.4,745.0L1607.9,733.9L1603.0,725.3L1604.2,709.5L1598.3,702.0L1593.6,684.6L1590.9,666.3L1584.6,654.2L1575.1,661.5L1558.6,671.9L1550.4,670.6L1541.5,667.2L1546.5,649.2L1543.4,635.6L1532.1,618.9L1533.8,613.6L1525.3,611.8L1515.0,600.0L1510.9,592.4L1510.1,585.0L1507.3,578.0L1501.2,569.5L1487.8,569.0L1489.2,574.9L1484.6,583.0L1478.4,580.1L1476.3,582.7L1472.2,581.1L1466.6,579.8L1464.5,585.1L1454.7,585.0L1436.7,588.0L1437.6,598.9L1429.8,607.5L1408.9,617.2L1392.7,634.3L1381.8,643.5L1367.3,653.0L1367.3,659.7L1360.1,663.2L1347.0,668.4L1340.2,669.2L1335.8,680.3L1338.9,699.2L1339.6,711.2L1333.5,725.0L1333.4,749.7L1325.9,750.4L1319.3,761.4L1323.7,766.2L1310.5,770.3L1305.6,780.2L1299.8,784.4L1286.0,770.8L1279.3,750.5L1273.7,735.8L1268.7,729.0L1260.9,715.0L1257.3,696.9L1254.8,687.8L1241.6,667.9L1235.6,639.8L1231.3,621.2L1231.3,603.6L1228.5,590.0L1207.4,598.7L1197.1,597.0L1178.2,579.4L1185.2,574.1L1180.9,568.4L1163.8,556.1L1153.2,552.4L1148.9,542.0L1137.7,530.9L1110.9,533.7L1087.3,533.9L1066.9,536.0L1039.6,531.6L1023.7,528.2L1007.4,526.4L1001.2,508.6L994.3,506.0L983.1,508.6L968.4,515.6L950.7,510.8L936.0,499.6L922.1,495.5L912.4,481.7L901.7,462.4L893.9,464.7L884.6,459.9L879.2,465.6L870.6,464.9L873.6,471.3L872.3,474.6L877.0,485.5L882.7,498.1L889.8,501.4L892.3,506.5L902.2,512.6L903.1,518.6L901.7,523.4L903.5,528.3L907.7,532.3L909.6,537.1L911.7,540.7L910.8,530.1L914.7,522.5L918.7,520.9L923.1,525.5L923.3,534.0L920.2,542.5L922.9,548.1L925.5,547.3L926.1,551.3L937.4,549.0L949.4,549.4L958.2,549.9L968.1,540.0L978.9,530.7L988.1,521.8L992.3,516.8L994.2,518.1L992.8,524.1L990.9,526.7L992.9,538.2L999.4,548.1L1007.5,553.4L1018.1,555.3L1026.7,557.9L1033.2,566.2L1037.2,571.1L1042.4,572.9L1042.3,576.1L1037.1,584.8L1034.8,588.9L1028.6,593.5L1023.2,603.4L1016.6,602.7L1013.6,606.1L1011.3,613.5L1013.1,623.2L1011.7,625.0L1005.0,624.9L995.9,630.4L994.5,637.4L991.2,640.5L982.2,640.4L976.5,644.1L976.5,649.9L969.5,654.0L961.5,652.6L951.8,657.5L945.1,658.3L934.6,662.2L931.8,668.6L931.5,673.6L917.0,679.7L893.8,686.5L880.8,696.7L874.4,697.5L870.1,696.7L861.6,702.7L852.3,705.5L840.2,706.2L836.5,707.1L833.3,710.9L829.5,712.0L827.2,715.6L820.1,715.3L815.4,717.3L805.4,716.6L801.6,708.1L802.1,700.1L799.7,695.9L796.8,685.1L792.6,679.2L795.6,678.4L794.1,671.8L795.8,669.0L795.2,662.7L793.3,656.5L788.9,652.1L787.8,646.3L780.3,641.1L772.6,629.0L768.5,617.1L758.4,607.1L751.9,604.8L742.3,590.9L740.7,580.8L741.3,572.2L733.0,556.1L726.2,550.5L718.3,547.5L713.5,539.1L714.3,535.9L710.3,528.4L706.1,525.1L700.4,514.3L691.5,502.6L684.2,492.6L676.9,492.7L679.2,484.7L679.8,479.7L681.6,473.9L681.1,471.7L677.1,477.6L673.9,488.6L670.0,496.1L666.6,498.7L661.7,494.0L655.2,487.5L644.9,466.7L643.3,468.0L649.4,483.3L658.3,497.9L669.3,520.5L674.6,528.4L679.3,536.6L692.3,552.7L689.4,555.2L689.9,564.6L706.8,577.7L709.3,580.6L714.1,594.9L710.9,597.5L713.0,612.5L718.3,629.8L723.8,633.4L731.8,638.7L740.2,655.6L744.2,668.9L752.1,675.9L772.0,689.7L780.0,697.9L787.9,706.3L792.4,711.3L799.5,715.6L803.0,720.1L802.5,726.2L794.3,729.7L800.5,733.6L805.2,736.3L808.1,742.3L814.6,748.4L821.8,748.4L835.5,744.7L851.3,743.0L864.1,738.5L871.3,737.5L876.5,734.9L884.7,734.4L889.4,734.1L896.1,731.9L903.7,730.5L910.6,725.5L916.1,725.5L916.4,729.5L915.1,737.9L915.2,745.5L912.1,750.8L908.0,766.5L901.0,782.7L892.0,801.2L879.6,822.5L867.2,838.7L850.1,858.5L835.6,870.3L813.9,884.7L800.4,895.8L784.5,913.3L781.2,921.0L777.9,924.4L767.7,930.2L764.1,936.3L758.7,937.4L756.6,947.6L751.9,953.4L749.1,963.1L743.3,967.9ZM883.8,343.7L888.4,354.5L902.1,357.5L912.2,364.7L932.9,367.3L955.5,363.4L956.9,360.0L954.2,349.8L956.3,334.6L945.0,329.7L948.7,319.7L939.1,318.9L942.3,306.6L956.0,310.2L968.8,305.6L958.2,296.8L954.0,288.5L942.3,292.2L940.9,302.9L936.3,293.5L935.5,289.9L939.1,283.9L936.3,278.8L919.5,273.9L912.9,260.8L904.9,257.2L904.4,252.4L918.5,253.8L919.1,243.2L931.4,240.8L944.1,243.0L946.8,228.9L944.1,219.9L929.6,220.6L917.3,217.0L900.5,223.4L887.0,226.5L880.3,235.1L866.3,237.5L851.9,252.4L865.0,266.2L863.6,276.0L879.4,293.1L887.1,300.7L894.4,311.0L901.2,311.7L905.7,315.6L893.8,316.8L891.2,328.1L888.7,333.2L883.4,336.5L883.8,343.7ZM301.2,281.2L310.5,275.7L313.0,288.1L308.2,299.3L301.6,296.4L298.2,286.6L301.2,281.2ZM555.8,387.6L554.0,391.9L533.1,393.1L533.2,390.7L515.5,387.9L518.2,381.7L526.2,386.6L537.5,385.8L548.3,386.8L547.9,389.3L555.8,387.6ZM84.2,118.0L86.6,128.4L75.7,141.4L49.9,150.0L29.4,147.8L41.1,132.6L33.5,117.8L53.3,106.5L64.3,99.7L76.4,99.1L92.0,108.1L84.2,118.0ZM388.5,346.3L399.5,345.0L394.3,356.5L396.4,361.0L393.4,368.4L382.3,363.0L374.9,361.4L354.7,354.0L356.7,346.5L373.6,347.9L388.5,346.3ZM300.6,306.3L307.9,301.8L316.6,312.1L314.5,331.3L307.9,330.4L302.0,335.2L296.6,331.4L296.0,313.9L292.6,305.6L300.6,306.3ZM353.8,85.5L358.4,92.8L349.7,104.5L334.5,96.3L332.5,90.3L353.8,85.5ZM129.3,124.8L129.3,124.8L131.4,116.4L121.7,107.4L121.5,107.2L103.9,104.7L100.4,100.7L105.7,94.2L100.9,90.2L93.1,97.1L92.2,83.1L84.9,75.7L90.2,60.7L101.5,48.9L113.1,50.1L130.6,48.9L115.1,64.6L129.9,62.6L145.7,62.6L142.0,74.5L128.9,87.5L143.9,88.4L145.1,89.9L158.0,107.1L167.9,109.4L176.9,125.9L181.0,131.7L198.6,134.4L196.8,143.7L189.4,148.0L195.2,155.5L182.2,163.1L162.8,162.9L138.1,166.9L131.3,164.1L121.7,170.9L108.3,169.2L98.1,174.8L90.3,171.9L111.6,156.6L124.6,153.5L124.5,153.5L101.8,151.1L97.7,145.3L112.9,140.8L105.0,133.0L107.7,123.5L129.3,124.8ZM649.4,389.9L650.3,389.8L652.4,386.3L662.9,386.5L676.1,382.2L666.3,388.4L667.4,391.1L667.8,392.3L652.9,398.2L645.8,396.3L642.5,390.4L649.4,389.9Z"/><g id="segni"></g></svg>
+    <p class="mappa-info" id="mappa-info" aria-live="polite">Tocca un punto sulla carta o un luogo dell'elenco.</p>
+    <p class="mappa-nota">Carta muta: solo coste e mari. I nuovi regni occupano le terre dell'ex Impero d'Occidente; a est continua a esistere l'Impero d'Oriente, con capitale Costantinopoli.</p>
+  </div>
+  <ul class="luoghi" id="luoghi"></ul>
+  <div class="animata" id="carta-animata" aria-labelledby="t-animata">
+    <h4 id="t-animata">🎬 Cambia sguardo: la carta animata</h4>
+    <p>Ora guarda questi luoghi in movimento: popoli, confini e regni che cambiano nel tempo. Poi torna alla carta muta e ritrova i luoghi dell'elenco.</p>
+    <h5>Carte animate</h5>
+    <ul>
+      <li><a href="https://www.youtube.com/playlist?list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">Tutte le carte animate di storia di HUB Scuola</a></li>
+      <li><a href="https://www.youtube.com/results?search_query=carta+animata+regni+romano-barbarici" target="_blank" rel="noopener">Cerca carte animate sui regni romano-barbarici</a></li>
+    </ul>
+    <p class="nota-video">Video su YouTube, si aprono in una nuova scheda. Osserva soprattutto la carta e le date.</p>
+  </div>
+
+  <h3 id="quando"><span>2. Quando?</span></h3>
+  <p class="mestiere">🕐 Collocare nel tempo</p>
+  <div class="tlwrap" id="linea-immagini"></div>
+  <p class="fonti-immagini">Da dove vengono le immagini: <a href="https://commons.wikimedia.org/wiki/File:Young_Folks%27_History_of_Rome_illus420.png" target="_blank" rel="noopener">476</a> · <a href="https://commons.wikimedia.org/wiki/File:Theoderic_Quarter_Siliqua_80000847.jpg" target="_blank" rel="noopener">493</a> · <a href="https://commons.wikimedia.org/wiki/File:Chlodwigs_taufe.jpg" target="_blank" rel="noopener">496</a> · <a href="https://commons.wikimedia.org/wiki/File:Boethius_initial_consolation_philosophy.jpg" target="_blank" rel="noopener">525</a> · <a href="https://commons.wikimedia.org/wiki/File:Ravenna%3B_tomb_of_Theodoric,_King_of_the_Ostrogoths._Wellcome_L0047700.jpg" target="_blank" rel="noopener">526</a>.</p>
+  <details class="linea-elenco">
+    <summary>Tutte le date della lezione, in elenco</summary>
+  <ol class="linea">
+    <li class="estremo"><span class="anno">476</span>Odoacre depone Romolo Augustolo: finisce l'Impero romano d'Occidente e comincia il Medioevo.</li>
+    <li><span class="anno">493</span>Il re degli Ostrogoti Teodorico sconfigge e uccide Odoacre e conquista l'Italia.</li>
+    <li><span class="anno">496</span>A Reims il vescovo battezza Clodoveo, re dei Franchi: i Franchi diventano cattolici.</li>
+    <li><span class="anno">524</span>L'imperatore d'Oriente Giustino I condanna l'arianesimo.</li>
+    <li><span class="anno">525</span>Teodorico fa uccidere Severino Boezio, sospettato ingiustamente di tradimento.</li>
+    <li class="estremo"><span class="anno">526</span>Teodorico muore: senza di lui gli Ostrogoti non riescono a restare al potere.</li>
+  </ol>
+  <p class="guida" style="margin-top:12px">Per orientarti: il Medioevo va dal 476 al 1492. L'anno 1000 lo divide in <strong>Alto Medioevo</strong> (476–1000) e <strong>Basso Medioevo</strong> (1000–1492). Questa lezione si svolge all'inizio dell'Alto Medioevo, tra il V e il VI secolo.</p>
+  </details>
+
+</section>
+
+<!-- ======================= CHI INCONTRERAI? ======================= -->
+<section class="parte" id="chi-incontrerai" aria-labelledby="t-chi">
+  <p class="etichetta">Chi incontrerai?</p>
+  <h2 id="t-chi">I protagonisti</h2>
+  <p class="guida">Le persone che incontrerai in questa lezione. Ritrovale mentre leggi: chi sono i Romani e chi i Germani? Chi collabora e chi si scontra?</p>
+  <p class="mestiere">🧩 Comprendere · 👤 Conoscere i protagonisti</p>
+  <div class="persone">
+    <article class="persona" id="chi-romolo-augustolo"><span class="sigla" aria-hidden="true">RA</span><div><h4>Romolo Augustolo</h4><span class="date">circa 460 – dopo il 476 · Ravenna</span><p>L'ultimo imperatore romano d'Occidente. È poco più di un ragazzo: per questo lo chiamano «Augustolo», cioè «piccolo Augusto». Nel 476 Odoacre lo depone e lo manda a vivere in Campania.</p></div></article>
+    <article class="persona" id="chi-odoacre"><span class="sigla" aria-hidden="true">OD</span><div><h4>Odoacre</h4><span class="date">circa 433–493 · Italia</span><p>Capo dei soldati germanici al servizio di Roma. Nel 476 depone Romolo Augustolo e governa l'Italia. Nel 493 viene sconfitto e ucciso da Teodorico.</p></div></article>
+    <article class="persona" id="chi-teodorico"><span class="sigla" aria-hidden="true">TE</span><div><h4>Teodorico</h4><span class="date">454–526 · Ravenna</span><p>Re degli Ostrogoti. Nel 493 sconfigge Odoacre e conquista l'Italia. Ammira la cultura romana, governa con l'aiuto dei Romani e fa rinascere città e campagne.</p></div></article>
+    <article class="persona" id="chi-cassiodoro"><span class="sigla" aria-hidden="true">CA</span><div><h4>Cassiodoro</h4><span class="date">circa 485 – circa 580 · Calabria e Ravenna</span><p>Politico e letterato romano. Aiuta Teodorico a governare l'Italia e scrive per lui lettere e documenti ufficiali.</p></div></article>
+    <article class="persona" id="chi-boezio"><span class="sigla" aria-hidden="true">SB</span><div><h4>Severino Boezio</h4><span class="date">circa 475–525 · Roma e Pavia</span><p>Filosofo romano e consigliere di Teodorico. Nel 525, sospettato ingiustamente di tradimento, viene condannato a morte. In carcere scrive la <em>Consolazione della filosofia</em>.</p></div></article>
+    <article class="persona" id="chi-clodoveo"><span class="sigla" aria-hidden="true">CL</span><div><h4>Clodoveo</h4><span class="date">circa 466–511 · Gallia</span><p>Re dei Franchi. Nel 496 si fa battezzare a Reims e diventa cattolico: così i Romani della Gallia lo accettano come loro re.</p></div></article>
+    <article class="persona" id="chi-anastasio"><span class="sigla" aria-hidden="true">AN</span><div><h4>Anastasio I</h4><span class="date">circa 430–518 · Costantinopoli</span><p>Imperatore romano d'Oriente. Considera Teodorico il suo rappresentante in Italia.</p></div></article>
+    <article class="persona" id="chi-giustino"><span class="sigla" aria-hidden="true">G1</span><div><h4>Giustino I</h4><span class="date">circa 450–527 · Costantinopoli</span><p>Imperatore romano d'Oriente dopo Anastasio. Nel 524 condanna l'arianesimo: Teodorico teme che voglia togliergli l'Italia.</p></div></article>
+  </div>
+</section>
+
+<!-- ======================= TESTO ======================= -->
+<section class="parte" id="testi" aria-labelledby="t-testi">
+  <p class="etichetta">Leggiamo</p>
+  <h2 id="t-testi">La lezione per intero</h2>
+  <p class="guida">Lo stesso testo in due versioni: il <strong>sintetico</strong> contiene tutte le informazioni, l'<strong>essenziale</strong> le riassume con frasi più brevi. Scegli quella che ti serve.</p>
+  <div class="livelli" role="group" aria-label="Versione del testo">
+    <button type="button" data-livello="sintetico" aria-pressed="true">Sintetico</button>
+    <button type="button" data-livello="essenziale" aria-pressed="false">Essenziale</button>
+  </div>
+  <div id="testo-sintetico">
+    <div class="paragrafo"><h4><span class="n">1</span>Il termine «Medioevo»</h4><p>«Medioevo» significa «età di mezzo». La parola nasce nel Rinascimento per indicare, in modo negativo, i secoli tra la caduta dell'Impero romano d'Occidente (476) e la scoperta dell'America (1492). Oggi sappiamo che nel Medioevo ci furono anche periodi di sviluppo economico e culturale. Gli storici lo dividono in due parti: fino all'anno Mille l'Alto Medioevo, segnato dalla crisi delle città; dopo il Mille il Basso Medioevo, con una ripresa dell'economia.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>Dove si stabilirono i Germani</h4><p>Dopo la caduta dell'Impero d'Occidente i popoli germanici formano regni indipendenti. I Vandali conquistano il Nord Africa, la Sardegna e la Corsica; i Burgundi occupano la zona tra la Germania e la Gallia, che si chiamerà Borgogna; i Visigoti si stabiliscono in Spagna; gli Angli e i Sassoni in Britannia e nella Germania del nord; i Franchi nella Gallia settentrionale. Gli Ostrogoti vivono prima lungo il Danubio, poi arrivano in Italia.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>I regni romano-germanici</h4><p>Questi regni si chiamano romano-germanici perché uniscono elementi romani ed elementi germanici. I Germani sono guerrieri esperti, ma non sanno governare: vengono da una vita nomade e spesso sono analfabeti. Per questo si fanno aiutare da funzionari romani, che governano, amministrano la giustizia e riscuotono le tasse. I Germani mantengono molte leggi romane e i loro re cercano di imitare lo stile e i simboli degli imperatori.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>La debolezza dei nuovi regni</h4><p>Il potere dei re germanici è limitato, perché l'aristocrazia germanica è forte e indipendente: i Germani sono abituati a vivere divisi in tribù e sopportano male il comando di un solo capo. Per questo i regni romano-germanici sono deboli e spesso i più forti conquistano i più deboli: i Franchi sconfiggono i Burgundi, l'Impero d'Oriente vince i Vandali e gli Ostrogoti. Solo il regno dei Franchi ha una vita lunga.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>La religione dei Germani</h4><p>Alcuni Germani restano pagani, altri si convertono al cristianesimo ariano, che segue la dottrina del sacerdote Ario: per Ario Gesù è un uomo mandato da Dio sulla Terra, e non Dio stesso come credono gli altri cristiani. I Romani considerano l'arianesimo un'eresia. Per questo i Germani vengono accettati del tutto solo quando si convertono al cristianesimo della Chiesa di Roma, detto «cattolico», cioè universale. Il primo è Clodoveo, re dei Franchi, battezzato a Reims nel 496.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>Gli Ostrogoti in Italia</h4><p>In Italia dal 476 regna Odoacre, che ha deposto Romolo Augustolo. Il suo regno dura poco: nel 493, dopo alcuni anni di guerra, viene sconfitto da Teodorico, re degli Ostrogoti. Gli Ostrogoti si erano stabiliti ai confini dell'Impero d'Oriente; allontanati dall'imperatore, si erano diretti verso occidente. Conquistata l'Italia, Teodorico sceglie come capitale Ravenna. L'imperatore d'Oriente Anastasio lo considera il suo rappresentante in Italia.</p></div>
+    <div class="paragrafo"><h4><span class="n">7</span>Teodorico adotta i costumi romani</h4><p>Teodorico è analfabeta, ma è affascinato dalla cultura romana. Per creare un regno che duri nel tempo chiede l'aiuto di aristocratici romani come Cassiodoro e Severino Boezio. Fa amministrare le città e la giustizia da funzionari romani e fa scrivere una raccolta di leggi ispirate a quelle di Roma, l'Editto di Teodorico. Agli Ostrogoti affida il comando dell'esercito.</p></div>
+    <div class="paragrafo"><h4><span class="n">8</span>Rinascono l'economia e le città</h4><p>Con Teodorico l'Italia vive un nuovo periodo di sviluppo. Il re fa bonificare molte zone paludose, che diventano coltivabili, e restaura gli acquedotti romani: l'acqua torna nelle città. Le città si ripopolano e sono più sicure, grazie a nuove mura e grandi opere. A Ravenna Teodorico fa costruire un grande palazzo, simile a quelli degli imperatori, e il suo mausoleo, una tomba monumentale.</p></div>
+    <div class="paragrafo"><h4><span class="n">9</span>Tra Ostrogoti e Romani nascono contrasti</h4><p>Gli Ostrogoti sono ariani, ma all'inizio vivono in pace con i Romani e Teodorico ha buoni rapporti con la Chiesa. Nel 524 però l'imperatore d'Oriente Giustino I condanna gli ariani: Teodorico teme che l'imperatore si allei con la Chiesa di Roma per prendersi l'Italia. Allora smette di servirsi di collaboratori romani e fa uccidere Boezio, sospettato ingiustamente di tradimento. Nel 526 Teodorico muore e gli Ostrogoti non riescono a mantenere a lungo il potere.</p></div>
+  </div>
+  <div id="testo-essenziale" class="essenziale" hidden>
+    <div class="paragrafo"><h4><span class="n">1</span>Il termine «Medioevo»</h4><p>«Medioevo» significa «età di mezzo»: va dal 476 al 1492. L'anno Mille lo divide in Alto Medioevo, un periodo difficile, e Basso Medioevo, quando l'economia delle città riparte.</p></div>
+    <div class="paragrafo"><h4><span class="n">2</span>Dove si stabilirono i Germani</h4><p>Caduto l'Impero d'Occidente, i Germani creano dei regni. Vandali in Nord Africa, Sardegna e Corsica. Burgundi tra Germania e Gallia. Visigoti in Spagna. Angli e Sassoni in Britannia. Franchi nella Gallia del nord. Ostrogoti prima sul Danubio, poi in Italia.</p></div>
+    <div class="paragrafo"><h4><span class="n">3</span>I regni romano-germanici</h4><p>In questi regni vivono insieme Romani e Germani. I Germani spesso sono analfabeti: usano funzionari romani per governare e riscuotere le tasse.</p></div>
+    <div class="paragrafo"><h4><span class="n">4</span>La debolezza dei nuovi regni</h4><p>I re hanno poco potere, perché l'aristocrazia è molto indipendente. I regni sono deboli: solo quello dei Franchi dura a lungo.</p></div>
+    <div class="paragrafo"><h4><span class="n">5</span>La religione dei Germani</h4><p>Alcuni Germani sono pagani, altri sono cristiani ariani: per loro Gesù è solo un uomo mandato da Dio. Sono accettati dai Romani solo quando diventano cattolici.</p></div>
+    <div class="paragrafo"><h4><span class="n">6</span>Gli Ostrogoti in Italia</h4><p>Nel 493 Teodorico, re degli Ostrogoti, sconfigge Odoacre. Sceglie come capitale Ravenna. L'imperatore d'Oriente lo considera suo rappresentante.</p></div>
+    <div class="paragrafo"><h4><span class="n">7</span>Teodorico adotta i costumi romani</h4><p>Teodorico ama la civiltà di Roma: sceglie collaboratori romani come Cassiodoro e Boezio e pubblica leggi simili a quelle romane. Agli Ostrogoti dà l'esercito.</p></div>
+    <div class="paragrafo"><h4><span class="n">8</span>Rinascono l'economia e le città</h4><p>Teodorico prosciuga le paludi, ripara gli acquedotti, costruisce mura. A Ravenna fa costruire un palazzo e il suo mausoleo.</p></div>
+    <div class="paragrafo"><h4><span class="n">9</span>Tra Ostrogoti e Romani nascono contrasti</h4><p>Quando l'imperatore d'Oriente condanna gli ariani, Teodorico ha paura e non collabora più con i Romani. Nel 526 muore e presto gli Ostrogoti perdono il potere.</p></div>
+  </div>
+</section>
+
+<!-- ======================= PERCHÉ ======================= -->
+<section class="parte" id="perche" aria-labelledby="t-perche">
+  <p class="etichetta">Perché?</p>
+  <h2 id="t-perche">Causa, evento, effetto</h2>
+  <p class="guida">Gli storici non si chiedono solo che cosa è successo, ma perché. Leggi la catena da sinistra a destra.</p>
+  <p class="mestiere">🧩 Comprendere fatti e processi storici</p>
+  <div class="catena">
+    <div class="anello causa"><h4>Causa</h4><p>Nel 476 cade l'Impero romano d'Occidente. I Germani sono forti in guerra, ma sono poco numerosi, spesso analfabeti e non sanno governare un territorio grande e pieno di città.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello evento"><h4>Evento</h4><p>Nascono i regni romano-germanici: i Germani comandano l'esercito, i Romani governano le città, amministrano la giustizia e riscuotono le tasse.</p></div>
+    <div class="freccia" aria-hidden="true">→</div>
+    <div class="anello effetto"><h4>Effetto</h4><p>La cultura e le leggi romane sopravvivono. Ma i regni sono deboli: l'aristocrazia non obbedisce al re e la religione divide ariani e cattolici. Solo il regno dei Franchi dura a lungo.</p></div>
+  </div>
+  <div class="ombra">
+    <h4>Ma attenzione</h4>
+    <p>Le parole che usiamo contengono un giudizio. «Barbari» era il nome che i Greci e i Romani davano agli stranieri: è il loro punto di vista, non quello dei Germani. Anche «Medioevo», «età di mezzo», è un giudizio: nel Rinascimento lo consideravano un'epoca buia tra due età splendide. Oggi gli storici sanno che nel Medioevo ci furono anche sviluppo, città nuove e grandi opere d'arte.</p>
+  </div>
+  <div class="ricorda">
+    <h4>Ricorda</h4>
+    <dl>
+      <dt>476</dt><dd>Fine dell'Impero romano d'Occidente; inizio del Medioevo.</dd>
+      <dt>493</dt><dd>Teodorico, re degli Ostrogoti, conquista l'Italia.</dd>
+      <dt>Ravenna</dt><dd>La capitale di Teodorico.</dd>
+      <dt>Arianesimo</dt><dd>Il cristianesimo dei Goti, considerato un'eresia dai Romani.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ======================= COME ======================= -->
+<section class="parte" id="come" aria-labelledby="t-come">
+  <p class="etichetta">Come?</p>
+  <h2 id="t-come">Come funziona un regno romano-germanico</h2>
+  <p class="guida">Due schemi per vedere chi fa che cosa in un regno romano-germanico, e perché questi regni sono così fragili.</p>
+  <p class="mestiere">🧩 Organizzare le informazioni · costruire una mappa delle informazioni</p>
+  <p class="radice">Nel regno romano-germanico i compiti sono divisi…</p>
+  <div class="come">
+    <div class="colonna"><h4>Il re germanico</h4><ul><li>comanda il regno</li><li>imita lo stile degli imperatori</li><li>ma il suo potere è limitato dall'aristocrazia</li></ul></div>
+    <div class="colonna"><h4>Ai Germani</h4><ul><li>il comando dell'esercito</li><li>in Italia, un terzo delle terre conquistate</li></ul></div>
+    <div class="colonna"><h4>Ai Romani</h4><ul><li>il governo delle città</li><li>la giustizia</li><li>la riscossione delle tasse</li></ul></div>
+    <div class="colonna"><h4>Le leggi</h4><ul><li>molte leggi romane restano in vigore</li><li>in Italia: l'Editto di Teodorico</li></ul></div>
+  </div>
+  <p class="radice" style="margin-top:26px">Ma i regni sono molto deboli, per i conflitti interni…</p>
+  <div class="come tre">
+    <div class="colonna"><h4>Tra aristocratici germanici</h4><ul><li>lotte per il potere</li></ul></div>
+    <div class="colonna"><h4>Tra aristocrazia e re</h4><ul><li>desiderio di indipendenza</li><li>i Germani non vogliono un unico capo</li></ul></div>
+    <div class="colonna"><h4>Tra Germani e Romani</h4><ul><li>differenze religiose</li><li>ariani contro cattolici</li></ul></div>
+  </div>
+</section>
+
+<!-- ======================= CONCETTI ======================= -->
+<section class="parte" id="concetti" aria-labelledby="t-concetti">
+  <p class="etichetta">Quali idee?</p>
+  <h2 id="t-concetti">Le idee chiave</h2>
+  <p class="guida">Le idee più importanti della lezione, spiegate una per una. Le parole sottolineate a puntini rimandano a <a href="#parole">Quali parole?</a>.</p>
+  <article class="concetto" id="c-medioevo"><h4>Un'età «di mezzo»</h4><p>Il <a class="pk" href="#p-medioevo">Medioevo</a> comincia nel 476 e finisce nel 1492. Il suo nome è nato come un giudizio negativo, ma è un periodo lungo mille anni, con momenti di crisi e momenti di crescita.</p></article>
+  <article class="concetto" id="c-due-mondi"><h4>Due mondi insieme</h4><p>Nei <a class="pk" href="#p-regni">regni romano-germanici</a> i Germani portano la forza militare, i Romani le leggi, la scrittura e l'esperienza di governo. Nessuno dei due può fare a meno dell'altro.</p></article>
+  <article class="concetto" id="c-debolezza"><h4>Re forti in guerra, deboli nel regno</h4><p>L'<a class="pk" href="#p-aristocrazia">aristocrazia</a> germanica vuole restare indipendente e non obbedisce volentieri al re. Per questo i nuovi regni si indeboliscono e spesso vengono conquistati dai vicini.</p></article>
+  <article class="concetto" id="c-religione"><h4>La religione divide</h4><p>Ariani e cattolici sono tutti cristiani, ma per i Romani l'<a class="pk" href="#p-arianesimo">arianesimo</a> è un'<a class="pk" href="#p-eresia">eresia</a>. Un re germanico che diventa <a class="pk" href="#p-cattolico">cattolico</a>, come Clodoveo, è accettato più facilmente dai Romani.</p></article>
+  <article class="concetto" id="c-teodorico"><h4>Teodorico, un re tra due mondi</h4><p>Teodorico è un re germanico che ammira Roma: governa come <a class="pk" href="#p-rappresentante">rappresentante</a> dell'imperatore, usa le leggi romane e fa rinascere l'Italia. Ma quando la religione divide Goti e Romani, la collaborazione finisce.</p></article>
+</section>
+
+<!-- ======================= PAROLE CHIAVE ======================= -->
+<section class="parte" id="parole" aria-labelledby="t-parole">
+  <p class="etichetta">Quali parole?</p>
+  <h2 id="t-parole">Le parole della lezione</h2>
+  <p class="guida">Il significato dei termini nuovi, in ordine alfabetico.</p>
+  <dl class="parole">
+    <div class="parola" id="p-acquedotto"><dt>Acquedotto</dt><dd>Insieme di opere e canali che portano l'acqua dalla sorgente a una città o a un villaggio.</dd></div>
+    <div class="parola" id="p-amministrare"><dt>Amministrare</dt><dd>Controllare e curare il buon andamento della vita dello Stato, in tutti i suoi aspetti.</dd></div>
+    <div class="parola" id="p-analfabeta"><dt>Analfabeta</dt><dd>Persona che non sa leggere e scrivere.</dd></div>
+    <div class="parola" id="p-arianesimo"><dt>Arianesimo</dt><dd>Un tipo di cristianesimo nato dalla dottrina del sacerdote egiziano Ario: per lui Gesù era un uomo mandato da Dio sulla Terra, non Dio stesso.</dd></div>
+    <div class="parola" id="p-aristocrazia"><dt>Aristocrazia</dt><dd>La parte più ricca e potente della popolazione.</dd></div>
+    <div class="parola" id="p-barbari"><dt>Barbari</dt><dd>Per i Greci e i Romani, gli stranieri che non parlavano la loro lingua e non vivevano secondo le loro leggi.</dd></div>
+    <div class="parola" id="p-bonificare"><dt>Bonificare</dt><dd>Prosciugare l'acqua di una palude e risanare il terreno, per renderlo adatto alle coltivazioni.</dd></div>
+    <div class="parola" id="p-cattolico"><dt>Cattolico</dt><dd>Significa «universale»: è il nome del cristianesimo della Chiesa di Roma.</dd></div>
+    <div class="parola" id="p-deporre"><dt>Deporre</dt><dd>Togliere a una persona una carica, come quella di re o di imperatore, spesso con la forza e contro la sua volontà.</dd></div>
+    <div class="parola" id="p-dottrina"><dt>Dottrina</dt><dd>Insieme di regole e insegnamenti di una religione.</dd></div>
+    <div class="parola" id="p-editto"><dt>Editto</dt><dd>Legge o raccolta di leggi decisa da un re o da un imperatore. L'Editto di Teodorico raccoglie leggi ispirate a quelle romane.</dd></div>
+    <div class="parola" id="p-eresia"><dt>Eresia</dt><dd>Una dottrina contraria a quanto deciso dalla Chiesa.</dd></div>
+    <div class="parola" id="p-filosofo"><dt>Filosofo</dt><dd>Uomo di grande cultura e amante del sapere.</dd></div>
+    <div class="parola" id="p-germani"><dt>Germani</dt><dd>Popoli che vivevano a nord e a est dei confini dell'Impero romano: Franchi, Goti, Vandali, Burgundi, Angli, Sassoni e molti altri.</dd></div>
+    <div class="parola" id="p-giustizia"><dt>Giustizia</dt><dd>Sistema che un popolo adotta per regolare e proteggere i diritti dei cittadini e per punire chi commette reati.</dd></div>
+    <div class="parola" id="p-mausoleo"><dt>Mausoleo</dt><dd>Tomba monumentale, costruita per ricordare una persona importante dopo la morte.</dd></div>
+    <div class="parola" id="p-medioevo"><dt>Medioevo</dt><dd>«Età di mezzo»: i secoli tra la caduta di Roma (476) e la scoperta dell'America (1492). Il nome nasce nel Rinascimento.</dd></div>
+    <div class="parola" id="p-pagani"><dt>Pagani</dt><dd>Persone di religione politeista, non cristiana.</dd></div>
+    <div class="parola" id="p-rappresentante"><dt>Rappresentante</dt><dd>Persona che agisce e decide per conto di qualcun altro.</dd></div>
+    <div class="parola" id="p-regni"><dt>Regni romano-germanici</dt><dd>I regni nati sulle terre dell'Impero d'Occidente, dove abitanti, governo e cultura vengono sia dal mondo romano sia da quello germanico. Si chiamano anche romano-barbarici.</dd></div>
+    <div class="parola" id="p-rinascimento"><dt>Rinascimento</dt><dd>Periodo storico e culturale che interessò l'Italia e l'Europa occidentale a partire dal XIV secolo.</dd></div>
+    <div class="parola" id="p-zona-paludosa"><dt>Zona paludosa</dt><dd>Terreno che non fa filtrare l'acqua e che resta coperto di fango e acqua ferma: la palude.</dd></div>
+  </dl>
+</section>
+
+<!-- ======================= CHE COSA DICONO LE FONTI? ======================= -->
+<section class="parte" id="lente" aria-labelledby="t-lente">
+  <p class="etichetta">Che cosa dicono le fonti?</p>
+  <h2 id="t-lente">Dentro la fonte</h2>
+  <p class="guida">Un mosaico di Ravenna mostra il palazzo di Teodorico. Ma guardandolo da vicino si scopre che qualcuno, dopo la sua morte, lo ha modificato.</p>
+  <p class="mestiere">📜 Leggere e interpretare le fonti · fonte iconografica</p>
+  <div class="lente">
+    <div class="lente-testa">
+      <p class="testata-giornale">Mosaico · inizio del VI secolo · Sant'Apollinare Nuovo, Ravenna</p>
+      <h3>Il palazzo di Teodorico e le figure scomparse</h3>
+    </div>
+    <div class="lente-corpo">
+      <p>Teodorico fa costruire a Ravenna una grande chiesa per i cristiani ariani, oggi chiamata Sant'Apollinare Nuovo. Sulle pareti, i mosaici mostrano anche il suo palazzo: in alto si legge la parola latina <em>PALATIUM</em>, «palazzo». Tra le colonne, all'inizio, c'erano le figure del re e della sua corte.</p>
+      <p>Dopo la fine del regno degli Ostrogoti, intorno al 560, la chiesa passa ai cattolici. Le figure di Teodorico e dei suoi vengono coperte da tende e da un fondo d'oro. Ma il lavoro non è perfetto: su alcune colonne si vedono ancora delle mani rimaste sole.</p>
+      <p class="domanda-guida">Domanda guida: perché qualcuno ha voluto cancellare Teodorico e la sua corte da questo mosaico? Che cosa ci dice questo sui rapporti tra ariani e cattolici?</p>
+      <figure class="dettaglio-fonte fonte-intera">
+        <button type="button" class="dettaglio-apri" data-src="https://commons.wikimedia.org/wiki/Special:FilePath/PalatiumTheodoricMosaicDetail.jpg" data-cap="Il palazzo di Teodorico nel mosaico di Sant'Apollinare Nuovo, Ravenna (inizio del VI secolo, modificato intorno al 560). Guarda bene le colonne: vedi le mani rimaste?"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/PalatiumTheodoricMosaicDetail.jpg" alt="Mosaico del palazzo di Teodorico a Sant'Apollinare Nuovo, Ravenna"><span>🔍 Ingrandisci il mosaico</span></button>
+        <figcaption>Il mosaico del palazzo. Fonte: Basilica di Sant'Apollinare Nuovo, Ravenna · <a href="https://commons.wikimedia.org/wiki/File:PalatiumTheodoricMosaicDetail.jpg" target="_blank" rel="noopener">scheda su Wikimedia Commons</a></figcaption>
+      </figure>
+      <div class="fasi">
+        <div class="fase"><h4>1. Prima di guardare</h4><ol><li>Che cos'è un mosaico? Con quali materiali si fa?</li><li>Perché Teodorico, re ariano, fa costruire una chiesa per gli ariani? Rileggi il paragrafo 5 di <a href="#testi">Leggiamo</a>.</li></ol></div>
+        <div class="fase"><h4>2. Osservare</h4><ol><li>Ingrandisci il mosaico: trova la scritta e le colonne.</li><li>Cerca le mani che spuntano sulle colonne: a chi appartenevano?</li></ol></div>
+        <div class="fase"><h4>3. Pensare da storici</h4><ol><li>Chi ha deciso di cancellare le figure, e quando?</li><li>Cancellare un'immagine è un modo per cancellare anche il ricordo di una persona? Perché?</li><li>Questa fonte ci racconta solo il tempo di Teodorico o anche quello che è successo dopo?</li></ol></div>
+      </div>
+      <ul class="altre-fonti">
+        <li><span class="tipo">Europeana</span><a href="https://www.europeana.eu/it/search?query=Teodorico" target="_blank" rel="noopener">Teodorico (ricerca)</a> · <a href="https://www.europeana.eu/it/search?query=Ravenna%20Sant%27Apollinare%20Nuovo" target="_blank" rel="noopener">Sant'Apollinare Nuovo (ricerca)</a> · <a href="https://www.europeana.eu/it/search?query=Clodoveo" target="_blank" rel="noopener">Clodoveo (ricerca)</a></li>
+        <li><span class="tipo">Wikimedia Commons</span><a href="https://commons.wikimedia.org/wiki/Mausoleum_of_Theodoric_(Ravenna)" target="_blank" rel="noopener">Il mausoleo di Teodorico a Ravenna: foto e disegni</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RIPASSIAMO ======================= -->
+<section class="parte" id="compiti" aria-labelledby="t-compiti">
+  <p class="etichetta">Ripassiamo</p>
+  <h2 id="t-compiti">Le cinque attività dello storico</h2>
+  <p class="guida">Rispondi prima da solo, poi premi «Controlla». Se sbagli, riprova: la soluzione compare con il pulsante «Mostra le soluzioni».</p>
+  <div id="esercizi"></div>
+
+  <p class="fascia" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8"/></svg></span><span>Ripasso finale</span></p>
+  <div class="attivita">
+    <h4>Dieci cose da sapere</h4>
+    <p class="meta">Ricongiungi le due metà di ogni frase.</p>
+    <div id="dieci"></div>
+  </div>
+  <div class="attivita">
+    <h4>Mini-dibattito</h4>
+    <p class="consegna"><strong>Teodorico: re barbaro o re romano?</strong> Teodorico è un re germanico, ariano, che non sa leggere né scrivere. Però ama Roma, usa le sue leggi, ripara i suoi acquedotti e governa in nome dell'imperatore. Alla fine fa uccidere Boezio. Era più un re «barbaro» o più un re «romano»? Prepara argomenti per entrambe le posizioni.</p>
+    <textarea aria-label="I tuoi argomenti" placeholder="Era un re barbaro perché… Era un re romano perché…"></textarea>
+    <p class="dibattito"><b>Regole:</b> non si interrompe chi parla; si criticano le idee, non le persone; alla fine ognuno scrive una conclusione personale.</p>
+  </div>
+</section>
+<!-- ======================= DOPO ======================= -->
+<section class="parte" id="dopo" aria-labelledby="t-dopo">
+  <p class="etichetta">E dopo?</p>
+  <h2 id="t-dopo">Che cosa ci aspetta</h2>
+  <p class="guida">Hai finito la lezione. Ecco che cosa succede dopo: è da qui che partirà il prossimo argomento.</p>
+  <div class="pd dopo-box">
+    <h3><span>Dopo</span></h3>
+      <p>Dopo la morte di Teodorico, l'imperatore d'Oriente Giustiniano vuole riunire l'Impero: i suoi eserciti combattono contro gli Ostrogoti per quasi vent'anni e riconquistano l'Italia. Ma l'Italia, devastata dalla guerra, nel 568 viene invasa da un nuovo popolo germanico, i Longobardi.</p>
+      <p class="link-lez">Più avanti: l'Impero bizantino di Giustiniano e i Longobardi in Italia</p>
+  </div>
+  <div class="attivita prepara">
+    <h4>Per prepararti</h4>
+    <p class="consegna">Rileggi il riquadro qui sopra. Scrivi una cosa che già sai di quello che succederà e una domanda a cui vorresti trovare risposta nella prossima lezione.</p>
+    <textarea aria-label="Che cosa so e che cosa vorrei sapere" placeholder="So già che… Vorrei sapere…"></textarea>
+  </div>
+</section>
+</main>
+</div>
+
+<footer>
+<p>Organizzazione della lezione ispirata a <em>Storia facile per la scuola secondaria di primo grado – Classe prima</em> (Modulo 1, cap. 3 «I regni romano-barbarici»), Edizioni Erickson: Idea principale (qui «Cosa imparerai»), Concetti chiave, testo sintetico ed essenziale, glossario, mappa delle informazioni, dieci cose da sapere, verifiche. Testi originali della lezione.</p>
+  <p>Carta: coste da Natural Earth (dominio pubblico). Immagini: Wikimedia Commons. Fonti: Europeana.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- luoghi ---------- */
+var LUOGHI=[
+{n:"Ravenna",ll:[44.4184,12.2035],t:"Città circondata da paludi e vicina al mare. È la sede degli ultimi imperatori d'Occidente, poi di Odoacre e infine la capitale di Teodorico, che vi fa costruire il suo palazzo e il suo mausoleo."},
+ {n:"Roma",ll:[41.9028,12.4964],t:"L'antica capitale dell'Impero. Qui ci sono il Senato e il papa, il vescovo di Roma, capo della Chiesa cattolica. Cassiodoro e Boezio sono senatori romani."},
+ {n:"Costantinopoli",ll:[41.0082,28.9784],t:"La capitale dell'Impero romano d'Oriente, che continua a esistere. Qui regnano gli imperatori Anastasio e Giustino."},
+ {n:"Cartagine",ll:[36.8529,10.3233],t:"In Nord Africa: è la capitale del regno dei Vandali, che controllano anche la Sardegna e la Corsica."},
+ {n:"Toledo",ll:[39.8628,-4.0273],t:"In Spagna. Nel VI secolo diventa la capitale del regno dei Visigoti."},
+ {n:"Lione",ll:[45.764,4.8357],t:"Una delle città più importanti del regno dei Burgundi, tra la Germania e la Gallia, nella regione che si chiamerà Borgogna."},
+ {n:"Reims",ll:[49.2583,4.0317],t:"Nella Gallia del nord, terra dei Franchi. Qui nel 496 il vescovo battezza Clodoveo, re dei Franchi, che diventa cattolico."},
+ {n:"Canterbury",ll:[51.2802,1.0789],t:"In Britannia, dove si stabiliscono gli Angli e i Sassoni. Diventa la città principale del regno anglosassone del Kent."}
+];
+var lista=document.getElementById("luoghi"), gruppo=document.getElementById("segni"), info=document.getElementById("mappa-info"), NS="http://www.w3.org/2000/svg";
+function xy(ll){ return [(ll[1]-(-12))*900/62, (62-ll[0])*900/62]; }
+/* posizione dell'etichetta rispetto al punto: [dx, dy, allineamento] */
+var ETI={"Ravenna":[12,-4,"start"],"Roma":[-12,10,"end"],"Costantinopoli":[12,5,"start"],"Cartagine":[12,12,"start"],"Toledo":[12,5,"start"],"Lione":[12,10,"start"],"Reims":[12,-2,"start"],"Canterbury":[-12,0,"end"]};
+var segni=[];
+function scegli(i){
+  segni.forEach(function(g,j){ g.setAttribute("class", j===i ? "segno scelto" : "segno"); g.firstChild.setAttribute("r", j===i ? "8" : "6"); if(j===i) gruppo.appendChild(g); });
+  info.innerHTML=""; var b=document.createElement("strong"); b.textContent=LUOGHI[i].n+": "; info.appendChild(b); info.appendChild(document.createTextNode(LUOGHI[i].t));
+}
+LUOGHI.forEach(function(L,i){
+  var p=xy(L.ll), g=document.createElementNS(NS,"g"), c=document.createElementNS(NS,"circle"), t=document.createElementNS(NS,"text"), e=ETI[L.n]||[14,5,"start"];
+  g.setAttribute("class","segno"); g.setAttribute("tabindex","0"); g.setAttribute("role","button"); g.setAttribute("aria-label",L.n);
+  c.setAttribute("cx",p[0].toFixed(1)); c.setAttribute("cy",p[1].toFixed(1)); c.setAttribute("r","6");
+  t.setAttribute("x",(p[0]+e[0]).toFixed(1)); t.setAttribute("y",(p[1]+e[1]).toFixed(1)); t.setAttribute("text-anchor",e[2]); t.textContent=L.n.replace(/ \(.*\)$/,"");
+  g.appendChild(c); g.appendChild(t); gruppo.appendChild(g); segni.push(g);
+  g.addEventListener("click",function(){ scegli(i); });
+  g.addEventListener("keydown",function(ev){ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); scegli(i); } });
+  var li=document.createElement("li"), bt=document.createElement("button");
+  bt.type="button"; bt.textContent=L.n; bt.addEventListener("click",function(){ scegli(i); document.getElementById("mappa").scrollIntoView({block:"center"}); });
+  li.appendChild(bt); li.appendChild(document.createTextNode(" — "+L.t)); lista.appendChild(li);
+});
+/* link diretto a un luogo della carta: lezione.html#luogo-boston seleziona Boston e mostra la carta */
+function slugLuogo(t){ t=String(t).toLowerCase(); try{ t=t.normalize("NFD").replace(/[\u0300-\u036f]/g,""); }catch(e){} return t.replace(/\(.*?\)/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,""); }
+Array.prototype.forEach.call(lista.children,function(li,i){ if(LUOGHI[i]) li.id="luogo-"+slugLuogo(LUOGHI[i].n); });
+function luogoDaLink(){
+  var h=(location.hash||"").slice(1); try{ h=decodeURIComponent(h); }catch(e){}
+  if(h.indexOf("luogo-")!==0) return;
+  for(var i=0;i<LUOGHI.length;i++){ if("luogo-"+slugLuogo(LUOGHI[i].n)===h){
+    scegli(i); var m=document.getElementById("mappa"); if(m) setTimeout(function(){ m.scrollIntoView({block:"center"}); },80); return; } }
+}
+window.addEventListener("hashchange",luogoDaLink); luogoDaLink();
+
+/* ---------- indice laterale: si vede una parte alla volta ---------- */
+var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
+var parti=Array.prototype.slice.call(document.querySelectorAll("section.parte"));
+document.documentElement.className+=" una-parte";
+function attiva(id){ Array.prototype.forEach.call(voci,function(v){ var on=v.getAttribute("href")==="#"+id; if(on){ v.setAttribute("aria-current","true"); if(navI.scrollWidth>navI.clientWidth){ navI.scrollLeft=v.offsetLeft-16; } } else v.removeAttribute("aria-current"); }); }
+var vocePer={}; Array.prototype.forEach.call(voci,function(v){ vocePer[v.getAttribute("href").slice(1)]=v; });
+function linkParte(sx,cls,prima,dopo){ var v=vocePer[sx.id], a=document.createElement("a"), n=v&&v.querySelector(".nome");
+  a.href="#"+sx.id; a.className=cls; if(v&&v.style.getPropertyValue("--c")) a.style.setProperty("--c",v.style.getPropertyValue("--c"));
+  a.textContent=prima+(n?n.textContent:(sx.querySelector(".etichetta")||sx).textContent)+dopo; return a; }
+parti.forEach(function(sx,i){ var n=document.createElement("nav"); n.className="parte-nav"; n.setAttribute("aria-label","Altre parti della lezione");
+  if(i>0) n.appendChild(linkParte(parti[i-1],"prec","← ",""));
+  if(i<parti.length-1) n.appendChild(linkParte(parti[i+1],"succ",""," →"));
+  sx.appendChild(n); });
+var corrente=null;
+function mostra(id){ if(id===corrente) return false; parti.forEach(function(sx){ sx.hidden=(sx.id!==id); }); corrente=id; attiva(id);
+  try{ window.dispatchEvent(new Event("resize")); }catch(e){ var ev=document.createEvent("Event"); ev.initEvent("resize",true,true); window.dispatchEvent(ev); }
+  return true; }
+function parteDi(el){ while(el&&!(el.classList&&el.classList.contains("parte"))) el=el.parentNode; return el; }
+function bersaglio(h){ try{ h=decodeURIComponent(h); }catch(e){} return h?document.getElementById(h):null; }
+/* un link interno (#p-..., #chi-..., #luogo-..., una voce dell'indice) apre prima la parte che lo contiene */
+document.addEventListener("click",function(e){ var a=e.target; while(a&&a.tagName!=="A") a=a.parentNode;
+  if(!a||!a.getAttribute) return; var h=a.getAttribute("href")||""; if(h.charAt(0)!=="#") return;
+  var el=bersaglio(h.slice(1)), sx=el&&parteDi(el); if(sx) mostra(sx.id); },true);
+function daIndirizzo(){ var el=bersaglio((location.hash||"").slice(1)), sx=el&&parteDi(el);
+  if(sx){ if(mostra(sx.id)) setTimeout(function(){ el.scrollIntoView(); },0); } else if(!corrente) mostra(parti[0].id); }
+window.addEventListener("hashchange",daIndirizzo); daIndirizzo();
+
+/* ---------- testo sintetico / essenziale ---------- */
+var bot=document.querySelectorAll(".livelli button");
+Array.prototype.forEach.call(bot,function(b){ b.addEventListener("click",function(){
+  var ess=b.getAttribute("data-livello")==="essenziale";
+  document.getElementById("testo-sintetico").hidden=ess; document.getElementById("testo-essenziale").hidden=!ess;
+  Array.prototype.forEach.call(bot,function(x){ x.setAttribute("aria-pressed", x===b ? "true":"false"); });
+});});
+
+/* ---------- esercizi ---------- */
+var ESERCIZI=[{"gruppo": "tempo", "titolo": "Scegli l'anno giusto", "meta": "Abbina ogni evento all'anno in cui accadde.", "scelte": ["476", "493", "496", "524", "525", "526"], "righe": [["Fine dell'Impero romano d'Occidente", "476"], ["Teodorico sconfigge Odoacre", "493"], ["Battesimo di Clodoveo", "496"], ["Giustino I condanna l'arianesimo", "524"], ["Boezio viene condannato a morte", "525"], ["Morte di Teodorico", "526"]]}, {"gruppo": "spazio", "titolo": "Dove successe?", "meta": "Usa la carta di «Cosa imparerai» per trovare il luogo giusto.", "scelte": ["Ravenna", "Roma", "Costantinopoli", "Cartagine", "Lione", "Reims"], "righe": [["La capitale di Teodorico", "Ravenna"], ["La sede del papa e del Senato", "Roma"], ["La capitale dell'Impero d'Oriente", "Costantinopoli"], ["La capitale dei Vandali", "Cartagine"], ["Una città del regno dei Burgundi", "Lione"], ["Il battesimo di Clodoveo", "Reims"]]}, {"gruppo": "spazio", "titolo": "Chi si stabilì dove?", "meta": "Abbina ogni territorio al popolo germanico che lo occupò.", "scelte": ["Vandali", "Visigoti", "Franchi", "Burgundi", "Angli e Sassoni", "Ostrogoti"], "righe": [["Nord Africa, Sardegna e Corsica", "Vandali"], ["Spagna", "Visigoti"], ["Gallia settentrionale", "Franchi"], ["Tra Germania e Gallia (Borgogna)", "Burgundi"], ["Britannia e Germania del nord", "Angli e Sassoni"], ["Prima lungo il Danubio, poi in Italia", "Ostrogoti"]]}, {"gruppo": "fonti", "titolo": "Fatto o interpretazione?", "meta": "Uno storico distingue i fatti (si possono verificare) dalle interpretazioni (sono giudizi, opinioni).", "scelte": ["Fatto", "Interpretazione"], "righe": [["Nel 493 Teodorico sconfigge Odoacre.", "Fatto", "Lo raccontano le cronache del tempo."], ["Il Medioevo fu un'età buia, senza progresso.", "Interpretazione", "È il giudizio nato nel Rinascimento; oggi gli storici non lo condividono."], ["Il mausoleo di Teodorico si trova a Ravenna.", "Fatto", "Si può andare a vederlo ancora oggi."], ["Teodorico fu un re saggio.", "Interpretazione", "È un giudizio: qualcuno potrebbe pensarla diversamente."], ["Nel mosaico di Sant'Apollinare Nuovo le figure della corte sono state coperte.", "Fatto", "Lo si vede osservando il mosaico: restano le mani sulle colonne."], ["Boezio fu condannato ingiustamente.", "Interpretazione", "È il giudizio di Boezio stesso e di molti storici, non un dato verificabile."]]}, {"gruppo": "processi", "titolo": "Ai Romani o ai Germani?", "meta": "Rileggi lo schema «Come?»: a chi spetta ogni compito nel regno di Teodorico?", "scelte": ["Ai Romani", "Ai Germani"], "righe": [["Governare le città", "Ai Romani"], ["Amministrare la giustizia", "Ai Romani"], ["Riscuotere le tasse", "Ai Romani"], ["Comandare l'esercito", "Ai Germani"], ["Ricevere un terzo delle terre conquistate", "Ai Germani"]]}, {"gruppo": "processi", "titolo": "Vero o falso?", "meta": "Dopo il controllo leggi la spiegazione: serve a correggere le frasi false.", "scelte": ["Vero", "Falso"], "righe": [["Il potere dei re germanici era limitato da un'aristocrazia forte e indipendente.", "Vero"], ["Il regno di Odoacre in Italia durò più di cento anni.", "Falso", "Durò solo dal 476 al 493."], ["Gli Ostrogoti non credevano in nessun dio.", "Falso", "Erano cristiani ariani."], ["Solo il regno dei Franchi ebbe una vita lunga.", "Vero"], ["Teodorico fece costruire il suo mausoleo a Roma.", "Falso", "Lo fece costruire a Ravenna, la sua capitale."], ["Ai Romani fu affidato l'esercito, ai Germani il governo.", "Falso", "È il contrario: ai Germani l'esercito, ai Romani il governo."]]}, {"gruppo": "lessico", "titolo": "Parole e significati", "meta": "Abbina ogni parola alla sua definizione.", "scelte": ["Analfabeta", "Arianesimo", "Eresia", "Aristocrazia", "Bonificare", "Mausoleo"], "righe": [["Chi non sa leggere e scrivere", "Analfabeta"], ["Cristianesimo per cui Gesù è un uomo mandato da Dio", "Arianesimo"], ["Dottrina contraria a quanto deciso dalla Chiesa", "Eresia"], ["La parte più ricca e potente della popolazione", "Aristocrazia"], ["Prosciugare una palude per coltivarla", "Bonificare"], ["Tomba monumentale", "Mausoleo"]]}];
+var DIECI=[["«Medioevo» significa", "«età di mezzo», dal 476 al 1492."], ["Caduto l'Impero d'Occidente, i popoli germanici", "formano regni indipendenti."], ["I Germani non sanno governare, così", "si affidano a funzionari romani."], ["L'aristocrazia germanica è indipendente, per questo", "i regni romano-germanici sono deboli."], ["Molti Germani si convertono", "al cristianesimo ariano."], ["Dopo il breve regno di Odoacre,", "l'Italia è conquistata dagli Ostrogoti di Teodorico."], ["Teodorico sceglie come capitale", "Ravenna e governa per conto dell'imperatore d'Oriente."], ["L'Editto di Teodorico", "raccoglie leggi ispirate a quelle romane."], ["Con Teodorico", "si bonificano le paludi e si riparano gli acquedotti."], ["Quando l'imperatore d'Oriente condanna gli ariani,", "Teodorico smette di servirsi dei Romani."]];
+function el(t,attr,txt){ var e=document.createElement(t); if(attr){ for(var k in attr){ e.setAttribute(k,attr[k]); } } if(txt!=null) e.textContent=txt; return e; }
+function mescola(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+function costruisci(cont, scelte, righe, conGruppo){
+  var tab=el("table",{"class":"esercizio"}), tb=el("tbody"); tab.appendChild(tb);
+  var stati=[];
+  righe.forEach(function(r,i){
+    var tr=el("tr"), td1=el("td"), td2=el("td"), td3=el("td",{"class":"esito","aria-live":"polite"});
+    td1.appendChild(document.createTextNode(r[0]));
+    var sp=el("span",{"class":"spiega"}); sp.hidden=true; if(r[2]) sp.textContent=r[2]; td1.appendChild(sp);
+    var s=el("select",{"aria-label":"Risposta: "+r[0]}); s.appendChild(el("option",{value:""},"— scegli —"));
+    scelte.forEach(function(c){ s.appendChild(el("option",{value:c},c)); });
+    td2.appendChild(s); tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tb.appendChild(tr);
+    stati.push({tr:tr,s:s,esito:td3,sp:sp,giusta:r[1]});
+  });
+  cont.appendChild(tab);
+  var com=el("div",{"class":"comandi"}), b1=el("button",{type:"button","class":"bottone"},"Controlla"), b2=el("button",{type:"button","class":"bottone secondario"},"Mostra le soluzioni"), pt=el("span",{"class":"punteggio","aria-live":"polite"});
+  b2.hidden=true; com.appendChild(b1); com.appendChild(b2); com.appendChild(pt); cont.appendChild(com);
+  b1.addEventListener("click",function(){
+    var ok=0, vuote=0;
+    stati.forEach(function(x){
+      x.tr.classList.remove("ok"); x.tr.classList.remove("no");
+      if(!x.s.value){ vuote++; x.esito.textContent=""; return; }
+      var g=x.s.value===x.giusta; if(g) ok++;
+      x.tr.classList.add(g?"ok":"no"); x.esito.textContent=g?"✓":"✗"; x.esito.setAttribute("aria-label",g?"giusto":"sbagliato");
+      if(x.sp.textContent) x.sp.hidden=false;
+    });
+    pt.textContent=ok+" su "+stati.length+(vuote? " · "+vuote+" senza risposta":"");
+    b2.hidden=false;
+  });
+  b2.addEventListener("click",function(){
+    stati.forEach(function(x){ x.s.value=x.giusta; x.tr.classList.remove("no"); x.tr.classList.add("ok"); x.esito.textContent="✓"; if(x.sp.textContent) x.sp.hidden=false; });
+    pt.textContent="Ecco le soluzioni.";
+  });
+}
+var GRUPPI={"tempo": {"c": "#2a7f6f", "n": "Collocare nel tempo", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3.5\" y=\"5\" width=\"17\" height=\"15.5\" rx=\"2\"/><path d=\"M3.5 10h17M8 3v4M16 3v4\"/><path d=\"M9 14.5h2v3M13.5 14.5h2l-1.5 3\"/></svg>"}, "spazio": {"c": "#b25510", "n": "Collocare nello spazio", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 6.5l6-2 6 2 6-2v13l-6 2-6-2-6 2z\"/><path d=\"M9 4.5v13M15 6.5v13\"/></svg>"}, "fonti": {"c": "#55800f", "n": "Leggere e interpretare le fonti", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"5\" y=\"11\" width=\"14\" height=\"10\" rx=\"2\"/><path d=\"M8 11V7.5a4 4 0 0 1 7.6-1.8\"/><circle cx=\"12\" cy=\"15.5\" r=\"1.3\"/><path d=\"M12 16.8v1.7\"/></svg>"}, "processi": {"c": "#b0215f", "n": "Comprendere fatti e processi storici", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 4.5l6 3.5-6 3.5zM10 4.5l6 3.5-6 3.5z\"/><path d=\"M20 12.5l-6 3.5 6 3.5zM14 12.5l-6 3.5 6 3.5z\"/></svg>"}, "lessico": {"c": "#6b3f8a", "n": "Conoscere e usare il lessico specifico", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 18.5L8.5 6l4.5 12.5M5.6 14h5.8\"/><path d=\"M15 12.5a2.5 2.5 0 1 1 0 4.5M20 10v8.5\"/></svg>"}, "ripasso": {"c": "#2b5f6b", "n": "Ripasso finale", "i": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6.5l2 2 3.5-3.5M12 7h8M4 13.5l2 2 3.5-3.5M12 14h8M12 20h8\"/></svg>"}};
+var zona=document.getElementById("esercizi"), ultimo="";
+ESERCIZI.forEach(function(E,i){
+  if(E.gruppo!==ultimo){ var g=GRUPPI[E.gruppo], f=el("p",{"class":"fascia",style:"--c:"+g.c}), t=el("span",{"class":"tondo"}); t.innerHTML=g.i; f.appendChild(t); f.appendChild(el("span",null,g.n)); zona.appendChild(f); ultimo=E.gruppo; }
+  var box=el("div",{"class":"attivita"}); box.appendChild(el("h4",null,(i+1)+". "+E.titolo)); box.appendChild(el("p",{"class":"meta"},E.meta));
+  costruisci(box,E.scelte,mescola(E.righe)); zona.appendChild(box);
+});
+costruisci(document.getElementById("dieci"), mescola(DIECI.map(function(d){return d[1];})), DIECI.map(function(d){ return [d[0]+" …", d[1]]; }));
+})();
+</script>
+<script>
+/* Ti ricordi?: testo con le parole mancanti */
+(function(){
+  var box=document.getElementById("cloze-ricordi"); if(!box) return;
+  var buchi=Array.prototype.slice.call(box.querySelectorAll(".buco")), banca=box.querySelector(".cloze-banca"), parole=box.querySelector(".cloze-parole");
+  var bS=box.querySelector('[data-cz="soluzioni"]'), pt=box.querySelector(".punteggio"), ultimo=null;
+  function norm(t){ t=String(t||"").trim().toLowerCase(); try{ t=t.normalize("NFD").replace(/[̀-ͯ]/g,""); }catch(e){} return t.replace(/\s+/g," "); }
+  function giuste(b){ return [b.getAttribute("data-r")].concat((b.getAttribute("data-alt")||"").split("|")).filter(Boolean).map(norm); }
+  function link(b,svelata){
+    var a=document.createElement("a"); a.className="buco-ok"+(svelata?" svelata":""); var hr=b.getAttribute("data-href"); a.href=hr; if(hr.charAt(0)!=="#"){ a.target="_blank"; a.rel="noopener"; }
+    var tipo=b.getAttribute("data-tipo")||"parola", dove=b.getAttribute("data-dove")||"lezione precedente";
+    var cosa={parola:"Leggi la definizione in",personaggio:"Chi è? Leggi la scheda in",luogo:"Dov'è? Trovalo sulla carta in"}[tipo]||"Approfondisci in";
+    a.className+=" "+tipo; a.textContent=b.getAttribute("data-r"); a.title=cosa+": "+dove;
+    a.setAttribute("aria-label",b.getAttribute("data-r")+" – "+cosa+": "+dove+(hr.charAt(0)!=="#"?" (si apre in una nuova scheda)":""));
+    b.innerHTML=""; b.appendChild(a); b._fatto=true;
+  }
+  function campo(b,i){
+    var r=b.getAttribute("data-r"), inp=document.createElement("input");
+    inp.type="text"; inp.className="buco-in"; inp.size=Math.max(6,r.length+2); inp.autocomplete="off"; inp.spellcheck=false;
+    inp.setAttribute("autocapitalize","off"); inp.setAttribute("aria-label","Parola mancante "+(i+1));
+    inp.addEventListener("focus",function(){ ultimo=inp; });
+    inp.addEventListener("input",function(){ inp.classList.remove("no"); segna(); });
+    inp.addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); controlla(); } });
+    b.innerHTML=""; b.appendChild(inp); b._fatto=false;
+  }
+  var lez=Array.prototype.slice.call(box.querySelectorAll(".cloze-lez"));
+  function mostraLez(v){ lez.forEach(function(a){ a.hidden=!v; }); }
+  function mescola(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), x=a[i]; a[i]=a[j]; a[j]=x; } return a; }
+  function segna(){
+    var usate=buchi.map(function(b){ var inp=b.querySelector("input"); return b._fatto? norm(b.getAttribute("data-r")) : (inp? norm(inp.value):""); });
+    Array.prototype.forEach.call(parole.children,function(c){ var k=usate.indexOf(norm(c.textContent)); c.classList.toggle("usata",k>=0); });
+  }
+  function banco(){
+    parole.innerHTML="";
+    mescola(buchi.map(function(b){ return b.getAttribute("data-r"); })).forEach(function(w){
+      var c=document.createElement("button"); c.type="button"; c.textContent=w;
+      c.addEventListener("click",function(){
+        var dest=(ultimo&&ultimo.isConnected)?ultimo:null;
+        if(!dest){ for(var i=0;i<buchi.length;i++){ var x=buchi[i].querySelector("input"); if(x&&!x.value){ dest=x; break; } } }
+        if(!dest) return;
+        dest.value=w; dest.classList.remove("no"); segna();
+        var tutti=buchi.map(function(b){ return b.querySelector("input"); }).filter(Boolean), k=tutti.indexOf(dest);
+        for(var j=1;j<=tutti.length;j++){ var n=tutti[(k+j)%tutti.length]; if(!n.value){ n.focus(); return; } }
+        dest.focus();
+      });
+      parole.appendChild(c);
+    });
+    segna();
+  }
+  function controlla(){
+    var ok=0, vuote=0; mostraLez(true);
+    buchi.forEach(function(b){
+      if(b._fatto){ ok++; return; }
+      var inp=b.querySelector("input"); if(!inp.value.trim()){ vuote++; inp.classList.remove("no"); return; }
+      if(giuste(b).indexOf(norm(inp.value))>=0){ ok++; link(b,false); } else inp.classList.add("no");
+    });
+    pt.textContent = ok===buchi.length ? "Bravo! Tutte giuste: apri le parole per ripassare." : ok+" su "+buchi.length+(vuote?" · "+vuote+" da completare":"");
+    bS.hidden = ok===buchi.length; segna();
+  }
+  function avvia(){
+    buchi.forEach(campo); mostraLez(false); ultimo=null; pt.textContent=""; bS.hidden=true;
+    banco();
+  }
+  box.querySelector('[data-cz="controlla"]').addEventListener("click",controlla);
+  bS.addEventListener("click",function(){ buchi.forEach(function(b){ if(!b._fatto) link(b,true); }); pt.textContent="Ecco le soluzioni: le parole in blu sono quelle che ti mancavano."; bS.hidden=true; segna(); });
+  box.querySelector('[data-cz="ricomincia"]').addEventListener("click",avvia);
+  avvia();
+})();
+</script>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+
+  /* le regole @media (max-width) valgono anche quando la pagina è ingrandita (lo zoom non le attiva da solo) */
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  /* larghezza dello schermo misurata senza ingrandimento (sui tablet lo zoom può allargare la finestra virtuale) */
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+
+  /* aspect-ratio per i browser che non lo conoscono (iOS 14 e precedenti, Chrome prima dell'88) */
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+
+  /* ingrandimento: zoom CSS dove esiste, altrimenti (Firefox fino a maggio 2024) una scala equivalente.
+     Sui telefoni stretti si ferma quando la pagina non ci starebbe più (larghezza minima 300 px). */
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      /* se a questo ingrandimento la pagina non ci sta in larghezza, si scende di un passo */
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<!-- /zoom-ctrl -->
+<script>
+(function(){var bs=document.querySelectorAll(".dettaglio-apri");for(var i=0;i<bs.length;i++){bs[i].onclick=function(){if(window.tlLente)window.tlLente(this.getAttribute("data-src"),this.getAttribute("data-cap"));};}})();
+</script>
+<script>
+if(window.NodeList&&!NodeList.prototype.forEach){NodeList.prototype.forEach=Array.prototype.forEach;}
+
+/* Lettore: la stessa funzione serve all'anteprima e alla pagina per gli studenti */
+function mountTL(root, D, opts){
+  opts = opts || {};
+  function h(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function annoTxt(y){ y = Number(y); if (!isFinite(y) || String(y) === '') return ''; return y < 0 ? (-y) + ' a.C.' : String(y); }
+  function lab(it){ return (it.label || '').trim() || annoTxt(it.year); }
+  var items = (D.items || []).map(function(it, i){ return {evento: it.evento, dettaglio: it.dettaglio, img: it.img, year: it.year === '' || it.year == null ? NaN : Number(it.year), label: it.label, caption: it.caption, source: it.source, i: i}; })
+    .filter(function(it){ return it.img; });
+  items.sort(function(a, b){ var ya = isFinite(a.year) ? a.year : Infinity, yb = isFinite(b.year) ? b.year : Infinity; return ya - yb || a.i - b.i; });
+  var n = items.length, modi = D.modes || {esplora: true, confronta: true, ordina: true};
+  var M = ['esplora', 'confronta', 'ordina'].filter(function(m){ return modi[m]; }); if (!M.length) M = ['esplora'];
+  var NOMI = {esplora: 'Sfoglia nel tempo', confronta: 'Confronta', ordina: 'Metti in ordine'};
+  var cleanup = [];
+  function pulisci(){ cleanup.forEach(function(f){ try { f(); } catch (e) {} }); cleanup = []; }
+  if (root._tlStop) root._tlStop();
+  root._tlStop = pulisci;
+  if (!n){ root.innerHTML = '<div class="tl tl-empty">Aggiungi almeno una foto per vedere la linea del tempo.</div>'; return {stop: pulisci}; }
+  /* posizioni sulla linea */
+  var ys = items.map(function(it){ return it.year; }), tuttiAnni = ys.every(isFinite), ymin = Math.min.apply(null, ys), ymax = Math.max.apply(null, ys);
+  var pos = items.map(function(it, i){ return n === 1 ? 0.5 : (D.proporzionale !== false && tuttiAnni && ymax > ymin ? (it.year - ymin) / (ymax - ymin) : i / (n - 1)); });
+  var modo = M[0];
+  root.innerHTML = '<div class="tl' + (opts.lim ? ' lim' : '') + '"><div class="tl-head"><div><span class="tl-kind">Linea del tempo per immagini</span><h2 class="tl-title">' + h(D.title || 'Senza titolo') + '</h2>' + (D.subtitle ? '<p class="tl-sub">' + h(D.subtitle) + '</p>' : '') + '</div>' +
+    '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">' + (M.length > 1 ? '<div class="tl-modes" role="group">' + M.map(function(m){ return '<button type="button" data-modo="' + m + '">' + NOMI[m] + '</button>'; }).join('') + '</div>' : '') +
+    '<button class="btn small" type="button" data-fs title="Schermo intero (LIM)">⛶</button></div></div><div class="tl-body"></div></div>';
+  var box = root.querySelector('.tl'), body = root.querySelector('.tl-body');
+  box.querySelectorAll('[data-modo]').forEach(function(b){ b.onclick = function(){ apri(b.dataset.modo); }; });
+  box.querySelector('[data-fs]').onclick = function(){
+    if (document.fullscreenElement) document.exitFullscreen(); else if (box.requestFullscreen){ var pr = box.requestFullscreen(); if (pr && pr.then) pr.then(function(){ box.classList.add('lim'); }, function(){}); else box.classList.add('lim'); }
+  };
+  var fsH = function(){ if (!document.fullscreenElement) box.classList.toggle('lim', !!opts.lim); };
+  document.addEventListener('fullscreenchange', fsH); cleanup.push(function(){ document.removeEventListener('fullscreenchange', fsH); });
+  var locali = [];
+  function apri(m){
+    locali.forEach(function(f){ f(); }); locali = [];
+    modo = m; box.querySelectorAll('[data-modo]').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.modo === m); });
+    if (m === 'esplora') esplora(); else if (m === 'confronta') confronta(); else ordina();
+  }
+  cleanup.push(function(){ locali.forEach(function(f){ f(); }); locali = []; });
+
+  /* ---------- Sfoglia nel tempo ---------- */
+  function esplora(){
+    body.innerHTML = '<div class="tl-track"><div class="tl-in"><div class="tl-fill"></div>' + items.map(function(it, i){ return '<button type="button" class="tl-mark' + (i % 2 ? ' giu' : '') + '" style="left:' + (pos[i] * 100) + '%" data-i="' + i + '" title="' + h(lab(it)) + '"><span>' + h(lab(it)) + '</span></button>'; }).join('') + '</div>' +
+      '<input type="range" class="tl-range" min="0" max="1000" step="1" aria-label="Sposta nel tempo"></div>' +
+      '<div class="tl-scena"><div class="tl-lato"><div class="tl-cap"><b></b><span class="tl-txt"></span></div>' +
+      '<div class="tl-ctrl"><button class="btn primary" type="button" data-k="play">▶ Avvia</button><button class="btn" type="button" data-k="zoom">🔍 Ingrandisci</button><button class="btn" type="button" data-k="det" hidden>🔎 Guarda il dettaglio</button></div></div>' +
+      '<div class="tl-stage"><div class="tl-view">' + items.map(function(it){ return '<img alt="' + h(lab(it) + (it.caption ? ' – ' + it.caption : '')) + '" src="' + h(it.img) + '">'; }).join('') + '<span class="tl-badge"></span></div>' +
+      '<button class="tl-freccia sx" type="button" data-k="prev" aria-label="Immagine precedente" title="Immagine precedente">‹</button><button class="tl-freccia dx" type="button" data-k="next" aria-label="Immagine successiva" title="Immagine successiva">›</button>' +
+      '<small class="tl-fonte"></small></div></div>';
+    var imgs = body.querySelectorAll('.tl-view img'), marks = body.querySelectorAll('.tl-mark'), rng = body.querySelector('.tl-range'), fill = body.querySelector('.tl-fill');
+    var cap = body.querySelector('.tl-cap'), badge = body.querySelector('.tl-badge'), cur = -1, p = n === 1 ? .5 : 0, anim = null, playing = false;
+    function attuale(){ var best = 0; for (var i = 1; i < n; i++) if (Math.abs(pos[i] - p) < Math.abs(pos[best] - p)) best = i; return best; }
+    function upd(){
+      var i = 0; while (i < n - 2 && p > pos[i + 1]) i++;
+      var a = i, b = Math.min(i + 1, n - 1), t = (b === a || pos[b] === pos[a]) ? 0 : Math.max(0, Math.min(1, (p - pos[a]) / (pos[b] - pos[a])));
+      var fade = D.dissolvenza !== false;
+      for (var k = 0; k < n; k++){
+        var o = 0;
+        if (fade){ if (k === a) o = 1 - t; if (k === b) o = Math.max(o, t); if (a === b && k === a) o = 1; }
+        else o = k === attuale() ? 1 : 0;
+        imgs[k].style.opacity = o; imgs[k].style.zIndex = k === b ? 2 : (k === a ? 1 : 0);
+      }
+      if (fade && a !== b){ imgs[a].style.opacity = 1; imgs[b].style.opacity = t; }
+      rng.value = Math.round(p * 1000); fill.style.width = (p * 100) + '%';
+      var c = attuale();
+      if (c !== cur){ cur = c; var it = items[c];
+        cap.querySelector('b').textContent = lab(it); cap.querySelector('.tl-txt').textContent = it.caption || '';
+        body.querySelector('.tl-fonte').textContent = it.source ? 'Fonte: ' + it.source : ''; badge.textContent = lab(it); badge.hidden = !lab(it);
+        marks.forEach(function(m, j){ m.classList.toggle('on', j === c); }); body.querySelector('[data-k=det]').hidden = !it.dettaglio; }
+    }
+    function ferma(){ if (anim) cancelAnimationFrame(anim); anim = null; playing = false; var pb = body.querySelector('[data-k=play]'); if (pb) pb.textContent = '▶ Avvia'; }
+    function vai(dest, poi){
+      if (anim) cancelAnimationFrame(anim);
+      var da = p, t0 = null, dur = Math.max(350, Math.abs(dest - da) * 2600);
+      function st(ts){ if (t0 == null) t0 = ts; var k = Math.min(1, (ts - t0) / dur), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+        p = da + (dest - da) * e; upd(); if (k < 1) anim = requestAnimationFrame(st); else { anim = null; if (poi) poi(); } }
+      anim = requestAnimationFrame(st);
+    }
+    function passo(d){ ferma(); var c = attuale(), j = Math.max(0, Math.min(n - 1, c + d)); if (Math.abs(pos[c] - p) > .001 && d > 0 && pos[c] > p) j = c; if (Math.abs(pos[c] - p) > .001 && d < 0 && pos[c] < p) j = c; vai(pos[j]); }
+    rng.addEventListener('input', function(){ ferma(); p = rng.value / 1000; upd(); });
+    marks.forEach(function(m){ m.onclick = function(){ ferma(); vai(pos[+m.dataset.i]); }; });
+    body.querySelector('[data-k=zoom]').onclick = function(){ ferma(); var it = items[attuale()]; lente(it.img, lab(it) + (it.caption ? ' – ' + it.caption : '')); };
+    body.querySelector('.tl-view').onclick = body.querySelector('[data-k=zoom]').onclick;
+    body.querySelector('[data-k=det]').onclick = function(){ ferma(); var it = items[attuale()]; if (it.dettaglio) lente(it.dettaglio.img, 'Dettaglio – ' + (it.dettaglio.caption || '')); };
+    body.querySelector('[data-k=prev]').onclick = function(){ passo(-1); };
+    body.querySelector('[data-k=next]').onclick = function(){ passo(1); };
+    body.querySelector('[data-k=play]').onclick = function(){
+      if (playing) return ferma();
+      playing = true; this.textContent = '❚❚ Pausa';
+      if (p >= .999) { p = 0; upd(); }
+      (function prossimo(){ if (!playing) return; var j = 0; while (j < n && pos[j] <= p + .001) j++; if (j >= n) return ferma();
+        vai(pos[j], function(){ if (playing) setTimeout(prossimo, 1300); }); })();
+    };
+    var key = function(e){ if (!root.isConnected || modo !== 'esplora' || /INPUT|TEXTAREA|SELECT/.test((e.target || {}).tagName || '')) return; if (e.key === 'ArrowRight'){ e.preventDefault(); passo(1); } if (e.key === 'ArrowLeft'){ e.preventDefault(); passo(-1); } };
+    document.addEventListener('keydown', key);
+    locali.push(function(){ ferma(); document.removeEventListener('keydown', key); });
+    upd();
+  }
+
+  /* ---------- Confronta prima/dopo ---------- */
+  function confronta(){
+    var opz = function(sel){ return items.map(function(it, i){ return '<option value="' + i + '"' + (i === sel ? ' selected' : '') + '>' + h(lab(it) || ('Foto ' + (i + 1))) + '</option>'; }).join(''); };
+    body.innerHTML = (n < 2 ? '<p class="or-hint">Servono almeno due foto per il confronto.</p>' : '') +
+      '<div class="cf-sel"><label>Prima <select data-cf="a">' + opz(0) + '</select></label><label>Dopo <select data-cf="b">' + opz(n - 1) + '</select></label><span class="hint" style="color:var(--muted);font-size:.9rem">Trascina sulla foto per scoprire i cambiamenti</span></div>' +
+      '<div class="cf-view"><img class="cf-ib" alt=""><div class="cf-a"><img class="cf-ia" alt=""></div><div class="cf-h"><span>⇔</span></div><span class="cf-la"></span><span class="cf-lb"></span></div>' +
+      '<input type="range" class="cf-range" min="0" max="100" value="50" aria-label="Sposta la divisione tra prima e dopo"><div class="tl-cap"><span class="cf-cap"></span></div>';
+    var v = body.querySelector('.cf-view'), A = body.querySelector('.cf-a'), H = body.querySelector('.cf-h'), r = body.querySelector('.cf-range');
+    function set(x){ x = Math.max(0, Math.min(100, x)); A.style.clipPath = A.style.webkitClipPath = 'inset(0 ' + (100 - x) + '% 0 0)'; H.style.left = x + '%'; r.value = Math.round(x); }
+    function foto(){
+      var a = items[+body.querySelector('[data-cf=a]').value], b = items[+body.querySelector('[data-cf=b]').value];
+      body.querySelector('.cf-ia').src = a.img; body.querySelector('.cf-ib').src = b.img;
+      body.querySelector('.cf-la').textContent = lab(a); body.querySelector('.cf-lb').textContent = lab(b);
+      body.querySelector('.cf-cap').textContent = [a.caption && (lab(a) + ': ' + a.caption), b.caption && (lab(b) + ': ' + b.caption)].filter(Boolean).join(' · ');
+    }
+    body.querySelectorAll('[data-cf]').forEach(function(s){ s.onchange = foto; });
+    var drag = false;
+    function mv(e){ var R = v.getBoundingClientRect(); set((e.clientX - R.left) / R.width * 100); }
+    v.addEventListener('pointerdown', function(e){ drag = true; try { v.setPointerCapture(e.pointerId); } catch (x) {} mv(e); });
+    v.addEventListener('pointermove', function(e){ if (drag) mv(e); });
+    v.addEventListener('pointerup', function(){ drag = false; });
+    v.addEventListener('pointercancel', function(){ drag = false; });
+    r.addEventListener('input', function(){ set(+r.value); });
+    foto(); set(50);
+  }
+
+  /* ---------- Metti in ordine ---------- */
+  function ordina(){
+    var posto = [], sel = null, verificato = false;
+    for (var i = 0; i < n; i++) posto.push(null);
+    var mazzo = items.map(function(_, k){ return k; });
+    for (var k = 0; k < 20; k++){ for (var a = mazzo.length - 1; a > 0; a--){ var j = Math.floor(Math.random() * (a + 1)), t = mazzo[a]; mazzo[a] = mazzo[j]; mazzo[j] = t; } if (n < 2 || mazzo.some(function(x, q){ return x !== q; })) break; }
+    function giusto(s){ var k = posto[s]; return k != null && (k === s || (isFinite(items[k].year) && items[k].year === items[s].year && lab(items[k]) === lab(items[s]))); }
+    function draw(){
+      var libere = mazzo.filter(function(k){ return posto.indexOf(k) < 0; });
+      body.innerHTML = '<p class="or-hint">Trascina ogni foto nel posto giusto della linea del tempo (oppure tocca una foto e poi il posto).</p>' +
+        '<p class="or-evento" aria-live="polite">' + (sel && items[sel.k] && items[sel.k].evento ? '<b>Hai scelto:</b> ' + h(items[sel.k].evento) : 'Tocca un\'immagine per sapere che evento rappresenta.') + '</p>' + '<div class="or-dir"><span>← più antico</span><span>più recente →</span></div>' +
+        '<div class="or-slots" style="--n:' + Math.min(n, 8) + '">' + posto.map(function(k, s){
+          var cls = verificato && k != null ? (giusto(s) ? ' ok' : ' ko') : '';
+          return '<div class="or-slot' + cls + '"><div class="or-lab">' + (D.dateGioco ? h(lab(items[s])) : (s + 1) + '°') + '</div>' +
+            '<button type="button" class="or-drop' + (sel && sel.da === 's' + s ? ' sel' : '') + '" data-s="' + s + '"' + (k != null ? ' draggable="true"' : '') + '>' + (k != null ? '<img alt="" src="' + h(items[k].img) + '">' : '<span class="q">?</span>') + '</button>' +
+            '<span class="or-dot"></span>' + '<span class="or-real">' + (verificato && k != null ? h(lab(items[k])) : '&nbsp;') + '</span></div>'; }).join('') + '</div>' +
+        '<div class="or-pool">' + (libere.length ? libere.map(function(k){ return '<button type="button" class="or-th' + (sel && sel.k === k && sel.da === 'p' ? ' sel' : '') + '" data-k="' + k + '" draggable="true" title="' + h(items[k].evento || '') + '"><img alt="' + h(items[k].evento || 'immagine') + '" src="' + h(items[k].img) + '"></button>'; }).join('') : '<span class="or-hint" style="align-self:center">Tutte le foto sono sulla linea: premi «Verifica».</span>') + '</div>' +
+        '<div class="tl-ctrl"><button class="btn primary" type="button" data-o="ver">Verifica</button><button class="btn" type="button" data-o="sol">Mostra la soluzione</button><button class="btn" type="button" data-o="new">Ricomincia</button></div>' +
+        '<div class="or-res"></div>';
+      if (verificato){ var g = posto.filter(function(_, s){ return giusto(s); }).length, R = body.querySelector('.or-res');
+        var vuoti = posto.filter(function(k){ return k == null; }).length;
+        R.textContent = g === n ? 'Perfetto! Tutte le foto sono al posto giusto.' : g + ' su ' + n + ' al posto giusto' + (vuoti ? ' · ' + (vuoti === 1 ? 'manca ancora una foto' : 'mancano ancora ' + vuoti + ' foto') : ''); R.classList.toggle('ok', g === n); }
+      body.querySelectorAll('.or-th').forEach(function(b){
+        b.onclick = function(){ verificato = false; var k = +b.dataset.k; sel = sel && sel.k === k ? null : {k: k, da: 'p'}; draw(); };
+        b.ondragstart = function(e){ e.dataTransfer.setData('text/plain', 'p' + b.dataset.k); e.dataTransfer.effectAllowed = 'move'; };
+      });
+      body.querySelectorAll('.or-drop').forEach(function(d){
+        var s = +d.dataset.s;
+        d.onclick = function(){
+          verificato = false;
+          if (sel){ metti(sel, s); sel = null; }
+          else if (posto[s] != null) sel = {k: posto[s], da: 's' + s};
+          draw();
+        };
+        d.ondragstart = function(e){ if (posto[s] == null) return e.preventDefault(); e.dataTransfer.setData('text/plain', 's' + s); };
+        d.ondragover = function(e){ e.preventDefault(); d.classList.add('over'); };
+        d.ondragleave = function(){ d.classList.remove('over'); };
+        d.ondrop = function(e){ e.preventDefault(); var x = e.dataTransfer.getData('text/plain'); if (!x) return; verificato = false;
+          metti(x[0] === 'p' ? {k: +x.slice(1), da: 'p'} : {k: posto[+x.slice(1)], da: x}, s); sel = null; draw(); };
+      });
+      var pool = body.querySelector('.or-pool');
+      pool.ondragover = function(e){ e.preventDefault(); };
+      pool.ondrop = function(e){ var x = e.dataTransfer.getData('text/plain'); if (x && x[0] === 's'){ e.preventDefault(); posto[+x.slice(1)] = null; verificato = false; sel = null; draw(); } };
+      pool.onclick = function(e){ if (e.target === pool && sel && sel.da !== 'p'){ posto[+sel.da.slice(1)] = null; sel = null; draw(); } };
+      body.querySelector('[data-o=ver]').onclick = function(){ verificato = true; sel = null; draw(); };
+      body.querySelector('[data-o=sol]').onclick = function(){ for (var s = 0; s < n; s++) posto[s] = s; verificato = true; sel = null; draw(); };
+      body.querySelector('[data-o=new]').onclick = function(){ ordina(); };
+    }
+    function metti(o, s){
+      if (o.k == null) return;
+      var prima = posto[s];
+      if (o.da !== 'p') posto[+o.da.slice(1)] = null;
+      posto[s] = o.k;
+      if (prima != null && prima !== o.k && o.da !== 'p') posto[+o.da.slice(1)] = prima;
+    }
+    draw();
+  }
+  function lente(src, testo){
+    var o = document.createElement('div'); o.className = 'tl-lente'; o.setAttribute('role', 'dialog'); o.setAttribute('aria-label', 'Immagine ingrandita');
+    o.innerHTML = '<button type="button" class="tl-chiudi" aria-label="Chiudi">✕</button><div class="tl-lente-img"><img alt="" src="' + h(src) + '"></div><p>' + h(testo) + '</p><p class="tl-aiuto">Tocca l\'immagine per ingrandirla ancora · Esc o ✕ per chiudere</p>';
+    document.body.appendChild(o);
+    var img = o.querySelector('img'), z = false;
+    img.onclick = function(e){ e.stopPropagation(); z = !z; o.className = 'tl-lente' + (z ? ' zoom' : ''); };
+    function chiudi(){ if (o.parentNode) o.parentNode.removeChild(o); document.removeEventListener('keydown', esc); }
+    function esc(e){ if (e.key === 'Escape' || e.keyCode === 27) chiudi(); }
+    o.querySelector('.tl-chiudi').onclick = chiudi;
+    o.onclick = function(e){ if (e.target === o) chiudi(); };
+    document.addEventListener('keydown', esc); o.querySelector('.tl-chiudi').focus();
+  }
+  window.tlLente = lente;
+  apri(modo);
+  return {stop: pulisci};
+}
+
+(function(){var el=document.getElementById("linea-immagini");if(el)mountTL(el,{"title": "I regni romano-barbarici per immagini", "subtitle": "Sfoglia le immagini nel tempo, poi prova a rimetterle in ordine. Le date sono quelle degli eventi; la didascalia dice quando è stata fatta l'immagine.", "modes": {"esplora": true, "confronta": false, "ordina": true}, "proporzionale": true, "dissolvenza": true, "dateGioco": true, "items": [{"img": "https://commons.wikimedia.org/wiki/Special:FilePath/Young_Folks'_History_of_Rome_illus420.png", "year": 476, "evento": "Romolo Augustolo consegna la corona a Odoacre.", "label": "476", "caption": "Il giovane Romolo Augustolo consegna la corona a Odoacre: finisce l'Impero romano d'Occidente. Disegno dal libro Young Folks' History of Rome di Charlotte M. Yonge, 1880.", "source": "Wikimedia Commons · pubblico dominio"}, {"img": "https://commons.wikimedia.org/wiki/Special:FilePath/Theoderic_Quarter_Siliqua_80000847.jpg", "year": 493, "evento": "Una moneta del regno di Teodorico.", "label": "493", "caption": "Una piccola moneta d'argento coniata a Milano negli anni del regno di Teodorico (circa 491–501). Porta il nome dell'imperatore d'Oriente Anastasio: Teodorico governa l'Italia come suo rappresentante.", "source": "Classical Numismatic Group · Wikimedia Commons · CC BY-SA 2.5"}, {"img": "https://commons.wikimedia.org/wiki/Special:FilePath/Chlodwigs_taufe.jpg?width=1200", "year": 496, "evento": "Il battesimo di Clodoveo, re dei Franchi.", "label": "496", "caption": "Reims: il vescovo Remigio battezza Clodoveo, re dei Franchi, che diventa cattolico. Quadro del Maestro di Saint-Gilles, circa 1500, National Gallery of Art, Washington.", "source": "Wikimedia Commons · pubblico dominio"}, {"img": "https://commons.wikimedia.org/wiki/Special:FilePath/Boethius_initial_consolation_philosophy.jpg?width=1200", "year": 525, "evento": "Boezio insegna ai suoi studenti e poi finisce in carcere.", "label": "525", "caption": "Boezio mentre insegna ai suoi studenti e, sotto, chiuso in carcere, dove scrive la Consolazione della filosofia prima di essere ucciso. Miniatura da un manoscritto italiano del 1385, Università di Glasgow.", "source": "Wikimedia Commons · pubblico dominio"}, {"img": "https://commons.wikimedia.org/wiki/Special:FilePath/Ravenna%3B_tomb_of_Theodoric,_King_of_the_Ostrogoths._Wellcome_L0047700.jpg?width=1400", "year": 526, "evento": "Il mausoleo dove viene sepolto Teodorico.", "label": "526", "caption": "Ravenna: il mausoleo di Teodorico, la tomba monumentale che il re si era fatto costruire intorno al 520. Qui viene sepolto nel 526.", "source": "Wellcome Collection · Wikimedia Commons"}]});})();
+</script>
+<script>
+(function(){
+  var corpo=document.querySelector(".corpo-lezione"), nav=document.querySelector("nav.indice"), b=document.querySelector(".indice-riduci");
+  if(!corpo||!nav||!b) return;
+  function metti(r){
+    if(r) corpo.className+=" indice-ridotto"; else corpo.className=corpo.className.replace(/\s*indice-ridotto/g,"");
+    b.setAttribute("aria-pressed",r?"true":"false");
+    b.setAttribute("aria-label",r?"Mostra i nomi delle parti":"Riduci l'indice alle sole icone");
+    b.title=b.getAttribute("aria-label"); b.innerHTML=r?"&raquo;":"&laquo;";
+  }
+  var r=false; try{ r=localStorage.getItem("indice-ridotto")==="1"; }catch(e){}
+  metti(r);
+  b.onclick=function(){ r=!r; metti(r); try{ localStorage.setItem("indice-ridotto",r?"1":"0"); }catch(e){} };
+})();
+</script>
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

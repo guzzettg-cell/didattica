@@ -133,8 +133,9 @@
       if (o.modulo !== gruppo) {
         if (gruppo) h += "</ol></section>";
         gruppo = o.modulo;
-        var tit = o.modulo.numero ? "All'inizio del modulo " + o.modulo.numero : "Prima di cominciare";
-        var sot = o.modulo.numero ? o.modulo.titolo : "Settembre–ottobre, prima del modulo I";
+        var zero = !o.modulo.numero || o.modulo.numero === "0";
+        var tit = zero ? "Modulo 0 · Prima di cominciare" : "All'inizio del modulo " + o.modulo.numero;
+        var sot = zero ? "Settembre–ottobre, prima del modulo I" : o.modulo.titolo;
         h += '<section class="gruppo-officine"><h2>' + esc(tit) + '</h2><p class="gruppo-sotto">' + esc(sot) + '</p><ol class="officine-schede">';
       }
       var p = parte(o.parte);

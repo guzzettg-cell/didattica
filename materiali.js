@@ -1185,18 +1185,28 @@ var MODULI = [
   {
     materia: "storia",
     classe: "prima",
-    titolo: "I laboratori dello storico",
-    link: "storia/prima/officine/index.html",
-    descrizione: "Prima di cominciare: brevi laboratori di metodo. Ogni laboratorio prepara una parte delle lezioni e ne ha l'icona e il colore.",
+    numero: "0",
+    titolo: "Introduzione e ripasso: il metodo e le invasioni barbariche",
+    descrizione: "Modulo introduttivo, settembre–ottobre: i laboratori di metodo dello storico (ognuno prepara una parte delle lezioni e ne ha l'icona e il colore) e come si studia la storia. Come materiale di esempio per i laboratori si usano le invasioni barbariche e la fine dell'Impero romano d'Occidente, ripasso del programma precedente (Storia facile 1, M1 capp. 1–2 · Tablet pp. 11, 14, 20). Da qui partono i contenuti nuovi del modulo I.",
     lezioni: [
       { titolo: "Laboratorio 0 · Chi siamo", officina: 0, parte: "officina", descrizione: "Ci presentiamo con oggetti e ricordi: ognuno ha una storia.", link: "storia/prima/officine/officina-00-chi-siamo.html", data: "2026-10-30", attivita: [] },
       { titolo: "Laboratorio 1 · Che cos'è la storia", officina: 1, parte: "attivita", descrizione: "La storia ricostruisce il passato degli uomini con domande e prove.", attivita: [] },
       { titolo: "Laboratorio 2 · Storia e preistoria", officina: 2, parte: "att-tempo", descrizione: "La storia comincia con la scrittura; prima c'è la preistoria.", attivita: [] },
       { titolo: "Laboratorio 3 · Oralità e scrittura", officina: 3, parte: "att-fonti", descrizione: "Racconti tramandati a voce e testi scritti: che cosa si conserva, che cosa cambia.", attivita: [] },
-      { titolo: "Laboratorio 4 · Le tracce del passato", officina: 4, parte: "att-fonti", descrizione: "Fonti scritte, materiali, iconografiche e orali: il museo di classe delle fonti.", attivita: [] },
-      { titolo: "Laboratorio 5 · Il tempo della storia", officina: 5, parte: "cosa-quando", descrizione: "Anni, secoli, a.C. e d.C., periodi; la linea del tempo.", attivita: [] },
-      { titolo: "Laboratorio 6 · Lo spazio della storia", officina: 6, parte: "cosa-dove", descrizione: "Carta geografica e carta storica: i confini cambiano.", attivita: [] },
-      { titolo: "Laboratorio 7 · Le parole della storia", officina: 7, parte: "quali-parole", descrizione: "Parole nuove, parole che cambiano significato; il glossario di classe.", attivita: [] }
+      { titolo: "Laboratorio 4 · Le tracce del passato", officina: 4, parte: "att-fonti", descrizione: "Fonti scritte, materiali, iconografiche e orali: il museo di classe delle fonti. Esempio: le fonti sulla fine dell'Impero romano (monete, resti archeologici, racconti degli storici antichi).", attivita: [] },
+      { titolo: "Laboratorio 5 · Il tempo della storia", officina: 5, parte: "cosa-quando", descrizione: "Anni, secoli, a.C. e d.C., periodi; la linea del tempo. Esempio: la linea del tempo dalla divisione dell'Impero (395) alla deposizione di Romolo Augustolo (476).", attivita: [] },
+      { titolo: "Laboratorio 6 · Lo spazio della storia", officina: 6, parte: "cosa-dove", descrizione: "Carta geografica e carta storica: i confini cambiano. Esempio: la carta delle invasioni barbariche e i confini dell'Impero che si sgretolano.", attivita: [] },
+      { titolo: "Laboratorio 7 · Le parole della storia", officina: 7, parte: "quali-parole", descrizione: "Parole nuove, parole che cambiano significato; il glossario di classe. Esempio: barbaro, impero, invasione, limes, regno romano-barbarico.", attivita: [] },
+      { titolo: "Laboratorio 8 · Come si legge una lezione", officina: 8, parte: "leggiamo", descrizione: "Le prime parti della lezione: Cosa imparerai, Leggiamo, Quali parole?, Ripassiamo. Esempio: le pagine del libro sulla fine dell'Impero romano d'Occidente.", attivita: [] },
+      { titolo: "Laboratorio 9 · Le persone della storia", officina: 9, parte: "chi-incontrerai", descrizione: "Chi sono i protagonisti e come si presentano. Esempio: Attila, Odoacre, Romolo Augustolo.", attivita: [] },
+      { titolo: "Laboratorio 10 · Causa, evento, effetto", officina: 10, parte: "perche", descrizione: "Perché le cose succedono e che cosa provocano. Esempio: la crisi dell'Impero, le invasioni barbariche, la caduta nel 476, la nascita dei regni romano-barbarici.", attivita: [] },
+      {
+        titolo: "Come si studia la storia",
+        descrizione: "Lezione di metodo, prima di cominciare: le cinque attività del mestiere dello storico e le parti di ogni lezione (Prima/Dopo, Idea principale, Testo, Perché?, Concetti fondamentali, Come?, Parole chiave, Studiamo le fonti, Ripassiamo).",
+        link: "storia/prima/metodo/come-si-studia-la-storia.html",
+        data: "2026-10-28",
+        attivita: []
+      }
     ]
   },
   {
@@ -1206,15 +1216,6 @@ var MODULI = [
     titolo: "L'Italia dai Bizantini ai Longobardi",
     descrizione: "Primo quadrimestre, in collegamento con Geografia.",
     lezioni: [
-      { titolo: "Laboratorio 8 · Come si legge una lezione", officina: 8, parte: "leggiamo", descrizione: "Le prime parti della lezione: Cosa imparerai, Leggiamo, Quali parole?, Ripassiamo.", attivita: [] },
-      {
-        titolo: "Come si studia la storia",
-        descrizione: "Lezione di metodo, prima di cominciare: le cinque attività del mestiere dello storico e le parti di ogni lezione (Prima/Dopo, Idea principale, Testo, Perché?, Concetti fondamentali, Come?, Parole chiave, Studiamo le fonti, Ripassiamo).",
-        link: "storia/prima/metodo/come-si-studia-la-storia.html",
-        data: "2026-10-28",
-        attivita: []
-      },
-      { titolo: "La fine dell'Impero romano d'Occidente", descrizione: "Lezione extra: il punto di partenza del Medioevo, ripreso da Storia facile e dal Tablet; non è nella programmazione di dipartimento.", indice: "Storia facile 1, M1 capp. 1–2 · Tablet pp. 11, 14, 20", attivita: [] },
       { titolo: "Un nuovo scenario europeo", dipartimento: true, indice: "Storia facile 1, M1 cap. 3 (I regni romano-barbarici) · Tablet p. 25", attivita: [] },
       { titolo: "Il monachesimo", descrizione: "Lezione extra: capitolo di Storia facile e del Tablet che non è nella programmazione di dipartimento.", indice: "Storia facile 1, M1 cap. 4 · Tablet p. 36", attivita: [] },
       { titolo: "I Longobardi", dipartimento: true, indice: "Storia facile 1, M1 cap. 5 · Tablet p. 25", attivita: [] },
@@ -1242,8 +1243,6 @@ var MODULI = [
     titolo: "Nuove invasioni e nuovi regni: l'Europa dopo l'impero carolingio",
     descrizione: "Primo quadrimestre, in collegamento con Geografia e Italiano (epica cavalleresca).",
     lezioni: [
-      { titolo: "Laboratorio 9 · Le persone della storia", officina: 9, parte: "chi-incontrerai", descrizione: "Chi sono i protagonisti e come si presentano.", attivita: [] },
-      { titolo: "Laboratorio 10 · Causa, evento, effetto", officina: 10, parte: "perche", descrizione: "Perché le cose succedono e che cosa provocano.", attivita: [] },
       { titolo: "La divisione dell'impero dopo Carlo Magno", dipartimento: true, indice: "Storia facile 1, M2 cap. 8 · Tablet p. 47", attivita: [] },
       { titolo: "Le nuove invasioni", dipartimento: true, indice: "Storia facile 1, M2 cap. 8 · Tablet p. 47", attivita: [] },
       { titolo: "L'epoca d'oro dell'impero romano d'Oriente", dipartimento: true, indice: "Storia facile 1, M1 cap. 5 · Tablet p. 25", attivita: [] },
