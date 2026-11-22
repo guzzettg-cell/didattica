@@ -473,6 +473,12 @@ a.voce[aria-current="true"] .tondo{background:#ffffff;border-color:#fff}
 .come.tre{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (max-width: 900px){.come.tre{grid-template-columns:1fr 1fr}}
 @media (max-width: 560px){.come.tre{grid-template-columns:1fr}}
+.video-box{position:relative;width:100%;aspect-ratio:16/9;margin:12px 0 8px;border-radius:12px;overflow:hidden;background:#000}
+.video-box iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-box a.video-anteprima{position:absolute;inset:0;display:block;background:#000 center/cover no-repeat}
+.video-box a.video-anteprima span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76px;height:54px;border-radius:14px;background:#e62117;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.video-box a.video-anteprima span:after{content:"";position:absolute;left:31px;top:16px;border-style:solid;border-width:11px 0 11px 19px;border-color:transparent transparent transparent #fff}
+.video-box a.video-anteprima em{position:absolute;left:0;right:0;bottom:0;padding:8px 12px;background:rgba(0,0,0,.6);color:#fff;font:600 .9rem system-ui,sans-serif;font-style:normal}
 </style>
 </head>
 <body>
@@ -480,7 +486,7 @@ a.voce[aria-current="true"] .tondo{background:#ffffff;border-color:#fff}
 <div class="foglio">
 <header class="testata">
   <a class="indietro" href="../../index.html">← Torna a Storia: tutti i moduli</a>
-  <p class="eyebrow">Storia · Classe prima · Il nuovo scenario europeo</p>
+  <p class="eyebrow">Storia · Modulo I · L'Italia dai Bizantini ai Longobardi</p>
   <p class="capitolo">Lezione 1</p>
   <h1>I regni romano-barbarici</h1>
   <p class="sottotitolo">476–526: sulle terre dell'Impero d'Occidente Germani e Romani costruiscono un'Europa nuova</p>
@@ -567,12 +573,17 @@ a.voce[aria-current="true"] .tondo{background:#ffffff;border-color:#fff}
   <div class="animata" id="carta-animata" aria-labelledby="t-animata">
     <h4 id="t-animata">🎬 Cambia sguardo: la carta animata</h4>
     <p>Ora guarda questi luoghi in movimento: popoli, confini e regni che cambiano nel tempo. Poi torna alla carta muta e ritrova i luoghi dell'elenco.</p>
-    <h5>Carte animate</h5>
+    <div class="video-box" data-ar="16/9"><iframe src="https://www.youtube-nocookie.com/embed/IRi1eZmc2f8" title="I regni romano-germanici: carta animata" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+    <h5>Carte animate HUB Scuola</h5>
     <ul>
-      <li><a href="https://www.youtube.com/playlist?list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">Tutte le carte animate di storia di HUB Scuola</a></li>
-      <li><a href="https://www.youtube.com/results?search_query=carta+animata+regni+romano-barbarici" target="_blank" rel="noopener">Cerca carte animate sui regni romano-barbarici</a></li>
+      <li><a href="https://www.youtube.com/watch?v=IRi1eZmc2f8&amp;list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">I regni romano-germanici</a></li>
     </ul>
-    <p class="nota-video">Video su YouTube, si aprono in una nuova scheda. Osserva soprattutto la carta e le date.</p>
+    <h5>Altre carte animate</h5>
+    <ul>
+      <li><a href="https://www.youtube.com/results?search_query=carta+animata+regni+romano-barbarici" target="_blank" rel="noopener">Cerca altre carte animate su questo argomento</a></li>
+      <li><a href="https://www.youtube.com/playlist?list=PLsLBNKs3-030DpTJj8sW5NzzYkMmPTfCu" target="_blank" rel="noopener">Tutte le carte animate di storia di HUB Scuola</a></li>
+    </ul>
+    <p class="nota-video">Se il video non parte qui, aprilo su YouTube con i link. Osserva soprattutto la carta e le date.</p>
   </div>
 
   <h3 id="quando"><span>2. Quando?</span></h3>
@@ -1355,5 +1366,21 @@ function mountTL(root, D, opts){
 })();
 </script>
 <script src="../../../assets/barra.js"></script>
+<script>
+/* Aperta come file dal computer (file://) YouTube non permette il video incorporato (errore 153):
+   al suo posto un'anteprima che apre il video su YouTube. Sul sito pubblicato resta il video incorporato. */
+(function(){
+  if(location.protocol!=="file:") return;
+  var f=document.querySelectorAll(".video-box iframe");
+  for(var i=0;i<f.length;i++){
+    var m=/embed\/([\w-]{11})/.exec(f[i].src); if(!m) continue;
+    var a=document.createElement("a"); a.className="video-anteprima"; a.href="https://www.youtube.com/watch?v="+m[1]; a.target="_blank"; a.rel="noopener";
+    a.style.backgroundImage="url(https://i.ytimg.com/vi/"+m[1]+"/hqdefault.jpg)";
+    a.innerHTML="<span></span><em>Guarda il video su YouTube (si apre in una nuova scheda)</em>";
+    a.setAttribute("aria-label",(f[i].title||"Video")+" – guarda su YouTube");
+    f[i].parentNode.replaceChild(a,f[i]);
+  }
+})();
+</script>
 </body>
 </html>

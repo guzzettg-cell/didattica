@@ -1216,8 +1216,8 @@ var MODULI = [
     titolo: "L'Italia dai Bizantini ai Longobardi",
     descrizione: "Primo quadrimestre, in collegamento con Geografia.",
     lezioni: [
-      { titolo: "Un nuovo scenario europeo", dipartimento: true, indice: "Storia facile 1, M1 cap. 3 (I regni romano-barbarici) · Tablet p. 25", attivita: [] },
-      { titolo: "Il monachesimo", descrizione: "Lezione extra: capitolo di Storia facile e del Tablet che non è nella programmazione di dipartimento.", indice: "Storia facile 1, M1 cap. 4 · Tablet p. 36", attivita: [] },
+      { titolo: "Un nuovo scenario europeo", dipartimento: true, indice: "Storia facile 1, M1 cap. 3 (I regni romano-barbarici) · Tablet p. 25", descrizione: "I regni romano-barbarici: dove si stabiliscono i Germani, come convivono con i Romani, Teodorico e gli Ostrogoti in Italia (476–526).", link: "storia/prima/nuovo-scenario-europeo/regni-romano-barbarici.html", data: "2026-11-22", attivita: [] },
+      { titolo: "Il monachesimo", descrizione: "Lezione extra: capitolo di Storia facile e del Tablet che non è nella programmazione di dipartimento.", indice: "Storia facile 1, M1 cap. 4 · Tablet p. 36", link: "storia/prima/monachesimo/monachesimo.html", data: "2026-11-22", attivita: [] },
       { titolo: "I Longobardi", dipartimento: true, indice: "Storia facile 1, M1 cap. 5 · Tablet p. 25", attivita: [] },
       { titolo: "L'inizio del potere temporale della Chiesa", dipartimento: true, indice: "Storia facile 1, M1 cap. 5 · Tablet p. 25", attivita: [] }
     ]
