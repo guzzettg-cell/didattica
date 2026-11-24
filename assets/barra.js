@@ -331,3 +331,108 @@
   function avvia() { try { zoom(); } catch (e) {} try { menu(); } catch (e) {} try { barra(); } catch (e) {} }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", avvia); else avvia();
 })();
+
+/* =============================================================
+   3. PAGINA APERTA DAL SITO DELLE CLASSI
+   Il sito delle classi apre le pagine con due aggiunte nell'indirizzo:
+     ?parti=idea,parole   mostra solo quelle parti della pagina
+     &torna=<indirizzo>   nasconde il menu del sito e mostra «← Torna alla classe»
+   Le parti sono le stesse di assets/indice-parti.js (vedi strumenti/crea-indice-parti.py):
+     - le <section class="parte" id="..."> e gli elementi con data-parte="...";
+     - se non ce ne sono, le <section> principali: il loro id oppure p1, p2... in ordine.
+   Nelle lezioni a schede (una parte alla volta, con nav.indice) le parti non scelte
+   spariscono dall'indice e dai pulsanti ← →; nelle altre pagine si nascondono.
+   Le presentazioni a diapositive (section.slide) restano sempre intere.
+   Senza queste aggiunte nell'indirizzo la pagina è quella di sempre.
+   ============================================================= */
+(function () {
+  "use strict";
+  var q = new URLSearchParams(location.search);
+  var parti = (q.get("parti") || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+  var torna = q.get("torna") || "";
+  if (!/^(https?:|file:)/.test(torna)) torna = "";
+  if (!parti.length && !torna) return;
+
+  if (torna) {
+    var st = document.createElement("style");
+    st.textContent = ".menu-sito,.barra-sito{display:none!important}" +
+      ".torna-classe{display:inline-block;margin:.6rem 1rem;padding:.35rem .9rem;border-radius:999px;background:#1d5fa8;color:#fff!important;" +
+      "text-decoration:none;font:600 15px/1.4 system-ui,sans-serif}.torna-classe:focus-visible{outline:3px solid #f0a500;outline-offset:2px}" +
+      "@media print{.torna-classe{display:none}}";
+    document.head.appendChild(st);
+  }
+
+  function sezioniPrincipali() {
+    return Array.prototype.filter.call(document.querySelectorAll("section"), function (s) {
+      return !(s.parentElement && s.parentElement.closest("section"));
+    });
+  }
+  function filtra() {
+    if (!parti.length) return;
+    var esplicite = Array.prototype.filter.call(document.querySelectorAll("section.parte[id], [data-parte]"), function (el) {
+      return !(el.parentElement && el.parentElement.closest("section.parte[id], [data-parte]"));
+    });
+    var elenco;
+    if (esplicite.length) {
+      elenco = esplicite.map(function (el) { return [el.getAttribute("data-parte") || el.id, el]; });
+    } else {
+      var sez = sezioniPrincipali();
+      if (sez.some(function (s) { return s.classList.contains("slide"); })) return;
+      elenco = sez.map(function (s, i) { return [s.id || "p" + (i + 1), s]; });
+    }
+    var scelte = elenco.filter(function (x) { return parti.indexOf(x[0]) > -1; });
+    if (!scelte.length) return; /* nomi sbagliati: pagina intera */
+    var idScelti = scelte.map(function (x) { return x[1].id; });
+
+    var indice = document.querySelector("nav.indice");
+    var aSchede = indice && indice.querySelector('a.voce[href^="#"]');
+    if (aSchede) {
+      /* LEZIONI A SCHEDE (una parte alla volta): la pagina decide quale parte si vede.
+         Qui si tolgono dall'indice e dai pulsanti ← → le parti non scelte. */
+      Array.prototype.forEach.call(indice.querySelectorAll('a.voce[href^="#"]'), function (v) {
+        if (idScelti.indexOf(v.getAttribute("href").slice(1)) === -1) v.style.display = "none";
+      });
+      Array.prototype.forEach.call(indice.querySelectorAll(".indice-gruppo"), function (g) {
+        var n = g.nextElementSibling, visibili = 0;
+        while (n && !n.classList.contains("indice-gruppo")) { if (n.matches("a.voce") && n.style.display !== "none") visibili++; n = n.nextElementSibling; }
+        if (!visibili) g.style.display = "none";
+      });
+      function nome(id) { var v = indice.querySelector('a.voce[href="#' + id + '"] .nome'); return v ? v.textContent : ""; }
+      scelte.forEach(function (x, k) {
+        Array.prototype.forEach.call(x[1].querySelectorAll(".parte-nav a"), function (a) {
+          var succ = a.classList.contains("succ"), altra = scelte[succ ? k + 1 : k - 1];
+          if (!altra) { a.style.display = "none"; return; }
+          a.setAttribute("href", "#" + altra[1].id);
+          var n = nome(altra[1].id);
+          if (n) a.textContent = succ ? n + " →" : "← " + n;
+        });
+      });
+      function controlla() {
+        var h = decodeURIComponent((location.hash || "").slice(1)), el = h && document.getElementById(h);
+        var sx = el && el.closest("section.parte, [data-parte]");
+        if (!sx || idScelti.indexOf(sx.id) === -1) location.replace("#" + idScelti[0]);
+      }
+      window.addEventListener("hashchange", controlla);
+      controlla();
+      return;
+    }
+    /* PAGINE NORMALI: si nascondono le parti non scelte */
+    elenco.forEach(function (x) {
+      if (parti.indexOf(x[0]) === -1) { x[1].hidden = true; x[1].style.display = "none"; }
+    });
+    /* via i collegamenti interni a parti nascoste (indici, «vai a…») */
+    Array.prototype.forEach.call(document.querySelectorAll('a[href^="#"]'), function (a) {
+      var id = a.getAttribute("href").slice(1); if (!id) return;
+      var t = document.getElementById(id);
+      if (t && t.closest("[hidden]")) { var li = a.closest("li"); (li || a).style.display = "none"; }
+    });
+  }
+  function aggiungiTorna() {
+    if (!torna || document.querySelector(".torna-classe")) return;
+    var a = document.createElement("a");
+    a.className = "torna-classe"; a.href = torna; a.textContent = "← Torna alla classe";
+    document.body.insertBefore(a, document.body.firstChild);
+  }
+  function avvia() { try { filtra(); } catch (e) {} try { aggiungiTorna(); } catch (e) {} }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", avvia); else avvia();
+})();
