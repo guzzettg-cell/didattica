@@ -436,3 +436,143 @@
   function avvia() { try { filtra(); } catch (e) {} try { aggiungiTorna(); } catch (e) {} }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", avvia); else avvia();
 })();
+
+/* =============================================================
+   4. MODALITÀ DOCENTE: «＋ classe» per mettere materiali nella programmazione delle classi
+   Si accende una volta sola, su questo computer e browser, aprendo una pagina del sito
+   con ?docente=1 alla fine dell'indirizzo (si spegne con ?docente=0 o con «esci»).
+   I ragazzi non la vedono. Quando è accesa:
+     - nella pagina di una materia, accanto a moduli, lezioni e attività c'è «＋ classe»;
+     - in ogni altra pagina c'è il pulsante «＋ Aggiungi a una classe».
+   Il pulsante apre la pagina docente del sito delle classi (indirizzo in CLASSI qui sotto).
+   ============================================================= */
+(function () {
+  "use strict";
+  if (window.self !== window.top) return;
+  var me = document.currentScript || (function () { var s = document.getElementsByTagName("script"); return s[s.length - 1]; })();
+  var ROOT = String(me.src).replace(/assets\/barra\.js(\?.*)?$/, "");
+  /* Indirizzo del sito delle classi. Sul computer: la cartella «classi» accanto a «didattica». */
+  var CLASSI = location.protocol === "file:" ? ROOT + "../classi/" : "https://guzzettg-cell.github.io/classi/";
+  var CHIAVE = "scuolafacile-docente";
+
+  var q = new URLSearchParams(location.search);
+  try {
+    if (q.get("docente") === "1") localStorage.setItem(CHIAVE, "1");
+    if (q.get("docente") === "0") localStorage.removeItem(CHIAVE);
+    if (localStorage.getItem(CHIAVE) !== "1") return;
+  } catch (e) { return; }
+
+  var qui = String(location.href).split("#")[0].split("?")[0];
+  var rel = qui.indexOf(ROOT) === 0 ? decodeURI(qui.slice(ROOT.length)) : "";
+  var pezzi = rel.split("/").filter(Boolean);
+  if (pezzi.length && /^index\.html?$/.test(pezzi[pezzi.length - 1])) pezzi.pop();
+  var MATERIE = ["geografia", "storia", "italiano", "educazione-civica"];
+  var paginaMateria = pezzi.length === 1 && MATERIE.indexOf(pezzi[0]) > -1;
+  var home = pezzi.length === 0 || rel === "cerca.html";
+
+  function apri(param) {
+    var p = [];
+    for (var k in param) if (param[k]) p.push(k + "=" + encodeURIComponent(param[k]));
+    window.open(CLASSI + "docente.html?" + p.join("&"), "docente-classi");
+  }
+  function relDi(href) {
+    var h = String(href).split("#")[0].split("?")[0];
+    return h.indexOf(ROOT) === 0 ? decodeURI(h.slice(ROOT.length)) : "";
+  }
+  function bottone(testo, titolo, param) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "piu-classe"; b.textContent = testo; b.title = titolo;
+    b.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); apri(param); });
+    return b;
+  }
+
+  var st = document.createElement("style");
+  st.textContent =
+    ".piu-classe{font:600 12px/1.3 system-ui,sans-serif;color:#1d5fa8;background:#e4eefa;border:1px solid #b9d0ee;border-radius:999px;" +
+    "padding:2px 9px;margin:0 0 0 8px;cursor:pointer;vertical-align:middle;white-space:nowrap}" +
+    ".piu-classe:hover{background:#1d5fa8;color:#fff}.piu-classe:focus-visible{outline:3px solid #f0a500;outline-offset:2px}" +
+    ".piu-classe.grande{position:fixed;right:16px;bottom:16px;z-index:9999;font-size:15px;padding:9px 16px;box-shadow:0 3px 12px rgba(0,0,0,.25);background:#1d5fa8;color:#fff}" +
+    ".modo-docente{position:fixed;left:12px;bottom:12px;z-index:9999;font:12px/1.3 system-ui,sans-serif;background:#fff3c4;border:1px solid #e0c060;" +
+    "border-radius:999px;padding:4px 10px;color:#5a4500}.modo-docente a{color:inherit;margin-left:6px}" +
+    "@media print{.piu-classe,.modo-docente{display:none!important}}";
+  document.head.appendChild(st);
+
+  function segnale() {
+    var d = document.createElement("div");
+    d.className = "modo-docente";
+    d.innerHTML = "Modalità docente<a href=\"?docente=0\">esci</a>";
+    document.body.appendChild(d);
+  }
+
+  /* ---- pagina di una materia: pulsanti accanto a moduli, lezioni e attività ---- */
+  function materia() {
+    var materiaPag = pezzi[0], classePag = q.get("classe") || "";
+    var moduli = (typeof MODULI !== "undefined" ? MODULI : []).filter(function (m) { return m.materia === materiaPag; });
+    var perLink = {};
+    moduli.forEach(function (m) {
+      (m.lezioni || []).forEach(function (l) { if (l.link) perLink[l.link] = 1; (l.attivita || []).forEach(function (a) { if (a.link) perLink[a.link] = 1; }); });
+      (m.attivita || []).forEach(function (a) { if (a.link) perLink[a.link] = 1; });
+    });
+    function moduloDi(det) {
+      var t = det.querySelector("summary .titolo-modulo"); if (!t) return null;
+      var tit = t.textContent.trim();
+      var c = moduli.filter(function (m) { return m.titolo === tit; });
+      if (c.length > 1 && classePag) c = c.filter(function (m) { return m.classe === classePag; }).concat(c).slice(0, 1);
+      if (c.length > 1) { /* stesso titolo in più classi: si riconosce dai link delle lezioni */
+        var link = Array.prototype.map.call(det.querySelectorAll("a[href]"), function (a) { return relDi(a.href); });
+        c = c.filter(function (m) { return (m.lezioni || []).some(function (l) { return link.indexOf(l.link) > -1; }); }).concat(c).slice(0, 1);
+      }
+      return c[0] || null;
+    }
+    function metti() {
+      Array.prototype.forEach.call(document.querySelectorAll("details.modulo"), function (det) {
+        var s = det.querySelector("summary"); if (!s || s.querySelector(".piu-classe")) return;
+        var m = moduloDi(det); if (!m) return;
+        s.appendChild(bottone("＋ classe", "Metti tutto il modulo nella programmazione di una classe",
+          { materia: m.materia, anno: m.classe, modulo: m.titolo }));
+        /* lezioni senza pagina: si riconoscono dal titolo */
+        Array.prototype.forEach.call(det.querySelectorAll("li.lezione"), function (li) {
+          if (li.querySelector(":scope > h4 > .piu-classe")) return;
+          var a = li.querySelector(":scope > h4 a");
+          var lezione = null;
+          (m.lezioni || []).forEach(function (l) {
+            if (a ? relDi(a.href) === l.link : (!l.link && (li.querySelector(":scope > h4") || li).textContent.trim() === l.titolo && (!lezione || l.titolo.length > lezione.titolo.length))) lezione = l;
+          });
+          if (!lezione) {
+            var tutti = Array.prototype.map.call(li.querySelectorAll("a[href]"), function (x) { return relDi(x.href); });
+            (m.lezioni || []).forEach(function (l) { if (l.link && tutti.indexOf(l.link) > -1 && !lezione) lezione = l; });
+          }
+          if (!lezione) return;
+          var dove = li.querySelector(":scope > h4") || li;
+          dove.appendChild(bottone("＋ classe", "Metti questa lezione nella programmazione di una classe",
+            { materia: m.materia, anno: m.classe, modulo: m.titolo, lezione: lezione.titolo, link: lezione.link || "" }));
+        });
+      });
+      /* attività (dentro le lezioni, per tutto il modulo, o nella pagina senza moduli) */
+      Array.prototype.forEach.call(document.querySelectorAll("li.attivita > a[href], li.voce > a[href]"), function (a) {
+        var li = a.parentNode; if (li.querySelector(":scope > .piu-classe")) return;
+        var r = relDi(a.href); if (!perLink[r]) return;
+        li.appendChild(bottone("＋ classe", "Metti questa attività nella programmazione di una classe", { link: r }));
+      });
+    }
+    var attesa = null;
+    function presto() { clearTimeout(attesa); attesa = setTimeout(metti, 80); }
+    metti();
+    new MutationObserver(presto).observe(document.body, { childList: true, subtree: true });
+  }
+
+  /* ---- ogni altra pagina: un pulsante fisso ---- */
+  function pagina() {
+    var h1 = document.querySelector("h1");
+    var titolo = (h1 ? h1.textContent : document.title).replace(/\s+/g, " ").trim();
+    var b = bottone("＋ Aggiungi a una classe", "Metti questa pagina nella programmazione di una classe", { link: rel, titolo: titolo });
+    b.classList.add("grande");
+    document.body.appendChild(b);
+  }
+
+  function avvia() {
+    try { segnale(); } catch (e) {}
+    try { if (paginaMateria) materia(); else if (!home && rel) pagina(); } catch (e) {}
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", avvia); else avvia();
+})();

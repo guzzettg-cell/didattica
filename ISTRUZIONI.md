@@ -213,3 +213,21 @@ In `privati/giochi.js`, per ogni proposta: `stato` («da valutare», «sì», «
 `idea` (come si collega alla lezione), `modulo` e `lezione` scritti come in `materiali.js` (`lezione: null` = tutto il modulo).
 Lo script è `assets/giochi-da-valutare.js`: online non trova il file e non mostra nulla.
 Per mostrarle in un'altra pagina: `<div data-giochi="Titolo del modulo"></div>` e lo script in fondo alla pagina.
+
+## Sito delle classi: parti scelte e pulsanti «＋ classe»
+
+Il sito delle classi (repository `classi`) prende lezioni e attività da questo sito e le mostra a ogni classe
+man mano che le attivi. Qui ci sono due aggiunte in `assets/barra.js`:
+
+- **Parti scelte** (sezione 3): una pagina aperta con `?parti=idea,parole` mostra solo quelle parti;
+  con `&torna=…` nasconde il menu del sito e mostra «← Torna alla classe». Le parti di ogni pagina sono
+  in `assets/indice-parti.js`, che si aggiorna da solo con l'azione *Indice della ricerca*
+  (a mano: `python3 strumenti/crea-indice-parti.py`).
+- **Modalità docente** (sezione 4): si accende **una volta** aprendo una pagina del sito con `?docente=1`
+  alla fine dell'indirizzo (per esempio `https://didattica.amnesiacreativa.it/?docente=1`, oppure dal link
+  «＋ Pulsanti nell'archivio» nella pagina docente). Vale solo per quel browser; si spegne con «esci»
+  in basso a sinistra. Quando è accesa:
+  - nelle pagine delle materie, accanto a ogni modulo, lezione e attività c'è **＋ classe**;
+  - in tutte le altre pagine c'è il pulsante **＋ Aggiungi a una classe** in basso a destra.
+  Il pulsante apre la pagina docente del sito delle classi, dove si scelgono le classi, l'unità e le parti.
+  L'indirizzo del sito delle classi è nella riga `var CLASSI` della sezione 4.
