@@ -456,11 +456,13 @@
   var CHIAVE = "scuolafacile-docente";
 
   var q = new URLSearchParams(location.search);
+  var acceso = q.get("docente") === "1";
   try {
     if (q.get("docente") === "1") localStorage.setItem(CHIAVE, "1");
     if (q.get("docente") === "0") localStorage.removeItem(CHIAVE);
-    if (localStorage.getItem(CHIAVE) !== "1") return;
-  } catch (e) { return; }
+    if (localStorage.getItem(CHIAVE) === "1") acceso = true;
+  } catch (e) {}
+  if (q.get("docente") === "0" || !acceso) return;
 
   var qui = String(location.href).split("#")[0].split("?")[0];
   var rel = qui.indexOf(ROOT) === 0 ? decodeURI(qui.slice(ROOT.length)) : "";
