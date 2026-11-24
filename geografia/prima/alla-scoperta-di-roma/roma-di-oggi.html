@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Roma di oggi: caccia alle opere — Alla scoperta di Roma</title>
+<meta name="description" content="Attività di ricerca e sul campo: i ragazzi scoprono architetture del Novecento, architetture contemporanee e street art di Roma, le visitano, le descrivono e preparano i punti per una mappa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#efe8d8; --cream-deep:#e3d9c1; --ink:#171a2e; --ink-soft:#54587a; --line:#c7c4d6;
+    --paper:#f7f6f1;
+    --nov:#8a5a2b;      /* pista A: Novecento */
+    --con:#2c5f8a;      /* pista B: contemporanea */
+    --str:#b0306a;      /* pista C: street art */
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;margin:0;}
+  p{margin:0 0 1em;}
+  a{color:inherit;}
+
+  .hero{padding:8vh 8vw 6vh;border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--cream) 0%,var(--cream) 75%,var(--cream-deep) 100%);}
+  .hero .back{display:inline-block;margin-bottom:1.6rem;font-size:.85rem;color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line);}
+  .hero .kicker{display:flex;align-items:center;gap:.6em;color:var(--str);font-weight:600;font-size:.95rem;margin-bottom:1.2rem;}
+  .kicker .dot{width:.55em;height:.55em;border-radius:50%;background:var(--str);}
+  .hero h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.06;max-width:20ch;}
+  .hero .sub{max-width:62ch;font-size:clamp(1rem,1.4vw,1.15rem);color:var(--ink-soft);margin-top:1.3rem;}
+  .domanda{margin-top:1.8rem;max-width:62ch;background:var(--ink);color:#f4efe2;border-radius:8px;padding:1.3rem 1.5rem;}
+  .domanda .lab{font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#d9c9a3;}
+  .domanda p{font-family:'Fraunces',serif;font-size:1.3rem;margin:.3rem 0 0;}
+
+  .indice{max-width:860px;margin:0 auto;padding:3vh 8vw 0;}
+  .indice ol{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;padding:0;margin:0;}
+  .indice a{display:inline-block;padding:.3rem .8rem;border:1px solid var(--line);border-radius:999px;background:var(--paper);text-decoration:none;font-size:.85rem;}
+
+  main{max-width:860px;margin:0 auto;padding:2vh 8vw 6vh;}
+  section.parte{padding:3rem 0;border-top:1px solid var(--line);}
+  section.parte:first-of-type{border-top:none;}
+  .fase{font-family:'Fraunces',serif;font-weight:600;font-size:.9rem;color:var(--str);letter-spacing:.02em;margin-bottom:.4rem;}
+  section.parte h2{font-size:clamp(1.5rem,2.6vw,1.95rem);margin-bottom:1rem;}
+  section.parte h3{font-size:1.15rem;margin:1.6rem 0 .6rem;}
+  .soft{color:var(--ink-soft);}
+
+  .ruoli{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.8rem;margin:1rem 0;}
+  .ruolo{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:.9rem 1rem;}
+  .ruolo strong{display:block;font-family:'Fraunces',serif;font-size:1.05rem;}
+  .ruolo span{font-size:.88rem;color:var(--ink-soft);}
+  .attenzione{background:#fff6e0;border:1px solid #e9cf8c;border-radius:8px;padding:1rem 1.2rem;margin:1.2rem 0;}
+  .attenzione h3{margin-top:0;}
+  .attenzione ul{margin:.3rem 0 0;padding-left:1.2rem;}
+
+  .piste{display:grid;gap:1.4rem;margin-top:1rem;}
+  .pista{border-radius:10px;padding:1.2rem 1.3rem 1.3rem;background:var(--paper);border:1px solid var(--line);border-top:6px solid var(--c);}
+  .pista h3{margin:0 0 .2rem;color:var(--c);}
+  .pista .periodo{font-size:.85rem;color:var(--ink-soft);margin-bottom:.8rem;}
+  .indizi{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.7rem;}
+  .indizio{background:#fff;border:1px dashed var(--c);border-radius:8px;padding:.8rem .9rem;font-size:.92rem;}
+  .indizio b{display:block;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin-bottom:.2rem;}
+  .fonti{margin-top:1.2rem;font-size:.92rem;}
+  .fonti li{margin-bottom:.3rem;}
+
+  .scheda{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1.2rem 1.3rem;}
+  .campo{margin-bottom:1rem;}
+  .campo label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.25rem;}
+  .campo small{display:block;color:var(--ink-soft);font-size:.8rem;margin-bottom:.3rem;}
+  .campo input,.campo textarea,.campo select{width:100%;font:inherit;font-size:.95rem;padding:.45rem .6rem;border:1px solid var(--line);border-radius:6px;background:var(--paper);}
+  .campo textarea{min-height:5.5em;resize:vertical;}
+  .due{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem;}
+  @media (max-width:640px){.due{grid-template-columns:1fr;}}
+
+  .check{list-style:none;padding:0;margin:0;}
+  .check li{display:flex;gap:.6rem;align-items:flex-start;padding:.45rem 0;border-bottom:1px dotted var(--line);}
+  .check input{margin-top:.35rem;transform:scale(1.15);}
+
+  .proposte{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.8rem;margin:1rem 0;}
+  .proposta{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--str);border-radius:8px;padding:.9rem 1rem;}
+  .proposta strong{font-family:'Fraunces',serif;font-size:1.05rem;}
+  .proposta p{font-size:.9rem;margin:.3rem 0 0;color:var(--ink-soft);}
+
+  table{width:100%;border-collapse:collapse;font-size:.9rem;background:#fff;}
+  th,td{border:1px solid var(--line);padding:.5rem .6rem;text-align:left;vertical-align:top;}
+  th{background:var(--cream-deep);font-weight:600;}
+  .tabella{overflow-x:auto;}
+
+  .btn{font:inherit;font-weight:600;font-size:.92rem;padding:.55rem 1rem;border-radius:6px;border:1px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer;margin:.3rem .4rem .3rem 0;}
+  .btn.chiaro{background:#fff;color:var(--ink);}
+
+  .docente{background:#eef0f7;border:1px solid var(--line);border-radius:10px;padding:1.2rem 1.3rem;}
+  .docente summary{cursor:pointer;font-weight:600;}
+  .docente table{margin-top:.8rem;}
+
+  footer{max-width:860px;margin:0 auto;padding:2rem 8vw 4rem;font-size:.8rem;color:var(--ink-soft);border-top:1px solid var(--line);}
+  @media print{.indice,.btn,.no-stampa,.hero .back{display:none!important;} section.parte{break-inside:avoid-page;padding:1.2rem 0;} body{background:#fff;}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <a class="back" href="index.html">← Alla scoperta di Roma</a>
+  <div class="kicker"><span class="dot"></span>Ricerca e uscita sul campo · lavoro di gruppo</div>
+  <h1>La Roma di oggi: caccia alle opere</h1>
+  <p class="sub">Roma non è solo Colosseo e Fori. Dagli anni Trenta del Novecento a oggi la città si è riempita di palazzi, ponti, musei e murales che raccontano il nostro tempo. Il vostro compito: scoprirli, andarli a vedere, raccontarli e preparare i punti per una grande mappa della Roma di oggi.</p>
+  <div class="domanda">
+    <div class="lab">La domanda che ci guida</div>
+    <p>Che cosa racconta un'opera del luogo in cui si trova? Perché è stata fatta proprio lì?</p>
+  </div>
+</header>
+
+<nav class="indice no-stampa" aria-label="Le fasi dell'attività">
+  <ol>
+    <li><a href="#come">1 · Come lavoriamo</a></li>
+    <li><a href="#ricerca">2 · La ricerca</a></li>
+    <li><a href="#scheda">3 · La scheda dell'opera</a></li>
+    <li><a href="#sul-posto">4 · Sul posto</a></li>
+    <li><a href="#scrivere">5 · Scrivere</a></li>
+    <li><a href="#mappa">6 · Verso la mappa</a></li>
+    <li><a href="#valutazione">Valutazione</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<section class="parte" id="come" aria-labelledby="t-come">
+  <div class="fase">Fase 1</div>
+  <h2 id="t-come">Come lavoriamo</h2>
+  <p>Lavorate in gruppi di tre o quattro. Ogni gruppo sceglie (o riceve) una <strong>pista</strong> e deve trovare <strong>almeno quattro opere</strong>, di cui <strong>almeno una da andare a vedere dal vivo</strong>. Dentro il gruppo ci si divide i ruoli, ma tutti cercano, guardano e scrivono.</p>
+  <div class="ruoli">
+    <div class="ruolo"><strong>🔎 Ricercatore</strong><span>trova le informazioni e controlla che le fonti siano affidabili</span></div>
+    <div class="ruolo"><strong>📷 Fotografo</strong><span>fotografa l'opera e il luogo intorno (insieme e dettaglio)</span></div>
+    <div class="ruolo"><strong>🗺️ Cartografo</strong><span>trova l'indirizzo esatto, il quartiere e come arrivarci</span></div>
+    <div class="ruolo"><strong>✒️ Scrittore</strong><span>cura le descrizioni e il testo poetico finale</span></div>
+  </div>
+  <div class="attenzione">
+    <h3>Prima di uscire</h3>
+    <ul>
+      <li>Le visite si fanno <strong>con un adulto</strong> (in famiglia o con la classe).</li>
+      <li>Molte opere sono su <strong>case dove vivono delle persone</strong>: si guarda dalla strada, senza entrare nei cortili e senza disturbare.</li>
+      <li>Nelle foto <strong>niente persone riconoscibili</strong>, a meno che non siano d'accordo.</li>
+      <li>La street art cambia: alcune opere vengono cancellate o coperte. <strong>Controllate prima</strong> (per esempio con Street View, guardando la data delle immagini) che l'opera ci sia ancora.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="parte" id="ricerca" aria-labelledby="t-ricerca">
+  <div class="fase">Fase 2</div>
+  <h2 id="t-ricerca">La ricerca: tre piste, tanti indizi</h2>
+  <p>Ogni pista ha degli <strong>indizi</strong>. Ogni indizio porta a un'opera o a un luogo: dovete scoprire quale, con una ricerca. Potete partire dagli indizi, ma potete anche trovare altre opere: anzi, è meglio!</p>
+
+  <div class="piste">
+    <div class="pista" style="--c:var(--nov)">
+      <h3>Pista A · La città del Novecento</h3>
+      <div class="periodo">Architetture dagli anni Trenta agli anni Sessanta</div>
+      <div class="indizi">
+        <div class="indizio"><b>Indizio A1</b>Un quartiere intero, nato per un'Esposizione Universale prevista per il 1942 che non si tenne mai. Il suo palazzo più famoso ha tanti archi e lo chiamano «Colosseo quadrato».</div>
+        <div class="indizio"><b>Indizio A2</b>Un grande complesso sportivo ai piedi di Monte Mario, inaugurato nel 1932. Ha uno stadio circondato da statue di atleti.</div>
+        <div class="indizio"><b>Indizio A3</b>Un palazzo dello sport con una grande cupola, costruito per le Olimpiadi di Roma del 1960 da un ingegnere famoso per il cemento armato.</div>
+        <div class="indizio"><b>Indizio A4</b>La facciata della stazione più grande di Roma: la sua pensilina ondulata ha un soprannome preistorico.</div>
+      </div>
+    </div>
+
+    <div class="pista" style="--c:var(--con)">
+      <h3>Pista B · La città contemporanea</h3>
+      <div class="periodo">Architetture e musei degli ultimi trent'anni</div>
+      <div class="indizi">
+        <div class="indizio"><b>Indizio B1</b>Un museo per l'arte del XXI secolo: il suo nome ha cinque lettere, tre delle quali sono uguali. L'ha progettato un'architetta nata a Baghdad.</div>
+        <div class="indizio"><b>Indizio B2</b>Tre grandi sale per i concerti che, viste dall'alto, sembrano scarabei o strumenti musicali. L'architetto è genovese.</div>
+        <div class="indizio"><b>Indizio B3</b>Una «nuvola» sospesa dentro una grande teca di vetro, in un quartiere progettato negli anni Trenta.</div>
+        <div class="indizio"><b>Indizio B4</b>Un ponte sul Tevere solo per pedoni e biciclette, che porta il nome di un'arte.</div>
+      </div>
+    </div>
+
+    <div class="pista" style="--c:var(--str)">
+      <h3>Pista C · La città sui muri</h3>
+      <div class="periodo">Street art: murales e poesie di strada</div>
+      <div class="indizi">
+        <div class="indizio"><b>Indizio C1</b>Un quartiere di case popolari così affollato da essere soprannominato come una metropoli cinese. Oggi sulle sue facciate ci sono 22 murales alti come i palazzi.</div>
+        <div class="indizio"><b>Indizio C2</b>Il primo «museo» di street art di Roma, nato nel 2010 in un quartiere vicino alla via Casilina. Gli artisti hanno dipinto ascoltando le storie degli abitanti.</div>
+        <div class="indizio"><b>Indizio C3</b>Un quartiere della periferia dove dei ragazzi hanno cominciato a scrivere poesie in romanesco sui muri. Poi sono arrivati anche dei pittori.</div>
+        <div class="indizio"><b>Indizio C4</b>Il quartiere dove un grande scrittore e regista girò il suo primo film, nel 1961. Oggi il suo volto è dipinto su un muro.</div>
+        <div class="indizio"><b>Indizio C5</b>Un lupo enorme dipinto sulla facciata di un palazzo, in un quartiere famoso per il suo mercato.</div>
+        <div class="indizio"><b>Indizio C6</b>Un uccello che tiene un pesce nel becco, dipinto con una vernice speciale che «mangia» lo smog, in una vecchia zona industriale vicino al gazometro.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fonti">
+    <h3>Dove cercare (fonti affidabili)</h3>
+    <ul>
+      <li><strong>Turismo Roma</strong>, il sito del Comune (turismoroma.it): itinerari «Roma contemporanea».</li>
+      <li><strong>Atlante dell'architettura contemporanea</strong> del Ministero della Cultura: schede di edifici con autore e anno.</li>
+      <li>I siti dei progetti di street art (per esempio Big City Life, M.U.Ro) e le mappe della street art romana.</li>
+      <li><strong>Google Maps e Street View</strong>: per trovare l'indirizzo e controllare che l'opera ci sia ancora.</li>
+    </ul>
+    <p class="soft">Per ogni informazione scrivete da dove l'avete presa. Se due fonti non sono d'accordo, segnatelo!</p>
+  </div>
+</section>
+
+<section class="parte" id="scheda" aria-labelledby="t-scheda">
+  <div class="fase">Fase 3</div>
+  <h2 id="t-scheda">La scheda dell'opera</h2>
+  <p>Compilate una scheda per ogni opera. Potete scriverla qui e salvarla in Word, oppure stamparla.</p>
+  <div class="scheda" id="scheda-opera">
+    <div class="due">
+      <div class="campo"><label for="s-nome">Nome dell'opera</label><input id="s-nome" type="text"></div>
+      <div class="campo"><label for="s-pista">Pista</label>
+        <select id="s-pista"><option value="">—</option><option>A · Novecento</option><option>B · Contemporanea</option><option>C · Street art</option></select></div>
+      <div class="campo"><label for="s-autore">Autore / autrice</label><input id="s-autore" type="text"></div>
+      <div class="campo"><label for="s-anno">Anno</label><input id="s-anno" type="text"></div>
+      <div class="campo"><label for="s-indirizzo">Indirizzo esatto</label><input id="s-indirizzo" type="text"></div>
+      <div class="campo"><label for="s-quartiere">Quartiere</label><input id="s-quartiere" type="text"></div>
+    </div>
+    <div class="campo"><label for="s-cosa">Che cosa vedo</label><small>Forma, grandezza, colori, materiali, che cosa rappresenta. Partite dall'insieme e poi passate ai dettagli.</small><textarea id="s-cosa"></textarea></div>
+    <div class="campo"><label for="s-intorno">Com'è il luogo intorno</label><small>Centro o periferia? Case, negozi, verde, strade grandi o piccole? Come ci si arriva (metro, autobus, a piedi)?</small><textarea id="s-intorno"></textarea></div>
+    <div class="campo"><label for="s-perche">Perché proprio qui?</label><small>La storia del quartiere, chi ci vive, che cosa c'era prima, chi ha voluto l'opera e perché. È la domanda più importante!</small><textarea id="s-perche"></textarea></div>
+    <div class="campo"><label for="s-fonti">Fonti</label><small>Siti, libri, persone intervistate.</small><textarea id="s-fonti" style="min-height:3.5em"></textarea></div>
+  </div>
+  <p class="no-stampa" style="margin-top:1rem">
+    <button class="btn" type="button" data-salva-word="#scheda-opera">Salva la scheda in Word</button>
+    <button class="btn chiaro" type="button" onclick="window.print()">Stampa</button>
+  </p>
+</section>
+
+<section class="parte" id="sul-posto" aria-labelledby="t-posto">
+  <div class="fase">Fase 4</div>
+  <h2 id="t-posto">Sul posto: guardare con i propri occhi</h2>
+  <p>Una foto su internet non basta: dal vivo si scoprono cose che online non si vedono. Portate la scheda e questa lista.</p>
+  <ul class="check">
+    <li><input type="checkbox" id="c1"><label for="c1">Quanto tempo ci abbiamo messo ad arrivare, e con quali mezzi?</label></li>
+    <li><input type="checkbox" id="c2"><label for="c2">Foto d'insieme: l'opera con il luogo intorno.</label></li>
+    <li><input type="checkbox" id="c3"><label for="c3">Foto di un dettaglio che online non si notava.</label></li>
+    <li><input type="checkbox" id="c4"><label for="c4">Che cosa si sente? Traffico, voci, silenzio, musica…</label></li>
+    <li><input type="checkbox" id="c5"><label for="c5">Chi passa? Chi vive qui? Che cosa c'è vicino (scuole, negozi, giardini)?</label></li>
+    <li><input type="checkbox" id="c6"><label for="c6">Se possibile, con un adulto, chiedete a qualcuno del posto che cosa pensa dell'opera.</label></li>
+    <li><input type="checkbox" id="c7"><label for="c7">Che cosa è diverso da come ce lo aspettavamo guardando online?</label></li>
+  </ul>
+</section>
+
+<section class="parte" id="scrivere" aria-labelledby="t-scrivere">
+  <div class="fase">Fase 5</div>
+  <h2 id="t-scrivere">Scrivere: descrivere e fare poesia</h2>
+  <h3>La descrizione</h3>
+  <p>Scegliete l'opera che vi ha colpito di più e scrivetene una descrizione di 10–15 righe: dal generale al particolare, con parole precise per forme, colori e materiali. Chiudete con il «perché proprio qui».</p>
+  <h3>La poesia di strada</h3>
+  <p>A Roma, nel quartiere del Trullo, un gruppo di poeti ha cominciato a scrivere poesie sui muri, in romanesco. Anche voi diventate poeti della città, <strong>sulla carta</strong>: le vostre poesie accompagneranno le opere sulla mappa. Scegliete una proposta:</p>
+  <div class="proposte">
+    <div class="proposta"><strong>Parla il muro</strong><p>Scrivete la poesia dal punto di vista dell'opera o del muro: che cosa vede ogni giorno? Chi passa? Che cosa c'era prima?</p></div>
+    <div class="proposta"><strong>Acrostico del quartiere</strong><p>Scrivete in verticale il nome del quartiere: ogni lettera è l'inizio di un verso.</p></div>
+    <div class="proposta"><strong>Tre righe</strong><p>Una poesia brevissima, di tre versi: un'immagine, un suono, un'emozione del luogo.</p></div>
+    <div class="proposta"><strong>In romanesco (o nella vostra lingua)</strong><p>Una strofa nella lingua di casa vostra: romanesco, un altro dialetto o un'altra lingua, con la traduzione accanto.</p></div>
+  </div>
+</section>
+
+<section class="parte" id="mappa" aria-labelledby="t-mappa">
+  <div class="fase">Fase 6</div>
+  <h2 id="t-mappa">Verso la mappa</h2>
+  <p>Alla fine ogni gruppo prepara i suoi <strong>segnaposto</strong>: le informazioni che metteremo sulla mappa della Roma di oggi. Un segnaposto per ogni opera, con colore della pista (A marrone, B blu, C rosa).</p>
+  <div class="tabella">
+    <table>
+      <thead><tr><th>Opera</th><th>Indirizzo</th><th>Pista</th><th>In due righe</th><th>Perché qui?</th><th>Foto (nostra o fonte)</th><th>Poesia / didascalia</th></tr></thead>
+      <tbody>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="soft" style="margin-top:.8rem">Guardate la mappa finita: dove si trovano le opere del Novecento? E la street art: più al centro o in periferia? Perché, secondo voi?</p>
+</section>
+
+<section class="parte" id="valutazione" aria-labelledby="t-valutazione">
+  <div class="fase">Alla fine</div>
+  <h2 id="t-valutazione">Come verrà valutato il lavoro</h2>
+  <div class="tabella">
+    <table>
+      <thead><tr><th>Che cosa</th><th>Da migliorare</th><th>Buono</th><th>Ottimo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Ricerca</strong></td><td>informazioni poche o senza fonte</td><td>informazioni corrette, con fonti</td><td>informazioni precise, fonti confrontate, opere trovate in più</td></tr>
+        <tr><td><strong>Osservazione sul posto</strong></td><td>poche osservazioni</td><td>lista completata, foto d'insieme e dettaglio</td><td>osservazioni originali e confronto con ciò che si sapeva online</td></tr>
+        <tr><td><strong>Descrizione</strong></td><td>generica</td><td>ordinata, dal generale al particolare</td><td>precisa, con lessico specifico</td></tr>
+        <tr><td><strong>Perché proprio qui?</strong></td><td>non spiegato</td><td>collega l'opera al quartiere</td><td>collega opera, storia e geografia del luogo</td></tr>
+        <tr><td><strong>Scrittura poetica</strong></td><td>poco curata</td><td>legata al luogo</td><td>originale, con immagini efficaci</td></tr>
+        <tr><td><strong>Lavoro di gruppo</strong></td><td>ruoli non rispettati</td><td>ognuno ha fatto la sua parte</td><td>collaborazione e aiuto reciproco</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="parte" id="docente" aria-labelledby="t-docente">
+  <div class="fase">Per l'insegnante</div>
+  <h2 id="t-docente">Soluzioni degli indizi e note</h2>
+  <div class="docente">
+    <details>
+      <summary>Mostra le soluzioni</summary>
+      <table>
+        <thead><tr><th>Indizio</th><th>Soluzione</th><th>Spunto per «perché qui?»</th></tr></thead>
+        <tbody>
+          <tr><td>A1</td><td>EUR, Palazzo della Civiltà Italiana</td><td>quartiere progettato per l'Esposizione Universale del 1942, mai svolta per la guerra</td></tr>
+          <tr><td>A2</td><td>Foro Italico (Stadio dei Marmi), inaugurato nel 1932</td><td>la città dello sport voluta negli anni Trenta ai piedi di Monte Mario</td></tr>
+          <tr><td>A3</td><td>Palazzo dello Sport all'EUR, Piacentini e Nervi, 1956–1959</td><td>le Olimpiadi del 1960 completano il quartiere</td></tr>
+          <tr><td>A4</td><td>Stazione Termini, edificio di testata (la pensilina detta «dinosauro»)</td><td>la porta d'ingresso della città moderna</td></tr>
+          <tr><td>B1</td><td>MAXXI, Zaha Hadid</td><td>quartiere Flaminio: dal Foro Italico all'Auditorium, un «distretto» del contemporaneo</td></tr>
+          <tr><td>B2</td><td>Auditorium Parco della Musica, Renzo Piano</td><td>vicino al Palazzetto dello Sport di Nervi e al Villaggio Olimpico</td></tr>
+          <tr><td>B3</td><td>La Nuvola, Massimiliano Fuksas (EUR)</td><td>architettura di oggi in un quartiere degli anni Trenta</td></tr>
+          <tr><td>B4</td><td>Ponte della Musica</td><td>collega le due rive del Flaminio, tra Foro Italico e Auditorium</td></tr>
+          <tr><td>C1</td><td>Tor Marancia, progetto Big City Life (22 murales, 2015); il quartiere era soprannominato «Shanghai»</td><td>case popolari trasformate in museo all'aperto; S. Maria di Shanghai di Mr Klevra</td></tr>
+          <tr><td>C2</td><td>Quadraro, M.U.Ro – Museo Urban di Roma (dal 2010, Diavù)</td><td>gli artisti hanno ascoltato le storie del quartiere prima di dipingere</td></tr>
+          <tr><td>C3</td><td>Trullo, Poeti der Trullo e Pittori Anonimi del Trullo</td><td>poesia e colore in una periferia trascurata</td></tr>
+          <tr><td>C4</td><td>Pigneto, ritratti di Pier Paolo Pasolini (per esempio quello di Maupal in via Fanfulla da Lodi); il film è <em>Accattone</em></td><td>Pasolini girò qui; letteratura e cinema sui muri</td></tr>
+          <tr><td>C5</td><td>Testaccio, il lupo di Roa (via Galvani)</td><td>il lupo, simbolo di Roma</td></tr>
+          <tr><td>C6</td><td>Ostiense, via del Porto Fluviale: il cormorano di Iena Cruz (2018), dipinto con vernice che purifica l'aria</td><td>ex zona industriale; i murales di Blu al Porto Fluviale non ci sono più: utile per parlare di un'arte che può sparire</td></tr>
+        </tbody>
+      </table>
+      <p class="soft" style="margin-top:.8rem">Altre opere possibili: San Basilio (progetto SanBa), Palazzetto dello Sport di Nervi al Flaminio, Palazzine al Circo Massimo (1952–1953), Casa delle Armi di Luigi Moretti al Foro Italico, Corviale. Prima dell'uscita conviene controllare che i murales scelti ci siano ancora.</p>
+      <p class="soft">Se usate il sito delle classi, questa parte si può nascondere ai ragazzi togliendo la spunta a «Soluzioni degli indizi e note».</p>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer>Alla scoperta di Roma · attività di ricerca «La Roma di oggi». Le opere si guardano dalla strada, con rispetto per chi abita nei quartieri.</footer>
+
+<script src="../../../assets/salva-word.js"></script>
+<script src="../../../assets/barra.js"></script>
+</body>
+</html>

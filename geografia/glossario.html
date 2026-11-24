@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Glossario dei termini geografici</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{--paper:#eef1f5;--card:#fff;--ink:#152131;--muted:#566476;--line:#d3dbe4;--accent:#c2410c;--accent-soft:#fde4d3;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;--body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif}
+@media (prefers-color-scheme: dark){:root{--paper:#0b111a;--card:#121b28;--ink:#e5ecf4;--muted:#97a6b8;--line:#243244;--accent:#fb923c;--accent-soft:#3b2414;color-scheme:dark}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+[hidden]{display:none!important}
+.wrap{max-width:860px;margin:0 auto;padding:32px 16px 48px;display:grid;gap:18px}
+.indietro{display:inline-block;margin-bottom:14px;font-weight:700;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,5vw,3rem);line-height:1.02;margin:4px 0 0}
+.lead{margin:0;color:var(--muted);max-width:70ch}
+.strumenti{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px}
+.strumenti input{font:inherit;flex:1 1 220px;min-width:0;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+.strumenti input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+#glossario-numero{color:var(--muted);font-size:.9rem}
+#glossario-lettere{display:flex;flex-wrap:wrap;gap:6px;flex-basis:100%}
+#glossario-lettere a{font-family:var(--display);font-weight:800;color:var(--accent);text-decoration:none;border:1px solid var(--line);border-radius:8px;min-width:2em;text-align:center;padding:2px 6px}
+#glossario-lettere a:hover{border-color:var(--accent)}
+#glossario-lista{display:grid;gap:12px}
+.lettera{font-family:var(--display);font-weight:800;font-size:1.6rem;color:var(--accent);margin:10px 0 0;border-bottom:2px solid var(--line)}
+.voce{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;scroll-margin-top:70px}
+.voce:target{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.voce h3{font-family:var(--display);font-weight:800;font-size:1.3rem;margin:0 0 4px}
+.voce p{margin:6px 0 0}
+.voce .breve{font-weight:700}
+.voce .vedi{font-size:.92rem;color:var(--muted)}
+.voce .vedi a{color:var(--accent);font-weight:700;text-underline-offset:3px}
+@media print{.strumenti,.indietro{display:none}.voce{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="indietro" href="index.html">← Torna a Geografia: tutti i moduli</a>
+    <div class="eyebrow">Geografia</div>
+    <h1>Glossario dei termini geografici</h1>
+  </header>
+  <p class="lead">Le parole della geografia, in ordine alfabetico. Nelle lezioni le trovi sottolineate a puntini: toccale per leggere la definizione.</p>
+  <div class="strumenti">
+    <input id="glossario-cerca" type="search" placeholder="Cerca una parola…" aria-label="Cerca nel glossario">
+    <span id="glossario-numero"></span>
+    <nav id="glossario-lettere" aria-label="Lettere"></nav>
+  </div>
+  <div id="glossario-lista"></div>
+</div>
+<script src="glossario.js"></script>
+<script src="../assets/barra.js"></script>
+</body>
+</html>

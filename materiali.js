@@ -316,7 +316,6 @@ var MODULI = [
     classe: "prima",
     numero: "VIII",
     percorso: "roma",
-    standby: true, // Percorso visibile, ma temporaneamente non disponibile.
     titolo: "Alla scoperta di Roma",
     descrizione: "Lezioni extra, non presenti nel libro: storia e geografia camminando per Roma. Si parte dalle pareti della stazione San Giovanni della metro C, poi cinque passeggiate (missioni), una per epoca, e un atlante da costruire insieme. Le missioni si possono fare anche cercando le informazioni sul web.",
     link: "geografia/prima/alla-scoperta-di-roma/index.html",
@@ -343,6 +342,9 @@ var MODULI = [
       ] },
       { titolo: "L'atlante dei quartieri di Roma", descrizione: "Lezione extra. Dopo le passeggiate i ragazzi diventano cartografi: aggiungono nuovi luoghi sulla mappa, filtrabili per epoca.", link: "geografia/prima/alla-scoperta-di-roma/atlante-roma-quartieri.html", data: "2026-11-06", attivita: [
         { tipo: "Attività", titolo: "Atlante dei quartieri di Roma", descrizione: "Mappa interattiva con le cinque missioni; si esporta e si riprende alla lezione successiva.", link: "geografia/prima/alla-scoperta-di-roma/atlante-roma-quartieri.html", data: "2026-11-06" }
+      ] },
+      { titolo: "La Roma di oggi: caccia alle opere", descrizione: "Lezione extra. Ricerca e uscita sul campo: architetture del Novecento, architetture contemporanee e street art. I ragazzi seguono gli indizi, vanno a vedere le opere, compilano la scheda («perché proprio qui?»), scrivono descrizioni e poesie di strada e preparano i punti per la mappa della Roma di oggi.", link: "geografia/prima/alla-scoperta-di-roma/roma-di-oggi.html", data: "2026-11-24", attivita: [
+        { tipo: "Ricerca", titolo: "La Roma di oggi: caccia alle opere", descrizione: "Tre piste di indizi, la scheda dell'opera da salvare in Word, la lista per l'uscita, le proposte di scrittura e la griglia di valutazione.", link: "geografia/prima/alla-scoperta-di-roma/roma-di-oggi.html", data: "2026-11-24" }
       ] }
     ]
   },
@@ -2213,7 +2215,6 @@ var MODULI = [
 var UDA = [
   {
     titolo: "Benvenuti nei laboratori delle discipline",
-    standby: true,
     descrizione: "Accoglienza: i laboratori dello storico, del geografo, del lettore, dello scrittore e del cittadino. La valigia con un oggetto, un luogo, una storia, la prima parola e una regola; la mostra «Chi siamo».",
     classe: "prima",
     periodo: "Accoglienza, prime settimane",
