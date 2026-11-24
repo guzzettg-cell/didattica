@@ -364,6 +364,108 @@
     main{grid-template-columns:1fr; grid-template-rows:42vh 1fr;}
     aside{border-left:none; border-top:1px solid var(--line);}
   }
+
+  /* =========================================================
+     VERSIONE SMARTPHONE (iPhone): mappa a tutto schermo +
+     pannello di lettura che scorre dal basso
+     ========================================================= */
+  html{-webkit-text-size-adjust:100%; text-size-adjust:100%;}
+  #sheet{display:contents;}
+  .leaflet-bar a.europa-btn{font:700 11px/30px 'Source Sans 3', sans-serif; letter-spacing:.5px; color:#17282c;}
+  .sheet-handle{display:none;}
+  @media (max-width: 860px){
+    body{height:100vh; height:100dvh;}
+    header{
+      display:grid;
+      grid-template-columns:1fr auto;
+      grid-template-areas:"title size" "legend legend";
+      align-items:center;
+      gap:8px 10px;
+      padding:10px 12px 8px;
+    }
+    header .title-block{grid-area:title; min-width:0;}
+    header .title-block h1{font-size:19px; margin:0;}
+    header .title-block p{display:none;}
+    .header-controls{display:contents;}
+    .text-size-controls{grid-area:size;}
+    .text-size-controls button{width:38px; height:34px; font-size:14px;}
+    .text-size-controls button#textSmaller{font-size:12px;}
+    .text-size-controls button#textBigger{font-size:16px;}
+    .legend{
+      grid-area:legend;
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      margin:0 -12px;
+      padding:2px 12px 4px;
+    }
+    .legend::-webkit-scrollbar{display:none;}
+    .chip{white-space:nowrap; flex-shrink:0; padding:7px 12px; font-size:13.5px;}
+
+    main{display:block; position:relative; flex:1; min-height:0; overflow:hidden;}
+    #map{position:absolute !important; inset:0; height:100%;}
+    .leaflet-bottom{bottom:var(--peek, 132px);}
+    .leaflet-tooltip.city-tooltip{width:210px;}
+    .tooltip-hint{display:none;}
+
+    #sheet{
+      --peek:132px;
+      display:flex;
+      flex-direction:column;
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height:100%;
+      z-index:1100;
+      background:var(--panel);
+      border-top:1px solid var(--line);
+      border-radius:16px 16px 0 0;
+      box-shadow:0 -6px 22px rgba(0,0,0,.4);
+      transform:translateY(calc(100% - var(--peek)));
+      transition:transform .28s ease;
+      will-change:transform;
+    }
+    #sheet.open{transform:translateY(0);}
+    .sheet-handle{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:5px;
+      flex-shrink:0;
+      width:100%;
+      background:none;
+      border:none;
+      border-bottom:1px solid var(--line);
+      color:var(--ink);
+      font-family:'Source Sans 3', sans-serif;
+      font-size:14px;
+      font-weight:600;
+      padding:8px 12px 9px;
+      cursor:pointer;
+      touch-action:none;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .sheet-handle .grabber{width:40px; height:5px; border-radius:3px; background:var(--ink-dim); opacity:.6;}
+    aside#panel{
+      flex:1;
+      min-height:0;
+      border:none;
+      overflow-y:hidden;
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior:contain;
+      padding:14px 16px calc(40px + env(safe-area-inset-bottom));
+    }
+    #sheet.open aside#panel{overflow-y:auto;}
+
+    /* bersagli più comodi da toccare */
+    .city-list li{padding:13px 0;}
+    .back-btn{padding:6px 0 16px; font-size:calc(14.5px * var(--text-scale));}
+    .ep-tabs{flex-wrap:nowrap; overflow-x:auto; margin:12px -16px 16px; padding:0 16px 4px; scrollbar-width:none;}
+    .ep-tabs::-webkit-scrollbar{display:none;}
+    .ep-tab{white-space:nowrap; flex-shrink:0; padding:9px 13px;}
+    article .body p{font-size:calc(15px * var(--text-scale));}
+    .brief-box p{font-size:calc(14.5px * var(--text-scale));}
+  }
 </style>
 </head>
 <body>
@@ -1558,6 +1660,85 @@ function showCity(cityName, epNum){
 
 renderMarkers(activeCats);
 showIntro();
+</script>
+
+<script>
+// ---------------------------------------------------------------
+// VERSIONE SMARTPHONE: pannello che scorre dal basso
+// ---------------------------------------------------------------
+(function(){
+  const mq = window.matchMedia('(max-width: 860px)');
+  const panelEl = document.getElementById('panel');
+  const sheet = document.createElement('div');
+  sheet.id = 'sheet';
+  const handle = document.createElement('button');
+  handle.type = 'button';
+  handle.className = 'sheet-handle';
+  handle.innerHTML = '<span class="grabber"></span><span class="sheet-label"></span>';
+  panelEl.parentNode.insertBefore(sheet, panelEl);
+  sheet.appendChild(handle);
+  sheet.appendChild(panelEl);
+  const label = handle.querySelector('.sheet-label');
+
+  function setOpen(open){
+    sheet.classList.toggle('open', open);
+    const inCity = !!panelEl.querySelector('article');
+    label.textContent = open ? '▼ Torna alla mappa' : (inCity ? '▲ Leggi il testo' : '▲ Elenco delle città');
+    if(!open) panelEl.scrollTop = 0;
+  }
+  handle.addEventListener('click', () => setOpen(!sheet.classList.contains('open')));
+
+  // trascinamento con il dito sulla maniglia
+  let startY = null;
+  handle.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, {passive:true});
+  handle.addEventListener('touchend', e => {
+    if(startY === null) return;
+    const dy = e.changedTouches[0].clientY - startY;
+    startY = null;
+    if(dy < -30){ setOpen(true); e.preventDefault(); }
+    else if(dy > 30){ setOpen(false); e.preventDefault(); }
+  });
+
+  // in versione chiusa, toccare l'anteprima apre il pannello
+  panelEl.addEventListener('click', e => {
+    if(mq.matches && !sheet.classList.contains('open') && !e.target.closest('button, a, .ep-tab, li')){
+      setOpen(true);
+    }
+  });
+
+  // quando si sceglie una città (dal pallino o dall'elenco) il testo si apre subito
+  const originalShowCity = showCity;
+  window.showCity = function(cityName, epNum){
+    originalShowCity(cityName, epNum);
+    panelEl.scrollTop = 0;
+    if(mq.matches) setOpen(true);
+  };
+  const originalShowIntro = showIntro;
+  window.showIntro = function(){
+    originalShowIntro();
+    panelEl.scrollTop = 0;
+    setOpen(sheet.classList.contains('open'));
+  };
+
+  // pulsante per tornare alla vista di tutta l'Europa
+  const EuropaControl = L.Control.extend({
+    options:{ position:'topleft' },
+    onAdd: function(){
+      const box = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+      const a = L.DomUtil.create('a', 'europa-btn', box);
+      a.href = '#'; a.title = "Torna a tutta l'Europa"; a.setAttribute('role','button');
+      a.setAttribute('aria-label', "Torna a tutta l'Europa");
+      a.textContent = 'EU';
+      L.DomEvent.on(a, 'click', e => { L.DomEvent.preventDefault(e); L.DomEvent.stopPropagation(e); map.flyTo([51, 10], 4, {duration:0.6}); });
+      return box;
+    }
+  });
+  map.addControl(new EuropaControl());
+
+  setOpen(false);
+  mq.addEventListener ? mq.addEventListener('change', () => setOpen(false)) : mq.addListener(() => setOpen(false));
+  setTimeout(() => map.invalidateSize(), 0);
+})();
 </script>
 </body>
 </html>
