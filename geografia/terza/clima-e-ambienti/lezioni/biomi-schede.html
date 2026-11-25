@@ -96,6 +96,24 @@ aside.identita dl{margin:0;padding:6px 16px 12px}
 aside.identita dt{font:800 .72rem var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--tenue);margin-top:10px}
 aside.identita dd{margin:2px 0 0;font-size:.95rem;line-height:1.45}
 
+
+/* foto e video */
+figure.foto{margin:0 0 20px;border:1px solid var(--filo);border-radius:10px;overflow:hidden;background:var(--tenue-bg)}
+figure.foto img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--tenue-bg)}
+figure.foto figcaption{padding:8px 12px 10px;font-size:.93rem;line-height:1.45}
+figure.foto .credito{display:block;font-size:.76rem;color:var(--tenue);margin-top:3px}
+figure.foto.rotta img{display:none}
+.guarda{margin:24px 0 8px;border:2px solid var(--c);border-radius:14px;padding:12px 16px 14px}
+.guarda h4{margin:0 0 4px;font:800 .82rem var(--sans);letter-spacing:.1em;text-transform:uppercase}
+.guarda p{margin:0 0 10px;font-size:.97rem}
+.guarda+.guarda{margin-top:12px}
+.video{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#000}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video .schermo{all:unset;box-sizing:border-box;cursor:pointer;position:absolute;inset:0;display:flex;align-items:flex-end;background:#111 center/cover no-repeat}
+.video .schermo:focus-visible{outline:3px solid var(--accento);outline-offset:-3px}
+.video .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;background:rgba(200,30,30,.92);color:#fff;display:grid;place-items:center;font-size:1.6rem;padding-left:4px;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.video .vt{width:100%;padding:10px 14px;color:#fff;font:700 1rem var(--sans);background:linear-gradient(transparent,rgba(0,0,0,.75))}
+@media print{.guarda{display:none}figure.foto{break-inside:avoid}}
 /* indice dei biomi (voce introduttiva) */
 .elenco-biomi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:8px 0 6px}
 .elenco-biomi .zona{border:1px solid var(--filo);border-radius:12px;padding:12px 14px}
@@ -231,6 +249,8 @@ body{padding-top:40px}
 <h3>Biomi e zone climatiche</h3>
 <p>Viaggiando dall'Equatore verso i poli si attraversano le <strong>zone climatiche</strong> della Terra e, una dopo l'altra, si incontrano i diversi biomi. Nella <strong>zona calda</strong> si trovano la foresta pluviale, la savana e i grandi deserti; nelle <strong>zone temperate</strong> la macchia mediterranea, le foreste di latifoglie e le praterie; nelle <strong>zone fredde</strong> la taiga, la tundra e infine i ghiacci polari.</p>
 <p>Qualcosa di simile accade salendo su un'alta montagna: poiché con l'altitudine la temperatura diminuisce, si attraversano fasce di vegetazione che ricordano i biomi incontrati andando verso nord. Sulle Alpi si passa dai boschi di latifoglie ai boschi di conifere, poi ai prati d'alta quota, simili alla tundra, e infine alle rocce e ai ghiacciai.</p>
+<div class="guarda"><h4>Guarda il video</h4><p>Perché in luoghi diversi vivono piante e animali diversi? Guarda il video, poi rileggi il paragrafo «Il clima decide».</p><div class="video" data-yt="qa81Quy9BmI" data-titolo="Gli ambienti e i biomi"><button type="button" class="schermo" aria-label="Guarda il video: Gli ambienti e i biomi"><span class="play" aria-hidden="true">▶</span><span class="vt">Gli ambienti e i biomi</span></button></div></div>
+<div class="guarda"><h4>Guarda il video</h4><p>Dall'Equatore ai poli: quali fasce climatiche si attraversano?</p><div class="video" data-yt="qT7Uy23R7WE" data-titolo="Le fasce climatiche"><button type="button" class="schermo" aria-label="Guarda il video: Le fasce climatiche"><span class="play" aria-hidden="true">▶</span><span class="vt">Le fasce climatiche</span></button></div></div>
 <h3>Le voci di questa enciclopedia</h3>
 <div class="elenco-biomi">
 <div class="zona"><h4 style="color:#c25a12">Zona calda</h4><ul><li><a href="#pluviale">Foresta pluviale</a></li><li><a href="#savana">Savana</a></li><li><a href="#deserto">Deserto</a></li></ul></div>
@@ -263,6 +283,7 @@ body{padding-top:40px}
 <div class="voce-enc">
 <div class="testo-voce">
 <p class="definizione">Foresta fitta e sempreverde che cresce nelle regioni vicine all'Equatore, dove fa caldo e piove molto durante tutto l'anno. È il bioma più ricco di vita della Terra.</p>
+<figure class="foto"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Amazon_Manaus_forest.jpg?width=960" alt="Distesa di foresta pluviale vista dall'alto" loading="lazy" decoding="async"><figcaption>La foresta amazzonica vista dall'alto, a nord di Manaus (Brasile): le chiome degli alberi formano una volta continua. <span class="credito">Foto: Wikimedia Commons · CC BY-SA 2.5 · <a href="https://commons.wikimedia.org/wiki/File:Amazon_Manaus_forest.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure>
 <h3>Dove si trova</h3>
 <p>Occupa una fascia a cavallo dell'Equatore, all'incirca tra 10° di latitudine nord e 10° di latitudine sud. Le tre aree principali sono il bacino del <strong>Rio delle Amazzoni</strong> in America meridionale, che è la più vasta, il bacino del fiume <strong>Congo</strong> in Africa e le isole del <strong>Sud-est asiatico</strong>, come il Borneo, Sumatra e la Nuova Guinea.</p>
 <h3>Il clima</h3>
@@ -274,6 +295,7 @@ body{padding-top:40px}
 <p>Nelle foreste pluviali vive più della metà delle specie di piante e di animali conosciute sulle terre emerse. Molti animali passano la vita sugli alberi: scimmie, bradipi, tucani e pappagalli come le are. Ci sono rane dai colori vivaci, alcune velenose, serpenti come l'anaconda e il boa e un numero enorme di insetti. Ogni foresta ha i suoi grandi animali: il <strong>giaguaro</strong> in America, il <strong>gorilla</strong> e l'okapi in Africa, l'<strong>orango</strong> nel Borneo e a Sumatra.</p>
 <h3>Gli esseri umani</h3>
 <p>Da migliaia di anni nella foresta vivono popoli indigeni, come gli Yanomami dell'Amazzonia, che cacciano, pescano, raccolgono frutti e coltivano piccoli orti. Oggi la foresta è minacciata dalla <strong>deforestazione</strong>: viene abbattuta per ricavare legname pregiato e per fare spazio a pascoli, a piantagioni di soia e di palma da olio, a miniere e a strade. Così scompaiono specie viventi e aumenta nell'aria l'anidride carbonica, che contribuisce all'<strong>effetto serra</strong>.</p>
+<div class="guarda"><h4>Guarda il video</h4><p>Nella foresta pluviale vive più della metà delle specie conosciute. Perché è importante proteggerle?</p><div class="video" data-yt="ehXsQtdnRwk" data-titolo="Biodiversità: una risorsa da preservare"><button type="button" class="schermo" aria-label="Guarda il video: Biodiversità: una risorsa da preservare"><span class="play" aria-hidden="true">▶</span><span class="vt">Biodiversità: una risorsa da preservare</span></button></div></div>
 <div class="sapevi"><h4>Lo sapevi?</h4><p>La foresta amazzonica produce una parte della sua stessa pioggia. Gli alberi assorbono l'acqua dal suolo e la rilasciano nell'aria come vapore attraverso le foglie: il vapore forma nuvole che il vento trasporta verso l'interno del continente. Per questo si parla di «fiumi volanti».</p></div>
 <p class="vedi"><b>Vedi anche</b><a class="rimando" href="#savana">savana</a><a class="rimando" href="#bioma">bioma</a></p>
 </div>
@@ -303,6 +325,7 @@ body{padding-top:40px}
 <div class="voce-enc">
 <div class="testo-voce">
 <p class="definizione">Vasta pianura coperta di erbe alte, con alberi e arbusti sparsi, tipica delle regioni tropicali dove a una stagione delle piogge segue una lunga stagione secca.</p>
+<figure class="foto"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Serengeti_Elefantenherde1.jpg?width=960" alt="Elefanti africani nella savana" loading="lazy" decoding="async"><figcaption>Una famiglia di elefanti nella savana del Serengeti (Tanzania), tra erba alta e alberi sparsi. <span class="credito">Foto: Ikiwaner · GFDL 1.2 · <a href="https://commons.wikimedia.org/wiki/File:Serengeti_Elefantenherde1.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure>
 <h3>Dove si trova</h3>
 <p>La savana si estende nella zona calda, tra le foreste pluviali e i deserti, all'incirca tra 5° e 20° di latitudine nord e sud. La più vasta e famosa è quella dell'<strong>Africa</strong>, che circonda la foresta del Congo e comprende parchi celebri come il Serengeti, in Tanzania. Savane si trovano anche in <strong>America meridionale</strong> (i <em>llanos</em> del Venezuela e il <em>cerrado</em> del Brasile), nel nord dell'<strong>Australia</strong> e in <strong>India</strong>.</p>
 <h3>Il clima</h3>
@@ -344,6 +367,7 @@ body{padding-top:40px}
 <div class="voce-enc">
 <div class="testo-voce">
 <p class="definizione">Regione in cui piove pochissimo, meno di 250 mm all'anno, e dove quindi piante e animali sono scarsi e devono adattarsi a vivere con pochissima acqua.</p>
+<figure class="foto"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Libya_4709_Idehan_Ubari_Luca_Galuzzi_2007.jpg?width=960" alt="Dune di sabbia nel deserto del Sahara" loading="lazy" decoding="async"><figcaption>Le dune dell'erg di Ubari, nel Sahara libico: un «mare di sabbia», ma solo una parte del deserto è fatta così. <span class="credito">Foto: Luca Galuzzi · CC BY-SA 2.5 · <a href="https://commons.wikimedia.org/wiki/File:Libya_4709_Idehan_Ubari_Luca_Galuzzi_2007.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure>
 <h3>Dove si trova</h3>
 <p>I grandi <strong>deserti caldi</strong> si trovano soprattutto nelle fasce vicino ai tropici, tra 15° e 35° di latitudine nord e sud, dove l'aria scende dall'alto, si riscalda e diventa secca, impedendo la formazione delle nuvole. Il più grande è il <strong>Sahara</strong>, nell'Africa settentrionale: con circa 9 milioni di km² è grande circa trenta volte l'Italia. Altri deserti caldi sono il deserto Arabico, il Kalahari e il Namib in Africa meridionale, i deserti dell'Australia e il deserto di Atacama in Cile, uno dei luoghi più aridi della Terra.</p>
 <p>Esistono anche <strong>deserti freddi</strong>, come il Gobi, in Asia centrale, dove gli inverni sono gelidi. Anche l'Antartide, dove le precipitazioni sono scarsissime, è considerata un deserto.</p>
@@ -386,6 +410,7 @@ body{padding-top:40px}
 <div class="voce-enc">
 <div class="testo-voce">
 <p class="definizione">Vegetazione fitta di arbusti e piccoli alberi sempreverdi, con foglie dure e spesso profumate, tipica delle regioni a clima mediterraneo, con estati calde e secche e inverni miti.</p>
+<figure class="foto"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Myrtus_communis_L._subsp._communis_-_52505075873.png?width=960" alt="Ramo di mirto con foglie e fiori bianchi" loading="lazy" decoding="async"><figcaption>Il mirto, uno degli arbusti tipici della macchia: foglie piccole, dure, lucide e profumate. <span class="credito">Foto: Ligurian Vascular Flora · CC BY 2.0 · <a href="https://commons.wikimedia.org/wiki/File:Myrtus_communis_L._subsp._communis_-_52505075873.png" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure>
 <h3>Dove si trova</h3>
 <p>La macchia cresce lungo le coste del <strong>Mar Mediterraneo</strong>: in Italia, soprattutto nel Centro-Sud e nelle isole, in Spagna, in Grecia, in Turchia e in Africa settentrionale. Lo stesso clima si trova in altre quattro regioni del mondo, tutte sulle coste occidentali dei continenti e a latitudini simili: la <strong>California</strong>, il <strong>Cile</strong> centrale, la regione di Città del Capo in <strong>Sudafrica</strong> e il sud-ovest dell'<strong>Australia</strong>. Le piante sono di specie diverse, ma hanno lo stesso aspetto.</p>
 <h3>Il clima</h3>
@@ -428,6 +453,8 @@ body{padding-top:40px}
 <div class="voce-enc">
 <div class="testo-voce">
 <p class="definizione">Foresta formata soprattutto da alberi con foglie larghe e piatte, che cadono in autunno e ricrescono in primavera. È il bioma tipico delle regioni temperate con quattro stagioni ben distinte.</p>
+<figure class="foto"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Beech_and_ferns_in_Gullmarsskogen.jpg?width=960" alt="Bosco di faggi con felci verdi" loading="lazy" decoding="async"><figcaption>Una faggeta in primavera, con le felci del sottobosco (riserva di Gullmarsskogen, Svezia). <span class="credito">Foto: W.carter · CC0 · <a href="https://commons.wikimedia.org/wiki/File:Beech_and_ferns_in_Gullmarsskogen.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure>
+<figure class="foto"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Fagus_sylvatica_JPG2a.jpg?width=960" alt="Faggio con le foglie colorate d'autunno" loading="lazy" decoding="async"><figcaption>Lo stesso albero in autunno: il faggio smette di produrre clorofilla e le foglie diventano gialle e rosse. <span class="credito">Foto: Jean-Pol Grandmont · CC BY 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Fagus_sylvatica_JPG2a.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure>
 <h3>Dove si trova</h3>
 <p>Le foreste di latifoglie si trovano nelle zone temperate dell'emisfero nord: nell'<strong>Europa</strong> centrale e occidentale (Francia, Germania, Gran Bretagna, Polonia), nella parte orientale degli <strong>Stati Uniti</strong>, in <strong>Cina</strong> orientale, in Corea e in Giappone. In <strong>Italia</strong> un tempo coprivano gran parte della Pianura Padana; oggi restano soprattutto sulle colline, sulle Prealpi e sugli Appennini, con boschi di querce, castagni e faggi.</p>
 <h3>Il clima</h3>
@@ -469,6 +496,7 @@ body{padding-top:40px}
 <div class="voce-enc">
 <div class="testo-voce">
 <p class="definizione">Grande distesa pianeggiante coperta di erbe, quasi senza alberi, tipica delle regioni temperate all'interno dei continenti, dove piove troppo poco perché possa crescere una foresta.</p>
+<figure class="foto"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Steppe_of_western_Kazakhstan_in_the_early_spring.jpg?width=960" alt="Pianura erbosa senza alberi" loading="lazy" decoding="async"><figcaption>La steppa del Kazakistan occidentale all'inizio della primavera: erba a perdita d'occhio, nessun albero. <span class="credito">Foto: Carole a · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:Steppe_of_western_Kazakhstan_in_the_early_spring.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure>
 <h3>Dove si trova</h3>
 <p>Le praterie si estendono all'interno dei continenti, lontano dal mare, e prendono nomi diversi a seconda del luogo. Si chiama <strong>prateria</strong> in America settentrionale, nelle Grandi Pianure tra gli Stati Uniti e il Canada; <strong>steppa</strong> in Europa orientale e in Asia, in una fascia che va dall'Ucraina fino al Kazakistan e alla Mongolia; <strong>pampa</strong> in Argentina e in Uruguay; <em>puszta</em> in Ungheria e <em>veld</em> in Sudafrica.</p>
 <h3>Il clima</h3>
@@ -509,6 +537,7 @@ body{padding-top:40px}
 <div class="voce-enc">
 <div class="testo-voce">
 <p class="definizione">Immensa foresta di conifere – abeti, pini e larici – che si estende nelle regioni fredde dell'emisfero nord, dove gli inverni sono lunghissimi e gelidi e le estati brevi.</p>
+<figure class="foto"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/BaikalForest_%28pixinn.net%29.jpg?width=960" alt="Foresta di conifere in Siberia" loading="lazy" decoding="async"><figcaption>Foresta di conifere vicino al lago Bajkal, in Siberia. <span class="credito">Foto: Christophe Meneboeuf · CC BY-SA 3.0 · <a href="https://commons.wikimedia.org/wiki/File:BaikalForest_%28pixinn.net%29.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure>
 <h3>Dove si trova</h3>
 <p>La taiga forma una fascia quasi continua attraverso l'<strong>America settentrionale</strong> (Alaska e Canada) e l'<strong>Eurasia</strong> (Norvegia, Svezia, Finlandia e Russia, fino alla Siberia), all'incirca tra 50° e 70° di latitudine nord. È il <strong>bioma terrestre più esteso</strong> del pianeta. Nell'emisfero sud non esiste, perché a quelle latitudini non ci sono quasi terre emerse, ma solo oceano.</p>
 <h3>Il clima</h3>
@@ -549,6 +578,7 @@ body{padding-top:40px}
 <div class="voce-enc">
 <div class="testo-voce">
 <p class="definizione">Vasta distesa senza alberi delle regioni vicine al Polo nord, dove il suolo resta gelato quasi tutto l'anno e crescono solo piante basse: muschi, licheni, erbe e arbusti nani.</p>
+<figure class="foto"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tundra_at_Adventfjord%2C_Svalbard.jpg?width=960" alt="Tundra artica con vegetazione bassa e montagne sullo sfondo" loading="lazy" decoding="async"><figcaption>La tundra delle isole Svalbard in estate: il permafrost si scongela solo per circa un metro e crescono piante basse. <span class="credito">Foto: AWeith · CC BY-SA 4.0 · <a href="https://commons.wikimedia.org/wiki/File:Tundra_at_Adventfjord%2C_Svalbard.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure>
 <h3>Dove si trova</h3>
 <p>La tundra si estende a nord della taiga, oltre il <strong>limite degli alberi</strong>, fino alle coste del Mar Glaciale Artico: nel nord dell'Alaska e del Canada, sulle coste della Groenlandia, in Islanda, nella Lapponia (il nord di Norvegia, Svezia e Finlandia) e nella Siberia settentrionale. Un ambiente simile, detto <strong>tundra alpina</strong>, si trova sulle alte montagne, sopra il limite dei boschi.</p>
 <h3>Il clima</h3>
@@ -562,6 +592,7 @@ body{padding-top:40px}
 <h3>Gli esseri umani</h3>
 <p>Nella tundra vivono da migliaia di anni popoli che si sono adattati al freddo: gli <strong>Inuit</strong> in Canada, in Alaska e in Groenlandia, i <strong>Sami</strong> in Lapponia, i Nenets e altri popoli in Siberia. Molti erano allevatori nomadi di renne e ne seguivano le migrazioni. Oggi nella tundra si estraggono petrolio, gas e minerali, con oleodotti e strade che attraversano il territorio.</p>
 <p>La tundra è uno degli ambienti più colpiti dal <strong>cambiamento climatico</strong>: l'Artico si sta riscaldando circa quattro volte più in fretta della media del pianeta. Il permafrost che si scioglie fa sprofondare il terreno, danneggia case e strade e libera gas serra rimasti imprigionati nel suolo per migliaia di anni, che riscaldano ancora di più l'atmosfera. Intanto arbusti e alberi della taiga avanzano verso nord.</p>
+<div class="guarda"><h4>Guarda il video</h4><p>La tundra è uno degli ambienti più colpiti dal riscaldamento globale. Che cosa sta cambiando?</p><div class="video" data-yt="l5E34g9ZXxI" data-titolo="I cambiamenti climatici"><button type="button" class="schermo" aria-label="Guarda il video: I cambiamenti climatici"><span class="play" aria-hidden="true">▶</span><span class="vt">I cambiamenti climatici</span></button></div></div>
 <div class="sapevi"><h4>Lo sapevi?</h4><p>Nel permafrost della Siberia sono stati ritrovati mammut rimasti congelati per decine di migliaia di anni, alcuni con la pelle, il pelo e perfino il cibo nello stomaco.</p></div>
 <p class="vedi"><b>Vedi anche</b><a class="rimando" href="#taiga">taiga</a><a class="rimando" href="#deserto">deserto</a></p>
 </div>
@@ -611,6 +642,7 @@ body{padding-top:40px}
 </main>
 </div>
 <footer>
+<p>Foto: Wikimedia Commons, con autore e licenza nella didascalia di ogni immagine. Video: canale YouTube di HUB Scuola.</p>
 <p>Schede scritte con il linguaggio delle enciclopedie per ragazzi: definizione, voce divisa in paragrafi, carta d'identità, «Lo sapevi?» e rimandi ad altre voci. Testi e disegni di questa pagina sono originali; i valori di temperatura e di pioggia sono indicativi.</p>
 </footer>
 </div>
@@ -654,6 +686,18 @@ ogni(document.querySelectorAll("figure.fasce"),function(fig){
   fig.insertBefore(s,fig.firstChild);
 });
 
+
+/* ---------- video: anteprima, il video si carica solo al clic ---------- */
+ogni(document.querySelectorAll(".video[data-yt]"),function(v){
+  var id=v.getAttribute("data-yt"), b=v.querySelector(".schermo");
+  b.style.backgroundImage="url(https://i.ytimg.com/vi/"+id+"/hqdefault.jpg)";
+  b.addEventListener("click",function(){ var f=document.createElement("iframe");
+    f.src="https://www.youtube-nocookie.com/embed/"+id+"?autoplay=1&rel=0"; f.allow="autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen=true; f.title=v.getAttribute("data-titolo")||"Video";
+    b.replaceWith(f); });
+});
+/* ---------- foto che non si caricano: resta la didascalia con il link ---------- */
+ogni(document.querySelectorAll("figure.foto img"),function(im){ function rotta(){ im.parentNode.classList.add("rotta"); }
+  im.addEventListener("error",rotta); });
 /* ---------- indice laterale: si vede una voce alla volta ---------- */
 var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
 var parti=Array.prototype.slice.call(document.querySelectorAll("section.parte"));
