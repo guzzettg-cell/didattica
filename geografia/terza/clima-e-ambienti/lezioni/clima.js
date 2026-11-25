@@ -68,6 +68,30 @@ function ORD(id,cons,items,show){
   <button class="btn" type="button" data-check="${id}">Controlla</button><button class="btn ghost" type="button" data-reset="${id}">Ricomincia</button>
   <p class="result" aria-live="polite"></p></div>`;
 }
+/* testo con i buchi: [[parola]] diventa un menu; le parole si scelgono da un elenco in ordine alfabetico */
+function CLOZE(id,cons,paras){
+  const items=[];
+  const html=paras.map(t=>"<p>"+t.replace(/\[\[([^\]]+)\]\]/g,(m,w)=>{const i=items.length;items.push(["",w]);
+    return `<span class="buco" data-i="${i}"><select data-sel="${id}:${i}" aria-label="Spazio ${i+1}"><option value="">……</option>@@OPZ@@</select><span class="segno" aria-live="polite"></span></span>`;})+"</p>").join("");
+  const banca=[...new Set(items.map(it=>it[1]))].sort((a,b)=>a.localeCompare(b,"it"));
+  EX[id]={type:"cloze",items};
+  return `<div class="ex cloze" data-ex="${id}"><p class="cons">${cons}</p>
+  <ul class="chips banca" aria-label="Le parole da usare">${banca.map(w=>`<li>${w}</li>`).join("")}</ul>
+  <div class="testo-buchi">${html.split("@@OPZ@@").join(banca.map(w=>`<option>${w}</option>`).join(""))}</div>
+  <button class="btn" type="button" data-check="${id}">Controlla</button><button class="btn ghost" type="button" data-reset="${id}">Ricomincia</button><button class="btn ghost" type="button" data-sol="${id}">Mostra le soluzioni</button>
+  <p class="result" aria-live="polite"></p></div>`;
+}
+(function(){const st=document.createElement("style");st.textContent=`
+.orig .cloze .banca{margin:0 0 .8rem}
+.orig .testo-buchi p{line-height:2.3;margin:0 0 .6rem}
+.orig .buco{white-space:nowrap}
+.orig .buco select{padding:.15rem .3rem;font-size:.95rem}
+.orig .buco.ok select{border-color:var(--accent);outline:2px solid var(--accent)}
+.orig .buco.no select{border-color:var(--no);outline:2px solid var(--no)}
+.orig .buco .segno{font-weight:700;margin-left:.15rem}
+.orig .buco.ok .segno{color:var(--accent)} .orig .buco.no .segno{color:var(--no)}
+.orig .ripasso{border:2px dashed var(--accent);border-radius:12px;padding:.4rem 1rem .2rem;margin:0 0 1.4rem}
+`;document.head.appendChild(st);})();
 function TXT(id,cons,ph){
   return `<div class="ex"><p class="cons">${cons}</p><textarea data-txt="${id}" aria-label="${cons.replace(/<[^>]+>/g,"").replace(/"/g,"")}" placeholder="${ph||"Scrivi qui"}"></textarea><span class="saved">La risposta resta salvata su questo dispositivo.</span></div>`;
 }
@@ -181,6 +205,15 @@ ${TXT("1-catena","Scegli uno dei casi e completa la catena: fattore → che cosa
 exit:["Indica tre fattori che determinano il clima e spiega l'effetto di uno di essi."]});
 
 L.push({n:2,title:"Dal clima ai biomi",
+pre:`<section class="step ripasso"><span class="tag">Ripassa</span><h2>Ti ricordi la lezione precedente?</h2>
+<p>Prima di cominciare, controlla che cosa ricordi della lezione «Perché sulla Terra esistono climi diversi?». Scegli la parola giusta per ogni spazio: ogni parola si usa una volta sola.</p>
+${CLOZE("2-ripasso","Completa il testo.",[
+ "Quando diciamo «oggi piove» parliamo del [[tempo]] atmosferico; quando descriviamo le condizioni medie di un luogo, osservate per almeno trent'anni, parliamo del [[clima]].",
+ "Il primo fattore del clima è la [[latitudine]], cioè la distanza dall'Equatore. Vicino all'Equatore i raggi del Sole arrivano quasi [[perpendicolari]] e scaldano molto; vicino ai poli arrivano [[inclinati]] e la stessa energia si distribuisce su una superficie più ampia. Poiché l'[[asse]] terrestre è inclinato e la Terra gira intorno al Sole, durante l'anno si alternano le [[stagioni]].",
+ "Tra i due tropici si trova la zona [[torrida]]; oltre i circoli polari ci sono le due zone [[polari]]. La [[longitudine]], invece, serve a localizzare un luogo ma non cambia il clima.",
+ "Salendo di quota la temperatura [[diminuisce]] di circa 0,6 °C ogni 100 metri: è l'effetto dell'[[altitudine]]. Il [[mare]] si scalda e si raffredda lentamente, perciò sulle coste l'[[escursione]] termica è minore. Le [[correnti]] oceaniche calde rendono più miti le coste che raggiungono, e le montagne fermano i venti umidi: il versante [[sopravvento]] riceve molte piogge, quello sottovento resta secco."])}
+<p>Ora tieni a mente due parole: <b>temperatura</b> e <b>precipitazioni</b>. Oggi scopriamo che cosa succede alle piante e agli animali quando cambiano.</p>
+</section>`,
 q:"Se conosco temperatura e precipitazioni di un luogo, posso immaginare che paesaggio troverò?",
 geo:"Capitolo 20, §2 Le zone climatiche e i biomi (pp. E44–E45)",
 vivi:"Unità 3, Lezione 1 I climi e gli ambienti",
@@ -355,7 +388,7 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
 const app=document.getElementById("app");
 function renderLesson(n){
   const l=L[n-1], nuovo=document.getElementById("nuovo");
-  app.innerHTML=`<div class="orig"><div class="question"><span>La domanda di oggi</span><p>${l.q}</p></div>${l.body}</div><div id="slot"></div>
+  app.innerHTML=`<div class="orig">${l.pre||""}<div class="question"><span>La domanda di oggi</span><p>${l.q}</p></div>${l.body}</div><div id="slot"></div>
   <div class="orig"><section class="step"><span class="tag">Prima di uscire</span><h2>${l.exit.length>1?"Le domande finali":"La domanda finale"}</h2>
   <div class="exit">${l.exit.map((q,i)=>`<p>${q}</p><textarea data-txt="exit-${l.n}-${i}" aria-label="${q.replace(/"/g,"")}" placeholder="Scrivi qui"></textarea>`).join("")}</div></section></div>`;
   if(nuovo){document.getElementById("slot").replaceWith(nuovo);nuovo.hidden=false;}
@@ -380,6 +413,17 @@ function renderOrd(id,marks){
 /* ---- controllo ---- */
 function check(id){
   const box=app.querySelector(`[data-ex="${id}"]`),ex=EX[id];let ok=0,tot;
+  if(ex.type==="cloze"){
+    tot=ex.items.length;
+    box.querySelectorAll(".buco").forEach(sp=>{
+      const v=sp.querySelector("select").value,it=ex.items[+sp.dataset.i],sg=sp.querySelector(".segno");
+      sp.classList.remove("ok","no");
+      if(!v){sg.textContent="";return}
+      if(v===it[1]){ok++;sp.classList.add("ok");sg.textContent="✓"}else{sp.classList.add("no");sg.textContent="✗"}
+    });
+    box.querySelector(".result").textContent=ok===tot?`Tutto giusto: ${ok} su ${tot}. Sei pronto per la lezione di oggi!`:`${ok} ${ok===1?"risposta giusta":"risposte giuste"} su ${tot}. Correggi gli spazi segnati con ✗ e controlla di nuovo.`;
+    return;
+  }
   if(ex.type==="sel"){
     tot=ex.items.length;
     box.querySelectorAll(".item").forEach(row=>{
@@ -396,7 +440,8 @@ function check(id){
 }
 function reset(id){
   const box=app.querySelector(`[data-ex="${id}"]`),ex=EX[id];
-  if(ex.type==="sel"){box.querySelectorAll("select").forEach(s=>{s.value="";delete state.ans[s.dataset.sel]});box.querySelectorAll(".item").forEach(r=>{r.classList.remove("ok","no");r.querySelector(".fb").textContent=""})}
+  if(ex.type==="cloze"){box.querySelectorAll(".buco").forEach(sp=>{const sl=sp.querySelector("select");sl.value="";delete state.ans[sl.dataset.sel];sp.classList.remove("ok","no");sp.querySelector(".segno").textContent=""})}
+  else if(ex.type==="sel"){box.querySelectorAll("select").forEach(s=>{s.value="";delete state.ans[s.dataset.sel]});box.querySelectorAll(".item").forEach(r=>{r.classList.remove("ok","no");r.querySelector(".fb").textContent=""})}
   else{delete state.ord[id];renderOrd(id)}
   box.querySelector(".result").textContent="";save();
 }
@@ -404,6 +449,8 @@ function reset(id){
 app.addEventListener("click",e=>{
   const c=e.target.closest("[data-check]");if(c)return check(c.dataset.check);
   const r=e.target.closest("[data-reset]");if(r)return reset(r.dataset.reset);
+  const so=e.target.closest("[data-sol]");if(so){const id=so.dataset.sol,box=app.querySelector(`[data-ex="${id}"]`);
+    box.querySelectorAll(".buco").forEach(sp=>{const sl=sp.querySelector("select");sl.value=EX[id].items[+sp.dataset.i][1];state.ans[sl.dataset.sel]=sl.value});save();check(id);return;}
   const m=e.target.closest("[data-mv]");
   if(m){const [id,i,d]=m.dataset.mv.split(":");const o=curOrder(id),a=+i,b=a+(+d);[o[a],o[b]]=[o[b],o[a]];state.ord[id]=o;save();renderOrd(id);
     const btn=document.querySelector(`[data-mv="${id}:${b}:${d}"]`)||document.querySelector(`[data-mv="${id}:${b}:${-d}"]`);if(btn)btn.focus();
