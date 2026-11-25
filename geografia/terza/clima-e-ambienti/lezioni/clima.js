@@ -151,6 +151,11 @@ const PLACES=`<div class="places">
 const L=[];
 
 L.push({n:1,title:"Perché sulla Terra esistono climi diversi?",
+pre:`<section class="step ripasso"><span class="tag">Ripassa</span><h2>Ti ricordi il modulo precedente?</h2>
+<p>Prima di cominciare il nuovo modulo, controlla che cosa ricordi del modulo «Il pianeta Terra»: i moti della Terra e l'atmosfera ti serviranno per capire il clima. Scegli la parola giusta per ogni spazio: ogni parola si usa una volta sola.</p>
+${CLOZE("1-ripasso","Completa il testo.",["La Terra gira su se stessa con il moto di [[rotazione]], che dura circa 24 ore e produce l'alternarsi del dì e della notte. Intanto gira intorno al Sole con il moto di [[rivoluzione]], che dura circa 365 giorni.", "L'[[asse]] terrestre è inclinato di circa 23°: per questo, durante l'anno, i raggi del Sole colpiscono i due emisferi in modo diverso e si alternano le [[stagioni]]. Nei giorni dei [[solstizi]] (intorno al 21 giugno e al 21 dicembre) un emisfero riceve il massimo della luce; nei giorni degli [[equinozi]] (intorno al 21 marzo e al 23 settembre) il dì e la notte durano 12 ore su tutta la Terra.", "L'[[atmosfera]] è l'involucro di gas che circonda la Terra. Il gas più abbondante è l'[[azoto]] (78%); quello che respiriamo è l'[[ossigeno]] (21%).", "Lo strato più basso è la [[troposfera]]: qui si formano le nuvole e la pioggia, e salendo la temperatura [[diminuisce]]. Più in alto, nella stratosfera, l'[[ozono]] ci protegge dai raggi ultravioletti. I venti soffiano dalle zone di [[alta]] pressione verso quelle di bassa pressione."])}
+<p>Oggi scopriamo perché, con lo stesso Sole e la stessa atmosfera, sulla Terra ci sono climi così diversi.</p>
+</section>`,
 q:"Perché alla stessa ora in alcuni luoghi fa molto caldo e in altri molto freddo?",
 geo:"Capitolo 20, §1 Le zone astronomiche e le stagioni (pp. E42–E43)",
 vivi:"Unità 2, Lezione 2 I moti della Terra; Unità 3, Lezione 1 I climi e gli ambienti",
@@ -264,6 +269,11 @@ ${TXT("2-carta","Osserva la carta dei biomi del mondo (in classe o sul libro): i
 exit:["Spiega in una frase perché clima e bioma non sono sinonimi."]});
 
 L.push({n:3,title:"Gli ambienti caldi: troppa acqua o troppo poca?",
+pre:`<section class="step ripasso"><span class="tag">Ripassa</span><h2>Ti ricordi la lezione precedente?</h2>
+<p>Prima di cominciare, controlla che cosa ricordi della lezione «Dal clima ai biomi». Scegli la parola giusta per ogni spazio: ogni parola si usa una volta sola.</p>
+${CLOZE("3-ripasso","Completa il testo.",["Il clima descrive l'atmosfera di un luogo, soprattutto la [[temperatura]] e le [[precipitazioni]]. Il [[bioma]] è invece il grande ambiente naturale che si forma in quel clima, con le sue piante e i suoi animali. Per questo lo stesso bioma si trova anche in [[continenti]] lontani tra loro, se il clima è simile.", "Nella zona [[calda]] fa caldo tutto l'anno e a cambiare è la pioggia: dove piove sempre c'è la foresta [[pluviale]], dove c'è una lunga stagione secca c'è la [[savana]], dove non piove quasi mai c'è il [[deserto]].", "Nelle zone [[temperate]] ci sono quattro stagioni: qui si trovano la macchia mediterranea, le foreste di [[latifoglie]] e le praterie. Nelle zone [[fredde]], con inverni lunghi e gelidi, ci sono la [[taiga]], la tundra e i ghiacci.", "Nel grafico climatico la linea indica la temperatura media di ogni mese, le [[colonne]] indicano le precipitazioni."])}
+<p>Oggi entriamo negli ambienti della zona calda: perché vicino ai tropici ci sono sia foreste fittissime sia deserti?</p>
+</section>`,
 q:"Com'è possibile che vicino ai tropici esistano sia foreste fittissime sia deserti quasi senza vegetazione?",
 geo:"Capitolo 20, §3 Le zone caldo-umide e §4 Le zone aride (pp. E46–E49)",
 vivi:"Unità 3, Lezioni 2 La foresta pluviale e la giungla, 3 La savana, 4 I deserti caldi, 5 Le oasi del Sahara",
@@ -298,6 +308,11 @@ ${TXT("3-indizio","Scegli un dossier e spiega quale indizio ti ha fatto riconosc
 exit:["Completa: «Foresta pluviale e deserto possono trovarsi entrambi in zone calde, ma…»"]});
 
 L.push({n:4,title:"Dalle zone temperate ai poli",
+pre:`<section class="step ripasso"><span class="tag">Ripassa</span><h2>Ti ricordi la lezione precedente?</h2>
+<p>Prima di cominciare, controlla che cosa ricordi della lezione «Gli ambienti caldi». Scegli la parola giusta per ogni spazio: ogni parola si usa una volta sola.</p>
+${CLOZE("4-ripasso","Completa il testo.",["Nella zona calda le temperature sono alte dappertutto: a fare la differenza è la quantità di [[acqua]].", "Nella foresta pluviale la vegetazione è disposta a [[strati]]: in alto gli alberi emergenti, poi la [[volta]], dove vive la maggior parte delle specie; più in basso il sottobosco e il suolo, dove arriva pochissima [[luce]]. Le [[liane]] si arrampicano sugli altri alberi per raggiungerla.", "Nella savana gli animali si dividono le erbe, così c'è cibo per tutti. Tra gli alberi tipici c'è il [[baobab]], che trattiene l'acqua nel suo grande tronco.", "Il deserto di sabbia con grandi dune si chiama [[erg]], quello roccioso di altipiani e montagne [[hammada]]. Gli uadi sono letti asciutti di antichi [[fiumi]]. Ai margini del deserto c'è il [[predeserto]], con piogge scarse e cespugli. Dove l'acqua sotterranea affiora c'è l'[[oasi]]: nel palmeto le palme da [[dattero]] fanno ombra agli alberi da frutta e agli ortaggi.", "Nei deserti caldi c'è una forte [[escursione]] termica tra il giorno e la notte."])}
+<p>Oggi ci allontaniamo dai tropici: che cosa succede al paesaggio andando verso i poli?</p>
+</section>`,
 q:"Che cosa succede al paesaggio man mano che ci allontaniamo dai tropici?",
 geo:"Capitolo 20, §5 Le zone temperate e §6 Le zone fredde (pp. E50–E53)",
 vivi:"Unità 3, Lezioni 6 Gli ambienti temperati e 7 Gli ambienti freddi",
@@ -332,6 +347,11 @@ ${TXT("4-difficolta","Per ogni tappa del viaggio scrivi una difficoltà per la v
 exit:["Qual è la differenza fondamentale tra taiga e tundra?"]});
 
 L.push({n:5,title:"Come trasformiamo gli ambienti?",
+pre:`<section class="step ripasso"><span class="tag">Ripassa</span><h2>Ti ricordi la lezione precedente?</h2>
+<p>Prima di cominciare, controlla che cosa ricordi della lezione «Dalle zone temperate ai poli». Scegli la parola giusta per ogni spazio: ogni parola si usa una volta sola.</p>
+${CLOZE("5-ripasso","Completa il testo.",["Viaggiando dalla Grecia verso il Polo nord si incontrano la macchia mediterranea, la foresta di latifoglie, la [[steppa]], la taiga, la tundra e infine i ghiacci perenni.", "Il clima [[mediterraneo]] ha estati calde e secche e inverni miti e piovosi; la sua vegetazione è fatta di piante [[sempreverdi]], come il leccio e il corbezzolo. Il clima [[oceanico]] ha temperature miti e piogge in tutte le stagioni. Il clima [[continentale]] ha estati calde, inverni freddi e una forte escursione termica.", "Gli alberi a foglia larga perdono le [[foglie]] in autunno. La [[taiga]] invece è una foresta di conifere: abeti, pini e larici.", "Nella tundra il terreno resta gelato in profondità tutto l'anno: è il [[permafrost]]. Crescono solo muschi e [[licheni]]. Salendo in [[montagna]] il paesaggio cambia come andando verso il polo.", "I deserti freddi, come il [[Gobi]], si trovano lontano dal mare; la loro escursione termica è soprattutto [[stagionale]]."])}
+<p>Finora abbiamo studiato gli ambienti naturali. Ma un ambiente resta naturale quando arrivano gli esseri umani?</p>
+</section>`,
 q:"Un ambiente naturale resta naturale quando arriva l'uomo?",
 geo:"Capitolo 20, §2, parte conclusiva: le azioni che minacciano i biomi (p. E45)",
 vivi:"Unità 4, Lezioni 1 La crisi degli ecosistemi terrestri, 2 I limiti del pianeta, 4 La riduzione delle specie viventi e il degrado del pianeta",
@@ -362,6 +382,11 @@ ${TXT("5-gruppo","Ora il caso del tuo gruppo (desertificazione, inquinamento, ri
 exit:["Scrivi una relazione causa-effetto usando le parole: azione umana – ambiente – conseguenza."]});
 
 L.push({n:6,title:"Il clima è sempre cambiato. Che cosa cambia oggi?",
+pre:`<section class="step ripasso"><span class="tag">Ripassa</span><h2>Ti ricordi la lezione precedente?</h2>
+<p>Prima di cominciare, controlla che cosa ricordi della lezione «Come trasformiamo gli ambienti?». Scegli la parola giusta per ogni spazio: ogni parola si usa una volta sola.</p>
+${CLOZE("6-ripasso","Completa il testo.",["Gli esseri umani hanno sempre trasformato gli ambienti. Si parla di [[degrado]] quando la trasformazione danneggia l'ambiente in modo grave o difficile da recuperare.", "Con la [[deforestazione]] si tagliano o si bruciano le foreste: il suolo resta scoperto, la pioggia porta via lo strato fertile (è l'[[erosione]]) e piante e animali perdono il loro [[habitat]]. Oggi la deforestazione si concentra nei paesi della fascia [[tropicale]].", "Con la [[cementificazione]] il suolo viene coperto da asfalto e cemento e non assorbe più la pioggia: aumenta il rischio di [[allagamenti]]. La [[desertificazione]] fa perdere a un terreno fertile la sua fertilità.", "L'[[impronta]] ecologica misura quanta superficie serve a una persona per vivere: la Terra ne può offrire circa 1,8 ettari a testa.", "La [[biodiversità]] è la varietà delle specie viventi. Le [[api]] impollinano le piante: per questo sono un indicatore della salute dell'ambiente. Una bottiglia di [[plastica]] impiega da 100 a 1000 anni per decomporsi."])}
+<p>Oggi vediamo una trasformazione che riguarda tutto il pianeta: quella del clima.</p>
+</section>`,
 q:"Ma il clima non è sempre cambiato?",
 geo:"Capitolo 20, §7 I cambiamenti climatici e §8 Il riscaldamento globale (pp. E54–E57)",
 vivi:"Unità 4, Lezioni 3 Il cambiamento climatico e 6 Salviamo il pianeta",
