@@ -42,10 +42,21 @@ const T=(k,label)=>`<button type="button" class="term" data-term="${k}">${label|
 
 /* ================= ESERCIZI ================= */
 const EX={};
+/* righe in ordine casuale, mai nello stesso ordine delle risposte */
+function MESCOLA(a){
+  if(a.length<2) return a;
+  let b;
+  for(let k=0;k<20;k++){
+    b=a.slice();
+    for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}
+    if(b.some((x,i)=>x!==a[i])) break;
+  }
+  return b;
+}
 function SEL(id,cons,opts,items){
   EX[id]={type:"sel",items};
   return `<div class="ex" data-ex="${id}"><p class="cons">${cons}</p>
-  ${items.map((it,i)=>`<div class="item" data-i="${i}"><p>${it[0]}</p>
+  ${MESCOLA(items.map((it,i)=>[it,i])).map(([it,i])=>`<div class="item" data-i="${i}"><p>${it[0]}</p>
     <select data-sel="${id}:${i}" aria-label="Risposta"><option value="">Scegli…</option>${opts.map(o=>`<option>${o}</option>`).join("")}</select>
     <p class="fb" aria-live="polite"></p></div>`).join("")}
   <button class="btn" type="button" data-check="${id}">Controlla</button><button class="btn ghost" type="button" data-reset="${id}">Ricomincia</button>
@@ -371,8 +382,8 @@ function check(id){
   const box=app.querySelector(`[data-ex="${id}"]`),ex=EX[id];let ok=0,tot;
   if(ex.type==="sel"){
     tot=ex.items.length;
-    box.querySelectorAll(".item").forEach((row,i)=>{
-      const v=row.querySelector("select").value,it=ex.items[i],fb=row.querySelector(".fb");
+    box.querySelectorAll(".item").forEach(row=>{
+      const v=row.querySelector("select").value,it=ex.items[+row.dataset.i],fb=row.querySelector(".fb");
       row.classList.remove("ok","no");
       if(!v){fb.textContent="Manca la risposta.";fb.className="fb no";return}
       if(v===it[1]){ok++;row.classList.add("ok");fb.className="fb ok";fb.textContent="✓ Giusto."+(it[2]?" "+it[2]:"")}
