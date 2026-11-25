@@ -90,6 +90,12 @@ function CLOZE(id,cons,paras){
 .orig .buco.no select{border-color:var(--no);outline:2px solid var(--no)}
 .orig .buco .segno{font-weight:700;margin-left:.15rem}
 .orig .buco.ok .segno{color:var(--accent)} .orig .buco.no .segno{color:var(--no)}
+.orig .q-foto{display:block}
+.orig .q-foto img{display:block;width:100%;max-width:420px;aspect-ratio:3/2;object-fit:cover;border-radius:8px;background:var(--soft,#eee)}
+.orig .q-foto b{display:block;margin-top:.25rem}
+.orig .cred-foto{display:block;font-size:.75rem;color:var(--muted,#666);margin-top:.15rem}
+.orig .nota-sinonimi ul{margin:.3rem 0 0;padding-left:1.2rem}
+.orig .nota-sinonimi li{margin:.3rem 0}
 .orig .ripasso{border:2px dashed var(--accent);border-radius:12px;padding:.4rem 1rem .2rem;margin:0 0 1.4rem}
 `;document.head.appendChild(st);})();
 function TXT(id,cons,ph){
@@ -218,31 +224,42 @@ q:"Se conosco temperatura e precipitazioni di un luogo, posso immaginare che pae
 geo:"Capitolo 20, §2 Le zone climatiche e i biomi (pp. E44–E45)",
 vivi:"Unità 3, Lezione 1 I climi e gli ambienti",
 body:`
-<section class="step"><span class="tag">Osserva</span><h2>Indovina il paesaggio</h2>
-${SEL("2-dati","Leggi i dati e scegli la vegetazione che ti aspetti.",["Foresta fitta e sempreverde","Poche piante, adattate alla siccità","Boschi di alberi che perdono le foglie","Muschi, licheni e piccoli arbusti"],[
- ["Caldo tutto l'anno + molte piogge","Foresta fitta e sempreverde","Con caldo e acqua abbondanti le piante crescono senza sosta."],
- ["Caldo + pochissime piogge","Poche piante, adattate alla siccità","Senza acqua possono vivere solo piante specializzate."],
- ["Temperature moderate + piogge regolari","Boschi di alberi che perdono le foglie","D'inverno fa freddo e gli alberi si fermano, perdendo le foglie."],
- ["Molto freddo + poche precipitazioni","Muschi, licheni e piccoli arbusti","Con il freddo intenso gli alberi non riescono a crescere."]])}
+<section class="step"><span class="tag">Osserva</span><h2>Che clima c'è qui?</h2>
+<p>Guarda le piante (e gli animali) di ogni foto. Da quello che vedi, che clima immagini? Ogni clima va con una sola foto.</p>
+${SEL("2-foto","Per ogni foto scegli il clima.",["Caldo e piogge abbondanti tutto l'anno", "Caldo, con una stagione delle piogge e una secca", "Caldo e pochissima pioggia", "Estati calde e secche, inverni miti e piovosi", "Quattro stagioni e piogge regolari", "Estati calde, inverni gelidi e poca pioggia", "Inverni lunghissimi e gelidi, estati brevi", "Freddo quasi tutto l'anno, terreno gelato"],[
+ ["<span class=\"q-foto\"><img class=\"foto-bioma\" src=\"https://commons.wikimedia.org/wiki/Special:FilePath/Amazon_Manaus_forest.jpg?width=640\" alt=\"Una foresta fittissima vista dall'alto\" loading=\"lazy\" onerror=\"this.style.display='none'\"><span class=\"cred-foto\">Foto: Wikimedia Commons, CC BY-SA 2.5, <a href=\"https://commons.wikimedia.org/wiki/File:Amazon_Manaus_forest.jpg\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></span><b>Foto A</b></span>","Caldo e piogge abbondanti tutto l'anno","È la foresta pluviale dell'Amazzonia: tanti alberi, fitti e sempre verdi, hanno bisogno di caldo e acqua tutto l'anno."],
+ ["<span class=\"q-foto\"><img class=\"foto-bioma\" src=\"https://commons.wikimedia.org/wiki/Special:FilePath/Serengeti_Elefantenherde1.jpg?width=640\" alt=\"Elefanti tra erba alta e pochi alberi\" loading=\"lazy\" onerror=\"this.style.display='none'\"><span class=\"cred-foto\">Foto: Ikiwaner, GFDL 1.2, <a href=\"https://commons.wikimedia.org/wiki/File:Serengeti_Elefantenherde1.jpg\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></span><b>Foto B</b></span>","Caldo, con una stagione delle piogge e una secca","È la savana del Serengeti: l'erba alta e i pochi alberi resistono a una lunga stagione secca."],
+ ["<span class=\"q-foto\"><img class=\"foto-bioma\" src=\"https://commons.wikimedia.org/wiki/Special:FilePath/Libya_4709_Idehan_Ubari_Luca_Galuzzi_2007.jpg?width=640\" alt=\"Dune di sabbia senza piante\" loading=\"lazy\" onerror=\"this.style.display='none'\"><span class=\"cred-foto\">Foto: Luca Galuzzi, CC BY-SA 2.5, <a href=\"https://commons.wikimedia.org/wiki/File:Libya_4709_Idehan_Ubari_Luca_Galuzzi_2007.jpg\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></span><b>Foto C</b></span>","Caldo e pochissima pioggia","È il deserto del Sahara: senza acqua quasi nessuna pianta riesce a vivere."],
+ ["<span class=\"q-foto\"><img class=\"foto-bioma\" src=\"https://commons.wikimedia.org/wiki/Special:FilePath/Myrtus_communis_L._subsp._communis_-_52505075873.png?width=640\" alt=\"Ramo di un arbusto con foglie piccole e lucide\" loading=\"lazy\" onerror=\"this.style.display='none'\"><span class=\"cred-foto\">Foto: Ligurian Vascular Flora, CC BY 2.0, <a href=\"https://commons.wikimedia.org/wiki/File:Myrtus_communis_L._subsp._communis_-_52505075873.png\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></span><b>Foto D</b></span>","Estati calde e secche, inverni miti e piovosi","È il mirto della macchia mediterranea: foglie piccole, dure e lucide per non perdere acqua nell'estate secca."],
+ ["<span class=\"q-foto\"><img class=\"foto-bioma\" src=\"https://commons.wikimedia.org/wiki/Special:FilePath/Fagus_sylvatica_JPG2a.jpg?width=640\" alt=\"Albero con le foglie gialle e rosse\" loading=\"lazy\" onerror=\"this.style.display='none'\"><span class=\"cred-foto\">Foto: Jean-Pol Grandmont, CC BY 3.0, <a href=\"https://commons.wikimedia.org/wiki/File:Fagus_sylvatica_JPG2a.jpg\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></span><b>Foto E</b></span>","Quattro stagioni e piogge regolari","È un faggio in autunno: gli alberi che perdono le foglie vivono dove ci sono quattro stagioni."],
+ ["<span class=\"q-foto\"><img class=\"foto-bioma\" src=\"https://commons.wikimedia.org/wiki/Special:FilePath/Steppe_of_western_Kazakhstan_in_the_early_spring.jpg?width=640\" alt=\"Pianura d'erba senza alberi\" loading=\"lazy\" onerror=\"this.style.display='none'\"><span class=\"cred-foto\">Foto: Carole a, CC BY-SA 3.0, <a href=\"https://commons.wikimedia.org/wiki/File:Steppe_of_western_Kazakhstan_in_the_early_spring.jpg\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></span><b>Foto F</b></span>","Estati calde, inverni gelidi e poca pioggia","È la steppa del Kazakistan: piove troppo poco perché crescano alberi, e gli inverni sono gelidi."],
+ ["<span class=\"q-foto\"><img class=\"foto-bioma\" src=\"https://commons.wikimedia.org/wiki/Special:FilePath/BaikalForest_%28pixinn.net%29.jpg?width=640\" alt=\"Foresta di conifere\" loading=\"lazy\" onerror=\"this.style.display='none'\"><span class=\"cred-foto\">Foto: Christophe Meneboeuf, CC BY-SA 3.0, <a href=\"https://commons.wikimedia.org/wiki/File:BaikalForest_%28pixinn.net%29.jpg\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></span><b>Foto G</b></span>","Inverni lunghissimi e gelidi, estati brevi","È la taiga della Siberia: abeti e pini resistono a inverni lunghissimi."],
+ ["<span class=\"q-foto\"><img class=\"foto-bioma\" src=\"https://commons.wikimedia.org/wiki/Special:FilePath/Tundra_at_Adventfjord%2C_Svalbard.jpg?width=640\" alt=\"Distesa di piante basse senza alberi\" loading=\"lazy\" onerror=\"this.style.display='none'\"><span class=\"cred-foto\">Foto: AWeith, CC BY-SA 4.0, <a href=\"https://commons.wikimedia.org/wiki/File:Tundra_at_Adventfjord%2C_Svalbard.jpg\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></span><b>Foto H</b></span>","Freddo quasi tutto l'anno, terreno gelato","È la tundra delle isole Svalbard: il terreno gelato non lascia crescere gli alberi."]])}
 </section>
 
 <section class="step"><span class="tag">Capiamo</span><h2>Clima e bioma non sono la stessa cosa</h2>
 <p>Il clima descrive l'atmosfera: temperature e ${T("precipitazioni")}. Il ${T("bioma")} descrive l'ambiente che si forma in quel clima: le piante e gli animali che ci vivono. Un'area con temperature e precipitazioni simili forma una ${T("zonaclimatica")}.</p>
 <div class="chain">CLIMA = temperatura + precipitazioni + altri fattori<br>↓<br>BIOMA = grande ambiente naturale con vegetazione e animali adattati a quel clima</div>
 <p>Per questo lo stesso bioma si trova in continenti lontanissimi, se il clima è simile: la savana c'è in Africa, ma anche in Sud America e in Australia.</p>
-<div class="tbl"><table><thead><tr><th>Zone</th><th>Clima in breve</th><th>Biomi</th></tr></thead><tbody>
-<tr><th scope="row">Caldo-umide</th><td>caldo tutto l'anno, piogge abbondanti o stagionali</td><td>${T("pluviale")}, ${T("savana")}</td></tr>
-<tr><th scope="row">Aride</th><td>piogge scarsissime</td><td>deserti caldi e freddi, ${T("predeserto","predeserti")}</td></tr>
-<tr><th scope="row">Temperate</th><td>stagioni ben distinte, temperature moderate</td><td>${T("macchia")}, ${T("latifoglie","foreste di latifoglie")}, ${T("prateria","praterie")}</td></tr>
-<tr><th scope="row">Fredde</th><td>inverni lunghi e gelidi</td><td>${T("taiga")}, ${T("tundra")}, ghiacci</td></tr>
+<div class="tbl"><table><thead><tr><th>Zona climatica</th><th>Clima in breve</th><th>Biomi</th></tr></thead><tbody>
+<tr><th scope="row">Zona calda</th><td>caldo tutto l'anno; a cambiare è la pioggia: abbondante, solo in una stagione o quasi assente</td><td>${T("pluviale")}, ${T("savana")}, ${T("deserto","deserti caldi")}</td></tr>
+<tr><th scope="row">Zone temperate</th><td>quattro stagioni, temperature moderate</td><td>${T("macchia")}, ${T("latifoglie","foreste di latifoglie")}, ${T("prateria","praterie")}</td></tr>
+<tr><th scope="row">Zone fredde</th><td>inverni lunghi e gelidi, estati brevi</td><td>${T("taiga")}, ${T("tundra")}, ghiacci polari</td></tr>
 </tbody></table></div>
 </section>
-
-<section class="step"><span class="tag">Mettiti alla prova</span><h2>A quale zona appartiene?</h2>
-${SEL("2-zone","Per ogni bioma scegli la zona climatica.",["Caldo-umida","Arida","Temperata","Fredda"],[
- ["Foresta pluviale","Caldo-umida"],["Savana","Caldo-umida"],["Deserto","Arida"],["Macchia mediterranea","Temperata"],
- ["Foresta di latifoglie","Temperata"],["Prateria","Temperata"],["Taiga","Fredda"],["Tundra","Fredda"]])}
+`,
+post:`<section class="step"><span class="tag">Mettiti alla prova</span><h2>A quale zona appartiene?</h2>
+${SEL("2-zone","Per ogni bioma scegli la zona climatica.",["Zona calda","Zona temperata","Zona fredda"],[
+ ["Foresta pluviale","Zona calda"],["Savana","Zona calda"],["Deserto caldo","Zona calda","È un ambiente arido della zona calda. Ci sono anche deserti freddi, come il Gobi, nelle zone temperate."],["Macchia mediterranea","Zona temperata"],
+ ["Foresta di latifoglie","Zona temperata"],["Prateria","Zona temperata"],["Taiga","Zona fredda"],["Tundra","Zona fredda"]])}
 ${TXT("2-carta","Osserva la carta dei biomi del mondo (in classe o sul libro): in quali continenti trovi la foresta pluviale? E la taiga? Perché, secondo te?")}
+<div class="box nota-sinonimi"><h3>Attenzione alle parole: stessi nomi, libri diversi</h3>
+<ul>
+<li><b>Zona calda</b>: si chiama anche <i>zona torrida</i>, <i>intertropicale</i> o <i>tropicale</i>. GeoAgenda la divide in <i>zone caldo-umide</i> (foresta pluviale e savana) e <i>zone aride</i> (deserti e predeserti).</li>
+<li><b>Zone temperate</b>: si chiamano anche zone delle <i>medie latitudini</i>.</li>
+<li><b>Zone fredde</b>: si chiamano anche <i>zone polari</i>, <i>glaciali</i> o, vicino ai circoli polari, <i>subpolari</i>.</li>
+<li>Nella lezione precedente hai visto le <b>zone astronomiche</b> (torrida, temperate, polari): sono disegnate dai tropici e dai circoli polari. Le zone climatiche le ricordano, ma non coincidono del tutto, perché il clima dipende anche dall'altitudine, dal mare e dai venti.</li>
+</ul></div>
 </section>`,
 exit:["Spiega in una frase perché clima e bioma non sono sinonimi."]});
 
@@ -388,7 +405,7 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
 const app=document.getElementById("app");
 function renderLesson(n){
   const l=L[n-1], nuovo=document.getElementById("nuovo");
-  app.innerHTML=`<div class="orig">${l.pre||""}<div class="question"><span>La domanda di oggi</span><p>${l.q}</p></div>${l.body}</div><div id="slot"></div>
+  app.innerHTML=`<div class="orig">${l.pre||""}<div class="question"><span>La domanda di oggi</span><p>${l.q}</p></div>${l.body}</div><div id="slot"></div>${l.post?`<div class="orig">${l.post}</div>`:""}
   <div class="orig"><section class="step"><span class="tag">Prima di uscire</span><h2>${l.exit.length>1?"Le domande finali":"La domanda finale"}</h2>
   <div class="exit">${l.exit.map((q,i)=>`<p>${q}</p><textarea data-txt="exit-${l.n}-${i}" aria-label="${q.replace(/"/g,"")}" placeholder="Scrivi qui"></textarea>`).join("")}</div></section></div>`;
   if(nuovo){document.getElementById("slot").replaceWith(nuovo);nuovo.hidden=false;}

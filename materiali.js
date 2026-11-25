@@ -619,9 +619,7 @@ var MODULI = [
         descrizione: "Le zone climatiche e i grandi ambienti naturali. GeoAgenda 3: E44–E45 · Vivi la Geografia 3: Unità 3, lezione 1, pp. 20–21.",
         link: "geografia/terza/clima-e-ambienti/lezioni/biomi.html",
         data: "2026-11-01",
-        attivita: [
-          { tipo: "Scheda", titolo: "I biomi della Terra: schede enciclopediche", descrizione: "Otto voci in stile enciclopedia per ragazzi (foresta pluviale, savana, deserto, macchia mediterranea, foresta di latifoglie, prateria, taiga, tundra), con carta d'identità e tavola di confronto.", link: "geografia/terza/clima-e-ambienti/lezioni/biomi-schede.html", data: "2026-11-25" }
-        ]
+        attivita: []
       },
       {
         titolo: "Gli ambienti caldi: troppa acqua o troppo poca?",
@@ -665,7 +663,8 @@ var MODULI = [
       }
     ],
     attivita: [
-      { tipo: "Lezione facile", titolo: "Il clima e gli ambienti", descrizione: "Versione facile di tutto il modulo, organizzata come Geografia facile (Erickson): idea principale con il termometro sulla montagna, carte delle parole, testo sintetico/essenziale, glossario, mappa delle informazioni, dieci cose da sapere.", link: "geografia/terza/clima-e-ambienti/lezioni/clima-e-ambienti-facile.html", data: "2026-11-18" }
+      { tipo: "Lezione facile", titolo: "Il clima e gli ambienti", descrizione: "Versione facile di tutto il modulo, organizzata come Geografia facile (Erickson): idea principale con il termometro sulla montagna, carte delle parole, testo sintetico/essenziale, glossario, mappa delle informazioni, dieci cose da sapere.", link: "geografia/terza/clima-e-ambienti/lezioni/clima-e-ambienti-facile.html", data: "2026-11-18" },
+      { tipo: "Scheda", titolo: "I biomi della Terra: schede enciclopediche", descrizione: "Otto voci in stile enciclopedia per ragazzi (foresta pluviale, savana, deserto, macchia mediterranea, foresta di latifoglie, prateria, taiga, tundra), con carta d'identità e tavola di confronto.", link: "geografia/terza/clima-e-ambienti/lezioni/biomi-schede.html", data: "2026-11-25" }
     ]
   },
   {

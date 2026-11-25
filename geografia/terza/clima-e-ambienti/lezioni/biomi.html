@@ -159,9 +159,8 @@ table.dati td.n,table.dati th.n{text-align:right;font-variant-numeric:tabular-nu
 
   <div id="app"></div>
   <div id="nuovo" hidden>
-  <h2 class="sec" style="margin-top:8px">Approfondisci con il libro</h2>
-  <section class="part">
-    <h2 class="sec">1. Leggere un grafico climatico</h2>
+    <section class="part">
+    <h2 class="sec">Leggere un grafico climatico</h2>
     <div class="books"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>grafici delle pp. 23–33</span></div></div>
     <p class="lead">Il <b>grafico climatico</b> mette insieme le due misure del clima: la linea arancione è la <b>temperatura media</b> di ogni mese (scala a sinistra), le colonne blu sono le <b>precipitazioni</b> (scala a destra). Guarda il grafico e indovina il bioma: poi scopri di che luogo si tratta.</p>
     <div class="grid">
@@ -181,14 +180,6 @@ table.dati td.n,table.dati th.n{text-align:right;font-variant-numeric:tabular-nu
   </section>
 
   <section class="part">
-    <h2 class="sec">2. Zone climatiche e ambienti</h2>
-    <div class="books"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>p. 21 · Per cominciare</span></div><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">p. E44</span></div></div>
-    <div class="card sort" id="s2">
-      <p>Completa la tabella del libro: tocca un ambiente e poi la sua zona climatica.</p>
-      <div class="pool"></div><div class="bins"></div>
-      <div class="chips"><button type="button" class="btn go" data-ck>Controlla</button><button type="button" class="btn" data-rs>Ricomincia</button></div>
-      <div class="fb" hidden></div>
-    </div>
     <div class="words"><p><b>Curiosità · La foresta amazzonica</b> (Vivi la Geografia, p. 21). È la foresta pluviale più estesa del mondo: più di 5 milioni di km², circa 18 volte l'Italia. Il libro elenca otto paesi e territori (Brasile, Perù, Bolivia, Colombia, Venezuela, Guyana, Suriname e Guyana francese); la foresta arriva anche in Ecuador. Attenzione: il libro scrive «60 milioni di km²», ma è un errore di stampa: sarebbero più di tre volte tutto il Sud America.</p></div>
   </section>
 
@@ -198,7 +189,6 @@ table.dati td.n,table.dati th.n{text-align:right;font-variant-numeric:tabular-nu
     <div class="book">
       <div class="row"><div class="vivi"><b>VIVI LA GEOGRAFIA 3</b><span>Adesso apri il libro · pp. 20–21</span></div><p>Osserva la carta «Gli ambienti della Terra» a p. 21 e completa la tabella di «Per cominciare». I grafici climatici che hai letto qui sono quelli delle lezioni 2–7.</p></div>
       <div class="row"><div class="vivi"><b class="ga">GEOAGENDA 3</b><span class="ga">Adesso apri il libro · pp. E44–E45</span></div><p>Studia la prima parte delle pp. E44–E45: le zone climatiche e i biomi.</p></div>
-      <div class="row"><div class="vivi"><b>SCHEDE ENCICLOPEDICHE</b><span>Per approfondire</span></div><p>Consulta le <a href="biomi-schede.html">schede sui biomi della Terra</a>: una voce per ogni bioma, con la carta d'identità e i biomi a confronto.</p></div>
     </div>
   </section>
 
@@ -331,10 +321,6 @@ $('#go').addEventListener('click',e=>{const b=e.target.closest('[data-b]');if(!b
   if(b.dataset.b===s.b){done[gi]=true;card3();draw3();}else{b.className='wrong';$('#gf').hidden=false;$('#gf').className='fb wrong';
   $('#gf').textContent='✗ Non è questo. Guarda: fa caldo o freddo? Piove molto, poco, sempre o solo in una stagione?';}});
 setupFig($('#f3'),draw3);card3();
-smista($('#s2'),[
- {t:'Foresta pluviale',ok:0},{t:'Giungla',ok:0},{t:'Savana',ok:0},{t:'Deserti caldi',ok:0},
- {t:'Foresta di latifoglie',ok:1},{t:'Prateria',ok:1},{t:'Steppa',ok:1},{t:'Macchia mediterranea',ok:1},
- {t:'Taiga',ok:2},{t:'Tundra',ok:2},{t:'Regioni polari',ok:2}].sort(()=>Math.random()-.5),['Zona torrida','Zone temperate','Zone fredde']);
 
 </script>
 <!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
