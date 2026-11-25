@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>I biomi della Terra · Schede enciclopediche</title>
+<style>
+:root{
+--sfondo:#f3f3ef; --carta:#ffffff; --tenue-bg:#eaf1f2; --ink:#23262a; --tenue:#5a6066; --filo:#dfe2dd;
+--accento:#2b5f6b; --accento-2:#1f4a54; --accento-soft:#e1edef; --box:#fbf6e9;
+--serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+--sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+--surface:var(--carta); --line:var(--filo); --soft:var(--tenue-bg); --paper:var(--tenue-bg); --accent:var(--accento); --accent-ink:#fff; --muted:var(--tenue); --card:var(--carta);
+color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+--sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+--accento:#7cc0cc; --accento-2:#a6d6de; --accento-soft:#1d3237; --box:#22231b; --accent-ink:#0f1416; color-scheme:dark}}
+:root[data-theme="dark"]{
+--sfondo:#0f1416; --carta:#161d20; --tenue-bg:#1b2629; --ink:#e7ecee; --tenue:#9aa7ad; --filo:#2a3639;
+--accento:#7cc0cc; --accento-2:#a6d6de; --accento-soft:#1d3237; --box:#22231b; --accent-ink:#0f1416; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--sfondo);color:var(--ink);font:1.08rem/1.65 var(--sans)}
+a{color:var(--accento)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accento);outline-offset:2px}
+.salta{position:absolute;left:1rem;top:-6rem;background:var(--carta);padding:.8rem 1rem;z-index:20}.salta:focus{top:1rem}
+.foglio{max-width:1280px;margin:32px auto;background:var(--carta);border:1px solid var(--filo)}
+header.testata{padding:22px 52px 26px;border-top:9px solid var(--accento);background:var(--tenue-bg)}
+.indietro{display:inline-block;font-size:.92rem;margin-bottom:18px;text-decoration:none;border-bottom:1px solid currentColor}
+.eyebrow{margin:0 0 6px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tenue);font-weight:700}
+.capitolo{margin:0;font-weight:700;color:var(--accento)}
+h1{font:700 2.6rem/1.08 var(--serif);font-size:clamp(2.1rem,6vw,3.5rem);margin:6px 0 10px}
+.sottotitolo{margin:0;font:italic 1.25rem/1.4 var(--serif);color:var(--tenue)}
+.corpo-lezione{display:grid;grid-template-columns:268px minmax(0,1fr);align-items:start}
+nav.indice{position:sticky;top:12px;align-self:start;display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:30px 0 24px 28px;max-height:calc(100vh - 24px);overflow-y:auto}
+.indice-titolo{margin:0 0 2px;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--tenue)}
+.indice-gruppo{margin:8px 0 -4px;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--tenue)}
+a.voce{display:flex;align-items:center;min-height:54px;padding:4px 12px 4px 4px;border-radius:999px 8px 8px 999px;background:var(--carta);color:var(--ink);text-decoration:none;font:800 .86rem/1.15 var(--sans);text-transform:uppercase;letter-spacing:.02em;transition:transform .15s,box-shadow .15s}
+a.voce:not([aria-current="true"]){box-shadow:inset 0 0 0 1px var(--filo)}
+a.voce .tondo{margin-right:10px;flex:none;width:46px;height:46px;border-radius:50%;background:var(--tenue-bg);color:var(--c);border:3px solid var(--carta);display:grid;place-items:center}
+a.voce svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+a.voce:hover{transform:translateX(4px)}
+a.voce[aria-current="true"]{background:var(--c);color:#fff;transform:translateX(8px);box-shadow:0 0 0 3px var(--carta),0 0 0 5px var(--ink)}
+a.voce[aria-current="true"] .tondo{background:#fff;border-color:#fff}
+a.voce:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+main{padding:10px 52px 40px 40px;min-width:0}
+section.parte{padding:34px 0 8px;scroll-margin-top:56px}
+footer{border-top:1px solid var(--filo);padding:18px 52px;font-size:.86rem;color:var(--tenue)}
+footer p{margin:0 0 6px}
+
+/* ===== la voce di enciclopedia ===== */
+.lemma-testa{border-bottom:3px solid var(--c);padding-bottom:10px;margin-bottom:18px}
+.etichetta{display:inline-block;font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--tenue);margin:0 0 2px}
+.etichetta .pallino{display:inline-block;width:.7em;height:.7em;border-radius:50%;background:var(--c);margin-right:6px;vertical-align:-.05em}
+.lemma{font:700 2.4rem/1.1 var(--serif);margin:0}
+.lemma .gram{font:italic 400 1.05rem var(--serif);color:var(--tenue);margin-left:8px}
+.varianti{margin:4px 0 0;font:italic 1.08rem var(--serif);color:var(--tenue)}
+.voce-enc{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:30px;align-items:start}
+.testo-voce{max-width:74ch}
+.definizione{font:1.2rem/1.6 var(--serif);margin:0 0 22px;padding:2px 0 2px 16px;border-left:5px solid var(--c)}
+.testo-voce h3{font:800 .9rem/1.3 var(--sans);text-transform:uppercase;letter-spacing:.07em;margin:26px 0 8px;display:flex;align-items:center;gap:8px}
+.testo-voce h3:before{content:"";flex:none;width:12px;height:12px;background:var(--c);border-radius:2px}
+.testo-voce p{margin:0 0 12px}
+.testo-voce strong{font-weight:700}
+.rimando{white-space:nowrap;font-variant:small-caps;font-weight:700;text-decoration:none;border-bottom:1px dotted currentColor}
+.rimando:before{content:"→ ";font-variant:normal}
+.sapevi{margin:24px 0 8px;background:var(--box);border:1px solid var(--filo);border-radius:4px 16px 16px 16px;padding:14px 18px 6px;position:relative}
+.sapevi h4{margin:0 0 6px;font:800 .82rem var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sapevi h4{color:var(--ink)}}
+:root[data-theme="dark"] .sapevi h4{color:var(--ink)}
+.vedi{margin:18px 0 0;padding-top:12px;border-top:1px solid var(--filo);font-size:.97rem}
+.vedi b{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tenue);margin-right:6px}
+.vedi a{margin-right:14px}
+
+/* carta d'identità */
+aside.identita{border:1px solid var(--filo);border-top:6px solid var(--c);border-radius:6px 6px 14px 14px;background:var(--carta);position:sticky;top:14px}
+.id-figura{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--tenue-bg);border-bottom:1px solid var(--filo)}
+.id-figura .icona{flex:none;width:64px;height:64px;border-radius:50%;background:var(--carta);color:var(--c);display:grid;place-items:center;border:3px solid var(--c)}
+.id-figura svg{width:38px;height:38px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .id-figura .icona{color:var(--ink)}}
+:root[data-theme="dark"] .id-figura .icona{color:var(--ink)}
+.id-figura p{margin:0;font:700 1.05rem/1.25 var(--serif)}
+.id-figura p span{display:block;font:600 .78rem var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--tenue)}
+.fasce{margin:0;padding:10px 12px 4px;border-bottom:1px solid var(--filo)}
+.fasce svg{display:block;width:100%;height:auto}
+.fasce figcaption{font-size:.76rem;color:var(--tenue);line-height:1.35;margin-top:2px}
+.fasce .globo{fill:var(--tenue-bg);stroke:var(--tenue);stroke-width:1}
+.fasce .banda{fill:var(--c);opacity:.8}
+.fasce .linea{stroke:var(--tenue);stroke-width:.7;stroke-dasharray:3 2}
+.fasce .linea.eq{stroke-dasharray:none;stroke-width:1}
+.fasce text{font:600 7.5px var(--sans);fill:var(--tenue)}
+.fasce .zona-calda{fill:#d9822b;opacity:.75}.fasce .zona-temp{fill:#5d9a52;opacity:.75}.fasce .zona-fredda{fill:#7fb7dc;opacity:.9}
+aside.identita dl{margin:0;padding:6px 16px 12px}
+aside.identita dt{font:800 .72rem var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--tenue);margin-top:10px}
+aside.identita dd{margin:2px 0 0;font-size:.95rem;line-height:1.45}
+
+/* indice dei biomi (voce introduttiva) */
+.elenco-biomi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:8px 0 6px}
+.elenco-biomi .zona{border:1px solid var(--filo);border-radius:12px;padding:12px 14px}
+.elenco-biomi h4{margin:0 0 6px;font:800 .8rem var(--sans);letter-spacing:.08em;text-transform:uppercase}
+.elenco-biomi ul{margin:0;padding-left:18px}
+.elenco-biomi li{margin:3px 0}
+
+/* tavola di confronto */
+.tavola-scorri{overflow-x:auto;border:1px solid var(--filo);border-radius:10px}
+table.tavola{border-collapse:collapse;width:100%;min-width:860px;font-size:.93rem}
+table.tavola th,table.tavola td{padding:9px 10px;border-bottom:1px solid var(--filo);text-align:left;vertical-align:top}
+table.tavola thead th{background:var(--tenue-bg);font:800 .74rem var(--sans);letter-spacing:.07em;text-transform:uppercase;color:var(--tenue)}
+table.tavola tbody th{font:700 1rem var(--serif);white-space:nowrap;border-left:6px solid var(--c)}
+table.tavola tbody th a{color:inherit;text-decoration:none;border-bottom:1px dotted currentColor}
+table.tavola tr.gruppo td{background:var(--accento-soft);font:800 .74rem var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--accento)}
+
+/* una parte alla volta */
+section.parte[hidden]{display:none}
+.una-parte section.parte{min-height:60vh}
+.parte-nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin:34px 0 10px;padding-top:18px;border-top:1px solid var(--filo)}
+.parte-nav a{display:inline-block;padding:10px 18px;border-radius:999px;background:var(--c,#2b5f6b);color:#fff;text-decoration:none;font:800 .86rem/1.2 var(--sans);text-transform:uppercase;letter-spacing:.03em}
+.parte-nav a.succ{margin-left:auto}
+.parte-nav a:hover{filter:brightness(1.1)}
+.parte-nav a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+@media (max-width:1100px){
+.voce-enc{grid-template-columns:1fr}
+aside.identita{position:static;order:-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}
+.id-figura{grid-column:1/-1}
+.fasce{border-bottom:0;border-right:1px solid var(--filo)}
+.elenco-biomi{grid-template-columns:1fr}
+}
+@media (max-width:960px){
+html{scroll-padding-bottom:84px}
+.corpo-lezione{display:block}
+nav.indice{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:90;grid-auto-flow:column;grid-auto-columns:max-content;grid-template-columns:none;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;max-height:none;gap:8px;padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));background:var(--carta);border-top:1px solid var(--filo);box-shadow:0 -4px 14px rgba(0,0,0,.12)}
+.foglio{margin-bottom:70px}
+.indice-titolo,.indice-gruppo,.indice-testa{display:none}
+a.voce{flex:none;min-height:40px;padding:3px 12px 3px 3px;font-size:.74rem;white-space:nowrap}
+a.voce .tondo{width:34px;height:34px;border-width:2px}
+a.voce svg{width:18px;height:18px}
+a.voce:hover,a.voce[aria-current="true"]{transform:none}
+main{padding:10px 40px 40px}
+}
+@media (max-width:700px){
+.foglio{margin:0;border:0}
+header.testata{padding:16px 16px 20px}
+main{padding:4px 16px 28px}
+footer{padding:16px}
+.lemma{font-size:2rem}
+aside.identita{display:block}
+.fasce{border-right:0;border-bottom:1px solid var(--filo)}
+}
+@media print{
+body{background:#fff}.foglio{border:0;margin:0}nav.indice,.indietro,.parte-nav{display:none}
+.corpo-lezione{display:block}
+section.parte[hidden]{display:block!important}
+section.parte{break-before:page}
+aside.identita{position:static}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* indice riducibile */
+.indice-riduci{display:none}
+@media (min-width:961px){
+.indice-testa{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.indice-riduci{display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:50%;border:1px solid var(--filo);background:var(--carta);color:var(--tenue);font:700 1rem/1 system-ui,sans-serif;cursor:pointer;padding:0}
+.indice-riduci:hover{color:var(--ink)}
+.corpo-lezione{transition:grid-template-columns .2s}
+.corpo-lezione.indice-ridotto{grid-template-columns:84px minmax(0,1fr)}
+.indice-ridotto nav.indice{padding-left:16px;padding-right:0;overflow:visible;z-index:20;gap:8px}
+.indice-ridotto .indice-testa{justify-content:center;width:52px}
+.indice-ridotto .indice-titolo,.indice-ridotto .indice-gruppo{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.indice-ridotto a.voce{position:relative;width:52px;min-height:52px;padding:4px;justify-content:center;border-radius:999px}
+.indice-ridotto a.voce .tondo{margin-right:0}
+.indice-ridotto a.voce:hover{transform:none}
+.indice-ridotto a.voce .nome{position:absolute;left:62px;top:50%;transform:translateY(-50%);white-space:nowrap;background:#23262a;color:#fff;padding:7px 12px;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .12s;z-index:30}
+.indice-ridotto a.voce:hover .nome,.indice-ridotto a.voce:focus .nome{opacity:1}
+}
+</style>
+<style>
+.zm{position:fixed;top:10px;right:10px;top:max(10px,env(safe-area-inset-top,0px));right:max(10px,env(safe-area-inset-right,0px));z-index:100;display:flex;gap:4px;align-items:center;background:var(--surface,var(--card,#fff));border:1px solid var(--line,#ccd);border-radius:999px;padding:4px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-family:system-ui,sans-serif}
+.zm button{border:0;background:var(--soft,var(--paper,#eef));color:var(--ink,#123);border-radius:999px;min-width:36px;height:36px;font-weight:800;font-size:1rem;cursor:pointer;padding:0 8px;margin:0}
+.zm button:hover{background:var(--accent,#336);color:var(--accent-ink,#fff)}
+.zm button:disabled{opacity:.35;cursor:default}
+.zm button:disabled:hover{background:var(--soft,var(--paper,#eef));color:var(--ink,#123)}
+.zm span{min-width:44px;text-align:center;font-weight:700;font-size:.85rem;color:var(--muted,#567);font-variant-numeric:tabular-nums;cursor:pointer}
+body{padding-top:40px}
+@media print{.zm{display:none!important}body{padding-top:0}}
+</style>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+<div class="foglio">
+<header class="testata">
+<a class="indietro" href="../index.html">← Torna a Clima e ambienti: tutte le lezioni</a>
+<p class="eyebrow">Geografia · Modulo II · Clima e ambienti</p>
+<p class="capitolo">Schede enciclopediche</p>
+<h1>I biomi della Terra</h1>
+<p class="sottotitolo">Otto voci da consultare: dove si trova ogni bioma, che clima ha, chi ci vive e come lo trasformano le persone</p>
+</header>
+<div class="corpo-lezione">
+<nav class="indice" aria-label="Voci dell'enciclopedia">
+<div class="indice-testa"><p class="indice-titolo">Le voci</p><button type="button" class="indice-riduci" aria-pressed="false" aria-label="Riduci l'indice alle sole icone" title="Riduci l'indice alle sole icone">«</button></div>
+<a class="voce" href="#bioma" style="--c:#2b5f6b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/></svg></span><span class="nome">Bioma</span></a>
+<p class="indice-gruppo">Zona calda</p>
+<a class="voce" href="#pluviale" style="--c:#1f7a4d"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-8"/><path d="M6.5 13a4 4 0 0 1 .8-7.6 5 5 0 0 1 9.4 0 4 4 0 0 1 .8 7.6z"/><path d="M4 16v2M20 16v2M7 19v2M17 19v2"/></svg></span><span class="nome">Foresta pluviale</span></a>
+<a class="voce" href="#savana" style="--c:#97670b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9c3-3.5 15-3.5 18 0z"/><path d="M12 9v11M12 13l-4-4M12 12l4-3"/><path d="M2 20h20"/></svg></span><span class="nome">Savana</span></a>
+<a class="voce" href="#deserto" style="--c:#b4531f"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 21V5a2 2 0 0 1 4 0v16"/><path d="M10 14H7.5A2.5 2.5 0 0 1 5 11.5V8"/><path d="M14 11h2.5A2.5 2.5 0 0 0 19 8.5V6"/><path d="M3 21h18"/></svg></span><span class="nome">Deserto</span></a>
+<p class="indice-gruppo">Zone temperate</p>
+<a class="voce" href="#mediterranea" style="--c:#5c7524"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20c4-5 8-9 14-15"/><path d="M8.5 16c-.6-2.6.8-4.8 3-5.4.6 2.6-.8 4.8-3 5.4zM13 11.5c-.6-2.6.8-4.8 3-5.4.6 2.6-.8 4.8-3 5.4zM10 15c2.6.6 4.8-.8 5.4-3-2.6-.6-4.8.8-5.4 3z"/></svg></span><span class="nome">Macchia mediterranea</span></a>
+<a class="voce" href="#latifoglie" style="--c:#9a4d22"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M12 15v6M9 21h6M12 12l-2.2-2.2M12 13.2l2.6-2.6"/></svg></span><span class="nome">Foresta di latifoglie</span></a>
+<a class="voce" href="#prateria" style="--c:#6b7419"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 20h20"/><path d="M6 20c0-5-1.5-8-3-10M9 20c0-6 1-10 3-13M13 20c0-5 2-8 5-10M17 20c0-4 1-6.5 4-8"/></svg></span><span class="nome">Prateria</span></a>
+<p class="indice-gruppo">Zone fredde</p>
+<a class="voce" href="#taiga" style="--c:#24594b"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l-5 7h3l-4 6h12l-4-6h3z"/><path d="M12 16v5"/></svg></span><span class="nome">Taiga</span></a>
+<a class="voce" href="#tundra" style="--c:#3d6f93"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/><path d="M9.5 4.5L12 6l2.5-1.5M9.5 19.5L12 18l2.5 1.5"/></svg></span><span class="nome">Tundra</span></a>
+<p class="indice-gruppo">Per ripassare</p>
+<a class="voce" href="#confronto" style="--c:#4757a8"><span class="tondo"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M3 14.5h18M9 4v16"/></svg></span><span class="nome">I biomi a confronto</span></a>
+</nav>
+<main id="contenuto">
+
+<!-- ======================= BIOMA ======================= -->
+<section class="parte" id="bioma" style="--c:#2b5f6b" aria-labelledby="t-bioma">
+<div class="lemma-testa">
+<p class="etichetta"><span class="pallino"></span>Voce introduttiva</p>
+<h2 class="lemma" id="t-bioma">bioma<span class="gram">s. m.</span></h2>
+</div>
+<div class="voce-enc">
+<div class="testo-voce">
+<p class="definizione">Grande ambiente naturale della Terra che si estende su regioni molto vaste, anche lontane fra loro, dove il clima, le piante e gli animali sono simili. Esempi di biomi sono la savana, il deserto e la taiga.</p>
+<h3>Il clima decide</h3>
+<p>Ciò che caratterizza un bioma è soprattutto il <strong>clima</strong>: quanto fa caldo e quanto piove, e in quali mesi. Da questi due elementi dipende il tipo di <strong>vegetazione</strong> che può crescere: alberi altissimi dove piove molto e fa sempre caldo, erbe dove la pioggia è poca, muschi e licheni dove il terreno resta gelato. Le piante, a loro volta, stabiliscono quali <strong>animali</strong> possono trovare cibo e riparo.</p>
+<p>Per questo lo stesso bioma si ripete in continenti diversi. In Africa, in America meridionale e in Australia esistono savane: gli animali sono di specie diverse, ma hanno modi di vivere simili, perché devono superare gli stessi problemi, come la lunga stagione senza pioggia.</p>
+<h3>Biomi e zone climatiche</h3>
+<p>Viaggiando dall'Equatore verso i poli si attraversano le <strong>zone climatiche</strong> della Terra e, una dopo l'altra, si incontrano i diversi biomi. Nella <strong>zona calda</strong> si trovano la foresta pluviale, la savana e i grandi deserti; nelle <strong>zone temperate</strong> la macchia mediterranea, le foreste di latifoglie e le praterie; nelle <strong>zone fredde</strong> la taiga, la tundra e infine i ghiacci polari.</p>
+<p>Qualcosa di simile accade salendo su un'alta montagna: poiché con l'altitudine la temperatura diminuisce, si attraversano fasce di vegetazione che ricordano i biomi incontrati andando verso nord. Sulle Alpi si passa dai boschi di latifoglie ai boschi di conifere, poi ai prati d'alta quota, simili alla tundra, e infine alle rocce e ai ghiacciai.</p>
+<h3>Le voci di questa enciclopedia</h3>
+<div class="elenco-biomi">
+<div class="zona"><h4 style="color:#c25a12">Zona calda</h4><ul><li><a href="#pluviale">Foresta pluviale</a></li><li><a href="#savana">Savana</a></li><li><a href="#deserto">Deserto</a></li></ul></div>
+<div class="zona"><h4 style="color:#4f8f3f">Zone temperate</h4><ul><li><a href="#mediterranea">Macchia mediterranea</a></li><li><a href="#latifoglie">Foresta di latifoglie</a></li><li><a href="#prateria">Prateria</a></li></ul></div>
+<div class="zona"><h4 style="color:#3d7fae">Zone fredde</h4><ul><li><a href="#taiga">Taiga</a></li><li><a href="#tundra">Tundra</a></li></ul></div>
+</div>
+<h3>Gli esseri umani e i biomi</h3>
+<p>Quasi nessun bioma è rimasto come era in origine. Gli esseri umani hanno tagliato foreste, arato praterie, costruito città e strade, e oggi, con il <strong>cambiamento climatico</strong>, modificano anche il clima da cui i biomi dipendono. Conoscere i biomi serve anche a capire che cosa rischiamo di perdere.</p>
+<div class="sapevi"><h4>Lo sapevi?</h4><p>Esistono anche biomi acquatici, come le barriere coralline o il mare aperto. Le voci di questa enciclopedia parlano solo dei <strong>biomi terrestri</strong>, quelli che si trovano sulle terre emerse.</p></div>
+</div>
+<aside class="identita" aria-label="Carta d'identità">
+<div class="id-figura"><span class="icona"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/></svg></span><p><span>In breve</span>Bioma</p></div>
+<figure class="fasce" data-zone="1"><figcaption>Le zone climatiche: calda (arancione), temperate (verde), fredde (azzurro). Schema, non in scala.</figcaption></figure>
+<dl>
+<dt>Origine della parola</dt><dd>dal greco <em>bíos</em>, «vita»</dd>
+<dt>Che cosa lo definisce</dt><dd>clima, vegetazione, animali</dd>
+<dt>Biomi terrestri principali</dt><dd>foresta pluviale, savana, deserto, macchia mediterranea, foresta di latifoglie, prateria, taiga, tundra</dd>
+</dl>
+</aside>
+</div>
+</section>
+
+<!-- ======================= FORESTA PLUVIALE ======================= -->
+<section class="parte" id="pluviale" style="--c:#1f7a4d" aria-labelledby="t-pluviale" hidden>
+<div class="lemma-testa">
+<p class="etichetta"><span class="pallino"></span>Bioma della zona calda</p>
+<h2 class="lemma" id="t-pluviale">foresta pluviale</h2>
+<p class="varianti">o foresta equatoriale, foresta tropicale umida</p>
+</div>
+<div class="voce-enc">
+<div class="testo-voce">
+<p class="definizione">Foresta fitta e sempreverde che cresce nelle regioni vicine all'Equatore, dove fa caldo e piove molto durante tutto l'anno. È il bioma più ricco di vita della Terra.</p>
+<h3>Dove si trova</h3>
+<p>Occupa una fascia a cavallo dell'Equatore, all'incirca tra 10° di latitudine nord e 10° di latitudine sud. Le tre aree principali sono il bacino del <strong>Rio delle Amazzoni</strong> in America meridionale, che è la più vasta, il bacino del fiume <strong>Congo</strong> in Africa e le isole del <strong>Sud-est asiatico</strong>, come il Borneo, Sumatra e la Nuova Guinea.</p>
+<h3>Il clima</h3>
+<p>Il clima equatoriale è caldo e umido. La temperatura media è di circa 25-27 °C in tutti i mesi: tra il mese più caldo e quello più freddo ci sono appena uno o due gradi di differenza, e quindi non esistono stagioni come le nostre. Le piogge superano i 2000 mm all'anno (a Roma ne cadono circa 800). Quasi ogni pomeriggio scoppia un temporale: il Sole scalda il suolo, l'acqua evapora, sale verso l'alto e forma grandi nuvole cariche di pioggia.</p>
+<h3>Le piante</h3>
+<p>Gli alberi sono disposti a <strong>piani</strong>, come in un palazzo. In alto spuntano i giganti, che superano i 50 metri. Più sotto, tra i 30 e i 40 metri, le chiome si toccano e formano la <strong>volta</strong>, un tetto verde quasi continuo dove vive la maggior parte degli animali. Sotto la volta c'è il sottobosco, con felci, palme e giovani alberi, e infine il suolo, così buio che vi arriva pochissima luce. Per raggiungere il sole le <strong>liane</strong> si arrampicano sui tronchi e le piante <strong>epifite</strong>, come molte orchidee, crescono direttamente sui rami.</p>
+<p>Sorprendentemente, il terreno è povero. Con il caldo e l'umidità le foglie cadute si decompongono in fretta e le sostanze nutritive vengono subito riassorbite dalle radici. Se la foresta viene tagliata, la pioggia porta via il sottile strato fertile e in pochi anni il terreno diventa sterile.</p>
+<h3>Gli animali</h3>
+<p>Nelle foreste pluviali vive più della metà delle specie di piante e di animali conosciute sulle terre emerse. Molti animali passano la vita sugli alberi: scimmie, bradipi, tucani e pappagalli come le are. Ci sono rane dai colori vivaci, alcune velenose, serpenti come l'anaconda e il boa e un numero enorme di insetti. Ogni foresta ha i suoi grandi animali: il <strong>giaguaro</strong> in America, il <strong>gorilla</strong> e l'okapi in Africa, l'<strong>orango</strong> nel Borneo e a Sumatra.</p>
+<h3>Gli esseri umani</h3>
+<p>Da migliaia di anni nella foresta vivono popoli indigeni, come gli Yanomami dell'Amazzonia, che cacciano, pescano, raccolgono frutti e coltivano piccoli orti. Oggi la foresta è minacciata dalla <strong>deforestazione</strong>: viene abbattuta per ricavare legname pregiato e per fare spazio a pascoli, a piantagioni di soia e di palma da olio, a miniere e a strade. Così scompaiono specie viventi e aumenta nell'aria l'anidride carbonica, che contribuisce all'<strong>effetto serra</strong>.</p>
+<div class="sapevi"><h4>Lo sapevi?</h4><p>La foresta amazzonica produce una parte della sua stessa pioggia. Gli alberi assorbono l'acqua dal suolo e la rilasciano nell'aria come vapore attraverso le foglie: il vapore forma nuvole che il vento trasporta verso l'interno del continente. Per questo si parla di «fiumi volanti».</p></div>
+<p class="vedi"><b>Vedi anche</b><a class="rimando" href="#savana">savana</a><a class="rimando" href="#bioma">bioma</a></p>
+</div>
+<aside class="identita" aria-label="Carta d'identità della foresta pluviale">
+<div class="id-figura"><span class="icona"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21v-8"/><path d="M6.5 13a4 4 0 0 1 .8-7.6 5 5 0 0 1 9.4 0 4 4 0 0 1 .8 7.6z"/><path d="M4 16v2M20 16v2M7 19v2M17 19v2"/></svg></span><p><span>Carta d'identità</span>Foresta pluviale</p></div>
+<figure class="fasce" data-bande="-10,10"><figcaption>Dove si trova: fascia equatoriale. Schema, non in scala.</figcaption></figure>
+<dl>
+<dt>Zona climatica</dt><dd>calda (clima equatoriale)</dd>
+<dt>Temperature</dt><dd>25-27 °C tutto l'anno</dd>
+<dt>Piogge</dt><dd>oltre 2000 mm all'anno</dd>
+<dt>Stagioni</dt><dd>nessuna: caldo e piogge tutto l'anno</dd>
+<dt>Dove</dt><dd>Amazzonia, bacino del Congo, Sud-est asiatico</dd>
+<dt>Piante</dt><dd>alberi altissimi, liane, orchidee, felci</dd>
+<dt>Animali</dt><dd>scimmie, bradipi, tucani, giaguaro, gorilla, orango</dd>
+<dt>Origine della parola</dt><dd><em>pluviale</em> dal latino <em>pluvia</em>, «pioggia»</dd>
+</dl>
+</aside>
+</div>
+</section>
+
+<!-- ======================= SAVANA ======================= -->
+<section class="parte" id="savana" style="--c:#97670b" aria-labelledby="t-savana" hidden>
+<div class="lemma-testa">
+<p class="etichetta"><span class="pallino"></span>Bioma della zona calda</p>
+<h2 class="lemma" id="t-savana">savana<span class="gram">s. f.</span></h2>
+</div>
+<div class="voce-enc">
+<div class="testo-voce">
+<p class="definizione">Vasta pianura coperta di erbe alte, con alberi e arbusti sparsi, tipica delle regioni tropicali dove a una stagione delle piogge segue una lunga stagione secca.</p>
+<h3>Dove si trova</h3>
+<p>La savana si estende nella zona calda, tra le foreste pluviali e i deserti, all'incirca tra 5° e 20° di latitudine nord e sud. La più vasta e famosa è quella dell'<strong>Africa</strong>, che circonda la foresta del Congo e comprende parchi celebri come il Serengeti, in Tanzania. Savane si trovano anche in <strong>America meridionale</strong> (i <em>llanos</em> del Venezuela e il <em>cerrado</em> del Brasile), nel nord dell'<strong>Australia</strong> e in <strong>India</strong>.</p>
+<h3>Il clima</h3>
+<p>Il clima tropicale fa caldo tutto l'anno, con temperature tra i 20 e i 30 °C, ma è diviso in <strong>due stagioni</strong>. Nella stagione delle piogge, che dura alcuni mesi, cadono acquazzoni abbondanti e la pianura diventa verde. Nella stagione secca per mesi non piove quasi mai: l'erba ingiallisce, molti alberi perdono le foglie e le pozze d'acqua si prosciugano. In un anno cadono di solito tra 500 e 1500 mm di pioggia.</p>
+<h3>Le piante</h3>
+<p>Il paesaggio è dominato dalle <strong>graminacee</strong>, erbe della stessa famiglia del grano, che possono superare i due metri di altezza. Nella stagione secca seccano, ma le radici sopravvivono sotto terra e ributtano con le prime piogge. Gli alberi sono pochi e lontani tra loro. Il più tipico è l'<strong>acacia</strong>, con la chioma piatta a ombrello e i rami spinosi; il <strong>baobab</strong> ha un tronco enorme in cui immagazzina acqua per i mesi di siccità.</p>
+<p>Nella stagione secca scoppiano spesso <strong>incendi</strong>, causati dai fulmini o accesi dalle persone. Il fuoco brucia l'erba secca ma non le radici; inoltre impedisce agli alberi di diventare troppo fitti, e così la savana resta una distesa aperta.</p>
+<h3>Gli animali</h3>
+<p>La savana africana ospita la più grande concentrazione di grandi mammiferi della Terra. Ci sono gli <strong>erbivori</strong> – zebre, gnu, gazzelle, bufali, elefanti, rinoceronti e giraffe, che con il lungo collo raggiungono le foglie più alte delle acacie – e i <strong>predatori</strong> che li cacciano: leoni, leopardi, iene e ghepardi, i più veloci animali terrestri. Gli avvoltoi si nutrono delle carcasse. Le termiti costruiscono termitai di terra alti anche diversi metri.</p>
+<p>Ogni anno, tra il Serengeti e il Masai Mara, in Kenya, oltre un milione di gnu, insieme a zebre e gazzelle, compie una lunga <strong>migrazione</strong> circolare, seguendo le piogge in cerca di erba fresca e di acqua.</p>
+<h3>Gli esseri umani</h3>
+<p>Nella savana vivono popoli di pastori, come i <strong>Masai</strong> del Kenya e della Tanzania, che allevano bovini, e contadini che coltivano miglio, sorgo e mais, raccolti che dipendono dall'arrivo delle piogge. Campi e pascoli tolgono spazio agli animali selvatici, minacciati anche dal <strong>bracconaggio</strong>, la caccia illegale per l'avorio delle zanne e per i corni dei rinoceronti. Per proteggerli sono nati grandi parchi nazionali, che attirano turisti da tutto il mondo.</p>
+<div class="sapevi"><h4>Lo sapevi?</h4><p>La parola <em>safari</em>, che oggi usiamo per le escursioni per osservare gli animali, viene dallo swahili, una lingua dell'Africa orientale, e significa semplicemente «viaggio».</p></div>
+<p class="vedi"><b>Vedi anche</b><a class="rimando" href="#pluviale">foresta pluviale</a><a class="rimando" href="#deserto">deserto</a><a class="rimando" href="#prateria">prateria</a></p>
+</div>
+<aside class="identita" aria-label="Carta d'identità della savana">
+<div class="id-figura"><span class="icona"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9c3-3.5 15-3.5 18 0z"/><path d="M12 9v11M12 13l-4-4M12 12l4-3"/><path d="M2 20h20"/></svg></span><p><span>Carta d'identità</span>Savana</p></div>
+<figure class="fasce" data-bande="5,20;-20,-5"><figcaption>Dove si trova: ai due lati della fascia equatoriale. Schema, non in scala.</figcaption></figure>
+<dl>
+<dt>Zona climatica</dt><dd>calda (clima tropicale)</dd>
+<dt>Temperature</dt><dd>20-30 °C tutto l'anno</dd>
+<dt>Piogge</dt><dd>500-1500 mm all'anno, solo in alcuni mesi</dd>
+<dt>Stagioni</dt><dd>una stagione delle piogge e una stagione secca</dd>
+<dt>Dove</dt><dd>Africa, Brasile, Venezuela, Australia settentrionale, India</dd>
+<dt>Piante</dt><dd>erbe alte, acacia, baobab</dd>
+<dt>Animali</dt><dd>zebre, gnu, giraffe, elefanti, leoni, ghepardi</dd>
+<dt>Origine della parola</dt><dd>dallo spagnolo <em>sabana</em>, da una lingua delle popolazioni dei Caraibi</dd>
+</dl>
+</aside>
+</div>
+</section>
+
+<!-- ======================= DESERTO ======================= -->
+<section class="parte" id="deserto" style="--c:#b4531f" aria-labelledby="t-deserto" hidden>
+<div class="lemma-testa">
+<p class="etichetta"><span class="pallino"></span>Bioma della zona calda (e non solo)</p>
+<h2 class="lemma" id="t-deserto">deserto<span class="gram">s. m.</span></h2>
+</div>
+<div class="voce-enc">
+<div class="testo-voce">
+<p class="definizione">Regione in cui piove pochissimo, meno di 250 mm all'anno, e dove quindi piante e animali sono scarsi e devono adattarsi a vivere con pochissima acqua.</p>
+<h3>Dove si trova</h3>
+<p>I grandi <strong>deserti caldi</strong> si trovano soprattutto nelle fasce vicino ai tropici, tra 15° e 35° di latitudine nord e sud, dove l'aria scende dall'alto, si riscalda e diventa secca, impedendo la formazione delle nuvole. Il più grande è il <strong>Sahara</strong>, nell'Africa settentrionale: con circa 9 milioni di km² è grande circa trenta volte l'Italia. Altri deserti caldi sono il deserto Arabico, il Kalahari e il Namib in Africa meridionale, i deserti dell'Australia e il deserto di Atacama in Cile, uno dei luoghi più aridi della Terra.</p>
+<p>Esistono anche <strong>deserti freddi</strong>, come il Gobi, in Asia centrale, dove gli inverni sono gelidi. Anche l'Antartide, dove le precipitazioni sono scarsissime, è considerata un deserto.</p>
+<h3>Il clima</h3>
+<p>Le piogge sono rare e irregolari: a volte passano anni senza che cada una goccia. Nei deserti caldi, di giorno, in estate, si superano i 40 °C; di notte invece la temperatura può scendere fin quasi a 0 °C. Questa forte <strong>escursione termica giornaliera</strong> si spiega con l'aria secca e il cielo senza nuvole: il calore che il suolo accumula di giorno si disperde rapidamente appena il Sole tramonta. Il vento solleva la sabbia e provoca violente tempeste.</p>
+<h3>Il paesaggio</h3>
+<p>Il deserto non è fatto solo di sabbia. Le grandi distese di <strong>dune</strong>, che nel Sahara si chiamano <em>erg</em>, ne coprono soltanto una parte, circa un quinto. Il resto sono altipiani di roccia nuda (<em>hamada</em>) e pianure coperte di ciottoli e ghiaia (<em>reg</em>).</p>
+<h3>Le piante</h3>
+<p>Le piante del deserto hanno trovato molti modi per risparmiare acqua. I <strong>cactus</strong> delle Americhe e le altre piante grasse la conservano nei fusti carnosi, e al posto delle foglie hanno spine, che disperdono meno acqua e le difendono dagli animali. Alcune piante hanno radici lunghissime che arrivano all'acqua in profondità, altre radici larghe e superficiali che assorbono in fretta la poca pioggia. Molti semi restano nel terreno anche per anni: dopo un acquazzone germogliano e in pochi giorni il deserto si copre di fiori. Dove l'acqua sotterranea affiora nascono le <strong>oasi</strong>, con le palme da dattero.</p>
+<h3>Gli animali</h3>
+<p>Molti animali del deserto restano nascosti durante il giorno e si muovono di notte, quando fa più fresco. Il <strong>dromedario</strong> resiste molti giorni senza bere; la sua gobba non contiene acqua ma grasso, una riserva di energia; ciglia lunghe e narici che si chiudono lo proteggono dalla sabbia. Il <strong>fennec</strong>, una piccola volpe, ha grandi orecchie che lo aiutano a disperdere il calore. Vivono nel deserto anche scorpioni, serpenti, lucertole, scarabei e piccoli roditori, molti dei quali ricavano l'acqua dal cibo.</p>
+<h3>Gli esseri umani</h3>
+<p>Nei deserti vivono da secoli popoli nomadi, come i <strong>Tuareg</strong> del Sahara e i <strong>Beduini</strong> della penisola arabica, che attraversavano il deserto con le carovane di dromedari. Altri vivono stabilmente nelle oasi. Sotto alcuni deserti si trovano grandi giacimenti di <strong>petrolio</strong> e di gas naturale, e il sole intenso è sfruttato da grandi impianti a energia solare. Ai margini del Sahara, nel Sahel, il deserto si allarga a causa della siccità, del pascolo eccessivo e del taglio degli alberi: è la <strong>desertificazione</strong>.</p>
+<div class="sapevi"><h4>Lo sapevi?</h4><p>In alcune zone del deserto di Atacama non piove per anni. Il terreno è così secco e privo di vita che vi si provano i veicoli destinati a esplorare il pianeta Marte.</p></div>
+<p class="vedi"><b>Vedi anche</b><a class="rimando" href="#savana">savana</a><a class="rimando" href="#prateria">prateria</a></p>
+</div>
+<aside class="identita" aria-label="Carta d'identità del deserto">
+<div class="id-figura"><span class="icona"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 21V5a2 2 0 0 1 4 0v16"/><path d="M10 14H7.5A2.5 2.5 0 0 1 5 11.5V8"/><path d="M14 11h2.5A2.5 2.5 0 0 0 19 8.5V6"/><path d="M3 21h18"/></svg></span><p><span>Carta d'identità</span>Deserto</p></div>
+<figure class="fasce" data-bande="15,35;-35,-15;40,48"><figcaption>Dove si trova: vicino ai tropici; più a nord, i deserti freddi dell'Asia. Schema, non in scala.</figcaption></figure>
+<dl>
+<dt>Zona climatica</dt><dd>calda (clima arido); deserti freddi anche nella zona temperata</dd>
+<dt>Temperature</dt><dd>di giorno oltre 40 °C, di notte vicino a 0 °C</dd>
+<dt>Piogge</dt><dd>meno di 250 mm all'anno</dd>
+<dt>Stagioni</dt><dd>sempre secco</dd>
+<dt>Dove</dt><dd>Sahara, deserto Arabico, Kalahari, Australia, Atacama, Gobi</dd>
+<dt>Piante</dt><dd>cactus, piante grasse, palma da dattero nelle oasi</dd>
+<dt>Animali</dt><dd>dromedario, fennec, scorpioni, serpenti, scarabei</dd>
+<dt>Origine della parola</dt><dd>dal latino <em>desertus</em>, «abbandonato»</dd>
+</dl>
+</aside>
+</div>
+</section>
+
+<!-- ======================= MACCHIA MEDITERRANEA ======================= -->
+<section class="parte" id="mediterranea" style="--c:#5c7524" aria-labelledby="t-mediterranea" hidden>
+<div class="lemma-testa">
+<p class="etichetta"><span class="pallino"></span>Bioma delle zone temperate</p>
+<h2 class="lemma" id="t-mediterranea">macchia mediterranea</h2>
+</div>
+<div class="voce-enc">
+<div class="testo-voce">
+<p class="definizione">Vegetazione fitta di arbusti e piccoli alberi sempreverdi, con foglie dure e spesso profumate, tipica delle regioni a clima mediterraneo, con estati calde e secche e inverni miti.</p>
+<h3>Dove si trova</h3>
+<p>La macchia cresce lungo le coste del <strong>Mar Mediterraneo</strong>: in Italia, soprattutto nel Centro-Sud e nelle isole, in Spagna, in Grecia, in Turchia e in Africa settentrionale. Lo stesso clima si trova in altre quattro regioni del mondo, tutte sulle coste occidentali dei continenti e a latitudini simili: la <strong>California</strong>, il <strong>Cile</strong> centrale, la regione di Città del Capo in <strong>Sudafrica</strong> e il sud-ovest dell'<strong>Australia</strong>. Le piante sono di specie diverse, ma hanno lo stesso aspetto.</p>
+<h3>Il clima</h3>
+<p>Il clima mediterraneo appartiene alla zona temperata. Gli <strong>inverni sono miti e piovosi</strong>, con temperature che raramente scendono sotto lo zero; le <strong>estati sono calde e secche</strong>, con temperature che superano spesso i 30 °C. Le piogge, tra 500 e 900 mm all'anno, cadono soprattutto in autunno e in inverno. Il problema principale per le piante è quindi la <strong>siccità estiva</strong>, che arriva proprio quando fa più caldo.</p>
+<h3>Le piante</h3>
+<p>Le piante della macchia sono quasi tutte <strong>sempreverdi</strong>. Hanno foglie piccole, dure e coriacee, spesso lucide perché ricoperte di cera o rivestite di peli: sono tutti modi per perdere meno acqua. Molte producono <strong>oli essenziali</strong> profumati, come il rosmarino, il mirto, il timo, la lavanda e l'alloro.</p>
+<p>Gli alberi più tipici sono il <strong>leccio</strong>, una quercia sempreverde, la <strong>sughera</strong>, il carrubo e, vicino al mare, il pino domestico e il pino d'Aleppo. Tra gli arbusti ci sono il lentisco, il corbezzolo con i suoi frutti rossi, la ginestra, l'erica e l'oleandro. Dove la macchia è stata distrutta dagli incendi o dal pascolo, al suo posto si forma la <strong>gariga</strong>, una vegetazione di cespugli bassi e radi tra le rocce.</p>
+<p>D'estate, con il caldo, la siccità e il vento, gli <strong>incendi</strong> sono frequenti e spesso sono causati dalle persone. Alcune piante si sono adattate: la sughera è protetta dalla sua spessa corteccia, mentre i semi del cisto germogliano proprio dopo il passaggio del fuoco.</p>
+<h3>Gli animali</h3>
+<p>Nella macchia vivono il cinghiale, la volpe, l'istrice, la donnola e la lepre; tra i rettili la lucertola, il ramarro e la tartaruga di Hermann, oggi protetta. Gli uccelli tipici sono piccoli passeriformi come l'occhiocotto, ma anche l'upupa e il colorato gruccione. D'estate il paesaggio risuona del canto delle <strong>cicale</strong>.</p>
+<h3>Gli esseri umani</h3>
+<p>Le regioni mediterranee sono state la culla di grandi civiltà antiche, come quella greca e quella romana. Da allora gli esseri umani hanno trasformato la macchia per coltivare le tre piante tipiche del Mediterraneo: l'<strong>olivo</strong>, la <strong>vite</strong> e il <strong>grano</strong>. Oggi le minacce principali sono gli incendi e la costruzione di case, alberghi e strade lungo le coste per il turismo.</p>
+<div class="sapevi"><h4>Lo sapevi?</h4><p>Il sughero dei tappi delle bottiglie è la corteccia della sughera. Si stacca dal tronco ogni nove-dodici anni senza uccidere l'albero, che poi la rifà. In Italia le sugherete più estese sono in Sardegna.</p></div>
+<p class="vedi"><b>Vedi anche</b><a class="rimando" href="#latifoglie">foresta di latifoglie</a><a class="rimando" href="#deserto">deserto</a></p>
+</div>
+<aside class="identita" aria-label="Carta d'identità della macchia mediterranea">
+<div class="id-figura"><span class="icona"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20c4-5 8-9 14-15"/><path d="M8.5 16c-.6-2.6.8-4.8 3-5.4.6 2.6-.8 4.8-3 5.4zM13 11.5c-.6-2.6.8-4.8 3-5.4.6 2.6-.8 4.8-3 5.4zM10 15c2.6.6 4.8-.8 5.4-3-2.6-.6-4.8.8-5.4 3z"/></svg></span><p><span>Carta d'identità</span>Macchia mediterranea</p></div>
+<figure class="fasce" data-bande="31,44;-38,-31"><figcaption>Dove si trova: medie latitudini, sulle coste. Schema, non in scala.</figcaption></figure>
+<dl>
+<dt>Zona climatica</dt><dd>temperata (clima mediterraneo)</dd>
+<dt>Temperature</dt><dd>inverno 8-12 °C, estate oltre 25-30 °C</dd>
+<dt>Piogge</dt><dd>500-900 mm all'anno, soprattutto in autunno e inverno</dd>
+<dt>Stagioni</dt><dd>estate calda e secca, inverno mite e piovoso</dd>
+<dt>Dove</dt><dd>coste del Mediterraneo, California, Cile, Sudafrica, Australia</dd>
+<dt>Piante</dt><dd>leccio, sughera, mirto, lentisco, corbezzolo, rosmarino</dd>
+<dt>Animali</dt><dd>cinghiale, istrice, tartaruga di Hermann, upupa, cicale</dd>
+<dt>Origine della parola</dt><dd><em>macchia</em>: forse perché da lontano appare come una macchia scura sui pendii</dd>
+</dl>
+</aside>
+</div>
+</section>
+
+<!-- ======================= FORESTA DI LATIFOGLIE ======================= -->
+<section class="parte" id="latifoglie" style="--c:#9a4d22" aria-labelledby="t-latifoglie" hidden>
+<div class="lemma-testa">
+<p class="etichetta"><span class="pallino"></span>Bioma delle zone temperate</p>
+<h2 class="lemma" id="t-latifoglie">foresta di latifoglie</h2>
+<p class="varianti">o bosco di latifoglie, foresta temperata decidua</p>
+</div>
+<div class="voce-enc">
+<div class="testo-voce">
+<p class="definizione">Foresta formata soprattutto da alberi con foglie larghe e piatte, che cadono in autunno e ricrescono in primavera. È il bioma tipico delle regioni temperate con quattro stagioni ben distinte.</p>
+<h3>Dove si trova</h3>
+<p>Le foreste di latifoglie si trovano nelle zone temperate dell'emisfero nord: nell'<strong>Europa</strong> centrale e occidentale (Francia, Germania, Gran Bretagna, Polonia), nella parte orientale degli <strong>Stati Uniti</strong>, in <strong>Cina</strong> orientale, in Corea e in Giappone. In <strong>Italia</strong> un tempo coprivano gran parte della Pianura Padana; oggi restano soprattutto sulle colline, sulle Prealpi e sugli Appennini, con boschi di querce, castagni e faggi.</p>
+<h3>Il clima</h3>
+<p>Il clima temperato ha <strong>quattro stagioni</strong>: estati tiepide o calde, con temperature sopra i 20 °C, e inverni freddi, con gelate e neve e temperature vicine allo zero. Le piogge, tra 700 e 1500 mm all'anno, sono distribuite in tutti i mesi: non c'è una vera stagione secca.</p>
+<h3>Le piante</h3>
+<p>Le <strong>latifoglie</strong> sono gli alberi a foglia larga: le querce (farnia, rovere, roverella, cerro), il faggio, il castagno, l'acero, il tiglio, il carpino, il frassino, la betulla. La maggior parte di questi alberi è <strong>caducifoglia</strong>, cioè perde le foglie in inverno. D'inverno, infatti, l'acqua del terreno gela e le radici non riescono ad assorbirla; le foglie larghe continuerebbero a perdere acqua e potrebbero essere danneggiate dal gelo e dal peso della neve. In autunno l'albero smette di produrre la <strong>clorofilla</strong>, la sostanza che colora le foglie di verde, e compaiono i colori gialli, arancioni e rossi che rendono così belli i boschi in questa stagione.</p>
+<p>Sotto gli alberi crescono arbusti, come il nocciolo e il biancospino, e piante erbacee. Molti fiori del sottobosco, come i bucaneve, gli anemoni e le primule, fioriscono all'inizio della primavera, prima che le foglie degli alberi facciano ombra. Le foglie cadute formano uno strato, la <strong>lettiera</strong>, che decomponendosi produce l'<strong>humus</strong> e rende il terreno fertile.</p>
+<h3>Gli animali</h3>
+<p>Nei boschi di latifoglie vivono il cervo, il capriolo, il cinghiale, la volpe, il tasso, lo scoiattolo, il ghiro e il riccio; in alcune zone sono tornati il lupo e, in Italia, l'orso bruno marsicano dell'Abruzzo. Tra gli uccelli ci sono il picchio, la ghiandaia, la cinciallegra, il gufo e l'allocco. Per superare l'inverno, quando il cibo scarseggia, alcuni animali vanno in <strong>letargo</strong>, come il ghiro e il riccio, mentre molti uccelli migrano verso sud.</p>
+<h3>Gli esseri umani</h3>
+<p>È uno dei biomi più trasformati dagli esseri umani. Proprio perché il terreno è fertile e il clima favorevole, le foreste sono state abbattute nel corso dei secoli per far posto a campi, pascoli, villaggi e città. In Europa rimangono pochissimi lembi di foresta originaria: il più famoso è la foresta di <strong>Białowieża</strong>, al confine tra Polonia e Bielorussia, dove vive il bisonte europeo. I boschi forniscono legno per costruire, per i mobili e per il riscaldamento, oltre a castagne e funghi; oggi molti sono protetti in parchi e riserve.</p>
+<div class="sapevi"><h4>Lo sapevi?</h4><p>Alcune faggete italiane, cresciute quasi senza interventi umani, fanno parte del patrimonio dell'umanità dell'UNESCO. Due di queste si trovano nel Lazio, sul Monte Cimino e sul Monte Raschio, vicino a Viterbo; altre in Abruzzo, in Toscana e nella Foresta Umbra, sul Gargano.</p></div>
+<p class="vedi"><b>Vedi anche</b><a class="rimando" href="#mediterranea">macchia mediterranea</a><a class="rimando" href="#taiga">taiga</a><a class="rimando" href="#prateria">prateria</a></p>
+</div>
+<aside class="identita" aria-label="Carta d'identità della foresta di latifoglie">
+<div class="id-figura"><span class="icona"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M12 15v6M9 21h6M12 12l-2.2-2.2M12 13.2l2.6-2.6"/></svg></span><p><span>Carta d'identità</span>Foresta di latifoglie</p></div>
+<figure class="fasce" data-bande="38,58"><figcaption>Dove si trova: medie latitudini dell'emisfero nord. Schema, non in scala.</figcaption></figure>
+<dl>
+<dt>Zona climatica</dt><dd>temperata (clima temperato umido)</dd>
+<dt>Temperature</dt><dd>inverno intorno a 0 °C, estate sopra i 20 °C</dd>
+<dt>Piogge</dt><dd>700-1500 mm all'anno, in tutti i mesi</dd>
+<dt>Stagioni</dt><dd>quattro stagioni ben distinte</dd>
+<dt>Dove</dt><dd>Europa centro-occidentale, Stati Uniti orientali, Cina, Giappone, Italia</dd>
+<dt>Piante</dt><dd>querce, faggio, castagno, acero, tiglio</dd>
+<dt>Animali</dt><dd>cervo, capriolo, cinghiale, scoiattolo, ghiro, picchio</dd>
+<dt>Origine della parola</dt><dd><em>latifoglia</em> dal latino <em>latus</em>, «largo», e <em>folium</em>, «foglia»</dd>
+</dl>
+</aside>
+</div>
+</section>
+
+<!-- ======================= PRATERIA ======================= -->
+<section class="parte" id="prateria" style="--c:#6b7419" aria-labelledby="t-prateria" hidden>
+<div class="lemma-testa">
+<p class="etichetta"><span class="pallino"></span>Bioma delle zone temperate</p>
+<h2 class="lemma" id="t-prateria">prateria<span class="gram">s. f.</span></h2>
+<p class="varianti">chiamata anche steppa, pampa, puszta</p>
+</div>
+<div class="voce-enc">
+<div class="testo-voce">
+<p class="definizione">Grande distesa pianeggiante coperta di erbe, quasi senza alberi, tipica delle regioni temperate all'interno dei continenti, dove piove troppo poco perché possa crescere una foresta.</p>
+<h3>Dove si trova</h3>
+<p>Le praterie si estendono all'interno dei continenti, lontano dal mare, e prendono nomi diversi a seconda del luogo. Si chiama <strong>prateria</strong> in America settentrionale, nelle Grandi Pianure tra gli Stati Uniti e il Canada; <strong>steppa</strong> in Europa orientale e in Asia, in una fascia che va dall'Ucraina fino al Kazakistan e alla Mongolia; <strong>pampa</strong> in Argentina e in Uruguay; <em>puszta</em> in Ungheria e <em>veld</em> in Sudafrica.</p>
+<h3>Il clima</h3>
+<p>Lontano dal mare manca la sua azione mitigatrice, e il clima è <strong>continentale</strong>: le estati sono calde e gli inverni molto freddi, anche sotto i −20 °C, con una forte escursione termica annua. Le piogge sono scarse, tra 250 e 750 mm all'anno, e cadono soprattutto in primavera e in estate. Soffiano spesso venti forti. Nella pampa il clima è più mite.</p>
+<h3>Le piante</h3>
+<p>La vegetazione è formata da <strong>graminacee</strong> e da altre erbe, che in primavera si riempiono di fiori. Gli alberi crescono solo lungo i fiumi, dove c'è più acqua. Le erbe hanno <strong>radici fitte e profonde</strong> che formano sotto terra un intreccio: trattiene il suolo e l'acqua e permette alle piante di sopravvivere all'inverno gelido e alle estati secche. Ogni anno la parte dell'erba che muore si trasforma in humus: per questo i suoli delle praterie, come le <strong>terre nere</strong> dell'Ucraina e della Russia, sono tra i più fertili del mondo.</p>
+<h3>Gli animali</h3>
+<p>Sulle praterie vivono grandi erbivori che si muovono in branchi: il <strong>bisonte</strong> e l'antilocapra in America settentrionale, l'antilope saiga e il cavallo selvatico di Przewalski in Asia. Nella pampa vive il nandù, un grande uccello corridore che non vola. Molti piccoli animali scavano tane sotto terra, dove si riparano dal freddo e dai predatori: i cani della prateria, le marmotte, i criceti. I predatori sono il coyote, il lupo, la volpe e i rapaci, come aquile e falchi.</p>
+<h3>Gli esseri umani</h3>
+<p>Nelle steppe dell'Asia vivevano popoli nomadi di pastori a cavallo, come i <strong>Mongoli</strong>; nella pampa i <em>gauchos</em> allevavano grandi mandrie di bovini. Grazie ai loro suoli fertili, oggi quasi tutte le praterie sono state trasformate in immensi campi coltivati: sono i <strong>«granai del mondo»</strong>, dove si producono grano, mais, girasole e soia. Il bisonte americano, che nell'Ottocento contava decine di milioni di esemplari, fu cacciato fin quasi all'estinzione; oggi, protetto, è tornato a qualche centinaio di migliaia di capi, in gran parte in allevamenti e parchi.</p>
+<div class="sapevi"><h4>Lo sapevi?</h4><p>Negli anni Trenta del Novecento, nelle Grandi Pianure degli Stati Uniti, le erbe erano state tolte per arare i campi. Quando arrivò una lunga siccità, il vento sollevò il terreno secco e lo portò via in gigantesche tempeste di polvere. Quella regione fu chiamata <em>Dust Bowl</em>, «catino di polvere».</p></div>
+<p class="vedi"><b>Vedi anche</b><a class="rimando" href="#savana">savana</a><a class="rimando" href="#deserto">deserto</a><a class="rimando" href="#latifoglie">foresta di latifoglie</a></p>
+</div>
+<aside class="identita" aria-label="Carta d'identità della prateria">
+<div class="id-figura"><span class="icona"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 20h20"/><path d="M6 20c0-5-1.5-8-3-10M9 20c0-6 1-10 3-13M13 20c0-5 2-8 5-10M17 20c0-4 1-6.5 4-8"/></svg></span><p><span>Carta d'identità</span>Prateria</p></div>
+<figure class="fasce" data-bande="38,55;-40,-30"><figcaption>Dove si trova: medie latitudini, all'interno dei continenti. Schema, non in scala.</figcaption></figure>
+<dl>
+<dt>Zona climatica</dt><dd>temperata (clima continentale)</dd>
+<dt>Temperature</dt><dd>inverni molto freddi, estati calde</dd>
+<dt>Piogge</dt><dd>250-750 mm all'anno</dd>
+<dt>Stagioni</dt><dd>quattro stagioni, con forte differenza tra estate e inverno</dd>
+<dt>Dove</dt><dd>Grandi Pianure (America), steppe di Ucraina, Kazakistan e Mongolia, pampa argentina</dd>
+<dt>Piante</dt><dd>graminacee e altre erbe fiorite</dd>
+<dt>Animali</dt><dd>bisonte, cavallo di Przewalski, cane della prateria, coyote, nandù</dd>
+<dt>Origine della parola</dt><dd>dal francese <em>prairie</em>, «prato»; <em>steppa</em> viene dal russo, <em>pampa</em> dal quechua, una lingua delle Ande</dd>
+</dl>
+</aside>
+</div>
+</section>
+
+<!-- ======================= TAIGA ======================= -->
+<section class="parte" id="taiga" style="--c:#24594b" aria-labelledby="t-taiga" hidden>
+<div class="lemma-testa">
+<p class="etichetta"><span class="pallino"></span>Bioma delle zone fredde</p>
+<h2 class="lemma" id="t-taiga">taiga<span class="gram">s. f.</span></h2>
+<p class="varianti">o foresta boreale, foresta di conifere</p>
+</div>
+<div class="voce-enc">
+<div class="testo-voce">
+<p class="definizione">Immensa foresta di conifere – abeti, pini e larici – che si estende nelle regioni fredde dell'emisfero nord, dove gli inverni sono lunghissimi e gelidi e le estati brevi.</p>
+<h3>Dove si trova</h3>
+<p>La taiga forma una fascia quasi continua attraverso l'<strong>America settentrionale</strong> (Alaska e Canada) e l'<strong>Eurasia</strong> (Norvegia, Svezia, Finlandia e Russia, fino alla Siberia), all'incirca tra 50° e 70° di latitudine nord. È il <strong>bioma terrestre più esteso</strong> del pianeta. Nell'emisfero sud non esiste, perché a quelle latitudini non ci sono quasi terre emerse, ma solo oceano.</p>
+<h3>Il clima</h3>
+<p>Il clima è freddo e continentale. L'<strong>inverno</strong> dura sei o sette mesi, con temperature che scendono spesso a −30 o −40 °C; la neve copre il suolo per gran parte dell'anno. L'<strong>estate</strong> è breve e fresca, ma le giornate sono lunghissime e la temperatura può superare i 20 °C. Le precipitazioni, tra 300 e 900 mm all'anno, cadono in buona parte sotto forma di neve.</p>
+<h3>Le piante</h3>
+<p>Gli alberi della taiga sono <strong>conifere</strong>, cioè piante che portano i semi in coni, le pigne. Sono adatte al freddo in molti modi. La chioma ha la forma di un cono e i rami sono flessibili e rivolti verso il basso, così la neve scivola via senza spezzarli. Le foglie sono <strong>aghi</strong> sottili coperti di cera, che perdono pochissima acqua e resistono al gelo. Quasi tutte le conifere sono sempreverdi: appena arriva la breve primavera possono subito cominciare a produrre nutrimento, senza dover prima rifare le foglie.</p>
+<p>Gli alberi più diffusi sono l'abete rosso, il pino silvestre e il <strong>larice</strong>, l'unica conifera che d'inverno perde gli aghi, e che prevale nella Siberia orientale, dove fa più freddo. Tra le conifere crescono anche betulle e pioppi. Il sottobosco è povero: muschi, licheni e arbusti come il mirtillo. Il terreno è acido e poco fertile, e ovunque si trovano laghi, paludi e torbiere.</p>
+<h3>Gli animali</h3>
+<p>Vivono nella taiga l'<strong>alce</strong>, il più grande dei cervi, la renna (chiamata caribù in America), il lupo, la lince, l'orso bruno e il ghiottone. Lo zibellino e l'ermellino hanno una pelliccia preziosa e la lepre variabile diventa bianca d'inverno, per mimetizzarsi nella neve. Nell'estremo oriente della Russia vive la <strong>tigre siberiana</strong>, la più grande delle tigri. Tra gli uccelli ci sono gufi, civette, picchi e il gallo cedrone. D'inverno l'orso va in letargo; d'estate arrivano milioni di uccelli migratori e nuvole di zanzare.</p>
+<h3>Gli esseri umani</h3>
+<p>La taiga è poco abitata: le città sono piccole e lontane tra loro. È una grande riserva di <strong>legname</strong> e di carta per il Canada, la Svezia, la Finlandia e la Russia; in passato era famosa per il commercio delle pellicce. Nel sottosuolo della Siberia si estraggono petrolio, gas naturale e minerali. Il taglio degli alberi e gli <strong>incendi</strong>, sempre più frequenti e vasti con le estati più calde, sono oggi i pericoli maggiori.</p>
+<div class="sapevi"><h4>Lo sapevi?</h4><p>Nel villaggio di Ojmjakon, nella Siberia orientale, nel 1933 è stata misurata una temperatura di −67,7 °C. È considerato uno dei luoghi abitati più freddi della Terra.</p></div>
+<p class="vedi"><b>Vedi anche</b><a class="rimando" href="#tundra">tundra</a><a class="rimando" href="#latifoglie">foresta di latifoglie</a></p>
+</div>
+<aside class="identita" aria-label="Carta d'identità della taiga">
+<div class="id-figura"><span class="icona"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l-5 7h3l-4 6h12l-4-6h3z"/><path d="M12 16v5"/></svg></span><p><span>Carta d'identità</span>Taiga</p></div>
+<figure class="fasce" data-bande="50,68"><figcaption>Dove si trova: solo nell'emisfero nord, sotto il Circolo polare artico. Schema, non in scala.</figcaption></figure>
+<dl>
+<dt>Zona climatica</dt><dd>fredda (clima subartico)</dd>
+<dt>Temperature</dt><dd>inverno da −20 a −40 °C, estate breve fino a 20 °C</dd>
+<dt>Piogge</dt><dd>300-900 mm all'anno, in gran parte neve</dd>
+<dt>Stagioni</dt><dd>inverno lunghissimo, estate breve</dd>
+<dt>Dove</dt><dd>Alaska, Canada, Scandinavia, Finlandia, Russia (Siberia)</dd>
+<dt>Piante</dt><dd>abete rosso, pino silvestre, larice, betulla</dd>
+<dt>Animali</dt><dd>alce, renna, lupo, lince, orso bruno, tigre siberiana</dd>
+<dt>Origine della parola</dt><dd>dal russo <em>tajgá</em>, «foresta»</dd>
+</dl>
+</aside>
+</div>
+</section>
+
+<!-- ======================= TUNDRA ======================= -->
+<section class="parte" id="tundra" style="--c:#3d6f93" aria-labelledby="t-tundra" hidden>
+<div class="lemma-testa">
+<p class="etichetta"><span class="pallino"></span>Bioma delle zone fredde</p>
+<h2 class="lemma" id="t-tundra">tundra<span class="gram">s. f.</span></h2>
+</div>
+<div class="voce-enc">
+<div class="testo-voce">
+<p class="definizione">Vasta distesa senza alberi delle regioni vicine al Polo nord, dove il suolo resta gelato quasi tutto l'anno e crescono solo piante basse: muschi, licheni, erbe e arbusti nani.</p>
+<h3>Dove si trova</h3>
+<p>La tundra si estende a nord della taiga, oltre il <strong>limite degli alberi</strong>, fino alle coste del Mar Glaciale Artico: nel nord dell'Alaska e del Canada, sulle coste della Groenlandia, in Islanda, nella Lapponia (il nord di Norvegia, Svezia e Finlandia) e nella Siberia settentrionale. Un ambiente simile, detto <strong>tundra alpina</strong>, si trova sulle alte montagne, sopra il limite dei boschi.</p>
+<h3>Il clima</h3>
+<p>Il clima è polare. L'<strong>inverno</strong> dura otto o nove mesi, è gelido – spesso sotto i −30 °C – e buio: oltre il Circolo polare, per giorni o settimane il Sole non sorge mai, è la <strong>notte polare</strong>. L'<strong>estate</strong> dura poche settimane e anche nel mese più caldo la temperatura media resta sotto i 10 °C; in compenso il Sole quasi non tramonta. Le precipitazioni sono scarse, tra 150 e 300 mm all'anno: più o meno quante in un deserto.</p>
+<h3>Il permafrost</h3>
+<p>Sotto la superficie il terreno è <strong>permanentemente gelato</strong>, anche per centinaia di metri di profondità: è il <strong>permafrost</strong>. D'estate si scioglie solo lo strato più superficiale, spesso pochi decimetri. L'acqua non può scendere in profondità, perché sotto c'è il ghiaccio, e il terreno diventa una distesa di paludi e di stagni. Gli alberi non riescono a crescere: le radici non possono affondare nel terreno gelato, l'estate è troppo breve e il vento è troppo forte.</p>
+<h3>Le piante</h3>
+<p>Le piante della tundra sono basse e crescono vicine al suolo, per ripararsi dal vento e approfittare del poco calore del terreno. Ci sono <strong>muschi</strong> e <strong>licheni</strong>, che sopportano il gelo e crescono lentissimi, erbe e <strong>arbusti nani</strong> come la betulla nana e il salice nano, alti pochi centimetri. Durante la breve estate la tundra si copre di fiori colorati: in poche settimane le piante devono fiorire e produrre i semi.</p>
+<h3>Gli animali</h3>
+<p>Il simbolo della tundra è la <strong>renna</strong> (in America <strong>caribù</strong>), che d'inverno scava sotto la neve per mangiare i licheni e compie lunghe migrazioni tra la tundra e la taiga. Vivono qui anche il bue muschiato, protetto da una lunga pelliccia, la volpe artica e la lepre artica, che d'inverno diventano bianche, il lupo artico, il gufo delle nevi e i lemming, piccoli roditori. Sulle coste vive l'orso polare. D'estate arrivano milioni di <strong>uccelli migratori</strong> – oche, anatre e altri uccelli acquatici – che fanno il nido approfittando dell'abbondanza di insetti.</p>
+<h3>Gli esseri umani</h3>
+<p>Nella tundra vivono da migliaia di anni popoli che si sono adattati al freddo: gli <strong>Inuit</strong> in Canada, in Alaska e in Groenlandia, i <strong>Sami</strong> in Lapponia, i Nenets e altri popoli in Siberia. Molti erano allevatori nomadi di renne e ne seguivano le migrazioni. Oggi nella tundra si estraggono petrolio, gas e minerali, con oleodotti e strade che attraversano il territorio.</p>
+<p>La tundra è uno degli ambienti più colpiti dal <strong>cambiamento climatico</strong>: l'Artico si sta riscaldando circa quattro volte più in fretta della media del pianeta. Il permafrost che si scioglie fa sprofondare il terreno, danneggia case e strade e libera gas serra rimasti imprigionati nel suolo per migliaia di anni, che riscaldano ancora di più l'atmosfera. Intanto arbusti e alberi della taiga avanzano verso nord.</p>
+<div class="sapevi"><h4>Lo sapevi?</h4><p>Nel permafrost della Siberia sono stati ritrovati mammut rimasti congelati per decine di migliaia di anni, alcuni con la pelle, il pelo e perfino il cibo nello stomaco.</p></div>
+<p class="vedi"><b>Vedi anche</b><a class="rimando" href="#taiga">taiga</a><a class="rimando" href="#deserto">deserto</a></p>
+</div>
+<aside class="identita" aria-label="Carta d'identità della tundra">
+<div class="id-figura"><span class="icona"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/><path d="M9.5 4.5L12 6l2.5-1.5M9.5 19.5L12 18l2.5 1.5"/></svg></span><p><span>Carta d'identità</span>Tundra</p></div>
+<figure class="fasce" data-bande="64,78"><figcaption>Dove si trova: intorno al Circolo polare artico e oltre. Schema, non in scala.</figcaption></figure>
+<dl>
+<dt>Zona climatica</dt><dd>fredda (clima polare)</dd>
+<dt>Temperature</dt><dd>inverno sotto −30 °C, estate sotto 10 °C</dd>
+<dt>Piogge</dt><dd>150-300 mm all'anno</dd>
+<dt>Stagioni</dt><dd>inverno lungo e buio, estate di poche settimane</dd>
+<dt>Dove</dt><dd>nord di Alaska, Canada e Siberia, Groenlandia, Islanda, Lapponia</dd>
+<dt>Piante</dt><dd>muschi, licheni, erbe, betulla nana, salice nano</dd>
+<dt>Animali</dt><dd>renna, caribù, bue muschiato, volpe artica, gufo delle nevi, lemming</dd>
+<dt>Origine della parola</dt><dd>dal russo, da una parola delle lingue del nord (in finlandese <em>tunturi</em>, «altura senza alberi»)</dd>
+</dl>
+</aside>
+</div>
+</section>
+
+<!-- ======================= CONFRONTO ======================= -->
+<section class="parte" id="confronto" style="--c:#4757a8" aria-labelledby="t-confronto" hidden>
+<div class="lemma-testa">
+<p class="etichetta"><span class="pallino"></span>Per ripassare</p>
+<h2 class="lemma" id="t-confronto">I biomi a confronto</h2>
+</div>
+<p class="testo-voce">Le carte d'identità degli otto biomi in una sola tavola. Leggi una riga per conoscere un bioma, oppure una colonna per confrontarli. Tocca il nome di un bioma per tornare alla sua voce.</p>
+<div class="tavola-scorri">
+<table class="tavola">
+<thead><tr><th scope="col">Bioma</th><th scope="col">Temperature</th><th scope="col">Piogge all'anno</th><th scope="col">Piante tipiche</th><th scope="col">Animali tipici</th><th scope="col">Dove</th></tr></thead>
+<tbody>
+<tr class="gruppo"><td colspan="6">Zona calda</td></tr>
+<tr style="--c:#1f7a4d"><th scope="row"><a href="#pluviale">Foresta pluviale</a></th><td>25-27 °C tutto l'anno</td><td>oltre 2000 mm, in tutti i mesi</td><td>alberi altissimi, liane, orchidee</td><td>scimmie, tucani, giaguaro, gorilla</td><td>Amazzonia, Congo, Sud-est asiatico</td></tr>
+<tr style="--c:#97670b"><th scope="row"><a href="#savana">Savana</a></th><td>20-30 °C tutto l'anno</td><td>500-1500 mm, in una sola stagione</td><td>erbe alte, acacia, baobab</td><td>zebre, gnu, giraffe, leoni</td><td>Africa, Brasile, Australia</td></tr>
+<tr style="--c:#b4531f"><th scope="row"><a href="#deserto">Deserto</a></th><td>caldissimo di giorno, freddo di notte</td><td>meno di 250 mm</td><td>cactus, piante grasse, palme nelle oasi</td><td>dromedario, fennec, scorpioni</td><td>Sahara, Arabia, Atacama, Gobi</td></tr>
+<tr class="gruppo"><td colspan="6">Zone temperate</td></tr>
+<tr style="--c:#5c7524"><th scope="row"><a href="#mediterranea">Macchia mediterranea</a></th><td>inverni miti, estati calde</td><td>500-900 mm, d'autunno e d'inverno</td><td>leccio, sughera, mirto, rosmarino</td><td>cinghiale, istrice, tartaruga di Hermann</td><td>Mediterraneo, California, Cile</td></tr>
+<tr style="--c:#9a4d22"><th scope="row"><a href="#latifoglie">Foresta di latifoglie</a></th><td>quattro stagioni, inverni freddi</td><td>700-1500 mm, in tutti i mesi</td><td>querce, faggio, castagno, acero</td><td>cervo, capriolo, scoiattolo, picchio</td><td>Europa, Stati Uniti orientali, Cina</td></tr>
+<tr style="--c:#6b7419"><th scope="row"><a href="#prateria">Prateria</a></th><td>inverni gelidi, estati calde</td><td>250-750 mm</td><td>graminacee e altre erbe</td><td>bisonte, cane della prateria, coyote</td><td>Grandi Pianure, steppe, pampa</td></tr>
+<tr class="gruppo"><td colspan="6">Zone fredde</td></tr>
+<tr style="--c:#24594b"><th scope="row"><a href="#taiga">Taiga</a></th><td>inverno lunghissimo e gelido</td><td>300-900 mm, molta neve</td><td>abeti, pini, larici</td><td>alce, lupo, lince, orso bruno</td><td>Canada, Scandinavia, Siberia</td></tr>
+<tr style="--c:#3d6f93"><th scope="row"><a href="#tundra">Tundra</a></th><td>sotto 10 °C anche d'estate</td><td>150-300 mm</td><td>muschi, licheni, arbusti nani</td><td>renna, bue muschiato, volpe artica</td><td>nord di Canada e Siberia, Lapponia</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+</div>
+<footer>
+<p>Schede scritte con il linguaggio delle enciclopedie per ragazzi: definizione, voce divisa in paragrafi, carta d'identità, «Lo sapevi?» e rimandi ad altre voci. Testi e disegni di questa pagina sono originali; i valori di temperatura e di pioggia sono indicativi.</p>
+</footer>
+</div>
+<!-- zoom-ctrl v2: ingrandimento di tutta la pagina, uguale in tutto il sito -->
+<div class="zm" role="group" aria-label="Dimensione della pagina">
+<button type="button" data-z="-1" title="Restringi (tasto −)" aria-label="Restringi">A−</button><span data-zv title="Torna al 100%">100%</span><button type="button" data-z="1" title="Allarga (tasto +)" aria-label="Allarga">A+</button><button type="button" data-z="0" title="Dimensione normale (tasto 0)" aria-label="Dimensione normale">↺</button>
+</div>
+<!-- /zoom-ctrl -->
+<script>
+(function(){
+"use strict";
+var NS="http://www.w3.org/2000/svg";
+function ogni(l,f){ Array.prototype.forEach.call(l,f); }
+function sv(t,attr,txt){ var e=document.createElementNS(NS,t); for(var k in attr){ e.setAttribute(k,attr[k]); } if(txt!=null) e.textContent=txt; return e; }
+function ridimensiona(){ try{ window.dispatchEvent(new Event("resize")); }catch(e){ var ev=document.createEvent("Event"); ev.initEvent("resize",true,true); window.dispatchEvent(ev); } }
+
+/* ---------- le fasce di latitudine sul globo ---------- */
+var CX=132, CY=60, R=50, n=0;
+function Y(lat){ return CY-R*Math.sin(lat*Math.PI/180); }
+ogni(document.querySelectorAll("figure.fasce"),function(fig){
+  n++; var id="globo-"+n;
+  var s=sv("svg",{viewBox:"0 0 200 120",role:"img"});
+  var tit=fig.getAttribute("data-zone")?"Il globo diviso nelle zone climatiche":"Il globo con le fasce di latitudine dove si trova questo bioma";
+  s.appendChild(sv("title",{},tit));
+  var defs=sv("defs",{}), cp=sv("clipPath",{id:id}); cp.appendChild(sv("circle",{cx:CX,cy:CY,r:R})); defs.appendChild(cp); s.appendChild(defs);
+  s.appendChild(sv("circle",{"class":"globo",cx:CX,cy:CY,r:R}));
+  var g=sv("g",{"clip-path":"url(#"+id+")"}); s.appendChild(g);
+  function banda(a,b,cls){ var y1=Y(Math.max(a,b)), y2=Y(Math.min(a,b)); g.appendChild(sv("rect",{"class":cls,x:CX-R,y:y1,width:2*R,height:y2-y1})); }
+  if(fig.getAttribute("data-zone")){
+    banda(-23.4,23.4,"zona-calda"); banda(23.4,66.6,"zona-temp"); banda(-66.6,-23.4,"zona-temp"); banda(66.6,90,"zona-fredda"); banda(-90,-66.6,"zona-fredda");
+  } else {
+    fig.getAttribute("data-bande").split(";").forEach(function(p){ var v=p.split(","); banda(+v[0],+v[1],"banda"); });
+  }
+  [[66.6,"Circolo polare"],[23.4,"Tropico"],[0,"Equatore"],[-23.4,"Tropico"],[-66.6,"Circolo polare"]].forEach(function(L){
+    var y=Y(L[0]), half=Math.sqrt(R*R-(y-CY)*(y-CY));
+    s.appendChild(sv("line",{"class":"linea"+(L[0]===0?" eq":""),x1:62,x2:CX+half,y1:y,y2:y}));
+    s.appendChild(sv("text",{x:4,y:y-2},L[1]));
+  });
+  s.appendChild(sv("text",{x:CX,y:CY-R-3,"text-anchor":"middle"},"Polo nord"));
+  s.appendChild(sv("text",{x:CX,y:CY+R+9,"text-anchor":"middle"},"Polo sud"));
+  fig.insertBefore(s,fig.firstChild);
+});
+
+/* ---------- indice laterale: si vede una voce alla volta ---------- */
+var voci=document.querySelectorAll("a.voce"), navI=document.querySelector("nav.indice");
+var parti=Array.prototype.slice.call(document.querySelectorAll("section.parte"));
+document.documentElement.className+=" una-parte";
+function attiva(id){ ogni(voci,function(v){ var on=v.getAttribute("href")==="#"+id; if(on){ v.setAttribute("aria-current","true"); if(navI.scrollWidth>navI.clientWidth){ navI.scrollLeft=v.offsetLeft-16; } } else v.removeAttribute("aria-current"); }); }
+var vocePer={}; ogni(voci,function(v){ vocePer[v.getAttribute("href").slice(1)]=v; });
+function linkParte(sx,cls,prima,dopo){ var v=vocePer[sx.id], a=document.createElement("a"), nm=v&&v.querySelector(".nome");
+  a.href="#"+sx.id; a.className=cls; if(v&&v.style.getPropertyValue("--c")) a.style.setProperty("--c",v.style.getPropertyValue("--c"));
+  a.textContent=prima+(nm?nm.textContent:sx.id)+dopo; return a; }
+parti.forEach(function(sx,i){ var nv=document.createElement("nav"); nv.className="parte-nav"; nv.setAttribute("aria-label","Altre voci");
+  if(i>0) nv.appendChild(linkParte(parti[i-1],"prec","← ",""));
+  if(i<parti.length-1) nv.appendChild(linkParte(parti[i+1],"succ",""," →"));
+  sx.appendChild(nv); });
+var corrente=null;
+function mostra(id){ if(id===corrente) return false; parti.forEach(function(sx){ sx.hidden=(sx.id!==id); }); corrente=id; attiva(id); ridimensiona(); return true; }
+function parteDi(el){ while(el&&!(el.classList&&el.classList.contains("parte"))) el=el.parentNode; return el; }
+function bersaglio(h){ try{ h=decodeURIComponent(h); }catch(e){} return h?document.getElementById(h):null; }
+document.addEventListener("click",function(e){ var a=e.target; while(a&&a.tagName!=="A") a=a.parentNode;
+  if(!a||!a.getAttribute) return; var h=a.getAttribute("href")||""; if(h.charAt(0)!=="#") return;
+  var el=bersaglio(h.slice(1)), sx=el&&parteDi(el);
+  if(sx){ e.preventDefault(); mostra(sx.id); try{ history.pushState(null,"",h); }catch(err){} var t=document.querySelector(".foglio"); window.scrollTo(0,0); if(t&&t.scrollIntoView&&window.scrollY>0) t.scrollIntoView(); }
+},true);
+function daIndirizzo(){ var el=bersaglio((location.hash||"").slice(1)), sx=el&&parteDi(el);
+  if(sx){ mostra(sx.id); } else if(!corrente) mostra(parti[0].id); }
+window.addEventListener("hashchange",daIndirizzo); window.addEventListener("popstate",daIndirizzo); daIndirizzo();
+})();
+</script>
+<script>
+/* zoom-ctrl v2: zoom CSS dove esiste, altrimenti una scala equivalente; le regole @media seguono l'ingrandimento;
+   sui telefoni si ferma quando la pagina non ci sta più; proporzioni dei disegni anche sui browser vecchi */
+(function(){
+  var STEPS=[.6,.7,.8,.9,1,1.1,1.25,1.4,1.6,1.8,2,2.3], KEY='ripasso-zoom', html=document.documentElement;
+  var box=document.querySelector('.zm'), out=box.querySelector('[data-z="-1"]'), inn=box.querySelector('[data-z="1"]'), val=box.querySelector('[data-zv]'), rst=box.querySelector('[data-z="0"]');
+  var sup=function(p,v){ try{ return !!(window.CSS&&CSS.supports&&CSS.supports(p,v)); }catch(e){ return false; } };
+  var hasZoom=sup('zoom','2'), hasAR=sup('aspect-ratio','1/1');
+  function parts(){ return Array.prototype.filter.call(document.body.children,function(e){ return !e.matches('.zm,script,style,link,template'); }); }
+  function each(list,fn){ Array.prototype.forEach.call(list,fn); }
+  var MQ=[];
+  each(document.styleSheets,function(sh){
+    var rules; try{ rules=sh.cssRules; }catch(e){ return; } if(!rules) return;
+    var adds=[];
+    for(var r=0;r<rules.length;r++){
+      var R=rules[r]; if(R.type!==4) continue;
+      var m=/^\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(\d+(?:\.\d+)?)px\s*\)\s*$/.exec(R.media.mediaText); if(!m) continue;
+      var n=parseFloat(m[1]), cls='pz-mq-'+String(n).replace('.','_'); if(MQ.indexOf(n)<0) MQ.push(n);
+      for(var k=0;k<R.cssRules.length;k++){ var S=R.cssRules[k]; if(S.type!==1) continue;
+        var sel=S.selectorText.split(',').map(function(x){ x=x.trim();
+          if(/^:root/.test(x)) return 'html.'+cls+x.slice(5); if(/^html(?![\w-])/.test(x)) return 'html.'+cls+x.slice(4); return 'html.'+cls+' '+x; }).join(',');
+        adds.push(sel+'{'+S.style.cssText+'}'); }
+    }
+    adds.forEach(function(t){ try{ sh.insertRule(t,sh.cssRules.length); }catch(e){} });
+  });
+  var W0=0, I0=0;
+  function measure(){ var hz=html.style.zoom; if(hz) html.style.zoom=''; var w=html.clientWidth||window.innerWidth; I0=window.innerWidth||w; if(hz) html.style.zoom=hz; return w; }
+  function vw(){ return W0||(W0=measure()); }
+  function setMQ(z){ var lw=vw()/z; MQ.forEach(function(n){ var c='pz-mq-'+String(n).replace('.','_'); if(lw<=n) html.classList.add(c); else html.classList.remove(c); }); }
+  var AR=[];
+  function grab(txt,media){
+    txt.replace(/([^{}]+)\{([^{}]*)\}/g,function(m,sel,decl){
+      var a=/aspect-ratio\s*:\s*([0-9.]+)\s*(?:\/\s*([0-9.]+))?|aspect-ratio\s*:\s*auto/.exec(decl);
+      if(a&&sel.indexOf('@')<0) AR.push({sel:sel.trim(),media:media,r:a[1]?parseFloat(a[1])/(a[2]?parseFloat(a[2]):1):0});
+      return '';
+    });
+  }
+  if(!hasAR){
+    each(document.querySelectorAll('style'),function(st){
+      var t=st.textContent.replace(/\/\*[\s\S]*?\*\//g,'');
+      t=t.replace(/@media([^{]+)\{((?:[^{}]*\{[^{}]*\})*[^{}]*)\}/g,function(m,q,body){ grab(body,q.trim()); return ''; });
+      grab(t,null);
+    });
+  }
+  function mqOn(q){ var m=/max-width\s*:\s*(\d+(?:\.\d+)?)px/.exec(q); if(m&&/^\s*\(\s*max-width[^)]*\)\s*$/.test(q)) return vw()/STEPS[i]<=parseFloat(m[1]); return matchMedia(q).matches; }
+  function fixAR(){
+    if(hasAR) return;
+    var done=[];
+    AR.forEach(function(rule){
+      if(rule.media&&!mqOn(rule.media)) return;
+      var els; try{ els=document.querySelectorAll(rule.sel); }catch(e){ return; }
+      each(els,function(el){ el.__ar=rule.r; if(done.indexOf(el)<0) done.push(el); });
+    });
+    each(document.querySelectorAll('[data-ar]'),function(el){ var q=String(el.getAttribute('data-ar')).split('/'); var r=parseFloat(q[0])/(q[1]?parseFloat(q[1]):1); if(r>0){ el.__ar=r; if(done.indexOf(el)<0) done.push(el); } });
+    done.forEach(function(el){ if(document.fullscreenElement&&document.fullscreenElement.contains(el)){ el.style.height=''; return; }
+      el.style.height=el.__ar&&el.clientWidth?(el.clientWidth/el.__ar)+'px':''; });
+  }
+  function zmax(){ return Math.max(1,vw()/300); }
+  var i=STEPS.indexOf(1);
+  try{ var z0=parseFloat(localStorage.getItem(KEY)), k=STEPS.indexOf(z0); if(k>=0) i=k; }catch(e){}
+  var want=i;
+  function fixHeights(){ if(hasZoom) return; var z=STEPS[i]; parts().forEach(function(e){ e.style.marginBottom=z===1?'':(e.offsetHeight*(z-1))+'px'; }); }
+  function apply(save){
+    W0=measure(); i=want; while(i>STEPS.indexOf(1)&&STEPS[i]>zmax()+0.001) i--;
+    for(var guard=0;guard<STEPS.length;guard++){ setZ(STEPS[i]);
+      var over=html.scrollWidth>html.clientWidth+2||(window.innerWidth||0)>I0+2;
+      if(!over||i<=STEPS.indexOf(1)) break; i--; }
+    var z=STEPS[i];
+    if(save){ try{ localStorage.setItem(KEY,String(z)); }catch(e){} }
+    val.textContent=Math.round(z*100)+'%'; out.disabled=i===0; inn.disabled=i===STEPS.length-1||STEPS[i+1]>zmax()+0.001||i<want;
+    fixAR(); fixHeights(); refresh();
+  }
+  function setZ(z){
+    parts().forEach(function(e){
+      if(hasZoom) return;
+      if(z===1){ e.style.transform=''; e.style.transformOrigin=''; e.style.width=''; e.style.boxSizing=''; e.style.marginBottom=''; }
+      else { e.style.transformOrigin='50% 0'; e.style.transform='scale('+z+')'; e.style.boxSizing='border-box'; e.style.width=(100/z)+'%'; }
+    });
+    if(hasZoom){ html.style.zoom=z===1?'':String(z); box.style.zoom=z===1?'':String(1/z); }
+    setMQ(z); fixAR();
+  }
+  var busy=false, lastW=measure();
+  function refresh(){ busy=true; try{ var ev; try{ ev=new Event('resize'); }catch(e){ ev=document.createEvent('Event'); ev.initEvent('resize',true,true); } window.dispatchEvent(ev); }finally{ busy=false; } }
+  window.addEventListener('resize',function(){ if(busy) return; var mw=measure(); if(mw!==lastW){ lastW=mw; apply(false); return; } fixAR(); fixHeights(); });
+  if(!hasZoom||!hasAR){ setInterval(function(){ fixAR(); fixHeights(); },1000); }
+  function minus(){ if(i>0){ want=i-1; apply(true); } }
+  function plus(){ if(!inn.disabled){ want=i+1; apply(true); } }
+  function reset(){ want=STEPS.indexOf(1); apply(true); }
+  out.addEventListener('click',minus); inn.addEventListener('click',plus); rst.addEventListener('click',reset); val.addEventListener('click',reset);
+  document.addEventListener('keydown',function(e){
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test((e.target||{}).tagName||'')||(e.target&&e.target.isContentEditable)||e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.key==='+'||e.key==='='){ e.preventDefault(); plus(); }
+    else if(e.key==='-'){ e.preventDefault(); minus(); }
+    else if(e.key==='0'){ e.preventDefault(); reset(); }
+  });
+  apply(false);
+})();
+</script>
+<script>
+(function(){
+  var corpo=document.querySelector(".corpo-lezione"), nav=document.querySelector("nav.indice"), b=document.querySelector(".indice-riduci");
+  if(!corpo||!nav||!b) return;
+  function metti(r){
+    if(r) corpo.className+=" indice-ridotto"; else corpo.className=corpo.className.replace(/\s*indice-ridotto/g,"");
+    b.setAttribute("aria-pressed",r?"true":"false");
+    b.setAttribute("aria-label",r?"Mostra i nomi delle voci":"Riduci l'indice alle sole icone");
+    b.title=b.getAttribute("aria-label"); b.innerHTML=r?"&raquo;":"&laquo;";
+  }
+  var r=false; try{ r=localStorage.getItem("indice-ridotto")==="1"; }catch(e){}
+  metti(r);
+  b.onclick=function(){ r=!r; metti(r); try{ localStorage.setItem("indice-ridotto",r?"1":"0"); }catch(e){} };
+})();
+</script>
+<script src="../../../../assets/barra.js"></script>
+</body>
+</html>

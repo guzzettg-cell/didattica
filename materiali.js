@@ -619,7 +619,9 @@ var MODULI = [
         descrizione: "Le zone climatiche e i grandi ambienti naturali. GeoAgenda 3: E44–E45 · Vivi la Geografia 3: Unità 3, lezione 1, pp. 20–21.",
         link: "geografia/terza/clima-e-ambienti/lezioni/biomi.html",
         data: "2026-11-01",
-        attivita: []
+        attivita: [
+          { tipo: "Scheda", titolo: "I biomi della Terra: schede enciclopediche", descrizione: "Otto voci in stile enciclopedia per ragazzi (foresta pluviale, savana, deserto, macchia mediterranea, foresta di latifoglie, prateria, taiga, tundra), con carta d'identità e tavola di confronto.", link: "geografia/terza/clima-e-ambienti/lezioni/biomi-schede.html", data: "2026-11-25" }
+        ]
       },
       {
         titolo: "Gli ambienti caldi: troppa acqua o troppo poca?",
